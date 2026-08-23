@@ -1,0 +1,5 @@
+# Force LF line endings for the canonical Master regardless of core.autocrlf
+sfm_defaultanimationgroups.txt text eol=lf
+
+# Silkworm reference Master: preserve exact original bytes (CRLF), never normalize
+reference/sfm_defaultanimationgroups_silkworm.txt -text
