@@ -494,6 +494,8 @@ means the control is duplicated.
 
 Either condition is a failed edit.
 
+See also Section 24 for the related native-Rebuild casefold check, which governs cross-path distribution of case-equivalent spellings rather than exact-string duplication.
+
 **\*\*# 10. Move Operations\*\***
 
 A move means:
@@ -653,6 +655,8 @@ Numbers are significant.
 Punctuation is significant.
 
 Do not substitute a visually similar or semantically similar control.
+
+Case significance here concerns literal preservation during edits: never rewrite a control's case while transcribing or moving it. It does not mean case differences justify placing case-equivalent spellings at different taxonomy destinations — see Section 24.
 
 **\*\*# 13. Exact-Line Matching\*\***
 
@@ -1191,6 +1195,35 @@ Do not modify anything until I give the first explicit edit instruction.
 
 
 
+
+
+**# 24. Native-Rebuild Casefold Invariant**
+
+Before adding, moving, or importing any control literal, compute its ASCII case-insensitive native-Rebuild key by folding only A-Z to a-z.
+
+Do not use Unicode casefolding, locale-sensitive folding, or punctuation/whitespace/underscore normalization.
+
+Search the entire file for every existing exact spelling sharing that key, and collect every full taxonomy path among them.
+
+All exact spellings sharing one native-Rebuild key must resolve to exactly one full taxonomy path.
+
+Exact spellings remain preserved. Only cross-path distribution is prohibited.
+
+For a new or relocating literal:
+
+1\. If no casefold family exists for that key, classify normally under the existing rules.
+
+2\. If its family already exists at exactly one canonical path, the new or moved exact spelling inherits that same path unless an explicitly approved review relocates the entire family.
+
+3\. If its family already spans multiple paths, STOP and report the pre-existing invariant violation before adding or moving anything. Do not silently pick a path.
+
+Do not delete any exact spelling to satisfy this rule.
+
+Do not infer semantic destination from capitalization alone.
+
+This rule is complementary to Section 9's exact-literal duplicate check, not a replacement for it: Section 9 guards exact-string uniqueness; this section guards cross-path distribution of case-equivalent spellings.
+
+This is a detection rule, not a classification system. See Section 22.
 
 **\*\*# Preflight Approval Gate\*\***
 
