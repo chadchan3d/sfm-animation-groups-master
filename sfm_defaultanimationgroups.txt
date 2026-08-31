@@ -341,6 +341,23 @@ groupFile  // Generated canonical SFM animation-group master
 	// Helpers may provide useful fine posing, deformation correction, clipping
 	// correction, attachment behavior, or control of unusual secondary structures.
 	//
+	// CLASSIFICATION AND ACCESSIBILITY
+	//
+	// Failure to establish a semantic classification is not, by itself,
+	// justification for hiding a control. Uncertainty should remain accessible
+	// unless positive evidence establishes that hiding is preferable.
+	//
+	// This clarifies the accessibility consequences of Unknown, Useless, and
+	// IGNORE; it does not redefine them. Unknown means the universal semantic
+	// destination cannot safely be established. Useless means the control has
+	// been positively audited as providing little practical animator value,
+	// yet remains accessible as a safeguard. IGNORE is an exceptional positive
+	// determination that hiding is preferable to exposing the control.
+	//
+	// Mere uncertainty must never be sufficient reason for Useless or IGNORE.
+	// Classification failure alone must not make an animator-facing control
+	// inaccessible.
+	//
 	// ONE CONTROL, ONE UNIVERSAL ASSIGNMENT
 	//
 	// Preserve exact control spelling and case for compatibility.
@@ -532,6 +549,61 @@ groupFile  // Generated canonical SFM animation-group master
 	// Uniformity comes from combining a stable universal baseline with contextual
 	// interpretation where that baseline cannot safely reach, not from having the
 	// Scanner repeatedly reinterpret controls that are already known.
+	//
+	// RIG-PRESENTATION PRESERVATION
+	//
+	// Universal taxonomy and rig-specific presentation are separate concerns.
+	//
+	// Contextual tooling may preserve useful presentation deliberately created
+	// by an active rig when native SFM Rebuild would otherwise destroy that
+	// presentation, provided doing so does not override an established Master
+	// destination.
+	//
+	// The precedence is:
+	//
+	//   established Master semantic destination
+	//        -> Master wins
+	//
+	//   no safe Master destination, but deliberate useful active-rig
+	//   presentation exists
+	//        -> contextual tooling may preserve that rig presentation
+	//
+	//   neither exists
+	//        -> do not invent taxonomy or presentation merely to avoid
+	//           uncertainty
+	//
+	// Rig-presentation preservation is contextual compatibility behavior, not
+	// universal taxonomy. Specialized presentation should be preserved from
+	// demonstrated rig behavior, not invented merely because a control becomes
+	// hidden.
+	//
+	// Master owns semantic meaning; the active rig may own specialized
+	// presentation where Master has no justified semantic destination. This is
+	// consistent with the Master / Scanner contract above and the general
+	// distinction between universal knowledge and model-local or contextual
+	// tooling.
+	//
+	// NO TAXONOMY FOR COMPATIBILITY ALONE
+	//
+	// Do not add universal Master categories merely to preserve technical
+	// structures belonging to particular rigs. Specialized rig mechanics or
+	// presentation should be preserved contextually when justified, per
+	// RIG-PRESENTATION PRESERVATION above, rather than causing expansion of
+	// the universal taxonomy.
+	//
+	// A new Master category must still independently earn inclusion under
+	// TAXONOMY DEPTH and ANIMATOR WORKFLOW above. It should represent a
+	// recurring animator-facing semantic distinction whose subdivision
+	// materially improves navigation or understanding.
+	//
+	// Compatibility problems alone are not sufficient justification for
+	// generic technical catch-all categories such as Helpers, Utilities,
+	// Deformers, or equivalent implementation-oriented buckets.
+	//
+	// This does not prohibit a semantic category merely because some of its
+	// controls happen to be helpers. The distinction is that a category must
+	// be justified by animator-facing purpose rather than by the need to
+	// preserve a particular rig's technical presentation.
 	//
 	// CONTRIBUTIONS
 	//
