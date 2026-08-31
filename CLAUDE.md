@@ -1225,6 +1225,18 @@ This rule is complementary to Section 9's exact-literal duplicate check, not a r
 
 This is a detection rule, not a classification system. See Section 22.
 
+**# 25. Master Validator**
+
+tools/validate_master.py is a read-only diagnostic tool. It reports whether the Master mechanically satisfies structural, exact-duplicate, and native-Rebuild casefold invariants. It has no repair mode and no write path.
+
+Before promoting any candidate Master, run the validator against the candidate. If it reports FAIL, do not promote. Report the exact failure evidence and stop.
+
+After promoting a canonical Master, run the validator against the canonical file again. If it reports FAIL, report the evidence immediately.
+
+A validator failure is a failed validation, not authorization to repair. It does not bypass, shorten, or replace the Preflight Approval Gate. Any corrective edit still requires a normal Phase 1 proposal, stated backup and validation plans, and explicit user approval before Phase 2.
+
+The validator is one mandatory mechanical check among the existing independent validation and diff-review requirements — it does not replace them, and a validator PASS does not by itself authorize an edit.
+
 **\*\*# Preflight Approval Gate\*\***
 
 For every requested edit, separate the work into two phases:
