@@ -1,0 +1,335 @@
+==============================================================================
+MASTER IMPORT RECONCILIATION REPORT
+Generated from: E:\SFM Animation Group Master\MASTER_IMPORT_REVIEW.xlsx
+Against live Master: E:\SFM Animation Group Master\sfm_defaultanimationgroups.txt
+==============================================================================
+
+1. WORKBOOK INTEGRITY
+------------------------------------------------------------------------------
+Total reviewed control rows:              15,238
+Review <-> Audit mapping failures:              0
+Altered/lost literal failures:                  0
+Duplicate exact literal failures (global):       0
+
+2. HUMAN DISPOSITIONS
+------------------------------------------------------------------------------
+Accepted unchanged:                     14101 families /  14609 rows
+Human-corrected (M3, applied):             165 families /    167 rows
+M3 DO NOT IMPORT:                            0 families /      0 rows
+M2 new spellings skipped (DO NOT IMPORT):    14 families /     18 rows
+M2 existing-family audit candidates:       397 families /    444 rows
+UNSURE / NEEDS REVIEW:                       0 families /      0 rows
+Contradictory family-level marks:            0 families
+
+3. CURRENT-LIVE-MASTER RECONCILIATION
+------------------------------------------------------------------------------
+Current M1 rows:                                0
+Current M2 rows / families:                 3,431 / 2,968
+Current M3 rows / families:                11,807 / 11,709
+Workbook classifications changed by live-Master drift: 0
+(the Master file is unchanged since workbook generation; validator PASS confirmed fresh)
+
+4. FAMILY INVARIANT VALIDATION
+------------------------------------------------------------------------------
+Exact duplicate count (global, 15,238 rows):     0
+Cross-path ASCII-family collision count:         0
+Families with multiple exact spellings:        435  (of 14,677 total families)
+Families with inconsistent post-review destination: 0
+
+5. CORRECTIONS SUMMARY -- M3 destinations changed by human review (165 families)
+------------------------------------------------------------------------------
+groupFile/Body Morphs -> groupFile/Body   (152 families)
+    'bip_breast_nipple_l'               spellings: ['bip_breast_nipple_l']
+    'bip_breast_nipple_r'               spellings: ['bip_breast_nipple_r']
+    'bip_breasthelper_r'                spellings: ['Bip_BreastHelper_R']
+    'breast left 0'                     spellings: ['Breast Left 0', 'breast left 0']
+    'breast left 0_jiggle'              spellings: ['Breast Left 0_jiggle']
+    'breast left 0_jiggle_root'         spellings: ['Breast Left 0_jiggle_root']
+    'breast left 135'                   spellings: ['breast left 135']
+    'breast left 180'                   spellings: ['breast left 180']
+    'breast left 1_jiggle'              spellings: ['Breast Left 1_jiggle']
+    'breast left 225'                   spellings: ['breast left 225']
+    'breast left 270'                   spellings: ['breast left 270']
+    'breast left 315'                   spellings: ['breast left 315']
+    'breast left 45'                    spellings: ['breast left 45']
+    'breast left 90'                    spellings: ['breast left 90']
+    'breast left adj. 1'                spellings: ['breast left adj. 1']
+    'breast left adj. 2'                spellings: ['breast left adj. 2']
+    'breast left adj. 3'                spellings: ['breast left adj. 3']
+    'breast left adj. 4'                spellings: ['breast left adj. 4']
+    'breast left adj. 5'                spellings: ['breast left adj. 5']
+    'breast left adj. 6'                spellings: ['breast left adj. 6']
+    'breast left adj. 7'                spellings: ['breast left adj. 7']
+    'breast left adj. 8'                spellings: ['breast left adj. 8']
+    'breast left adj.1'                 spellings: ['breast left adj.1']
+    'breast left adj.2'                 spellings: ['breast left adj.2']
+    'breast left adj.3'                 spellings: ['breast left adj.3']
+    'breast left adj.4'                 spellings: ['breast left adj.4']
+    'breast left adj.5'                 spellings: ['breast left adj.5']
+    'breast left ctrl'                  spellings: ['breast left ctrl']
+    'breast left nip'                   spellings: ['breast left nip']
+    'breast nipple left'                spellings: ['breast nipple left']
+    'breast nipple right'               spellings: ['breast nipple right']
+    'breast right 0'                    spellings: ['Breast Right 0', 'breast right 0']
+    'breast right 0_jiggle'             spellings: ['Breast Right 0_jiggle']
+    'breast right 0_jiggle_root'        spellings: ['Breast Right 0_jiggle_root']
+    'breast right 135'                  spellings: ['breast right 135']
+    'breast right 180'                  spellings: ['breast right 180']
+    'breast right 1_jiggle'             spellings: ['Breast Right 1_jiggle']
+    'breast right 225'                  spellings: ['breast right 225']
+    'breast right 270'                  spellings: ['breast right 270']
+    'breast right 315'                  spellings: ['breast right 315']
+    'breast right 45'                   spellings: ['breast right 45']
+    'breast right 90'                   spellings: ['breast right 90']
+    'breast right adj. 1'               spellings: ['breast right adj. 1']
+    'breast right adj. 2'               spellings: ['breast right adj. 2']
+    'breast right adj. 3'               spellings: ['breast right adj. 3']
+    'breast right adj. 4'               spellings: ['breast right adj. 4']
+    'breast right adj. 5'               spellings: ['breast right adj. 5']
+    'breast right adj. 6'               spellings: ['breast right adj. 6']
+    'breast right adj. 7'               spellings: ['breast right adj. 7']
+    'breast right adj. 8'               spellings: ['breast right adj. 8']
+    'breast right adj.1'                spellings: ['breast right adj.1']
+    'breast right adj.2'                spellings: ['breast right adj.2']
+    'breast right adj.3'                spellings: ['breast right adj.3']
+    'breast right adj.4'                spellings: ['breast right adj.4']
+    'breast right adj.5'                spellings: ['breast right adj.5']
+    'breast right base '                spellings: ['breast right base ']
+    'breast right ctrl'                 spellings: ['breast right ctrl']
+    'breast right nip'                  spellings: ['breast right nip']
+    'breast.rjigglecontrol'             spellings: ['breast.RJiggleControl']
+    'breast_3_l'                        spellings: ['breast_3_L']
+    'breast_3_r'                        spellings: ['breast_3_R']
+    'breast_4_l'                        spellings: ['breast_4_L']
+    'breast_4_r'                        spellings: ['breast_4_R']
+    'breast_5_l'                        spellings: ['breast_5_L']
+    'breast_5_r'                        spellings: ['breast_5_R']
+    'breast_left1'                      spellings: ['breast_Left1']
+    'breast_left_root'                  spellings: ['breast_Left_root']
+    'breast_right1'                     spellings: ['breast_Right1']
+    'breast_right_root'                 spellings: ['breast_Right_root']
+    'breastupper1_l'                    spellings: ['BreastUpper1_L']
+    'breastupper1_r'                    spellings: ['BreastUpper1_R']
+    'brk-rig-breasthuge-l1'             spellings: ['Brk-Rig-BreastHuge-L1']
+    'brk-rig-breasthuge-l2'             spellings: ['Brk-Rig-BreastHuge-L2']
+    'brk-rig-breasthuge-r1'             spellings: ['Brk-Rig-BreastHuge-R1']
+    'brk-rig-breasthuge-r2'             spellings: ['Brk-Rig-BreastHuge-R2']
+    'flm-arma-breast-l1'                spellings: ['Flm-ArmA-Breast-L1']
+    'flm-arma-breast-l1h'               spellings: ['Flm-ArmA-Breast-L1H']
+    'flm-arma-breast-l2'                spellings: ['Flm-ArmA-Breast-L2']
+    'flm-arma-breast-l2h'               spellings: ['Flm-ArmA-Breast-L2H']
+    'flm-arma-breast-r1'                spellings: ['Flm-ArmA-Breast-R1']
+    'flm-arma-breast-r1h'               spellings: ['Flm-ArmA-Breast-R1H']
+    'flm-arma-breast-r2'                spellings: ['Flm-ArmA-Breast-R2']
+    'flm-arma-breast-r2h'               spellings: ['Flm-ArmA-Breast-R2H']
+    'flm-rig-breast-l'                  spellings: ['Flm-Rig-Breast-L']
+    'flm-rig-breast-r'                  spellings: ['Flm-Rig-Breast-R']
+    'flm-rig-breasthuge-l1'             spellings: ['Flm-Rig-BreastHuge-L1']
+    'flm-rig-breasthuge-l2'             spellings: ['Flm-Rig-BreastHuge-L2']
+    'flm-rig-breasthuge-r1'             spellings: ['Flm-Rig-BreastHuge-R1']
+    'flm-rig-breasthuge-r2'             spellings: ['Flm-Rig-BreastHuge-R2']
+    'l_breast0_jiggle'                  spellings: ['L_breast0_jiggle']
+    'l_breast1_jiggle'                  spellings: ['L_breast1_jiggle']
+    'leftbreast4_janggle'               spellings: ['LeftBreast4_Janggle']
+    'leftbreast5'                       spellings: ['LeftBreast5']
+    'leftbreast5_janggle'               spellings: ['LeftBreast5_Janggle']
+    'leftbreast6'                       spellings: ['LeftBreast6']
+    'leftbreast6_janggle'               spellings: ['LeftBreast6_Janggle']
+    'leftbreast7'                       spellings: ['LeftBreast7']
+    'leftbreast7_janggle'               spellings: ['LeftBreast7_Janggle']
+    'mar-rig-breast-l'                  spellings: ['Mar-Rig-Breast-L']
+    'mar-rig-breast-r'                  spellings: ['Mar-Rig-Breast-R']
+    'mar-rig-breasthuge-l1'             spellings: ['Mar-Rig-BreastHuge-L1']
+    'mar-rig-breasthuge-r1'             spellings: ['Mar-Rig-BreastHuge-R1']
+    'opt_breast_*1.1.l'                 spellings: ['OPT_Breast_*1.1.L']
+    'opt_breast_*1.1.r'                 spellings: ['OPT_Breast_*1.1.R']
+    'opt_breast_*2.1.l'                 spellings: ['OPT_Breast_*2.1.L']
+    'opt_breast_*2.1.r'                 spellings: ['OPT_Breast_*2.1.R']
+    'opt_breast_left1'                  spellings: ['OPT_Breast_Left1']
+    'opt_breast_left2'                  spellings: ['OPT_Breast_Left2']
+    'opt_breast_left3'                  spellings: ['OPT_Breast_Left3']
+    'opt_breast_left4'                  spellings: ['OPT_Breast_Left4']
+    'opt_breast_left5'                  spellings: ['OPT_Breast_Left5']
+    'opt_breast_left_base'              spellings: ['OPT_Breast_Left_base']
+    'opt_breast_left_tip'               spellings: ['OPT_Breast_Left_tip']
+    'opt_breast_right1'                 spellings: ['OPT_Breast_Right1']
+    'opt_breast_right2'                 spellings: ['OPT_Breast_Right2']
+    'opt_breast_right3'                 spellings: ['OPT_Breast_Right3']
+    'opt_breast_right4'                 spellings: ['OPT_Breast_Right4']
+    'opt_breast_right5'                 spellings: ['OPT_Breast_Right5']
+    'opt_breast_right_base'             spellings: ['OPT_Breast_Right_base']
+    'opt_breast_right_tip'              spellings: ['OPT_Breast_Right_tip']
+    'pb_l_cmy01_breast_01'              spellings: ['pb_L_CMY01_Breast_01']
+    'pb_r_cmy01_breast_01'              spellings: ['pb_R_CMY01_Breast_01']
+    'pbg-rig-breast-l'                  spellings: ['PBG-Rig-Breast-L']
+    'pbg-rig-breast-r'                  spellings: ['PBG-Rig-Breast-R']
+    'pbg-rig-breasthuge-l1'             spellings: ['PBG-Rig-BreastHuge-L1']
+    'pbg-rig-breasthuge-l2'             spellings: ['PBG-Rig-BreastHuge-L2']
+    'pbg-rig-breasthuge-r1'             spellings: ['PBG-Rig-BreastHuge-R1']
+    'pbg-rig-breasthuge-r2'             spellings: ['PBG-Rig-BreastHuge-R2']
+    'qwn-rig-breast-l1'                 spellings: ['Qwn-Rig-Breast-L1']
+    'qwn-rig-breast-l2'                 spellings: ['Qwn-Rig-Breast-L2']
+    'qwn-rig-breast-r1'                 spellings: ['Qwn-Rig-Breast-R1']
+    'qwn-rig-breast-r2'                 spellings: ['Qwn-Rig-Breast-R2']
+    'r_breast0_jiggle'                  spellings: ['R_breast0_jiggle']
+    'r_breast1_jiggle'                  spellings: ['R_breast1_jiggle']
+    'rightbreast4_janggle'              spellings: ['RightBreast4_Janggle']
+    'rightbreast5'                      spellings: ['RightBreast5']
+    'rightbreast5_janggle'              spellings: ['RightBreast5_Janggle']
+    'rightbreast6'                      spellings: ['RightBreast6']
+    'rightbreast6_janggle'              spellings: ['RightBreast6_Janggle']
+    'rightbreast7'                      spellings: ['RightBreast7']
+    'rightbreast7_janggle'              spellings: ['RightBreast7_Janggle']
+    'ruby_lf_breast_a_jnt'              spellings: ['Ruby_lf_breast_a_jnt']
+    'ruby_lf_breast_b_jnt'              spellings: ['Ruby_lf_breast_b_jnt']
+    'ruby_rt_breast_a_jnt'              spellings: ['Ruby_rt_breast_a_jnt']
+    'ruby_rt_breast_b_jnt'              spellings: ['Ruby_rt_breast_b_jnt']
+    'valvebiped.bip01_l_breasthelper'   spellings: ['ValveBiped.Bip01_L_BreastHelper']
+    'valvebiped.bip01_lbreast'          spellings: ['ValveBiped.Bip01_lBreast']
+    'valvebiped.bip01_rbreast'          spellings: ['ValveBiped.Bip01_rBreast']
+    'valvebiped.bip02_l_breast'         spellings: ['ValveBiped.Bip02_L_Breast']
+    'valvebiped.bip02_r_breast'         spellings: ['ValveBiped.Bip02_R_Breast']
+    'valvebiped.bip03_l_breast'         spellings: ['ValveBiped.Bip03_L_Breast']
+    'valvebiped.bip03_r_breast'         spellings: ['ValveBiped.Bip03_R_Breast']
+
+groupFile/Face/Lower Face -> groupFile/Face/Mid Face   (5 families)
+    'mouth-full-cheek-puff'             spellings: ['Mouth-Full-Cheek-puff']
+    'mouth-succcheeks-l'                spellings: ['Mouth-SuccCheeks-L']
+    'mouth-succcheeks-r'                spellings: ['Mouth-SuccCheeks-R']
+    'mouth-widecheeks-l'                spellings: ['Mouth-WideCheeks-L']
+    'mouth-widecheeks-r'                spellings: ['Mouth-WideCheeks-R']
+
+groupFile/Body Morphs -> groupFile/Clothing   (4 families)
+    'bip_breast_piercing_l'             spellings: ['bip_breast_piercing_l']
+    'bip_breast_piercing_r'             spellings: ['bip_breast_piercing_r']
+    'lulu necklace.breast_left'         spellings: ['Lulu Necklace.Breast_Left']
+    'lulu necklace.breast_right'        spellings: ['Lulu Necklace.Breast_Right']
+
+groupFile/Face/Mid Face -> groupFile/Face/Mid Face   (2 families)
+    'fa_cheek_left'                     spellings: ['fa_cheek_left']
+    'fa_cheek_right'                    spellings: ['fa_cheek_right']
+
+groupFile/Face/Mid Face -> groupFile/Body Morphs   (1 families)
+    'body-buttcheeks-crease'            spellings: ['Body-Buttcheeks-Crease']
+
+groupFile/Face/Lower Face -> groupFile/Other   (1 families)
+    'kitty_lips'                        spellings: ['kitty_lips']
+
+
+6. EXISTING-FAMILY AUDIT CANDIDATES (M2 -- existing Master family, NOT altered this phase)
+------------------------------------------------------------------------------
+Named in human discussion:
+
+  bottom  (fold='bottom', spellings: BOTTOM, bottom)
+    Current Master path: groupFile/Face/Upper Face
+    Human flag: DO NOT IMPORT (both spellings)
+    Evidence: 'bottom' is a plausible lower-eyelid descriptor. Per the live Master's
+    stated philosophy (Face/Eyes owns 'eyelid positioning, widening, closing,
+    squinting'), a bare 'bottom' control used as an eyelid term would belong in
+    Face/Eyes, not Face/Upper Face -- mirroring the Phase 1G eyelid-policy finding.
+    Recommendation: flag for future existing-family migration review to
+    groupFile/Face/Eyes. New spelling addition withheld this phase. Master NOT edited.
+
+  default  (fold='default', spelling: default)
+    Current Master path: groupFile/Face/Lower Face
+    Human flag: DO NOT IMPORT
+    Evidence: too context-dependent/opaque to confirm or refute the existing
+    placement from the scanner-corpus evidence alone.
+    Recommendation: retain as an audit candidate; do not remove or move automatically.
+
+  cannon  (fold='cannon', spelling: cannon)
+    Current Master path: groupFile/Body Morphs
+    Human flag: DO NOT IMPORT
+    Evidence: weak/context-dependent; could plausibly be a prop/weapon term on some
+    models rather than a body morph.
+    Recommendation: retain as an audit candidate; do not remove or move automatically.
+
+Other M2 DO NOT IMPORT families (new spelling skipped only, existing family retained,
+no audit-candidate status per explicit human policy or lack of further evidence):
+    'down'          spellings=['Down', 'down']               existing path=groupFile/Face/Eyes
+    'heart'         spellings=['heart']                      existing path=groupFile/Face/Expressions
+    'hs1'           spellings=['Hs1']                        existing path=groupFile/Face/Expressions
+    'hs2'           spellings=['Hs2']                        existing path=groupFile/Face/Expressions
+    'lower'         spellings=['Lower']                      existing path=groupFile/Face/Upper Face
+    'lowerer'       spellings=['Lowerer']                    existing path=groupFile/Face/Upper Face
+    'upper left'    spellings=['Upper Left', 'Upper left']   existing path=groupFile/Face/Upper Face
+    'upper right'   spellings=['Upper Right', 'Upper right'] existing path=groupFile/Face/Upper Face
+    'sil'           spellings=['sil']                        existing path=groupFile/Face/Lower Face
+    'forward'       spellings=['Forward']                    existing path=groupFile/Body Morphs
+    'height'        spellings=['height']                     existing path=groupFile/Body Morphs
+
+MAJOR FINDING -- 397 additional M2 families flagged by the human reviewer with a
+DIFFERENT destination than their current Master path (not merely 'DO NOT IMPORT').
+Per the native-Rebuild invariant, an existing family cannot be split across two
+paths, so these corrections could NOT be applied to just the new spelling without
+relocating the whole existing family -- which this phase is not authorized to do.
+All 397 are therefore treated as EXISTING FAMILY AUDIT CANDIDATES: their new
+spellings are excluded from this import batch, and the existing Master family is
+untouched. Two coherent clusters account for the bulk of them:
+
+  groupFile/Body Morphs -> groupFile/Body   (239 families)  e.g. ['ass_1_l', 'ass_2_l', 'ass_3_l', 'ass_4_l', 'ass_5_l', 'ass_l']
+  groupFile/Face/Upper Face -> groupFile/Face/Eyes   (121 families)  e.g. ['angryeyes', 'bip_uppereyelid_l', 'bip_uppereyelid_r', 'blink happy', 'blink l', 'blink r']
+  groupFile/Face/Upper Face -> groupFile/Face/Expressions   (8 families)  e.g. ['anger', 'confuse', 'disgust', 'focus', 'huh', 'meh']
+  groupFile/Face/Expressions -> groupFile/Face   (4 families)  e.g. ['bone_face', 'face root', 'face_root', 'headtop']
+  groupFile/Face/Upper Face -> groupFile/Other   (3 families)  e.g. ['wide', 'widel', 'wider']
+  groupFile/Face/Expressions -> groupFile/Useless   (2 families)  e.g. ['unused headbase', 'unusedbone 000b']
+  groupFile/Face/Mid Face -> groupFile/Face/Lower Face   (2 families)  e.g. ['mouth-frown-left', 'mouth-frown-right']
+  groupFile/Face/Lower Face -> groupFile/Face/Mid Face   (2 families)  e.g. ['beakup', 'cheekinout']
+  groupFile/Face/Lower Face -> groupFile/Face/Eyes   (2 families)  e.g. ['bip_eyelids_l', 'bip_eyelids_r']
+  groupFile/Body Morphs -> groupFile/Arms   (2 families)  e.g. ['lowerarm', 'upperarm']
+  groupFile/RigHelpers -> groupFile/Body Morphs   (2 families)  e.g. ['back', 'stomach']
+  groupFile/Face/Eyes -> groupFile/Face/Expressions   (1 families)  e.g. ['derp']
+  groupFile/Face/Expressions -> groupFile/Face/Eyes   (1 families)  e.g. ['circle eye']
+  groupFile/Face/Expressions -> groupFile/Face/Upper Face   (1 families)  e.g. ['head forehead']
+  groupFile/Face/Upper Face -> groupFile/Face/Mid Face   (1 families)  e.g. ['cheeksraise']
+  groupFile/Face/Upper Face -> groupFile/Face   (1 families)  e.g. ['headbase']
+  groupFile/Face/Mid Face -> groupFile/Face/Eyes   (1 families)  e.g. ['eyes-squint-both']
+  groupFile/Face/Lower Face -> groupFile/Other   (1 families)  e.g. ['kitty']
+  groupFile/Body Morphs -> groupFile/Body Morphs   (1 families)  e.g. ['breast press']
+  groupFile/Body Morphs -> groupFile/Face/Eyes   (1 families)  e.g. ['wink']
+  groupFile/Other -> groupFile/Face/Expressions   (1 families)  e.g. ['tears']
+
+The full per-family list (all 397) is available in MASTER_IMPORT_FINAL_CANDIDATES.tsv
+under disposition 'EXCLUDED_EXISTING_FAMILY_AUDIT_CANDIDATE'.
+Recommendation: the 121-family Face/Upper Face -> Face/Eyes cluster and the
+239-family Body Morphs -> Body cluster both look substantively evidenced (the former
+mirrors the Phase 1G eyelid-philosophy finding) and are good candidates to prioritize
+for a dedicated future Master migration pass. No Master edit has been made.
+
+7. FINAL IMPORT-READY TOTALS
+------------------------------------------------------------------------------
+Exact spellings eligible to add:          14776
+Unique ASCII families represented:        14266
+  M2 spellings to add:                    2969  (2557 families)
+  M3 spellings/families to add:           11807  (11709 families)
+Excluded / unresolved total:               462  (18 M2 DO NOT IMPORT + 444 M2 existing-family audit candidates)
+
+==============================================================================
+INDEPENDENT VALIDATION OF THE HYPOTHETICAL FINAL CANDIDATE SET
+==============================================================================
+0 exact duplicate additions
+0 cross-path strict-ASCII family conflicts
+0 family path splits
+0 quarantined scanner metadata imports
+0 invalid destination paths
+0 unintended M2 family relocations
+
+Baseline validator run (tools/validate_master.py) against untouched live Master: PASS
+  102,836 controls / 102,172 ASCII families / 0 exact duplicates / 0 cross-path families
+
+==============================================================================
+VERDICT: READY FOR FINAL IMPORT APPROVAL
+==============================================================================
+The 14,776-row / 14,266-family eligible candidate set (2,969 M2 spellings across
+2,557 families + 11,807 M3 spellings across 11,709 families) has zero invariant
+failures and is ready for a Phase 2 import preflight.
+
+Nothing is blocking this import. The 411 excluded M2 families (397 existing-family
+audit candidates + 14 DO NOT IMPORT, including bottom/default/cannon) are correctly
+held out by design -- not defects -- and constitute a SEPARATE follow-up decision
+track (existing-family migration) that this phase was explicitly not authorized to
+resolve. No Master edits were made.
+
+No files have been modified except the two new artifacts:
+  E:\SFM Animation Group Master\MASTER_IMPORT_FINAL_CANDIDATES.tsv
+  E:\SFM Animation Group Master\MASTER_IMPORT_RECONCILIATION_REPORT.txt
