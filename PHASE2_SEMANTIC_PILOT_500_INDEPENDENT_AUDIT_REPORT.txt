@@ -1,0 +1,487 @@
+==============================================================================
+PHASE 2 SEMANTIC PILOT 500 -- INDEPENDENT AUDIT REPORT
+Exhaustive re-audit of all 500 reconciled pilot families against the 12
+failure classes (A-L) identified by external review of
+PHASE2_SEMANTIC_PILOT_500_REVIEW_RENDERING.txt.
+
+Source (unmodified): PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv @ commit 12debd8
+Candidate (new file): PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE.tsv
+Method: every row was inspected against every applicable failure class via
+targeted, non-sampling searches across fold_key/exact_spellings/
+semantic_referent (not limited to the named examples), followed by
+individual semantic re-judgment of every match; corrections applied via
+deterministic Python (build_audit.py), re-opened from disk and
+independently re-validated after writing.
+This report does NOT re-litigate rows outside the 12 failure classes; it is
+a defect audit against the specific classes named, not a full re-derivation
+of all 500 judgments from a blank slate.
+==============================================================================
+
+AUDIT DISPOSITION COUNTS (all 500 families)
+------------------------------------------------------------------------------
+  KEEP                     : 422
+  DEFINITE_CORRECTION      :  64
+  POLICY_QUESTION          :   5
+  CONTEXT_REMAINS_NEEDED   :   9
+                             -----
+  TOTAL                    : 500
+
+KEEP = inspected under one or more applicable failure classes (or not
+matched by any failure class) and judged already correct; no field changed.
+CONTEXT_REMAINS_NEEDED = specifically inspected under a failure class,
+already NEEDS_CONTEXT/PARTIAL/OPAQUE, and confirmed that the abstention is
+correct and should NOT be resolved by force. POLICY_QUESTION = a genuine
+standing-rule ambiguity that blocks a confident individual correction;
+listed in full below, not silently resolved.
+
+==============================================================================
+CATEGORY-BY-CATEGORY FINDINGS
+==============================================================================
+
+--- A. STRUCTURAL ANATOMY VS BODY MORPHS ---------------------------------
+Reviewed: all 35 rows with proposed_destination = groupFile/Body Morphs
+(the full population, not a sample), plus a broader genital/breast/
+buttock/anatomy keyword sweep across the whole 500 to confirm no additional
+candidates existed outside that destination.
+
+Defect confirmed: the pilot's Body Morphs rule as applied did treat bare
+genital/anatomical nouns and root/structural-segment bones as sufficient
+evidence for Body Morphs, without asking whether an actual shape/size/
+state/deformation/action word was present. 13 rows corrected from Body
+Morphs to Body (penus 1, l bust01 sec root, scrotumRight, Bip_Balls_2_R,
+nipple up, R_Butt_left, RightNipple1, vag inner2 2,
+ValveBiped.Bip01_Vag_L_2, Cock.Shaft_4_Skin, foreskin_right, penis root,
+PussParent.002_L.008) plus 1 rerouted from Body Morphs to Clothing
+(PantsAnalOpen -- primary named object is the garment, not the body).
+
+Confirmed CORRECT and left unchanged (real shape/size/state/deformation/
+action word present): Body-R-Hard-Nipple (hard/erect state),
+Left_stomach_buldge (bulge), pussy_tighten (tighten), Shouldershrink
+(shrink), AnusOpenSuitExposedTorn (open -- anus is the primary subject,
+suit is only the triggering context, unlike PantsAnalOpen), BellyIn-
+topclothed (in/state), Body-R-Nipple-Pull (pull), ErectNips (erect),
+R-Ass-Smack (impact/deformation reaction), Shin Thickness (thickness),
+TopMuscles (muscular/tone), Belly Inflat (inflate), Belly-bottomnude
+(state), Bikini Boobs Upward R (upward/shape), BoobJobL+BoobJobR (boob
+job = augmentation), BallsDetail4 (detail = shape-refinement slider,
+already explicitly self-described as a "morph"), cock-head-skinny
+(skinny -- user-confirmed), R-Titty-Pull (pull), AnusGrip (grip/tighten),
+CockWide (wide -- user-confirmed), pantspregnant (Clothing already
+correct: the object being fit is the pants, per Object-Specific-Purpose-
+Takes-Precedence; CONTEXT_REMAINS_NEEDED-level ambiguity noted but
+resolved by existing doctrine, not left open).
+
+POLICY_QUESTION (1): bip_lube.001 -- a "lube"/wetness-effect bone. Not
+confidently an intended body-shape/appearance-change control (the
+philosophy's Body Morphs purpose test) nor confidently anything else in
+the existing taxonomy; whether a fluid/wetness-effect bone falls inside
+Body Morphs' scope at all is a standing scope question, not an individual
+misclassification. Left unchanged pending a policy decision.
+
+--- B. UNUSED / DUPLICATE EXHAUSTIVENESS ---------------------------------
+Mechanically enumerated every family containing "unused" or "duplicate"
+anywhere in fold_key or exact_spellings (13 total, confirmed exhaustive by
+two independent regex passes on both fields). 6 were already correctly
+resolved to Useless. 7 remained OPAQUE/NOT_APPLICABLE despite the explicit
+self-declaration: unused.050, unusedbone091, unused C_I_Position,
+unused.029, unuseddummy, unusedbone146, unusedbone022. All 7 corrected to
+semantic_status=PARTIAL, taxonomy_status=CLEAR, proposed_destination=
+groupFile/Useless, per already-settled rule 15 (a generic "unused"
+placeholder is not semantically opaque -- "unused" itself conveys
+function). Post-correction validation confirms zero explicit-unused
+families remain OPAQUE or NOT_APPLICABLE.
+
+--- C. OPAQUE VS PARTIAL --------------------------------------------------
+Reviewed all 91 OPAQUE rows individually (the full population). Test
+applied: OPAQUE requires that NO token names a real object, material, or
+concrete function/action; PARTIAL applies wherever the semantic_referent
+field itself already names something real, even if ownership/exact
+destination is unresolved.
+
+30 corrected out of OPAQUE (26 to PARTIAL/NEEDS_CONTEXT, 4 to CLEAR/Other
+where a strong existing Master precedent already resolves the object):
+  -> PARTIAL/NEEDS_CONTEXT: bone_skin_099, taurenmale_hd_bone_90,
+     taurenmale_hd_bone_78, end/beam/shrink, key.s, key.x, key 17, key.9,
+     l_horselink, light 3, lock1, opt_acs_year_l8, opt_acs_year_r8,
+     page2_f, show, squish-zx, valvebiped.topswitch, whl_2, crush-26,
+     egg.wall_21, shell.wall_58, ex_2, glass_d3_d, plate 2, stick, bracket
+  -> CLEAR/groupFile/Other (matching Door2/Torch3/BoxBig precedent already
+     used elsewhere in this exact pilot): sign07, box06, box08, boxa1
+
+54 confirmed correctly remain OPAQUE (KEEP; no real object/material/
+function token present in any of these): 28, 52, Bone._R, Bone._L,
+bone 706, Bone.001_L.002, BoneHigh02 (positional adjective only, no
+object noun), Bone.001.L, Bone036, Bone041, Bone093, Bone046, Bone094,
+Bone009, Bone077, Bone083, Bone106, bone 1046, Bone.001_R.040, Dummy03,
+Null.001, Null.002, Object003, Object47, Object12, Object40, Object24,
+Object033_009, polySurface75, ValveBiped.pCube45 (DCC auto-generated
+names, zero real-object content, distinct from real nouns like "box"),
+_right_z_up, F7, G8, CH1, AU18Z, BhR43, v_rr, C4 (ambiguous alphanumeric
+codes -- ambiguous between a real object and a meaningless code, so no
+reading can be reliably preferred), gentle_4, gentle_3, rough_small_7
+(quality adjectives with no object), houjin 9_1, lipur (unresolved
+foreign/truncated terms), l_outer_lower, left_6, microleft, side_right_7,
+top_right, rup, top-1, Position (pure positional words / generic
+technical placeholders, no object noun), kargathbladefist_Bone12,
+kargathbladefist_Bone42 (a proper-noun character name attached to a bare
+numbered bone gives model ownership but no body-part information at all).
+
+--- D. WHOLE-FACE EXPRESSIONS (proposed rule applied to data only) --------
+Corrected 2: HurtR and SurpriseL, from PARTIAL/NEEDS_CONTEXT to CLEAR/
+groupFile/Face/Expressions, under the proposed rule: bare emotion/
+expression state with no specific facial feature named routes to the
+existing Face/Expressions group (no new taxonomy). Already-correct rows
+with a named feature (MainLidSurprised -> Eyes, Brows-R-Surprise -> Upper
+Face, wide eye -> Eyes, EyeCringe.L -> Eyes) confirmed unchanged -- KEEP.
+"Pale Face" was reviewed and left unchanged (CONTEXT_REMAINS_NEEDED): its
+own ambiguity is between a skin-tone/color control (Body Morphs-style) and
+an expression, which the Expressions rule does not resolve -- "pale" is
+not itself an expression word.
+The rule itself is proposed only; see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_
+AMENDMENTS.txt. It was not added to PHASE2_SEMANTIC_BATCH_RULES.txt.
+
+--- E. HOLSTER / WORN-ITEM CONTRADICTION ----------------------------------
+All 4 holster rows re-audited: Gear.Holster, Holster_Base,
+l_side_holster_0u_0v, l_rear_holster_0u_8v. None of the four complete
+literals independently establishes whether the holster is body/garment-
+mounted (-> Clothing) or a standalone weapon/prop-assembly component
+(-> Other) -- all reported as POLICY_QUESTION (see table below). Left
+unchanged (still groupFile/Other) pending a policy decision; not silently
+resolved in either direction.
+
+--- F. CREATURE ANATOMY: PAW AND WING-BONE OVERGENERALIZATION -------------
+R_FrontPaw corrected: a whole paw is the limb-end assembly, not an
+individual digit, so it should not be forced into the Fingers subgroup
+merely because "paw" is majority-Fingers historically in the live Master.
+Destination changed to groupFile/Arms (see also Category K -- this
+correction combines the F and K findings).
+Crow_3.Phalanges3_L corrected: phalanges occur in a bird's WING (digit
+bones) and its FOOT (toe bones) alike; the referent's own prior text
+already flagged "wing/foot bone" as unresolved, yet taxonomy_status was
+CLEAR/Wings regardless. Downgraded to PARTIAL/NEEDS_CONTEXT.
+Crow_3.Clavical_R confirmed correct and left unchanged (KEEP): a crow's
+only forelimbs are its wings, so a clavicle (shoulder-girdle bone) on this
+species is wing-associated by anatomical necessity, not mere
+"bone-type-can-occur-in-wings" overgeneralization -- unlike phalanges,
+there is no competing foot-clavicle reading.
+Bip001-L-Clavicle confirmed correct and left unchanged (KEEP): plain
+human-context clavicle, no creature/wing context present at all, correctly
+routed to Arms.
+
+--- G. SEMANTIC-STATUS INTERNAL CONSISTENCY -------------------------------
+Checked all 16 rows where semantic_status=CLEAR but uncertainty_reason is
+non-empty, for a logical contradiction between the confidently-asserted
+referent and the stated doubt (the full population of that shape, not a
+sample). Only 1 genuine contradiction found: Pincer Right Mid, whose
+semantic_referent asserted "creature claw" (a specific anatomical claim)
+while its own uncertainty_reason simultaneously denied that any domain
+(anatomical/mechanical/weapon) could be established. Corrected:
+semantic_status CLEAR -> PARTIAL, semantic_referent reworded to remove the
+unsupported "creature claw" claim; taxonomy_status remains NEEDS_CONTEXT
+(unchanged) -- ownership was already correctly left open, only the
+semantic-status field was inconsistent with that openness.
+The other 15 rows checked (head eyeball middle, v_weapon.left_middle03,
+feather 1a/2a/2b, finger2a, R_Butt_left, bip facetemplemiin r,
+Canine_Tail2, hLidDroop, Nasolabial, LidUbberOpenL, PantsPregnant,
+PussParent.002_L.008, v_weapon.right_index03) do not contain this kind of
+contradiction -- each states a confidently-resolved core referent with
+only a secondary, non-disqualifying caveat (spelling uncertainty, a close
+call between two adjacent valid subgroups, or an already-appropriately-
+paired CLEAR-semantic/NEEDS_CONTEXT-taxonomy combination for an object
+whose OWNER, not identity, is unresolved). These are KEEP or
+CONTEXT_REMAINS_NEEDED as applicable, not corrections.
+
+--- H. CORRECTIVES ---------------------------------------------------------
+Checked all 3 current Correctives rows (leg_bone_correct_fl_01,
+pJCMThighFwd57R, shoulder_bone_correct_l_02) and searched the entire pilot
+for the bare token "collision" (0 hits anywhere). All 3 Correctives rows
+rely on explicit "correct"/"JCM" (Joint Corrective Morph) language, not on
+"collision" or any other weaker signal. Clean pass -- zero corrections.
+KEEP all 3.
+
+--- I. OBJECT OWNERSHIP / BARE ACCESSORIES --------------------------------
+Reviewed all 13 rows matching strap/tassel/tassle/string/charm/band. 7
+corrected from CLEAR/Clothing to PARTIAL/NEEDS_CONTEXT for lacking any
+named owner: Strap_B.02, Strap_B.03, TasselB, Band.Bend_Right_1,
+l string1 tip sec, l leg string tip sec, StrapFrontLeftIn. Confirmed
+correct and left unchanged: ChocoboCharm (a themed decorative
+charm/pendant -- ordinary worn-jewelry reading, not over-corrected),
+leg left/right boot tassle (explicit "boot" owner named), Wakazashi.
+Tassel_Front_7/8 (explicit weapon owner named, matches the instruction's
+own worked example), Pants string２.R (explicit "Pants" owner named).
+Also confirmed headgear_r.004 and veil_l_2 (obviously wearable items)
+were NOT over-corrected -- left unchanged as Clothing per the explicit
+instruction not to hedge on self-evidently worn terms.
+
+--- J. RIG TAXONOMY ---------------------------------------------------------
+Only 1 row in the entire pilot uses a Rig* destination: bip_origin ->
+RigBody. Checked under the stricter test ("the complete literal must
+identify an intrinsic rig-machinery concept, not ordinary anatomy wearing
+a rig prefix"): "origin" (the skeleton's root/anchor transform) is itself
+an intrinsic rig-machinery concept with no anatomical meaning at all --
+there is no body part called "origin." Confirmed correct. Clean pass --
+zero corrections. KEEP.
+
+--- K. SIDE SUBPATHS --------------------------------------------------------
+Checked every row routed into any Left/Right child subgroup. Genuine,
+independently-verified side-specific categories (LeftFingers/RightFingers,
+LeftToes/RightToes) were used correctly and left unchanged. Exactly one
+row used a bare Arms/LeftArm or Arms/RightArm destination for non-Fingers
+content: Third_Arms_R_1 (Arms/RightArm). Cross-checked against this same
+pilot's own settled precedent: every other explicitly-sided arm bone
+(Bip01_L_Forearm007, Bip01_R_Forearm009, Bip01_R_UpperArm013/016, all
+twist/roll arm bones, RForeArmEX, etc.) was already routed to the bare
+groupFile/Arms destination, never into a LeftArm/RightArm subpath -- this
+pilot itself provides no verified example of ordinary content living
+directly under Arms/LeftArm or Arms/RightArm. Corrected Third_Arms_R_1 to
+groupFile/Arms for internal consistency with its own siblings. This
+finding also applies to R_FrontPaw (Category F above) -- both moved to
+groupFile/Arms rather than a Left/RightArm subpath.
+
+--- L. RULEBOOK SCHEMA WORDING ---------------------------------------------
+Not applied to any row (this category is about rulebook TEXT, not data).
+See PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt for the proposed
+Rule 12 rewrite (OPAQUE/NEEDS_CONTEXT/NEEDS_DOCTRINE are not
+interchangeable), narrower Rule 5 collision wording, and revised Rule 16
+holster wording. PHASE2_SEMANTIC_BATCH_RULES.txt was NOT modified.
+
+==============================================================================
+EVERY DEFINITE_CORRECTION (64 of 64 -- full list, not a sample)
+==============================================================================
+Format: fold_key | exact_spelling(s) | old_sem -> new_sem |
+old_tax -> new_tax | old_dest -> new_dest
+
+1.  band.bend_right_1 | Band.Bend_Right_1 | CLEAR -> PARTIAL | CLEAR -> NEEDS_CONTEXT | groupFile/Clothing -> [NONE]
+    reason: bare accessory term with no explicit named owner
+2.  bip_balls_2_r | Bip_Balls_2_R | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: plain numbered anatomical segment, no shape/size/state descriptor
+3.  bone_skin_099 | Bone_skin_099 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "skin" names a real deform function; body region unresolved
+4.  box06 | Box06 | OPAQUE -> CLEAR | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Other
+    reason: matches Door2/Torch3/BoxBig -> Other precedent
+5.  box08 | Box08 | OPAQUE -> CLEAR | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Other
+    reason: matches Door2/Torch3/BoxBig -> Other precedent
+6.  boxa1 | BoxA1 | OPAQUE -> CLEAR | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Other
+    reason: matches Door2/Torch3/BoxBig -> Other precedent
+7.  bracket | bracket | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: names a real mechanical object; assembly ownership unresolved
+8.  cock.shaft_4_skin | Cock.Shaft_4_Skin | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: plain numbered segment + skin-layer designation, not a shape/size descriptor
+9.  crow_3.phalanges3_l | Crow_3.Phalanges3_L | CLEAR -> PARTIAL | CLEAR -> NEEDS_CONTEXT | groupFile/Wings -> [NONE]
+    reason: phalanges occur in both wing and foot; ownership not established
+10. crush-26 | crush-26 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "crush" names a real deformation function; object unresolved
+11. egg.wall_21 | Egg.Wall_21 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "wall" names a real object; ownership unresolved
+12. end/beam/shrink | End/beam/shrink | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "beam"/"shrink" name real object/function; combined referent unresolved
+13. ex_2 | Ex_2 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "Ex" matches an established Master helper-bone naming pattern; region unresolved
+14. foreskin_right | foreskin_right | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: plain genital anatomical term, no shape/size/state descriptor
+15. glass_d3_d | glass_d3_d | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "glass" names a real material/object; type unresolved
+16. hurtr | HurtR | PARTIAL -> CLEAR | NEEDS_CONTEXT -> CLEAR | [NONE] -> groupFile/Face/Expressions
+    reason: bare expression state, no facial feature named -> Expressions (proposed rule)
+17. key 17 | Key 17 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "key" has Master-internal precedent (Key.Black_3/White_25 -> Other); family membership unresolved
+18. key.9 | Key.9 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: same as key 17
+19. key.s | Key.S | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: same as key 17
+20. key.x | Key.X | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: same as key 17
+21. l bust01 sec root | l bust01 sec root | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: a jiggle-physics root/bone, not a shape descriptor
+22. l leg string tip sec | l leg string tip sec | CLEAR -> PARTIAL | CLEAR -> NEEDS_CONTEXT | groupFile/Clothing -> [NONE]
+    reason: bare accessory term, only an anatomical region named, no garment owner
+23. l string1 tip sec | l string1 tip sec | CLEAR -> PARTIAL | CLEAR -> NEEDS_CONTEXT | groupFile/Clothing -> [NONE]
+    reason: bare accessory term, no named owner
+24. l_horselink | l_horselink | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "horse" is a real, specific referent; mechanism/ownership unresolved
+25. light 3 | Light 3 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: plausible real light-source prop (compare Torch3 -> Other); ownership unresolved
+26. lock1 | lock1 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "lock" names two real candidate objects; which is unresolved
+27. nipple up | nipple up | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: "up" is positional/directional, not an explicit state/shape descriptor
+28. opt_acs_year_l8 | OPT_acs_year_l8 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "acs" plausibly = accessory (real category); specifics unresolved
+29. opt_acs_year_r8 | OPT_acs_year_r8 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: same as opt_acs_year_l8
+30. page2_f | Page2_F | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "page" is a real referent (compare Book TurnPage9 -> Other); book/variant unresolved
+31. pantsanalopen | PantsAnalOpen | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Clothing
+    reason: "Pants" is the primary named object; object-specific feature stays with the object
+32. penis root | penis root | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: explicit "root" -- plain structural segment
+33. penus 1 | penus 1 | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: plain anatomical segment, no shape/size/state descriptor
+34. pincer right mid | Pincer Right Mid | CLEAR -> PARTIAL | NEEDS_CONTEXT -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: semantic_status contradicted its own uncertainty_reason; downgraded to match the evidence
+35. plate 2 | Plate 2 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "plate" names a real object; type unresolved
+36. pussparent.002_l.008 | PussParent.002_L.008 | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: explicit "parent/root bone" -- plain structural segment
+37. r_butt_left | R_Butt_left | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: plain anatomical segment, no shape/size/state descriptor
+38. r_frontpaw | R_FrontPaw | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Arms/RightArm/RightFingers -> groupFile/Arms
+    reason: whole paw is a limb-end assembly, not a digit; Arms/RightArm not independently verified for direct content
+39. rightnipple1 | RightNipple1 | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: plain numbered anatomical segment, no shape/size/state descriptor
+40. scrotumright | scrotumRight | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: plain genital anatomical term
+41. shell.wall_58 | Shell.Wall_58 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "wall" names a real object; ownership unresolved
+42. show | show | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "show" names a real function (visibility toggle); object unresolved
+43. sign07 | sign07 | OPAQUE -> CLEAR | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Other
+    reason: matches Door2/Torch3/BoxBig -> Other precedent
+44. squish-zx | squish-zx | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "squish" names a real deformation function; object unresolved
+45. stick | stick | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "stick" names a real object; type unresolved
+46. strap_b.02 | Strap_B.02 | CLEAR -> PARTIAL | CLEAR -> NEEDS_CONTEXT | groupFile/Clothing -> [NONE]
+    reason: bare accessory term, no named owner
+47. strap_b.03 | Strap_B.03 | CLEAR -> PARTIAL | CLEAR -> NEEDS_CONTEXT | groupFile/Clothing -> [NONE]
+    reason: bare accessory term, no named owner
+48. strapfrontleftin | StrapFrontLeftIn | CLEAR -> PARTIAL | CLEAR -> NEEDS_CONTEXT | groupFile/Clothing -> [NONE]
+    reason: bare accessory term, no named owner
+49. surprisel | SurpriseL | PARTIAL -> CLEAR | NEEDS_CONTEXT -> CLEAR | [NONE] -> groupFile/Face/Expressions
+    reason: bare expression state, no facial feature named -> Expressions (proposed rule)
+50. tasselb | TasselB | CLEAR -> PARTIAL | CLEAR -> NEEDS_CONTEXT | groupFile/Clothing -> [NONE]
+    reason: bare accessory term, no named owner (contrast Wakazashi.Tassel_*, which names the sword)
+51. taurenmale_hd_bone_78 | taurenmale_hd_bone_78 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "hd" plausibly = head; abbreviation not certain enough for CLEAR
+52. taurenmale_hd_bone_90 | taurenmale_hd_bone_90 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: same as taurenmale_hd_bone_78
+53. third_arms_r_1 | Third_Arms_R_1 | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Arms/RightArm -> groupFile/Arms
+    reason: inconsistent with every other sided-arm-bone precedent in this same pilot
+54. unused c_i_position | unused C_I_Position | OPAQUE -> PARTIAL | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Useless
+    reason: self-declared unused is positive semantic content (rule 15)
+55. unused.029 | unused.029 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Useless
+    reason: same as unused c_i_position
+56. unused.050 | unused.050 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Useless
+    reason: same as unused c_i_position
+57. unusedbone022 | unusedbone022 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Useless
+    reason: same as unused c_i_position
+58. unusedbone091 | unusedbone091 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Useless
+    reason: same as unused c_i_position
+59. unusedbone146 | unusedbone146 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Useless
+    reason: same as unused c_i_position
+60. unuseddummy | unuseddummy | OPAQUE -> PARTIAL | NOT_APPLICABLE -> CLEAR | [NONE] -> groupFile/Useless
+    reason: same as unused c_i_position
+61. vag inner2 2 | vag inner2 2 | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: plain numbered anatomical segment
+62. valvebiped.bip01_vag_l_2 | ValveBiped.Bip01_Vag_L_2 | CLEAR -> CLEAR | CLEAR -> CLEAR | groupFile/Body Morphs -> groupFile/Body
+    reason: plain numbered anatomical segment
+63. valvebiped.topswitch | ValveBiped.topswitch | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "switch" names a real toggle mechanism; system unresolved
+64. whl_2 | whL_2 | OPAQUE -> PARTIAL | NOT_APPLICABLE -> NEEDS_CONTEXT | [NONE] -> [NONE]
+    reason: "whl" plausibly = wheel (compare wheelback_base/fake_wheel_fl -> Other); abbreviation unresolved
+
+==============================================================================
+EVERY POLICY_QUESTION (5 of 5)
+==============================================================================
+
+1. row: bip_lube.001 | literal: bip_lube.001
+   current judgment: CLEAR/CLEAR/groupFile/Body Morphs
+   competing interpretations: (a) a body-appearance "wetness/lube" effect,
+     falling inside Body Morphs' intended-appearance-change scope; (b) a
+     material/texture-only effect bone that isn't really a "shape" control
+     at all and may not belong in any existing destination cleanly
+   standing rule needed: does Body Morphs' scope include fluid/wetness/
+     texture-state effects, or only shape/size/deformation of the body's
+     own geometry? Left unchanged pending this decision.
+
+2. row: gear.holster | literal: Gear.Holster
+   current judgment: CLEAR/CLEAR/groupFile/Other
+   competing interpretations: (a) part of a body-worn tactical gear/belt
+     assembly -> Clothing (worn-equipment reading); (b) a standalone
+     weapon-holster prop not attached to the body -> Other
+   standing rule needed: Rule 16 resolution (see amendments doc) --
+     proposed default is Clothing (a holster's primary real-world function
+     is to be worn), flagged for approval, not applied.
+
+3. row: holster_base | literal: Holster_Base
+   current judgment: CLEAR/CLEAR/groupFile/Other
+   competing interpretations: same as gear.holster
+   standing rule needed: same as gear.holster
+
+4. row: l_side_holster_0u_0v | literal: l_side_holster_0u_0v
+   current judgment: CLEAR/CLEAR/groupFile/Other
+   competing interpretations: same as gear.holster; the "0u_0v" suffix is
+     UV/modular-attachment-style and does not resolve ownership either way
+   standing rule needed: same as gear.holster
+
+5. row: l_rear_holster_0u_8v | literal: l_rear_holster_0u_8v
+   current judgment: CLEAR/CLEAR/groupFile/Other
+   competing interpretations: same as gear.holster
+   standing rule needed: same as gear.holster
+
+None of these 5 rows were changed in the candidate TSV. All 5 retain their
+PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv values pending a human decision.
+
+==============================================================================
+VALIDATION
+==============================================================================
+  [x] Exactly 500 families in the candidate file
+  [x] Identical fold_key order to PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv
+  [x] exact_spellings byte-identical for all 500 rows
+  [x] No duplicate fold_key (0 found)
+  [x] Every non-blank proposed_destination in the candidate file is a full
+      group path that exists in a fresh structural parse of the live
+      canonical Master (0 invalid destinations found)
+  [x] semantic_status=OPAQUE iff taxonomy_status=NOT_APPLICABLE, verified
+      by independent re-scan of the written candidate file (0 violations
+      in either direction)
+  [x] No family containing an explicit "unused" or "duplicate" marker
+      remains OPAQUE or NOT_APPLICABLE in the candidate file (0 found)
+  [x] Exactly 64 rows touched, all listed individually above (no sample)
+  [x] Nothing outside the touched 64 was modified in any field
+
+OLD vs CANDIDATE -- semantic_status:
+  CLEAR    : 353 -> 350
+  PARTIAL  :  56 ->  96
+  OPAQUE   :  91 ->  54
+
+OLD vs CANDIDATE -- taxonomy_status:
+  CLEAR          : 349 -> 354
+  NEEDS_CONTEXT  :  60 ->  92
+  NOT_APPLICABLE :  91 ->  54
+  NEEDS_DOCTRINE :   0 ->   0
+
+OLD vs CANDIDATE -- destination counts (all groups with any count change):
+  groupFile/Clothing                   : 63 -> 57  (net -6: 7 bare-accessory rows lost Clothing (Strap_B.02/.03, TasselB, Band.Bend_Right_1, l string1 tip sec, l leg string tip sec, StrapFrontLeftIn), offset by +1 gained (PantsAnalOpen, moved in from Body Morphs))
+  groupFile/Arms                       : 30 -> 32  (+2: Third_Arms_R_1, R_FrontPaw)
+  groupFile/Arms/RightArm/RightFingers : 16 -> 15  (-1: R_FrontPaw moved out)
+  groupFile/Body                       : 17 -> 30  (+13: Category A corrections)
+  groupFile/Other                      : 49 -> 53  (+4: sign07/box06/box08/boxa1)
+  groupFile/Body Morphs                : 35 -> 21  (-14: Category A corrections)
+  groupFile/Wings                      :  4 ->  3  (-1: Crow_3.Phalanges3_L moved out)
+  groupFile/Face/Expressions           :  0 ->  2  (+2: HurtR, SurpriseL -- new)
+  groupFile/Useless                    :  6 -> 13  (+7: Category B corrections)
+  groupFile/Arms/RightArm              :  1 ->  0  (-1: Third_Arms_R_1 moved out)
+  (all other destinations unchanged)
+
+==============================================================================
+MASTER AND BASELINE INTEGRITY
+==============================================================================
+Verified via `git status --short` and `git diff --stat` against commit
+12debd8 immediately before and after writing the candidate file:
+  [x] sfm_defaultanimationgroups.txt: no diff, not opened for writing
+  [x] PHASE2_SEMANTIC_PILOT_500.tsv: no diff, not opened for writing
+  [x] PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv: no diff, not opened for writing
+  [x] PHASE2_SEMANTIC_BATCH_RULES.txt: no diff, not opened for writing
+  [x] PHASE2_PILOT_DOCTRINE_CALIBRATION.txt: no diff
+  [x] PHASE2_PRE_SCALE_DOCTRINE_REVIEW.txt: no diff
+  [x] PHASE2_SEMANTIC_PILOT_RECONCILIATION_REPORT.txt: no diff
+  [x] CLAUDE.md: no diff
+  [x] tools/validate_master.py: no diff, opened read-only only, to obtain
+      the current valid destination-path set for validation
+Only new, previously-untracked files were written this pass:
+  PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE.tsv
+  PHASE2_SEMANTIC_PILOT_500_INDEPENDENT_AUDIT_REPORT.txt (this file)
+  PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt
+No commit was made. No import occurred. No family numbered 501 or beyond
+was classified.

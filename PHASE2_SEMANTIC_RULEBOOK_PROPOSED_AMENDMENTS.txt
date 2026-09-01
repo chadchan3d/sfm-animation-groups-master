@@ -1,0 +1,269 @@
+==============================================================================
+PHASE 2 SEMANTIC BATCH RULES -- PROPOSED AMENDMENTS (NOT YET APPLIED)
+Produced by the independent 500-family audit
+(PHASE2_SEMANTIC_PILOT_500_INDEPENDENT_AUDIT_REPORT.txt).
+These are PROPOSALS ONLY. PHASE2_SEMANTIC_BATCH_RULES.txt has NOT been
+edited. Do not treat any wording below as standing doctrine until it is
+explicitly approved and merged into that file.
+==============================================================================
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT 1 -- RULE 7 (Body Morphs), add an explicit root/plain-
+anatomy carve-out
+--------------------------------------------------------------------------
+PROBLEM FOUND: the pilot treated bare genital/anatomical nouns and
+root/structural-segment bones (penis, vagina, scrotum, foreskin, nipple,
+buttock -- with only numbering, a side marker, or a "root"/"parent"
+designation and no shape/size/state word) as sufficient evidence for Body
+Morphs. This is an over-broad reading distinct from the object-ownership
+correction already made to rule 7 -- it is about WHETHER a shape/size/
+state/deformation word is present at all, not about WHOSE body is
+changing.
+
+PROPOSED ADDITION to rule 7 (append after the existing CORRECTION
+paragraph):
+
+  FURTHER CORRECTION: a bare anatomical noun -- including explicit
+  genital/breast/buttock terms -- with no accompanying shape/size/state/
+  deformation/action word (e.g. a plain numbered segment, a "root" or
+  "parent" bone designation, a bare positional/directional word like
+  "up") is ordinary structural anatomy and routes to its anatomical
+  destination (typically Body), NOT Body Morphs. Body Morphs requires an
+  actual shape/size/state/deformation/action word to be present in the
+  literal (e.g. wide, skinny, thick/thickness, shrink, muscular, tone,
+  pull, tighten, grip, open, inflate, bulge, hard/erect, smack/impact-
+  deformation, augmentation/"job", detail). Explicit anatomical
+  terminology alone (this includes genital terms) is not, by itself,
+  shape/size/state evidence.
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT 2 -- RULE 5 (Correctives), narrow the collision wording
+--------------------------------------------------------------------------
+PROBLEM CHECKED FOR, NOT FOUND IN THE CURRENT PILOT (0 "collision" rows
+exist), but rule 5's own text lists "collision" as qualifying repair
+language without qualification, which invites future over-application.
+
+CURRENT RULE 5 TEXT:
+  "A literal that itself names a repair/fix/pose-correction purpose (e.g.
+  containing 'fix', 'correct', 'repair', 'collision', 'squash/stretch
+  correction' language) supports Correctives..."
+
+PROPOSED REPLACEMENT:
+  "A literal that itself names a repair/fix/pose-correction PURPOSE (e.g.
+  containing 'fix', 'correct', 'repair', 'JCM', or 'squash/stretch
+  correction' language) supports Correctives -- the corrective signal
+  must come from the literal's own stated purpose, not from numbering,
+  helper naming, or twist/roll alone (see rules 2-4). The bare word
+  'collision' is NOT by itself sufficient: collision geometry, collision
+  physics, and collision-detection object naming are common non-
+  corrective technical terms (hitboxes, physics proxies, trigger
+  volumes). Only treat 'collision' as corrective evidence when the
+  complete literal also states a repair/compensation PURPOSE for that
+  collision (e.g. 'collision-fix', 'collision-compensate'), not merely
+  that collision is involved."
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT 3 -- RULE 16 (Other), resolve the holster/worn-item
+conflict
+--------------------------------------------------------------------------
+PROBLEM FOUND: rule 16 lists holsters under Other in its main text, but
+also states worn equipment generally belongs to Clothing (the same
+paragraph that carves out the helmet exception). This is internally
+contradictory for any holster whose literal doesn't independently settle
+body-worn vs. weapon-assembly ownership. All 4 pilot holster rows
+(Gear.Holster, Holster_Base, l_side_holster_0u_0v, l_rear_holster_0u_8v)
+were left unresolved as POLICY_QUESTION rather than silently picking a
+side.
+
+PROPOSED REPLACEMENT for the holster portion of rule 16:
+
+  "HOLSTERS: a holster's real-world primary function is to be worn on the
+  body (belt, thigh rig, chest harness, etc.) to carry a weapon or tool,
+  distinguishing it from the weapon/tool it holds. Therefore:
+    - a holster with no further owner named in the literal -> defaults to
+      groupFile/Clothing (worn-equipment reading), NOT Other
+    - a holster whose literal explicitly ties it to a specific weapon/prop
+      ASSEMBLY (e.g. named as a sub-part of a specific gun/sword prop
+      hierarchy, not a generic body-worn holster) -> groupFile/Other,
+      per Object-Specific-Purpose-Takes-Precedence
+    - this reverses the pilot's default (which sent bare holsters to
+      Other); it does not relitigate any literal that already names its
+      owning weapon/prop explicitly."
+
+  This proposed default (Clothing) is offered for approval, not applied.
+  If approved, it affects only the 4 rows named above and any future
+  family matching the same "bare holster, no further owner" pattern.
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT 4 -- RULE 18/19, correct the paw-to-Fingers claim and
+sharpen the wing-bone test
+--------------------------------------------------------------------------
+PROBLEM FOUND: rule 18 currently states "paw routes to the existing
+Fingers destination (paw is the limb-end/hand-equivalent structure, not a
+generic Other item)" as settled doctrine, based on a historical-majority
+argument (79% of "paw" hits in the live Master fall under Fingers). The
+audit found this treats majority usage as semantic proof rather than
+examining what "paw" actually denotes: a WHOLE paw is the entire limb-end
+assembly, not an individual digit/finger -- Fingers is the destination
+for individual digit-level controls, and routing a whole-paw literal
+there was found to be a category error, independent of how the *word*
+"paw" happens to be distributed in the live Master today.
+
+Rule 18 also currently states wing-bone terms (clavicle, phalanges,
+humerus, ulna) "route to Wings" without qualification. The audit found
+phalanges is genuinely ambiguous for a bird (present in both the wing and
+the foot), so the same unqualified statement cannot govern both bone
+types.
+
+PROPOSED REPLACEMENT for the relevant bullets of rule 18:
+
+  "- an individual digit/finger/claw-segment control on a creature routes
+     to the existing Fingers destination, matching the human-equivalent
+     structure; a WHOLE paw/limb-end assembly (not a specific digit) does
+     NOT belong in Fingers merely because the bare word 'paw' happens to
+     be majority-Fingers historically in the live Master -- route it to
+     the plain limb destination (e.g. groupFile/Arms) instead, with an
+     explicit side marker determining the Left/Right reading only where
+     the Master independently verifies a side-specific destination for
+     that class of content (see rule 10 amendment below)
+   - a named leg-end 'toe' on a creature routes to the existing Toes
+     destination the same way a human toe would
+   - horn and tentacle route to Other, matching existing precedent
+   - clavicle, humerus, and ulna do not have a corresponding non-wing
+     forelimb bone in a flighted species (a bird's only forelimb IS its
+     wing), so on a bird/flighted creature these route to Wings
+   - phalanges is NOT unqualified: birds have phalanges in BOTH the wing
+     (digit bones) and the foot (toe bones). A bare 'phalanges' literal
+     on a bird does not, by itself, establish wing ownership over foot
+     ownership -- flag NEEDS_CONTEXT rather than defaulting to Wings,
+     unless the complete literal also names a wing-specific qualifier
+     (e.g. 'wingtip', an explicit wing-segment name)."
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT 5 -- RULE 10, restrict side-subpath entry to
+independently-verified categories
+--------------------------------------------------------------------------
+PROBLEM FOUND: rule 10 as written ("explicit side markers determine
+Left/Right subpaths where appropriate") is too permissive if read as
+license to route any sided arm/leg control into a LeftArm/RightArm-style
+child group merely because that child group exists. This pilot's own
+data shows every ordinary sided arm bone was (correctly) routed to the
+bare groupFile/Arms destination, never into Arms/LeftArm or
+Arms/RightArm -- meaning those child groups have no verified use for
+direct (non-Fingers) content anywhere in this pilot, unlike
+LeftFingers/RightFingers and LeftToes/RightToes, which DO hold verified
+real content (confirmed by direct live-Master precedent query in the
+pre-scale doctrine review).
+
+PROPOSED REPLACEMENT for rule 10:
+
+  "EXPLICIT SIDE MARKERS DETERMINE LEFT/RIGHT SUBPATHS -- ONLY WHERE THAT
+  SUBPATH IS INDEPENDENTLY VERIFIED FOR THE CLASS OF CONTENT INVOLVED.
+  Do not infer that every Left/Right arm or leg control must enter a
+  LeftArm/RightArm-style child group merely because such a child group
+  exists in the Master's structure. Use a side-specific subpath only
+  where the live taxonomy's actual, verified content assigns that CLASS
+  of control there (confirmed examples: LeftFingers/RightFingers,
+  LeftToes/RightToes). An ordinary anatomical control (a plain arm or leg
+  bone, even explicitly sided) may legitimately remain directly under the
+  bare Arms/Legs destination despite its explicit L/R spelling -- side
+  information is preserved in the literal itself and does not require a
+  matching structural subpath to exist. When uncertain whether a
+  Left/Right child group holds verified content for a given control
+  class, default to the bare parent group rather than assuming the child
+  group is the intended destination."
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT 6 -- NEW RULE, whole-face expressions
+--------------------------------------------------------------------------
+NOT YET SETTLED -- proposed here for approval, applied to two rows in the
+audit candidate (HurtR, SurpriseL) as a data-level correction using an
+EXISTING Master group (Face/Expressions), but not yet added to the
+standing rulebook text.
+
+PROPOSED NEW RULE (to be numbered upon approval and insertion):
+
+  "WHOLE-FACE EXPRESSIONS. An explicit facial feature named together with
+  an expression/action word routes to that feature's normal destination
+  (Eyes, Upper Face, Mid Face, Lower Face, etc.) -- e.g. 'eyelid
+  surprised' -> Eyes, 'brow surprise' -> Upper Face. A BARE emotion/
+  expression state word with NO specific facial feature named (e.g.
+  'Surprise', 'Hurt', with only a side marker and nothing else) routes to
+  the existing groupFile/Face/Expressions destination. Do not send a bare
+  expression word to NEEDS_CONTEXT merely because the emotion could
+  plausibly involve multiple facial features (eyes AND brows, for
+  example) -- that is precisely the case Face/Expressions exists for.
+  This rule does NOT extend to non-expression facial-state words (e.g.
+  skin-tone/color words like 'pale') -- those remain governed by whatever
+  rule actually applies to their content (Body Morphs vs. Face, a
+  separate and still-open question for terms like 'Pale Face')."
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT 7 -- RULE 12 REWRITE, so it cannot contradict RULE 21
+--------------------------------------------------------------------------
+PROBLEM FOUND: current rule 12 ("GENUINELY OPAQUE CONTROLS REMAIN
+UNRESOLVED... leave it OPAQUE/NEEDS_CONTEXT/NEEDS_DOCTRINE") lists these
+three as if interchangeable outcomes of the same situation ("insufficient
+evidence"). Rule 21 (added in the schema-consistency pass) establishes
+that OPAQUE is a semantic_status value strictly tied to NOT_APPLICABLE
+taxonomy_status, while NEEDS_CONTEXT/NEEDS_DOCTRINE are taxonomy_status
+values that apply when semantic_status is CLEAR or PARTIAL. Rule 12's
+current wording invites exactly the confusion the audit found repeatedly
+(e.g. a real object being called "OPAQUE" when a taxonomy-only ownership
+gap, not a semantic gap, was the actual issue).
+
+CURRENT RULE 12 TEXT:
+  "GENUINELY OPAQUE CONTROLS REMAIN UNRESOLVED. If the complete literal
+  does not give enough evidence to determine either its semantic referent
+  or its taxonomy destination, leave it OPAQUE/NEEDS_CONTEXT/
+  NEEDS_DOCTRINE. Do not guess to force a CLEAR result."
+
+PROPOSED REPLACEMENT:
+  "ABSTENTION IS CORRECT WHEN EVIDENCE IS INSUFFICIENT -- BUT THE THREE
+  ABSTENTION STATES ARE NOT INTERCHANGEABLE. Do not guess to force a
+  CLEAR result, but pick the abstention state that matches WHICH question
+  is unanswered:
+    - if NO token in the complete literal names any real object,
+      material, or concrete function/action (a bare number, a pure
+      positional/directional adjective with no object noun, a generic
+      DCC/software auto-name artifact, or an ambiguous short alphanumeric
+      code) -> semantic_status = OPAQUE, taxonomy_status =
+      NOT_APPLICABLE (see rule 21 -- these two are biconditional, never
+      set independently)
+    - if the semantic REFERENT is understood (CLEAR or at least PARTIAL
+      -- something real is named) but its OWNERSHIP or exact DESTINATION
+      is not established by the complete literal -> semantic_status =
+      CLEAR or PARTIAL as appropriate, taxonomy_status = NEEDS_CONTEXT
+    - if the semantic referent and general destination CATEGORY are both
+      understood, but resolving it requires a standing policy decision
+      this rulebook does not yet make (a genuine cross-family ambiguity,
+      not a single literal's missing information) -> taxonomy_status =
+      NEEDS_DOCTRINE and the ambiguity should be reported, not silently
+      guessed
+  A semantic_status=CLEAR row must never carry an uncertainty_reason that
+  contradicts the referent it asserts (e.g. confidently naming a specific
+  object while simultaneously saying that object's domain cannot be
+  established) -- that combination means the row should be PARTIAL, not
+  CLEAR. Before finalizing any batch, spot-check CLEAR rows with a
+  non-empty uncertainty_reason for exactly this contradiction."
+
+==============================================================================
+STATUS
+==============================================================================
+All 7 amendments above are PROPOSALS. None have been merged into
+PHASE2_SEMANTIC_BATCH_RULES.txt. Amendments 1, 4 (paw/Third_Arms portion),
+and 6 were partially reflected as DATA corrections in
+PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE.tsv for the specific rows named
+in the independent audit report, using only EXISTING Master destinations
+(Body, Clothing, Arms, Face/Expressions) -- no new taxonomy was created by
+applying them at the data level. Amendments 2, 3, 5, and 7 were NOT
+applied to any row (rule 2's "collision" issue had zero matching rows;
+rule 3's holster question was left as POLICY_QUESTION; rule 5's side-
+subpath fix WAS applied to the two affected rows -- Third_Arms_R_1 and
+R_FrontPaw -- since it is a factual correction about existing destination
+validity, not a new policy choice; rule 7's OPAQUE/NEEDS_CONTEXT/
+NEEDS_DOCTRINE clarification is a wording-only fix with no directly
+affected data rows beyond what Categories B/C/G already corrected under
+the existing rule 21 invariant).
+Approval of any amendment above should be given explicitly before it is
+merged into PHASE2_SEMANTIC_BATCH_RULES.txt.

@@ -1,19 +1,26 @@
 ==============================================================================
-PHASE 2 SEMANTIC BATCH RULES
-The standing rulebook for classifying SFM animation-control literals into
-the canonical Master's semantic_status / taxonomy_status / proposed_
-destination fields. Supply this file, unchanged, to every Phase 2 semantic
-classification batch.
+PHASE 2 SEMANTIC BATCH RULES -- FINAL CANDIDATE (NOT YET MERGED)
+This is ONE coherent proposed replacement for PHASE2_SEMANTIC_BATCH_RULES.
+txt, built by starting from that live file, incorporating the approved/
+corrected findings of the V1 audit, V2 audit, and this V3 surgical pass,
+and superseding any obsolete or conflicting proposal wording from
+PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt and
+PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS_V2.txt where those documents
+disagree with each other or with this pass's corrections. Where an
+amendment was superseded, this file states the final, corrected wording
+only -- it is not an additive dump of every draft.
 
-This document has not yet been merged into PHASE2_SEMANTIC_BATCH_RULES.txt.
-Merging requires a separate, explicit approval.
+THIS FILE HAS NOT BEEN MERGED INTO PHASE2_SEMANTIC_BATCH_RULES.txt. That
+live file is unchanged. Merging requires a separate, explicit approval.
 
-It contains SETTLED rules only. Anything not covered here is still an open
-question -- apply rule 22 to determine semantic_status and rule 12 to
-determine taxonomy_status; do not treat silence on a topic as permission
-to invent a rule. This file is descriptive of settled doctrine, not a
-substitute for reading the live Master DESIGN PHILOSOPHY header, which
-remains authoritative.
+Supply this file, unchanged, to every future Phase 2 semantic
+classification batch once approved. It contains SETTLED rules only.
+Anything not listed here is still an open question -- classify it as
+NEEDS_DOCTRINE / NEEDS_CONTEXT (never as OPAQUE/NOT_APPLICABLE unless rule
+21's test is met) rather than guessing; do not treat silence on a topic
+as permission to invent a rule. This file is descriptive of settled
+doctrine, not a substitute for reading the live Master DESIGN PHILOSOPHY
+header, which remains authoritative.
 ==============================================================================
 
 1. READ THE COMPLETE LITERAL.
@@ -23,7 +30,11 @@ remains authoritative.
 2. NUMBERING IS NOT CORRECTIVE EVIDENCE.
    A numbered suffix or index on an otherwise-ordinary bone/flex name
    (Bone01, Spine2_002, etc.) does not by itself suggest Correctives. Many
-   numbered names are plain repeated/segmented anatomy or rig chains.
+   numbered names are plain repeated/segmented anatomy or rig chains. A
+   stale semantic_referent note guessing "(likely a deformation-
+   corrective bone)" on a numbered bone does not override this rule --
+   the guess itself is not evidence; look for actual repair/fix/correct
+   language (rule 5).
 
 3. TWIST/ROLL IS NOT CORRECTIVE EVIDENCE.
    "Twist" and "roll" bones are standard rig/deformation-helper anatomy
@@ -62,10 +73,7 @@ remains authoritative.
    This includes a bare numbered segment, a side marker alone, or an
    explicit "root"/"parent"/"origin" bone designation on an otherwise
    plain anatomical noun -- none of these describe the visible form
-   actively changing (contrast rule 7). This applies to soft tissue as
-   much as to skeletal regions: ordinary bone posing stays anatomical
-   even on soft tissue when the literal indicates a structural/posing
-   control rather than an appearance/state change (see rule 7).
+   actively changing (contrast rule 7).
 
 7. BODY MORPHS IS PURPOSE-BASED, NEVER A KEYWORD TRIGGER.
    Body Morphs contains controls whose COMPLETE LITERAL indicates
@@ -82,37 +90,23 @@ remains authoritative.
    ArmForward, FingerGrip, TongueForward, ShoulderDown are all routine
    POSING controls for regions that have real skeletal/articulation
    function, not morphs).
-   The test is PURPOSE, read from the complete literal, not a mechanical
-   rule about whether the named region happens to have a skeletal joint:
-     - the absence of ordinary skeletal articulation for the named region
-       (soft tissue with no joint of its own -- nipple, breast, buttock,
-       belly, genitals) is STRONG SUPPORT for a Body-Morph interpretation
-       of a direction/state word, but it is NEVER sufficient by itself --
-       SFM rigs can and do pose soft tissue with ordinary bones and rig
-       controls, so a direction/state word on soft tissue can still be
-       ordinary structural posing if the complete literal indicates a
-       structural/posing control rather than an intended appearance
-       change;
-     - explicit size/shape/soft-tissue-appearance/state-deformation
-       language on the character's own body supports Body Morphs;
-     - plain structural anatomy -- a bare body-part name, a numbered
-       segment, a side marker alone, an explicit root/parent/origin
-       designation -- is never Body Morphs regardless of the region
-       (rule 6);
-     - object ownership still outranks this entire rule: object-specific
-       shape/fit/deformation routes to the object's own group (rule 8),
-       even when the visible effect sounds like a body-shape change (e.g.
-       a pants feature that happens to expose or reshape an anatomical
-       opening stays with the pants unless the anatomical control is
-       clearly the primary subject and the object is only a triggering
-       context).
-   Calibrated example: "nipple up" routes to Body Morphs, because on this
-   literal's own evidence (a nipple has no ordinary skeletal-posing
-   function this rig assigns to it, and no structural/root/segment
-   wording is present) it is best read as an intended nipple appearance/
-   state control. This is a purpose-based conclusion about THIS literal,
-   not a general "soft tissue + direction word = Body Morphs" rule --
-   each literal's complete wording still decides.
+   The test: does the region named have a genuine skeletal/articulation
+   function that this word could instead be describing as ordinary
+   posing? If yes (an eye, a jaw, an arm, a finger, a tongue, a shoulder),
+   treat the word as posing evidence, not morph evidence, absent a
+   further explicit shape/size/state word. If no (soft tissue with no
+   joint of its own -- nipple, breast, buttock, belly, genitals), a
+   direction/state word describing its form/position can only represent
+   an intended appearance/state change, and Body Morphs applies.
+   PLAIN STRUCTURAL ANATOMY (rule 6) -- a bare body-part name, a numbered
+   segment, a side marker alone, an explicit root/parent/origin
+   designation -- is never Body Morphs regardless of the region.
+   Object ownership still wins over this entire rule: object-specific
+   shape/fit/deformation routes to the object's own group (rule 8), even
+   when the visible effect sounds like a body-shape change (e.g. a pants
+   feature that happens to expose or reshape an anatomical opening stays
+   with the pants unless the anatomical control is clearly the primary
+   subject and the object is only a triggering context).
    LUBE/WETNESS/FLUID EFFECTS ARE NOT BODY MORPHS MERELY BECAUSE THEY ARE
    ADULT-CONTENT OR ANATOMY-ADJACENT. A bare lube/wetness/fluid-effect
    control is an effect/material/fluid referent, not structural anatomy
@@ -167,29 +161,35 @@ remains authoritative.
     side-neutral destination (a bare group with no Left/Right split, or a
     groupColor/shared-control tier), use it rather than guessing a side.
 
-12. TAXONOMY ABSTENTION STATES ARE DETERMINED AFTER SEMANTIC_STATUS, UNDER
-    RULE 22.
-    Determine semantic_status first and exclusively under rule 22's test.
-    Only then apply this sequence to pick taxonomy_status:
-      1. If semantic_status = OPAQUE, taxonomy_status MUST = NOT_APPLICABLE
-         (rule 21). This pairing is biconditional and admits no exception.
-      2. If semantic_status = CLEAR or PARTIAL, and the available semantic
-         evidence does not establish one destination because ownership,
-         mounting, or context is missing, taxonomy_status = NEEDS_CONTEXT.
-      3. If semantic_status = CLEAR or PARTIAL, and the destination can
-         only be resolved by a standing policy decision not yet contained
-         in this rulebook (a genuine cross-family ambiguity, not a single
-         literal's missing information), taxonomy_status = NEEDS_DOCTRINE,
-         reported rather than guessed.
-      4. Otherwise, taxonomy_status = CLEAR.
-    CLEAR + NEEDS_CONTEXT is valid. PARTIAL + CLEAR is valid. PARTIAL +
-    NEEDS_CONTEXT is valid. OPAQUE is valid only paired with
-    NOT_APPLICABLE -- never with NEEDS_CONTEXT or NEEDS_DOCTRINE.
-    Do not use a positional/directional phrase with no object noun, or an
-    unknown ownership/domain attached to an otherwise CLEAR referent, as
-    an independent taxonomy-level test for OPAQUE or PARTIAL -- those are
-    semantic questions rule 22 already settles. This rule only sequences
-    the resulting taxonomy_status once semantic_status is known.
+12. THE THREE ABSTENTION STATES ARE NOT INTERCHANGEABLE.
+    Do not guess to force a CLEAR result, but pick the state that matches
+    WHICH question is unanswered:
+      - if NO token in the complete literal names any real object,
+        material, or concrete function/action (a bare number, a pure
+        positional/directional adjective with no object noun, a generic
+        DCC/software auto-name artifact, or an ambiguous short
+        alphanumeric code) -> semantic_status = OPAQUE, taxonomy_status =
+        NOT_APPLICABLE. These two are biconditional (rule 21) -- OPAQUE
+        must never be paired with NEEDS_CONTEXT or NEEDS_DOCTRINE, and
+        NOT_APPLICABLE must never be paired with CLEAR or PARTIAL
+        semantic_status.
+      - if the semantic referent is understood (CLEAR or PARTIAL --
+        something real is named) but its ownership or exact destination
+        is not established by the complete literal -> taxonomy_status =
+        NEEDS_CONTEXT (semantic_status stays CLEAR or PARTIAL as
+        independently warranted -- see rule 22).
+      - if the semantic referent and general destination category are
+        both understood, but resolving it requires a standing policy
+        decision this rulebook does not yet make (a genuine cross-family
+        ambiguity, not a single literal's missing information) ->
+        taxonomy_status = NEEDS_DOCTRINE, reported rather than guessed.
+    A semantic_status=CLEAR row must never carry a semantic_referent or
+    uncertainty_reason that contradicts the referent it asserts (e.g.
+    confidently naming a specific object while simultaneously saying that
+    object's domain cannot be established) -- that combination means the
+    row should be PARTIAL, not CLEAR (rule 22). Before finalizing any
+    batch, mechanically spot-check CLEAR rows with hedging language in
+    semantic_referent or short_reason for exactly this contradiction.
 
 13. SETTLED: BARE STRUCTURAL "HEAD"/"SKULL" DEFAULTS TO BODY.
     A bare head/skull reference with no specific facial feature named
@@ -219,8 +219,9 @@ remains authoritative.
     Do not invoke the historical collision to justify flagging a spine
     literal that DOES carry ownership evidence as a doctrine question.
 
-15. SETTLED: SELF-DECLARED "UNUSED" (OR "DUPLICATE") GOES TO USELESS --
-    ONLY WHEN THE LITERAL ITSELF DECLARES THIS CONTROL UNUSED/DUPLICATE.
+15. SETTLED: SELF-DECLARED "UNUSED" (OR "DUPLICATE") GOES TO USELESS,
+    REGARDLESS OF WHETHER THE REST OF THE LITERAL IS ANATOMICALLY
+    READABLE.
     An explicit self-declared "unused" (or "duplicate") marker in a
     literal is positive Useless-evidence and takes priority over the
     control's otherwise-readable anatomical referent, per already-
@@ -230,26 +231,11 @@ remains authoritative.
     generic self-declared-unused controls with no anatomical content at
     all (e.g. "unused trash 01", "unused trash 02," already live in
     Useless). A self-declared unused/duplicate placeholder ->
-    groupFile/Useless (taxonomy_status CLEAR). Per rule 22, its
-    semantic_status is normally CLEAR too -- "a self-declared unused/
-    duplicate placeholder" IS the complete, stable core reading; a
-    further generic index, an unresolved internal code, or unrelated
-    attribution/credit text attached to it is an omission, not a
-    materially different reading, and does not by itself require
-    PARTIAL. The self-declaration alone is sufficient taxonomy evidence;
-    this is NOT a NOT_APPLICABLE case (rule 21).
-    "DUPLICATE" MUST BE SELF-DECLARATIVE METADATA ABOUT THIS CONTROL, NOT
-    A COINCIDENTAL WORD MATCH. "Duplicate" counts as Useless evidence only
-    when the literal is clearly SELF-DECLARATIVE -- saying that THIS
-    control itself is a duplicate, redundant, or dead copy (e.g. "unused
-    duplicate duplicate unused.006"). The mere occurrence of the English
-    word "duplicate" describing some other named object or function (for
-    example, a control that duplicates an in-world object, or a literal
-    that happens to contain "duplicate" as part of an unrelated compound
-    or file-naming artifact) does NOT automatically trigger Useless --
-    read the complete literal for genuine self-declaration, the same way
-    rule 1 requires for every other determination. "Unused" remains
-    strong self-declaration under the existing settled precedent above.
+    groupFile/Useless (taxonomy_status CLEAR) even when semantic_status
+    is only PARTIAL (e.g. an unused generic bone carrying unrelated
+    attribution/credit text, or a bone explicitly flagged "duplicate...
+    unused"). The self-declaration alone is sufficient taxonomy evidence;
+    it is NOT a NOT_APPLICABLE case (rule 21).
 
 16. RECOGNIZED PROPS/WEAPONS/EQUIPMENT GO TO OTHER -- WORN EQUIPMENT
     (INCLUDING HOLSTERS) DEFAULTS TO CLOTHING.
@@ -292,8 +278,7 @@ remains authoritative.
         of a _mesh-style suffix -> groupFile/Clothing, per rule 16's worn-
         item exception
       - a generic/opaque identifier with no named referent at all (e.g.
-        "Mesh01") -> follow rule 22's semantic test and rule 12's taxonomy
-        sequencing
+        "Mesh01") -> follow rule 12's abstention test
     See rule 24 for the closely related rule on model/character-prefix
     naming specifically, which extends this same "read past the prefix"
     principle to abbreviations that stand for a model, character, or
@@ -360,11 +345,7 @@ remains authoritative.
     exists for the word in any direction. Flag NEEDS_CONTEXT for this
     reason specifically -- missing ownership/context in the literal --
     not because the referent might be nonhuman or because it names more
-    than the standard limb count (rule 19 already settles those). Note
-    that "Pincer" itself also satisfies rule 22's PARTIAL test
-    independently (anatomical claw / mechanical gripper / weapon part are
-    materially different core readings) -- both rules point to the same
-    conclusion here.
+    than the standard limb count (rule 19 already settles those).
 
 21. SCHEMA INVARIANT -- semantic_status=OPAQUE AND taxonomy_status=
     NOT_APPLICABLE ARE BICONDITIONAL.
@@ -387,104 +368,27 @@ remains authoritative.
 
 22. SEMANTIC_STATUS AND TAXONOMY_STATUS ARE INDEPENDENT AXES.
     semantic_status answers "how completely do we understand the
-    literal's semantic referent/function, AT THE LEVEL THE LITERAL
-    ACTUALLY SPECIFIES?" taxonomy_status answers "is the semantic
-    information we DO have sufficient to determine one Master
-    destination?" These are independent axes, determined separately: use
-    THIS rule to pick semantic_status, then rule 12 to pick
-    taxonomy_status from it. PARTIAL semantic_status paired with CLEAR
-    taxonomy_status is valid, and so is CLEAR semantic_status paired with
-    NEEDS_CONTEXT taxonomy_status -- neither pairing should be forced or
-    avoided.
-
-    CLEAR: the complete literal has ONE stable CORE semantic reading at
-    the level the literal actually specifies. CLEAR does NOT require:
-      - knowing a subtype the literal never names (a generic "cloth"
-        control with no garment type stated is still CLEAR: it clearly
-        means a generic cloth/clothing control)
-      - knowing an owner the literal never names (a "feather" is clearly
-        a feather; whether it belongs to a wing, a headdress, or a
-        costume is a taxonomy-ownership question, not a semantic gap --
-        likewise a "strap," "tassel," "band," "string," "cord," "knot,"
-        "bracket," "spike," or "charm" that names only its theme and not
-        its mount)
-      - knowing left/right if the literal is side-neutral, or which
-        specific finger/digit when the literal merely says "finger"
-        (finger2a, LeftFinger02 are CLEAR)
-      - knowing the exact anatomical mechanism of a whole-face expression
-        (HurtR, SurpriseL are CLEAR: they clearly name expression states;
-        the literal does not need to identify individual facial muscles
-        or a narrower feature to be semantically readable)
-      - knowing what object a clearly named item is attached to, or the
-        precise real-world purpose/mechanism behind an otherwise clear
-        function word (a "lift"/"lower"/"drop"/"show"/"squish"/"crush"/
-        "switch" function, or a "jiggle"/dynamic-bone-physics function,
-        is CLEAR even when the object it acts on is unstated -- the
-        FUNCTION itself has one stable reading in this naming domain,
-        with no realistic competing sense)
-      - a self-declared "unused"/"duplicate" placeholder remaining
-        generic beyond that declaration (see rule 15) -- "a self-declared
-        unused placeholder" is itself the complete, stable core reading
-      - a name being part of a demonstrably coherent naming series whose
-        member pattern is confirmed even when this specific member has no
-        further descriptive suffix (see rule 23) -- membership in a real
-        series is itself a stable core reading, distinct from a mere
-        systematic-but-undecoded compound (contrast the PARTIAL example
-        below)
-
-    PARTIAL: the literal contains meaningful semantic content BUT either:
-      (a) an ACTUAL meaningful token or relation in the literal remains
-          genuinely undecoded -- not merely unnamed, but present in the
-          literal and not resolvable (e.g. "miloin" in a facial-lip
-          control; "globe" in a Finger_Globe_* qualifier; "StC" in a leg
-          qualifier; "Mizin" in a palm control, confirmed by direct
-          corpus check to have zero grounding anywhere despite a
-          confirmed bilateral L/R naming pair -- the existence of a
-          systematic bilateral pattern proves the name is deliberate, it
-          does not decode what the compound means; an unresolved
-          RELATION between tokens that doesn't parse as an ordinary
-          phrase, e.g. "belt hat," or three loosely-related words with no
-          coherent combined reading); OR
-      (b) two or more MATERIALLY DIFFERENT core semantic readings remain
-          plausible -- not just different owners of the same kind of
-          thing, but different KINDS of things (e.g. "bow" = decorative
-          bow / archery bow / ship's bow; "lock" = hair lock / mechanical
-          lock; "plate" = armor plate / dinnerware / structural plate;
-          "glass" = drinking glass / window glass / eyeglass lens;
-          "pincer" = anatomical claw / mechanical gripper / weapon part;
-          "chain" with no anchor word at all = jewelry chain / physics-
-          simulation chain / mechanical chain; a body-vs-object split such
-          as "handles" = love-handles vs. a literal grip object, or
-          "cup" = a bra cup vs. a drinking cup, or "wire" = a garment
-          underwire vs. an animation-rig deformer technique).
-    Judge the CORE semantic reading, not merely whether the English word
-    is recognized. A word is CLEAR despite an unnamed owner when every
-    plausible owner still refers to the SAME kind of object or the SAME
-    function; a word is PARTIAL when its plausible readings are
-    different KINDS of things, or when an actual token in the literal
-    resists decoding altogether -- even one confirmed by a systematic
-    naming pattern to be deliberate rather than random.
-
-    OPAQUE: no reliable core semantic referent/function can be
-    established at all (Bone041, "28," an ungrounded abbreviation with no
-    grounding under rule 23, a generic numbered technical bone tied only
-    to a proper-noun character prefix with no functional or regional word
-    at all, or any similarly meaningless code). This is a distinct, third
-    state from CLEAR and PARTIAL, not a more-severe version of PARTIAL --
-    see rule 21 for its strict taxonomy-status pairing.
-
-    A taxonomy decision becoming CLEAR must NEVER mechanically or
-    conceptually upgrade semantic_status to CLEAR, and conversely a
-    semantic_status of PARTIAL must never mechanically downgrade
-    taxonomy_status -- apply the two tests independently. Before marking
-    a row semantic_status=CLEAR, re-read its own semantic_referent and
-    short_reason: if either still asserts an ACTUAL unresolved token/
-    relation, or a materially different core reading, per the PARTIAL
-    test above, semantic_status must be PARTIAL. If the only thing
-    unresolved is subtype, owner, side, digit identity, exact mechanism,
-    or attachment object, semantic_status may be CLEAR regardless of how
-    that phrasing is worded.
-
+    literal's semantic referent/function?" taxonomy_status answers "is
+    the semantic information we DO have sufficient to determine one
+    Master destination?" PARTIAL semantic_status paired with CLEAR
+    taxonomy_status is VALID and EXPECTED -- it is the normal outcome
+    whenever the PRIMARY owner is clear enough to route the control but a
+    secondary qualifier, action, or token genuinely remains undecoded. A
+    taxonomy decision becoming CLEAR must NEVER mechanically or
+    conceptually upgrade semantic_status to CLEAR. Before marking a row
+    semantic_status=CLEAR, re-read its own semantic_referent and
+    short_reason: if either still explicitly says a meaningful qualifier,
+    action, owner, function, or token is unresolved (hedging language
+    such as "unclear," "unspecified," "not explicit," "not fully clear,"
+    "possibly," "likely" used to hedge on IDENTITY rather than mere
+    spelling origin), semantic_status must be PARTIAL, not CLEAR --
+    regardless of how confidently the taxonomy destination was resolved.
+    Conversely, do not downgrade taxonomy_status merely because
+    semantic_status is PARTIAL: rows whose semantic referent really is
+    fully understood may remain CLEAR, and rows whose PRIMARY owner is
+    clear despite an undecoded secondary detail keep their resolved
+    taxonomy destination (see rule 12's abstention test for the case
+    distinctions).
     A hedge on a COSMETIC spelling-origin guess (e.g. whether a leading
     "H" means "Half," whether "Ubber" is a misspelling of "Upper") is NOT
     a semantic-completeness gap when the control's actual FUNCTION is
@@ -516,43 +420,22 @@ remains authoritative.
         Key.A/Key.B, Key.CapsLock, Key.Enter, Key.Colon, Key.Comma all
         share the identical period-separated "Key.<label>" template with
         no descriptive suffix -- a genuine, coherent keyboard-prop
-        series; likewise Page1_A..Page1_R, Page2_A..Page2_R, Page3_A..
-        Page3_R, Page4_A..Page4_R, Page5_L/R form a genuine, coherent
-        "Page<N>_<letter>" series). A superficially similar but
-        structurally different literal is NOT a sibling merely because it
-        shares a substring or theme: a SPACE-separated "Key 17" is not a
-        sibling of the period-separated "Key.<label>" series merely
-        because both contain "Key" -- if the space-separated form belongs
-        to its OWN coherent series (e.g. "Key 1," "Key 1 - Shirt," "Key 3
-        - PoneyHair" reading as a keyframe/pose-preset series), that is a
-        DIFFERENT family with a different likely meaning, not evidence
-        for the first family's expansion. A coherent series can itself
-        establish a CLEAR (not merely PARTIAL) core reading for an
-        un-suffixed member of that series (e.g. "Key 17" is CLEAR --
-        definitely a numbered preset/key slot in the established series
-        -- even though the exact pose/state it keys is unstated); the
-        series only fails to ground an interpretation when it is NOT
-        genuinely coherent (e.g. an isolated abbreviation and an
-        unrelated literal that merely share a thematic guess, with no
-        shared naming template at all, are NOT siblings). A confirmed
-        BILATERAL pair (a matching left/right naming convention) proves a
-        name is systematic, but proves only that -- it does not by itself
-        decode what an undecoded compound within that name means (see
-        rule 22's PARTIAL test).
+        series). A superficially similar but structurally different
+        literal is NOT a sibling merely because it shares a substring or
+        theme: a SPACE-separated "Key 17" is not a sibling of the
+        period-separated "Key.<label>" series merely because both contain
+        "Key" -- if the space-separated form belongs to its OWN coherent
+        series (e.g. "Key 1," "Key 1 - Shirt," "Key 3 - PoneyHair" reading
+        as a keyframe/pose-preset series), that is a DIFFERENT family with
+        a different likely meaning, not evidence for the first family's
+        expansion. Likewise, "whL_2" and "wheelback_base"/"fake_wheel_fl"
+        are NOT siblings merely because both could involve "wheel" -- they
+        share no naming template at all, only a thematic guess.
       - strong, specific corpus evidence (a documented reference, not an
-        inferred guess). Documented example: "dyng" is grounded this way
-        -- the live Master contains a substantial "dyng hair a01/a02/..."
-        system, and the residual corpus separately contains coherent
-        "dyng necklace," "dyng ... earing," and generic lettered/paired
-        "dyng a/b/c/d/e" and "dyng w/x/y/z" systems, establishing "dyng"
-        as a recognized dynamic/jiggle-physics naming convention in this
-        corpus -- unlike an isolated, ungrounded abbreviation. This
-        grounds the FUNCTION reading of "dyng" under rule 22; it does not
-        by itself decide taxonomy -- object ownership still governs the
-        destination exactly as rule 8 and rule 12 require.
+        inferred guess)
     A merely plausible expansion, with no such grounding, is not enough --
-    leave the literal governed by rule 22's OPAQUE test (typically paired
-    with NOT_APPLICABLE per rule 21).
+    leave the literal governed by rule 12's abstention test (typically
+    OPAQUE/NOT_APPLICABLE).
 
 24. A MODEL/CHARACTER/VARIANT PREFIX IS NOT ITSELF SEMANTIC OWNERSHIP --
     CLASSIFY WHATEVER INDEPENDENTLY-GROUNDED CONTENT REMAINS.
@@ -563,10 +446,7 @@ remains authoritative.
     rest of the literal. This is NOT limited to anatomical content:
       - TaurenMale_HD_bone_78 -- if the remainder is only a generic
         numbered technical bone and "HD" is an ungrounded abbreviation
-        (rule 23), this stays OPAQUE/NOT_APPLICABLE (a bare character-
-        name-plus-generic-bone provides no functional or regional
-        content at all, unlike a genuinely generic-but-named category
-        such as "cloth" or "unused" -- see rule 22); a long, contiguous,
+        (rule 23), this stays OPAQUE/NOT_APPLICABLE; a long, contiguous,
         generically-numbered bone series after the prefix is itself a
         strong signal that the prefix is a model/variant tag, not a
         body-region label, and "HD" must not be expanded to "head" merely
@@ -577,41 +457,25 @@ remains authoritative.
       - fbx_sakura_face / fbx_murasaki_face -- "face" remains meaningful
         despite the DCC/model prefix, so this routes to the bare
         groupFile/Face destination (consistent with rule 13's treatment
-        of bare structural anatomy with no further named feature); per
-        rule 22, semantic_status is CLEAR here too -- "a face-related
-        marker for this character" is the complete, stable core reading
+        of bare structural anatomy with no further named feature)
     Do not require the remaining content to be anatomical specifically --
     require only that it be meaningful and independently grounded.
 
-25. OWNERLESS DECORATIVE-ACCESSORY TERMS: DISTINGUISH "UNKNOWN OWNER"
-    (SEMANTIC CLEAR) FROM "MATERIALLY DIFFERENT CORE SENSES" (SEMANTIC
-    PARTIAL) -- NEITHER DEFAULTS TO CLOTHING WITHOUT AN OWNER.
-    A bare decorative-accessory noun with no named owner does not default
-    to Clothing (taxonomy_status) merely because the item CAN be worn --
-    it can equally plausibly be jewelry, a weapon/prop accessory, or
-    mechanical hardware. This is a TAXONOMY rule (rule 12's NEEDS_CONTEXT
-    branch); it does not by itself determine semantic_status (rule 22
-    governs that separately):
-      - Wakazashi.Tassel_* -> weapon/prop ownership -> Other (taxonomy
-        CLEAR; semantic_status CLEAR -- explicit owner named)
+25. OWNERLESS DECORATIVE-ACCESSORY TERMS DO NOT DEFAULT TO CLOTHING.
+    A bare decorative-accessory noun (strap, tassel, string, charm, band,
+    bow, and similar) with no named owner does not default to Clothing
+    merely because the item CAN be worn -- it can equally plausibly be
+    jewelry, a weapon/prop accessory, or mechanical hardware. Use the
+    explicit owner where present:
+      - Wakazashi.Tassel_* -> weapon/prop ownership -> Other
       - an explicit garment name (Pants string, boot tassel, a "necklace"/
         "pendant" that is spelled out, a body-location anchor such as
-        "belly button" for a piercing) -> Clothing (taxonomy CLEAR;
-        semantic_status CLEAR)
+        "belly button" for a piercing) -> Clothing
       - a bare term with no such owner and no strong standing Master
-        precedent resolving it (Strap_B.02, TasselB, Band.Bend_Right_1,
-        StrapFrontLeftIn, a themed "charm" that names only its theme and
-        not its mount) -> taxonomy_status NEEDS_CONTEXT, destination
-        blank. semantic_status for these is normally CLEAR per rule 22:
-        a strap, tassel, band, or charm is the SAME kind of object
-        regardless of who owns it -- the gap is ownership, not core
-        identity.
-      - a bare term whose word itself has MATERIALLY DIFFERENT core
-        senses (a bare "bow" -- decorative bow / archery bow / ship's
-        bow; "lock" -- hair lock / mechanical lock) -> taxonomy_status
-        NEEDS_CONTEXT, destination blank, AND semantic_status PARTIAL per
-        rule 22 -- here the gap is not merely ownership, it is which
-        KIND of thing the word even refers to.
+        precedent resolving it (Strap_B.02, TasselB, Band.Bend_Right_1, a
+        bare "bow," a themed "charm" that names only its theme and not
+        its mount) -> semantic_status PARTIAL, taxonomy_status
+        NEEDS_CONTEXT, destination blank
     Do not over-correct obviously wearable terms with an unambiguous
     single reading (veil, headgear, necktie) into false uncertainty --
     this rule targets genuine multi-category ambiguity, not every
@@ -622,11 +486,12 @@ remains authoritative.
 
 ==============================================================================
 END OF SETTLED RULES. Anything not covered above is an open question --
-apply rule 22 to determine semantic_status and rule 12 to determine
-taxonomy_status from it (OPAQUE only paired with NOT_APPLICABLE per rule
-21; otherwise NEEDS_CONTEXT or NEEDS_DOCTRINE as rule 12 sequences). Do
-not resolve it by analogy to a settled rule unless the analogy itself has
-been checked against existing Master precedent (see rule 18's caution)
-and, for abbreviations or model/character prefixes, against the
-coherent-sibling-series standard (rules 23-24).
+apply rule 12's test to pick the correct abstention state (OPAQUE only
+paired with NOT_APPLICABLE per rule 21; otherwise NEEDS_CONTEXT or
+NEEDS_DOCTRINE as rule 12 distinguishes) -- never report OPAQUE as
+interchangeable with NEEDS_CONTEXT/NEEDS_DOCTRINE. Do not resolve it by
+analogy to a settled rule unless the analogy itself has been checked
+against existing Master precedent (see rule 18's caution) and, for
+abbreviations or model/character prefixes, against the coherent-sibling-
+series standard (rules 23-24).
 ==============================================================================

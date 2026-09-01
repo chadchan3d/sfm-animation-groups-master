@@ -1,0 +1,740 @@
+==============================================================
+PHASE 2 SEMANTIC PILOT 500 -- AUDIT V2 -> V3 CHANGES REVIEW
+Every row that differs between the second and third audit candidates.
+
+V2: PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V2.tsv
+V3: PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V3.tsv
+V3 CHANGE BASIS points to the numbered requirement (A-F) in
+PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt's own per-row table --
+copied mechanically, no new rationale authored while rendering.
+==============================================================
+--------------------------------------------------------------
+ROW: 410
+FOLD KEY: bip facelipmiloin
+EXACT SPELLING(S): bip facelipmiloin
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a lip-related control, exact modifier ("miloin") unclear
+V3 SEMANTIC REFERENT: a lip-related control, exact modifier ("miloin") unclear
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Face/Lower Face
+V3 DESTINATION: groupFile/Face/Lower Face
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: primary owner ("face"/"lip") is reliable; the unresolved "miloin" qualifier does not create a competing owner or category
+V3 REASON: primary owner ("face"/"lip") is reliable; the unresolved "miloin" qualifier does not create a competing owner or category (semantic_status corrected to PARTIAL: the exact modifier ("miloin") remains genuinely undecoded even though the owner (face/lip) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 311
+FOLD KEY: bip facetemplemiin r
+EXACT SPELLING(S): bip facetemplemiin r
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: right face temple, positional qualifier unclear
+V3 SEMANTIC REFERENT: right face temple, positional qualifier unclear
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Face/Upper Face
+V3 DESTINATION: groupFile/Face/Upper Face
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: miin does not resolve to a standard word, but does not block the clear "temple" referent
+V3 UNCERTAINTY REASON: miin does not resolve to a standard word, but does not block the clear "temple" referent
+
+V2 REASON: temple is explicit despite an unclear trailing qualifier
+V3 REASON: temple is explicit despite an unclear trailing qualifier (semantic_status corrected to PARTIAL: the trailing qualifier remains genuinely undecoded even though the owner (temple) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 110
+FOLD KEY: bip_bobby_l_finger_globe_2_02
+EXACT SPELLING(S): Bip_BOBBY_L_Finger_Globe_2_02
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: left-hand finger area (per-character "Bobby" rig), "globe" qualifier unclear
+V3 SEMANTIC REFERENT: left-hand finger area (per-character "Bobby" rig), "globe" qualifier unclear
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+V3 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: primary owner ("finger") is reliable; the unresolved "globe" qualifier does not create a competing owner or category
+V3 REASON: primary owner ("finger") is reliable; the unresolved "globe" qualifier does not create a competing owner or category (semantic_status corrected to PARTIAL: the 'globe' qualifier remains genuinely undecoded even though the owner (finger) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 15
+FOLD KEY: bip_stone _r_finger_globe_1_02
+EXACT SPELLING(S): Bip_STONE _R_Finger_Globe_1_02
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: right-hand finger area (per-character "Stone" rig), "globe" qualifier unclear -- possibly a ball-joint
+V3 SEMANTIC REFERENT: right-hand finger area (per-character "Stone" rig), "globe" qualifier unclear -- possibly a ball-joint
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Arms/RightArm/RightFingers
+V3 DESTINATION: groupFile/Arms/RightArm/RightFingers
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: primary owner ("finger") is reliable; the unresolved "globe" qualifier (likely a ball-joint) does not create a competing owner or category
+V3 REASON: primary owner ("finger") is reliable; the unresolved "globe" qualifier (likely a ball-joint) does not create a competing owner or category (semantic_status corrected to PARTIAL: the 'globe' qualifier (possibly a ball-joint) remains genuinely undecoded even though the owner (finger) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 128
+FOLD KEY: c dlipout
+EXACT SPELLING(S): C Dlipout
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a lip-related control, exact action ("Dlipout") unclear
+V3 SEMANTIC REFERENT: a lip-related control, exact action ("Dlipout") unclear
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Face/Lower Face
+V3 DESTINATION: groupFile/Face/Lower Face
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: primary owner ("lip") is reliable; the unresolved "Dlipout" construction does not create a competing owner or category
+V3 REASON: primary owner ("lip") is reliable; the unresolved "Dlipout" construction does not create a competing owner or category (semantic_status corrected to PARTIAL: the exact action ("Dlipout") remains genuinely undecoded even though the owner (lip) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 35
+FOLD KEY: cloth right 1
+EXACT SPELLING(S): cloth right 1
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a clothing item, right side, variant 1 (garment type unspecified)
+V3 SEMANTIC REFERENT: a clothing item, right side, variant 1 (garment type unspecified)
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Clothing
+V3 DESTINATION: groupFile/Clothing
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: cloth generically still resolves to Clothing
+V3 REASON: cloth generically still resolves to Clothing (semantic_status corrected to PARTIAL: the specific garment type remains unspecified even though the general category (a clothing item) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 139
+FOLD KEY: feather 1a
+EXACT SPELLING(S): feather 1a
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 1a
+V3 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 1a
+
+V2 TAXONOMY STATUS: NEEDS_CONTEXT
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V2 DESTINATION: [NONE]
+V3 DESTINATION: [NONE]
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: could belong to a wing, a headdress, or a costume accessory -- object not specified
+V3 UNCERTAINTY REASON: could belong to a wing, a headdress, or a costume accessory -- object not specified
+
+V2 REASON: appendage referent clear, owning structure unclear
+V3 REASON: appendage referent clear, owning structure unclear (semantic_status corrected to PARTIAL: the owning structure (wing, headdress, or costume) remains genuinely unresolved even though the object itself (a feather) is clear -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 140
+FOLD KEY: feather 2a
+EXACT SPELLING(S): feather 2a
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2a
+V3 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2a
+
+V2 TAXONOMY STATUS: NEEDS_CONTEXT
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V2 DESTINATION: [NONE]
+V3 DESTINATION: [NONE]
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: same reasoning as feather 1a
+V3 UNCERTAINTY REASON: same reasoning as feather 1a
+
+V2 REASON: appendage referent clear, owning structure unclear
+V3 REASON: appendage referent clear, owning structure unclear (semantic_status corrected to PARTIAL: the owning structure remains genuinely unresolved even though the object itself (a feather) is clear -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 340
+FOLD KEY: feather 2b
+EXACT SPELLING(S): feather 2b
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2b
+V3 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2b
+
+V2 TAXONOMY STATUS: NEEDS_CONTEXT
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V2 DESTINATION: [NONE]
+V3 DESTINATION: [NONE]
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: could belong to a wing, headdress, or costume accessory -- object not specified
+V3 UNCERTAINTY REASON: could belong to a wing, headdress, or costume accessory -- object not specified
+
+V2 REASON: appendage referent clear, owning structure unclear
+V3 REASON: appendage referent clear, owning structure unclear (semantic_status corrected to PARTIAL: the owning structure remains genuinely unresolved even though the object itself (a feather) is clear -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 240
+FOLD KEY: finger2a
+EXACT SPELLING(S): finger2a
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a finger (side unspecified), variant 2a
+V3 SEMANTIC REFERENT: a finger (side unspecified), variant 2a
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Fingers
+V3 DESTINATION: groupFile/Fingers
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: no left/right marker present, so a specific side cannot be assigned
+V3 UNCERTAINTY REASON: no left/right marker present, so a specific side cannot be assigned
+
+V2 REASON: clear finger referent but no side marker to route to Left/RightFingers
+V3 REASON: clear finger referent but no side marker to route to Left/RightFingers (semantic_status corrected to PARTIAL: which specific finger remains unspecified (and no side marker is present) even though the general owner (a finger) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 43
+FOLD KEY: flipoutrighttop
+EXACT SPELLING(S): FlipoutRightTop
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a "flip out" styling effect, right side, top region -- likely hair, but object not explicit
+V3 SEMANTIC REFERENT: a "flip out" styling effect, right side, top region -- likely hair, but object not explicit
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Hair
+V3 DESTINATION: groupFile/Hair
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: "flip out" is an established hair-styling term with no comparably strong competing reading; ownership is sufficiently inferable without the word "hair" being spelled out
+V3 REASON: "flip out" is an established hair-styling term with no comparably strong competing reading; ownership is sufficiently inferable without the word "hair" being spelled out (semantic_status corrected to PARTIAL: the literal itself only says the object is "likely hair" and leaves it "not explicit" -- the owning object is inferred with reasonable confidence for taxonomy purposes but is not itself fully decoded -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 52
+FOLD KEY: hurtr
+EXACT SPELLING(S): HurtR
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: an overall "hurt"/pained expression, possibly lateralized (right)
+V3 SEMANTIC REFERENT: an overall "hurt"/pained expression, possibly lateralized (right)
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Face/Expressions
+V3 DESTINATION: groupFile/Face/Expressions
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt)
+V3 REASON: corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt) (semantic_status corrected to PARTIAL: the literal itself only says the expression is "possibly" lateralized -- resolving it to the whole-face Expressions group is a taxonomy decision, not full semantic resolution of the exact facial mechanism -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 253
+FOLD KEY: key 17
+EXACT SPELLING(S): Key 17
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: CLEAR
+
+V2 SEMANTIC REFERENT: an unlabeled numbered "key" slot
+V3 SEMANTIC REFERENT: a numbered slot in the space-separated "Key <N>" naming series (e.g. "Key 1 - Shirt", "Key 3 - PoneyHair" elsewhere in the residual corpus) -- likely a keyframe/pose-preset marker, not a piano/keyboard-key prop
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V2 DESTINATION: groupFile/Other
+V3 DESTINATION: [NONE]
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Low
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: the residual corpus shows "Key 17" belongs to a distinct, coherent space-separated series (Key 1, Key 2 ... Key 27, several carrying descriptive suffixes like "- Shirt"/"- EyeLeft"/"- PoneyHair"/"- Reverted") that reads as keyframe/pose-preset markers -- a DIFFERENT naming template from the period-separated "Key.<label>" keyboard-prop series (Key.0-Key.9, Key.A/Key.B, Key.CapsLock, Key.Enter, Key.Colon, Key.Comma, Key.Black_*, Key.White_*) that Key.S/Key.X/Key.9 genuinely belong to; what specific pose/state this un-suffixed "Key 17" keys is not established
+
+V2 REASON: "Key <label>" matches the Key.Black_3/Key.White_25 sibling family already established -> Other in this same pilot
+V3 REASON: reverted (V3): tightened sibling-grounding review shows "Key 17" (space-separated) is NOT part of the same coherent naming series as Key.Black_3/Key.White_25/Key.S/Key.X/Key.9 (period-separated) -- it belongs to a separate, distinct "Key <N>" keyframe/preset series instead; restored to PARTIAL/NEEDS_CONTEXT
+
+V3 CHANGE BASIS: requirement D (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section D)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 355
+FOLD KEY: l dlip b
+EXACT SPELLING(S): L Dlip B
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a lip-related control, left, exact action ("Dlip") unclear
+V3 SEMANTIC REFERENT: a lip-related control, left, exact action ("Dlip") unclear
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Face/Lower Face
+V3 DESTINATION: groupFile/Face/Lower Face
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: primary owner ("lip") is reliable; the unresolved "D" prefix does not create a competing owner or category
+V3 REASON: primary owner ("lip") is reliable; the unresolved "D" prefix does not create a competing owner or category (semantic_status corrected to PARTIAL: the exact action ("Dlip") remains genuinely undecoded even though the owner (lip) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 60
+FOLD KEY: leftfinger02
+EXACT SPELLING(S): LeftFinger02
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: left hand, a finger (unspecified which), joint/segment 02
+V3 SEMANTIC REFERENT: left hand, a finger (unspecified which), joint/segment 02
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+V3 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: generic but clearly a left-hand finger control
+V3 REASON: generic but clearly a left-hand finger control (semantic_status corrected to PARTIAL: which specific finger (thumb/index/etc.) remains unspecified even though the general owner (a left-hand finger) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 157
+FOLD KEY: leg left stc
+EXACT SPELLING(S): leg left StC
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: left leg, unclear "StC" qualifier
+V3 SEMANTIC REFERENT: left leg, unclear "StC" qualifier
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Legs
+V3 DESTINATION: groupFile/Legs
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: primary owner ("leg left") is reliable; the unresolved "StC" qualifier does not create a competing owner or category
+V3 REASON: primary owner ("leg left") is reliable; the unresolved "StC" qualifier does not create a competing owner or category (semantic_status corrected to PARTIAL: the "StC" qualifier remains genuinely undecoded even though the owner (leg left) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 268
+FOLD KEY: nipple up
+EXACT SPELLING(S): nipple up
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: CLEAR
+
+V2 SEMANTIC REFERENT: nipple, "up" position/direction
+V3 SEMANTIC REFERENT: nipple, "up" position/direction
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Body Morphs
+V3 DESTINATION: groupFile/Body Morphs
+
+V2 CONFIDENCE: High
+V3 CONFIDENCE: High
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: reverted (V2): "up" describes a visible directional/state change to the nipple's form -- this is deformation/state morphology, not a plain structural segment -- restored to Body Morphs per the refined structural-vs-deformation test
+V3 REASON: re-reasoned (V3, purpose-based, not keyword-based): a nipple has no skeletal joint or ordinary posing function, so a directional word describing its form/position can only represent an intended soft-tissue appearance/state change -- this satisfies Body Morphs' PURPOSE test on its own facts and must not be generalized into "anatomical noun + up/down/etc. = Body Morphs" (which would wrongly catch ordinary articulation controls like EyeUp, JawOpen, ArmForward, FingerGrip, TongueForward, ShoulderDown)
+
+V3 CHANGE BASIS: requirement B (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section B)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 172
+FOLD KEY: page2_f
+EXACT SPELLING(S): Page2_F
+
+V2 SEMANTIC STATUS: PARTIAL
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: an unclear "page" reference, variant F
+V3 SEMANTIC REFERENT: an unclear "page" reference, variant F
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V2 DESTINATION: groupFile/Other
+V3 DESTINATION: [NONE]
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Low
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: "page" is a real referent, but "Book TurnPage9" is not a genuine sibling of "Page2_F" -- they do not share a coherent naming template ("Book TurnPage<N>" vs. "Page<N>_<letter>"), only the substring "page"; this does not meet the tightened sibling-grounding standard
+
+V2 REASON: "page" matches the existing Book TurnPage9 -> Other sibling precedent in this same pilot; the "f" variant and exact book are unresolved but do not create a competing destination
+V3 REASON: reverted (V3): the V2 resolution to Other relied on a "sibling precedent" (Book TurnPage9) that, on closer inspection, is not a demonstrably coherent naming series with Page2_F -- restored to PARTIAL/NEEDS_CONTEXT
+
+V3 CHANGE BASIS: requirement D (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section D)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 375
+FOLD KEY: palmlmizin1
+EXACT SPELLING(S): PalmLMizin1
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: left palm area, "Mizin" qualifier unclear
+V3 SEMANTIC REFERENT: left palm area, "Mizin" qualifier unclear
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+V3 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: "Mizin" has zero precedent anywhere else in the live Master and appears in only 4 residual-corpus entries (PalmLMizin, PalmLMizin1, PalmRMizin, PalmRMizin1), all the same family -- it is a genuinely ungrounded qualifier, not a decodable word
+
+V2 REASON: primary owner ("palm", left) is reliable and conventionally grouped with hand/finger controls; the unresolved "Mizin" qualifier does not create a competing owner or category
+V3 REASON: re-evidenced (V3): fresh live-Master parse confirms "palm" is 91.6% (98/107) directly in LeftFingers/RightFingers, structurally distinct from "carpal"/"metacarpal" (which are ~100% LeftCarpals/RightCarpals) -- LeftFingers is the correct, precedent-backed destination for "palm," not a default assumption; semantic_status is PARTIAL because "Mizin" itself remains genuinely undecoded
+
+V3 CHANGE BASIS: requirement A+C (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A+C)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 284
+FOLD KEY: shorts non futa shadow
+EXACT SPELLING(S): Shorts Non Futa Shadow
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a shading/texture toggle for shorts, specific to a non-futa body variant
+V3 SEMANTIC REFERENT: a shading/texture toggle for shorts, specific to a non-futa body variant
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Clothing
+V3 DESTINATION: groupFile/Clothing
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: primary owner ("shorts") is reliable; whether "shadow" means a shading toggle or a geometry variant does not change the destination
+V3 REASON: primary owner ("shorts") is reliable; whether "shadow" means a shading toggle or a geometry variant does not change the destination (semantic_status corrected to PARTIAL: whether "shadow" means a shading toggle or a geometry variant remains genuinely undecoded even though the owner (shorts) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 79
+FOLD KEY: sign07
+EXACT SPELLING(S): sign07
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: possibly a signboard/placard prop, numbered
+V3 SEMANTIC REFERENT: possibly a signboard/placard prop, numbered
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Other
+V3 DESTINATION: groupFile/Other
+
+V2 CONFIDENCE: High
+V3 CONFIDENCE: High
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque
+V3 REASON: corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque (semantic_status corrected to PARTIAL: the literal itself only says "possibly" a signboard/placard -- the general category (a prop object) is clear enough for taxonomy, but the specific type is not fully decoded -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 388
+FOLD KEY: surprisel
+EXACT SPELLING(S): SurpriseL
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a "surprise" expression, left side, specific facial region unnamed
+V3 SEMANTIC REFERENT: a "surprise" expression, left side, specific facial region unnamed
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Face/Expressions
+V3 DESTINATION: groupFile/Face/Expressions
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt)
+V3 REASON: corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt) (semantic_status corrected to PARTIAL: the specific facial region remains unnamed even though the general category (an expression state) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 191
+FOLD KEY: turtleneckhouseofmcleavage
+EXACT SPELLING(S): TurtleNeckHouseofMCleavage
+
+V2 SEMANTIC STATUS: CLEAR
+V3 SEMANTIC STATUS: PARTIAL
+
+V2 SEMANTIC REFERENT: a turtleneck garment interacting with cleavage; middle portion unclear
+V3 SEMANTIC REFERENT: a turtleneck garment interacting with cleavage; middle portion unclear
+
+V2 TAXONOMY STATUS: CLEAR
+V3 TAXONOMY STATUS: CLEAR
+
+V2 DESTINATION: groupFile/Clothing
+V3 DESTINATION: groupFile/Clothing
+
+V2 CONFIDENCE: Medium
+V3 CONFIDENCE: Medium
+
+V2 UNCERTAINTY REASON: [NONE]
+V3 UNCERTAINTY REASON: [NONE]
+
+V2 REASON: primary owner ("TurtleNeck" garment, "Cleavage" feature) is reliable; the unresolved "House of M" middle segment does not create a competing owner or category
+V3 REASON: primary owner ("TurtleNeck" garment, "Cleavage" feature) is reliable; the unresolved "House of M" middle segment does not create a competing owner or category (semantic_status corrected to PARTIAL: the "House of M" middle segment remains genuinely undecoded even though the owner (turtleneck/cleavage) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+
+V3 CHANGE BASIS: requirement A (see PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, section A)
+--------------------------------------------------------------
+
+==============================================================
+PALM PRECEDENT EVIDENCE (PalmLMizin1) -- reproduced verbatim from
+PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt, Section C
+==============================================================
+C. PalmLMizin1 REOPENED AGAINST THE ACTUAL LIVE MASTER
+==============================================================================
+Fresh structural parse of the CURRENT sfm_defaultanimationgroups.txt
+(not an assumption) was queried directly:
+  "palm" (word-boundary): 107 hits total -- 51 groupFile/Arms/LeftArm/
+    LeftFingers, 47 groupFile/Arms/RightArm/RightFingers, 5 groupFile/
+    Arms/RightArm, 4 groupFile/Arms -- 91.6% (98/107) directly in
+    LeftFingers/RightFingers
+  "carpal": 214 hits total -- 108 groupFile/Arms/RightArm/RightCarpals,
+    104 groupFile/Arms/LeftArm/LeftCarpals, 2 groupFile/Arms --
+    essentially 100% in the Carpals subgroups, a STRUCTURALLY DISTINCT
+    destination from where "palm" actually lives
+  "metacarpal": 10 hits, split evenly RightCarpals/LeftCarpals
+  "mizin": 0 hits anywhere in the live Master
+
+This directly REFUTES the concern that "palm -> Fingers" was an unverified
+assumption: in THIS Master, the word "palm" and the word "carpal" are
+different words routed to different, real destinations, and "palm"
+itself is solidly, independently precedented at LeftFingers/RightFingers
+-- not merely "generally hand/finger related" by loose analogy.
+
+PHASE2_RESIDUAL_TERMS.txt (the ~14,282-term residual corpus) was also
+checked for "Mizin": exactly 4 hits, all within the same family --
+PalmLMizin, PalmLMizin1, PalmRMizin, PalmRMizin1 -- confirming "Mizin" has
+no independent grounding anywhere in the corpus; it is a genuinely
+ungrounded, corpus-local qualifier attached to an otherwise well-
+precedented "palm" owner.
+
+DECISION: PalmLMizin1 retains taxonomy_status=CLEAR, proposed_destination
+=groupFile/Arms/LeftArm/LeftFingers (now backed by direct, fresh Master
+evidence rather than a general convention assumption). semantic_status is
+corrected to PARTIAL (per Section A) because "Mizin" itself remains
+genuinely undecoded. uncertainty_reason and short_reason were rewritten to
+record this evidence explicitly.
+
+==============================================================================
+
+==============================================================
+MECHANICAL GROUPING (23 of 23)
+==============================================================
+A. SEMANTIC STATUS ONLY  (20)
+  410 | bip facelipmiloin | sem=CLEAR/tax=CLEAR/dest=groupFile/Face/Lower Face -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Face/Lower Face
+  311 | bip facetemplemiin r | sem=CLEAR/tax=CLEAR/dest=groupFile/Face/Upper Face -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Face/Upper Face
+  110 | Bip_BOBBY_L_Finger_Globe_2_02 | sem=CLEAR/tax=CLEAR/dest=groupFile/Arms/LeftArm/LeftFingers -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Arms/LeftArm/LeftFingers
+  15 | Bip_STONE _R_Finger_Globe_1_02 | sem=CLEAR/tax=CLEAR/dest=groupFile/Arms/RightArm/RightFingers -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Arms/RightArm/RightFingers
+  128 | C Dlipout | sem=CLEAR/tax=CLEAR/dest=groupFile/Face/Lower Face -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Face/Lower Face
+  35 | cloth right 1 | sem=CLEAR/tax=CLEAR/dest=groupFile/Clothing -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Clothing
+  139 | feather 1a | sem=CLEAR/tax=NEEDS_CONTEXT/dest=[NONE] -> sem=PARTIAL/tax=NEEDS_CONTEXT/dest=[NONE]
+  140 | feather 2a | sem=CLEAR/tax=NEEDS_CONTEXT/dest=[NONE] -> sem=PARTIAL/tax=NEEDS_CONTEXT/dest=[NONE]
+  340 | feather 2b | sem=CLEAR/tax=NEEDS_CONTEXT/dest=[NONE] -> sem=PARTIAL/tax=NEEDS_CONTEXT/dest=[NONE]
+  240 | finger2a | sem=CLEAR/tax=CLEAR/dest=groupFile/Fingers -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Fingers
+  43 | FlipoutRightTop | sem=CLEAR/tax=CLEAR/dest=groupFile/Hair -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Hair
+  52 | HurtR | sem=CLEAR/tax=CLEAR/dest=groupFile/Face/Expressions -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Face/Expressions
+  355 | L Dlip B | sem=CLEAR/tax=CLEAR/dest=groupFile/Face/Lower Face -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Face/Lower Face
+  60 | LeftFinger02 | sem=CLEAR/tax=CLEAR/dest=groupFile/Arms/LeftArm/LeftFingers -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Arms/LeftArm/LeftFingers
+  157 | leg left StC | sem=CLEAR/tax=CLEAR/dest=groupFile/Legs -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Legs
+  375 | PalmLMizin1 | sem=CLEAR/tax=CLEAR/dest=groupFile/Arms/LeftArm/LeftFingers -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Arms/LeftArm/LeftFingers
+  284 | Shorts Non Futa Shadow | sem=CLEAR/tax=CLEAR/dest=groupFile/Clothing -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Clothing
+  79 | sign07 | sem=CLEAR/tax=CLEAR/dest=groupFile/Other -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Other
+  388 | SurpriseL | sem=CLEAR/tax=CLEAR/dest=groupFile/Face/Expressions -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Face/Expressions
+  191 | TurtleNeckHouseofMCleavage | sem=CLEAR/tax=CLEAR/dest=groupFile/Clothing -> sem=PARTIAL/tax=CLEAR/dest=groupFile/Clothing
+
+B. TAXONOMY / DESTINATION CHANGE  (2)
+  253 | Key 17 | sem=CLEAR/tax=CLEAR/dest=groupFile/Other -> sem=CLEAR/tax=NEEDS_CONTEXT/dest=[NONE]
+  172 | Page2_F | sem=PARTIAL/tax=CLEAR/dest=groupFile/Other -> sem=PARTIAL/tax=NEEDS_CONTEXT/dest=[NONE]
+
+C. REASONING / CONFIDENCE ONLY  (1)
+  268 | nipple up | sem=CLEAR/tax=CLEAR/dest=groupFile/Body Morphs -> sem=CLEAR/tax=CLEAR/dest=groupFile/Body Morphs
+
+D. OTHER  (0)
+  (none)
+
+==============================================================
+MECHANICAL SUMMARY
+==============================================================
+Total V2 -> V3 changed rows: 23
+  A. SEMANTIC STATUS ONLY            : 20
+  B. TAXONOMY / DESTINATION CHANGE    : 2
+  C. REASONING / CONFIDENCE ONLY      : 1
+  D. OTHER                            : 0
+==============================================================

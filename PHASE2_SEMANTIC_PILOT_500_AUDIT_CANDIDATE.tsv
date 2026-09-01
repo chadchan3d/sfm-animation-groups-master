@@ -1,0 +1,501 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+28	28	OPAQUE	bare number, no words at all	NOT_APPLICABLE		Low	a number alone carries no semantic content	no interpretable content	1	9468
+apron f2	Apron f2	CLEAR	apron (clothing), variant f2	CLEAR	groupFile/Clothing	High		plain garment item	1	9605
+arm right roll 1	arm right roll 1	CLEAR	"right arm ""roll"" (rotation/twist) bone, variant 1"	CLEAR	groupFile/Arms	High		twist/roll arm bone, ordinary deformation articulation	1	3436
+arm right shoulder twist2	arm right shoulder twist2	CLEAR	right shoulder twist bone, variant 2	CLEAR	groupFile/Arms	High		twist/roll arm bone, ordinary deformation articulation	1	20947
+bag back	Bag Back	CLEAR	a bag accessory, back position	CLEAR	groupFile/Clothing	Medium		worn/carried bag accessory	1	10039
+belt back right a	belt back right a	CLEAR	belt, back position, right side, variant a	CLEAR	groupFile/Clothing	High		explicit clothing belt control	1	21075
+bip collar l	bip collar l	CLEAR	left clothing collar	CLEAR	groupFile/Clothing	High		plain clothing collar	1	21142
+bip upperarmbase l	bip upperarmbase l	CLEAR	left upper arm base (shoulder-adjacent root of the upper arm)	CLEAR	groupFile/Arms	High		explicit upper-arm base bone	1	21233
+bip01_r_upperarm016	Bip01_R_UpperArm016	CLEAR	right upper arm, numbered sub-bone 016 (likely a deformation-corrective bone)	CLEAR	groupFile/Arms	High		numbered anatomical arm bone, no repair language	1	2032
+bip_bobby_l_foretwist1	Bip_BOBBY_L_ForeTwist1	CLEAR	"left forearm twist bone (per-character ""Bobby"" rig), variant 1"	CLEAR	groupFile/Arms	High		twist/roll arm bone, ordinary deformation articulation	1	10568
+bip_clockcollarback_l	bip_ClockCollarBack_L	CLEAR	"a ""Clock Collar"" accessory, back position, left side"	CLEAR	groupFile/Clothing	Medium		named clothing/costume accessory (collar)	1	21334
+bip_eardown1_l	bip_earDown1_l	CLEAR	"left ear, ""down"" position, variant 1"	CLEAR	groupFile/Face/Ears	High		explicit ear-position control	1	2443
+bip_fpinky01_r	Bip_FPinky01_R	CLEAR	right pinky finger, segment 01	CLEAR	groupFile/Arms/RightArm/RightFingers	High		"explicit ""FPinky"" = Finger Pinky"	1	10620
+bip_l_neck_b	bip_l_neck_b	CLEAR	left-side neck bone, variant b	CLEAR	groupFile/Body	Medium		neck is an explicit anatomical referent	1	21852
+bip_stone _r_finger_globe_1_02	Bip_STONE _R_Finger_Globe_1_02	PARTIAL	"right-hand finger area (per-character ""Stone"" rig), ""globe"" qualifier unclear -- possibly a ball-joint"	NEEDS_CONTEXT		Low	globe is an unusual technical qualifier whose exact meaning for this rig is not evident from the name alone	"finger referent is clear but ""globe"" modifies it in an unclear technical way"	1	10688
+bip_tail_d_05	bip_tail_d_05	CLEAR	tail, chain segment d-05	CLEAR	groupFile/Tail	High		explicit tail chain	1	22113
+bip_tailc01	bip_tailC01	CLEAR	tail, chain segment 01	CLEAR	groupFile/Tail	High		explicit tail chain	1	7393
+bipbrk drink	BipBrk Drink	PARTIAL	"a ""drink""-related control on the per-character ""Brk"" rig -- possibly a pose or held-prop attachment"	NEEDS_CONTEXT		Low	unclear whether this is a bone, an attachment point, or a full pose	Drink names an action/prop but not what kind of control this is	1	10415
+bipbrk r finger4	BipBrk R Finger4	CLEAR	"right pinky finger (per-character ""Brk"" rig, finger index 4)"	CLEAR	groupFile/Arms/RightArm/RightFingers	Medium		Bip finger-numbering convention, 4=pinky	1	10430
+bipqwn l finger3	BipQwn L Finger3	CLEAR	"left ring finger (per-character ""Qwn"" rig)"	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium		same finger-numbering convention as other Bip### entries	1	10543
+bipqwn r finger3	BipQwn R Finger3	CLEAR	"right ring finger (per-character ""Qwn"" rig, finger index 3)"	CLEAR	groupFile/Arms/RightArm/RightFingers	Medium		Bip finger-numbering convention, 3=ring	1	10553
+bld_gen_army_tent_medium_a_bottom_a_mesh	BLD_GEN_Army_Tent_Medium_A_Bottom_A_Mesh	CLEAR	bottom mesh piece of a medium army-tent prop	CLEAR	groupFile/Other	High		named environment prop (tent) ending in _Mesh; suffix does not determine legitimacy or destination	1	9918
+body-r-hard-nipple	Body-R-Hard-Nipple	CLEAR	"right nipple, ""hard""/erect state"	CLEAR	groupFile/Body Morphs	High		explicit body-morph nipple control	1	10951
+bone._r	Bone._R	OPAQUE	a bone marker with a right-side tag and nothing else	NOT_APPLICABLE		Low	bone plus a side letter carries no specific body-part information	generic bone identifier, no anatomical referent	1	10993
+botshrink	BotShrink	PARTIAL	"shrinking of ""bot"" (likely ""bottom""), object ambiguous"	NEEDS_CONTEXT		Low	bottom could mean buttocks or the lower hem of a garment	"abbreviation ""Bot"" is ambiguous between anatomy and clothing"	1	4390
+bracket	bracket	PARTIAL	a generic mechanical bracket/fastener, object unspecified	NEEDS_CONTEXT		Low	'bracket' names a real mechanical object; which assembly it belongs to is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	1	22546
+browllower	BrowLLower	CLEAR	left eyebrow, lower position	CLEAR	groupFile/Face/Upper Face	High		"Brow + ""L"" + ""Lower"" is explicit"	1	11473
+bulgeanimbig1	BulgeAnimBig1	PARTIAL	"an animated ""big bulge"" effect, object unspecified"	NEEDS_CONTEXT		Low	bulge could refer to muscle, crotch, or stomach with nothing to disambiguate	bulge+big+anim is clear as a concept but lacks a body-part anchor	1	11539
+c4	C4	OPAQUE	could be an explosive charge, a musical note, or a generic code	NOT_APPLICABLE		Low	too many plausible unrelated readings, no anchoring context	bare 2-character code, no reliable referent	1	11625
+c_dred_l1_07	C_Dred_L1_07	CLEAR	dreadlock hair strand, left, chain 1, segment 07	CLEAR	groupFile/Hair	High		Dred = dreadlock, a hair convention already seen elsewhere in this corpus	1	11795
+c_tiel_c10	C_TieL_C10	CLEAR	necktie, left side, chain segment 10	CLEAR	groupFile/Clothing	Medium		TieL = Tie Left, a clothing accessory chain	1	11853
+chain_3	Chain_3; chain_3	PARTIAL	a chain of unspecified type/object, numbered	NEEDS_CONTEXT		Low	same reasoning as chain_7	"bare ""chain"" + number, no anchoring object"	1	11958; 7568
+chain_7	chain_7	PARTIAL	a chain of unspecified type/object, numbered	NEEDS_CONTEXT		Low	could be jewelry, physics, or mechanical chain with no owning object stated	"bare ""chain"" + number, no anchoring object"	1	7573
+chocobocharm	ChocoboCharm	CLEAR	"a decorative charm/accessory shaped after or referencing a ""Chocobo"" (fictional bird)"	CLEAR	groupFile/Clothing	Medium		charm is a worn decorative accessory	1	12053
+cloth right 1	cloth right 1	CLEAR	a clothing item, right side, variant 1 (garment type unspecified)	CLEAR	groupFile/Clothing	Medium		cloth generically still resolves to Clothing	1	23095
+cloth_back_a_4	cloth_back_A_4	CLEAR	clothing back panel, variant A, segment 4	CLEAR	groupFile/Clothing	High		explicit clothing back-panel control	1	23115
+crow_3.clavical_r	Crow_3.Clavical_R	CLEAR	Crow creature skeleton (instance 3), right clavicle/wing-shoulder bone	CLEAR	groupFile/Wings	High		shoulder-girdle bone of a flight appendage	1	12481
+crow_3.femur_r	Crow_3.Femur_R	CLEAR	Crow creature skeleton (instance 3), right femur/leg bone	CLEAR	groupFile/Legs	High		femur names a real thigh bone shared across vertebrates	1	12483
+def-brows2_r	DEF-brows2_R	CLEAR	right eyebrow, deform bone #2 (Blender Rigify convention)	CLEAR	groupFile/Face/Upper Face	High		"DEF- is a rig-tool marker; ""brows2_R"" is the real referent"	1	12537
+eyeblink_right_out	eyeBlink_Right_OUT	CLEAR	"right eye blink, ""out""/outward variant"	CLEAR	groupFile/Face/Eyes	High		eyeBlink_Right_OUT is a right-eye blink control	1	23724
+eyes_symmetric	eyes_symmetric	CLEAR	a control that synchronizes/symmetrizes both eyes	CLEAR	groupFile/Face/Eyes	High		explicit eye-symmetry function	1	23918
+five_bullet00	Five_Bullet00	CLEAR	ammunition round, slot/index 5, bullet 00	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	1	4658
+flipoutrighttop	FlipoutRightTop	PARTIAL	"a ""flip out"" styling effect, right side, top region -- likely hair, but object not explicit"	NEEDS_CONTEXT		Low	"flip out is a recognizable hair-styling term but not explicitly tied to ""hair"" here"	styling term without an explicit object noun	1	13935
+front_lift1	front_lift1	PARTIAL	"a ""lift"" action applied to something at the front, unspecified object"	NEEDS_CONTEXT		Low	"front and ""lift"" are real words but no referent (front of what?) is given"	positional+action words with no anchoring object	1	7832
+frontlower	FrontLower	PARTIAL	"front + ""lower"", object unspecified"	NEEDS_CONTEXT		Low	could apply to almost any body part or garment	positional words only, no referent	1	3028
+fur_gen_pillow_sitting_b_mesh	FUR_GEN_Pillow_Sitting_B_mesh	CLEAR	"a ""pillow, sitting pose"" prop mesh, variant B"	CLEAR	groupFile/Other	High		named furniture prop (pillow) ending in _Mesh, consistent with existing Pillow->Other resolution	1	13602
+fur_gen_pillow_sitting_d_mesh.001	FUR_GEN_Pillow_Sitting_D_mesh.001	CLEAR	"a ""pillow, sitting pose"" prop mesh, variant D, sub .001"	CLEAR	groupFile/Other	High		named furniture prop (pillow) ending in _Mesh, consistent with existing Pillow->Other resolution	1	13606
+gear.holster	Gear.Holster	CLEAR	equipment holster (for a weapon/tool)	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	1	14341
+head eyeball middle	head eyeball middle	CLEAR	"an eyeball positioned/labeled ""middle"" (possibly a third/center eye on a non-standard face)"	CLEAR	groupFile/Face/Eyes	Medium	middle is unusual for a normally-paired eye and may indicate a creature/extra-eye case	"eyeball is the clear anatomical referent regardless of the unusual ""middle"" qualifier"	1	25631
+headfurtop.r	HeadFurTop.R	CLEAR	top-of-head fur, right side (creature/furred character)	CLEAR	groupFile/Hair	High		fur is the creature-equivalent keratinous covering	1	15323
+helpthighbackr	HelpThighBackR	CLEAR	right thigh helper bone, back position	CLEAR	groupFile/Legs	High		helper naming, leg explicitly named, no repair language	1	15421
+hurtr	HurtR	CLEAR	"an overall ""hurt""/pained expression, possibly lateralized (right)"	CLEAR	groupFile/Face/Expressions	Medium		corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt)	1	5295
+ivy.sword	Ivy.Sword	CLEAR	"a sword prop belonging to a character named ""Ivy"""	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	1	15549
+key.s	Key.S	PARTIAL	"an unlabeled ""key"" slot marked S"	NEEDS_CONTEXT		Low	'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	1	15932
+key.x	Key.X	PARTIAL	"an unlabeled ""key"" slot marked X"	NEEDS_CONTEXT		Low	'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	1	16001
+l collarc a phy	L CollarC a Phy	CLEAR	left clothing collar, variant C, sub-part a, physics-simulated	CLEAR	groupFile/Clothing	High		clear clothing collar with a physics-sim marker	1	5326
+l sideburn c phy	l sideburn c phy	CLEAR	left sideburn, variant c, physics-simulated	CLEAR	groupFile/Hair	High		sideburn is a standard hair term	1	26380
+l ujacketb spo	L uJacketB Spo	CLEAR	"left jacket, variant B, ""spo"" (likely ""spare"") sub-part"	CLEAR	groupFile/Clothing	Medium		jacket is an explicit clothing referent	1	16105
+left_stomach_buldge	Left_stomach_buldge	CLEAR	"left-side stomach bulge (obvious misspelling of ""bulge"")"	CLEAR	groupFile/Body Morphs	High		"buldge is a plain misspelling of ""bulge"""	1	16471
+leftfinger02	LeftFinger02	CLEAR	left hand, a finger (unspecified which), joint/segment 02	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium		generic but clearly a left-hand finger control	1	5414
+leg back ankle right	leg back ankle right	CLEAR	right ankle, back position	CLEAR	groupFile/Legs	High		explicit leg/ankle control	1	26605
+leg_bone_correct_fl_01	leg_bone_correct_fl_01	CLEAR	leg corrective bone, front-left area, variant 01	CLEAR	groupFile/Correctives	High		explicit correct/JCM repair semantics	1	8768
+liplower_r4	lipLower_R4	CLEAR	lower lip, right side, variant 4	CLEAR	groupFile/Face/Lower Face	High		same convention as liplower_right2	1	26853
+liplower_right2	lipLower_Right2	CLEAR	lower lip, right side, variant 2	CLEAR	groupFile/Face/Lower Face	High		lower-lip right-side control	1	26854
+lipsbottomraise	lipsbottomraise	CLEAR	bottom lip, raise action	CLEAR	groupFile/Face/Lower Face	High		explicit lower-lip control	1	26988
+ltoepinky02	lToePinky02	CLEAR	left foot pinky toe, segment 02	CLEAR	groupFile/Toes/LeftToes	High		explicit toe pinky convention	1	26443
+nostrilup	NostrilUp	CLEAR	nostril, raised/up position	CLEAR	groupFile/Face/Mid Face	High		explicit nostril control	1	17207
+null.001	Null.001	OPAQUE	a generic empty/null transform helper object	NOT_APPLICABLE		Low	null objects carry no semantic content about what they help	generic DCC null/empty object	1	17211
+object003	Object003	OPAQUE	generic auto-numbered mesh/object name	NOT_APPLICABLE		Low	same as object47	DCC placeholder name	1	989
+object47	Object47	OPAQUE	generic auto-numbered mesh/object name	NOT_APPLICABLE		Low	no descriptive content beyond a DCC auto-generated identifier	classic DCC-generated placeholder name	1	17327
+opt_as_l_upleg_b	OPT_AS_L_UpLeg_B	CLEAR	left upper leg/thigh, variant B	CLEAR	groupFile/Legs	Medium		UpLeg = upper leg is explicit despite the OPT_/AS_ technical prefixes	1	3242
+penus 1	penus 1	CLEAR	"penis, variant 1 (obvious misspelling of ""penis"")"	CLEAR	groupFile/Body	High		corrected: plain anatomical segment, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	1	27465
+pillow 1	Pillow 1	CLEAR	a pillow prop, variant 1	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	1	17572
+pussy_tighten	pussy_tighten	CLEAR	vaginal tightening body-morph	CLEAR	groupFile/Body Morphs	High		explicit genital morph control	1	27615
+r_finger1b	r_finger1b	CLEAR	right hand, finger 1 (thumb by common numbering), variant b	CLEAR	groupFile/Arms/RightArm/RightFingers	Medium		finger1 fits the standard 0/1-indexed finger convention	1	27768
+right index finger 1 grip 1	Right index finger 1 grip 1	CLEAR	right index finger, joint 1, grip pose variant 1	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit right index finger grip control	1	18211
+rindex	RIndex	CLEAR	right index finger	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain abbreviation, clearly right index finger	1	17942
+shouldershrink	Shouldershrink	CLEAR	shoulder size/shape reduction	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor, no posing verb, character's own anatomy	1	6545
+sign07	sign07	CLEAR	possibly a signboard/placard prop, numbered	CLEAR	groupFile/Other	High		corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque	1	28290
+silencer	silencer; Silencer	CLEAR	a weapon suppressor/silencer attachment	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	1	9067; 6548
+sk_tail03	SK_tail03	CLEAR	"tail, segment 03 (rig-code ""SK"")"	CLEAR	groupFile/Tail	High		tail03 is explicit	1	18573
+student.front_1_jiggle	Student.Front_1_jiggle	PARTIAL	"a front-positioned jiggle/secondary-motion bone on the ""Student"" character rig"	NEEDS_CONTEXT		Medium	jiggle physics is clear but the object jiggling (hair? bust? clothing?) is not named	front...jiggle lacks the specific jiggling object	1	19307
+sword_3	sword_3	CLEAR	a sword prop, variant 3	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	1	28854
+taurenmale_hd_bone_90	taurenmale_hd_bone_90	PARTIAL	a numbered head bone on the Tauren creature skeleton, no specific part named	NEEDS_CONTEXT		Low	'hd' plausibly abbreviates 'head', giving a body-region candidate; abbreviation is not certain enough for CLEAR	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	1	28942
+third_arms_r_1	Third_Arms_R_1	CLEAR	a third (extra) right arm, segment 1 -- implies a multi-armed character	CLEAR	groupFile/Arms	Medium		corrected: every other explicitly-sided arm bone in this same pilot (Bip01_L_Forearm007, Bip01_R_Thigh011, etc.) was routed to plain Arms/Legs, not into a LeftArm/RightArm subpath -- LeftArm/RightArm is not a verified destination for ordinary content in this Master (only Left/RightFingers under it are independently verified); an explicit side marker alone does not justify entering it	1	19731
+tie_4	Tie_4	CLEAR	necktie, variant 4	CLEAR	groupFile/Clothing	High		plain clothing accessory	1	19782
+tipsmall	tipsmall	PARTIAL	"a small ""tip"" of something, object unspecified"	NEEDS_CONTEXT		Low	could be a fingertip, tail tip, weapon tip, etc.	"tip + ""small"" without an anchoring noun"	1	29029
+toplid_r3	toplid_R3	CLEAR	top eyelid, right, variant 3	CLEAR	groupFile/Face/Eyes	High		toplid = top eyelid	1	29116
+torso pipe b r 1a	torso pipe B R 1a	PARTIAL	"a ""pipe"" attached to the torso, right side -- possibly a mechanical/cybernetic part"	NEEDS_CONTEXT		Low	pipe on a torso is ambiguous between a mechanical accessory, prop, or costume piece	"torso is a clear anchor but ""pipe"" itself is an unclear qualifier"	1	29135
+unused dogmeat_eye_r	unused dogmeat_eye_r	CLEAR	"right eye of ""Dogmeat"" (a dog companion character), explicitly marked unused"	CLEAR	groupFile/Useless	High		self-declared unused, Phase 1 Useless precedent	1	29218
+unused.050	unused.050	PARTIAL	a generic numbered placeholder, explicitly marked unused	CLEAR	groupFile/Useless	High		corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity	1	29386
+unusedbone091	unusedbone091	PARTIAL	a generic numbered bone, explicitly marked unused	CLEAR	groupFile/Useless	High		corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity	1	29483
+upperarm_left	upperarm_left	CLEAR	left upper arm	CLEAR	groupFile/Arms	High		plain anatomical term	1	9314
+v_weapon.flashbang_parent	v_weapon.Flashbang_Parent	CLEAR	parent bone of a flashbang grenade prop	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	1	29599
+v_weapon.left_middle03	v_weapon.Left_Middle03	CLEAR	weapon view-model hand rig, left middle finger, segment 03	NEEDS_CONTEXT		Medium	unclear whether this is a normal posable finger or an internal weapon-viewmodel helper	looks like a first-person weapon hand-rig finger bone	1	4110
+valvebiped.bip01_l_index03	ValveBiped.Bip01_L_Index03	CLEAR	left index finger, segment 03	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		standard ValveBiped finger convention	1	20114
+valvebiped.bip01_r_ring	ValveBiped.Bip01_R_Ring	CLEAR	right ring finger	CLEAR	groupFile/Arms/RightArm/RightFingers	High		standard ValveBiped finger convention	1	20192
+wep_gl_base	WEP_GL_Base	CLEAR	weapon grenade-launcher base component	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	1	6870
+wide eye	Wide eye	CLEAR	wide-eye expression	CLEAR	groupFile/Face/Eyes	High		plain eye-expression control	1	20606
+wing_left_1_1	Wing_Left_1_1	CLEAR	left wing, chain segment 1-1	CLEAR	groupFile/Wings	High		explicit left wing segment	1	20615
+_right_z_up	_right_z_up	OPAQUE	a right-side, Z-axis-up technical/positional code	NOT_APPLICABLE		Low	pure axis notation with no body part named	technical coordinate label, no referent	2	20701
+anusopensuitexposedtorn	AnusOpenSuitExposedTorn	CLEAR	anus-open morph, tied to a torn/exposed suit state	CLEAR	groupFile/Body Morphs	Medium		anus is the clear anatomical referent; the rest qualifies the clothing-damage context	2	9583
+apron e2	Apron e2	CLEAR	apron, variant e2	CLEAR	groupFile/Clothing	High		plain garment item	2	9602
+arm left wrist ctrl 1	arm left wrist ctrl 1	CLEAR	left wrist control, variant 1	CLEAR	groupFile/Arms	High		explicit wrist control	2	6974
+bas.side_right_1_jiggle	BAS.Side_Right_1_jiggle	PARTIAL	a right-side jiggle-physics bone, owning object unspecified	NEEDS_CONTEXT		Low	could be clothing, sash, or hair; not named	jiggle referent clear, object unclear	2	9850
+bellyin-topclothed	BellyIn-topclothed	CLEAR	stomach-in morph, calibrated for when a top garment is worn	CLEAR	groupFile/Body Morphs	Medium		"belly is the dominant anatomical referent; ""topclothed"" is a qualifier"	2	10145
+belt_19	belt_19	CLEAR	belt, variant 19	CLEAR	groupFile/Clothing	High		plain clothing item	2	21095
+bip01_r_thigh011	Bip01_R_Thigh011	CLEAR	right thigh, numbered sub-bone (likely deformation-corrective)	CLEAR	groupFile/Legs	High		numbered anatomical leg bone, no repair language	2	1557
+bip01_spine2_002	Bip01_Spine2_002	CLEAR	spine, numbered sub-bone	CLEAR	groupFile/Body	High		explicit anatomical/biped spine (Bip01/DEF-/bip_/SK_ rig prefixes, no object-owner noun present)	2	1154
+bip_bobby_l_finger_globe_2_02	Bip_BOBBY_L_Finger_Globe_2_02	PARTIAL	"left-hand finger area (per-character ""Bobby"" rig), ""globe"" qualifier unclear"	NEEDS_CONTEXT		Low	globe is an unusual technical qualifier not evident from the name alone	"finger referent clear, ""globe"" modifier unclear"	2	10566
+bip_l_index_03	bip_l_index_03	CLEAR	left index finger, segment 03	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		standard finger convention	2	2494
+bip_r_hip	bip_r_hip	CLEAR	right hip	CLEAR	groupFile/Body	High		plain anatomical term	2	1351
+bip_tail_d_02	bip_tail_d_02	CLEAR	tail, chain segment d-02	CLEAR	groupFile/Tail	High		explicit tail chain	2	22110
+bobcut.rear_left_3_jiggle	Bobcut.Rear_Left_3_jiggle	CLEAR	Bobcut hairstyle, rear-left jiggle-physics bone	CLEAR	groupFile/Hair	High		named hairstyle convention	2	10860
+body-r-nipple-pull	Body-R-Nipple-Pull	CLEAR	"right nipple ""pull"" morph"	CLEAR	groupFile/Body Morphs	High		explicit body-morph nipple control	2	10952
+bone 706	bone 706	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information at all	bare numbered technical bone	2	22301
+bone.001_l.002	Bone.001_L.002	OPAQUE	generic numbered bone, left, sub-variant	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	2	4341
+bone._l	Bone._L	OPAQUE	generic bone, left side, no specific part	NOT_APPLICABLE		Low	bone plus a side letter carries no anatomical specificity	generic bone identifier	2	10990
+bone_skin_099	Bone_skin_099	PARTIAL	a skin-related deform bone, numbered	NEEDS_CONTEXT		Low	'skin' names a real deformation function (a skin-slide/deform bone); which body region is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	2	11186
+bonehigh02	BoneHigh02	OPAQUE	"a bone positioned ""high"", numbered"	NOT_APPLICABLE		Low	high gives only vague position, no body part named	generic bone + positional adjective, no specific anatomy	2	11142
+bottomlid_r2	bottomlid_R2	CLEAR	bottom eyelid, right, variant 2	CLEAR	groupFile/Face/Eyes	High		explicit eyelid control	2	22451
+bottomlip3.l	BottomLip3.L	CLEAR	bottom lip, segment 3, left	CLEAR	groupFile/Face/Lower Face	High		explicit lip control	2	11277
+bottomlip_r	bottomlip_R	CLEAR	bottom lip, right	CLEAR	groupFile/Face/Lower Face	High		explicit lip control	2	22454
+bow left 1h	bow left 1h	CLEAR	bow accessory, left, variant 1h	CLEAR	groupFile/Clothing	High		plain clothing accessory	2	22464
+bow right 1a	bow right 1a	CLEAR	bow accessory, right, variant 1a	CLEAR	groupFile/Clothing	High		plain clothing accessory	2	22498
+boxa1	BoxA1	CLEAR	a generic box prop/mesh, variant A1	CLEAR	groupFile/Other	High		corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque	2	11319
+buffyleg	buffyLeg	CLEAR	"a leg (character-named ""Buffy"")"	CLEAR	groupFile/Legs	Medium		leg is the explicit anatomical referent	2	7520
+c dlipout	C Dlipout	PARTIAL	"a lip-related control, exact action (""Dlipout"") unclear"	NEEDS_CONTEXT		Low	lip is visible but the surrounding construction is not a standard phrase	lip referent partially visible, construction unclear	2	4441
+canine_lbacklegtoe	Canine_LBackLegToe	CLEAR	Canine creature, left back leg toe	CLEAR	groupFile/Toes/LeftToes	High		toe is the direct human-equivalent word; explicit left marker	2	4488
+cape2_right5	CAPE2_RIGHT5	CLEAR	cape, variant 2, right, segment 5	CLEAR	groupFile/Clothing	High		plain clothing item	2	11664
+cape_6_r	cape_6_R	CLEAR	cape, variant 6, right	CLEAR	groupFile/Clothing	High		plain clothing item	2	22874
+chain_21	chain_21	PARTIAL	a chain of unspecified type/object, numbered	NEEDS_CONTEXT		Low	no owning object stated	"bare ""chain"" + number"	2	7559
+condom 4	condom 4	CLEAR	a condom item, variant 4	CLEAR	groupFile/Clothing	Medium		worn item, closest fit is Clothing	2	23231
+door2	Door2	CLEAR	a door prop, variant 2	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	2	12706
+dummy03	Dummy03	OPAQUE	generic numbered placeholder/dummy object	NOT_APPLICABLE		Low	dummy plus a number carries no anatomical content	generic technical placeholder	2	2984
+end/beam/shrink	End/beam/shrink	PARTIAL	three loosely related technical words with no clear combined meaning	NEEDS_CONTEXT		Low	'beam' names a real object and 'shrink' names a real deformation action; the combined referent/ownership is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	2	13150
+erectnips	ErectNips	CLEAR	erect nipples	CLEAR	groupFile/Body Morphs	High		plain body-morph term	2	13157
+f7	F7	OPAQUE	an ambiguous 2-character code	NOT_APPLICABLE		Low	could be a function-key reference, an instrument key, or unrelated	no reliable referent	2	13580
+feather 1a	feather 1a	CLEAR	a feather (creature/costume appendage), variant 1a	NEEDS_CONTEXT		Medium	could belong to a wing, a headdress, or a costume accessory -- object not specified	appendage referent clear, owning structure unclear	2	24016
+feather 2a	feather 2a	CLEAR	a feather (creature/costume appendage), variant 2a	NEEDS_CONTEXT		Medium	same reasoning as feather 1a	appendage referent clear, owning structure unclear	2	24018
+frily_41.l	Frily_41.L	CLEAR	a frill/decorative trim, numbered 41, left	CLEAR	groupFile/Clothing	Medium		"Frily reads as ""frilly"" clothing decoration"	2	14232
+gentle_4	gentle_4	OPAQUE	"a ""gentle"" quality applied to an unspecified object/motion"	NOT_APPLICABLE		Low	no object or body part named	generic adjective with no referent	2	24209
+growlowerteeth	growLowerTeeth	CLEAR	lower teeth growing/extending	CLEAR	groupFile/Face/Lower Face	High		explicit teeth-growth morph	2	24249
+hat_right_2_jiggle	Hat_Right_2_jiggle	CLEAR	hat, right, jiggle-physics	CLEAR	groupFile/Clothing	High		plain clothing item	2	15229
+holster_base	Holster_Base	CLEAR	base component of a weapon holster	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	2	15470
+horn2	Horn2; horn2	CLEAR	a horn (creature/appendage), variant 2	CLEAR	groupFile/Other	High		horn, existing Other precedent	2	2156; 2666
+houjin 9_1	Houjin 9_1	OPAQUE	"unclear term (""Houjin""), numbered"	NOT_APPLICABLE		Low	not a term I can confidently resolve to an animator-facing meaning	unrecognized word, no anatomical/clothing anchor	2	15493
+juriclothes_reference	Juriclothes_reference	PARTIAL	"a reference/guide bone for a character's (""Juri"") clothes"	NEEDS_CONTEXT		Low	reference suggests a non-functional guide bone rather than a normal control	character-specific clothing reference marker	2	15825
+kargathbladefist_bone12	kargathbladefist_Bone12	OPAQUE	"a numbered bone on a specific character's (""Kargath Bladefist"") skeleton, no part named"	NOT_APPLICABLE		Low	bone12 carries no anatomical specificity	bare numbered technical bone despite a named source character	2	8671
+key.white_25	Key.White_25	CLEAR	white piano/instrument key, numbered 25	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	2	15958
+l bust01 sec root	l bust01 sec root	CLEAR	left bust/breast, segment 01, secondary jiggle-physics root	CLEAR	groupFile/Body	High		corrected: a secondary jiggle-physics root/bone, not a shape/size descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	2	26335
+l_neck_19	l_neck_19	CLEAR	left-side neck, numbered	CLEAR	groupFile/Body	Medium		neck is the explicit anatomical referent	2	26506
+l_side_holster_0u_0v	l_side_holster_0u_0v	CLEAR	left-side weapon holster, with a UV-style coordinate suffix	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	2	26529
+left index intermediate	Left Index Intermediate	CLEAR	left index finger, intermediate phalanx	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		standard finger-joint terminology	2	16260
+leg back ankle left	leg back ankle left	CLEAR	left ankle, back position	CLEAR	groupFile/Legs	High		explicit leg/ankle control	2	26604
+leg left boot tassle 3a	leg left boot tassle 3a	CLEAR	"left leg, boot, tassel accessory, variant 3a (obvious misspelling of ""tassel"")"	CLEAR	groupFile/Clothing	High		boot/tassel are explicit clothing referents	2	26632
+leg left stc	leg left StC	PARTIAL	"left leg, unclear ""StC"" qualifier"	NEEDS_CONTEXT		Low	StC does not resolve to a recognizable term	leg referent clear, qualifier unclear	2	3964
+leg left thigh ctr4	leg left thigh ctr4	CLEAR	left thigh control, variant 4	CLEAR	groupFile/Legs	High		explicit thigh control	2	26664
+light 3	Light 3	PARTIAL	"either a light-source prop or a ""light"" degree adjective, variant 3"	NEEDS_CONTEXT		Low	'light' plausibly names a real light-source prop (compare Torch3 -> Other); the adjective reading keeps ownership unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	2	16588
+lipupperinner_l	LipUpperInner_L	CLEAR	upper lip, inner, left	CLEAR	groupFile/Face/Lower Face	High		explicit lip control	2	5452
+lipur	lipur	OPAQUE	unclear truncated/abbreviated term	NOT_APPLICABLE		Low	does not confidently resolve to a specific word	ambiguous short fragment	2	348
+loincloth back 1	loincloth back 1	CLEAR	loincloth, back, variant 1	CLEAR	groupFile/Clothing	High		plain garment item	2	1855
+loot_gen_backpack_d_posed_a_mesh	LOOT_GEN_Backpack_D_Posed_A_Mesh	CLEAR	a backpack prop mesh, posed variant	CLEAR	groupFile/Clothing	High		named worn accessory (backpack) ending in _Mesh; worn items follow Clothing's worn-accessories rule	2	16201
+lowerarm_roll_left_0	lowerarm_roll_left_0	CLEAR	left forearm roll/twist bone	CLEAR	groupFile/Arms	High		twist/roll arm bone, ordinary deformation articulation	2	8836
+magnifier	Magnifier	CLEAR	a magnifying-glass prop	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	2	5487
+mainlidsurprised	MainLidSurprised	CLEAR	"main eyelid, ""surprised"" expression"	CLEAR	groupFile/Face/Eyes	High		explicit eyelid-expression control	2	16832
+middlewirebulgeup	MiddleWireBulgeUp	PARTIAL	"an upward bulge effect from a ""wire"" support, object unspecified"	NEEDS_CONTEXT		Low	likely a corset/garment wire-support bulge, but the garment isn't named	bulge+wire+direction without a specific garment referent	2	16930
+nostrils_pushin	nostrils_pushin	CLEAR	"nostrils, ""push in"" action"	CLEAR	groupFile/Face/Mid Face	High		explicit nostril control	2	27240
+object12	Object12	OPAQUE	generic auto-numbered mesh/object name	NOT_APPLICABLE		Low	no descriptive content	DCC placeholder name	2	17293
+opt_acs_year_l8	OPT_acs_year_l8	PARTIAL	"unclear accessory referenced by ""year"", left, segment 8"	NEEDS_CONTEXT		Low	'acs' plausibly abbreviates 'accessory', a real category; the specific accessory and 'year' qualifier are unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	2	17261
+opt_as_r_knee	OPT_AS_R_Knee	CLEAR	right knee	CLEAR	groupFile/Legs	High		knee is the explicit anatomical referent	2	3249
+page2_f	Page2_F	PARTIAL	"an unclear ""page"" reference, variant F"	NEEDS_CONTEXT		Low	'page' is a real referent (compare Book TurnPage9 -> Other); the exact book/object and 'f' variant are unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	2	17439
+pelvis_ctrl	pelvis_ctrl	CLEAR	pelvis control	CLEAR	groupFile/Body	High		plain anatomical term	2	27434
+piercing.belly_button_pendant_jiggle	Piercing.Belly_Button_Pendant_jiggle	CLEAR	belly-button piercing pendant, jiggle-physics	CLEAR	groupFile/Clothing	High		explicit body-jewelry accessory	2	6200
+pincer right mid	Pincer Right Mid	PARTIAL	a pincer/claw-like gripping element (anatomical, mechanical, or weapon-related); exact domain not established by the complete literal	NEEDS_CONTEXT		Low	literal establishes no ownership/context (anatomical, mechanical, or weapon-related); zero existing Master precedent for the word in any direction	"corrected: semantic_status was CLEAR while asserting a specific referent (""creature claw"") that the row's own uncertainty_reason simultaneously denied -- internally inconsistent; downgraded to PARTIAL to match the actual evidence"	2	17581
+polysurface75	polySurface75	OPAQUE	generic auto-numbered mesh	NOT_APPLICABLE		Low	classic DCC-generated placeholder name	no descriptive content	2	27544
+pupils-glaresizebig-l	Pupils-GlareSizeBig-L	CLEAR	left pupil, glare-highlight size increase	CLEAR	groupFile/Face/Eyes	High		explicit eye/pupil control	2	17699
+r-ass-smack	R-Ass-Smack	CLEAR	"right buttock ""smack""/impact reaction"	CLEAR	groupFile/Body Morphs	High		explicit buttock-impact morph	2	17868
+right_chain	Right_chain	PARTIAL	a chain of unspecified type/object, right side	NEEDS_CONTEXT		Low	no owning object stated	"bare ""chain"" + side marker"	2	18343
+scrotumright	scrotumRight	CLEAR	right scrotum	CLEAR	groupFile/Body	High		corrected: plain genital anatomical term, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	2	4046
+shin thickness	Shin Thickness	CLEAR	shin (lower leg) thickness	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor, no posing verb, character's own anatomy	2	6540
+show	show	PARTIAL	a generic visibility toggle, object unspecified	NEEDS_CONTEXT		Low	'show' names a real, specific function (a visibility toggle); the object being toggled is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	2	28269
+sk_l_b_leg_1	SK_L_B_leg_1	CLEAR	left leg, back position, segment 1	CLEAR	groupFile/Legs	Medium		leg is the explicit referent despite the rig-code prefix	2	18542
+squish-zx	squish-zx	PARTIAL	"a compression/""squish"" effect along a zx axis, object unspecified"	NEEDS_CONTEXT		Low	'squish' names a real deformation/compression function; the object being deformed is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	2	28762
+strap_b.02	Strap_B.02	PARTIAL	strap, variant B, .02	NEEDS_CONTEXT		Low	'strap' with no named owner -- could be garment, bag, weapon sling, or mechanical hardware	corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn	2	19282
+strap_b.03	Strap_B.03	PARTIAL	strap, variant B, .03	NEEDS_CONTEXT		Low	'strap' with no named owner -- could be garment, bag, weapon sling, or mechanical hardware	corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn	2	19283
+tasselb	TasselB	PARTIAL	tassel accessory, variant B	NEEDS_CONTEXT		Low	'tassel' with no named owner (contrast Wakazashi.Tassel_Front_7/8, which names the weapon) -- could be garment, weapon, or decor	corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn	2	19616
+tongehide	TONGEHIDE	CLEAR	"hide/retract the tongue (obvious misspelling of ""tongue"")"	CLEAR	groupFile/Face/Tongue	Medium		"tonge reads as a plain misspelling of ""tongue"""	2	19488
+topmuscles	TopMuscles	CLEAR	upper-body muscle definition	CLEAR	groupFile/Body Morphs	Medium		muscles is the clear morph referent	2	19880
+torch3	Torch3	CLEAR	a torch prop, variant 3	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	2	19908
+turtleneckhouseofmcleavage	TurtleNeckHouseofMCleavage	PARTIAL	a turtleneck garment interacting with cleavage; middle portion unclear	NEEDS_CONTEXT		Low	house of m does not resolve to a clear qualifier	turtleneck+cleavage referents clear, middle segment is unclear	2	19942
+unused c_i_position	unused C_I_Position	PARTIAL	"an unclear positional code (""C_I_Position""), explicitly unused"	CLEAR	groupFile/Useless	High		corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity	2	29169
+unused.029	unused.029	PARTIAL	generic numbered placeholder, explicitly unused	CLEAR	groupFile/Useless	High		corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity	2	29365
+upperjaw2	Upperjaw2	CLEAR	upper jaw, variant 2	CLEAR	groupFile/Face/Lower Face	High		explicit jaw control	2	20023
+upperraise eyes right	UpperRaise Eyes Right	CLEAR	right eye(s), upper-eyelid raise	CLEAR	groupFile/Face/Eyes	High		explicit eye/eyelid control	2	20005
+valvebiped.bip01_r_forearm_helperbone	ValveBiped.Bip01_R_Forearm_Helperbone	CLEAR	right forearm helper bone	CLEAR	groupFile/Arms	High		helper/EX naming, arm explicitly named, no repair language	2	1313
+wakazashi.tassel_front_7	Wakazashi.Tassel_Front_7	CLEAR	tassel on a wakizashi-sword prop, front, segment 7	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	2	20567
+wep_bipod_leftleg	WEP_Bipod_LeftLeg	CLEAR	left leg of a weapon's bipod stand	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	2	6838
+wep_wick2	WEP_Wick2	CLEAR	"weapon ""wick"" component (e.g. a molotov-style fuse), variant 2"	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	2	20539
+whl_2	whL_2	PARTIAL	"unclear abbreviation (""wheel""? initials?), numbered"	NEEDS_CONTEXT		Low	'whl' plausibly abbreviates 'wheel' (compare wheelback_base/fake_wheel_fl -> Other); the abbreviation is not certain enough for CLEAR	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	2	9363
+52	52	OPAQUE	bare number, no words at all	NOT_APPLICABLE		Low	no interpretable content	no semantic content	3	9496
+arm left arm twist 1	arm left arm twist 1	CLEAR	left arm twist, variant 1	CLEAR	groupFile/Arms	High		twist/roll arm bone, ordinary deformation articulation	3	20751
+arm right finger 2	arm right finger 2	CLEAR	right hand, a finger (index by common numbering), segment/joint 2	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit right-hand finger control	3	20892
+backhair4.001	backhair4.001	CLEAR	back hair, segment 4, sub .001	CLEAR	groupFile/Hair	High		plain hair term	3	6995
+band.bend_right_1	Band.Bend_Right_1	PARTIAL	a band/strip accessory bending, right, variant 1	NEEDS_CONTEXT		Low	'band' with no named owner -- could be hair band, wrist band, weapon strap-band, or mechanical hardware	corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn	3	10076
+belly inflat	Belly Inflat	CLEAR	"belly inflation (obvious truncation of ""inflate"")"	CLEAR	groupFile/Body Morphs	High		"Inflat reads as truncated ""Inflate"""	3	314
+belly-bottomnude	Belly-bottomnude	CLEAR	"belly, bottom region, ""nude"" (no-clothing) state"	CLEAR	groupFile/Body Morphs	Medium		belly is the clear anatomical referent	3	10140
+bikini boobs upward r	Bikini Boobs Upward R	CLEAR	right breast, upward morph, in the context of a bikini	CLEAR	groupFile/Body Morphs	High		boobs upward is an explicit breast-morph control	3	10247
+bip faceforeheadtop l	bip faceforeheadtop l	CLEAR	left forehead, top region	CLEAR	groupFile/Face/Upper Face	High		explicit forehead control	3	21164
+bip facetempleloout r	bip facetempleloout r	CLEAR	right temple, lower-out direction	CLEAR	groupFile/Face/Upper Face	High		explicit temple control	3	21183
+bip fring00 l	bip fring00 l	CLEAR	"left hair fringe, segment 00 (obvious truncation of ""fringe"")"	CLEAR	groupFile/Hair	Medium		"fring reads as truncated ""fringe"""	3	21202
+bip upperarmtwist2 r	bip upperarmtwist2 r	CLEAR	right upper arm twist, variant 2	CLEAR	groupFile/Arms	High		twist/roll arm bone, ordinary deformation articulation	3	21237
+bip01_r_forearm009	Bip01_R_Forearm009	CLEAR	right forearm, numbered sub-bone (likely deformation-corrective)	CLEAR	groupFile/Arms	High		numbered anatomical arm bone, no repair language	3	1130
+bip_balls_2_r	Bip_Balls_2_R	CLEAR	right testicle, segment 2	CLEAR	groupFile/Body	High		corrected: plain numbered anatomical segment, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	3	10590
+bip_frangehair1_l	bip_frangehair1_L	CLEAR	"left hair fringe (""frange"" reads as a variant spelling of ""fringe""), segment 1"	CLEAR	groupFile/Hair	Medium		"Frange is a plausible spelling variant of ""fringe"""	3	3544
+bip_mustache_r	bip_Mustache_R	CLEAR	right moustache section	CLEAR	groupFile/Hair	High		facial hair, matches established moustache-in-Hair convention	3	21426
+bip_r_cloth_d_02	bip_r_cloth_d_02	CLEAR	right-side clothing, variant D, segment 02	CLEAR	groupFile/Clothing	High		explicit clothing control	3	21959
+bip_spine_0.002	bip_spine_0.002	CLEAR	spine, numbered sub-bone	CLEAR	groupFile/Body	High		explicit anatomical/biped spine (Bip01/DEF-/bip_/SK_ rig prefixes, no object-owner noun present)	3	22083
+bip_waist_sub	bip_waist_sub	CLEAR	waist, secondary/sub bone	CLEAR	groupFile/Body	Medium		waist is the explicit anatomical referent	3	22178
+bipbrk lthightwist	BipBrk LThighTwist	CLEAR	"left thigh twist bone (per-character ""Brk"" rig)"	CLEAR	groupFile/Legs	High		twist/roll leg bone, ordinary deformation articulation	3	10425
+bone 709	bone 709	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	3	22304
+bone.001.l	Bone.001.L	OPAQUE	generic numbered bone, left	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	3	10968
+bone036	Bone036	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	3	1575
+bone041	Bone041	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	3	1580
+bone093	Bone093	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	3	11015
+bone_eye_l	Bone_eye_L; Bone_Eye_L	CLEAR	"left eye (generic ""Bone"" prefix does not remove the explicit ""Eye"" referent)"	CLEAR	groupFile/Face/Eyes	High		Eye_L is unambiguous despite the generic prefix	3	4381; 1168
+boobjobl+boobjobr	BoobJobL+BoobJobR	CLEAR	breast augmentation/size morph, left+right combined	CLEAR	groupFile/Body Morphs	High		boob job is an unambiguous breast-morph term	3	11191
+box06	Box06	CLEAR	generic numbered box prop	CLEAR	groupFile/Other	High		corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque	3	11301
+brows-r-surprise	Brows-R-Surprise	CLEAR	"right eyebrow, ""surprise"" expression"	CLEAR	groupFile/Face/Upper Face	High		explicit eyebrow-expression control	3	11516
+btn.hour	Btn.Hour	CLEAR	the hour-hand button/control of a clock or watch prop	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	3	11529
+c facebase b	C FaceBase b	PARTIAL	a center face base/root bone, variant b	NEEDS_CONTEXT		Low	base suggests a technical root bone rather than a specific facial feature	face referent present, specific feature unclear	3	4444
+chain_2	chain_2; Chain_2	PARTIAL	a chain of unspecified type/object, numbered	NEEDS_CONTEXT		Low	no owning object stated	"bare ""chain"" + number"	3	7557; 11957
+chain_22	chain_22	PARTIAL	a chain of unspecified type/object, numbered	NEEDS_CONTEXT		Low	no owning object stated	"bare ""chain"" + number"	3	7560
+chin3.c	chin3.C	CLEAR	chin, segment 3, center	CLEAR	groupFile/Face/Lower Face	High		explicit chin control	3	23008
+cord5	Cord5	PARTIAL	a cord/rope-like object, variant 5, owning object unspecified	NEEDS_CONTEXT		Low	could be a drawstring, cable, or decorative cord	object type (cord) known, but not what it belongs to	3	12327
+def-spine.031	DEF-spine.031	CLEAR	spine, numbered deform bone	CLEAR	groupFile/Body	High		explicit anatomical/biped spine (Bip01/DEF-/bip_/SK_ rig prefixes, no object-owner noun present)	3	12607
+def-thigh.r.004	DEF-thigh.R.004	CLEAR	right thigh, deform-chain sub-bone 004	CLEAR	groupFile/Legs	Medium		"DEF- prefix is a rig-tool marker; ""thigh.R"" is the real referent"	3	2951
+fbx_murasaki_face	fbx_murasaki_face	PARTIAL	"a face-related marker for a character (""Murasaki"")"	NEEDS_CONTEXT		Low	"no specific facial control or feature is named beyond ""face"""	character+face referents present, specific function unclear	3	24004
+fbx_sakura_zero_face_none	fbx_sakura_zero_face_none	PARTIAL	"a face-related marker for a character (""Sakura"") in a null/default state"	NEEDS_CONTEXT		Low	zero_face_none reads as a technical default marker rather than naming a specific control	character+face referents present, exact function unclear	3	7778
+finger2a	finger2a	CLEAR	a finger (side unspecified), variant 2a	CLEAR	groupFile/Fingers	Medium	no left/right marker present, so a specific side cannot be assigned	clear finger referent but no side marker to route to Left/RightFingers	3	24030
+flm-arma-swordb-lr	Flm-ArmA-SwordB-LR	CLEAR	"a sword prop mounted via an arm-attachment system (per-character ""Flm"" rig)"	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	3	14041
+flm-armb-leg-rbc	Flm-ArmB-Leg-RBC	PARTIAL	"an arm-to-leg strap/attachment, right side, ""RBC"" suffix unclear"	NEEDS_CONTEXT		Low	"combining ""Arm"" and ""Leg"" is unusual; likely a weapon/gear strap but not certain"	arm+leg referents present but combined oddly, suffix unresolved	3	14114
+flowerchoker1.r	FlowerChoker1.R	CLEAR	flower-decorated choker, right, variant 1	CLEAR	groupFile/Clothing	High		explicit clothing accessory	3	14166
+frily_root_2.r	Frily_Root_2.R	CLEAR	frilly clothing decoration, root bone, variant 2, right	CLEAR	groupFile/Clothing	Medium		"Frily reads as ""frilly"" clothing decoration"	3	14243
+frontflaptopnarrower	FrontFlapTopNarrower	CLEAR	"a front clothing flap, top, ""narrower"" shape morph"	CLEAR	groupFile/Clothing	Medium		flap is the clear clothing-piece referent	3	278
+gag_l_02	Gag_L_02	CLEAR	a gag accessory (worn mouth item), left, variant 02	CLEAR	groupFile/Clothing	Medium		gag is a worn accessory item	3	14322
+generichuman_c_chinjnt	GenericHuman_C_chinJnt	CLEAR	center chin joint (GenericHuman template rig)	CLEAR	groupFile/Face/Lower Face	High		explicit chin referent despite the template-rig prefix	3	3049
+generichuman_r_nostriljnt	GenericHuman_r_nostrilJnt	CLEAR	right nostril joint (GenericHuman template rig)	CLEAR	groupFile/Face/Mid Face	High		explicit nostril referent	3	3072
+head chin middle	head chin middle	CLEAR	head, chin, center	CLEAR	groupFile/Face/Lower Face	High		explicit chin control	3	2620
+hiji_r__rot_ude_r__z50__offset	hiji_r__rot_ude_r__z50__offset	CLEAR	right elbow rotation offset (Japanese rig terms: hiji=elbow, ude=arm)	CLEAR	groupFile/Arms	Medium		Japanese MMD-style anatomical naming for the right elbow	3	26071
+innerlips top left	innerlips top left	CLEAR	inner lips, top, left	CLEAR	groupFile/Face/Lower Face	High		explicit lip control	3	26153
+jiggle4	Jiggle4	PARTIAL	a jiggle/secondary-motion bone, object unspecified	NEEDS_CONTEXT		Low	jiggle names a function but not what is jiggling	function word present, no owning object	3	15807
+key 17	Key 17	PARTIAL	"an unlabeled numbered ""key"" slot"	NEEDS_CONTEXT		Low	'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	3	801
+key.9	Key.9	PARTIAL	"an unlabeled numbered ""key"" slot"	NEEDS_CONTEXT		Low	'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	3	15848
+key.black_3	Key.Black_3	CLEAR	black piano/instrument key, numbered 3	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	3	15873
+l sideburn g phy	l sideburn g phy	CLEAR	left sideburn, physics-simulated	CLEAR	groupFile/Hair	High		plain hair term	3	26384
+l_outer_lower	l_outer_lower	OPAQUE	left, outer, lower -- positional words only, object unspecified	NOT_APPLICABLE		Low	no object-type word at all	pure positional stack with no referent	3	8714
+l_rear_holster_0u_8v	l_rear_holster_0u_8v	CLEAR	left rear weapon holster, with a UV-style coordinate suffix	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	3	26520
+left little intermediate	Left Little Intermediate	CLEAR	"left pinky (""little"") finger, intermediate phalanx"	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		little finger is a standard name for the pinky	3	16264
+left_6	left_6	OPAQUE	"bare ""left"" + number, object unspecified"	NOT_APPLICABLE		Low	no object-type word at all	pure side marker with no referent	3	8728
+leftlowerleg	LeftLowerLeg	CLEAR	left lower leg	CLEAR	groupFile/Legs	High		plain anatomical term	3	16389
+leg right knee_ctr	leg right knee_ctr	CLEAR	right knee control	CLEAR	groupFile/Legs	High		explicit knee control	3	1064
+magazine_full	Magazine_full	CLEAR	"a weapon magazine, ""full"" (loaded) state"	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	3	441
+microleft	MicroLeft	OPAQUE	"something ""micro""-scale, left side, object unspecified"	NOT_APPLICABLE		Low	micro does not name any body part or object	adjective + side marker with no referent	3	16902
+mlid_r_1	MLid_R_1	CLEAR	right eyelid (mid-lid), variant 1	CLEAR	groupFile/Face/Eyes	Medium		lid is the recognizable eyelid referent	3	3201
+moustache_l_2	Moustache_L_2	CLEAR	left moustache section, variant 2	CLEAR	groupFile/Hair	High		facial hair, matches established moustache-in-Hair convention	3	16949
+necklace rope	necklace rope	CLEAR	a rope-style necklace	CLEAR	groupFile/Clothing	High		explicit clothing accessory	3	27191
+nipple up	nipple up	CLEAR	"nipple, ""up"" position/direction"	CLEAR	groupFile/Body	High		corrected: 'up' is a positional/directional word, not an explicit state/shape descriptor (contrast 'hard'/'erect' which do qualify); per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	3	27194
+null.002	Null.002	OPAQUE	a generic empty/null transform helper object	NOT_APPLICABLE		Low	null objects carry no semantic content	generic DCC null/empty object	3	5924
+object40	Object40	OPAQUE	generic auto-numbered mesh/object name	NOT_APPLICABLE		Low	no descriptive content	DCC placeholder name	3	17320
+opt_hand_right_pinky2	OPT_Hand_Right_Pinky2	CLEAR	right hand pinky finger, segment 2	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger convention	3	3293
+pants string ２.r	Pants string ２.R	CLEAR	pants drawstring, variant 2, right	CLEAR	groupFile/Clothing	High		explicit clothing drawstring	3	17504
+pelerinecentr_l	PelerineCentr_L	CLEAR	a pelerine (cape/collar garment), center, left	CLEAR	groupFile/Clothing	Medium		Pelerine is a recognized garment term	3	17542
+pendant.chain_2	Pendant.Chain_2	CLEAR	a pendant necklace chain, variant 2	CLEAR	groupFile/Clothing	High		explicit jewelry/accessory item	3	6189
+r beltc spo	R BeltC Spo	CLEAR	"right belt, variant C, ""spo"" (likely ""spare"")"	CLEAR	groupFile/Clothing	High		explicit clothing belt control	3	17824
+r_butt_left	R_Butt_left	CLEAR	"left buttock (an ""R"" rig/character-code prefix, ""Butt_left"" is the referent)"	CLEAR	groupFile/Body	High		corrected: plain anatomical segment (Butt_left), no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	3	6307
+r_frontpaw	R_FrontPaw	CLEAR	right front paw (creature appendage)	CLEAR	groupFile/Arms	Medium		"corrected: a whole paw is the limb-end assembly, not an individual digit/finger -- historical Master majority for the word ""paw"" is not semantic proof it belongs in Fingers; and Arms/RightArm is not independently verified for direct (non-Fingers) content in this Master, so the plain side-marked Arms destination is used instead, consistent with every other explicitly-sided arm bone in this pilot"	3	18019
+rforearmex	RForeArmEX	CLEAR	"right forearm, ""EX"" (extra/helper) variant"	CLEAR	groupFile/Arms	High		helper/EX naming, arm explicitly named, no repair language	3	17923
+rightnipple1	RightNipple1	CLEAR	right nipple, variant 1	CLEAR	groupFile/Body	High		corrected: plain numbered anatomical segment, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	3	18300
+rightupperlid	RightUpperLid	CLEAR	right upper eyelid	CLEAR	groupFile/Face/Eyes	High		explicit eyelid control	3	18315
+ringleft2	RingLeft2	CLEAR	left ring finger, variant 2	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit finger control	3	821
+rough_small_7	rough_small_7	OPAQUE	"two adjectives (""rough"", ""small"") with no object, numbered"	NOT_APPLICABLE		Low	neither word names a body part or object	adjectives with no referent	3	28140
+rtoemid02	rToeMid02	CLEAR	right middle toe, segment 02	CLEAR	groupFile/Toes/RightToes	High		explicit toe control	3	27733
+shorts non futa shadow	Shorts Non Futa Shadow	PARTIAL	a shading/texture toggle for shorts, specific to a non-futa body variant	NEEDS_CONTEXT		Low	shadow could mean a shading toggle or a geometry variant; not fully clear	"shorts (clothing) referent clear, exact function of ""shadow"" unclear"	3	18815
+side_right_7	side_right_7	OPAQUE	a right-side positional marker, object unspecified	NOT_APPLICABLE		Low	no object-type word at all, purely positional	pure position code with no referent	3	9059
+taurenmale_hd_bone_78	taurenmale_hd_bone_78	PARTIAL	a numbered head bone on the Tauren creature skeleton, no specific part named	NEEDS_CONTEXT		Low	'hd' plausibly abbreviates 'head', giving a body-region candidate; abbreviation is not certain enough for CLEAR	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	3	28931
+tentacletopleft2	TentacleTopLeft2	CLEAR	a tentacle (creature appendage), top-left, variant 2	CLEAR	groupFile/Other	High		tentacle, existing Other precedent (99.7%)	3	19673
+top_right	TOP_RIGHT	OPAQUE	"top + ""right"" -- positional words only, object unspecified"	NOT_APPLICABLE		Low	no object-type word at all	pure positional stack with no referent	3	19505
+unused b_l_ankle2helper	unused b_l_ankle2helper	CLEAR	left ankle helper bone, explicitly marked unused	CLEAR	groupFile/Useless	High		self-declared unused, Phase 1 Useless precedent	3	29181
+unusedbone_3b item_ffx_x-2_rikku_by_xxkammyxx	unusedbone_3B item_FFX_X-2_Rikku_By_xXKammyXx	PARTIAL	"a generic unused placeholder bone carrying an embedded creator-credit string (references the character ""Rikku"" from Final Fantasy X-2)"	CLEAR	groupFile/Useless	High		self-declared unused generic bone (attached credit text is not anatomical content); Phase 1 Useless precedent applies regardless of anatomical specificity	3	29523
+unuseddummy	unuseddummy	PARTIAL	a generic unused dummy placeholder	CLEAR	groupFile/Useless	High		corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity	3	29529
+unusedhandr	unusedhandr	CLEAR	right hand, explicitly marked unused	CLEAR	groupFile/Useless	High		self-declared unused, Phase 1 Useless precedent	3	9296
+upperhead	UpperHead	CLEAR	the upper portion of the head	CLEAR	groupFile/Body	High		bare structural head/skull, no named facial feature	3	19990
+vag inner2 2	vag inner2 2	CLEAR	vagina, inner, variant 2-2	CLEAR	groupFile/Body	High		corrected: plain numbered anatomical segment, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	3	29629
+valvebiped.bip01_l_middle01	ValveBiped.Bip01_L_Middle01	CLEAR	left middle finger, segment 01	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		standard ValveBiped finger convention	3	6727
+valvebiped.bip01_pack3	ValveBiped.Bip01_Pack3	CLEAR	a backpack/pack prop, segment 3	CLEAR	groupFile/Clothing	Medium		worn pack/bag item, consistent with other bag/backpack entries	3	657
+valvebiped.bip01_vag_l_2	ValveBiped.Bip01_Vag_L_2	CLEAR	left vagina, segment 2	CLEAR	groupFile/Body	High		corrected: plain numbered anatomical segment, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	3	6763
+wep_paddle1_button	WEP_Paddle1_Button	CLEAR	a weapon paddle/release button, variant 1	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	3	6883
+wep_shell5	WEP_Shell5	CLEAR	weapon shell casing, variant 5	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	3	20507
+wheelback_base	wheelback_base	CLEAR	"base component of a ""wheel back"" mechanical/vehicle prop"	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	3	29684
+adjust_knuckle_a_l	adjust_knuckle_A_L	CLEAR	left knuckle adjustment, variant a	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		knuckle is an explicit finger-joint referent	4	20713
+arm left shoulder 2 ctr3	arm left shoulder 2 ctr3	CLEAR	left shoulder control, variant 2, ctr3	CLEAR	groupFile/Arms	High		explicit shoulder control	4	20829
+arm right finger 4xx	arm right finger 4xx	CLEAR	"right hand, finger 4 (pinky by common numbering), ""xx"" variant marker"	CLEAR	groupFile/Arms/RightArm/RightFingers	Medium		"finger referent explicit despite the unusual ""xx"" suffix"	4	3433
+au18z	AU18Z	OPAQUE	ambiguous alphanumeric code	NOT_APPLICABLE		Low	no recognizable word content	opaque code	4	4181
+backhair5.001	backhair5.001	CLEAR	back hair, segment 5	CLEAR	groupFile/Hair	High		plain hair term	4	6996
+backlegs	backlegs	CLEAR	back legs (implies a quadruped/non-human creature with more than two legs)	CLEAR	groupFile/Legs	High		bare plural quadruped leg reference is still a Legs control; no side marker, side-neutral destination used	4	21020
+ballsdetail4	BallsDetail4	CLEAR	testicle detail morph, variant 4	CLEAR	groupFile/Body Morphs	High		explicit genital anatomical term	4	10065
+beard_r_131	Beard_R_131	CLEAR	right-side beard section, numbered	CLEAR	groupFile/Hair	High		facial hair, consistent with the moustache-in-Hair convention	4	10133
+belthat_bone_r_02	beltHat_bone_r_02	PARTIAL	"an unusual combined ""belt hat"" accessory bone, right, variant 02"	NEEDS_CONTEXT		Low	belt hat is not a standard garment term; exact object unclear	clothing/accessory-adjacent referents present but the combined object is unusual	4	7023
+bigtoe2_l	bigToe2_l	CLEAR	left big toe, segment 2	CLEAR	groupFile/Toes/LeftToes	High		explicit toe control	4	7031
+bip facetemplemiin r	bip facetemplemiin r	CLEAR	right face temple, positional qualifier unclear	CLEAR	groupFile/Face/Upper Face	Medium	"miin does not resolve to a standard word, but does not block the clear ""temple"" referent"	temple is explicit despite an unclear trailing qualifier	4	21185
+bip001-pelvis	Bip001-Pelvis	CLEAR	pelvis	CLEAR	groupFile/Body	High		plain anatomical term	4	1958
+bip_belt_r_3	bip_belt_R_3	CLEAR	right belt, segment 3	CLEAR	groupFile/Clothing	High		explicit clothing belt control	4	3512
+bip_handles_l	bip_handles_l	PARTIAL	"left ""handles"" -- ambiguous between love-handles (waist fat) and a literal grip/handle object"	NEEDS_CONTEXT		Low	handles has two very different plausible readings with nothing to disambiguate	ambiguous between a body-morph slang term and a literal object	4	21726
+bip_l_wing	bip_l_wing	CLEAR	left wing	CLEAR	groupFile/Wings	High		"explicit wing referent despite the heterogeneous ""bip_"" prefix"	4	21882
+bip_tentacle.011	Bip_Tentacle.011	CLEAR	tentacle (creature appendage), segment 011	CLEAR	groupFile/Other	High		tentacle, existing Other precedent (99.7%)	4	10720
+bipod	bipod; Bipod	CLEAR	a weapon bipod (support legs)	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	22182; 4322
+bobcut.rear_center_3	Bobcut.Rear_Center_3	CLEAR	Bobcut hairstyle, rear-center, variant 3	CLEAR	groupFile/Hair	High		named hairstyle convention	4	10853
+bone.001_r.040	Bone.001_R.040	OPAQUE	generic numbered bone, right	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	4	10979
+bone046	Bone046	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	4	1585
+bone094	Bone094	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	4	11016
+book turnpage9	Book TurnPage9	CLEAR	a book prop, page-turning action, variant 9	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	11219
+canine_tail2	Canine_Tail2	CLEAR	Canine creature tail, segment 2	CLEAR	groupFile/Tail	Medium	the Tail group is already an established non-human-appendage destination, unlike other creature body parts	tail is explicit, and Master already treats Tail as a non-human-appendage home	4	4515
+cape1_right51	CAPE1_RIGHT51	CLEAR	cape, variant 1, right, segment 51	CLEAR	groupFile/Clothing	High		plain clothing item	4	11645
+cape_10_l	cape_10_L	CLEAR	cape, variant 10, left	CLEAR	groupFile/Clothing	High		plain clothing item	4	22853
+ch1	CH1	OPAQUE	ambiguous 2-character-plus-digit code	NOT_APPLICABLE		Low	"could mean ""channel"", ""chapter"", or anything else"	no reliable referent	4	634
+cock-head-skinny	cock-head-skinny	CLEAR	"penis head, ""skinny"" shape morph"	CLEAR	groupFile/Body Morphs	High		explicit genital body-morph term	4	23200
+cock.shaft_4_skin	Cock.Shaft_4_Skin	CLEAR	penis shaft, segment 4, skin layer	CLEAR	groupFile/Body	High		corrected: plain numbered segment + skin layer designation, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	4	2070
+creasetop	CreaseTop	PARTIAL	a skin/cloth crease effect, top position, object unspecified	NEEDS_CONTEXT		Low	crease names a real deformation concept but not which surface it applies to	function word (crease) present, owning surface unclear	4	12437
+cup.pivot_left	Cup.Pivot_Left	PARTIAL	"a ""cup"" object's pivot point, left"	NEEDS_CONTEXT		Low	ambiguous between a bra cup (clothing) and a drinking-cup prop	"pivot mechanism is clear, but which kind of ""cup"" is not"	4	12502
+dyng w 02	dyng w 02	PARTIAL	"a dynamic-bone-physics control, object unspecified (""w"")"	NEEDS_CONTEXT		Low	w does not resolve to a recognizable body part or object	dynamic-bone function clear, object unclear	4	23641
+dyng x 03	dyng x 03	PARTIAL	"a dynamic-bone-physics control, object/axis unspecified (""x"")"	NEEDS_CONTEXT		Low	x does not resolve to a recognizable body part or object	dynamic-bone function clear, object unclear	4	23645
+egg.wall_21	Egg.Wall_21	PARTIAL	"an ""egg wall"" hard-surface prop segment"	NEEDS_CONTEXT		Low	'wall' names a real hard-surface object; the 'egg' qualifier and exact ownership are unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	4	13130
+eyecringe.l	EyeCringe.L	CLEAR	"left eye ""cringe"" expression"	CLEAR	groupFile/Face/Eyes	High		explicit eye-expression control	4	4610
+eyeleft1	EyeLeft1	CLEAR	left eye, variant 1	CLEAR	groupFile/Face/Eyes	High		plain eye control	4	13251
+eyeleft2	EyeLeft2	CLEAR	left eye, variant 2	CLEAR	groupFile/Face/Eyes	High		plain eye control	4	13252
+fa_low_lid_right_center	fa_low_lid_right_center	CLEAR	right lower eyelid, center	CLEAR	groupFile/Face/Eyes	High		explicit eyelid control	4	7733
+fa_up_lid_right_inner	fa_up_lid_right_inner	CLEAR	right upper eyelid, inner	CLEAR	groupFile/Face/Eyes	High		explicit eyelid control	4	7772
+fake_wheel_fl	fake_wheel_fl	CLEAR	"a decorative ""fake wheel"" mechanical prop, front-left"	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	23990
+feather 2b	feather 2b	CLEAR	a feather (creature/costume appendage), variant 2b	NEEDS_CONTEXT		Medium	could belong to a wing, headdress, or costume accessory -- object not specified	appendage referent clear, owning structure unclear	4	24019
+flm-rig-eye-lb	Flm-Rig-Eye-LB	CLEAR	"left eye, lower-bottom variant (per-character ""Flm"" rig)"	CLEAR	groupFile/Face/Eyes	Medium		Eye-LB is a clear eye referent despite the rig-code prefix	4	14125
+foreskin_right	foreskin_right	CLEAR	right foreskin	CLEAR	groupFile/Body	High		corrected: plain genital anatomical term, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	4	24119
+fur_gen_bed_single_rich_a_mesh.002	FUR_GEN_Bed_Single_Rich_A_Mesh.002	CLEAR	a bed prop mesh (furniture), variant A	CLEAR	groupFile/Other	High		named furniture prop (bed) ending in _Mesh	4	13599
+fur_gen_pillow_sitting_e_mesh	FUR_GEN_Pillow_Sitting_E_mesh	CLEAR	"a ""pillow, sitting pose"" prop mesh, variant E"	CLEAR	groupFile/Other	High		named furniture prop (pillow) ending in _Mesh, consistent with existing Pillow->Other resolution	4	13607
+g8	G8	OPAQUE	ambiguous 2-character code	NOT_APPLICABLE		Low	no recognizable word content	opaque code	4	14318
+gentle_3	gentle_3	OPAQUE	"a ""gentle"" quality applied to an unspecified object/motion"	NOT_APPLICABLE		Low	no object or body part named	adjective with no referent	4	24208
+glass_d3_d	glass_d3_d	PARTIAL	"a ""glass"" object of unclear type, variant d3_d"	NEEDS_CONTEXT		Low	'glass' names a real material/object; which type (drinking glass, window, lens) is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	4	24224
+hand finger right 1a	hand finger right 1a	CLEAR	right hand finger, variant 1a	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger control	4	25558
+head back 1	head back 1	CLEAR	head, back position, variant 1	CLEAR	groupFile/Body	High		bare structural head/skull, no named facial feature	4	25587
+head cheeck left 4	head cheeck left 4	CLEAR	"head, cheek (misspelled ""cheeck""), left, variant 4"	CLEAR	groupFile/Face/Mid Face	High		"cheeck is a plain misspelling of ""cheek"""	4	25594
+hliddroop	HlidDroop	CLEAR	"a drooping eyelid (likely ""half-lid droop"")"	CLEAR	groupFile/Face/Eyes	Medium	"the leading ""H"" is not fully certain to mean ""half"""	"lid + ""droop"" is a clear eyelid action despite the unclear prefix"	4	15465
+jacket.neck_right	Jacket.Neck_Right	CLEAR	jacket, neck area, right	CLEAR	groupFile/Clothing	High		explicit clothing control	4	15651
+jiggle05	Jiggle05	PARTIAL	a jiggle/secondary-motion bone, object unspecified	NEEDS_CONTEXT		Low	jiggle names a function but not what is jiggling	function word present, no owning object	4	15801
+kunai	Kunai	CLEAR	a kunai (throwing-knife weapon prop)	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	16061
+l dlip b	L Dlip B	PARTIAL	"a lip-related control, left, exact action (""Dlip"") unclear"	NEEDS_CONTEXT		Low	D prefix does not resolve to a standard direction/action word	lip referent visible, construction unclear	4	5333
+l hip spo	L Hip Spo	CLEAR	"left hip, ""spo"" (likely ""spare"")"	CLEAR	groupFile/Body	High		hip is the explicit anatomical referent	4	16092
+l string1 tip sec	l string1 tip sec	PARTIAL	a string/cord accessory, left, segment 1, tip, secondary physics bone	NEEDS_CONTEXT		Low	'string' with no named garment owner -- could be jewelry/anklet, garment drawstring, or prop/physics cord	corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn	4	26386
+l_horselink	l_horselink	PARTIAL	"an unclear ""horse link"" mechanism, left"	NEEDS_CONTEXT		Low	'horse' is a real, specific referent; the exact linkage mechanism and ownership are unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	4	26497
+leg back toes right	leg back toes right	CLEAR	right leg, back toes	CLEAR	groupFile/Toes/RightToes	High		explicit toe control	4	26611
+leg left knee twist	leg left knee twist	CLEAR	left knee twist bone	CLEAR	groupFile/Legs	High		twist/roll leg bone, ordinary deformation articulation	4	8749
+leg right boot tassle 6b	leg right boot tassle 6b	CLEAR	"right leg, boot, tassel accessory (misspelled ""tassle""), variant 6b"	CLEAR	groupFile/Clothing	High		boot/tassel are explicit clothing referents	4	26706
+leg right thigh ctr 3	leg right thigh ctr 3	CLEAR	right thigh control, variant 3	CLEAR	groupFile/Legs	High		explicit thigh control	4	26726
+leg right thigh ctrl 3	leg right thigh ctrl 3	CLEAR	right thigh control, variant 3	CLEAR	groupFile/Legs	High		explicit thigh control	4	8767
+lipsbottomforward	lipsbottomforward	CLEAR	"lower lips, ""forward""/protrusion"	CLEAR	groupFile/Face/Lower Face	High		explicit lip control	4	26986
+lock1	lock1	PARTIAL	a lock, variant 1 -- could mean a hair lock or a mechanical lock	NEEDS_CONTEXT		Low	'lock' names two real, concrete candidate objects (hair lock vs. mechanical lock); which one is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	4	27013
+lower_middle_drop	lower_middle_drop	PARTIAL	"a ""drop"" action, lower-middle position, object unspecified"	NEEDS_CONTEXT		Low	drop names an action but not what drops	action word present, no owning object	4	27032
+lowerbottomlips	LowerBottomLips	CLEAR	lower/bottom lips	CLEAR	groupFile/Face/Lower Face	High		"explicit lip control (redundant ""lower""+""bottom"" phrasing)"	4	16737
+lowerlidlowerr	LowerLidLowerR	CLEAR	lower eyelid, lower action, right	CLEAR	groupFile/Face/Eyes	High		explicit eyelid control	4	2183
+lshoulderj	LShoulderJ	CLEAR	left shoulder joint	CLEAR	groupFile/Arms	High		"J reads as ""Joint""; shoulder is explicit"	4	16207
+m_head_2	m_head_2	CLEAR	head, variant 2	CLEAR	groupFile/Body	High		bare structural head/skull, no named facial feature	4	27060
+nasolabial	Nasolabial	CLEAR	the nasolabial fold (nose-to-mouth crease)	CLEAR	groupFile/Face/Mid Face	Medium	the fold spans both nose and mouth regions, so Mid vs Lower Face is a close call	recognized anatomical/medical term	4	5895
+nostril dilator	Nostril dilator	CLEAR	nostril dilator (widening) control	CLEAR	groupFile/Face/Mid Face	High		explicit nostril anatomical/muscular term	4	17204
+object24	Object24	OPAQUE	generic auto-numbered mesh/object name	NOT_APPLICABLE		Low	no descriptive content	DCC placeholder name	4	17304
+outereye_l	outerEye_L	CLEAR	left outer eye corner	CLEAR	groupFile/Face/Eyes	High		explicit eye control	4	27269
+palmlmizin1	PalmLMizin1	PARTIAL	"left palm area, ""Mizin"" qualifier unclear"	NEEDS_CONTEXT		Low	Mizin does not resolve to a recognizable English or common rigging term	palm/left referent visible, qualifier unresolved	4	17470
+pb_l_cmy01_bhair_2	pb_L_CMY01_BHair_2	CLEAR	"back hair, left, rig-code ""CMY01"", segment 2"	CLEAR	groupFile/Hair	Medium		BHair = back hair is the clear referent	4	27393
+pc_cable_2	pc_cable_2	CLEAR	a computer/PC cable prop, variant 2	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	27426
+penis root	penis root	CLEAR	penis, root/base position	CLEAR	groupFile/Body	High		corrected: explicit 'root' -- plain structural segment, not a shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	4	4013
+pillow	Pillow	CLEAR	a pillow prop	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	17571
+position	Position	OPAQUE	"bare word ""Position"", object unspecified"	NOT_APPLICABLE		Low	applies to virtually any object	no anchoring referent	4	2314
+protrusion-bottomnude	Protrusion-bottomnude	PARTIAL	"a body ""protrusion"" effect, bottom region, nude (no-clothing) state"	NEEDS_CONTEXT		Low	likely genital-adjacent but the exact body part is not named	protrusion/context suggest a body-morph, exact anatomy unclear	4	17675
+r-titty-pull	R-Titty-Pull	CLEAR	"right breast ""pull"" morph (slang ""titty"" = breast)"	CLEAR	groupFile/Body Morphs	High		unambiguous breast-morph slang term	4	17871
+right ring finger 3 grip 2	Right ring finger 3 grip 2	CLEAR	right ring finger, joint 3, grip pose 2	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger grip control	4	18251
+rup	RUp	OPAQUE	"right + ""up"" -- positional words only, object unspecified"	NOT_APPLICABLE		Low	no object-type word at all	pure positional stack with no referent	4	1271
+shell.wall_58	Shell.Wall_58	PARTIAL	"a ""shell wall"" hard-surface prop segment"	NEEDS_CONTEXT		Low	'wall' names a real hard-surface object; the 'shell' qualifier and exact ownership are unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	4	18738
+shirt-lift-3	Shirt-Lift-3	CLEAR	"a shirt ""lift"" (riding-up) effect, variant 3"	CLEAR	groupFile/Clothing	High		explicit clothing-fit control	4	18768
+stock_pos_00	Stock_Pos_00	CLEAR	weapon stock position, variant 00	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	1304
+surprisel	SurpriseL	CLEAR	"a ""surprise"" expression, left side, specific facial region unnamed"	CLEAR	groupFile/Face/Expressions	Medium		corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt)	4	19444
+tailleft2_4	TailLeft2_4	CLEAR	left tail, chain segment 2-4	CLEAR	groupFile/Tail	High		explicit tail chain	4	19543
+tears 2 upper	Tears 2 Upper	CLEAR	tears, variant 2, upper	CLEAR	groupFile/Face/Eyes	High		explicit eye/tear control	4	19634
+toplid_corner_l	toplid_corner_L	CLEAR	top eyelid corner, left	CLEAR	groupFile/Face/Eyes	High		explicit eyelid control	4	29118
+unused duplicate duplicate unused.006	unused duplicate duplicate unused.006	PARTIAL	a control explicitly flagged as a duplicate and unused	CLEAR	groupFile/Useless	High		self-declared duplicate/unused placeholder; Phase 1 Useless precedent applies regardless of anatomical specificity	4	29225
+unusedbone146	unusedbone146	PARTIAL	generic numbered bone, explicitly unused	CLEAR	groupFile/Useless	High		corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity	4	29499
+valvebiped.bip01_l_ear02	ValveBiped.Bip01_L_Ear02	CLEAR	left ear, segment 02	CLEAR	groupFile/Face/Ears	High		standard ValveBiped ear convention	4	20097
+valvebiped.pcube45	ValveBiped.pCube45	OPAQUE	"a generic auto-generated ""pCube"" mesh name"	NOT_APPLICABLE		Low	classic DCC-generated placeholder name	no descriptive content	4	20328
+valvebiped.topswitch	ValveBiped.topswitch	PARTIAL	"an unclear ""top switch"" toggle mechanism"	NEEDS_CONTEXT		Low	'switch' names a real toggle mechanism; the object/system it switches is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	4	20343
+vwidth	Vwidth	PARTIAL	"a ""width"" morph for an unspecified object abbreviated ""V"""	NEEDS_CONTEXT		Low	V could mean vagina, V-neck, or something else	"width (a real morph term) is clear, the ""V"" object is ambiguous"	4	6835
+wakazashi.tassel_front_8	Wakazashi.Tassel_Front_8	CLEAR	tassel on a wakizashi-sword prop, front, segment 8	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	20568
+wep_backcap	WEP_BackCap	CLEAR	weapon back-cap component	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	20424
+wep_cylinder_release	WEP_Cylinder_Release	CLEAR	weapon cylinder-release mechanism (e.g. a revolver)	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	20448
+anusgrip	AnusGrip	CLEAR	"anus ""grip"" morph"	CLEAR	groupFile/Body Morphs	High		explicit genital anatomical term	5	9577
+arm left shoulder 2 adj. 2	arm left shoulder 2 adj. 2	CLEAR	left shoulder adjustment, variant 2	CLEAR	groupFile/Arms	High		explicit shoulder control	5	20823
+arm right lower 1	arm right lower 1	CLEAR	right lower arm (forearm), variant 1	CLEAR	groupFile/Arms	High		explicit forearm control	5	6979
+arm.left_top	Arm.Left_Top	CLEAR	left arm, top (upper arm) region	CLEAR	groupFile/Arms	High		plain anatomical term	5	9638
+armhandsuitraisealtline	ArmHandSuitRaiseAltLine	PARTIAL	an arm/hand pose combined with a suit-raise action, alternate variant	NEEDS_CONTEXT		Low	unclear whether this is primarily a pose (Arms) or a clothing-fit control (Clothing)	multiple referents combine ambiguously	5	4215
+bag a 1	bag a 1	CLEAR	a bag accessory, variant a1	CLEAR	groupFile/Clothing	Medium		worn/carried bag accessory	5	21024
+beard_1	Beard_1	CLEAR	a beard, variant 1	CLEAR	groupFile/Hair	High		facial hair, consistent with the moustache-in-Hair convention	5	10129
+belthat_bone_l_01	beltHat_bone_l_01	PARTIAL	"an unusual combined ""belt hat"" accessory bone, left, variant 01"	NEEDS_CONTEXT		Low	belt hat is not a standard garment term; exact object unclear	clothing/accessory-adjacent referents present but the combined object is unusual	5	7018
+bhr43	BhR43	OPAQUE	ambiguous alphanumeric code	NOT_APPLICABLE		Low	no recognizable word content	opaque code	5	10228
+bip facelipmiloin	bip facelipmiloin	PARTIAL	"a lip-related control, exact modifier (""miloin"") unclear"	NEEDS_CONTEXT		Low	miloin does not resolve to a standard word	lip referent visible, remainder of the construction unclear	5	21170
+bip001 r foretwist	Bip001 R ForeTwist	CLEAR	right forearm twist	CLEAR	groupFile/Arms	High		twist/roll arm bone, ordinary deformation articulation	5	10291
+bip001-l-clavicle	Bip001-L-Clavicle	CLEAR	left clavicle	CLEAR	groupFile/Arms	High		plain anatomical term	5	1939
+bip01_l_forearm007	Bip01_L_Forearm007	CLEAR	left forearm, numbered sub-bone (likely deformation-corrective)	CLEAR	groupFile/Arms	High		numbered anatomical arm bone, no repair language	5	2842
+bip01_l_hand007	Bip01_L_Hand007	CLEAR	left hand, numbered sub-bone	CLEAR	groupFile/Arms	High		numbered anatomical arm bone, no repair language	5	2844
+bip01_r_thigh013	Bip01_R_Thigh013	CLEAR	right thigh, numbered sub-bone (likely deformation-corrective)	CLEAR	groupFile/Legs	High		numbered anatomical leg bone, no repair language	5	4284
+bip01_r_upperarm013	Bip01_R_UpperArm013	CLEAR	right upper arm, numbered sub-bone (likely deformation-corrective)	CLEAR	groupFile/Arms	High		numbered anatomical arm bone, no repair language	5	4288
+bip_bobby_l_calftwist	Bip_BOBBY_L_CalfTwist	CLEAR	"left calf twist (per-character ""Bobby"" rig)"	CLEAR	groupFile/Legs	High		twist/roll leg bone, ordinary deformation articulation	5	10561
+bip_horn_03	bip_horn_03	CLEAR	a horn (creature/appendage), variant 03	CLEAR	groupFile/Other	High		horn, existing Other precedent	5	21739
+bip_leg.006	Bip_leg.006	CLEAR	leg, numbered	CLEAR	groupFile/Legs	High		plain anatomical term	5	10748
+bip_lube.001	bip_lube.001	CLEAR	"a ""lube""/wetness effect, segment .001"	CLEAR	groupFile/Body Morphs	Medium		recognizable adult-content wetness/lubrication term	5	21905
+bip_origin	bip_origin	CLEAR	the root/origin transform of the biped skeleton	CLEAR	groupFile/RigBody	High		skeleton root/origin transform, technical rig machinery	5	21921
+bip_r_cloth_a_01	bip_r_cloth_a_01	CLEAR	right-side clothing, variant A, segment 01	CLEAR	groupFile/Clothing	High		explicit clothing control	5	7316
+bipflm rcalftwist1	BipFlm RCalfTwist1	CLEAR	"right calf twist (per-character ""Flm"" rig), variant 1"	CLEAR	groupFile/Legs	High		twist/roll leg bone, ordinary deformation articulation	5	10495
+blinklmid1	BlinkLMid1	CLEAR	left eye blink, mid position, variant 1	CLEAR	groupFile/Face/Eyes	High		explicit blink control	5	10771
+bobby_bone_necklace_06	BOBBY_Bone_NeckLace_06	CLEAR	"a necklace (per-character ""Bobby"" rig), segment 06"	CLEAR	groupFile/Clothing	High		"explicit jewelry accessory despite the generic ""Bone"" token"	5	9936
+bone 1046	bone 1046	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	5	22238
+bone forearm01	bone forearm01	CLEAR	forearm, segment 01	CLEAR	groupFile/Arms	High		"forearm is explicit despite the generic ""Bone"" prefix"	5	63
+bone-r-upperarm-twist1	Bone-R-UpperArm-Twist1	CLEAR	right upper arm twist, variant 1	CLEAR	groupFile/Arms	High		twist/roll arm bone, ordinary deformation articulation	5	10965
+bone009	Bone009	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	5	110
+bone077	Bone077	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	5	10998
+bone083	Bone083	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	5	11004
+bone106	Bone106	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no body-part information	bare numbered technical bone	5	11028
+bow left 2h	bow left 2h	CLEAR	bow accessory, left, variant 2h	CLEAR	groupFile/Clothing	High		plain clothing accessory	5	22472
+bow right 1b	bow right 1b	CLEAR	bow accessory, right, variant 1b	CLEAR	groupFile/Clothing	High		plain clothing accessory	5	22499
+box08	Box08	CLEAR	generic numbered box prop	CLEAR	groupFile/Other	High		corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque	5	11303
+boxbig	BoxBig	CLEAR	a large box prop	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	5	11322
+canine_dog_lbrow	Canine_Dog_LBrow	CLEAR	Canine/dog creature, left eyebrow	CLEAR	groupFile/Face/Upper Face	High		brow is a location word, species-neutral	5	11870
+cape left 2	cape left 2	CLEAR	cape, left, variant 2	CLEAR	groupFile/Clothing	High		plain clothing item	5	22842
+cape right 3	cape right 3	CLEAR	cape, right, variant 3	CLEAR	groupFile/Clothing	High		plain clothing item	5	22847
+cockwide	CockWide	CLEAR	"penis ""wide"" shape morph"	CLEAR	groupFile/Body Morphs	High		explicit genital body-morph term	5	2946
+crow_3.phalanges3_l	Crow_3.Phalanges3_L	PARTIAL	Crow creature, left phalanges (wing/foot bone), segment 3	NEEDS_CONTEXT		Low	"phalanges occur in both a bird's wing (digit bones) and its foot (toe bones); the literal does not establish which, and the referent's own text already flagged this (""wing/foot bone"")"	corrected: bare phalanges does not, by itself, establish wing ownership over foot ownership -- do not route to Wings merely because the bone type can occur there	5	12490
+crush-26	crush-26	PARTIAL	"unclear ""crush"" term, numbered"	NEEDS_CONTEXT		Low	'crush' names a real deformation/compression function; the object being crushed is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	5	23257
+dec_gen_wagon_caravan_a_mesh	DEC_GEN_Wagon_Caravan_A_Mesh	CLEAR	a wagon/caravan decoration prop mesh	CLEAR	groupFile/Other	High		named vehicle/furniture prop (wagon) ending in _Mesh	5	12529
+duvetroot	DuvetRoot	CLEAR	root bone of a duvet/blanket prop	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	5	13028
+dyng necklace 01	dyng necklace 01	CLEAR	a necklace, dynamic-bone physics, variant 01	CLEAR	groupFile/Clothing	High		explicit jewelry accessory	5	7634
+elbowroll l	ELBOWROLL L	CLEAR	left elbow roll (rotation/twist) bone	CLEAR	groupFile/Arms	High		twist/roll arm bone, ordinary deformation articulation	5	13044
+ex_2	Ex_2	PARTIAL	"unclear abbreviation (""Ex""), numbered"	NEEDS_CONTEXT		Low	'Ex' matches an established Master helper/auxiliary-bone naming pattern (compare RForeArmEX); which body region it helps is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	5	13167
+eye-r-nuetral	Eye-R-Nuetral	CLEAR	"right eye, ""neutral"" pose (obvious misspelling of ""neutral"")"	CLEAR	groupFile/Face/Eyes	High		"nuetral is a plain misspelling of ""neutral"""	5	13227
+eyeballs-right	Eyeballs-Right	CLEAR	right eyeball	CLEAR	groupFile/Face/Eyes	High		plain eye control	5	13297
+eyeright2	EyeRight2	CLEAR	right eye, variant 2	CLEAR	groupFile/Face/Eyes	High		plain eye control	5	13270
+flm-armb-belt-la	Flm-ArmB-Belt-LA	CLEAR	"a belt accessory mounted via an arm-attachment system (per-character ""Flm"" rig), left variant"	CLEAR	groupFile/Clothing	Medium		belt is the clear referent despite the arm-mount rig prefix	5	14080
+gag_l_04	Gag_L_04	CLEAR	a gag accessory (worn mouth item), left, variant 04	CLEAR	groupFile/Clothing	Medium		gag is a worn accessory item	5	14324
+h3jiggle06	H3Jiggle06	PARTIAL	"a jiggle-physics bone, object abbreviated ""H3"" is unclear"	NEEDS_CONTEXT		Low	H3 does not resolve to a recognizable body part or object	jiggle function clear, object unclear	5	4720
+headgear_r.004	Headgear_R.004	CLEAR	headgear (clothing/costume item), right, .004	CLEAR	groupFile/Clothing	High		plain clothing item	5	15412
+kargathbladefist_bone42	kargathbladefist_Bone42	OPAQUE	a numbered bone on a specific character's skeleton, no part named	NOT_APPLICABLE		Low	bone42 carries no anatomical specificity	bare numbered technical bone despite a named source character	5	8677
+knotmedium2	KnotMedium2	PARTIAL	a medium-sized knot, object unspecified	NEEDS_CONTEXT		Low	could be a hair knot or a rope/clothing knot	knot names a real object type, but not which structure it belongs to	5	16047
+l leg string tip sec	l leg string tip sec	PARTIAL	left leg, string/cord accessory, tip, secondary physics bone	NEEDS_CONTEXT		Low	'string' with only an anatomical region ('leg'), not a named garment -- could be jewelry/anklet, garment drawstring, or prop/physics cord	corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn	5	26364
+l sideburn e phy	l sideburn e phy	CLEAR	left sideburn, physics-simulated	CLEAR	groupFile/Hair	High		plain hair term	5	26382
+l_fin_back_b	l_fin_back_b	CLEAR	left fin (creature appendage), back, variant b	CLEAR	groupFile/Other	High		fin, existing Other-majority precedent	5	8703
+l_upperarm_00002	l_upperarm_00002	CLEAR	left upper arm, numbered	CLEAR	groupFile/Arms	Medium		upperarm is a plain anatomical referent	5	26543
+leg left footb	leg left footb	CLEAR	left foot (leg context), variant b	CLEAR	groupFile/Legs	Medium		"footb reads as ""foot"" + variant suffix"	5	8745
+leg_3.middle	leg_3.middle	CLEAR	leg, instance 3, middle segment	CLEAR	groupFile/Legs	High		leg is the explicit anatomical referent	5	26761
+lidubberopenl	LidUbberOpenL	CLEAR	"upper eyelid open, left (likely ""Ubber"" is a misspelling of ""Upper"")"	CLEAR	groupFile/Face/Eyes	Medium	"the ""Ubber"" spelling is not certain to mean ""Upper"""	eyelid-open action is clear even allowing for the likely typo	5	2177
+midbrows_raise_l	midbrows_raise_l	CLEAR	mid-eyebrows, raise, left	CLEAR	groupFile/Face/Upper Face	High		explicit eyebrow control	5	27086
+nostril close right	Nostril Close Right	CLEAR	"right nostril, ""close"" action"	CLEAR	groupFile/Face/Mid Face	High		explicit nostril control	5	17195
+object033_009	Object033_009	OPAQUE	generic auto-numbered mesh/object name	NOT_APPLICABLE		Low	no descriptive content	DCC placeholder name	5	6158
+opt_acs_year_r8	OPT_acs_year_r8	PARTIAL	"unclear accessory referenced by ""year"", right, segment 8"	NEEDS_CONTEXT		Low	'acs' plausibly abbreviates 'accessory', a real category; the specific accessory and 'year' qualifier are unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	5	17262
+pale face	Pale Face	PARTIAL	"a ""pale"" skin-tone or sickly expression applied to the face"	NEEDS_CONTEXT		Low	could be a Body Morphs skin-color control or a Face/Expressions sickly look	pale+face referents present, which category (color vs expression) is unclear	5	17464
+pantsanalopen	PantsAnalOpen	CLEAR	an anus-open state, in the context of pants	CLEAR	groupFile/Clothing	Medium		corrected: 'Pants' is the primary named object (an opening/cutout feature of the garment); object-specific fit/feature stays with the object (Clothing) per Object-Specific-Purpose-Takes-Precedence, unlike AnusOpenSuitExposedTorn where the anus is the primary subject and the suit is only a triggering context	5	17506
+pantspregnant	PantsPregnant	CLEAR	pants adapted for a pregnant body state	CLEAR	groupFile/Clothing	Medium	could also be read as a Body Morphs pregnancy control that references pants	pants is the literal's leading/primary noun	5	17518
+pjcmthighfwd57r	pJCMThighFwd57R	CLEAR	a pose-driven joint-corrective morph (JCM) for the right thigh, forward pose at 57 degrees	CLEAR	groupFile/Correctives	High		explicit correct/JCM repair semantics	5	27342
+plate 2	Plate 2	PARTIAL	"a ""plate"" object of unclear type (armor plate vs. dinnerware), variant 2"	NEEDS_CONTEXT		Low	'plate' names a real object; which type (armor plate vs. dinnerware) is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	5	17617
+pussparent.002_l.008	PussParent.002_L.008	CLEAR	"vagina parent/root bone (truncated ""Puss"" = ""Pussy""), left, numbered"	CLEAR	groupFile/Body	High		corrected: explicit 'parent/root bone' -- plain structural segment, not a shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs	5	17714
+qwn-rig-hole-v1	Qwn-Rig-Hole-V1	PARTIAL	"an unclear ""hole"" feature (per-character ""Qwn"" rig), variant 1"	NEEDS_CONTEXT		Low	hole could mean a genital orifice or a technical mesh gap	referent word present but its exact meaning is ambiguous	5	17794
+r_head_3	r_head_3	CLEAR	head, right-side marker, variant 3	CLEAR	groupFile/Body	High		bare structural head/skull, no named facial feature	5	27793
+right index finger 1	Right index finger 1	CLEAR	right index finger, segment 1	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger control	5	18209
+right middle finger 3	Right middle finger 3	CLEAR	right middle finger, segment 3	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger control	5	18237
+right thumb 1	Right thumb 1	CLEAR	right thumb, segment 1	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger control	5	18256
+sakotsu_rt_rside_d__offset	sakotsu_rt_rside_d__offset	CLEAR	right clavicle/collarbone offset (Japanese rig term: sakotsu=clavicle)	CLEAR	groupFile/Arms	Medium		Japanese MMD-style anatomical naming for the clavicle	5	28192
+sash b 3	Sash B 3	CLEAR	sash accessory, variant b, 3	CLEAR	groupFile/Clothing	High		plain clothing accessory	5	18601
+shoulder_bone_correct_l_02	shoulder_bone_correct_l_02	CLEAR	left shoulder corrective bone, variant 02	CLEAR	groupFile/Correctives	High		explicit correct/JCM repair semantics	5	9039
+sidelockleft2 jiggle	SideLockLeft2 jiggle	CLEAR	a side lock of hair, left, variant 2, jiggle-physics	CLEAR	groupFile/Hair	High		side lock is a recognized hair-styling term	5	18837
+sk_spine_3	SK_spine_3	CLEAR	spine, segment 3	CLEAR	groupFile/Body	High		explicit anatomical/biped spine (Bip01/DEF-/bip_/SK_ rig prefixes, no object-owner noun present)	5	18569
+skull_06	skull_06	CLEAR	skull, variant 06	CLEAR	groupFile/Body	High		bare structural head/skull, no named facial feature	5	28695
+slutthinplunge	SlutThinPlunge	PARTIAL	"a body/costume preset combining a shape descriptor (""thin"") and a ""plunge"" element"	NEEDS_CONTEXT		Low	same reasoning as slutthinthinnerplunge	shape and clothing-adjacent referents present but overall meaning unclear	5	324
+slutthinthinnerplunge	SlutThinThinnerPlunge	PARTIAL	"a body/costume preset combining a shape descriptor (""thin/thinner"") and a ""plunge"" (neckline or pose) element"	NEEDS_CONTEXT		Low	the exact combined control (shape morph vs clothing preset) is not clear	shape and clothing-adjacent referents present but the overall preset meaning is unclear	5	6579
+spike_07_m	Spike_07_M	PARTIAL	"a spike (creature/costume decorative element), variant 07, ""m"" qualifier unclear"	NEEDS_CONTEXT		Low	could be creature body armor or a costume decoration; owning object not specified	appendage/decoration referent clear, owning structure unclear	5	19230
+spine upper_r.002	spine upper_R.002	CLEAR	upper spine, right, numbered	CLEAR	groupFile/Body	High		explicit anatomical/biped spine (Bip01/DEF-/bip_/SK_ rig prefixes, no object-owner noun present)	5	28747
+squint-right	Squint-Right	CLEAR	right eye squint	CLEAR	groupFile/Face/Eyes	High		explicit eye-expression control	5	604
+stick	stick	PARTIAL	"a ""stick"" object of unspecified type"	NEEDS_CONTEXT		Low	'stick' names a real object; which type (prop stick, joystick, drumstick) is unresolved	corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved	5	28766
+strapfrontleftin	StrapFrontLeftIn	PARTIAL	a strap, front, left, inward position	NEEDS_CONTEXT		Low	'strap' with no named owner -- could be garment, bag, weapon sling, or mechanical hardware	corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn	5	3347
+top-1	top-1	OPAQUE	"bare ""top"" + number, object unspecified"	NOT_APPLICABLE		Low	no object-type word at all	pure positional stack with no referent	5	29105
+unused f_c_faceroot	unused f_c_faceroot	CLEAR	face root bone, center, explicitly marked unused	CLEAR	groupFile/Useless	High		self-declared unused, Phase 1 Useless precedent	5	29236
+unusedbone022	unusedbone022	PARTIAL	generic unused numbered bone	CLEAR	groupFile/Useless	High		corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity	5	29467
+v_rr	v_rr	OPAQUE	ambiguous short code	NOT_APPLICABLE		Low	no recognizable word content	opaque code	5	29595
+v_weapon.right_index03	v_weapon.Right_Index03	CLEAR	weapon view-model hand rig, right index finger, segment 03	NEEDS_CONTEXT		Medium	unclear whether this is a normal posable finger or an internal weapon-viewmodel helper	looks like a first-person weapon hand-rig finger bone	5	4125
+valvebiped.bip01_l_ring03	ValveBiped.Bip01_L_Ring03	CLEAR	left ring finger, segment 03	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		standard ValveBiped finger convention	5	20123
+valvebiped.bip01_r_forearmtwist1	ValveBiped.Bip01_R_ForearmTwist1	CLEAR	right forearm twist, variant 1	CLEAR	groupFile/Arms	High		twist/roll arm bone, ordinary deformation articulation	5	20181
+veil_l_2	VEIL_L_2	CLEAR	veil (headwear/clothing accessory), left, variant 2	CLEAR	groupFile/Clothing	High		plain clothing accessory	5	20044
+wep_sight_carry_windage	WEP_Sight_Carry_Windage	CLEAR	weapon scope windage adjustment	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	5	3413

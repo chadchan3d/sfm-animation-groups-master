@@ -1,0 +1,311 @@
+==============================================================================
+PHASE 2 SEMANTIC PILOT 500 -- FREEZE REPORT
+Final cleanup pass over the frozen V4 candidate: one semantic_status
+correction (l_horselink), one evidence-text correction (Page2_F), and a
+text-normalization pass removing obsolete audit-transition language from
+semantic_referent/uncertainty_reason/short_reason across every row ever
+touched by V1-V4. NO taxonomy_status or proposed_destination changed on
+any row -- enforced by a hard in-script assertion at write time.
+Source (unmodified): PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V4.tsv
+Candidate (new file): PHASE2_SEMANTIC_PILOT_500_FINAL.tsv
+Method: all judgment performed by direct reading against fresh corpus
+evidence (PHASE2_RESIDUAL_TERMS.txt, sfm_defaultanimationgroups.txt);
+Python used only for bookkeeping and independent re-validation after
+writing (deterministic script build_final.py).
+==============================================================================
+
+A. TAXONOMY FREEZE -- CONFIRMED ABSOLUTE
+------------------------------------------------------------------------------
+taxonomy_status changed rows: 0
+proposed_destination changed rows: 0
+Enforced by a hard in-script assertion comparing every one of the 500
+rows' taxonomy_status and proposed_destination against
+PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V4.tsv before the file was
+written -- the script would have raised an exception and produced no
+output file had either column differed anywhere.
+
+==============================================================================
+B. l_horselink -- SEMANTIC_STATUS CORRECTED CLEAR -> PARTIAL
+==============================================================================
+Fresh check of PHASE2_RESIDUAL_TERMS.txt confirms a coherent bilateral
+naming pair:
+  l_horselink
+  r_horselink
+  bip01_l_horselink
+  bip01_r_horselink
+This proves the name is systematic (deliberate, not a random string), so
+it is NOT OPAQUE. But the compound "horselink" itself still does not
+resolve to a known object, function, or ordinary semantic relation --
+the bilateral pattern proves the naming is systematic; it does not decode
+the term. This satisfies rule 22's PARTIAL test: an actual relation/
+compound in the literal remains genuinely unresolved.
+
+  Field           | Before (V4)                                | After (FINAL)
+  semantic_status | CLEAR                                       | PARTIAL
+  referent        | a "horse link" mechanism, left, exact       | a bilateral model-specific "horselink"
+                  | linkage type unspecified                    | control, left; exact meaning of
+                  |                                              | "horselink" unresolved
+  confidence      | High                                        | Low
+  taxonomy_status | NEEDS_CONTEXT (unchanged)                   | NEEDS_CONTEXT (unchanged)
+  destination     | [blank] (unchanged)                         | [blank] (unchanged)
+
+No other row's semantic_status was found to require a similar reversal
+under this same "systematic-but-undecoded" test during this pass -- no
+other row combines a confirmed bilateral/sibling naming pattern with a
+still-undecoded compound the way l_horselink does.
+
+==============================================================================
+C. CLEAN FINAL-STATE REASONS -- 111 ROWS NORMALIZED
+==============================================================================
+Every row ever touched by V1, V2, V3, or V4 was inspected for obsolete
+transition-history language ("corrected...", "reverted (V2)...",
+"re-reasoned (V3...)", "re-evidenced (V3)...", "(V4: semantic_status
+corrected to CLEAR...)", "settled (V2)...", etc.) in semantic_referent,
+uncertainty_reason, and short_reason. This search covered ALL 500 rows,
+not only the rows the earlier reports listed as changed, to catch
+anything missed.
+
+RESULT: semantic_referent already carried zero instances of this
+language (0 of 500) -- every prior pass had already kept that field
+clean. uncertainty_reason carried one apparent match, which was inspected
+and confirmed to be a FALSE POSITIVE, not left uncorrected by mistake:
+Key 17's uncertainty_reason cites the residual-corpus sibling example
+"Key 1 - Reverted" as evidence of the space-separated keyframe/preset
+series -- "Reverted" there is a literal control name being quoted as
+corpus evidence, not audit-history commentary about this project's own
+editing process. It was deliberately left in place because it is
+substantive evidence, not history language, and removing it would delete
+real evidence that the row's CLEAR/NEEDS_CONTEXT classification depends
+on.
+
+short_reason carried the obsolete language on 111 rows. Every one was
+rewritten to state, in the present tense: what the literal means now, why
+the current semantic_status is correct, why the current taxonomy_status/
+destination is correct, and any genuine remaining uncertainty -- with no
+reference to which audit pass (V1/V2/V3/V4) produced the current value.
+No substantive evidence was removed in this process: every factual claim
+present in the prior (historical-language) text -- e.g. the specific
+Master-precedent percentages for "palm" in PalmLMizin1, the exact sibling
+literals establishing the "Key" series split, the Bip01_L_Forearm007-
+style precedent chain for Third_Arms_R_1 -- was preserved in the
+rewritten text, only the "corrected/reverted/re-examined" framing
+language was removed.
+
+Full list of the 111 rows normalized (fold_key):
+  band.bend_right_1, bas.side_right_1_jiggle, bip facelipmiloin,
+  bip facetemplemiin r, bip_balls_2_r, bip_bobby_l_finger_globe_2_02,
+  bip_lube.001, bip_stone _r_finger_globe_1_02, bone_skin_099,
+  bow left 1h, bow left 2h, bow right 1a, bow right 1b, box06, box08,
+  boxa1, bracket, bulgeanimbig1, c dlipout, c facebase b, chocobocharm,
+  cloth right 1, cock.shaft_4_skin, cord5, crow_3.clavical_r,
+  crow_3.phalanges3_l, crush-26, dyng w 02, dyng x 03, egg.wall_21,
+  end/beam/shrink, ex_2, fbx_murasaki_face, fbx_sakura_zero_face_none,
+  feather 1a, feather 2a, feather 2b, finger2a, flipoutrighttop,
+  foreskin_right, front_lift1, frontlower, gear.holster, glass_d3_d,
+  h3jiggle06, holster_base, hurtr, jiggle05, jiggle4, key 17, knotmedium2,
+  l bust01 sec root, l dlip b, l leg string tip sec, l string1 tip sec,
+  l_horselink, l_rear_holster_0u_8v, l_side_holster_0u_0v, leftfinger02,
+  leg left stc, light 3, lock1, lower_middle_drop, nipple up,
+  opt_acs_year_l8, opt_acs_year_r8, page2_f, palmlmizin1, pantsanalopen,
+  penis root, penus 1, pincer right mid, plate 2, protrusion-bottomnude,
+  pussparent.002_l.008, r_butt_left, r_frontpaw, rightnipple1,
+  scrotumright, shell.wall_58, shorts non futa shadow, show, sign07,
+  spike_07_m, squish-zx, stick, strap_b.02, strap_b.03, strapfrontleftin,
+  student.front_1_jiggle, surprisel, tasselb, taurenmale_hd_bone_78,
+  taurenmale_hd_bone_90, third_arms_r_1, tipsmall, torso pipe b r 1a,
+  turtleneckhouseofmcleavage, unused c_i_position,
+  unused duplicate duplicate unused.006, unused.029, unused.050,
+  unusedbone022, unusedbone091, unusedbone146,
+  "unusedbone_3b item_ffx_x-2_rikku_by_xxkammyxx", unuseddummy,
+  vag inner2 2, valvebiped.bip01_vag_l_2, valvebiped.topswitch, whl_2
+
+==============================================================================
+D. Page2_F -- EVIDENCE TEXT CORRECTED (status/taxonomy/destination
+UNCHANGED)
+==============================================================================
+The prior evidence claim ("matching the Book TurnPage9-style naming
+pattern") was withdrawn: "Book TurnPage9" and "Page2_F" share only the
+substring "page," not a coherent naming template, and do not establish
+genuine sibling grounding.
+
+Fresh check of PHASE2_RESIDUAL_TERMS.txt establishes the ACTUAL coherent
+series:
+  Page1_A, Page1_B, Page1_C, Page1_D, Page1_E, Page1_F, Page1_G, Page1_L, Page1_R
+  Page2_A, Page2_B, Page2_C, Page2_D, Page2_E, Page2_F, Page2_G, Page2_L, Page2_R
+  Page3_A .. Page3_R
+  Page4_A .. Page4_R
+  Page5_L, Page5_R
+"Page2_F" is a confirmed member of this genuine "Page<N>_<letter>"
+template (rule 23's coherent-sibling-series standard), which gives it a
+single stable core reading -- semantic_status remains CLEAR on this
+corrected, stronger evidentiary basis. The owning book/document/system is
+still not established by the complete literal, so taxonomy_status remains
+NEEDS_CONTEXT and destination remains blank -- unchanged.
+
+  Field            | Before (V4)                                  | After (FINAL)
+  semantic_status  | CLEAR (unchanged)                             | CLEAR (unchanged)
+  referent         | ...matching the Book TurnPage9-style naming   | a member of the coherent "Page<N>_<letter>"
+                   | pattern in this pilot...                       | naming series confirmed in the residual
+                   |                                                | corpus (Page1_A..Page1_R, Page2_A..Page2_R,
+                   |                                                | Page3_A..Page3_R, Page4_A..Page4_R,
+                   |                                                | Page5_L/R), variant F...
+  taxonomy_status  | NEEDS_CONTEXT (unchanged)                     | NEEDS_CONTEXT (unchanged)
+  destination      | [blank] (unchanged)                           | [blank] (unchanged)
+
+==============================================================================
+E-I. RULEBOOK CORRECTIONS -- SEE PHASE2_SEMANTIC_RULEBOOK_FINAL.txt
+==============================================================================
+PHASE2_SEMANTIC_RULEBOOK_FINAL.txt was built from PHASE2_SEMANTIC_
+RULEBOOK_FINAL_CANDIDATE_V2.txt with the following corrections, and all
+amendment-history/version commentary removed so it reads as a production
+document:
+
+  E. Rule 12 rewritten to defer entirely to rule 22 for semantic_status,
+     then sequence taxonomy_status in four steps (OPAQUE->NOT_APPLICABLE
+     per rule 21; CLEAR/PARTIAL + missing ownership/context->
+     NEEDS_CONTEXT; CLEAR/PARTIAL + needs a standing policy decision->
+     NEEDS_DOCTRINE; otherwise CLEAR). The obsolete rule-12 language that
+     independently asserted "a positional/directional phrase with no
+     object is automatically OPAQUE" and "a CLEAR referent with unknown
+     ownership must be PARTIAL" was removed -- those are now rule 22's
+     job exclusively. CLEAR+NEEDS_CONTEXT, PARTIAL+CLEAR, PARTIAL+
+     NEEDS_CONTEXT, and OPAQUE<=>NOT_APPLICABLE are all explicitly
+     preserved as valid.
+  F. Rule 7's categorical "no joint => direction/state word can only mean
+     Body Morphs" trigger was removed. It is replaced with: absence of
+     ordinary skeletal articulation is STRONG SUPPORT for a Body-Morph
+     reading but never sufficient alone (SFM rigs can pose soft tissue
+     with ordinary bones/rig controls); direction/action/state vocabulary
+     remains contextual evidence only; complete-literal purpose decides;
+     plain structural/root/parent/segment anatomy stays Body; ordinary
+     bone posing stays anatomical even on soft tissue when the literal
+     indicates a structural/posing control; explicit size/shape/soft-
+     tissue-appearance/state-deformation language supports Body Morphs;
+     object ownership still outranks the rule. "nipple up" -> Body Morphs
+     is retained as the calibrated decision on that literal's own
+     evidence, explicitly stated NOT to generalize into a "soft tissue +
+     direction = Body Morphs" rule.
+  G. Rule 15 clarified: "duplicate" counts as Useless evidence only when
+     the literal is clearly SELF-DECLARATIVE about THIS control being
+     duplicate/redundant/dead -- the bare occurrence of the English word
+     "duplicate" describing some other named object or function does not
+     automatically trigger Useless. "Unused" remains strong self-
+     declaration under the existing settled precedent, unchanged.
+  H. Rule 23 gained one documented worked example: "dyng" is grounded as
+     a dynamic/jiggle-physics naming convention by direct evidence (a
+     substantial "dyng hair a01/a02/..." system in the live Master, plus
+     coherent "dyng necklace"/"dyng ... earing"/lettered "dyng a-e"/"dyng
+     w-z" systems in the residual corpus) -- unlike an isolated,
+     speculative abbreviation such as Ex_2 or whL_2. Explicitly stated
+     that this grounds the FUNCTION reading only; object ownership still
+     decides taxonomy per rules 8 and 12.
+  I. PHASE2_SEMANTIC_RULEBOOK_FINAL.txt contains no amendment-history
+     commentary ("corrected in this revision," "supersedes V1," "proposed
+     amendment," etc.) -- it reads as a standing production rulebook. All
+     otherwise-settled rules from the V2 final candidate are retained.
+     Searched for internal contradictions across OPAQUE, NOT_APPLICABLE,
+     PARTIAL, CLEAR, NEEDS_CONTEXT, NEEDS_DOCTRINE, Body Morphs,
+     Correctives, unused, duplicate, collision, side, wing, holster,
+     lube, and abbreviation -- none found; every OPAQUE mention pairs
+     exclusively with NOT_APPLICABLE.
+
+==============================================================================
+J. FINAL VALIDATION
+==============================================================================
+PHASE2_SEMANTIC_PILOT_500_FINAL.tsv, re-opened independently from disk:
+  [x] Exactly 500 rows
+  [x] Identical fold_key order to V4
+  [x] exact_spellings byte-identical to V4 for all 500 rows
+  [x] taxonomy_status byte-for-byte identical to V4 for all 500 rows
+      (0 differences)
+  [x] proposed_destination byte-for-byte identical to V4 for all 500 rows
+      (0 differences)
+  [x] semantic_status differs from V4 for exactly one row: l_horselink
+      (CLEAR -> PARTIAL); 0 other semantic_status differences
+  [x] semantic_status=OPAQUE iff taxonomy_status=NOT_APPLICABLE (0
+      violations either direction)
+  [x] Every non-blank proposed_destination is a full group path that
+      exists in a FRESH structural parse of the live canonical Master
+      (0 invalid destinations found)
+  [x] Every family containing an explicit "unused"/"duplicate" marker
+      routes to groupFile/Useless (0 exceptions)
+  [x] No obsolete audit-transition language remains in final-state
+      semantic_referent/uncertainty_reason/short_reason, except one
+      confirmed false-positive substring match (Key 17's uncertainty_
+      reason quotes the literal sibling example "Key 1 - Reverted" as
+      corpus evidence -- not audit-history commentary; deliberately
+      retained as substantive evidence, not missed)
+  [x] No family numbered 501 or beyond was touched or classified
+  [x] Exactly 111 rows touched relative to V4 (110 short_reason-only
+      normalizations + l_horselink's full correction + page2_f's
+      evidence-text correction); nothing outside these 111 was modified
+      in any field
+
+Final distributions (re-confirmed from the written file):
+  semantic_status: CLEAR 396 | PARTIAL 44 | OPAQUE 60
+  taxonomy_status: CLEAR 372 | NEEDS_CONTEXT 68 | NOT_APPLICABLE 60 |
+                   NEEDS_DOCTRINE 0
+  (taxonomy_status and destination counts are identical to V4 in every
+  category, as required by the absolute freeze)
+
+PHASE2_SEMANTIC_RULEBOOK_FINAL.txt, re-read independently from disk:
+  [x] Rule 12 no longer independently defines CLEAR/PARTIAL/OPAQUE --
+      it sequences taxonomy_status strictly after rule 22 determines
+      semantic_status
+  [x] Rule 12 and rule 22 agree (rule 12 explicitly cross-references
+      rule 22 for every semantic determination; rule 22 explicitly
+      cross-references rule 12 for taxonomy sequencing)
+  [x] Rule 7 contains no automatic "soft tissue + direction = Body
+      Morphs" trigger; the "no joint" condition is stated as strong
+      support only, never sufficient alone
+  [x] Rule 15's "duplicate" clause requires self-declared redundancy
+      about THIS control, not a coincidental word match
+  [x] No contradictory OPAQUE/NOT_APPLICABLE wording found (every
+      mention checked; all pair OPAQUE with NOT_APPLICABLE exclusively)
+  [x] No proposal/version-history language remains anywhere in the file
+
+Master validator (tools/validate_master.py) run directly against the live
+canonical Master during this pass:
+  PASS: Master validation succeeded
+  Group count: 35 | Open/close braces: 35/35 | Structural parse: PASS
+  Exact duplicate literals: 0
+  Multi-spelling ASCII-fold families: 3178, all same-path (0 cross-path
+    invariant violations)
+  Explicit output line: "No files have been modified."
+
+==============================================================================
+MASTER AND BASELINE INTEGRITY
+==============================================================================
+Verified via `git status --short` and `git diff --stat` before and after
+this pass, and via the Master validator's own read-only confirmation:
+  [x] sfm_defaultanimationgroups.txt: no diff, validator confirms
+      unmodified
+  [x] CLAUDE.md: no diff
+  [x] PHASE2_SEMANTIC_BATCH_RULES.txt (live rulebook): no diff, not
+      opened for writing
+  [x] PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V4.tsv: no diff (opened
+      read-only as this pass's source; NOT overwritten)
+  [x] PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V3.tsv / V2.tsv / .tsv
+      (V1): no diff
+  [x] PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv / PHASE2_SEMANTIC_PILOT_
+      500.tsv (original pilot): no diff
+  [x] PHASE2_SEMANTIC_RULEBOOK_FINAL_CANDIDATE.txt / _V2.txt: no diff
+      (opened read-only as this pass's rulebook source; NOT overwritten)
+  [x] PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt / _V2.txt: no diff
+  [x] All prior audit reports (Independent Audit Report; V2/V3/V4
+      Reports; V2/V3/V4 Changes Reviews): no diff
+  [x] PHASE2_PILOT_DOCTRINE_CALIBRATION.txt / PHASE2_PRE_SCALE_DOCTRINE_
+      REVIEW.txt: no diff
+  [x] tools/validate_master.py: no diff, run read-only
+  [x] PHASE2_RESIDUAL_TERMS.txt: no diff, opened read-only for evidence
+      lookups (l_horselink, Page<N>_<letter>, dyng systems)
+Only new, previously-untracked files were written this pass:
+  PHASE2_SEMANTIC_PILOT_500_FINAL.tsv
+  PHASE2_SEMANTIC_RULEBOOK_FINAL.txt
+  PHASE2_SEMANTIC_PILOT_500_FREEZE_REPORT.txt (this file)
+No commit was made. No merge into PHASE2_SEMANTIC_BATCH_RULES.txt
+occurred. No family numbered 501 or beyond was classified.
+
+==============================================================================
+FINAL PHASE 2 CALIBRATION FREEZE READY: YES
+==============================================================================

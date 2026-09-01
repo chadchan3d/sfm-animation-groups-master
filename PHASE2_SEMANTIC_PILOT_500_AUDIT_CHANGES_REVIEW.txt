@@ -1,0 +1,2205 @@
+==============================================================
+PHASE 2 SEMANTIC PILOT 500 -- AUDIT CHANGES REVIEW
+Every non-KEEP row from the independent 500-family audit:
+DEFINITE_CORRECTION, POLICY_QUESTION, and CONTEXT_REMAINS_NEEDED.
+
+OLD values: PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv @ commit 12debd8
+NEW values: PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE.tsv (uncommitted)
+This is a mechanical rendering -- no new semantic judgment was made
+while producing it. Rows where OLD == NEW (POLICY_QUESTION and
+CONTEXT_REMAINS_NEEDED) show identical values in both columns,
+confirming nothing was changed for those rows.
+==============================================================
+--------------------------------------------------------------
+ROW: 205
+FOLD KEY: band.bend_right_1
+EXACT SPELLING(S): Band.Bend_Right_1
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a band/strip accessory bending, right, variant 1
+NEW SEMANTIC REFERENT: a band/strip accessory bending, right, variant 1
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: groupFile/Clothing
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: 'band' with no named owner -- could be hair band, wrist band, weapon strap-band, or mechanical hardware
+
+OLD REASON: band is a recognizable clothing/accessory referent
+NEW REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+
+AUDIT BASIS: Category I -- object ownership / bare accessories: bare accessory term with no explicit named owner; Clothing is not the only plausible destination
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 214
+FOLD KEY: bip_balls_2_r
+EXACT SPELLING(S): Bip_Balls_2_R
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: right testicle, segment 2
+NEW SEMANTIC REFERENT: right testicle, segment 2
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: explicit genital anatomical term
+NEW REASON: corrected: plain numbered anatomical segment, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 420
+FOLD KEY: bip_lube.001
+EXACT SPELLING(S): bip_lube.001
+AUDIT DISPOSITION: POLICY_QUESTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: a "lube"/wetness effect, segment .001
+NEW SEMANTIC REFERENT: a "lube"/wetness effect, segment .001
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body Morphs
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: recognizable adult-content wetness/lubrication term
+NEW REASON: recognizable adult-content wetness/lubrication term
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: standing scope question (does Body Morphs cover fluid/wetness effects) not resolved by the corrected rule; left unchanged pending policy decision
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 119
+FOLD KEY: bone_skin_099
+EXACT SPELLING(S): Bone_skin_099
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a skin-related deform bone, numbered
+NEW SEMANTIC REFERENT: a skin-related deform bone, numbered
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: skin plus a number still names no specific body part
+NEW UNCERTAINTY REASON: 'skin' names a real deformation function (a skin-slide/deform bone); which body region is unresolved
+
+OLD REASON: generic skin/bone identifier without an anatomical anchor
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 228
+FOLD KEY: box06
+EXACT SPELLING(S): Box06
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: generic numbered box prop
+NEW SEMANTIC REFERENT: generic numbered box prop
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Other
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: no descriptive content beyond a generic prop label
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: generic numbered box
+NEW REASON: corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 435
+FOLD KEY: box08
+EXACT SPELLING(S): Box08
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: generic numbered box prop
+NEW SEMANTIC REFERENT: generic numbered box prop
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Other
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: no descriptive content beyond a generic prop label
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: generic numbered box
+NEW REASON: corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 126
+FOLD KEY: boxa1
+EXACT SPELLING(S): BoxA1
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: a generic box prop/mesh, variant A1
+NEW SEMANTIC REFERENT: a generic box prop/mesh, variant A1
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Other
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: no descriptive content beyond a generic prop label
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: generic numbered box
+NEW REASON: corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 26
+FOLD KEY: bracket
+EXACT SPELLING(S): bracket
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a generic mechanical bracket/fastener, object unspecified
+NEW SEMANTIC REFERENT: a generic mechanical bracket/fastener, object unspecified
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: could belong to nearly any prop or rig without more context
+NEW UNCERTAINTY REASON: 'bracket' names a real mechanical object; which assembly it belongs to is unresolved
+
+OLD REASON: generic hardware term with no anchor
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 128
+FOLD KEY: c dlipout
+EXACT SPELLING(S): C Dlipout
+AUDIT DISPOSITION: CONTEXT_REMAINS_NEEDED
+
+OLD SEMANTIC STATUS: PARTIAL
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a lip-related control, exact action ("Dlipout") unclear
+NEW SEMANTIC REFERENT: a lip-related control, exact action ("Dlipout") unclear
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: lip is visible but the surrounding construction is not a standard phrase
+NEW UNCERTAINTY REASON: lip is visible but the surrounding construction is not a standard phrase
+
+OLD REASON: lip referent partially visible, construction unclear
+NEW REASON: lip referent partially visible, construction unclear
+
+AUDIT BASIS: Category D sweep -- reviewed under the expression-adjacent sweep: a lip-related control whose exact action/construction is non-standard; abstention confirmed correct
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 328
+FOLD KEY: cock.shaft_4_skin
+EXACT SPELLING(S): Cock.Shaft_4_Skin
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: penis shaft, segment 4, skin layer
+NEW SEMANTIC REFERENT: penis shaft, segment 4, skin layer
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: explicit genital anatomical term
+NEW REASON: corrected: plain numbered segment + skin layer designation, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 441
+FOLD KEY: crow_3.phalanges3_l
+EXACT SPELLING(S): Crow_3.Phalanges3_L
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: Crow creature, left phalanges (wing/foot bone), segment 3
+NEW SEMANTIC REFERENT: Crow creature, left phalanges (wing/foot bone), segment 3
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: groupFile/Wings
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: phalanges occur in both a bird's wing (digit bones) and its foot (toe bones); the literal does not establish which, and the referent's own text already flagged this ("wing/foot bone")
+
+OLD REASON: wing-tip structural bone
+NEW REASON: corrected: bare phalanges does not, by itself, establish wing ownership over foot ownership -- do not route to Wings merely because the bone type can occur there
+
+AUDIT BASIS: Category F -- creature anatomy: phalanges occur in both a bird's wing and foot; the literal does not establish which
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 442
+FOLD KEY: crush-26
+EXACT SPELLING(S): crush-26
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: unclear "crush" term, numbered
+NEW SEMANTIC REFERENT: unclear "crush" term, numbered
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: no anchoring context for what is being crushed or compressed
+NEW UNCERTAINTY REASON: 'crush' names a real deformation/compression function; the object being crushed is unresolved
+
+OLD REASON: bare abstract term with no referent
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 333
+FOLD KEY: egg.wall_21
+EXACT SPELLING(S): Egg.Wall_21
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: an "egg wall" hard-surface prop segment
+NEW SEMANTIC REFERENT: an "egg wall" hard-surface prop segment
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: no specific object class is discernible
+NEW UNCERTAINTY REASON: 'wall' names a real hard-surface object; the 'egg' qualifier and exact ownership are unresolved
+
+OLD REASON: generic hard-surface prop naming, no clear referent
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 136
+FOLD KEY: end/beam/shrink
+EXACT SPELLING(S): End/beam/shrink
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: three loosely related technical words with no clear combined meaning
+NEW SEMANTIC REFERENT: three loosely related technical words with no clear combined meaning
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: cannot confidently resolve what object or action this names
+NEW UNCERTAINTY REASON: 'beam' names a real object and 'shrink' names a real deformation action; the combined referent/ownership is unresolved
+
+OLD REASON: ambiguous slash-separated compound
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 447
+FOLD KEY: ex_2
+EXACT SPELLING(S): Ex_2
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: unclear abbreviation ("Ex"), numbered
+NEW SEMANTIC REFERENT: unclear abbreviation ("Ex"), numbered
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: could mean extra, example, exclude, or something else
+NEW UNCERTAINTY REASON: 'Ex' matches an established Master helper/auxiliary-bone naming pattern (compare RForeArmEX); which body region it helps is unresolved
+
+OLD REASON: no reliable referent
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 139
+FOLD KEY: feather 1a
+EXACT SPELLING(S): feather 1a
+AUDIT DISPOSITION: CONTEXT_REMAINS_NEEDED
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: a feather (creature/costume appendage), variant 1a
+NEW SEMANTIC REFERENT: a feather (creature/costume appendage), variant 1a
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: could belong to a wing, a headdress, or a costume accessory -- object not specified
+NEW UNCERTAINTY REASON: could belong to a wing, a headdress, or a costume accessory -- object not specified
+
+OLD REASON: appendage referent clear, owning structure unclear
+NEW REASON: appendage referent clear, owning structure unclear
+
+AUDIT BASIS: Category D sweep -- reviewed under the expression/accessory sweep: "feather" is a real referent but its owning object (wing, headdress, costume) is genuinely unresolved; abstention confirmed correct
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 140
+FOLD KEY: feather 2a
+EXACT SPELLING(S): feather 2a
+AUDIT DISPOSITION: CONTEXT_REMAINS_NEEDED
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2a
+NEW SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2a
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: same reasoning as feather 1a
+NEW UNCERTAINTY REASON: same reasoning as feather 1a
+
+OLD REASON: appendage referent clear, owning structure unclear
+NEW REASON: appendage referent clear, owning structure unclear
+
+AUDIT BASIS: Category D sweep -- reviewed under the expression/accessory sweep: "feather" is a real referent but its owning object (wing, headdress, costume) is genuinely unresolved; abstention confirmed correct
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 340
+FOLD KEY: feather 2b
+EXACT SPELLING(S): feather 2b
+AUDIT DISPOSITION: CONTEXT_REMAINS_NEEDED
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2b
+NEW SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2b
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: could belong to a wing, headdress, or costume accessory -- object not specified
+NEW UNCERTAINTY REASON: could belong to a wing, headdress, or costume accessory -- object not specified
+
+OLD REASON: appendage referent clear, owning structure unclear
+NEW REASON: appendage referent clear, owning structure unclear
+
+AUDIT BASIS: Category D sweep -- reviewed under the expression/accessory sweep: "feather" is a real referent but its owning object (wing, headdress, costume) is genuinely unresolved; abstention confirmed correct
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 43
+FOLD KEY: flipoutrighttop
+EXACT SPELLING(S): FlipoutRightTop
+AUDIT DISPOSITION: CONTEXT_REMAINS_NEEDED
+
+OLD SEMANTIC STATUS: PARTIAL
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a "flip out" styling effect, right side, top region -- likely hair, but object not explicit
+NEW SEMANTIC REFERENT: a "flip out" styling effect, right side, top region -- likely hair, but object not explicit
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: flip out is a recognizable hair-styling term but not explicitly tied to "hair" here
+NEW UNCERTAINTY REASON: flip out is a recognizable hair-styling term but not explicitly tied to "hair" here
+
+OLD REASON: styling term without an explicit object noun
+NEW REASON: styling term without an explicit object noun
+
+AUDIT BASIS: Category I sweep -- reviewed under the accessory/styling-term sweep: "flip out" is a recognizable styling term but not explicitly tied to an object (e.g. "hair"); abstention confirmed correct
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 342
+FOLD KEY: foreskin_right
+EXACT SPELLING(S): foreskin_right
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: right foreskin
+NEW SEMANTIC REFERENT: right foreskin
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: explicit genital anatomical term
+NEW REASON: corrected: plain genital anatomical term, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 48
+FOLD KEY: gear.holster
+EXACT SPELLING(S): Gear.Holster
+AUDIT DISPOSITION: POLICY_QUESTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: equipment holster (for a weapon/tool)
+NEW SEMANTIC REFERENT: equipment holster (for a weapon/tool)
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Other
+NEW DESTINATION: groupFile/Other
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: recognized prop/weapon/equipment, existing Other precedent
+NEW REASON: recognized prop/weapon/equipment, existing Other precedent
+
+AUDIT BASIS: Category E -- holster / worn-item contradiction: Rule 16 internally conflicts (holsters listed under Other vs. worn-equipment-to-Clothing); complete literal does not resolve ownership; left unchanged pending policy decision
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 347
+FOLD KEY: glass_d3_d
+EXACT SPELLING(S): glass_d3_d
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a "glass" object of unclear type, variant d3_d
+NEW SEMANTIC REFERENT: a "glass" object of unclear type, variant d3_d
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: could mean a drinking glass, window glass, or eyeglass lens with nothing to decide
+NEW UNCERTAINTY REASON: 'glass' names a real material/object; which type (drinking glass, window, lens) is unresolved
+
+OLD REASON: ambiguous material/object term
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 145
+FOLD KEY: holster_base
+EXACT SPELLING(S): Holster_Base
+AUDIT DISPOSITION: POLICY_QUESTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: base component of a weapon holster
+NEW SEMANTIC REFERENT: base component of a weapon holster
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Other
+NEW DESTINATION: groupFile/Other
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: recognized prop/weapon/equipment, existing Other precedent
+NEW REASON: recognized prop/weapon/equipment, existing Other precedent
+
+AUDIT BASIS: Category E -- holster / worn-item contradiction: Rule 16 internally conflicts (holsters listed under Other vs. worn-equipment-to-Clothing); complete literal does not resolve ownership; left unchanged pending policy decision
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 52
+FOLD KEY: hurtr
+EXACT SPELLING(S): HurtR
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: PARTIAL
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: an overall "hurt"/pained expression, possibly lateralized (right)
+NEW SEMANTIC REFERENT: an overall "hurt"/pained expression, possibly lateralized (right)
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Face/Expressions
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: unclear whether this is a whole-face state or a localized right-side flinch
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: Hurt reads as an expression word but no facial region is named
+NEW REASON: corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt)
+
+AUDIT BASIS: Category D -- whole-face expressions: bare emotion/expression state with no facial feature named routes to the existing Face/Expressions group (proposed rule, applied to data only)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 253
+FOLD KEY: key 17
+EXACT SPELLING(S): Key 17
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: an unlabeled numbered "key" slot
+NEW SEMANTIC REFERENT: an unlabeled numbered "key" slot
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: no description attached
+NEW UNCERTAINTY REASON: 'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved
+
+OLD REASON: bare key-slot placeholder
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 254
+FOLD KEY: key.9
+EXACT SPELLING(S): Key.9
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: an unlabeled numbered "key" slot
+NEW SEMANTIC REFERENT: an unlabeled numbered "key" slot
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: no description attached, unlike the "Key N - Description" convention seen elsewhere
+NEW UNCERTAINTY REASON: 'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved
+
+OLD REASON: bare key-slot placeholder
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 54
+FOLD KEY: key.s
+EXACT SPELLING(S): Key.S
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: an unlabeled "key" slot marked S
+NEW SEMANTIC REFERENT: an unlabeled "key" slot marked S
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: same reasoning as key.x -- no description attached
+NEW UNCERTAINTY REASON: 'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved
+
+OLD REASON: bare key-slot placeholder
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 55
+FOLD KEY: key.x
+EXACT SPELLING(S): Key.X
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: an unlabeled "key" slot marked X
+NEW SEMANTIC REFERENT: an unlabeled "key" slot marked X
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: no numbering or description attached, unlike the "Key N - Description" convention seen elsewhere
+NEW UNCERTAINTY REASON: 'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved
+
+OLD REASON: bare key-slot placeholder with no description
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 151
+FOLD KEY: l bust01 sec root
+EXACT SPELLING(S): l bust01 sec root
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: left bust/breast, segment 01, secondary jiggle-physics root
+NEW SEMANTIC REFERENT: left bust/breast, segment 01, secondary jiggle-physics root
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: bust/breast is the clear anatomical referent
+NEW REASON: corrected: a secondary jiggle-physics root/bone, not a shape/size descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 457
+FOLD KEY: l leg string tip sec
+EXACT SPELLING(S): l leg string tip sec
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: left leg, string/cord accessory, tip, secondary physics bone
+NEW SEMANTIC REFERENT: left leg, string/cord accessory, tip, secondary physics bone
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: groupFile/Clothing
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: 'string' with only an anatomical region ('leg'), not a named garment -- could be jewelry/anklet, garment drawstring, or prop/physics cord
+
+OLD REASON: string reads as a clothing drawstring/cord accessory
+NEW REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+
+AUDIT BASIS: Category I -- object ownership / bare accessories: bare accessory term with no explicit named owner; Clothing is not the only plausible destination
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 357
+FOLD KEY: l string1 tip sec
+EXACT SPELLING(S): l string1 tip sec
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a string/cord accessory, left, segment 1, tip, secondary physics bone
+NEW SEMANTIC REFERENT: a string/cord accessory, left, segment 1, tip, secondary physics bone
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: groupFile/Clothing
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: 'string' with no named garment owner -- could be jewelry/anklet, garment drawstring, or prop/physics cord
+
+OLD REASON: string reads as a clothing drawstring/cord accessory
+NEW REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+
+AUDIT BASIS: Category I -- object ownership / bare accessories: bare accessory term with no explicit named owner; Clothing is not the only plausible destination
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 358
+FOLD KEY: l_horselink
+EXACT SPELLING(S): l_horselink
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: an unclear "horse link" mechanism, left
+NEW SEMANTIC REFERENT: an unclear "horse link" mechanism, left
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: does not confidently resolve to a specific object or function
+NEW UNCERTAINTY REASON: 'horse' is a real, specific referent; the exact linkage mechanism and ownership are unresolved
+
+OLD REASON: ambiguous compound term
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 258
+FOLD KEY: l_rear_holster_0u_8v
+EXACT SPELLING(S): l_rear_holster_0u_8v
+AUDIT DISPOSITION: POLICY_QUESTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: left rear weapon holster, with a UV-style coordinate suffix
+NEW SEMANTIC REFERENT: left rear weapon holster, with a UV-style coordinate suffix
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Other
+NEW DESTINATION: groupFile/Other
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: recognized prop/weapon/equipment, existing Other precedent
+NEW REASON: recognized prop/weapon/equipment, existing Other precedent
+
+AUDIT BASIS: Category E -- holster / worn-item contradiction: Rule 16 internally conflicts (holsters listed under Other vs. worn-equipment-to-Clothing); complete literal does not resolve ownership; left unchanged pending policy decision
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 153
+FOLD KEY: l_side_holster_0u_0v
+EXACT SPELLING(S): l_side_holster_0u_0v
+AUDIT DISPOSITION: POLICY_QUESTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: left-side weapon holster, with a UV-style coordinate suffix
+NEW SEMANTIC REFERENT: left-side weapon holster, with a UV-style coordinate suffix
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Other
+NEW DESTINATION: groupFile/Other
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: recognized prop/weapon/equipment, existing Other precedent
+NEW REASON: recognized prop/weapon/equipment, existing Other precedent
+
+AUDIT BASIS: Category E -- holster / worn-item contradiction: Rule 16 internally conflicts (holsters listed under Other vs. worn-equipment-to-Clothing); complete literal does not resolve ownership; left unchanged pending policy decision
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 159
+FOLD KEY: light 3
+EXACT SPELLING(S): Light 3
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: either a light-source prop or a "light" degree adjective, variant 3
+NEW SEMANTIC REFERENT: either a light-source prop or a "light" degree adjective, variant 3
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: no context to choose between the two readings
+NEW UNCERTAINTY REASON: 'light' plausibly names a real light-source prop (compare Torch3 -> Other); the adjective reading keeps ownership unresolved
+
+OLD REASON: ambiguous between prop and adjective sense
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 365
+FOLD KEY: lock1
+EXACT SPELLING(S): lock1
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a lock, variant 1 -- could mean a hair lock or a mechanical lock
+NEW SEMANTIC REFERENT: a lock, variant 1 -- could mean a hair lock or a mechanical lock
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: genuinely ambiguous between a hair-lock and a padlock/mechanism reading
+NEW UNCERTAINTY REASON: 'lock' names two real, concrete candidate objects (hair lock vs. mechanical lock); which one is unresolved
+
+OLD REASON: no way to disambiguate the intended meaning of "lock"
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 268
+FOLD KEY: nipple up
+EXACT SPELLING(S): nipple up
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: nipple, "up" position/direction
+NEW SEMANTIC REFERENT: nipple, "up" position/direction
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: explicit body-morph nipple control
+NEW REASON: corrected: 'up' is a positional/directional word, not an explicit state/shape descriptor (contrast 'hard'/'erect' which do qualify); per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 170
+FOLD KEY: opt_acs_year_l8
+EXACT SPELLING(S): OPT_acs_year_l8
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: unclear accessory referenced by "year", left, segment 8
+NEW SEMANTIC REFERENT: unclear accessory referenced by "year", left, segment 8
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: year does not resolve to any recognizable object or body part
+NEW UNCERTAINTY REASON: 'acs' plausibly abbreviates 'accessory', a real category; the specific accessory and 'year' qualifier are unresolved
+
+OLD REASON: unclear/possibly mistranscribed token
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 467
+FOLD KEY: opt_acs_year_r8
+EXACT SPELLING(S): OPT_acs_year_r8
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: unclear accessory referenced by "year", right, segment 8
+NEW SEMANTIC REFERENT: unclear accessory referenced by "year", right, segment 8
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: year does not resolve to any recognizable object or body part
+NEW UNCERTAINTY REASON: 'acs' plausibly abbreviates 'accessory', a real category; the specific accessory and 'year' qualifier are unresolved
+
+OLD REASON: unclear/possibly mistranscribed token
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 172
+FOLD KEY: page2_f
+EXACT SPELLING(S): Page2_F
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: an unclear "page" reference, variant F
+NEW SEMANTIC REFERENT: an unclear "page" reference, variant F
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: could be a book-prop page or a UI/reference panel; no anchor to decide
+NEW UNCERTAINTY REASON: 'page' is a real referent (compare Book TurnPage9 -> Other); the exact book/object and 'f' variant are unresolved
+
+OLD REASON: ambiguous "page" reference
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 468
+FOLD KEY: pale face
+EXACT SPELLING(S): Pale Face
+AUDIT DISPOSITION: CONTEXT_REMAINS_NEEDED
+
+OLD SEMANTIC STATUS: PARTIAL
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a "pale" skin-tone or sickly expression applied to the face
+NEW SEMANTIC REFERENT: a "pale" skin-tone or sickly expression applied to the face
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: could be a Body Morphs skin-color control or a Face/Expressions sickly look
+NEW UNCERTAINTY REASON: could be a Body Morphs skin-color control or a Face/Expressions sickly look
+
+OLD REASON: pale+face referents present, which category (color vs expression) is unclear
+NEW REASON: pale+face referents present, which category (color vs expression) is unclear
+
+AUDIT BASIS: Category D -- whole-face expressions: reviewed against the proposed Expressions rule; "pale" is not an expression word (skin-tone/color vs. expression ambiguity), so the rule does not resolve it; abstention confirmed correct
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 469
+FOLD KEY: pantsanalopen
+EXACT SPELLING(S): PantsAnalOpen
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: an anus-open state, in the context of pants
+NEW SEMANTIC REFERENT: an anus-open state, in the context of pants
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Clothing
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: anal open is the dominant genital-morph referent despite the clothing context
+NEW REASON: corrected: 'Pants' is the primary named object (an opening/cutout feature of the garment); object-specific fit/feature stays with the object (Clothing) per Object-Specific-Purpose-Takes-Precedence, unlike AnusOpenSuitExposedTorn where the anus is the primary subject and the suit is only a triggering context
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 378
+FOLD KEY: penis root
+EXACT SPELLING(S): penis root
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: penis, root/base position
+NEW SEMANTIC REFERENT: penis, root/base position
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: explicit genital anatomical term
+NEW REASON: corrected: explicit 'root' -- plain structural segment, not a shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 72
+FOLD KEY: penus 1
+EXACT SPELLING(S): penus 1
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: penis, variant 1 (obvious misspelling of "penis")
+NEW SEMANTIC REFERENT: penis, variant 1 (obvious misspelling of "penis")
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: penus is a plain misspelling of "penis"
+NEW REASON: corrected: plain anatomical segment, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 175
+FOLD KEY: pincer right mid
+EXACT SPELLING(S): Pincer Right Mid
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: right pincer (creature claw), middle segment
+NEW SEMANTIC REFERENT: a pincer/claw-like gripping element (anatomical, mechanical, or weapon-related); exact domain not established by the complete literal
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: literal establishes no ownership/context (anatomical, mechanical, or weapon-related); zero existing Master precedent for the word in any direction
+NEW UNCERTAINTY REASON: literal establishes no ownership/context (anatomical, mechanical, or weapon-related); zero existing Master precedent for the word in any direction
+
+OLD REASON: no ownership/context evidence in complete literal
+NEW REASON: corrected: semantic_status was CLEAR while asserting a specific referent ("creature claw") that the row's own uncertainty_reason simultaneously denied -- internally inconsistent; downgraded to PARTIAL to match the actual evidence
+
+AUDIT BASIS: Category G -- semantic-status internal consistency: semantic_status=CLEAR asserted a specific referent that the row's own uncertainty_reason simultaneously denied
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 472
+FOLD KEY: plate 2
+EXACT SPELLING(S): Plate 2
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a "plate" object of unclear type (armor plate vs. dinnerware), variant 2
+NEW SEMANTIC REFERENT: a "plate" object of unclear type (armor plate vs. dinnerware), variant 2
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: nothing in the literal disambiguates between the two readings
+NEW UNCERTAINTY REASON: 'plate' names a real object; which type (armor plate vs. dinnerware) is unresolved
+
+OLD REASON: ambiguous object term
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 473
+FOLD KEY: pussparent.002_l.008
+EXACT SPELLING(S): PussParent.002_L.008
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: vagina parent/root bone (truncated "Puss" = "Pussy"), left, numbered
+NEW SEMANTIC REFERENT: vagina parent/root bone (truncated "Puss" = "Pussy"), left, numbered
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: the truncated spelling introduces some uncertainty
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: genital referent recognizable despite the truncation
+NEW REASON: corrected: explicit 'parent/root bone' -- plain structural segment, not a shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 276
+FOLD KEY: r_butt_left
+EXACT SPELLING(S): R_Butt_left
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: left buttock (an "R" rig/character-code prefix, "Butt_left" is the referent)
+NEW SEMANTIC REFERENT: left buttock (an "R" rig/character-code prefix, "Butt_left" is the referent)
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: the leading "R" is ambiguous (could be a code, not "right") but does not obscure the clear "Butt_left" referent
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: explicit buttock referent despite the odd leading letter
+NEW REASON: corrected: plain anatomical segment (Butt_left), no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 277
+FOLD KEY: r_frontpaw
+EXACT SPELLING(S): R_FrontPaw
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: right front paw (creature appendage)
+NEW SEMANTIC REFERENT: right front paw (creature appendage)
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Arms/RightArm/RightFingers
+NEW DESTINATION: groupFile/Arms
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: paw is the existing Fingers-equivalent limb-end structure (79% precedent)
+NEW REASON: corrected: a whole paw is the limb-end assembly, not an individual digit/finger -- historical Master majority for the word "paw" is not semantic proof it belongs in Fingers; and Arms/RightArm is not independently verified for direct (non-Fingers) content in this Master, so the plain side-marked Arms destination is used instead, consistent with every other explicitly-sided arm bone in this pilot
+
+AUDIT BASIS: Category F + K -- paw/wing-bone overgeneralization and side-subpath overgeneralization: a whole paw is a limb-end assembly, not a digit, and Arms/RightArm is not independently verified for direct content
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 279
+FOLD KEY: rightnipple1
+EXACT SPELLING(S): RightNipple1
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: right nipple, variant 1
+NEW SEMANTIC REFERENT: right nipple, variant 1
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: plain body-morph term
+NEW REASON: corrected: plain numbered anatomical segment, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 180
+FOLD KEY: scrotumright
+EXACT SPELLING(S): scrotumRight
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: right scrotum
+NEW SEMANTIC REFERENT: right scrotum
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: plain genital body-morph term
+NEW REASON: corrected: plain genital anatomical term, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 385
+FOLD KEY: shell.wall_58
+EXACT SPELLING(S): Shell.Wall_58
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a "shell wall" hard-surface prop segment
+NEW SEMANTIC REFERENT: a "shell wall" hard-surface prop segment
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: no specific object class (architectural? vehicle? weapon?) is discernible
+NEW UNCERTAINTY REASON: 'wall' names a real hard-surface object; the 'shell' qualifier and exact ownership are unresolved
+
+OLD REASON: generic hard-surface prop naming, no clear referent
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 182
+FOLD KEY: show
+EXACT SPELLING(S): show
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a generic visibility toggle, object unspecified
+NEW SEMANTIC REFERENT: a generic visibility toggle, object unspecified
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: show alone applies to any object
+NEW UNCERTAINTY REASON: 'show' names a real, specific function (a visibility toggle); the object being toggled is unresolved
+
+OLD REASON: no anchoring referent
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 79
+FOLD KEY: sign07
+EXACT SPELLING(S): sign07
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: possibly a signboard/placard prop, numbered
+NEW SEMANTIC REFERENT: possibly a signboard/placard prop, numbered
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Other
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: sign could be a prop noun or unrelated; no body/clothing/posing context
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: generic numbered item, no clear animator function
+NEW REASON: corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 184
+FOLD KEY: squish-zx
+EXACT SPELLING(S): squish-zx
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a compression/"squish" effect along a zx axis, object unspecified
+NEW SEMANTIC REFERENT: a compression/"squish" effect along a zx axis, object unspecified
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: no body part or object is named
+NEW UNCERTAINTY REASON: 'squish' names a real deformation/compression function; the object being deformed is unresolved
+
+OLD REASON: technical axis notation with no referent
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 490
+FOLD KEY: stick
+EXACT SPELLING(S): stick
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a "stick" object of unspecified type
+NEW SEMANTIC REFERENT: a "stick" object of unspecified type
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: could be a weapon, walking stick, drumstick, or anything else
+NEW UNCERTAINTY REASON: 'stick' names a real object; which type (prop stick, joystick, drumstick) is unresolved
+
+OLD REASON: too generic to anchor to one meaning
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 185
+FOLD KEY: strap_b.02
+EXACT SPELLING(S): Strap_B.02
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: strap, variant B, .02
+NEW SEMANTIC REFERENT: strap, variant B, .02
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: groupFile/Clothing
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: 'strap' with no named owner -- could be garment, bag, weapon sling, or mechanical hardware
+
+OLD REASON: plain clothing accessory
+NEW REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+
+AUDIT BASIS: Category I -- object ownership / bare accessories: bare accessory term with no explicit named owner; Clothing is not the only plausible destination
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 186
+FOLD KEY: strap_b.03
+EXACT SPELLING(S): Strap_B.03
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: strap, variant B, .03
+NEW SEMANTIC REFERENT: strap, variant B, .03
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: groupFile/Clothing
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: 'strap' with no named owner -- could be garment, bag, weapon sling, or mechanical hardware
+
+OLD REASON: plain clothing accessory
+NEW REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+
+AUDIT BASIS: Category I -- object ownership / bare accessories: bare accessory term with no explicit named owner; Clothing is not the only plausible destination
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 491
+FOLD KEY: strapfrontleftin
+EXACT SPELLING(S): StrapFrontLeftIn
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a strap, front, left, inward position
+NEW SEMANTIC REFERENT: a strap, front, left, inward position
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: groupFile/Clothing
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: 'strap' with no named owner -- could be garment, bag, weapon sling, or mechanical hardware
+
+OLD REASON: explicit clothing accessory
+NEW REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+
+AUDIT BASIS: Category I -- object ownership / bare accessories: bare accessory term with no explicit named owner; Clothing is not the only plausible destination
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 388
+FOLD KEY: surprisel
+EXACT SPELLING(S): SurpriseL
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: PARTIAL
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: a "surprise" expression, left side, specific facial region unnamed
+NEW SEMANTIC REFERENT: a "surprise" expression, left side, specific facial region unnamed
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Face/Expressions
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: could be an eyebrow raise, eye widen, or whole-face state
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: emotion word and side marker present, exact facial region missing
+NEW REASON: corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt)
+
+AUDIT BASIS: Category D -- whole-face expressions: bare emotion/expression state with no facial feature named routes to the existing Face/Expressions group (proposed rule, applied to data only)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 187
+FOLD KEY: tasselb
+EXACT SPELLING(S): TasselB
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: tassel accessory, variant B
+NEW SEMANTIC REFERENT: tassel accessory, variant B
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: groupFile/Clothing
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: 'tassel' with no named owner (contrast Wakazashi.Tassel_Front_7/8, which names the weapon) -- could be garment, weapon, or decor
+
+OLD REASON: plain clothing accessory
+NEW REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+
+AUDIT BASIS: Category I -- object ownership / bare accessories: bare accessory term with no explicit named owner; Clothing is not the only plausible destination
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 286
+FOLD KEY: taurenmale_hd_bone_78
+EXACT SPELLING(S): taurenmale_hd_bone_78
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a numbered head bone on the Tauren creature skeleton, no specific part named
+NEW SEMANTIC REFERENT: a numbered head bone on the Tauren creature skeleton, no specific part named
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: bone_78 carries no anatomical specificity
+NEW UNCERTAINTY REASON: 'hd' plausibly abbreviates 'head', giving a body-region candidate; abbreviation is not certain enough for CLEAR
+
+OLD REASON: bare numbered technical bone
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 84
+FOLD KEY: taurenmale_hd_bone_90
+EXACT SPELLING(S): taurenmale_hd_bone_90
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a numbered head bone on the Tauren creature skeleton, no specific part named
+NEW SEMANTIC REFERENT: a numbered head bone on the Tauren creature skeleton, no specific part named
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: bone_90 carries no anatomical specificity beyond "part of the head rig"
+NEW UNCERTAINTY REASON: 'hd' plausibly abbreviates 'head', giving a body-region candidate; abbreviation is not certain enough for CLEAR
+
+OLD REASON: bare numbered technical bone, same shape as generic Bone### placeholders
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 85
+FOLD KEY: third_arms_r_1
+EXACT SPELLING(S): Third_Arms_R_1
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: a third (extra) right arm, segment 1 -- implies a multi-armed character
+NEW SEMANTIC REFERENT: a third (extra) right arm, segment 1 -- implies a multi-armed character
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Arms/RightArm
+NEW DESTINATION: groupFile/Arms
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: additional/third arm is still an arm control; explicit R marker determines side branch
+NEW REASON: corrected: every other explicitly-sided arm bone in this same pilot (Bip01_L_Forearm007, Bip01_R_Thigh011, etc.) was routed to plain Arms/Legs, not into a LeftArm/RightArm subpath -- LeftArm/RightArm is not a verified destination for ordinary content in this Master (only Left/RightFingers under it are independently verified); an explicit side marker alone does not justify entering it
+
+AUDIT BASIS: Category K -- side subpaths: inconsistent with every other explicitly-sided arm bone in this same pilot, which routes to the bare Arms destination, not a LeftArm/RightArm subpath
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 191
+FOLD KEY: turtleneckhouseofmcleavage
+EXACT SPELLING(S): TurtleNeckHouseofMCleavage
+AUDIT DISPOSITION: CONTEXT_REMAINS_NEEDED
+
+OLD SEMANTIC STATUS: PARTIAL
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a turtleneck garment interacting with cleavage; middle portion unclear
+NEW SEMANTIC REFERENT: a turtleneck garment interacting with cleavage; middle portion unclear
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: house of m does not resolve to a clear qualifier
+NEW UNCERTAINTY REASON: house of m does not resolve to a clear qualifier
+
+OLD REASON: turtleneck+cleavage referents clear, middle segment is unclear
+NEW REASON: turtleneck+cleavage referents clear, middle segment is unclear
+
+AUDIT BASIS: Category A sweep -- reviewed under the anatomy/accessory keyword sweep: turtleneck+cleavage referents are clear but the middle segment ("house of m") does not resolve; abstention confirmed correct
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 192
+FOLD KEY: unused c_i_position
+EXACT SPELLING(S): unused C_I_Position
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: an unclear positional code ("C_I_Position"), explicitly unused
+NEW SEMANTIC REFERENT: an unclear positional code ("C_I_Position"), explicitly unused
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Useless
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: C_I does not resolve to a recognizable referent
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: unused marker plus an unclear abbreviation
+NEW REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+
+AUDIT BASIS: Category B -- unused/duplicate exhaustiveness: self-declared "unused" is positive semantic content under rule 15, not semantic opacity
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 193
+FOLD KEY: unused.029
+EXACT SPELLING(S): unused.029
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: generic numbered placeholder, explicitly unused
+NEW SEMANTIC REFERENT: generic numbered placeholder, explicitly unused
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Useless
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: no anatomical content beyond the unused marker
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: self-declared unused generic slot
+NEW REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+
+AUDIT BASIS: Category B -- unused/duplicate exhaustiveness: self-declared "unused" is positive semantic content under rule 15, not semantic opacity
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 91
+FOLD KEY: unused.050
+EXACT SPELLING(S): unused.050
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a generic numbered placeholder, explicitly marked unused
+NEW SEMANTIC REFERENT: a generic numbered placeholder, explicitly marked unused
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Useless
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: same reasoning as unusedbone091
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: self-declared unused generic slot, no anatomical content
+NEW REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+
+AUDIT BASIS: Category B -- unused/duplicate exhaustiveness: self-declared "unused" is positive semantic content under rule 15, not semantic opacity
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 494
+FOLD KEY: unusedbone022
+EXACT SPELLING(S): unusedbone022
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: generic unused numbered bone
+NEW SEMANTIC REFERENT: generic unused numbered bone
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Useless
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: no anatomical content beyond the unused marker
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: self-declared unused generic technical bone
+NEW REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+
+AUDIT BASIS: Category B -- unused/duplicate exhaustiveness: self-declared "unused" is positive semantic content under rule 15, not semantic opacity
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 92
+FOLD KEY: unusedbone091
+EXACT SPELLING(S): unusedbone091
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a generic numbered bone, explicitly marked unused
+NEW SEMANTIC REFERENT: a generic numbered bone, explicitly marked unused
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Useless
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: unused tells us the function-status (deprecated placeholder) but not any body-part referent
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: self-declared unused generic technical bone, no anatomical content
+NEW REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+
+AUDIT BASIS: Category B -- unused/duplicate exhaustiveness: self-declared "unused" is positive semantic content under rule 15, not semantic opacity
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 393
+FOLD KEY: unusedbone146
+EXACT SPELLING(S): unusedbone146
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: generic numbered bone, explicitly unused
+NEW SEMANTIC REFERENT: generic numbered bone, explicitly unused
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Useless
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: no anatomical content beyond the unused marker
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: self-declared unused generic technical bone
+NEW REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+
+AUDIT BASIS: Category B -- unused/duplicate exhaustiveness: self-declared "unused" is positive semantic content under rule 15, not semantic opacity
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 291
+FOLD KEY: unuseddummy
+EXACT SPELLING(S): unuseddummy
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: a generic unused dummy placeholder
+NEW SEMANTIC REFERENT: a generic unused dummy placeholder
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: groupFile/Useless
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: no anatomical content beyond the placeholder markers
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: self-declared unused generic dummy
+NEW REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+
+AUDIT BASIS: Category B -- unused/duplicate exhaustiveness: self-declared "unused" is positive semantic content under rule 15, not semantic opacity
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 95
+FOLD KEY: v_weapon.left_middle03
+EXACT SPELLING(S): v_weapon.Left_Middle03
+AUDIT DISPOSITION: CONTEXT_REMAINS_NEEDED
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: weapon view-model hand rig, left middle finger, segment 03
+NEW SEMANTIC REFERENT: weapon view-model hand rig, left middle finger, segment 03
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: unclear whether this is a normal posable finger or an internal weapon-viewmodel helper
+NEW UNCERTAINTY REASON: unclear whether this is a normal posable finger or an internal weapon-viewmodel helper
+
+OLD REASON: looks like a first-person weapon hand-rig finger bone
+NEW REASON: looks like a first-person weapon hand-rig finger bone
+
+AUDIT BASIS: Category G sweep -- reviewed for internal consistency: CLEAR semantic (a named viewmodel finger) paired with NEEDS_CONTEXT taxonomy (posable finger vs. internal helper) is a legitimate, non-contradictory pairing; abstention confirmed correct
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 496
+FOLD KEY: v_weapon.right_index03
+EXACT SPELLING(S): v_weapon.Right_Index03
+AUDIT DISPOSITION: CONTEXT_REMAINS_NEEDED
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: weapon view-model hand rig, right index finger, segment 03
+NEW SEMANTIC REFERENT: weapon view-model hand rig, right index finger, segment 03
+
+OLD TAXONOMY STATUS: NEEDS_CONTEXT
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Medium
+NEW CONFIDENCE: Medium
+
+OLD UNCERTAINTY REASON: unclear whether this is a normal posable finger or an internal weapon-viewmodel helper
+NEW UNCERTAINTY REASON: unclear whether this is a normal posable finger or an internal weapon-viewmodel helper
+
+OLD REASON: looks like a first-person weapon hand-rig finger bone
+NEW REASON: looks like a first-person weapon hand-rig finger bone
+
+AUDIT BASIS: Category G sweep -- reviewed for internal consistency: CLEAR semantic (a named viewmodel finger) paired with NEEDS_CONTEXT taxonomy (posable finger vs. internal helper) is a legitimate, non-contradictory pairing; abstention confirmed correct
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 294
+FOLD KEY: vag inner2 2
+EXACT SPELLING(S): vag inner2 2
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: vagina, inner, variant 2-2
+NEW SEMANTIC REFERENT: vagina, inner, variant 2-2
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: explicit genital anatomical term
+NEW REASON: corrected: plain numbered anatomical segment, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 297
+FOLD KEY: valvebiped.bip01_vag_l_2
+EXACT SPELLING(S): ValveBiped.Bip01_Vag_L_2
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: CLEAR
+NEW SEMANTIC STATUS: CLEAR
+OLD SEMANTIC REFERENT: left vagina, segment 2
+NEW SEMANTIC REFERENT: left vagina, segment 2
+
+OLD TAXONOMY STATUS: CLEAR
+NEW TAXONOMY STATUS: CLEAR
+
+OLD DESTINATION: groupFile/Body Morphs
+NEW DESTINATION: groupFile/Body
+
+OLD CONFIDENCE: High
+NEW CONFIDENCE: High
+
+OLD UNCERTAINTY REASON: [NONE]
+NEW UNCERTAINTY REASON: [NONE]
+
+OLD REASON: explicit genital anatomical term
+NEW REASON: corrected: plain numbered anatomical segment, no shape/size/state descriptor; per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+
+AUDIT BASIS: Category A -- structural anatomy vs Body Morphs: plain anatomy/root/segment (or, for pantsanalopen, primary named object) does not qualify as an explicit shape/size/state/deformation word
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 396
+FOLD KEY: valvebiped.topswitch
+EXACT SPELLING(S): ValveBiped.topswitch
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: an unclear "top switch" toggle mechanism
+NEW SEMANTIC REFERENT: an unclear "top switch" toggle mechanism
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: no specific body part or object is named
+NEW UNCERTAINTY REASON: 'switch' names a real toggle mechanism; the object/system it switches is unresolved
+
+OLD REASON: generic technical switch, no referent
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 200
+FOLD KEY: whl_2
+EXACT SPELLING(S): whL_2
+AUDIT DISPOSITION: DEFINITE_CORRECTION
+
+OLD SEMANTIC STATUS: OPAQUE
+NEW SEMANTIC STATUS: PARTIAL
+OLD SEMANTIC REFERENT: unclear abbreviation ("wheel"? initials?), numbered
+NEW SEMANTIC REFERENT: unclear abbreviation ("wheel"? initials?), numbered
+
+OLD TAXONOMY STATUS: NOT_APPLICABLE
+NEW TAXONOMY STATUS: NEEDS_CONTEXT
+
+OLD DESTINATION: [NONE]
+NEW DESTINATION: [NONE]
+
+OLD CONFIDENCE: Low
+NEW CONFIDENCE: Low
+
+OLD UNCERTAINTY REASON: does not confidently resolve
+NEW UNCERTAINTY REASON: 'whl' plausibly abbreviates 'wheel' (compare wheelback_base/fake_wheel_fl -> Other); the abbreviation is not certain enough for CLEAR
+
+OLD REASON: ambiguous short code
+NEW REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+
+AUDIT BASIS: Category C -- OPAQUE vs PARTIAL: semantic_referent already names a real object/material/function, so semantic_status=OPAQUE understated the available evidence
+--------------------------------------------------------------
+
+==============================================================
+MECHANICAL SUMMARY
+==============================================================
+Total rendered rows: 78
+  DEFINITE_CORRECTION    : 64
+  POLICY_QUESTION        : 5
+  CONTEXT_REMAINS_NEEDED : 9
+==============================================================

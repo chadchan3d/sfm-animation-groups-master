@@ -1,0 +1,1735 @@
+==============================================================
+PHASE 2 SEMANTIC PILOT 500 -- AUDIT V3 -> V4 CHANGES REVIEW
+Every row whose semantic_status differs between the third and fourth
+audit candidates (the semantic-status-only calibration pass).
+
+V3: PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V3.tsv
+V4: PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V4.tsv
+V4 SEMANTIC-CALIBRATION BASIS is pulled mechanically from the named
+row lists in PHASE2_SEMANTIC_PILOT_500_AUDIT_V4_REPORT.txt -- no new
+rationale was authored while rendering.
+==============================================================
+--------------------------------------------------------------
+ROW: 205
+FOLD KEY: band.bend_right_1
+EXACT SPELLING(S): Band.Bend_Right_1
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a band/strip accessory bending, right, variant 1
+V4 SEMANTIC REFERENT: a band/strip accessory bending, right, variant 1
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'band' with no named owner -- could be hair band, wrist band, weapon strap-band, or mechanical hardware
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+V4 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 105
+FOLD KEY: bas.side_right_1_jiggle
+EXACT SPELLING(S): BAS.Side_Right_1_jiggle
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a right-side jiggle-physics bone, owning object unspecified
+V4 SEMANTIC REFERENT: a right-side jiggle-physics bone, owning object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: could be clothing, sash, or hair; not named
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: jiggle referent clear, object unclear
+V4 REASON: jiggle referent clear, object unclear (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION (jiggle/dynamic-bone physics), object unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 119
+FOLD KEY: bone_skin_099
+EXACT SPELLING(S): Bone_skin_099
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a skin-related deform bone, numbered
+V4 SEMANTIC REFERENT: a skin-related deform bone, numbered
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'skin' names a real deformation function (a skin-slide/deform bone); which body region is unresolved
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V4 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION, acted-on object/system unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 26
+FOLD KEY: bracket
+EXACT SPELLING(S): bracket
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a generic mechanical bracket/fastener, object unspecified
+V4 SEMANTIC REFERENT: a generic mechanical bracket/fastener, object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'bracket' names a real mechanical object; which assembly it belongs to is unresolved
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V4 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 28
+FOLD KEY: bulgeanimbig1
+EXACT SPELLING(S): BulgeAnimBig1
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: an animated "big bulge" effect, object unspecified
+V4 SEMANTIC REFERENT: an animated "big bulge" effect, object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: bulge could refer to muscle, crotch, or stomach with nothing to disambiguate
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: bulge+big+anim is clear as a concept but lacks a body-part anchor
+V4 REASON: bulge+big+anim is clear as a concept but lacks a body-part anchor (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION, acted-on object/system unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 231
+FOLD KEY: c facebase b
+EXACT SPELLING(S): C FaceBase b
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a center face base/root bone, variant b
+V4 SEMANTIC REFERENT: a center face base/root bone, variant b
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Face
+V4 DESTINATION: groupFile/Face
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: primary owner ("face") is reliable; "base" indicates a generic root/anchor bone rather than a specific feature, so the bare Face destination is used, consistent with bare head/skull routing to the general anatomical group
+V4 REASON: primary owner ("face") is reliable; "base" indicates a generic root/anchor bone rather than a specific feature, so the bare Face destination is used, consistent with bare head/skull routing to the general anatomical group (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core anchor concept (generic root/base bone for a named region)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 34
+FOLD KEY: chocobocharm
+EXACT SPELLING(S): ChocoboCharm
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a decorative charm/accessory shaped after or referencing a "Chocobo" (fictional bird)
+V4 SEMANTIC REFERENT: a decorative charm/accessory shaped after or referencing a "Chocobo" (fictional bird)
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: a charm can be jewelry, a weapon charm, a keychain charm, or another decorative prop -- "Chocobo" names only the theme, not the mount/owner
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected (V2): bare accessory term with no explicit named owner -- Clothing is not the only plausible destination, per consistent application of the ownerless-accessory rule
+V4 REASON: corrected (V2): bare accessory term with no explicit named owner -- Clothing is not the only plausible destination, per consistent application of the ownerless-accessory rule (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 35
+FOLD KEY: cloth right 1
+EXACT SPELLING(S): cloth right 1
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a clothing item, right side, variant 1 (garment type unspecified)
+V4 SEMANTIC REFERENT: a clothing item, right side, variant 1 (garment type unspecified)
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Clothing
+V4 DESTINATION: groupFile/Clothing
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: cloth generically still resolves to Clothing (semantic_status corrected to PARTIAL: the specific garment type remains unspecified even though the general category (a clothing item) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+V4 REASON: cloth generically still resolves to Clothing (semantic_status corrected to PARTIAL: the specific garment type remains unspecified even though the general category (a clothing item) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant) (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: named "over-downgraded" row (8 named); stable core reading, generic index/variant/no-side/no-digit omission only
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 235
+FOLD KEY: cord5
+EXACT SPELLING(S): Cord5
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a cord/rope-like object, variant 5, owning object unspecified
+V4 SEMANTIC REFERENT: a cord/rope-like object, variant 5, owning object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: could be a drawstring, cable, or decorative cord
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: object type (cord) known, but not what it belongs to
+V4 REASON: object type (cord) known, but not what it belongs to (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 442
+FOLD KEY: crush-26
+EXACT SPELLING(S): crush-26
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: unclear "crush" term, numbered
+V4 SEMANTIC REFERENT: a "crush"/compression deformation function, object unspecified, numbered
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'crush' names a real deformation/compression function; the object being crushed is unresolved
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V4 REASON: "crush" names a single stable core deformation function; only the object being crushed is unresolved (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION, acted-on object/system unknown (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 331
+FOLD KEY: dyng w 02
+EXACT SPELLING(S): dyng w 02
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a dynamic-bone-physics control, object unspecified ("w")
+V4 SEMANTIC REFERENT: a dynamic-bone-physics control, object unspecified ("w")
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: w does not resolve to a recognizable body part or object
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: dynamic-bone function clear, object unclear
+V4 REASON: dynamic-bone function clear, object unclear (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION (jiggle/dynamic-bone physics), object unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 332
+FOLD KEY: dyng x 03
+EXACT SPELLING(S): dyng x 03
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a dynamic-bone-physics control, object/axis unspecified ("x")
+V4 SEMANTIC REFERENT: a dynamic-bone-physics control, object/axis unspecified ("x")
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: x does not resolve to a recognizable body part or object
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: dynamic-bone function clear, object unclear
+V4 REASON: dynamic-bone function clear, object unclear (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION (jiggle/dynamic-bone physics), object unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 333
+FOLD KEY: egg.wall_21
+EXACT SPELLING(S): Egg.Wall_21
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: an "egg wall" hard-surface prop segment
+V4 SEMANTIC REFERENT: an "egg wall" hard-surface prop segment
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Other
+V4 DESTINATION: groupFile/Other
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: "wall" reliably denotes hard-surface environment geometry with no plausible competing (non-Other) destination; the "egg" qualifier and exact building/ownership are unresolved but do not change the destination
+V4 REASON: "wall" names a single stable core hard-surface-geometry reading; the "egg" qualifier and exact ownership are unresolved but do not change the core reading (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 238
+FOLD KEY: fbx_murasaki_face
+EXACT SPELLING(S): fbx_murasaki_face
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a face-related marker for a character ("Murasaki")
+V4 SEMANTIC REFERENT: a face-related marker for a character ("Murasaki")
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Face
+V4 DESTINATION: groupFile/Face
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: primary owner ("face") is reliable even though no specific feature is named; routed to the bare Face destination
+V4 REASON: primary owner ("face") is reliable even though no specific feature is named; routed to the bare Face destination (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core anchor concept (generic root/base bone for a named region)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 239
+FOLD KEY: fbx_sakura_zero_face_none
+EXACT SPELLING(S): fbx_sakura_zero_face_none
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a face-related marker for a character ("Sakura") in a null/default state
+V4 SEMANTIC REFERENT: a face-related marker for a character ("Sakura") in a null/default state
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Face
+V4 DESTINATION: groupFile/Face
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: primary owner ("face") is reliable; "zero_face_none" raises a control-desirability question (is this a real posable control), not a taxonomy question, and does not block classification
+V4 REASON: primary owner ("face") is reliable; "zero_face_none" raises a control-desirability question (is this a real posable control), not a taxonomy question, and does not block classification (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core anchor concept (generic root/base bone for a named region)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 139
+FOLD KEY: feather 1a
+EXACT SPELLING(S): feather 1a
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 1a
+V4 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 1a
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: could belong to a wing, a headdress, or a costume accessory -- object not specified
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: appendage referent clear, owning structure unclear (semantic_status corrected to PARTIAL: the owning structure (wing, headdress, or costume) remains genuinely unresolved even though the object itself (a feather) is clear -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+V4 REASON: appendage referent clear, owning structure unclear (semantic_status corrected to PARTIAL: the owning structure (wing, headdress, or costume) remains genuinely unresolved even though the object itself (a feather) is clear -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant) (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: named "over-downgraded" row (8 named)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 140
+FOLD KEY: feather 2a
+EXACT SPELLING(S): feather 2a
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2a
+V4 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2a
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: same reasoning as feather 1a
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: appendage referent clear, owning structure unclear (semantic_status corrected to PARTIAL: the owning structure remains genuinely unresolved even though the object itself (a feather) is clear -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+V4 REASON: appendage referent clear, owning structure unclear (semantic_status corrected to PARTIAL: the owning structure remains genuinely unresolved even though the object itself (a feather) is clear -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant) (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: named "over-downgraded" row (8 named)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 340
+FOLD KEY: feather 2b
+EXACT SPELLING(S): feather 2b
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2b
+V4 SEMANTIC REFERENT: a feather (creature/costume appendage), variant 2b
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: could belong to a wing, headdress, or costume accessory -- object not specified
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: appendage referent clear, owning structure unclear (semantic_status corrected to PARTIAL: the owning structure remains genuinely unresolved even though the object itself (a feather) is clear -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+V4 REASON: appendage referent clear, owning structure unclear (semantic_status corrected to PARTIAL: the owning structure remains genuinely unresolved even though the object itself (a feather) is clear -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant) (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: named "over-downgraded" row (8 named)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 240
+FOLD KEY: finger2a
+EXACT SPELLING(S): finger2a
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a finger (side unspecified), variant 2a
+V4 SEMANTIC REFERENT: a finger (side unspecified), variant 2a
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Fingers
+V4 DESTINATION: groupFile/Fingers
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: no left/right marker present, so a specific side cannot be assigned
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: clear finger referent but no side marker to route to Left/RightFingers (semantic_status corrected to PARTIAL: which specific finger remains unspecified (and no side marker is present) even though the general owner (a finger) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+V4 REASON: clear finger referent but no side marker to route to Left/RightFingers (semantic_status corrected to PARTIAL: which specific finger remains unspecified (and no side marker is present) even though the general owner (a finger) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant) (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: named "over-downgraded" row (8 named); stable core reading, generic index/variant/no-side/no-digit omission only
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 43
+FOLD KEY: flipoutrighttop
+EXACT SPELLING(S): FlipoutRightTop
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a "flip out" styling effect, right side, top region -- likely hair, but object not explicit
+V4 SEMANTIC REFERENT: a "flip out" hair-styling effect, right side, top region
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Hair
+V4 DESTINATION: groupFile/Hair
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: "flip out" is an established hair-styling term with no comparably strong competing reading; ownership is sufficiently inferable without the word "hair" being spelled out (semantic_status corrected to PARTIAL: the literal itself only says the object is "likely hair" and leaves it "not explicit" -- the owning object is inferred with reasonable confidence for taxonomy purposes but is not itself fully decoded -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+V4 REASON: "flip out" is an established hair-styling term with a single stable core reading; only the object noun is left implicit (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core reading, generic index/variant/no-side/no-digit omission only (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 44
+FOLD KEY: front_lift1
+EXACT SPELLING(S): front_lift1
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a "lift" action applied to something at the front, unspecified object
+V4 SEMANTIC REFERENT: a "lift" action applied to something at the front, unspecified object
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: front and "lift" are real words but no referent (front of what?) is given
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: positional+action words with no anchoring object
+V4 REASON: positional+action words with no anchoring object (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION, acted-on object/system unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 45
+FOLD KEY: frontlower
+EXACT SPELLING(S): FrontLower
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: front + "lower", object unspecified
+V4 SEMANTIC REFERENT: front + "lower", object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: could apply to almost any body part or garment
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: positional words only, no referent
+V4 REASON: positional words only, no referent (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION, acted-on object/system unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 453
+FOLD KEY: h3jiggle06
+EXACT SPELLING(S): H3Jiggle06
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a jiggle-physics bone, object abbreviated "H3" is unclear
+V4 SEMANTIC REFERENT: a jiggle-physics bone, object abbreviated "H3", exact object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: H3 does not resolve to a recognizable body part or object
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: jiggle function clear, object unclear
+V4 REASON: "jiggle" names a single stable core secondary-motion-physics function; "H3" is a generic index label, not a materially different reading (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION (jiggle/dynamic-bone physics), object unknown (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 52
+FOLD KEY: hurtr
+EXACT SPELLING(S): HurtR
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: an overall "hurt"/pained expression, possibly lateralized (right)
+V4 SEMANTIC REFERENT: an overall "hurt"/pained expression, right side
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Face/Expressions
+V4 DESTINATION: groupFile/Face/Expressions
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt) (semantic_status corrected to PARTIAL: the literal itself only says the expression is "possibly" lateralized -- resolving it to the whole-face Expressions group is a taxonomy decision, not full semantic resolution of the exact facial mechanism -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+V4 REASON: bare emotion/expression state with no specific facial feature named routes to Face/Expressions; the expression's IDENTITY (hurt, lateralized right) is a single stable core reading (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: named "over-downgraded" row (8 named); stable core reading, generic index/variant/no-side/no-digit omission only (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 353
+FOLD KEY: jiggle05
+EXACT SPELLING(S): Jiggle05
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a jiggle/secondary-motion bone, object unspecified
+V4 SEMANTIC REFERENT: a jiggle/secondary-motion bone, object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: jiggle names a function but not what is jiggling
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: function word present, no owning object
+V4 REASON: function word present, no owning object (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION (jiggle/dynamic-bone physics), object unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 252
+FOLD KEY: jiggle4
+EXACT SPELLING(S): Jiggle4
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a jiggle/secondary-motion bone, object unspecified
+V4 SEMANTIC REFERENT: a jiggle/secondary-motion bone, object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: jiggle names a function but not what is jiggling
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: function word present, no owning object
+V4 REASON: function word present, no owning object (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION (jiggle/dynamic-bone physics), object unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 456
+FOLD KEY: knotmedium2
+EXACT SPELLING(S): KnotMedium2
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a medium-sized knot, object unspecified
+V4 SEMANTIC REFERENT: a medium-sized knot, object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: could be a hair knot or a rope/clothing knot
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: knot names a real object type, but not which structure it belongs to
+V4 REASON: knot names a real object type, but not which structure it belongs to (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 457
+FOLD KEY: l leg string tip sec
+EXACT SPELLING(S): l leg string tip sec
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: left leg, string/cord accessory, tip, secondary physics bone
+V4 SEMANTIC REFERENT: left leg, string/cord accessory, tip, secondary physics bone
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'string' with only an anatomical region ('leg'), not a named garment -- could be jewelry/anklet, garment drawstring, or prop/physics cord
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+V4 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 357
+FOLD KEY: l string1 tip sec
+EXACT SPELLING(S): l string1 tip sec
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a string/cord accessory, left, segment 1, tip, secondary physics bone
+V4 SEMANTIC REFERENT: a string/cord accessory, left, segment 1, tip, secondary physics bone
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'string' with no named garment owner -- could be jewelry/anklet, garment drawstring, or prop/physics cord
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+V4 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 358
+FOLD KEY: l_horselink
+EXACT SPELLING(S): l_horselink
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: an unclear "horse link" mechanism, left
+V4 SEMANTIC REFERENT: a "horse link" mechanism, left, exact linkage type unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'horse' is a real, specific referent; the exact linkage mechanism and ownership are unresolved
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V4 REASON: "horse" is a real, specific, single-reading referent; only the exact linkage mechanism and ownership are unresolved (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 60
+FOLD KEY: leftfinger02
+EXACT SPELLING(S): LeftFinger02
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: left hand, a finger (unspecified which), joint/segment 02
+V4 SEMANTIC REFERENT: left hand, a finger (unspecified which), joint/segment 02
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+V4 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: generic but clearly a left-hand finger control (semantic_status corrected to PARTIAL: which specific finger (thumb/index/etc.) remains unspecified even though the general owner (a left-hand finger) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+V4 REASON: generic but clearly a left-hand finger control (semantic_status corrected to PARTIAL: which specific finger (thumb/index/etc.) remains unspecified even though the general owner (a left-hand finger) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant) (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: named "over-downgraded" row (8 named)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 366
+FOLD KEY: lower_middle_drop
+EXACT SPELLING(S): lower_middle_drop
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a "drop" action, lower-middle position, object unspecified
+V4 SEMANTIC REFERENT: a "drop" action, lower-middle position, object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: drop names an action but not what drops
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: action word present, no owning object
+V4 REASON: action word present, no owning object (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION, acted-on object/system unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 172
+FOLD KEY: page2_f
+EXACT SPELLING(S): Page2_F
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: an unclear "page" reference, variant F
+V4 SEMANTIC REFERENT: a "page" reference (matching the Book TurnPage9-style naming pattern in this pilot), variant F, exact book unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: "page" is a real referent, but "Book TurnPage9" is not a genuine sibling of "Page2_F" -- they do not share a coherent naming template ("Book TurnPage<N>" vs. "Page<N>_<letter>"), only the substring "page"; this does not meet the tightened sibling-grounding standard
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: reverted (V3): the V2 resolution to Other relied on a "sibling precedent" (Book TurnPage9) that, on closer inspection, is not a demonstrably coherent naming series with Page2_F -- restored to PARTIAL/NEEDS_CONTEXT
+V4 REASON: "page" has a single stable core reading in this naming context; only the exact book/object is unresolved (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 381
+FOLD KEY: protrusion-bottomnude
+EXACT SPELLING(S): Protrusion-bottomnude
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a body "protrusion" effect, bottom region, nude (no-clothing) state
+V4 SEMANTIC REFERENT: a body "protrusion" effect, bottom region, nude (no-clothing) state
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Body Morphs
+V4 DESTINATION: groupFile/Body Morphs
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: "nude" rules out a Clothing reading, and "protrusion" is a body-shape/deformation term; the exact body part is unresolved but the destination category is not in genuine competition
+V4 REASON: "nude" rules out a Clothing reading, and "protrusion" is a body-shape/deformation term; the exact body part is unresolved but the destination category is not in genuine competition (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION, acted-on object/system unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 385
+FOLD KEY: shell.wall_58
+EXACT SPELLING(S): Shell.Wall_58
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a "shell wall" hard-surface prop segment
+V4 SEMANTIC REFERENT: a "shell wall" hard-surface prop segment
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Other
+V4 DESTINATION: groupFile/Other
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: "wall" reliably denotes hard-surface environment geometry with no plausible competing (non-Other) destination; the "shell" qualifier and exact ownership are unresolved but do not change the destination
+V4 REASON: "wall" names a single stable core hard-surface-geometry reading; the "shell" qualifier and exact ownership are unresolved but do not change the core reading (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 182
+FOLD KEY: show
+EXACT SPELLING(S): show
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a generic visibility toggle, object unspecified
+V4 SEMANTIC REFERENT: a generic visibility toggle, object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'show' names a real, specific function (a visibility toggle); the object being toggled is unresolved
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V4 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION, acted-on object/system unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 79
+FOLD KEY: sign07
+EXACT SPELLING(S): sign07
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: possibly a signboard/placard prop, numbered
+V4 SEMANTIC REFERENT: a signboard/placard prop, numbered
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Other
+V4 DESTINATION: groupFile/Other
+
+V3 CONFIDENCE: High
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: names a recognized real-world prop object (matching Door2/Torch3/BoxBig -> Other precedent already applied elsewhere in this same pilot); not semantically opaque (semantic_status corrected to PARTIAL: the literal itself only says "possibly" a signboard/placard -- the general category (a prop object) is clear enough for taxonomy, but the specific type is not fully decoded -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+V4 REASON: "sign" names a recognized real-world prop object with a single stable core reading (matching Door2/Torch3/BoxBig precedent); only the exact placard type is unspecified (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 487
+FOLD KEY: spike_07_m
+EXACT SPELLING(S): Spike_07_M
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a spike (creature/costume decorative element), variant 07, "m" qualifier unclear
+V4 SEMANTIC REFERENT: a spike (creature/costume decorative element), variant 07m
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: could be creature body armor or a costume decoration; owning object not specified
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: appendage/decoration referent clear, owning structure unclear
+V4 REASON: "spike" names a single stable core decorative-object reading; the "m" is a generic variant label, not an unresolved content-word, and the mounting (creature body vs. costume) is an ownership question (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 184
+FOLD KEY: squish-zx
+EXACT SPELLING(S): squish-zx
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a compression/"squish" effect along a zx axis, object unspecified
+V4 SEMANTIC REFERENT: a compression/"squish" effect along a zx axis, object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'squish' names a real deformation/compression function; the object being deformed is unresolved
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V4 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION, acted-on object/system unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 185
+FOLD KEY: strap_b.02
+EXACT SPELLING(S): Strap_B.02
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: strap, variant B, .02
+V4 SEMANTIC REFERENT: strap, variant B, .02
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'strap' with no named owner -- could be garment, bag, weapon sling, or mechanical hardware
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+V4 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 186
+FOLD KEY: strap_b.03
+EXACT SPELLING(S): Strap_B.03
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: strap, variant B, .03
+V4 SEMANTIC REFERENT: strap, variant B, .03
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'strap' with no named owner -- could be garment, bag, weapon sling, or mechanical hardware
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+V4 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 491
+FOLD KEY: strapfrontleftin
+EXACT SPELLING(S): StrapFrontLeftIn
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a strap, front, left, inward position
+V4 SEMANTIC REFERENT: a strap, front, left, inward position
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'strap' with no named owner -- could be garment, bag, weapon sling, or mechanical hardware
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+V4 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 82
+FOLD KEY: student.front_1_jiggle
+EXACT SPELLING(S): Student.Front_1_jiggle
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a front-positioned jiggle/secondary-motion bone on the "Student" character rig
+V4 SEMANTIC REFERENT: a front-positioned jiggle/secondary-motion bone on the "Student" character rig
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: jiggle physics is clear but the object jiggling (hair? bust? clothing?) is not named
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: front...jiggle lacks the specific jiggling object
+V4 REASON: front...jiggle lacks the specific jiggling object (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION (jiggle/dynamic-bone physics), object unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 388
+FOLD KEY: surprisel
+EXACT SPELLING(S): SurpriseL
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a "surprise" expression, left side, specific facial region unnamed
+V4 SEMANTIC REFERENT: a "surprise" expression, left side, specific facial region unnamed
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Face/Expressions
+V4 DESTINATION: groupFile/Face/Expressions
+
+V3 CONFIDENCE: Medium
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt) (semantic_status corrected to PARTIAL: the specific facial region remains unnamed even though the general category (an expression state) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant)
+V4 REASON: corrected: bare emotion/expression state with no specific facial feature named routes to Face/Expressions (proposed rule, see PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt) (semantic_status corrected to PARTIAL: the specific facial region remains unnamed even though the general category (an expression state) is clear enough for taxonomy -- taxonomy_status/destination unaffected, per the semantic/taxonomy independence invariant) (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: named "over-downgraded" row (8 named)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 187
+FOLD KEY: tasselb
+EXACT SPELLING(S): TasselB
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: tassel accessory, variant B
+V4 SEMANTIC REFERENT: tassel accessory, variant B
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'tassel' with no named owner (contrast Wakazashi.Tassel_Front_7/8, which names the weapon) -- could be garment, weapon, or decor
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn
+V4 REASON: corrected: bare accessory term with no explicit named owner -- Clothing is not the only plausible destination; do not assume Clothing merely because the item can be worn (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 87
+FOLD KEY: tipsmall
+EXACT SPELLING(S): tipsmall
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a small "tip" of something, object unspecified
+V4 SEMANTIC REFERENT: a small "tip" of something, object unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: could be a fingertip, tail tip, weapon tip, etc.
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: tip + "small" without an anchoring noun
+V4 REASON: tip + "small" without an anchoring noun (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 89
+FOLD KEY: torso pipe b r 1a
+EXACT SPELLING(S): torso pipe B R 1a
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a "pipe" attached to the torso, right side -- possibly a mechanical/cybernetic part
+V4 SEMANTIC REFERENT: a "pipe" attached to the torso, right side, variant 1a
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: pipe on a torso is ambiguous between a mechanical accessory, prop, or costume piece
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: torso is a clear anchor but "pipe" itself is an unclear qualifier
+V4 REASON: "pipe" names a single stable core object (a tube/conduit); only its exact mechanical purpose and mounting are unresolved (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core OBJECT, owner/attachment unknown (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 192
+FOLD KEY: unused c_i_position
+EXACT SPELLING(S): unused C_I_Position
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: an unclear positional code ("C_I_Position"), explicitly unused
+V4 SEMANTIC REFERENT: a self-declared unused control carrying an internal positional code ("C_I_Position")
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Useless
+V4 DESTINATION: groupFile/Useless
+
+V3 CONFIDENCE: High
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+V4 REASON: self-declared "unused" is the complete, stable core reading; the internal code is an unresolved LABEL, not a materially different reading (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: self-declared unused/duplicate placeholder (rule 15) -- complete stable core reading (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 392
+FOLD KEY: unused duplicate duplicate unused.006
+EXACT SPELLING(S): unused duplicate duplicate unused.006
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a control explicitly flagged as a duplicate and unused
+V4 SEMANTIC REFERENT: a control explicitly flagged as a duplicate and unused
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Useless
+V4 DESTINATION: groupFile/Useless
+
+V3 CONFIDENCE: High
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: self-declared duplicate/unused placeholder; Phase 1 Useless precedent applies regardless of anatomical specificity
+V4 REASON: self-declared duplicate/unused placeholder; Phase 1 Useless precedent applies regardless of anatomical specificity (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: self-declared unused/duplicate placeholder (rule 15) -- complete stable core reading
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 193
+FOLD KEY: unused.029
+EXACT SPELLING(S): unused.029
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: generic numbered placeholder, explicitly unused
+V4 SEMANTIC REFERENT: generic numbered placeholder, explicitly unused
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Useless
+V4 DESTINATION: groupFile/Useless
+
+V3 CONFIDENCE: High
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+V4 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: self-declared unused/duplicate placeholder (rule 15) -- complete stable core reading
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 91
+FOLD KEY: unused.050
+EXACT SPELLING(S): unused.050
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a generic numbered placeholder, explicitly marked unused
+V4 SEMANTIC REFERENT: a generic numbered placeholder, explicitly marked unused
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Useless
+V4 DESTINATION: groupFile/Useless
+
+V3 CONFIDENCE: High
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+V4 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: self-declared unused/duplicate placeholder (rule 15) -- complete stable core reading
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 494
+FOLD KEY: unusedbone022
+EXACT SPELLING(S): unusedbone022
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: generic unused numbered bone
+V4 SEMANTIC REFERENT: generic unused numbered bone
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Useless
+V4 DESTINATION: groupFile/Useless
+
+V3 CONFIDENCE: High
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+V4 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: self-declared unused/duplicate placeholder (rule 15) -- complete stable core reading
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 92
+FOLD KEY: unusedbone091
+EXACT SPELLING(S): unusedbone091
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a generic numbered bone, explicitly marked unused
+V4 SEMANTIC REFERENT: a generic numbered bone, explicitly marked unused
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Useless
+V4 DESTINATION: groupFile/Useless
+
+V3 CONFIDENCE: High
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+V4 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: self-declared unused/duplicate placeholder (rule 15) -- complete stable core reading
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 393
+FOLD KEY: unusedbone146
+EXACT SPELLING(S): unusedbone146
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: generic numbered bone, explicitly unused
+V4 SEMANTIC REFERENT: generic numbered bone, explicitly unused
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Useless
+V4 DESTINATION: groupFile/Useless
+
+V3 CONFIDENCE: High
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+V4 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: self-declared unused/duplicate placeholder (rule 15) -- complete stable core reading
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 290
+FOLD KEY: unusedbone_3b item_ffx_x-2_rikku_by_xxkammyxx
+EXACT SPELLING(S): unusedbone_3B item_FFX_X-2_Rikku_By_xXKammyXx
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a generic unused placeholder bone carrying an embedded creator-credit string (references the character "Rikku" from Final Fantasy X-2)
+V4 SEMANTIC REFERENT: a generic unused placeholder bone carrying an embedded creator-credit string (references the character "Rikku" from Final Fantasy X-2)
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Useless
+V4 DESTINATION: groupFile/Useless
+
+V3 CONFIDENCE: High
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: self-declared unused generic bone (attached credit text is not anatomical content); Phase 1 Useless precedent applies regardless of anatomical specificity
+V4 REASON: self-declared unused generic bone (attached credit text is not anatomical content); Phase 1 Useless precedent applies regardless of anatomical specificity (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: self-declared unused/duplicate placeholder (rule 15) -- complete stable core reading
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 291
+FOLD KEY: unuseddummy
+EXACT SPELLING(S): unuseddummy
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: a generic unused dummy placeholder
+V4 SEMANTIC REFERENT: a generic unused dummy placeholder
+
+V3 TAXONOMY STATUS: CLEAR
+V4 TAXONOMY STATUS: CLEAR
+
+V3 DESTINATION: groupFile/Useless
+V4 DESTINATION: groupFile/Useless
+
+V3 CONFIDENCE: High
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: [NONE]
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity
+V4 REASON: corrected: self-declared 'unused' is positive semantic content (rule 15) -- not semantically opaque, and not NOT_APPLICABLE; routes to Useless regardless of anatomical specificity (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: self-declared unused/duplicate placeholder (rule 15) -- complete stable core reading
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 396
+FOLD KEY: valvebiped.topswitch
+EXACT SPELLING(S): ValveBiped.topswitch
+
+V3 SEMANTIC STATUS: PARTIAL
+V4 SEMANTIC STATUS: CLEAR
+
+V3 SEMANTIC REFERENT: an unclear "top switch" toggle mechanism
+V4 SEMANTIC REFERENT: a "top switch" toggle mechanism, object/system unspecified
+
+V3 TAXONOMY STATUS: NEEDS_CONTEXT
+V4 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V3 DESTINATION: [NONE]
+V4 DESTINATION: [NONE]
+
+V3 CONFIDENCE: Low
+V4 CONFIDENCE: High
+
+V3 UNCERTAINTY REASON: 'switch' names a real toggle mechanism; the object/system it switches is unresolved
+V4 UNCERTAINTY REASON: [NONE]
+
+V3 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V4 REASON: "switch" names a single stable core toggle-mechanism reading; only the object/system it switches is unresolved (V4: semantic_status corrected to CLEAR -- the core object/function is a single stable reading at the level the literal specifies; only ownership/subtype/mechanism is unresolved, which is a taxonomy question, not a semantic-completeness gap)
+
+V4 SEMANTIC-CALIBRATION BASIS: stable core FUNCTION, acted-on object/system unknown (referent/reason text updated to remove hedge language)
+--------------------------------------------------------------
+
+==============================================================
+MECHANICAL GROUPING (57 of 57)
+==============================================================
+A. CLEAR OBJECT / REFERENT, OWNER UNKNOWN  (19)
+  205 | Band.Bend_Right_1 | PARTIAL -> CLEAR
+  26 | bracket | PARTIAL -> CLEAR
+  34 | ChocoboCharm | PARTIAL -> CLEAR
+  235 | Cord5 | PARTIAL -> CLEAR
+  333 | Egg.Wall_21 | PARTIAL -> CLEAR
+  456 | KnotMedium2 | PARTIAL -> CLEAR
+  457 | l leg string tip sec | PARTIAL -> CLEAR
+  357 | l string1 tip sec | PARTIAL -> CLEAR
+  358 | l_horselink | PARTIAL -> CLEAR
+  172 | Page2_F | PARTIAL -> CLEAR
+  385 | Shell.Wall_58 | PARTIAL -> CLEAR
+  79 | sign07 | PARTIAL -> CLEAR
+  487 | Spike_07_M | PARTIAL -> CLEAR
+  185 | Strap_B.02 | PARTIAL -> CLEAR
+  186 | Strap_B.03 | PARTIAL -> CLEAR
+  491 | StrapFrontLeftIn | PARTIAL -> CLEAR
+  187 | TasselB | PARTIAL -> CLEAR
+  87 | tipsmall | PARTIAL -> CLEAR
+  89 | torso pipe B R 1a | PARTIAL -> CLEAR
+
+B. CLEAR FUNCTION / ACTION, ACTED-ON OBJECT UNKNOWN  (17)
+  105 | BAS.Side_Right_1_jiggle | PARTIAL -> CLEAR
+  119 | Bone_skin_099 | PARTIAL -> CLEAR
+  28 | BulgeAnimBig1 | PARTIAL -> CLEAR
+  442 | crush-26 | PARTIAL -> CLEAR
+  331 | dyng w 02 | PARTIAL -> CLEAR
+  332 | dyng x 03 | PARTIAL -> CLEAR
+  44 | front_lift1 | PARTIAL -> CLEAR
+  45 | FrontLower | PARTIAL -> CLEAR
+  453 | H3Jiggle06 | PARTIAL -> CLEAR
+  353 | Jiggle05 | PARTIAL -> CLEAR
+  252 | Jiggle4 | PARTIAL -> CLEAR
+  366 | lower_middle_drop | PARTIAL -> CLEAR
+  381 | Protrusion-bottomnude | PARTIAL -> CLEAR
+  182 | show | PARTIAL -> CLEAR
+  184 | squish-zx | PARTIAL -> CLEAR
+  82 | Student.Front_1_jiggle | PARTIAL -> CLEAR
+  396 | ValveBiped.topswitch | PARTIAL -> CLEAR
+
+C. GENERIC BUT SEMANTICALLY COMPLETE ANATOMY / EXPRESSION  (12)
+  231 | C FaceBase b | PARTIAL -> CLEAR
+  35 | cloth right 1 | PARTIAL -> CLEAR
+  238 | fbx_murasaki_face | PARTIAL -> CLEAR
+  239 | fbx_sakura_zero_face_none | PARTIAL -> CLEAR
+  139 | feather 1a | PARTIAL -> CLEAR
+  140 | feather 2a | PARTIAL -> CLEAR
+  340 | feather 2b | PARTIAL -> CLEAR
+  240 | finger2a | PARTIAL -> CLEAR
+  43 | FlipoutRightTop | PARTIAL -> CLEAR
+  52 | HurtR | PARTIAL -> CLEAR
+  60 | LeftFinger02 | PARTIAL -> CLEAR
+  388 | SurpriseL | PARTIAL -> CLEAR
+
+D. SELF-DECLARED UNUSED / DUPLICATE PLACEHOLDER  (9)
+  192 | unused C_I_Position | PARTIAL -> CLEAR
+  392 | unused duplicate duplicate unused.006 | PARTIAL -> CLEAR
+  193 | unused.029 | PARTIAL -> CLEAR
+  91 | unused.050 | PARTIAL -> CLEAR
+  494 | unusedbone022 | PARTIAL -> CLEAR
+  92 | unusedbone091 | PARTIAL -> CLEAR
+  393 | unusedbone146 | PARTIAL -> CLEAR
+  290 | unusedbone_3B item_FFX_X-2_Rikku_By_xXKammyXx | PARTIAL -> CLEAR
+  291 | unuseddummy | PARTIAL -> CLEAR
+
+E. OTHER  (0)
+  (none)
+
+==============================================================
+SECTION 5 -- MECHANICAL REVIEW AIDS (index only, no judgment)
+==============================================================
+
+Rows depending on an abbreviation rather than a fully spelled word (4):
+  119 | Bone_skin_099
+  331 | dyng w 02
+  332 | dyng x 03
+  290 | unusedbone_3B item_FFX_X-2_Rikku_By_xXKammyXx
+
+Rows containing dyng/dyn/jiggle or similar technical shorthand (7):
+  105 | BAS.Side_Right_1_jiggle
+  331 | dyng w 02
+  332 | dyng x 03
+  453 | H3Jiggle06
+  353 | Jiggle05
+  252 | Jiggle4
+  82 | Student.Front_1_jiggle
+
+Rows that are a bare action word with no named object (6):
+  28 | BulgeAnimBig1
+  442 | crush-26
+  45 | FrontLower
+  366 | lower_middle_drop
+  184 | squish-zx
+  396 | ValveBiped.topswitch
+
+Rows that are a bare object noun with multiple common lexical senses (17):
+  205 | Band.Bend_Right_1
+  26 | bracket
+  34 | ChocoboCharm
+  35 | cloth right 1
+  235 | Cord5
+  333 | Egg.Wall_21
+  456 | KnotMedium2
+  457 | l leg string tip sec
+  357 | l string1 tip sec
+  385 | Shell.Wall_58
+  79 | sign07
+  487 | Spike_07_M
+  185 | Strap_B.02
+  186 | Strap_B.03
+  491 | StrapFrontLeftIn
+  187 | TasselB
+  89 | torso pipe B R 1a
+
+==============================================================
+MECHANICAL SUMMARY
+==============================================================
+Total V3 -> V4 semantic_status changes: 57
+  A. CLEAR OBJECT / REFERENT, OWNER UNKNOWN            : 19
+  B. CLEAR FUNCTION / ACTION, ACTED-ON OBJECT UNKNOWN  : 17
+  C. GENERIC BUT SEMANTICALLY COMPLETE ANATOMY/EXPR    : 12
+  D. SELF-DECLARED UNUSED / DUPLICATE PLACEHOLDER      : 9
+  E. OTHER                                             : 0
+==============================================================

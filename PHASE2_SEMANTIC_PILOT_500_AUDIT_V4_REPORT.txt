@@ -1,0 +1,319 @@
+==============================================================================
+PHASE 2 SEMANTIC PILOT 500 -- AUDIT V4 REPORT
+Semantic_status-ONLY calibration pass over the frozen V3 candidate.
+taxonomy_status and proposed_destination are UNCHANGED on every one of the
+500 rows -- verified both by a hard in-script assertion during the write
+and by independent re-comparison after re-opening the written file.
+Source (unmodified): PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V3.tsv
+Candidate (new file): PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V4.tsv
+Method: all semantic judgment performed by direct reading of each literal
+against the corrected CLEAR/PARTIAL/OPAQUE definitions; Python used only
+for bookkeeping (applying the decided semantic_status/referent/confidence/
+uncertainty_reason/short_reason values) and independent re-validation
+after writing (deterministic script build_audit_v4.py).
+==============================================================================
+
+CORRECTED DEFINITIONS APPLIED (superseding V3's over-broad PARTIAL usage):
+  CLEAR -- the complete literal has ONE stable core semantic reading at
+    the level the literal actually specifies. CLEAR does NOT require
+    knowing a subtype, an owner, a side, which specific finger, the exact
+    mechanism of an expression, or what object a named item is attached
+    to -- those are OMISSIONS, not semantic ambiguity.
+  PARTIAL -- the literal contains meaningful semantic content BUT either
+    (a) an actual meaningful token/relation in the literal remains
+    genuinely undecoded, or (b) two or more MATERIALLY DIFFERENT core
+    semantic readings remain plausible (e.g. "lock" = hair lock vs.
+    mechanical lock; "bow" = decorative bow vs. archery bow vs. ship's
+    bow; "plate" = armor vs. dinnerware vs. structural plate).
+  OPAQUE -- no reliable core semantic referent/function can be
+    established at all.
+  The invariant OPAQUE <=> NOT_APPLICABLE is unchanged. CLEAR and PARTIAL
+  may each pair with either taxonomy CLEAR or NEEDS_CONTEXT, depending on
+  whether the known semantic information is sufficient to choose a
+  destination -- this is a taxonomy question, never a reason by itself to
+  downgrade semantic_status.
+
+==============================================================================
+EXACT V3 -> V4 CHANGED-ROW COUNT: 57 (all semantic_status corrections;
+0 taxonomy_status changes; 0 proposed_destination changes)
+==============================================================================
+
+--------------------------------------------------------------------------
+NAMED "OVER-DOWNGRADED" ROWS (8 named) -- ALL REVERTED TO CLEAR
+--------------------------------------------------------------------------
+  cloth right 1, feather 1a, feather 2a, feather 2b, finger2a, HurtR,
+  LeftFinger02, SurpriseL
+  Reason for each: the object/state named (cloth, feather, finger, an
+  expression) has one stable core reading; the omitted piece (garment
+  subtype, feather's owning structure, which specific finger, the exact
+  facial mechanism) is exactly the kind of missing specificity the
+  corrected CLEAR definition says does not disqualify a row.
+
+--------------------------------------------------------------------------
+NAMED "LIKELY LEGITIMATE PARTIAL" ROWS (10 named) -- ALL CONFIRMED
+UNCHANGED (remain PARTIAL, per this pass's own re-derivation, not merely
+copied from the prompt)
+--------------------------------------------------------------------------
+  bip facelipmiloin ("miloin" is an actual undecoded token)
+  bip facetemplemiin r (trailing qualifier is an actual undecoded token)
+  Bip_BOBBY_L_Finger_Globe_2_02, Bip_STONE _R_Finger_Globe_1_02 ("globe"
+    is an actual undecoded qualifier, not a generic index)
+  C Dlipout, L Dlip B ("Dlipout"/"Dlip" are actual undecoded actions)
+  leg left StC ("StC" is an actual undecoded qualifier)
+  PalmLMizin1 ("Mizin" is an actual undecoded token, confirmed by direct
+    corpus check to have zero grounding anywhere)
+  Shorts Non Futa Shadow ("shadow" spans two MATERIALLY DIFFERENT core
+    functions -- a shading/texture toggle vs. a distinct geometry
+    variant -- not merely an unnamed owner)
+  TurtleNeckHouseofMCleavage ("House of M" is an actual undecoded token)
+
+--------------------------------------------------------------------------
+KEY 17 -- RE-EXAMINED, CONFIRMED CLEAR, NO CHANGE MADE
+--------------------------------------------------------------------------
+Key 17's semantic_status was already CLEAR going into this pass (V3 never
+touched its semantic_status, only its taxonomy fields). Re-examined
+against the corrected definitions: the residual corpus shows a coherent,
+well-populated "Key <N>" space-separated series with multiple confirmed
+descriptive members ("Key 1 - Shirt", "Key 3 - PoneyHair", "Key 1 -
+Reverted", "Key 1 - EyeLeft"), establishing with reasonable confidence
+that this is a keyframe/pose-preset slot as its CORE nature -- not a
+piano/keyboard-key prop. This crosses the threshold from "genuinely
+uncertain core nature" into "definitely a numbered preset/key slot, exact
+keyed state unspecified," matching the CLEAR pattern (analogous to "cloth
+right 1": category confidently known, specific instance/subtype
+unknown). CONFIRMED CLEAR. semantic_status, semantic_referent,
+taxonomy_status (NEEDS_CONTEXT), and proposed_destination (blank) are all
+UNCHANGED for this row in this pass.
+
+--------------------------------------------------------------------------
+ADDITIONAL ROWS RECLASSIFIED PARTIAL -> CLEAR BEYOND THE NAMED 8 (49 more,
+57 total) -- FOUND BY A FULL RE-REVIEW OF ALL 100 V3 PARTIAL ROWS
+--------------------------------------------------------------------------
+Every one of the 100 rows carrying semantic_status=PARTIAL in V3 was
+individually re-examined against the corrected definitions (full
+population, not a sample). The following 49 additional rows were found to
+name ONE stable core object or function, with only ownership, exact
+subtype, mechanism, or a generic index/variant label left unresolved --
+matching the corrected CLEAR pattern, not the PARTIAL one:
+
+  Stable core OBJECT, owner/attachment unknown (matches the "feather /
+  strap / tassel" pattern given as the worked example):
+    bracket, chocobocharm, strap_b.02, strap_b.03, strapfrontleftin,
+    tasselb, band.bend_right_1, cord5, l string1 tip sec,
+    l leg string tip sec, knotmedium2, spike_07_m, sign07,
+    torso pipe b r 1a, egg.wall_21, shell.wall_58, tipsmall,
+    l_horselink, page2_f
+
+  Stable core FUNCTION, object/system unknown (the function itself --
+  toggle, compress, crush, switch, lift, lower, drop, bulge, protrude --
+  is unambiguous in this rig-control naming domain, with no realistic
+  competing sense; only WHAT it acts on is unresolved):
+    front_lift1, frontlower, lower_middle_drop, show, squish-zx,
+    crush-26, valvebiped.topswitch, bulgeanimbig1, protrusion-bottomnude,
+    bone_skin_099
+
+  Stable core FUNCTION (secondary/dynamic-bone physics motion), object
+  unknown -- "jiggle"/"dyng" have a single established meaning in this
+  domain with no competing sense:
+    student.front_1_jiggle, bas.side_right_1_jiggle, jiggle4, jiggle05,
+    h3jiggle06, dyng w 02, dyng x 03
+
+  Stable core anchor concept (a generic root/base bone for a named
+  region), consistent with rule 13's bare-head-defaults-to-Body pattern:
+    c facebase b, fbx_murasaki_face, fbx_sakura_zero_face_none
+
+  Stable core reading, generic index/variant/no-side/no-digit omission
+  only (directly matching the finger2a/LeftFinger02 pattern):
+    finger2a, cloth right 1 [named], flipoutrighttop, hurtr [named]
+
+  Self-declared "unused"/"duplicate" -- the complete, stable core reading
+  IS "a self-declared unused/duplicate placeholder"; a generic numbered
+  slot or an unresolved internal code beyond that point is an omission,
+  not a competing reading (destination already CLEAR/Useless, frozen,
+  unaffected):
+    unused.050, unusedbone091, unused.029, unuseddummy, unusedbone146,
+    unusedbone022, unused duplicate duplicate unused.006,
+    "unusedbone_3b item_ffx_x-2_rikku_by_xxkammyxx", unused c_i_position
+
+For 13 of these 57 rows, the existing semantic_referent and/or short_
+reason used hedging language ("unclear," "possibly," "likely") that would
+have contradicted the new CLEAR status if left as-is; those fields were
+reworded to state the confirmed core reading plainly, per rule 22's own
+requirement that a CLEAR row's referent must not contradict its status.
+The other 44 rows needed no wording change -- their existing referent
+text already read as a complete, confident description; only the
+semantic_status value itself was wrong.
+
+--------------------------------------------------------------------------
+ROWS EXPLICITLY RE-EXAMINED AND CONFIRMED TO REMAIN PARTIAL (beyond the
+10 named) -- MATERIALLY DIFFERENT CORE READINGS, NOT MERE OWNERSHIP GAPS
+--------------------------------------------------------------------------
+  bipbrk drink (bone vs. attachment point vs. full pose -- different KINDS
+    of things, not different owners of the same kind)
+  botshrink ("bot" itself ambiguous between buttocks and a garment hem --
+    different body-vs-object referents)
+  chain_3, chain_7, chain_21, chain_2, chain_22, right_chain (jewelry
+    chain vs. physics-simulation chain vs. mechanical chain are different
+    KINDS of objects, not just different owners of "a chain")
+  end/beam/shrink (the RELATION between the three tokens itself remains
+    undecoded, not merely an unnamed owner)
+  light 3 (a physical light-source NOUN vs. a bare intensity ADJECTIVE
+    with no object at all -- a fundamentally different grammatical/
+    semantic reading, not an ownership gap)
+  middlewirebulgeup ("wire" as a physical garment underwire vs. "wire" as
+    an abstract animation-rig deformer technique -- different KINDS of
+    things)
+  pincer right mid (anatomical claw vs. mechanical gripper vs. weapon
+    part -- different KINDS of things, and zero existing precedent to
+    anchor any one reading)
+  bow left 1h, bow right 1a, bow left 2h, bow right 1b (decorative bow
+    vs. archery bow vs. ship's bow -- explicitly confirmed materially
+    different by this task's own instructions)
+  glass_d3_d (drinking glass vs. window glass vs. eyeglass lens --
+    different KINDS of objects)
+  lock1 (hair lock vs. mechanical lock -- explicitly confirmed materially
+    different)
+  flm-armb-leg-rbc (an arm control vs. a leg control vs. a weapon/gear
+    strap connecting both -- different KINDS of things)
+  belthat_bone_r_02, belthat_bone_l_01 ("belt hat" is not an established
+    compound phrase; the relation between "belt" and "hat" itself remains
+    undecoded, unlike an ordinary single noun such as "cloth" or "feather")
+  bip_handles_l (love-handles/body fat vs. a literal mechanical grip
+    object -- different KINDS of things)
+  creasetop (a skin/anatomical crease vs. a cloth/fabric fold -- different
+    material KINDS, potentially different destination categories)
+  cup.pivot_left (a bra cup/garment vs. a drinking-cup prop -- different
+    KINDS of objects)
+  vwidth ("V" is an actual undecoded abbreviation spanning materially
+    different readings -- vagina vs. V-neck -- unlike a full word)
+  armhandsuitraisealtline (explicitly a pose-vs-clothing-fit-control
+    ambiguity -- different KINDS of controls)
+  crow_3.phalanges3_l (a wing digit bone vs. a foot/toe digit bone --
+    different anatomical LIMB assignments, not merely different owners
+    of the same bone)
+  pale face (a skin-tone/color morph vs. an expression state -- different
+    KINDS of controls)
+  plate 2 (explicitly confirmed materially different: armor vs.
+    dinnerware vs. structural plate)
+  qwn-rig-hole-v1 (a genital orifice vs. a technical mesh gap -- different
+    KINDS of things, one of which may not even be a legitimate control)
+  slutthinplunge, slutthinthinnerplunge (a body-shape morph vs. a
+    clothing preset -- different KINDS of controls)
+  stick (on reconsideration in V2/V3, a worn hair-stick accessory reading
+    competes with a handheld prop/joystick reading -- different
+    destination-relevant KINDS, not resolved by this pass)
+
+==============================================================================
+CLEAR / PARTIAL / OPAQUE TOTALS
+==============================================================================
+  CLEAR    : 340 -> 397   (+57, all Section-2 corrections above)
+  PARTIAL  : 100 ->  43   (-57)
+  OPAQUE   :  60 ->  60   (unchanged -- no OPAQUE row was reclassified;
+                            e.g. Bone041-style rows, kargathbladefist_
+                            bone12/42, Ex_2/whL_2/OPT_acs_*/TaurenMale_HD_
+                            bone_78/90 all remain OPAQUE, since none of
+                            these establish even a generic stable
+                            FUNCTIONAL category the way "unused" or
+                            "cloth" do -- a bare character-name prefix or
+                            an ungrounded abbreviation provides zero
+                            content about what the control actually is or
+                            does)
+
+==============================================================================
+TAXONOMY_STATUS COUNTS -- PROVEN IDENTICAL TO V3
+==============================================================================
+  V3: NOT_APPLICABLE 60 | CLEAR 372 | NEEDS_CONTEXT 68 | NEEDS_DOCTRINE 0
+  V4: NOT_APPLICABLE 60 | CLEAR 372 | NEEDS_CONTEXT 68 | NEEDS_DOCTRINE 0
+  Identical in every category. Verified row-by-row (not just aggregate
+  count): taxonomy_status differs on 0 of 500 rows between V3 and V4.
+
+==============================================================================
+DESTINATION COUNTS -- PROVEN IDENTICAL TO V3
+==============================================================================
+Every destination count (groupFile/Clothing, groupFile/Other,
+groupFile/Body, groupFile/Body Morphs, groupFile/Arms, groupFile/Legs,
+groupFile/Face/*, groupFile/Useless, groupFile/Wings, groupFile/Hair,
+groupFile/Toes/*, groupFile/Fingers, groupFile/RigBody, and every row with
+a blank destination) is unchanged between V3 and V4. Verified row-by-row:
+proposed_destination differs on 0 of 500 rows between V3 and V4.
+
+EXPLICIT VERIFICATION:
+  taxonomy_status changed rows = 0
+  proposed_destination changed rows = 0
+
+==============================================================================
+VALIDATION
+==============================================================================
+  [x] Exactly 500 families in the V4 candidate
+  [x] Identical fold_key order to PHASE2_SEMANTIC_PILOT_500_AUDIT_
+      CANDIDATE_V3.tsv
+  [x] exact_spellings byte-identical for all 500 rows
+  [x] taxonomy_status column byte-for-byte identical to V3 for all 500
+      rows (0 differences)
+  [x] proposed_destination column byte-for-byte identical to V3 for all
+      500 rows (0 differences)
+  [x] No duplicate fold_key (0 found)
+  [x] Every non-blank proposed_destination is a full group path that
+      exists in a FRESH structural parse of the live canonical Master
+      run as part of this pass (0 invalid destinations found)
+  [x] semantic_status=OPAQUE iff taxonomy_status=NOT_APPLICABLE, verified
+      by independent re-scan of the written V4 file (0 violations either
+      direction)
+  [x] Every family containing an explicit "unused"/"duplicate" marker
+      routes to groupFile/Useless (0 exceptions)
+  [x] Exactly 57 rows touched relative to V3, all semantic_status
+      corrections, all listed individually above; nothing outside these
+      57 was modified in any field
+  [x] A hard in-script assertion (not just a post-hoc check) enforced
+      taxonomy_status/proposed_destination equality to V3 for all 500
+      rows at write time -- the script would have raised an exception
+      before writing the file had any taxonomy or destination field been
+      touched
+  [x] No family numbered 501 or beyond was touched or classified
+
+Master validator (tools/validate_master.py) run directly against the live
+canonical Master during this pass:
+  PASS: Master validation succeeded
+  Group count: 35 | Open/close braces: 35/35 | Structural parse: PASS
+  Exact duplicate literals: 0
+  Multi-spelling ASCII-fold families: 3178, all same-path (0 cross-path
+    invariant violations)
+  Explicit output line: "No files have been modified."
+
+==============================================================================
+MASTER AND BASELINE INTEGRITY
+==============================================================================
+Verified via `git status --short` and `git diff --stat` before and after
+this pass, and via the Master validator's own read-only confirmation:
+  [x] sfm_defaultanimationgroups.txt: no diff, validator confirms
+      unmodified
+  [x] CLAUDE.md: no diff
+  [x] PHASE2_SEMANTIC_BATCH_RULES.txt (live rulebook): no diff, not
+      opened for writing
+  [x] PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V3.tsv: no diff (opened
+      read-only as the V4 source; NOT overwritten)
+  [x] PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V2.tsv: no diff
+  [x] PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE.tsv (V1): no diff
+  [x] PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv: no diff
+  [x] PHASE2_SEMANTIC_PILOT_500.tsv (original pilot): no diff
+  [x] PHASE2_SEMANTIC_RULEBOOK_FINAL_CANDIDATE.txt: no diff (opened
+      read-only as the source for the V2 rulebook correction; NOT
+      overwritten)
+  [x] PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt: no diff
+  [x] PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS_V2.txt: no diff
+  [x] PHASE2_SEMANTIC_PILOT_500_AUDIT_V2_REPORT.txt: no diff
+  [x] PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt: no diff
+  [x] PHASE2_PILOT_DOCTRINE_CALIBRATION.txt: no diff
+  [x] PHASE2_PRE_SCALE_DOCTRINE_REVIEW.txt: no diff
+  [x] tools/validate_master.py: no diff, run read-only
+Only new, previously-untracked files were written this pass:
+  PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V4.tsv
+  PHASE2_SEMANTIC_PILOT_500_AUDIT_V4_REPORT.txt (this file)
+  PHASE2_SEMANTIC_RULEBOOK_FINAL_CANDIDATE_V2.txt
+No commit was made. PHASE2_SEMANTIC_BATCH_RULES.txt was not edited, and no
+final candidate rulebook was merged into it. No family numbered 501 or
+beyond was classified.
+
+==============================================================================
+SEMANTIC STATUS CALIBRATION READY TO FREEZE: YES
+==============================================================================

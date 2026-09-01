@@ -1,0 +1,249 @@
+==============================================================================
+PHASE 2 SEMANTIC BATCH RULES -- PROPOSED AMENDMENTS V2 (NOT YET APPLIED)
+Produced by the second-order audit pass
+(PHASE2_SEMANTIC_PILOT_500_AUDIT_V2_REPORT.txt), which corrected several
+V1 overcorrections and settled two of V1's five POLICY_QUESTION items.
+These are PROPOSALS ONLY, in addition to the seven proposals already
+recorded in PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt (V1) --
+that file is not superseded and is not repeated here except where a V2
+finding directly revises a V1 proposal (Amendment 3, holster wording,
+below). PHASE2_SEMANTIC_BATCH_RULES.txt has NOT been edited.
+==============================================================================
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT V2-1 -- RULE 7 (Body Morphs), sharpen the structural-
+vs-deformation test with a positive word list
+--------------------------------------------------------------------------
+PROBLEM FOUND: V1's Amendment 1 correctly added a root/plain-anatomy
+carve-out to rule 7, but its own application overcorrected "nipple up" --
+treating a bare directional word ("up") as equivalent to a plain
+structural segment. The distinction needs a clearer positive test for
+what counts as deformation/state language versus plain structural naming.
+
+PROPOSED ADDITION to rule 7 (refines V1's "FURTHER CORRECTION" paragraph):
+
+  "PLAIN STRUCTURAL ANATOMY (routes to Body, or the relevant anatomical
+  group) includes: a bare body-part name, a numbered segment, a side
+  marker alone, and an explicit 'root'/'parent'/'origin' bone
+  designation -- none of these describe the visible form changing.
+  Examples: RightNipple1, NippleChain.Left, penis root, Vag_L_2,
+  Cock.Shaft_4.
+
+  VISIBLE ACTION/DIRECTION/STATE/SHAPE APPLIED TO ANATOMY (routes to Body
+  Morphs) includes a word describing the anatomy's form or position
+  actively changing: up, down, forward, backward, movement, poke, pull,
+  push, tighten, grip, open, close, inflate, deflate, bulge, wide,
+  skinny, thick/thickness, shrink, muscular, tone, hard/erect, smack/
+  impact-deformation, augmentation/'job', detail. Examples: NippleUp,
+  NippleDown, Nipple Movement, NipplePoke, BreastUp, BellyIn, ButtPull,
+  PenisForward.
+  A bare directional word (up/down/forward/backward) attached to an
+  anatomical noun IS deformation/state language, not a structural
+  segment marker -- do not treat 'up' the same as a numbered segment or
+  a side marker."
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT V2-2 -- NEW RULE, abbreviation grounding standard
+--------------------------------------------------------------------------
+PROBLEM FOUND: the first audit upgraded several OPAQUE rows to PARTIAL by
+expanding a short abbreviation to a plausible real word (Ex -> "helper"-
+style EX suffix without an anatomical anchor, whl -> "wheel", acs ->
+"accessory", hd -> "head") without requiring the expansion to be grounded
+in anything beyond plausibility.
+
+PROPOSED NEW RULE (to be numbered upon approval and insertion):
+
+  "AN ABBREVIATION EXPANSION IS NOT SEMANTIC EVIDENCE UNLESS GROUNDED.
+  Do not upgrade a literal's semantic_status merely because an
+  abbreviation COULD plausibly expand to a meaningful word. An
+  abbreviation may support a semantic interpretation only when its
+  expansion is grounded by at least one of:
+    - other explicit content in the SAME literal (e.g. RForeArmEX is
+      readable because 'ForeArm' supplies the referent -- 'EX' alone
+      inherits nothing from this by itself)
+    - a recognized rig/DCC naming convention with SPECIFIC, not merely
+      plausible, support
+    - sibling spellings in the SAME corpus establishing the expansion
+      (e.g. Key.S/Key.X/Key 17/Key.9 are grounded because Key.Black_3 and
+      Key.White_25 already exist in the same pilot using the identical
+      'Key.<label>' pattern)
+    - strong, specific corpus evidence (a documented reference, not an
+      inferred guess)
+  A merely plausible expansion, with no such grounding, is not enough --
+  leave the literal OPAQUE/NOT_APPLICABLE."
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT V2-3 -- NEW RULE, model/character prefixes are not
+anatomical words
+--------------------------------------------------------------------------
+PROBLEM FOUND: "TaurenMale_HD" was reinterpreted as containing the
+anatomical word "head" (HD -> head) purely because that expansion was
+possible, ignoring that TaurenMale_HD reads far more naturally as a
+model/variant prefix in front of a long, contiguous, generically-numbered
+bone series.
+
+PROPOSED NEW RULE (to be numbered upon approval and insertion):
+
+  "MODEL/CHARACTER PREFIX ABBREVIATIONS MUST NOT BE REINTERPRETED AS
+  ANATOMICAL WORDS WITHOUT POSITIVE EVIDENCE. A prefix that names or
+  abbreviates a model, character, or variant (e.g. TaurenMale_HD,
+  Bip_STONE, fbx_sakura) is not itself anatomical content, and a short
+  code within such a prefix must not be expanded into an anatomical word
+  (e.g. 'HD' -> 'head') merely because that expansion is possible. This
+  applies even when the surrounding literal is a long, contiguous,
+  generically-numbered bone series (a strong signal that the prefix is a
+  model/variant tag, not a body-region label). Unless the COMPLETE
+  literal independently supplies anatomical content beyond the model/
+  character prefix, leave the family OPAQUE/NOT_APPLICABLE. This rule is
+  a specific application of the abbreviation-grounding standard (see
+  Amendment V2-2) to model/character-prefix naming specifically."
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT V2-4 -- NEW RULE, taxonomy does not require every
+token to be decoded
+--------------------------------------------------------------------------
+PROBLEM FOUND: the pilot repeatedly withheld a destination for a family
+whose PRIMARY owner was already clear (an explicit facial feature, limb,
+or garment) merely because a SECONDARY qualifier, variant code, or
+technical role could not be fully decoded -- conflating "not every token
+is translated" with "the destination is unknown."
+
+PROPOSED NEW RULE (to be numbered upon approval and insertion; this is a
+standing principle, not limited to the examples below):
+
+  "TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED. If the PRIMARY
+  semantic owner/referent is clear, an unresolved secondary qualifier
+  does NOT block a taxonomy destination unless that qualifier creates a
+  CREDIBLE COMPETING owner or category. A taxonomy destination asks 'what
+  semantic thing does this control belong to' -- it does NOT require
+  'can every token in the control name be translated.'
+  Examples where the primary owner is reliable and the destination should
+  NOT be withheld: 'C Dlipout' (lip is a reliable owner -> Face/Lower
+  Face; failing to decode 'D'/'out' does not create a competing owner);
+  'L Dlip B' (same); 'leg left StC' (leg left is reliable anatomy ->
+  Legs; an unresolved variant/technical suffix does not itself block
+  Legs); a bare finger-plus-unresolved-qualifier bone (the finger is the
+  reliable owner even if a 'globe'/joint-type qualifier is unclear); a
+  named garment plus an unresolved secondary descriptor, PROVIDED every
+  plausible reading of that descriptor stays within the same destination
+  category (e.g. 'belt hat' -- whether it means the belt or the hat, both
+  are Clothing).
+  Examples where the ambiguity DOES create a competing category, and
+  destination should remain withheld: a bare word with no anchor at all
+  ('chain', 'show', 'squish') that could belong to entirely different
+  destinations depending on its unstated object; a real object whose
+  plausible types span different destinations (e.g. a 'plate' that could
+  be worn armor -> Clothing or a dinnerware prop -> Other; a 'lock' that
+  could be Hair or Other; a 'stick' that could be a worn hair-stick
+  accessory -> Clothing/Hair or a handheld prop -> Other).
+  Also remember: uncertainty about whether a control is a DESIRABLE
+  animator control is NOT the same as uncertainty about its semantic
+  TAXONOMY. Helper/reference/internal-looking naming alone (e.g.
+  '_reference', a weapon-viewmodel helper bone that also happens to be a
+  normal named finger) is not evidence for Useless/IGNORE, and is not
+  grounds to withhold a taxonomy destination when the owner is otherwise
+  clear."
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT V2-5 -- RULE (ownerless accessories), apply
+consistently -- confirms V1's existing rule, no wording change needed
+--------------------------------------------------------------------------
+No new rule text is proposed here. The V1 rulebook's existing guidance
+(bare accessory terms with no named owner should not default to Clothing
+merely because the item CAN be worn) was already correct; the defect
+found in V2 was an APPLICATION inconsistency (ChocoboCharm and the "bow"
+rows were not held to the same standard as Strap/Tassel/Band in the same
+audit), not a gap in the rule itself. Future batches should mechanically
+re-check every Clothing-destination row for a bare, ownerless decorative-
+accessory noun (charm, bow, pendant, clasp, etc.) before finalizing,
+rather than relying on a single pass to catch every instance.
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT V2-6 -- RULE 16 (Other), REVISED holster wording
+(supersedes V1's Amendment 3 proposal)
+--------------------------------------------------------------------------
+STATUS: this policy question has now been SETTLED by explicit decision
+(see PHASE2_SEMANTIC_PILOT_500_AUDIT_V2_REPORT.txt Section 6) and applied
+to all 4 affected data rows. The rule text below is proposed to record
+that settled decision in the standing rulebook; it revises V1's
+Amendment 3, which proposed the same DIRECTION (Clothing default) but had
+not yet been adopted as policy.
+
+PROPOSED REPLACEMENT for the holster portion of rule 16:
+
+  "HOLSTERS: a holster is treated as WORN EQUIPMENT and routes to
+  groupFile/Clothing by default when the literal describes the holster
+  as character equipment/body-positioned gear (e.g. Gear.Holster,
+  l_side_holster_*, l_rear_holster_*, Holster_Base) -- Clothing, NOT
+  Other, unless the COMPLETE literal positively establishes that the
+  holster is a component of a specific weapon/prop ASSEMBLY rather than
+  worn character equipment (e.g. explicitly named as a sub-part of a
+  particular gun/sword prop hierarchy). This is the settled default;
+  apply it going forward without re-litigating it per family."
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT V2-7 -- RULE 7 (Body Morphs), lube/wetness scope
+clarification
+--------------------------------------------------------------------------
+STATUS: SETTLED for the single case tested (bip_lube.001 -> Other) and
+proposed here as a narrow, non-generalizing clarification.
+
+PROPOSED ADDITION to rule 7:
+
+  "LUBE/WETNESS/FLUID EFFECTS ARE NOT BODY MORPHS MERELY BECAUSE THEY ARE
+  ADULT-CONTENT OR ANATOMY-ADJACENT. A bare lube/wetness/fluid-effect
+  control (e.g. bip_lube.001) is an effect/material/fluid referent, not
+  structural anatomy and not anatomical shape/deformation morphology --
+  it routes to groupFile/Other, not Body Morphs, on that basis. Do NOT
+  generalize this into 'every control containing wet is Other' -- if the
+  COMPLETE literal clearly describes an anatomical geometry/state change
+  (e.g. an explicit swelling, opening, or shape word applied to a named
+  body part) alongside a wetness word, classify according to that full
+  anatomical meaning instead."
+
+--------------------------------------------------------------------------
+PROPOSED AMENDMENT V2-8 -- RULE 18/19, do not infer Wings from species
+alone
+--------------------------------------------------------------------------
+PROBLEM FOUND: V1's Amendment 4 correctly flagged phalanges as wing-vs-
+foot ambiguous for a bird, but the same audit pass left Crow_3.Clavical_R
+at Wings on the reasoning "a crow's only forelimbs are its wings, so any
+crow shoulder-girdle bone must be wing-associated" -- this is exactly the
+"infer Wings because the animal is a bird" reasoning that should have
+been rejected consistently. It has now been corrected (Crow_3.Clavical_R
+downgraded to NEEDS_CONTEXT).
+
+PROPOSED ADDITION to rule 18/19 (extends V1's Amendment 4 wording):
+
+  "DO NOT INFER WING OWNERSHIP MERELY BECAUSE THE ANIMAL IS A BIRD (OR
+  ANY OTHER FLIGHTED CREATURE). A bone routes to Wings only when the
+  COMPLETE LITERAL, or an established and documented skeletal-taxonomy
+  reference for that specific model, sufficiently identifies it as part
+  of the flight appendage -- not merely because the species in question
+  has no other forelimb type. A clavicle, humerus, ulna, or similar
+  shoulder-girdle/forelimb bone on a bird is NOT automatically Wings by
+  elimination; if the literal does not itself say 'wing'/'flight'/name a
+  wing-specific segment, and no other established evidence resolves it,
+  use NEEDS_CONTEXT rather than Wings. Femur is an exception: a femur has
+  no wing-vs-other competing reading in any vertebrate (it is always a
+  hindlimb/leg bone), so femur routes to Legs without this caution
+  applying."
+
+==============================================================================
+STATUS
+==============================================================================
+All 8 amendments above (V2-1 through V2-8) are PROPOSALS. None have been
+merged into PHASE2_SEMANTIC_BATCH_RULES.txt. V2-1 through V2-4 and V2-8
+were reflected as DATA corrections in
+PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V2.tsv for the specific rows
+named in the V2 audit report, using only EXISTING Master destinations --
+no new taxonomy was created. V2-6 and V2-7 record settled POLICY
+decisions (holster default, lube/wetness scope) that have ALSO already
+been applied to their 5 affected data rows; V2-6 supersedes V1's
+Amendment 3 in direction (both proposed Clothing as the default) but V2-6
+reflects that the decision is now made, not merely proposed. V2-5 records
+that no rule-text change is needed, only more consistent application.
+Approval of any amendment above (V2-1 through V2-8, and the seven
+V1 amendments in PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt) should
+be given explicitly before any of it is merged into
+PHASE2_SEMANTIC_BATCH_RULES.txt.

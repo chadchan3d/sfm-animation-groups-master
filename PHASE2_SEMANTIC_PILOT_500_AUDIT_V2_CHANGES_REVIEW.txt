@@ -1,0 +1,1311 @@
+==============================================================
+PHASE 2 SEMANTIC PILOT 500 -- AUDIT V1 -> V2 CHANGES REVIEW
+Every row that differs between the first and second audit candidates.
+
+V1: PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE.tsv
+V2: PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V2.tsv
+V2 CHANGE BASIS is pulled mechanically from the numbered sections of
+PHASE2_SEMANTIC_PILOT_500_AUDIT_V2_REPORT.txt that name this fold_key
+or exact spelling -- no new rationale was authored while rendering.
+==============================================================
+--------------------------------------------------------------
+ROW: 408
+FOLD KEY: belthat_bone_l_01
+EXACT SPELLING(S): beltHat_bone_l_01
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: an unusual combined "belt hat" accessory bone, left, variant 01
+V2 SEMANTIC REFERENT: an unusual combined "belt hat" accessory bone, left, variant 01
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Clothing
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: belt hat is not a standard garment term; exact object unclear
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: clothing/accessory-adjacent referents present but the combined object is unusual
+V2 REASON: both plausible readings of "belt hat" (belt or hat) are Clothing items, so the unresolved exact identity does not create a competing destination
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 309
+FOLD KEY: belthat_bone_r_02
+EXACT SPELLING(S): beltHat_bone_r_02
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: an unusual combined "belt hat" accessory bone, right, variant 02
+V2 SEMANTIC REFERENT: an unusual combined "belt hat" accessory bone, right, variant 02
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Clothing
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: belt hat is not a standard garment term; exact object unclear
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: clothing/accessory-adjacent referents present but the combined object is unusual
+V2 REASON: both plausible readings of "belt hat" (belt or hat) are Clothing items, so the unresolved exact identity does not create a competing destination
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 410
+FOLD KEY: bip facelipmiloin
+EXACT SPELLING(S): bip facelipmiloin
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: a lip-related control, exact modifier ("miloin") unclear
+V2 SEMANTIC REFERENT: a lip-related control, exact modifier ("miloin") unclear
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Face/Lower Face
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: miloin does not resolve to a standard word
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: lip referent visible, remainder of the construction unclear
+V2 REASON: primary owner ("face"/"lip") is reliable; the unresolved "miloin" qualifier does not create a competing owner or category
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 110
+FOLD KEY: bip_bobby_l_finger_globe_2_02
+EXACT SPELLING(S): Bip_BOBBY_L_Finger_Globe_2_02
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: left-hand finger area (per-character "Bobby" rig), "globe" qualifier unclear
+V2 SEMANTIC REFERENT: left-hand finger area (per-character "Bobby" rig), "globe" qualifier unclear
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: globe is an unusual technical qualifier not evident from the name alone
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: finger referent clear, "globe" modifier unclear
+V2 REASON: primary owner ("finger") is reliable; the unresolved "globe" qualifier does not create a competing owner or category
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 420
+FOLD KEY: bip_lube.001
+EXACT SPELLING(S): bip_lube.001
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: a "lube"/wetness effect, segment .001
+V2 SEMANTIC REFERENT: a "lube"/wetness effect, segment .001
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: groupFile/Body Morphs
+V2 DESTINATION: groupFile/Other
+
+V1 CONFIDENCE: Medium
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: recognizable adult-content wetness/lubrication term
+V2 REASON: settled policy (V2): lube/wetness is an effect/material/fluid referent, not structural anatomy and not anatomical shape/deformation morphology -- routes to Other, not Body Morphs, on this basis alone (not a general "contains wet" rule)
+
+V2 CHANGE BASIS: Section 7 (LUBE/WETNESS POLICY SETTLED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 15
+FOLD KEY: bip_stone _r_finger_globe_1_02
+EXACT SPELLING(S): Bip_STONE _R_Finger_Globe_1_02
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: right-hand finger area (per-character "Stone" rig), "globe" qualifier unclear -- possibly a ball-joint
+V2 SEMANTIC REFERENT: right-hand finger area (per-character "Stone" rig), "globe" qualifier unclear -- possibly a ball-joint
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Arms/RightArm/RightFingers
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: globe is an unusual technical qualifier whose exact meaning for this rig is not evident from the name alone
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: finger referent is clear but "globe" modifies it in an unclear technical way
+V2 REASON: primary owner ("finger") is reliable; the unresolved "globe" qualifier (likely a ball-joint) does not create a competing owner or category
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 124
+FOLD KEY: bow left 1h
+EXACT SPELLING(S): bow left 1h
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: bow accessory, left, variant 1h
+V2 SEMANTIC REFERENT: bow accessory, left, variant 1h
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V1 DESTINATION: groupFile/Clothing
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: High
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: a bare "bow" can be a hair bow, a gift-wrap bow, a bow weapon, or a shoelace/garment bow -- no owner is named
+
+V1 REASON: plain clothing accessory
+V2 REASON: corrected (V2): bare accessory term with no explicit named owner -- Clothing is not the only plausible destination, per consistent application of the ownerless-accessory rule
+
+V2 CHANGE BASIS: Section 5 (OWNERLESS ACCESSORY RULE APPLIED CONSISTENTLY)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 433
+FOLD KEY: bow left 2h
+EXACT SPELLING(S): bow left 2h
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: bow accessory, left, variant 2h
+V2 SEMANTIC REFERENT: bow accessory, left, variant 2h
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V1 DESTINATION: groupFile/Clothing
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: High
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: a bare "bow" can be a hair bow, a gift-wrap bow, a bow weapon, or a shoelace/garment bow -- no owner is named
+
+V1 REASON: plain clothing accessory
+V2 REASON: corrected (V2): bare accessory term with no explicit named owner -- Clothing is not the only plausible destination, per consistent application of the ownerless-accessory rule
+
+V2 CHANGE BASIS: Section 5 (OWNERLESS ACCESSORY RULE APPLIED CONSISTENTLY)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 125
+FOLD KEY: bow right 1a
+EXACT SPELLING(S): bow right 1a
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: bow accessory, right, variant 1a
+V2 SEMANTIC REFERENT: bow accessory, right, variant 1a
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V1 DESTINATION: groupFile/Clothing
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: High
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: a bare "bow" can be a hair bow, a gift-wrap bow, a bow weapon, or a shoelace/garment bow -- no owner is named
+
+V1 REASON: plain clothing accessory
+V2 REASON: corrected (V2): bare accessory term with no explicit named owner -- Clothing is not the only plausible destination, per consistent application of the ownerless-accessory rule
+
+V2 CHANGE BASIS: Section 5 (OWNERLESS ACCESSORY RULE APPLIED CONSISTENTLY)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 434
+FOLD KEY: bow right 1b
+EXACT SPELLING(S): bow right 1b
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: bow accessory, right, variant 1b
+V2 SEMANTIC REFERENT: bow accessory, right, variant 1b
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V1 DESTINATION: groupFile/Clothing
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: High
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: a bare "bow" can be a hair bow, a gift-wrap bow, a bow weapon, or a shoelace/garment bow -- no owner is named
+
+V1 REASON: plain clothing accessory
+V2 REASON: corrected (V2): bare accessory term with no explicit named owner -- Clothing is not the only plausible destination, per consistent application of the ownerless-accessory rule
+
+V2 CHANGE BASIS: Section 5 (OWNERLESS ACCESSORY RULE APPLIED CONSISTENTLY)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 128
+FOLD KEY: c dlipout
+EXACT SPELLING(S): C Dlipout
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: a lip-related control, exact action ("Dlipout") unclear
+V2 SEMANTIC REFERENT: a lip-related control, exact action ("Dlipout") unclear
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Face/Lower Face
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: lip is visible but the surrounding construction is not a standard phrase
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: lip referent partially visible, construction unclear
+V2 REASON: primary owner ("lip") is reliable; the unresolved "Dlipout" construction does not create a competing owner or category
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 231
+FOLD KEY: c facebase b
+EXACT SPELLING(S): C FaceBase b
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: a center face base/root bone, variant b
+V2 SEMANTIC REFERENT: a center face base/root bone, variant b
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Face
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: base suggests a technical root bone rather than a specific facial feature
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: face referent present, specific feature unclear
+V2 REASON: primary owner ("face") is reliable; "base" indicates a generic root/anchor bone rather than a specific feature, so the bare Face destination is used, consistent with bare head/skull routing to the general anatomical group
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 34
+FOLD KEY: chocobocharm
+EXACT SPELLING(S): ChocoboCharm
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: a decorative charm/accessory shaped after or referencing a "Chocobo" (fictional bird)
+V2 SEMANTIC REFERENT: a decorative charm/accessory shaped after or referencing a "Chocobo" (fictional bird)
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V1 DESTINATION: groupFile/Clothing
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: Medium
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: a charm can be jewelry, a weapon charm, a keychain charm, or another decorative prop -- "Chocobo" names only the theme, not the mount/owner
+
+V1 REASON: charm is a worn decorative accessory
+V2 REASON: corrected (V2): bare accessory term with no explicit named owner -- Clothing is not the only plausible destination, per consistent application of the ownerless-accessory rule
+
+V2 CHANGE BASIS: Section 5 (OWNERLESS ACCESSORY RULE APPLIED CONSISTENTLY)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 37
+FOLD KEY: crow_3.clavical_r
+EXACT SPELLING(S): Crow_3.Clavical_R
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: Crow creature skeleton (instance 3), right clavicle/wing-shoulder bone
+V2 SEMANTIC REFERENT: Crow creature skeleton (instance 3), right clavicle (shoulder-girdle bone); the complete literal does not itself state wing/flight-appendage ownership
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: NEEDS_CONTEXT
+
+V1 DESTINATION: groupFile/Wings
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: High
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: the complete literal names the species and the bone but does not itself establish wing ownership; clavicle is a shoulder-girdle bone that could plausibly be treated as generic torso/shoulder structure rather than the flight appendage without further evidence
+
+V1 REASON: shoulder-girdle bone of a flight appendage
+V2 REASON: reverted (V2): being a bird does not by itself establish Wings ownership for a bone that is not explicitly identified as part of the flight appendage -- downgraded to NEEDS_CONTEXT, consistent with Crow_3.Phalanges3_L
+
+V2 CHANGE BASIS: Section 8 (CROW ANATOMY CONSISTENCY RECHECKED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 333
+FOLD KEY: egg.wall_21
+EXACT SPELLING(S): Egg.Wall_21
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: an "egg wall" hard-surface prop segment
+V2 SEMANTIC REFERENT: an "egg wall" hard-surface prop segment
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Other
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: 'wall' names a real hard-surface object; the 'egg' qualifier and exact ownership are unresolved
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: "wall" reliably denotes hard-surface environment geometry with no plausible competing (non-Other) destination; the "egg" qualifier and exact building/ownership are unresolved but do not change the destination
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 447
+FOLD KEY: ex_2
+EXACT SPELLING(S): Ex_2
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: OPAQUE
+
+V1 SEMANTIC REFERENT: unclear abbreviation ("Ex"), numbered
+V2 SEMANTIC REFERENT: unclear abbreviation ("Ex"), numbered
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: NOT_APPLICABLE
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: 'Ex' matches an established Master helper/auxiliary-bone naming pattern (compare RForeArmEX); which body region it helps is unresolved
+V2 UNCERTAINTY REASON: could mean extra, example, exclude, or something else
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: reverted (V2): the abbreviation expansion used in V1 was merely plausible, not grounded by other content in the literal, a recognized rig/DCC convention, sibling spellings, or corpus evidence -- restored to OPAQUE/NOT_APPLICABLE
+
+V2 CHANGE BASIS: Section 2 (PLAUSIBLE ABBREVIATION != SEMANTIC EVIDENCE)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 238
+FOLD KEY: fbx_murasaki_face
+EXACT SPELLING(S): fbx_murasaki_face
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: a face-related marker for a character ("Murasaki")
+V2 SEMANTIC REFERENT: a face-related marker for a character ("Murasaki")
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Face
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: no specific facial control or feature is named beyond "face"
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: character+face referents present, specific function unclear
+V2 REASON: primary owner ("face") is reliable even though no specific feature is named; routed to the bare Face destination
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 239
+FOLD KEY: fbx_sakura_zero_face_none
+EXACT SPELLING(S): fbx_sakura_zero_face_none
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: a face-related marker for a character ("Sakura") in a null/default state
+V2 SEMANTIC REFERENT: a face-related marker for a character ("Sakura") in a null/default state
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Face
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: zero_face_none reads as a technical default marker rather than naming a specific control
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: character+face referents present, exact function unclear
+V2 REASON: primary owner ("face") is reliable; "zero_face_none" raises a control-desirability question (is this a real posable control), not a taxonomy question, and does not block classification
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 43
+FOLD KEY: flipoutrighttop
+EXACT SPELLING(S): FlipoutRightTop
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: a "flip out" styling effect, right side, top region -- likely hair, but object not explicit
+V2 SEMANTIC REFERENT: a "flip out" styling effect, right side, top region -- likely hair, but object not explicit
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Hair
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: flip out is a recognizable hair-styling term but not explicitly tied to "hair" here
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: styling term without an explicit object noun
+V2 REASON: "flip out" is an established hair-styling term with no comparably strong competing reading; ownership is sufficiently inferable without the word "hair" being spelled out
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 48
+FOLD KEY: gear.holster
+EXACT SPELLING(S): Gear.Holster
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: equipment holster (for a weapon/tool)
+V2 SEMANTIC REFERENT: equipment holster (for a weapon/tool)
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: groupFile/Other
+V2 DESTINATION: groupFile/Clothing
+
+V1 CONFIDENCE: High
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: recognized prop/weapon/equipment, existing Other precedent
+V2 REASON: settled policy (V2): a holster's primary real-world function is to be worn as body/character equipment; the complete literal does not positively establish it as a component of a weapon/prop assembly, so the worn-equipment default (Clothing) applies
+
+V2 CHANGE BASIS: Section 6 (HOLSTER POLICY SETTLED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 145
+FOLD KEY: holster_base
+EXACT SPELLING(S): Holster_Base
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: base component of a weapon holster
+V2 SEMANTIC REFERENT: base component of a weapon holster
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: groupFile/Other
+V2 DESTINATION: groupFile/Clothing
+
+V1 CONFIDENCE: High
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: recognized prop/weapon/equipment, existing Other precedent
+V2 REASON: settled policy (V2): a holster's primary real-world function is to be worn as body/character equipment; the complete literal does not positively establish it as a component of a weapon/prop assembly, so the worn-equipment default (Clothing) applies
+
+V2 CHANGE BASIS: Section 6 (HOLSTER POLICY SETTLED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 148
+FOLD KEY: juriclothes_reference
+EXACT SPELLING(S): Juriclothes_reference
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: a reference/guide bone for a character's ("Juri") clothes
+V2 SEMANTIC REFERENT: a reference/guide bone for a character's ("Juri") clothes
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Clothing
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: reference suggests a non-functional guide bone rather than a normal control
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: character-specific clothing reference marker
+V2 REASON: primary owner ("clothes") is reliable; a "_reference"/guide-bone naming style is a control-desirability question, not a taxonomy question, and does not block classification
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 253
+FOLD KEY: key 17
+EXACT SPELLING(S): Key 17
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: an unlabeled numbered "key" slot
+V2 SEMANTIC REFERENT: an unlabeled numbered "key" slot
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Other
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: 'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: "Key <label>" matches the Key.Black_3/Key.White_25 sibling family already established -> Other in this same pilot
+
+V2 CHANGE BASIS: Section 2 (PLAUSIBLE ABBREVIATION != SEMANTIC EVIDENCE) + Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 254
+FOLD KEY: key.9
+EXACT SPELLING(S): Key.9
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: an unlabeled numbered "key" slot
+V2 SEMANTIC REFERENT: an unlabeled numbered "key" slot
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Other
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: 'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: "Key.<label>" matches the Key.Black_3/Key.White_25 sibling family already established -> Other in this same pilot
+
+V2 CHANGE BASIS: Section 2 (PLAUSIBLE ABBREVIATION != SEMANTIC EVIDENCE) + Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 54
+FOLD KEY: key.s
+EXACT SPELLING(S): Key.S
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: an unlabeled "key" slot marked S
+V2 SEMANTIC REFERENT: an unlabeled "key" slot marked S
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Other
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: 'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: "Key.<label>" matches the Key.Black_3/Key.White_25 sibling family already established -> Other in this same pilot; this is sibling-spelling grounding, not a mere plausible guess
+
+V2 CHANGE BASIS: Section 2 (PLAUSIBLE ABBREVIATION != SEMANTIC EVIDENCE) + Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 55
+FOLD KEY: key.x
+EXACT SPELLING(S): Key.X
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: an unlabeled "key" slot marked X
+V2 SEMANTIC REFERENT: an unlabeled "key" slot marked X
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Other
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: 'key' is a real referent with Master-internal precedent (Key.Black_3/Key.White_25 -> Other); whether this shares that family is unresolved
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: "Key.<label>" matches the Key.Black_3/Key.White_25 sibling family already established -> Other in this same pilot
+
+V2 CHANGE BASIS: Section 2 (PLAUSIBLE ABBREVIATION != SEMANTIC EVIDENCE) + Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 355
+FOLD KEY: l dlip b
+EXACT SPELLING(S): L Dlip B
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: a lip-related control, left, exact action ("Dlip") unclear
+V2 SEMANTIC REFERENT: a lip-related control, left, exact action ("Dlip") unclear
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Face/Lower Face
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: D prefix does not resolve to a standard direction/action word
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: lip referent visible, construction unclear
+V2 REASON: primary owner ("lip") is reliable; the unresolved "D" prefix does not create a competing owner or category
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 258
+FOLD KEY: l_rear_holster_0u_8v
+EXACT SPELLING(S): l_rear_holster_0u_8v
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: left rear weapon holster, with a UV-style coordinate suffix
+V2 SEMANTIC REFERENT: left rear weapon holster, with a UV-style coordinate suffix
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: groupFile/Other
+V2 DESTINATION: groupFile/Clothing
+
+V1 CONFIDENCE: High
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: recognized prop/weapon/equipment, existing Other precedent
+V2 REASON: settled policy (V2): a holster's primary real-world function is to be worn as body/character equipment; the complete literal does not positively establish it as a component of a weapon/prop assembly, so the worn-equipment default (Clothing) applies
+
+V2 CHANGE BASIS: Section 6 (HOLSTER POLICY SETTLED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 153
+FOLD KEY: l_side_holster_0u_0v
+EXACT SPELLING(S): l_side_holster_0u_0v
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: left-side weapon holster, with a UV-style coordinate suffix
+V2 SEMANTIC REFERENT: left-side weapon holster, with a UV-style coordinate suffix
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: groupFile/Other
+V2 DESTINATION: groupFile/Clothing
+
+V1 CONFIDENCE: High
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: recognized prop/weapon/equipment, existing Other precedent
+V2 REASON: settled policy (V2): a holster's primary real-world function is to be worn as body/character equipment; the complete literal does not positively establish it as a component of a weapon/prop assembly, so the worn-equipment default (Clothing) applies
+
+V2 CHANGE BASIS: Section 6 (HOLSTER POLICY SETTLED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 157
+FOLD KEY: leg left stc
+EXACT SPELLING(S): leg left StC
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: left leg, unclear "StC" qualifier
+V2 SEMANTIC REFERENT: left leg, unclear "StC" qualifier
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Legs
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: StC does not resolve to a recognizable term
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: leg referent clear, qualifier unclear
+V2 REASON: primary owner ("leg left") is reliable; the unresolved "StC" qualifier does not create a competing owner or category
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 268
+FOLD KEY: nipple up
+EXACT SPELLING(S): nipple up
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: nipple, "up" position/direction
+V2 SEMANTIC REFERENT: nipple, "up" position/direction
+
+V1 TAXONOMY STATUS: CLEAR
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: groupFile/Body
+V2 DESTINATION: groupFile/Body Morphs
+
+V1 CONFIDENCE: High
+V2 CONFIDENCE: High
+
+V1 UNCERTAINTY REASON: [NONE]
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: corrected: 'up' is a positional/directional word, not an explicit state/shape descriptor (contrast 'hard'/'erect' which do qualify); per settled doctrine, plain anatomy/bone/root/structural segment routes to Body, not Body Morphs
+V2 REASON: reverted (V2): "up" describes a visible directional/state change to the nipple's form -- this is deformation/state morphology, not a plain structural segment -- restored to Body Morphs per the refined structural-vs-deformation test
+
+V2 CHANGE BASIS: Section 1 (ACTION/DIRECTIONAL BODY DEFORMATION)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 170
+FOLD KEY: opt_acs_year_l8
+EXACT SPELLING(S): OPT_acs_year_l8
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: OPAQUE
+
+V1 SEMANTIC REFERENT: unclear accessory referenced by "year", left, segment 8
+V2 SEMANTIC REFERENT: unclear accessory referenced by "year", left, segment 8
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: NOT_APPLICABLE
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: 'acs' plausibly abbreviates 'accessory', a real category; the specific accessory and 'year' qualifier are unresolved
+V2 UNCERTAINTY REASON: year does not resolve to any recognizable object or body part
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: reverted (V2): the abbreviation expansion used in V1 was merely plausible, not grounded by other content in the literal, a recognized rig/DCC convention, sibling spellings, or corpus evidence -- restored to OPAQUE/NOT_APPLICABLE
+
+V2 CHANGE BASIS: Section 2 (PLAUSIBLE ABBREVIATION != SEMANTIC EVIDENCE)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 467
+FOLD KEY: opt_acs_year_r8
+EXACT SPELLING(S): OPT_acs_year_r8
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: OPAQUE
+
+V1 SEMANTIC REFERENT: unclear accessory referenced by "year", right, segment 8
+V2 SEMANTIC REFERENT: unclear accessory referenced by "year", right, segment 8
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: NOT_APPLICABLE
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: 'acs' plausibly abbreviates 'accessory', a real category; the specific accessory and 'year' qualifier are unresolved
+V2 UNCERTAINTY REASON: year does not resolve to any recognizable object or body part
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: reverted (V2): the abbreviation expansion used in V1 was merely plausible, not grounded by other content in the literal, a recognized rig/DCC convention, sibling spellings, or corpus evidence -- restored to OPAQUE/NOT_APPLICABLE
+
+V2 CHANGE BASIS: Section 2 (PLAUSIBLE ABBREVIATION != SEMANTIC EVIDENCE)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 172
+FOLD KEY: page2_f
+EXACT SPELLING(S): Page2_F
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: an unclear "page" reference, variant F
+V2 SEMANTIC REFERENT: an unclear "page" reference, variant F
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Other
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: 'page' is a real referent (compare Book TurnPage9 -> Other); the exact book/object and 'f' variant are unresolved
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: "page" matches the existing Book TurnPage9 -> Other sibling precedent in this same pilot; the "f" variant and exact book are unresolved but do not create a competing destination
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 375
+FOLD KEY: palmlmizin1
+EXACT SPELLING(S): PalmLMizin1
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: left palm area, "Mizin" qualifier unclear
+V2 SEMANTIC REFERENT: left palm area, "Mizin" qualifier unclear
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: Mizin does not resolve to a recognizable English or common rigging term
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: palm/left referent visible, qualifier unresolved
+V2 REASON: primary owner ("palm", left) is reliable and conventionally grouped with hand/finger controls; the unresolved "Mizin" qualifier does not create a competing owner or category
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 381
+FOLD KEY: protrusion-bottomnude
+EXACT SPELLING(S): Protrusion-bottomnude
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: a body "protrusion" effect, bottom region, nude (no-clothing) state
+V2 SEMANTIC REFERENT: a body "protrusion" effect, bottom region, nude (no-clothing) state
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Body Morphs
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: likely genital-adjacent but the exact body part is not named
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: protrusion/context suggest a body-morph, exact anatomy unclear
+V2 REASON: "nude" rules out a Clothing reading, and "protrusion" is a body-shape/deformation term; the exact body part is unresolved but the destination category is not in genuine competition
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 385
+FOLD KEY: shell.wall_58
+EXACT SPELLING(S): Shell.Wall_58
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: PARTIAL
+
+V1 SEMANTIC REFERENT: a "shell wall" hard-surface prop segment
+V2 SEMANTIC REFERENT: a "shell wall" hard-surface prop segment
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Other
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: 'wall' names a real hard-surface object; the 'shell' qualifier and exact ownership are unresolved
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: "wall" reliably denotes hard-surface environment geometry with no plausible competing (non-Other) destination; the "shell" qualifier and exact ownership are unresolved but do not change the destination
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 284
+FOLD KEY: shorts non futa shadow
+EXACT SPELLING(S): Shorts Non Futa Shadow
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: a shading/texture toggle for shorts, specific to a non-futa body variant
+V2 SEMANTIC REFERENT: a shading/texture toggle for shorts, specific to a non-futa body variant
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Clothing
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: shadow could mean a shading toggle or a geometry variant; not fully clear
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: shorts (clothing) referent clear, exact function of "shadow" unclear
+V2 REASON: primary owner ("shorts") is reliable; whether "shadow" means a shading toggle or a geometry variant does not change the destination
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 286
+FOLD KEY: taurenmale_hd_bone_78
+EXACT SPELLING(S): taurenmale_hd_bone_78
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: OPAQUE
+
+V1 SEMANTIC REFERENT: a numbered head bone on the Tauren creature skeleton, no specific part named
+V2 SEMANTIC REFERENT: a numbered head bone on the Tauren creature skeleton, no specific part named
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: NOT_APPLICABLE
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: 'hd' plausibly abbreviates 'head', giving a body-region candidate; abbreviation is not certain enough for CLEAR
+V2 UNCERTAINTY REASON: bone_78 carries no anatomical specificity
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: reverted (V2): "TaurenMale_HD" reads as a model/variant prefix in a long contiguous numbered-bone series, not an anatomical "head" abbreviation without positive evidence -- restored to OPAQUE/NOT_APPLICABLE
+
+V2 CHANGE BASIS: Section 3 (TAURENMALE_HD IS NOT "HEAD" WITHOUT EVIDENCE)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 84
+FOLD KEY: taurenmale_hd_bone_90
+EXACT SPELLING(S): taurenmale_hd_bone_90
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: OPAQUE
+
+V1 SEMANTIC REFERENT: a numbered head bone on the Tauren creature skeleton, no specific part named
+V2 SEMANTIC REFERENT: a numbered head bone on the Tauren creature skeleton, no specific part named
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: NOT_APPLICABLE
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: 'hd' plausibly abbreviates 'head', giving a body-region candidate; abbreviation is not certain enough for CLEAR
+V2 UNCERTAINTY REASON: bone_90 carries no anatomical specificity beyond "part of the head rig"
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: reverted (V2): "TaurenMale_HD" reads as a model/variant prefix in a long contiguous numbered-bone series, not an anatomical "head" abbreviation without positive evidence -- restored to OPAQUE/NOT_APPLICABLE
+
+V2 CHANGE BASIS: Section 3 (TAURENMALE_HD IS NOT "HEAD" WITHOUT EVIDENCE)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 191
+FOLD KEY: turtleneckhouseofmcleavage
+EXACT SPELLING(S): TurtleNeckHouseofMCleavage
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: a turtleneck garment interacting with cleavage; middle portion unclear
+V2 SEMANTIC REFERENT: a turtleneck garment interacting with cleavage; middle portion unclear
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Clothing
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: house of m does not resolve to a clear qualifier
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: turtleneck+cleavage referents clear, middle segment is unclear
+V2 REASON: primary owner ("TurtleNeck" garment, "Cleavage" feature) is reliable; the unresolved "House of M" middle segment does not create a competing owner or category
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 95
+FOLD KEY: v_weapon.left_middle03
+EXACT SPELLING(S): v_weapon.Left_Middle03
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: weapon view-model hand rig, left middle finger, segment 03
+V2 SEMANTIC REFERENT: weapon view-model hand rig, left middle finger, segment 03
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Arms/LeftArm/LeftFingers
+
+V1 CONFIDENCE: Medium
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: unclear whether this is a normal posable finger or an internal weapon-viewmodel helper
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: looks like a first-person weapon hand-rig finger bone
+V2 REASON: primary owner ("left middle finger") is reliable; whether this exposed control is a normal posable finger or an internal weapon-viewmodel helper is a control-desirability question, not a taxonomy question, and does not block classification
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 496
+FOLD KEY: v_weapon.right_index03
+EXACT SPELLING(S): v_weapon.Right_Index03
+
+V1 SEMANTIC STATUS: CLEAR
+V2 SEMANTIC STATUS: CLEAR
+
+V1 SEMANTIC REFERENT: weapon view-model hand rig, right index finger, segment 03
+V2 SEMANTIC REFERENT: weapon view-model hand rig, right index finger, segment 03
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: CLEAR
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: groupFile/Arms/RightArm/RightFingers
+
+V1 CONFIDENCE: Medium
+V2 CONFIDENCE: Medium
+
+V1 UNCERTAINTY REASON: unclear whether this is a normal posable finger or an internal weapon-viewmodel helper
+V2 UNCERTAINTY REASON: [NONE]
+
+V1 REASON: looks like a first-person weapon hand-rig finger bone
+V2 REASON: primary owner ("right index finger") is reliable; whether this exposed control is a normal posable finger or an internal weapon-viewmodel helper is a control-desirability question, not a taxonomy question, and does not block classification
+
+V2 CHANGE BASIS: Section 4 (TAXONOMY DOES NOT REQUIRE EVERY TOKEN TO BE DECODED)
+--------------------------------------------------------------
+--------------------------------------------------------------
+ROW: 200
+FOLD KEY: whl_2
+EXACT SPELLING(S): whL_2
+
+V1 SEMANTIC STATUS: PARTIAL
+V2 SEMANTIC STATUS: OPAQUE
+
+V1 SEMANTIC REFERENT: unclear abbreviation ("wheel"? initials?), numbered
+V2 SEMANTIC REFERENT: unclear abbreviation ("wheel"? initials?), numbered
+
+V1 TAXONOMY STATUS: NEEDS_CONTEXT
+V2 TAXONOMY STATUS: NOT_APPLICABLE
+
+V1 DESTINATION: [NONE]
+V2 DESTINATION: [NONE]
+
+V1 CONFIDENCE: Low
+V2 CONFIDENCE: Low
+
+V1 UNCERTAINTY REASON: 'whl' plausibly abbreviates 'wheel' (compare wheelback_base/fake_wheel_fl -> Other); the abbreviation is not certain enough for CLEAR
+V2 UNCERTAINTY REASON: does not confidently resolve
+
+V1 REASON: corrected: semantic_referent names a real object/function -- not semantically opaque; ownership/destination remains genuinely unresolved
+V2 REASON: reverted (V2): the abbreviation expansion used in V1 was merely plausible, not grounded by other content in the literal, a recognized rig/DCC convention, sibling spellings, or corpus evidence -- restored to OPAQUE/NOT_APPLICABLE
+
+V2 CHANGE BASIS: Section 2 (PLAUSIBLE ABBREVIATION != SEMANTIC EVIDENCE)
+--------------------------------------------------------------
+
+==============================================================
+MECHANICAL GROUPING (44 of 44)
+==============================================================
+A. V1 CORRECTION REVERSED  (7)
+  447 | Ex_2 | NEEDS_CONTEXT -> NOT_APPLICABLE
+  268 | nipple up | groupFile/Body -> groupFile/Body Morphs
+  170 | OPT_acs_year_l8 | NEEDS_CONTEXT -> NOT_APPLICABLE
+  467 | OPT_acs_year_r8 | NEEDS_CONTEXT -> NOT_APPLICABLE
+  286 | taurenmale_hd_bone_78 | NEEDS_CONTEXT -> NOT_APPLICABLE
+  84 | taurenmale_hd_bone_90 | NEEDS_CONTEXT -> NOT_APPLICABLE
+  200 | whL_2 | NEEDS_CONTEXT -> NOT_APPLICABLE
+
+B. PREVIOUS NEEDS_CONTEXT -> CLEAR  (26)
+  408 | beltHat_bone_l_01 | NEEDS_CONTEXT -> groupFile/Clothing
+  309 | beltHat_bone_r_02 | NEEDS_CONTEXT -> groupFile/Clothing
+  410 | bip facelipmiloin | NEEDS_CONTEXT -> groupFile/Face/Lower Face
+  110 | Bip_BOBBY_L_Finger_Globe_2_02 | NEEDS_CONTEXT -> groupFile/Arms/LeftArm/LeftFingers
+  15 | Bip_STONE _R_Finger_Globe_1_02 | NEEDS_CONTEXT -> groupFile/Arms/RightArm/RightFingers
+  128 | C Dlipout | NEEDS_CONTEXT -> groupFile/Face/Lower Face
+  231 | C FaceBase b | NEEDS_CONTEXT -> groupFile/Face
+  333 | Egg.Wall_21 | NEEDS_CONTEXT -> groupFile/Other
+  238 | fbx_murasaki_face | NEEDS_CONTEXT -> groupFile/Face
+  239 | fbx_sakura_zero_face_none | NEEDS_CONTEXT -> groupFile/Face
+  43 | FlipoutRightTop | NEEDS_CONTEXT -> groupFile/Hair
+  148 | Juriclothes_reference | NEEDS_CONTEXT -> groupFile/Clothing
+  253 | Key 17 | NEEDS_CONTEXT -> groupFile/Other
+  254 | Key.9 | NEEDS_CONTEXT -> groupFile/Other
+  54 | Key.S | NEEDS_CONTEXT -> groupFile/Other
+  55 | Key.X | NEEDS_CONTEXT -> groupFile/Other
+  355 | L Dlip B | NEEDS_CONTEXT -> groupFile/Face/Lower Face
+  157 | leg left StC | NEEDS_CONTEXT -> groupFile/Legs
+  172 | Page2_F | NEEDS_CONTEXT -> groupFile/Other
+  375 | PalmLMizin1 | NEEDS_CONTEXT -> groupFile/Arms/LeftArm/LeftFingers
+  381 | Protrusion-bottomnude | NEEDS_CONTEXT -> groupFile/Body Morphs
+  385 | Shell.Wall_58 | NEEDS_CONTEXT -> groupFile/Other
+  284 | Shorts Non Futa Shadow | NEEDS_CONTEXT -> groupFile/Clothing
+  191 | TurtleNeckHouseofMCleavage | NEEDS_CONTEXT -> groupFile/Clothing
+  95 | v_weapon.Left_Middle03 | NEEDS_CONTEXT -> groupFile/Arms/LeftArm/LeftFingers
+  496 | v_weapon.Right_Index03 | NEEDS_CONTEXT -> groupFile/Arms/RightArm/RightFingers
+
+C. PREVIOUS CLEAR -> NEEDS_CONTEXT  (6)
+  124 | bow left 1h | groupFile/Clothing -> NEEDS_CONTEXT
+  433 | bow left 2h | groupFile/Clothing -> NEEDS_CONTEXT
+  125 | bow right 1a | groupFile/Clothing -> NEEDS_CONTEXT
+  434 | bow right 1b | groupFile/Clothing -> NEEDS_CONTEXT
+  34 | ChocoboCharm | groupFile/Clothing -> NEEDS_CONTEXT
+  37 | Crow_3.Clavical_R | groupFile/Wings -> NEEDS_CONTEXT
+
+D. POLICY QUESTION SETTLED  (5)
+  420 | bip_lube.001 | groupFile/Body Morphs -> groupFile/Other
+  48 | Gear.Holster | groupFile/Other -> groupFile/Clothing
+  145 | Holster_Base | groupFile/Other -> groupFile/Clothing
+  258 | l_rear_holster_0u_8v | groupFile/Other -> groupFile/Clothing
+  153 | l_side_holster_0u_0v | groupFile/Other -> groupFile/Clothing
+
+E. OTHER  (0)
+  (none)
+
+==============================================================
+MECHANICAL SUMMARY
+==============================================================
+Total V1 -> V2 changed rows: 44
+  A. V1 CORRECTION REVERSED          : 7
+  B. PREVIOUS NEEDS_CONTEXT -> CLEAR  : 26
+  C. PREVIOUS CLEAR -> NEEDS_CONTEXT  : 6
+  D. POLICY QUESTION SETTLED          : 5
+  E. OTHER                            : 0
+==============================================================

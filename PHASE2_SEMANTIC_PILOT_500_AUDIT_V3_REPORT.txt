@@ -1,0 +1,382 @@
+==============================================================================
+PHASE 2 SEMANTIC PILOT 500 -- AUDIT V3 REPORT
+Surgical correction pass over the second audit candidate. Fixes the
+semantic_status/taxonomy_status independence defect, tightens the
+abbreviation/sibling-grounding standard with fresh corpus evidence, and
+re-evidences PalmLMizin1 against a fresh live-Master parse.
+Source (unmodified): PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V2.tsv
+Candidate (new file): PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V3.tsv
+Method: all semantic judgment performed by direct reading of each literal
+and fresh Master/corpus evidence; Python used only for bookkeeping
+(applying the decided field values) and independent re-validation after
+writing (deterministic script build_audit_v3.py).
+==============================================================================
+
+EXACT V2 -> V3 CHANGED-ROW COUNT: 23
+
+==============================================================================
+A. SEMANTIC_STATUS / TAXONOMY_STATUS INDEPENDENCE AUDIT
+==============================================================================
+STANDING INVARIANT ESTABLISHED:
+  semantic_status answers "how completely do we understand the literal's
+  semantic referent/function?"
+  taxonomy_status answers "is the semantic information we DO have
+  sufficient to determine one Master destination?"
+  PARTIAL + CLEAR is VALID and EXPECTED. A taxonomy decision becoming
+  CLEAR must NOT mechanically or conceptually upgrade semantic_status to
+  CLEAR.
+
+METHOD: all 9 named rows were individually re-read, plus a full-population
+mechanical sweep of all 500 V3-candidate rows for semantic_status=CLEAR
+paired with hedge language ("unclear," "unresolved," "unspecified," "not
+explicit," "not fully," "possibly," "likely," etc.) in semantic_referent
+or short_reason. The sweep surfaced 23 initial candidates across two
+passes; each was individually judged -- a hedge word alone does not prove
+the defect (e.g. "unambiguous" false-matches on the substring "ambiguous"),
+and a hedge on a COSMETIC spelling-origin guess (not the control's actual
+function) does not require a downgrade.
+
+RESULT: 20 rows had a genuine defect and were downgraded from
+semantic_status=CLEAR to PARTIAL. In every case, taxonomy_status and
+proposed_destination are UNCHANGED -- the taxonomy decision was correct;
+only the semantic-completeness claim was wrong.
+
+  All 9 named rows confirmed defective and corrected:
+    bip facelipmiloin, Bip_BOBBY_L_Finger_Globe_2_02,
+    Bip_STONE _R_Finger_Globe_1_02, C Dlipout, L Dlip B, leg left StC,
+    PalmLMizin1 (see also Section C below), Shorts Non Futa Shadow,
+    TurtleNeckHouseofMCleavage
+  11 additional rows found by the broader sweep and confirmed defective:
+    FlipoutRightTop (referent itself says "object not explicit")
+    cloth right 1 (referent says "garment type unspecified")
+    HurtR (referent says "possibly lateralized")
+    SurpriseL (referent says "specific facial region unnamed")
+    LeftFinger02 (referent says "unspecified which" finger)
+    finger2a (referent says finger identity unspecified, no side marker)
+    bip facetemplemiin r (referent says "positional qualifier unclear")
+    feather 1a, feather 2a, feather 2b (referent says "owning structure"
+      unresolved -- these were already CLEAR/NEEDS_CONTEXT in the
+      ORIGINAL pilot, never touched by V1 or V2; caught only by this
+      exhaustive V3 sweep)
+    sign07 (referent says "possibly a signboard/placard," matching the
+      same pattern as "cloth right 1" -- object category solid, exact
+      type unresolved)
+
+  Confirmed NOT defective (reviewed, left unchanged) -- CLEAR semantic
+  status is justified because the CORE FUNCTION/IDENTITY is fully
+  understood and only a non-disqualifying secondary detail is hedged:
+    Crow_3.Clavical_R (species+bone type fully known; the open question
+      is a DESTINATION-category question -- which Master group -- not a
+      semantic-completeness question)
+    Juriclothes_reference, Key.S, Key.X, Key.9, v_weapon.Left_Middle03,
+      v_weapon.Right_Index03 (referent text does not hedge on identity;
+      remaining doubt is about control-desirability/internal-use status,
+      which the rulebook already treats as a non-taxonomy, non-semantic
+      question)
+    HlidDroop, LidUbberOpenL, R_Butt_left (the hedge concerns a guessed
+      spelling-origin abbreviation letter, not the control's actual
+      function, which is fully understood either way)
+    Nasolabial, head eyeball middle (the hedge concerns which of two
+      adjacent valid subgroups/an unusual anatomical count, not
+      incomplete understanding of the referent itself)
+    Bip01_R_UpperArm016, Bip01_R_Thigh011/013, Bip01_R_UpperArm013,
+      Bip01_R_Forearm009, Bip01_L_Forearm007 (a stale "(likely a
+      deformation-corrective bone)" parenthetical predates the
+      Correctives calibration that already rejected the numbered-bone-
+      implies-corrective theory; the bone's location is fully known and
+      unaffected)
+    BoobJobL+BoobJobR, R-Titty-Pull (false positives: "unambiguous"
+      matched the substring "ambiguous" in the sweep regex; both rows
+      assert full confidence, not doubt)
+
+Note on scope: this was a targeted sweep (keyword search across all 500
+rows, individual judgment on every match), not a from-scratch re-read of
+all 500 literals independent of any triggering signal -- consistent with
+the surgical, not broad-redesign, nature of this pass.
+
+==============================================================================
+B. REWRITTEN V2-1 -- PURPOSE-BASED, NOT KEYWORD-TRIGGERED
+==============================================================================
+V2-1 (as proposed) listed a positive word list (up, down, forward,
+backward, movement, grip, open, close, push, pull, etc.) as sufficient
+evidence for Body Morphs. This is rejected as a standing rule: those same
+words are ordinary POSING vocabulary for actual skeletal joints (EyeUp,
+JawOpen, ArmForward, FingerGrip, TongueForward, ShoulderDown are all
+routine articulation controls, not morphs).
+
+CORRECTED DOCTRINE (purpose-based, reflected in
+PHASE2_SEMANTIC_RULEBOOK_FINAL_CANDIDATE.txt, not yet merged into the
+live rulebook):
+  1. Ordinary anatomical structure/bones/joints/articulation/posing ->
+     the appropriate anatomical destination.
+  2. Body Morphs -> controls whose COMPLETE LITERAL indicates intended
+     body-shape, size, soft-tissue form, appearance, or morphological/
+     state deformation of the character's own body.
+  3. A direction/action word is CONTEXTUAL EVIDENCE ONLY -- never a
+     sufficient keyword trigger by itself. Ask: does this body region
+     have a genuine skeletal/articulation function this word could be
+     describing instead (ordinary posing), or does the region lack any
+     such function (making an intended appearance/state change the only
+     plausible purpose)?
+  4. Object ownership still wins: object-specific shape/fit/deformation
+     -> the object's group.
+
+RE-EXAMINED under this purpose test: "nipple up" (kept at Body Morphs) --
+a nipple has no skeletal joint or ordinary posing function, so a
+directional word describing its form/position can only represent an
+intended soft-tissue appearance/state change; this is a purpose-based
+conclusion specific to this literal, not a generalized "anatomical noun +
+direction word" rule. The short_reason field was reworded accordingly (no
+status/destination change).
+All 21 other Body-Morphs-destination rows in the pilot (Body-R-Hard-
+Nipple, Left_stomach_buldge, pussy_tighten, Shouldershrink,
+AnusOpenSuitExposedTorn, BellyIn-topclothed, Body-R-Nipple-Pull,
+ErectNips, R-Ass-Smack, Shin Thickness, TopMuscles, Belly Inflat, Belly-
+bottomnude, Bikini Boobs Upward R, BoobJobL+BoobJobR, BallsDetail4, cock-
+head-skinny, R-Titty-Pull, AnusGrip, CockWide, PantsAnalOpen->Clothing/
+PantsPregnant->Clothing already excluded by object-ownership,
+Protrusion-bottomnude) were individually re-checked against the purpose
+test: every one describes a soft-tissue region with no skeletal
+articulation function (breast, buttock, stomach, genitals, nipple), so
+none required reversal. No TSV field beyond nipple up's short_reason
+changed for this section.
+
+==============================================================================
+C. PalmLMizin1 REOPENED AGAINST THE ACTUAL LIVE MASTER
+==============================================================================
+Fresh structural parse of the CURRENT sfm_defaultanimationgroups.txt
+(not an assumption) was queried directly:
+  "palm" (word-boundary): 107 hits total -- 51 groupFile/Arms/LeftArm/
+    LeftFingers, 47 groupFile/Arms/RightArm/RightFingers, 5 groupFile/
+    Arms/RightArm, 4 groupFile/Arms -- 91.6% (98/107) directly in
+    LeftFingers/RightFingers
+  "carpal": 214 hits total -- 108 groupFile/Arms/RightArm/RightCarpals,
+    104 groupFile/Arms/LeftArm/LeftCarpals, 2 groupFile/Arms --
+    essentially 100% in the Carpals subgroups, a STRUCTURALLY DISTINCT
+    destination from where "palm" actually lives
+  "metacarpal": 10 hits, split evenly RightCarpals/LeftCarpals
+  "mizin": 0 hits anywhere in the live Master
+
+This directly REFUTES the concern that "palm -> Fingers" was an unverified
+assumption: in THIS Master, the word "palm" and the word "carpal" are
+different words routed to different, real destinations, and "palm"
+itself is solidly, independently precedented at LeftFingers/RightFingers
+-- not merely "generally hand/finger related" by loose analogy.
+
+PHASE2_RESIDUAL_TERMS.txt (the ~14,282-term residual corpus) was also
+checked for "Mizin": exactly 4 hits, all within the same family --
+PalmLMizin, PalmLMizin1, PalmRMizin, PalmRMizin1 -- confirming "Mizin" has
+no independent grounding anywhere in the corpus; it is a genuinely
+ungrounded, corpus-local qualifier attached to an otherwise well-
+precedented "palm" owner.
+
+DECISION: PalmLMizin1 retains taxonomy_status=CLEAR, proposed_destination
+=groupFile/Arms/LeftArm/LeftFingers (now backed by direct, fresh Master
+evidence rather than a general convention assumption). semantic_status is
+corrected to PARTIAL (per Section A) because "Mizin" itself remains
+genuinely undecoded. uncertainty_reason and short_reason were rewritten to
+record this evidence explicitly.
+
+==============================================================================
+D. TIGHTENED V2-2 ABBREVIATION/SIBLING-GROUNDING STANDARD -- 2 REVERTS
+==============================================================================
+CLARIFICATION ADOPTED: "siblings in the same corpus" means a demonstrably
+COHERENT naming series or template -- not merely another literal
+elsewhere that happens to suggest the same expansion by loose thematic
+association.
+
+PHASE2_RESIDUAL_TERMS.txt was checked directly for the "Key" naming
+system. It revealed TWO structurally distinct series that were being
+conflated:
+  - a PERIOD-separated "Key.<label>" keyboard-prop series: Key.0-Key.9,
+    Key.A, Key.B, Key.C ... Key.CapsLock, Key.Enter, Key.Colon,
+    Key.Comma, Key.Black_1..Key.Black_N, Key.White_1..Key.White_N -- a
+    real, coherent, individually-keyed computer-keyboard/piano prop
+    system with no descriptive suffixes
+  - a SPACE-separated "Key <N>" series: Key 1, Key 1 - EyeLeft, Key 1 -
+    Reverted, Key 1 - Shirt, Key 2, Key 2 - Shirt, Key 3, Key 3 -
+    PoneyHair, Key 3 - Shirt, Key 4, Key 4 - PoneyHair, Key 5 ... Key 17,
+    Key 22, Key 27 -- reading as keyframe/pose-PRESET markers (the
+    descriptive suffixes -- "- Shirt," "- EyeLeft," "- PoneyHair," "-
+    Reverted" -- are pose/state labels, not keyboard-key labels)
+
+REVERTED to PARTIAL/NEEDS_CONTEXT (their pre-V2, original-independent-
+audit values, with reasoning updated to reflect this new evidence):
+  Key 17 -- belongs to the space-separated keyframe/preset series, NOT
+    the period-separated keyboard-prop series; what specific pose/state
+    this un-suffixed instance keys is not established
+  Page2_F -- "Book TurnPage9" and "Page2_F" share only the substring
+    "page," not a coherent naming template ("Book TurnPage<N>" vs.
+    "Page<N>_<letter>" are different templates) -- does not meet the
+    tightened standard
+
+CONFIRMED still CLEAR/groupFile/Other (genuinely part of the coherent
+period-separated keyboard-prop series, now with STRONGER evidence than
+V2 had): Key.S, Key.X, Key.9 (Key.S and Key.X are literal keyboard letter
+keys; Key.9 is part of the confirmed Key.0-Key.9 numeric row; all three
+share the identical no-suffix "Key.<label>" template with Key.Black_*/
+Key.White_*/Key.CapsLock/Key.Enter). No TSV field changed for these three
+-- V2's classification was already correct, now with better-documented
+evidence recorded in this report (not written back into their TSV rows,
+to keep the changed-row count limited to rows that actually needed a
+field changed).
+Ex_2, whL_2, OPT_acs_year_l8, OPT_acs_year_r8 (already reverted to
+OPAQUE/NOT_APPLICABLE in V2) and TaurenMale_HD_bone_78/90 (already
+reverted to OPAQUE/NOT_APPLICABLE in V2) remain reverted -- re-confirmed
+ungrounded, no new evidence found to change this.
+
+==============================================================================
+E. TIGHTENED V2-3 MODEL/CHARACTER PREFIX RULE
+==============================================================================
+No TSV rows required a data change for this section (V2's own
+classifications already followed the corrected, more general principle
+in practice: fbx_murasaki_face and fbx_sakura_zero_face_none were
+resolved by treating "face" as meaningful content independent of the
+"fbx_<character>" prefix, matching the corrected rule below; taurenmale_
+hd_bone_78/90 were correctly left OPAQUE because no meaningful content
+survives independent of the ungrounded "HD" abbreviation and the
+TaurenMale_ prefix).
+
+CORRECTED PRINCIPLE (rulebook wording only, reflected in
+PHASE2_SEMANTIC_RULEBOOK_FINAL_CANDIDATE.txt): a model/character/variant
+prefix is not itself semantic ownership -- ignore it as a semantic owner
+unless positively established otherwise, then classify whatever
+meaningful, independently-grounded content remains in the rest of the
+literal. This does NOT require that remaining content specifically be
+anatomical -- "TaurenMale_HD_Cape01" would classify as Clothing on
+"Cape" alone, exactly as "fbx_sakura_face" classifies on "face" alone,
+regardless of the model/DCC prefix in front of either.
+
+==============================================================================
+F. V2 DECISIONS PRESERVED (NOT REOPENED)
+==============================================================================
+None of the surgical checks above contradicted the following V2
+decisions; all remain unchanged in V3:
+  - ownerless bow/charm downgrades (ChocoboCharm, bow left/right rows)
+  - holster worn-equipment default -> Clothing (all 4 rows)
+  - bip_lube.001 -> Other as a narrow effect/material/fluid decision
+  - bird/species alone does not imply Wings (Crow_3.Clavical_R stays
+    NEEDS_CONTEXT; Crow_3.Phalanges3_L stays NEEDS_CONTEXT)
+  - Ex_2 / whL_2 / OPT_acs_year_l8 / OPT_acs_year_r8 / TaurenMale_HD_
+    bone_78/90 remain ungrounded (OPAQUE/NOT_APPLICABLE)
+  - taxonomy may be CLEAR while a secondary qualifier remains undecoded
+    (this is the surviving half of the A correction -- only the
+    semantic_status side of these rows changed, not their taxonomy)
+  - v_weapon named finger controls retain anatomical finger taxonomy;
+    internal/helper/viewmodel status is not itself a competing semantic
+    owner (confirmed under Section A: their referent text does not hedge
+    on identity, so semantic_status correctly stays CLEAR too)
+
+==============================================================================
+EVERY V2 -> V3 CHANGED ROW (23 of 23 -- full list, not a sample)
+==============================================================================
+Format: fold_key | changed fields | v2_sem -> v3_sem | v2_tax -> v3_tax |
+v2_dest -> v3_dest | requirement
+
+bip facelipmiloin              | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Face/Lower Face->groupFile/Face/Lower Face | A
+bip facetemplemiin r           | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Face/Upper Face->groupFile/Face/Upper Face | A
+Bip_BOBBY_L_Finger_Globe_2_02  | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Arms/LeftArm/LeftFingers->same | A
+Bip_STONE _R_Finger_Globe_1_02 | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Arms/RightArm/RightFingers->same | A
+C Dlipout                      | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Face/Lower Face->same | A
+cloth right 1                  | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Clothing->same | A
+feather 1a                     | semantic_status, short_reason | CLEAR->PARTIAL | NEEDS_CONTEXT->same | [NONE]->[NONE] | A
+feather 2a                     | semantic_status, short_reason | CLEAR->PARTIAL | NEEDS_CONTEXT->same | [NONE]->[NONE] | A
+feather 2b                     | semantic_status, short_reason | CLEAR->PARTIAL | NEEDS_CONTEXT->same | [NONE]->[NONE] | A
+finger2a                       | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Fingers->same | A
+FlipoutRightTop                | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Hair->same | A
+HurtR                          | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Face/Expressions->same | A
+Key 17                         | semantic_referent, taxonomy_status, proposed_destination, confidence, uncertainty_reason, short_reason | CLEAR->CLEAR | CLEAR->NEEDS_CONTEXT | groupFile/Other->[NONE] | D
+L Dlip B                       | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Face/Lower Face->same | A
+LeftFinger02                   | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Arms/LeftArm/LeftFingers->same | A
+leg left StC                   | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Legs->same | A
+nipple up                      | short_reason | CLEAR->CLEAR | CLEAR->CLEAR | groupFile/Body Morphs->same | B
+Page2_F                        | taxonomy_status, proposed_destination, confidence, uncertainty_reason, short_reason | PARTIAL->PARTIAL | CLEAR->NEEDS_CONTEXT | groupFile/Other->[NONE] | D
+PalmLMizin1                    | semantic_status, uncertainty_reason, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Arms/LeftArm/LeftFingers->same | A+C
+Shorts Non Futa Shadow         | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Clothing->same | A
+sign07                         | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Other->same | A
+SurpriseL                      | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Face/Expressions->same | A
+TurtleNeckHouseofMCleavage     | semantic_status, short_reason | CLEAR->PARTIAL | CLEAR->CLEAR | groupFile/Clothing->same | A
+
+==============================================================================
+FINAL 500-FAMILY DISTRIBUTIONS (V3 candidate)
+==============================================================================
+semantic_status:
+  CLEAR    : 360 -> 340   (V2 -> V3; -20, all Section A downgrades)
+  PARTIAL  :  80 -> 100   (+20)
+  OPAQUE   :  60 ->  60   (unchanged)
+
+taxonomy_status:
+  CLEAR          : 374 -> 372   (-2: Key 17, Page2_F reverted)
+  NEEDS_CONTEXT  :  66 ->  68   (+2)
+  NOT_APPLICABLE :  60 ->  60   (unchanged)
+  NEEDS_DOCTRINE :   0 ->   0
+
+Destination counts: identical to V2 except groupFile/Other (57 -> 55,
+-2: Key 17 and Page2_F moved out to no destination). No other destination
+count changed.
+
+==============================================================================
+VALIDATION
+==============================================================================
+  [x] Exactly 500 families in the V3 candidate
+  [x] Identical fold_key order to PHASE2_SEMANTIC_PILOT_500_AUDIT_
+      CANDIDATE_V2.tsv
+  [x] exact_spellings byte-identical for all 500 rows
+  [x] No duplicate fold_key (0 found)
+  [x] Every non-blank proposed_destination is a full group path that
+      exists in a FRESH structural parse of the live canonical Master
+      run as part of this pass (0 invalid destinations found)
+  [x] semantic_status=OPAQUE iff taxonomy_status=NOT_APPLICABLE, verified
+      by independent re-scan of the written V3 file (0 violations either
+      direction)
+  [x] Every family containing an explicit "unused"/"duplicate" marker
+      routes to groupFile/Useless (0 exceptions)
+  [x] No semantic_status was upgraded to CLEAR merely because
+      taxonomy_status became CLEAR -- explicitly re-checked: all 20
+      Section-A-flagged rows show semantic_status=PARTIAL in the written
+      V3 file (0 failures)
+  [x] Exactly 23 rows touched relative to V2, all listed individually
+      above; nothing outside these 23 was modified in any field
+  [x] No family numbered 501 or beyond was touched or classified
+
+Master validator (tools/validate_master.py) run directly against the live
+canonical Master during this pass:
+  PASS: Master validation succeeded
+  Group count: 35 | Open/close braces: 35/35 | Structural parse: PASS
+  Exact duplicate literals: 0
+  Multi-spelling ASCII-fold families: 3178, all same-path (0 cross-path
+    invariant violations)
+  Explicit output line: "No files have been modified."
+
+==============================================================================
+MASTER AND BASELINE INTEGRITY
+==============================================================================
+Verified via `git status --short` and `git diff --stat` before and after
+this pass, and via the Master validator's own read-only confirmation:
+  [x] sfm_defaultanimationgroups.txt: no diff, validator confirms
+      unmodified
+  [x] CLAUDE.md: no diff
+  [x] PHASE2_SEMANTIC_BATCH_RULES.txt (live rulebook): no diff, not
+      opened for writing
+  [x] PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V2.tsv: no diff (opened
+      read-only as the V3 source; NOT overwritten)
+  [x] PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE.tsv (V1): no diff
+  [x] PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv: no diff
+  [x] PHASE2_SEMANTIC_PILOT_500.tsv (original pilot): no diff
+  [x] PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS.txt (V1): no diff
+  [x] PHASE2_SEMANTIC_RULEBOOK_PROPOSED_AMENDMENTS_V2.txt: no diff
+  [x] PHASE2_SEMANTIC_PILOT_500_AUDIT_V2_REPORT.txt: no diff
+  [x] PHASE2_PILOT_DOCTRINE_CALIBRATION.txt: no diff
+  [x] PHASE2_PRE_SCALE_DOCTRINE_REVIEW.txt: no diff
+  [x] tools/validate_master.py: no diff, run read-only
+Only new, previously-untracked files were written this pass:
+  PHASE2_SEMANTIC_PILOT_500_AUDIT_CANDIDATE_V3.tsv
+  PHASE2_SEMANTIC_PILOT_500_AUDIT_V3_REPORT.txt (this file)
+  PHASE2_SEMANTIC_RULEBOOK_FINAL_CANDIDATE.txt
+No commit was made. PHASE2_SEMANTIC_BATCH_RULES.txt was not edited, and
+the final candidate rulebook was not merged into it. No family numbered
+501 or beyond was classified.
+
+==============================================================================
+V3 PILOT CANDIDATE READY FOR FINAL REVIEW: YES
+==============================================================================
