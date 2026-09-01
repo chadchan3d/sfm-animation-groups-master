@@ -1,0 +1,169 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 2 -- BOX-FAMILY QA CORRECTION, APPLIED REPORT
+Narrow correction pass over positions 1501-2500, triggered by external
+review finding that the original Tranche-2 consistency audit
+misdiagnosed box10/box22 as metadata-only defects when they were
+actually classification errors.
+======================================================================
+
+----------------------------------------------------------------------
+1. ORIGINAL BOX10/BOX22 CLASSIFICATIONS
+----------------------------------------------------------------------
+Both rows, before this correction:
+  semantic_status:       OPAQUE
+  semantic_referent:     a generic "box" object, numbered; likely a
+                         placeholder/bounding-box technical object
+  taxonomy_status:       NOT_APPLICABLE
+  proposed_destination:  [blank]
+  confidence:            Low
+  short_reason:          generic placeholder-style object name
+
+----------------------------------------------------------------------
+2. CALIBRATION PRECEDENTS CONSULTED
+----------------------------------------------------------------------
+Verified directly against PHASE2_SEMANTIC_PILOT_500_FINAL.tsv (read-
+only; not modified):
+  Box06: semantic_status=CLEAR, semantic_referent="generic numbered box
+    prop", taxonomy_status=CLEAR, proposed_destination=groupFile/Other,
+    confidence=High.
+  BoxA1: semantic_status=CLEAR, semantic_referent="a generic box
+    prop/mesh, variant A1", taxonomy_status=CLEAR,
+    proposed_destination=groupFile/Other, confidence=High.
+Both carry the short_reason "Names a recognized real-world prop object,
+matching the Door2/Torch3/BoxBig -> Other precedent," confirming this
+was itself a settled correction during the original calibration audit
+(genericity/numbering does not make a named real object OPAQUE).
+PHASE2_RESIDUAL_TERMS.txt additionally confirms Box01 through Box22
+(and BoxA1-style variants) form one coherent naming series -- consulted
+only as corroborating naming-series evidence, not as same-model
+provenance, per instruction.
+
+----------------------------------------------------------------------
+3. CORRECTED FIELDS
+----------------------------------------------------------------------
+box10:
+  semantic_status:       OPAQUE -> CLEAR
+  semantic_referent:     -> "generic numbered box prop/object, variant 10"
+  taxonomy_status:       NOT_APPLICABLE -> CLEAR
+  proposed_destination:  [blank] -> groupFile/Other
+  confidence:            Low -> High
+  uncertainty_reason:    [blank] (unchanged, already blank)
+  short_reason:          -> "\"Box\" names a recognized real-world
+    object; numbering only identifies the variant. Consistent with
+    finalized Box06/Box08/BoxA1 -> Other calibration precedent."
+
+box22: identical correction pattern, semantic_referent "...variant 22".
+
+fold_key, exact_spellings, batch_id, scanner_lines unchanged on both
+rows (hard-asserted in the applying script).
+
+----------------------------------------------------------------------
+4. WHY THE ORIGINAL AUDIT'S "METADATA-ONLY" CONCLUSION WAS WRONG
+----------------------------------------------------------------------
+The original consistency audit (PHASE2_PRODUCTION_TRANCHE2_CONSISTENCY_
+FLAGS.txt) tested these two rows only for unhedged speculative wording
+in the referent ("likely a placeholder/bounding-box technical object")
+and, finding the OPAQUE/NOT_APPLICABLE classification "internally
+consistent" with that wording, concluded the defect was cosmetic. It
+never cross-checked the classification itself against the calibration
+set's own prior resolution of the identical question for the same
+naming family (Box06/BoxA1). A generic, numbered, real-object noun is
+not OPAQUE merely because its exact subtype/owner/variant is
+unspecified -- that is precisely what the calibration audit had already
+settled for this family. This was an actual classification error
+masquerading as a wording defect, not a true metadata-only case.
+
+PHASE2_PRODUCTION_TRANCHE2_CONSISTENCY_FLAGS.txt has been updated in
+place to record the corrected verdict for both rows and to state this
+failure mode explicitly, rather than leaving the original
+misdiagnosis unremarked. PHASE2_PRODUCTION_TRANCHE2_REPORT.txt's
+tranche-only statistics have likewise been updated to the corrected
+figures.
+
+No new taxonomy rule was created or is needed: Rule 22 already
+establishes that a stable core reading at the level actually specified
+is CLEAR even when subtype/owner/variant is missing, and the settled
+Box06/BoxA1 calibration precedent is a direct, already-existing
+application of that rule to this exact family. The defect was in
+applying the existing rule during the consistency audit, not a gap in
+the rule itself -- so PHASE2_SEMANTIC_RULEBOOK_FINAL.txt and
+PHASE2_SEMANTIC_BATCH_RULES.txt were not modified. For future
+consistency audits, the required check is recorded here and in the
+corrected PHASE2_PRODUCTION_TRANCHE2_CONSISTENCY_FLAGS.txt: whenever an
+OPAQUE row's referent already names a real object/function/anatomical
+concept, verify against accepted calibration/production precedent for
+that same family before accepting OPAQUE as correct -- do not stop at
+checking whether the wording is internally hedge-consistent.
+
+----------------------------------------------------------------------
+5. NARROW OPAQUE-REAL-OBJECT SWEEP (POSITIONS 501-2500)
+----------------------------------------------------------------------
+Method: Python mechanically located every production OPAQUE row (282
+total across positions 501-2500) whose fold_key contains a common
+real-world physical-object noun (box, door, torch, pillow, sign, crate,
+barrel, bucket, chair, table, lamp, vase, clock, drum, cup, bottle,
+plate, bowl, mirror, book, shelf, basket, candle, lantern, jar, urn,
+container, ladder, fence, gate, window, pot, jug, bag, sack, crown,
+bell, key, wand, staff, umbrella, fan, pipe, tube). Each hit was then
+individually inspected by Claude, per instruction (Python located
+candidates only; it did not classify).
+
+Result: 2 hits beyond box10/box22 themselves -- "key 27" and "key 2"
+(exact spellings "Key 27", "Key 2"). Both individually inspected and
+found to be CORRECTLY classified, not a further instance of the box
+failure mode: this project's own settled Rule 23 sibling-series
+standard already distinguishes space-separated "Key <N>" (a keyframe/
+animation-preset marker series) from period-separated "Key.<label>"
+(a physical keyboard-prop series) as two genuinely different, non-
+sibling naming conventions. "Key 27"/"Key 2" belong to the keyframe-
+preset series, not the physical-key-object series, so OPAQUE/
+NOT_APPLICABLE is correct for them and does not conflict with any
+calibration precedent for a physical "key" object.
+
+No other production OPAQUE row's fold_key contains a real-object noun
+from the search list.
+
+ADDITIONAL DIRECT CALIBRATION-PRECEDENT CONFLICTS FOUND: 0.
+No further correction was required beyond box10/box22, and no
+unresolved conflict blocks this commit.
+
+----------------------------------------------------------------------
+6. UPDATED TRANCHE-2 DISTRIBUTIONS (positions 1501-2500 only)
+----------------------------------------------------------------------
+semantic_status:
+  CLEAR   : 799 -> 801
+  PARTIAL : 57  -> 57
+  OPAQUE  : 144 -> 142
+
+taxonomy_status:
+  CLEAR           : 747 -> 749
+  NEEDS_CONTEXT   : 109 -> 109
+  NEEDS_DOCTRINE  : 0   -> 0
+  NOT_APPLICABLE  : 144 -> 142
+
+proposed_destination: groupFile/Other 105 -> 107 (+2)
+
+Exactly matches the delta specified in the task instructions.
+
+----------------------------------------------------------------------
+7. GLOBAL LEDGER VALIDATION (mechanical, post-correction, re-opened
+   from disk)
+----------------------------------------------------------------------
+row_count_2500:                    PASS
+first_500_identical_to_final:      PASS
+fold_key_sequence_identical:       PASS
+exact_spellings_unchanged:         PASS
+batch_id_unchanged:                PASS
+zero_duplicates:                   PASS
+rule21_global (OPAQUE iff NOT_APPLICABLE, all 2,500 rows): PASS
+all_destinations_valid (checked against live Master group/control
+  full paths):                     PASS
+no_position_2501_plus:             PASS
+exactly_two_rows_changed:          PASS (box10, box22 only)
+
+ALL CHECKS PASS: True
+
+Raw batch files PHASE2_PRODUCTION_BATCH_P11 through _P20 were NOT
+modified -- they remain the historical raw-classification record.
+FINAL.tsv and the Master were NOT modified.
+======================================================================

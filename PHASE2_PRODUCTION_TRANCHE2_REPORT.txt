@@ -56,25 +56,32 @@ Ledger size: 1500 (before this tranche) -> 2500 (after this tranche).
 ----------------------------------------------------------------------
 2. TRANCHE-ONLY STATISTICS (the 1,000 rows classified in this tranche)
 ----------------------------------------------------------------------
+[UPDATED post-QA-correction; see PHASE2_PRODUCTION_TRANCHE2_QA_APPLIED_REPORT.txt.
+ Originally reported CLEAR 799 / OPAQUE 144 and CLEAR(taxonomy) 747 /
+ NOT_APPLICABLE 144 -- box10 and box22 were corrected from
+ OPAQUE/NOT_APPLICABLE to CLEAR/CLEAR/Other, a real classification
+ correction, not a metadata fix. Figures below reflect the corrected
+ ledger.]
+
 semantic_status:
-  CLEAR   : 799
+  CLEAR   : 801
   PARTIAL : 57
-  OPAQUE  : 144
+  OPAQUE  : 142
 
 taxonomy_status:
-  CLEAR          : 747
+  CLEAR          : 749
   NEEDS_CONTEXT  : 109
   NEEDS_DOCTRINE : 0
-  NOT_APPLICABLE : 144
+  NOT_APPLICABLE : 142
 
 confidence:
-  High   : 549
+  High   : 551
   Medium : 216
-  Low    : 235
+  Low    : 233
 
-proposed_destination distribution (CLEAR rows only, 747 total):
+proposed_destination distribution (CLEAR rows only, 749 total):
   Clothing                    : 139
-  Other                       : 105
+  Other                       : 107
   Body                        : 61
   Legs                        : 53
   Face/Eyes                   : 50
@@ -141,12 +148,20 @@ NEEDS_DOCTRINE: 0 (no doctrine-escalation report was needed; no
 ----------------------------------------------------------------------
 4. CONSISTENCY AUDIT
 ----------------------------------------------------------------------
-Full detail in PHASE2_PRODUCTION_TRANCHE2_CONSISTENCY_FLAGS.txt.
-Summary: 2 flags (box22, box10 -- both an unhedged "likely" guess
-retained in an OPAQUE row's referent), both assessed as metadata/
-reason-only defects, neither a classification error, neither
-contradicting an accepted precedent. No ledger row was changed during
-the audit, per instruction.
+Full detail in PHASE2_PRODUCTION_TRANCHE2_CONSISTENCY_FLAGS.txt (updated
+post-review; see PHASE2_PRODUCTION_TRANCHE2_QA_APPLIED_REPORT.txt for
+the full correction record).
+Summary: 2 flags (box22, box10). The original audit assessed both as
+metadata/reason-only defects (an unhedged "likely" guess in an OPAQUE
+row's referent) without checking the classification itself against the
+finalized calibration precedent for the same naming family. External
+review found both to be actual classification errors: the finalized
+calibration already resolves generic-numbered-box literals to
+CLEAR/CLEAR/groupFile/Other (Box06, BoxA1), and box10/box22 directly
+contradicted that precedent while sitting at OPAQUE/NOT_APPLICABLE. Both
+were corrected in a follow-up QA-application pass (not during the audit
+itself, consistent with the flag-only instruction) to CLEAR/CLEAR/
+groupFile/Other/High. No ledger row was changed during the audit itself.
 
 ----------------------------------------------------------------------
 5. CUMULATIVE PHASE 2 STATE (kept separate from tranche-only stats)

@@ -73,38 +73,63 @@ TARGETED FAMILY-CONSISTENCY SPOT CHECKS
 ----------------------------------------------------------------------
 
 FOLD KEY: box22 (exact: Box22)
-  Current: OPAQUE / NOT_APPLICABLE / [blank] / Low
-  Current semantic_referent: "a generic 'box' object, numbered; likely
+  Original (as-flagged): OPAQUE / NOT_APPLICABLE / [blank] / Low
+  Original semantic_referent: "a generic 'box' object, numbered; likely
   a placeholder/bounding-box technical object"
-  1. Contradicts precedent? No other row's classification is
-     contradicted; this is an internal wording issue on this row alone.
-  2. Classification wrong? No -- OPAQUE/NOT_APPLICABLE is correct: a
-     bare "Box22" has no reliable anatomical or functional referent.
-  3. Metadata/reason wrong? Yes -- the referent asserts "likely a
-     placeholder/bounding-box technical object" as an unhedged claim,
-     which is inconsistent with OPAQUE's own definition ("no reliable
-     core referent/function can be recovered"). Compare the properly
-     neutral phrasing used elsewhere in this same tranche for
-     comparably ungrounded literals (e.g. "l dcorin": "cryptic compound
-     with no recoverable anatomical or functional content" -- no guess
-     asserted at all). This is a metadata-only defect, not a
-     classification error, and should be corrected to a neutral
-     phrasing (e.g. "a generic 'box' object, numbered; type/purpose not
-     established") in a future QA-application pass, not auto-rewritten
-     here.
+
+  *** CORRECTED VERDICT (post external review; see
+  PHASE2_PRODUCTION_TRANCHE2_QA_APPLIED_REPORT.txt) ***
+  1. Contradicts precedent? YES. The finalized calibration already
+     contains Box06 and BoxA1, both explicitly corrected during
+     calibration audit from OPAQUE/NOT_APPLICABLE to
+     CLEAR/CLEAR/groupFile/Other on the settled principle that a
+     generic numbered box still names a recognized real-world object;
+     genericity/numbering alone does not make it OPAQUE. "Box22" is the
+     same fold family under the same naming convention.
+  2. Classification wrong? YES. This was originally answered "No" on
+     the reasoning that "Box22 has no reliable ... referent" -- but the
+     referent field itself already named the object ("box") correctly;
+     the row was OPAQUE only because genericity/numbering was treated
+     as opacity, which is exactly the calibration audit's own settled
+     counter-principle for this exact family. This is an actual
+     classification error, not a metadata-only defect.
+  3. Metadata/reason wrong? Also yes (the unhedged "likely
+     placeholder/bounding-box" guess), but that is secondary to point 2.
+  CORRECTED TO: CLEAR / CLEAR / groupFile/Other / High. Full field
+  values and rationale in PHASE2_PRODUCTION_TRANCHE2_QA_APPLIED_REPORT.txt.
 
 FOLD KEY: box10 (exact: Box10)
-  Same defect, same disposition as box22 -- identical referent wording
-  ("likely a placeholder/bounding-box technical object").
-  1. Contradicts precedent? No.
-  2. Classification wrong? No -- OPAQUE/NOT_APPLICABLE is correct.
-  3. Metadata/reason wrong? Yes -- same fix needed as box22.
+  Same defect, same corrected disposition as box22.
+  1. Contradicts precedent? YES -- same Box06/BoxA1 calibration
+     precedent applies.
+  2. Classification wrong? YES -- same reasoning as box22.
+  3. Metadata/reason wrong? Also yes, secondary to point 2.
+  CORRECTED TO: CLEAR / CLEAR / groupFile/Other / High.
 
 ----------------------------------------------------------------------
-SUMMARY
+AUDIT-METHOD FAILURE MODE (recorded per external review)
 ----------------------------------------------------------------------
-Total flags: 2 (box22, box10) -- both metadata/reason-only, neither a
-classification error, neither contradicting an accepted precedent.
-No row's semantic_status, taxonomy_status, or proposed_destination is
-disputed by this audit. No ledger row was changed.
+The original audit tested these two OPAQUE rows only for speculative/
+unhedged wording (question 3) and, on finding the classification
+"looked internally consistent" with OPAQUE's own definition, answered
+question 2 ("is the classification wrong?") without actually cross-
+checking the literal against the accepted calibration precedent for the
+SAME coherent naming family (Box06/BoxA1 -> Other). A generic-and-
+numbered object name is not automatically OPAQUE; when the calibration
+set has already resolved that exact question for the same family, this
+check must be performed before accepting OPAQUE as correct. See
+PHASE2_PRODUCTION_TRANCHE2_QA_APPLIED_REPORT.txt Section 4 for the
+narrow sweep performed to check for further instances of this failure
+mode elsewhere in positions 501-2500 (none found beyond box10/box22).
+
+----------------------------------------------------------------------
+SUMMARY (CORRECTED)
+----------------------------------------------------------------------
+Total flags: 2 (box22, box10) -- BOTH are actual classification
+corrections (OPAQUE/NOT_APPLICABLE -> CLEAR/CLEAR/groupFile/Other),
+not metadata-only as originally concluded. Both directly contradicted
+the finalized Box06/BoxA1 calibration precedent for the same naming
+family. Corrected in the ledger; see
+PHASE2_PRODUCTION_TRANCHE2_QA_APPLIED_REPORT.txt for full detail and
+validation results.
 ======================================================================
