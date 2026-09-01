@@ -1,0 +1,145 @@
+======================================================================
+PHASE 2 SEMANTIC PILOT 500 -- QA2 REPORT
+Final calibration reason-hygiene patch. Reason-text-only correction
+pass over the 500-family QA candidate dataset. No classification
+field (semantic_status, taxonomy_status, proposed_destination,
+confidence) was touched anywhere in this pass.
+
+Source (unmodified, read-only): PHASE2_SEMANTIC_PILOT_500_FINAL_QA_CANDIDATE.tsv
+Candidate produced: PHASE2_SEMANTIC_PILOT_500_FINAL_QA2_CANDIDATE.tsv
+
+No family 501+ was classified. No taxonomy decision was reopened.
+The Master, CLAUDE.md, the live rulebook, ledger, progress manifest,
+FINAL.tsv, RULEBOOK_FINAL.txt, and QA_CANDIDATE.tsv were not modified.
+Nothing was committed.
+======================================================================
+
+----------------------------------------------------------------------
+SECTION 1 -- BODY MORPHS REASON CONSISTENCY
+----------------------------------------------------------------------
+Scope: all 22 rows with proposed_destination = groupFile/Body Morphs.
+A programmatic regex sweep (for anatomy-only phrasing such as "is the
+clear/dominant anatomical referent" / "explicit ... anatomical term",
+and for the rejected "no (skeletal) joint" automatic-rule phrasing)
+was cross-checked against manual review of all 22 rows. Both methods
+converged on the identical 6-row set with no additional undisclosed
+instances -- confirming the search is exhaustive.
+
+A. AnusGrip -- corrected.
+   Classification unchanged (CLEAR/CLEAR/Body Morphs/High).
+   OLD short_reason cited only "explicit genital anatomical term."
+   NEW short_reason identifies "Grip" as the actual soft-tissue
+   state/deformation evidence (a gripping/clenching state), and
+   states that plain genital anatomy alone would only route to Body.
+
+B. BallsDetail4 -- corrected.
+   Classification unchanged (CLEAR/CLEAR/Body Morphs/High).
+   OLD short_reason cited only "explicit genital anatomical term."
+   NEW short_reason identifies "Detail" as an appearance/detail
+   morphology descriptor, and states plain genital anatomy alone
+   would only route to Body.
+
+C. BellyIn-topclothed -- corrected.
+   Classification unchanged (CLEAR/CLEAR/Body Morphs/Medium).
+   OLD short_reason said "belly is the dominant anatomical referent;
+   'topclothed' is a qualifier" -- naming the bare body part as the
+   evidence rather than the actual deformation word.
+   NEW short_reason identifies "BellyIn" (stomach-in deformation) as
+   the Body-Morph evidence and "topclothed" as a contextual
+   clothing-state qualifier only.
+
+D. Belly-bottomnude -- BLOCKER. Left entirely unchanged. See the
+   dedicated blocker section below and the changes-review file. The
+   literal itself was found to carry no shape/appearance/deformation
+   word at all (unlike its structural siblings BellyIn-topclothed and
+   Protrusion-bottomnude, which do), so the existing Body Morphs
+   classification cannot be defended by a reason-text rewrite alone
+   without reproducing the anatomy-only reasoning this pass exists to
+   eliminate. Escalated rather than silently corrected or reclassified.
+
+E. AnusOpenSuitExposedTorn -- corrected.
+   Classification unchanged (CLEAR/CLEAR/Body Morphs/Medium).
+   OLD short_reason said "anus is the clear anatomical referent; the
+   rest qualifies the clothing-damage context."
+   NEW short_reason identifies "AnusOpen" as an anatomical open/state
+   morphology (the actual Body-Morphs evidence), states explicitly why
+   the primary subject is anatomy rather than Clothing, and why this
+   is Body Morphs rather than plain Body; "SuitExposedTorn" is named
+   as context/trigger qualification only.
+
+----------------------------------------------------------------------
+SECTION 2 -- NIPPLE UP (MATCH FINAL RULE 7)
+----------------------------------------------------------------------
+Classification unchanged: CLEAR/CLEAR/groupFile/Body Morphs/High.
+OLD short_reason stated the rejected automatic rule verbatim: "A
+nipple has no skeletal joint or ordinary posing function, so a
+directional word describing its form/position represents an intended
+soft-tissue appearance/state change; this satisfies Body Morphs'
+purpose test on its own facts and is not a general 'soft tissue +
+direction = Body Morphs' rule." -- despite its own closing disclaimer,
+the reasoning chain itself performed the rejected inference.
+NEW short_reason reframes the absence of skeletal articulation as
+supporting evidence only, per the task's suggested wording: "On this
+complete literal, 'nipple up' is best read as an intended nipple
+appearance/state/position deformation rather than a structural
+root/segment control. The lack of ordinary skeletal articulation
+supports that reading, but does not create a general soft-tissue+
+direction rule." No new doctrine was created; this is a single-literal
+reason correction, not a rule.
+
+----------------------------------------------------------------------
+SECTION 3 -- GLOBAL SEARCH (ALL groupFile/Body Morphs ROWS)
+----------------------------------------------------------------------
+All 22 Body Morphs rows were inspected individually in addition to the
+regex sweep. The following rows were checked and found NOT defective
+(short_reason already cites the actual shape/state/deformation word,
+not bare anatomy, and does not use the rejected joint-rule inference):
+  Body-R-Hard-Nipple, Left_stomach_buldge, pussy_tighten,
+  Shouldershrink, Body-R-Nipple-Pull, ErectNips, R-Ass-Smack,
+  Shin Thickness, TopMuscles, Belly Inflat, Bikini Boobs Upward R,
+  BoobJobL+BoobJobR, cock-head-skinny, Protrusion-bottomnude,
+  R-Titty-Pull, CockWide.
+
+No row beyond the 6 identified in Sections 1-2 required correction.
+No control was reinterpreted; only explanatory metadata was touched,
+and only on the 5 corrected rows.
+
+----------------------------------------------------------------------
+SECTION 4 -- HARD FREEZE ASSERTIONS / VALIDATION RESULTS
+----------------------------------------------------------------------
+row_count_500:                              PASS
+fold_key_sequence_identical:                PASS
+exact_spellings_identical (byte-for-byte):  PASS
+batch_id_identical:                         PASS
+semantic_status_identical_all_500:          PASS
+taxonomy_status_identical_all_500:          PASS
+proposed_destination_identical_all_500:     PASS
+confidence_identical_all_500:               PASS
+only_mutable_fields_differ (semantic_referent/uncertainty_reason/
+  short_reason are the only fields that differ anywhere):   PASS
+  (fields that differed anywhere: short_reason only)
+zero_duplicate_families:                    PASS
+zero_missing_families:                      PASS
+zero_invented_families:                     PASS
+
+ALL VALIDATION CHECKS: PASS
+Candidate promoted to PHASE2_SEMANTIC_PILOT_500_FINAL_QA2_CANDIDATE.tsv
+
+Exact number of changed rows: 5
+  (AnusGrip, BallsDetail4, BellyIn-topclothed, AnusOpenSuitExposedTorn,
+   nipple up -- short_reason only on each)
+Exact number of blocker rows (reviewed, left unchanged, escalated): 1
+  (Belly-bottomnude)
+
+----------------------------------------------------------------------
+SECTION 5 -- PROTECTED FILES / INTEGRITY
+----------------------------------------------------------------------
+git status --porcelain confirms no changes to any protected file.
+Confirmed unmodified: sfm_defaultanimationgroups.txt, CLAUDE.md,
+PHASE2_SEMANTIC_BATCH_RULES.txt, PHASE2_SEMANTIC_LEDGER.tsv,
+PHASE2_SEMANTIC_PROGRESS.txt, PHASE2_SEMANTIC_PILOT_500_FINAL.tsv,
+PHASE2_SEMANTIC_RULEBOOK_FINAL.txt, and
+PHASE2_SEMANTIC_PILOT_500_FINAL_QA_CANDIDATE.tsv.
+No family 501+ was classified. No taxonomy decision was reopened.
+Nothing was committed.
+======================================================================

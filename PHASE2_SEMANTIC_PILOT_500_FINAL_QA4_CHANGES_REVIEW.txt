@@ -1,0 +1,47 @@
+======================================================================
+PHASE 2 SEMANTIC PILOT 500 -- QA4 CHANGES REVIEW
+Final calibration blocker correction. Source: QA2_CANDIDATE.tsv
+(NOT QA3 -- QA3's evidence/confidence rested on a rejected
+same-model provenance argument; see PHASE2_BELLY_BOTTOMNUDE_
+PROVENANCE_VERIFICATION.txt for the independent audit that
+rejected it.)
+======================================================================
+
+Total changed rows: 1
+
+----------------------------------------------------------------------
+FOLD KEY: belly-bottomnude
+EXACT SPELLINGS (unchanged): Belly-bottomnude
+BATCH ID (unchanged): 3
+DISPOSITION: taxonomy/destination correction (QA3 DISPOSITION: C)
+
+  semantic_status (unchanged): CLEAR
+  semantic_referent:
+    OLD: belly, bottom region, "nude" (no-clothing) state
+    NEW: belly control, bottom region, nude/unclothed state; exact control mechanism/purpose not established
+  taxonomy_status:
+    OLD: CLEAR
+    NEW: NEEDS_CONTEXT
+  proposed_destination:
+    OLD: groupFile/Body Morphs
+    NEW: [NONE]
+  confidence (unchanged): Medium
+  uncertainty_reason:
+    OLD: [NONE]
+    NEW: available evidence cannot determine whether the exposed control represents a body morphology/state deformation, a clothing/visibility/geometry-state control, or another model-specific presentation mechanism
+  short_reason:
+    OLD: belly is the clear anatomical referent
+    NEW: Belly/bottom/nude gives a clear semantic subject and state, but does not establish control purpose. Same-model provenance cannot be recovered from the scanner dump, and comparable live-Master templates split across Body Morphs and Clothing; therefore taxonomy requires context.
+----------------------------------------------------------------------
+
+======================================================================
+DISTRIBUTION DELTA (QA2 -> QA4)
+======================================================================
+semantic_status QA2: {'OPAQUE': 59, 'CLEAR': 397, 'PARTIAL': 44}
+semantic_status QA4: {'OPAQUE': 59, 'CLEAR': 397, 'PARTIAL': 44}
+taxonomy_status  QA2: {'NOT_APPLICABLE': 59, 'CLEAR': 373, 'NEEDS_CONTEXT': 68}
+taxonomy_status  QA4: {'NOT_APPLICABLE': 59, 'CLEAR': 372, 'NEEDS_CONTEXT': 69}
+
+Delta: taxonomy_status CLEAR 373 -> 372 (-1), NEEDS_CONTEXT 68 -> 69 (+1).
+semantic_status distribution unchanged (as expected -- the row's
+semantic_status remains CLEAR before and after).

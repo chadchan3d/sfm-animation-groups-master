@@ -1,0 +1,303 @@
+======================================================================
+PHASE 2 SEMANTIC PILOT 500 -- QA CORRECTION PASS REPORT
+Narrowly scoped correction pass over the frozen 500-family calibration
+dataset, triggered by internal QA defects surfaced during external
+review of PHASE2_SEMANTIC_PILOT_500_FINAL_FULL_REVIEW.txt.
+
+Source of truth (read-only): PHASE2_SEMANTIC_PILOT_500_FINAL.tsv
+Supporting evidence (read-only): PHASE2_RESIDUAL_TERMS.txt,
+                                  PHASE2_SEMANTIC_RULEBOOK_FINAL.txt
+Candidate produced: PHASE2_SEMANTIC_PILOT_500_FINAL_QA_CANDIDATE.tsv
+
+No family 501+ was classified. The Master, CLAUDE.md, the live
+rulebook, ledger, and progress manifest, and FINAL.tsv/RULEBOOK_FINAL
+were not modified. Nothing was committed.
+======================================================================
+
+----------------------------------------------------------------------
+SECTION 1 -- STALE NUMBERED-ANATOMY "CORRECTIVE" LANGUAGE
+----------------------------------------------------------------------
+Method: regex search across all 500 rows' semantic_referent /
+uncertainty_reason / short_reason for "likely (a) deformation-
+corrective", "likely corrective", or equivalent numbering-derived
+corrective speculation.
+
+Result: exactly 6 hits, matching the six examples named in the task
+verbatim, confirming the search is exhaustive (no undisclosed
+seventh instance exists):
+  bip01_r_upperarm016, bip01_r_thigh011, bip01_r_forearm009,
+  bip01_l_forearm007, bip01_r_thigh013, bip01_r_upperarm013
+
+All 6 already carry correct semantic_status=CLEAR, taxonomy_status=
+CLEAR, correct destination (Arms/Legs), confidence=High, empty
+uncertainty_reason, and a short_reason that already correctly states
+"no repair language" -- none of that needed to change. The only
+defect in each was an unsupported parenthetical in semantic_referent
+asserting corrective purpose from numbering/sub-bone status alone,
+which the settled rule (numbering/twist/roll/helper/bone/ctrl/jnt/
+DEF-/bip_ markers do not themselves prove corrective purpose) rejects.
+
+Disposition: Category A (metadata/referent-only) for all 6. The
+parenthetical was removed; nothing else on these rows changed.
+
+----------------------------------------------------------------------
+SECTION 2 -- TAURENMALE_HD INTERNAL CONTRADICTION
+----------------------------------------------------------------------
+Re-audited taurenmale_hd_bone_78 and taurenmale_hd_bone_90. Both
+carried a semantic_referent asserting "a numbered head bone...",
+and bone_90's uncertainty_reason additionally asserted "part of the
+head rig" -- both directly contradicting the row's own settled
+short_reason, which already correctly states TaurenMale_HD reads as
+a model/variant prefix in a long generically-numbered bone series,
+not an anatomical "head" abbreviation without positive evidence.
+
+No new positive evidence was found to justify the "head" reading (or
+a "high definition" reading -- neither is asserted as fact per the
+task's explicit caution). semantic_status=OPAQUE, taxonomy_status=
+NOT_APPLICABLE, destination=blank, confidence=Low all correctly kept
+unchanged. semantic_referent was made neutral for both rows: "a
+generic numbered bone in the TaurenMale_HD model/variant series;
+anatomical region/function unknown". uncertainty_reason was made
+neutral for both rows, removing "part of the head rig" from bone_90
+and tightening bone_78's already-fairly-neutral wording for
+consistency, without asserting either candidate expansion of "HD".
+
+Disposition: Category A for both rows.
+
+----------------------------------------------------------------------
+SECTION 3 -- OPT_ACS_YEAR INTERNAL CONTRADICTION
+----------------------------------------------------------------------
+Re-audited opt_acs_year_l8 and opt_acs_year_r8. Both carried a
+semantic_referent asserting "unclear accessory referenced by
+'year'...", contradicting the row's own settled short_reason, which
+already correctly states the "acs" -> "accessory" expansion is
+merely plausible and ungrounded (not supported by other content in
+the literal, a recognized rig/DCC convention, sibling spellings, or
+corpus evidence, per Rule 23).
+
+No new evidence was found for "accessory" or any other expansion.
+semantic_status=OPAQUE, taxonomy_status=NOT_APPLICABLE, destination=
+blank, confidence=Low all correctly kept unchanged. semantic_referent
+was replaced with a neutral description that asserts no expansion:
+"opaque OPT_acs_year code, left/right, index 8; 'acs'/'year' semantic
+meaning unresolved". uncertainty_reason was made neutral to match,
+stating that neither token resolves to a recognizable object,
+function, or body part.
+
+Disposition: Category A for both rows.
+
+----------------------------------------------------------------------
+SECTION 4 -- LIPUR / LIPUL COHERENT-SERIES CHECK
+----------------------------------------------------------------------
+Evidence gathered from PHASE2_RESIDUAL_TERMS.txt (full "lip*"
+neighborhood, lexically sorted -- adjacency alone is NOT treated as
+provenance evidence per the task's explicit caution):
+
+  lipdl, lipdr        -- immediately adjacent to the lipLower_L1..4 /
+                          LipLowerInner_L/R / LipLowerOuter_L/R series
+  lipul, lipur         -- immediately adjacent to the lipUpper_L1..4 /
+                          LipUpperInner_L/R / LipUpperOuter_L/R series
+
+This is a coherent parallel TEMPLATE, not a single isolated bilateral
+pair: "lip" + {d|u} + {l|r}, where the first letter systematically
+tracks Lower/Upper (matching the adjacent fully-spelled series in the
+same corpus) and the second letter tracks the side convention (l/r)
+used throughout the entire surrounding lip series (lipLower_L/R,
+lipUpper_L/R, LipNasolabialCrease_L/R, etc.). Two independent
+same-template pairs corroborating the same two-axis code is stronger
+grounding than a single isolated L/R pair (which would only prove
+systematicity, not decode meaning) -- this satisfies Rule 23's
+"demonstrably coherent naming series/template in the same corpus"
+grounding test (23c).
+
+Live-Master destination check (not assumed from the task's example):
+  bare "lip" (any):        3410/3652 hits -> groupFile/Face/Lower Face
+  "upper lip" specifically: 511/513 hits  -> groupFile/Face/Lower Face
+This confirms the Master routes upper-lip controls to Face/Lower Face
+regardless of upper/lower distinction -- there is no separate "Upper
+Face" convention for lips. The proposed destination matches actual
+Master precedent, not merely the task's illustrative suggestion.
+
+Conclusion: sufficiently grounded. lipur is reclassified:
+  semantic_status:      OPAQUE -> CLEAR
+  semantic_referent:    "upper lip, right side (compact 'lip'+
+                         direction+side shorthand paralleling
+                         lipUpper_R1..4 / LipUpperOuter_R /
+                         LipUpperInner_R)"
+  taxonomy_status:       NOT_APPLICABLE -> CLEAR
+  proposed_destination:  [blank] -> groupFile/Face/Lower Face
+  confidence:            Low -> Medium (decoded via strong template
+                         evidence, not an explicit full-form spelling
+                         -- Medium rather than High)
+  uncertainty_reason:    cleared (row is now CLEAR)
+
+lipul is NOT itself a row in the 500-family pilot (confirmed by
+lookup); no change was made or needed for it.
+
+Disposition: Category B (semantic-status correction) and Category C
+(taxonomy/destination correction) simultaneously, linked by Rule 21's
+OPAQUE<->NOT_APPLICABLE biconditional -- a single row change counted
+in both tallies below.
+
+----------------------------------------------------------------------
+SECTION 5 -- BARE "BIP COLLAR L" TARGETED RE-AUDIT
+----------------------------------------------------------------------
+Only "bip collar l" exists as a row in the 500-family pilot; "bip
+collar r", "bip collarback", "bip collarhelper l/r" are corpus context
+only (confirmed by lookup -- not separate rows).
+
+Live-Master evidence for the bare, unqualified underscore form
+"bip_collar_L" / "bip_collar_R" (all case variants):
+  bip_collar_L, bip_collar_R, Bip_Collar_L, bip_Collar_l,
+  bip_collar_l, Bip_Collar_R, bip_collar_r  -> ALL 7/7 -> groupFile/Arms
+Related anatomical-pattern siblings also in Arms: bip_collar0_l/r,
+bip_collar_def_L/R (a "_def"/deform-bone marker), bip_collar_L1/L2/L3,
+bip_collar_L_twist_01, bip_collar_L_root. The residual corpus itself
+contains a parallel "bip_collarhelper_l/r" pair -- "helper" bones are
+a rig/anatomy satellite-bone pattern, not a garment pattern.
+
+The standard Source-engine ValveBiped clavicle-bone naming convention
+also appears in the residual corpus (Valvebiped.L_collar,
+Valvebiped.R_collar), corroborating that bare biped "collar" is a
+recognized rig/DCC convention for the clavicle/shoulder-girdle bone
+(Rule 23b).
+
+By contrast, every clearly-garment "collar" found in both the Master
+and the residual corpus carries an explicit qualifier the target
+literal lacks: jacket_collar_*, cloth_collar_*, bip_ClockCollar_*
+(named costume), bip_BellCollar_* (named costume), bip_collar_L_cloths
+/ bip_collar_1_L (explicit "_cloths"/segment-numbering garment
+pattern), "collar front/back/side left/right" (spatial multi-segment
+cloth-sim phrasing), CollarFur2SuitMH3 (explicit "Suit"), L/R CollarA/
+B/C a Phy (explicit physics-sim marker).
+
+Conclusion: the original Clothing/High classification was not
+adequately grounded -- in fact the evidence points the other way. The
+bare, unqualified form matches the biped anatomical clavicle-bone
+convention exclusively (100% of exact Master precedent), while every
+garment reading in this corpus requires an explicit qualifier this
+literal does not have. Reclassified as Arms (interpretation B):
+  semantic_referent:     "left clothing collar" -> "left clavicle/
+                          shoulder-girdle rig bone (biped 'collar'
+                          bone)"
+  proposed_destination:  groupFile/Clothing -> groupFile/Arms
+  confidence:            High (unchanged -- the exclusive 7/7 Master
+                          precedent plus the ValveBiped convention and
+                          the sibling "collarhelper" pattern is
+                          decisive, not merely "plausible")
+  short_reason:          updated to state the evidence above
+
+semantic_status and taxonomy_status remain CLEAR (unchanged) -- only
+the interpretation and destination change.
+
+Disposition: Category C (taxonomy/destination correction).
+
+Two adjacent rows were also inspected as part of this sweep and found
+NOT to need any change (Category D, see changes-review file):
+  bip_clockcollarback_l -- named-costume qualifier ("Clock Collar"),
+    genuinely different pattern from the bare literal; Clothing
+    correctly retained.
+  l collarc a phy -- explicit physics-sim marker and lettered variant,
+    genuinely different pattern; Clothing correctly retained.
+
+No global "collar -> Arms" or "collar -> Clothing" rule was adopted;
+this correction is scoped to the specific bare-unqualified template
+evidenced above.
+
+----------------------------------------------------------------------
+SECTION 6 -- CROSS-FIELD CONSISTENCY SWEEP (ALL 500 ROWS)
+----------------------------------------------------------------------
+Method: programmatic sweep of all 500 rows (excluding the 12 rows
+already corrected above) for: OPAQUE rows with hedge-guess language
+still asserted as fact; OPAQUE rows with a non-blank destination;
+any violation of the Rule 21 OPAQUE<->NOT_APPLICABLE biconditional;
+numbered-anatomy rows still carrying undisclosed corrective language;
+and rows whose short_reason rejects an abbreviation expansion while
+the referent still asserts it.
+
+Result: zero additional rows flagged. The only 4 rows in the entire
+500 whose short_reason contains an expansion-rejection marker
+("merely plausible", "not grounded", etc.) are opt_acs_year_l8/r8
+(already corrected in Section 3) and whl_2 / ex_2 -- the latter two
+already hedge their referents with quotation marks and a question
+mark ("unclear abbreviation (\"wheel\"? initials?)", "unclear
+abbreviation (\"Ex\")") rather than asserting the guess as fact, so
+no contradiction exists there and they were left unchanged (Category
+D, documented in the changes-review file).
+
+This confirms the defect set found in Sections 1-5 is exhaustive
+within the scope of the checks run; no further semantic rewrite was
+performed or needed.
+
+----------------------------------------------------------------------
+SECTION 7 -- REGRESSION VERIFICATION (SETTLED DECISIONS, NOT REOPENED)
+----------------------------------------------------------------------
+All listed rows confirmed present in FINAL.tsv with their expected,
+already-settled values; none were reopened or altered:
+  Bip_Balls_2_R            -> groupFile/Body      (CLEAR/CLEAR)
+  vag inner2 2             -> groupFile/Body      (CLEAR/CLEAR)
+  ValveBiped.Bip01_Vag_L_2 -> groupFile/Body      (CLEAR/CLEAR)
+  Cock.Shaft_4_Skin        -> groupFile/Body      (CLEAR/CLEAR)
+  unuseddummy              -> groupFile/Useless   (CLEAR/CLEAR)
+  unusedbone146            -> groupFile/Useless   (CLEAR/CLEAR)
+  unusedbone022            -> groupFile/Useless   (CLEAR/CLEAR)
+  nipple up                -> groupFile/Body Morphs (CLEAR/CLEAR)
+  bip_lube.001             -> groupFile/Other     (CLEAR/CLEAR)
+  gear.holster, holster_base, l_side_holster_0u_0v, l_rear_holster_0u_8v
+                           -> groupFile/Clothing (no explicit weapon/
+                              prop-assembly evidence present)
+  v_weapon.left_middle03, v_weapon.right_index03
+                           -> corresponding finger taxonomy
+                              (groupFile/Arms/*/*Fingers)
+
+----------------------------------------------------------------------
+SECTION 8 -- CANDIDATE VALIDATION RESULTS (machine-derived)
+----------------------------------------------------------------------
+row_count_500:                          PASS (500)
+fold_key_sequence_identical:            PASS
+exact_spellings_identical:              PASS (byte-for-byte)
+batch_id_identical:                     PASS
+zero_duplicate_families:                PASS
+zero_missing_families:                  PASS
+zero_invented_families:                 PASS
+rule21_biconditional (OPAQUE<->NOT_APPLICABLE, all 500 rows): PASS
+only_valid_destinations (checked against live Master group/control
+  full paths via tools/validate_master.py parse_structure):   PASS
+self_declared_unused_routes_to_useless:  PASS
+
+ALL VALIDATION CHECKS: PASS
+Candidate promoted to PHASE2_SEMANTIC_PILOT_500_FINAL_QA_CANDIDATE.tsv
+
+----------------------------------------------------------------------
+SECTION 9 -- INTEGRITY / PROTECTED-FILE CHECK
+----------------------------------------------------------------------
+git status --porcelain shows NO changes to any protected file. Only
+new untracked files appear (the QA_CANDIDATE/QA_REPORT/QA_CHANGES_REVIEW
+outputs from this pass, plus the FOR_REVIEW.tsv and FULL_REVIEW.txt
+artifacts from the prior review-staging turn). Confirmed unmodified:
+  sfm_defaultanimationgroups.txt
+  CLAUDE.md
+  PHASE2_SEMANTIC_BATCH_RULES.txt
+  PHASE2_SEMANTIC_LEDGER.tsv
+  PHASE2_SEMANTIC_PROGRESS.txt   (still: calibration_families_complete
+                                   500 / next_permutation_position 501 /
+                                   production_families_classified 0)
+  PHASE2_SEMANTIC_PILOT_500_FINAL.tsv
+  PHASE2_SEMANTIC_RULEBOOK_FINAL.txt
+No family 501+ was classified. Nothing was committed.
+
+======================================================================
+SUMMARY COUNTS
+======================================================================
+Category A (metadata/referent-only corrections):   10
+  (6 stale-corrective-language rows + 2 taurenmale_hd rows +
+   2 opt_acs_year rows)
+Category B (semantic-status corrections):           1
+  (lipur -- also counted in Category C, see Rule 21 link)
+Category C (taxonomy/destination corrections):      2
+  (lipur -- linked to its Category B change; bip collar l)
+Category D (targeted rows reviewed, intentionally unchanged): 4
+  (whl_2, ex_2, bip_clockcollarback_l, l collarc a phy)
+
+Total distinct rows changed: 12
+======================================================================

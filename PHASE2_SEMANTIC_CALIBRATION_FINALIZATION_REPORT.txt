@@ -1,0 +1,165 @@
+======================================================================
+PHASE 2 SEMANTIC CALIBRATION -- FINALIZATION REPORT
+Administrative promotion checkpoint. This report is descriptive only;
+no new taxonomy doctrine was created and no new semantic classification
+was performed in this task.
+======================================================================
+
+----------------------------------------------------------------------
+1. AUTHORITATIVE SOURCE PROMOTED
+----------------------------------------------------------------------
+PHASE2_SEMANTIC_PILOT_500_FINAL_QA4_CANDIDATE.tsv is now the
+authoritative content of:
+
+    PHASE2_SEMANTIC_PILOT_500_FINAL.tsv
+
+The promotion was a direct byte copy (not a regeneration or
+reserialization). Verified via `cmp` (identical) and matching SHA-256
+digests (752a0fdf...9a329c27) on both files.
+
+----------------------------------------------------------------------
+2. FINAL SEMANTIC DISTRIBUTIONS
+----------------------------------------------------------------------
+semantic_status:
+    CLEAR   397
+    PARTIAL  44
+    OPAQUE   59
+
+taxonomy_status:
+    CLEAR           372
+    NEEDS_CONTEXT    69
+    NEEDS_DOCTRINE    0
+    NOT_APPLICABLE   59
+
+Rule 21 invariant (semantic_status=OPAQUE iff taxonomy_status=
+NOT_APPLICABLE) verified across all 500 rows: PASS.
+
+----------------------------------------------------------------------
+3. MAJOR QA CORRECTIONS (HIGH-LEVEL SUMMARY)
+----------------------------------------------------------------------
+The 500-family calibration pilot went through four correction passes
+(QA, QA2, QA3, QA4) after the initial freeze, driven by external
+review and targeted re-audits:
+
+  - Stale corrective-language cleanup: removed unsupported "(likely
+    deformation-corrective)" parentheticals from 6 numbered-anatomy
+    rows (Bip01_R_UpperArm016, Bip01_R_Thigh011, Bip01_R_Forearm009,
+    Bip01_L_Forearm007, Bip01_R_Thigh013, Bip01_R_UpperArm013) whose
+    classification fields were already correct.
+
+  - TaurenMale_HD / OPT_acs_year unsupported-expansion cleanup:
+    neutralized referent/uncertainty_reason text that had drifted into
+    asserting "head bone" or "accessory" as fact, contradicting each
+    row's own already-settled OPAQUE/NOT_APPLICABLE classification.
+
+  - lipur resolved through grounded naming-series evidence: reclassified
+    OPAQUE/NOT_APPLICABLE -> CLEAR/CLEAR/groupFile/Face/Lower Face,
+    grounded in a coherent parallel shorthand template (lipdl/lipdr vs.
+    lipul/lipur) paralleling the fully-spelled lipLower_*/lipUpper_*
+    series in the same corpus, and confirmed against live-Master
+    upper-lip destination precedent.
+
+  - Bare "bip collar l" corrected Clothing -> Arms through Master
+    precedent: the bare, unqualified biped "collar" naming convention
+    was found to route exclusively to Arms (clavicle/shoulder-girdle
+    rig bone) in the live Master, while every garment-collar reading in
+    the corpus carries an explicit qualifier this literal lacked.
+
+  - Body Morphs reason hygiene: corrected 5 rows (AnusGrip,
+    BallsDetail4, BellyIn-topclothed, AnusOpenSuitExposedTorn,
+    nipple up) whose short_reason cited bare anatomy or a since-rejected
+    automatic "no skeletal joint + direction = morph" inference instead
+    of the actual shape/state/deformation evidence, without changing
+    any classification field.
+
+  - Belly-bottomnude ultimately resolved to CLEAR + NEEDS_CONTEXT after
+    rejecting unprovable same-model provenance: an initial correction
+    (QA3) reclassified this row to Body Morphs at High confidence based
+    on an apparent "same-model" sibling grid inferred from alphabetical
+    sort-order behavior in the scanner dump. An independent
+    methodological audit found that inference invalid -- the scanner
+    file has no positive per-model delimiter of any kind, so same-model
+    membership could not be proven for any pair of candidate siblings --
+    and further found that the live Master contains a second,
+    structurally comparable template (Body-Clothed/Body-Unclothed-*)
+    that routes overwhelmingly to Clothing, directly competing with the
+    bare "_nude" shape-target family QA3 had relied on. The final QA4
+    correction (built from QA2, not QA3, to avoid carrying forward the
+    rejected evidence) sets this row to semantic_status=CLEAR,
+    taxonomy_status=NEEDS_CONTEXT, proposed_destination=blank,
+    confidence=Medium, with metadata stating plainly that available
+    evidence cannot establish control purpose.
+
+Full evidence trails for each item remain in their respective QA/QA2/
+QA3/QA4 report and changes-review files, plus the two dedicated
+Belly-bottomnude blocker/provenance reports -- all retained as audit
+history per Section 2 below.
+
+----------------------------------------------------------------------
+4. AUDIT ARTIFACTS RETAINED (NOT DELETED OR ALTERED)
+----------------------------------------------------------------------
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA_CANDIDATE.tsv
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA2_CANDIDATE.tsv
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA3_CANDIDATE.tsv
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA4_CANDIDATE.tsv
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA_REPORT.txt
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA_CHANGES_REVIEW.txt
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA2_REPORT.txt
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA2_CHANGES_REVIEW.txt
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA4_REPORT.txt
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA4_CHANGES_REVIEW.txt
+  PHASE2_BELLY_BOTTOMNUDE_BLOCKER_REPORT.txt
+  PHASE2_BELLY_BOTTOMNUDE_PROVENANCE_VERIFICATION.txt
+  PHASE2_SEMANTIC_PILOT_500_FINAL_FOR_REVIEW.tsv
+  PHASE2_SEMANTIC_PILOT_500_FINAL_FULL_REVIEW.txt
+  PHASE2_SEMANTIC_PILOT_500_FINAL_QA_FULL_REVIEW.txt
+  PHASE2_SEMANTIC_PILOT_500_FREEZE_REPORT.txt
+
+(Note: QA3 has no dedicated changes-review/report pair of its own beyond
+what was produced when it was built -- its single-row change and
+rationale are documented in the QA3 build's own turn and in the
+Belly-bottomnude blocker/provenance reports; QA3_CANDIDATE.tsv itself
+is retained unmodified as audit history even though it was NOT used as
+the promotion source.)
+
+----------------------------------------------------------------------
+5. LEDGER
+----------------------------------------------------------------------
+PHASE2_SEMANTIC_LEDGER.tsv was reseeded by direct byte copy from the
+newly promoted PHASE2_SEMANTIC_PILOT_500_FINAL.tsv (its prior seed,
+predating the QA corrections, was stale). Verified: 500 rows, fold_key
+sequence identical to FINAL.tsv, every field identical to FINAL.tsv,
+zero duplicate families, no row beyond the 500 calibration families.
+production_families_classified remains 0 -- the ledger contains ONLY
+the 500 calibration rows, no production rows.
+
+----------------------------------------------------------------------
+6. PRODUCTION STATE
+----------------------------------------------------------------------
+Production families classified: 0
+Position 501 has NOT been classified in this task or any prior task.
+Family 501+ was not touched.
+
+----------------------------------------------------------------------
+7. PERMUTATION BOUNDARY
+----------------------------------------------------------------------
+The permutation-boundary check for "family 501" remains unresolved from
+the original freeze checkpoint: the pre-shuffle family-list construction
+could not be mechanically recovered. This finalization does NOT resolve
+or claim to resolve that issue. PHASE2_SEMANTIC_PROGRESS.txt now
+explicitly records:
+
+    permutation_boundary_status: verification_pending
+
+This line exists to prevent the manifest from implying the boundary has
+been mechanically certified when it has not. No permutation
+reconstruction work was performed in this task, per instruction.
+
+----------------------------------------------------------------------
+8. MASTER
+----------------------------------------------------------------------
+sfm_defaultanimationgroups.txt was not modified. `git diff --stat`
+against it is empty. tools/validate_master.py reports PASS (structural
+parse PASS, 0 exact duplicate literals, 0 cross-path native-Rebuild
+casefold invariant violations).
+======================================================================

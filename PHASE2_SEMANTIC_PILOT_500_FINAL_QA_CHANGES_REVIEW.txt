@@ -1,0 +1,224 @@
+======================================================================
+PHASE 2 SEMANTIC PILOT 500 -- QA CHANGES REVIEW
+Every FINAL.tsv -> QA_CANDIDATE.tsv difference, OLD vs NEW, plus
+targeted rows explicitly re-audited and intentionally left unchanged.
+======================================================================
+
+Total changed rows: 12
+
+----------------------------------------------------------------------
+FOLD KEY: bip collar l
+EXACT SPELLINGS (unchanged): bip collar l
+BATCH ID (unchanged): 1
+DISPOSITION: C - taxonomy/destination correction
+
+  semantic_referent:
+    OLD: left clothing collar
+    NEW: left clavicle/shoulder-girdle rig bone (biped "collar" bone)
+  proposed_destination:
+    OLD: groupFile/Clothing
+    NEW: groupFile/Arms
+  short_reason:
+    OLD: plain clothing collar
+    NEW: bare "bip_collar_L/R" matches the standard biped clavicle/shoulder-girdle rig-bone naming (cf. the ValveBiped.*_collar convention and the sibling bip_collarhelper_L/R pair); the Master routes every bare, unqualified spelling of this exact form to Arms (7/7 exact case variants), while every garment collar in this corpus and Master carries an explicit qualifier (jacket/cloth/suit/fur/named costume/multi-segment front-back) that this literal lacks
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: bip01_r_upperarm016
+EXACT SPELLINGS (unchanged): Bip01_R_UpperArm016
+BATCH ID (unchanged): 1
+DISPOSITION: A - metadata/referent-only correction
+
+  semantic_referent:
+    OLD: right upper arm, numbered sub-bone 016 (likely a deformation-corrective bone)
+    NEW: right upper arm, numbered sub-bone 016
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: taurenmale_hd_bone_90
+EXACT SPELLINGS (unchanged): taurenmale_hd_bone_90
+BATCH ID (unchanged): 1
+DISPOSITION: A - metadata/referent-only correction
+
+  semantic_referent:
+    OLD: a numbered head bone on the Tauren creature skeleton, no specific part named
+    NEW: a generic numbered bone in the TaurenMale_HD model/variant series; anatomical region/function unknown
+  uncertainty_reason:
+    OLD: bone_90 carries no anatomical specificity beyond "part of the head rig"
+    NEW: the numbered suffix carries no anatomical specificity, and "HD" is an ungrounded model/variant tag with no confirmed anatomical meaning
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: bip01_r_thigh011
+EXACT SPELLINGS (unchanged): Bip01_R_Thigh011
+BATCH ID (unchanged): 2
+DISPOSITION: A - metadata/referent-only correction
+
+  semantic_referent:
+    OLD: right thigh, numbered sub-bone (likely deformation-corrective)
+    NEW: right thigh, numbered sub-bone
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: lipur
+EXACT SPELLINGS (unchanged): lipur
+BATCH ID (unchanged): 2
+DISPOSITION: B + C - semantic-status AND taxonomy/destination correction (linked by Rule 21)
+
+  semantic_status:
+    OLD: OPAQUE
+    NEW: CLEAR
+  semantic_referent:
+    OLD: unclear truncated/abbreviated term
+    NEW: upper lip, right side (compact "lip"+direction+side shorthand paralleling lipUpper_R1..4 / LipUpperOuter_R / LipUpperInner_R)
+  taxonomy_status:
+    OLD: NOT_APPLICABLE
+    NEW: CLEAR
+  proposed_destination:
+    OLD: [NONE]
+    NEW: groupFile/Face/Lower Face
+  confidence:
+    OLD: Low
+    NEW: Medium
+  uncertainty_reason:
+    OLD: does not confidently resolve to a specific word
+    NEW: [NONE]
+  short_reason:
+    OLD: ambiguous short fragment
+    NEW: grounded by a coherent parallel two-member shorthand template (lipdl/lipdr vs. lipul/lipur) directly flanking the fully-spelled lipLower_*/lipUpper_* sibling series in the same corpus (Rule 23c); second letter (l/r) matches the established side convention used throughout the surrounding lip series; Master precedent routes upper-lip controls to Face/Lower Face (511/513 exact matches)
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: opt_acs_year_l8
+EXACT SPELLINGS (unchanged): OPT_acs_year_l8
+BATCH ID (unchanged): 2
+DISPOSITION: A - metadata/referent-only correction
+
+  semantic_referent:
+    OLD: unclear accessory referenced by "year", left, segment 8
+    NEW: opaque OPT_acs_year code, left, index 8; "acs"/"year" semantic meaning unresolved
+  uncertainty_reason:
+    OLD: year does not resolve to any recognizable object or body part
+    NEW: neither "acs" nor "year" resolves to a recognizable object, function, or body part; no grounding exists for either token
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: bip01_r_forearm009
+EXACT SPELLINGS (unchanged): Bip01_R_Forearm009
+BATCH ID (unchanged): 3
+DISPOSITION: A - metadata/referent-only correction
+
+  semantic_referent:
+    OLD: right forearm, numbered sub-bone (likely deformation-corrective)
+    NEW: right forearm, numbered sub-bone
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: taurenmale_hd_bone_78
+EXACT SPELLINGS (unchanged): taurenmale_hd_bone_78
+BATCH ID (unchanged): 3
+DISPOSITION: A - metadata/referent-only correction
+
+  semantic_referent:
+    OLD: a numbered head bone on the Tauren creature skeleton, no specific part named
+    NEW: a generic numbered bone in the TaurenMale_HD model/variant series; anatomical region/function unknown
+  uncertainty_reason:
+    OLD: bone_78 carries no anatomical specificity
+    NEW: the numbered suffix carries no anatomical specificity, and "HD" is an ungrounded model/variant tag with no confirmed anatomical meaning
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: bip01_l_forearm007
+EXACT SPELLINGS (unchanged): Bip01_L_Forearm007
+BATCH ID (unchanged): 5
+DISPOSITION: A - metadata/referent-only correction
+
+  semantic_referent:
+    OLD: left forearm, numbered sub-bone (likely deformation-corrective)
+    NEW: left forearm, numbered sub-bone
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: bip01_r_thigh013
+EXACT SPELLINGS (unchanged): Bip01_R_Thigh013
+BATCH ID (unchanged): 5
+DISPOSITION: A - metadata/referent-only correction
+
+  semantic_referent:
+    OLD: right thigh, numbered sub-bone (likely deformation-corrective)
+    NEW: right thigh, numbered sub-bone
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: bip01_r_upperarm013
+EXACT SPELLINGS (unchanged): Bip01_R_UpperArm013
+BATCH ID (unchanged): 5
+DISPOSITION: A - metadata/referent-only correction
+
+  semantic_referent:
+    OLD: right upper arm, numbered sub-bone (likely deformation-corrective)
+    NEW: right upper arm, numbered sub-bone
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: opt_acs_year_r8
+EXACT SPELLINGS (unchanged): OPT_acs_year_r8
+BATCH ID (unchanged): 5
+DISPOSITION: A - metadata/referent-only correction
+
+  semantic_referent:
+    OLD: unclear accessory referenced by "year", right, segment 8
+    NEW: opaque OPT_acs_year code, right, index 8; "acs"/"year" semantic meaning unresolved
+  uncertainty_reason:
+    OLD: year does not resolve to any recognizable object or body part
+    NEW: neither "acs" nor "year" resolves to a recognizable object, function, or body part; no grounding exists for either token
+----------------------------------------------------------------------
+
+======================================================================
+CATEGORY D -- TARGETED ROWS REVIEWED, INTENTIONALLY LEFT UNCHANGED
+======================================================================
+
+----------------------------------------------------------------------
+FOLD KEY: whl_2
+VERDICT: REVIEWED — NO CHANGE
+REASON: Referent already hedges the "wheel" expansion with quotation marks and a question mark ("unclear abbreviation (\"wheel\"? initials?), numbered"); short_reason already correctly states the expansion is merely plausible and ungrounded. No internal contradiction: the referent does not assert the expansion as fact, so Section 6 rule (E) speculative-assertion contradiction does not apply here.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: ex_2
+VERDICT: REVIEWED — NO CHANGE
+REASON: Same pattern as whl_2: referent already hedges ("unclear abbreviation (\"Ex\"), numbered") and short_reason already states the expansion is merely plausible/ungrounded. No contradiction found; left unchanged.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: bip_clockcollarback_l
+VERDICT: REVIEWED — NO CHANGE
+REASON: Inspected as part of the Section 5 collar sweep. Carries an explicit named-costume qualifier ("Clock Collar"), matching the pattern this Master consistently uses for garment collars (cf. bip_BellCollar_*, jacket_collar_*, cloth_collar_*). Clothing/CLEAR/High is well grounded; this is a genuinely different, unambiguous pattern from the bare "bip collar l" literal and was not altered.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: l collarc a phy
+VERDICT: REVIEWED — NO CHANGE
+REASON: Inspected as part of the Section 5 collar sweep. Explicit "Phy" (physics-simulated) marker and variant lettering match this Master's clothing/cloth-sim collar naming pattern (cf. L/R CollarA/B/C a Phy, Spo). Clothing/CLEAR/High is well grounded and unaffected by the bare-"bip_collar" anatomical-precedent finding used for bip collar l. Left unchanged.
+----------------------------------------------------------------------
+
+NOTE: lipur and bip collar l were both explicitly targeted for re-audit (Sections 4 and 5)
+but are NOT Category D rows -- evidence warranted correcting both. See the change
+records above (disposition B+C for lipur, C for bip collar l).
+
+----------------------------------------------------------------------
+REGRESSION VERIFICATION SET (Section 7) -- confirmed unchanged, not reopened
+----------------------------------------------------------------------
+  Bip_Balls_2_R -> Body
+  vag inner2 2 -> Body
+  ValveBiped.Bip01_Vag_L_2 -> Body
+  Cock.Shaft_4_Skin -> Body
+  unuseddummy -> Useless
+  unusedbone146 -> Useless
+  unusedbone022 -> Useless
+  nipple up -> Body Morphs
+  bip_lube.001 -> Other
+  gear.holster / holster_base / l_side_holster_0u_0v / l_rear_holster_0u_8v -> Clothing (no explicit weapon/prop-assembly evidence present)
+  v_weapon.left_middle03 / v_weapon.right_index03 -> corresponding finger taxonomy
+All confirmed present in FINAL.tsv with expected values; none reopened or altered.
+----------------------------------------------------------------------

@@ -1,0 +1,128 @@
+======================================================================
+PHASE 2 SEMANTIC PILOT 500 -- QA4 REPORT
+Final calibration blocker correction. This is the true final candidate
+of the 500-family calibration pilot.
+
+Source (unmodified, read-only): PHASE2_SEMANTIC_PILOT_500_FINAL_QA2_CANDIDATE.tsv
+   (QA3_CANDIDATE.tsv was deliberately NOT used as the source, because
+   its Belly-bottomnude evidence and confidence rested on a same-model
+   provenance claim that the independent verification pass rejected.)
+Candidate produced: PHASE2_SEMANTIC_PILOT_500_FINAL_QA4_CANDIDATE.tsv
+
+No family 501+ was classified. The Master, CLAUDE.md, the live
+rulebook, ledger, progress manifest, FINAL.tsv, RULEBOOK_FINAL.txt,
+QA2_CANDIDATE.tsv, and QA3_CANDIDATE.tsv were not modified. The ledger
+and progress manifest were not updated. Nothing was committed.
+======================================================================
+
+----------------------------------------------------------------------
+BACKGROUND: WHY QA3 WAS NOT USED AS THE SOURCE
+----------------------------------------------------------------------
+QA3 reclassified Belly-bottomnude's semantic_referent, confidence, and
+short_reason on the strength of a claimed "verified same-model" sibling
+grid, inferred from the absence of an alphabetical sort-order reset
+between two lines in the scanner dump. An independent audit
+(PHASE2_BELLY_BOTTOMNUDE_PROVENANCE_VERIFICATION.txt) found that
+inference invalid: absence of a reset cannot prove absence of a model
+boundary, and re-inspection of the scanner file found NO positive
+per-model delimiter of any kind (0 blank lines, no path/header/record
+markers, only 14 stray bracketed lines clustered at two unrelated
+locations across a ~9,000-model, 29,769-line file). The audit further
+found that the live Master's Body-Clothed/Body-Unclothed-* template
+(a structurally close analog, including "Body-Unclothed-Bottom")
+routes overwhelmingly to Clothing, directly competing with the bare
+"_nude" shape-target family QA3 had relied on. Verdict:
+
+    SAME-MODEL PROVENANCE: NOT PROVEN
+    QA3 DISPOSITION: C (QA3's Body Morphs classification not supported)
+
+QA4 therefore branches from QA2 (the last state not tainted by the
+rejected provenance argument) and applies the audit's own recommended
+correction directly.
+
+----------------------------------------------------------------------
+FINAL BELLY-BOTTOMNUDE ROW
+----------------------------------------------------------------------
+fold_key:              belly-bottomnude                (unchanged)
+exact_spellings:        Belly-bottomnude                 (unchanged)
+semantic_status:        CLEAR                            (unchanged)
+semantic_referent:      "belly control, bottom region, nude/unclothed
+                        state; exact control mechanism/purpose not
+                        established"
+taxonomy_status:        CLEAR -> NEEDS_CONTEXT
+proposed_destination:   groupFile/Body Morphs -> [blank]
+confidence:             Medium -> Medium               (unchanged)
+uncertainty_reason:     "available evidence cannot determine whether
+                        the exposed control represents a body
+                        morphology/state deformation, a clothing/
+                        visibility/geometry-state control, or another
+                        model-specific presentation mechanism"
+short_reason:           "Belly/bottom/nude gives a clear semantic
+                        subject and state, but does not establish
+                        control purpose. Same-model provenance cannot
+                        be recovered from the scanner dump, and
+                        comparable live-Master templates split across
+                        Body Morphs and Clothing; therefore taxonomy
+                        requires context."
+batch_id:               3                                (unchanged)
+scanner_lines:          10140                            (unchanged)
+
+No sort-reset-interval reasoning is referenced anywhere in the new
+metadata, per instruction.
+
+----------------------------------------------------------------------
+HARD ASSERTION RESULTS (QA4 vs QA2)
+----------------------------------------------------------------------
+row_count_500:                              PASS
+fold_key_sequence_identical:                PASS
+exact_spellings_identical (byte-for-byte):  PASS
+batch_id_identical:                         PASS
+exactly_one_row_differs:                    PASS (belly-bottomnude)
+target_semantic_status_CLEAR:               PASS (CLEAR -> CLEAR)
+target_taxonomy_status_NEEDS_CONTEXT:       PASS (CLEAR -> NEEDS_CONTEXT)
+target_destination_blank:                   PASS (groupFile/Body Morphs -> blank)
+target_confidence_Medium:                   PASS (Medium -> Medium)
+only_allowed_fields_changed_on_target:      PASS (semantic_referent,
+    taxonomy_status, proposed_destination, uncertainty_reason,
+    short_reason changed; semantic_status, confidence, fold_key,
+    exact_spellings, batch_id, scanner_lines unchanged)
+other_499_rows_byte_identical_field_for_field: PASS
+rule21_biconditional_all_500 (OPAQUE iff NOT_APPLICABLE):  PASS
+  (CLEAR + NEEDS_CONTEXT on this row is valid and expected -- Rule 21
+  only constrains OPAQUE/NOT_APPLICABLE, which this row is neither)
+zero_duplicate_families:                    PASS
+zero_missing_families:                      PASS
+zero_invented_families:                     PASS
+
+ALL VALIDATION CHECKS: PASS
+Candidate promoted to PHASE2_SEMANTIC_PILOT_500_FINAL_QA4_CANDIDATE.tsv
+
+----------------------------------------------------------------------
+FINAL CALIBRATION DISTRIBUTIONS (QA4)
+----------------------------------------------------------------------
+semantic_status:
+  CLEAR   : 397   (QA2: 397, delta 0)
+  PARTIAL : 44    (QA2: 44,  delta 0)
+  OPAQUE  : 59    (QA2: 59,  delta 0)
+
+taxonomy_status:
+  CLEAR          : 372   (QA2: 373, delta -1)
+  NEEDS_CONTEXT  : 69    (QA2: 68,  delta +1)
+  NEEDS_DOCTRINE : 0     (QA2: 0,   delta 0)
+  NOT_APPLICABLE : 59    (QA2: 59,  delta 0)
+
+Delta exactly matches the expected effect of this single row's
+correction: CLEAR decreases by 1, NEEDS_CONTEXT increases by 1, and no
+semantic_status distribution change occurs.
+
+----------------------------------------------------------------------
+INTEGRITY
+----------------------------------------------------------------------
+git status --porcelain confirms no changes to any protected file.
+Confirmed unmodified: sfm_defaultanimationgroups.txt, CLAUDE.md,
+PHASE2_SEMANTIC_BATCH_RULES.txt, PHASE2_SEMANTIC_LEDGER.tsv,
+PHASE2_SEMANTIC_PROGRESS.txt, PHASE2_SEMANTIC_PILOT_500_FINAL.tsv,
+PHASE2_SEMANTIC_RULEBOOK_FINAL.txt, QA2_CANDIDATE.tsv, and
+QA3_CANDIDATE.tsv. The ledger and progress manifest were not updated.
+No family 501+ was classified. Nothing was committed.
+======================================================================

@@ -100,11 +100,11 @@ wep_gl_base	WEP_GL_Base	CLEAR	weapon grenade-launcher base component	CLEAR	group
 wide eye	Wide eye	CLEAR	wide-eye expression	CLEAR	groupFile/Face/Eyes	High		plain eye-expression control	1	20606
 wing_left_1_1	Wing_Left_1_1	CLEAR	left wing, chain segment 1-1	CLEAR	groupFile/Wings	High		explicit left wing segment	1	20615
 _right_z_up	_right_z_up	OPAQUE	a right-side, Z-axis-up technical/positional code	NOT_APPLICABLE		Low	pure axis notation with no body part named	technical coordinate label, no referent	2	20701
-anusopensuitexposedtorn	AnusOpenSuitExposedTorn	CLEAR	anus-open morph, tied to a torn/exposed suit state	CLEAR	groupFile/Body Morphs	Medium		"""AnusOpen"" describes an anatomical open/state morphology of the anus, which is why the primary subject is anatomy rather than Clothing and why this is Body Morphs rather than plain Body; ""SuitExposedTorn"" is context/trigger qualification describing when the state applies, not the classification's basis."	2	9583
+anusopensuitexposedtorn	AnusOpenSuitExposedTorn	CLEAR	anus-open morph, tied to a torn/exposed suit state	CLEAR	groupFile/Body Morphs	Medium		anus is the clear anatomical referent; the rest qualifies the clothing-damage context	2	9583
 apron e2	Apron e2	CLEAR	apron, variant e2	CLEAR	groupFile/Clothing	High		plain garment item	2	9602
 arm left wrist ctrl 1	arm left wrist ctrl 1	CLEAR	left wrist control, variant 1	CLEAR	groupFile/Arms	High		explicit wrist control	2	6974
 bas.side_right_1_jiggle	BAS.Side_Right_1_jiggle	CLEAR	a right-side jiggle-physics bone, owning object unspecified	NEEDS_CONTEXT		High		Jiggle names a single stable secondary-motion-physics function; the owning object is unspecified, so taxonomy is NEEDS_CONTEXT.	2	9850
-bellyin-topclothed	BellyIn-topclothed	CLEAR	stomach-in morph, calibrated for when a top garment is worn	CLEAR	groupFile/Body Morphs	Medium		"""BellyIn"" is the Body-Morph evidence -- an intended stomach-in deformation; ""topclothed"" is a contextual clothing-state qualifier for when the deformation applies, not the classification's basis."	2	10145
+bellyin-topclothed	BellyIn-topclothed	CLEAR	stomach-in morph, calibrated for when a top garment is worn	CLEAR	groupFile/Body Morphs	Medium		"belly is the dominant anatomical referent; ""topclothed"" is a qualifier"	2	10145
 belt_19	belt_19	CLEAR	belt, variant 19	CLEAR	groupFile/Clothing	High		plain clothing item	2	21095
 bip01_r_thigh011	Bip01_R_Thigh011	CLEAR	right thigh, numbered sub-bone	CLEAR	groupFile/Legs	High		numbered anatomical leg bone, no repair language	2	1557
 bip01_spine2_002	Bip01_Spine2_002	CLEAR	spine, numbered sub-bone	CLEAR	groupFile/Body	High		explicit anatomical/biped spine (Bip01/DEF-/bip_/SK_ rig prefixes, no object-owner noun present)	2	1154
@@ -205,7 +205,7 @@ arm right finger 2	arm right finger 2	CLEAR	right hand, a finger (index by commo
 backhair4.001	backhair4.001	CLEAR	back hair, segment 4, sub .001	CLEAR	groupFile/Hair	High		plain hair term	3	6995
 band.bend_right_1	Band.Bend_Right_1	CLEAR	a band/strip accessory bending, right, variant 1	NEEDS_CONTEXT		High		Band is a single stable core object with no named owner; Clothing is not the only plausible destination, so taxonomy is NEEDS_CONTEXT.	3	10076
 belly inflat	Belly Inflat	CLEAR	"belly inflation (obvious truncation of ""inflate"")"	CLEAR	groupFile/Body Morphs	High		"Inflat reads as truncated ""Inflate"""	3	314
-belly-bottomnude	Belly-bottomnude	CLEAR	belly control, bottom region, nude/unclothed state; exact control mechanism/purpose not established	NEEDS_CONTEXT		Medium	available evidence cannot determine whether the exposed control represents a body morphology/state deformation, a clothing/visibility/geometry-state control, or another model-specific presentation mechanism	Belly/bottom/nude gives a clear semantic subject and state, but does not establish control purpose. Same-model provenance cannot be recovered from the scanner dump, and comparable live-Master templates split across Body Morphs and Clothing; therefore taxonomy requires context.	3	10140
+belly-bottomnude	Belly-bottomnude	CLEAR	"belly, bottom region, ""nude"" (no-clothing) state"	CLEAR	groupFile/Body Morphs	Medium		belly is the clear anatomical referent	3	10140
 bikini boobs upward r	Bikini Boobs Upward R	CLEAR	right breast, upward morph, in the context of a bikini	CLEAR	groupFile/Body Morphs	High		boobs upward is an explicit breast-morph control	3	10247
 bip faceforeheadtop l	bip faceforeheadtop l	CLEAR	left forehead, top region	CLEAR	groupFile/Face/Upper Face	High		explicit forehead control	3	21164
 bip facetempleloout r	bip facetempleloout r	CLEAR	right temple, lower-out direction	CLEAR	groupFile/Face/Upper Face	High		explicit temple control	3	21183
@@ -266,7 +266,7 @@ microleft	MicroLeft	OPAQUE	"something ""micro""-scale, left side, object unspeci
 mlid_r_1	MLid_R_1	CLEAR	right eyelid (mid-lid), variant 1	CLEAR	groupFile/Face/Eyes	Medium		lid is the recognizable eyelid referent	3	3201
 moustache_l_2	Moustache_L_2	CLEAR	left moustache section, variant 2	CLEAR	groupFile/Hair	High		facial hair, matches established moustache-in-Hair convention	3	16949
 necklace rope	necklace rope	CLEAR	a rope-style necklace	CLEAR	groupFile/Clothing	High		explicit clothing accessory	3	27191
-nipple up	nipple up	CLEAR	"nipple, ""up"" position/direction"	CLEAR	groupFile/Body Morphs	High		"On this complete literal, ""nipple up"" is best read as an intended nipple appearance/state/position deformation rather than a structural root/segment control. The lack of ordinary skeletal articulation supports that reading, but does not create a general soft-tissue+direction rule."	3	27194
+nipple up	nipple up	CLEAR	"nipple, ""up"" position/direction"	CLEAR	groupFile/Body Morphs	High		"A nipple has no skeletal joint or ordinary posing function, so a directional word describing its form/position represents an intended soft-tissue appearance/state change; this satisfies Body Morphs' purpose test on its own facts and is not a general ""soft tissue + direction = Body Morphs"" rule."	3	27194
 null.002	Null.002	OPAQUE	a generic empty/null transform helper object	NOT_APPLICABLE		Low	null objects carry no semantic content	generic DCC null/empty object	3	5924
 object40	Object40	OPAQUE	generic auto-numbered mesh/object name	NOT_APPLICABLE		Low	no descriptive content	DCC placeholder name	3	17320
 opt_hand_right_pinky2	OPT_Hand_Right_Pinky2	CLEAR	right hand pinky finger, segment 2	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger convention	3	3293
@@ -305,7 +305,7 @@ arm right finger 4xx	arm right finger 4xx	CLEAR	"right hand, finger 4 (pinky by 
 au18z	AU18Z	OPAQUE	ambiguous alphanumeric code	NOT_APPLICABLE		Low	no recognizable word content	opaque code	4	4181
 backhair5.001	backhair5.001	CLEAR	back hair, segment 5	CLEAR	groupFile/Hair	High		plain hair term	4	6996
 backlegs	backlegs	CLEAR	back legs (implies a quadruped/non-human creature with more than two legs)	CLEAR	groupFile/Legs	High		bare plural quadruped leg reference is still a Legs control; no side marker, side-neutral destination used	4	21020
-ballsdetail4	BallsDetail4	CLEAR	testicle detail morph, variant 4	CLEAR	groupFile/Body Morphs	High		"""Detail"" explicitly describes an appearance/detail morphology of the testicles, which is why Body Morphs applies; plain genital anatomy by itself would only route to Body."	4	10065
+ballsdetail4	BallsDetail4	CLEAR	testicle detail morph, variant 4	CLEAR	groupFile/Body Morphs	High		explicit genital anatomical term	4	10065
 beard_r_131	Beard_R_131	CLEAR	right-side beard section, numbered	CLEAR	groupFile/Hair	High		facial hair, consistent with the moustache-in-Hair convention	4	10133
 belthat_bone_r_02	beltHat_bone_r_02	PARTIAL	"an unusual combined ""belt hat"" accessory bone, right, variant 02"	CLEAR	groupFile/Clothing	Medium		"both plausible readings of ""belt hat"" (belt or hat) are Clothing items, so the unresolved exact identity does not create a competing destination"	4	7023
 bigtoe2_l	bigToe2_l	CLEAR	left big toe, segment 2	CLEAR	groupFile/Toes/LeftToes	High		explicit toe control	4	7031
@@ -399,7 +399,7 @@ vwidth	Vwidth	PARTIAL	"a ""width"" morph for an unspecified object abbreviated "
 wakazashi.tassel_front_8	Wakazashi.Tassel_Front_8	CLEAR	tassel on a wakizashi-sword prop, front, segment 8	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	20568
 wep_backcap	WEP_BackCap	CLEAR	weapon back-cap component	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	20424
 wep_cylinder_release	WEP_Cylinder_Release	CLEAR	weapon cylinder-release mechanism (e.g. a revolver)	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	20448
-anusgrip	AnusGrip	CLEAR	"anus ""grip"" morph"	CLEAR	groupFile/Body Morphs	High		"""Grip"" describes an intended soft-tissue state/deformation of the anus (a gripping/clenching state), which is why Body Morphs applies; plain genital anatomy by itself would only route to Body."	5	9577
+anusgrip	AnusGrip	CLEAR	"anus ""grip"" morph"	CLEAR	groupFile/Body Morphs	High		explicit genital anatomical term	5	9577
 arm left shoulder 2 adj. 2	arm left shoulder 2 adj. 2	CLEAR	left shoulder adjustment, variant 2	CLEAR	groupFile/Arms	High		explicit shoulder control	5	20823
 arm right lower 1	arm right lower 1	CLEAR	right lower arm (forearm), variant 1	CLEAR	groupFile/Arms	High		explicit forearm control	5	6979
 arm.left_top	Arm.Left_Top	CLEAR	left arm, top (upper arm) region	CLEAR	groupFile/Arms	High		plain anatomical term	5	9638

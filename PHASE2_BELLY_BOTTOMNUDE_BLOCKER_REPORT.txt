@@ -1,0 +1,249 @@
+======================================================================
+PHASE 2 -- BELLY-BOTTOMNUDE BLOCKER RESOLUTION REPORT
+Targeted resolution of the single remaining QA2 calibration blocker.
+No other row in the 500-family calibration was touched or reopened.
+
+Row: fold_key=belly-bottomnude, exact_spellings=Belly-bottomnude
+Scanner source line recorded on the row: 10140
+Scanner corpus: C:\Users\REDACTED\Downloads\SFM Model Scanner\Scan 9000 models.txt
+======================================================================
+
+----------------------------------------------------------------------
+1. SCANNER FILE FORMAT -- ESTABLISHED BEFORE ANY CLAIM OF PROVENANCE
+----------------------------------------------------------------------
+The scanner dump is NOT a single globally-sorted vocabulary list (unlike
+PHASE2_RESIDUAL_TERMS.txt) and it does NOT carry per-line model-path
+headers. Structurally, it is a concatenation of per-model control lists,
+where EACH model's own list is internally alphabetized (case-insensitive)
+and then the next model's list begins again from the top of the alphabet.
+
+This was verified mechanically, not assumed: scanning the whole file for
+every point where the case-insensitive alphabetical order goes backward
+(a "reset") finds 673 such resets across 29,769 lines -- consistent with
+per-model chunk boundaries, not a single sorted list (which would show
+zero resets). A short header/bodygroup-name block exists near lines
+6949 and 20669-20681 ([main_character], [----Body----], [pos_asagi],
+etc.) but these bracketed lines are sparse and not reliably present for
+every chunk, so chunk boundaries were located by the reset method, not
+by bracket headers.
+
+This means: exact adjacency in this file DOES constitute same-model
+membership evidence *within one reset-bounded chunk*, but NOT across a
+chunk boundary. This distinction was applied rigorously below.
+
+----------------------------------------------------------------------
+2. EXACT SCANNER OCCURRENCES
+----------------------------------------------------------------------
+"Belly-bottomnude"       -- exactly 1 occurrence, line 10140
+"BellyIn-topclothed"     -- exactly 1 occurrence, line 10145
+"Protrusion-bottomnude"  -- exactly 1 occurrence, line 17675
+
+Chunk-boundary check (via the reset method above):
+  Chunk containing line 10140: bounded by resets at line 10105 and 10162.
+  Chunk containing line 17675: bounded by resets at line 17595 and 17685.
+  These are DIFFERENT chunks -- i.e. DIFFERENT models.
+
+CONCLUSION: "Protrusion-bottomnude" is NOT a same-model sibling of
+"Belly-bottomnude". Their earlier apparent association (seen only in the
+lexically-sorted PHASE2_RESIDUAL_TERMS.txt) was exactly the kind of
+lexical-adjacency illusion this project's methodology explicitly warns
+against, and is disregarded here. "Belly-bottomnude" and
+"BellyIn-topclothed", however, ARE in the same verified chunk (both fall
+between resets 10105 and 10162) -- this is genuine same-model provenance,
+not an assumption.
+
+----------------------------------------------------------------------
+3. SOURCE MODEL PATH
+----------------------------------------------------------------------
+The scanner dump does not carry an explicit filesystem model path for
+this chunk (no bracketed header immediately precedes it, and the nearest
+bracketed section markers, at lines 6949 and 20669+, belong to different,
+much more distant chunks). Model identity beyond "this specific
+reset-bounded chunk of the scan" cannot be recovered from this file.
+This limitation is stated explicitly, per the task's instruction to say
+so if the scanner dump cannot establish a model path.
+
+----------------------------------------------------------------------
+4. FULL SAME-MODEL SIBLING CHUNK (lines 10105-10161, verified boundaries)
+----------------------------------------------------------------------
+The complete, verified same-model control chunk containing the target
+literal (props/clothing entries retained for completeness, morph-relevant
+entries called out):
+
+  ... Base_00002 .. BeerCrate (unrelated props/accessories) ...
+  BellowRaise Eyebrows
+  BellowRaise Mouth
+  Belly Bulge Large            <- explicit graduated shape-size morph
+  Belly Bulge Medium           <- explicit graduated shape-size morph
+  Belly Bulge Monster          <- explicit graduated shape-size morph
+  Belly-bottomnude             <- TARGET LITERAL
+  Belly-nudetop
+  Belly-topclothed
+  BellyIn-bottomnude
+  BellyIn-nudetop
+  BellyIn-topclothed
+  BellyInflateFeathers          <- explicit inflate morph
+  BellyOut                      <- explicit shape morph, opposite of "In"
+  Belt, Belt.Kunai, Belt.Mask, Belt.Root, BeltClip, BeltControl.* ...
+  (clothing/accessory items, unrelated to the belly-morph system)
+
+----------------------------------------------------------------------
+5. SAME-MODEL SIBLING TEST -- ANALYSIS
+----------------------------------------------------------------------
+This one model's own control list contains an unusually rich, explicit
+belly shape-morph vocabulary: three graduated bulge-size morphs (Large/
+Medium/Monster), an explicit "BellyOut" shape morph, an explicit
+"BellyInflateFeathers" morph, AND a fully parallel 2x3 grid:
+
+           bottomnude   nudetop   topclothed
+  Belly    Belly-bottomnude  Belly-nudetop   Belly-topclothed
+  BellyIn  BellyIn-bottomnude BellyIn-nudetop BellyIn-topclothed
+
+Two independent tracks ("Belly" and "BellyIn") receive the identical
+three clothing-state suffixes. The most coherent technical reading,
+given the surrounding confirmed shape-morph vocabulary on this same
+model, is that both tracks are shape-deformation targets that must be
+split per clothing-context because the underlying mesh a morph deforms
+differs depending on which garments are worn (a standard reason
+compiled-model rigs need multiple morph targets for what is conceptually
+one deformation) -- "BellyIn" is the confirmed stomach-in push, and
+"Belly" (bare, in this specific model's vocabulary) is its
+counterpart/companion track, most plausibly the belly-out/bulge
+direction already independently evidenced by the bare "BellyOut" and
+the three "Belly Bulge" size morphs sitting immediately alongside it.
+
+A. Yes -- the sibling system positively shows Belly-bottomnude is a
+   body-shape/deformation state, not bare structural anatomy. The
+   density of unambiguous shape-morph siblings on the same model model
+   (Bulge Large/Medium/Monster, BellyOut, BellyInflateFeathers) makes a
+   coincidental non-morph reading implausible.
+B. No positive evidence of a visibility/mesh/variant selector reading:
+   nothing in this chunk resembles bodygroup/mesh-swap naming (no
+   "Mesh", "LOD", "Swap", "Skin", or discrete asset-name markers); every
+   neighbor that shares the "Belly" root is a graduated or directional
+   shape-morph term.
+C. Yes -- "bottomnude"/"nudetop"/"topclothed" function as clothing-state
+   qualifiers on an implicit/companion deformation, exactly mirroring how
+   they qualify the confirmed "BellyIn" deformation one row below.
+D. No evidence of a structural/anatomical-only reading: no bone, joint,
+   twist, or rig-hierarchy marker appears anywhere in this literal or its
+   same-model neighborhood.
+
+----------------------------------------------------------------------
+6. LIVE MASTER PRECEDENT
+----------------------------------------------------------------------
+Exact substrings "bottomnude", "topclothed", "nudetop" do not yet occur
+anywhere in the live Master (expected -- Belly-bottomnude is still an
+unclassified residual literal). The closest comparable, already-resolved
+Master patterns:
+
+  "bellyin"  (30 hits): 13 -> Body Morphs (bare BellyInflate, BellyInflate2,
+      BellyInflateL/PLUS/S, BellyInflation, E1/E2/E3BellyInflate,
+      (Penis)BellyInflate -- all UNPREFIXED by a garment name)
+                          14 -> Clothing (BellyinflateDRESS,
+      BootyShortsBellyInflate, LeggingsBellyInflate, Pants(2)BellyInflate,
+      PantsBellyInflatePLUS, RougeSBellyInflate, S3BellyInflate,
+      ShirtBellyInflate, ShortsBellyInflate, Speedo(PLUS)BellyInflate,
+      SuitBellyInflate, TrackSuitBellyInflate -- every one of these is
+      explicitly PREFIXED with an actual garment name: Dress, Booty
+      Shorts, Leggings, Pants, Shirt, Shorts, Speedo, Suit, Track Suit)
+                          3 -> Hair (FPubesBellyInflate, MPubesBellyInflate
+      -- unrelated pubic-hair-prefixed compounds)
+  bare "belly-" prefix (82 hits): 76 -> Body Morphs, 6 -> RigHelpers
+      (all clear graduated bulge/buldge/base/scale shape terms, no
+      clothing-state qualifiers among the Master's own examples)
+
+ESTABLISHED CONVENTION: the Master routes a belly-inflate-family morph
+to Clothing ONLY when the literal is explicitly prefixed by a real
+garment name (Pants, Speedo, Shirt, Suit, Dress, etc.) -- i.e. the
+morph is owned by the garment as a cloth-fit corrective. A clothing
+*STATE* qualifier (nude vs. clothed) is NOT the same thing as a garment
+*NAME*, and no Master precedent treats a bare state-qualifier alone as a
+signal to route to Clothing. "Belly-bottomnude" carries no garment name
+at all -- only a body-part root ("Belly") and a state qualifier
+("bottomnude") -- so this precedent affirmatively supports Body Morphs,
+not Clothing, and gives no support for a structural Body reading either
+(the Master's own bare "belly-" family is overwhelmingly Body Morphs,
+not Body).
+
+----------------------------------------------------------------------
+7. DOCTRINE APPLICATION
+----------------------------------------------------------------------
+Settled principles applied, no new rule invented:
+  - plain structural/anatomical naming alone -> Body: does NOT apply
+    here once same-model sibling evidence is considered -- this is not
+    an isolated "belly" with no other context; it is verified to sit in
+    a dense, coherent shape-morph vocabulary on its own model.
+  - intended body shape/size/appearance/state/deformation -> Body
+    Morphs: satisfied by the verified same-model sibling grid (Section 5)
+    and by the Master's own bare-vs-garment-prefixed "bellyin" precedent
+    (Section 6).
+  - clothing-state context alone does NOT automatically prove Body
+    Morphs: respected -- the clothing-state suffix ("bottomnude") was
+    NOT treated as sufficient by itself. The classification instead
+    rests on the verified same-model deformation-vocabulary evidence and
+    the Master's own bare/garment-prefix distinction.
+  - if the semantic subject is understandable but taxonomy cannot be
+    safely resolved, use NEEDS_CONTEXT: not applicable -- taxonomy CAN
+    now be safely resolved on the strength of Sections 5 and 6.
+  - uncertainty is preferable to inventing purpose: respected -- this
+    conclusion rests on verified same-model corpus evidence and a
+    verified Master naming convention, not on an invented rule or a
+    forced reading.
+
+RESULT: Option A -- KEEP Body Morphs. Not merely to preserve the prior
+calibration (QA2 correctly identified that the literal alone could not
+justify this), but because targeted provenance work has now supplied
+the missing evidence QA2 lacked: verified same-model sibling deformation
+vocabulary, plus a Master naming convention that affirmatively
+distinguishes garment-owned correctives (Clothing) from bare body-state
+morphs (Body Morphs) and places this literal firmly in the latter.
+
+----------------------------------------------------------------------
+8. FINAL RECOMMENDED ROW FIELDS
+----------------------------------------------------------------------
+fold_key:              belly-bottomnude              (unchanged)
+exact_spellings:        Belly-bottomnude               (unchanged)
+semantic_status:        CLEAR                          (unchanged)
+semantic_referent:      belly/stomach shape-morph, nude-bottom
+                        clothing-state variant (verified same-model
+                        sibling of the parallel Belly-nudetop/
+                        -topclothed and BellyIn-bottomnude/-nudetop/
+                        -topclothed grid, alongside Belly Bulge Large/
+                        Medium/Monster, BellyOut, and
+                        BellyInflateFeathers on the same model)
+taxonomy_status:        CLEAR                          (unchanged)
+proposed_destination:   groupFile/Body Morphs          (unchanged)
+confidence:             High                            (was Medium)
+uncertainty_reason:     [NONE]                          (unchanged, empty)
+short_reason:           Verified via the original scanner corpus (not
+                        the lexically-sorted residual list) that this
+                        exact literal occurs in a single real per-model
+                        control chunk containing a coherent 2x3 belly-
+                        morph grid -- Belly-bottomnude/-nudetop/
+                        -topclothed paired with BellyIn-bottomnude/
+                        -nudetop/-topclothed -- alongside Belly Bulge
+                        Large/Medium/Monster, BellyOut, and
+                        BellyInflateFeathers on the same model; the
+                        clothing-state suffixes are per-context variants
+                        of a shape deformation, not a garment name
+                        (contrast the Master's garment-prefixed
+                        *BellyInflate correctives, e.g. PantsBellyInflate,
+                        SpeedoBellyInflate, which are Clothing because
+                        they name an actual garment) -- so this is Body
+                        Morphs, not Clothing or plain Body.
+batch_id:               3                               (unchanged)
+scanner_lines:          10140                           (unchanged)
+
+----------------------------------------------------------------------
+9. FIELDS CHANGED VS. QA2
+----------------------------------------------------------------------
+Changed:   semantic_referent, confidence (Medium -> High), short_reason
+Unchanged: fold_key, exact_spellings, semantic_status, taxonomy_status,
+           proposed_destination, uncertainty_reason, batch_id,
+           scanner_lines
+
+This is the ONLY row that differs between QA2_CANDIDATE and QA3_CANDIDATE.
+All other 499 rows are byte-identical field-for-field (hard-asserted
+before and after write).
+======================================================================

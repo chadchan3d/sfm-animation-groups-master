@@ -1,0 +1,232 @@
+======================================================================
+BELLY-BOTTOMNUDE PROVENANCE VERIFICATION
+Independent methodological audit of the same-model provenance claim
+made in PHASE2_BELLY_BOTTOMNUDE_BLOCKER_REPORT.txt.
+
+QA3_CANDIDATE.tsv was NOT modified during this audit. No prior
+artifact was modified. No family 501+ was classified. Nothing was
+committed.
+======================================================================
+
+----------------------------------------------------------------------
+THE METHODOLOGICAL DEFECT, CONFIRMED
+----------------------------------------------------------------------
+The prior blocker report inferred "same model" from the absence of an
+alphabetical sort-order reset between two lines. That inference is
+invalid as stated: a reset positively proves a NEW model's list began
+(the order broke), but the absence of a reset only shows the order
+happened to continue -- which is exactly what would also happen at a
+true model boundary if the last control of model A and the first
+control of model B happen to be alphabetically consistent. Absence of
+a reset cannot prove absence of a boundary. This defect is accepted in
+full and the prior report's same-model claim is retracted below.
+
+----------------------------------------------------------------------
+1. RE-INSPECTED SCANNER FORMAT
+----------------------------------------------------------------------
+The file was re-examined for ANY positive structural delimiter --
+explicit model path/header, model-start/end marker, repeated filename
+line, record identifier, per-control model-path field, meaningful
+blank/separator record, or documented section-count marker.
+
+Findings, all verified mechanically against the actual file:
+  - Total lines: 29,769
+  - Blank lines: 0 (checked directly -- there is no blank-line
+    separator convention anywhere in the file)
+  - Lines containing a colon (a plausible "field: value" record
+    marker): 2, both of which are ordinary control-name literals that
+    happen to contain a colon, not headers
+  - Lines mentioning "model"/"mdl"/a path separator/"scan": 1, and it
+    is the literal prop control name "overpass_swingset_seat_model" --
+    not a scanner-format header
+  - Bracketed lines (the only candidate header-like syntax found
+    anywhere in the file): exactly 14, clustered at two locations only
+    (line 6949: "[main_character]"; lines 20669-20681: a run of
+    "[----(FLEX)----]", "[----Body----]", "[----Boots----]", ...,
+    "[pos_asagi]", "[pos_murasaki]", "[pos_rinko]", "[pos_sakura]").
+    For a ~9,000-model scan, 14 bracketed lines cannot be a per-model
+    delimiter scheme -- at most one model's own bodygroup/pose-preset
+    names happen to be recorded literally as "[label]" strings, which
+    is a control-name convention belonging to ONE model, not a
+    scanner-format marker applied consistently to the file.
+
+Literal excerpt at the only two bracket clusters that exist (for the
+record, showing they are isolated and far from the target lines,
+not periodic per-model headers):
+  line 6949:  [main_character]
+  lines 20669-20681:
+    [----(FLEX)----]
+    [----Body----]
+    [----Boots----]
+    [----EyeLid----]
+    [----Eyes----]
+    [----Metal----]
+    [----Mouth----]
+    [----Pants----]
+    [----Shirt----]
+    [pos_asagi]
+    [pos_murasaki]
+    [pos_rinko]
+    [pos_sakura]
+
+CONCLUSION: this scanner file carries NO positive, per-model
+structural delimiter of any kind -- no path, no header, no separator,
+no record boundary. It is a flat sequence of bare control-name
+strings with nothing attached that identifies which scanned model any
+given line came from. The earlier "alphabetical reset" observation is
+not a scanner-format feature; it was a statistical side-effect of each
+model's own list apparently being emitted in sorted order internally,
+which -- as the issue correctly states -- can reveal a boundary but
+never rule one out.
+
+----------------------------------------------------------------------
+2. SAME-MODEL MEMBERSHIP -- PROVEN OR REJECTED
+----------------------------------------------------------------------
+Because no positive delimiter exists anywhere in this file, NO line in
+it can be positively tied to a specific source model, and therefore no
+two lines can be positively proven to share one model.
+
+  Belly-bottomnude:    exact source model path -- NOT RECOVERABLE
+                       (no header, path, or delimiter of any kind is
+                       within structural reach of line 10140)
+  BellyIn-topclothed:  exact source model path -- NOT RECOVERABLE
+                       (same limitation, line 10145)
+
+  Explicit structural evidence tying either row to a model: NONE.
+
+SAME-MODEL PROVENANCE: NOT PROVEN.
+
+Checked individually, the same conclusion applies to every member of
+the previously-alleged 2x3 grid -- none of the following pairs can be
+positively shown to share one model, for the identical reason (no
+delimiter exists to test against):
+  Belly-bottomnude / Belly-nudetop
+  Belly-bottomnude / Belly-topclothed
+  Belly-bottomnude / BellyIn-bottomnude
+  Belly-bottomnude / BellyIn-nudetop
+  Belly-bottomnude / BellyIn-topclothed
+  (and all other pairs within the six)
+
+Their proximity in the scan file is evidentially equivalent to lexical
+adjacency in PHASE2_RESIDUAL_TERMS.txt -- suggestive of a corpus-wide
+naming template (the grammar "{Belly|BellyIn}-{bottomnude|nudetop|
+topclothed}" clearly recurs as a coherent pattern SOMEWHERE in the
+9,000-model corpus), but it is NOT proof that any specific instance of
+that template lives on the same model as any other instance, and must
+not be described as verified same-model provenance. The prior report's
+"verified same-model sibling" and "single real per-model control
+chunk" language is retracted.
+
+----------------------------------------------------------------------
+3. RE-EVALUATED BLOCKER EVIDENCE, CHANNELS KEPT SEPARATE
+----------------------------------------------------------------------
+
+CHANNEL A -- same-model authored-family provenance: NOT PROVEN (see
+Section 2). All same-model claims are removed from the evidence base.
+What remains legitimately observable from the scanner file, stated at
+the correct evidentiary weight: the corpus contains at least one
+occurrence of a coherent "{Belly|BellyIn}-{bottomnude|nudetop|
+topclothed}" naming grammar. This shows the template exists somewhere
+in the corpus, exactly like a residual-terms lexical-adjacency
+observation -- it does not by itself establish what the template means
+or that this specific row's classification is settled.
+
+CHANNEL B -- live-Master naming precedent: re-examined directly
+against the actual sfm_defaultanimationgroups.txt (independent of the
+scanner file and unaffected by its format problem). Two DIFFERENT
+templates exist in the Master combining anatomy with a clothing state,
+and they were previously conflated. Checked separately, per the
+instruction not to use raw majority across mixed templates:
+
+  Template 1 -- bare body-part + "_nude"/"-nude" suffix (a compressed,
+  lowercase/underscore style matching "Belly-bottomnude"'s own style):
+    breasts-nude   -> groupFile/Body Morphs
+    LBreast_nude   -> groupFile/Body Morphs
+    LButt_nude     -> groupFile/Body Morphs
+    RBreast_nude   -> groupFile/Body Morphs
+    RButt_nude     -> groupFile/Body Morphs
+    unzipTopNude   -> groupFile/Clothing   (different template: an
+                       "unzip" garment-action verb, not a bare body
+                       part + state)
+    kara_nude_body.qc_skeleton -> groupFile/Body (a QC/skeleton
+                       filename artifact, unrelated)
+  5 of 5 genuine bare-body-part+"nude" instances -> Body Morphs.
+
+  Template 2 -- anatomy/body word + "-Clothed"/"-Unclothed" state
+  qualifier (structurally the closer analog to "Belly-bottomnude":
+  anatomy word + clothing-coverage state, no explicit deformation verb):
+    Body-Clothed              -> groupFile/Clothing
+    Body-Clothed-Feet         -> groupFile/Clothing
+    Body-Clothed-Hands        -> groupFile/Clothing
+    Body-Clothed-Lower-Only   -> groupFile/Clothing
+    Body-Clothed-Upper-Only   -> groupFile/Clothing
+    Body-Halfbreasts-Unclothed-> groupFile/Clothing
+    Body-Unclothed            -> groupFile/Clothing
+    Body-Unclothed-Bottom     -> groupFile/Clothing
+    Body-Unclothed-Lower      -> groupFile/Clothing
+    Body-Unclothed-Upper      -> groupFile/Clothing
+    AntiClip-Arms-Clothed     -> groupFile/Clothing
+    AntiClip-Hands-Clothed    -> groupFile/Clothing
+    Breasts-Unclothed-Free    -> groupFile/Body Morphs  (the one outlier)
+  12 of 13 -> Clothing. Note "Body-Unclothed-Bottom" in particular is
+  structurally near-identical to "Belly-bottomnude" (body/region word +
+  bottom + nude/unclothed state), and it is Clothing, not Body Morphs.
+
+These two templates point in OPPOSITE directions. "Belly-bottomnude"
+sits ambiguously between them: its compressed lowercase-suffix style
+("-bottomnude") resembles Template 1's style ("-nude" suffix, which is
+Body Morphs), but its actual semantic content -- an anatomy word plus a
+bare clothing-coverage state with no deformation verb -- is a closer
+functional match to Template 2 ("-Clothed"/"-Unclothed", which is
+overwhelmingly Clothing, and includes an almost exact structural analog
+in "Body-Unclothed-Bottom"). No exact-substring precedent for
+"bottomnude", "topclothed", or "nudetop" exists anywhere in the Master
+(0 hits each), so neither template can claim direct identity with this
+literal -- both are analogies, and they disagree.
+
+Given two live, non-trivial Master templates that plausibly apply to
+this literal and that resolve to opposite destinations, Channel B does
+NOT cleanly resolve to Body Morphs. It also does not cleanly resolve to
+Clothing (Template 1 remains a real, exact-style counter-example). This
+is precisely a "raw majority across mixed templates" trap, and no
+majority is asserted here in either direction.
+
+----------------------------------------------------------------------
+4. QA3 DISPOSITION
+----------------------------------------------------------------------
+With Channel A retracted (not proven) and Channel B shown to be
+genuinely mixed between two live, structurally comparable Master
+templates that disagree (bare "_nude" shape-target family -> Body
+Morphs vs. "-Clothed/-Unclothed" coverage-state family -> Clothing,
+with "Body-Unclothed-Bottom" a close structural analog on the Clothing
+side), the evidence assembled for QA3 no longer safely establishes
+Body Morphs at High confidence, or arguably at all.
+
+"Belly-bottomnude" remains semantically understandable at the surface
+level (an anatomical root, a region, and a clothing-coverage state),
+but the available evidence cannot establish whether the underlying
+control is a shape/deformation morph (Body Morphs), a coverage/
+visibility-style control analogous to the Master's own Body-Clothed/
+Unclothed family (Clothing), or something else. Per the settled
+doctrine, uncertainty is preferable to inventing purpose, and this is
+exactly the condition NEEDS_CONTEXT exists for.
+
+RECOMMENDATION (not applied to QA3 in this pass):
+  semantic_status:       CLEAR (unchanged -- the literal's surface
+                          meaning, anatomy + region + clothing-state,
+                          is not itself in doubt)
+  taxonomy_status:       NEEDS_CONTEXT (was CLEAR)
+  proposed_destination:  [blank] (was groupFile/Body Morphs)
+  confidence:            Low-Medium (was High in QA3 / Medium in QA2)
+  short_reason should state that two structurally comparable Master
+    templates disagree (bare "_nude" shape-target family vs.
+    "-Clothed/-Unclothed" coverage-state family, the latter including
+    the near-identical "Body-Unclothed-Bottom"), and that no verified
+    same-model or exact-substring precedent breaks the tie.
+
+This is a recommendation only. QA3_CANDIDATE.tsv was not edited in
+this pass, per instruction.
+======================================================================
+
+SAME-MODEL PROVENANCE: NOT PROVEN
+QA3 DISPOSITION: C

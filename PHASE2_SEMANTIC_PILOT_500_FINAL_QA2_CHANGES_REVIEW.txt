@@ -1,0 +1,107 @@
+======================================================================
+PHASE 2 SEMANTIC PILOT 500 -- QA2 CHANGES REVIEW
+Final calibration reason-hygiene patch. QA_CANDIDATE.tsv -> QA2_CANDIDATE.tsv.
+Scope: short_reason / semantic_referent / uncertainty_reason ONLY.
+No semantic_status, taxonomy_status, proposed_destination, or confidence changed.
+======================================================================
+
+Total changed rows: 5
+
+----------------------------------------------------------------------
+FOLD KEY: anusopensuitexposedtorn
+EXACT SPELLINGS (unchanged): AnusOpenSuitExposedTorn
+semantic_status (unchanged): CLEAR
+taxonomy_status (unchanged): CLEAR
+proposed_destination (unchanged): groupFile/Body Morphs
+confidence (unchanged): Medium
+
+  short_reason:
+    OLD: anus is the clear anatomical referent; the rest qualifies the clothing-damage context
+    NEW: "AnusOpen" describes an anatomical open/state morphology of the anus, which is why the primary subject is anatomy rather than Clothing and why this is Body Morphs rather than plain Body; "SuitExposedTorn" is context/trigger qualification describing when the state applies, not the classification's basis.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: bellyin-topclothed
+EXACT SPELLINGS (unchanged): BellyIn-topclothed
+semantic_status (unchanged): CLEAR
+taxonomy_status (unchanged): CLEAR
+proposed_destination (unchanged): groupFile/Body Morphs
+confidence (unchanged): Medium
+
+  short_reason:
+    OLD: belly is the dominant anatomical referent; "topclothed" is a qualifier
+    NEW: "BellyIn" is the Body-Morph evidence -- an intended stomach-in deformation; "topclothed" is a contextual clothing-state qualifier for when the deformation applies, not the classification's basis.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: nipple up
+EXACT SPELLINGS (unchanged): nipple up
+semantic_status (unchanged): CLEAR
+taxonomy_status (unchanged): CLEAR
+proposed_destination (unchanged): groupFile/Body Morphs
+confidence (unchanged): High
+
+  short_reason:
+    OLD: A nipple has no skeletal joint or ordinary posing function, so a directional word describing its form/position represents an intended soft-tissue appearance/state change; this satisfies Body Morphs' purpose test on its own facts and is not a general "soft tissue + direction = Body Morphs" rule.
+    NEW: On this complete literal, "nipple up" is best read as an intended nipple appearance/state/position deformation rather than a structural root/segment control. The lack of ordinary skeletal articulation supports that reading, but does not create a general soft-tissue+direction rule.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: ballsdetail4
+EXACT SPELLINGS (unchanged): BallsDetail4
+semantic_status (unchanged): CLEAR
+taxonomy_status (unchanged): CLEAR
+proposed_destination (unchanged): groupFile/Body Morphs
+confidence (unchanged): High
+
+  short_reason:
+    OLD: explicit genital anatomical term
+    NEW: "Detail" explicitly describes an appearance/detail morphology of the testicles, which is why Body Morphs applies; plain genital anatomy by itself would only route to Body.
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+FOLD KEY: anusgrip
+EXACT SPELLINGS (unchanged): AnusGrip
+semantic_status (unchanged): CLEAR
+taxonomy_status (unchanged): CLEAR
+proposed_destination (unchanged): groupFile/Body Morphs
+confidence (unchanged): High
+
+  short_reason:
+    OLD: explicit genital anatomical term
+    NEW: "Grip" describes an intended soft-tissue state/deformation of the anus (a gripping/clenching state), which is why Body Morphs applies; plain genital anatomy by itself would only route to Body.
+----------------------------------------------------------------------
+
+======================================================================
+BLOCKER -- REVIEWED, LEFT ENTIRELY UNCHANGED, ESCALATED FOR DECISION
+======================================================================
+
+----------------------------------------------------------------------
+FOLD KEY: belly-bottomnude
+EXACT SPELLING: Belly-bottomnude
+ALL FIELDS UNCHANGED (semantic_status=CLEAR, taxonomy_status=CLEAR,
+proposed_destination=groupFile/Body Morphs, confidence=Medium,
+short_reason="belly is the clear anatomical referent")
+
+WHY THIS IS A BLOCKER, NOT A REASON-TEXT FIX:
+The literal contains no shape/size/appearance/soft-tissue-state/deformation
+word at all -- "Belly" is bare anatomical location, "bottom" is a region
+qualifier, and "nude" is a clothing-state qualifier, not a body-shape or
+appearance descriptor. Contrast with the structurally similar sibling rows
+in this same set: "BellyIn-topclothed" (has "In" = stomach-in deformation)
+and "Protrusion-bottomnude" (has "Protrusion" = shape/deformation term) --
+both carry an actual morph word before the region/clothing-state suffix.
+"Belly-bottomnude" does not.
+
+Under the settled doctrine (plain structural/anatomical body-part naming
+alone -> Body; Body Morphs requires the complete literal to indicate
+intended shape/size/appearance/soft-tissue state/deformation), this row's
+current Body Morphs destination cannot be defended by rewriting the reason
+alone -- any defense would have to treat "belly" + a clothing-state word
+as if that combination itself implies a morph, which is exactly the kind
+of anatomy-only reasoning this pass was told to eliminate, not launder into
+new wording. Fixing this honestly would require changing taxonomy_status/
+proposed_destination (Body Morphs -> Body), which this pass is explicitly
+not authorized to do. Left fully unchanged per instruction; flagged for a
+human taxonomy decision in a future pass.
+----------------------------------------------------------------------
