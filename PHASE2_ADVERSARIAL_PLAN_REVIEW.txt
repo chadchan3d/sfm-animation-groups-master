@@ -1,0 +1,444 @@
+==============================================================================
+PHASE 2 ADVERSARIAL PLAN REVIEW
+Inspected: PHASE2_RESIDUAL_CENSUS.txt, PHASE2_RESIDUAL_INVENTORY.tsv,
+           PHASE2_RESIDUAL_TERMS.txt, live Master philosophy header, CLAUDE.md
+Live Master state: post Phase-1-import (tag phase1-reviewed-import, commit 894c09a)
+==============================================================================
+
+Legend used throughout this report:
+  [FACT]    directly observed/counted from the actual data (mechanical, reproducible)
+  [INFER]   a mechanical inference drawn from FACTs (still deterministic, not a guess)
+  [HYP]     a semantic hypothesis -- plausible reading of what a term means, unverified
+  [POLICY]  a recommendation requiring a human decision, not derivable from data alone
+
+==============================================================================
+1. VERDICT ON THE PROPOSED PLAN
+==============================================================================
+
+DOES THE PROPOSED PHASE 2 ARCHITECTURE SURVIVE ADVERSARIAL REVIEW?
+
+    YES, WITH MODIFICATIONS
+
+The five-part structure (A: biped systems first, B: creature/character scope
+separated, C: technical markers as investigation not destination, D: harvest
+semantic islands incrementally, E: accept an unresolved tail) is directionally
+sound and consistent with the Master's own stated philosophy (CLASSIFICATION
+AND ACCESSIBILITY, NO TAXONOMY FOR COMPATIBILITY ALONE, the UNKNOWN/USELESS/
+IGNORE distinctions). It does NOT survive unmodified: Part A's ordering
+("start with bip/ValveBiped/Bip01 because they look high-value") is not
+supported by direct inspection of the actual literals, and the plan's own
+Section C warns against exactly the mistake Part A's framing risks making.
+See Sections 3-4 below.
+
+==============================================================================
+2. WHAT THE PLAN GETS RIGHT
+==============================================================================
+
+[FACT] Master precedent for narrow, exact-shape-matched conventions is
+strong and reproducible where it exists: e.g. cape=99.4% Clothing (358
+hits), penis=98.2% Body Morphs (846 hits), bow=98.0% Clothing (100 hits),
+hair=97.6% Hair (17,506 hits), ass/butt=94.6% Body Morphs (858 hits),
+cloth=94.3% Clothing (3,040 hits), belt=93.3% Clothing (165 hits). This
+validates Part D's precedent-then-approve method as the correct general
+mechanism -- it is exactly the method that produced Phase 1's clean
+results and it still works post-import.
+
+[FACT] Part B is right to separate creature/character-scope questions from
+ordinary classification. [FACT] The live Master's group list (35 groups)
+contains no non-human anatomical destination; Arms/Legs/Fingers/Toes are
+explicitly human-biped-shaped by their own sub-structure (LeftArm/RightArm,
+LeftFingers/RightFingers). [FACT] A word-level check for "wolf|dog|canine"
+in the current Master returns only 28 hits, nearly all in Clothing (a
+"wolf tail" costume accessory reading, not a creature skeleton). There is
+no existing precedent to lean on either way for Canine/Crow/taurenmale --
+this is genuinely a scope question, not a lookup.
+
+[FACT] Part C's caution about technical markers is empirically justified:
+"root" is only 19.5% concentrated in its single largest Master destination
+(Hair) out of 594 hits, and "helper" is only 27.7% concentrated (Arms) out
+of 469 hits -- both scatter across 6+ destinations with no majority. Both
+markers would fail Part D's own precedent test if bulk-classified.
+
+[FACT] Part E's acceptance of an unresolved tail matches the Master's own
+philosophy verbatim: "Failure to establish a semantic classification is
+not, by itself, justification for hiding a control," and "Controls whose
+exact names contain too little globally stable semantic information to
+classify safely across unrelated models remain Unknown in the universal
+Master." The plan does not fight the Master's own stated design; it
+implements it.
+
+==============================================================================
+3. WHAT THE PLAN MAY BE ASSUMING INCORRECTLY
+==============================================================================
+
+[FACT] Direct precedent check on the plan's own headline candidate:
+bare "bip" prefix in the current (post-import) Master = 17,176 hits,
+top destination Hair at only 3,931 (22.9%), followed by Clothing 3,910
+(22.8%), Body Morphs 1,213 (7.1%), Other 1,107, Upper Face 1,084, Lower
+Face 1,073, Arms 594, Body 464. There is no majority destination at all.
+"valvebiped" prefix = 1,492 hits, top destination Hair at 231 (15.5%),
+then Body Morphs 185, Body 182, LeftFingers 149, Arms 147, RightFingers
+146, Legs 100, Clothing 75 -- again no majority.
+
+[INFER] "Belongs to the bip/ValveBiped naming system" carries almost no
+destination information by itself. The plan's Part A framing ("these
+appear potentially high-value... established, repeatable skeletal
+conventions") describes the SHAPE of the name, not its semantics, and the
+data shows the shape does not predict a destination. The census's own
+Section 7 breadth table already contained this signal (bip: 100%
+self-concentration under its own leading token, meaning it's one huge
+internally-consistent vocabulary, not evidence the vocabulary maps to one
+Master destination) but Section 9's region write-up did not carry that
+caveat forward strongly enough into the plan's Part A framing -- this is
+exactly the failure mode Part A itself warns against ("Do NOT bulk-import
+merely because a name belongs to one of these systems"), so the plan is
+self-aware of the risk but its sequencing choice (put this FIRST) doesn't
+reflect that the risk is unusually high for this specific region compared
+to alternatives that already show strong precedent today.
+
+[FACT] Structurally splitting the residual "bip*" population confirms the
+census undersold its heterogeneity:
+  A) 'Bip01 X.L/.R' clean dot-suffixed (Calf, Clavicle, Foot, Forearm,
+     ForearmTwist, Hand, Thigh, UpperArm): 18 families, 18 literals.
+  B) 'ValveBiped.Bip01_X' dot-prefixed: 178 families, 178 literals.
+  C) 'ValveBiped.X' non-Bip01 (Bip02/03/04 sub-bones, Barrels prop): 104
+     families, 105 literals.
+  D) bare 'bip_'/'bip ' underscore/space form: 799 families, 801 literals.
+  E) bare 'bip01' catch-all: 290 families, 290 literals (overlaps A).
+[FACT] Sampling group D (the largest, 799 families) for an obvious
+technical/clothing/twist/attach/weapon token found only 188 (24%) flagged
+by that narrow keyword list -- but manual inspection of the REMAINING 76%
+("non-tech-flagged") sample still surfaces items like 'bip_giroscopeY'
+(gyroscope -- mechanical), 'Bip_Tentacle.003' (creature-specific),
+'Bip_STONE _L_Finger_Globe_1_02' (character-prefixed + opaque "Globe"
+term), 'bip_ClockCollar_R' (accessory-specific), alongside genuinely
+anatomical entries like 'bip_r_foot_thumb' and 'bip findex00 l'.
+[INFER] Group D is not "anatomical minus a small technical minority" --
+it is heterogeneous at a finer grain than any single keyword filter can
+separate, and would require the same per-sub-pattern treatment already
+used successfully for Wings/Fingers in Phase 1, not one bulk pass.
+
+[FACT] The one shape that DOES have direct, unambiguous Phase-1-established
+convention precedent is the finger pattern
+(bip01[ _]?finger = 30 hits, 15 RightFingers + 15 LeftFingers, both
+100%) -- but that shape was already fully imported in Phase 1 and does
+not represent additional recoverable value in the residual.
+[FACT] The broader 'Bip01 X.L/.R' dot-suffixed shape (Group A, 18
+families: Calf/Clavicle/Foot/Forearm/Hand/Thigh/UpperArm) has ZERO direct
+shape-precedent in the current Master (a search for the exact
+`bip01 <word>.[lr]` pattern returns 0 hits) -- its case for inclusion
+would have to rest on the anatomical word itself (calf=81.6% Legs,
+thigh=71.4% Legs, clavicle=90.4% Arms -- all individually strong) rather
+than on a matched naming convention, which is a materially weaker
+evidence class per the standard this project used throughout Phase 1E-G.
+
+[HYP] This suggests Part A's justification ("may represent established,
+repeatable skeletal conventions") is true only for a small, already-mostly-
+imported slice of the bip*/ValveBiped* population, and the plan risks
+spending the first investigation pass on the LEAST tractable of the
+plan's own candidate regions rather than the most.
+
+==============================================================================
+4. FINDINGS FROM DIRECT INSPECTION OF THE ACTUAL RESIDUAL LITERALS
+==============================================================================
+
+[FACT] Adult-content/body-morph vocabulary is a coherent, high-precedent
+region the census under-emphasized. Word-level precedent checks:
+  penis   = 846 hits, 98.2% Body Morphs
+  ass/butt = 858 hits, 94.6% Body Morphs
+  breast  = 2,551 hits, 82.0% Body Morphs
+  nipple  = 468 hits, 80.6% Body Morphs
+[INFER] This is comparable in strength to the census's flagged clothing
+regions and was not called out as its own line item in Section 9 of the
+census (it appeared only glancingly, inside the "bikini_bobcut_frily"
+region note). This answers adversarial question 6 directly: yes, a major
+tractable semantic region was under-emphasized.
+
+[FACT] Clothing-accessory tokens are now MORE concentrated post-import
+than the equivalent tokens were pre-import in Phase 1C: cape 99.4% (358
+hits), bow 98.0% (100), cloth 94.3% (3,040), belt 93.3% (165) -- all
+comfortably above the ad hoc ~90% threshold this project has treated as
+"strong" in earlier phases. These look like lower-risk, higher-confidence
+starting material than bip*/ValveBiped*.
+
+[FACT] "twist" (1,334 hits, 53.8% top concentration, split Arms 718/Legs
+401/RigHelpers 88/Fingers 24/Clothing 18/Wings 18) and "helper" (469
+hits, 27.7% top concentration, split across 6 groups roughly evenly)
+confirm Part C's caution is warranted specifically for these two markers:
+neither has a majority destination, both require per-limb/per-object
+disambiguation exactly like the Phase 1 twist/eyelid/breast splits did.
+
+[FACT] Random sample of the "completely unbucketed remainder" (outside
+the census's 17 flagged regions) turned up real, interpretable, and
+apparently genuinely useful animator-facing candidates that no defined
+region currently covers, e.g.: 'rightupperarm', 'RightUpperArm' shape,
+'browsapart' (Brows Apart -- clear Upper Face candidate), 'foot_pinky_1_l'
+(clear Toes candidate), 'left_small_labia4' / genital-morph shaped items
+(Body Morphs candidate, reinforcing the point above), 'leg right buttock'
+(Body Morphs candidate). [INFER] The 17 named regions in the census
+capture only ~19% of the residual; the remaining ~81% is not uniformly
+noise -- ordinary, plausibly-classifiable anatomical/clothing terms are
+present outside every named region, meaning Phase 2 will need continued
+open-ended token discovery, not just work on the 17 named regions.
+
+[FACT] Some entries in the "unbucketed remainder" sample are themselves
+prop/instrument vocabulary unrelated to a body at all: 'music_gen_guitar_
+lute_a_mesh.001', 'cons_potion_healing_a_greater_glass_mesh.001',
+'keychain.chain_8', 'sign01'. [INFER] A meaningful slice of the residual
+is generic game-asset/prop terminology that has no animator-facing
+"pose" meaning at all -- distinct from both "anatomical" and "technical
+rig helper," and likely belongs in neither Body Morphs/Clothing nor a
+future Useless designation without further evidence. This is a third
+population the plan's five parts don't explicitly name.
+
+==============================================================================
+5. RISKS CREATED BY LACK OF MODEL PROVENANCE
+==============================================================================
+
+[FACT] Re-confirmed fresh in this pass (as in the census): the scanner
+corpus has no per-model field. All "breadth" and "leading-token" numbers
+used anywhere in the census or this report are a text heuristic over the
+literal itself, not verified model identity.
+
+[INFER] Anything in the plan that reasons from "this looks like it comes
+from many different models" (Part D's implicit framing of "semantic
+islands," and the census's Section 7 "cross-model convention" claims) is
+only as strong as the leading-token proxy. Two known failure modes:
+  (a) A single real model's controls can use no common prefix at all
+      (e.g. plain English-word literals) and would incorrectly read as
+      "many models" under this proxy.
+  (b) A prefix collision between two UNRELATED models that happen to
+      start with the same generic word (e.g. two different "front"-
+      prefixed rigs) would incorrectly read as "one recurring system."
+
+[POLICY] Any Phase 2 write-up must keep using explicit "heuristic, not
+verified provenance" labeling wherever leading-token breadth is cited (as
+the census already does) rather than letting the language drift toward
+"this recurs across N models" as if that were measured fact.
+
+[FACT] No part of the proposed Part A/B/C/D/E plan text itself makes a
+false provenance claim -- it correctly avoids asserting model counts. The
+risk is in DOWNSTREAM interpretation of the census's heuristic sections if
+they get cited later without the caveat attached.
+
+==============================================================================
+6. BETTER SEQUENCING, IF APPLICABLE
+==============================================================================
+
+[POLICY] Recommend re-ordering Part A relative to Part D rather than
+treating "biped systems first" as the fixed starting point. The evidence
+in Section 3-4 above shows several Part-D-style clothing/anatomy token
+regions already clear a higher precedent bar today than the bip*/
+ValveBiped* systems do as a whole. Recommended order, most defensible
+first:
+
+  1. Finish the narrow, already-precedented sub-shapes inside bip*/
+     ValveBiped* (Group A's 18 'Bip01 X.L/.R' anatomical bones, using the
+     anatomical-word evidence directly since no shape-precedent exists)
+     -- small, bounded, high per-item confidence.
+  2. Clothing-accessory tokens with re-verified >=90% concentration
+     (cape, bow, cloth, belt) -- same method Phase 1 already validated,
+     now with stronger evidence than before.
+  3. Adult-content/body-morph vocabulary (penis, ass/butt, breast,
+     nipple sub-patterns) -- comparably strong precedent, previously
+     under-emphasized.
+  4. The 7 isolated "<code>-Rig-<part>" per-character systems -- small,
+     self-contained, low cross-contamination risk, good for validating
+     the method on a bounded set before tackling the messy bip_ Group D.
+  5. Group D (bare bip_/bip ) and ValveBiped.Bip01_X (Group B) --
+     deliberately LAST among the "biped" material, sub-pattern by
+     sub-pattern (twist, helper, weapon-attach, cloth split out first),
+     because it is the least homogeneous of the plan's own candidates.
+  6. Creature/character-scope decision (Part B) as a standalone POLICY
+     question, decoupled from any import batch -- resolving it doesn't
+     require touching a single control and should happen independent of
+     the ongoing classification cadence.
+  7. Root/helper/twist broad markers (Part C) -- investigated last among
+     "promising" material because their low concentration numbers (19.5%,
+     27.7%, 53.8%) mean most of the yield will be splitting work, not
+     quick wins.
+
+==============================================================================
+7. RANKED NEXT INVESTIGATION REGIONS
+==============================================================================
+
+Ranked by (precedent strength x boundedness x low contamination risk),
+highest confidence first. Counts are residual families/literals unless
+noted.
+
+ 1. Clothing tokens (cape 358/358 hits*, bow 100, belt 165, cloth 3,040
+    -- *Master-wide hit counts, not residual-only; residual family counts
+    are smaller, see census Section 9 "belt_bow_cape_cloth": 463 families)
+    -- precedent 93-99%, method already proven in Phase 1.
+ 2. Adult-content/body-morph tokens (penis, ass/butt, breast, nipple
+    sub-patterns) -- precedent 80-98%, not previously separated out.
+ 3. 'Bip01 X.L/.R' clean anatomical set (18 families) -- small, word-level
+    precedent 71-90% per limb term, no shape precedent but high semantic
+    clarity.
+ 4. '<code>-Rig-<part>' isolated systems (91 families, 7 codes) -- small,
+    self-contained, needs per-code semantic reading (eye variants clear;
+    "Bacon"/"Hole"/"EggWhite" terms need investigation before any decision).
+ 5. taurenmale / Canine / Crow creature skeletons (156 families combined)
+    -- NOT for classification yet; investigate as the concrete evidence
+    base for the Part B scope decision.
+ 6. ValveBiped.Bip01_X dot-prefixed (178 families) -- moderate precedent
+    (Body Morphs/Body/Fingers/Arms/Legs all present, no majority) --
+    needs body-part-word sub-splitting like twist/helper below.
+ 7. twist / helper corrective markers (214 families combined per census
+    region) -- low concentration (28-54%), split by limb/object first.
+ 8. bare bip_/bip (Group D, 799 families) -- most heterogeneous, treat
+    last, sub-pattern by sub-pattern.
+ 9. root attachment token (162 families) -- lowest concentration found
+    (19.5%) of any candidate examined; likely resolves into many tiny
+    per-object slivers rather than one region.
+10. Generic mesh/prop dump (Box##, Null.###, polySurface, plus the newly-
+    noticed game-asset props like guitar/potion/keychain meshes, ~199+
+    families) -- primarily useful as a bounded EXCLUSION candidate, not
+    an import source; still worth formally investigating so it can be
+    documented rather than left ambiguous.
+
+==============================================================================
+8. EVIDENCE STANDARD FOR PHASE 2 INCLUSION
+==============================================================================
+
+Ranking of the plan's own listed evidence sources (question 13), most to
+least reliable based on what this pass actually observed:
+
+ 1. Existing-Master precedent, checked at the SPECIFIC candidate's own
+    exact shape/word (not a broad token) -- this is what actually
+    predicted correct destinations in Phase 1 and again in this review's
+    clothing/adult-morph checks. Highest weight.
+ 2. Structural naming morphology (side markers, numbering schemes,
+    dot/underscore conventions) -- reliable for SPLITTING a population
+    into safe sub-groups (as with fingers, toes, wings), not for
+    assigning semantics by itself.
+ 3. Naming-system family membership (e.g. "this is a bip* name") --
+    demonstrated in Section 3 to carry almost no destination information
+    on its own. Use only to DISCOVER candidates, never as evidence for a
+    destination.
+ 4. Semantic token regions (broad English-word tokens like "root,"
+    "helper," "twist") -- useful for discovery and for identifying what
+    NOT to bulk-classify, but only becomes real evidence once narrowed to
+    a specific concentrated sub-pattern (as with cape/bow/penis above).
+
+[POLICY] Recommended inclusion bar, unchanged in spirit from Phase 1E's
+explicit no-percentage-threshold rule but restated for Phase 2: a
+candidate is eligible for import only when (a) its OWN exact shape or its
+governing anatomical/functional word shows a real, checked Master
+precedent with a clear majority destination, AND (b) a representative
+sample of its actual member literals has been manually inspected for
+contamination, AND (c) any identified minority/exception pattern has been
+split out rather than absorbed into the majority. As evidence quality
+declines (Part E), the bar rises rather than lowers -- a 30-50%
+concentration split six ways (root, helper) is not "probably fine," it is
+a signal to decompose the region further or leave it unresolved.
+
+==============================================================================
+9. RECOMMENDED IMMEDIATE NEXT EXPERIMENT
+==============================================================================
+
+[POLICY] Before any classification proposal, run one bounded, fully
+mechanical precedent-and-contamination pass over the #1-ranked region
+above (clothing tokens: cape/bow/belt/cloth, ~463 residual families per
+the census's "belt_bow_cape_cloth" region) using exactly the Phase 1E/1F
+method (per-sub-pattern precedent check, manual sample inspection,
+exception carve-out) and produce a small, fully-evidenced S1/S2-style
+proposal set for THAT region only -- not a comprehensive Phase 2 pass.
+This tests whether the harvesting method still works cleanly against the
+post-import Master and produces a template for the following regions
+(adult-content body-morphs, then the Bip01 anatomical set, then the
+rig-code systems) before any attempt is made at the messier bip_ Group D
+or the low-concentration root/helper/twist markers.
+
+==============================================================================
+ANSWERS TO THE 15 ADVERSARIAL QUESTIONS (summary; full evidence above)
+==============================================================================
+
+ 1. No -- the census summary makes bip/ValveBiped/Bip01 look cleaner than
+    the literals support. Bare "bip" = 22.9% top concentration, no
+    majority; the only genuinely clean sub-shape (finger convention) is
+    already imported.
+
+ 2. Yes, partially -- Part A's framing conflated "recurring naming
+    system" with "recurring semantic destination." Section 3 shows these
+    are different things for this data.
+
+ 3. Any claim of the form "recurs across many models" (census Sections
+    6-7, this report's Section 5) is unsafe as verified fact; safe only
+    as a labeled heuristic. No part of the plan's own text makes this
+    error, but downstream use of the census could.
+
+ 4. Yes, precedent shifted after Phase 1 import, but not uniformly toward
+    more confidence: cheek/hair got MORE concentrated, but finger (74.0%
+    -> 39.9%) and eyelid (90.4% -> 62.8%) got LESS concentrated because
+    Phase 1's own corrections (eyelid split into Eyes+Upper Face, wing-
+    membrane "finger" bones) legitimately added real minority mass.
+    Phase 2 must recompute precedent fresh, not reuse Phase 1C/1D numbers.
+
+ 5. Yes -- clothing tokens (cape/bow/belt/cloth) and adult-content body-
+    morph tokens (penis/breast/nipple/ass) both show stronger, cleaner
+    precedent today than the biped systems as a whole. See Section 7.
+
+ 6. Yes -- adult-content/body-morph vocabulary and generic non-anatomical
+    game-asset props (instruments, potions, keychains) were both present
+    in the actual data but not called out as their own regions in the
+    census. See Section 4.
+
+ 7. Genuinely separate. [FACT] No existing Master doctrine or precedent
+    resolves whether a dedicated creature-anatomy destination should
+    exist; existing doctrine (NO TAXONOMY FOR COMPATIBILITY ALONE)
+    constrains HOW that question could be answered but does not answer it.
+
+ 8. About right, if anything slightly under-strict in the plan's own
+    text but correctly strict in outcome: root (19.5%) and helper (27.7%)
+    are exactly the kind of marker Part C says should not imply a
+    destination, and the evidence confirms that caution was warranted,
+    not excessive.
+
+ 9. Misleading if read as "little left to gain." 99% singleton-family-
+    ness is about exact-spelling uniqueness. Underlying tokens/words
+    (cape, penis, calf, thigh) still show strong, measurable semantic
+    regularity even though each exact literal is a one-off spelling.
+    Real, still-recoverable semantic content coexists with the singleton
+    statistic.
+
+10. Greatest contamination risk: treating a broad naming-SYSTEM token
+    (bip, root, helper) as if it were a semantic token, and bulk-
+    assigning based on system membership rather than checked precedent --
+    exactly Part A's stated risk, now confirmed present in the actual
+    data.
+
+11. Greatest over-conservatism risk: leaving the ~463-family clothing
+    region, the adult-content body-morph region, or the Bip01 anatomical
+    18-family set unresolved indefinitely out of excess caution, when
+    each already clears a strong, checked precedent bar today.
+
+12. Required evidence before another bulk tranche: (a) the specific
+    exact-shape or governing-word precedent check against the CURRENT
+    Master, redone fresh; (b) a manual contamination sample of actual
+    residual members, not just the Master-side precedent; (c) any
+    exception pattern split out, not absorbed; (d) the same four
+    mechanical integrity checks used in Phase 1G (family->1 path,
+    literal->1 family, no cross-path collision, no quarantined leakage).
+
+13. Ranking (most to least reliable): existing-Master precedent at exact
+    shape/word > structural morphology (for splitting only) > naming-
+    system family membership (discovery only) > broad semantic token
+    (discovery + exclusion signal only). See Section 8.
+
+14. See Section 7's ranked list (10 regions, clothing and adult-content
+    body-morphs first, generic mesh dump last).
+
+15. Reject: sequencing bip*/ValveBiped* as the literal first investigation
+    target. Modify: Part A should explicitly sub-split (Groups A/B/C/D/E
+    above) before any evidence-gathering begins, not after. Split: Part D
+    should explicitly separate "clothing/anatomy islands" from "generic
+    game-asset prop" material -- they need different eventual treatment
+    (import vs. likely-permanent-Unknown) and were conflated in this
+    pass's own remainder sample. Postpone: the Part B creature/character
+    scope decision should be explicitly decoupled from the classification
+    cadence and resolved as its own policy item, not scheduled as part of
+    an investigation "pass."
+
+No individual family was classified for import during this task.
+sfm_defaultanimationgroups.txt was not edited.

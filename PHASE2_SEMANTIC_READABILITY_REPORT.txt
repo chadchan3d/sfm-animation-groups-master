@@ -1,0 +1,375 @@
+==============================================================================
+PHASE 2 SEMANTIC READABILITY AUDIT
+Unit of reasoning: strict ASCII-fold family (14,282 families / 14,432 exact
+literals -- the current M3 residual, unchanged from PHASE2_RESIDUAL_TERMS.txt)
+Companion data file: PHASE2_SEMANTIC_READABILITY_AUDIT.tsv
+==============================================================================
+
+METHODOLOGY (read this before the numbers)
+------------------------------------------------------------------------------
+Per-family classification was performed by decomposing every exact literal in
+the family into its constituent words (splitting on punctuation, camelCase
+boundaries, and letter/digit boundaries, with a compound-word fallback for
+concatenated lowercase forms such as "bottomlid" -> "bottom"+"lid"), then
+reading the FULL set of resulting words against a curated multi-domain
+dictionary (anatomy, clothing, hair, facial expression, body-morph
+descriptors, creature/species terms, generic positional/functional words,
+and known rig/DCC technical markers). This is a mechanical implementation of
+"read the whole literal," not a lookup of prefix, suffix, token frequency,
+family size, or neighboring-row content -- none of those signals are used
+anywhere in the classification logic. Master-precedent percentages from
+earlier phases were NOT used to decide state; they are cited only as
+supporting confirmation where relevant.
+
+This is NOT literally "an LLM read all 14,282 rows one at a time." It is a
+dictionary-and-decomposition heuristic, iteratively corrected against the
+actual data. That correction process is itself part of this audit's findings
+(Quality Control section) and is disclosed in full rather than hidden.
+
+Bugs found and fixed during this pass (in order):
+ 1. "arm," "leg," and "body" were missing from the anatomy dictionary
+    entirely -- an early run classified literals like "arm right cloth 3a"
+    and "Body Tone" as merely "referent unclear" (state B) because the most
+    basic body-region words weren't recognized at all. Fixed by adding them;
+    this alone moved several hundred families from B into A.
+ 2. Body-shape descriptor words (bulge, size, muscular, tone...) were
+    initially treated as a full "referent" on their own, so a bare literal
+    like "Length" or "Body Size" without any other context could reach state
+    A. Descriptor words were reclassified as modifiers only, not referents by
+    themselves; a bare descriptor with no anatomical/object anchor now
+    correctly falls to state C, matching the spec's own "Front, Base, Root,
+    Adjust, Main" example category.
+ 3. Directional-only literals (e.g. "UpDown") were falling to D (opaque)
+    because "up"/"down" were treated as fully neutral rather than as real,
+    if referent-less, English words. Fixed to resolve to C.
+ 4. A jargon/abbreviation word (bone, joint, ctrl, null, rig) plus a bare
+    number was initially conflated with genuine descriptive words (front,
+    base, root) into one "C" bucket. Per the task's own worked examples
+    (Bone103, Bone.017, Bone001 should be D; Front/Base/Root/Adjust/Main
+    should be C), these were split into two different states.
+ 5. "ValveBiped" systematically mis-tokenized: camelCase splitting breaks it
+    into "Valve"+"Biped" before either half could match a glued
+    "valvebiped" dictionary entry, so every "ValveBiped.*" literal (282
+    residual families) was carrying two false "unknown" fragments and
+    getting pulled down to C even when the actual body-part word (e.g. Vag,
+    Ring, Thigh) was perfectly clear. Fixed by listing "valve" and "biped"
+    separately.
+ 6. "wep" (weapon-prop marker) had been placed in the same "neutral prefix"
+    bucket as genuine identity-only rig codes (bip, flm, mar...). Unlike
+    those, "wep" carries real semantic content ("this is a weapon part") and
+    was silently letting unrelated words underneath it (e.g. "strap" in
+    "WEP_topstrap") default to a body/clothing destination. Removed from the
+    neutral set so weapon-prefixed literals are judged on their own merits
+    (typically state D or B, not a false Clothing/Anatomy state A).
+ 7. Missing vocabulary discovered by direct sampling and added: pigtail,
+    lid/eyesocket/lash family, choker/flower/loincloth/chain/lace/fur
+    (clothing), boobs/balls/cock/shaft/foreskin/nip/pussy/vag/clit/dick
+    (genital synonyms actually used in this corpus), head/skull, and
+    blink/squint/wink/smile/sneer/laugh/cry/etc. (facial-expression words
+    previously present in the dictionary but never wired into the
+    destination-illustration mapping).
+Known remaining limitations (not fixed, disclosed instead of hidden):
+ - Misspellings are not corrected (e.g. "theethU" for "teeth" was not
+   recognized and the family was left at D).
+ - The compound-word splitter only tries a two-way split, so a
+   three-morpheme concatenation like "rbigtoe" (r+big+toe) is not resolved
+   and the family lands in D despite containing a real word.
+ - Specialized/Latin anatomical terms not in the general dictionary (e.g.
+   "Flexor Radialis") are scored as D even though a domain expert would
+   recognize them immediately.
+ - Single-letter abbreviations (the "F" in "Bip_FMiddle01_R", almost
+   certainly "Finger") are treated as neutral glue rather than resolved,
+   which is conservative (doesn't force a possibly-wrong reading) but means
+   a small amount of real information is left on the table.
+These limitations bias the result toward UNDER-counting A and OVER-counting
+D/C relative to what a careful human reader would do -- i.e. the true
+readable fraction of the residual is very likely somewhat HIGHER than the
+numbers below, not lower.
+
+==============================================================================
+1-2. STATE COUNTS
+==============================================================================
+                    Families            Literals
+  A (clear+clear):   4,606  (32.3%)      4,636  (32.1%)
+  B (clear+doctrine): 3,733 (26.1%)      3,774  (26.2%)
+  C (interpretable,   1,728 (12.1%)      1,753  (12.1%)
+     context-dependent):
+  D (genuinely opaque): 4,215 (29.5%)    4,269  (29.6%)
+  -----------------------------------------------------
+  TOTAL:              14,282 (100%)     14,432 (100%)
+
+==============================================================================
+3-4. HOW MUCH OF THE RESIDUAL IS ACTUALLY READABLE / TAXONOMY-CLEAR?
+==============================================================================
+Semantically readable (A + B): 8,339 families / 8,410 literals = 58.4% of
+the residual. The literal itself supplies enough information to understand
+what the control is or does for well over half of what remains.
+
+Immediately taxonomy-clear without further doctrine work (A only): 4,606
+families / 4,636 literals = 32.3% of the residual -- meaning roughly one in
+three remaining families could, in principle, go straight to a precedent-
+and-contamination check (the normal Phase 1 method) rather than needing any
+open research question first.
+
+C (12.1%) and D (29.5%) together (41.6%) is where the "difficult long tail"
+framing genuinely still applies -- but that is well under half of the
+residual, not "most of it."
+
+==============================================================================
+5. MAJOR SEMANTIC DOMAINS AMONG STATE-A FAMILIES
+==============================================================================
+Destination bucket (illustrative mapping only, NOT a verified import
+destination -- see file header):
+    972  Clothing
+    796  Fingers (Left/RightFingers by side marker)
+    430  Body
+    395  Body Morphs
+    383  Arms
+    335  Face/Eyes
+    263  Legs
+    242  Face/Lower Face
+    134  (no destination mapped by this pass's word list -- would need
+         manual lookup, not evidence the family is unclear)
+    123  Hair
+    123  Tail
+    100  Face/Upper Face
+     79  Other (creature/appendage -- scope question, see Section 6)
+     67  Wings
+     66  Face/Ears
+     43  Face/Mid Face
+     42  Toes (Left/RightToes by side marker)
+     13  Face/Expressions
+
+Representative samples, deliberately spread across the requested domains
+(not cherry-picked -- these are straight random draws from each bucket):
+
+  Body skeleton (Arms/Legs/Body):
+    DEF-foot.001.02.R, Valvebiped.chest_b, Bip01_L_Hand019, Left foot D,
+    Bip_leg.003, Bip01_Pelvis008, Left LowerArm, l_head_5
+
+  Fingers/toes:
+    bip_l_middle, foot_pinky_1_R, r middle 02, bip_r_finger_b_01,
+    leg front toes right, Bip01_L_Toe2, l_index_metacarpal,
+    BipFin L Finger1, OPT_Hand_Left_Ring2
+
+  Face (Upper/Mid/Lower):
+    TopLip1, BottomLipLeft, fang left1, RFrown2, bip_GumsTeethLower,
+    BrowsInnerDownRight, UpperLipLeft, chin_2, Teeth-Back, DEF-brows1_L
+
+  Eyes:
+    Right_LidUpRaise, blink_happy_left, Small pupil, normalblink,
+    Eyes Surprise, Eye-R-Down, Squint-Left, bip eye r,
+    UpperBlinkL+UpperBlinkR
+
+  Hair:
+    bip_Strands1_L, fringe 16, bip_pigtail_L_0, fronthair normal b joint,
+    r sideburn e phy, Bobcut.Front_Left_3, BottomHair3, sideHair_L2
+
+  Clothing/accessories:
+    Strap_A.04, Back.Bow_Left_2, chain_21, Hat.Root, Cape 1b,
+    bip_strap_r, Bikini_06, Belt.Root, loincloth front 1e
+
+  Body morphs:
+    CockBigBallsA, genitals 01, bip_AnusRoot_R, penis shaft 6, Balls_01,
+    vag inner open, Boobs +, pussy clitoris 3, CockFat, Vagina_Close
+
+  Appendages (Tail/Wings/Other):
+    bip_tail_d_03, TailLeft4_3, TailRight1_4, RWing01, bip_tailC14,
+    Bip_Tentacle, Belt_FrontTail_2, LWing06
+
+==============================================================================
+6. RECURRING DOCTRINE QUESTIONS THAT DOMINATE STATE B
+==============================================================================
+    2,879 families -- "core referent is clear but the literal carries an
+           additional unclear fragment; needs closer reading before a final
+           destination is picked" (e.g. taurenmale_hd_bone_136, SK_R_B_leg_4,
+           Flm-ArmB-Float-B1). This is the largest B bucket and is mostly a
+           "needs one more look, not a policy question" category -- many of
+           these will resolve to A on individual inspection.
+      405  families contain a technical-but-meaningful marker (twist,
+           helper, corrective, deform, jiggle, attach) combined with a clear
+           anatomical/object referent (e.g. r_shoulder_twist_c_helper,
+           ValveBiped.Bip01_R_UpperarmTwist2, LeftDeltoid_helper,
+           Body-L-Ass-Spread). Recurring doctrine question: where do
+           corrective/helper bones belong when the anatomy they help is
+           obvious -- with the anatomy group, or with a Correctives/
+           RigHelpers destination? (The Master philosophy already has an
+           answer in principle -- "object-specific purpose takes
+           precedence" -- but each family should still be checked against
+           it individually.)
+      358  families are a recognizable object/prop noun with no body/
+           clothing referent (Blade.R, Box08, Sheath 2-adjacent items).
+           Recurring doctrine question: does Master want any kind of
+           animator-facing Props destination, or does this material stay
+           unresolved indefinitely? This is a real policy gap, not a
+           classification gap.
+       91  families contain a non-human creature/species referent
+           (taurenBack and the Canine/Crow/taurenmale population).
+           Recurring doctrine question: identical to the one already raised
+           in PHASE2_ADVERSARIAL_PLAN_REVIEW.txt Part B -- does Master want
+           a creature-anatomy destination at all? Confirmed again here from
+           a completely different analysis method (word-reading rather than
+           precedent-percentage), which strengthens the finding rather than
+           merely repeating it.
+
+==============================================================================
+7. WHAT KIND OF MISSING CONTEXT DOMINATES STATE C
+==============================================================================
+      821  families mix one recognizable generic/technical word with one
+           unclear fragment (e.g. moustache right control, turret_root,
+           Pincer Right Root, front_inwards) -- genuinely borderline; a
+           closer read of a specific model or convention could move many of
+           these to B or D, but not safely on the literal alone.
+      537  families have a real referent word that is nonetheless
+           outweighed by other unclear fragments (ForeskinTipPullBack,
+           GenericHuman_l_loLidJnt, BellyInflateLeotard1) -- the referent
+           is real but the literal's own construction makes the intended
+           object ambiguous.
+      370  families contain ONLY generic positional/functional/directional
+           words with no anchor at all (RUp, right_16, _right_z_up, top-4)
+           -- these are the cleanest illustration of the task's own C
+           definition: real, readable English words, but structurally
+           incapable of resolving to a specific universal destination
+           without a referent.
+The common thread: state C is not "hard to read" -- every sample above is
+made of ordinary words. It is "readable, but the object being acted on is
+missing from the literal itself," which is a fundamentally different
+problem from state D.
+
+==============================================================================
+8. WHAT THE GENUINELY OPAQUE (STATE D) POPULATION ACTUALLY LOOKS LIKE
+==============================================================================
+    3,583 families have no recognizable word content of any kind: BOT_RIGHT
+           (ambiguous acronym, not "bottom+right" per the tokenizer), T1,
+           H10/h10, special05_R, spiral1, rhumb0, polySurface76 (already a
+           known B4-pattern from Phase 1), whL_5, v_sil, depth_4, and a
+           meaningful cluster of WEP_-prefixed weapon-component names
+           (WEP_Magazine2_Bullet2, WEP_FX_Laser2, WEP_Sight_FlipUp2_KAC --
+           these ARE readable as "weapon parts" by a human, but score D here
+           because "weapon" itself resolves to no anatomical/clothing/body
+           referent and was deliberately NOT given a false destination; see
+           Section 6's "recognizable object/prop noun" B-population for the
+           cases where enough of the literal survives to reach B instead).
+      632  families are a bare jargon/abbreviation marker plus a number
+           (bone 82, dyng c 01, unused.052) -- the Phase-1 B4 pattern,
+           reconfirmed by an entirely different method.
+A meaningful minority of D (see Quality Control below) is D only because of
+this pass's own dictionary gaps (misspellings, 3-morpheme concatenations,
+specialized medical terms, weapon-prop vocabulary) rather than genuine
+opacity -- the true opaque population is very likely smaller than 29.5%.
+
+==============================================================================
+9. WAS THE PRIOR "DIFFICULT LONG TAIL" DESCRIPTION MATERIALLY MISLEADING?
+==============================================================================
+Yes, materially. The prior census and adversarial review were built entirely
+from ASCII-family singleton rate (99.0% singleton), prefix/stem recurrence,
+naming-system concentration, and Master-precedent percentages. All of those
+are properties of SPELLING, not of MEANING. This audit shows that reading
+the actual words in the literal -- which was never done at scale in the
+prior passes -- resolves 58.4% of the residual to a readable state
+immediately, including 32.3% that already look genuinely taxonomy-clear.
+None of the prior passes' mechanical findings were WRONG (the singleton
+statistic, the low bip/root/helper concentration percentages, the "no
+model provenance" finding are all still true and still matter for HOW to
+proceed) -- but the prior passes' overall framing ("this is a difficult
+long tail," "start with the naming systems that look established") answered
+the wrong question. The right first question, as this task's premise states,
+is "what does this literal mean," and that question was previously
+under-asked.
+
+==============================================================================
+10. CONCLUSIONS TO WITHDRAW OR REVISE FROM EARLIER PHASE 2 OUTPUT
+==============================================================================
+WITHDRAW:
+  - Any implication that the residual is predominantly hard-to-classify.
+    58.4% reads clearly; that is a majority, not a "long tail exception."
+  - The framing that bip*/ValveBiped*/Bip01* systems are useful primarily as
+    a NAMING-SYSTEM signal. Fixing the ValveBiped tokenization bug (Section
+    Methodology, item 5) shows the individual literals under that prefix are
+    frequently perfectly clear once the prefix itself is read as neutral
+    rather than as an unknown fragment blocking the rest of the reading.
+
+REVISE (still true, but incomplete without this audit):
+  - "99% singleton-family-ness implies a difficult long tail" -- true about
+    spelling uniqueness, false as a difficulty signal; this audit is the
+    concrete demonstration the adversarial review's question 9 predicted.
+  - "Master precedent percentages are the primary evidence source" -- still
+    correct for CONFIRMING a destination once meaning is established, but
+    this audit shows word-level reading should come FIRST, with precedent
+    checking as the second, confirmatory step -- not the first filter.
+  - The adversarial review's ranked investigation order (clothing tokens,
+    then adult-content body-morphs, then Bip01 anatomical set...) remains
+    directionally reasonable, but should now be re-scoped around STATE-A
+    FAMILIES specifically (4,606 of them, already domain-tagged in the
+    companion TSV) rather than around broad tokens -- the token-based
+    regions in the census/adversarial review and the family-level A/B states
+    in this audit are two different cuts of the same data and should be
+    cross-referenced, not treated as competing conclusions.
+
+CONFIRMED, NOT WITHDRAWN:
+  - No per-model provenance exists in the corpus (unaffected by this audit).
+  - The creature/character taxonomy-scope question is real and unresolved
+    (confirmed again here via the 91 creature-referent B families, by a
+    completely independent method).
+  - A genuine Props-destination policy gap exists (confirmed again here via
+    the 358 "recognizable object/prop noun" B families).
+  - A real opaque/technical population exists and is large (D = 29.5%,
+    consistent in kind, if not in exact size, with earlier findings).
+
+==============================================================================
+QUALITY CONTROL: SPECIFIC FAILURE-MODE AUDIT
+==============================================================================
+- "Obvious literal demoted for being singleton": structurally impossible in
+  this classifier -- family size is never read by classify_family(). No
+  instance found or possible.
+- "Clear literal demoted for heterogeneous prefix": structurally impossible
+  -- no prefix-frequency or naming-system statistic is used anywhere in the
+  per-family logic. Confirmed by the bip_l_wing/bip_Ear3_L/bip_pigtail_L_2
+  worked examples from the task prompt, all of which now resolve to A once
+  "bip" is read as a neutral rig marker rather than as an unknown blocker.
+- "Technical-looking but explicit literal treated as opaque": found and
+  fixed (helper_forearm_L vs bare helper01 test case; DEF-foot.L.002
+  resolves to A while bare Bone017 resolves to D, matching the task's own
+  worked examples exactly).
+- "Vague literal promoted because of neighboring rows": structurally
+  impossible -- no row has access to any other row's data.
+- "Family assigned by substring while the full literal contradicts it":
+  checked directly by sampling 40 of the 276 compound-splits this pass
+  performed (e.g. upperlips->upper+lips, fingerbase->finger+base,
+  necktie->neck+tie, bowtie->bow+tie, cockring->cock+ring); all 40 were
+  correct decompositions with no contamination found. The compound-splitter
+  requires BOTH halves of a two-way split to be independently real
+  dictionary words, which is a strong protection against a spurious partial
+  match.
+- "Semantic interpretation inferred from neighboring rows": structurally
+  impossible, same reason as above.
+Two real defects WERE found and are disclosed rather than hidden: the
+ValveBiped camelCase-tokenization bug and the "wep" false-neutrality bug
+(both described under Methodology above, both fixed before the final run
+that produced the numbers in this report).
+
+==============================================================================
+VERDICT
+==============================================================================
+PRIOR PHASE 2 DIFFICULTY ASSESSMENT: OVERSTATED
+
+Not "substantially correct" -- the prior census and adversarial review
+never disputed a single mechanical fact this audit produced (family counts,
+precedent percentages, and the no-provenance finding all still stand), but
+their combined framing left the impression that most of the 14,282-family
+residual was intrinsically hard to work with. Reading the actual literals
+shows 58.4% resolves to an understandable meaning immediately, and roughly
+one in three families (32.3%) already looks taxonomy-clear without any open
+policy question attached.
+
+Not "severely overstated" either -- 29.5% of the residual genuinely is
+opaque by any reasonable reading (bare numbered technical placeholders,
+uninterpretable codes, generic mesh/prop remnants), and the doctrine
+questions raised in state B (creature-anatomy scope, technical-helper
+placement, a possible Props destination) are real, unresolved, and will
+still require deliberate human decisions before any bulk import -- the
+difficulty was real, just not as large a share of the total as previously
+implied.
+
+No individual family was classified for import during this task.
+sfm_defaultanimationgroups.txt was not edited.

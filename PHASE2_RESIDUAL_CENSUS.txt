@@ -1,0 +1,657 @@
+==============================================================================
+PHASE 2 RESIDUAL CENSUS
+Scanner corpus: C:\Users\REDACTED\Downloads\SFM Model Scanner\Scan 9000 models.txt
+Live Master (post Phase-1-import): E:\SFM Animation Group Master\sfm_defaultanimationgroups.txt
+Git baseline: 894c09a (tag phase1-reviewed-import)
+==============================================================================
+
+NOTE ON A SCRIPT BUG CAUGHT DURING THIS PASS
+------------------------------------------------------------------------------
+The first fresh-recompute attempt used str.split('\n') on the raw scanner
+bytes. The scanner file uses CRLF line endings; split('\n') alone leaves a
+trailing '\r' on every literal, which silently corrupted every fold key and
+caused 100% of the corpus to misclassify as M3 (0 matches against the live
+Master). Caught via a sanity check, fixed by using str.splitlines() (which
+correctly strips '\r\n'/'\r'/'\n' without touching interior content), and
+re-verified: known Phase-1-imported literals now correctly resolve as
+already-present. Reported per this project's error-disclosure convention;
+no historical output was affected -- this bug was local to this session's
+first attempt.
+
+==============================================================================
+1. EXACT RESIDUAL TOTALS
+==============================================================================
+Exact literals:               14,432
+ASCII-fold families:          14,282
+Scanner occurrences (raw line records for these literals): 14,446
+Source models represented:    NOT MECHANICALLY COMPUTABLE
+
+  The scanner corpus has no per-model field, delimiter, or header of any kind.
+  It is a flat list of one control-name-per-line. The filename '9000 models'
+  describes the scale of the library that was scanned to produce this
+  vocabulary dump, not a per-line model tag. 29,769 raw lines cannot encode
+  9,000 distinct per-model records at ~3.3 lines/model; the file is a scanned
+  aggregate vocabulary, not a per-model transaction log. This was already
+  flagged in Phase 1 ('the file has no reliable per-model provenance') and is
+  reconfirmed here rather than assumed. Sections 6 and 7 below use an
+  explicit, clearly-labeled heuristic proxy in place of real provenance.
+
+Cross-check against Phase 1: fresh M1/M2/M3 recompute against the current
+live Master:
+  M1 (already in Master exactly):  14,776  -- matches the 14,776 Phase 1 import exactly
+  M2 (existing family, new spelling): 411 families / 462 spellings
+    -- matches the 411 Phase-1-excluded families / 462 spellings exactly.
+    These are NOT part of this residual census: they already have a known
+    Master home and a documented disposition (existing-family audit
+    candidate or DO NOT IMPORT) from MASTER_IMPORT_RECONCILIATION_REPORT.txt.
+  M3 (genuinely new, no Master home at all): 14,282 families / 14,432 literals
+    -- THIS is the residual population this census covers.
+
+==============================================================================
+2. FAMILY-SIZE DISTRIBUTION
+==============================================================================
+Singleton families (1 spelling):   14,139  (99.0%)
+2-spelling families:               136  (1.0%)
+3+-spelling families:              7  (0.0%)
+
+Largest families (all currently top out at 3 spellings -- this residual has
+no large multi-spelling families left; those were resolved in Phase 1):
+  'ltoes'              size=3  spellings=['LToes', 'ltoes', 'lToes']
+  'bottle'             size=3  spellings=['Bottle', 'bottle', 'BOTTLE']
+  'rknee'              size=3  spellings=['rKnee', 'rknee', 'RKnee']
+  'rtoes'              size=3  spellings=['rToes', 'rtoes', 'RToes']
+  'lelbow'             size=3  spellings=['lelbow', 'LElbow', 'lElbow']
+  'relbow'             size=3  spellings=['rElbow', 'relbow', 'RElbow']
+  'lknee'              size=3  spellings=['LKnee', 'lknee', 'lKnee']
+  'lpinkie1'           size=2  spellings=['lPinkie1', 'lpinkie1']
+  'horn1'              size=2  spellings=['horn1', 'Horn1']
+  'horn2'              size=2  spellings=['Horn2', 'horn2']
+  'bone02'             size=2  spellings=['bone02', 'Bone02']
+  'bone01'             size=2  spellings=['bone01', 'Bone01']
+  'rightleggib'        size=2  spellings=['RightLegGib', 'rightLegGib']
+  'busty'              size=2  spellings=['busty', 'Busty']
+  'thiccer'            size=2  spellings=['Thiccer', 'thiccer']
+
+==============================================================================
+3. LITERAL MORPHOLOGY
+==============================================================================
+Contains digits:          8,258 (57.2%)
+Numeric suffix:           6,369 (44.1%)
+L/R marker:               5,317 (36.8%)
+Very short (len<=4):      515 (3.6%)
+One-word (no separator):  3,646 (25.3%)
+
+Separator structure breakdown:
+  underscore                   4,946 (34.3%)
+  none                         3,646 (25.3%)
+  space                        2,942 (20.4%)
+  underscore+dot               1,142 (7.9%)
+  hyphen                       797 (5.5%)
+  dot                          545 (3.8%)
+  underscore+space             169 (1.2%)
+  space+dot                    111 (0.8%)
+  hyphen+dot                   50 (0.3%)
+  hyphen+space                 38 (0.3%)
+  underscore+hyphen            14 (0.1%)
+  underscore+hyphen+dot        13 (0.1%)
+  underscore+space+dot         13 (0.1%)
+  underscore+hyphen+space      5 (0.0%)
+  underscore+hyphen+space+dot  1 (0.0%)
+
+Length: min=1 max=63 median=13 mean=13.6
+Unusually long (len>40): 43 (0.3%)
+
+==============================================================================
+4. RECURRENT LEXICAL STRUCTURE (boundary-safe tokenization, not substring)
+==============================================================================
+Top 30 tokens by family count:
+  left              1004 families   e.g. ['+left_foot_d', '+left_footd', '1 left middle finger']
+  right             1000 families   e.g. ['+right_elbow_aux_end', '+right_footd', '_right_x_down']
+  bip                800 families   e.g. ['attach_bip_pelvis_to_me', 'bip ankle l', 'bip ankle r']
+  bone               554 families   e.g. ['ass bone_l', 'ass bone_r', 'bag_bone_l_01']
+  bip01              477 families   e.g. ['bip01', 'bip01 calf.l', 'bip01 calf.r']
+  arm                321 families   e.g. ['arm', 'arm cape left shoulder 1', 'arm cape left shoulder 2']
+  wep                303 families   e.g. ['wep_40mm_nade', 'wep_40mm_shell', 'wep_backcap']
+  valvebiped         302 families   e.g. ['valvebiped.barrels', 'valvebiped.bip01', 'valvebiped.bip01_belly']
+  head               297 families   e.g. ['bip001-head', 'bip_b_nic_head', 'bip_head-chip']
+  leg                259 families   e.g. ['+leg_l', '+leg_r', 'bags_leg']
+  finger             243 families   e.g. ['1 left middle finger', 'arm left finger', 'arm left finger 1 a']
+  unused             221 families   e.g. ['marie unused dummy', 'unused', 'unused 1']
+  front              208 families   e.g. ['baffle.front', 'baffle_bottom.front', 'bandana_front.l']
+  eye                191 families   e.g. ['bip eye l.001', 'bip eye r', 'bip_eye.l']
+  key                191 families   e.g. ['key 1', 'key 1 - eyeleft', 'key 1 - eyeright']
+  cloth              185 families   e.g. ['arm left cloth 1a', 'arm left cloth 1b', 'arm left cloth 1c']
+  back               183 families   e.g. ['back 0', 'back 1', 'back 1_1']
+  jiggle             179 families   e.g. ['bas.back_1_jiggle', 'bas.back_2_jiggle', 'bas.back_3_jiggle']
+  flm                170 families   e.g. ['flm', 'flm-arma-back1', 'flm-arma-back2']
+  root               162 families   e.g. ['accessories bell root', 'accessories zipper root', 'arm right hand root']
+  middle             152 families   e.g. ['1 left middle finger', 'anus_open_middle', 'arm left finger knuckle middle']
+  upper              135 families   e.g. ['arm left upper', 'arm right upper', 'bip_head_upper']
+  lower              127 families   e.g. ['arm left lower', 'arm left lower 1', 'arm left lower 2']
+  helper             118 families   e.g. ['bip_pelvis_helper_l', 'bip_pelvis_helper_r', 'facial_helper_eye_l']
+  top                115 families   e.g. ['(flex) arms + top', '(flex) top', 'arm.left_top']
+  ring               111 families   e.g. ['anus.ring', 'arm left finger knuckle ring', 'arm right finger knuckle ring']
+  hand               109 families   e.g. ['arm right hand root', 'bip001-l-hand', 'bip001-r-hand']
+  belt               106 families   e.g. ['bags belt root', 'belt a', 'belt b']
+  bow                105 families   e.g. ['back.bow_left_1', 'back.bow_left_2', 'back.bow_right_1']
+  foot                98 families   e.g. ['(flex) bottom + foot', '(flex) foot', '+left_foot_d']
+
+Top 20 leading tokens (first name segment):
+  bip                799
+  bone               339
+  wep                303
+  valvebiped         302
+  bip01              290
+  r                  271
+  arm                271
+  l                  259
+  unused             220
+  leg                191
+  key                187
+  head               182
+  right              177
+  left               171
+  flm                170
+  c                  142
+  cloth              118
+  v                  102
+  bow                 84
+  eye                 78
+
+Top 20 trailing tokens (last name segment):
+  r                  675
+  l                  668
+  1                  480
+  2                  476
+  3                  270
+  right              180
+  left               179
+  01                 171
+  02                 169
+  4                  156
+  jiggle             137
+  a                  123
+  b                  115
+  root               108
+  helper              93
+  03                  93
+  001                 91
+  5                   81
+  spo                 71
+  c                   65
+
+==============================================================================
+5. POTENTIALLY TECHNICAL/MODEL-LOCAL VOCABULARY (census only, no classification)
+==============================================================================
+  bone       families=  554  literals=  558  e.g. ['BOBBY_Bone_NeckLace_05', 'bone middle 05', 'bone 1083', 'bone 76', 'bone middle 2']
+  unused     families=  221  literals=  221  e.g. ['unused dogmeat_eye_r', 'unused MOT01_Head', 'unused spine top.001', 'unused stomach root', 'unused b_r_armroll2helper']
+  jiggle     families=  179  literals=  179  e.g. ['Hat_Left_3_jiggle', 'BAS.Rear_Center_3_jiggle', 'Hat_Right_1_jiggle', 'Bobcut.Right_1_jiggle', 'Bobcut.Side_Left_2_3_jiggle']
+  root       families=  162  literals=  163  e.g. ['r string6 sec root', 'head eye root', 'leg_2.root', 'Frily_Root_2.R', 'unused stomach root']
+  helper     families=  118  literals=  118  e.g. ['r_elbow_twist_c_helper', 'RightArmRoll_helper', 'helper_forearm_R', 'r_chest_helper', 'Helper_LT']
+  twist      families=   96  literals=   96  e.g. ['r_elbow_twist_c_helper', 'arm_twist_r', 'lowerarm_twist_r_02', 'arm right wrist twist 2', 'arm right shoulder 2 twist']
+  rig        families=   91  literals=   91  e.g. ['Fio-Rig-Face', 'PBG-Rig-Eye-LB', 'Qwn-Rig-Eye-RB', 'Mar-Rig-Hole-V2', 'Brk-Rig-Bacon-F']
+  opt        families=   68  literals=   68  e.g. ['OPT_acs_osage_l16', 'OPT_AS_R_ArmTwist_A', 'OPT_acs_year_r8', 'OPT_AS_L_Elbow', 'OPT_Hand_Right_Ring2']
+  phy        families=   63  literals=   63  e.g. ['r earringa a phy', 'L CollarB a Phy', 'R uJacketA b Phy', 'R uJacketA c Phy', 'L uJacketC a Phy']
+  def        families=   51  literals=   51  e.g. ['DEF-spine.026', 'DEF-thigh.R.004', 'DEF-neck.001', 'DEF-shin.02.L', 'DEF-brows2_L']
+  offset     families=   49  literals=   49  e.g. ['waki_l__slerp_kata_l__i40_x0__offset', 'koshi_d__offset', 'tekubi_l__rot_te_l__x100__offset', 'kata_l_d__offset', 'sakotsu_rt_rside_d__offset']
+  dyng       families=   45  literals=   45  e.g. ['dyng e 02', 'dyng head rope2 03', 'dyng r necklace 02', 'dyng r necklace 01', 'dyng head rope2 02']
+  joint      families=   31  literals=   31  e.g. ['backhair c03 joint', 'Right_joint', 'Wrist Joint A', 'rip00 joint', 'backhair c00 joint']
+  ctrl       families=   19  literals=   19  e.g. ['arm left shoulder ctrl 1', 'arm left wrist ctrl', 'leg left thigh ctrl 2', 'leg right thigh ctrl 3', 'leg left thigh ctrl 3']
+  dummy      families=   10  literals=   10  e.g. ['unusedOPT_head_dummy', 'Mila unusedopt-head-dummy', 'Marie unused dummy', 'Dummy_DEC_GEN_Wagon_Caravan_B', 'Dummy_FUR_GEN_Bed_Single_Rich_B']
+  control    families=    9  literals=    9  e.g. ['moustache left control', 'chair control', 'beard control', 'Bandana_Control_Main', 'stool control']
+  handle     families=    7  literals=    7  e.g. ['Wakazashi.Handle', 'handle_lock', 'WEP_Bolt_Handle', 'charge_handle', 'lengthen_handle']
+  null       families=    7  literals=    7  e.g. ['Null.007', 'Null.017', 'Null.006', 'Null.003', 'Null.002']
+  loc        families=    5  literals=    5  e.g. ['L_Eyeball_Loc', 'Head_Root_Loc', 'L_MouseJaw_Loc', 'R_Eyeball_Loc', 'R_MouseJaw_Loc']
+  pivot      families=    5  literals=    5  e.g. ['Cup.Pivot_Left', 'Pivot', 'Pivot_point', 'Lever.Pivot', 'Cup.Pivot_Right']
+  attach     families=    4  literals=    4  e.g. ['Cup.Attach_Left', 'Cup.Attach_Right', 'Attach_bip_pelvis_To_Me', 'unused head neck lower attached_ssx h #2 head neck lower attach']
+  target     families=    2  literals=    2  e.g. ['head eyeball target', 'head eyeball right target']
+  fk         families=    1  literals=    1  e.g. ['ShotgunCartridge_FK_0']
+
+==============================================================================
+6. MODEL CONCENTRATION (heuristic proxy -- see limitation in Section 1)
+==============================================================================
+Since no real model field exists, this section uses a mechanical proxy: the
+leading name-like token of each literal (text before the first separator).
+This is NOT verified model identity -- a shared leading token may be a
+generic rig-convention word (bip, bone, wep) rather than a character name,
+and a genuine single model's controls may carry no common prefix at all.
+Treat this section as suggestive structure, not ground truth.
+
+Top 25 leading tokens by literal count:
+  bip                  688
+  Bip                  444
+  Bone                 385
+  WEP                  304
+  ValveBiped           288
+  unused               252
+  arm                  249
+  bone                 214
+  Key                  187
+  leg                  185
+  r                    172
+  Flm                  170
+  l                    158
+  C                    156
+  head                 150
+  Right                132
+  L                    124
+  R                    123
+  Left                 122
+  cloth                114
+  v                    99
+  Object               89
+  bow                  84
+  polySurface          75
+  unusedbone           73
+
+A distinct and more reliable-looking sub-pattern: per-character/rig short
+codes following the exact convention '<code>-Rig-<part>':
+  brk      families=  16  e.g. ['brk-rig-bacon-b', 'brk-rig-bacon-bl', 'brk-rig-bacon-f', 'brk-rig-bacon-fl']
+  fio      families=  15  e.g. ['fio-rig-eye-l', 'fio-rig-eye-lb', 'fio-rig-eye-lu', 'fio-rig-eye-r']
+  mar      families=  15  e.g. ['mar-rig-eggwhite1', 'mar-rig-eggwhite2', 'mar-rig-eggwhite3', 'mar-rig-eggwhite4']
+  fin      families=  14  e.g. ['fin-rig-cape1', 'fin-rig-cape2', 'fin-rig-eye-l', 'fin-rig-eye-lb']
+  qwn      families=  11  e.g. ['qwn-rig-eye-l', 'qwn-rig-eye-lb', 'qwn-rig-eye-lu', 'qwn-rig-eye-r']
+  pbg      families=  10  e.g. ['pbg-rig-eye-l', 'pbg-rig-eye-lb', 'pbg-rig-eye-lu', 'pbg-rig-eye-r']
+  flm      families=  10  e.g. ['flm-rig-eye-l', 'flm-rig-eye-lb', 'flm-rig-eye-lu', 'flm-rig-eye-r']
+  (7 distinct codes, 91 families total --
+   these look like genuine distinct per-character rig exports, each
+   contributing a small, internally-consistent, isolated naming system.)
+
+Distribution shape: the leading-token histogram is extremely long-tailed
+(3,117 distinct leading tokens across 14,432 literals) -- consistent with
+many small, idiosyncratic per-model/per-rig naming systems rather than a
+small number of giant contributors.
+
+==============================================================================
+7. REPEATED CROSS-MODEL CONVENTIONS (heuristic: leading-token breadth)
+==============================================================================
+For each frequent token, 'breadth' = number of DISTINCT leading tokens found
+among its member families. High breadth = the token recurs inside many
+different naming systems (a real candidate for a broad universal pass).
+Low breadth/high self-concentration = the token IS the naming system itself
+(one large internally-consistent vocabulary, e.g. wep_/valvebiped./bip01),
+not evidence of a convention spanning many unrelated models.
+
+  left           families= 1004  distinct-leaders= 152  top-leader='left' (16%)
+  right          families= 1000  distinct-leaders= 153  top-leader='right' (17%)
+  bip            families=  800  distinct-leaders=   2  top-leader='bip' (100%)
+  bone           families=  554  distinct-leaders=  28  top-leader='bone' (61%)
+  bip01          families=  477  distinct-leaders=   5  top-leader='bip01' (61%)
+  arm            families=  321  distinct-leaders=   8  top-leader='arm' (84%)
+  wep            families=  303  distinct-leaders=   1  top-leader='wep' (100%)
+  valvebiped     families=  302  distinct-leaders=   1  top-leader='valvebiped' (100%)
+  head           families=  297  distinct-leaders=  25  top-leader='head' (61%)
+  leg            families=  259  distinct-leaders=  10  top-leader='leg' (73%)
+  finger         families=  243  distinct-leaders=  13  top-leader='arm' (30%)
+  unused         families=  221  distinct-leaders=   2  top-leader='unused' (100%)
+  front          families=  208  distinct-leaders=  40  top-leader='front' (15%)
+  eye            families=  191  distinct-leaders=  27  top-leader='eye' (41%)
+  key            families=  191  distinct-leaders=   2  top-leader='key' (98%)
+  cloth          families=  185  distinct-leaders=   5  top-leader='cloth' (64%)
+  back           families=  183  distinct-leaders=  47  top-leader='back' (17%)
+  jiggle         families=  179  distinct-leaders=  24  top-leader='jiggle' (20%)
+  flm            families=  170  distinct-leaders=   1  top-leader='flm' (100%)
+  root           families=  162  distinct-leaders=  71  top-leader='root' (11%)
+  middle         families=  152  distinct-leaders=  35  top-leader='cloth' (13%)
+  upper          families=  135  distinct-leaders=  43  top-leader='unused' (13%)
+  lower          families=  127  distinct-leaders=  35  top-leader='lower' (19%)
+  helper         families=  118  distinct-leaders=  30  top-leader='r' (27%)
+  top            families=  115  distinct-leaders=  34  top-leader='top' (30%)
+  ring           families=  111  distinct-leaders=  23  top-leader='bip' (15%)
+  hand           families=  109  distinct-leaders=  16  top-leader='opt' (31%)
+  belt           families=  106  distinct-leaders=   7  top-leader='belt' (61%)
+  bow            families=  105  distinct-leaders=   5  top-leader='bow' (80%)
+  foot           families=   98  distinct-leaders=  14  top-leader='foot' (37%)
+
+Reading this table: 'left'/'right'/'root'/'back'/'upper'/'lower'/'middle'/
+'top'/'helper'/'jiggle' show high breadth (24-153 distinct leading tokens) --
+these are the strongest candidates for 'recurs across many models' in
+Section 9. 'bip'/'wep'/'valvebiped'/'unused'/'flm'/'key'/'bip01' show near-
+100% self-concentration -- they are single large internally-consistent
+systems (their own leading token dominates trivially), not broad
+cross-model conventions in the sense this section is looking for.
+
+==============================================================================
+8. OPAQUE/GENERIC-NAME POPULATION
+==============================================================================
+Bare generic direction/position words (whole literal): 4  ['Big', 'big', 'OPen', 'Open']
+Near-numbered (short letter-prefix + trailing number): 1,707  (11.8%)
+  sample: ['left_12', 'Tie_04', 'Jiggle07', 'T1', 'ES2', 'horn1', 'Horn1', 'door_4', 'stomp-5', 'pPlane4', 'unused073', 'Stare 2', 'Cock_09', 'Horn2', 'horn2']
+Very short ALL-CAPS abbreviation-like: 250  ['T1', 'ES2', 'R6', 'AU18', 'A15', 'L3', 'M06', 'M01', 'H10', 'G11', 'F12', 'PH06', 'LM02', 'TR', 'LC2', 'D4', 'LM03', 'C1', 'PH13', 'SRS']
+Short + no vowel (code/abbreviation-shaped): 407  ['RGRRRR', 'T1', 'v_nn', 'R6', '47', '><', 'Fh15.L', 'L3', 'M06', 'M01', 'H10', 'h10', 'G11', 's4', 'j', 'F12', 'PH06', 'whR_5', 'LM02', 'TR']
+
+None of these have been assigned anywhere. They are quantified only.
+
+==============================================================================
+9. CANDIDATE EXPLORATION REGIONS (17) -- for future investigation only
+==============================================================================
+These are NOT proposed Master destinations. Each is a mechanically-defined
+pattern region worth investigating in a future pass, with its own
+contamination risks noted. Combined they cover 2,736 of 14,282 residual families (19.2%); the rest is untouched by this list.
+
+--- wep_weapon_props ---
+  Rule (fold-key regex): ^wep[_.]
+  Families: 303   Literals: 304   Cross-'model' breadth: 1
+  Single system (breadth 1): weapon/prop component parts (magazines, bipods, sights, belts of bullets). Semantically tractable IF the Master gains a defensible Weapons/Props destination; currently these look like they'd need one. Contamination risk: many are pure static mesh parts with no animator-facing pose value (e.g. WEP_Bipod_Base) mixed with a smaller set of genuinely posable parts (WEP_Barrel_Sight).
+  Representative examples (40):
+    ['WEP_40mm_Nade', 'WEP_40mm_Shell', 'WEP_BackCap', 'WEP_Barrel', 'WEP_Barrel_Sight', 'WEP_Base', 'WEP_Belt_Bullet1', 'WEP_Belt_Bullet10', 'WEP_Belt_Bullet11', 'WEP_Belt_Bullet12', 'WEP_Belt_Bullet13', 'WEP_Belt_Bullet14', 'WEP_Belt_Bullet15', 'WEP_Belt_Bullet16', 'WEP_Belt_Bullet2', 'WEP_Belt_Bullet3', 'WEP_Belt_Bullet4', 'WEP_Belt_Bullet5', 'WEP_Belt_Bullet6', 'WEP_Belt_Bullet7', 'WEP_Belt_Bullet8', 'WEP_Belt_Bullet9', 'WEP_BeltMagazine', 'WEP_Bipod', 'WEP_Bipod_Base', 'WEP_Bipod_LeftLeg', 'WEP_Bipod_LeftLeg1', 'WEP_Bipod_LeftLeg2', 'WEP_Bipod_LegL', 'WEP_Bipod_LegR', 'WEP_Bipod_RightLeg', 'WEP_Bipod_RightLeg1', 'WEP_Bipod_RightLeg2', 'WEP_Bolt', 'WEP_Bolt_Handle', 'WEP_Bolt_Safety', 'WEP_BoltAssist', 'WEP_BoltCatch', 'WEP_BoltCharger', 'WEP_BoltCharger_2']
+
+--- valvebiped_bare ---
+  Rule (fold-key regex): ^valvebiped\.
+  Families: 282   Literals: 283   Cross-'model' breadth: 1
+  Single system: raw Source-engine ValveBiped.* joint names, many with clear anatomical meaning (Calf_Twist, Ear0-04, Finger_Twist) but under an opaque prefix convention. High tractability: many members map cleanly to existing anatomical groups (Legs/Ears/Fingers) by the same convention-matching approach used successfully in Phase 1. Risk: some members (ValveBiped.Barrels, .HeadTop, .headband) are prop/clothing-adjacent, not pure anatomy.
+  Representative examples (40):
+    ['ValveBiped.Barrels', 'ValveBiped.Bip01', 'ValveBiped.Bip01_Belly', 'ValveBiped.Bip01_Belt1', 'ValveBiped.Bip01_Belt2', 'ValveBiped.Bip01_BeltLower', 'ValveBiped.Bip01_BeltUpper', 'ValveBiped.Bip01_headband', 'ValveBiped.Bip01_HeadTop', 'ValveBiped.Bip01_L_Butt0_JiggleRoot', 'ValveBiped.Bip01_L_ButtHelper', 'ValveBiped.Bip01_L_Calf_Twist', 'ValveBiped.Bip01_L_CalfTwist1', 'ValveBiped.Bip01_L_CalfTwist2', 'ValveBiped.Bip01_L_Clavivle', 'ValveBiped.Bip01_L_Ear0', 'ValveBiped.Bip01_L_Ear01', 'ValveBiped.Bip01_L_Ear02', 'ValveBiped.Bip01_L_Ear03', 'ValveBiped.Bip01_L_Ear04', 'ValveBiped.Bip01_L_Elbow_CTR', 'ValveBiped.Bip01_L_Finger1_Twist_1', 'ValveBiped.Bip01_L_Finger2_Twist_1', 'ValveBiped.Bip01_L_Finger3_Twist_1', 'ValveBiped.Bip01_L_Finger4_Twist_1', 'ValveBiped.Bip01_L_FingerBase1', 'ValveBiped.Bip01_L_FingerBase2', 'ValveBiped.Bip01_L_FingerBase3', 'ValveBiped.Bip01_L_FingerBase4', 'ValveBiped.Bip01_L_Foot01', 'ValveBiped.Bip01_L_Foot02', 'ValveBiped.Bip01_L_Forearm_Helperbone', 'ValveBiped.Bip01_L_ForearmTwist1', 'ValveBiped.Bip01_L_ForearmTwist2', 'ValveBiped.Bip01_L_Hand_Helperbone', 'ValveBiped.Bip01_L_Hand_Twist', 'valvebiped.bip01_l_HELPER', 'ValveBiped.Bip01_L_Index', 'ValveBiped.Bip01_L_Index01', 'ValveBiped.Bip01_L_Index02']
+
+--- bip01_bip_anatomical ---
+  Rule (fold-key regex): ^bip01?[\s_.]
+  Families: 264   Literals: 264   Cross-'model' breadth: 1
+  Single system: space/dot-separated 'Bip01 X.L/.R' bone names (Calf, Clavicle, Foot, Forearm, Hand, Thigh, UpperArm + Twist variants). Very tractable: near-identical in shape to the already-approved Phase-1 Wing/Finger conventions. Risk: a few odd members (NonAccum, Op1/Op2) are rig-technical, not anatomical.
+  Representative examples (40):
+    ['Bip01 Calf.L', 'Bip01 Calf.R', 'Bip01 Clavicle.L', 'Bip01 Clavicle.R', 'Bip01 Foot.L', 'Bip01 Foot.R', 'Bip01 Forearm.L', 'Bip01 Forearm.R', 'Bip01 ForearmTwist.L', 'Bip01 ForearmTwist.R', 'Bip01 Hand.L', 'Bip01 Hand.R', 'Bip01 Neck1', 'Bip01 NonAccum', 'Bip01 Op1.L', 'Bip01 Op1.R', 'Bip01 Op2.L', 'Bip01 Op2.R', 'Bip01 Thigh.L', 'Bip01 Thigh.R', 'Bip01 UpperArm.L', 'Bip01 UpperArm.R', 'Bip01 UpperArmTwist.L', 'Bip01 UpperArmTwist.R', 'Bip01_Head002', 'Bip01_Head003', 'Bip01_Head004', 'Bip01_Head007', 'Bip01_Head008', 'Bip01_Head009', 'Bip01_Head010', 'Bip01_Head011', 'Bip01_Head012', 'Bip01_Head013', 'Bip01_Head016', 'Bip01_Head017', 'Bip01_Head018', 'Bip01_Head019', 'Bip01_L_Clavicle002', 'Bip01_L_Clavicle003']
+
+--- taurenmale_skeleton ---
+  Rule (fold-key regex): taurenmale
+  Families: 59   Literals: 59   Cross-'model' breadth: 1
+  Single imported WoW Tauren skeleton dump, opaque numbered bones. Already flagged once before (Phase 1 S4 sample) as technical/model-specific. Low tractability, included here mainly to size the population precisely for the record.
+  Representative examples (40):
+    ['taurenmale_hd_bone_101', 'taurenmale_hd_bone_117', 'taurenmale_hd_bone_118', 'taurenmale_hd_bone_120', 'taurenmale_hd_bone_121', 'taurenmale_hd_bone_122', 'taurenmale_hd_bone_123', 'taurenmale_hd_bone_124', 'taurenmale_hd_bone_125', 'taurenmale_hd_bone_126', 'taurenmale_hd_bone_127', 'taurenmale_hd_bone_128', 'taurenmale_hd_bone_129', 'taurenmale_hd_bone_130', 'taurenmale_hd_bone_131', 'taurenmale_hd_bone_132', 'taurenmale_hd_bone_133', 'taurenmale_hd_bone_134', 'taurenmale_hd_bone_135', 'taurenmale_hd_bone_136', 'taurenmale_hd_bone_137', 'taurenmale_hd_bone_55', 'taurenmale_hd_bone_57', 'taurenmale_hd_bone_58', 'taurenmale_hd_bone_59', 'taurenmale_hd_bone_60', 'taurenmale_hd_bone_61', 'taurenmale_hd_bone_62', 'taurenmale_hd_bone_63', 'taurenmale_hd_bone_64', 'taurenmale_hd_bone_65', 'taurenmale_hd_bone_66', 'taurenmale_hd_bone_67', 'taurenmale_hd_bone_68', 'taurenmale_hd_bone_69', 'taurenmale_hd_bone_70', 'taurenmale_hd_bone_71', 'taurenmale_hd_bone_73', 'taurenmale_hd_bone_74', 'taurenmale_hd_bone_75']
+
+--- canine_skeleton ---
+  Rule (fold-key regex): canine
+  Families: 45   Literals: 45   Cross-'model' breadth: 1
+  Single creature-specific 'Canine' skeleton with clear anatomical names (LBackLeg, LEar, LEye, Neck, Pelvis). Tractable IF the Master gains or reuses a creature-anatomy destination; not a good fit for the current human-biped-oriented taxonomy as-is.
+  Representative examples (40):
+    ['Canine', 'Canine_', 'Canine_COM', 'Canine_Dog_LBrow', 'Canine_Dog_RBrow', 'Canine_FrontLip', 'Canine_Head', 'Canine_LBackLeg1', 'Canine_LBackLeg2', 'Canine_LBackLegPalm', 'Canine_LBackLegToe', 'Canine_LEar01', 'Canine_LEar02', 'Canine_LEar_Wolf', 'Canine_LEye', 'Canine_LFrontLeg1', 'Canine_LFrontLeg2', 'Canine_LFrontLegPalm', 'Canine_LFrontLegShoulderblade', 'Canine_LFrontLegToe', 'Canine_LUpperLip', 'Canine_Neck1', 'Canine_Neck2', 'Canine_Pelvis', 'Canine_RBackLeg1', 'Canine_RBackLeg2', 'Canine_RBackLegPalm', 'Canine_RBackLegToe', 'Canine_REar01', 'Canine_REar02', 'Canine_REar_Wolf', 'Canine_REye', 'Canine_RFrontLeg1', 'Canine_RFrontLeg2', 'Canine_RFrontLegPalm', 'Canine_RFrontLegShoulderblade', 'Canine_RFrontLegToe', 'Canine_Ribcage', 'Canine_RUpperLip', 'Canine_Spine1']
+
+--- crow_skeleton ---
+  Rule (fold-key regex): crow
+  Families: 52   Literals: 52   Cross-'model' breadth: 2
+  Two related 'Crow_1'/'Crow_2'/'Crow_3' numbered instances of one bird skeleton (Femur, Humerus, Phalanges, Clavical, Ulna -- avian wing/leg anatomy). Same tractability profile as Canine: creature-anatomy, not human-biped.
+  Representative examples (40):
+    ['Crow_1.Body', 'Crow_1.Clavical_L', 'Crow_1.Clavical_R', 'Crow_1.Femur_L', 'Crow_1.Femur_R', 'Crow_1.Humerus_L', 'Crow_1.Humerus_R', 'Crow_1.Phalanges1_L', 'Crow_1.Phalanges1_R', 'Crow_1.Phalanges2_L', 'Crow_1.Phalanges2_R', 'Crow_1.Phalanges3_L', 'Crow_1.Phalanges3_R', 'Crow_1.Tail_L', 'Crow_1.Tail_R', 'Crow_1.Ulna_L', 'Crow_1.Ulna_R', 'Crow_2.Body', 'Crow_2.Clavical_L', 'Crow_2.Clavical_R', 'Crow_2.Femur_L', 'Crow_2.Femur_R', 'Crow_2.Humerus_L', 'Crow_2.Humerus_R', 'Crow_2.Phalanges1_L', 'Crow_2.Phalanges1_R', 'Crow_2.Phalanges2_L', 'Crow_2.Phalanges2_R', 'Crow_2.Phalanges3_L', 'Crow_2.Phalanges3_R', 'Crow_2.Tail_L', 'Crow_2.Tail_R', 'Crow_2.Ulna_L', 'Crow_2.Ulna_R', 'Crow_3.Body', 'Crow_3.Clavical_L', 'Crow_3.Clavical_R', 'Crow_3.Femur_L', 'Crow_3.Femur_R', 'Crow_3.Humerus_L']
+
+--- root_attachment ---
+  Rule (fold-key regex): (^|[^a-z])root($|[^a-z0-9])
+  Families: 162   Literals: 163   Cross-'model' breadth: 71
+  Broadest cross-model token found (71 distinct leading systems). Genuinely mixed: some are real anatomical roots (bip_pinky_root_0_L), many are generic attachment/anchor points for accessories (Belt.Root, Ascot.Root, Bags Belt Root). High contamination risk if treated as one block; would need splitting by the object it roots (clothing vs. body vs. hair) similar to the Phase 1 breast/dress pattern-precedent approach.
+  Representative examples (40):
+    ['accessories bell root', 'accessories zipper root', 'arm right hand root', 'Ascot.Root', 'Bags Belt Root', 'Balls.Root', 'Band.Root', 'BELT ROOT', 'Belt.Root', 'bip_BellCollar_Root', 'bip_l_root_cloth', 'bip_l_root_horn', 'bip_pinky_root_0_L', 'bip_pinky_root_0_R', 'bip_r_root_cloth', 'bip_r_root_horn', 'bip_ring_root_0_L', 'bip_ring_root_0_R', 'bip_root_cloth', 'bip_root_neck', 'blend_root', 'bone.root', 'Book Root', 'boon_root_left', 'boon_root_right', 'bow left a root', 'bow left bcd root', 'bow right a root', 'bow right bcd root', 'Butt Left_jiggle_root', 'Butt Right_jiggle_root', 'butt root.l', 'butt root.r', 'butt_Left_root', 'butt_Right_root', 'c collar sec root', 'camera_root', 'cannon_root', 'Canvas.Root', 'cape root']
+
+--- helper_twist_corrective ---
+  Rule (fold-key regex): (^|[^a-z])(helper|twist)($|[^a-z0-9])
+  Families: 214   Literals: 214   Cross-'model' breadth: 41
+  Broad (41 distinct systems): twist/helper corrective bones on arms/legs. Strong precedent already exists in the live Master (twist bones already established in Arms/Legs/RigHelpers per Phase-1C evidence). Reasonably tractable but needs the same per-limb-side care already used for fingers/toes.
+  Representative examples (40):
+    ['arm left arm twist 1', 'arm left arm twist 2', 'arm left arm twist a', 'arm left arm twist b', 'arm left shoulder 2 twist', 'arm left twist', 'arm left wrist twist 1', 'arm left wrist twist 2', 'arm right arm twist 1', 'arm right arm twist 2', 'arm right arm twist a', 'arm right arm twist b', 'arm right elbow twist ', 'arm right shoulder 2 twist', 'arm right twist', 'arm right wrist twist', 'arm right wrist twist 1', 'arm right wrist twist 2', 'arm_twist.l', 'arm_twist.r', 'arm_twist_l', 'arm_twist_r', 'bip_bicep_twist_L', 'bip_bicep_twist_R', 'bip_pelvis_helper_L', 'bip_pelvis_helper_R', 'Bone-L-Calf-Twist', 'Bone-L-ForeArm-Twist', 'Bone-L-Thigh-Twist', 'Bone-L-UpperArm-Twist', 'Bone-R-Calf-Twist', 'Bone-R-ForeArm-Twist', 'Bone-R-Thigh-Twist', 'Bone-R-UpperArm-Twist', 'calf_twist_l_01', 'calf_twist_l_02', 'calf_twist_r_01', 'calf_twist_r_02', 'Facial_Helper_Eye_L', 'Facial_Helper_Eye_R']
+
+--- jiggle_physics ---
+  Rule (fold-key regex): jiggle
+  Families: 225   Literals: 225   Cross-'model' breadth: 63
+  Broad (63 distinct systems): secondary-motion/physics bones, mostly hair/clothing- adjacent, ending in _jiggle. Master already has an established Hair jiggle convention; this region's members appear to sit on clothing/accessory objects (BAS.*, Bobcut.*, Student.*) more than on hair specifically -- would need destination-by-object investigation, not one bulk rule.
+  Representative examples (40):
+    ['BAS.Back_1_jiggle', 'BAS.Back_2_jiggle', 'BAS.Back_3_jiggle', 'BAS.Left_1_jiggle', 'BAS.Left_2_jiggle', 'BAS.Left_3_jiggle', 'BAS.Rear_Center_1_jiggle', 'BAS.Rear_Center_2_jiggle', 'BAS.Rear_Center_3_jiggle', 'BAS.Rear_Center_4_jiggle', 'BAS.Rear_Left_1_jiggle', 'BAS.Rear_Left_2_jiggle', 'BAS.Rear_Left_3_jiggle', 'BAS.Rear_Left_4_jiggle', 'BAS.Rear_Right_1_jiggle', 'BAS.Rear_Right_2_jiggle', 'BAS.Rear_Right_3_jiggle', 'BAS.Rear_Right_4_jiggle', 'BAS.Right_1_jiggle', 'BAS.Right_2_jiggle', 'BAS.Right_3_jiggle', 'BAS.Side_Left_1_jiggle', 'BAS.Side_Left_2_jiggle', 'BAS.Side_Left_3_jiggle', 'BAS.Side_Left_4_jiggle', 'BAS.Side_Right_1_jiggle', 'BAS.Side_Right_2_jiggle', 'BAS.Side_Right_3_jiggle', 'BAS.Side_Right_4_jiggle', 'Bikini_a_jiggle', 'Bikini_b_jiggle', 'Bikini_c_jiggle', 'Bikini_d_jiggle', 'bip_pelvis_jiggle', 'Bobcut.Back_1_jiggle', 'Bobcut.Back_2_jiggle', 'Bobcut.Back_3_jiggle', 'Bobcut.Front_Left_1_jiggle', 'Bobcut.Front_Left_2_jiggle', 'Bobcut.Front_Left_3_jiggle']
+
+--- rig_code_convention ---
+  Rule (fold-key regex): ^[a-z0-9]+-rig-
+  Families: 91   Literals: 91   Cross-'model' breadth: 7
+  7 distinct 2-4 letter codes (Brk/Fio/Fin/Qwn/Pbg/Flm/Mar), each an isolated, internally-consistent per-character rig export (eye variants, cape, face, bacon(?), eggwhite). Small but very clean; each code is its own tiny closed vocabulary. Low contamination risk within a code; the risk is only in guessing what a code's odd terms (Bacon, Hole, EggWhite) actually pose.
+  Representative examples (40):
+    ['Brk-Rig-Bacon-B', 'Brk-Rig-Bacon-BL', 'Brk-Rig-Bacon-F', 'Brk-Rig-Bacon-FL', 'Brk-Rig-Bacon-FR', 'Brk-Rig-Bread', 'Brk-Rig-Eye-L', 'Brk-Rig-Eye-LB', 'Brk-Rig-Eye-LU', 'Brk-Rig-Eye-R', 'Brk-Rig-Eye-RB', 'Brk-Rig-Eye-RU', 'Brk-Rig-Face', 'Brk-Rig-Hole-A', 'Brk-Rig-Hole-V1', 'Brk-Rig-Hole-V2', 'Fin-Rig-Cape1', 'Fin-Rig-Cape2', 'Fin-Rig-Eye-L', 'Fin-Rig-Eye-LB', 'Fin-Rig-Eye-LU', 'Fin-Rig-Eye-R', 'Fin-Rig-Eye-RB', 'Fin-Rig-Eye-RU', 'Fin-Rig-Hat-Hood-B', 'Fin-Rig-Hat-Hood-F', 'Fin-Rig-Hat-Hood-L', 'Fin-Rig-Hat-Hood-R', 'Fin-Rig-Shorts-L', 'Fin-Rig-Shorts-R', 'Fio-Rig-Eye-L', 'Fio-Rig-Eye-LB', 'Fio-Rig-Eye-LU', 'Fio-Rig-Eye-R', 'Fio-Rig-Eye-RB', 'Fio-Rig-Eye-RU', 'Fio-Rig-Face', 'Fio-Rig-Strip-L1', 'Fio-Rig-Strip-L2', 'Fio-Rig-Strip-L3']
+
+--- key_blendshape_style ---
+  Rule (fold-key regex): ^key\s+\d
+  Families: 22   Literals: 22   Cross-'model' breadth: 1
+  Small (22 families) but structurally distinct: 'Key N' / 'Key N - Description' FACS-style naming where the dash-suffix carries real semantic content (EyeLeft, Shirt, PoneyHair). Tractable by parsing the description half, not the 'Key N' half; bare 'Key N' entries with no description are opaque and would need to stay unresolved.
+  Representative examples (22):
+    ['Key 1', 'Key 1 - EyeLeft', 'Key 1 - EyeRight', 'Key 1 - Reverted', 'Key 1 - Shirt', 'Key 10', 'Key 11', 'Key 17', 'Key 2', 'Key 2 - Shirt', 'Key 22', 'Key 27', 'Key 3', 'Key 3 - PoneyHair', 'Key 3 - Shirt', 'Key 4', 'Key 4 - PoneyHair', 'Key 5', 'Key 6', 'Key 7', 'Key 8', 'Key 9']
+
+--- dcc_technical_suffix ---
+  Rule (fold-key regex): ^def-|^dyng|(^|[^a-z])phy($|[^a-z0-9])|^opt[_\s]
+  Families: 224   Literals: 224   Cross-'model' breadth: 6
+  6 distinct DCC-tool markers (Blender Rigify 'DEF-', dynamic-bone 'dyng', physics 'Phy', optional 'OPT_'). DEF- names are often clearly anatomical (DEF-forearm.L, DEF-neck.001) and could plausibly follow existing conventions; 'Phy'/'dyng'/'OPT_' skew more purely technical. Needs per-marker treatment, not one rule.
+  Representative examples (40):
+    ['C Beard a Phy', 'C CollarA a Phy', 'C uJacketA a Phy', 'C uJacketA b Phy', 'C uJacketA c Phy', 'C uJacketB a Phy', 'C uJacketB b Phy', 'C uJacketB c Phy', 'DEF-brows1_L', 'DEF-brows1_R', 'DEF-brows2_L', 'DEF-brows2_R', 'DEF-brows_L', 'DEF-brows_R', 'DEF-foot.001.02.L', 'DEF-foot.001.02.R', 'DEF-foot.L.002', 'DEF-foot.R.002', 'DEF-forearm.L', 'DEF-forearm.R', 'DEF-hand.L', 'DEF-head.002', 'DEF-neck.001', 'DEF-ribcage.B.L', 'DEF-ribcage.B.L.001', 'DEF-ribcage.B.R', 'DEF-ribcage.B.R.001', 'DEF-ribcage.T.L', 'DEF-ribcage.T.L.001', 'DEF-ribcage.T.R', 'DEF-ribcage.T.R.001', 'DEF-shin.02.L', 'DEF-shin.02.R', 'DEF-shin.L', 'DEF-shin.R', 'DEF-shoulder.L', 'DEF-shoulder.R', 'DEF-spine.006_L.010', 'DEF-spine.006_L.012', 'DEF-spine.006_L.015']
+
+--- generic_mesh_dump ---
+  Rule (fold-key regex): ^polysurface\d+$|^object\d+$|^box\d+$|^egg\.wall|^null\.\d+$
+  Families: 199   Literals: 199   Cross-'model' breadth: 169
+  Extremely broad (169 distinct leading tokens): auto-numbered mesh/prop remnants (Box##, Egg.Wall_#, Null.###, plus the already-known polySurface/Object families). Very low semantic content; primarily useful as a large, low-risk exclusion candidate rather than an import candidate, matching the Phase-1 B4 pattern.
+  Representative examples (40):
+    ['Box01', 'Box02', 'Box03', 'Box04', 'Box05', 'Box06', 'Box07', 'Box08', 'Box09', 'Box1', 'Box10', 'Box11', 'Box12', 'Box13', 'Box14', 'Box15', 'Box16', 'Box17', 'Box18', 'Box19', 'Box20', 'Box21', 'Box22', 'Egg.Wall0_10', 'Egg.Wall_1', 'Egg.Wall_11', 'Egg.Wall_12', 'Egg.Wall_13', 'Egg.Wall_14', 'Egg.Wall_15', 'Egg.Wall_16', 'Egg.Wall_17', 'Egg.Wall_18', 'Egg.Wall_19', 'Egg.Wall_2', 'Egg.Wall_20', 'Egg.Wall_21', 'Egg.Wall_22', 'Egg.Wall_23', 'Egg.Wall_24']
+
+--- bikini_bobcut_frily ---
+  Rule (fold-key regex): bikini|bobcut|frily
+  Families: 143   Literals: 143   Cross-'model' breadth: 6
+  Specific costume/hairstyle vocabulary already partially evidenced in Phase 1 (Bobcut jiggle patterns were seen inside the Hair region). 'Bikini' contains both real body-morph- style controls (Bikini Boobs Big, Bikini Pregnant) and plain garment terms (Bikini Top Side) -- mixed destination risk, would need splitting.
+  Representative examples (40):
+    ['Bikini Boobs Big', 'Bikini Boobs Small', 'Bikini Boobs Upward L', 'Bikini Boobs Upward R', 'Bikini Bottom Side', 'Bikini Bulge', 'Bikini Butt Big', 'Bikini Nipple Movement L', 'Bikini Nipple Movement R', 'Bikini Pregnant', 'Bikini Slide 1', 'Bikini Slide 2', 'Bikini Small Thigs', 'Bikini Thick Thigs', 'Bikini Top Side', 'Bikini Top Tight', 'Bikini_01', 'Bikini_02', 'Bikini_03', 'Bikini_04', 'Bikini_05', 'Bikini_06', 'Bikini_07', 'Bikini_08', 'Bikini_09', 'Bikini_10', 'Bikini_11', 'Bikini_12', 'Bikini_13', 'Bikini_14', 'Bikini_15', 'Bikini_16', 'Bikini_a', 'Bikini_a_jiggle', 'Bikini_b', 'Bikini_b_jiggle', 'Bikini_c', 'Bikini_c_jiggle', 'Bikini_d', 'Bikini_d_jiggle']
+
+--- tail_left_right ---
+  Rule (fold-key regex): ^tailleft|^tailright
+  Families: 58   Literals: 58   Cross-'model' breadth: 10
+  Concatenated 'TailLeft#_#'/'TailRight#_#' numbered chain, distinct in shape from the already-approved bip_l/r_wing convention. Master already has a Tail group; plausible fit, but the concatenated (no separator) naming shape has not been convention-matched against the Master yet.
+  Representative examples (40):
+    ['TailLeft', 'TailLeft1_1', 'TailLeft1_2', 'TailLeft1_3', 'TailLeft1_4', 'TailLeft1_5', 'TailLeft1_6', 'TailLeft1_7', 'TailLeft2_1', 'TailLeft2_2', 'TailLeft2_3', 'TailLeft2_4', 'TailLeft2_5', 'TailLeft2_6', 'TailLeft2_7', 'TailLeft3_1', 'TailLeft3_2', 'TailLeft3_3', 'TailLeft3_4', 'TailLeft3_5', 'TailLeft3_6', 'TailLeft3_7', 'TailLeft4_1', 'TailLeft4_2', 'TailLeft4_3', 'TailLeft4_4', 'TailLeft4_5', 'TailLeft4_6', 'TailLeft4_7', 'TailRight', 'TailRight1_1', 'TailRight1_2', 'TailRight1_3', 'TailRight1_4', 'TailRight1_5', 'TailRight1_6', 'TailRight1_7', 'TailRight2_1', 'TailRight2_2', 'TailRight2_3']
+
+--- belt_bow_cape_cloth ---
+  Rule (fold-key regex): (^|[^a-z])(belt|bow|cape|cloth)($|[^a-z0-9])
+  Families: 463   Literals: 463   Cross-'model' breadth: 17
+  Broad (17 distinct systems), a grab-bag of clothing-accessory tokens similar in spirit to the already-imported skirt/dress/ribbon/coat/cloak/scarf/sleeve set from Phase 1, but for belt/bow/cape/cloth specifically. Likely tractable via the same Master-precedent-checking method used successfully before; needs the same per-token precedent verification, not assumed inclusion.
+  Representative examples (40):
+    ['arm cape left shoulder 1', 'arm cape left shoulder 2', 'arm cape right shoulder 1', 'arm cape right shoulder 2', 'arm left cloth 1a', 'arm left cloth 1b', 'arm left cloth 1c', 'arm left cloth 2a', 'arm left cloth 2b', 'arm left cloth 2c', 'arm left cloth 3a', 'arm left cloth 3b', 'arm left cloth 3c', 'arm right cloth 1a', 'arm right cloth 1b', 'arm right cloth 1c', 'arm right cloth 2a', 'arm right cloth 2b', 'arm right cloth 2c', 'arm right cloth 3a', 'arm right cloth 3b', 'arm right cloth 3c', 'Back.Bow_Left_1', 'Back.Bow_Left_2', 'Back.Bow_Right_1', 'Back.Bow_Right_2', 'Bags Belt Root', 'belt a', 'belt b', 'belt back left a', 'belt back left b', 'belt back left c', 'belt back right a', 'belt back right b', 'belt back right c', 'belt front 00', 'belt front 01', 'belt front left a', 'belt front left b', 'belt front left c']
+
+--- generic_human_placeholder ---
+  Rule (fold-key regex): generichuman
+  Families: 28   Literals: 28   Cross-'model' breadth: 2
+  Small (28 families), one coherent 'GenericHuman_*' facial-rig joint template (brow/lip/eye joints in Maya-style camelCase). Looks like a generic template skeleton rather than any specific character; anatomical content is genuine but the model itself may be a placeholder/reference rig rather than a real animated character.
+  Representative examples (28):
+    ['GenericHuman_C_chinJnt', 'GenericHuman_C_forehead', 'GenericHuman_c_loLipJnt', 'GenericHuman_c_uppLipJnt', 'GenericHuman_l_browAJnt', 'GenericHuman_l_browBJnt', 'GenericHuman_l_browCJnt', 'GenericHuman_l_cornerLipJnt', 'GenericHuman_l_EyeJnt', 'GenericHuman_l_loLidJnt', 'GenericHuman_l_loLipJnt', 'GenericHuman_l_nostrilJnt', 'GenericHuman_l_uppLidJnt', 'GenericHuman_l_uppLipJnt', 'GenericHuman_LSquint', 'GenericHuman_r_browAJnt', 'GenericHuman_r_browBJnt', 'GenericHuman_r_browCJnt', 'GenericHuman_r_cornerLipJnt', 'GenericHuman_r_EyeJnt', 'GenericHuman_r_loLidJnt', 'GenericHuman_r_loLipJnt', 'GenericHuman_r_nostrilJnt', 'GenericHuman_r_uppLidJnt', 'GenericHuman_r_uppLipJnt', 'GenericHuman_RFaceHair01', 'GenericHuman_RSquint', 'GenericHumanDummyHead']
+
+==============================================================================
+10. RESIDUAL RANDOM SAMPLES (stratified)
+==============================================================================
+--- (a) highly recurrent cross-model tokens: diverse leading-prefix spread ---
+  [root] 'r string5 sec root' -> ['r string5 sec root']
+  [root] 'sideburn_root_r' -> ['sideburn_root_R']
+  [root] 'bip_bellcollar_root' -> ['bip_BellCollar_Root']
+  [root] 'l string2 sec root' -> ['l string2 sec root']
+  [back] 'cloth_back_b_1_l' -> ['cloth_back_B_1_L']
+  [back] 'cloth_back_b_4_r' -> ['cloth_back_B_4_R']
+  [back] 'cloth_back_b_3_r' -> ['cloth_back_B_3_R']
+  [back] 'jacket left back b' -> ['jacket left back b']
+  [upper] 'head laughline upper left' -> ['head laughline upper left']
+  [upper] 'maid.bow_right_upper_2' -> ['Maid.Bow_Right_Upper_2']
+  [upper] 'upper_03' -> ['Upper_03']
+  [upper] 'fitness upper details' -> ['Fitness Upper Details']
+  [middle] 'cloth back middle 1' -> ['cloth back middle 1']
+  [middle] 'cloth middle 5' -> ['cloth middle 5']
+  [middle] 'foot_middle_1_r' -> ['foot_middle_1_R']
+  [middle] 'r middle 02' -> ['r middle 02']
+  [lower] 'unused head neck lower attached_ssx h #2 head neck lower attach' -> ['unused head neck lower attached_ssx h #2 head neck lower attach']
+  [lower] 'spine lower_r' -> ['spine lower_R']
+  [lower] 'fit lower 02' -> ['fit Lower 02']
+  [lower] 'leg_2.lower' -> ['leg_2.lower']
+  [helper] 'unused b_l_ankle3helper' -> ['unused b_l_ankle3helper']
+  [helper] 'helper_wrist_l' -> ['helper_wrist_L']
+  [helper] 'r_knee_calf_helper' -> ['r_knee_calf_helper']
+  [helper] 'l_tricep_helper' -> ['l_tricep_helper']
+  [top] 'fin_top_a_c' -> ['fin_top_a_c']
+  [top] 'fin_top_a_b' -> ['fin_top_a_b']
+  [top] 'no teeth top' -> ['No teeth top']
+  [top] 'bip_head_top' -> ['bip_head_top']
+  [jiggle] 'student.left_3_jiggle' -> ['Student.Left_3_jiggle']
+  [jiggle] 'piercing.belly_button_pendant_jiggle' -> ['Piercing.Belly_Button_Pendant_jiggle']
+  [jiggle] 'jiggle leg left thigh 1' -> ['jiggle leg left thigh 1']
+  [jiggle] 'bobcut.left_3_jiggle' -> ['Bobcut.Left_3_jiggle']
+
+--- (b) single-'model' concentrations ---
+  [taurenmale] 'taurenmale_hd_bone_69' -> ['taurenmale_hd_bone_69']
+  [taurenmale] 'taurenmale_hd_bone_88' -> ['taurenmale_hd_bone_88']
+  [taurenmale] 'taurenmale_hd_bone_122' -> ['taurenmale_hd_bone_122']
+  [taurenmale] 'taurenmale_hd_bone_70' -> ['taurenmale_hd_bone_70']
+  [taurenmale] 'taurenmale_hd_bone_99' -> ['taurenmale_hd_bone_99']
+  [canine] 'canine_rear02' -> ['Canine_REar02']
+  [canine] 'canine_lfrontleg2' -> ['Canine_LFrontLeg2']
+  [canine] 'canine_dog_rbrow' -> ['Canine_Dog_RBrow']
+  [canine] 'canine_rfrontlegshoulderblade' -> ['Canine_RFrontLegShoulderblade']
+  [canine] 'canine_tail2' -> ['Canine_Tail2']
+  [crow] 'crow_3.ulna_l' -> ['Crow_3.Ulna_L']
+  [crow] 'crow_3.phalanges2_l' -> ['Crow_3.Phalanges2_L']
+  [crow] 'crow_2.clavical_r' -> ['Crow_2.Clavical_R']
+  [crow] 'crow_3.body' -> ['Crow_3.Body']
+  [crow] 'crow_2.humerus_l' -> ['Crow_2.Humerus_L']
+  [rig-code] 'fio-rig-strip-l3' -> ['Fio-Rig-Strip-L3']
+  [rig-code] 'mar-rig-eggwhite1' -> ['Mar-Rig-Eggwhite1']
+  [rig-code] 'brk-rig-eye-ru' -> ['Brk-Rig-Eye-RU']
+  [rig-code] 'fio-rig-eye-ru' -> ['Fio-Rig-Eye-RU']
+  [rig-code] 'flm-rig-hole-v2' -> ['Flm-Rig-Hole-V2']
+  [rig-code] 'brk-rig-hole-a' -> ['Brk-Rig-Hole-A']
+  [rig-code] 'pbg-rig-eye-l' -> ['PBG-Rig-Eye-L']
+  [rig-code] 'qwn-rig-eye-r' -> ['Qwn-Rig-Eye-R']
+
+--- (c) technical-looking names (random sample) ---
+  (sampled from 1,742 technical-marker rows)
+  'lowerarm_twist_r_02'  markers=twist
+  'Fin-Rig-Eye-R'  markers=rig
+  'unused.038'  markers=unused
+  'unused duplicate duplicate unused.015'  markers=unused
+  'L CollarC a Phy'  markers=phy
+  'Fin-Rig-Eye-RU'  markers=rig
+  'taurenmale_hd_bone_67'  markers=bone
+  'OPT_AS_R_UpLeg_A'  markers=opt
+  'taurenmale_hd_bone_64'  markers=bone
+  'bone middle 08'  markers=bone
+  'Brk-Rig-Bread'  markers=rig
+  'taurenmale_hd_bone_87'  markers=bone
+  'Bone.015'  markers=bone
+  'Bone.016.l'  markers=bone
+  'DEF-foot.R.002'  markers=def
+  'Mar-Rig-Eggwhite1'  markers=rig
+  'ValveBiped.Bip01_R_Finger2_Twist_1'  markers=twist
+  'Fio-Rig-Eye-LB'  markers=rig
+  'headband tail right d_jiggle'  markers=jiggle
+  'hokage hat left 2a_jiggle'  markers=jiggle
+  'C uJacketB c Phy'  markers=phy
+  'Butt Left_jiggle_root'  markers=jiggle;root
+  'l_elbow_twist_c_helper'  markers=helper;twist
+  'unused.009'  markers=unused
+  'Bone.001_R.042'  markers=bone
+
+--- (d) generic/opaque names (random sample) ---
+  (sampled from 605 opaque-shaped rows)
+  'M04'
+  'G14'
+  'TL'
+  'R3rdNb'
+  'R01'
+  'R2ndNb'
+  'C6'
+  'AU18'
+  'AU25'
+  'hmhm'
+  '37'
+  'PH07'
+  'I12'
+  'BhR43'
+  'zr68c'
+  'EI'
+  'whR_1'
+  'A12'
+  '13'
+  'T6'
+  'C11'
+  'Lids'
+  'T3'
+  'TLC'
+  '49'
+
+--- (e) completely unbucketed remainder (random sample, outside all 17 regions above) ---
+  (sampled from 11,546 families untouched by Section 9's regions)
+  'bone_face_eye_l_shape_u_in' -> ['Bone_Face_Eye_L_Shape_U_In']
+  'head eye sack upper right' -> ['Head Eye Sack Upper Right']
+  'key.white_58' -> ['Key.White_58']
+  'pupils-glaresizebig-r' -> ['Pupils-GlareSizeBig-R']
+  'box_face_19_m' -> ['Box_Face_19_M']
+  'tounge curl down' -> ['Tounge curl down']
+  'rgrrrr' -> ['RGRRRR']
+  'rfrown2' -> ['RFrown2']
+  'forehead_l' -> ['Forehead_L', 'forehead_L']
+  'c_arl_a00' -> ['C_ARL_A00']
+  'bip fpinky00 l' -> ['bip fpinky00 l']
+  'shell.wall_38' -> ['Shell.Wall_38']
+  'bone188' -> ['Bone188']
+  'prop_03' -> ['prop_03']
+  'arm left lower' -> ['arm left lower']
+  'bone124' -> ['Bone124']
+  'iriswiden' -> ['irisWiden']
+  'leg front knee right' -> ['leg front knee right']
+  'cape2_right4' -> ['CAPE2_RIGHT4']
+  'door_5' -> ['door_5']
+  'unusedmot13-rightleg' -> ['unusedmot13-rightleg']
+  'bone105' -> ['Bone105']
+  'fyounger' -> ['FYounger']
+  'bone083' -> ['Bone083']
+  'head_neck_upper' -> ['head_neck_upper']
+  'se_bones24' -> ['se_bones24']
+  'leg left knee adj.' -> ['leg left knee adj.']
+  'au17d' -> ['AU17D']
+  'creaseright' -> ['CreaseRight']
+  'valvebiped_bullet3' -> ['ValveBiped_Bullet3']
+
+==============================================================================
+WHAT KIND OF RESIDUAL CORPUS DO WE ACTUALLY HAVE?
+==============================================================================
+1. It is overwhelmingly a long tail, not a small set of big buckets.
+   99.0% of residual families (14,139 of 14,282) are singletons -- Phase 1
+   already absorbed essentially all the large multi-spelling families this
+   corpus had to offer. Whatever Phase 2 becomes, it will be won or lost on
+   many small, independently-evidenced decisions, not a few sweeping ones.
+
+2. The corpus has no per-model provenance at all, confirmed freshly rather
+   than assumed. Any "model concentration" or "cross-model recurrence"
+   statement in this report (Sections 6-7, 9, 10) rests on a leading-token
+   text heuristic, not verified data, and must be labeled as such wherever
+   it is used going forward.
+
+3. A meaningful slice is opaque-biped/rig-convention vocabulary (bip*,
+   ValveBiped.*, Bip01 *) rather than free-form scanner noise -- these
+   three systems alone account for roughly 850 families and, based on the
+   Phase-1 precedent-matching method, look like the single highest-value,
+   lowest-risk place to start a future pass: same shape as the already-
+   approved Wing/Finger conventions, just larger.
+
+4. A second meaningful slice is genuinely non-human creature/character
+   skeletons (Canine, Crow, taurenmale) and isolated per-character rig
+   exports (the 7 "<code>-Rig-<part>" systems). These are real, coherent,
+   but structurally foreign to the current human-biped-oriented taxonomy --
+   they raise a taxonomy-scope question (does Master want a creature-
+   anatomy home?) rather than a simple classification question.
+
+5. A third meaningful slice is generic technical/DCC noise (Box##, Egg.Wall,
+   Null.###, DEF-/dyng/Phy/OPT_ markers, "unused" self-declared items) that
+   mirrors the Phase-1 B4 pattern almost exactly and is likely to resolve
+   the same way (technical, no clean semantic destination) rather than
+   needing new investigation.
+
+6. The clothing/accessory vocabulary (belt/bow/cape/cloth/jiggle/root on
+   worn objects) is real and probably tractable, but it is diffuse and
+   attached to many different objects rather than one clean token --
+   exactly the pattern that required careful Master-precedent verification
+   (not bulk substring assignment) in Phase 1, and will again here.
+
+7. Roughly 4-5% of the residual literals are short, vowel-less, or bare-
+   direction-word shaped with no interpretable content on their own
+   (near-numbered codes, "><", "v_nn", single letters+digits). These look
+   like the natural floor of this corpus -- population that may never
+   safely classify, matching the "incomplete truth over convenient false
+   certainty" principle already in the Master's own philosophy.
+
+8. A non-trivial fraction (about 1 in 6 literals) already carries an
+   explicit technical-marker token (bone, unused, jiggle, root, helper,
+   twist, rig, opt, phy, def, offset, dyng, joint, ctrl, dummy, control,
+   handle, null, loc, pivot, attach, target, fk) -- this vocabulary alone,
+   census-only for now, is a natural first place to look when a future pass
+   asks "what should definitely NOT be bulk-imported."
+
+No import recommendation is made. This is reconnaissance only.

@@ -1,0 +1,347 @@
+==============================================================================
+PHASE 2 PRE-SCALE DOCTRINE REVIEW
+Re-audit of the 74 pilot families that remained NEEDS_DOCTRINE after the
+Correctives calibration, against the current live Master DESIGN PHILOSOPHY
+(re-read in full for this task) and settled Phase 1 precedent.
+Source: PHASE2_PILOT_DOCTRINE_CALIBRATION.txt (not altered by this document)
+==============================================================================
+
+A note on one arithmetic slip in the prior calibration document: it added a
+parenthetical claiming "unused dogmeat_eye_r is counted... under bucket 8
+creature anatomy," which contradicted that same document's own earlier,
+correct 104-family tally (where dogmeat_eye_r was placed in the "explicitly
+UNUSED, non-helper" bucket of 3 -- actually 4 once ankle2helper is included
+separately -- items, not the 15-item creature bucket). The creature bucket
+was, and remains, 15 items NOT including dogmeat_eye_r; the unused bucket is
+4 items (ankle2helper, dogmeat_eye_r, faceroot, handr). Both readings sum to
+the same 74 total; this note exists only so the two documents' bucket labels
+don't appear to disagree. No count changes as a result.
+
+==============================================================================
+1. BODY MORPHS RULE -- CORRECTING THE OVERBROAD STATEMENT
+==============================================================================
+FINDING: Already fully settled by existing doctrine; no new rule needed,
+only a correction to how the calibration document stated it.
+
+The live philosophy is explicit on two independent, converging points:
+
+- CLOTHING's own definition already includes shape as an in-scope function:
+  "Clothing contains controls whose primary animator-facing purpose is
+  manipulating, fitting, opening, closing, hiding, exposing, SHAPING, or
+  otherwise working with garments and worn accessories."
+- OBJECT-SPECIFIC PURPOSE TAKES PRECEDENCE states the general principle
+  directly: "A control that exists to fit, repair, hide, or accommodate a
+  particular animator-facing object belongs with that object," and BODY
+  SHAPE's own text distinguishes intended appearance change from the
+  purpose test, not from a bare word list ("Body Shape represents anatomy
+  or appearance change as the intended result").
+
+So the calibration's "explicit shape/size descriptors with no posing verb
+go straight to Body Morphs" was incomplete: it never asked WHOSE shape is
+changing. The corrected rule:
+
+  A shape/size descriptor (bigger, wider, thicker, shrink, muscular, tone,
+  thickness, size) indicates Body Morphs ONLY when its primary referent is
+  the character's own body/anatomy (Hips, Breast, Feet, Penis, Waist, Shin,
+  Shoulder, etc.). When the SAME kind of descriptor modifies a named worn
+  object/garment/accessory as its primary referent (Boots2Thicker, BraShape,
+  JacketBelly, GloveMuscles, BeltWidth), the control belongs with that
+  object's own destination (typically Clothing), per Clothing's own
+  "shaping" language and the Object-Specific-Purpose-Takes-Precedence rule
+  -- regardless of the fact that the visible effect sounds like a body-
+  shape change.
+
+The two pilot families originally resolved under the old, broader statement
+(Shin Thickness -> Body Morphs, Shouldershrink -> Body Morphs) remain
+correctly resolved: both name a body region (shin, shoulder) as the primary
+referent, with no worn-object noun present. No re-classification needed for
+those two; only the standing rule's wording needed the object-ownership
+test added before scaling to 13,782 more families where a garment-shape
+literal is far more likely to appear.
+
+==============================================================================
+2. BARE STRUCTURAL HEAD / SKULL / SPINE
+==============================================================================
+FINDING: Head/skull -- RESOLVED (5 of 5). Spine -- REMAINS a genuine
+doctrine question (0 of 5), for a documented, evidence-based reason.
+
+Tested proposition: a clearly structural literal naming Head/Skull/Spine/
+Pelvis/Ribcage/Torso should default to Body unless the complete literal
+gives stronger evidence for another established destination.
+
+HEAD/SKULL: Confirmed correct by direct inspection of current Master
+content. Word-boundary "head" resolves 2,705 times in the current Master,
+and the overwhelming majority (Lower/Upper/Mid Face, Eyes, Tongue, Hair)
+is explained entirely by "head [specific facial feature]" compounds (e.g.
+"head eyelid left upper", "head eyeball left") -- i.e. "head" functions as
+a location/context prefix, and the ACTUAL feature word already resolves the
+destination correctly under existing Facial Taxonomy doctrine. None of the
+5 pilot cases (head back 1, m_head_2, r_head_3, skull_06, UpperHead) name a
+specific facial feature -- they are bare structural/positional head/skull
+references. The closest existing structural analogue, bare "pelvis," is
+66% Body (139/210) with the remaining minority explained by legitimate
+Clothing/Tail/Legs object-specific exceptions (not evidence of a different
+underlying referent, unlike spine below). This supports treating a bare,
+feature-less head/skull reference as ordinary structural anatomy by
+default:
+  head back 1  -> groupFile/Body
+  m_head_2     -> groupFile/Body
+  r_head_3     -> groupFile/Body
+  skull_06     -> groupFile/Body
+  UpperHead    -> groupFile/Body
+
+SPINE: NOT resolved by the same default, and this is not merely caution --
+it is confirmed by direct evidence that "spine" is genuinely attested with
+DIFFERENT REFERENTS in this Master's actual historical content, not simply
+filed inconsistently. The current Master's own "spine" usage (gathered in
+an earlier Phase 2 pass) splits Clothing 1084 / Body 436 / Hair 341 /
+RigHelpers 115 / RigBody 21 / Legs 10 / Tail 10 / Correctives 5 -- and
+direct sampling shows WHY: many "spine"-named Clothing entries are corset/
+dress design elements (e.g. "Ab-Fr-Spine-RibboneA-01"), and many "spine"-
+named Hair entries are hair-physics-chain nicknames (e.g. "backspine.L",
+"bip_DownSpine_0_L", "bip_MiddleSpine_0"), not the character's actual
+anatomical spine at all. This is precisely the situation the Master's own
+CANONICAL-COLLISION COROLLARY describes: "the same exact literal is
+genuinely attested with meanings that require different Master destinations
+... do not force a resolution. Leave it for deliberate human review." The
+5 pilot spine families (Bip01_Spine2_002, DEF-spine.031, bip_spine_0.002,
+SK_spine_3, spine upper_R.002) remain NEEDS_DOCTRINE -- not because the
+word is generically uncertain, but because it has a confirmed multi-
+referent history in this specific Master.
+
+==============================================================================
+3. SELF-DECLARED UNUSED CONTROLS
+==============================================================================
+FINDING: Already fully settled by existing, EXECUTED Phase 1 precedent.
+All 4 resolve. No new rule invented.
+
+This is not a new policy question. Phase 1F/1G already decided and Phase 1
+already IMPORTED this exact policy: 82 explicitly self-declared "unused"
+families (each carrying positive, explicit self-declared non-use evidence
+in its own literal, per the philosophy's "Useless requires positive audit
+evidence" test) were promoted to groupFile/Useless rather than to their
+anatomical destination, explicitly matching the Master's own pre-existing
+precedent ("unused trash 01", "unused trash 02" already live in Useless).
+This is committed, live Master state today (Useless currently holds 84
+controls, including that promoted population).
+
+Applying the SAME settled precedent to the 4 pilot cases:
+  unused b_l_ankle2helper  -> groupFile/Useless
+  unused dogmeat_eye_r     -> groupFile/Useless
+  unused f_c_faceroot      -> groupFile/Useless
+  unusedhandr              -> groupFile/Useless
+Each carries a clear anatomical referent (ankle, eye, face, hand) AND an
+explicit self-declared "unused" marker. Per settled precedent, the
+"unused" self-declaration is treated as positive Useless-evidence and
+takes priority over routing to the anatomical group. This also resolves
+unused dogmeat_eye_r's creature-scope question as moot -- its destination
+does not depend on what species the eye belongs to, because it is going to
+Useless either way.
+
+==============================================================================
+4. PROPS / WEAPONS / FURNITURE
+==============================================================================
+FINDING: NOT a taxonomy-invention question. "Other" already fulfills this
+role by strong, directly-verified existing precedent. 38 of 45 resolve
+using EXISTING Master practice; 7 remain open for a narrower, different
+reason (control-legitimacy, not destination).
+
+The live philosophy contains NO explicit "OTHER" definition section --
+its role has only ever been empirical. Direct inspection of the current
+Master's actual "Other" group content (8,403 members) settles both parts
+of the question with hard numbers, not assumption:
+
+  word-boundary "weapon"/"wep_"   : 154 hits, 153 (99.4%) already in Other
+  "rocket"                        :  40 hits,  40 (100.0%) already in Other
+  "door"                          :  24 hits,  22 (91.7%) already in Other
+  "tentacle"/"tentecle"           : 1,329 hits, 1,325 (99.7%) already in Other
+Direct sample of Other also turned up, unprompted: Weapon 23, Weapon_5_R,
+rocket_launchers_missileA_L, mp_rocket_launchers, mp_helmet, mp_chest plate,
+control_joystick, Box006, Tube_3_08, Pen07, Text balloon, prp_button_9,
+socket_Throwable, bip_WhipLasso_00 -- i.e. genuine, substantial, pre-
+existing animator-facing prop/equipment content, not a hypothetical.
+
+ANSWER to 4A: YES -- Other already, in actual practice, holds legitimate
+animator-facing controls for recognized objects/props that don't fit a
+character-specific semantic group, at overwhelming and consistent
+concentration. Mapping clearly-named weapon/prop controls to Other is
+applying an existing, well-evidenced convention, not creating a new
+category -- NO TAXONOMY FOR COMPATIBILITY ALONE is not implicated because
+nothing new is being added to the Master's structure.
+
+ANSWER to 4B: The residual has substantial, recurring prop material (the
+45-family pilot bucket alone, times the full residual's proportion, implies
+several hundred such families remain in the 13,782 unscaled population) --
+but this does NOT need to be "considered" as a new category, because it is
+already served by Other. The corpus therefore demonstrates a real,
+recurring animator-workflow domain (props/equipment an animator manipulates)
+that the Master already accommodates through Other's existing, broad,
+established role -- not a case for inventing a dedicated Props category.
+
+Of the 45, 38 resolve to CLEAR -> groupFile/Other using this precedent:
+bipod, Five_Bullet00, Flm-ArmA-SwordB-LR, Gear.Holster, Holster_Base,
+Ivy.Sword, Key.Black_3, Key.White_25, Kunai, l_rear_holster_0u_8v,
+l_side_holster_0u_0v, Magazine_full, silencer, Stock_Pos_00, sword_3,
+v_weapon.Flashbang_Parent, Wakazashi.Tassel_Front_7, Wakazashi.Tassel_
+Front_8, WEP_BackCap, WEP_Bipod_LeftLeg, WEP_Cylinder_Release, WEP_GL_Base,
+WEP_Paddle1_Button, WEP_Shell5, WEP_Sight_Carry_Windage, WEP_Wick2 (26
+weapon items), plus Book TurnPage9, BoxBig, Btn.Hour, Door2, DuvetRoot,
+fake_wheel_fl, Magnifier, pc_cable_2, Pillow, Pillow 1, Torch3,
+wheelback_base (12 non-weapon named props) = 38.
+
+7 remain open, for a DIFFERENT and narrower reason than "which destination":
+  BLD_GEN_Army_Tent_Medium_A_Bottom_A_Mesh
+  DEC_GEN_Wagon_Caravan_A_Mesh
+  FUR_GEN_Bed_Single_Rich_A_Mesh.002
+  FUR_GEN_Pillow_Sitting_B_mesh
+  FUR_GEN_Pillow_Sitting_D_mesh.001
+  FUR_GEN_Pillow_Sitting_E_mesh
+  LOOT_GEN_Backpack_D_Posed_A_Mesh
+All seven end in "_mesh"/"_Mesh," strongly suggesting these are raw
+scanned-geometry/submesh identifiers rather than animator-posable bones or
+flexes at all. IF they are legitimate controls, Other is still the correct
+destination by the same evidence above -- but the prior question ("is a raw
+submesh name a legitimate Master control candidate in the first place")
+is not answered by this review and is not a Correctives- or Props-category
+question. This is reported as a narrower, separate open item.
+
+==============================================================================
+5. CREATURE ANATOMY
+==============================================================================
+FINDING: 12 of 15 resolve -- 7 directly via an existing species-neutral
+category, 5 more via strong existing Master precedent discovered by direct
+inspection (the same method used in Section 4). Only 3 remain genuinely
+open, and they share one minimum policy question.
+
+A. SEMANTICALLY DIRECT (existing category applies once the literal is read
+   correctly; no doctrine needed) -- 7 families:
+     Canine_Dog_LBrow    -> groupFile/Face/Upper Face  (brow is a location
+                             word, not human-specific)
+     HeadFurTop.R        -> groupFile/Hair              (fur is the
+                             creature-equivalent keratinous covering)
+     bip_horn_03         -> groupFile/Other             (horn already
+                             81.7% Other by existing precedent)
+     Horn2/horn2         -> groupFile/Other             (same)
+     Crow_3.Clavical_R   -> groupFile/Wings             (shoulder-girdle
+                             bone of a flight appendage)
+     Crow_3.Phalanges3_L -> groupFile/Wings             (wing-tip structural
+                             bone)
+     Crow_3.Femur_R      -> groupFile/Legs              (femur names a real
+                             thigh bone shared across vertebrates)
+
+B. RESOLVED VIA DIRECTLY-VERIFIED EXISTING PRECEDENT (checked, not
+   assumed) -- 5 families:
+     l_fin_back_b        -> groupFile/Other   (fin: 63% Other, 53/84,
+                             already-established creature-appendage usage)
+     TentacleTopLeft2    -> groupFile/Other   (tentacle: 99.7% Other)
+     Bip_Tentacle.011    -> groupFile/Other   (same)
+     R_FrontPaw          -> groupFile/Arms/RightArm/RightFingers (paw is
+                             NOT Other-dominant in the current Master --
+                             it is 79% Fingers, 11 RightFingers + 11
+                             LeftFingers of 28 total hits -- the existing
+                             Master already treats "paw" as the Fingers-
+                             equivalent limb-end structure)
+     Canine_LBackLegToe  -> groupFile/Toes/LeftToes (same reasoning as
+                             paw -> Fingers: "toe" is the direct human-
+                             equivalent word, and the existing Toes group
+                             is not itself human-exclusive in the way a
+                             literal read might fear)
+
+C. GENUINELY REMAINING (no existing precedent either direction; this is
+   the actual, narrow, minimum policy gap) -- 3 families:
+     Pincer Right Mid   -- word-boundary "pincer" has ZERO hits anywhere
+                            in the current Master. No existing category,
+                            majority, or minority to reason from at all.
+     Third_Arms_R_1     -- names a THIRD arm, i.e. more than the two the
+                            Arms/LeftArm/RightArm structure assumes.
+     backlegs           -- bare plural "back legs," implying more than two
+                            legs, with no side or specific bone segment
+                            named.
+   The minimum policy question these three genuinely share is NOT "does
+   Master support creature anatomy" (mostly yes, per A and B above) but
+   specifically: for a body-part reference that has (a) no existing
+   Master category and no strong precedent in either direction, or (b)
+   implies MORE THAN the standard limb count the Arms/Legs/Fingers/Toes
+   substructure assumes, should the family go to Other (extending its
+   already-observed non-standard-anatomy role), stay Unknown/unresolved
+   indefinitely, or does this require a genuinely new decision? This is
+   the one real, still-open creature-related question -- narrower than the
+   original framing, and it does not require inventing creature-specific
+   taxonomy to state.
+
+==============================================================================
+CORRECTED COUNT
+==============================================================================
+                                          Families
+  Originally NEEDS_DOCTRINE (post-Correctives-calibration):   74
+  Resolved by this review:
+    Head/skull (Body)                                          5
+    Self-declared unused (Useless)                             4
+    Props/weapons (Other)                                     38
+    Creature anatomy (existing category / precedent)          12
+    ------------------------------------------------------------
+    Total resolved this pass:                                 59
+  Remain genuine, unresolved doctrine questions:               15
+    Spine placement (multi-referent, confirmed)                 5
+    Raw "_mesh"-suffixed prop identifiers (control-legitimacy)  7
+    Creature edge cases (no precedent / multi-limb-count)       3
+
+Combined across both doctrine passes (Correctives calibration + this
+review): of the original 104 NEEDS_DOCTRINE pilot families, 89 (85.6%) are
+now resolved to a specific, evidence-backed destination, and 15 (14.4%)
+remain genuine, human-decision-worthy doctrine questions.
+
+==============================================================================
+EXACT UNRESOLVED DOCTRINE ISSUES REQUIRING A HUMAN DECISION
+==============================================================================
+1. SPINE PLACEMENT. The word "spine" is confirmed multi-referent in this
+   Master's own historical content (real anatomy vs. corset/dress design
+   element vs. hair-chain nickname). A bare numbered "spine" literal with
+   no further disambiguating word cannot be safely routed without either
+   (a) a documented rule for distinguishing the three senses from the bare
+   literal alone (may not be possible), or (b) a human decision to default
+   bare "spine" to one destination despite the confirmed ambiguity, or (c)
+   continuing to leave these unresolved indefinitely.
+
+2. RAW "_MESH"-SUFFIXED PROP IDENTIFIERS. Whether a literal that is
+   plainly a raw scanned-geometry/submesh name (not obviously a bone or
+   flex) should be treated as a legitimate Master control candidate at
+   all, separate from where it would go if it were.
+
+3. CREATURE/MULTI-LIMB EDGE CASES WITH NO PRECEDENT. Whether a body-part
+   reference with zero existing Master precedent in either direction
+   (e.g. "pincer"), or one that implies more limbs than the standard
+   two-arm/two-leg structure assumes ("third arm," bare "back legs"),
+   should default to Other, stay unresolved, or needs its own decision.
+
+==============================================================================
+DID ANY STANDING RULE FROM THE CORRECTIVES CALIBRATION NEED REVISION?
+==============================================================================
+Yes, one: the Body Morphs shape/size rule (Section 1 above) needed the
+object-ownership qualifier added -- as originally worded it could have
+misdirected object-specific clothing/accessory shape controls into Body
+Morphs during the full-scale run. It has been corrected here before any
+further families are judged. No other standing rule from the Correctives
+calibration required change; the twist/roll, numbering, and helper
+findings all held up under this review.
+
+==============================================================================
+READY TO SCALE WITHOUT HUMAN POLICY DECISION: NO
+==============================================================================
+Three narrow policy questions remain (spine placement; raw-mesh-identifier
+control-legitimacy; creature/multi-limb edge cases with zero precedent).
+None of them block the vast majority of the remaining 13,782-family
+residual -- they affect a small, identifiable slice (bare spine literals,
+literals ending in a mesh-geometry suffix, and body-part words with no
+Master precedent at all in either direction). Scaling can proceed with
+standing instructions to keep flagging these three categories as
+NEEDS_DOCTRINE/NEEDS_CONTEXT rather than guessing, while every other
+family type audited in this review (numbered bones, twist/roll, helper
+bones without repair language, explicit correctives, object-vs-body shape
+controls, bare head/skull, self-declared unused, and the large majority of
+prop/weapon and creature-anatomy vocabulary) now has a settled, evidence-
+backed rule and does not need to wait for a human decision.
+
+No family beyond re-auditing the existing 104 was touched. PHASE2_SEMANTIC_
+PILOT_500.tsv was not altered. sfm_defaultanimationgroups.txt was not
+edited. No family numbered 501 or beyond was classified.

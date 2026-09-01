@@ -1,0 +1,252 @@
+==============================================================================
+PHASE 2 SEMANTIC BATCH RULES -- STANDING INSTRUCTIONS
+Supply this file, unchanged, to every future Phase 2 semantic classification
+batch. It contains SETTLED rules only. Anything not listed here is still an
+open question -- classify it as NEEDS_DOCTRINE / NEEDS_CONTEXT rather than
+guessing; do not treat silence on a topic as permission to invent a rule.
+Source: PHASE2_PILOT_DOCTRINE_CALIBRATION.txt + PHASE2_PRE_SCALE_DOCTRINE_
+REVIEW.txt. This file is descriptive of settled doctrine, not a substitute
+for reading the live Master DESIGN PHILOSOPHY header, which remains
+authoritative.
+==============================================================================
+
+1. READ THE COMPLETE LITERAL.
+   Judge the whole control name, not a matched substring or prefix. A
+   partial match to a keyword is not evidence by itself.
+
+2. NUMBERING IS NOT CORRECTIVE EVIDENCE.
+   A numbered suffix or index on an otherwise-ordinary bone/flex name
+   (Bone01, Spine2_002, etc.) does not by itself suggest Correctives. Many
+   numbered names are plain repeated/segmented anatomy or rig chains.
+
+3. TWIST/ROLL IS NOT CORRECTIVE EVIDENCE.
+   "Twist" and "roll" bones are standard rig/deformation-helper anatomy
+   (forearm twist, shoulder roll, etc.), not evidence of a corrective
+   purpose by themselves.
+
+4. "HELPER" IS NOT CORRECTIVE EVIDENCE BY ITSELF.
+   A bare "helper"/"Helper" token in a name does not by itself indicate
+   Correctives, nor does it indicate Useless/IGNORE (per the live
+   philosophy's own text: "Helper/support naming alone is never sufficient
+   reason for Useless or IGNORE"). Helper naming is neutral; look for an
+   actual functional signal instead.
+
+5. EXPLICIT REPAIR/FIX/CORRECTIVE SEMANTICS SUPPORT CORRECTIVES.
+   A literal that itself names a repair/fix/pose-correction purpose (e.g.
+   containing "fix", "correct", "repair", "collision", "squash/stretch
+   correction" language) supports Correctives -- the corrective signal must
+   come from the literal's own stated purpose, not from numbering, helper
+   naming, or twist/roll alone (see 2-4).
+
+6. ORDINARY STRUCTURAL ANATOMY GOES TO ITS ANATOMICAL DESTINATION.
+   A control that simply names and postures a real anatomical
+   region/bone goes to that region's established group (Face subgroup,
+   Arms, Legs, Body, Hair, Wings, Tail, etc.) under ordinary posing intent.
+
+7. BODY/ANATOMY SHAPE OR SIZE CHANGE GOES TO BODY MORPHS -- BUT ONLY WHEN
+   THE CHARACTER'S OWN BODY IS THE PRIMARY REFERENT.
+   Shape/size descriptors (bigger, wider, thicker, shrink, tone,
+   thickness, muscular, size) indicate Body Morphs when they modify the
+   character's own anatomy (Hips, Breast, Feet, Shin, Shoulder, Penis,
+   etc.) as the primary referent.
+   CORRECTION (this must not be applied more broadly than this): when the
+   SAME kind of descriptor modifies a named WORN OBJECT/GARMENT/ACCESSORY
+   as the primary referent (Boots2Thicker, BraShape, JacketBelly,
+   GloveMuscles, BeltWidth), the control stays with that object's own
+   destination (typically Clothing) -- Clothing's own definition explicitly
+   includes "shaping... garments and worn accessories," and Object-
+   Specific-Purpose-Takes-Precedence governs. Ask "whose shape is
+   changing" before routing a shape/size literal to Body Morphs.
+
+8. OBJECT-SPECIFIC SHAPE/FIT/DEFORMATION STAYS WITH THE OBJECT'S
+   DESTINATION.
+   Applies generally, not only to shape descriptors: a control that
+   exists to fit, repair, hide, or accommodate a specific animator-facing
+   object (garment, prop, accessory) belongs with that object's own
+   group, even when the underlying mechanism resembles a body-shape or
+   corrective control.
+
+9. GENERIC DCC/RIG PREFIXES DO NOT DETERMINE DESTINATION.
+   Prefixes such as bip_, Bone_, DEF-, ORG-, MCH- and similar generic
+   rigging/DCC-tool naming conventions carry no destination signal by
+   themselves. Judge the remainder of the literal.
+
+10. EXPLICIT SIDE MARKERS DETERMINE LEFT/RIGHT SUBPATHS.
+    Where a group has established Left/Right subpaths, an explicit side
+    marker in the literal (L/R, Left/Right, _l/_r, .L/.R, etc.) determines
+    which subpath a control belongs in.
+
+11. NO SIDE MARKER -> USE THE SIDE-NEUTRAL DESTINATION IF ONE EXISTS.
+    When no side marker is present and the group structure offers a valid
+    side-neutral destination (a bare group with no Left/Right split, or a
+    groupColor/shared-control tier), use it rather than guessing a side.
+
+12. GENUINELY OPAQUE CONTROLS REMAIN UNRESOLVED.
+    If the complete literal does not give enough evidence to determine
+    either its semantic referent or its taxonomy destination, leave it
+    OPAQUE/NEEDS_CONTEXT/NEEDS_DOCTRINE. Do not guess to force a CLEAR
+    result.
+
+13. SETTLED: BARE STRUCTURAL "HEAD"/"SKULL" DEFAULTS TO BODY.
+    A bare head/skull reference with no specific facial feature named
+    (no eye/brow/cheek/jaw/etc. compound) defaults to groupFile/Body,
+    consistent with existing Master practice for bare structural/
+    positional anatomy. If the complete literal names a specific facial
+    feature (e.g. "head eyelid left"), that feature's own Facial Taxonomy
+    destination governs instead -- the word "head" there is a location
+    prefix, not the control's true referent.
+
+14. SETTLED: "SPINE" IS RESOLVED BY OWNERSHIP, NOT BY DEFAULT AND NOT BY
+    TREATING EVERY SPINE LITERAL AS AMBIGUOUS.
+    "Spine" is confirmed multi-referent in this Master's own history (real
+    anatomical spine vs. corset/dress design element vs. hair-physics-chain
+    nickname), but that history does not make every spine literal a
+    doctrine gap -- the complete literal usually establishes ownership:
+      - an explicit anatomical/biped spine literal (Bip01_, DEF-, bip_,
+        SK_, or similar generic skeleton/rig prefix + "spine," with no
+        garment/hair-object noun present) -> groupFile/Body
+      - an explicit object-owned spine literal (names a garment/design
+        element, e.g. a corset "spine"/ribbone, or a hair-physics-chain
+        nickname) -> that object's own semantic destination (Clothing,
+        Hair, etc.)
+      - a bare/referent-free "Spine"/"Spine01"-style literal where the
+        complete literal gives no ownership evidence either way ->
+        NEEDS_CONTEXT
+    Do not invoke the historical collision to justify flagging a spine
+    literal that DOES carry ownership evidence (a rig prefix and no
+    object noun, or an explicit garment/hair term) as a doctrine question.
+
+15. SETTLED: SELF-DECLARED "UNUSED" (OR "DUPLICATE") GOES TO USELESS,
+    REGARDLESS OF WHETHER THE REST OF THE LITERAL IS ANATOMICALLY
+    READABLE.
+    An explicit self-declared "unused" (or "duplicate") marker in a
+    literal is positive Useless-evidence and takes priority over the
+    control's otherwise-readable anatomical referent, per already-
+    executed Phase 1 precedent. This applies regardless of the anatomical
+    region or species named -- e.g. an "unused" eye control on a creature
+    still goes to Useless, not to a creature-scoped Eyes destination; the
+    species question is moot once "unused" governs.
+    This is NOT limited to cases with an identifiable body part: Phase 1
+    precedent already includes purely generic self-declared-unused
+    controls with no anatomical content at all (e.g. "unused trash 01",
+    "unused trash 02," already live in Useless). A self-declared unused/
+    duplicate placeholder -> groupFile/Useless (taxonomy_status CLEAR)
+    even when semantic_status is only PARTIAL (e.g. an unused generic bone
+    carrying unrelated attribution/credit text, or a bone explicitly
+    flagged "duplicate...unused"). The self-declaration alone is
+    sufficient taxonomy evidence; it does not require full semantic
+    legibility of the rest of the literal, and it is NOT a NOT_APPLICABLE
+    case (see rule 21).
+
+16. SETTLED: RECOGNIZED PROPS/WEAPONS/EQUIPMENT GO TO OTHER.
+    Other already holds, by strong and directly verified existing
+    precedent, the vast majority of controls naming recognized real-world
+    objects that don't fit a character-specific semantic group: weapons
+    and weapon parts, ammunition, holsters, vehicles/furniture mechanisms,
+    doors, books, pillows, and similar handheld/mechanical/furniture
+    props. This is applying an existing, well-evidenced Master convention,
+    not creating new taxonomy -- do not add a dedicated Props category.
+    EXCEPTION: a WORN item (helmet, and worn equipment generally) follows
+    Clothing's "worn accessories" rule instead of Other -- worn-on-the-
+    body items are Clothing; carried/handheld/mechanical/furniture items
+    are Other.
+
+17. SETTLED: AN IMPLEMENTATION-STYLE SUFFIX/PREFIX NEVER DETERMINES
+    LEGITIMACY OR DESTINATION -- READ THE NAMED OBJECT.
+    A suffix or prefix such as _mesh, _bone, _ctrl, _jnt, DEF-, bip_,
+    Bone_ (including generator-style prefixes like BLD_GEN_, DEC_GEN_,
+    FUR_GEN_, LOOT_GEN_) does NOT by itself determine whether a control is
+    legitimate, and does NOT by itself determine its destination. The
+    scanner having surfaced the item as an effective control is sufficient
+    -- do not exclude or hold it merely because its name resembles a
+    DCC/export implementation identifier. Read the complete literal for
+    the named object instead:
+      - a clearly named prop/environment/object component (tent, wagon,
+        bed, pillow, etc.), regardless of a _mesh-style suffix -> classify
+        by the named object, normally groupFile/Other where no more
+        specific destination applies
+      - a clearly named WORN object/accessory (e.g. a backpack), regardless
+        of a _mesh-style suffix -> groupFile/Clothing, per rule 16's worn-
+        item exception
+      - a generic/opaque identifier with no named referent at all (e.g.
+        "Mesh01") -> NEEDS_CONTEXT/OPAQUE as appropriate -- the uncertainty
+        there comes from having no named referent, not from the suffix.
+
+18. SETTLED: SPECIES-NEUTRAL BODY-PART WORDS NEED NO CREATURE-SPECIFIC
+    DOCTRINE.
+    Words that already name a real, species-neutral anatomical
+    region/bone/covering (brow, fur, horn, wing bones such as clavicle/
+    phalanges, femur, fin, tentacle, paw, toe) route to their existing
+    established Master category the same way for a creature as for a
+    human, using the SAME word-level precedent check as any other
+    anatomy word -- no creature-specific taxonomy is needed or permitted.
+    In particular (confirmed by direct precedent, not assumption):
+      - paw routes to the existing Fingers destination (paw is the
+        limb-end/hand-equivalent structure, not a generic Other item)
+      - a named leg-end "toe" on a creature routes to the existing Toes
+        destination the same way a human toe would
+      - horn and tentacle route to Other, matching existing precedent
+      - wing-specific skeletal terms (clavicle, phalanges, humerus, ulna)
+        route to Wings
+    Do not assume a creature-anatomy word defaults to Other or to any
+    other destination without checking existing word-level precedent
+    first -- precedent varies by word (compare paw vs. horn above).
+
+19. SETTLED: LIMB COUNT AND SPECIES DO NOT CHANGE SEMANTIC DESTINATION.
+    The taxonomy is semantic/function-based, not limited to a conventional
+    two-arm/two-leg human skeleton. Where the literal clearly names the
+    function, limb count is irrelevant to destination:
+      - a third/additional arm -> groupFile/Arms (with explicit side
+        marker determining the LeftArm/RightArm subpath per rule 10)
+      - a front/back/hind leg -> groupFile/Legs
+      - a left/right toe (any species) -> the corresponding Toes subpath
+      - a finger/digit (any species) -> the corresponding Fingers
+        destination when functionally appropriate
+      - eye -> Face/Eyes; ear -> Face/Ears; tail -> Tail; wing -> Wings
+    Do not create creature-specific taxonomy, and do not treat "this
+    literal implies more than two of this limb" as doctrine-worthy by
+    itself -- e.g. "Third_Arms_R_1" is an arm control despite implying an
+    additional arm; "backlegs" is a Legs control despite potentially
+    describing quadruped anatomy.
+
+20. SETTLED: A BODY-PART WORD WITH NO ESTABLISHED REFERENT REMAINS
+    NEEDS_CONTEXT -- THE GAP IS OWNERSHIP/CONTEXT, NOT SPECIES OR LIMB
+    COUNT.
+    Standing principle: SPECIES AND LIMB COUNT DO NOT DETERMINE TAXONOMY;
+    SEMANTIC FUNCTION DOES (see rule 19). Separately, a term such as bare
+    "Pincer" remains NEEDS_CONTEXT when the complete literal does not
+    establish whether it is anatomical, mechanical, weapon-related, or
+    something else, and no existing Master precedent exists for the word
+    in any direction. Flag NEEDS_CONTEXT for this reason specifically --
+    missing ownership/context in the literal -- not because the referent
+    might be nonhuman or because it names more than the standard limb
+    count (those are already settled by rule 19 and are not, by
+    themselves, reasons to withhold classification).
+
+21. SETTLED: SCHEMA INVARIANT -- semantic_status=OPAQUE AND
+    taxonomy_status=NOT_APPLICABLE ARE BICONDITIONAL.
+    NOT_APPLICABLE means "there is no semantic content for a taxonomy
+    question to even apply to" -- it is defined by, and only by, the
+    semantic meaning itself being opaque. Therefore:
+      - semantic_status=OPAQUE MUST imply taxonomy_status=NOT_APPLICABLE
+      - taxonomy_status=NOT_APPLICABLE MUST imply semantic_status=OPAQUE
+    There is no legitimate exception where NOT_APPLICABLE coexists with
+    CLEAR or PARTIAL semantic_status. If a literal has ANY partial
+    semantic content (e.g. a self-declared "unused"/"duplicate" marker,
+    even with no anatomical referent), a taxonomy question DOES apply to
+    it and taxonomy_status must be CLEAR / NEEDS_CONTEXT / NEEDS_DOCTRINE
+    -- never NOT_APPLICABLE. In particular, do not code a PARTIAL-
+    semantic self-declared-unused/duplicate placeholder as NOT_APPLICABLE
+    merely because it lacks an anatomical referent -- rule 15 already
+    gives it a destination (Useless) regardless of anatomical legibility.
+    Before finalizing any batch, mechanically check this invariant across
+    all rows (semantic_status == "OPAQUE") == (taxonomy_status ==
+    "NOT_APPLICABLE") and treat any violation as a miscoding to fix, not
+    as evidence of a new exception category.
+
+==============================================================================
+END OF SETTLED RULES. Anything not covered above is an open question --
+report it as NEEDS_DOCTRINE / NEEDS_CONTEXT, do not resolve it by analogy
+to a settled rule unless the analogy itself has been checked against
+existing Master precedent (see rule 18's caution).
+==============================================================================

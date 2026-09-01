@@ -1,0 +1,326 @@
+==============================================================================
+PHASE 2 PILOT DOCTRINE CALIBRATION
+Audit of all 104 pilot families marked taxonomy_status = NEEDS_DOCTRINE
+Source: PHASE2_SEMANTIC_PILOT_500.tsv (NOT altered by this document)
+==============================================================================
+
+PURPOSE
+------------------------------------------------------------------------------
+Re-read all 104 NEEDS_DOCTRINE families against the Master's actual
+Correctives rule (purpose-based: ordinary posing -> anatomical destination;
+intended appearance change -> Body Morphs; pose/deformation repair ->
+Correctives; object-specific fit -> the object's destination) rather than
+against the false shortcuts the pilot appears to have used (numeric suffix,
+secondary-bone appearance, twist/roll naming, or a bare DCC prefix).
+
+==============================================================================
+KEY TEST -- DID THE PILOT INVENT A FALSE RULE?
+==============================================================================
+YES, on two separate points. Both are explicitly rejected below.
+
+FALSE RULE 1 (REJECTED): "named anatomical bone + number/secondary-bone
+appearance -> maybe Correctives."
+7 families (Bip01_L_Forearm007, Bip01_L_Hand007, Bip01_R_Forearm009,
+Bip01_R_Thigh011, Bip01_R_Thigh013, Bip01_R_UpperArm013, Bip01_R_UpperArm016)
+were held at NEEDS_DOCTRINE for no reason other than "it's a numbered
+sub-bone, might be corrective." None of these seven literals contain any
+repair/fix/correct/compensate language. Per the Master's own purpose test,
+a numbered sub-bone with no stated repair purpose is ordinary anatomical
+posing until shown otherwise. This rule is rejected; all 7 resolve to their
+plain anatomical destination (see table below).
+
+FALSE RULE 2 (REJECTED): "twist/roll -> maybe Correctives."
+14 families (arm left arm twist 1, arm right roll 1, arm right shoulder
+twist2, bip upperarmtwist2 r, bip001 r foretwist, bip_bobby_l_calftwist,
+bip_bobby_l_foretwist1, bipbrk lthightwist, bipflm rcalftwist1, bone-r-
+upperarm-twist1, elbowroll l, leg left knee twist, lowerarm_roll_left_0,
+valvebiped.bip01_r_forearmtwist1) were held at NEEDS_DOCTRINE purely because
+they are named "twist" or "roll" bones. None contain repair/fix/correct
+language. Independent verification against the LIVE Master's own existing
+precedent (word-boundary search for "twist" across the current Master,
+already gathered in an earlier Phase 2 pass) shows twist bones are already
+53.8% concentrated directly in groupFile/Arms (718 of 1,334 hits), with the
+rest split Legs/RigHelpers/Fingers/Clothing/Wings -- NOT concentrated in
+Correctives at all. A twist/roll bone implements ordinary limb rotation
+deformation during normal posing; it is not, by naming alone, evidence of
+repairing a mistake. This rule is rejected; all 14 resolve to their plain
+anatomical destination.
+
+Two further false-shortcut instances were found beyond the two the audit
+specifically asked about, and are corrected under the same principle:
+
+FALSE SHORTCUT 3 (REJECTED): "helper" alone -> Correctives-vs-anatomy
+question, without checking whether the literal actually conveys repair
+purpose. 3 families (helpthighbackr, rforearmex, ValveBiped.Bip01_R_
+Forearm_Helperbone) were held at NEEDS_DOCTRINE on this basis alone. None
+contain fix/correct/repair/compensate wording; "helper"/"EX" in ordinary
+biped-rig naming overwhelmingly denotes a secondary deformation-assist bone
+functioning exactly like a twist bone, not a repair. These resolve to their
+plain anatomical destination.
+
+FALSE SHORTCUT 4 (REJECTED): treating an explicit shape/size DESCRIPTOR
+word (thickness, shrink) as an open "pose vs. Body Morphs" question. 2
+families (Shin Thickness, Shouldershrink) were held at NEEDS_DOCTRINE despite
+containing no posing verb at all -- "thickness" and "shrink" are unambiguous
+intended-appearance-change words with no plausible posing reading. Per the
+philosophy's own test ("intended anatomy or appearance change -> Body
+Morphs"), these resolve directly to Body Morphs.
+
+One additional family was resolved using an EXISTING, already-stated part of
+the philosophy that the pilot did not apply: bip_origin (the root/origin
+transform of the whole skeleton) matches "technical rig machinery with no
+clearer semantic destination belongs in the appropriate Rig group" verbatim
+-- this is not a Correctives question and not a true gap; it resolves to
+groupFile/RigBody.
+
+==============================================================================
+ALL 104 FAMILIES, GROUPED BY ACTUAL REASON
+==============================================================================
+
+--- 1. NUMBERED ANATOMICAL BONE (7 families) -- RESOLVED, false rule rejected ---
+  Bip01_L_Forearm007          -> groupFile/Arms
+  Bip01_L_Hand007             -> groupFile/Arms
+  Bip01_R_Forearm009          -> groupFile/Arms
+  Bip01_R_Thigh011            -> groupFile/Legs
+  Bip01_R_Thigh013            -> groupFile/Legs
+  Bip01_R_UpperArm013         -> groupFile/Arms
+  Bip01_R_UpperArm016         -> groupFile/Arms
+All 7: a numbered sub-bone with an unambiguous limb-word and no repair
+language is ordinary anatomical posing. No further doctrine question.
+
+--- 2. TWIST / ROLL / SECONDARY ANATOMICAL ARTICULATION (14 families) --
+     RESOLVED, false rule rejected ---
+  arm left arm twist 1                       -> groupFile/Arms
+  arm right roll 1                           -> groupFile/Arms
+  arm right shoulder twist2                  -> groupFile/Arms
+  bip upperarmtwist2 r                       -> groupFile/Arms
+  Bip001 R ForeTwist                         -> groupFile/Arms
+  Bip_BOBBY_L_CalfTwist                      -> groupFile/Legs
+  Bip_BOBBY_L_ForeTwist1                     -> groupFile/Arms
+  BipBrk LThighTwist                         -> groupFile/Legs
+  BipFlm RCalfTwist1                         -> groupFile/Legs
+  Bone-R-UpperArm-Twist1                     -> groupFile/Arms
+  ELBOWROLL L                                -> groupFile/Arms
+  leg left knee twist                        -> groupFile/Legs
+  lowerarm_roll_left_0                       -> groupFile/Arms
+  ValveBiped.Bip01_R_ForearmTwist1           -> groupFile/Arms
+Confirmed against live-Master precedent: "twist" is already 53.8% Arms in
+the current Master, with the remainder split Legs/RigHelpers/Fingers/
+Clothing/Wings -- essentially never Correctives. No further doctrine
+question for any of these 14.
+
+--- 3. EXPLICIT CORRECTIVE / FIX / REPAIR SEMANTICS (3 families) --
+     RESOLVED to Correctives (this is what the rule is FOR) ---
+  leg_bone_correct_fl_01      -> groupFile/Correctives
+  shoulder_bone_correct_l_02  -> groupFile/Correctives
+  pJCMThighFwd57R             -> groupFile/Correctives
+"correct" is explicit repair language; "JCM" (Joint Corrective Morph) is a
+standard rigging term whose entire meaning is "a corrective." These are not
+doctrine questions -- they are the one class the philosophy's Correctives
+rule is actually built to catch, and it catches them cleanly.
+
+--- 4. HELPER / TECHNICAL ANATOMICAL CONTROL, no repair language (3 families) --
+     RESOLVED, false shortcut rejected ---
+  HelpThighBackR                           -> groupFile/Legs
+  RForeArmEX                               -> groupFile/Arms
+  ValveBiped.Bip01_R_Forearm_Helperbone    -> groupFile/Arms
+"Helper" or "EX" alone, with the actual limb explicitly named and no repair
+wording, describes an ordinary secondary deformation-assist bone -- read the
+same way as the twist/roll bones above.
+
+--- 4b. HELPER + explicitly UNUSED (1 family) -- STILL a genuine doctrine
+     question, but for a DIFFERENT reason than "helper" ---
+  unused b_l_ankle2helper -- referent (left ankle) is CLEAR and would
+    otherwise resolve to Legs; the remaining open question is accessibility
+    (Useless-vs-normal placement for a self-declared "unused" control), not
+    Correctives. Kept NEEDS_DOCTRINE, reclassified reason.
+
+--- 5. explicitly UNUSED, non-helper (3 families) -- unchanged, genuine
+     accessibility doctrine question, unrelated to Correctives ---
+  unused dogmeat_eye_r    (also raises the creature-scope question, below)
+  unused f_c_faceroot
+  unusedhandr
+These were never mis-held on a Correctives-adjacent basis; the "unused"
+self-declaration is a real, separate accessibility question the philosophy's
+CLASSIFICATION AND ACCESSIBILITY section does not by itself resolve for a
+control that also has a clear anatomical referent.
+
+--- 6. BODY-SHAPE DESCRIPTOR wrongly left open (2 families) -- RESOLVED,
+     false shortcut rejected ---
+  Shin Thickness    -> groupFile/Body Morphs
+  Shouldershrink    -> groupFile/Body Morphs
+No posing verb is present in either literal; "thickness"/"shrink" are
+unambiguous intended-appearance-change words.
+
+--- 7. TECHNICAL RIG-ROOT CONCEPT (1 family) -- RESOLVED using an existing,
+     already-stated part of the philosophy ---
+  bip_origin -> groupFile/RigBody
+Matches "technical rig machinery with no clearer semantic destination
+belongs in the appropriate Rig group" directly. Not a Correctives question
+and not a new gap.
+
+--- 8. CREATURE ANATOMY / UNIVERSAL-SCOPE QUESTION (15 families) --
+     UNCHANGED, genuine doctrine question, untouched by the Correctives fix ---
+  Canine_Dog_LBrow, Canine_LBackLegToe, Crow_3.Clavical_R, Crow_3.Femur_R,
+  Crow_3.Phalanges3_L, HeadFurTop.R, l_fin_back_b, Pincer Right Mid,
+  R_FrontPaw, TentacleTopLeft2, Bip_Tentacle.011, Third_Arms_R_1,
+  bip_horn_03, Horn2/horn2, backlegs
+No dedicated creature-anatomy or multi-limb destination exists in the
+current Master; this is the same taxonomy-scope gap already identified in
+PHASE2_ADVERSARIAL_PLAN_REVIEW.txt Part B and reconfirmed here by an
+independent method.
+
+--- 9. PROP / WEAPON / NON-CHARACTER TAXONOMY QUESTION (45 families) --
+     UNCHANGED, genuine doctrine question, untouched by the Correctives fix ---
+  bipod, BLD_GEN_Army_Tent_Medium_A_Bottom_A_Mesh, Book TurnPage9, BoxBig,
+  Btn.Hour, DEC_GEN_Wagon_Caravan_A_Mesh, Door2, DuvetRoot, fake_wheel_fl,
+  Five_Bullet00, Flm-ArmA-SwordB-LR, FUR_GEN_Bed_Single_Rich_A_Mesh.002,
+  FUR_GEN_Pillow_Sitting_B_mesh, FUR_GEN_Pillow_Sitting_D_mesh.001,
+  FUR_GEN_Pillow_Sitting_E_mesh, Gear.Holster, Holster_Base, Ivy.Sword,
+  Key.Black_3, Key.White_25, Kunai, l_rear_holster_0u_8v,
+  l_side_holster_0u_0v, LOOT_GEN_Backpack_D_Posed_A_Mesh, Magazine_full,
+  Magnifier, pc_cable_2, Pillow, Pillow 1, silencer/Silencer, Stock_Pos_00,
+  sword_3, Torch3, v_weapon.Flashbang_Parent, Wakazashi.Tassel_Front_7,
+  Wakazashi.Tassel_Front_8, WEP_BackCap, WEP_Bipod_LeftLeg,
+  WEP_Cylinder_Release, WEP_GL_Base, WEP_Paddle1_Button, WEP_Shell5,
+  WEP_Sight_Carry_Windage, WEP_Wick2, wheelback_base
+No established Props/Weapons/Furniture destination exists anywhere in the
+current 34-group Master. This is by far the largest single bucket (43% of
+the original 104) and represents a real structural gap, not a
+classification failure.
+
+--- 10. GENERIC HEAD / SKULL / BODY-REGION QUESTION (5 families) --
+     UNCHANGED, genuine doctrine question ---
+  head back 1, m_head_2, r_head_3, skull_06, UpperHead
+A bare head/skull reference with no named sub-feature (eye, brow, chin,
+cheek, forehead) has no obvious single Master home (Body? Face/Expressions?
+elsewhere?) -- unlike the 6 head-related pilot families that DID resolve
+CLEAR in the original pilot because they named a specific sub-feature.
+
+--- 11. OTHER GENUINE DOCTRINE QUESTION (8 families) -- UNCHANGED ---
+  Bip01_Spine2_002, DEF-spine.031, bip_spine_0.002, SK_spine_3,
+  spine upper_R.002 (5 families: spine placement is a genuine, Master-
+    specific gap -- the live Master's own historical "spine" usage already
+    splits nearly 5 ways with no majority destination, independently
+    confirmed in an earlier Phase 2 pass; this is not resolved by the
+    Correctives-purpose test because the ambiguity is anatomical-group
+    choice, not corrective-vs-anatomical)
+  unused b_l_ankle2helper (accessibility question, see bucket 4b)
+  unused f_c_faceroot, unusedhandr (accessibility questions, see bucket 5)
+(unused dogmeat_eye_r is counted once, under bucket 8 "creature anatomy,"
+since its open question here is creature scope, not accessibility -- it is
+not double-counted in this bucket. Every family below is counted exactly
+once across all buckets.)
+
+==============================================================================
+HEADLINE RECONCILIATION (each of the 104 counted exactly once)
+==============================================================================
+  Resolved to taxonomy CLEAR after correct philosophy application:  30
+    - 7  numbered anatomical bone            -> Arms/Legs
+    - 14 twist/roll/secondary articulation   -> Arms/Legs
+    - 3  explicit corrective/JCM language    -> Correctives
+    - 3  helper/EX, no repair language       -> Arms/Legs
+    - 2  explicit shape/size descriptor      -> Body Morphs
+    - 1  technical rig-root concept          -> RigBody
+  Remain genuine, unresolved doctrine questions:                    74
+    - 15 creature anatomy / universal scope (bucket 8, includes
+      unused dogmeat_eye_r, whose open question here is creature scope)
+    - 45 prop / weapon / non-character taxonomy (bucket 9)
+    -  5 generic head/skull/body-region (bucket 10)
+    -  5 spine placement (bucket 11)
+    -  4 accessibility/"unused"-marker questions on an otherwise-clear
+       anatomical referent (bucket 4b + the 3 non-creature entries in
+       bucket 5: unused b_l_ankle2helper, unused f_c_faceroot, unusedhandr)
+  ------------------------------------------------------------------
+  TOTAL:                                                            104
+
+Proposed destinations for the 30 newly-CLEAR families, by group:
+  groupFile/Arms:          17
+  groupFile/Legs:           7
+  groupFile/Correctives:    3
+  groupFile/Body Morphs:    2
+  groupFile/RigBody:        1
+  ------------------------------
+  TOTAL:                   30
+
+==============================================================================
+NEW GENUINE DOCTRINE GAPS CONFIRMED BY THIS AUDIT
+==============================================================================
+1. NO PROPS/WEAPONS/FURNITURE DESTINATION. 45 of the original 104 (43%) --
+   the single largest bucket by far -- are ordinary, clearly-understood
+   physical objects (weapons, weapon accessories, furniture, scenery props)
+   with genuinely no home anywhere in the current 34-group Master. This is
+   not a classification failure and not resolved by the Correctives-purpose
+   correction; it is a real structural question for a human to decide
+   (create a Props-type destination vs. deliberately leave this entire
+   class in Unknown/unresolved).
+2. Creature/non-human anatomy (15 families) and generic bare-head/skull
+   naming (5 families) reconfirm gaps already raised in
+   PHASE2_ADVERSARIAL_PLAN_REVIEW.txt.
+3. Spine placement (5 families) reconfirms a Master-specific historical
+   ambiguity already independently measured in an earlier Phase 2 pass
+   (no majority destination across ~5 existing groups).
+
+None of these three are Correctives-related; none are resolved by this
+calibration. They are reported, not corrected, per instruction.
+
+==============================================================================
+ANSWERS
+==============================================================================
+IS THE SEMANTIC ARCHITECTURE READY TO SCALE AFTER TAXONOMY CALIBRATION?
+
+Yes, conditional on every future batch prompt explicitly carrying the
+standing taxonomy instructions below. The pilot's semantic READING was
+sound throughout (confirmed in the prior pilot report); the defect found
+here is a narrow, identifiable over-abstention pattern in taxonomy
+reasoning specifically around Correctives, fully explained by two false
+shortcut rules (numbered-bone-appearance, twist/roll-naming) plus two minor
+related ones (bare "helper" wording, shape-descriptor hesitation). All four
+are mechanically checkable in review (does the literal contain actual
+repair/fix/correct/compensate language, yes or no) and are now corrected.
+No change to the semantic-reading half of the architecture is needed.
+
+WHAT STANDING TAXONOMY INSTRUCTIONS MUST EVERY FUTURE BATCH RECEIVE?
+
+1. A numbered anatomical bone (e.g. Bip01_R_Thigh013) is ordinary anatomical
+   posing by default. Numbering, a secondary-bone appearance, or a DCC
+   prefix (bip_, Bip01_, DEF-, Bone_, ValveBiped.) is NEVER by itself
+   evidence for Correctives.
+2. A twist/roll/secondary-articulation bone (forearmtwist, calf_twist,
+   upperarmtwist, elbow roll) is ordinary anatomical posing by default,
+   confirmed by the live Master's own precedent (twist bones sit 53.8% in
+   Arms already). Twist/roll naming is NEVER by itself evidence for
+   Correctives.
+3. "Helper" (or similar: EX, aux, sub) naming is not by itself evidence for
+   Correctives either. Read the complete literal for actual repair/fix/
+   correct/compensate/clipping/"volume fix"/"pose fix" language, or a
+   recognized corrective-specific term (e.g. JCM = Joint Corrective Morph).
+   Only that positive language moves a family toward Correctives.
+4. An explicit shape/size descriptor (thickness, shrink, wider, bigger,
+   tone, size, muscular) attached to a named body region, with NO posing
+   verb present, is an intended-appearance-change control -> Body Morphs.
+   This is not an open pose-vs-morph question merely because the region
+   word could theoretically also appear in a posing context.
+5. A pure technical rig-anchor concept with no anatomical function at all
+   (origin/root transform of the whole skeleton) routes to the appropriate
+   existing Rig* group, per the Master's own "technical rig machinery...
+   belongs in the appropriate Rig group" rule. This is different from #1 --
+   a numbered LIMB bone is anatomical; a skeleton ORIGIN/ROOT is not.
+6. Creature/non-human anatomy, weapon/prop/furniture objects, and bare
+   head/skull references with no named sub-feature are REAL, currently-
+   unresolved Master scope gaps -- not classification errors. Continue
+   marking these NEEDS_DOCTRINE (or NOT_APPLICABLE/NEEDS_CONTEXT as
+   appropriate) rather than forcing them toward an existing anatomical
+   group or toward Correctives.
+7. Spine-region bones remain a genuine, Master-specific doctrine question
+   (historical usage splits across ~5 groups with no majority) and should
+   stay NEEDS_DOCTRINE regardless of numbering or DCC prefix.
+8. An explicit "unused" self-declaration on an otherwise-clear anatomical
+   control is a genuine, separate accessibility doctrine question (per the
+   Master's CLASSIFICATION AND ACCESSIBILITY section) and should stay
+   NEEDS_DOCTRINE for THAT reason -- not be conflated with the Correctives
+   question, and not be resolved by this calibration.
+
+No family beyond re-auditing the existing 104 was touched. PHASE2_SEMANTIC_
+PILOT_500.tsv was not altered. sfm_defaultanimationgroups.txt was not
+edited. No family numbered 501 or beyond was classified.

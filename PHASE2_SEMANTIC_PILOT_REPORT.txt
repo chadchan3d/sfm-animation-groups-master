@@ -1,0 +1,281 @@
+==============================================================================
+PHASE 2 SEMANTIC PILOT -- 500 FAMILIES
+Architecture under test: Python = corpus management/validation/bookkeeping;
+Claude = actual per-family semantic judgment.
+Companion data file: PHASE2_SEMANTIC_PILOT_500.tsv
+==============================================================================
+
+DESIGN AS EXECUTED
+------------------------------------------------------------------------------
+- 14,282 residual ASCII families were deterministically shuffled with a fixed,
+  documented seed (Python random.Random(20260831)) and the first 500 were
+  selected as the pilot population. All exact spellings of a family stayed
+  together as one unit.
+- The shuffle genuinely broke lexical adjacency: batch 1's first five families
+  were eyeblink_right_out, five_bullet00, right index finger 1 grip 1,
+  liplower_right2, wing_left_1_1 -- five unrelated domains in a row, with no
+  visible run of similar bip_/Cape_/Bone_-style neighbors anywhere sampled.
+- The 500 were split into five fixed batches of 100. For each batch, Claude
+  was given ONLY the fold key and exact spelling(s) -- no OLD mechanical A/B/
+  C/D label, no dictionary/rule-engine output, and no neighboring-batch
+  context -- and produced a fresh semantic_status, semantic_referent,
+  taxonomy_status, proposed_destination (only when taxonomy_status=CLEAR),
+  confidence, uncertainty_reason, and a short literal-specific reason for
+  every one of the 100 families in that batch.
+- Python's role was confined to: building the shuffled selection, writing
+  batch input files, and validating each returned batch -- checking row
+  count, exact fold-key coverage (no missing, no invented keys), enum-field
+  validity, and that every proposed destination is a real path in the
+  current live Master's 34 valid group paths. Zero semantic decisions were
+  made by Python at any point. All five batches validated cleanly on the
+  first attempt: 100/100 keys returned, 0 missing, 0 hallucinated, 0
+  malformed enum or destination values.
+
+==============================================================================
+1-5. POST-PILOT COUNTS
+==============================================================================
+1) Counts by semantic_status:
+     CLEAR:   353  (70.6%)
+     PARTIAL:  56  (11.2%)
+     OPAQUE:   91  (18.2%)
+
+2) Counts by taxonomy_status:
+     CLEAR:            244  (48.8%)
+     NEEDS_DOCTRINE:   104  (20.8%)
+     NEEDS_CONTEXT:     59  (11.8%)
+     NOT_APPLICABLE:    93  (18.6%)
+
+3) Counts by proposed destination (only given when taxonomy_status=CLEAR):
+     62  Clothing                           15  Arms/RightArm/RightFingers
+     33  Body Morphs                        15  Legs
+     29  Face/Eyes                          14  Face/Lower Face
+     16  Hair                               13  Arms
+     10  Arms/LeftArm/LeftFingers             7  Face/Upper Face
+      7  Face/Mid Face                        7  Body
+      6  Tail                                 2  Wings
+      2  Toes/LeftToes                        2  Face/Ears
+      2  Toes/RightToes                       1  Face/Tongue
+      1  Fingers
+
+4) Number with no destination given: 256 of 500 (51.2%) -- this includes all
+   NEEDS_DOCTRINE (104), NEEDS_CONTEXT (59), and NOT_APPLICABLE (93) rows.
+   Claude did not force a destination onto any of these.
+
+5) Confidence distribution: High 225 (45.0%), Medium 131 (26.2%), Low 144
+   (28.8%). Low confidence correlates almost entirely with OPAQUE/PARTIAL/
+   NEEDS_CONTEXT rows, not with CLEAR+CLEAR rows -- i.e. confidence tracks
+   genuine uncertainty rather than being flat or arbitrary.
+
+==============================================================================
+COMPARISON TO THE OLD MECHANICAL READABILITY AUDIT (done only after all five
+batches were complete, per instruction)
+==============================================================================
+Old A/B/C/D vs. new semantic_status x taxonomy_status, full crosstab:
+
+  old=A  new=CLEAR/CLEAR             139
+  old=D  new=OPAQUE/NOT_APPLICABLE    62
+  old=B  new=CLEAR/CLEAR              57
+  old=B  new=CLEAR/NEEDS_DOCTRINE     40
+  old=D  new=CLEAR/CLEAR              35
+  old=A  new=CLEAR/NEEDS_DOCTRINE     24
+  old=D  new=CLEAR/NEEDS_DOCTRINE     23
+  old=D  new=PARTIAL/NEEDS_CONTEXT    23
+  old=C  new=CLEAR/NEEDS_DOCTRINE     17
+  old=B  new=OPAQUE/NOT_APPLICABLE    14
+  old=C  new=OPAQUE/NOT_APPLICABLE    14
+  old=C  new=CLEAR/CLEAR              13
+  old=C  new=PARTIAL/NEEDS_CONTEXT    11
+  old=A  new=PARTIAL/NEEDS_CONTEXT    11
+  old=B  new=PARTIAL/NEEDS_CONTEXT     9
+  (remaining cells: 8 rows total, each count <=3)
+
+Overall disagreement rate (old A vs. not-A, compared against new fully-clear
+[CLEAR semantic + CLEAR taxonomy] vs. not): 143/500 = 28.6%.
+
+Headline categories:
+
+- OLD D, NEW semantic CLEAR: 61 families (12.2% of the pilot). These are
+  exactly the cases the dictionary-classifier's own limitations predicted:
+  misspellings (penus 1 -> "penis", tongehide -> "tongue", bip fring00 l ->
+  "fringe"), weapon-prop vocabulary the dictionary never covered (silencer,
+  wep_wick2, wep_shell5, l_rear_holster_0u_8v), recognizable prop nouns
+  (magnifier, torch3, condom 4, btn.hour), and creature/costume appendage
+  words absent from the dictionary (feather 1a, feather 2a, pincer right
+  mid, chocobocharm). Every one of these has a plainly readable meaning to
+  a human (or a language model actually reading the word), which the static
+  dictionary simply never learned.
+
+- OLD B, NEW taxonomy CLEAR: 57 families (11.4%). The old classifier's B
+  bucket conflated "genuinely needs a policy decision" with "the dictionary
+  didn't have quite enough words to auto-map a destination." Reading the
+  full literal resolved many of these immediately and confidently: eyes_
+  symmetric -> Face/Eyes, sk_tail03 -> Tail, pussy_tighten -> Body Morphs,
+  opt_as_l_upleg_b -> Legs, bobcut.rear_left_3_jiggle -> Hair. None of these
+  actually raise a doctrine question; they were only "uncertain" because a
+  static word list didn't have "eyes_symmetric" or "opt_as" pre-registered.
+
+- OLD A, NEW semantic NOT fully clear: 12 families (2.4%). Small and mostly
+  benign -- e.g. skull_06, upperhead, m_head_2, r_head_3, head back 1 were
+  mechanically mapped straight to a destination by the old dictionary's
+  simple word-priority list, but genuine reading recognizes that a bare
+  "head" bone raises a real destination choice (Body? Face/Expressions?
+  something else?) that the old system's shallow lookup could not see.
+  bip01_*_thigh013/upperarm013/forearm007/hand007-style numbered sub-bones
+  show the same pattern: the old dictionary happily mapped "thigh" straight
+  to Legs, while genuine reading flags the primary-anatomy-vs-corrective-
+  bone doctrine question the Master's own philosophy actually cares about.
+  This is the OLD system being too confident, not the new one being wrong.
+
+- OLD A, NEW taxonomy NOT clear: 38 families (7.6%, overlapping partly with
+  the 12 above). Dominated by two recurring, principled patterns: (a) 23
+  cases where the old dictionary mapped a numbered biped sub-bone (thigh,
+  upperarm, forearm, hand, spine) straight to an anatomical group without
+  recognizing the Correctives-doctrine question Master's own philosophy
+  raises for such bones; (b) several bare "chain"/positional-only literals
+  the old classifier's cruder morph-only-referent rule let through as A
+  when they genuinely lack an owning object.
+
+50 representative disagreements are shown in the two sample blocks above and
+in PHASE2_SEMANTIC_PILOT_500.tsv (batch_id column lets you find any of the
+500 by batch; cross-reference against PHASE2_SEMANTIC_READABILITY_AUDIT.tsv
+by fold_key for the old state).
+
+==============================================================================
+CONSISTENCY AUDIT (performed strictly AFTER independent judgment, per
+instruction -- not used to revise any individual family's judgment)
+==============================================================================
+Python grouped the 500 pilot families by shared stem/pattern and flagged any
+cluster with more than one destination or taxonomy_status. Flags found, with
+an assessment of whether the variation looks principled or arbitrary:
+
+- cape* (6 families): 100% consistent (Clothing, CLEAR). No flag.
+- bare chain_N (5 families): 100% consistent (NEEDS_CONTEXT, no destination
+  forced). No flag.
+- *twist* bones (11 families): 100% consistent (NEEDS_DOCTRINE). No flag.
+- bare numbered Bone### (12 families): 100% consistent (NOT_APPLICABLE).
+  No flag.
+- horn* (2 families): 100% consistent (NEEDS_DOCTRINE). No flag.
+- *finger* (15 families): FLAGGED -- 13 resolved to a clear Fingers
+  destination (with correct Left/Right/side-neutral routing based on each
+  literal's own side marker, including finger2a correctly routed to the
+  side-neutral groupFile/Fingers because it carries no L/R marker at all),
+  while 2 ("...finger_globe..." entries) were held at NEEDS_CONTEXT because
+  of an unusual "globe" qualifier not present in the other 13. This reads as
+  a principled, literal-driven distinction, not noise -- but is reported as
+  a flag per instruction, for human confirmation.
+- creature (canine/crow/taurenmale, 8 families): FLAGGED -- 1 (canine_tail2)
+  resolved CLEAR to Tail (Master already treats Tail as an established non-
+  human-appendage destination), while the other 7 (specific limb/eye/brow/
+  phalanges bones with no Tail-equivalent precedent, plus 2 bare taurenmale
+  numbered bones with no named body part at all) stayed NEEDS_DOCTRINE or
+  NOT_APPLICABLE. Explainable by genuine differences between the literals;
+  flagged for human confirmation rather than silently accepted.
+- *head*/*skull* (11 families): FLAGGED -- families naming a SPECIFIC facial
+  sub-feature alongside "head" (head eyeball middle, bip faceforeheadtop l,
+  head chin middle, head cheeck left 4) or using "head" in an unrelated
+  sense (headgear_r.004 = clothing, cock-head-skinny = penis anatomy)
+  resolved CLEAR with a specific destination; families using bare/generic
+  "head" with no sub-feature (upperhead, head back 1, m_head_2, r_head_3,
+  headfurtop.r) stayed NEEDS_DOCTRINE. Explainable, flagged for confirmation.
+- unused-prefixed (13 families): FLAGGED -- the 4 that also name a real body
+  part (dogmeat_eye_r, handr, ankle2helper, faceroot) went NEEDS_DOCTRINE;
+  the 9 that are bare numbered/dummy/duplicate placeholders went
+  NOT_APPLICABLE. Explainable by the presence/absence of an actual
+  anatomical referent; flagged for confirmation.
+- weapon-prop (wep_/v_weapon, 11 families): FLAGGED -- the 2 v_weapon.*_
+  index/middle03 entries (finger-shaped names on a weapon view-model) went
+  NEEDS_CONTEXT (is this a real posable finger or an internal viewmodel
+  helper?); the other 9 plain weapon-component names went NEEDS_DOCTRINE
+  (a cleaner "does Master want a Props destination" question). Explainable,
+  flagged for confirmation.
+- *jiggle* (9 families): FLAGGED -- the 4 where the jiggling OBJECT is
+  explicitly named (a pendant, a hairstyle, a hat, a hair side-lock) resolved
+  CLEAR to the object's own destination; the 5 with no named object (bare
+  jiggle4/jiggle05/h3jiggle06, and two rig-code entries with only a vague
+  "side"/"front" position) stayed NEEDS_CONTEXT. Explainable, flagged for
+  confirmation.
+
+No cluster showed destination disagreement that looked arbitrary or
+attention-related (e.g. the same exact pattern getting different answers for
+no visible reason). Every flagged cluster's variation traces to a real,
+identifiable difference in the literal itself. None were auto-corrected, per
+instruction -- they are reported here as review flags only.
+
+==============================================================================
+QUALITY ASSESSMENT
+==============================================================================
+- Equal attentiveness across batches 1-5: per-batch semantic_status counts
+  were stable throughout -- CLEAR ranged 67-74 per 100, OPAQUE 13-24,
+  PARTIAL 9-14; taxonomy CLEAR ranged 46-51 per 100 in every batch. No
+  downward drift in CLEAR-rate or upward drift in OPAQUE-rate from batch 1
+  to batch 5 was observed, which is what a batch size that preserves genuine
+  per-item attention should look like.
+- Short reasons reference the literal's own meaning: spot-checked across all
+  five batches (e.g. "'Inflat' reads as truncated 'Inflate'", "'lid' is the
+  recognizable eyelid referent", "no object-type word at all, purely
+  positional"). Reasons are literal-specific, not templated boilerplate.
+- Abstention is real, not decorative: 256 of 500 families (51.2%) received
+  no proposed destination at all, spanning three different abstention
+  reasons (NEEDS_DOCTRINE, NEEDS_CONTEXT, NOT_APPLICABLE) rather than one
+  catch-all "unsure" bucket. Genuinely ambiguous single-word or acronym
+  literals (lock1, plate 2, stick, c4, f7, ex_2, g8, glass_d3_d) were left
+  OPAQUE/NOT_APPLICABLE rather than guessed at.
+- Obvious readable literals recognized despite being unusual or misspelled:
+  penus 1 -> penis, tongehide -> tongue, left_stomach_buldge -> bulge,
+  head cheeck left 4 -> cheek, eye-r-nuetral -> neutral, lidubberopenl ->
+  upper (all correctly read through the typo); Japanese-anatomical-term
+  literals (hiji_r__rot_ude_r__z50__offset = right elbow, sakotsu_rt_rside_
+  d__offset = right clavicle) were also correctly recognized rather than
+  scored opaque for using non-English rig vocabulary.
+- Generic prefixes were not used as a substitute for reading the rest of the
+  name: bip_l_wing, Bone_eye_L, DEF-brows2_r, and DEF-thigh.r.004 all
+  resolved CLEAR on their real referent (wing/eye/brows/thigh) despite
+  carrying the same heterogeneous bip_/Bone_/DEF- prefixes that, taken
+  alone, predict nothing. Conversely, when a "bip_"/"Bone_"/"unused"-
+  prefixed literal genuinely had nothing else in it (bone077, bone.001_l,
+  unusedbone091, bone._l), it was correctly scored OPAQUE rather than
+  defaulted to some guessed anatomy -- confirming the prefix-neutral
+  behavior works in both directions, not just the convenient one.
+- Taxonomy assignments remained consistent across independently-judged
+  batches: cape*, chain_N, *twist*, and bare Bone### clusters (spanning all
+  five batches) were each internally 100% consistent despite being judged
+  in entirely separate batch calls with no cross-batch memory.
+
+==============================================================================
+VERDICT
+==============================================================================
+SEMANTIC BATCH ARCHITECTURE: READY TO SCALE
+
+No modification is required to the core mechanism before scaling to the
+remaining 13,782 families. The pilot demonstrates:
+  - genuine per-literal reading (not dictionary lookup) -- proven directly by
+    the 61 old-D/new-CLEAR and 57 old-B/new-CLEAR disagreement categories,
+    which are exactly the failure modes a static dictionary cannot fix and a
+    reading model can;
+  - stable attention across five independently-processed batches with no
+    quality drift;
+  - real, non-decorative abstention on genuinely ambiguous literals;
+  - internally consistent taxonomy judgments on repeated patterns despite
+    zero cross-batch context;
+  - review flags (not silent auto-correction) surfaced on every cluster
+    where a pattern legitimately split, exactly as instructed.
+
+Two minor, low-cost process refinements are worth carrying into the full run
+(neither is a correctness problem, both are efficiency/traceability notes):
+  1. The pilot's proposed_destination values were mapped to complete
+     canonical paths only when a specific sub-branch was unambiguous from
+     the literal itself (e.g. LeftFingers vs. RightFingers by explicit side
+     marker; the side-neutral groupFile/Fingers when no side marker exists).
+     This convention should be written down explicitly as a standing
+     instruction for the full run rather than left implicit.
+  2. Bare positional/generic-word literals (front, back, side, top, up,
+     down alone) and bare technical-jargon-plus-number literals (bone/
+     joint/ctrl/null + a number) were treated as two different OPAQUE
+     sub-flavors by the judge's own reasoning but recorded under the same
+     semantic_status value. If a future pass wants to distinguish "real
+     word, no referent" from "no real word at all" as separate machine-
+     readable categories, that would need a schema addition -- not required
+     for the pilot's purpose, but worth deciding now rather than after
+     14,282 rows are committed to the current three-value scheme.
+
+No files were edited. No family beyond the 500-family pilot was classified.

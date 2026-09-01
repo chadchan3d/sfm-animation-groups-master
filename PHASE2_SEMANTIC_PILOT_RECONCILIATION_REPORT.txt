@@ -1,0 +1,319 @@
+==============================================================================
+PHASE 2 SEMANTIC PILOT RECONCILIATION REPORT
+Applying the Correctives calibration (30 resolutions), the pre-scale
+doctrine review (59 resolutions), and the three final policy decisions
+(spine ownership, implementation-suffix neutrality, limb-count neutrality)
+to PHASE2_SEMANTIC_PILOT_500.tsv.
+Output: PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv (new file; original
+PHASE2_SEMANTIC_PILOT_500.tsv left untouched)
+Method: deterministic Python (reconcile_pilot.py), keyed by exact fold_key,
+re-opened from disk and independently re-validated after writing.
+
+ADDENDUM (post-schema-consistency check): a second deterministic pass
+(fix_schema_invariant.py) corrected 2 additional rows that violated the
+semantic_status/taxonomy_status schema invariant (see the dedicated section
+below). All counts in this report reflect the file AFTER that correction.
+==============================================================================
+
+WHAT WAS CHANGED
+------------------------------------------------------------------------------
+Every row of the pilot's 104 NEEDS_DOCTRINE families was located by exact
+fold_key match, and only the following fields were updated on a touched row:
+taxonomy_status, proposed_destination, confidence, uncertainty_reason,
+short_reason. semantic_status and semantic_referent were never touched (all
+104 already carried semantic_status = CLEAR; the doctrine block was always a
+taxonomy-destination question, never a semantic-reading question). No other
+field on any row -- touched or not -- was modified.
+
+  Resolved via PHASE2_PILOT_DOCTRINE_CALIBRATION.txt:           30 families
+  Resolved via PHASE2_PRE_SCALE_DOCTRINE_REVIEW.txt:            59 families
+  Resolved via this turn's 3 policy decisions:                  14 families
+  Status changed (NEEDS_DOCTRINE -> NEEDS_CONTEXT), no destination:
+                                                                  1 family
+                                                              -----------
+  Total touched:                                               104 families
+
+104 touched families exactly matches the 104 NEEDS_DOCTRINE rows present in
+the original pilot TSV (verified: every row with taxonomy_status =
+NEEDS_DOCTRINE in the source file was assigned a resolution, and no
+resolution key failed to match a row).
+
+==============================================================================
+THIS TURN'S 3 POLICY DECISIONS AS APPLIED TO THE PILOT'S 15 REMAINING CASES
+==============================================================================
+
+1. SPINE (5 families) -- resolved by ownership, all anatomical:
+     Bip01_Spine2_002    -> groupFile/Body  (Bip01_ biped rig prefix, no
+                                              object-owner noun present)
+     DEF-spine.031       -> groupFile/Body  (DEF- generic rig prefix, no
+                                              object-owner noun present)
+     bip_spine_0.002     -> groupFile/Body  (bip_ generic rig prefix, no
+                                              object-owner noun present)
+     SK_spine_3          -> groupFile/Body  (SK_ generic skeleton prefix,
+                                              no object-owner noun present)
+     spine upper_R.002   -> groupFile/Body  (bare anatomical "spine upper"
+                                              + side marker, no object noun)
+   None of the 5 pilot literals name a garment, design element, or hair
+   term -- each reads as an explicit anatomical/biped spine bone under the
+   ownership test. None required the NEEDS_CONTEXT fallback.
+
+2. IMPLEMENTATION-SUFFIX ITEMS / "_MESH" (7 families) -- resolved by the
+   named object, suffix ignored:
+     BLD_GEN_Army_Tent_Medium_A_Bottom_A_Mesh -> groupFile/Other  (tent)
+     DEC_GEN_Wagon_Caravan_A_Mesh              -> groupFile/Other  (wagon)
+     FUR_GEN_Bed_Single_Rich_A_Mesh.002        -> groupFile/Other  (bed)
+     FUR_GEN_Pillow_Sitting_B_mesh             -> groupFile/Other  (pillow)
+     FUR_GEN_Pillow_Sitting_D_mesh.001         -> groupFile/Other  (pillow)
+     FUR_GEN_Pillow_Sitting_E_mesh             -> groupFile/Other  (pillow)
+     LOOT_GEN_Backpack_D_Posed_A_Mesh          -> groupFile/Clothing (worn
+                                                   accessory -- backpack is
+                                                   worn on the body, per
+                                                   the worn-item exception)
+   Six name non-worn environment/furniture objects (tent, wagon, bed,
+   pillow x3) -> Other, consistent with the already-verified Other
+   precedent for recognized props. One (backpack) names a worn accessory
+   -> Clothing, per rule 16's worn-item exception (the same exception that
+   already routes helmet-type items to Clothing instead of Other). No
+   family in this group was held back as OPAQUE/NEEDS_CONTEXT for a
+   "raw geometry" reason -- the suffix carried no destination or
+   legitimacy weight per the settled rule.
+
+3. LIMB-COUNT / NO-PRECEDENT CREATURE EDGE CASES (3 families) -- 2 resolve,
+   1 remains NEEDS_CONTEXT for a documented, narrower reason:
+     Third_Arms_R_1     -> groupFile/Arms/RightArm  (an arm control despite
+                            implying an additional arm; explicit R marker
+                            determines the RightArm subpath per rule 10)
+     backlegs           -> groupFile/Legs  (a Legs control despite
+                            potentially describing quadruped anatomy; no
+                            side marker present, so the side-neutral Legs
+                            destination is used per rule 11)
+     Pincer Right Mid   -> taxonomy_status changed NEEDS_DOCTRINE ->
+                            NEEDS_CONTEXT; proposed_destination remains
+                            blank. This is NOT a species/limb-count
+                            question (both are now settled) -- it remains
+                            open because the complete literal never
+                            establishes whether "pincer" is anatomical,
+                            mechanical, or weapon-related, and the word has
+                            zero existing precedent anywhere in the Master
+                            in any direction.
+
+==============================================================================
+VERIFICATION (independent re-open of the written candidate file)
+==============================================================================
+  [x] Exactly 500 data rows in the reconciled file (500 present; matches
+      the original 500 exactly)
+  [x] Every fold_key in the reconciled file matches the original file's
+      fold_key list, in the same order (verified by direct list equality)
+  [x] Every exact_spellings value is byte-identical to the original
+      (verified by direct list equality) -- no literal was altered
+  [x] No duplicate fold_key introduced (0 found)
+  [x] Every non-blank proposed_destination in the reconciled file is a
+      full group path that exists in the live canonical Master, verified
+      by fresh structural parse of sfm_defaultanimationgroups.txt via
+      tools/validate_master.py (0 invalid destinations found)
+  [x] Exactly 104 rows touched -- no more, no fewer -- matching the
+      104-row NEEDS_DOCTRINE population identified in the source TSV
+  [x] No family outside the 104 (i.e. no already-CLEAR, already-
+      NEEDS_CONTEXT, already-NOT_APPLICABLE, or already-OPAQUE row) was
+      modified in any field
+  [x] Every changed field on every touched row is traceable to a named
+      source (PHASE2_PILOT_DOCTRINE_CALIBRATION.txt,
+      PHASE2_PRE_SCALE_DOCTRINE_REVIEW.txt, or this turn's 3 policy
+      decisions) -- recorded per-field in the reconciliation script's
+      change log (479 individual field changes across 104 families)
+  [x] File encoding: no BOM, LF-only line endings -- matches the source
+      pilot TSV's own encoding and newline style exactly
+  Original PHASE2_SEMANTIC_PILOT_500.tsv: unmodified (byte count and
+  content unchanged; not opened for writing at any point)
+  sfm_defaultanimationgroups.txt: not edited (opened read-only, once, to
+  obtain the current valid destination-path set for validation)
+
+==============================================================================
+SCHEMA CONSISTENCY CHECK -- OPAQUE / NOT_APPLICABLE INVARIANT
+==============================================================================
+The pilot schema defines taxonomy_status=NOT_APPLICABLE as "used when the
+semantic meaning itself is opaque" -- i.e. it should be biconditional with
+semantic_status=OPAQUE. Before finalizing, all 500 reconciled rows were
+checked against this invariant. 0 rows had OPAQUE without NOT_APPLICABLE.
+2 rows had NOT_APPLICABLE without OPAQUE (both semantic_status=PARTIAL):
+
+  fold_key: unusedbone_3b item_ffx_x-2_rikku_by_xxkammyxx
+  exact_spellings: unusedbone_3B item_FFX_X-2_Rikku_By_xXKammyXx
+  semantic_status (before/after): PARTIAL / PARTIAL (unchanged)
+  taxonomy_status (before -> after): NOT_APPLICABLE -> CLEAR
+  reason: a self-declared "unused" generic bone carrying an unrelated
+    creator-credit string; it was coded NOT_APPLICABLE because the
+    remainder of the literal names no body part -- but the "unused"
+    self-declaration IS semantic content, and per rule 15 that content
+    alone determines a taxonomy destination (Useless) regardless of
+    whether the rest of the literal is anatomically legible.
+  valid under the intended schema: NO -- taxonomy_status=NOT_APPLICABLE
+    is defined for opaque semantic meaning; PARTIAL semantic content that
+    is actually sufficient to answer the taxonomy question (self-declared
+    unused -> Useless) must never be coded NOT_APPLICABLE.
+
+  fold_key: unused duplicate duplicate unused.006
+  exact_spellings: unused duplicate duplicate unused.006
+  semantic_status (before/after): PARTIAL / PARTIAL (unchanged)
+  taxonomy_status (before -> after): NOT_APPLICABLE -> CLEAR
+  reason: a self-declared duplicate/unused placeholder with no anatomical
+    content; same defect as above -- the "unused"/"duplicate" declaration
+    is sufficient semantic content to answer the taxonomy question.
+  valid under the intended schema: NO -- same reasoning as above.
+
+DETERMINED INVARIANT: option A. semantic_status=OPAQUE must always imply
+taxonomy_status=NOT_APPLICABLE, AND taxonomy_status=NOT_APPLICABLE must
+always imply semantic_status=OPAQUE -- with no legitimate exception. There
+was no case here where NOT_APPLICABLE legitimately coexists with CLEAR or
+PARTIAL; both violations were genuine miscodings (rule 15's Useless
+destination was simply never applied to these 2 rows during the original
+pilot pass), not a case calling for a documented exception (option B).
+
+CORRECTION APPLIED: both rows' taxonomy_status was changed to CLEAR,
+proposed_destination set to groupFile/Useless (a valid current Master
+path), confidence raised to High, uncertainty_reason cleared, and
+short_reason updated to record the Useless rationale -- via a second
+deterministic pass (fix_schema_invariant.py) against
+PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv only. PHASE2_SEMANTIC_PILOT_500.tsv
+(the original) was not opened for writing at any point in either pass.
+PHASE2_SEMANTIC_BATCH_RULES.txt rule 15 was broadened to state explicitly
+that the self-declared unused/duplicate rule applies even without
+anatomical legibility, and a new rule 21 was added stating the
+OPAQUE/NOT_APPLICABLE invariant as a standing, mechanically-checkable
+requirement for every future batch.
+
+Revalidation of all 500 rows after this correction confirmed:
+  [x] 500 rows, fold_keys and exact_spellings unchanged (identical to the
+      pre-correction reconciled file)
+  [x] semantic_status column unchanged for all 500 rows (this correction
+      touches only taxonomy_status/proposed_destination/confidence/
+      uncertainty_reason/short_reason on the 2 identified rows)
+  [x] no duplicate fold_key
+  [x] no invalid proposed_destination (groupFile/Useless confirmed present
+      in the live Master's current structural parse)
+  [x] invariant now holds exactly: 91 OPAQUE rows == 91 NOT_APPLICABLE rows,
+      zero violations in either direction
+
+==============================================================================
+FINAL PILOT DISTRIBUTION (all 500 families, post-reconciliation +
+post-schema-correction)
+==============================================================================
+
+semantic_status:
+  CLEAR    : 353
+  PARTIAL  :  56
+  OPAQUE   :  91
+  (unchanged from the original pilot throughout both passes -- neither
+  reconciliation pass touches semantic_status)
+
+taxonomy_status:
+  CLEAR           : 349   (was 243 before the doctrine reconciliation;
+                            +104 from doctrine resolutions, +2 from the
+                            schema-invariant correction)
+  NEEDS_CONTEXT   :  60   (was 59 before doctrine reconciliation; +1, the
+                            Pincer Right Mid reclassification -- all other
+                            59 are pre-existing NEEDS_CONTEXT rows
+                            unrelated to the doctrine buckets addressed in
+                            this project, e.g. jiggle/chain/feather
+                            physics bones and ambiguous shrink/bulge
+                            words -- untouched)
+  NOT_APPLICABLE  :  91   (was 93 before the schema-invariant correction;
+                            -2, the two rows above)
+  NEEDS_DOCTRINE  :   0   (was 104 before this reconciliation)
+
+Destination counts (all 349 CLEAR rows, by group):
+  groupFile/Clothing                     : 63
+  groupFile/Other                        : 49
+  groupFile/Body Morphs                  : 35
+  groupFile/Arms                         : 30
+  groupFile/Face/Eyes                    : 29
+  groupFile/Legs                         : 24
+  groupFile/Body                         : 17
+  groupFile/Hair                         : 17
+  groupFile/Arms/RightArm/RightFingers   : 16
+  groupFile/Face/Lower Face              : 14
+  groupFile/Arms/LeftArm/LeftFingers     : 10
+  groupFile/Face/Upper Face              :  8
+  groupFile/Face/Mid Face                :  7
+  groupFile/Tail                         :  6
+  groupFile/Useless                      :  6
+  groupFile/Wings                        :  4
+  groupFile/Toes/LeftToes                :  3
+  groupFile/Correctives                  :  3
+  groupFile/Face/Ears                    :  2
+  groupFile/Toes/RightToes               :  2
+  groupFile/Arms/RightArm                :  1
+  groupFile/Face/Tongue                  :  1
+  groupFile/Fingers                      :  1
+  groupFile/RigBody                      :  1
+                                          ------
+  TOTAL                                  : 349
+
+==============================================================================
+REMAINING NEEDS_DOCTRINE: 0
+==============================================================================
+Every family that carried a genuine, project-level taxonomy-policy question
+at the start of this reconciliation effort (the original 104) now has
+either a settled destination (103 families) or a settled, narrower,
+per-family reason for remaining open that is NOT a standing policy gap (1
+family: Pincer Right Mid, NEEDS_CONTEXT). No family in the 500-pilot
+population is held back today for a reason that requires a further
+standing policy decision.
+
+==============================================================================
+REMAINING NEEDS_CONTEXT: 60 -- DISTINGUISHING SETTLED-POLICY FROM GENUINE
+PER-FAMILY CONTEXT GAPS
+==============================================================================
+All 60 are genuine per-family context gaps -- none reflect an unresolved
+standing policy question:
+
+  - 1 (Pincer Right Mid) was reclassified this pass. Its openness is
+    explicitly NOT a species, limb-count, or taxonomy-existence question
+    (those are now settled) -- it is a plain missing-referent-evidence
+    case: the literal alone does not say what a "pincer" is here, and the
+    word has no existing Master precedent in either direction to lean on.
+  - The other 59 pre-date this reconciliation and were never part of the
+    104-family doctrine population. Sampling them (chain_2/chain_3/
+    chain_7/chain_21/chain_22/right_chain, feather 1a/1b/2a/2b,
+    student.front_1_jiggle/bas.side_right_1_jiggle/jiggle4/jiggle05/
+    h3jiggle06, botshrink/bulgeanimbig1/middlewirebulgeup/vwidth,
+    v_weapon.left_middle03/v_weapon.right_index03, juriclothes_reference,
+    turtleneckhouseofmcleavage, qwn-rig-hole-v1, and similar) shows they
+    are held for the same reason the pilot originally used NEEDS_CONTEXT
+    for: a plausible but under-determined referent (an unlabeled physics
+    chain link, an ambiguous "shrink"/"bulge" word with no named body part
+    or object, a fragment name needing surrounding-model context). None of
+    these fall inside the spine, implementation-suffix, or limb-count
+    doctrine questions resolved this pass, and this reconciliation
+    intentionally left all 59 untouched -- resolving them was out of scope
+    for this task.
+
+==============================================================================
+REMAINING OPAQUE: 91 -- ALL PRE-EXISTING, UNTOUCHED
+==============================================================================
+All 91 OPAQUE semantic_status rows (bare numbers, isolated "bone041"/
+"object12"-style fragments, single ambiguous tokens such as "stick",
+"lock1", "position") pre-date this reconciliation and were not part of the
+104-family NEEDS_DOCTRINE population (recall: all 104 already carried
+semantic_status = CLEAR). None were touched. Their openness reflects
+genuinely insufficient literal content, not a policy question this project
+has addressed.
+
+==============================================================================
+PHASE 2 RULEBOOK AND PILOT BASELINE READY FOR FULL SCALE: YES
+==============================================================================
+PHASE2_SEMANTIC_BATCH_RULES.txt has been updated to incorporate all three
+final policy decisions (rule 14 rewritten for spine ownership, rule 17
+rewritten for implementation-suffix neutrality, rules 19-20 added for
+limb-count/species neutrality and the narrower Pincer-style context gap),
+plus the schema-consistency correction (rule 15 broadened; rule 21 added
+stating the OPAQUE/NOT_APPLICABLE invariant as a standing, mechanically-
+checkable requirement for every future batch). The reconciled pilot
+baseline (PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv) now carries zero
+NEEDS_DOCTRINE rows, zero schema-invariant violations, and every remaining
+NEEDS_CONTEXT or OPAQUE row reflects a genuine per-family evidence gap
+rather than a standing policy question. No new taxonomy was created. No
+family numbered 501 or beyond was classified. sfm_defaultanimationgroups.txt
+was not edited. PHASE2_SEMANTIC_PILOT_500.tsv (the original) was not
+altered by either the doctrine-reconciliation pass or the schema-
+consistency correction pass.
