@@ -1,0 +1,181 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 2 -- REPORT
+Canonical positions 1501-2500 (1,000 production families), batches
+P11 (1501-1600) through P20 (2401-2500).
+======================================================================
+
+----------------------------------------------------------------------
+1. BATCHES PROCESSED / VALIDATION RESULTS
+----------------------------------------------------------------------
+All 10 batches classified, saved as raw TSVs, mechanically validated,
+and merged into the ledger one at a time (atomic validate -> merge ->
+re-validate-whole-ledger -> update-progress, per batch):
+
+  P11 (1501-1600): 100/100 rows -- batch PASS, ledger PASS (size 1600)
+  P12 (1601-1700): 100/100 rows -- batch PASS, ledger PASS (size 1700)
+  P13 (1701-1800): 100/100 rows -- batch PASS, ledger PASS (size 1800)
+  P14 (1801-1900): 100/100 rows -- batch PASS, ledger PASS (size 1900)
+  P15 (1901-2000): 100/100 rows -- batch PASS, ledger PASS (size 2000)
+  P16 (2001-2100): 100/100 rows -- batch PASS, ledger PASS (size 2100)
+  P17 (2101-2200): 100/100 rows -- batch PASS, ledger PASS (size 2200)
+  P18 (2201-2300): 100/100 rows -- batch PASS, ledger PASS (size 2300)
+  P19 (2301-2400): 100/100 rows -- batch PASS, ledger PASS (size 2400)
+  P20 (2401-2500): 100/100 rows -- batch PASS, ledger PASS (size 2500)
+
+Every batch validation checked: exact canonical positions; exact
+fold_keys against PHASE2_PRODUCTION_ORDER.tsv; exact_spellings
+byte-for-byte; zero duplicate families; valid enums; valid Master
+destinations; destination blank unless taxonomy_status=CLEAR; Rule 21
+biconditional; no calibration family present; no already-classified
+production family present. Every ledger re-validation after each merge
+additionally checked: exact expected row count; first 500 rows still
+field-identical to PHASE2_SEMANTIC_PILOT_500_FINAL.tsv; production
+fold_keys in exact canonical-position order for positions 501 through
+the latest completed position; zero duplicates across the whole
+ledger; Rule 21 globally; all destinations valid. All checks PASS at
+every step -- no batch was rejected, no re-merge was needed.
+
+Two authoring slips were caught and corrected by the batch validator
+BEFORE any ledger merge (never reached the ledger in a bad state):
+  - P11: several OPAQUE rows were initially missing their blank
+    proposed_destination field (a 6-tuple instead of 7); caught by the
+    row-shape assertion and corrected before validation.
+  - P11 "bone 1087": a field-shift due to a stray expression in the
+    authoring script placed "Low" in the destination slot; caught by
+    exact_spellings/all_destinations_valid mismatches, corrected by
+    rebuilding the row from the canonical production-order data.
+Both were caught by mechanical validation exactly as designed -- no
+ledger row was ever written in a bad state.
+
+Raw batch files created (untouched after writing):
+  PHASE2_PRODUCTION_BATCH_P11_1501_1600.tsv through
+  PHASE2_PRODUCTION_BATCH_P20_2401_2500.tsv (10 files).
+
+Ledger size: 1500 (before this tranche) -> 2500 (after this tranche).
+
+----------------------------------------------------------------------
+2. TRANCHE-ONLY STATISTICS (the 1,000 rows classified in this tranche)
+----------------------------------------------------------------------
+semantic_status:
+  CLEAR   : 799
+  PARTIAL : 57
+  OPAQUE  : 144
+
+taxonomy_status:
+  CLEAR          : 747
+  NEEDS_CONTEXT  : 109
+  NEEDS_DOCTRINE : 0
+  NOT_APPLICABLE : 144
+
+confidence:
+  High   : 549
+  Medium : 216
+  Low    : 235
+
+proposed_destination distribution (CLEAR rows only, 747 total):
+  Clothing                    : 139
+  Other                       : 105
+  Body                        : 61
+  Legs                        : 53
+  Face/Eyes                   : 50
+  Body Morphs                 : 45
+  Face/Lower Face             : 44
+  Arms/LeftArm                : 35
+  Arms/LeftArm/LeftFingers    : 27
+  Arms/RightArm/RightFingers  : 27
+  Hair                        : 27
+  Useless                     : 24
+  Arms/RightArm               : 23
+  Tail                        : 15
+  Face/Upper Face             : 14
+  Correctives                 : 10
+  Face/Ears                   : 8
+  Face/Mid Face               : 7
+  Face/Expressions            : 6
+  Fingers                     : 5
+  Toes/RightToes              : 5
+  Toes/LeftToes               : 5
+  Wings                       : 4
+  Arms                        : 3
+  Face                        : 2
+  Face/Tongue                 : 2
+  Arms/LeftArm/LeftCarpals    : 1
+
+NEEDS_CONTEXT: 109
+NEEDS_DOCTRINE: 0 (no doctrine-escalation report was needed; no
+  hard-stop occurred)
+
+----------------------------------------------------------------------
+3. RECURRING UNCERTAINTY THEMES (NEEDS_CONTEXT / OPAQUE drivers)
+----------------------------------------------------------------------
+- Bare multi-sense object words with no disambiguating context: "bow"
+  (5), "chain" (4), "pad" (2), "strings" (2), "lid" (3), "glass",
+  "shaft", "rope", "cup" -- each genuinely supports more than one
+  materially different reading (rule 25-style).
+- Bare accessory/object nouns with no owner named: strap/band/tassel/
+  charm-family rows, consistent with the calibration-set Strap_B.02/
+  Band.Bend_Right_1/TasselB precedent (object clear, ownership missing).
+- Creature-appendage anatomy with no established Master destination
+  convention: "fin" (4 occurrences) and "tentacle" (5 occurrences,
+  including the "tenta_" abbreviation) -- anatomy itself is not in
+  doubt, but no existing group among the Master's 35 valid destinations
+  is confirmed to be the right home for either.
+- The torso/back "owner-vs-location" trap (the settled torso-pipe
+  lesson, Section 2A of the tranche instructions): "brace" and
+  "support" objects positioned at the torso or back, where the location
+  word does not establish the object's ownership or mechanism (5
+  occurrences this tranche).
+- Bare function words with no anatomical object named: jiggle, dyng,
+  poke, crush, squish, raise/raiser, stroke -- function is clear
+  (rule 22's jiggle-example pattern), but the owning body part is not
+  stated.
+- Contradictory dual-body-part compounds: "Leg...Finger..." literals
+  (4 occurrences: legpeopledifferencefinger1_r, legringfinger3_r,
+  legmiddlefinger2_l) where two incompatible anatomical tokens appear
+  in one literal with no way to tell which governs.
+- Generic numbered/mesh/placeholder artifacts (the largest OPAQUE
+  contributor): bare "Bone###", "polySurface###", "pCube###", bare
+  numbers, and similar technical-artifact names carrying no anatomical
+  content at all.
+
+----------------------------------------------------------------------
+4. CONSISTENCY AUDIT
+----------------------------------------------------------------------
+Full detail in PHASE2_PRODUCTION_TRANCHE2_CONSISTENCY_FLAGS.txt.
+Summary: 2 flags (box22, box10 -- both an unhedged "likely" guess
+retained in an OPAQUE row's referent), both assessed as metadata/
+reason-only defects, neither a classification error, neither
+contradicting an accepted precedent. No ledger row was changed during
+the audit, per instruction.
+
+----------------------------------------------------------------------
+5. CUMULATIVE PHASE 2 STATE (kept separate from tranche-only stats)
+----------------------------------------------------------------------
+  calibration families complete           : 500
+  production families classified (total)  : 2000
+  total ledger rows                       : 2500
+  canonical production universe           : 14,282
+  production families remaining after
+    canonical position 2500               : 11,782
+  next canonical Phase 2 position         : 2501
+
+----------------------------------------------------------------------
+6. VALIDATION -- FINAL STATE
+----------------------------------------------------------------------
+Ledger: 2500 rows. First 500 rows field-identical to
+PHASE2_SEMANTIC_PILOT_500_FINAL.tsv. Production rows (1501-2500... i.e.
+ledger rows 501-2500) in exact canonical-position order per
+PHASE2_PRODUCTION_ORDER.tsv. Zero duplicate fold_keys across all 2500
+rows. Rule 21 (OPAQUE iff NOT_APPLICABLE) holds globally. Every
+non-blank proposed_destination is one of the Master's 35 valid group
+paths.
+
+tools/verify_phase2_production_order.py: 15/15 checks PASS (rerun
+after this tranche's commit; unaffected by ledger growth since it
+verifies the canonical production ORDER, not ledger content).
+
+Master validator (tools/validate_master.py): PASS -- structural parse
+PASS, 0 exact duplicate literals, 0 cross-path native-Rebuild casefold
+invariant violations. sfm_defaultanimationgroups.txt was not modified
+by this tranche.
+======================================================================

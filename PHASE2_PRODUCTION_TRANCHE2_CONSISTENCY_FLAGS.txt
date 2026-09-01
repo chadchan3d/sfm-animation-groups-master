@@ -1,0 +1,110 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 2 -- CONSISTENCY AUDIT
+Positions 1501-2500 (1,000 production families). Flag-only audit per
+Section 9. No ledger rows were changed during this audit.
+======================================================================
+
+----------------------------------------------------------------------
+METHOD
+----------------------------------------------------------------------
+For every flag, three questions were explicitly worked through rather
+than defaulting to "awareness only":
+  1. Does this contradict an accepted calibration or production
+     precedent?
+  2. Is the classification (semantic_status/taxonomy_status/
+     proposed_destination) actually wrong?
+  3. Is only the metadata/reason text wrong, or is the difference
+     genuinely justified by the complete literals?
+
+----------------------------------------------------------------------
+MECHANICAL CHECKS (automated, full-population)
+----------------------------------------------------------------------
+- Rule 21 biconditional (OPAQUE iff NOT_APPLICABLE): 0 violations
+  across all 1,000 rows.
+- proposed_destination present but taxonomy_status != CLEAR: 0 found.
+- short_reason invoking an abbreviation-rejection phrase ("merely
+  plausible", "not grounded", "ungrounded", "no grounding") on a row
+  whose semantic_status is not OPAQUE: 0 found.
+- proposed_destination = Correctives without repair/fix/correct/JCM
+  language anywhere in fold_key/exact_spellings/referent/short_reason:
+  0 found. All 10 Correctives rows carry explicit "fix"/"correct"/"JCM"
+  language: leg_bone_correct_l_02, outfit_boob_fix, pjcmforearmfwd75r,
+  topclothfix all, shoulder_bone_correct_l_01, armjacketfix,
+  hip_bone_correct_r_01, pjcmabdomenupperfwdnavel, collarfixarmsup80,
+  legfix90sw l.
+- OPAQUE rows asserting a hedged/unhedged guess word ("likely",
+  "probably", "presumably"): 2 found (Section 1 below).
+
+----------------------------------------------------------------------
+TARGETED FAMILY-CONSISTENCY SPOT CHECKS
+----------------------------------------------------------------------
+- Rule 26 hip/pelvis boundary: only 2 genuine hip-family rows occur in
+  this tranche -- mot00_hips (unsided -> Body) and
+  hip_bone_correct_r_01 (explicit repair language -> Correctives,
+  Rule 26's own override). Both consistent with the settled rule; no
+  sided-hip-joint case requiring the Legs branch happened to appear in
+  this tranche.
+- Torso/back "owner-vs-location" trap (the settled torso-pipe lesson):
+  torso brace f l, torso pipe b l 1b, torso upperbrace b r,
+  back_support_l, torso brace b r -- all 5 consistently NEEDS_CONTEXT/
+  blank. No drift toward assuming Body from the location word alone.
+- Fin/tentacle creature-appendage rows (no established Master
+  destination convention): r_fin_front_a, l_fin_mid_b, l_fin_front_c,
+  headfin, bip_tentacle.004, tenta_9_l, tenta_8_r, tenta_b_10_l,
+  tentacletopright3 -- all 9 consistently CLEAR/NEEDS_CONTEXT/blank.
+- Multi-sense-word families (chain/bow/pad/strings): all 14 occurrences
+  (5x bow, 4x chain, 2x pad, 2x strings, matching the calibration-set
+  precedent for "bow"/"Strap"/"Band"-style bare multi-sense or
+  ownerless terms) consistently PARTIAL or CLEAR paired with
+  NEEDS_CONTEXT as appropriate -- no member of any of these families
+  was silently forced to a destination.
+- third_arms_*/second_arms_* extra-limb rows (8 occurrences): finger-
+  numbered variants correctly route to the corresponding *Fingers
+  subgroup, bare numbered arm-segment variants route to the parent Arm
+  group -- the difference tracks real content (finger vs. non-finger
+  segment), not an inconsistency.
+- Fio-Rig-Strip-r2/r3 and the lone Flm-ArmB-Arm-LF row: consistent
+  with each other and with the Tranche 1 Flm-ArmB-Float precedent
+  (internal rig-namespace sub-labels are not treated as self-proving
+  anatomy).
+
+----------------------------------------------------------------------
+1. FLAGGED ROWS
+----------------------------------------------------------------------
+
+FOLD KEY: box22 (exact: Box22)
+  Current: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  Current semantic_referent: "a generic 'box' object, numbered; likely
+  a placeholder/bounding-box technical object"
+  1. Contradicts precedent? No other row's classification is
+     contradicted; this is an internal wording issue on this row alone.
+  2. Classification wrong? No -- OPAQUE/NOT_APPLICABLE is correct: a
+     bare "Box22" has no reliable anatomical or functional referent.
+  3. Metadata/reason wrong? Yes -- the referent asserts "likely a
+     placeholder/bounding-box technical object" as an unhedged claim,
+     which is inconsistent with OPAQUE's own definition ("no reliable
+     core referent/function can be recovered"). Compare the properly
+     neutral phrasing used elsewhere in this same tranche for
+     comparably ungrounded literals (e.g. "l dcorin": "cryptic compound
+     with no recoverable anatomical or functional content" -- no guess
+     asserted at all). This is a metadata-only defect, not a
+     classification error, and should be corrected to a neutral
+     phrasing (e.g. "a generic 'box' object, numbered; type/purpose not
+     established") in a future QA-application pass, not auto-rewritten
+     here.
+
+FOLD KEY: box10 (exact: Box10)
+  Same defect, same disposition as box22 -- identical referent wording
+  ("likely a placeholder/bounding-box technical object").
+  1. Contradicts precedent? No.
+  2. Classification wrong? No -- OPAQUE/NOT_APPLICABLE is correct.
+  3. Metadata/reason wrong? Yes -- same fix needed as box22.
+
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+Total flags: 2 (box22, box10) -- both metadata/reason-only, neither a
+classification error, neither contradicting an accepted precedent.
+No row's semantic_status, taxonomy_status, or proposed_destination is
+disputed by this audit. No ledger row was changed.
+======================================================================
