@@ -1,0 +1,113 @@
+======================================================================
+PHASE 2 -- TRANCHE 1 QA COUNT VERIFICATION
+Mechanical re-derivation of the commit 8260433 ledger delta, triggered
+by a reported bookkeeping inconsistency between
+PHASE2_PRODUCTION_TRANCHE1_QA_APPLIED_REPORT.txt's section headers and
+its own final chat-turn execution summary.
+
+Method: `git show 8260433^:PHASE2_SEMANTIC_LEDGER.tsv` and
+`git show 8260433:PHASE2_SEMANTIC_LEDGER.tsv` were independently
+extracted and parsed as TSV; every one of the 1,500 rows was compared
+field-by-field, before vs after. A row was classified as a
+"classification correction" if semantic_status, taxonomy_status, or
+proposed_destination differed; otherwise, if ANY field differed, it was
+classified as "metadata-only." Rows split at position 500 (index <500 =
+calibration, >=500 = production). No prose, no report text, and no
+prior chat summary was used as a count source -- only the two extracted
+ledger files.
+======================================================================
+
+----------------------------------------------------------------------
+FULL PER-ROW RESULT (13 changed rows out of 1,500)
+----------------------------------------------------------------------
+CALIBRATION -- CLASSIFICATION CORRECTION (2):
+  pos  112  bip_r_hip                              [semantic_referent, proposed_destination, short_reason]
+  pos  356  l hip spo                               [semantic_referent, proposed_destination, short_reason]
+
+CALIBRATION -- METADATA-ONLY (0): none.
+
+PRODUCTION -- CLASSIFICATION CORRECTION (4):
+  pos  513  torso pipe b l 1c                        [semantic_referent, taxonomy_status, proposed_destination, confidence, short_reason]
+  pos 1147  shiri_l__slerp_momo_l__i50_x0__offset     [semantic_referent, taxonomy_status, proposed_destination, short_reason]
+  pos 1218  levator03_r                               [semantic_status, semantic_referent, taxonomy_status, proposed_destination, confidence, uncertainty_reason, short_reason]
+  pos 1414  torso pipe b l 2c                         [semantic_referent, taxonomy_status, proposed_destination, confidence, short_reason]
+
+PRODUCTION -- METADATA-ONLY (7):
+  pos  759  bone_lefthipbuffer                        [semantic_referent, short_reason]
+  pos  798  bip hipfront r                             [semantic_referent, short_reason]
+  pos 1005  oris04_l                                   [semantic_referent]
+  pos 1054  bip_hip_r_1                                [semantic_referent, short_reason]
+  pos 1067  hip base right                             [semantic_referent, short_reason]
+  pos 1351  oris06_l                                   [semantic_referent]
+  pos 1430  bunnytail                                  [semantic_referent, confidence, uncertainty_reason, short_reason]
+
+----------------------------------------------------------------------
+MECHANICALLY DERIVED TOTALS
+----------------------------------------------------------------------
+  calibration classification corrections:  2
+  calibration metadata-only corrections:   0
+  production classification corrections:   4
+  production metadata-only corrections:    7
+  TOTAL ROWS TOUCHED:                       13   (2 + 4 + 7 = 13, matches
+                                                   the commit's own
+                                                   "2 calibration + 11
+                                                   production" total line,
+                                                   which was correct)
+
+----------------------------------------------------------------------
+COMPARISON AGAINST THE TWO CANDIDATE EXPECTATIONS
+----------------------------------------------------------------------
+Neither of the two figures floated before this verification matches the
+mechanical data:
+
+  Requested-task hypothesis (2 / 8 / 3 / 13):  DOES NOT MATCH.
+    The 4 hip-policy rows (bone_lefthipbuffer, bip hipfront r,
+    bip_hip_r_1, hip base right) were counted as "production
+    classification corrections" in that hypothesis, but none of the
+    three classification fields (semantic_status, taxonomy_status,
+    proposed_destination) actually changed on any of the four --
+    they were already CLEAR/CLEAR/groupFile/Legs in the ledger before
+    this commit. Only their semantic_referent/short_reason text changed.
+
+  Prior chat-turn summary (2 / 7 / 3 / 13): DOES NOT MATCH either --
+    it undercounted metadata-only production rows by miscounting 4 of
+    the 7 as classification corrections (the same four hip-policy rows).
+
+  Actual mechanical data (2 / 4 / 7 / 13): CONFIRMED CORRECT. This is
+  the only figure derived directly from the committed before/after
+  ledger content rather than from prose.
+
+----------------------------------------------------------------------
+LEDGER DATA ASSESSMENT
+----------------------------------------------------------------------
+LEDGER DATA CORRECT: YES.
+
+This was a documentation/bucketing discrepancy only -- every one of the
+13 changed rows contains the correct, intended field values (confirmed
+against PHASE2_HIP_POLICY_RECONCILIATION_REPORT.txt and
+PHASE2_PRODUCTION_TRANCHE1_QA_CHANGES_REVIEW.txt for each row's intended
+old/new values, all of which match what is actually in the ledger). No
+ledger row was miswritten, no fold_key/exact_spellings/batch_id was
+disturbed, and no classification field holds an unintended value. The
+only error was in how PHASE2_PRODUCTION_TRANCHE1_QA_APPLIED_REPORT.txt
+(Section 2/3 headers) and this session's own final chat-turn summary
+categorized four already-CLEAR/Legs rows as "classification
+corrections" instead of "metadata-only corrections." No ledger edit was
+made or is needed as a result of this verification.
+
+----------------------------------------------------------------------
+CORRECTIVE ACTION TAKEN
+----------------------------------------------------------------------
+PHASE2_PRODUCTION_TRANCHE1_QA_APPLIED_REPORT.txt Section 2 header
+corrected from "(7 rows)" to "(4 rows)" and Section 3 header corrected
+from "(3 rows)" to "(7 rows)"; the four hip-policy rows were moved from
+Section 2 into Section 3 with a rewritten explanation of why they are
+metadata-only. No substantive reasoning about WHY each row was
+corrected was altered -- only which section each row is filed under and
+the section counts.
+
+PHASE2_HIP_POLICY_RECONCILIATION_REPORT.txt was checked and contains no
+classification-vs-metadata bucketing claim to correct (its "4 rows
+resolved" language is accurate regardless of which bucket those rows
+fall into and required no change).
+======================================================================

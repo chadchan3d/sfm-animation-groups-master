@@ -21,10 +21,16 @@ PHASE2_HIP_POLICY_RECONCILIATION_REPORT.txt Section 5.
   l hip spo   : groupFile/Body -> groupFile/Legs (CLEAR/CLEAR retained)
 
 ----------------------------------------------------------------------
-2. PRODUCTION CLASSIFICATION CORRECTIONS (7 rows)
+2. PRODUCTION CLASSIFICATION CORRECTIONS (4 rows)
 ----------------------------------------------------------------------
 Actual semantic_status and/or taxonomy_status/destination corrections
-(as opposed to reason-text-only changes):
+(as opposed to reason-text-only changes). This count and the Section 3
+count below were mechanically re-derived by diffing commit 8260433
+against its parent field-by-field; see
+PHASE2_TRANCHE1_QA_COUNT_VERIFICATION.txt for the full derivation. The
+originally published counts here (7 / 3) miscategorized the four
+hip-policy rows below as classification corrections; they are reason-
+text-only changes and have been moved to Section 3.
 
   torso pipe b l 1c:
     taxonomy_status CLEAR -> NEEDS_CONTEXT
@@ -47,36 +53,8 @@ Actual semantic_status and/or taxonomy_status/destination corrections
     proposed_destination groupFile/Legs -> [blank]
     (semantic_status CLEAR, confidence Medium both retained)
 
-  bone_lefthipbuffer (hip-policy resolution):
-    taxonomy_status: was blank/blocked -> CLEAR
-    proposed_destination: was blank/blocked -> groupFile/Legs
-
-  bip hipfront r (hip-policy resolution):
-    taxonomy_status: was blank/blocked -> CLEAR
-    proposed_destination: was blank/blocked -> groupFile/Legs
-
-  bip_hip_r_1 (hip-policy resolution):
-    taxonomy_status: was blank/blocked -> CLEAR
-    proposed_destination: was blank/blocked -> groupFile/Legs
-
-  hip base right (hip-policy resolution):
-    taxonomy_status: was blank/blocked -> CLEAR
-    proposed_destination: was blank/blocked -> groupFile/Legs
-
-Note: the four hip-policy rows above were CLEAR/CLEAR/groupFile/Legs
-already in the raw ledger at the time of the prior QA pass (the "blank/
-blocked" language reflects that their destination was not authorized
-for use until the policy question was resolved, not that the ledger
-field was literally empty) -- no taxonomy_status or destination value
-actually changed on these four rows; only their referent/short_reason
-text was rewritten to reflect the settled Rule 26 rationale in place of
-the earlier ungrounded reasoning. They are listed here for completeness
-per the task's request to document the hip-policy resolution alongside
-the QA corrections, and are cross-referenced in
-PHASE2_HIP_POLICY_RECONCILIATION_REPORT.txt Section 6.
-
 ----------------------------------------------------------------------
-3. METADATA/REASON-ONLY CORRECTIONS (3 rows)
+3. METADATA/REASON-ONLY CORRECTIONS (7 rows)
 ----------------------------------------------------------------------
 No semantic_status, taxonomy_status, or proposed_destination change --
 referent/confidence/uncertainty_reason/short_reason only:
@@ -89,6 +67,20 @@ referent/confidence/uncertainty_reason/short_reason only:
     "on_waist_bunnytaile"/"bip_BunnyTail" precedent in place of the
     earlier genre-assumption language. Destination retained at
     groupFile/Clothing.
+
+  bone_lefthipbuffer, bip hipfront r, bip_hip_r_1, hip base right
+    (hip-policy resolution rows): these four were already CLEAR/CLEAR/
+    groupFile/Legs in the raw ledger at the time of the prior QA pass --
+    the destination was simply not authorized for use in the applied
+    calibration/production output until the Rule 26 policy question was
+    resolved. Resolving the policy changed no taxonomy_status or
+    proposed_destination value on any of the four; only their
+    semantic_referent/short_reason text was rewritten to state the
+    settled Rule 26 rationale in place of the earlier reasoning (which
+    had left them unauthorized/pending rather than grounded). They are
+    therefore metadata/reason-only corrections, not classification
+    corrections, and are cross-referenced in
+    PHASE2_HIP_POLICY_RECONCILIATION_REPORT.txt Section 6.
 
 ----------------------------------------------------------------------
 4. REVIEWED-NO-CHANGE ROWS (9, unchanged, listed for audit completeness)
