@@ -620,6 +620,30 @@ remains authoritative.
     first instance encountered in a batch -- consistency across an entire
     batch is part of the rule, not an afterthought.
 
+26. SETTLED: HIP/PELVIS BOUNDARY -- CENTRAL/UNSIDED VS. EXPLICITLY SIDED.
+    A central/unsided hip-pelvis structural control (a bare "hip",
+    "hip.base", "hip.root", or equivalent single unsided pelvis anchor)
+    goes to Body -- it behaves as pelvis/torso structure.
+    An explicitly LEFT/RIGHT-sided hip JOINT/ARTICULATION control goes to
+    Legs -- it is the proximal articulation of that side's leg, and
+    belongs with the leg controls from an animator-facing workflow
+    perspective. Qualifiers such as "helper"/"buffer"/"front"/"base" or a
+    numeric suffix do not by themselves change this destination when the
+    primary owner is still a clearly left/right structural hip joint.
+    This rule is NARROW. Do not generalize it into "any L/R + hip token
+    -> Legs." Stronger semantic ownership/purpose still overrides it:
+      - buttock/ass/butt remains Body regardless of any side marker;
+      - an explicit hip/butt shape or size morph remains Body Morphs
+        (rule 7);
+      - a garment-owned hip control remains Clothing;
+      - an explicit repair/correction purpose remains Correctives
+        (rules 2-5 still govern -- side markers and the qualifiers above
+        do not themselves establish or defeat a corrective reading);
+      - a hip phrase that is not plainly a structural hip-pelvis/hip-joint
+        control (e.g. mixed with another named region, or otherwise
+        non-structural) is resolved by ordinary context rules, not by
+        this rule.
+
 ==============================================================================
 END OF SETTLED RULES. Anything not covered above is an open question --
 apply rule 22 to determine semantic_status and rule 12 to determine

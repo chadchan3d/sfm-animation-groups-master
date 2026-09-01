@@ -1,0 +1,168 @@
+======================================================================
+PHASE 2 -- HIP/PELVIS TAXONOMY POLICY RECONCILIATION
+Resolves the single Tranche 1 QA blocker reported in
+PHASE2_PRODUCTION_TRANCHE1_QA_REPORT.txt Section 2.
+======================================================================
+
+----------------------------------------------------------------------
+1. THE ORIGINAL CONFLICT
+----------------------------------------------------------------------
+The finalized calibration contained two side-qualified plain-hip rows,
+both routed to Body:
+  bip_r_hip  -> groupFile/Body   (CLEAR/CLEAR)
+  l hip spo  -> groupFile/Body   (CLEAR/CLEAR)
+
+The live Master's own existing precedent for word-boundary "hip" splits
+cleanly by side-qualification:
+  Bare/unsided forms -- 4/4 -> groupFile/Body:
+    hip, Hip, hip.base, hip.root
+  Explicitly sided forms -- 6/6 -> groupFile/Legs:
+    hip.l, hip.r, Ab-L-Hip, Ab-L-Hip-Reg, Ab-R-Hip, Ab-R-Hip-Reg
+
+The two calibration rows are both side-qualified yet both landed on
+Body, directly contradicting the Master's own sided-hip convention.
+Four production rows inherited this same ambiguity and were blocked
+rather than resolved in either direction during the targeted QA pass.
+
+----------------------------------------------------------------------
+2. LIVE-MASTER EVIDENCE (CENTRAL VS. SIDED)
+----------------------------------------------------------------------
+See Section 1 above for the exact counts. The split is total and
+unambiguous within the Master's own data: every unsided hip literal is
+Body, every sided hip literal (of this structural kind) is Legs. No
+sided-hip Master literal was found routed to Body, and no unsided-hip
+Master literal was found routed to Legs.
+
+----------------------------------------------------------------------
+3. ANIMATOR-FACING RATIONALE
+----------------------------------------------------------------------
+A central/unsided hip control behaves as a single pelvis/torso anchor
+-- there is only one of it, it has no leg-specific counterpart, and it
+functions as body/torso structure. An explicitly left- or right-sided
+hip JOINT is, from an animator's workflow perspective, the proximal
+end of that side's leg chain -- the same way a shoulder is grouped with
+the arm it articulates rather than with the torso, a sided hip belongs
+with that side's leg controls. This mirrors the Master's own existing,
+self-consistent split and gives animators a single predictable place to
+find "the hip control for the left/right leg" alongside the rest of
+that leg's rig.
+
+----------------------------------------------------------------------
+4. EXACT NARROW RULE ADOPTED
+----------------------------------------------------------------------
+Recorded as Rule 26 in both PHASE2_SEMANTIC_RULEBOOK_FINAL.txt and
+PHASE2_SEMANTIC_BATCH_RULES.txt (identical text, keeping the two files
+byte-synchronized as they have been since the original freeze commit --
+see Section 7 below):
+
+  Central/unsided hip-pelvis structure -> Body.
+  Explicitly left/right-sided hip joint/articulation -> Legs.
+  Helper/buffer/front/base qualifiers and numeric suffixes do not by
+  themselves change this destination.
+  NARROW: does not generalize to "any L/R + hip token -> Legs."
+  Explicit overrides preserved: buttock/ass/butt -> Body regardless of
+  side marker; hip/butt shape or size morph -> Body Morphs; garment-
+  owned hip control -> Clothing; explicit repair/correction purpose ->
+  Correctives; any hip phrase that is not plainly a structural hip-
+  pelvis/hip-joint control is resolved by ordinary context rules.
+
+----------------------------------------------------------------------
+5. CALIBRATION ROWS CORRECTED (2)
+----------------------------------------------------------------------
+Both corrected in PHASE2_SEMANTIC_PILOT_500_FINAL.tsv (and mirrored
+identically into ledger rows 1-500). semantic_status and taxonomy_status
+kept CLEAR/CLEAR on both, per instruction -- only proposed_destination
+and the referent/reason text changed.
+
+  bip_r_hip:
+    proposed_destination: groupFile/Body -> groupFile/Legs
+    semantic_referent: "right hip" -> "right hip joint/articulation
+      (explicitly sided)"
+    short_reason: "plain anatomical term" -> "explicitly right-sided hip
+      joint/articulation -- proximal articulation of the right leg
+      (hip/pelvis boundary rule)"
+
+  l hip spo:
+    proposed_destination: groupFile/Body -> groupFile/Legs
+    semantic_referent: "left hip, \"spo\" (likely \"spare\")" -> "left
+      hip joint/articulation, \"spo\" (likely \"spare\"); the explicit
+      left-side hip owner is not overridden by \"spo\""
+    short_reason: "hip is the explicit anatomical referent" ->
+      "explicitly left-sided hip joint/articulation -- proximal
+      articulation of the left leg (hip/pelvis boundary rule); \"spo\"
+      does not override the explicit side-qualified hip owner"
+
+No other calibration row was altered. Verified mechanically: all other
+498 calibration rows remain field-identical to the pre-correction
+FINAL.tsv; calibration semantic_status and taxonomy_status distributions
+are unchanged (397/44/59 and 372/69/0/59 respectively) -- only the
+destination distribution changed (2 rows moved from Body to Legs within
+the already-CLEAR taxonomy bucket).
+
+----------------------------------------------------------------------
+6. BLOCKED PRODUCTION ROWS RESOLVED (4)
+----------------------------------------------------------------------
+All four now CLEAR/groupFile/Legs, per the narrow rule -- none of the
+technical qualifiers present (buffer, front, base, numbering, bip_)
+was treated as Correctives evidence or as overriding the sided-hip
+owner:
+
+  bone_lefthipbuffer:
+    taxonomy_status: CLEAR (unchanged) | proposed_destination:
+      groupFile/Legs (was blank pending policy)
+    semantic_referent -> "left hip-region structural helper (\"buffer\"),
+      explicitly sided"
+
+  bip hipfront r:
+    taxonomy_status: CLEAR (unchanged) | proposed_destination:
+      groupFile/Legs (was blank pending policy)
+    semantic_referent -> "right hip-region structural control, front
+      aspect, explicitly sided"
+
+  bip_hip_r_1:
+    taxonomy_status: CLEAR (unchanged) | proposed_destination:
+      groupFile/Legs (was blank pending policy)
+    semantic_referent -> "right hip joint/articulation, numbered
+      variant, explicitly sided" (near-identical pattern to the
+      corrected calibration row bip_r_hip)
+
+  hip base right:
+    taxonomy_status: CLEAR (unchanged) | proposed_destination:
+      groupFile/Legs (was blank pending policy)
+    semantic_referent -> "right hip-region structural base control,
+      explicitly sided"
+
+----------------------------------------------------------------------
+7. EXCLUSIONS / OVERRIDE CASES -- NOT CHANGED
+----------------------------------------------------------------------
+  leg left hip: already groupFile/Legs; the literal explicitly names
+    "leg" as the owning object independent of the sided-hip rule. Not
+    touched.
+  right_hip_cancel_end: already groupFile/Legs on independent grounding
+    ("cancel" is a recognized leg-chain rotation-isolation rig feature).
+    The new narrow rule agrees with this row's existing destination (no
+    contradiction), so it was left unchanged rather than re-derived.
+  koshiplus_d__offset: unsided ("koshi" carries no left/right marker) --
+    outside the scope of this rule; already Body, unchanged.
+  hips clip adjust (Correctives), thick hips / hip growth (Body Morphs),
+    valvebiped.hip_l_ulna (Arms, dominant "Ulna" anatomy): each
+    independently grounded by a different rule (Correctives purpose,
+    explicit shape/size word, dominant competing anatomy); none is a
+    plain structural hip-joint case and none was touched.
+  Buttock/ass/butt controls: no production or calibration row in this
+    tranche was reclassified on the basis of a "leg"-adjacent prefix;
+    the rule's explicit override preserves buttock -> Body regardless
+    of any side marker, and no row required applying that override in
+    this pass (none existed in the audited set).
+
+----------------------------------------------------------------------
+8. RULEBOOK / BATCH-RULES SYNC
+----------------------------------------------------------------------
+PHASE2_SEMANTIC_RULEBOOK_FINAL.txt and PHASE2_SEMANTIC_BATCH_RULES.txt
+were confirmed byte-identical before this change (established at the
+original freeze commit, which installed the final rulebook into the
+live batch-rules file verbatim). The new Rule 26 was appended
+identically to both files, preserving that synchronization -- verified
+byte-identical again after the edit. Nothing else in either file was
+restructured or rewritten.
+======================================================================

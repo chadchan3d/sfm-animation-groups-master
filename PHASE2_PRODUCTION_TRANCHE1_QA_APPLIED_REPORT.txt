@@ -1,0 +1,130 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 1 -- QA APPLIED REPORT
+Records every ledger correction actually applied following the
+PHASE2_PRODUCTION_TRANCHE1_QA_REPORT.txt / _QA_CHANGES_REVIEW.txt
+proposals and the hip-policy reconciliation
+(PHASE2_HIP_POLICY_RECONCILIATION_REPORT.txt). The earlier QA report
+and changes-review files are preserved unchanged as audit history; this
+report documents what was actually written to the ledger/calibration.
+
+Total rows touched: 13 (2 calibration + 11 production).
+======================================================================
+
+----------------------------------------------------------------------
+1. CALIBRATION CLASSIFICATION CORRECTIONS (2 rows)
+----------------------------------------------------------------------
+Applied to PHASE2_SEMANTIC_PILOT_500_FINAL.tsv and mirrored identically
+into ledger rows 1-500. Full detail in
+PHASE2_HIP_POLICY_RECONCILIATION_REPORT.txt Section 5.
+
+  bip_r_hip   : groupFile/Body -> groupFile/Legs (CLEAR/CLEAR retained)
+  l hip spo   : groupFile/Body -> groupFile/Legs (CLEAR/CLEAR retained)
+
+----------------------------------------------------------------------
+2. PRODUCTION CLASSIFICATION CORRECTIONS (7 rows)
+----------------------------------------------------------------------
+Actual semantic_status and/or taxonomy_status/destination corrections
+(as opposed to reason-text-only changes):
+
+  torso pipe b l 1c:
+    taxonomy_status CLEAR -> NEEDS_CONTEXT
+    proposed_destination groupFile/Body -> [blank]
+    confidence Medium -> High
+
+  torso pipe b l 2c:
+    taxonomy_status CLEAR -> NEEDS_CONTEXT
+    proposed_destination groupFile/Body -> [blank]
+    confidence Medium -> High
+
+  levator03_r:
+    semantic_status CLEAR -> PARTIAL
+    taxonomy_status CLEAR -> NEEDS_CONTEXT
+    proposed_destination groupFile/Face/Lower Face -> [blank]
+    confidence Medium -> Low
+
+  shiri_l__slerp_momo_l__i50_x0__offset:
+    taxonomy_status CLEAR -> NEEDS_CONTEXT
+    proposed_destination groupFile/Legs -> [blank]
+    (semantic_status CLEAR, confidence Medium both retained)
+
+  bone_lefthipbuffer (hip-policy resolution):
+    taxonomy_status: was blank/blocked -> CLEAR
+    proposed_destination: was blank/blocked -> groupFile/Legs
+
+  bip hipfront r (hip-policy resolution):
+    taxonomy_status: was blank/blocked -> CLEAR
+    proposed_destination: was blank/blocked -> groupFile/Legs
+
+  bip_hip_r_1 (hip-policy resolution):
+    taxonomy_status: was blank/blocked -> CLEAR
+    proposed_destination: was blank/blocked -> groupFile/Legs
+
+  hip base right (hip-policy resolution):
+    taxonomy_status: was blank/blocked -> CLEAR
+    proposed_destination: was blank/blocked -> groupFile/Legs
+
+Note: the four hip-policy rows above were CLEAR/CLEAR/groupFile/Legs
+already in the raw ledger at the time of the prior QA pass (the "blank/
+blocked" language reflects that their destination was not authorized
+for use until the policy question was resolved, not that the ledger
+field was literally empty) -- no taxonomy_status or destination value
+actually changed on these four rows; only their referent/short_reason
+text was rewritten to reflect the settled Rule 26 rationale in place of
+the earlier ungrounded reasoning. They are listed here for completeness
+per the task's request to document the hip-policy resolution alongside
+the QA corrections, and are cross-referenced in
+PHASE2_HIP_POLICY_RECONCILIATION_REPORT.txt Section 6.
+
+----------------------------------------------------------------------
+3. METADATA/REASON-ONLY CORRECTIONS (3 rows)
+----------------------------------------------------------------------
+No semantic_status, taxonomy_status, or proposed_destination change --
+referent/confidence/uncertainty_reason/short_reason only:
+
+  oris04_l: semantic_referent tightened (no longer asserts the specific
+    muscle "orbicularis-oris"; states the mouth-region reading only).
+  oris06_l: same correction as oris04_l.
+  bunnytail: confidence Medium -> High; uncertainty_reason cleared;
+    referent/short_reason rewritten to cite the live-Master
+    "on_waist_bunnytaile"/"bip_BunnyTail" precedent in place of the
+    earlier genre-assumption language. Destination retained at
+    groupFile/Clothing.
+
+----------------------------------------------------------------------
+4. REVIEWED-NO-CHANGE ROWS (9, unchanged, listed for audit completeness)
+----------------------------------------------------------------------
+  bone134_l_hoho4_joint, koshiplus_d__offset, lkakato01n,
+  flm-armb-float-a2, flm-armb-float-a4, flm-armb-float-b6,
+  leg left hip, right_hip_cancel_end, plus the independently-grounded
+  group (hips clip adjust, thick hips, hip growth,
+  valvebiped.hip_l_ulna) noted in the QA report Section 2/6.
+Full reasoning for each is in PHASE2_PRODUCTION_TRANCHE1_QA_REPORT.txt
+and PHASE2_PRODUCTION_TRANCHE1_QA_CHANGES_REVIEW.txt (unchanged, kept as
+audit history).
+
+----------------------------------------------------------------------
+5. VALIDATION RESULTS (mechanical, from the actual written files)
+----------------------------------------------------------------------
+final_row_count_500:                          PASS
+final_other_498_identical:                    PASS
+final_2_corrected:                            PASS
+final_fold_key_sequence_identical:            PASS
+ledger_row_count_1500:                        PASS
+ledger_first_500_matches_corrected_final:     PASS
+ledger_production_order_unchanged:            PASS
+ledger_fold_key_unchanged_everywhere:         PASS
+ledger_exact_spellings_unchanged_everywhere:  PASS
+ledger_batch_id_unchanged_everywhere:         PASS
+ledger_zero_duplicates:                       PASS
+ledger_rule21_global:                         PASS
+ledger_all_destinations_valid:                PASS
+no_position_1501_plus:                        PASS
+calibration_semantic_status_distribution_unchanged:  PASS
+calibration_taxonomy_status_distribution_unchanged:  PASS
+
+ALL CHECKS: PASS
+
+Raw batch files PHASE2_PRODUCTION_BATCH_P01_501_600.tsv through
+_P10_1401_1500.tsv were NOT modified -- they remain the historical raw-
+classification record, unaffected by this QA application.
+======================================================================

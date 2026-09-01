@@ -110,7 +110,7 @@ bip01_r_thigh011	Bip01_R_Thigh011	CLEAR	right thigh, numbered sub-bone	CLEAR	gro
 bip01_spine2_002	Bip01_Spine2_002	CLEAR	spine, numbered sub-bone	CLEAR	groupFile/Body	High		explicit anatomical/biped spine (Bip01/DEF-/bip_/SK_ rig prefixes, no object-owner noun present)	2	1154
 bip_bobby_l_finger_globe_2_02	Bip_BOBBY_L_Finger_Globe_2_02	PARTIAL	"left-hand finger area (per-character ""Bobby"" rig), ""globe"" qualifier unclear"	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium		"Primary owner (finger) is reliable; the ""globe"" qualifier remains genuinely undecoded, so semantic_status is PARTIAL while taxonomy is CLEAR."	2	10566
 bip_l_index_03	bip_l_index_03	CLEAR	left index finger, segment 03	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		standard finger convention	2	2494
-bip_r_hip	bip_r_hip	CLEAR	right hip	CLEAR	groupFile/Body	High		plain anatomical term	2	1351
+bip_r_hip	bip_r_hip	CLEAR	right hip joint/articulation (explicitly sided)	CLEAR	groupFile/Legs	High		explicitly right-sided hip joint/articulation -- proximal articulation of the right leg (hip/pelvis boundary rule)	2	1351
 bip_tail_d_02	bip_tail_d_02	CLEAR	tail, chain segment d-02	CLEAR	groupFile/Tail	High		explicit tail chain	2	22110
 bobcut.rear_left_3_jiggle	Bobcut.Rear_Left_3_jiggle	CLEAR	Bobcut hairstyle, rear-left jiggle-physics bone	CLEAR	groupFile/Hair	High		named hairstyle convention	2	10860
 body-r-nipple-pull	Body-R-Nipple-Pull	CLEAR	"right nipple ""pull"" morph"	CLEAR	groupFile/Body Morphs	High		explicit body-morph nipple control	2	10952
@@ -354,7 +354,7 @@ jacket.neck_right	Jacket.Neck_Right	CLEAR	jacket, neck area, right	CLEAR	groupFi
 jiggle05	Jiggle05	CLEAR	a jiggle/secondary-motion bone, object unspecified	NEEDS_CONTEXT		High		Jiggle function is clear; no owning object is named, so taxonomy is NEEDS_CONTEXT.	4	15801
 kunai	Kunai	CLEAR	a kunai (throwing-knife weapon prop)	CLEAR	groupFile/Other	High		recognized prop/weapon/equipment, existing Other precedent	4	16061
 l dlip b	L Dlip B	PARTIAL	"a lip-related control, left, exact action (""Dlip"") unclear"	CLEAR	groupFile/Face/Lower Face	Medium		"Primary owner (lip) is reliable; the exact action (""Dlip"") remains genuinely undecoded, so semantic_status is PARTIAL while taxonomy is CLEAR."	4	5333
-l hip spo	L Hip Spo	CLEAR	"left hip, ""spo"" (likely ""spare"")"	CLEAR	groupFile/Body	High		hip is the explicit anatomical referent	4	16092
+l hip spo	L Hip Spo	CLEAR	"left hip joint/articulation, ""spo"" (likely ""spare""); the explicit left-side hip owner is not overridden by ""spo"""	CLEAR	groupFile/Legs	High		"explicitly left-sided hip joint/articulation -- proximal articulation of the left leg (hip/pelvis boundary rule); ""spo"" does not override the explicit side-qualified hip owner"	4	16092
 l string1 tip sec	l string1 tip sec	CLEAR	a string/cord accessory, left, segment 1, tip, secondary physics bone	NEEDS_CONTEXT		High		String is a single stable core object with no named garment owner; taxonomy is NEEDS_CONTEXT.	4	26386
 l_horselink	l_horselink	PARTIAL	"a bilateral model-specific ""horselink"" control, left; exact meaning of ""horselink"" unresolved"	NEEDS_CONTEXT		Low	"the corpus confirms a coherent bilateral naming pair (l_horselink/r_horselink, and bip01_l_horselink/bip01_r_horselink), proving the name is systematic, but this does not decode what ""horselink"" refers to"	"A confirmed bilateral naming pair (l_horselink/r_horselink; bip01_l_horselink/bip01_r_horselink) shows the name is systematic, but the compound ""horselink"" itself does not resolve to a known object, function, or ordinary semantic relation; semantic_status is PARTIAL and taxonomy remains NEEDS_CONTEXT."	4	26497
 leg back toes right	leg back toes right	CLEAR	right leg, back toes	CLEAR	groupFile/Toes/RightToes	High		explicit toe control	4	26611
@@ -511,7 +511,7 @@ l_thumb1b_00001	l_thumb1b_00001	CLEAR	left thumb segment 1b	CLEAR	groupFile/Arms
 bottle4_liquid	bottle4_liquid	CLEAR	bottle prop with liquid effect, variant 4	CLEAR	groupFile/Other	High		recognized handheld/prop item	P01	
 front bar 5_2	Front bar 5_2	PARTIAL	"a ""bar"" object, front position, numbered"	NEEDS_CONTEXT		Low	"""bar"" has materially different core readings (mechanical linkage / prop / furniture / weapon part) with no anchor word"	bare ambiguous object noun, no owner	P01	
 lshoulderjb	LShoulderJb	CLEAR	"left shoulder control (""Jb"" suffix mechanism unresolved)"	CLEAR	groupFile/Arms	Medium		shoulder is the stable core reading; undecoded suffix does not change destination	P01	
-torso pipe b l 1c	torso pipe B L 1c	CLEAR	"torso region rig chain/""pipe"" control, variant B L 1c"	CLEAR	groupFile/Body	Medium	"exact chain/deformation mechanism of ""pipe"" unresolved, but torso anchors the region"	torso-anchored rig control, mechanism unstated	P01	
+torso pipe b l 1c	torso pipe B L 1c	CLEAR	"a ""pipe"" attached to the torso, left side, variant 1c"	NEEDS_CONTEXT		High	"exact chain/deformation mechanism of ""pipe"" unresolved, but torso anchors the region"	"""Pipe"" names a single stable core object (a tube/conduit); only its exact mechanical purpose and mounting are unresolved (matches the finalized calibration precedent for torso pipe B R 1a)."	P01	
 head hat wardpaper 2	head hat wardpaper 2	CLEAR	hat (worn headwear), unclear pattern/texture qualifier, variant 2	CLEAR	groupFile/Clothing	Medium	"""wardpaper"" does not resolve to a known word"	hat is the clear worn-object referent	P01	
 object39	Object39	OPAQUE	generic placeholder object name, no referent	NOT_APPLICABLE		Low	"numbered generic ""Object"" placeholder with no functional/regional word"	no interpretable content	P01	
 strings 1	strings 1	PARTIAL	"""strings"", numbered, no anchor"	NEEDS_CONTEXT		Low	materially different core readings: clothing drawstrings / instrument strings / physics jiggle strands / puppet strings	bare ambiguous object noun, no owner	P01	
@@ -757,7 +757,7 @@ valvebiped.hip_l_ulna	ValveBiped.Hip_L_Ulna	CLEAR	ulna (forearm bone), left	CLEA
 eyes-look-left	eyes-look-left	CLEAR	eye gaze direction, left	CLEAR	groupFile/Face/Eyes	High		ordinary eye control	P03	
 butt armor right	butt armor right	CLEAR	buttock armor, right	CLEAR	groupFile/Clothing	High		worn protective equipment	P03	
 facial_bone_uprlip	Facial_Bone_UprLip	CLEAR	facial bone, upper lip	CLEAR	groupFile/Face/Lower Face	High		lip-region facial anatomy	P03	
-bone_lefthipbuffer	bone_LeftHipbuffer	CLEAR	left hip buffer/spacing bone	CLEAR	groupFile/Legs	Medium		ordinary hip-region structural helper, not corrective by itself (rule 4)	P03	
+bone_lefthipbuffer	bone_LeftHipbuffer	CLEAR	"left hip-region structural helper (""buffer""), explicitly sided"	CLEAR	groupFile/Legs	Medium		"explicitly left-sided structural hip control; ""buffer"" is a technical helper qualifier that does not change the destination from the sided hip owner (hip/pelvis boundary rule)"	P03	
 bip01_l_toe4	Bip01_L_Toe4	CLEAR	left toe, digit 4	CLEAR	groupFile/Toes/LeftToes	High		explicit left toe digit, verified LeftToes subpath	P03	
 wep_gl_sight	WEP_GL_Sight	CLEAR	weapon grenade-launcher sight	CLEAR	groupFile/Other	High		recognized weapon part	P03	
 beltcontrol.009	BeltControl.009	CLEAR	belt garment control, variant 009	CLEAR	groupFile/Clothing	High		worn garment	P03	
@@ -796,7 +796,7 @@ key.white_47	Key.White_47	CLEAR	numbered slot in the coherent Key.White keyboard
 bip_l_thumb_03	bip_l_thumb_03	CLEAR	left thumb, segment 03	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit left finger digit, verified LeftFingers subpath	P03	
 left index finger 1 expansion 1	Left index finger 1 expansion 1	CLEAR	left index finger, expansion variant 1	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		"finger-class content despite ""expansion"" qualifier; not corrective by itself (rule 5)"	P03	
 drowsyl	DrowsyL	CLEAR	drowsy/sleepy eye expression, left	CLEAR	groupFile/Face/Eyes	High		ordinary eye expression	P03	
-bip hipfront r	bip hipfront r	CLEAR	hip front, right	CLEAR	groupFile/Legs	Medium		ordinary hip-region anatomy	P03	
+bip hipfront r	bip hipfront r	CLEAR	right hip-region structural control, front aspect, explicitly sided	CLEAR	groupFile/Legs	Medium		"explicitly right-sided structural hip control; ""front"" is a positional qualifier that does not change the destination from the sided hip owner (hip/pelvis boundary rule)"	P03	
 valvebiped.bip01_l_index04	ValveBiped.Bip01_L_Index04	CLEAR	left index finger, segment 4	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit left finger digit, verified LeftFingers subpath	P03	
 dummy_dec_gen_wagon_caravan_b	Dummy_DEC_GEN_Wagon_Caravan_B	CLEAR	a wagon/caravan dummy/helper, variant B	CLEAR	groupFile/Other	High		matches sibling wagon/caravan prop control	P03	
 unused b_l_legohelper	unused b_l_legohelper	CLEAR	self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared unused marker (rule 15)	P04	
@@ -1003,7 +1003,7 @@ bld_gen_circus_tent_big_a_top_a_mesh	BLD_GEN_Circus_Tent_Big_A_Top_A_Mesh	CLEAR	
 helena head eyeball right	Helena head eyeball right	CLEAR	"right eyeball (""Helena"" character-name prefix)"	CLEAR	groupFile/Face/Eyes	High		eye anatomy; prefix ignored (rule 24)	P06	
 bone_bed_09	bone_bed_09	CLEAR	a bed, segment 09	CLEAR	groupFile/Other	High		recognized furniture prop (rule 16)	P06	
 bone 1108	bone 1108	OPAQUE	generic numbered bone, no functional/regional word	NOT_APPLICABLE		Low		generic numbered technical bone	P06	
-oris04_l	oris04_L	CLEAR	orbicularis-oris mouth-region muscle, left, segment 04	CLEAR	groupFile/Face/Lower Face	Medium	"""oris"" read as the Latin mouth-muscle term (orbicularis oris)"	mouth-region facial anatomy	P06	
+oris04_l	oris04_L	CLEAR	"mouth-region facial muscle (Latin ""oris"" = mouth); the specific named muscle (e.g. orbicularis oris vs. levator/depressor anguli oris) is not established by the bare token alone"	CLEAR	groupFile/Face/Lower Face	Medium	"""oris"" read as the Latin mouth-muscle term (orbicularis oris)"	mouth-region facial anatomy	P06	
 leg right knee adjust b	leg right knee adjust b	CLEAR	right knee adjustment control, variant b	CLEAR	groupFile/Legs	High		ordinary knee anatomy	P06	
 alarm	alarm	CLEAR	an alarm device	CLEAR	groupFile/Other	Medium		recognized prop/device	P06	
 helper_forearm_r	helper_forearm_R	CLEAR	right forearm helper	CLEAR	groupFile/Arms	High		ordinary arm anatomy, not corrective by itself (rule 4)	P06	
@@ -1052,7 +1052,7 @@ right_shoulder_c	right_shoulder_C	CLEAR	right shoulder, variant c	CLEAR	groupFil
 l_elbow_twist_a_helper	l_elbow_twist_a_helper	CLEAR	left elbow twist helper	CLEAR	groupFile/Arms	High		ordinary twist/helper anatomy, not corrective by itself (rules 3-4)	P06	
 key.e	Key.E	CLEAR	a lettered key in the coherent Key.<label> keyboard-prop series	CLEAR	groupFile/Other	High		matches the confirmed Key.A/Key.B-style series (rule 23)	P06	
 pantsthin	Pantsthin	CLEAR	"pants garment, ""thin"" fit"	CLEAR	groupFile/Clothing	High		garment-owned shape/fit control (rule 8)	P06	
-bip_hip_r_1	bip_hip_r_1	CLEAR	hip, right, variant 1	CLEAR	groupFile/Legs	Medium		ordinary hip-region anatomy	P06	
+bip_hip_r_1	bip_hip_r_1	CLEAR	right hip joint/articulation, numbered variant, explicitly sided	CLEAR	groupFile/Legs	Medium		explicitly right-sided hip joint/articulation, near-identical pattern to the corrected calibration row bip_r_hip (hip/pelvis boundary rule)	P06	
 eyeballs-left	Eyeballs-Left	CLEAR	eyeballs, left	CLEAR	groupFile/Face/Eyes	High		ordinary eye anatomy	P06	
 neutral2	neutral2	CLEAR	a neutral/default state control, variant 2 (scope unstated)	NEEDS_CONTEXT		Low		neutral/reset function is clear; whether it scopes to face, body, or elsewhere is unstated	P06	
 prf_rinko_costume_1_aos	prf_rinko_costume_1_aos	CLEAR	"costume, variant 1 (""Rinko"" character-name prefix)"	CLEAR	groupFile/Clothing	High		"explicit ""costume"" content grounds this regardless of the prefix"	P06	
@@ -1065,7 +1065,7 @@ leg left boot tassle 3b	leg left boot tassle 3b	CLEAR	boot tassel, left leg, var
 cc_backtoe1.r	cc_backtoe1.r	CLEAR	back toe, right, segment 1	CLEAR	groupFile/Toes/RightToes	High		explicit right toe digit, verified RightToes subpath	P06	
 bone 1000	bone 1000	OPAQUE	generic numbered bone, no functional/regional word	NOT_APPLICABLE		Low		generic numbered technical bone	P06	
 ass1	Ass1	CLEAR	buttock (structural anatomy), numbered	CLEAR	groupFile/Body	High		plain structural anatomy, no shape/state word (rule 6)	P06	
-hip base right	Hip base right	CLEAR	hip base, right	CLEAR	groupFile/Legs	High		ordinary hip-region anatomy	P06	
+hip base right	Hip base right	CLEAR	right hip-region structural base control, explicitly sided	CLEAR	groupFile/Legs	High		"explicitly right-sided structural hip control; ""base"" is a positional qualifier that does not change the destination from the sided hip owner (hip/pelvis boundary rule)"	P06	
 unusedbone_3a item_ffx_x-2_rikku_by_xxkammyxx	unusedbone_3A item_FFX_X-2_Rikku_By_xXKammyXx	CLEAR	self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared unused marker (rule 15)	P06	
 robe_right	ROBE_RIGHT	CLEAR	robe garment, right	CLEAR	groupFile/Clothing	High		worn garment	P06	
 canine_tail1	Canine_Tail1	CLEAR	"tail, segment 1 (""Canine"" creature prefix)"	CLEAR	groupFile/Tail	High		species-neutral tail anatomy	P06	
@@ -1145,7 +1145,7 @@ i16	I16	OPAQUE	ungrounded code	NOT_APPLICABLE		Low		ungrounded abbreviation, no 
 bip_l_finger_c_02	bip_l_finger_c_02	CLEAR	left finger, variant c, segment 02	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit left finger digit, verified LeftFingers subpath	P07	
 eyes-full-furrow-inward	Eyes-Full-Furrow-Inward	CLEAR	full eye furrow, inward	CLEAR	groupFile/Face/Eyes	High		ordinary eye expression	P07	
 leg left hip	leg left hip	CLEAR	hip, left	CLEAR	groupFile/Legs	High		ordinary hip-region anatomy	P07	
-shiri_l__slerp_momo_l__i50_x0__offset	shiri_l__slerp_momo_l__i50_x0__offset	CLEAR	"buttock/thigh (Japanese ""shiri""/""momo"") interpolation blend control, left"	CLEAR	groupFile/Legs	Medium	"relies on Japanese anatomical-term recognition (shiri=buttock, momo=thigh); ""slerp"" is a pure interpolation technique, not a stated repair purpose"	ordinary structural hip/thigh blend control	P07	
+shiri_l__slerp_momo_l__i50_x0__offset	shiri_l__slerp_momo_l__i50_x0__offset	CLEAR	"a rotation-interpolation (""slerp"") blend control between the buttock (""shiri"") and the thigh (""momo""), left side, index 50, offset -- both named regions are structurally real but neither is established as the sole owner"	NEEDS_CONTEXT		Medium	"relies on Japanese anatomical-term recognition (shiri=buttock, momo=thigh); ""slerp"" is a pure interpolation technique, not a stated repair purpose"	"two-region compound (buttock + thigh) blended by a named interpolation technique; owning object not established by the relation alone. The ""slerp"" technique name is retained as NOT establishing corrective purpose by itself, consistent with the numbering/twist/roll/DEF- caution -- that part of the original reasoning is unchanged and correct."	P07	
 key.a	Key.A	CLEAR	a lettered key in the coherent Key.<label> keyboard-prop series	CLEAR	groupFile/Other	High		matches the confirmed Key.A/Key.B series (rule 23)	P07	
 sidehair_r_1	sidehair_R_1	CLEAR	side hair, right, segment 1	CLEAR	groupFile/Hair	High		ordinary hair control	P07	
 flex_thin_top	Flex_THIN_TOP+Flex_Thin_Top	OPAQUE	"generic ""flex"" category term combined with an ambiguous ""top"" qualifier"	NOT_APPLICABLE		Low	"""flex"" names the generic technical category of all morph controls; ""top"" does not resolve to one dominant sense"	generic technical category term plus ambiguous qualifier, no specific object	P07	
@@ -1216,7 +1216,7 @@ blade.l	Blade.L	CLEAR	a blade weapon, left	CLEAR	groupFile/Other	High		recognize
 wep_bullet6_shell	WEP_Bullet6_Shell	CLEAR	weapon bullet shell, variant 6	CLEAR	groupFile/Other	High		recognized weapon/ammunition part	P08	
 left_3	left_3	OPAQUE	pure positional phrase, no object/function named	NOT_APPLICABLE		Low		positional label with no object/function	P08	
 fh15.l	Fh15.L	OPAQUE	ungrounded two-letter code plus number, left	NOT_APPLICABLE		Low	"a possible ""forehead"" abbreviation reading is not grounded enough to assert"	ungrounded abbreviation	P08	
-levator03_r	levator03_R	CLEAR	levator muscle (mouth/cheek elevator), right, numbered	CLEAR	groupFile/Face/Lower Face	Medium		recognized facial-muscle anatomical term	P08	
+levator03_r	levator03_R	PARTIAL	"a ""levator"" (lifting/elevating) muscle, right, numbered; target organ/region not established by the bare word (levator muscles occur at the mouth, eyelid, neck/shoulder, and pelvic floor with materially different implications)"	NEEDS_CONTEXT		Low	"""levator"" is a generic elevator-muscle function word used across multiple unrelated regions (facial, eyelid, neck, pelvic floor); no target-organ qualifier is present in the literal, and the Master contains zero precedent for bare ""levator"""	generic lifting-muscle term with no region qualifier; competing core readings across body regions	P08	
 l_front_holster_0u_13v	l_front_holster_0u_13v	CLEAR	holster, left, front	CLEAR	groupFile/Clothing	High		worn-equipment holster default (rule 16)	P08	
 window	Window	CLEAR	a window	CLEAR	groupFile/Other	High		recognized environment prop	P08	
 rough_small_1	rough_small_1	OPAQUE	bare texture/size descriptors, no object at all	NOT_APPLICABLE		Low		no anchor object for the descriptive terms	P08	
@@ -1349,7 +1349,7 @@ bip01 forearmtwist.l	Bip01 ForearmTwist.L	CLEAR	left forearm twist	CLEAR	groupFi
 bip_balls1_r	bip_Balls1_r	CLEAR	testicle (structural anatomy), right, numbered	CLEAR	groupFile/Body	High		plain structural anatomy, no shape/state word (rule 6)	P09	
 wheel_2.rotate	Wheel_2.Rotate	CLEAR	a wheel, rotate function, variant 2	CLEAR	groupFile/Other	High		recognized vehicle/mechanism part	P09	
 spike_01_m	Spike_01_M	CLEAR	spike accessory, variant 01_M, no owner	NEEDS_CONTEXT		Medium		spike names its theme, not its mount/owner (rule 25)	P09	
-oris06_l	oris06_L	CLEAR	orbicularis-oris mouth-region muscle, left, segment 06	CLEAR	groupFile/Face/Lower Face	Medium	"""oris"" read as the Latin mouth-muscle term (orbicularis oris)"	mouth-region facial anatomy	P09	
+oris06_l	oris06_L	CLEAR	"mouth-region facial muscle (Latin ""oris"" = mouth); the specific named muscle (e.g. orbicularis oris vs. levator/depressor anguli oris) is not established by the bare token alone"	CLEAR	groupFile/Face/Lower Face	Medium	"""oris"" read as the Latin mouth-muscle term (orbicularis oris)"	mouth-region facial anatomy	P09	
 valvebiped.bip01_l_ear01	ValveBiped.Bip01_L_Ear01	CLEAR	left ear	CLEAR	groupFile/Face/Ears	High		ordinary ear anatomy	P09	
 head face	head face	CLEAR	"bare face reference (""head"" location prefix)"	CLEAR	groupFile/Face	High		bare structural face defaults to the bare Face group (rule 13/24 pattern)	P09	
 x_shift_11	x_shift_11	CLEAR	a positional shift along the X axis, variant 11 (object unstated)	NEEDS_CONTEXT		Low		generic shift function is clear; owning object is not named	P09	
@@ -1412,7 +1412,7 @@ sidehair_l_2	sidehair_L_2	CLEAR	side hair, left, segment 2	CLEAR	groupFile/Hair	
 bip01_r_clavicle002	Bip01_R_Clavicle002	CLEAR	right clavicle, numbered sub-bone 002	CLEAR	groupFile/Arms	High		clavicle/shoulder-girdle anatomy	P10	
 assfatshorts	AssFatShorts	CLEAR	"buttock ""fat"" shape, shorts context"	CLEAR	groupFile/Body Morphs	Medium		soft-tissue shape descriptor is the primary subject; shorts is only the triggering context (rule 8)	P10	
 r_front_holster_0u_5v	r_front_holster_0u_5v	CLEAR	holster, right, front	CLEAR	groupFile/Clothing	High		worn-equipment holster default (rule 16)	P10	
-torso pipe b l 2c	torso pipe B L 2c	CLEAR	"torso region rig chain/""pipe"" control, variant B L 2c"	CLEAR	groupFile/Body	Medium	"exact chain/deformation mechanism of ""pipe"" unresolved, but torso anchors the region"	torso-anchored rig control, mechanism unstated	P10	
+torso pipe b l 2c	torso pipe B L 2c	CLEAR	"a ""pipe"" attached to the torso, left side, variant 2c"	NEEDS_CONTEXT		High	"exact chain/deformation mechanism of ""pipe"" unresolved, but torso anchors the region"	"""Pipe"" names a single stable core object (a tube/conduit); only its exact mechanical purpose and mounting are unresolved (matches the finalized calibration precedent for torso pipe B R 1a)."	P10	
 belly side back left 1	belly side back left 1	CLEAR	belly, side, back, left (structural), variant 1	CLEAR	groupFile/Body	Medium		plain structural anatomy, no shape/state word (rule 6)	P10	
 head cheeck right 2	head cheeck right 2	CLEAR	cheek, right, segment 2	CLEAR	groupFile/Face/Mid Face	High	"""cheeck"" read as ""cheek"""	mid-face cheek anatomy	P10	
 plant 2	Plant 2	CLEAR	a plant, variant 2	CLEAR	groupFile/Other	High		recognized environment prop	P10	
@@ -1428,7 +1428,7 @@ llegj	LLegJ	CLEAR	"left leg (""J"" suffix unresolved)"	CLEAR	groupFile/Legs	Medi
 cloth front right 2	cloth front right 2	CLEAR	generic cloth control, front, right, variant 2	CLEAR	groupFile/Clothing	High		generic cloth control	P10	
 masktop1.r	MaskTop1.R	CLEAR	mask top, right, variant 1	CLEAR	groupFile/Clothing	High		worn accessory	P10	
 bot_right	BOT_RIGHT	PARTIAL	"a ""bot,"" right, no anchor"	NEEDS_CONTEXT		Low	materially different core readings: bottom-position truncation / robot / other	bare ambiguous truncated term, no owner	P10	
-bunnytail	BunnyTail	CLEAR	bunny-tail costume accessory	CLEAR	groupFile/Clothing	Medium	an actual creature-tail anatomical reading cannot be fully excluded	recognized costume accessory item, common in this genre	P10	
+bunnytail	BunnyTail	CLEAR	"bunny-tail costume accessory, worn on the waist (matches the Master's own ""on_waist_bunnytaile"" and ""bip_BunnyTail"" precedent for this exact fold family)"	CLEAR	groupFile/Clothing	High		"live-Master precedent for this exact fold family (bip_BunnyTail, on_waist_bunnytaile x3) routes to Clothing, with ""on_waist_"" as explicit positive evidence of a worn/attached costume item -- not a genre assumption"	P10	
 shape-athletic-nude	shape-athletic-nude	CLEAR	athletic-shape appearance, nude context	CLEAR	groupFile/Body Morphs	High		matches established shape-athletic-cleavage precedent exactly	P10	
 eyeshrink	EyeShrink	CLEAR	eye size shrink	CLEAR	groupFile/Body Morphs	Medium		eye size/shape change is an appearance morph, not ordinary posing	P10	
 lipstopforward	lipstopforward	CLEAR	lips top, forward	CLEAR	groupFile/Face/Lower Face	High		identical spelling to confirmed existing Master control	P10	

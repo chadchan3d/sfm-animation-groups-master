@@ -1,0 +1,229 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 1 -- QA PROPOSED CHANGES REVIEW
+Proposed-change set only. PHASE2_SEMANTIC_LEDGER.tsv was NOT modified.
+No commit was made. Application is blocked pending resolution of the
+Category D hip-policy question (see PHASE2_PRODUCTION_TRANCHE1_QA_
+REPORT.txt Section 2).
+======================================================================
+
+----------------------------------------------------------------------
+CATEGORY A -- ACTUAL CLASSIFICATION CORRECTIONS (4 rows)
+----------------------------------------------------------------------
+
+FOLD KEY: torso pipe b l 1c
+EXACT SPELLINGS (unchanged): torso pipe B L 1c
+  taxonomy_status:
+    OLD: CLEAR
+    NEW: NEEDS_CONTEXT
+  proposed_destination:
+    OLD: groupFile/Body
+    NEW: [NONE]
+  confidence:
+    OLD: Medium
+    NEW: High
+  semantic_referent:
+    OLD: torso region rig chain/"pipe" control, variant B L 1c
+    NEW: a "pipe" attached to the torso, left side, variant 1c
+  short_reason:
+    OLD: torso-anchored rig control, mechanism unstated
+    NEW: "Pipe" names a single stable core object (a tube/conduit); only its exact mechanical purpose and mounting are unresolved (matches the finalized calibration precedent for torso pipe B R 1a).
+  semantic_status (unchanged): CLEAR
+
+----------------------------------------------------------------------
+FOLD KEY: torso pipe b l 2c
+EXACT SPELLINGS (unchanged): torso pipe B L 2c
+  taxonomy_status:
+    OLD: CLEAR
+    NEW: NEEDS_CONTEXT
+  proposed_destination:
+    OLD: groupFile/Body
+    NEW: [NONE]
+  confidence:
+    OLD: Medium
+    NEW: High
+  semantic_referent:
+    OLD: torso region rig chain/"pipe" control, variant B L 2c
+    NEW: a "pipe" attached to the torso, left side, variant 2c
+  short_reason:
+    OLD: torso-anchored rig control, mechanism unstated
+    NEW: "Pipe" names a single stable core object (a tube/conduit); only its exact mechanical purpose and mounting are unresolved (matches the finalized calibration precedent for torso pipe B R 1a).
+  semantic_status (unchanged): CLEAR
+
+----------------------------------------------------------------------
+FOLD KEY: levator03_r
+EXACT SPELLINGS (unchanged): levator03_R
+  semantic_status:
+    OLD: CLEAR
+    NEW: PARTIAL
+  taxonomy_status:
+    OLD: CLEAR
+    NEW: NEEDS_CONTEXT
+  proposed_destination:
+    OLD: groupFile/Face/Lower Face
+    NEW: [NONE]
+  confidence:
+    OLD: Medium
+    NEW: Low
+  semantic_referent:
+    OLD: levator muscle (mouth/cheek elevator), right, numbered
+    NEW: a "levator" (lifting/elevating) muscle, right, numbered; target organ/region not established by the bare word (levator muscles occur at the mouth, eyelid, neck/shoulder, and pelvic floor with materially different implications)
+  uncertainty_reason:
+    OLD: [NONE]
+    NEW: "levator" is a generic elevator-muscle function word used across multiple unrelated regions (facial, eyelid, neck, pelvic floor); no target-organ qualifier is present in the literal, and the Master contains zero precedent for bare "levator"
+  short_reason:
+    OLD: recognized facial-muscle anatomical term
+    NEW: generic lifting-muscle term with no region qualifier; competing core readings across body regions
+
+----------------------------------------------------------------------
+FOLD KEY: shiri_l__slerp_momo_l__i50_x0__offset
+EXACT SPELLINGS (unchanged): shiri_l__slerp_momo_l__i50_x0__offset
+  taxonomy_status:
+    OLD: CLEAR
+    NEW: NEEDS_CONTEXT
+  proposed_destination:
+    OLD: groupFile/Legs
+    NEW: [NONE]
+  semantic_referent:
+    OLD: buttock/thigh (Japanese "shiri"/"momo") interpolation blend control, left
+    NEW: a rotation-interpolation ("slerp") blend control between the buttock ("shiri") and the thigh ("momo"), left side, index 50, offset -- both named regions are structurally real but neither is established as the sole owner
+  short_reason:
+    OLD: ordinary structural hip/thigh blend control
+    NEW: two-region compound (buttock + thigh) blended by a named interpolation technique; owning object not established by the relation alone. The "slerp" technique name is retained as NOT establishing corrective purpose by itself, consistent with the numbering/twist/roll/DEF- caution -- that part of the original reasoning is unchanged and correct.
+  semantic_status (unchanged): CLEAR
+  confidence (unchanged): Medium
+
+----------------------------------------------------------------------
+CATEGORY B -- METADATA/REASON-ONLY CORRECTIONS (3 rows)
+----------------------------------------------------------------------
+
+FOLD KEY: oris04_l
+EXACT SPELLINGS (unchanged): oris04_L
+  semantic_referent:
+    OLD: orbicularis-oris mouth-region muscle, left, segment 04
+    NEW: mouth-region facial muscle (Latin "oris" = mouth); the specific named muscle (e.g. orbicularis oris vs. levator/depressor anguli oris) is not established by the bare token alone
+  short_reason (unchanged): mouth-region facial anatomy
+  semantic_status (unchanged): CLEAR
+  taxonomy_status (unchanged): CLEAR
+  proposed_destination (unchanged): groupFile/Face/Lower Face
+  confidence (unchanged): Medium
+
+----------------------------------------------------------------------
+FOLD KEY: oris06_l
+EXACT SPELLINGS (unchanged): oris06_L
+  semantic_referent:
+    OLD: orbicularis-oris mouth-region muscle, left, segment 06
+    NEW: mouth-region facial muscle (Latin "oris" = mouth); the specific named muscle (e.g. orbicularis oris vs. levator/depressor anguli oris) is not established by the bare token alone
+  short_reason (unchanged): mouth-region facial anatomy
+  semantic_status (unchanged): CLEAR
+  taxonomy_status (unchanged): CLEAR
+  proposed_destination (unchanged): groupFile/Face/Lower Face
+  confidence (unchanged): Medium
+
+----------------------------------------------------------------------
+FOLD KEY: bunnytail
+EXACT SPELLINGS (unchanged): BunnyTail
+  semantic_referent:
+    OLD: bunny-tail costume accessory
+    NEW: bunny-tail costume accessory, worn on the waist (matches the Master's own "on_waist_bunnytaile" and "bip_BunnyTail" precedent for this exact fold family)
+  confidence:
+    OLD: Medium
+    NEW: High
+  uncertainty_reason:
+    OLD: an actual creature-tail anatomical reading cannot be fully excluded
+    NEW: [NONE]
+  short_reason:
+    OLD: recognized costume accessory item, common in this genre
+    NEW: live-Master precedent for this exact fold family (bip_BunnyTail, on_waist_bunnytaile x3) routes to Clothing, with "on_waist_" as explicit positive evidence of a worn/attached costume item -- not a genre assumption
+  semantic_status (unchanged): CLEAR
+  taxonomy_status (unchanged): CLEAR
+  proposed_destination (unchanged): groupFile/Clothing
+
+----------------------------------------------------------------------
+CATEGORY C -- REVIEWED, NO CHANGE (9 rows)
+----------------------------------------------------------------------
+
+FOLD KEY: bone134_l_hoho4_joint  (exact_spellings: bone134_L_Hoho4_Joint)
+VERDICT: REVIEWED -- NO CHANGE
+REASON: Japanese "hoho" (cheek) is unambiguous with no competing anatomical
+sense; groupFile/Face/Mid Face is well-supported. Current fields retained
+as-is (CLEAR/CLEAR/groupFile/Face/Mid Face/Medium).
+
+FOLD KEY: koshiplus_d__offset  (exact_spellings: koshiplus_d__offset)
+VERDICT: REVIEWED -- NO CHANGE
+REASON: Japanese "koshi" (hip/waist/lower back) carries no side qualifier
+and is not part of the sided-hip Body-vs-Legs conflict in Section 2;
+current Body destination is consistent with the bare/unqualified-hip
+precedent. Current fields retained as-is (CLEAR/CLEAR/groupFile/Body/Medium).
+
+FOLD KEY: lkakato01n  (exact_spellings: LKakato01N)
+VERDICT: REVIEWED -- NO CHANGE
+REASON: Japanese "kakato" (heel) is unambiguous; Legs is the largest
+genuinely-anatomical group in the Master's mixed "heel" precedent, and
+this literal carries no clothing/shoe qualifier. Current fields retained
+as-is (CLEAR/CLEAR/groupFile/Legs/Medium).
+
+FOLD KEY: flm-armb-float-a2  (exact_spellings: Flm-ArmB-Float-A2)
+VERDICT: REVIEWED -- NO CHANGE
+REASON: independently re-verified -- the sibling Flm-ArmA namespace
+contains Foot-L/R, Leg-L/R, Neck*, SwordA (a weapon), Back1/2, and
+Crotch, confirming "ArmA"/"ArmB" are internal section labels, not
+anatomical arm designators. Existing CLEAR/NEEDS_CONTEXT/blank/Low
+retained as-is.
+
+FOLD KEY: flm-armb-float-a4  (exact_spellings: Flm-ArmB-Float-A4)
+VERDICT: REVIEWED -- NO CHANGE
+REASON: same as flm-armb-float-a2.
+
+FOLD KEY: flm-armb-float-b6  (exact_spellings: Flm-ArmB-Float-B6)
+VERDICT: REVIEWED -- NO CHANGE
+REASON: same as flm-armb-float-a2.
+
+FOLD KEY: leg left hip  (exact_spellings: leg left hip)
+VERDICT: REVIEWED -- NO CHANGE
+REASON: reviewed as part of the Section 2 hip audit, but NOT part of the
+blocker -- the literal explicitly names "leg" as the owning object,
+independent grounding the bare side-qualified rows lack. Current
+CLEAR/CLEAR/groupFile/Legs/High retained as-is.
+
+FOLD KEY: right_hip_cancel_end  (exact_spellings: right_hip_cancel_end)
+VERDICT: REVIEWED -- NO CHANGE
+REASON: reviewed as part of the Section 2 hip audit, but NOT part of the
+blocker -- "cancel" identifies a recognized leg-chain rotation-isolation
+rig feature, independent of the bare side-qualified hip-naming question.
+Current CLEAR/CLEAR/groupFile/Legs/High retained as-is.
+
+FOLD KEY: hips clip adjust / thick hips / hip growth / valvebiped.hip_l_ulna
+VERDICT: REVIEWED -- NO CHANGE (grouped; each independently grounded)
+REASON: "hips clip adjust" -> Correctives (explicit clipping-correction
+purpose); "thick hips" and "hip growth" -> Body Morphs (explicit shape/
+size descriptor); "valvebiped.hip_l_ulna" -> Arms (dominant "Ulna"
+forearm anatomy overrides the spurious "Hip" token). None is implicated
+by the sided-hip Body-vs-Legs conflict.
+
+----------------------------------------------------------------------
+CATEGORY D -- UNRESOLVED BLOCKER (4 rows, 1 policy question)
+----------------------------------------------------------------------
+See PHASE2_PRODUCTION_TRANCHE1_QA_REPORT.txt Section 2 for full evidence.
+No fields changed. Ledger application blocked pending an explicit
+Body-vs-Legs reconciliation decision for side-qualified plain "hip".
+
+FOLD KEY: bone_lefthipbuffer  (exact_spellings: bone_LeftHipbuffer)
+  current: CLEAR / CLEAR / groupFile/Legs / High
+  BLOCKED: could be corrected to Body (matching calibration's sided-hip
+  precedent) or retained at Legs (matching the Master's own hip.l/hip.r/
+  Ab-L-Hip/Ab-R-Hip precedent) -- these two authorities conflict.
+
+FOLD KEY: bip hipfront r  (exact_spellings: bip hipfront r)
+  current: CLEAR / CLEAR / groupFile/Legs / High
+  BLOCKED: same conflict as above.
+
+FOLD KEY: bip_hip_r_1  (exact_spellings: bip_hip_r_1)
+  current: CLEAR / CLEAR / groupFile/Legs / High
+  BLOCKED: same conflict as above; this is the sharpest instance, since
+  its token pattern (bip_hip_r_1) near-mirrors the calibration row
+  bip_r_hip token-for-token, aside from ordering and a trailing index.
+
+FOLD KEY: hip base right  (exact_spellings: Hip base right)
+  current: CLEAR / CLEAR / groupFile/Legs / High
+  BLOCKED: same conflict as above.
+======================================================================
