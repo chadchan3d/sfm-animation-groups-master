@@ -1,0 +1,128 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 1 -- CONSISTENCY AUDIT
+Positions 501-1500 (1,000 production families)
+Flag-only audit per Section 12. No ledger rows were changed during
+this audit.
+======================================================================
+
+----------------------------------------------------------------------
+MECHANICAL CHECKS (automated, zero findings)
+----------------------------------------------------------------------
+- Rule 21 biconditional (OPAQUE iff NOT_APPLICABLE): 0 violations across
+  all 1,000 production rows.
+- OPAQUE rows asserting an unhedged "likely/probably/presumably" guess
+  in semantic_referent: 0 found.
+- short_reason invoking a rejection phrase ("merely plausible", "not
+  grounded", "ungrounded", "no grounding") while semantic_status is not
+  OPAQUE: 0 found.
+- proposed_destination = Correctives without repair/fix/correct/JCM
+  language anywhere in fold_key/exact_spellings/referent/short_reason:
+  0 found (all 6 Correctives rows carry explicit "fix"/"correct"/"JCM"
+  language: urethrabulgefixdown, spine_bone_correct_l_01,
+  pjcmabdomen2fwd40, hips clip adjust, leg fix side 90 l,
+  leg_bone_correct_l_01).
+- Self-declared "unused" literals not routed to Useless: 0 found (all
+  33 self-declared-unused production rows route to groupFile/Useless).
+- Recurring-term destination consistency, spot-checked across the full
+  1,000-row set:
+    bare/unqualified "collar" (l collar 01, collar right 3) -> Arms,
+      consistently, both instances
+    qualified collar (cloth_collar_1_l, island_collar_*_wind_helper,
+      collar.ring, bip_clockcollar_l) -> Clothing, consistently, all
+      4 instances
+    bare "fin"/"tenta(cle)" (9 instances total) -> Other, consistently,
+      all 9 instances
+    Key.Black_N / Key.White_N / Key.<letter> / Page<N>_<letter> series
+      -> Other, consistently, across every instance in the tranche
+
+----------------------------------------------------------------------
+FLAG 1 -- FOREIGN/LATIN ANATOMICAL-TERM RECOGNITION RELIES ON MODEL
+KNOWLEDGE, NOT CORPUS GROUNDING
+----------------------------------------------------------------------
+Several rows were classified by recognizing a non-English or Latin
+anatomical term rather than by corpus-internal grounding (no sibling
+series or Master precedent was checked for these specific words):
+
+  canonical_position 1005  oris04_l        -> Face/Lower Face (Latin
+                                              "oris", orbicularis oris)
+  canonical_position 1218  levator03_r     -> Face/Lower Face (Latin
+                                              "levator" muscle)
+  canonical_position 1351  oris06_l        -> Face/Lower Face (same
+                                              "oris" reading)
+  canonical_position 1147  shiri_l__slerp_momo_l__i50_x0__offset
+                                            -> Legs (Japanese "shiri"=
+                                              buttock, "momo"=thigh)
+  canonical_position 1207  bone134_l_hoho4_joint
+                                            -> Face/Mid Face (Japanese
+                                              "hoho"=cheek)
+  canonical_position 1211  koshiplus_d__offset
+                                            -> Body (Japanese "koshi"=
+                                              hip/waist/lower back)
+  canonical_position 581 (calibration-adjacent precedent, prior tranche)
+                                              lkakato01n -> Legs
+                                              (Japanese "kakato"=heel)
+
+Why review is warranted: this is a real and defensible pattern (these
+are genuine dictionary/anatomical terms, not speculative abbreviation
+guesses under rule 23), but it is a different evidentiary basis than
+the corpus-grounding standard used elsewhere in this tranche, and it
+was applied by the same judge who classified everything else, so it
+has not been independently checked. All were marked confidence Medium
+(not High) specifically to reflect this. No change is recommended
+without a second opinion on the specific terms.
+
+----------------------------------------------------------------------
+FLAG 2 -- "TORSO PIPE" AND "FLM-ARMB-FLOAT" READINGS ARE INFERENTIAL,
+NOT DIRECTLY STATED
+----------------------------------------------------------------------
+  canonical_position 513   torso pipe b l 1c   -> Body (Medium)
+  canonical_position 1414  torso pipe b l 2c   -> Body (Medium)
+  canonical_position 836, 860, 1076  Flm-ArmB-Float-*  -> NEEDS_CONTEXT (Low)
+
+"Pipe" in the torso-pipe rows was read as a rig chain/spline-deformer
+term based on general rigging convention, not confirmed against this
+Master or corpus. "ArmB" in the Flm-Arm* family was read as an internal
+model-section label (not anatomical arm) based on one sibling control
+(Flm-ArmA-SwordA-G, a weapon) rather than a systematically verified
+naming key. Both readings are internally consistent with each other
+(all Flm-ArmA/ArmB instances in this tranche were classified the same
+way throughout) but rest on a single anchor example rather than broad
+corpus confirmation. Flagged for awareness; no change recommended
+without further evidence.
+
+----------------------------------------------------------------------
+FLAG 3 -- HIP-REGION VS. BUTTOCK-REGION SPLIT BETWEEN LEGS AND BODY
+----------------------------------------------------------------------
+Across this tranche and the prior one, bare "hip" (the joint/socket
+region) consistently routed to Legs (leg left hip, bip hipfront r,
+bip_hip_r_1, hip base right, right_hip_cancel_end), while "buttock"/
+"ass"/"butt" (even when prefixed with "leg", e.g. "leg left buttock",
+"leg left butt 2") consistently routed to Body. This is a defensible
+anatomical distinction (the hip joint is part of the leg's proximal
+articulation; the buttock is torso/pelvis soft tissue), and it was
+applied consistently in both directions with no exceptions found. Not
+treated as an error, but recorded here since a "leg"-prefixed literal
+being split across two different top-level groups depending on the
+specific body part named is worth a reviewer's awareness.
+
+----------------------------------------------------------------------
+FLAG 4 -- "BUNNYTAIL" (POSITION 1430) COULD BE ANATOMY INSTEAD OF
+COSTUME
+----------------------------------------------------------------------
+Classified CLEAR/CLEAR/Clothing/Medium as a costume accessory (a
+"bunny tail" cosplay item), on the strength of that compound being a
+very common costume-accessory term in this content genre. An actual
+creature-tail-anatomy reading (if the source model is an anthropomorphic
+rabbit) cannot be excluded from the literal alone. Flagged for
+awareness; left as classified.
+
+----------------------------------------------------------------------
+NO OTHER FLAGS
+----------------------------------------------------------------------
+No instance was found of: structural anatomy misrouted to Body Morphs,
+a true shape/state morph misrouted to Body, twist/roll/helper naming
+treated as Correctives, an OPAQUE row retaining an asserted semantic
+guess, a CLEAR/PARTIAL boundary error under the frozen rule 22 test, or
+an object-owned control split inconsistently across two batches for the
+same recurring term.
+======================================================================

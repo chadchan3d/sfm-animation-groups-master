@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	canonical_position
+bas.left_2	BAS.Left_2	OPAQUE	"ungrounded ""BAS"" code with a bare position, no object"	NOT_APPLICABLE		Low	"""BAS"" has no grounding and ""left"" alone has no anchor object"	ungrounded prefix plus bare position	P08	1201
+bone middle 07	bone middle 07	OPAQUE	generic bone with a positional adjective, no functional/regional word	NOT_APPLICABLE		Low		generic numbered technical bone	P08	1202
+upperlipslift	UpperLipsLift	CLEAR	upper lip lift	CLEAR	groupFile/Face/Lower Face	High		ordinary lip expression control	P08	1203
+bip001-r-forearm	Bip001-R-Forearm	CLEAR	right forearm	CLEAR	groupFile/Arms	High		ordinary arm anatomy	P08	1204
+13	13	OPAQUE	bare number, no words at all	NOT_APPLICABLE		Low	a number alone carries no semantic content	no interpretable content	P08	1205
+v-open	V-Open	PARTIAL	"a ""V"" open function, no anchor"	NEEDS_CONTEXT		Low	"materially different core readings: a ""V"" viseme mouth-shape open vs. a vagina-open control"	unresolved abbreviation with competing readings	P08	1206
+bone134_l_hoho4_joint	bone134_L_Hoho4_Joint	CLEAR	"cheek (Japanese ""hoho""), left, joint"	CLEAR	groupFile/Face/Mid Face	Medium	relies on Japanese anatomical-term recognition (hoho=cheek)	mid-face anatomy	P08	1207
+l3rdnb	L3rdNb	OPAQUE	unclear fused compound, no confirmed decomposition	NOT_APPLICABLE		Low		ungrounded compound	P08	1208
+buttspread.r	ButtSpread.R	CLEAR	buttock spread, right	CLEAR	groupFile/Body Morphs	High		soft-tissue spread/state deformation	P08	1209
+arm left shoulder ctr 2	arm left shoulder ctr 2	CLEAR	left shoulder control, variant 2	CLEAR	groupFile/Arms	High		ordinary shoulder anatomy	P08	1210
+koshiplus_d__offset	koshiplus_d__offset	CLEAR	"hip/waist (Japanese ""koshi"") rig control, variant d, offset"	CLEAR	groupFile/Body	Medium	relies on Japanese anatomical-term recognition (koshi=hip/waist/lower back)	structural hip/waist region control	P08	1211
+spinec_helper	spinec_helper	CLEAR	spine (bare, no ownership evidence), variant c, helper	NEEDS_CONTEXT		Low		bare spine literal with no biped/rig prefix and no garment/hair noun (rule 14)	P08	1212
+cons_potion_healing_a_supreme_glass_mesh	CONS_Potion_Healing_A_Supreme_Glass_Mesh	CLEAR	a healing-potion glass vessel, supreme variant	CLEAR	groupFile/Other	High		matches established CONS_Potion_Healing prop pattern	P08	1213
+blade.l	Blade.L	CLEAR	a blade weapon, left	CLEAR	groupFile/Other	High		recognized weapon prop	P08	1214
+wep_bullet6_shell	WEP_Bullet6_Shell	CLEAR	weapon bullet shell, variant 6	CLEAR	groupFile/Other	High		recognized weapon/ammunition part	P08	1215
+left_3	left_3	OPAQUE	pure positional phrase, no object/function named	NOT_APPLICABLE		Low		positional label with no object/function	P08	1216
+fh15.l	Fh15.L	OPAQUE	ungrounded two-letter code plus number, left	NOT_APPLICABLE		Low	"a possible ""forehead"" abbreviation reading is not grounded enough to assert"	ungrounded abbreviation	P08	1217
+levator03_r	levator03_R	CLEAR	levator muscle (mouth/cheek elevator), right, numbered	CLEAR	groupFile/Face/Lower Face	Medium		recognized facial-muscle anatomical term	P08	1218
+l_front_holster_0u_13v	l_front_holster_0u_13v	CLEAR	holster, left, front	CLEAR	groupFile/Clothing	High		worn-equipment holster default (rule 16)	P08	1219
+window	Window	CLEAR	a window	CLEAR	groupFile/Other	High		recognized environment prop	P08	1220
+rough_small_1	rough_small_1	OPAQUE	bare texture/size descriptors, no object at all	NOT_APPLICABLE		Low		no anchor object for the descriptive terms	P08	1221
+leftlowerforearm_helper	LeftLowerForeArm_helper	CLEAR	left lower forearm helper	CLEAR	groupFile/Arms	High		ordinary arm anatomy, not corrective by itself (rule 4)	P08	1222
+m06	M06	OPAQUE	ungrounded code	NOT_APPLICABLE		Low		ungrounded abbreviation, no other content	P08	1223
+unusedhairroot1	unusedhairroot1	CLEAR	self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared unused marker (rule 15)	P08	1224
+bip01_r_thigh009	Bip01_R_Thigh009	CLEAR	right thigh, numbered sub-bone 009	CLEAR	groupFile/Legs	High		plain structural anatomy, numbering not corrective (rule 2)	P08	1225
+rib cage size	Rib cage Size	CLEAR	rib cage size	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor on the body	P08	1226
+shirt_exposed_tie_left_4	Shirt_Exposed_Tie_Left_4	CLEAR	shirt garment, exposed tie, left, variant 4	CLEAR	groupFile/Clothing	High		explicit garment name	P08	1227
+upper arm plate	Upper Arm Plate	CLEAR	arm armor plate	CLEAR	groupFile/Clothing	High		worn protective equipment, matches butt armor precedent	P08	1228
+tentacletopright1	TentacleTopRight1	CLEAR	tentacle, top right, segment 1	CLEAR	groupFile/Other	High		species-neutral tentacle anatomy routes to Other (rule 18)	P08	1229
+bone 1053	bone 1053	OPAQUE	generic numbered bone, no functional/regional word	NOT_APPLICABLE		Low		generic numbered technical bone	P08	1230
+hand_b_r	Hand_B_R	CLEAR	hand, variant b, right	CLEAR	groupFile/Arms	High		ordinary hand-structure anatomy	P08	1231
+rachel bun_3_jiggle	Rachel bun_3_jiggle	CLEAR	"hair bun, jiggle physics (""Rachel"" character-name prefix)"	CLEAR	groupFile/Hair	High		named hairstyle; prefix ignored (rule 24)	P08	1232
+hat-lengthen	hat-lengthen	CLEAR	"hat garment, ""lengthen"" fit"	CLEAR	groupFile/Clothing	High		garment-owned shape/fit control (rule 8)	P08	1233
+dec_hospital_skeleton_a_mesh	DEC_Hospital_Skeleton_A_Mesh	CLEAR	a hospital anatomy-skeleton prop, variant A	CLEAR	groupFile/Other	High		recognized prop; generator-style prefix does not affect destination (rule 17)	P08	1234
+corner down	Corner down	PARTIAL	"a ""corner,"" downward, no anchor"	NEEDS_CONTEXT		Low	materially different core readings: mouth corner / eye corner / room-furniture corner	bare ambiguous object noun, no owner	P08	1235
+crow_3.body	Crow_3.Body	CLEAR	"body (""Crow_3"" model prefix)"	CLEAR	groupFile/Body	High		bare structural body reference; prefix ignored (rule 24)	P08	1236
++right_footd	+right_footD	CLEAR	right foot, variant D	CLEAR	groupFile/Legs	High		ordinary foot anatomy	P08	1237
+nostril right	Nostril Right	CLEAR	nostril, right	CLEAR	groupFile/Face/Mid Face	High		mid-face anatomy	P08	1238
+grip.006	grip.006	CLEAR	a grip/handle component, variant 006	CLEAR	groupFile/Other	Medium		recognized handheld/weapon grip component	P08	1239
+pupils-glaresizesmall-r	Pupils-GlareSizeSmall-R	CLEAR	pupil glare size (small), right	CLEAR	groupFile/Face/Eyes	High		ordinary eye-shape control	P08	1240
+cube4	cube4	OPAQUE	generic default cube placeholder name, numbered	NOT_APPLICABLE		Low		generic DCC-default geometry placeholder, no functional/regional word	P08	1241
+weapon.frontright	Weapon.FrontRight	CLEAR	a weapon, front-right position	CLEAR	groupFile/Other	High		recognized weapon prop	P08	1242
+mainlidanger	MainLidAnger	CLEAR	angry eyelid expression	CLEAR	groupFile/Face/Eyes	High		ordinary eyelid expression	P08	1243
+left upperleg	Left UpperLeg	CLEAR	left upper leg	CLEAR	groupFile/Legs	High		ordinary leg anatomy	P08	1244
+bip01-neck001	Bip01-Neck001	CLEAR	neck (structural anatomy), numbered	CLEAR	groupFile/Body	High		plain structural anatomy, no shape/state word (rule 6)	P08	1245
+bip01-head001	Bip01-Head001	CLEAR	bare structural head, numbered sub-bone 001	CLEAR	groupFile/Body	High		bare structural head defaults to Body (rule 13)	P08	1246
+head left earring root	head left earring root	CLEAR	"earring, left, root (""head"" location prefix)"	CLEAR	groupFile/Clothing	High		worn jewelry accessory	P08	1247
+box20	Box20	CLEAR	a box, variant 20	CLEAR	groupFile/Other	High		recognized prop	P08	1248
+l_front_holster_0u_12v	l_front_holster_0u_12v	CLEAR	holster, left, front	CLEAR	groupFile/Clothing	High		worn-equipment holster default (rule 16)	P08	1249
+student.right_3_jiggle	Student.Right_3_jiggle	CLEAR	"a jiggle-physics function, right, variant 3, ""Student"" costume context (object unstated)"	NEEDS_CONTEXT		Low		jiggle function is clear; the theme prefix alone does not name a specific object	P08	1250
+arm right cloth 1a	arm right cloth 1a	CLEAR	generic cloth control, arm-mounted, right, variant 1a	CLEAR	groupFile/Clothing	High		generic cloth control	P08	1251
+lipscornersdown	LipsCornersDown	CLEAR	lip corners, downward	CLEAR	groupFile/Face/Lower Face	High		identical spelling to confirmed existing Master control	P08	1252
+cape_8_r	cape_8_R	CLEAR	cape garment, right, variant 8	CLEAR	groupFile/Clothing	High		worn garment	P08	1253
+island_collar_05_wind_helper	island_collar_05_wind_helper	CLEAR	garment collar, wind-physics helper, variant 05	CLEAR	groupFile/Clothing	Medium		wind-simulation context indicates fabric collar, not anatomy	P08	1254
+leg right boot tassle 2b	leg right boot tassle 2b	CLEAR	boot tassel, right leg, variant 2b	CLEAR	groupFile/Clothing	High		explicit garment owner (boot) named (rule 25)	P08	1255
+bip_scraft_r	bip_Scraft_R	CLEAR	a scarf garment, right	CLEAR	groupFile/Clothing	Medium	"""Scraft"" read as ""Scarf"""	worn garment	P08	1256
+jnt_112	jnt_112	OPAQUE	generic numbered joint, no functional/regional word	NOT_APPLICABLE		Low		generic numbered technical joint	P08	1257
+hitomi unusedmot01-head001	Hitomi unusedmot01-head001	CLEAR	"self-declared unused placeholder (""Hitomi"" character-name prefix)"	CLEAR	groupFile/Useless	High		self-declared unused marker takes priority (rule 15)	P08	1258
+first_loose_page4_m	First_Loose_Page4_M	CLEAR	"numbered slot in the coherent Page<N>_<letter> series, with ""First/Loose"" qualifiers"	CLEAR	groupFile/Other	Medium	additional qualifiers beyond the core confirmed series template	matches the confirmed Page-series template (rule 23)	P08	1259
+object010	Object010	OPAQUE	generic placeholder object name, no referent	NOT_APPLICABLE		Low		numbered generic placeholder	P08	1260
+toy_bone_07	toy_bone_07	CLEAR	a toy, segment 07	CLEAR	groupFile/Other	High		recognized prop	P08	1261
+bikini_15	Bikini_15	CLEAR	bikini garment, variant 15	CLEAR	groupFile/Clothing	High		worn garment	P08	1262
+lowerblinkr	lowerBlinkR	CLEAR	lower eyelid blink, right	CLEAR	groupFile/Face/Eyes	High		ordinary eyelid anatomy	P08	1263
+muscular arms	Muscular Arms	CLEAR	muscular arm appearance/definition	CLEAR	groupFile/Body Morphs	High		explicit appearance/state descriptor, matches Muscular Legs precedent	P08	1264
+lidopen	LIDOPEN	CLEAR	eyelid open	CLEAR	groupFile/Face/Eyes	High		ordinary eyelid anatomy	P08	1265
+limp_3	limp_3	PARTIAL	"""limp,"" numbered, no anchor"	NEEDS_CONTEXT		Low	materially different core readings: a limping gait/pose function vs. a flaccid/soft anatomical state	bare ambiguous term, no owner	P08	1266
+valvebiped.chainsaw	ValveBiped.chainsaw	CLEAR	a chainsaw	CLEAR	groupFile/Other	High		recognized weapon/tool prop	P08	1267
+left_lipcnrtwst	Left_LipCnrTwst	CLEAR	left lip corner twist	CLEAR	groupFile/Face/Lower Face	High	"""Cnr""/""Twst"" read as ""Corner""/""Twist"""	ordinary lip expression control	P08	1268
+key.white_12	Key.White_12	CLEAR	numbered slot in the coherent Key.White keyboard-prop series	CLEAR	groupFile/Other	High		confirmed coherent Key.White_N series (rule 23)	P08	1269
+lthe	Lthe	OPAQUE	ungrounded fragment	NOT_APPLICABLE		Low		ungrounded term, no other content	P08	1270
+dazer	DazeR	CLEAR	dazed/stunned expression, right	CLEAR	groupFile/Face/Expressions	Medium		whole-face expression state	P08	1271
+eyes-full-furrow	Eyes-Full-Furrow	CLEAR	full eye furrow	CLEAR	groupFile/Face/Eyes	High		ordinary eye expression	P08	1272
+opt_hand_left_thumb2	OPT_Hand_Left_Thumb2	CLEAR	left thumb, segment 2	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit left finger digit, verified LeftFingers subpath	P08	1273
+cockthick	CockThick	CLEAR	"penis, ""thick"" shape"	CLEAR	groupFile/Body Morphs	High		explicit shape descriptor on genital soft tissue	P08	1274
+beadhangfrontsmall a1	BeadHangFrontSmall A1	CLEAR	a small hanging-bead decoration, front, variant A1	CLEAR	groupFile/Clothing	Medium		decorative worn bead accessory	P08	1275
+f12	F12	OPAQUE	ungrounded code	NOT_APPLICABLE		Low		ungrounded abbreviation, no other content	P08	1276
+cloth_back_a_2	cloth_back_A_2	CLEAR	generic cloth control, back, variant A, segment 2	CLEAR	groupFile/Clothing	High		generic cloth control	P08	1277
+l_foot_00003	l_foot_00003	CLEAR	left foot, numbered	CLEAR	groupFile/Legs	High		ordinary foot anatomy	P08	1278
+key.i	Key.I	CLEAR	a lettered key in the coherent Key.<label> keyboard-prop series	CLEAR	groupFile/Other	High		matches the confirmed Key.A/Key.B series (rule 23)	P08	1279
+page4_d	Page4_D	CLEAR	numbered slot in the coherent Page<N>_<letter> series	CLEAR	groupFile/Other	High		confirmed coherent Page-series template (rule 23 explicit example)	P08	1280
+taurenmale_hd_bone_83	taurenmale_hd_bone_83	OPAQUE	a generic numbered bone in the TaurenMale_HD model/variant series; anatomical region/function unknown	NOT_APPLICABLE		Low	"the numbered suffix carries no anatomical specificity, and ""HD"" is an ungrounded model/variant tag with no confirmed anatomical meaning"	matches the settled TaurenMale_HD family treatment	P08	1281
+unused jnt-074	unused jnt-074	CLEAR	self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared unused marker (rule 15)	P08	1282
+gag_l_08	Gag_L_08	CLEAR	a mouth-gag restraint object, left, variant 08	CLEAR	groupFile/Clothing	Medium		worn/equipped restraint accessory, matches established gag pattern	P08	1283
+toplid_r4	toplid_R4	CLEAR	top eyelid, right, segment 4	CLEAR	groupFile/Face/Eyes	High		ordinary eyelid anatomy	P08	1284
+leftfinger04	LeftFinger04	CLEAR	left finger, digit 04	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit left finger digit, verified LeftFingers subpath	P08	1285
+thumbright2	ThumbRight2	CLEAR	right thumb, segment 2	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit right finger digit, verified RightFingers subpath	P08	1286
+lid lower - up	Lid Lower - Up	CLEAR	eyelid, lower, upward movement	CLEAR	groupFile/Face/Eyes	High		ordinary eyelid anatomy	P08	1287
+key.black_24	Key.Black_24	CLEAR	numbered slot in the coherent Key.Black keyboard-prop series	CLEAR	groupFile/Other	High		confirmed coherent Key.Black_N series (rule 23)	P08	1288
+glovesnoclaws	GlovesNoClaws	CLEAR	"gloves garment, ""no claws"" variant"	CLEAR	groupFile/Clothing	High		worn garment	P08	1289
+r_fin_mid_c	r_fin_mid_c	CLEAR	fin, right, middle, variant c	CLEAR	groupFile/Other	High		"species-neutral ""fin"" anatomy routes to Other by strong Master precedent"	P08	1290
+slate	Slate	PARTIAL	"a ""slate,"" no anchor"	NEEDS_CONTEXT		Low	materially different core readings: a film/director's slate (clapperboard) vs. a stone slate/tablet	bare ambiguous object noun, no owner	P08	1291
+book coverpage turn05	Book CoverPage Turn05	CLEAR	a book, cover-page turn function, variant 05	CLEAR	groupFile/Other	High		recognized prop (rule 16 explicit example)	P08	1292
+unused head.039	unused head.039	CLEAR	self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared unused marker (rule 15)	P08	1293
+shocked r	Shocked R	CLEAR	shocked expression, right	CLEAR	groupFile/Face/Expressions	High		whole-face expression state	P08	1294
+panties down 2	Panties down 2	CLEAR	panties garment, pulled-down state, variant 2	CLEAR	groupFile/Clothing	High		explicit garment name with a garment-owned pose/state	P08	1295
+eyes shocked	Eyes Shocked+Eyes shocked	CLEAR	shocked eye expression	CLEAR	groupFile/Face/Eyes	High		ordinary eye expression	P08	1296
+v_weapon.root99	v_weapon.Root99	CLEAR	viewmodel weapon root, numbered	CLEAR	groupFile/Other	High		recognized weapon part	P08	1297
+book turnpage1	Book TurnPage1	CLEAR	a book, turn-page function, variant 1	CLEAR	groupFile/Other	High		recognized prop (rule 16 explicit example)	P08	1298
+leg left butt 2	leg left butt 2	CLEAR	buttock (structural anatomy), left, numbered	CLEAR	groupFile/Body	Medium		plain structural anatomy, no shape/state word (rule 6)	P08	1299
+eye close mid l	Eye Close Mid L	CLEAR	eye close, mid, left	CLEAR	groupFile/Face/Eyes	High		ordinary eye expression	P08	1300

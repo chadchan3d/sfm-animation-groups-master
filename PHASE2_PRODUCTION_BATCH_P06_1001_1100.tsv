@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	canonical_position
+bld_gen_circus_tent_big_a_top_a_mesh	BLD_GEN_Circus_Tent_Big_A_Top_A_Mesh	CLEAR	a circus tent, big, variant A	CLEAR	groupFile/Other	High		recognized environment prop; generator-style prefix does not affect destination (rule 17)	P06	1001
+helena head eyeball right	Helena head eyeball right	CLEAR	"right eyeball (""Helena"" character-name prefix)"	CLEAR	groupFile/Face/Eyes	High		eye anatomy; prefix ignored (rule 24)	P06	1002
+bone_bed_09	bone_bed_09	CLEAR	a bed, segment 09	CLEAR	groupFile/Other	High		recognized furniture prop (rule 16)	P06	1003
+bone 1108	bone 1108	OPAQUE	generic numbered bone, no functional/regional word	NOT_APPLICABLE		Low		generic numbered technical bone	P06	1004
+oris04_l	oris04_L	CLEAR	orbicularis-oris mouth-region muscle, left, segment 04	CLEAR	groupFile/Face/Lower Face	Medium	"""oris"" read as the Latin mouth-muscle term (orbicularis oris)"	mouth-region facial anatomy	P06	1005
+leg right knee adjust b	leg right knee adjust b	CLEAR	right knee adjustment control, variant b	CLEAR	groupFile/Legs	High		ordinary knee anatomy	P06	1006
+alarm	alarm	CLEAR	an alarm device	CLEAR	groupFile/Other	Medium		recognized prop/device	P06	1007
+helper_forearm_r	helper_forearm_R	CLEAR	right forearm helper	CLEAR	groupFile/Arms	High		ordinary arm anatomy, not corrective by itself (rule 4)	P06	1008
+bipqwn lcalftwist	BipQwn LCalfTwist	CLEAR	"left calf twist (""Qwn"" character/model prefix)"	CLEAR	groupFile/Legs	High		ordinary twist bone; prefix ignored (rule 24)	P06	1009
+nyotengu head nostril left 1	Nyotengu head nostril left 1	CLEAR	"nostril, left, segment 1 (""Nyotengu"" character-name prefix)"	CLEAR	groupFile/Face/Mid Face	High		mid-face anatomy; prefix ignored (rule 24)	P06	1010
+legtoetip1_r	LegToeTip1_R	CLEAR	toe tip, right, segment 1	CLEAR	groupFile/Toes/RightToes	High		explicit right toe digit, verified RightToes subpath	P06	1011
+belt_r1	Belt_R1	CLEAR	belt garment, right, variant 1	CLEAR	groupFile/Clothing	High		worn garment	P06	1012
+l sideburn a phy	l sideburn a phy	CLEAR	sideburn (facial hair), left, physics-sim	CLEAR	groupFile/Hair	High		facial hair control	P06	1013
+leg left finger 2	leg left finger 2	CLEAR	"left foot digit, segment 2 (""finger"" used generically for a digit)"	CLEAR	groupFile/Toes/LeftToes	Medium	"""finger"" is generic digit terminology here; ""leg"" anchors it as a foot digit"	explicit leg-anchored digit, verified LeftToes subpath	P06	1014
+scale-up	scale-up	CLEAR	"a ""scale up"" size function (object unstated)"	NEEDS_CONTEXT		Low		generic scale function is clear; owning object is not named	P06	1015
+pad2_1	pad2_1	PARTIAL	"a ""pad,"" numbered, no anchor"	NEEDS_CONTEXT		Low	materially different core readings: muscle/anatomical pad / paw pad / cushioning object / shoulder-pad garment	bare ambiguous object noun, no owner	P06	1016
+bip01_r_hand016	Bip01_R_Hand016	CLEAR	right hand, numbered sub-bone 016	CLEAR	groupFile/Arms	High		ordinary hand-structure anatomy	P06	1017
+vwatch	Vwatch	CLEAR	a wristwatch	CLEAR	groupFile/Clothing	Medium		worn accessory, matches watch_face_helper precedent	P06	1018
+strap a 1	strap a 1	CLEAR	strap accessory, variant a, 1, no owner	NEEDS_CONTEXT		Medium		strap names its theme, not its mount/owner (rule 25)	P06	1019
+left_u_vag_1	left_u_vag_1	CLEAR	upper vaginal anatomy (structural), left, variant 1	CLEAR	groupFile/Body	Medium		"plain structural anatomy; ""upper"" is positional, not a shape/state word (rule 6)"	P06	1020
+box_kg_empty1	box_KG_empty1	CLEAR	an empty box container, variant 1	CLEAR	groupFile/Other	Medium		recognized container prop	P06	1021
+uppersnout_r	upperSnout_R	CLEAR	snout (creature nose/mouth), upper, right	CLEAR	groupFile/Face/Mid Face	High		species-neutral nose/snout anatomy	P06	1022
+cape_11_l	cape_11_L	CLEAR	cape garment, left, variant 11	CLEAR	groupFile/Clothing	High		worn garment	P06	1023
+outhouse_door001_reference	outhouse_door001_reference	CLEAR	an outhouse door, reference	CLEAR	groupFile/Other	High		recognized environment prop (rule 16 door example)	P06	1024
+bip01_l_thigh019	Bip01_L_Thigh019	CLEAR	left thigh, numbered sub-bone 019	CLEAR	groupFile/Legs	High		plain structural anatomy, numbering not corrective (rule 2)	P06	1025
+lipstopcurlin	lipstopcurlin	CLEAR	lips top, curl inward	CLEAR	groupFile/Face/Lower Face	High		identical spelling to confirmed existing Master control	P06	1026
+taz_l	Taz_L	OPAQUE	"generic tag, left (""Taz"" character-name prefix)"	NOT_APPLICABLE		Low	character-name prefix ignored (rule 24); no remaining functional/regional content	no content beyond a possible character-name prefix	P06	1027
+l_knee_calf_helper	l_knee_calf_helper	CLEAR	left knee/calf helper	CLEAR	groupFile/Legs	High		ordinary leg anatomy, not corrective by itself (rule 4)	P06	1028
+r belta a phy	R BeltA a Phy	CLEAR	belt garment, right, variant A, physics-simulated	CLEAR	groupFile/Clothing	High		matches the established ...A/B/C a Phy clothing physics-sim naming pattern	P06	1029
+d14	D14	OPAQUE	ungrounded code	NOT_APPLICABLE		Low		ungrounded abbreviation, no other content	P06	1030
+parasol	Parasol	CLEAR	a parasol/umbrella	CLEAR	groupFile/Other	High		recognized handheld prop	P06	1031
+right thumb 0 grip 2	Right thumb 0 grip 2	CLEAR	right thumb, grip posing, variant 2	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit right finger digit, verified RightFingers subpath	P06	1032
+l_pucker	L_pucker	CLEAR	mouth pucker expression, left	CLEAR	groupFile/Face/Lower Face	High		ordinary mouth expression	P06	1033
+bip001-r-upperarm	Bip001-R-UpperArm	CLEAR	right upper arm	CLEAR	groupFile/Arms	High		ordinary arm anatomy	P06	1034
+thigh_twist_l_01	thigh_twist_l_01	CLEAR	left thigh twist, segment 01	CLEAR	groupFile/Legs	High		ordinary twist bone, not corrective by itself (rule 3)	P06	1035
+tailwing_00	tailwing_00	PARTIAL	"a ""tail-wing"" compound structure, segment 00"	NEEDS_CONTEXT		Low	no Master precedent for this compound; materially different core readings between tail-region and wing-region ownership	unresolved compound, no precedent	P06	1036
+bas.side_right_4_jiggle	BAS.Side_Right_4_jiggle	CLEAR	"a jiggle-physics function, side right, variant 4 (""BAS"" prefix unresolved, object unstated)"	NEEDS_CONTEXT		Low	"""BAS"" itself is ungrounded, but ""jiggle"" supplies a real function reading"	jiggle function is clear; owning object is not named	P06	1037
+shirt_back_lift	shirt_back_lift	CLEAR	shirt garment, back, lift function	CLEAR	groupFile/Clothing	High		explicit garment name	P06	1038
+kickmidoutter	KickMidOutter	CLEAR	"a ""kick"" function, mid-outer variant (object unstated)"	NEEDS_CONTEXT		Low	"""Outter"" read as ""Outer"""	kick/posing function is clear; owning object is not named	P06	1039
+bip_r_root_horn	bip_r_root_horn	CLEAR	horn (creature anatomy), root, right	CLEAR	groupFile/Other	High		species-neutral horn anatomy routes to Other (rule 18)	P06	1040
+egg.wall_22	Egg.Wall_22	CLEAR	"an ""egg wall"" environment structure, variant 22"	CLEAR	groupFile/Other	Medium		"""Wall"" anchors this as architecture/environment, matching Shell.Wall precedent"	P06	1041
+saberon_bone38_lthumb	saberon_Bone38_LThumb	CLEAR	"left thumb (""Saberon"" character/model prefix)"	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit left finger digit; prefix ignored (rule 24); verified LeftFingers subpath	P06	1042
+speed1	speed1	OPAQUE	"a bare ""speed"" parameter, no subject/object"	NOT_APPLICABLE		Low		rate parameter with no anchor object, unlike a direct posing-action function	P06	1043
+box_face_15_m	Box_Face_15_M	PARTIAL	"a ""box face,"" variant 15_M, no further anchor"	NEEDS_CONTEXT		Low	"materially different core readings: a crate/box object's face vs. an anatomical face on a ""Box""-named model"	unresolved token relation	P06	1044
+left middle distal	Left Middle Distal	CLEAR	left middle finger, distal segment	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit left finger digit, verified LeftFingers subpath	P06	1045
+itsnouse	ITSNOUSE	OPAQUE	a phrase with no anatomical/functional referent	NOT_APPLICABLE		Low		no reliable core semantic referent for an animator control	P06	1046
+loot_gen_backpack_c_posed_a_mesh	LOOT_GEN_Backpack_C_Posed_A_Mesh	CLEAR	a backpack, variant C, posed	CLEAR	groupFile/Clothing	High		worn-equipment accessory; generator-style prefix does not affect destination (rule 17)	P06	1047
+cord10	Cord10	PARTIAL	"a ""cord,"" numbered, no anchor"	NEEDS_CONTEXT		Low	materially different core readings: decorative cord accessory / mechanical or electrical cord / physics rope	bare ambiguous object noun, no owner	P06	1048
+flm-rig-hole-a	Flm-Rig-Hole-A	PARTIAL	"a ""hole,"" variant A (""Flm-Rig"" model/rig prefix)"	NEEDS_CONTEXT		Low	materially different core readings: anatomical opening / garment hole / environment hole	bare ambiguous object noun, no owner	P06	1049
+right_shoulder_c	right_shoulder_C	CLEAR	right shoulder, variant c	CLEAR	groupFile/Arms	High		ordinary shoulder anatomy	P06	1050
+l_elbow_twist_a_helper	l_elbow_twist_a_helper	CLEAR	left elbow twist helper	CLEAR	groupFile/Arms	High		ordinary twist/helper anatomy, not corrective by itself (rules 3-4)	P06	1051
+key.e	Key.E	CLEAR	a lettered key in the coherent Key.<label> keyboard-prop series	CLEAR	groupFile/Other	High		matches the confirmed Key.A/Key.B-style series (rule 23)	P06	1052
+pantsthin	Pantsthin	CLEAR	"pants garment, ""thin"" fit"	CLEAR	groupFile/Clothing	High		garment-owned shape/fit control (rule 8)	P06	1053
+bip_hip_r_1	bip_hip_r_1	CLEAR	hip, right, variant 1	CLEAR	groupFile/Legs	Medium		ordinary hip-region anatomy	P06	1054
+eyeballs-left	Eyeballs-Left	CLEAR	eyeballs, left	CLEAR	groupFile/Face/Eyes	High		ordinary eye anatomy	P06	1055
+neutral2	neutral2	CLEAR	a neutral/default state control, variant 2 (scope unstated)	NEEDS_CONTEXT		Low		neutral/reset function is clear; whether it scopes to face, body, or elsewhere is unstated	P06	1056
+prf_rinko_costume_1_aos	prf_rinko_costume_1_aos	CLEAR	"costume, variant 1 (""Rinko"" character-name prefix)"	CLEAR	groupFile/Clothing	High		"explicit ""costume"" content grounds this regardless of the prefix"	P06	1057
+rachel bun_1	Rachel bun_1	CLEAR	"hair bun, variant 1 (""Rachel"" character-name prefix)"	CLEAR	groupFile/Hair	High		named hairstyle; prefix ignored (rule 24)	P06	1058
+eyelashes-angry	Eyelashes-Angry	CLEAR	angry eyelash/eye expression	CLEAR	groupFile/Face/Eyes	High		ordinary eye expression	P06	1059
+pupils-blankemote-l	Pupils-BlankEmote-L	CLEAR	blank pupil/eye expression, left	CLEAR	groupFile/Face/Eyes	High		ordinary eye expression	P06	1060
+tailstopb2	TailsTopB2	CLEAR	tail, top, variant B2	CLEAR	groupFile/Tail	High		ordinary tail anatomy	P06	1061
+valvebiped.polysurface12	ValveBiped.polySurface12	OPAQUE	generic default polygon-surface placeholder name on a generic rig prefix	NOT_APPLICABLE		Low		generic DCC-default geometry placeholder, no functional/regional word	P06	1062
+leg left boot tassle 3b	leg left boot tassle 3b	CLEAR	boot tassel, left leg, variant 3b	CLEAR	groupFile/Clothing	High		explicit garment owner (boot) named (rule 25)	P06	1063
+cc_backtoe1.r	cc_backtoe1.r	CLEAR	back toe, right, segment 1	CLEAR	groupFile/Toes/RightToes	High		explicit right toe digit, verified RightToes subpath	P06	1064
+bone 1000	bone 1000	OPAQUE	generic numbered bone, no functional/regional word	NOT_APPLICABLE		Low		generic numbered technical bone	P06	1065
+ass1	Ass1	CLEAR	buttock (structural anatomy), numbered	CLEAR	groupFile/Body	High		plain structural anatomy, no shape/state word (rule 6)	P06	1066
+hip base right	Hip base right	CLEAR	hip base, right	CLEAR	groupFile/Legs	High		ordinary hip-region anatomy	P06	1067
+unusedbone_3a item_ffx_x-2_rikku_by_xxkammyxx	unusedbone_3A item_FFX_X-2_Rikku_By_xXKammyXx	CLEAR	self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared unused marker (rule 15)	P06	1068
+robe_right	ROBE_RIGHT	CLEAR	robe garment, right	CLEAR	groupFile/Clothing	High		worn garment	P06	1069
+canine_tail1	Canine_Tail1	CLEAR	"tail, segment 1 (""Canine"" creature prefix)"	CLEAR	groupFile/Tail	High		species-neutral tail anatomy	P06	1070
+r_head_9	r_head_9	CLEAR	bare structural head, right, numbered	CLEAR	groupFile/Body	Medium		bare structural head defaults to Body (rule 13)	P06	1071
+bikini boobs small	Bikini Boobs Small	CLEAR	breast size (small), bikini context	CLEAR	groupFile/Body Morphs	High		explicit size descriptor; bikini is only the triggering context (rule 8)	P06	1072
+front-push-side	front-push-side	CLEAR	"a ""push"" function, front-side (object unstated)"	NEEDS_CONTEXT		Low		push function is clear; owning object is not named	P06	1073
+box_face_13_m	Box_Face_13_M	PARTIAL	"a ""box face,"" variant 13_M, no further anchor"	NEEDS_CONTEXT		Low	"materially different core readings: a crate/box object's face vs. an anatomical face on a ""Box""-named model"	unresolved token relation	P06	1074
+hat-widen	hat-widen	CLEAR	"hat garment, ""widen"" fit"	CLEAR	groupFile/Clothing	High		garment-owned shape/fit control (rule 8)	P06	1075
+flm-armb-float-b6	Flm-ArmB-Float-B6	CLEAR	"a ""float"" function in model section B, variant B6 (object unstated)"	NEEDS_CONTEXT		Low	"""ArmB"" reads as an internal model-section label, not anatomical arm, based on the sibling Flm-ArmA-SwordA-G weapon control"	float function is clear; owning object is not named	P06	1076
+rpinkie0	rPinkie0+rpinkie0	CLEAR	right pinky finger, segment 0	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit right finger digit, verified RightFingers subpath	P06	1077
+cape 3a	Cape 3a	CLEAR	cape garment, variant 3a	CLEAR	groupFile/Clothing	High		worn garment	P06	1078
+ascot.bottom_13	Ascot.Bottom_13	CLEAR	ascot (neckwear garment), bottom, variant 13	CLEAR	groupFile/Clothing	High		worn garment	P06	1079
+eye right focused	eye Right Focused	CLEAR	focused-gaze eye expression, right	CLEAR	groupFile/Face/Eyes	High		ordinary eye expression	P06	1080
+g9	G9	OPAQUE	ungrounded code	NOT_APPLICABLE		Low		ungrounded abbreviation, no other content	P06	1081
+front-push-center	front-push-center	CLEAR	"a ""push"" function, front-center (object unstated)"	NEEDS_CONTEXT		Low		push function is clear; owning object is not named	P06	1082
+belt_front_r	belt_front_R	CLEAR	belt garment, front, right	CLEAR	groupFile/Clothing	High		worn garment	P06	1083
+rachel head forehead left	Rachel head forehead left	CLEAR	"forehead, left (""Rachel"" character-name prefix)"	CLEAR	groupFile/Face/Upper Face	High		upper-face anatomy; prefix ignored (rule 24)	P06	1084
+headband back lower	headband back lower	CLEAR	headband, back, lower	CLEAR	groupFile/Clothing	High		worn accessory	P06	1085
+spine2_00002	spine2_00002	CLEAR	spine (bare, no ownership evidence), numbered	NEEDS_CONTEXT		Low		bare spine literal with no biped/rig prefix and no garment/hair noun (rule 14)	P06	1086
+right hand screw	Right hand screw	CLEAR	a screw/hardware item, right hand	CLEAR	groupFile/Other	Medium		recognized handheld hardware/tool item	P06	1087
+leftnutscale	LeftNutScale	CLEAR	"testicle (""nut"" slang) size scale, left"	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor on genital soft tissue	P06	1088
+lipssmilesmall	lipssmilesmall	CLEAR	lips smile, small	CLEAR	groupFile/Face/Lower Face	High		identical spelling to confirmed existing Master control	P06	1089
+se_bones24	se_bones24	OPAQUE	generic numbered bone, no functional/regional word	NOT_APPLICABLE		Low		generic numbered technical bone	P06	1090
+shell.wall_36	Shell.Wall_36	CLEAR	a building/architectural shell wall, variant 36	CLEAR	groupFile/Other	Medium		matches the established Shell.Wall pattern	P06	1091
+flm-arma-swordb-z	Flm-ArmA-SwordB-Z	CLEAR	sword weapon prop, variant B/Z	CLEAR	groupFile/Other	High		recognized weapon prop (rule 16); matches established Flm-ArmA-Sword pattern	P06	1092
+tentaclebottompleft3	TentacleBottompLeft3	CLEAR	tentacle, bottom left, segment 3	CLEAR	groupFile/Other	High	"""bottomp"" read as ""bottom"""	species-neutral tentacle anatomy routes to Other (rule 18)	P06	1093
+leftnipple2	LeftNipple2	CLEAR	left nipple (structural anatomy), numbered	CLEAR	groupFile/Body	Medium		plain structural anatomy, no shape/state word (rule 6)	P06	1094
+forehead_l	Forehead_L+forehead_L	CLEAR	forehead, left	CLEAR	groupFile/Face/Upper Face	High		ordinary forehead anatomy	P06	1095
+thighright	ThighRight	CLEAR	thigh, right	CLEAR	groupFile/Legs	High		ordinary leg anatomy	P06	1096
+bottom_s_r	Bottom_S_R	PARTIAL	"a ""bottom,"" S, right, no anchor"	NEEDS_CONTEXT		Low	materially different core readings: buttocks / bottom-position marker / bottom garment piece	bare ambiguous object noun, no owner	P06	1097
+opt_hand_right_middle3	OPT_Hand_Right_Middle3	CLEAR	right middle finger, segment 3	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit right finger digit, verified RightFingers subpath	P06	1098
+cock-chubby	cock-chubby	CLEAR	"penis, ""chubby"" shape"	CLEAR	groupFile/Body Morphs	High		explicit shape descriptor on genital soft tissue	P06	1099
+c_dred_l1_03	C_Dred_L1_03	CLEAR	dreadlock hair, variant L1_03	CLEAR	groupFile/Hair	Medium		named hairstyle control	P06	1100

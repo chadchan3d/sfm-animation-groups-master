@@ -1,0 +1,217 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 1 REPORT
+Canonical positions 501-1500 (1,000 production families)
+======================================================================
+
+----------------------------------------------------------------------
+1. SCOPE AND METHOD
+----------------------------------------------------------------------
+Canonical positions processed: 501-1500 (10 batches of 100, P01-P10,
+per PHASE2_PRODUCTION_ORDER.tsv's canonical production order v1).
+Every family was read and classified individually by the semantic
+judge (Claude) against PHASE2_SEMANTIC_RULEBOOK_FINAL.txt and the
+accepted calibration doctrine -- no dictionary/keyword/regex classifier
+was used to make any semantic decision. Python/bash were used only for
+mechanical bookkeeping: selecting canonical rows, building/validating
+batch files, merging into the ledger, and updating the progress
+manifest, exactly as Section 1 of the task requires.
+
+Number successfully classified: 1,000 / 1,000.
+NEEDS_DOCTRINE encountered: 0 (no doctrine-escalation report was
+required; the tranche was not interrupted).
+
+----------------------------------------------------------------------
+2. BATCH FILES PRODUCED
+----------------------------------------------------------------------
+  PHASE2_PRODUCTION_BATCH_P01_501_600.tsv
+  PHASE2_PRODUCTION_BATCH_P02_601_700.tsv
+  PHASE2_PRODUCTION_BATCH_P03_701_800.tsv
+  PHASE2_PRODUCTION_BATCH_P04_801_900.tsv
+  PHASE2_PRODUCTION_BATCH_P05_901_1000.tsv
+  PHASE2_PRODUCTION_BATCH_P06_1001_1100.tsv
+  PHASE2_PRODUCTION_BATCH_P07_1101_1200.tsv
+  PHASE2_PRODUCTION_BATCH_P08_1201_1300.tsv
+  PHASE2_PRODUCTION_BATCH_P09_1301_1400.tsv
+  PHASE2_PRODUCTION_BATCH_P10_1401_1500.tsv
+Each is the untouched raw classified batch (100 rows, header included)
+as originally produced and validated before ledger merge; none were
+overwritten or rewritten during the ledger-merge or audit steps.
+
+----------------------------------------------------------------------
+3. LEDGER COUNT BEFORE / AFTER
+----------------------------------------------------------------------
+  Before this tranche: 500 rows (500 calibration, 0 production)
+  After P01:            600 rows (500 calibration, 100 production)
+  After P02:             700
+  After P03:             800
+  After P04:             900
+  After P05:            1000
+  After P06:            1100
+  After P07:            1200
+  After P08:            1300
+  After P09:            1400
+  After P10 (final):    1500 rows (500 calibration, 1000 production)
+
+Each merge was performed as its own atomic validate-then-merge step:
+the raw batch was mechanically re-verified against
+PHASE2_PRODUCTION_ORDER.tsv (canonical position, fold_key, and
+exact_spellings) immediately before merge, and the ENTIRE resulting
+ledger was independently re-validated after every single merge (not
+only at the end) -- row count, the first 500 rows still field-identical
+to PHASE2_SEMANTIC_PILOT_500_FINAL.tsv, zero duplicate fold_keys, every
+production fold_key matching its canonical position in strict order,
+and the Rule 21 invariant -- before moving on to the next batch. No
+batch was merged out of order and no batch was merged twice.
+
+Final next canonical Phase 2 position: 1501.
+
+----------------------------------------------------------------------
+4. PRODUCTION STATISTICS (1,000 FAMILIES, POSITIONS 501-1500 ONLY)
+----------------------------------------------------------------------
+These are production-only statistics. They are reported separately
+from, and must not be confused with, the 500-family calibration
+statistics (CLEAR 397 / PARTIAL 44 / OPAQUE 59 semantic; CLEAR 372 /
+NEEDS_CONTEXT 69 / NEEDS_DOCTRINE 0 / NOT_APPLICABLE 59 taxonomy),
+which are unchanged and untouched by this tranche.
+
+semantic_status (1,000 production rows):
+  CLEAR    809  (80.9%)
+  PARTIAL   53  (5.3%)
+  OPAQUE   138  (13.8%)
+
+taxonomy_status (1,000 production rows):
+  CLEAR           770  (77.0%)
+  NEEDS_CONTEXT    92  (9.2%)
+  NEEDS_DOCTRINE    0  (0.0%)
+  NOT_APPLICABLE  138  (13.8%)
+
+Rule 21 check: semantic OPAQUE count (138) == taxonomy NOT_APPLICABLE
+count (138). Holds exactly, as required.
+
+confidence (1,000 production rows):
+  High     639  (63.9%)
+  Medium   140  (14.0%)
+  Low      221  (22.1%)
+
+proposed_destination distribution (only rows with taxonomy_status=
+CLEAR carry a destination; 770 rows):
+  133  groupFile/Clothing
+  127  groupFile/Other
+   64  groupFile/Face/Eyes
+   59  groupFile/Body
+   57  groupFile/Arms
+   51  groupFile/Body Morphs
+   47  groupFile/Legs
+   36  groupFile/Arms/RightArm/RightFingers
+   36  groupFile/Face/Lower Face
+   33  groupFile/Useless
+   30  groupFile/Hair
+   25  groupFile/Arms/LeftArm/LeftFingers
+   16  groupFile/Face/Upper Face
+   11  groupFile/Tail
+   10  groupFile/Face/Mid Face
+    8  groupFile/Face/Ears
+    6  groupFile/Correctives
+    6  groupFile/Face/Expressions
+    3  groupFile/Toes/LeftToes
+    3  groupFile/Toes/RightToes
+    2  groupFile/RigBody
+    2  groupFile/Fingers
+    2  groupFile/Wings
+    1  groupFile/Arms/RightArm/RightCarpals
+    1  groupFile/Face/Tongue
+    1  groupFile/Face
+  (sums to 770, matching taxonomy_status=CLEAR count exactly)
+
+NEEDS_CONTEXT count: 92. Recurring themes within it:
+  45  bare decorative accessory naming its theme but not its owner/mount
+      (rule 25 -- strap/tassel/knot/spike/bag/rope-style terms)
+  27  a clear function/action word (shift/poke/push/kick/scale/flip/
+      open/lift/jiggle/dyng, etc.) with no named owning object
+  12  a bare object noun with materially different possible kinds
+      (bow/lock/plate/glass/chain/string/hose/lid/pad/bottom/top, etc.)
+   8  other (bare Spine literal with no ownership evidence per rule 14;
+      phalanges ambiguous between wing/foot per rule 18; a level/
+      waypoint reference with no established category; etc.)
+
+NEEDS_DOCTRINE count: 0.
+
+Consistency-audit flag count: 4 (all descriptive/awareness flags, none
+requiring or triggering a ledger change -- see
+PHASE2_PRODUCTION_TRANCHE1_CONSISTENCY_FLAGS.txt for full detail):
+  1. Foreign/Latin anatomical-term recognition (oris, levator, shiri,
+     momo, hoho, koshi) relies on the judge's own linguistic knowledge
+     rather than corpus grounding -- all such rows kept at confidence
+     Medium, not High.
+  2. "Torso pipe" and "Flm-ArmB-Float" readings are inferential
+     (single-anchor-example based), applied consistently but not
+     broadly corpus-confirmed.
+  3. Hip-region (-> Legs) vs. buttock-region (-> Body) split under a
+     shared "leg"-prefix convention -- a defensible, consistently
+     applied distinction, flagged for reviewer awareness only.
+  4. "Bunnytail" (position 1430) classified as a costume accessory;
+     an anatomical-tail reading on an anthropomorphic model cannot be
+     excluded from the literal alone.
+
+----------------------------------------------------------------------
+5. VALIDATION RESULTS
+----------------------------------------------------------------------
+Per-batch validation (Section 8 of the task), run before every merge:
+  P01-P10: all 100/100 rows PASS on: exact row count; canonical
+  position sequence match against PHASE2_PRODUCTION_ORDER.tsv; exact
+  fold_key and exact_spellings match; zero duplicate fold_key within
+  batch; valid semantic_status/taxonomy_status/confidence enums;
+  destination blank unless taxonomy_status=CLEAR (and non-blank
+  whenever it is CLEAR); every non-blank destination a real Master
+  group path; Rule 21 invariant; no calibration family reused; no
+  family reused across any earlier production batch.
+  (P05 and P07 each caught one transcription slip -- a case mismatch
+  in exact_spellings on a single row -- via this exact mechanical
+  check before any write to disk; both were corrected and the batch
+  re-validated clean before proceeding. No corrupted data ever reached
+  the ledger.)
+
+Ledger validation (Section 10), run after every single merge (not only
+at the end):
+  row count exactly as expected at each step (600, 700, ..., 1500)
+  first 500 rows field-identical to PHASE2_SEMANTIC_PILOT_500_FINAL.tsv
+    -- PASS at every step
+  production fold_keys exactly equal canonical positions 501 through
+    the latest completed position, in strict order -- PASS at every step
+  zero duplicate fold_keys across the full ledger -- PASS at every step
+  Rule 21 invariant across the full ledger -- PASS at every step
+
+Canonical production-order verifier
+(tools/verify_phase2_production_order.py): rerun after the tranche,
+see Section 6 below.
+
+Master validator (tools/validate_master.py): rerun after the tranche,
+see Section 6 below. sfm_defaultanimationgroups.txt was not modified
+at any point in this task.
+
+----------------------------------------------------------------------
+6. POST-TRANCHE VALIDATOR RESULTS
+----------------------------------------------------------------------
+tools/verify_phase2_production_order.py (rerun after the tranche, before
+commit): all 15 checks PASS, including sequential_match_all_13782,
+full_sequence_sha256_matches_spec, and production_only_sha256_matches_spec.
+Canonical position 501 fold_key confirmed unchanged: "unused spine
+lower item_ssx h #2". Both fingerprints unchanged from
+PHASE2_PRODUCTION_SEQUENCE_SPEC.txt:
+  full sequence SHA256:       d43e0aa97e96608b165b993428af54084f3cfbe110379d22af8c416251618494
+  production-only SHA256:     ad4c1e865c8edc18e039f233466731a56bf44170a9eacbd208e39c56f3dd4858
+(Both hashes are keyed to the universe/calibration set/algorithm, not
+to production classification content, so they are expected -- and
+confirmed -- to remain identical after this tranche.)
+
+tools/validate_master.py: Structural parse PASS, 0 exact duplicate
+literals, 0 cross-path native-Rebuild casefold invariant violations,
+"No files have been modified." sfm_defaultanimationgroups.txt and
+CLAUDE.md are unchanged (confirmed via git diff --stat, zero output).
+
+Protected files confirmed unmodified: sfm_defaultanimationgroups.txt,
+CLAUDE.md, PHASE2_SEMANTIC_PILOT_500_FINAL.tsv,
+PHASE2_SEMANTIC_RULEBOOK_FINAL.txt, PHASE2_SEMANTIC_BATCH_RULES.txt,
+PHASE2_PRODUCTION_ORDER.tsv, PHASE2_PRODUCTION_SEQUENCE_SPEC.txt,
+tools/verify_phase2_production_order.py.
+======================================================================
