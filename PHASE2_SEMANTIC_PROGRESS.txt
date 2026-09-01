@@ -1,6 +1,11 @@
 calibration_families_complete: 500
-next_permutation_position: 501
 production_families_classified: 0
 last_completed_production_position: 500
 rulebook_status: frozen_and_installed
-permutation_boundary_status: verification_pending
+original_permutation_status: unrecoverable_level_c
+canonical_production_sequence_version: 1
+canonical_production_order_status: defined_and_verified
+next_canonical_phase2_position: 501
+next_permutation_position: 501
+next_permutation_position_note: legacy field, retained for historical/backward compatibility only; does NOT indicate the original 20260831 permutation boundary was recovered -- see original_permutation_status and PHASE2_PERMUTATION_BOUNDARY_VERIFICATION_REPORT.txt
+permutation_boundary_status: legacy field, superseded by original_permutation_status and canonical_production_order_status above -- see PHASE2_CANONICAL_SEQUENCE_REPORT.txt

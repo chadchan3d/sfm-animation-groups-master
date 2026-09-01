@@ -1,0 +1,142 @@
+======================================================================
+PHASE 2 PRODUCTION SEQUENCE SPECIFICATION -- VERSION 1
+Canonical, versioned, durable production-order specification for the
+13,782 residual families outside the 500-family calibration set.
+
+This is a NEW production-order convention. It is NOT a reconstruction
+of the original (unrecoverable) 20260831 shuffle. See
+PHASE2_PERMUTATION_BOUNDARY_VERIFICATION_REPORT.txt for the forensic
+finding that the original permutation is unrecoverable at Evidence
+Level C.
+======================================================================
+
+production_sequence_version: 1
+
+----------------------------------------------------------------------
+1. FAMILY IDENTITY RULE
+----------------------------------------------------------------------
+Strict ASCII fold: map A-Z -> a-z only. No Unicode casefold. No
+whitespace stripping. No punctuation normalization. No spelling
+repair. This is the same identity rule used throughout Phase 2.
+
+----------------------------------------------------------------------
+2. AUTHORITATIVE UNIVERSE SOURCE
+----------------------------------------------------------------------
+PHASE2_RESIDUAL_INVENTORY.tsv, column `exact_literal`. Every row's
+`exact_literal` is strict-ASCII-folded (per Section 1) to produce its
+`fold_key`; a family is the set of all exact literals sharing one
+fold_key. This reproduces the file's own stored `fold_key` column
+exactly (verified: 0 mismatches across all 14,432 exact_literal rows).
+
+Required and verified: exactly 14,282 unique families.
+
+----------------------------------------------------------------------
+3. CALIBRATION SET
+----------------------------------------------------------------------
+The 500 fold_keys present in PHASE2_SEMANTIC_PILOT_500_FINAL.tsv, taken
+verbatim from that file's `fold_key` column, in that file's stored row
+order for canonical positions 1-500 (see Section 5). All 500 are
+required to be, and were verified to be, unique and members of the
+14,282-family universe.
+
+----------------------------------------------------------------------
+4. PRODUCTION COMPLEMENT AND ORDERING ALGORITHM
+----------------------------------------------------------------------
+Production complement = universe (14,282) minus calibration (500) =
+13,782 families. Required and verified: the complement is disjoint from
+the calibration set, and their union is exactly the full universe.
+
+Ordering algorithm (deterministic, cross-version, no PRNG):
+
+  domain_seed (exact ASCII bytes, no trailing newline):
+      SFM_PHASE2_PRODUCTION_ORDER_V1_2026-09-01
+
+  For each production fold_key:
+      fold_bytes = fold_key.encode("utf-8")
+      digest = SHA256(domain_seed + b"\x00" + fold_bytes).digest()
+
+  Sort all 13,782 production fold_keys ascending by:
+      1. digest (raw 32-byte SHA-256 output, compared as bytes)
+      2. fold_key encoded as UTF-8 bytes (explicit collision tie-breaker
+         -- not expected to ever be exercised at this population size,
+         but included for a total, well-defined order)
+
+This algorithm depends on nothing but the fold_key string and the fixed
+domain-separation seed above. It does not use Python's random module,
+hash(), set/dict iteration order, locale collation, or filesystem
+order, and is therefore exactly reproducible on any machine, in any
+Python version, at any future time.
+
+----------------------------------------------------------------------
+5. CANONICAL POSITION DEFINITION
+----------------------------------------------------------------------
+Positions 1-500:   the 500 calibration fold_keys, in the exact row
+                   order stored in PHASE2_SEMANTIC_PILOT_500_FINAL.tsv.
+                   This is a NEW canonical indexing convention based on
+                   the preserved calibration-file order. It is NOT
+                   claimed to reproduce the lost original intra-shuffle
+                   order (see the forensic report).
+Positions 501-14282: the 13,782 production fold_keys, in the order
+                   produced by the Section 4 algorithm.
+
+canonical position 501 = the first fold_key in the Section 4 ordering
+of the production complement.
+
+----------------------------------------------------------------------
+6. EXACT_SPELLINGS SERIALIZATION (PHASE2_PRODUCTION_ORDER.tsv)
+----------------------------------------------------------------------
+For a production family with more than one distinct exact_literal
+sharing its fold_key, the `exact_spellings` field is:
+
+    "+".join(sorted(literals))
+
+using Python's default (ordinal/codepoint) string sort on the raw
+exact_literal strings, joined with a literal "+" character. This is
+purely mechanical -- no literal is altered, dropped, or reordered by
+meaning, only by codepoint value, and the join character matches this
+project's existing multi-spelling convention (see e.g.
+"BoobJobL+BoobJobR" in PHASE2_SEMANTIC_PILOT_500_FINAL.tsv, though that
+particular example turned out to be a single native literal containing
+a "+" character rather than a genuine multi-spelling join -- the "+"
+join character was already established as this project's separator of
+choice regardless).
+
+Single-spelling families simply carry their one exact_literal string.
+
+----------------------------------------------------------------------
+7. FULL-SEQUENCE FINGERPRINT SERIALIZATION
+----------------------------------------------------------------------
+Full canonical sequence = calibration fold_keys (positions 1-500, in
+PHASE2_SEMANTIC_PILOT_500_FINAL.tsv row order) followed by production
+fold_keys (positions 501-14282, in Section 4 order).
+
+Serialization: one fold_key per line, UTF-8 encoded, LF ("\n") line
+endings, INCLUDING a final trailing LF after the last (14,282nd) line.
+Equivalent to: `("\n".join(all_14282_fold_keys_in_order) + "\n").encode("utf-8")`.
+
+Two fingerprints are computed and recorded:
+  - FULL_SEQUENCE_SHA256: SHA-256 of the complete 14,282-line
+    serialization (positions 1-14282).
+  - PRODUCTION_ONLY_SHA256: SHA-256 of the 13,782-line serialization of
+    positions 501-14282 alone (same line-ending/encoding convention).
+
+Both values are recorded in PHASE2_CANONICAL_SEQUENCE_REPORT.txt and
+reproduced independently by tools/verify_phase2_production_order.py.
+Any future change to the calibration file's row order, the residual
+universe, or this algorithm will change these fingerprints, which is
+the intended tamper-evidence property of recording them here.
+
+----------------------------------------------------------------------
+8. WHAT THIS SPECIFICATION IS NOT
+----------------------------------------------------------------------
+This is not, and does not claim to be, a reconstruction of the
+original 20260831 `random.Random` permutation used to select the
+500-family calibration pilot. That permutation remains forensically
+unrecoverable (Evidence Level C -- see
+PHASE2_PERMUTATION_BOUNDARY_VERIFICATION_REPORT.txt). This
+specification instead defines a brand-new, durable, auditable ordering
+for all production work going forward, so that no future ambiguity of
+this kind can recur: the ordering here depends only on documented,
+reproducible inputs and a fixed algorithm, not on an unrecorded
+one-time random draw.
+======================================================================

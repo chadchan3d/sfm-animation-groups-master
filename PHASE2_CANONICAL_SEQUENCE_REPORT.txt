@@ -1,0 +1,128 @@
+======================================================================
+PHASE 2 CANONICAL PRODUCTION SEQUENCE -- DEFINITION REPORT
+Sequencing only. No semantic classification was performed. No family
+was classified, including canonical position 501. The Master, taxonomy
+doctrine, and the live rulebook were not touched.
+======================================================================
+
+----------------------------------------------------------------------
+1. PRESERVED FORENSIC FINDING
+----------------------------------------------------------------------
+ORIGINAL 20260831 PERMUTATION EVIDENCE LEVEL: C
+ORIGINAL PERMUTATION BOUNDARY VERIFIED: NO
+ORIGINAL INTRA-BATCH ORDER: NOT RECOVERABLE
+
+Full forensic detail remains in
+PHASE2_PERMUTATION_BOUNDARY_VERIFICATION_REPORT.txt (unmodified by this
+task). This report does not reopen or dispute that finding. Canonical
+position 501 as defined below is NOT claimed to be the original
+20260831 permutation's position 501 -- it is a newly defined position
+under production-order v1.
+
+----------------------------------------------------------------------
+2. AUTHORITATIVE FAMILY UNIVERSE
+----------------------------------------------------------------------
+Rebuilt mechanically from PHASE2_RESIDUAL_INVENTORY.tsv (exact_literal
+column), strict ASCII A-Z->a-z fold, cross-checked against that file's
+own stored fold_key column (0 mismatches across 14,432 rows).
+
+  Residual family universe: 14,282  -- PASS (required and matched)
+
+----------------------------------------------------------------------
+3. CALIBRATION / PRODUCTION SET ALGEBRA
+----------------------------------------------------------------------
+  Calibration families (PHASE2_SEMANTIC_PILOT_500_FINAL.tsv):  500
+    unique fold_keys:                                          500  PASS
+    all 500 present in the 14,282-family universe:                  PASS
+  Production complement (universe - calibration):            13,782  PASS
+  Calibration ∩ Production:                                        0  PASS
+  Calibration ∪ Production == full 14,282-family universe:         PASS
+
+----------------------------------------------------------------------
+4. CANONICAL PRODUCTION ORDER (VERSION 1)
+----------------------------------------------------------------------
+Full algorithm specification: PHASE2_PRODUCTION_SEQUENCE_SPEC.txt.
+Summary: each production fold_key is hashed as
+SHA256(domain_seed + 0x00 + fold_key_utf8), domain_seed =
+b"SFM_PHASE2_PRODUCTION_ORDER_V1_2026-09-01"; the 13,782 production
+families are sorted ascending by (digest bytes, fold_key UTF-8 bytes).
+No random module, hash(), set/dict iteration order, locale collation,
+or filesystem order is used anywhere in this algorithm.
+
+  production_sequence_version: 1
+  canonical production positions: 501-14282
+
+----------------------------------------------------------------------
+5. CANONICAL POSITION 501
+----------------------------------------------------------------------
+CANONICAL PHASE 2 POSITION 501 fold_key:
+
+    unused spine lower item_ssx h #2
+
+This family was NOT classified in this task. It is reported here only
+as the identity of the first position in the newly defined production
+order, per instruction.
+
+----------------------------------------------------------------------
+6. FULL-SEQUENCE FINGERPRINTS
+----------------------------------------------------------------------
+Serialization (see spec Section 7 for the exact definition): one
+fold_key per line, UTF-8, LF line endings, trailing LF after the final
+line.
+
+  Full canonical sequence (positions 1-14282):
+    FULL_SEQUENCE_SHA256:
+      d43e0aa97e96608b165b993428af54084f3cfbe110379d22af8c416251618494
+
+  Production-only sequence (positions 501-14282):
+    PRODUCTION_ONLY_SHA256:
+      ad4c1e865c8edc18e039f233466731a56bf44170a9eacbd208e39c56f3dd4858
+
+----------------------------------------------------------------------
+7. DURABLE ARTIFACTS CREATED
+----------------------------------------------------------------------
+  PHASE2_PRODUCTION_SEQUENCE_SPEC.txt        -- the versioned algorithm spec
+  PHASE2_PRODUCTION_ORDER.tsv                -- 13,782 rows, canonical_position
+                                                 501-14282, fold_key, exact_spellings
+  PHASE2_CANONICAL_SEQUENCE_REPORT.txt       -- this report
+  tools/verify_phase2_production_order.py    -- independent, read-only verifier
+
+----------------------------------------------------------------------
+8. DURABLE VERIFIER RESULT
+----------------------------------------------------------------------
+tools/verify_phase2_production_order.py was run independently (fresh
+process, re-deriving the universe, the calibration set, the production
+complement, and the SHA-256-key order from scratch, and re-opening
+PHASE2_PRODUCTION_ORDER.tsv from disk) and reports:
+
+  universe_size_14282:                        PASS
+  calibration_count_500:                      PASS
+  calibration_unique_500:                     PASS
+  calibration_subset_of_universe:              PASS
+  production_complement_13782:                 PASS
+  zero_overlap:                                PASS
+  union_equals_universe:                       PASS
+  order_file_row_count_13782:                  PASS
+  sequential_match_all_13782:                  PASS
+  exact_spellings_match_all_13782:             PASS
+  canonical_positions_501_to_14282:            PASS
+  order_file_zero_overlap_with_calibration:    PASS
+  order_file_union_equals_universe:            PASS
+  full_sequence_sha256_matches_spec:           PASS
+  production_only_sha256_matches_spec:         PASS
+
+  ALL CHECKS PASS: True
+
+----------------------------------------------------------------------
+9. STATE UNCHANGED
+----------------------------------------------------------------------
+No family beyond the calibrated 500 was classified, including
+canonical position 501. sfm_defaultanimationgroups.txt, CLAUDE.md,
+PHASE2_SEMANTIC_LEDGER.tsv, PHASE2_SEMANTIC_PILOT_500_FINAL.tsv,
+PHASE2_SEMANTIC_RULEBOOK_FINAL.txt, and PHASE2_SEMANTIC_BATCH_RULES.txt
+were not modified by this task.
+
+======================================================================
+ORIGINAL PERMUTATION RECOVERED: NO
+NEW CANONICAL PRODUCTION ORDER DEFINED: YES
+======================================================================

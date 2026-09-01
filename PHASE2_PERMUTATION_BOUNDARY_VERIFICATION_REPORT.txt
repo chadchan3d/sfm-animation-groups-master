@@ -1,0 +1,251 @@
+======================================================================
+PHASE 2 -- DETERMINISTIC PERMUTATION BOUNDARY VERIFICATION REPORT
+Forensic/mechanical task only. No semantic classification was
+performed. No file listed as protected was modified. Nothing was
+committed as part of this task.
+======================================================================
+
+----------------------------------------------------------------------
+1. HISTORICAL EVIDENCE INSPECTED
+----------------------------------------------------------------------
+Git history for every artifact named in the task, plus a full-repository
+scan, was inspected:
+
+  git log --all --oneline -- PHASE2_SEMANTIC_PILOT_500.tsv
+      PHASE2_RESIDUAL_INVENTORY.tsv PHASE2_RESIDUAL_TERMS.txt
+      PHASE2_SEMANTIC_BATCH_RULES.txt
+  -> all three touching commits are: 3a99682 (finalize, this session's
+     prior task), dc353db (freeze), 12debd8 (checkpoint). 12debd8 is the
+     FIRST commit that introduces any Phase 2 artifact at all.
+
+  git log --all --oneline -- "*.py"
+  -> only tools/validate_master.py (added in fa8841d, unrelated to
+     Phase 2 pilot selection) has ever been committed. No pilot/shuffle
+     generator script was ever committed, at any point in history.
+
+  git fsck --lost-found
+  -> 3 dangling blobs exist. Inspected all three: a .gitattributes-style
+     snippet, an old CLAUDE.md draft, and a stale full copy of
+     sfm_defaultanimationgroups.txt. None is a generator script or
+     otherwise relevant to pilot construction.
+
+  git log --all --name-only (full repository)
+  -> confirms no "batch input file" or raw-order intermediate was ever
+     committed, despite PHASE2_SEMANTIC_PILOT_REPORT.txt's own
+     description mentioning that Python "wrote batch input files" during
+     pilot construction. Those input files, if they ever existed on
+     disk, were never persisted to git and cannot be recovered from
+     repository history.
+
+CONCLUSION: no generator script, command record, or raw-order
+intermediate artifact was ever committed to this repository. The only
+surviving historical evidence is descriptive prose in
+PHASE2_SEMANTIC_PILOT_REPORT.txt (committed at 12debd8, unchanged
+since) and the structure of the committed data files themselves.
+
+----------------------------------------------------------------------
+2. DOCUMENTARY EVIDENCE OF THE SELECTION METHOD
+----------------------------------------------------------------------
+PHASE2_SEMANTIC_PILOT_REPORT.txt, "DESIGN AS EXECUTED" section, states
+verbatim:
+
+  "14,282 residual ASCII families were deterministically shuffled with
+  a fixed, documented seed (Python random.Random(20260831)) and the
+  first 500 were selected as the pilot population. All exact spellings
+  of a family stayed together as one unit."
+
+  "The shuffle genuinely broke lexical adjacency: batch 1's first five
+  families were eyeblink_right_out, five_bullet00, right index finger 1
+  grip 1, liplower_right2, wing_left_1_1 -- five unrelated domains in a
+  row..."
+
+  "The 500 were split into five fixed batches of 100."
+
+This is the ONLY textual description of the algorithm. It confirms:
+  - universe size: 14,282 families
+  - seed: random.Random(20260831)
+  - selection: first 500 of a full-universe shuffle
+  - batching: 5 fixed batches of 100, in shuffle order (batch 1 =
+    positions 1-100, etc., by the plain reading of "batch 1's first
+    five")
+It does NOT state: the exact pre-shuffle ordering of the 14,282-family
+list, the exact Python data structure shuffled (list of fold_keys?
+list of tuples? list of dicts?), or whether random.Random.shuffle() or
+some other method (e.g. .sample()) was used.
+
+It DOES supply one independently checkable fact: the identities, in
+order, of permutation positions 1-5 (batch 1's first five families).
+This is the only ground-truth checkpoint available anywhere in the
+project's history and was used below as the actual test of every
+candidate reconstruction, per the task's instruction not to accept a
+guessed procedure without genuine justification.
+
+----------------------------------------------------------------------
+3. RECONSTRUCTED RESIDUAL FAMILY UNIVERSE
+----------------------------------------------------------------------
+Rebuilt independently and mechanically from PHASE2_RESIDUAL_INVENTORY.tsv
+(the documented source of PHASE2_RESIDUAL_TERMS.txt per that file's own
+header: "Source: PHASE2_RESIDUAL_INVENTORY.tsv (column: exact_literal)"),
+using ONLY the project's strict identity rule (ASCII A-Z -> a-z, no
+Unicode casefold, no stripping, no punctuation/whitespace normalization):
+
+  RESIDUAL_INVENTORY.tsv exact_literal rows: 14,432
+  Reconstructed unique strict-ASCII-fold families: 14,282
+  Cross-check against the file's own stored fold_key column: 0 mismatches
+    across all 14,432 rows (my independently computed fold differs from
+    the file's own fold_key column in zero cases)
+
+RESULT: reconstructed universe = exactly 14,282 families. MATCHES the
+documented count. No hard stop triggered by this step.
+
+----------------------------------------------------------------------
+4. CANDIDATE PRE-SHUFFLE ORDERINGS AND SHUFFLE METHODS TESTED
+----------------------------------------------------------------------
+Per the task's instruction not to assume an ordering, every
+methodologically defensible candidate available from the actual
+historical artifacts was constructed and tested against the ONE
+available ground-truth checkpoint (permutation positions 1-5 = the
+five family names given in PHASE2_SEMANTIC_PILOT_REPORT.txt). No
+candidate was accepted merely for producing a plausible-looking result;
+each was checked for an EXACT ordered match against the known five
+names, and none is asserted as correct on any softer basis.
+
+  Candidate A: fold_key, sorted ascending (Python default string order).
+    This matches PHASE2_RESIDUAL_TERMS.txt's own documented sort
+    convention ("primary key = strict ASCII fold key"), and turned out
+    to be IDENTICAL, element-for-element, to two independently derived
+    orderings: first-occurrence order while reading
+    PHASE2_RESIDUAL_INVENTORY.tsv top-to-bottom, and first-occurrence
+    order while reading PHASE2_RESIDUAL_TERMS.txt top-to-bottom. (All
+    three source files are already stored in fold-key-sorted order, so
+    these three "candidates" collapse into one actual ordering.)
+      random.Random(20260831).shuffle(list) -> first 5:
+        ['bip_bowtieroot', 'vag insert', 'pelerinecentr_r', 'cube4', 'arm']
+      random.Random(20260831).sample(list, 5) -> first 5:
+        ['bone_lfl1', 'bone122', 'leg_3.lower', 'd16', 'key.black_38']
+    NEITHER matches the known ['eyeblink_right_out', 'five_bullet00',
+    'right index finger 1 grip 1', 'liplower_right2', 'wing_left_1_1'].
+
+  Candidate B: case-sensitive exact_literal ascending sort (not folded),
+    deduplicated to one representative fold_key per family by first
+    occurrence in that sort order.
+      shuffle -> first 5: ['bone13', 'tail 6 jb', 'bone 1071', 'lsmirk',
+        'ascot.bottom_14']
+      sample  -> first 5: ['eyeclashfix', 'earleft7', 'wep_shell6',
+        'l_mousejaw_loc', 'tentacletop1']
+    NEITHER matches.
+
+  Candidate C: shuffle the FULL 14,432-literal list (file order, with
+    duplicate families still present) with the documented seed, then
+    deduplicate to 14,282 families by first-occurrence-in-shuffled-order.
+      first 5: ['outbrow_right_out', 'box_face_11_m',
+        'kargathbladefist_bone100', 'flm-arma-leg-r0', 'side_ring_right']
+    Does NOT match (the superficial resemblance of "outbrow_right_out"
+    to "eyeblink_right_out" is a coincidence of shared vocabulary style,
+    not a match, and is explicitly not treated as evidence -- this is
+    exactly the kind of pattern-matching trap this project's own
+    methodology repeatedly warns against).
+
+None of the 6 tested (ordering x shuffle-method) combinations reproduce
+the one independently verifiable checkpoint. No further candidates were
+invented by trial and error beyond this defensible set, per instruction
+5's caution against accepting a procedure "merely because trial-and-
+error happened to reproduce the pilot" -- the inverse problem applies
+here too: it would be equally wrong to keep guessing arbitrary
+orderings until one happens to fit, since a fit found that way would
+carry no methodological justification either.
+
+----------------------------------------------------------------------
+5. A SEPARATE, INDEPENDENT OBSTACLE: STORED ORDER IS NOT SHUFFLE ORDER
+----------------------------------------------------------------------
+Beyond the negative result in Section 4, a second, independent, purely
+mechanical fact was established directly from
+PHASE2_SEMANTIC_PILOT_500_FINAL.tsv (and confirmed already present,
+identically, in the original PHASE2_SEMANTIC_PILOT_500.tsv and
+PHASE2_SEMANTIC_PILOT_500_RECONCILED.tsv at commit 12debd8, i.e. from
+the very first moment this data was ever committed):
+
+  - The 500 rows are stored in five contiguous blocks of exactly 100,
+    matching batch_id 1 through 5 in order (row 0-99 = batch 1, 100-199
+    = batch 2, etc.) -- consistent with the report's "five fixed
+    batches of 100."
+  - WITHIN each 100-row block, the rows are sorted ascending by
+    fold_key (verified: all 5 blocks independently pass a strict
+    ascending-order check).
+
+This means the file's row order already discards each batch's true
+internal permutation sequence -- it preserves WHICH 100 families
+belong to which batch (a set-level fact per batch), but not the order
+in which those 100 families actually emerged from the shuffle within
+that batch. This transformation was applied before the data was ever
+committed to git, and there is no earlier or alternate stored artifact,
+anywhere in this repository's history, that preserves the true
+intra-batch sequence.
+
+CONSEQUENCE: even if a pre-shuffle ordering and shuffle method were
+found that exactly reproduced the true original permutation, comparing
+"permutation position i" to "FINAL.tsv row i" one-for-one, in the
+strict sequential sense the task requires, could still never succeed
+past position 100 as a matter of surviving data, because FINAL.tsv's
+own row order past each block boundary is alphabetical, not
+positional. Full 500/500 sequential verification against the currently
+stored FINAL.tsv is therefore not merely unproven -- it is not
+recoverable from any artifact this repository has ever stored.
+
+----------------------------------------------------------------------
+6. FIRST_500_SEQUENCE_MATCH
+----------------------------------------------------------------------
+No candidate reconstruction reproduced even the first five known
+positions (Section 4), so no candidate was carried forward to a full
+500-row sequential comparison against PHASE2_SEMANTIC_PILOT_500_FINAL.tsv.
+Attempting that comparison with any of the tested candidates would
+score at or near 0/500 by construction (none placed any of the five
+known names in their documented positions), and Section 5 establishes
+that even a hypothetically correct candidate could not be verified past
+each block boundary against the stored file.
+
+FIRST_500_SEQUENCE_MATCH: 0/500
+
+----------------------------------------------------------------------
+7. EVIDENCE LEVEL
+----------------------------------------------------------------------
+LEVEL C -- UNDERDETERMINED.
+
+Justification: no generator source, batch-input file, or other direct
+record of the original permutation construction survives anywhere in
+git history (Section 1). The single available textual description
+(Section 2) fixes the universe size, the seed, and the selection rule,
+but not the pre-shuffle ordering or the exact shuffle call. Every
+methodologically defensible reconstruction of the missing pieces,
+tested against the one available ground-truth checkpoint, fails to
+reproduce it (Section 4). Independently, the stored calibration file
+has discarded the true intra-batch order at the moment it was first
+committed, so full sequential re-verification against it is not
+recoverable even in principle (Section 5). This is not a case of
+"multiple plausible procedures remain equally likely" so much as "the
+one procedure that can be documented from surviving evidence does not
+reproduce the known checkpoint, and no stored artifact could confirm a
+correct one even if found" -- both paths lead to the same Level C
+conclusion.
+
+No position-501 fold key is reported. No remaining-family count is
+certified. No full-permutation SHA-256 is computed or reported, per
+instruction (these are only produced under Level A or B).
+
+----------------------------------------------------------------------
+8. DURABLE VERIFIER
+----------------------------------------------------------------------
+Not created. Per instruction, tools/verify_phase2_permutation.py is
+only to be created if verification reaches Level A or B. Creating a
+"verifier" around an unproven guessed construction would misrepresent
+the state of the evidence, which instruction 6 explicitly prohibits.
+
+----------------------------------------------------------------------
+9. PROTECTED STATE
+----------------------------------------------------------------------
+Confirmed unmodified in this task: sfm_defaultanimationgroups.txt,
+CLAUDE.md, PHASE2_SEMANTIC_LEDGER.tsv, PHASE2_SEMANTIC_PROGRESS.txt,
+PHASE2_SEMANTIC_BATCH_RULES.txt, PHASE2_SEMANTIC_PILOT_500_FINAL.tsv,
+PHASE2_SEMANTIC_RULEBOOK_FINAL.txt. Position 501 and all families
+beyond the calibrated 500 remain unclassified. Nothing was committed.
+======================================================================
