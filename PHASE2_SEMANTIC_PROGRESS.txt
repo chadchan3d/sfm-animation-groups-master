@@ -7,5 +7,6 @@ canonical_production_sequence_version: 1
 canonical_production_order_status: defined_and_verified
 next_canonical_phase2_position: 501
 next_permutation_position: 501
-next_permutation_position_note: legacy field, retained for historical/backward compatibility only; does NOT indicate the original 20260831 permutation boundary was recovered -- see original_permutation_status and PHASE2_PERMUTATION_BOUNDARY_VERIFICATION_REPORT.txt
-permutation_boundary_status: legacy field, superseded by original_permutation_status and canonical_production_order_status above -- see PHASE2_CANONICAL_SEQUENCE_REPORT.txt
+next_permutation_position_note: legacy field retained for historical/backward compatibility only; does NOT indicate the original 20260831 permutation boundary was recovered
+permutation_boundary_status: superseded_legacy_field
+permutation_boundary_status_note: superseded by original_permutation_status and canonical_production_order_status
