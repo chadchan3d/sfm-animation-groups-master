@@ -62,9 +62,23 @@ production continued through all 10 batches without a hard stop.
 Consistency flags raised: 4 (documented in
 PHASE2_PRODUCTION_TRANCHE7_CONSISTENCY_FLAGS.txt) -- 1 corrected in-ledger
 (flm-rig-hole-v2, a Tranche-7-internal mis-citation caught and fixed before
-the raw commit), 3 reported as pre-existing cross-tranche splits
-(tentacle-family, balloon-flat-*, box_face_##_m) that were not corrected,
-per the restriction against a broad earlier-tranche re-audit.
+the raw commit), 3 reported at raw-commit time as pre-existing cross-tranche
+splits (tentacle-family, balloon-flat-*, box_face_##_m) that were not
+corrected then, per the restriction against a broad earlier-tranche re-audit.
+
+[SUPERSEDED: a follow-up targeted family-reconciliation pass resolved all
+three of these splits with mechanically-verified precedent -- see
+PHASE2_TRANCHE7_FAMILY_RECONCILIATION_REVIEW.txt and
+_APPLIED_REPORT.txt. Tentacle (23 rows) and fin (16 rows, a related drift
+discovered during the same pass) were corrected to CLEAR/CLEAR/groupFile/
+Other per settled Rule 18 and direct calibration precedent -- NOT the
+"more common/recent pattern" this report originally guessed. balloon-flat-
+bottom (1 row) was corrected to CLEAR/CLEAR/groupFile/Body Morphs per
+direct live-Master evidence. box_face_02_m and box_face_19_m (2 rows) were
+corrected DOWN to PARTIAL/NEEDS_CONTEXT/blank to match their majority
+siblings, since no positive evidence resolves that template. Total: 42
+rows corrected across the full ledger (most outside Tranche 7 itself,
+since these families span multiple earlier tranches).]
 
 OPAQUE rows manually reviewed (6-question test): 160 / 160.
 Face/Expressions rows reviewed (mandatory face audit): 14 / 14.

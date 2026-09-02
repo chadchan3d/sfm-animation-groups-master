@@ -1,0 +1,232 @@
+======================================================================
+PHASE 2 -- TRANCHE 7 CROSS-TRANCHE FAMILY RECONCILIATION
+TENTACLE / FIN / BALLOON-FLAT / BOX_FACE, QA REVIEW
+No ledger row has been modified by this document -- see
+PHASE2_TRANCHE7_FAMILY_RECONCILIATION_APPLIED_REPORT.txt for the
+applied result and validation.
+======================================================================
+
+----------------------------------------------------------------------
+0. flm-rig-hole-v2 -- REVALIDATED, NO CHANGE
+----------------------------------------------------------------------
+Mechanically re-read from the current ledger: semantic_status=CLEAR,
+taxonomy_status=NEEDS_CONTEXT, proposed_destination=[blank]. Matches
+the intended result exactly. No contradicting evidence found. CONFIRMED,
+no change.
+
+======================================================================
+A. SETTLED-DOCTRINE DRIFT
+======================================================================
+
+----------------------------------------------------------------------
+A1. TENTACLE FAMILY
+----------------------------------------------------------------------
+Accepted authoritative precedent (mechanically re-read from the current
+authoritative sources, not from memory or report prose):
+  Rule 18 (PHASE2_SEMANTIC_RULEBOOK_FINAL.txt, line 323): "horn and
+    tentacle route to Other, matching existing precedent."
+  PHASE2_SEMANTIC_PILOT_500_FINAL.tsv, mechanically re-read:
+    tentacletopleft2: semantic_status=CLEAR, taxonomy_status=CLEAR,
+      proposed_destination=groupFile/Other, short_reason="tentacle,
+      existing Other precedent (99.7%)"
+    bip_tentacle.011: semantic_status=CLEAR, taxonomy_status=CLEAR,
+      proposed_destination=groupFile/Other, short_reason="tentacle,
+      existing Other precedent (99.7%)"
+This is frozen doctrine plus direct finalized-calibration confirmation
+-- not a production-frequency argument.
+
+Mechanical enumeration of production positions 501-7500 whose fold_key
+matches "tentacle" or "tenta_" found 34 rows. All 34 were individually
+inspected; every one genuinely names a creature-tentacle appendage as
+its controlling referent (no substring accidents -- nothing matching
+unrelated words). Current distribution before this pass:
+  11 already CLEAR/CLEAR/groupFile/Other (correct)
+  23 CLEAR/NEEDS_CONTEXT/blank (drift -- destination withheld despite
+     the settled doctrine)
+
+Strongest counterevidence: none. No tentacle row in this set carries
+any competing semantic content (garment, weapon, non-anatomical use)
+that would override the bare-tentacle reading.
+
+FINAL JUDGMENT: all 23 NEEDS_CONTEXT rows corrected to CLEAR/CLEAR/
+groupFile/Other, matching the 11 already-correct rows and the direct
+calibration precedent. This includes the four Tranche-7 rows named in
+the task: tentaclebottom3, tenta_7_l, tentacletop3, tenta_4_l.
+
+TENTACLE ROWS CORRECTED: 23 (fold_keys: bip_tentacle.004, tenta_9_l,
+  tenta_8_r, tenta_b_10_l, tentacletopright3, tenta_7_r, tenta_2_l,
+  tenta_5_l, tenta_b_1_r, tenta_11_l, tenta_b_2_r, bip_tentacle.009,
+  tenta_6_r, lowertentacle1, tenta_b_3_r, tentacletop1, tenta_8_l,
+  tentaclebottom2, bip_tentacle.007, tentaclebottom3, tenta_7_l,
+  tentacletop3, tenta_4_l)
+
+----------------------------------------------------------------------
+A2. FIN FAMILY
+----------------------------------------------------------------------
+Accepted authoritative precedent (mechanically re-read):
+  PHASE2_SEMANTIC_PILOT_500_FINAL.tsv: l_fin_back_b: semantic_status=
+    CLEAR, taxonomy_status=CLEAR, proposed_destination=groupFile/
+    Other, short_reason="fin, existing Other-majority precedent."
+  Rule 18 lists "fin" among the species-neutral anatomical words
+    requiring "the SAME word-level precedent check as any other
+    anatomy word" -- the calibration row is that check, already
+    performed and settled.
+
+Mechanical enumeration of production positions 501-7500 for word-
+boundary "fin" (explicitly excluding finger/final/finish and similar)
+found 26 hits. Of these, 7 are "Fin-Rig-*" rows where "Fin" is an
+internal rig/model NAMESPACE PREFIX, not the anatomical word -- these
+were already correctly classified on their OTHER content (eye, hat,
+cape, shorts) under rule 24's "set aside the namespace" principle and
+are explicitly EXCLUDED from this family (fin-rig-hat-hood-r, fin-rig-
+eye-lu, fin-rig-eye-r, fin-rig-eye-lb, fin-rig-cape2, fin-rig-shorts-l,
+fin-rig-eye-ru). This leaves 19 genuine creature-fin anatomical rows:
+  3 already CLEAR/CLEAR/groupFile/Other (correct): l_fin_front_a,
+    r_fin_mid_c, r_fin_mid_a
+  14 CLEAR/NEEDS_CONTEXT/blank (drift): r_fin_front_a, l_fin_mid_b,
+    l_fin_front_c, fin_top_c_a, l_fin_back_a, l_fin_mid_c, fin_top_d_d,
+    r_fin_back_b, fin_top_c_b, fin_top_c_d, r_fin_back_a, fin_top_a_d,
+    fin_top_b_c, fin_top_a_c
+  2 misrouted to CLEAR/CLEAR/groupFile/Body (a THIRD inconsistent
+    bucket, not named in the task but found during this enumeration):
+    fin_top_b_d, fin_top_a_b -- both explicitly read "fin anatomy
+    (creature appendage)" in their own referent yet were not routed to
+    the settled Other destination.
+
+Strongest counterevidence: none found in any of the 16 drift rows --
+no competing owner/purpose overrides the bare-fin reading in any of
+them.
+
+FINAL JUDGMENT: all 16 drift rows (14 NEEDS_CONTEXT + 2 Body)
+corrected to CLEAR/CLEAR/groupFile/Other, matching the 3 already-
+correct rows and the calibration precedent. This is a direct
+application of the existing Rule 18 check, not a new rule.
+
+FIN ROWS CORRECTED: 16 (fold_keys: r_fin_front_a, l_fin_mid_b,
+  l_fin_front_c, fin_top_c_a, l_fin_back_a, l_fin_mid_c, fin_top_d_d,
+  r_fin_back_b, fin_top_c_b, fin_top_c_d, r_fin_back_a, fin_top_a_d,
+  fin_top_b_c, fin_top_a_c, fin_top_b_d, fin_top_a_b)
+
+======================================================================
+B. UNRESOLVED FAMILY-TEMPLATE AUDIT
+======================================================================
+
+----------------------------------------------------------------------
+B1. BALLOON-FLAT FAMILY
+----------------------------------------------------------------------
+Mechanical enumeration of the full ledger for "balloon" found 5
+distinct rows (positions given for the record):
+  balloon cum (position 5732, batch P53): CLEAR/CLEAR/groupFile/Body
+    Morphs -- "a belly-ballooning/inflation shape effect," reasoned
+    under rule 7's exception clause because "cum" explicitly names the
+    anatomical/fluid trigger.
+  balloon-flat-right (6263, P58): CLEAR/CLEAR/groupFile/Body Morphs.
+  balloon-flat-left (6315, P59): CLEAR/CLEAR/groupFile/Body Morphs.
+  balloon-flat-bottom (6734, P63): CLEAR/NEEDS_CONTEXT/[blank] --
+    "a 'balloon' (literal balloon object vs. breast-slang usage)."
+  balloon-flat-top (7198, P67): CLEAR/CLEAR/groupFile/Body Morphs.
+  balloon-flat-back: NOT present in the ledger. Verified against
+    PHASE2_PRODUCTION_ORDER.tsv: canonical position 11855, well beyond
+    7500 -- NOT classified, and NOT classified by this pass either.
+    Consulted only as template-family evidence (all 5 "balloon-flat-*"
+    members exist together as a coherent naming set in
+    PHASE2_RESIDUAL_TERMS.txt), not as a target for action.
+
+Doctrine check: Body Morphs requires an actual shape/size/state/
+deformation reading of the character's OWN body, not "deformation
+purpose" alone applied to any object. The question is whether "balloon"
+here is (A) a literal prop, (B) a body/anatomical referent, or (C)
+genuinely unresolved.
+
+Live-Master precedent (re-verified directly, not from memory): word-
+boundary "balloon" produces 7 hits -- Balloon, BalloonBelly,
+BalloonButt, BellyBalloon, BoobsBalloons, BreastsBalloons (6/7, ALL
+groupFile/Body Morphs, including the BARE word "Balloon" itself with
+no anatomical qualifier), and "Text balloon" (1/7, groupFile/Other --
+an unrelated UI/comic-speech-bubble sense, clearly distinguishable and
+not weakening the majority). This is decisive: the Master's own
+established convention treats bare "balloon" as a body-shape/inflation
+term by default, not as a literal prop and not exclusively as breast-
+specific slang. This resolves Option B (positively grounded as body/
+anatomical) for the whole family, independent of the "cum" trigger
+that only applies to "balloon cum" itself.
+
+No same-model provenance was inferred from lexical adjacency; the
+Master precedent stands on its own as an independent, structured (not
+merely sorted-list-adjacent) data source.
+
+FINAL JUDGMENT: balloon-flat-bottom's earlier hedge ("literal object
+vs. breast-slang") is superseded by the direct Master evidence.
+Corrected to CLEAR/CLEAR/groupFile/Body Morphs, normalizing all four
+currently-classified members to the same, now well-grounded reading.
+balloon-flat-back remains unclassified (position 11855), untouched.
+
+BALLOON-FLAT VERDICT: BODY_MORPHS
+BALLOON-FLAT ROWS CORRECTED: 1 (balloon-flat-bottom)
+
+----------------------------------------------------------------------
+B2. BOX_FACE_##_M FAMILY
+----------------------------------------------------------------------
+Mechanical enumeration of the full ledger for "box_face" found 10 of
+the 20 possible family members currently classified (positions given):
+  box_face_03_m (934, P05): PARTIAL/NEEDS_CONTEXT/[blank]
+  box_face_15_m (1044, P06): PARTIAL/NEEDS_CONTEXT/[blank]
+  box_face_13_m (1074, P06): PARTIAL/NEEDS_CONTEXT/[blank]
+  box_face_14_m (1507, P11): PARTIAL/NEEDS_CONTEXT/[blank]
+  box_face_11_m (2095, P16): PARTIAL/NEEDS_CONTEXT/[blank]
+  box_face_10_m (2143, P17): PARTIAL/NEEDS_CONTEXT/[blank]
+  box_face_02_m (4592, P41): CLEAR/CLEAR/groupFile/Other
+  box_face_19_m (4780, P43): CLEAR/CLEAR/groupFile/Other
+  box_face_01_m (6752, P63): PARTIAL/NEEDS_CONTEXT/[blank]
+  box_face_17_m (6775, P63): PARTIAL/NEEDS_CONTEXT/[blank]
+The remaining 10 members (04, 05, 06, 07, 08, 09, 12, 16, 18, 20) are
+unclassified beyond position 7500 and were NOT touched -- consulted
+only as evidence that this is a genuine 20-member systematic template
+(confirmed present as Box_Face_01_M through Box_Face_20_M, contiguous,
+in PHASE2_RESIDUAL_TERMS.txt).
+
+Live-Master check: zero hits for "box face"/"face box" combined --no
+direct precedent of any kind. The calibration Box06/BoxA1 precedent
+covers BARE numbered box props (no "_Face_"+"_M" template component),
+so it does not directly transfer to this materially different,
+extended template, per the task's own caution.
+
+Structural analysis: a real geometric cube/box primitive has exactly
+6 faces. A 20-member numbered "Box_Face_##" series does not map onto
+"the 6 faces of a box" in any natural way, which weakens rather than
+supports the "box prop, one geometric face" reading the 2 CLEAR/Other
+rows asserted. No alternative positive theory (e.g. a stylized "box-
+headed" character's facial-expression-preset series) is independently
+confirmed either -- no character/model reference, FACS-style numbering
+convention, or other corroborating evidence was found for that reading
+in either the Master or the residual corpus.
+
+The family's own physical proximity to the plain "Box16...Box22"
+numbered-prop family in PHASE2_RESIDUAL_TERMS.txt is exactly the kind
+of lexical-sorting adjacency this project's methodology repeatedly
+warns must NOT be treated as provenance or semantic evidence -- it
+reflects alphabetical sort order only, and was explicitly NOT used to
+justify either reading.
+
+FINAL JUDGMENT: no positive evidence resolves this template in either
+direction. Per the task's own conservative fallback, box_face_02_m and
+box_face_19_m are corrected DOWN to match the majority (8 of 10
+currently-classified siblings): PARTIAL/NEEDS_CONTEXT/blank. This does
+not create a new taxonomy rule; it applies the existing genuine-
+undecoded-token / materially-competing-readings standard (Rule 22)
+that the majority of this family's own members already used.
+
+BOX_FACE VERDICT: NEEDS_CONTEXT
+BOX_FACE ROWS CORRECTED: 2 (box_face_02_m, box_face_19_m)
+
+======================================================================
+NO DOCTRINE BLOCKER
+======================================================================
+Tentacle and fin are direct applications of already-settled Rule 18 and
+finalized calibration precedent -- no new doctrine. Balloon-flat is
+resolved by direct, structured live-Master precedent (not lexical
+adjacency) under the existing Rule 7/22 framework -- no new doctrine.
+Box_face reaches a conservative, evidence-consistent NEEDS_CONTEXT
+disposition under existing Rule 22 -- no new doctrine. Total: 42 rows
+corrected (23 tentacle + 16 fin + 1 balloon-flat + 2 box_face).
+======================================================================

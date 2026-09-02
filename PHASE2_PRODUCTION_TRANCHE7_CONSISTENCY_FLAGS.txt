@@ -72,6 +72,17 @@ Tranche 7 resolution: all new tentacle-family rows classified this tranche
 were routed CLEAR/NEEDS_CONTEXT/blank, matching what appears to be the more
 common/recent pattern, and are flagged here rather than silently resolved.
 
+*** SUPERSEDED -- see PHASE2_TRANCHE7_FAMILY_RECONCILIATION_REVIEW.txt and
+_APPLIED_REPORT.txt. This "matching the more common/recent pattern" framing
+was itself the error this project's methodology explicitly warns against:
+production frequency does not override frozen doctrine. Rule 18 states
+"horn and tentacle route to Other" as SETTLED doctrine, directly confirmed
+by finalized calibration (TentacleTopLeft2, Bip_Tentacle.011, both CLEAR/
+CLEAR/groupFile/Other). All 23 NEEDS_CONTEXT tentacle rows (including the
+4 named above) were corrected to CLEAR/CLEAR/groupFile/Other in a follow-up
+targeted pass -- not the reverse. A related fin-family drift (16 rows) was
+found and corrected the same way. ***
+
 ============================================================
 3. PRE-EXISTING CROSS-TRANCHE SPLIT: balloon-flat-* destination
 ============================================================
@@ -86,6 +97,17 @@ Tranche 7 resolution: balloon-flat-top [P67] was routed to the 2-of-3
 majority pattern (groupFile/Body Morphs, Medium confidence) with an explicit
 short_reason cross-reference to this flag.
 
+*** SUPERSEDED -- see PHASE2_TRANCHE7_FAMILY_RECONCILIATION_REVIEW.txt and
+_APPLIED_REPORT.txt. Direct live-Master evidence (word-boundary "balloon":
+6/7 hits, INCLUDING the bare word "Balloon" itself with no anatomical
+qualifier, all groupFile/Body Morphs; the lone exception, "Text balloon,"
+is an unrelated UI/speech-bubble sense) positively grounds "balloon" as a
+body-shape/inflation term in this corpus -- this is structured Master
+evidence, not majority voting among sibling rows. balloon-flat-bottom was
+corrected to CLEAR/CLEAR/groupFile/Body Morphs, normalizing the family.
+balloon-flat-back remains unclassified beyond position 7500 and was not
+touched. ***
+
 ============================================================
 4. PRE-EXISTING CROSS-TRANCHE SPLIT: box_face_##_m destination
 ============================================================
@@ -99,6 +121,15 @@ Current ledger split: box_face_01_m, _03_m, _10_m, _11_m, _13_m, _14_m,
 _15_m, _17_m all resolve PARTIAL/NEEDS_CONTEXT/blank, while box_face_02_m
 and box_face_19_m resolve CLEAR/CLEAR/groupFile/Other -- a genuine,
 unexplained split within one numbered family.
+
+*** SUPERSEDED -- see PHASE2_TRANCHE7_FAMILY_RECONCILIATION_REVIEW.txt and
+_APPLIED_REPORT.txt. No positive evidence resolves this 20-member template
+in either direction (zero Master hits for "box face" combined; a 20-member
+series does not map onto an ordinary cube's 6 geometric faces; proximity to
+the plain Box## family in the sorted residual list is lexical-sort
+adjacency, not provenance). box_face_02_m and box_face_19_m were corrected
+DOWN to PARTIAL/NEEDS_CONTEXT/blank to match the 8-of-10 majority, per the
+conservative fallback for an unresolved template. ***
 
 ============================================================
 5. OPAQUE MANUAL REVIEW (Section 14, 6-question test)
