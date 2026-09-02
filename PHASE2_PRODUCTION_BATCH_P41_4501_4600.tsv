@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+valvebiped.bip01_l_index02	ValveBiped.Bip01_L_Index02	CLEAR	standard biped index-finger bone, segment 2, left	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		standard ValveBiped finger anatomy	P41
+sash 1b	Sash 1b	CLEAR	a sash (worn cloth band), variant 1b	CLEAR	groupFile/Clothing	High		plain worn garment accessory	P41
+hose_11	Hose_11	PARTIAL	"a ""hose"" object, numbered"	NEEDS_CONTEXT		Medium	"""hose"" has materially different core senses (tubing/pipe vs. legwear/hosiery)"	bare multi-sense word, no grounding to pick a reading	P41
+bone 1062	bone 1062	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P41
+wep_barrel_sight	WEP_Barrel_Sight	CLEAR	a weapon barrel sight	CLEAR	groupFile/Other	High		recognized weapon-part object	P41
+cloth back left 3	cloth back left 3	CLEAR	a cloth garment segment, back, left, variant 3	CLEAR	groupFile/Clothing	High		plain garment segment	P41
+belly side back right 1	belly side back right 1	CLEAR	belly-region structural anatomy, side/back, right, variant 1	CLEAR	groupFile/Body	High		ordinary structural anatomy, no shape/state language	P41
+mot08_leftarm	MOT08_LeftArm	CLEAR	left arm anatomy (motion/model-tag prefix set aside)	CLEAR	groupFile/Arms	Medium		"""leftarm"" is meaningful, independently-grounded content despite the mot08 prefix (rule 24)"	P41
+head neck necklace	head neck necklace	CLEAR	a necklace (worn jewelry), head/neck position	CLEAR	groupFile/Clothing	High		explicit named worn accessory	P41
+eyes-full-squinch	Eyes-Full-Squinch	CLEAR	"an eye-region ""squinch"" (squint-like) expression, full intensity"	CLEAR	groupFile/Face/Eyes	High		explicit eye-region expression control	P41
+fur_hospital_surgical_table_a_mesh	FUR_Hospital_Surgical_Table_A_Mesh	CLEAR	a surgical table prop object, variant A	CLEAR	groupFile/Other	High		recognized furniture/prop object; generator-style prefix/suffix does not change this (rule 17)	P41
+x_shift_2	x_shift_2	CLEAR	"an X-axis ""shift"" control, numbered"	NEEDS_CONTEXT		Medium	owning object/body part for the shift is not stated	"""shift"" is a stable function word (rule 22) even without a named object"	P41
+dummy11	Dummy11	OPAQUE	"a generic ""dummy"" placeholder technical object, numbered"	NOT_APPLICABLE		Low		generic technical placeholder, no functional/regional word	P41
+bip hiptwistbase r	bip hiptwistbase r	CLEAR	right hip-twist base, explicitly sided structural hip control	CLEAR	groupFile/Legs	High		explicitly right-sided hip joint/articulation; twist/base qualifiers do not change the destination (rule 26)	P41
+cloth fix 2	Cloth fix 2	CLEAR	a cloth-garment fix/repair control, variant 2	CLEAR	groupFile/Clothing	Medium		object-specific (cloth) repair stays with the object's own destination (rule 8), not Correctives	P41
+eyes-full-surprise	Eyes-Full-Surprise	CLEAR	"an eye-region ""surprise"" expression, full intensity"	CLEAR	groupFile/Face/Eyes	High		explicit eye-region expression control	P41
+valvebiped.bip01_r_fingerbase4	ValveBiped.Bip01_R_FingerBase4	CLEAR	standard biped finger-base bone, finger 4, right	CLEAR	groupFile/Arms/RightArm/RightFingers	High		standard ValveBiped finger anatomy	P41
+canine_ribcage	Canine_Ribcage	CLEAR	ribcage anatomy on a canine creature model	CLEAR	groupFile/Body	High		species-neutral structural anatomy (rule 18)	P41
+c_arl_a00	C_ARL_A00	OPAQUE	"cryptic abbreviation (""ARL""), no grounding for any expansion, numbered variant"	NOT_APPLICABLE		Low		matches the settled c_arl_a01 precedent -- ungrounded abbreviation	P41
+def-ribcage.t.r	DEF-ribcage.T.R	CLEAR	ribcage anatomy, top/right region (DEF- rig prefix set aside)	CLEAR	groupFile/Body	High		"DEF- is a generic rig prefix (rule 9); ""ribcage"" is the meaningful content"	P41
+lowerlips_unknownflex	lowerlips_unknownflex	CLEAR	a lower-lip flex/morph-target control of unstated deformation	CLEAR	groupFile/Body Morphs	Medium		the literal itself frames this as an unidentified flex (morph-target) shape on the lower lip; region and mechanism (flex/morph) are stated even though the specific deformation is not	P41
+lwing04	LWing04	CLEAR	left wing, segment 4	CLEAR	groupFile/Wings	High		plain wing anatomy	P41
+bip_belt_l_1	bip_belt_L_1	CLEAR	a belt (worn garment accessory), left, variant 1	CLEAR	groupFile/Clothing	High		plain garment accessory	P41
+c_stm_a00	C_STM_A00	OPAQUE	"cryptic abbreviation (""STM""), no grounding for any expansion, numbered variant"	NOT_APPLICABLE		Low		"no recognizable word or established corpus/Master convention for ""STM"""	P41
+tailright2_1	TailRight2_1	CLEAR	tail anatomy, right variant, segment/index 2_1	CLEAR	groupFile/Tail	High		plain tail anatomy; side/number are variant identifiers	P41
+def-ribcage.b.l.001	DEF-ribcage.B.L.001	CLEAR	ribcage anatomy, bottom/left region (DEF- rig prefix set aside)	CLEAR	groupFile/Body	High		"DEF- is a generic rig prefix (rule 9); ""ribcage"" is the meaningful content"	P41
+dummy09	Dummy09	OPAQUE	"a generic ""dummy"" placeholder technical object, numbered"	NOT_APPLICABLE		Low		generic technical placeholder, no functional/regional word	P41
+au26z	AU26Z	CLEAR	"a FACS-style Action-Unit control (AU26), variant ""Z"""	CLEAR	groupFile/Face/Expressions	Medium		"matches this corpus's own established AU-numbered facial-expression convention (AU9/17/24/31/32/38 all -> Face/Expressions); the ""Z"" variant suffix does not change the core AU identity"	P41
+submesh_01_lod_1.1126	submesh_01_LOD_1.1126	OPAQUE	a generic technical mesh/LOD identifier, no anatomical content	NOT_APPLICABLE		Low		technical mesh-name/LOD artifact	P41
+arm left elbow ctr1	arm left elbow ctr1	CLEAR	left arm elbow control/center, variant 1	CLEAR	groupFile/Arms	High		ordinary elbow rig control	P41
+org-palm.02.r	ORG-palm.02.R	CLEAR	right palm anatomy, segment 2 (ORG- rig prefix set aside)	CLEAR	groupFile/Arms/RightArm/RightFingers	High		"matches direct, overwhelming live-Master precedent: 36/36 ""palm"" literals route to Left/RightFingers"	P41
+levator02_l	levator02_L	PARTIAL	"a ""levator"" (lifting/elevating) muscle, left, numbered; target organ/region not established by the bare word"	NEEDS_CONTEXT		Low	generic lifting-muscle term with no region qualifier; competing core readings across body regions (matches the settled levator03_r precedent)		P41
+valvebiped.glasses	ValveBiped.Glasses	CLEAR	glasses (worn eyewear accessory)	CLEAR	groupFile/Clothing	High		explicit named worn accessory	P41
+slutthinthinnerplunge.001	SlutThinThinnerPlunge.001	PARTIAL	"a size/shape descriptor sequence (""thin""/""thinner""/""plunge""); body-shape-morph or clothing-neckline reading both plausible, numbered variant"	NEEDS_CONTEXT		Low	"owner not established; ""plunge"" could describe a body-shape depth or a clothing neckline cut"	competing core readings (body vs. garment) for the same descriptor sequence	P41
+flareoutleft	FlareOutLeft	CLEAR	"a ""flare out"" motion/shape control, left side"	NEEDS_CONTEXT		Medium	owning object (garment flare vs. a body-part motion) not established	"""flare"" is a stable shape/motion word (rule 22) even without a named object"	P41
+v_weapon.left_ring02	v_weapon.Left_Ring02	CLEAR	left ring-finger bone, segment 2, on the viewmodel-weapon hand rig	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		matches the established v_weapon finger-control precedent -- routes to the corresponding finger taxonomy	P41
+eyesadr	EyeSadR	CLEAR	"a ""sad"" eye expression, right side"	CLEAR	groupFile/Face/Eyes	High		explicit eye-region expression control	P41
+arm left elbow_roll2	arm left elbow_roll2	CLEAR	left arm elbow roll bone, variant 2	CLEAR	groupFile/Arms	High		twist/roll is standard rig anatomy, not corrective (rule 3)	P41
+valvebiped.bip01_vag_r_1	ValveBiped.Bip01_Vag_R_1	CLEAR	standard biped vaginal/genital anatomy bone, right, segment 1	CLEAR	groupFile/Body	High		matches established ValveBiped genital-anatomy precedent	P41
+cumshot	CumShot	CLEAR	"a semen/fluid-effect control (""cumshot"")"	CLEAR	groupFile/Other	High		fluid/effect-material control, not structural anatomy or body-shape morphology (rule 7's lube/wetness-effect principle)	P41
+def-ribcage.b.r.001	DEF-ribcage.B.R.001	CLEAR	ribcage anatomy, bottom/right region (DEF- rig prefix set aside)	CLEAR	groupFile/Body	High		"DEF- is a generic rig prefix (rule 9); ""ribcage"" is the meaningful content"	P41
+rightclothpulltogether	RightClothPullTogether	CLEAR	"a cloth ""pull together"" garment-deformation control, right"	CLEAR	groupFile/Clothing	Medium		object-specific (cloth) deformation stays with the object's own destination (rule 8)	P41
+brk-rig-hole-a	Brk-Rig-Hole-A	CLEAR	"a ""hole"" (opening/aperture) element within the internal Brk-Rig namespace, variant A"	NEEDS_CONTEXT		Low	the internal rig namespace does not establish which object/anatomical region owns this opening	"""hole"" is a real, stable spatial/object concept (rule 22), unlike the arbitrary namespace code-words (Bacon/Eggwhite) that ground nothing"	P41
+bip01-l-clavicle001	Bip01-L-Clavicle001	CLEAR	standard biped clavicle bone, left, numbered	CLEAR	groupFile/Arms	High		clavicle is shoulder-girdle/arm anatomy	P41
+bone.001_l.040	Bone.001_L.040	OPAQUE	generic numbered bone, left, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label despite the extra numbering suffix	P41
+right thumb 0 grip 1	Right thumb 0 grip 1	CLEAR	right thumb, grip control, variants 0/1	CLEAR	groupFile/Arms/RightArm/RightFingers	High		"thumb is a named digit; ""grip"" is an established finger-control function"	P41
+r1stnc	R1stNc	OPAQUE	"cryptic abbreviation (""1st""+""Nc""), no grounding for any expansion"	NOT_APPLICABLE		Low		"matches the settled l1stnb/l2ndnb precedent -- ordinal recognized but ""Nc"" ungrounded"	P41
+door_1	door_1	CLEAR	a door prop, numbered	CLEAR	groupFile/Other	High		matches the finalized Door2 calibration precedent	P41
+f_c_faceroot	f_C_FaceRoot	CLEAR	a face-region rig root/anchor bone (model/variant prefix set aside)	CLEAR	groupFile/Face	Medium		"""FaceRoot"" is meaningful, independently-grounded content despite the prefix (rule 24); bare structural face anchor, no specific feature named (rule 13-style)"	P41
+flap3.l	Flap3.L	PARTIAL	"a ""flap"" object, left, numbered"	NEEDS_CONTEXT		Medium	"""flap"" has materially different core senses (garment flap vs. anatomical flap vs. mechanical flap)"	bare multi-sense word, no grounding to pick a reading	P41
+pouckerer	pouckerer	CLEAR	"a ""pucker"" action control (obvious misspelling of ""puckerer"")"	NEEDS_CONTEXT		Medium	owning body part (most likely lips, but not stated in the literal) not established	"""pucker"" is a stable, well-established facial/lip-region action word once the misspelling is recognized"	P41
+labiaminoraupperclosepull	LabiaMinoraUpperClosePull	CLEAR	"labia minora anatomy, upper portion, ""close""/""pull"" action"	CLEAR	groupFile/Body	High		explicit genital anatomical term with a structural action; matches established genital-anatomy-to-Body precedent	P41
+flap2.r	Flap2.R	PARTIAL	"a ""flap"" object, right, numbered"	NEEDS_CONTEXT		Medium	"""flap"" has materially different core senses (garment flap vs. anatomical flap vs. mechanical flap)"	bare multi-sense word, no grounding to pick a reading	P41
+rwing04	RWing04	CLEAR	right wing, segment 4	CLEAR	groupFile/Wings	High		plain wing anatomy	P41
+belt l	BELT L	CLEAR	a belt (worn garment accessory), left	CLEAR	groupFile/Clothing	High		plain garment accessory	P41
+wep_bullet2_shell	WEP_Bullet2_Shell	CLEAR	a weapon bullet shell/casing	CLEAR	groupFile/Other	High		recognized ammunition/weapon-part object	P41
+ebinnerlowererl+ebinnerlowererr	EBInnerLowererL+EBInnerLowererR	CLEAR	"an eyebrow (""EB"") inner-lowerer muscle control, left+right combined"	CLEAR	groupFile/Face/Upper Face	Medium		"""EB"" is a common, well-established eyebrow abbreviation; ""InnerLowerer"" corroborates the eyebrow-muscle reading (matches FACS ""inner brow lowerer"")"	P41
+boxa	BoxA	CLEAR	generic lettered box prop, variant A	CLEAR	groupFile/Other	High		matches the finalized Box06/BoxA1 calibration precedent	P41
+bip_r_eyelash_01	bip_r_eyelash_01	CLEAR	standard biped eyelash bone, right, numbered	CLEAR	groupFile/Face/Eyes	High		eyelash is eye-region anatomy	P41
+eyehappyl	EyeHappyL	CLEAR	"a ""happy"" eye expression, left side"	CLEAR	groupFile/Face/Eyes	High		explicit eye-region expression control	P41
+kitty_open	kitty_open	CLEAR	"a vulva/vagina (""kitty"", recognized slang) opening control"	CLEAR	groupFile/Body	Medium		recognized genital slang term, matches the established Anus Open/Vag Open action-on-genital-anatomy pattern	P41
+head brows inner	head brows inner	CLEAR	eyebrow anatomy, inner portion (head is a location prefix)	CLEAR	groupFile/Face/Upper Face	High		plain eyebrow anatomy	P41
+r thumb roll	r thumb roll	CLEAR	right thumb roll bone	CLEAR	groupFile/Arms/RightArm/RightFingers	High		twist/roll is standard rig anatomy, not corrective (rule 3); thumb is a named digit	P41
+r_rear_holster_0u_7v	r_rear_holster_0u_7v	CLEAR	a rear holster, right side, worn character equipment	CLEAR	groupFile/Clothing	High		matches settled holster-as-worn-equipment precedent (rule 16)	P41
+pussparent.002_l.012	PussParent.002_L.012	CLEAR	"a vulva/vagina (""puss"", recognized slang) parent/root rig bone, left, numbered"	CLEAR	groupFile/Body	Medium		recognized genital slang term on a structural parent/root bone	P41
+r bust01 sec root	r bust01 sec root	CLEAR	"right breast (""bust"") secondary/jiggle-chain root anchor, variant 1"	CLEAR	groupFile/Body	High		structural anchor/root on soft-tissue anatomy stays anatomical absent shape/state language (rule 6)	P41
+belt_l3	Belt_L3	CLEAR	a belt (worn garment accessory), left, variant 3	CLEAR	groupFile/Clothing	High		plain garment accessory	P41
+topopen	TopOpen	CLEAR	"a garment top-opening control (""open"" action on a ""top"")"	CLEAR	groupFile/Clothing	Medium		object-specific (top/shirt) action stays with the object's destination (rule 8)	P41
+unusedbone144	unusedbone144	CLEAR	a self-declared unused placeholder bone, numbered	CLEAR	groupFile/Useless	High		"self-declared ""unused"" (rule 15)"	P41
+arm left roll 1	arm left roll 1	CLEAR	left arm roll bone, variant 1	CLEAR	groupFile/Arms	High		twist/roll is standard rig anatomy, not corrective (rule 3)	P41
+l01	L01	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no readable content	P41
+raven_upperface	raven_upperface	CLEAR	upper-face anatomy on a raven creature model	CLEAR	groupFile/Face/Upper Face	High		species-neutral structural anatomy (rule 18)	P41
+body-pussy-open	Body-Pussy-Open	CLEAR	"a vulva/vagina (""pussy"") opening control"	CLEAR	groupFile/Body	High		recognized genital slang term, matches the established Anus Open/Vag Open pattern	P41
+bone008	Bone008	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P41
+veil_r_3	VEIL_R_3	CLEAR	a veil (worn headwear accessory), right, variant 3	CLEAR	groupFile/Clothing	High		plain worn garment accessory	P41
+option 00	OPTION 00	OPAQUE	"a generic technical ""option"" selector, numbered"	NOT_APPLICABLE		Low		bare organizational/technical choice-slot label, no subject or action stated	P41
+upper.l	upper.l	OPAQUE	"a positional label (""upper""), left, no object named"	NOT_APPLICABLE		Low		matches the established bare-position-no-object pattern	P41
+box18	Box18	CLEAR	generic numbered box prop, variant 18	CLEAR	groupFile/Other	High		matches the finalized Box06/BoxA1/Box10/Box22 calibration precedent	P41
+fan.front_2	Fan.Front_2	PARTIAL	"a ""fan"" object, front-positioned, numbered"	NEEDS_CONTEXT		Medium	"""fan"" has materially different core senses (handheld fan accessory vs. mechanical/ventilation fan)"	bare multi-sense word, no grounding to pick a reading	P41
+bip_neck_09	bip_neck_09	CLEAR	standard biped neck anatomy, numbered segment	CLEAR	groupFile/Body	High		bare structural neck anatomy defaults to Body, matching the head/skull precedent (rule 13-style)	P41
+tentacletop1	TentacleTop1	CLEAR	tentacle anatomy, top portion, variant 1	NEEDS_CONTEXT		Medium	no existing Master group is confirmed as the right home for tentacle anatomy	matches the settled tentacle-anatomy precedent (anatomy clear, no established destination)	P41
+rightlwrmasseter	RightLwrMasseter	CLEAR	right masseter (jaw-closing muscle), lower portion	CLEAR	groupFile/Face/Mid Face	High		"explicit anatomical muscle term; matches live-Master ""Bone-R-Masseter"" -> Face/Mid Face precedent"	P41
+globe_top	Globe_Top	CLEAR	the eye globe (eyeball), top portion	CLEAR	groupFile/Face/Eyes	Medium		"""globe"" is a recognized rigging term for the eyeball; top is a positional qualifier"	P41
+r gonion	R Gonion+r gonion	CLEAR	the gonion (jaw-angle craniofacial landmark), right side	CLEAR	groupFile/Face/Lower Face	Medium		explicit specialist anatomical term (jaw-angle landmark); no Master precedent found but the term itself is unambiguous	P41
+bip elbowbacktop l	bip elbowbacktop l	CLEAR	left elbow anatomy, back/top position	CLEAR	groupFile/Arms	High		ordinary elbow rig control	P41
+canine_rear_wolf	Canine_REar_Wolf	CLEAR	"right ear (""REar"") on a canine/wolf creature model"	CLEAR	groupFile/Face/Ears	Medium		"""REar"" parses as R+Ear (camelCase side marker + ear), not ""Rear""; species-neutral structural anatomy (rule 18)"	P41
+gasmask1	gasmask1	CLEAR	a gas mask (worn headwear equipment), numbered	CLEAR	groupFile/Clothing	High		worn equipment defaults to Clothing (rule 16)	P41
+front-pull-side	front-pull-side	CLEAR	"a ""pull"" action control, front/side positional qualifiers"	NEEDS_CONTEXT		Medium	owning object for the pull action is not stated	"""pull"" is a stable function word (rule 22) even without a named object"	P41
+arm left finger 4 5	arm left finger 4 5	CLEAR	left arm, finger 4, segment 5	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy	P41
+bh47	Bh47	OPAQUE	"cryptic abbreviation (""Bh""), no grounding for any expansion, numbered"	NOT_APPLICABLE		Low		matches the settled bh01.r precedent -- ungrounded abbreviation	P41
+loadarmleft	LoadArmLeft	PARTIAL	"a ""load"" + ""arm"" control, left; character-limb arm vs. mechanical loading-arm/lever reading both plausible"	NEEDS_CONTEXT		Low		"materially different core readings for ""arm"" (character limb vs. mechanical component)"	P41
+box_face_02_m	Box_Face_02_M	CLEAR	a box prop, one geometric face, variant 02_M	CLEAR	groupFile/Other	Medium		"matches the Box-family calibration precedent; ""face"" here reads as the box's own geometric face, not character anatomy"	P41
+bip01_spine2_013	Bip01_Spine2_013	CLEAR	standard biped spine anatomy, segment 2, numbered	CLEAR	groupFile/Body	High		plain structural spine anatomy with an explicit biped/rig prefix (rule 14)	P41
+valvebiped.hat	ValveBiped.Hat	CLEAR	a hat (worn headwear accessory)	CLEAR	groupFile/Clothing	High		explicit named worn accessory	P41
+booblsqueeze	BoobLSqueeze	CLEAR	"left breast (""boob"") squeeze/deformation action"	CLEAR	groupFile/Body Morphs	High		explicit squeeze/deformation action on soft-tissue breast anatomy (rule 7)	P41
+cloth right 5	cloth right 5	CLEAR	a cloth garment segment, right, variant 5	CLEAR	groupFile/Clothing	High		plain garment segment	P41
+squint_both	Squint_Both	CLEAR	a squint expression, both eyes	CLEAR	groupFile/Face/Eyes	High		explicit eye-region expression control	P41
+r_front_holster_0u_4v	r_front_holster_0u_4v	CLEAR	a front holster, right side, worn character equipment	CLEAR	groupFile/Clothing	High		matches settled holster-as-worn-equipment precedent (rule 16)	P41
+stool	Stool	CLEAR	a stool (furniture prop)	CLEAR	groupFile/Other	High		recognized furniture/prop object, matches the Door/Torch/Pillow precedent	P41
+side_right_6	side_right_6	OPAQUE	bare side marker with a number, no object or function named	NOT_APPLICABLE		Low		matches the established bare-position-no-object pattern	P41

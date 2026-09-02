@@ -1,0 +1,163 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 5 -- REPORT
+Canonical positions 4501-5500 (1,000 production families), batches
+P41-P50. Raw batch files: PHASE2_PRODUCTION_BATCH_P41_4501_4600.tsv
+through PHASE2_PRODUCTION_BATCH_P50_5401_5500.tsv.
+======================================================================
+
+----------------------------------------------------------------------
+1. TRANCHE-ONLY STATISTICS (the 1,000 rows classified in this tranche)
+----------------------------------------------------------------------
+semantic_status:
+  CLEAR   : 815
+  PARTIAL : 57
+  OPAQUE  : 128
+
+taxonomy_status:
+  CLEAR          : 738
+  NEEDS_CONTEXT  : 134
+  NEEDS_DOCTRINE : 0
+  NOT_APPLICABLE : 128
+
+confidence:
+  High   : 614
+  Medium : 226
+  Low    : 160
+
+proposed_destination distribution (CLEAR rows only, 738 total):
+  Clothing                    : 135
+  Other                       : 111
+  Body                        : 69
+  Face/Eyes                   : 55
+  Arms                        : 54
+  Legs                        : 50
+  Body Morphs                 : 34
+  Face/Lower Face             : 31
+  Arms/LeftArm/LeftFingers    : 29
+  Hair                        : 27
+  Useless                     : 25
+  Arms/RightArm/RightFingers  : 20
+  Face/Upper Face             : 18
+  Toes/RightToes              : 11
+  Toes/LeftToes               : 9
+  Tail                        : 8
+  Face/Expressions            : 8
+  Face/Mid Face               : 8
+  Face/Ears                   : 7
+  Wings                       : 6
+  Arms/LeftArm                : 6
+  Correctives                 : 5
+  Arms/RightArm               : 4
+  Face                        : 2
+  Fingers                     : 2
+  Face/Tongue                 : 2
+  Arms/RightArm/RightCarpals  : 1
+  Arms/LeftArm/LeftCarpals    : 1
+
+NEEDS_CONTEXT: 134
+NEEDS_DOCTRINE: 0 (no doctrine-escalation report was needed; no
+  hard-stop occurred at any point across all 10 batches)
+
+----------------------------------------------------------------------
+2. RECURRING UNCERTAINTY THEMES (NEEDS_CONTEXT / OPAQUE drivers)
+----------------------------------------------------------------------
+- Generic numbered/mesh/placeholder technical artifacts (the largest
+  OPAQUE contributor, ~60 occurrences): bare "Bone###," "polySurface/
+  pCube/pCylinder###," generic "Object###," bare alphanumeric codes,
+  submesh/LOD identifiers -- all individually verified to carry no
+  independently meaningful content, matching the extensively settled
+  negative pattern.
+- Bare position/side labels with no object (~15 occurrences): "front
+  0/3_2," "frontbottom," "frontlow," "left_5/23/26," "right_22/27,"
+  "side_right_6," "student.front_1," "upper.l" -- a position word alone
+  with nothing it modifies has no recoverable core referent, contrasted
+  throughout with genuine ACTION/FUNCTION words (tilt, pivot, jiggle,
+  poke, kick, crush, shift, raise, pull, push, open) which remain CLEAR
+  even without a named object per the Tranche-4 lesson.
+- Bare multi-sense object words with no disambiguating context (~20
+  occurrences): "bow" (4), "chain" (4), "pad" (2), "fan" (3), "hose"
+  (1), "flap" (2), "cuff," "tie," "shaft," "ball," "sack," "spur,"
+  "heart," "disc," "tissue," "slide," "stalk," "charge" (2) -- each
+  genuinely supports more than one materially different reading.
+- Bare accessory/object nouns with no owner named (~15 occurrences):
+  string/cord/rope/strap/spike/gem/clasp/knot-family rows, consistent
+  with the settled rule-25 bare-accessory pattern.
+- Generic function words with a real, stable reading but no named
+  owner (~20 occurrences): raiser, poke, crush, kick, pull(er), push,
+  shift (x2), open(r/b), jiggle (x4), master, wrinkler (x2), tilt-style
+  direction words -- CLEAR per rule 22, NEEDS_CONTEXT for taxonomy.
+  This category is the direct, proactive application of the sharpened
+  Tranche-4 OPAQUE discipline during classification, not a retrospective
+  fix.
+- Creature-appendage anatomy with no established Master destination:
+  "fin" (3 occurrences) and "tentacle" (2 occurrences) -- anatomy clear,
+  no confirmed destination, matching the settled precedent.
+- Bird shoulder-girdle-bone caution (rule 18): crow/creature "ulna" and
+  "clavical" (2 occurrences) -- correctly NOT assumed to be Wings by
+  elimination; NEEDS_CONTEXT per the rule's explicit bird caution.
+- Mixed-region compounds forced to NEEDS_CONTEXT rather than a silent
+  pick: "Leg...Finger" literals (2 occurrences, matching the settled
+  Tranche 3/4 precedent).
+- Bare/referent-free "spine"-style literals with no ownership evidence
+  (2 occurrences), matching rule 14's own explicit NEEDS_CONTEXT branch.
+- "dyng"-grounded jiggle-physics controls (3 occurrences) where the
+  function is grounded (rule 23's own documented example) but object
+  ownership genuinely is not.
+- "Level"-family waypoint/hierarchy references (3 occurrences) matching
+  the accepted level5_south precedent -- semantically CLEAR, taxonomy
+  NEEDS_CONTEXT.
+
+----------------------------------------------------------------------
+3. CONSISTENCY AUDIT
+----------------------------------------------------------------------
+Full detail in PHASE2_PRODUCTION_TRANCHE5_CONSISTENCY_FLAGS.txt. Every
+candidate finding was run through the six mandatory precedent-check
+questions.
+
+Result: 8 confirmed likely classification errors -- c_bck_b00 (a
+genuinely grounded "Bck"="Back" corpus convention was mistakenly
+treated as an ungrounded abbreviation), plus 6 confident + 1 lower-
+confidence expression-word destination inconsistencies (shocked l,
+csmile, lsuprise, mocking, hurt, roar routed to the generic Face/
+Expressions bucket without checking word-specific live-Master
+precedent, which for several of these words leans heavily toward a
+specific Face subgroup or, for zero-precedent words, toward
+NEEDS_CONTEXT rather than a confident pick; face ahegaostyle flagged
+with lower confidence given genuinely split evidence). None auto-
+corrected, per instruction (Section 13: do not auto-apply consistency
+flags before the raw-tranche commit).
+
+CONSISTENCY FLAGS: 8
+
+TRANCHE OPAQUE ROWS MANUALLY REVIEWED: 128
+DIRECT-READABILITY FALSE-OPAQUE FLAGS: 0
+PROJECT-GROUNDED FALSE-OPAQUE FLAGS: 1 (c_bck_b00)
+
+----------------------------------------------------------------------
+4. VALIDATION RESULTS (all batches, mechanical)
+----------------------------------------------------------------------
+Every one of the 10 batches (P41-P50) independently passed, before
+merge, per-batch validation: exactly 100 expected canonical positions;
+exact fold_key match against PHASE2_PRODUCTION_ORDER.tsv; exact_spellings
+byte-for-byte; no duplicate family within the batch; valid enums; valid
+destinations; destination blank unless taxonomy_status=CLEAR; OPAQUE iff
+NOT_APPLICABLE; no calibration-family reuse; no already-classified
+production-family reuse.
+
+After each of the 10 merges, the entire ledger was independently
+re-validated (not just the newly appended rows): row count matched the
+expected running total (4600, 4700, ..., 5500); the first 500 rows
+remained field-identical to PHASE2_SEMANTIC_PILOT_500_FINAL.tsv at
+every step; production positions 501-<latest> remained in exact
+canonical order against PHASE2_PRODUCTION_ORDER.tsv; zero duplicate
+families at any point; Rule 21 held globally after every merge.
+
+----------------------------------------------------------------------
+5. CUMULATIVE PHASE 2 STATE (kept separate from tranche-only stats)
+----------------------------------------------------------------------
+  calibration families complete           : 500
+  production families classified          : 5000
+  total ledger rows                       : 5500
+  next canonical Phase 2 position         : 5501
+  production families remaining           : 8782
+======================================================================

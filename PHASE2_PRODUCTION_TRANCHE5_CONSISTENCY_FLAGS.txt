@@ -1,0 +1,220 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 5 -- CONSISTENCY AUDIT
+Positions 4501-5500 (1,000 production families). Flag-only audit. No
+ledger rows were changed during this audit -- all findings below are
+documented for a future targeted QA-application pass, consistent with
+the established Tranche 2-4 pattern.
+======================================================================
+
+----------------------------------------------------------------------
+METHOD
+----------------------------------------------------------------------
+Every candidate finding was run through the six mandatory questions:
+(1) what does the complete literal itself establish; (2) finalized
+calibration precedent; (3) corrected Tranche 1-4 production precedent;
+(4) live Master/corpus grounding; (5) does the current row actually
+conflict; (6) verdict A/B/C/D. The mandatory three-way OPAQUE QA
+(Section 10 of the task) was run over all 128 Tranche-5 OPAQUE rows:
+direct-literal-readability, real-world-genericity, and project-grounded-
+convention checks. A mechanical token-vs-Master-family sweep (>=3 hits,
+>=60% single-destination consistency) surfaced 7 unique candidate rows
+across 4 tokens; each was individually inspected.
+
+----------------------------------------------------------------------
+1. THREE-WAY OPAQUE QA RESULTS
+----------------------------------------------------------------------
+TRANCHE OPAQUE ROWS MANUALLY REVIEWED: 128.
+
+Sweep A (real-world concept discarded merely for genericity -- the
+Box10/Box22 failure mode): none found. All numbered/generic-looking
+OPAQUE rows in this tranche (the large Bone###/polySurface###/pCube###/
+Object###/bare-alphanumeric-code/bare-position-no-object families) were
+individually checked against the same test that correctly promotes
+Box10/Box22/Splat/etc. -- none of them names a stable real object;
+"bone," "object," "polySurface" etc. are DCC/rig TYPE labels, not the
+name of a specific thing, and none carries an additional qualifier that
+would supply one (contrast the settled "toy_bone_NN" pattern, which
+these are NOT -- no "toy" or similar disambiguator is present in any of
+these rows).
+
+Sweep B (project-grounded convention discarded as cryptic -- the
+donger/r_brown/splat failure mode): mechanical token sweep surfaced 7
+unique candidates across 4 tokens (ARL, BED, BCK, WEAPON). Individually
+inspected:
+
+  c_arl_a00 ("ARL", 137 Master hits, 61% Face/Ears): FALSE POSITIVE.
+    All hits are substring coincidence -- Sn-ARL, Fa-r-L, E-ARL --
+    none relates to an "ARL" abbreviation. Verdict C, no change.
+
+  bone_bed_03 / bone_bed_10 ("BED", 17 Master hits, 71% Body Morphs):
+    FALSE POSITIVE. All hits are substring coincidence (BEDroom eyes,
+    grab-BED, rib-BED, "BEDrop" = "BE"+"Drop" not "bed"+"rop") -- none
+    is the word "bed" as a real object. Verdict C, no change.
+
+  v_weapon.root23 ("weapon", 153 hits, 100% Other): FALSE POSITIVE --
+    self-referential. Every hit is simply another v_weapon.* literal;
+    this is not independent grounding for "root23" specifically, it is
+    the shared prefix matching itself. Verdict C, no change.
+
+  c_bck_b00 ("BCK", 14 Master hits, 86% Hair): CONFIRMED CLASSIFICATION
+    ERROR. Unlike the above, this is a genuine, coherent, real pattern:
+    BckHair_1/2, dl_hairFaceBck_1/2_L/R, dl_hairSideBck_1/2_L/R,
+    dyn_waist_fur_l/r_bck (all Hair), plus bip_hood_bck/dyn_hood_bck
+    (Clothing) -- "Bck" is an established abbreviation for "Back" in
+    this exact corpus, always in a hair- or hood/clothing-related
+    context. The row was classified OPAQUE ("cryptic abbreviation
+    'BCK', no grounding for any expansion") on the assumption that a
+    plausible "Back" expansion lacked a demonstrated sibling series --
+    that assumption is factually wrong; the sibling series exists and
+    is coherent (rule 23c).
+    1. Literal establishes: "C" (variant/character prefix) + "Bck"
+       (back) + "B00" (variant/index), numbered.
+    2. Calibration precedent: none directly.
+    3. Corrected Tranche precedent: none directly, but the same
+       standard already applied to donger/r_brown/dyng governs here.
+    4. Live-Master grounding: yes, 12/14 non-substring-noise hits
+       establish "Bck" = "Back" as a real corpus convention.
+    5. Contradiction: yes -- OPAQUE/NOT_APPLICABLE asserts no
+       grounding exists at all, which the sibling series directly
+       contradicts.
+    6. Verdict: A, classification error. HOWEVER: the grounded
+       convention itself splits between Hair (10/12) and Clothing
+       (2/12) depending on what "back" position is being described,
+       so the CORRECTED destination is NOT confidently one group --
+       recommended correction is semantic_status OPAQUE -> CLEAR
+       ("a 'back'-position reference (\"Bck\"), variant C, numbered"),
+       taxonomy_status NOT_APPLICABLE -> NEEDS_CONTEXT, destination
+       stays blank, confidence Low -> Medium. NOT auto-applied here,
+       per instruction.
+
+No other OPAQUE row in this tranche was found to have a grounded
+convention improperly discarded as cryptic.
+
+PROJECT-GROUNDED FALSE-OPAQUE FLAGS: 1 (c_bck_b00).
+DIRECT-READABILITY FALSE-OPAQUE FLAGS: 0 (see Sweep A discussion above
+-- this tranche's OPAQUE population was produced applying the
+sharpened Tranche-4 discipline proactively during classification, so
+no direct-readability misses were found in retrospect).
+
+----------------------------------------------------------------------
+2. SELF-IDENTIFIED EXPRESSION-WORD DESTINATION INCONSISTENCY (7 rows)
+----------------------------------------------------------------------
+While classifying later batches in this same tranche, live-Master
+precedent checks for "frown," "smile," "shocked," and "surprise"
+(Section on fullfrown/frownright/fullsmile/smile_simple, P47-P50)
+revealed that several whole-face EXPRESSION WORDS have a strong,
+specific Master-precedent destination toward one particular Face
+subgroup (e.g. frown/smile lean overwhelmingly Face/Lower Face at
+89%/94%; shocked/surprise lean overwhelmingly Face/Upper Face at
+75%/74%), rather than the generic groupFile/Face/Expressions bucket.
+Earlier in this same tranche (before this precedent check was run),
+several rows were classified to Face/Expressions by default without
+checking word-specific Master precedent. Flagged for correction:
+
+  shocked l (P43, exact: Shocked L): classified CLEAR/CLEAR/
+    Face/Expressions. Live-Master "shocked" precedent: 9/12 (75%) ->
+    Face/Upper Face. 1. Literal: a "shocked" expression, left.
+    2. Calibration precedent: none directly. 3. Corrected precedent:
+    none directly (this is the first check of this specific word).
+    4. Live-Master grounding: yes, 75% Face/Upper Face. 5. Contradiction:
+    yes, the row's own destination does not match the word's actual
+    majority precedent. 6. Verdict: A, likely classification error --
+    recommend Face/Upper Face instead of Face/Expressions.
+
+  csmile (P43, exact: CSmile): classified CLEAR/CLEAR/Face/Expressions.
+    Live-Master "smile" precedent: 136/153 (89%) -> Face/Lower Face.
+    Same six-question analysis as above. Verdict: A, likely
+    classification error -- recommend Face/Lower Face.
+
+  mocking (P44, exact: Mocking): classified CLEAR/CLEAR/
+    Face/Expressions. Live-Master "mocking" precedent: 0 hits. Verdict:
+    A, likely classification error -- with zero Master corroboration
+    and no explicit facial-region word in the literal, taxonomy should
+    be NEEDS_CONTEXT rather than a confident Face/Expressions pick.
+
+  lsuprise (P44, exact: LSuprise): classified CLEAR/CLEAR/
+    Face/Expressions. Live-Master "surprise" precedent: 68/92 (74%) ->
+    Face/Upper Face. Verdict: A, likely classification error --
+    recommend Face/Upper Face.
+
+  face ahegaostyle (P44, exact: Face AhegaoStyle): classified CLEAR/
+    CLEAR/Face/Expressions. Live-Master "ahegao" precedent: genuinely
+    split (5/14 Expressions, 4/14 Upper Face, 3/14 Lower Face, 2/14
+    Tongue) -- no destination reaches even 40%. Verdict: A/D borderline
+    -- the current pick has a plurality but not a majority; arguably
+    this should be NEEDS_CONTEXT given the genuine split, though
+    Expressions is defensible as the single largest bucket for a
+    whole-face compound preset. Recommend downgrading to NEEDS_CONTEXT
+    on review, but flagged with lower confidence than the other four.
+
+  hurt (P45, exact: Hurt): classified CLEAR/CLEAR/Face/Expressions.
+    Live-Master "hurt" precedent: 0 hits. Verdict: A, likely
+    classification error -- taxonomy should be NEEDS_CONTEXT; rule 22's
+    own text cites "HurtR" as a semantic_status=CLEAR example, but that
+    establishes semantic clarity only, not a taxonomy destination, and
+    this row conflated the two.
+
+  roar (P45, exact: ROAR): classified CLEAR/CLEAR/Face/Expressions.
+    Live-Master "roar" precedent: 0 hits. Verdict: A, likely
+    classification error -- taxonomy should be NEEDS_CONTEXT for the
+    same reason as "hurt."
+
+These seven rows were NOT auto-corrected, per instruction (do not
+auto-apply consistency flags before the raw-tranche commit). All seven
+retain their semantic_status=CLEAR (the semantic reading itself is not
+in question) -- only the taxonomy_status/proposed_destination is
+flagged as likely needing correction to NEEDS_CONTEXT or a different
+specific Face subgroup.
+
+----------------------------------------------------------------------
+3. OTHER CHECKS (no findings)
+----------------------------------------------------------------------
+Body vs Body Morphs: spot-checked every Body Morphs assignment in this
+tranche for an actual stated shape/size/state/deformation word (not
+bare anatomy) -- all confirmed (e.g. legchubby, ballrounded, absdefine,
+emaciated lower details, nolipo, bootswidehips, buttbiggerpanty,
+long_bulge_middle, heavy upper details, muclesdefine). No bare-anatomy-
+mislabeled-as-Morphs cases found.
+
+Rule 26 hip handling: every hip-family row in this tranche (bip
+hiptwistbase r, bip hiptwistfront l, hip base left/right, hip left,
+bip_hip_l_1) is explicitly sided and correctly routed to Legs; no
+central/unsided hip row was misrouted.
+
+Correctives: all 6 Correctives assignments in this tranche
+(pjcmthighfwd115l, vag push anus corr, pjcmcollarup55r,
+pjcmabdomenlowerfwdnavel, leg_bone_correct_r_02) carry explicit JCM/
+"Corr"/"correct" repair language; none rests on helper/twist/roll/
+numbering alone.
+
+Owner-vs-location: torso/back/chest-adjacent bare-object rows (r
+string1/4 tip sec, cord3, rope_1, spike_10_m, gem_l, clasp, knotlarge3/
+small1, strap_a.03/1_l) were consistently routed to NEEDS_CONTEXT
+rather than a location-implied destination.
+
+Mixed regions: legmiddlefinger1_l and leg right finger 1 (Leg+Finger)
+both correctly routed to NEEDS_CONTEXT, matching the settled Tranche
+3/4 precedent; no mixed-region literal was silently forced to one
+destination.
+
+Self-declared unused: every self-declared unused/duplicate row in this
+tranche routed to Useless; no coincidental "duplicate"-word false
+positive was found.
+
+Coherent-family destination splits: the collar family (bip_collar_L/R
+-> Arms via Rule 26/clavicle precedent vs. bare numbered "collar N"/
+"collar left/right N" -> Clothing via the garment-collar-segment
+precedent) was applied consistently across all occurrences this
+tranche (valvebiped.l_collar -> Arms; collar left 2/collar right 1 ->
+Clothing) -- these are two genuinely different naming templates, not
+an inconsistent split of one template.
+
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+Total flags: 8 confirmed likely classification errors (c_bck_b00, plus
+6 confident + 1 lower-confidence expression-word destination
+inconsistencies). None auto-corrected. No other classification errors,
+metadata defects, or unjustified family splits were found across this
+tranche's 1,000 rows.
+======================================================================

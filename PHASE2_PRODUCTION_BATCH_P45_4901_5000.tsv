@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+crush-12	crush-12	CLEAR	"a ""crush"" action control, numbered"	NEEDS_CONTEXT		Medium	owning object/body part for the crush action is not stated	"""crush"" is a stable function word (rule 22) even without a named object"	P45
+roar	ROAR	CLEAR	"a ""roar"" expression/action"	CLEAR	groupFile/Face/Expressions	Medium		recognized whole-face/mouth expression-action term	P45
+fit underwear down - front/back	Fit Underwear Down - Front/Back	CLEAR	underwear (garment) fit-down adjustment, front/back	CLEAR	groupFile/Clothing	High		explicit named worn garment	P45
+c ujacketb c phy	C uJacketB c Phy	CLEAR	a jacket (garment), variant B, sub-part C, physics-simulated	CLEAR	groupFile/Clothing	High		matches the L CollarA a Phy-style calibration precedent -- explicit physics-sim marker on a garment	P45
+left little proximal	Left Little Proximal	CLEAR	"left pinky-finger (""little"") proximal-phalanx anatomy"	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit anatomical digit + joint-position terms	P45
+bone075	Bone075	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P45
+ltoemid01	lToeMid01	CLEAR	left middle-toe anatomy, numbered	CLEAR	groupFile/Toes/LeftToes	High		plain toe anatomy	P45
+lmiddle1	lMiddle1+lmiddle1	CLEAR	left middle-finger anatomy, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy	P45
+rankle	RAnkle	CLEAR	right ankle anatomy	CLEAR	groupFile/Legs	High		plain structural leg anatomy	P45
+gem_l	Gem_L	CLEAR	a gem (decorative accessory), left	NEEDS_CONTEXT		Medium	owner/mount for the gem accessory is not named	bare accessory noun with no owner (rule 25)	P45
+bip_bobby_l_finger_globe_2_01	Bip_BOBBY_L_Finger_Globe_2_01	PARTIAL	"left finger anatomy with a genuinely undecoded qualifier (""Globe""), numbered"	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium	"""Globe"" resists decoding in this finger-qualifier position"	matches the settled Tranche-3 Finger_Globe precedent -- owner (finger) is clear even though the modifier is not	P45
+maid.bow_left_lower_2	Maid.Bow_Left_Lower_2	CLEAR	a decorative bow (maid-costume accessory), left, lower, numbered	CLEAR	groupFile/Clothing	Medium		"the ""maid"" costume context resolves ""bow"" to the decorative-accessory reading over archery/ship senses"	P45
+dummy_fur_gen_bed_single_rich_b	Dummy_FUR_GEN_Bed_Single_Rich_B	CLEAR	"a bed (furniture prop), single, variant ""rich B"" (generator-style prefix/placeholder set aside)"	CLEAR	groupFile/Other	Medium		recognized furniture/prop object; generator-style prefix does not change this (rule 17)	P45
+butt right_jiggle_root	Butt Right_jiggle_root	CLEAR	right buttock jiggle-physics root anchor	CLEAR	groupFile/Body	High		structural anchor/root on soft-tissue anatomy stays anatomical absent shape/state language (rule 6)	P45
+bip_r_cloth_b_03	bip_r_cloth_b_03	CLEAR	a cloth garment segment, right, variant B, numbered	CLEAR	groupFile/Clothing	High		plain garment segment	P45
+fur_gen_pillow_sitting_d_mesh	FUR_GEN_Pillow_Sitting_D_mesh	CLEAR	a pillow (furniture prop), sitting pose, variant D (generator-style prefix/suffix set aside)	CLEAR	groupFile/Other	High		matches the finalized Pillow calibration precedent	P45
+bip_tailc17	bip_tailC17	CLEAR	tail anatomy, variant C, numbered	CLEAR	groupFile/Tail	High		plain tail anatomy	P45
+valvebiped.pcube43	ValveBiped.pCube43	OPAQUE	a generic default-named primitive mesh (Maya pCube), numbered	NOT_APPLICABLE		Low		technical DCC-default geometry placeholder	P45
+browrightdown	BrowRightDown	CLEAR	eyebrow-down action, right	CLEAR	groupFile/Face/Upper Face	High		plain eyebrow anatomy and action	P45
+mila head neck upper	Mila head neck upper	CLEAR	head/neck anatomy, upper portion (character-name prefix set aside)	CLEAR	groupFile/Body	Medium		bare structural head/neck anatomy defaults to Body (rule 13-style); character prefix is not itself semantic ownership (rule 24)	P45
+bone151	Bone151	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P45
+bip_woolpelvis_2_r	bip_WoolPelvis_2_R	CLEAR	a wool garment covering the pelvis region, right, numbered	CLEAR	groupFile/Clothing	Medium		"""wool"" identifies fabric/garment material over the pelvis region"	P45
+straps_l	straps_L	CLEAR	straps (accessory), left	NEEDS_CONTEXT		Medium	owner/mount for the strap accessory is not named	bare accessory noun with no owner (rule 25)	P45
+flapleft	flapleft	PARTIAL	"a ""flap"" object, left"	NEEDS_CONTEXT		Medium	"""flap"" has materially different core senses (garment flap vs. anatomical flap vs. mechanical flap)"	bare multi-sense word, no grounding to pick a reading	P45
+crow_3.ulna_r	Crow_3.Ulna_R	CLEAR	ulna (forelimb/shoulder-girdle bone) anatomy on a crow creature model, right	NEEDS_CONTEXT		Medium	"a shoulder-girdle/forelimb bone on a bird is not automatically Wings by elimination, and the literal does not itself say ""wing"""	matches rule 18's explicit caution against inferring Wings from bird species alone for ulna/clavicle/humerus-type bones	P45
+helper bone 1	helper bone 1	OPAQUE	a generic helper bone, numbered, no functional/regional word	NOT_APPLICABLE		Low		"matches the generic numbered bone precedent despite the neutral ""helper"" qualifier (rule 4)"	P45
+unused131	unused131	CLEAR	a self-declared unused placeholder, numbered	CLEAR	groupFile/Useless	High		"self-declared ""unused"" (rule 15)"	P45
+wep_wick1	WEP_Wick1	CLEAR	a weapon/explosive wick, numbered	CLEAR	groupFile/Other	Medium		recognized real-world object in a weapon context	P45
+nolipo	NoLipo+nolipo	CLEAR	"a ""no liposuction"" body-shape toggle (fuller-body appearance)"	CLEAR	groupFile/Body Morphs	Medium		"""lipo"" (liposuction) is a recognized body-shape term; explicit shape-state toggle (rule 7)"	P45
+right_browinv	Right_BrowInV	CLEAR	an inverted eyebrow control, right	CLEAR	groupFile/Face/Upper Face	Medium		plain eyebrow anatomy with a variant qualifier	P45
+valvebiped.l_foarm	Valvebiped.L_foarm	CLEAR	"standard biped forearm anatomy (obvious truncation of ""forearm""), left"	CLEAR	groupFile/Arms	High		obvious truncation/misspelling recognized	P45
+sofa.cushon.one	sofa.cushon.one	CLEAR	"a sofa cushion (obvious misspelling of ""cushion""), furniture prop, numbered"	CLEAR	groupFile/Other	High		recognized furniture/prop object; obvious misspelling recognized	P45
+tentaclebottom2	TentacleBottom2	CLEAR	tentacle anatomy, bottom portion, numbered	NEEDS_CONTEXT		Medium	no existing Master group is confirmed as the right home for tentacle anatomy	matches the settled tentacle-anatomy precedent	P45
+stalk	Stalk	PARTIAL	"a ""stalk"" object"	NEEDS_CONTEXT		Low	"""stalk"" has materially different plausible readings (plant/decorative stalk vs. a creature-appendage stalk vs. other)"	bare multi-sense word, no grounding to pick a reading	P45
+right_22	right_22	OPAQUE	bare side marker with a number, no object or function named	NOT_APPLICABLE		Low		matches the established bare-position-no-object pattern	P45
+cuff.right	cuff.right	PARTIAL	"a ""cuff"" object, right"	NEEDS_CONTEXT		Medium	"""cuff"" has materially different core senses (garment wrist/ankle cuff vs. a restraint/handcuff)"	bare multi-sense word, no grounding to pick a reading	P45
+strings 2 jb	strings 2 JB	CLEAR	strings (accessory), numbered, jiggle-bone tag	NEEDS_CONTEXT		Medium	owner/mount for the string accessory is not named	bare accessory noun with no owner (rule 25)	P45
+poke02	Poke02	CLEAR	"a ""poke"" action control, numbered"	NEEDS_CONTEXT		Medium	owning object/body part for the poke action is not stated	"""poke"" is a stable function word (rule 22) even without a named object"	P45
+ball.left	Ball.Left	PARTIAL	"a ""ball"" object, left"	NEEDS_CONTEXT		Medium	"""ball"" has materially different core senses (testicle anatomy vs. a literal ball prop/object)"	bare multi-sense word, no grounding to pick a reading	P45
+comaneci_r__slerp_momo_r__i70_x0__offset	comaneci_r__slerp_momo_r__i70_x0__offset	PARTIAL	"thigh (Japanese ""momo"") anatomy with an unresolved compound qualifier (""comaneci"", ""slerp"", offset parameters), right"	NEEDS_CONTEXT		Low	"the exact relation between ""comaneci"" and the interpolation/offset parameters is not resolved"	owner (thigh) is grounded via Japanese anatomical term, but the compound relation among the remaining tokens resists decoding (rule 22), matching the momo_rt_l precedent	P45
+genitals 01	genitals 01	CLEAR	genital anatomy, numbered	CLEAR	groupFile/Body	High		explicit genital anatomical term	P45
+bip_ears5_r	bip_Ears5_R	CLEAR	ear anatomy, right, numbered	CLEAR	groupFile/Face/Ears	High		plain ear anatomy	P45
+r ulid e	R Ulid E	CLEAR	upper eyelid anatomy, right, variant E	CLEAR	groupFile/Face/Eyes	High		matches the established ULid_L-style upper-eyelid shorthand	P45
+teeth-upper	teeth-upper	CLEAR	upper teeth anatomy	CLEAR	groupFile/Face/Lower Face	High		matches the live-Master teeth/tooth precedent (135/138 -> Face/Lower Face)	P45
+bow left 1e	bow left 1e	PARTIAL	"a ""bow"" object, left, numbered"	NEEDS_CONTEXT		Medium	"""bow"" has materially different core senses (decorative bow / archery bow / ship's bow)"	bare multi-sense word, no grounding to pick a reading	P45
+cons_potion_healing_a_superior_mesh	CONS_Potion_Healing_A_Superior_Mesh	CLEAR	a healing potion prop, superior variant (generator-style prefix/suffix set aside)	CLEAR	groupFile/Other	High		recognized game-item/prop object	P45
+bobcut.front_left_3_jiggle	Bobcut.Front_Left_3_jiggle	CLEAR	a bob-cut hairstyle element, front, left, numbered, jiggle physics	CLEAR	groupFile/Hair	High		recognized hairstyle term	P45
+bip01_neck016	Bip01_Neck016	CLEAR	standard biped neck anatomy, numbered	CLEAR	groupFile/Body	High		bare structural neck anatomy defaults to Body (rule 13-style)	P45
+jiggle.tassle_front_02	Jiggle.Tassle_Front_02	CLEAR	a tassel (worn accessory) with jiggle physics, front, numbered	CLEAR	groupFile/Clothing	High		plain worn garment accessory	P45
+left upperarm	Left UpperArm	CLEAR	upper-arm anatomy, left	CLEAR	groupFile/Arms	High		plain structural arm anatomy	P45
+lmiddle0	lMiddle0+lmiddle0	CLEAR	left middle-finger anatomy, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy	P45
+cloth middle 4	cloth middle 4	CLEAR	a cloth garment segment, middle position, numbered	CLEAR	groupFile/Clothing	High		plain garment segment	P45
+adjust_kneecap_r	adjust_kneecap_R	CLEAR	kneecap anatomy, right, adjust (rig control)	CLEAR	groupFile/Legs	High		ordinary kneecap rig control	P45
+head3	Head3	CLEAR	head anatomy, numbered	CLEAR	groupFile/Body	High		bare structural head anatomy defaults to Body (rule 13)	P45
+emaciated lower details	Emaciated Lower Details	CLEAR	"an ""emaciated"" (extreme-thinness) shape control, lower body"	CLEAR	groupFile/Body Morphs	High		explicit shape/appearance descriptor on the body (rule 7)	P45
+ringtoe2_r	ringToe2_r	CLEAR	right ring-toe anatomy, numbered	CLEAR	groupFile/Toes/RightToes	High		plain toe anatomy	P45
+bip_r_foot_thumb_03	bip_r_foot_thumb_03	CLEAR	"right big toe (""foot thumb"") anatomy, numbered"	CLEAR	groupFile/Toes/RightToes	High		"""foot thumb"" is a recognized colloquial term for the big toe"	P45
+brows-l-upset	Brows-L-Upset	CLEAR	"an ""upset"" eyebrow expression, left"	CLEAR	groupFile/Face/Upper Face	High		plain eyebrow anatomy with an expression state	P45
+bip_stone_l_calftwist	Bip_STONE_L_CalfTwist	CLEAR	left calf-twist bone (model/variant prefix set aside)	CLEAR	groupFile/Legs	High		twist is standard rig anatomy, not corrective (rule 3)	P45
+bipflm r finger4	BipFlm R Finger4	CLEAR	right finger 4 (rig/model prefix set aside)	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy	P45
+rpectoral root	rpectoral root	CLEAR	right pectoral (chest muscle) root/anchor bone	CLEAR	groupFile/Body	High		explicit anatomical muscle term	P45
+crush-19	crush-19	CLEAR	"a ""crush"" action control, numbered"	NEEDS_CONTEXT		Medium	owning object/body part for the crush action is not stated	"""crush"" is a stable function word (rule 22) even without a named object"	P45
+body-suit-fit	Body-Suit-Fit	CLEAR	a body suit (garment) fit adjustment	CLEAR	groupFile/Clothing	High		explicit named worn garment	P45
+clothesfitshirt	ClothesFitShirt	CLEAR	a shirt (garment) fit adjustment	CLEAR	groupFile/Clothing	High		explicit named worn garment	P45
+c_dred_r1_06	C_Dred_R1_06	CLEAR	"a dreadlock (""dred"") hairstyle element, right variant, numbered"	CLEAR	groupFile/Hair	Medium		"""dred"" is a recognized dreadlock-hairstyle abbreviation"	P45
+pcube6	pCube6	OPAQUE	a generic default-named primitive mesh (Maya pCube), numbered	NOT_APPLICABLE		Low		technical DCC-default geometry placeholder	P45
+bootswidehips	Bootswidehips	CLEAR	"a ""wide hips"" body-shape control, contextualized by boots (garment) state"	CLEAR	groupFile/Body Morphs	Medium		the body-shape effect (wide hips) is the primary subject; boots are only the contextual garment state (rule 8's primary-subject test)	P45
+level2_west	Level2_West	CLEAR	a level/waypoint reference, west direction (matches the accepted level5_south precedent)	NEEDS_CONTEXT		Medium	"owning system/category for the ""Level"" reference is not established"	matches the accepted level5_south precedent	P45
+leg left boot tassle 2b	leg left boot tassle 2b	CLEAR	a boot tassel (worn garment accessory), leg/left, variant 2b	CLEAR	groupFile/Clothing	High		plain worn garment accessory	P45
+butts	Butts	CLEAR	buttock anatomy, plural	CLEAR	groupFile/Body	High		explicit structurally-named buttock anatomy	P45
+rightelbowpoint_helper	RightElbowPoint_helper	CLEAR	right elbow-point helper bone	CLEAR	groupFile/Arms	High		"""helper"" is neutral rig naming (rule 4); elbow is the clear anatomical referent"	P45
+ltoeindex01	lToeIndex01	CLEAR	left index-toe anatomy, numbered	CLEAR	groupFile/Toes/LeftToes	High		plain toe anatomy	P45
+canine_spine1	Canine_Spine1	CLEAR	spine anatomy on a canine creature model, numbered	CLEAR	groupFile/Body	High		explicit biped/rig-style spine literal with no garment/hair-object noun (rule 14); species-neutral anatomy (rule 18)	P45
+car03	car03	CLEAR	a car (vehicle prop), numbered	CLEAR	groupFile/Other	High		recognized vehicle/prop object	P45
+arm left wrist ctrl 2	arm left wrist ctrl 2	CLEAR	left wrist control, numbered	CLEAR	groupFile/Arms	High		ordinary wrist rig control	P45
+screen_height	screen_height	CLEAR	a screen/display prop height parameter	CLEAR	groupFile/Other	Medium		recognized technical/prop parameter, not a character anatomy control	P45
+body-l-ass-up	Body-L-ass-Up	CLEAR	"left buttock (""ass"") ""up"" appearance control"	CLEAR	groupFile/Body Morphs	Medium		soft-tissue anatomy with no ordinary skeletal joint supports a Body-Morphs reading of the direction word on this literal (rule 7, nipple-up-style purpose-based reading)	P45
+fang left1	fang left1	CLEAR	fang (tooth) anatomy, left, numbered	CLEAR	groupFile/Face/Lower Face	High		matches the live-Master fang precedent (5/5 -> Face/Lower Face)	P45
+lefteyehalfopen	LeftEyeHalfOpen	CLEAR	a half-open left-eye state	CLEAR	groupFile/Face/Eyes	High		plain eye-region anatomy and state	P45
+frily_root_0.l	Frily_Root_0.L	CLEAR	a frilly (garment trim, obvious misspelling) root anchor, left, numbered	CLEAR	groupFile/Clothing	Medium		"""Frily"" is a recognizable misspelling of ""frilly,"" a garment-trim descriptor"	P45
+nippoke01	NipPoke01	CLEAR	nipple-poke deformation control, numbered	CLEAR	groupFile/Body Morphs	High		explicit poke/deformation action on nipple soft tissue, matches the settled precedent	P45
+toy_bone_04	toy_bone_04	CLEAR	a bone-shaped toy (recognized real-world object), numbered	CLEAR	groupFile/Other	Medium		"""toy"" disambiguates ""bone"" as a toy object, not skeletal anatomy"	P45
+hiza_l_d__offset	hiza_l_d__offset	CLEAR	"knee (Japanese ""hiza"") anatomy, left, offset parameter"	CLEAR	groupFile/Legs	Medium		recognized Japanese anatomical term (knee)	P45
+tailright2_7	TailRight2_7	CLEAR	tail anatomy, right variant, numbered	CLEAR	groupFile/Tail	High		plain tail anatomy	P45
+flm-armb-neckb	Flm-ArmB-NeckB	CLEAR	neck anatomy, variant B (internal Flm-ArmB namespace set aside)	CLEAR	groupFile/Body	High		"""Neck"" is meaningful, independently-grounded content despite the internal rig namespace (rule 24)"	P45
+hurt	Hurt	CLEAR	"a ""hurt"" expression state"	CLEAR	groupFile/Face/Expressions	High		matches rule 22's own documented HurtR CLEAR example -- whole-face expression state	P45
+vagina_base	vagina_base	CLEAR	vaginal anatomy, base/root	CLEAR	groupFile/Body	High		explicit genital anatomical term	P45
+vag inner open	vag inner open	CLEAR	vaginal inner-anatomy open action	CLEAR	groupFile/Body	High		explicit genital anatomical term with a structural action	P45
+bothlid-l	BothLid-l	CLEAR	both-eyelid control, left	CLEAR	groupFile/Face/Eyes	High		plain eyelid anatomy	P45
+right_lipcnrtwst	Right_LipCnrTwst	CLEAR	lip-corner twist action, right	CLEAR	groupFile/Face/Lower Face	High		plain lip anatomy and action	P45
+rag1	rag1	CLEAR	a rag (cloth prop object), numbered	CLEAR	groupFile/Other	Medium		recognized real-world object	P45
+eye-blink-happy-right	eye-blink-happy-right	CLEAR	a happy eye-blink expression, right	CLEAR	groupFile/Face/Eyes	High		explicit eye-region expression control	P45
+flm-armb-arm-lb	Flm-ArmB-Arm-LB	CLEAR	arm anatomy, variant LB (internal Flm-ArmB namespace set aside)	CLEAR	groupFile/Arms	High		"""Arm"" is a named internal segment (parallel to the established Foot/Leg/Neck/Sword siblings in this same namespace), independently-grounded content (rule 24)"	P45
+right middle finger 1 grip 2	Right middle finger 1 grip 2	CLEAR	right middle-finger grip control, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy with an established grip-control function	P45
+head eyefold left 3	head eyefold left 3	CLEAR	eyelid-fold anatomy, left, numbered (head is a location prefix)	CLEAR	groupFile/Face/Eyes	High		plain eye-region anatomy	P45
+canine_com	Canine_COM	CLEAR	"center-of-mass (""COM"") rig anchor on a canine creature model"	CLEAR	groupFile/Body	High		"matches the live-Master ""NPC COM [COM]"" -> Body precedent -- recognized rig-anchor abbreviation"	P45
+bone.017	Bone.017	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P45
+bippbg lthightwist1	BipPBG LThighTwist1	CLEAR	left thigh-twist bone (rig/model prefix set aside), numbered	CLEAR	groupFile/Legs	High		twist is standard rig anatomy, not corrective (rule 3)	P45
+arm right shoulder 2 adj. 3	arm right shoulder 2 adj. 3	CLEAR	right shoulder control, numbered, adjust variant	CLEAR	groupFile/Arms	High		ordinary shoulder rig control	P45
+levator06_l	levator06_L	PARTIAL	"a ""levator"" (lifting/elevating) muscle, left, numbered; target organ/region not established by the bare word"	NEEDS_CONTEXT		Low	generic lifting-muscle term with no region qualifier; competing core readings across body regions (matches the settled levator03_r precedent)		P45
