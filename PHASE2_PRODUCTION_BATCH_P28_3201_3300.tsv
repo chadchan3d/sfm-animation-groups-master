@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+wep_stock_minimi_hinge	WEP_Stock_Minimi_Hinge	CLEAR	a weapon stock hinge (Minimi machine gun)	CLEAR	groupFile/Other	High		weapon part, matching the established weapons-to-Other precedent	P28
+barbel3_r	Barbel3_R	CLEAR	a barbell (misspelled "Barbel"), numbered, right	CLEAR	groupFile/Other	Medium	reading "Barbel" as "Barbell"	plausible typo of a recognized gym-equipment object	P28
+eyes close right	eyes close right	CLEAR	eyes close, right	CLEAR	groupFile/Face/Eyes	High		ordinary eye-posing control	P28
+crow_1.phalanges2_r	Crow_1.Phalanges2_R	CLEAR	right phalanges (digit bones) on a crow model, numbered	NEEDS_CONTEXT		Medium	birds have phalanges in both the wing and the foot; bare "phalanges" does not establish which (rule 18)	digit-bone anatomy is clear; wing-vs-foot ownership is not established	P28
+polysurface84	polySurface84	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		technical mesh-name artifact	P28
+bip_suitear2_l	bip_suitear2_L	CLEAR	a suit's "ear" (flap/tab feature), left, numbered	CLEAR	groupFile/Clothing	Medium	the exact meaning of "ear" on a suit is unclear	"suit" is the explicit garment owner regardless of the exact feature name	P28
+f4	F4	OPAQUE	bare alphanumeric code, no object/function word	NOT_APPLICABLE		Low		no interpretable content	P28
+upper_04	Upper_04	OPAQUE	a bare "upper" positional word, numbered, no object named	NOT_APPLICABLE		Low		positional description alone carries no semantic content	P28
+l collarb a phy	L CollarB a Phy	CLEAR	left clothing collar, variant B, sub-part a, physics-simulated	CLEAR	groupFile/Clothing	High		matches the settled "L CollarC a Phy"-style physics-sim clothing-collar precedent	P28
+pussyopenwedgieexposed	PussyOpenWedgieExposed	CLEAR	vaginal open state, contextualized by a wedgie/exposure trigger	CLEAR	groupFile/Body Morphs	Medium		genital state is the primary anatomical subject; the wedgie/exposure wording is only the triggering context (rule 8)	P28
+eye_up_r	Eye_up_R	CLEAR	right eye up (posing)	CLEAR	groupFile/Face/Eyes	High		ordinary eye-posing control	P28
+openfront	OpenFront	CLEAR	an "open front" function, object unstated	NEEDS_CONTEXT		Medium	could describe a garment opening or an anatomical opening; no object is named	function itself is describable; owning object is not established	P28
+helper_wrist_r	helper_wrist_R	CLEAR	right wrist helper control	CLEAR	groupFile/Arms	High		"helper" is not corrective/exclusionary evidence (rule 4); plain wrist anatomy	P28
+key.pipe	Key.Pipe	CLEAR	a keyboard-prop key, Pipe	CLEAR	groupFile/Other	High		matches the coherent "Key.<label>" keyboard-prop series	P28
+lipscronersraise	LipsCronersRaise	CLEAR	lips corners raise (misspelled "Croners"=Corners) expression	CLEAR	groupFile/Face/Lower Face	High		matches the established LipsCronersRaise corpus precedent (a confirmed misspelling variant)	P28
+bone.001_l.041	Bone.001_L.041	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P28
+belt root	BELT ROOT	CLEAR	belt (clothing), root	CLEAR	groupFile/Clothing	High		plain garment item; root/hierarchy designation does not change destination (rule 6)	P28
+strapsnarrowermore	StrapsNarrowerMore	CLEAR	a bare straps accessory, narrower	NEEDS_CONTEXT		Medium	no owner named; a bare strap is the same kind of object regardless of owner (rule 25)	bare accessory noun, ownership unresolved	P28
+page4_b	Page4_B	CLEAR	a keyboard-prop page key, B	CLEAR	groupFile/Other	High		matches the coherent "Page<N>_<letter>" series	P28
+upperarm_twist_r_01	upperarm_twist_r_01	CLEAR	right upper-arm twist bone, numbered	CLEAR	groupFile/Arms	High		twist is not corrective evidence (rule 3); plain arm anatomy	P28
+shell.wall_16	Shell.Wall_16	CLEAR	a "shell" structure's wall segment, numbered	CLEAR	groupFile/Other	High		names a recognized environment/prop object; matches the Shell.Wall series	P28
+lower_leg	lower_leg	CLEAR	lower leg, plain structural	CLEAR	groupFile/Legs	High		plain leg anatomy	P28
+midddlelowerfull	MidddleLowerFull	PARTIAL	an unresolved "middle lower full" relation	NEEDS_CONTEXT		Low	the compound relation does not parse as an ordinary phrase	unresolved relation between tokens, no coherent combined reading	P28
+silencer01	silencer01	CLEAR	a weapon silencer/suppressor, numbered	CLEAR	groupFile/Other	High		weapon part, matching the established weapons-to-Other precedent	P28
+bootsvoluptuous	Bootsvoluptuous	CLEAR	boots (clothing), voluptuous shape variant	CLEAR	groupFile/Clothing	High		object-specific shape descriptor stays with the garment (rule 8)	P28
+cloth front middle 1	cloth front middle 1	CLEAR	cloth garment element, front, middle, numbered	CLEAR	groupFile/Clothing	High		plain garment item	P28
+wep_stock_base	WEP_Stock_Base	CLEAR	a weapon stock base	CLEAR	groupFile/Other	High		weapon part, matching the established weapons-to-Other precedent	P28
+arm left bracelet 03	arm left bracelet 03	CLEAR	bracelet (jewelry), left arm, numbered	CLEAR	groupFile/Clothing	High		worn jewelry accessory	P28
+arm right finger knuckle pinky	arm right finger knuckle pinky	CLEAR	right pinky finger knuckle	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy	P28
+muzzle in	Muzzle In	CLEAR	a weapon muzzle, retracted ("in") state	CLEAR	groupFile/Other	Medium		weapon part, matching the established weapons-to-Other precedent	P28
+sadness_l	sadness_l	CLEAR	sadness expression, left	CLEAR	groupFile/Face/Expressions	High		whole-face expression state	P28
+sash a 2	Sash A 2	CLEAR	a sash (clothing accessory), variant, numbered	CLEAR	groupFile/Clothing	High		worn accessory	P28
+dyng m necklace 02	dyng m necklace 02	CLEAR	a "dyng" (dynamic/jiggle-physics) necklace, middle, numbered	CLEAR	groupFile/Clothing	High		"dyng" is a grounded jiggle-physics convention (rule 23); "necklace" is the clear object owner	P28
+psphere1	pSphere1	OPAQUE	a generic default polygon-sphere placeholder name, numbered	NOT_APPLICABLE		Low		matches the pCube/pCylinder/pPlane DCC-default-geometry precedent	P28
+valvebiped.bip01_tail01	ValveBiped.Bip01_Tail01	CLEAR	tail, standard ValveBiped naming, numbered	CLEAR	groupFile/Tail	High		plain tail anatomy	P28
+fitnipples	FitNipples	CLEAR	a nipple "fit" state, object unstated	NEEDS_CONTEXT		Medium	could be a garment-interaction control or a body-state descriptor; not established which	"fit" does not clearly indicate garment ownership or a body-shape state on its own	P28
+narrowy	NarrowY	CLEAR	a "narrow" shape function, object unstated	NEEDS_CONTEXT		Medium	the acted-upon object/body part is not named	shape function is clear; owning object is not established	P28
+polysurface9	polySurface9	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		technical mesh-name artifact	P28
+leg right ankle roll	leg right ankle roll	CLEAR	right leg ankle roll	CLEAR	groupFile/Legs	High		roll is not corrective evidence (rule 3); plain leg anatomy	P28
+_03	_03	OPAQUE	a bare numbered index, no content	NOT_APPLICABLE		Low		bare index, no content	P28
+unusedbone104	unusedbone104	CLEAR	self-declared unused bone, numbered	CLEAR	groupFile/Useless	High		self-declared "unused" (rule 15)	P28
+calf_twist_r_01	calf_twist_r_01	CLEAR	right calf twist bone, numbered	CLEAR	groupFile/Legs	High		twist is not corrective evidence (rule 3); plain leg anatomy	P28
+unused 2	unused 2	CLEAR	self-declared unused placeholder, numbered	CLEAR	groupFile/Useless	High		self-declared "unused" (rule 15)	P28
+bikini_string.l	Bikini_String.L	CLEAR	a bikini's string, left	CLEAR	groupFile/Clothing	High		object-specific garment component stays with the garment (rule 8)	P28
+bathroom light	Bathroom light	CLEAR	a bathroom light fixture (recognized real-world object)	CLEAR	groupFile/Other	High		names a recognized real-world prop object	P28
+head left earring 2	head left earring 2	CLEAR	earring (jewelry), head, left, numbered	CLEAR	groupFile/Clothing	High		worn jewelry accessory	P28
+hose_03	Hose_03	PARTIAL	a "hose", numbered	NEEDS_CONTEXT		Low	"hose" has materially different core senses (stocking/pantyhose garment vs. mechanical tube) with no disambiguating content	bare multi-sense word, no grounding to pick a reading	P28
+penis balls root	penis balls root	CLEAR	penis and testicles, root	CLEAR	groupFile/Body	High		plain structural genital anatomy; root/hierarchy designation does not change destination (rule 6)	P28
+cloth_side_a_1_r	cloth_side_A_1_R	CLEAR	cloth garment element, side, variant, right	CLEAR	groupFile/Clothing	High		plain garment item	P28
+upperarm_twist_l_01	upperarm_twist_l_01	CLEAR	left upper-arm twist bone, numbered	CLEAR	groupFile/Arms	High		twist is not corrective evidence (rule 3); plain arm anatomy	P28
+backlight_2	backlight_2	CLEAR	a backlight (lighting/rendering element), numbered	CLEAR	groupFile/Other	Medium		recognizable lighting/technical concept, not anatomy	P28
+ebinnerupperr	EBInnerUpperR	CLEAR	right eyebrow, inner, upper	CLEAR	groupFile/Face/Upper Face	Medium	"EB" read as "eyebrow" (distinct from the "EBAll"="eyeball" reading, since no "All" is present and "Inner Upper" fits brow anatomy)	plausible eyebrow-segment reading	P28
+narrowbutt	NarrowButt	CLEAR	buttock "narrow" shape descriptor	CLEAR	groupFile/Body Morphs	High		explicit shape descriptor overrides the plain-buttock default (rule 26's own Body-Morphs override)	P28
+cloth1	Cloth1	CLEAR	generic cloth garment element, numbered	CLEAR	groupFile/Clothing	High		plain garment item	P28
+taurenmale_hd_bone_137	taurenmale_hd_bone_137	OPAQUE	a generic numbered bone in the TaurenMale_HD model/variant series; anatomical region/function unknown	NOT_APPLICABLE		Low	the numbered suffix carries no anatomical specificity, and "HD" is an ungrounded model/variant tag	matches the settled taurenmale_hd_bone_* family treatment	P28
+anus in	Anus In	CLEAR	anus "in" state	CLEAR	groupFile/Body Morphs	High		state language on anatomy with no ordinary skeletal joint, matching the Anus Open precedent	P28
+spine upper.003	spine upper.003	CLEAR	an upper-spine control, numbered	NEEDS_CONTEXT		Medium	no garment/hair-object noun is present to establish ownership one way or the other (rule 14's bare-spine branch)	bare spine literal with no ownership evidence	P28
+bip_clockcollar_r	bip_ClockCollar_R	CLEAR	a "Clock Collar" costume accessory, right	CLEAR	groupFile/Clothing	High		matches the established bip_ClockCollar* named-costume precedent	P28
+sidehair_r3	sideHair_R3	CLEAR	side hair, right, numbered	CLEAR	groupFile/Hair	High		plain hair anatomy; sibling of sidehair_r2	P28
+tail right root	tail right root	CLEAR	tail, right, root	CLEAR	groupFile/Tail	High		plain tail anatomy	P28
+jacket - boobscaler	jacket - boobscaler	CLEAR	a breast-size scaling control, triggered by the jacket	CLEAR	groupFile/Body Morphs	Medium		"boobscaler" is the primary subject; "jacket" is only the triggering context (rule 8), matching the jacketopen-boobscaler precedent	P28
+bone ring 05	bone ring 05	PARTIAL	a "ring", numbered	NEEDS_CONTEXT		Low	"ring" has materially different core senses with no hand-context grounding here	bare multi-sense word, no grounding to pick a reading	P28
+r lower lid	R lower lid	CLEAR	right lower eyelid	CLEAR	groupFile/Face/Eyes	High		plain eyelid anatomy	P28
+ropebelt_tassel_back_4	RopeBelt_Tassel_Back_4	CLEAR	a tassel on a rope belt, back, numbered	CLEAR	groupFile/Clothing	High		explicit belt owner grounds the tassel accessory (rule 25)	P28
+nailslength	NailsLength	CLEAR	fingernail length descriptor	CLEAR	groupFile/Body Morphs	High		explicit size descriptor on the character's own body	P28
+flm-armb-back-u1	Flm-ArmB-Back-U1	CLEAR	a "back"-labeled control in the Flm-ArmB internal namespace	NEEDS_CONTEXT		Medium	the Flm-ArmA/ArmB namespace is an internal section-labeling scheme, not confirmed anatomical	"back" word present, but the namespace's actual functional mapping is not confirmed	P28
+flap1.r	Flap1.R	CLEAR	a bare garment flap, numbered, right	NEEDS_CONTEXT		Medium	no owner named; a flap could belong to many different garments	bare accessory/feature noun, ownership unresolved	P28
+right little finger 3 grip 1	Right little finger 3 grip 1	CLEAR	right pinky finger, segment 3, grip function, variant 1	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy with grip function	P28
+unusedface	unusedface	CLEAR	self-declared unused face control	CLEAR	groupFile/Useless	High		self-declared "unused" (rule 15)	P28
+jiggle.tassle_front_10	Jiggle.Tassle_Front_10	CLEAR	a bare tassel accessory (misspelled "Tassle"), front, numbered, jiggle physics	NEEDS_CONTEXT		Medium	no owner named; jiggle physics does not by itself establish ownership	bare accessory noun, ownership unresolved (rule 25)	P28
+l sideburn d phy	l sideburn d phy	CLEAR	a sideburn (facial hair), physics-simulated, left	CLEAR	groupFile/Hair	Medium		facial hair, matching hair-content precedent	P28
+l collarb tip sec	l collarb tip sec	CLEAR	left collarbone (clavicle), tip, secondary	CLEAR	groupFile/Arms	Medium		"collarb" read as "collarbone," matching the established l collarb sec root precedent	P28
+bipflm rthightwist1	BipFlm RThighTwist1	CLEAR	right thigh twist bone, numbered	CLEAR	groupFile/Legs	High		twist is not corrective evidence (rule 3); plain leg anatomy	P28
+bip_l_foot_index	bip_l_foot_index	CLEAR	left foot index toe	CLEAR	groupFile/Toes/LeftToes	Medium		individual toe digit routes to the verified LeftToes subpath (rule 18)	P28
+arm right elbow adj. 2	arm right elbow adj. 2	CLEAR	right arm elbow adjustment, numbered	CLEAR	groupFile/Arms	High		plain elbow anatomy	P28
+shaft-fat	shaft-fat	CLEAR	penis shaft, "fat" shape descriptor	CLEAR	groupFile/Body Morphs	High		explicit shape descriptor on genital soft tissue	P28
+dingosuccgun	DingoSuccGun	CLEAR	a gun (weapon), on a "Dingo" character/model	CLEAR	groupFile/Other	Medium	the "Succ" fragment is not grounded	"Gun" is explicit, grounded content regardless of the cryptic middle fragment (rule 24 style)	P28
+byounger	Byounger	CLEAR	a "younger" appearance-state function, object unstated	NEEDS_CONTEXT		Low	no body part/region is named for the age-appearance change	appearance-state concept is describable; owning region is not established	P28
+cloth_bone_up_r_04	cloth_bone_up_r_04	CLEAR	cloth garment bone, up, right, numbered	CLEAR	groupFile/Clothing	High		plain garment item	P28
+c_dred_c2_03	C_Dred_C2_03	CLEAR	a dreadlock (hair), center, numbered	CLEAR	groupFile/Hair	Medium		"Dred" is a recognized hairstyle term; sibling of c_dred_c1_01	P28
+fa_low_lid_right_inner	fa_low_lid_right_inner	CLEAR	lower eyelid, right, inner	CLEAR	groupFile/Face/Eyes	High		plain eye anatomy	P28
+moss	Moss	CLEAR	moss (recognized natural/environment material)	CLEAR	groupFile/Other	Medium		names a recognized environment/material object	P28
+bip_tail1_r.001	bip_tail1_R.001	CLEAR	tail, right, numbered	CLEAR	groupFile/Tail	High		plain tail anatomy	P28
+second_arms_r_ring3	Second_Arms_R_Ring3	CLEAR	a second right arm, ring finger, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		limb count does not change destination (rule 19); plain finger anatomy	P28
+pussy_open_right	pussy_open_right	CLEAR	vaginal open state, right	CLEAR	groupFile/Body Morphs	High		state language on genital soft tissue with no ordinary skeletal joint, matching the Vag Open precedent	P28
+browsinnerdownleft	BrowsInnerDownLeft	CLEAR	eyebrows inner down, left	CLEAR	groupFile/Face/Upper Face	High		plain eyebrow expression control	P28
+apron b3	Apron b3	CLEAR	apron (clothing), variant	CLEAR	groupFile/Clothing	High		plain garment item	P28
+valvebiped.bip01_l_pinkie03	ValveBiped.Bip01_L_Pinkie03	CLEAR	left pinky finger, standard ValveBiped naming, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy	P28
+blinkmid2	BlinkMid2	CLEAR	blink, middle, numbered	CLEAR	groupFile/Face/Eyes	High		plain eye expression control	P28
+bodythin	BodyThin	CLEAR	body "thin" shape descriptor	CLEAR	groupFile/Body Morphs	High		explicit shape descriptor on the character's own body	P28
+brows-r-shock	Brows-R-Shock	CLEAR	eyebrows shock expression, right	CLEAR	groupFile/Face/Upper Face	High		plain eyebrow expression control	P28
+l_fin_back_a	l_fin_back_a	CLEAR	a fin, back position, left, variant	NEEDS_CONTEXT		Medium	no established Master destination convention exists for "fin" (Tranche 2 precedent)	fin anatomy is clear; owning destination is not established	P28
+def-spine.006_l.012	DEF-spine.006_L.012	CLEAR	left spine bone, numbered	CLEAR	groupFile/Body	High		"DEF-" is a qualifying generic rig prefix for the anatomical-spine branch (rule 14)	P28
+back-push-center	back-push-center	CLEAR	back "push" shape deformation, center	CLEAR	groupFile/Body Morphs	Medium		explicit direction/deformation word on the character's own body	P28
+qwn-rig-eye-lb	Qwn-Rig-Eye-LB	CLEAR	an eye control in the Qwn-Rig internal namespace, variant LB	CLEAR	groupFile/Face/Eyes	Medium		"Eye" is grounded anatomical content independent of the Qwn-Rig namespace prefix (rule 24)	P28
+bip_waist_c	bip_waist_c	CLEAR	waist, variant c	CLEAR	groupFile/Body	High		central/unsided torso structure	P28
+pjcmforearmfwd75l	pJCMForeArmFwd75L	CLEAR	a pose-driven joint corrective morph (JCM) for the left forearm, forward, numbered	CLEAR	groupFile/Correctives	High		"JCM" is explicit corrective-purpose language (rule 5)	P28
+book turnpage7	Book TurnPage7	CLEAR	a book (recognized real-world object), turn-page function, numbered	CLEAR	groupFile/Other	High		names a recognized real-world prop object with a function	P28
+leg left ankle cloth	Leg Left Ankle Cloth	CLEAR	cloth at the ankle of the leg (garment element)	CLEAR	groupFile/Clothing	High		object-specific garment element stays with Clothing (rule 8)	P28
+hip_joint02	hip_joint02	CLEAR	a hip joint, central/unsided, numbered	CLEAR	groupFile/Body	High		unsided hip-pelvis structure defaults to Body (rule 26's central branch); "joint" wording does not by itself require explicit sidedness	P28

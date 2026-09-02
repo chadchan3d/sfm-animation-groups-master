@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+shaftrootfold	ShaftRootFold	CLEAR	penis shaft, root, fold deformation	CLEAR	groupFile/Body Morphs	Medium		explicit fold/shape descriptor on genital soft tissue	P27
+nostrils_widen_r	nostrils_widen_r	CLEAR	nostril widen shape change, right	CLEAR	groupFile/Body Morphs	Medium		explicit shape descriptor, matching the facesmall/eye-iris-small appearance-descriptor precedent	P27
+bone_legfl1	Bone_LegFL1	CLEAR	leg, front-left, numbered	CLEAR	groupFile/Legs	Medium		plain leg anatomy	P27
+pcylinder13	pCylinder13	OPAQUE	a generic default polygon-cylinder placeholder name, numbered	NOT_APPLICABLE		Low		matches the pCube/pPlane DCC-default-geometry precedent	P27
+adjust_elbowcap_l	adjust_elbowcap_L	CLEAR	left elbow cap adjustment	CLEAR	groupFile/Arms	High		plain elbow anatomy	P27
+knotsmall3	KnotSmall3	CLEAR	a bare knot accessory, small, numbered	NEEDS_CONTEXT		Medium	no owner named; a bare knot is the same kind of object regardless of owner (rule 25)	bare accessory noun, ownership unresolved	P27
+palmrukaz1	PalmRUkaz1	CLEAR	right palm, numbered	CLEAR	groupFile/Arms/RightArm	Medium	"Ukaz" does not resolve to a grounded word	"Palm" + "R" (right) establishes the anatomical owner regardless of the undecoded "Ukaz" fragment	P27
+loincloth front 1e	loincloth front 1e	CLEAR	loincloth (clothing), front, variant 1e	CLEAR	groupFile/Clothing	High		plain garment item	P27
+torso.001	torso.001	CLEAR	torso, numbered	CLEAR	groupFile/Body	High		plain structural torso anatomy	P27
+shell.wall_8	Shell.Wall_8	CLEAR	a "shell" structure's wall segment, numbered	CLEAR	groupFile/Other	High		names a recognized environment/prop object; matches the Shell.Wall series	P27
+腕捩1.r	腕捩1.R	CLEAR	arm twist (Japanese "腕"=arm, "捩"=twist), right, numbered	CLEAR	groupFile/Arms	Medium	relies on Japanese anatomical-term recognition	twist is not corrective evidence (rule 3); plain arm anatomy	P27
+stare 2	Stare 2	CLEAR	a stare (eye expression), numbered	CLEAR	groupFile/Face/Eyes	High		plain eye expression control	P27
+bip_hatback	bip_HatBack	CLEAR	hat (clothing), back position	CLEAR	groupFile/Clothing	High		worn accessory	P27
+rope_5	Rope_5	CLEAR	a bare rope accessory, numbered	NEEDS_CONTEXT		Medium	no owner named; a bare rope is the same kind of object regardless of owner (rule 25)	bare accessory noun, ownership unresolved	P27
+wep_base	WEP_Base	CLEAR	a weapon base part	CLEAR	groupFile/Other	High		weapon part, matching the established weapons-to-Other precedent	P27
+loincloth back 1d	loincloth back 1d	CLEAR	loincloth (clothing), back, variant 1d	CLEAR	groupFile/Clothing	High		plain garment item	P27
+bip_cape_3_l	bip_Cape_3_L	CLEAR	cape (clothing), left, numbered	CLEAR	groupFile/Clothing	High		plain garment item	P27
+bip01_r_hand004	Bip01_R_Hand004	CLEAR	right hand, numbered	CLEAR	groupFile/Arms/RightArm	High		plain hand anatomy, explicitly sided	P27
+thighforward	ThighForward	CLEAR	thigh, forward posing	CLEAR	groupFile/Legs	High		plain structural leg posing	P27
+lower_body_d	lower_body_d	CLEAR	a "lower body" region control, variant d	NEEDS_CONTEXT		Medium	"lower body" could mean the legs/hips specifically or a broader torso-lower region; not established which	region word is clear; the specific destination (Legs vs. Body) is not established	P27
+heavy lower details	Heavy Lower Details	CLEAR	lower-body weight/appearance descriptor, "heavy"	CLEAR	groupFile/Body Morphs	Medium		explicit weight/size descriptor on the character's own body	P27
+momo_md_r__prot_x50__offset	momo_md_r__prot_x50__offset	CLEAR	thigh (Japanese "momo") control, right, numbered, offset	CLEAR	groupFile/Legs	Medium	relies on Japanese anatomical-term recognition (momo=thigh)	plain structural thigh anatomy, matching the established Japanese-term precedent	P27
+bone28	Bone28	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P27
+leg left ste	leg left StE	PARTIAL	left leg control with an undecoded "StE" qualifier	CLEAR	groupFile/Legs	Medium	"StE" does not resolve to a grounded word (parallel to the settled "StC"/"StB" leg-qualifier examples)	leg is the clear anatomical owner; "StE" is an undecoded token, not a competing region	P27
+bipmar rcalftwist	BipMar RCalfTwist	CLEAR	right calf twist bone	CLEAR	groupFile/Legs	High		twist is not corrective evidence (rule 3); plain leg anatomy	P27
+unused duplicate duplicate unused.008	unused duplicate duplicate unused.008	CLEAR	self-declared unused/duplicate placeholder, numbered	CLEAR	groupFile/Useless	High		explicit, repeated self-declaration of unused/duplicate (rule 15)	P27
+pupils-glaresizesmall-l	Pupils-GlareSizeSmall-L	CLEAR	pupil glare size, small, left	CLEAR	groupFile/Face/Eyes	High		plain eye anatomy/effect control	P27
+unused bip01_l_foretwist2	unused Bip01_L_ForeTwist2	CLEAR	self-declared unused forearm-twist control, left, numbered	CLEAR	groupFile/Useless	High		self-declared "unused" takes priority over the anatomical referent (rule 15)	P27
+bip001-l-foretwist	Bip001-L-ForeTwist	CLEAR	left forearm twist bone	CLEAR	groupFile/Arms	High		twist is not corrective evidence (rule 3); plain forearm anatomy	P27
+back.bow_left_1	Back.Bow_Left_1	CLEAR	a decorative bow on the back of a costume, left, numbered	CLEAR	groupFile/Clothing	Medium	"Back" as a position rather than an explicit garment name is a weaker grounding than a named costume	positional context grounds "bow" as a decorative garment accessory	P27
+bip chinfront	bip chinfront	CLEAR	chin, front, unsided	CLEAR	groupFile/Face/Lower Face	High		plain lower-face anatomy	P27
+loincloth_back_3	Loincloth_back_3	CLEAR	loincloth (clothing), back, numbered	CLEAR	groupFile/Clothing	High		plain garment item	P27
+facerig	FaceRig	CLEAR	a face-related rig marker	CLEAR	groupFile/Face	Medium		"face" remains grounded content despite the generic "rig" suffix (rule 24 style)	P27
+rotator	Rotator+rotator	OPAQUE	a generic "rotator" mechanism, no object named	NOT_APPLICABLE		Low		no reliable object or anatomical referent for a bare rotation mechanism	P27
+vagopen06	VagOpen06	CLEAR	vaginal open state, numbered	CLEAR	groupFile/Body Morphs	High		state language on genital soft tissue with no ordinary skeletal joint, matching the Vag Open precedent	P27
+r_trap_helper	r_trap_helper	CLEAR	right trapezius muscle, helper control	CLEAR	groupFile/Body	Medium		trapezius is a back/torso muscle rather than part of the arm's own kinematic chain	P27
+elevator	Elevator	CLEAR	an elevator (recognized real-world mechanical object)	CLEAR	groupFile/Other	Medium		names a recognized real-world mechanical object	P27
+row_chair016	row_chair016	CLEAR	a row chair (recognized real-world furniture object), numbered	CLEAR	groupFile/Other	High		names a recognized real-world furniture object	P27
+eye ehh r	Eye Ehh R	CLEAR	an "ehh" eye/facial expression, right	CLEAR	groupFile/Face/Eyes	Medium		recognizable expression state, matching the eye-expression precedent pattern	P27
+pcylinder6	pCylinder6	OPAQUE	a generic default polygon-cylinder placeholder name, numbered	NOT_APPLICABLE		Low		matches the pCube/pPlane DCC-default-geometry precedent	P27
+polysurface85	polySurface85	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		technical mesh-name artifact	P27
+eyeslookdown	EyesLookDown	CLEAR	eyes looking down	CLEAR	groupFile/Face/Eyes	High		ordinary eye-posing control	P27
+bas.rear_center_4_jiggle	BAS.Rear_Center_4_jiggle	CLEAR	a jiggle-physics function on an unresolved "BAS" object, rear-center, numbered	NEEDS_CONTEXT		Low	"BAS" is not grounded as an object (matches the bas.side_left precedent); jiggle's target is unclear	jiggle function is clear (rule 22); owning object is not established	P27
+unused dogmeat_com	unused dogmeat_com	CLEAR	self-declared unused control on a "dogmeat" model	CLEAR	groupFile/Useless	High		self-declared "unused" (rule 15)	P27
+bip01_l_clavicle010	Bip01_L_Clavicle010	CLEAR	left clavicle, numbered	CLEAR	groupFile/Arms	High		matches the established clavicle-to-Arms convention	P27
+stomp-8	stomp-8	CLEAR	a "stomp" function, numbered, object unstated	NEEDS_CONTEXT		Medium	whether this is a leg-posing motion or an impact-reaction morph is not established	function itself is clear; owning region/mechanism is not established	P27
+mot16_waist	MOT16_Waist	CLEAR	waist, plain structural	CLEAR	groupFile/Body	High		central/unsided torso structure (rule 26's central-anatomy principle)	P27
+shirt_r	shirt_R	CLEAR	shirt (clothing), right	CLEAR	groupFile/Clothing	High		plain garment item	P27
+box1	Box1	CLEAR	generic numbered box prop/object, variant 1	CLEAR	groupFile/Other	High		"Box" names a recognized real-world object; matches the settled Box06/Box10/Box22 calibration precedent	P27
+bip fmiddle00 l	bip fmiddle00 l	CLEAR	left middle finger, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium		"fmiddle" read as "Finger Middle," matching the FRing/FIndex biped finger-naming pattern	P27
+left_27	left_27	OPAQUE	bare side marker with a number, no object named	NOT_APPLICABLE		Low		side marker alone carries no semantic content	P27
+bip_fring01_l	Bip_FRing01_L	CLEAR	left ring finger, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium		matches the established FRing biped ring-finger naming pattern	P27
+polysurface218	polySurface218	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		technical mesh-name artifact	P27
+island_collar_01_wind_helper	island_collar_01_wind_helper	CLEAR	a wind-simulation helper on a collar, numbered	CLEAR	groupFile/Clothing	Medium	"island" prefix is not grounded	"collar" plus a wind-physics helper describes a garment collar's dynamics simulation	P27
+shaft-wide	shaft-wide	CLEAR	penis shaft, "wide" shape descriptor	CLEAR	groupFile/Body Morphs	High		explicit shape descriptor, matching the CockWide precedent	P27
+page_curl_2	page_curl_2	CLEAR	a page (recognized real-world object) curl effect, numbered	CLEAR	groupFile/Other	Medium		names a recognized real-world prop object with a function	P27
+bip_tail_d_03	bip_tail_d_03	CLEAR	tail, variant d, numbered	CLEAR	groupFile/Tail	High		plain tail anatomy	P27
+_left_x_down	_left_x_down	OPAQUE	generic axis/direction parameter, no object named	NOT_APPLICABLE		Low		matches the x_shift/z_shift precedent; technical parameter, no anatomical content	P27
+flex_noise_3	Flex_NOISE_3	OPAQUE	generic "flex" category term with a procedural-noise qualifier, no specific object	NOT_APPLICABLE		Low		matches the flex_noise precedent; generic technical category term	P27
+shell.wall_15	Shell.Wall_15	CLEAR	a "shell" structure's wall segment, numbered	CLEAR	groupFile/Other	High		names a recognized environment/prop object; matches the Shell.Wall series	P27
+c_stm_b00	C_STM_B00	OPAQUE	cryptic fragment ("STM"), no recoverable content	NOT_APPLICABLE		Low		no grounding for "STM" as an abbreviation	P27
+pantiesside	PantiesSide	CLEAR	panties (clothing), side	CLEAR	groupFile/Clothing	High		plain garment item	P27
+scrotumfoldl	ScrotumFoldL	CLEAR	scrotum fold, left	CLEAR	groupFile/Body Morphs	High		explicit fold/shape descriptor on genital soft tissue	P27
+valvebiped_bullet16	ValveBiped_Bullet16	CLEAR	a bullet (ammunition), numbered	CLEAR	groupFile/Other	High		ammunition, matching the established weapons-to-Other precedent	P27
+raisemiddle	RaiseMiddle	CLEAR	a "raise" function, middle, object unstated	NEEDS_CONTEXT		Medium	the acted-upon body part/object is not clearly named	function itself is clear; owning object is not established	P27
+fullblink	FullBlink	CLEAR	full blink expression	CLEAR	groupFile/Face/Eyes	High		plain eye expression control, matching the MainLidBlink/Face-Blink-Full precedent	P27
+adjust_digi_l	adjust_digi_L	CLEAR	a left digit adjustment ("digi"=digit)	NEEDS_CONTEXT		Medium	whether this is a finger or toe digit is not established	digit is the clear core reading (rule 22); Fingers-vs-Toes ownership is not established	P27
+unused duplicate duplicate unused.013	unused duplicate duplicate unused.013	CLEAR	self-declared unused/duplicate placeholder, numbered	CLEAR	groupFile/Useless	High		explicit, repeated self-declaration of unused/duplicate (rule 15)	P27
+donger04_chain	donger04_chain	OPAQUE	cryptic fragment ("donger"), no recoverable content	NOT_APPLICABLE		Low		no grounding for "donger" as a word or convention	P27
+taurenmale_hd_bone_136	taurenmale_hd_bone_136	OPAQUE	a generic numbered bone in the TaurenMale_HD model/variant series; anatomical region/function unknown	NOT_APPLICABLE		Low	the numbered suffix carries no anatomical specificity, and "HD" is an ungrounded model/variant tag	matches the settled taurenmale_hd_bone_* family treatment	P27
+head48	head48	CLEAR	bare structural head reference, numbered	CLEAR	groupFile/Body	High		bare head with no specific facial feature defaults to Body (rule 13)	P27
+opt_as_l_armtwist_a	OPT_AS_L_ArmTwist_A	CLEAR	left arm twist bone, variant a	CLEAR	groupFile/Arms	High		twist is not corrective evidence (rule 3); plain arm anatomy	P27
+bone058	Bone058	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P27
+anus_open_right	anus_open_right	CLEAR	anus open state, right	CLEAR	groupFile/Body Morphs	High		state language on anatomy with no ordinary skeletal joint, matching the Anus Open precedent	P27
+collar left 02	collar left 02	CLEAR	left clavicle/shoulder-girdle rig bone (bare biped "collar"), numbered	CLEAR	groupFile/Arms	Medium		matches the settled bare-biped-collar precedent; no garment qualifier present	P27
+ude_l_d__offset	ude_l_d__offset	CLEAR	arm (Japanese "ude") control, left, numbered, offset	CLEAR	groupFile/Arms	Medium	relies on Japanese anatomical-term recognition (ude=arm)	plain structural arm anatomy, matching the established Japanese-term precedent	P27
+unusedarm right finger pinky	unusedarm right finger pinky	CLEAR	self-declared unused right pinky-finger control	CLEAR	groupFile/Useless	High		self-declared "unused" takes priority over the anatomical referent (rule 15)	P27
+band.bend_left_2	Band.Bend_Left_2	CLEAR	a bare band accessory, bend, left, numbered	NEEDS_CONTEXT		Medium	no owner named; matches rule 25's own documented "Band.Bend_Right_1" example exactly	bare accessory noun, ownership unresolved	P27
+right_21	right_21	OPAQUE	bare side marker with a number, no object named	NOT_APPLICABLE		Low		side marker alone carries no semantic content	P27
+bip facelipbumploin l	bip facelipbumploin l	PARTIAL	facial lip control with an undecoded "loin" fragment, left	CLEAR	groupFile/Face/Lower Face	Medium	the "loin" fragment does not resolve to a grounded word (parallel to the settled "miloin" lip-control example)	lip is the clear anatomical owner regardless of the undecoded fragment	P27
+key.leftoption	Key.LeftOption	CLEAR	a keyboard-prop key, Left Option	CLEAR	groupFile/Other	High		matches the coherent "Key.<label>" keyboard-prop series	P27
+cock-wide	cock-wide	CLEAR	penis "wide" shape descriptor	CLEAR	groupFile/Body Morphs	High		explicit shape descriptor, matching the CockWide precedent exactly	P27
+leglittlefinger3_l	LegLittleFinger3_L	CLEAR	a "leg"/pinky-finger compound, left, numbered	NEEDS_CONTEXT		Medium	two incompatible anatomical tokens (leg, finger) appear with no way to tell which governs, matching the Tranche 2 "Leg...Finger" precedent	dual-region compound; owning region not established	P27
+dyng r necklace 01	dyng r necklace 01	CLEAR	a "dyng" (dynamic/jiggle-physics) necklace, right, numbered	CLEAR	groupFile/Clothing	High		"dyng" is a grounded jiggle-physics convention (rule 23); "necklace" is the clear object owner	P27
+rope.01.r	rope.01.R	CLEAR	a bare rope accessory, numbered, right	NEEDS_CONTEXT		Medium	no owner named; a bare rope is the same kind of object regardless of owner (rule 25)	bare accessory noun, ownership unresolved	P27
+key.white_10	Key.White_10	CLEAR	a keyboard-prop key, white, numbered	CLEAR	groupFile/Other	High		matches the coherent "Key.White_N" series	P27
+belt right 05	belt right 05	CLEAR	belt (clothing), right, numbered	CLEAR	groupFile/Clothing	High		plain garment item	P27
+valvebiped.bip01_vag_front	ValveBiped.Bip01_Vag_Front	CLEAR	vaginal anatomy, front position, standard naming	CLEAR	groupFile/Body	High		plain structural genital anatomy, matching the ValveBiped.Bip01_Vag_L_2 precedent	P27
+left_browlower	Left_browlower	CLEAR	left eyebrow lower	CLEAR	groupFile/Face/Upper Face	High		plain eyebrow anatomy/posing control	P27
+tailright1_7	TailRight1_7	CLEAR	tail, right, numbered	CLEAR	groupFile/Tail	High		plain tail anatomy	P27
+submesh_00_lod_1.1319	submesh_00_LOD_1.1319	OPAQUE	a technical submesh/LOD rendering artifact, numbered	NOT_APPLICABLE		Low		pure technical mesh/rendering artifact, no anatomical content	P27
+sk_r_f_leg_4	SK_R_F_leg_4	CLEAR	right front leg, numbered	CLEAR	groupFile/Legs	High		"SK_" is a generic rig prefix (rule 9); plain leg anatomy	P27
+nostril lower left	Nostril Lower Left	CLEAR	nostril, lower, left	CLEAR	groupFile/Face/Mid Face	High		plain nose/mid-face anatomy	P27
+bip01_pelvis019	Bip01_Pelvis019	CLEAR	pelvis, standard naming, numbered	CLEAR	groupFile/Body	High		central/unsided pelvis structure (rule 26's central branch)	P27
+l dlid b	L Dlid B	PARTIAL	left eyelid control with an undecoded "D" qualifier, variant b	CLEAR	groupFile/Face/Eyes	Medium	the "D" prefix does not resolve to a grounded word (parallel to the Dlip/Dcorin cryptic-prefix pattern)	"lid" (eyelid) is the clear anatomical owner regardless of the undecoded "D" prefix	P27
+pillow 3	Pillow 3	CLEAR	a pillow (recognized real-world object), numbered	CLEAR	groupFile/Other	High		matches the calibration Pillow -> Other precedent exactly	P27
+eballlowerl	EBAllLowerL	CLEAR	eyeball, lower, left (unusual capitalization of "Eyeball")	CLEAR	groupFile/Face/Eyes	Medium	the "EBAll" spelling requires reading it as "Eyeball" rather than a grounded abbreviation	eye anatomy read from an unusual capitalization; sibling of eballlowerr	P27
+aa13_sight	AA13_sight	CLEAR	a weapon sight attachment, model AA13	CLEAR	groupFile/Other	Medium		weapon part, matching the established weapons-to-Other precedent	P27
+arm left shoulder 1 ctr5	arm left shoulder 1 ctr5	CLEAR	left arm shoulder control, numbered, "ctr5" qualifier	CLEAR	groupFile/Arms	High		shoulder is the clear anatomical owner regardless of "ctr"	P27
+def-foot.r.002	DEF-foot.R.002	CLEAR	right foot, numbered	CLEAR	groupFile/Legs	High		"DEF-" is a generic rig prefix (rule 9); plain foot anatomy	P27

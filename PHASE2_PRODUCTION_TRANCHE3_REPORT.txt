@@ -1,0 +1,174 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 3 -- REPORT
+Canonical positions 2501-3500 (1,000 production families), batches
+P21-P30. Raw batch files: PHASE2_PRODUCTION_BATCH_P21_2501_2600.tsv
+through PHASE2_PRODUCTION_BATCH_P30_3401_3500.tsv.
+======================================================================
+
+----------------------------------------------------------------------
+1. TRANCHE-ONLY STATISTICS (the 1,000 rows classified in this tranche)
+----------------------------------------------------------------------
+semantic_status:
+  CLEAR   : 828
+  PARTIAL : 39
+  OPAQUE  : 133
+
+taxonomy_status:
+  CLEAR          : 758
+  NEEDS_CONTEXT  : 109
+  NEEDS_DOCTRINE : 0
+  NOT_APPLICABLE : 133
+
+confidence:
+  High   : 586
+  Medium : 247
+  Low    : 167
+
+proposed_destination distribution (CLEAR rows only, 758 total):
+  Clothing                    : 133
+  Other                       : 130
+  Body Morphs                 : 59
+  Body                        : 56
+  Legs                        : 53
+  Face/Eyes                   : 53
+  Arms                        : 43
+  Useless                     : 29
+  Arms/RightArm/RightFingers  : 27
+  Arms/LeftArm/LeftFingers    : 25
+  Face/Lower Face             : 24
+  Tail                        : 19
+  Hair                        : 16
+  Face/Upper Face             : 16
+  Face/Expressions            : 11
+  Face/Mid Face               : 10
+  Face/Ears                   : 9
+  Arms/RightArm               : 9
+  Wings                       : 6
+  Correctives                 : 6
+  Face/Tongue                 : 6
+  Toes/RightToes              : 4
+  Arms/LeftArm                : 4
+  Toes/LeftToes               : 3
+  Face                        : 3
+  Fingers                     : 3
+  Arms/LeftArm/LeftCarpals    : 1
+
+NEEDS_CONTEXT: 109
+NEEDS_DOCTRINE: 0 (no doctrine-escalation report was needed; no
+  hard-stop occurred at any point across all 10 batches)
+
+----------------------------------------------------------------------
+2. RECURRING UNCERTAINTY THEMES (NEEDS_CONTEXT / OPAQUE drivers)
+----------------------------------------------------------------------
+- Generic numbered/mesh/placeholder technical artifacts (the largest
+  OPAQUE contributor): bare "Bone###", "polySurface###", "pCube/
+  pCylinder/pSphere/pPlane###", generic "Object###", bare numbers, and
+  similar DCC-default or rig-internal names carrying no anatomical or
+  functional content at all.
+- Internal rig/model namespaces with no independently-grounded content:
+  the Flm-ArmA/ArmB family (7 of 12 occurrences this tranche), the
+  Fio-Rig/Qwn-Rig-Strip family, and the "BAS." cryptic-prefix family --
+  consistently NEEDS_CONTEXT unless the suffix itself names real,
+  grounded content (Sword, Neck, Belt, Eye, Visor), in which case rule
+  24 resolves them to a real destination regardless of the namespace.
+- Bare multi-sense object words with no disambiguating context: "bow"
+  (3), "ring" (7 ambiguous instances out of 32 total "ring" hits --
+  the rest are grounded by an earring/finger/weapon-hand context),
+  "chain", "hose", "cup", "pad", "cord"/"rope"/"knot"/"string"/"strap"
+  (rule 25's bare-accessory-no-owner pattern, ~15 occurrences) -- each
+  genuinely supports more than one materially different reading, or has
+  a real object identity with no owner named.
+- Creature-appendage anatomy with no established Master destination
+  convention: "fin" (4 occurrences) and "tenta_"/tentacle (5
+  occurrences) -- anatomy itself is not in doubt, but no existing group
+  among the Master's 35 valid destinations is confirmed as the right
+  home for either, consistent with the Tranche 2 finding.
+- Bare function words with no anatomical object named: poke, jiggle,
+  raise, stroke, lengthen, crush, flip-out, kick -- function is clear
+  (rule 22's jiggle-example pattern), but the owning body part/object is
+  not stated (~12 occurrences).
+- Bird shoulder-girdle/digit-bone caution (rule 18): crow model
+  phalanges (3 occurrences) and clavicle (1 occurrence) -- correctly
+  NOT assumed to be Wings by elimination; NEEDS_CONTEXT per the rule's
+  own explicit bird caution.
+- Mixed-region compounds forced to NEEDS_CONTEXT rather than a silent
+  pick: "Leg...Finger" literals (2 occurrences, matching the Tranche 2
+  precedent) and "Eye...Lip" (1 occurrence).
+- Bare "spine"/"hip"-adjacent literals with no ownership evidence: bare
+  "spine upper/lower" with a side qualifier but no garment/hair-object
+  noun (4 occurrences, rule 14's bare-spine branch).
+- Undecoded single-letter/short cryptic qualifiers on an otherwise clear
+  anatomical owner (StB/StC/StE/StG on "leg," D/U on "lid," LoV on
+  "lip," Globe on "finger"): semantic_status PARTIAL, taxonomy CLEAR --
+  the owner is established even though the qualifier itself is not
+  (rule 22's genuine-undecoded-token pattern), ~8 occurrences.
+
+----------------------------------------------------------------------
+3. CONSISTENCY AUDIT
+----------------------------------------------------------------------
+Full detail in PHASE2_PRODUCTION_TRANCHE3_CONSISTENCY_FLAGS.txt. Every
+candidate finding was run through the four mandatory precedent-check
+questions (does an accepted calibration/production precedent address
+the pattern; does the current classification contradict it; is it a
+classification error, metadata error, or legitimate distinction).
+
+Result: 1 flag. "donger04_chain" (OPAQUE) was found to likely
+contradict this same tranche's own "valvebiped.chain_aligned2"
+(PARTIAL/NEEDS_CONTEXT) -- both rows contain "chain" as their only
+content-bearing word, and rule 24's ignore-the-ungrounded-prefix
+principle (applied successfully elsewhere throughout this tranche)
+would treat "donger" the same way as any other cryptic/model prefix,
+leaving "chain" to stand on its own as PARTIAL rather than being
+dragged down to OPAQUE. Flagged as a likely classification error for a
+future targeted correction pass; NOT auto-corrected here, per
+instruction. Several other apparent inconsistencies (the collar
+sub-pattern split, the Flm-Arm namespace family, the bow/ring/chain/
+strap "bare accessory" families) were individually checked against the
+four questions and confirmed to be legitimate, already-justified
+distinctions (verdict C), not errors.
+
+CONSISTENCY FLAGS: 1
+
+----------------------------------------------------------------------
+4. VALIDATION RESULTS (all batches, mechanical)
+----------------------------------------------------------------------
+Every one of the 10 batches (P21-P30) independently passed, before
+merge, per-batch validation: exactly 100 expected canonical positions;
+exact fold_key match against PHASE2_PRODUCTION_ORDER.tsv; exact_spellings
+byte-for-byte; no duplicate family within the batch; valid enums; valid
+destinations; destination blank unless taxonomy_status=CLEAR; OPAQUE iff
+NOT_APPLICABLE; no calibration-family reuse; no already-classified
+production-family reuse.
+
+After each of the 10 merges, the entire ledger was independently
+re-validated (not just the newly appended rows): row count matched the
+expected running total (2600, 2700, ..., 3500); the first 500 rows
+remained field-identical to PHASE2_SEMANTIC_PILOT_500_FINAL.tsv at every
+step; production rows exactly corresponded, in order, to canonical
+positions 501 through the latest completed position; zero duplicate
+fold_keys; Rule 21 held globally.
+
+Final ledger size: 3,500 rows (500 calibration + 3,000 production).
+Next canonical position: 3501.
+
+----------------------------------------------------------------------
+5. CUMULATIVE PHASE 2 STATE (kept separate from tranche-only stats)
+----------------------------------------------------------------------
+  calibration families complete           : 500
+  production families classified          : 3000
+  total ledger rows                       : 3500
+  next canonical Phase 2 position         : 3501
+  production families remaining           : 10782
+    (14,282 total residual families - 500 calibration - 3,000
+    production classified)
+
+----------------------------------------------------------------------
+6. VALIDATOR RESULTS
+----------------------------------------------------------------------
+tools/verify_phase2_production_order.py: to be rerun post-commit (see
+final task report); all 15 checks passed pre-commit during batch
+processing (rerun after every state-changing operation in this session).
+tools/validate_master.py: sfm_defaultanimationgroups.txt was not
+modified at any point in this tranche; PASS expected and to be
+reconfirmed post-commit.
+======================================================================

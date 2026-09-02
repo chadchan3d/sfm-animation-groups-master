@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+lower_leg01	lower_leg01	CLEAR	lower leg, plain structural, numbered	CLEAR	groupFile/Legs	High		plain leg anatomy	P23
+uppelipraiserl	UppeLipRaiserL	CLEAR	upper lip raiser (misspelled "Uppe"=Upper), left	CLEAR	groupFile/Face/Lower Face	High		obvious typo of "Upper," matching the "buldge"="bulge" precedent; plain lip anatomy	P23
+wing_right_2_2	Wing_Right_2_2	CLEAR	right wing, numbered	CLEAR	groupFile/Wings	High		literal explicitly names "wing"	P23
+middle finger.001	Middle finger.001	CLEAR	middle finger, side-neutral, numbered	CLEAR	groupFile/Fingers	High		no side marker present; side-neutral Fingers destination applies (rule 11)	P23
+balls-squish	balls-squish	CLEAR	testicle "squish" soft-tissue state	CLEAR	groupFile/Body Morphs	High		direction word on anatomy with no ordinary skeletal joint, matching the BallsDetail/AnusGrip precedent	P23
+b3	B3	OPAQUE	bare alphanumeric code, no object/function word	NOT_APPLICABLE		Low		no interpretable content	P23
+v_res_tre_remote_high	v_res_tre_remote_high	OPAQUE	cryptic compound, no recoverable anatomical or functional content	NOT_APPLICABLE		Low		no grounding for "res"/"tre" as words or a convention	P23
+opt_hand_left_middle3	OPT_Hand_Left_Middle3	CLEAR	left hand middle finger, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy	P23
+boobcoverage	Boobcoverage	CLEAR	breast coverage/exposure control	CLEAR	groupFile/Body Morphs	Medium	no specific garment is named as owner, so this is read as a body-side exposure control	breast-region state control, no named garment owner	P23
+lassimpactmoveup2	LAssImpactMoveUp2	CLEAR	left buttock impact reaction, move-up, numbered	CLEAR	groupFile/Body Morphs	High		impact-reaction morph, matching the R-Ass-Smack precedent	P23
+17	17	OPAQUE	bare number, no words at all	NOT_APPLICABLE		Low		a number alone carries no semantic content	P23
+knot_small	knot_small	CLEAR	a bare knot accessory, small	NEEDS_CONTEXT		Medium	no owner named; a bare knot is the same kind of object regardless of owner (rule 25)	bare accessory noun, ownership unresolved	P23
+crow_1.phalanges3_l	Crow_1.Phalanges3_L	CLEAR	left phalanges (digit bones) on a crow model, numbered	NEEDS_CONTEXT		Medium	birds have phalanges in both the wing and the foot; bare "phalanges" does not establish which (rule 18)	digit-bone anatomy is clear; wing-vs-foot ownership is not established	P23
+unusedbone_6e	unusedbone_6E	CLEAR	self-declared unused bone, numbered	CLEAR	groupFile/Useless	High		self-declared "unused" (rule 15)	P23
+v_weapon.left_index02	v_weapon.Left_Index02	CLEAR	left index finger, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		matches the established v_weapon finger precedent	P23
+vwidthvo3vout	vwidthvo3vout	CLEAR	a "width" adjustment function, object abbreviation unresolved	NEEDS_CONTEXT		Medium	"v" is not grounded as a specific object under rule 23; "width" supplies a function but not full ownership	width function is recognizable; exact object is not established	P23
+l knee spo	L Knee Spo	CLEAR	left knee, "spo" (likely "spare")	CLEAR	groupFile/Legs	High		knee is the clear anatomical owner regardless of "spo"	P23
+lm05	LM05	OPAQUE	cryptic alphanumeric code, no recoverable content	NOT_APPLICABLE		Low		no grounding for "LM" as an abbreviation	P23
+cape1_right5	CAPE1_RIGHT5	CLEAR	cape (clothing), right, numbered	CLEAR	groupFile/Clothing	High		plain garment item	P23
+valvebiped.bip01_r_thumb01	ValveBiped.Bip01_R_Thumb01	CLEAR	right thumb, standard ValveBiped naming, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy	P23
+nostril rise left	Nostril Rise Left	CLEAR	nostril rise, left	CLEAR	groupFile/Face/Mid Face	High		plain nose/mid-face anatomy	P23
+fio-rig-strip-l2	Fio-Rig-Strip-L2	CLEAR	a "strip"-labeled control in the Fio-Rig internal namespace, left, numbered	NEEDS_CONTEXT		Medium	matches the established Fio-Rig-Strip-r2/r3 precedent -- internal rig-namespace label, not confirmed anatomy	consistent with the settled Fio-Rig-Strip family treatment	P23
+l_outer_raise	l_outer_raise	CLEAR	an "outer raise" function, left, object unstated	NEEDS_CONTEXT		Medium	the acted-upon object/body part is not named	function itself is clear; owning object is not named	P23
+wing_left_2_2	Wing_Left_2_2	CLEAR	left wing, numbered	CLEAR	groupFile/Wings	High		literal explicitly names "wing"	P23
+l.worry	l.worry	CLEAR	worry expression, left	CLEAR	groupFile/Face/Expressions	High		whole-face expression state, matching the HurtR/SurpriseL precedent	P23
+z_shift_6	z_shift_6	OPAQUE	generic axis-shift parameter, numbered, no object named	NOT_APPLICABLE		Low		matches the x_shift_9 precedent; technical parameter, no anatomical content	P23
+zipper.top	Zipper.Top	CLEAR	zipper (garment hardware), top position	CLEAR	groupFile/Clothing	High		plain garment hardware	P23
+bip01 clavicle.r	Bip01 Clavicle.R	CLEAR	right clavicle (shoulder-girdle bone)	CLEAR	groupFile/Arms	High		matches the established clavicle-to-Arms convention	P23
+flex_thin_middle	Flex_Thin_Middle	OPAQUE	generic "flex" category term with a size qualifier, no specific object	NOT_APPLICABLE		Low		matches the flex_noise/flex_thin_top precedent; generic technical category term	P23
+polysurface82	polySurface82	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		technical mesh-name artifact	P23
+reyeball	REyeball	CLEAR	right eyeball	CLEAR	groupFile/Face/Eyes	High		plain eye anatomy	P23
+cellphone_control	Cellphone_control	CLEAR	a cellphone (recognized real-world object)	CLEAR	groupFile/Other	High		names a recognized real-world prop object	P23
+plane06	Plane06	OPAQUE	a generic geometric "plane" primitive, numbered	NOT_APPLICABLE		Low		matches the plane07 precedent; no anatomical or functional specificity	P23
+11	11	OPAQUE	bare number, no words at all	NOT_APPLICABLE		Low		a number alone carries no semantic content	P23
+key 1 - eyeright	Key 1 - EyeRight	CLEAR	a numbered pose preset targeting the right eye	CLEAR	groupFile/Face/Eyes	Medium		matches the "Key N - description" preset series (rule 23's own documented example); descriptive suffix names the eye	P23
+key.r	Key.R	CLEAR	a keyboard-prop key, R	CLEAR	groupFile/Other	High		matches the coherent "Key.<label>" keyboard-prop series	P23
+key.black_41	Key.Black_41	CLEAR	a keyboard-prop key, black, numbered	CLEAR	groupFile/Other	High		matches the coherent "Key.Black_N" series (rule 23's own documented example)	P23
+object49	Object49	OPAQUE	generic placeholder object name, no referent	NOT_APPLICABLE		Low		numbered generic placeholder	P23
+left_18	left_18	OPAQUE	bare side marker with a number, no object named	NOT_APPLICABLE		Low		side marker alone carries no semantic content	P23
+throat-widen	throat-widen	CLEAR	throat widen shape deformation	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor on the character's own body	P23
+key 3 - shirt	Key 3 - Shirt	CLEAR	a numbered pose preset targeting a shirt	CLEAR	groupFile/Clothing	Medium		matches the "Key N - description" preset series (rule 23's own documented example); descriptive suffix names a garment	P23
+thumb_left_0	thumb_left_0	CLEAR	left thumb, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy	P23
+blanket messy	Blanket messy	CLEAR	a blanket (recognized real-world object), messy variant	CLEAR	groupFile/Other	High		names a recognized real-world prop object	P23
+brccurve	BRCCurve	OPAQUE	cryptic fragment ("BRC") plus a generic "curve" control, no anatomical content	NOT_APPLICABLE		Low		no grounding for "BRC" as an abbreviation or convention	P23
+right_liplov	Right_LipLoV	PARTIAL	right lip control with an undecoded "LoV" qualifier	CLEAR	groupFile/Face/Lower Face	Medium	"LoV" does not resolve to a grounded word	lip is the clear anatomical owner; "LoV" is an undecoded token, not a competing region	P23
+leg right roll 1	leg right roll 1	CLEAR	right leg roll bone, numbered	CLEAR	groupFile/Legs	High		roll is not corrective evidence (rule 3); plain leg anatomy	P23
+bag_bone_sr_01	bag_bone_sr_01	CLEAR	a bag (clothing accessory) bone, side/right, numbered	CLEAR	groupFile/Clothing	Medium		worn accessory	P23
+bip001 lcalftwist	Bip001 LCalfTwist	CLEAR	left calf twist bone	CLEAR	groupFile/Legs	High		twist is not corrective evidence (rule 3); plain leg anatomy	P23
+bas.side_left_4_jiggle	BAS.Side_Left_4_jiggle	CLEAR	a jiggle-physics function on an unresolved "BAS" object, left, numbered	NEEDS_CONTEXT		Low	"BAS" is not grounded as an object (matches the bas.side_left_2 precedent); jiggle's target is unclear	jiggle function is clear (rule 22); owning object is not established	P23
+foreskintippullback	ForeskinTipPullBack	CLEAR	foreskin tip, "pull back" soft-tissue state	CLEAR	groupFile/Body Morphs	High		direction word on genital soft tissue with no ordinary skeletal joint	P23
+l collarb sec root	l collarb sec root	CLEAR	left collarbone (clavicle), secondary root	CLEAR	groupFile/Arms	Medium		"collarb" read as "collarbone," matching the established clavicle-to-Arms convention	P23
+page5_r	Page5_R	CLEAR	a keyboard-prop page key, right	CLEAR	groupFile/Other	High		matches the coherent "Page<N>_<letter>" series	P23
+urethrabulgefixup	UrethraBulgeFixUp	CLEAR	a urethra-bulge deformation fix	CLEAR	groupFile/Correctives	Medium		explicit "FixUp" repair-purpose language (rule 5) overrides the plain bulge/shape reading	P23
+bip_neck_07	bip_neck_07	CLEAR	neck, numbered	CLEAR	groupFile/Body	High		plain neck anatomy; no dedicated neck subgroup exists	P23
+anus_open_small	anus_open_small	CLEAR	anus "open," small variant	CLEAR	groupFile/Body Morphs	High		state/size language on anatomy with no ordinary skeletal joint, matching the Anus Open precedent	P23
+bone174	Bone174	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P23
+valvebiped.rightbutt	ValveBiped.rightButt	CLEAR	right buttock, standard ValveBiped naming	CLEAR	groupFile/Body	High		buttock remains Body regardless of any side marker (rule 26's explicit override)	P23
+bip_bicep_twist_r	bip_bicep_twist_R	CLEAR	right bicep twist bone	CLEAR	groupFile/Arms	High		twist is not corrective evidence (rule 3); plain arm anatomy	P23
+bip_bellcollar_front	bip_BellCollar_Front	CLEAR	a "Bell Collar" costume accessory, front	CLEAR	groupFile/Clothing	High		matches the established bip_BellCollar_* named-costume precedent	P23
+arm left cloth 2b	arm left cloth 2b	CLEAR	sleeve/cloth on the left arm, variant 2b	CLEAR	groupFile/Clothing	High		garment element on the arm stays with Clothing (rule 8)	P23
+eyesadl	EyeSadL	CLEAR	eye sad expression, left	CLEAR	groupFile/Face/Eyes	High		plain eye expression control	P23
+ang	Ang	OPAQUE	cryptic fragment, no recoverable content	NOT_APPLICABLE		Low		no grounding for "Ang" as a word or abbreviation	P23
+censored	Censored	CLEAR	a censorship/blur effect control	CLEAR	groupFile/Other	Medium		recognized effect/technical concept, not structural anatomy	P23
+genital lower	genital lower	CLEAR	genital anatomy, lower position	CLEAR	groupFile/Body	High		plain structural genital anatomy, no shape/state language	P23
+marie head forehead left	Marie head forehead left	CLEAR	forehead, left	CLEAR	groupFile/Face/Upper Face	High		"Marie" is a character prefix (rule 24); forehead is upper-face anatomy	P23
+kublaribiped_penis_r2	KubLariBiped_Penis_R2	CLEAR	penis (genital anatomy), right, numbered	CLEAR	groupFile/Body	High		plain structural genital anatomy, matching the Cock.Shaft precedent	P23
+tenta_2_l	tenta_2_L	CLEAR	tentacle, numbered, left	NEEDS_CONTEXT		Medium	no established Master destination convention exists for tentacle appendages (Tranche 2 precedent)	tentacle anatomy is clear; owning destination is not established	P23
+unused pt_hand_left_root	unused PT_Hand_Left_Root	CLEAR	self-declared unused hand-root control, left	CLEAR	groupFile/Useless	High		self-declared "unused" (rule 15)	P23
+bone182	Bone182	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P23
+flm-visor-r2	Flm-Visor-R2	CLEAR	a visor (worn headwear), right, numbered	CLEAR	groupFile/Clothing	High		"Visor" is grounded content independent of the Flm namespace prefix (rule 24); worn headwear item	P23
+unused opt_as_r_elbow	unused OPT_AS_R_Elbow	CLEAR	self-declared unused elbow control, right	CLEAR	groupFile/Useless	High		self-declared "unused" (rule 15)	P23
+bipfin l finger4	BipFin L Finger4	CLEAR	left finger 4 (ring finger)	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy	P23
+kargathbladefist_bone102	kargathbladefist_Bone102	OPAQUE	a generic numbered bone under a named-character prefix; no anatomical content in the number itself	NOT_APPLICABLE		Low	character/model prefix is not itself semantic ownership (rule 24); bare numbered bone carries no anatomical specificity	matches the established kargathbladefist_bone* precedent	P23
+sword2 guard	Sword2 Guard	CLEAR	a sword's hand guard, numbered	CLEAR	groupFile/Other	High		weapon part, matching the established weapons-to-Other precedent	P23
+vag - push	Vag - Push	CLEAR	vaginal "push" soft-tissue state	CLEAR	groupFile/Body Morphs	High		direction word on genital soft tissue with no ordinary skeletal joint	P23
+lassimpactextrude2	LAssImpactExtrude2	CLEAR	left buttock impact reaction, extrude, numbered	CLEAR	groupFile/Body Morphs	High		impact-reaction morph, matching the R-Ass-Smack precedent	P23
+ringleft1	RingLeft1	PARTIAL	a "ring", left, numbered	NEEDS_CONTEXT		Low	"ring" has materially different core senses (ring finger / jewelry ring / other ring-shaped object) with no hand-context grounding here	bare multi-sense word, no grounding to pick a reading	P23
+bippbg r foretwist1	BipPBG R ForeTwist1	CLEAR	right forearm twist bone, numbered	CLEAR	groupFile/Arms	High		twist is not corrective evidence (rule 3); plain forearm anatomy	P23
+wut	Wut	OPAQUE	a slang fragment with no rigging-relevant meaning	NOT_APPLICABLE		Low		no reliable core referent in this domain	P23
+second_arms_l_middle2	Second_Arms_L_Middle2	CLEAR	a second left arm, middle finger, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		limb count does not change destination (rule 19); plain finger anatomy	P23
+unusedbone009	unusedbone009	CLEAR	self-declared unused bone, numbered	CLEAR	groupFile/Useless	High		self-declared "unused" (rule 15)	P23
+valvebiped.bip01_r_thightwist1	ValveBiped.Bip01_R_ThighTwist1	CLEAR	right thigh twist bone, standard ValveBiped naming	CLEAR	groupFile/Legs	High		twist is not corrective evidence (rule 3); plain leg anatomy	P23
+necktwist	NeckTwist	CLEAR	neck twist bone	CLEAR	groupFile/Body	High		twist is not corrective evidence (rule 3); plain neck anatomy, no dedicated neck subgroup	P23
+earring.ring_left_3_jiggle	Earring.Ring_Left_3_jiggle	CLEAR	an earring's ring, left, numbered, jiggle physics	CLEAR	groupFile/Clothing	High		"Earring" disambiguates "ring" as jewelry; jiggle physics stays with the item	P23
+unusedbone230	unusedbone230	CLEAR	self-declared unused bone, numbered	CLEAR	groupFile/Useless	High		self-declared "unused" (rule 15)	P23
+headband tail right c	headband tail right c	CLEAR	a headband's trailing tail/ribbon, right, variant c	CLEAR	groupFile/Clothing	High		object-specific component of the headband stays with Clothing (rule 8)	P23
+spine lower_l	spine lower_L	CLEAR	a lower-spine control, left-qualified	NEEDS_CONTEXT		Medium	no garment/hair-object noun is present to establish ownership one way or the other (rule 14's bare-spine branch)	bare spine literal with no ownership evidence	P23
+ph05	PH05	OPAQUE	cryptic alphanumeric code, no recoverable content	NOT_APPLICABLE		Low		no grounding for "PH" as an abbreviation	P23
+five_bullet03	Five_Bullet03	CLEAR	a bullet (ammunition), numbered	CLEAR	groupFile/Other	High		ammunition, matching the established weapons/ammunition-to-Other precedent	P23
+c tongtip	C Tongtip	CLEAR	tongue tip ("Tong"=Tongue)	CLEAR	groupFile/Face/Tongue	Medium	reading "Tong" as a truncation of "Tongue"	obvious near-misspelling read as "tongue tip," matching the "buldge"="bulge" precedent style	P23
+strap b 3	strap b 3	CLEAR	a bare strap accessory, variant b, numbered	NEEDS_CONTEXT		Medium	no owner named; a bare strap is the same kind of object regardless of owner (rule 25)	bare accessory noun, ownership unresolved	P23
+lock_r	Lock_R	PARTIAL	a "lock", right	NEEDS_CONTEXT		Low	"lock" has materially different core senses (hair lock / mechanical lock) with no disambiguating content	bare multi-sense word, no grounding to pick a reading	P23
+legbuffy	Legbuffy	CLEAR	a leg buffer helper control ("Buffy" read as "buffer")	CLEAR	groupFile/Legs	Medium	"Buffy" plausibly a truncation/typo of "buffer"	leg is the clear anatomical owner regardless of the exact qualifier reading	P23
+wep_fx_muzzle8	WEP_FX_Muzzle8	CLEAR	a weapon muzzle effect, numbered	CLEAR	groupFile/Other	High		weapon effect, matching the established weapons-to-Other precedent	P23
+l ulid d	L Ulid D	PARTIAL	left eyelid control with an undecoded "U" qualifier, variant d	CLEAR	groupFile/Face/Eyes	Medium	the "U" prefix does not resolve to a grounded word (parallel to the Dlid cryptic-prefix pattern)	"lid" (eyelid) is the clear anatomical owner regardless of the undecoded "U" prefix	P23
+r ulid d	R Ulid D	PARTIAL	right eyelid control with an undecoded "U" qualifier, variant d	CLEAR	groupFile/Face/Eyes	Medium	the "U" prefix does not resolve to a grounded word	"lid" (eyelid) is the clear anatomical owner; sibling of l ulid d confirms the pattern	P23
+pad3_2	pad3_2	PARTIAL	a "pad", numbered	NEEDS_CONTEXT		Low	"pad" has materially different core senses (clothing padding / cushion object / other) with no disambiguating content	bare multi-sense word, matching the Tranche 2 "pad" precedent	P23
+beadhangback2	BeadHangBack2	CLEAR	a hanging bead decoration, back position, numbered	CLEAR	groupFile/Clothing	Medium		bead accessory, matching the established BeadHangBack series	P23
+reciever	reciever	CLEAR	a "receiver" (weapon or device component)	CLEAR	groupFile/Other	Medium		recognized mechanical/prop object regardless of which specific reading applies	P23
+key.w	Key.W	CLEAR	a keyboard-prop key, W	CLEAR	groupFile/Other	High		matches the coherent "Key.<label>" keyboard-prop series	P23

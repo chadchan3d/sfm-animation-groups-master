@@ -1,0 +1,141 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 3 -- CONSISTENCY AUDIT
+Positions 2501-3500 (1,000 production families). Flag-only audit.
+No ledger rows were changed during this audit.
+======================================================================
+
+----------------------------------------------------------------------
+METHOD
+----------------------------------------------------------------------
+For every candidate finding, the four mandatory questions were worked
+through explicitly (per the Tranche 2 audit-method correction):
+  1. Does an accepted calibration row address the same semantic pattern?
+  2. Does a corrected Tranche-1 or Tranche-2 production precedent
+     address it?
+  3. Does the current classification contradict that precedent?
+  4. Verdict: A. classification error / B. metadata/reason error /
+     C. legitimate semantic distinction / D. unresolved/new-policy case.
+No finding was labeled "awareness only" without this analysis.
+
+----------------------------------------------------------------------
+MECHANICAL CHECKS (automated, full Tranche-3 population, 1,000 rows)
+----------------------------------------------------------------------
+- Rule 21 biconditional (OPAQUE iff NOT_APPLICABLE): 0 violations.
+- proposed_destination present but taxonomy_status != CLEAR: 0 found.
+- Correctives rows without repair/fix/correct/JCM language anywhere in
+  fold_key/exact_spellings/referent/short_reason: 0 found. (Correctives
+  rows this tranche: spine_bone_correct_r_01, urethrabulgefixup,
+  hootersarmupfixr, legsforwardcorrect, pjcmforearmfwd75l,
+  pjcmthighfwd115r -- all carry explicit fix/correct/JCM language.)
+- OPAQUE rows asserting an unhedged guess word ("likely"/"probably"/
+  "presumably") in the referent: 0 found -- the box10/box22 lesson
+  (Tranche 2 QA) was applied proactively; no comparable defect recurred.
+- Narrow real-object-noun sweep (the box-family lesson): every OPAQUE
+  row's fold_key (133 total) was checked against a list of ~50 common
+  real-world physical-object nouns (box, door, bench, pillow, sign,
+  bottle, wheel, etc.). Result: 0 hits -- no generic-numbered-real-object
+  row was misclassified OPAQUE this tranche.
+- Self-declared "unused"/"duplicate" rows not routed to Useless: 0 found
+  (all self-declared-unused rows this tranche correctly route to
+  groupFile/Useless).
+- Rule 26 hip/pelvis boundary: 2 hip-related rows this tranche --
+  "bip hiptwistbase l" (explicitly sided -> Legs) and "hip_joint02"
+  (unsided -> Body). Both consistent with the settled rule.
+
+----------------------------------------------------------------------
+TARGETED FAMILY-CONSISTENCY SPOT CHECKS
+----------------------------------------------------------------------
+- Collar family (11 rows): splits cleanly into three sub-patterns, all
+  internally consistent and each independently grounded --
+    bare biped "collar"/"collarb" (no garment qualifier): collar left
+      01/02, collar right a, l collarb sec root, l collarb tip sec ->
+      Arms (clavicle reading, matching the settled bare-biped-collar
+      precedent).
+    physics-sim "...a Phy" marked collar: l collarb a phy -> Clothing
+      (matches the settled "L CollarC a Phy" precedent).
+    named-costume or explicit-cloth-prefixed collar: cloth_collar_1_r,
+      bip_bellcollar_front, bip_clockcollarfront_l, bip_clockcollar_r,
+      island_collar_01_wind_helper -> Clothing.
+  "l collarb a phy" (Clothing) and "l collarb sec root"/"tip sec" (Arms)
+  might look inconsistent at a glance since all three share "collarb,"
+  but they are NOT the same sub-pattern: only the "a Phy" row carries
+  the physics-sim marker that the settled precedent specifically keys
+  on. Four-question check: (1) yes, both settled precedents apply
+  directly; (2) yes; (3) no contradiction -- each row is classified
+  under the correct one of the two established sub-rules; (4) verdict
+  C, legitimate distinction. No correction needed.
+- Flm-ArmA/ArmB namespace family (12 rows): rows whose suffix supplies
+  no independently-grounded content beyond a bare "Leg"/"Arm"/"Back"/
+  "Float" label consistently route to NEEDS_CONTEXT (7 rows); rows whose
+  suffix names actual grounded content (Sword x2, Neck, Belt) resolve to
+  their real destination (Other x2, Body, Clothing) regardless of the
+  ArmA/ArmB prefix, per rule 24. Fully consistent with the established
+  Tranche 1/2 Flm-Arm precedent; verdict C for the family as a whole.
+- Bow/ring/chain/hose/cup/pad/strap/string/cord "bare multi-sense or
+  ownerless accessory" families: bare/ownerless instances consistently
+  land on PARTIAL-or-CLEAR + NEEDS_CONTEXT; instances with an explicit
+  disambiguating owner (Maid.Bow, school_bowtie, earring.ring_*,
+  v_weapon.right_ring01, ValveBiped.Bip01_R_Ring04) consistently resolve
+  to a real destination. This is rule 22/25's own intended behavior, not
+  drift -- verdict C.
+- Fin (4 rows) and tentacle (5 rows) families: uniformly CLEAR/
+  NEEDS_CONTEXT across every occurrence, consistent with the Tranche 2
+  precedent that no established Master destination convention exists
+  for these appendages. Verdict C.
+- levator02_r: correctly matches the corrected levator03_r Tranche 2
+  precedent (PARTIAL/NEEDS_CONTEXT, generic function word, no region
+  established). "elevator" (a different, unrelated real word meaning a
+  lift machine) was correctly NOT conflated with "levator." Verdict C.
+
+----------------------------------------------------------------------
+1. FLAGGED ROW
+----------------------------------------------------------------------
+
+FOLD KEY: donger04_chain (exact: donger04_chain)
+  Current: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  Current semantic_referent: "cryptic fragment ('donger'), no
+  recoverable content"
+
+  1. Does an accepted precedent address this pattern? Yes -- this same
+     tranche independently classified "valvebiped.chain_aligned2" as
+     PARTIAL/NEEDS_CONTEXT on the strength of "chain" alone being a
+     real, recognizable (if multi-sense) word, per rule 22's own
+     documented "chain" example (jewelry chain / physics-sim chain /
+     mechanical chain).
+  2. Does a corrected Tranche 1/2 precedent address it? Yes, by
+     extension -- rule 24's "ignore an ungrounded/model-character prefix
+     and classify whatever meaningful, independently-grounded content
+     remains" principle, applied repeatedly and successfully throughout
+     Tranches 1-3 (e.g. Mar-Rig-Face, GenericHuman_l_browAJnt,
+     Flm-ArmA-SwordA-D), would treat "donger" the same way a cryptic or
+     character-style prefix is treated elsewhere: set it aside and
+     classify the remaining word, "chain."
+  3. Does the current classification contradict that precedent? Yes --
+     "donger04_chain" was classified fully OPAQUE (no reliable core
+     referent at all), which is a stricter conclusion than
+     "valvebiped.chain_aligned2" reached from the same content word.
+     Nothing in "donger" was shown to overwrite or redirect the meaning
+     of "chain" (no evidence "donger" is itself a grounded modifier that
+     changes what kind of chain is meant) -- it was simply left
+     ungrounded, exactly like the "aligned"/"valvebiped." padding around
+     the other row's own "chain."
+  4. Verdict: A -- likely classification error. "donger04_chain" should
+     probably read semantic_status=PARTIAL (chain is meaningful but
+     multi-sense, matching rule 22's own example), taxonomy_status=
+     NEEDS_CONTEXT, consistent with valvebiped.chain_aligned2, rather
+     than semantic_status=OPAQUE/taxonomy_status=NOT_APPLICABLE.
+
+DISPOSITION: flagged only, per instruction -- not corrected in this
+pass. Recommend a targeted QA-application pass (mirroring the box10/
+box22 pattern from Tranche 2) to review and, if confirmed, correct this
+single row.
+
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+Total flags: 1 (donger04_chain) -- a candidate classification error
+(OPAQUE -> likely PARTIAL/NEEDS_CONTEXT), flagged for a future targeted
+correction. No other classification errors, metadata defects, or
+unjustified family splits were found in this tranche's 1,000 rows. No
+ledger row was changed during this audit.
+======================================================================
