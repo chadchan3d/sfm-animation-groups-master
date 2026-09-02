@@ -1,0 +1,124 @@
+PHASE 2 PRODUCTION TRANCHE 9 -- REPORT
+Canonical positions 8501-9500 (1000 families, batches P81-P90, 100 each)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv
+
+============================================================
+TRANCHE-ONLY STATISTICS (1000 rows, this tranche)
+============================================================
+
+semantic_status:
+  CLEAR:   820
+  PARTIAL:  50
+  OPAQUE:  130
+
+taxonomy_status:
+  CLEAR:          761
+  NEEDS_CONTEXT:  109
+  NOT_APPLICABLE: 130
+  NEEDS_DOCTRINE:   0
+
+confidence:
+  High:   835
+  Medium: 165
+  Low:      0
+
+Rule 21 invariant (OPAQUE <=> NOT_APPLICABLE) check: 0 violations across
+all 1000 rows.
+
+Proposed-destination counts (CLEAR taxonomy rows only, 761 total):
+  groupFile/Other                        133
+  groupFile/Clothing                     129
+  groupFile/Body                          61
+  groupFile/Arms                          57
+  groupFile/Face/Eyes                     50
+  groupFile/Body Morphs                   50
+  groupFile/Legs                          34
+  groupFile/Useless                       31
+  groupFile/Arms/LeftArm/LeftFingers      29
+  groupFile/Face/Upper Face               28
+  groupFile/Face/Lower Face               27
+  groupFile/Hair                          26
+  groupFile/Arms/RightArm/RightFingers    24
+  groupFile/Face/Expressions              14
+  groupFile/Tail                          12
+  groupFile/Face/Mid Face                 12
+  groupFile/Wings                          6
+  groupFile/Toes/LeftToes                  6
+  groupFile/Face/Ears                      6
+  groupFile/Face/Tongue                    6
+  groupFile/Correctives                    5
+  groupFile/Toes/RightToes                 3
+  groupFile/Arms/RightArm                  3
+  groupFile/Fingers                        2
+  groupFile/Face                           2
+  groupFile/Arms/LeftArm                   2
+  groupFile/Attachments                    1
+  groupFile/Arms/LeftArm/LeftCarpals       1
+  groupFile/RigBody                        1
+
+NEEDS_CONTEXT rows: 109 (blank destination; mixed multi-sense literals
+["bow"/"chain"/"ball"/"whisker"/"crane"], unowned bare-accessory nouns
+[strap/string/knot/band/flap/screw], BAS./jiggle-function-but-no-owner
+rows, undecoded Flm-ArmB-* suffix codes, and unresolved shape/direction
+function words ["shrink"/"shorten"/"widen"/"scale-down"/"indent"/"hide"/
+"crush"/"stomp"/"dyng <axis>"] with no anatomical anchor).
+
+NEEDS_DOCTRINE rows: 0. No genuinely new taxonomy-policy question was
+encountered; production continued through all 10 batches without a hard
+stop.
+
+Consistency flags raised: see
+PHASE2_PRODUCTION_TRANCHE9_CONSISTENCY_FLAGS.txt for the full audit,
+including 5 non-blocking observational notes (Flm-ArmB-* suffix-code
+inconsistency, whisker/moustache/condom pre-existing splits, AU-family
+outliers) and 1 applied cross-tranche correction (the fringe family, 4
+rows).
+
+OPAQUE rows manually reviewed (6-question test): 130 / 130.
+Face/Expressions rows reviewed (mandatory face audit): 14 / 14.
+Settled-rule drift candidates reviewed: tentacle (6 rows), fin (3 rows),
+horn (2 rows), Box_Face_##_M (4 rows), balloon-flat (0 members this
+tranche), Rig-Hole (0 members this tranche) -- all matched current
+authoritative destinations with no drift.
+DCC-default-name candidates reviewed: 10 (polysurface16/26/27/59/73,
+pcylinder2/9, pcube1, cylinder001, submesh_00_lod_1.2922, all OPAQUE per
+Section 5E).
+Cross-tranche corrections applied: 4 (the "fringe" family: fringe 1,
+fringe 6, fringe 20, fringe 17 jb -- see consistency-flags document
+Section 6 for full evidence and original batch provenance).
+Precedent claims mechanically verified against current ledger/Master
+fields before use: every claim in every batch file and in this report
+that references a sibling row's semantic_status, taxonomy_status, or
+proposed_destination, and every live-Master grep cited as evidence
+(fringe/Fringe/HairFringe/bip_fringe family lines 43571-62045; the
+groupFile group-path enumeration used for destination validation).
+
+============================================================
+CUMULATIVE STATISTICS (after Tranche 9)
+============================================================
+
+calibration_families_complete:        500
+production_families_classified:      9000
+total ledger rows:                   9500
+next_canonical_phase2_position:      9501
+remaining_production_families:       4782
+
+============================================================
+Batch-level record (for resumability)
+============================================================
+
+P81 (8501-8600): merged, ledger reached 8600 rows
+P82 (8601-8700): merged, ledger reached 8700 rows
+P83 (8701-8800): merged, ledger reached 8800 rows
+P84 (8801-8900): merged, ledger reached 8900 rows
+P85 (8901-9000): merged, ledger reached 9000 rows
+P86 (9001-9100): merged, ledger reached 9100 rows
+P87 (9101-9200): merged, ledger reached 9200 rows
+P88 (9201-9300): merged, ledger reached 9300 rows
+P89 (9301-9400): merged, ledger reached 9400 rows
+P90 (9401-9500): merged, ledger reached 9500 rows
+
+All 10 batches for Tranche 9 are complete and merged. No batch remains
+pending. One post-merge cross-tranche correction (fringe family, 4 rows)
+was applied after all 10 batches merged, per Section 23 -- see the
+consistency-flags document.

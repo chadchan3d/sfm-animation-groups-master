@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+wep_fx_laser_rail	WEP_FX_Laser_Rail	CLEAR	a weapon laser-effect rail attachment control	CLEAR	groupFile/Other	High		matches extensive wep_fx sibling family (laser2/laser_micro/muzzle*/light1/flashlight_barrel), all CLEAR/CLEAR/Other	P84	
+object024	Object024	OPAQUE	a generic numbered placeholder object	NOT_APPLICABLE		High		matches extensive Object0## sibling series, all OPAQUE/NOT_APPLICABLE	P84	
+nipples_button	nipples_button	CLEAR	a nipple press/button control	CLEAR	groupFile/Body Morphs	Medium		matches nipple-family Body Morphs precedent (nippledown/nipplepoke/nipplesize), no skeletal joint (rule 7)	P84	
+bip_bowtieupper_l	bip_BowtieUpper_L	CLEAR	a left bowtie garment control, upper section	CLEAR	groupFile/Clothing	High		matches bowtie sibling family (Bowtie.Bow_Left_1/2, bip_BowtieRoot, School_Bowtie), all CLEAR/CLEAR/Clothing	P84	
+opt_hand_right_pinky1	OPT_Hand_Right_Pinky1	CLEAR	a right pinky-finger bone, segment 1	CLEAR	groupFile/Arms/RightArm/RightFingers	High		matches direct sibling OPT_Hand_Right_Pinky2, CLEAR/CLEAR/RightFingers	P84	
+r forehead	R Forehead	CLEAR	a right forehead control	CLEAR	groupFile/Face/Upper Face	High		matches extensive forehead sibling family, all CLEAR/CLEAR/Face/Upper Face	P84	
+earring.pendant_right_1	Earring.Pendant_Right_1	CLEAR	a right earring pendant control, numbered	CLEAR	groupFile/Clothing	High		matches Earring.Pendant_Left_1/Right_2/Right_2_jiggle sibling series, all CLEAR/CLEAR/Clothing	P84	
+outfit buttspread	Outfit ButtSpread	CLEAR	a butt-spread shape control, outfit-qualified	CLEAR	groupFile/Body Morphs	High		matches ButtSpread.R/L2 sibling series, all CLEAR/CLEAR/Body Morphs (rule 7)	P84	
+センター	センター	OPAQUE	a bare 'center' label with no object named	NOT_APPLICABLE		Medium		matches bare positional-label-no-owner OPAQUE precedent	P84	
+shirt_lift_full_3	shirt_lift_full_3	CLEAR	a shirt-lift garment control, full variant, numbered	CLEAR	groupFile/Clothing	High		explicit garment lift function (rule 8)	P84	
+window_urban_sash_48_88_full_gib08	window_urban_sash_48_88_full_gib08	CLEAR	a destructible window-sash gib fragment, numbered	CLEAR	groupFile/Other	High		direct exact-template sibling window_urban_sash_48_88_full_gib06, CLEAR/CLEAR/Other; 'gib' is a recognized Source-domain destructible-fragment convention (Section 5.B)	P84	
+bottom_lift1	bottom_lift1	CLEAR	a lift function on an unnamed 'bottom', numbered	NEEDS_CONTEXT		High	owner not established	matches direct siblings bottom_lift/bottom_lift2, CLEAR/NEEDS_CONTEXT	P84	
+emaciated upper details	Emaciated Upper Details	CLEAR	an emaciated-body shape detail control, upper	CLEAR	groupFile/Body Morphs	High		direct sibling 'emaciated lower details', CLEAR/CLEAR/Body Morphs	P84	
+valvebiped.bip01_l_elbow_ctr	ValveBiped.Bip01_L_Elbow_CTR	CLEAR	a left elbow center control	CLEAR	groupFile/Arms	High		ordinary structural elbow anatomy (rule 6); bare Arms per rule 10 default	P84	
+vag open wide	vag open wide	CLEAR	a vaginal open-wide shape control	CLEAR	groupFile/Body Morphs	High		matches direct sibling 'vag open wide2', CLEAR/CLEAR/Body Morphs	P84	
+mila head nostril left 2	Mila head nostril left 2	CLEAR	a left nostril control for the Mila character, numbered	CLEAR	groupFile/Face/Mid Face	High		matches extensive nostril sibling family, all CLEAR/CLEAR/Face/Mid Face	P84	
+upperlidlowerl	UpperLidLowerL	CLEAR	a left upper-eyelid lower control	CLEAR	groupFile/Face/Eyes	High		matches UpperLidLowerR/upperlidsdownl sibling series, all CLEAR/CLEAR/Face/Eyes	P84	
+cloth middle 5 jb	cloth middle 5 JB	CLEAR	a middle cloth garment control, numbered	CLEAR	groupFile/Clothing	High		matches extensive 'cloth middle' sibling family, all CLEAR/CLEAR/Clothing	P84	
+face-facialthin	Face-FacialThin	CLEAR	an overall facial-thinness shape control	CLEAR	groupFile/Body Morphs	Medium		bare body-shape/size adjective describing the character's own face, matches the 'torso width'/thicc-family Body Morphs pattern	P84	
+unusedwgthair	unusedwgthair	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		explicit self-declared 'unused' marker (rule 15)	P84	
+throat fill	throat fill	CLEAR	a throat-fill shape/state control	CLEAR	groupFile/Body Morphs	Medium		matches throat-widen/throat-bulge Body-Morphs subfamily (state/shape change, not plain structural posing)	P84	
+flm-armb-arm-lh	Flm-ArmB-Arm-LH	CLEAR	an arm-region rig control in the Flm-ArmB internal namespace, undecoded 1-letter suffix code, left	NEEDS_CONTEXT		Medium	no exact sibling match for the '-lh' suffix; family shows a mixed pattern (lb->Arms, lf/ri->NEEDS_CONTEXT)	conservative NEEDS_CONTEXT per the family's inconsistent precedent	P84	
+huladoll.hips	Huladoll.hips	CLEAR	a hip control on the Huladoll character/model namespace	CLEAR	groupFile/Body	Medium	'Huladoll' treated as a model/character-name prefix rather than a literal toy-prop reference	model prefix set aside (rule 24); bare unsided 'hips' remainder routes to Body (rule 26)	P84	
+nyotengu head eyeball right	Nyotengu head eyeball right	CLEAR	a right eyeball control for the Nyotengu character	CLEAR	groupFile/Face/Eyes	High		matches extensive eyeball sibling family, all CLEAR/CLEAR/Face/Eyes	P84	
+bone 1107	bone 1107	OPAQUE	a generic numbered bone with no functional or regional word	NOT_APPLICABLE		High		bare numbered bone, no anatomical/functional content	P84	
+30	30	OPAQUE	a bare number with no other content	NOT_APPLICABLE		High		pure numeric literal, no functional/regional word at all	P84	
+knee01	knee01	CLEAR	a numbered knee control	CLEAR	groupFile/Legs	High		matches direct sibling knee02, CLEAR/CLEAR/Legs	P84	
+butt right_jiggle	Butt Right_jiggle	CLEAR	a right buttock jiggle control	CLEAR	groupFile/Body	High		matches direct sibling 'Butt Left_jiggle', CLEAR/CLEAR/Body	P84	
+wep_bullet4	WEP_Bullet4	CLEAR	a numbered weapon bullet/ammunition prop	CLEAR	groupFile/Other	High		matches wep_bullet4_round/shell sibling series, all CLEAR/CLEAR/Other	P84	
+root waist l	root waist l	CLEAR	a left waist root/anchor control	CLEAR	groupFile/Body	High		matches direct sibling 'root waist r', CLEAR/CLEAR/Body	P84	
+bobcut.rear_center_1	Bobcut.Rear_Center_1	CLEAR	a bob-cut hairstyle control, rear-center, numbered	CLEAR	groupFile/Hair	High		matches extensive Bobcut sibling family, all CLEAR/CLEAR/Hair	P84	
+hair left ear 2	hair left ear 2	CLEAR	a left hair strand near the ear, numbered	CLEAR	groupFile/Hair	High		explicit hair strand naming (rule 8)	P84	
+collarleftmidlower	CollarLeftMidLower	CLEAR	a left collar (neckline) garment control, mid-lower	CLEAR	groupFile/Clothing	High		explicit garment neckline component (rule 8)	P84	
+car02_controller01	Car02_controller01	CLEAR	a numbered car/vehicle prop controller	CLEAR	groupFile/Other	High		matches extensive Car0#_controller sibling family, all CLEAR/CLEAR/Other	P84	
+unusedarm left finger knuckle thumb	unusedarm left finger knuckle thumb	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		explicit self-declared 'unused' marker (rule 15), takes priority over the readable remainder	P84	
+angry eyes left	Angry Eyes Left	CLEAR	a left 'angry eyes' expression control	CLEAR	groupFile/Face/Eyes	High		direct sibling 'angry eyes right', CLEAR/CLEAR/Face/Eyes	P84	
+rachel head nostril right 2	Rachel head nostril right 2	CLEAR	a right nostril control for the Rachel character, numbered	CLEAR	groupFile/Face/Mid Face	High		matches extensive nostril/Rachel-head sibling family, all CLEAR/CLEAR/Face/Mid Face	P84	
+valvebiped_bullet12	ValveBiped_Bullet12	CLEAR	a numbered weapon bullet prop	CLEAR	groupFile/Other	High		matches ValveBiped_Bullet3/9/14/15/16 sibling series, all CLEAR/CLEAR/Other	P84	
+armcirclegrow	ArmCircleGrow	CLEAR	an arm-circumference growth shape control	CLEAR	groupFile/Body Morphs	High		direct sibling ArmCircleShrink, CLEAR/CLEAR/Body Morphs	P84	
+dummy10	Dummy10	OPAQUE	a generic numbered dummy placeholder object	NOT_APPLICABLE		High		matches Dummy11 and the extensive Dummy0# sibling series, all OPAQUE/NOT_APPLICABLE	P84	
+bip_bobby_l_foretwist	Bip_BOBBY_L_ForeTwist	CLEAR	a left forearm twist bone on the Bobby rig namespace	CLEAR	groupFile/Arms	High		matches direct sibling bip_bobby_l_foretwist1, CLEAR/CLEAR/Arms	P84	
+browrraise	BrowRRaise	CLEAR	a right eyebrow raise control	CLEAR	groupFile/Face/Upper Face	High		localized eyebrow mechanism (rule 12)	P84	
+bhr444	BhR444	OPAQUE	a cryptic alphanumeric code, no grounding	NOT_APPLICABLE		High		matches BhR43/BhR45 sibling series, all OPAQUE/NOT_APPLICABLE	P84	
+rough_small_6	rough_small_6	OPAQUE	a generic ungrounded 'rough small' token, numbered	NOT_APPLICABLE		High		matches rough_small_1/2/7 sibling series, all OPAQUE/NOT_APPLICABLE	P84	
+head_neck_lower_2	head_neck_lower_2	CLEAR	a bare head/neck structural control, lower, numbered	CLEAR	groupFile/Body	High		bare structural head/neck reference, no facial feature named (rule 13)	P84	
+fio-rig-face	Fio-Rig-Face	CLEAR	a bare face control on the Fio-Rig internal namespace	CLEAR	groupFile/Face	High		rig namespace set aside (rule 24); bare 'face' with no specific feature routes to groupFile/Face (matches calibration precedent fbx_sakura_face)	P84	
+flm-armb-leg-lua	Flm-ArmB-Leg-LUA	CLEAR	a leg-region rig control in the Flm-ArmB internal namespace, undecoded 2-letter suffix code	NEEDS_CONTEXT		Medium	no exact sibling match; family splits between CLEAR/Legs (luc) and NEEDS_CONTEXT (lub) for similar codes	conservative NEEDS_CONTEXT per the family's inconsistent precedent	P84	
+box07	Box07	CLEAR	a numbered box prop	CLEAR	groupFile/Other	High		matches extensive Box## sibling series, all CLEAR/CLEAR/Other	P84	
+key.white_56	Key.White_56	CLEAR	a numbered white-key prop	CLEAR	groupFile/Other	High		coherent Key.White_N series (rule 23)	P84	
+tall	tall	CLEAR	a bare body-height/size shape adjective	CLEAR	groupFile/Body Morphs	Medium		matches the thicc/thiccer bare body-shape-adjective pattern, CLEAR/CLEAR/Body Morphs	P84	
+bip_findex00_r	Bip_FIndex00_R	CLEAR	a right index-finger bone, segment 00	CLEAR	groupFile/Arms/RightArm/RightFingers	High		matches Bip_FIndex01_R/00_L and 'bip findex00 r' sibling series, all CLEAR/CLEAR/RightFingers	P84	
+armsnew	ArmsNew	CLEAR	an alternate/secondary arm-set identifier control	CLEAR	groupFile/Arms	Medium	no side marker present	analogous to the established Second_Arms/Third_Arms secondary-arm-set naming pattern	P84	
+magazine00	Magazine00	CLEAR	a numbered weapon magazine prop	CLEAR	groupFile/Other	High		direct sibling Magazine02, CLEAR/CLEAR/Other	P84	
+valvebiped.bip01_l_pinkie	ValveBiped.Bip01_L_Pinkie	CLEAR	a left pinky-finger bone	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		matches extensive pinkie sibling family, all CLEAR/CLEAR/LeftFingers/RightFingers	P84	
+lower left tears l	Lower left tears L	CLEAR	a left lower-eyelid tear control	CLEAR	groupFile/Face/Eyes	High		direct sibling 'lower left tears r', CLEAR/CLEAR/Face/Eyes	P84	
+leftdooropen	LeftDoorOpen	CLEAR	a left door-open control	CLEAR	groupFile/Other	High		matches door sibling family (RightDoorOpen etc.), all CLEAR/CLEAR/Other	P84	
+bone_afr	Bone_AFR	OPAQUE	an ungrounded 'AFR' bone code	NOT_APPLICABLE		Medium		no sibling series or recognized convention grounds 'AFR' (rule 23)	P84	
+arm right shoulder adj a	arm right shoulder adj a	CLEAR	a right shoulder adjustment control, variant A	CLEAR	groupFile/Arms	High		matches direct sibling 'arm right shoulder adjuster', CLEAR/CLEAR/Arms	P84	
+shortfrombot	ShortFromBot	CLEAR	a 'shorten from bottom' length-adjustment function, no owner named	NEEDS_CONTEXT		Medium	owner not established	function is stable (a length-shortening adjustment, rule 22) but no object/region is named	P84	
+c_dred_r2_08	C_Dred_R2_08	CLEAR	a dreadlock hair strand control, numbered	CLEAR	groupFile/Hair	High		matches extensive C_Dred_R2 sibling family, all CLEAR/CLEAR/Hair	P84	
+condom 5	condom 5	CLEAR	a numbered condom (worn prophylactic) control	CLEAR	groupFile/Clothing	Medium	sibling 'condom 3' was classified groupFile/Other, a pre-existing split	a worn body-covering item follows the worn-equipment convention (rule 16 analog), matching direct sibling 'condom 4'	P84	
+thickend	ThickEnd	CLEAR	a 'thick end' shape-descriptor function, no owner named	NEEDS_CONTEXT		Medium	owner not established	function stable (matches sibling CockThickEnd's shape-descriptor reading) but no body part is named in this literal	P84	
+valvebiped.hip	Valvebiped.hip	OPAQUE	a bare namespace-root token; 'Hip' is used as a model/character name in this family, not the anatomical hip	NOT_APPLICABLE		Medium		sibling ValveBiped.Hip_L_Ulna proves 'Hip' is a model-name prefix here (an ulna cannot be anatomically owned by a hip); the bare root form carries no further content	P84	
+vent_lod1	vent_lod1	CLEAR	a numbered air-vent prop, level-of-detail variant	CLEAR	groupFile/Other	Medium		recognized mechanical/environment prop (rule 16)	P84	
+l ujacketa b phy	L uJacketA b Phy	CLEAR	a left uJacketA garment physics control, variant B	CLEAR	groupFile/Clothing	High		matches extensive uJacketA sibling family, all CLEAR/CLEAR/Clothing	P84	
+jacket back middle b	jacket back middle b	CLEAR	a jacket-back garment control, middle, variant B	CLEAR	groupFile/Clothing	High		matches direct sibling 'jacket back middle c', CLEAR/CLEAR/Clothing	P84	
+earring left a	earring left a	CLEAR	a left earring control, variant A	CLEAR	groupFile/Clothing	High		matches extensive 'earring left' sibling family, all CLEAR/CLEAR/Clothing	P84	
+topvoluptuous	Topvoluptuous	CLEAR	a top-fit 'voluptuous' shape control	CLEAR	groupFile/Clothing	High		object-specific garment fit control, matches Pantsvoluptuous pattern (rule 8)	P84	
+r_spread	R_spread	CLEAR	a right-side 'spread' function, no owning object named	NEEDS_CONTEXT		Medium	which body part is spreading is not stated	function is stable (rule 22) but distinct from the explicitly-named ButtSpread family; owner unresolved	P84	
+key.z	Key.Z	CLEAR	a lettered key prop in the Key.<label> series	CLEAR	groupFile/Other	High		coherent Key.<label> series (rule 23's own keyboard-prop example)	P84	
+jiggle04	Jiggle04	CLEAR	a jiggle-physics function, numbered, no owner named	NEEDS_CONTEXT		High	owner not established	matches extensive Jiggle0N sibling family, all CLEAR/NEEDS_CONTEXT	P84	
+ascot.top_10	Ascot.Top_10	CLEAR	a numbered ascot-top garment control	CLEAR	groupFile/Clothing	High		matches Ascot.Top_2/3/4/5/9 sibling series, all CLEAR/CLEAR/Clothing	P84	
+strapon_root	STRAPON_ROOT	CLEAR	a strap-on accessory root/anchor control	CLEAR	groupFile/Clothing	High		matches strapon_3/4 sibling series, all CLEAR/CLEAR/Clothing	P84	
+browsoutterdownright	BrowsOutterDownRight	CLEAR	a right outer-eyebrow down control	CLEAR	groupFile/Face/Upper Face	High		matches browsoutterup/BrowsOutterUpLeft sibling family, all CLEAR/CLEAR/Face/Upper Face	P84	
+lowerraise eyes right	LowerRaise Eyes Right	CLEAR	a right eyes lower-raise control	CLEAR	groupFile/Face/Eyes	High		compounded with the specific feature 'eyes' -> Eyes	P84	
+third_arms_l_index3	Third_Arms_L_Index3	CLEAR	a left index finger bone on a tertiary arm set, segment 3	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		matches extensive Third_Arms_L_* sibling series, all CLEAR/CLEAR/LeftFingers	P84	
+handcrystalraise	HandCrystalRaise	CLEAR	a hand-crystal prop raise control	CLEAR	groupFile/Other	High		direct sibling HandCrystalTilt, CLEAR/CLEAR/Other	P84	
+eyesround	EyesRound	CLEAR	an eye-shape 'round' control	CLEAR	groupFile/Face/Eyes	High		localized eye-shape mechanism (rule 12)	P84	
+wep_fx_muzzle2	WEP_FX_Muzzle2	CLEAR	a numbered weapon muzzle-effect control	CLEAR	groupFile/Other	High		matches wep_fx_muzzle/3/6/8 sibling series, all CLEAR/CLEAR/Other	P84	
+band.stretch_right	Band.Stretch_Right	CLEAR	a right band-stretch accessory control	NEEDS_CONTEXT		High	no owner/garment named	direct sibling Band.Stretch_Left, CLEAR/NEEDS_CONTEXT (bare ownerless accessory, rule 25)	P84	
+(thicc) legs (shirt)	(THICC) Legs (SHIRT)	CLEAR	a legs 'thicc' shape control, shirt-qualified variant	CLEAR	groupFile/Body Morphs	High		matches (THICC) Legs / (THICC) Legs (METAL) sibling series, all CLEAR/CLEAR/Body Morphs	P84	
+au1au4	AU1AU4	CLEAR	a recognized FACS Action Unit 1+4 combined facial control	CLEAR	groupFile/Face/Expressions	High		direct sibling au2au4, CLEAR/CLEAR/Face/Expressions	P84	
+feet thickness	Feet Thickness	CLEAR	a feet thickness shape control	CLEAR	groupFile/Body Morphs	High		explicit body-shape size word (rule 7)	P84	
+wep_shell3	WEP_Shell3	CLEAR	a numbered weapon shell/casing prop	CLEAR	groupFile/Other	High		matches extensive wep_shell sibling series, all CLEAR/CLEAR/Other	P84	
+lbrow_outer_raise	lbrow_outer_raise	CLEAR	a left outer-eyebrow raise control	CLEAR	groupFile/Face/Upper Face	High		localized eyebrow mechanism (rule 12)	P84	
+bone 69	bone 69	OPAQUE	a generic numbered bone with no functional or regional word	NOT_APPLICABLE		High		matches direct sibling 'bone 65', OPAQUE/NOT_APPLICABLE	P84	
+eyeopen	EyeOpen	CLEAR	an eye-open control	CLEAR	groupFile/Face/Eyes	High		ordinary eyelid mechanism (rule 12)	P84	
+box15	Box15	CLEAR	a numbered box prop	CLEAR	groupFile/Other	High		matches extensive Box## sibling series, all CLEAR/CLEAR/Other	P84	
+fio-rig-eye-l	Fio-Rig-Eye-L	CLEAR	a left eye control in the Fio-Rig internal namespace	CLEAR	groupFile/Face/Eyes	High		matches Fio-Rig-Eye-RB/LU sibling series, all CLEAR/CLEAR/Face/Eyes	P84	
+pantypussylower	PantyPussyLower	CLEAR	a panty garment control, lowering the pussy-adjacent area	CLEAR	groupFile/Clothing	Medium		the named garment (panty) is the primary object with a body-region qualifier (rule 8, matches PantiesPullAnus pattern)	P84	
+cum-flat-top	cum-flat-top	CLEAR	a fluid-effect 'cum-flat' control, top variant	CLEAR	groupFile/Other	High		direct sibling cum-flat-bottom, CLEAR/CLEAR/Other (fluid effect, rule 7)	P84	
+cloth fix 1	Cloth fix 1	CLEAR	a cloth-fix garment control, numbered	CLEAR	groupFile/Clothing	High		direct sibling 'Cloth fix 2', CLEAR/CLEAR/Clothing (object-specific fix stays with the garment, rule 8)	P84	
+r index 02	r index 02	CLEAR	a right index-finger bone, segment 02	CLEAR	groupFile/Arms/RightArm/RightFingers	High		ordinary individual digit segment, RightFingers verified subpath (rule 10)	P84	
+box_face_09_m	Box_Face_09_M	PARTIAL	a 'Box Face' (a geometric face/panel of a box object vs. a character's face), numbered, variant M	NEEDS_CONTEXT		Medium	no positive evidence resolves the 20-member template	settled Box_Face_##_M family precedent (Tranche 7 reconciliation)	P84	
+bone03	Bone03+bone03	OPAQUE	a generic numbered bone with no functional or regional word	NOT_APPLICABLE		High		matches Bone033/034/036 sibling series, all OPAQUE/NOT_APPLICABLE	P84	
+bippbg l foretwist1	BipPBG L ForeTwist1	CLEAR	a left forearm twist bone on the BipPBG rig namespace, numbered	CLEAR	groupFile/Arms	High		matches BipPBG L ForeTwist / BipPBG R ForeTwist1 sibling series, all CLEAR/CLEAR/Arms	P84	
+tenta_b_2_l	tenta_b_2_L	CLEAR	a numbered tentacle segment, left	CLEAR	groupFile/Other	High		settled Rule 18 tentacle precedent, direct sibling tenta_b_2_R, CLEAR/CLEAR/Other	P84	
+balls-small	balls-small	CLEAR	a testicle ('balls') size-shape control	CLEAR	groupFile/Body Morphs	High		soft-tissue shape control, no skeletal joint (rule 7)	P84	
+polysurface59	polySurface59	OPAQUE	a DCC-default primitive mesh identifier	NOT_APPLICABLE		High		DCC auto-generated primitive name, no independent semantic evidence (Section 5)	P84	
+mila head forehead right	Mila head forehead right	CLEAR	a right forehead control for the Mila character	CLEAR	groupFile/Face/Upper Face	High		matches extensive forehead sibling family, all CLEAR/CLEAR/Face/Upper Face	P84	

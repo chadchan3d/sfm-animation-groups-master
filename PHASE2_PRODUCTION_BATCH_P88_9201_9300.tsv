@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+cloth_collar_1_m	cloth_collar_1_M	CLEAR	a middle cloth-collar garment control, numbered	CLEAR	groupFile/Clothing	High		matches cloth_collar_1_l/r and cloth_collar_2_l/r sibling series, all CLEAR/CLEAR/Clothing	P88	
+point_eyeball_l	Point_Eyeball_L	CLEAR	a left eyeball point/target control	CLEAR	groupFile/Face/Eyes	High		direct sibling Point_Eyeball_R, CLEAR/CLEAR/Face/Eyes	P88	
+eyes sad right	eyes sad right	CLEAR	a right 'sad eyes' expression control	CLEAR	groupFile/Face/Eyes	High		compounded with the specific feature 'eyes' -> Eyes	P88	
+tentaclebottompleft1	TentacleBottompLeft1	CLEAR	a numbered tentacle segment	CLEAR	groupFile/Other	High		settled Rule 18 tentacle precedent, matches extensive Tentacle sibling series	P88	
+bottle1	bottle1	CLEAR	a numbered bottle prop	CLEAR	groupFile/Other	High		matches direct sibling bottle1_cap, CLEAR/CLEAR/Other	P88	
+polysurface16	polySurface16	OPAQUE	a DCC-default primitive mesh identifier	NOT_APPLICABLE		High		DCC auto-generated primitive name, no independent semantic evidence (Section 5)	P88	
+jiggle pelvis	jiggle pelvis	CLEAR	a pelvis jiggle-physics control	CLEAR	groupFile/Body	High		explicit owning body part named (pelvis, rule 25 contrast)	P88	
+t1	T1	OPAQUE	a bare alphanumeric code (plausibly a thoracic-vertebra label, unconfirmed in this corpus)	NOT_APPLICABLE		Medium	no corroborating sibling series confirms a vertebra-label convention in this corpus	matches bare cryptic-code OPAQUE precedent absent corpus confirmation (rule 23), consistent with the C5 treatment	P88	
+ballsrsqueshfront	ballsRsqueshfront	CLEAR	a right testicle squash shape control, front variant	CLEAR	groupFile/Body Morphs	High		matches ballsRsqueshbottom/side sibling series, all CLEAR/CLEAR/Body Morphs	P88	
+cloth_bone_up_r_02	cloth_bone_up_r_02	CLEAR	a right cloth-bone control, up position, numbered	CLEAR	groupFile/Clothing	High		matches cloth_bone_up_r_03/04/06 sibling series, all CLEAR/CLEAR/Clothing	P88	
+nostrilsuck	NostrilSuck	CLEAR	a nostril-suck control	CLEAR	groupFile/Face/Mid Face	High		matches extensive nostril sibling family, all CLEAR/CLEAR/Face/Mid Face	P88	
+b8	B8	OPAQUE	a bare cryptic alphanumeric code	NOT_APPLICABLE		Medium		matches bare cryptic-code OPAQUE precedent	P88	
+expansionvaginawidth	ExpansionVaginaWidth	CLEAR	a vagina-width expansion shape control	CLEAR	groupFile/Body Morphs	High		direct near-identical sibling WWExpansionVaginaWidth, CLEAR/CLEAR/Body Morphs	P88	
+ball.right	Ball.Right	PARTIAL	a 'ball' (eyeball / testicle / prop ball), right	NEEDS_CONTEXT		High	materially different core readings remain plausible	direct sibling Ball.Left, PARTIAL/NEEDS_CONTEXT	P88	
+valvebiped.barrels	ValveBiped.Barrels	CLEAR	a weapon barrels prop control	CLEAR	groupFile/Other	High		recognized weapon part (rule 16)	P88	
+crane	Crane	PARTIAL	a 'crane' (bird / construction equipment / pose name), no anchor	NEEDS_CONTEXT		Medium	materially different core readings remain plausible	bare multi-sense word with no grounding to pick a reading (rule 22b)	P88	
+pelvis_groin	pelvis_groin	CLEAR	a bare structural pelvis/groin control	CLEAR	groupFile/Body	High		ordinary structural anatomy (rule 6)	P88	
+key.white_8	Key.White_8	CLEAR	a numbered white-key prop	CLEAR	groupFile/Other	High		coherent Key.White_N series (rule 23)	P88	
+narrowx	NarrowX	CLEAR	a 'narrow' shape function, X axis, no owner named	NEEDS_CONTEXT		Medium	owner not established	shape function stable (rule 22) but no anchor object	P88	
+magazine_catch	Magazine_catch+magazine_catch	CLEAR	a weapon magazine-catch mechanism control	CLEAR	groupFile/Other	High		recognized weapon hardware part (rule 16)	P88	
+buttchin	buttchin	CLEAR	a 'butt chin' (cleft chin) control	CLEAR	groupFile/Face/Lower Face	Medium		recognized colloquial term for a cleft chin, a localized mouth/jaw feature (rule 12)	P88	
+rpuff	RPuff	CLEAR	a right hair-puff control	CLEAR	groupFile/Hair	Medium		matches sibling NoComicHairPuff, CLEAR/CLEAR/Hair	P88	
+bh002.r	Bh002.R	OPAQUE	a bare cryptic alphanumeric code, right side	NOT_APPLICABLE		High		matches Bh001.R/Bh002.L sibling series, both OPAQUE/NOT_APPLICABLE	P88	
+right_sneer	Right_sneer	CLEAR	a right sneer (lip/mouth) expression control	CLEAR	groupFile/Face/Lower Face	High		matches direct sibling sneer_right, CLEAR/CLEAR/Face/Lower Face	P88	
+bobcut.side_left_1_3_jiggle	Bobcut.Side_Left_1_3_jiggle	CLEAR	a bob-cut hairstyle jiggle control, side-left, numbered	CLEAR	groupFile/Hair	High		matches extensive Bobcut sibling family, all CLEAR/CLEAR/Hair	P88	
+unusedbone244	unusedbone244	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		explicit self-declared 'unused' marker (rule 15)	P88	
+pot4	pot4	CLEAR	a numbered pot/container prop	CLEAR	groupFile/Other	Medium		recognized generic prop object (rule 16)	P88	
+crow_1.ulna_r	Crow_1.Ulna_R	CLEAR	a right ulna (forearm) bone on the Crow_1 model	CLEAR	groupFile/Arms	High		model prefix set aside (rule 24); ulna on a bird is NOT automatically Wings by elimination (rule 18), matches Crow_3.Humerus_L precedent	P88	
+forearmshrink	Forearmshrink	CLEAR	a forearm-shrink shape control	CLEAR	groupFile/Body Morphs	High		explicit body-shape size word (rule 7), matches body-hands-shrink/armcirclegrow pattern	P88	
+bip findex00 l	bip findex00 l	CLEAR	a left index-finger bone, segment 00	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		matches extensive findex0 sibling series, all CLEAR/CLEAR/LeftFingers or RightFingers	P88	
+bip_r_middle_02	bip_r_middle_02	CLEAR	a right middle-finger bone, segment 02	CLEAR	groupFile/Arms/RightArm/RightFingers	High		matches bip_r_middle/bip_r_middle_03 sibling series, all CLEAR/CLEAR/RightFingers	P88	
+r_finger3b_00002	r_finger3b_00002	CLEAR	a right finger bone, segment 3, variant B	CLEAR	groupFile/Arms/RightArm/RightFingers	High		ordinary individual digit segment, RightFingers verified subpath (rule 10)	P88	
+bip_pussyroot_r	bip_PussyRoot_R	CLEAR	a right vulva-root control	CLEAR	groupFile/Body	High		direct sibling bip_PussyRoot_L, CLEAR/CLEAR/Body	P88	
+mar-base	Mar-Base	OPAQUE	a bare rig-namespace root marker	NOT_APPLICABLE		Medium		'Mar' rig namespace set aside (rule 24, matches BipMar precedent); bare 'Base' root carries no further content	P88	
+doof_speakerside	doof_speakerside	CLEAR	a side speaker prop control	CLEAR	groupFile/Other	High		matches direct sibling doof_speakersingle, CLEAR/CLEAR/Other	P88	
+unusedmot01-head001	unusedmot01-head001	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		explicit self-declared 'unused' marker (rule 15)	P88	
+skull_08	skull_08	CLEAR	a bare numbered skull structural reference	CLEAR	groupFile/Body	High		matches the majority skull_ sibling pattern, CLEAR/CLEAR/Body	P88	
+cons_potion_healing_a_supreme_glass_mesh.001	CONS_Potion_Healing_A_Supreme_Glass_Mesh.001	CLEAR	a numbered healing-potion prop mesh, supreme glass variant	CLEAR	groupFile/Other	High		matches extensive CONS_Potion_Healing sibling family, all CLEAR/CLEAR/Other	P88	
+unused.026	unused.026	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		explicit self-declared 'unused' marker (rule 15)	P88	
+pussparent.002_l.011	PussParent.002_L.011	CLEAR	a left vulva-parent rig control, numbered	CLEAR	groupFile/Body	High		matches extensive PussParent sibling family, all CLEAR/CLEAR/Body	P88	
+leftsneer	LeftSneer	CLEAR	a left sneer (lip/mouth) expression control	CLEAR	groupFile/Face/Lower Face	High		matches Right_sneer/sneer_right/right_sneer sibling series, all CLEAR/CLEAR/Face/Lower Face	P88	
+left arm twist	Left arm twist	CLEAR	a left arm twist control	CLEAR	groupFile/Arms	High		ordinary twist bone, not corrective (rule 3); bare Arms per rule 10 default	P88	
+masktop2.r	MaskTop2.R	CLEAR	a right mask-top garment control, numbered	CLEAR	groupFile/Clothing	High		direct sibling MaskTop1.R, CLEAR/CLEAR/Clothing	P88	
+bobcut.back_1_jiggle	Bobcut.Back_1_jiggle	CLEAR	a bob-cut hairstyle jiggle control, back, numbered	CLEAR	groupFile/Hair	High		matches extensive Bobcut sibling family, all CLEAR/CLEAR/Hair	P88	
+depth_8	depth_8	OPAQUE	a generic ungrounded 'depth' token, numbered	NOT_APPLICABLE		High		matches depth_5/6/7 sibling series, all OPAQUE/NOT_APPLICABLE	P88	
+beadhangback duo a3	BeadHangBack Duo A3	CLEAR	a hanging-bead accessory, back-duo variant, numbered	CLEAR	groupFile/Clothing	Medium	a minority sibling (beadhangback1) is Hair	matches the majority BeadHangBack/Duo sibling pattern, CLEAR/CLEAR/Clothing	P88	
+uplong	UpLong	PARTIAL	an 'up'/'long' shape or direction compound, no anchor	NEEDS_CONTEXT		Medium	no object noun resolves which reading applies	unresolved bare compound (rule 22a)	P88	
+c tongroot	C Tongroot	CLEAR	a center tongue-root control	CLEAR	groupFile/Face/Tongue	High		ordinary tongue anatomy (rule 12)	P88	
+valvebiped.l_uparm	Valvebiped.L_uparm	CLEAR	a left upper-arm control	CLEAR	groupFile/Arms	High		ordinary structural arm anatomy (rule 6)	P88	
+bip01_head002	Bip01_Head002	CLEAR	a head bone, numbered	CLEAR	groupFile/Body	High		matches extensive Bip01_Head### sibling series, all CLEAR/CLEAR/Body	P88	
+bip facelipmiloout	bip facelipmiloout	PARTIAL	a lip control referencing a 'Milo' variant, out state	CLEAR	groupFile/Face/Lower Face	High		direct sibling 'bip facelipmiloin', PARTIAL/CLEAR/Face/Lower Face	P88	
+key.d	Key.D	CLEAR	a lettered key prop in the Key.<label> series	CLEAR	groupFile/Other	High		coherent Key.<label> series (rule 23), matches Key.DELETE	P88	
+gasmask2	gasmask2	CLEAR	a numbered gas-mask garment control	CLEAR	groupFile/Clothing	High		direct sibling gasmask1, CLEAR/CLEAR/Clothing	P88	
+ventilation grid 1	Ventilation Grid 1	CLEAR	a numbered ventilation-grid prop	CLEAR	groupFile/Other	High		direct sibling 'Ventilation Grid 2', CLEAR/CLEAR/Other	P88	
+valvebiped.bip01_sword	ValveBiped.Bip01_Sword	CLEAR	a sword weapon prop control	CLEAR	groupFile/Other	High		matches sibling ValveBiped.Bip01_SwordStrap, CLEAR/CLEAR/Other	P88	
+wep_fx_light_barrel	WEP_FX_Light_Barrel	CLEAR	a weapon barrel-light effect control	CLEAR	groupFile/Other	High		matches wep_fx_light1/light1_m16/peq_light sibling family, all CLEAR/CLEAR/Other	P88	
+d_left	D_Left	OPAQUE	a bare single-letter code plus side marker, no grounding	NOT_APPLICABLE		High		direct sibling d_right, OPAQUE/NOT_APPLICABLE (ungrounded abbreviation, rule 23)	P88	
+toungmiddleleft	ToungMiddleLeft	CLEAR	a left tongue-middle control ('toung' spelling variant of 'tongue')	CLEAR	groupFile/Face/Tongue	High		ordinary tongue anatomy (rule 12); literal spelling preserved	P88	
+cloth_side_a_3_l	cloth_side_A_3_L	CLEAR	a left cloth-side garment control, numbered	CLEAR	groupFile/Clothing	High		matches extensive cloth_side sibling family, all CLEAR/CLEAR/Clothing	P88	
+tailmiddle_1	TailMiddle_1	CLEAR	a numbered middle-tail segment	CLEAR	groupFile/Tail	High		matches TailMiddle_2/5/7 sibling series, all CLEAR/CLEAR/Tail	P88	
+c_dred_c1_08	C_Dred_C1_08	CLEAR	a dreadlock hair strand control, center, numbered	CLEAR	groupFile/Hair	High		matches extensive C_Dred_C1 sibling family, all CLEAR/CLEAR/Hair	P88	
+ascot.root	Ascot.Root	CLEAR	an ascot garment root/anchor control	CLEAR	groupFile/Clothing	High		matches Ascot.Top/Bottom sibling family, all CLEAR/CLEAR/Clothing	P88	
+rpectoraljiggle	rPectoraljiggle	CLEAR	a right pectoral jiggle control	CLEAR	groupFile/Body	High		matches direct sibling 'rpectoral root', CLEAR/CLEAR/Body	P88	
+whisker_l_2	Whisker_L_2	CLEAR	a left whisker control, numbered	NEEDS_CONTEXT		Medium	'whisker' is genuinely split between facial anatomy and hair-strand readings in this corpus	matches direct sibling Whisker_R_2, CLEAR/NEEDS_CONTEXT	P88	
+leg left knee ctr 2	leg left knee ctr 2	CLEAR	a left knee center control, numbered	CLEAR	groupFile/Legs	High		matches 'leg left knee ctr2'/'leg right knee_ctr' sibling series, all CLEAR/CLEAR/Legs	P88	
+flm-arma-sworda-o	Flm-ArmA-SwordA-O	CLEAR	a sword weapon prop control in the Flm-ArmA namespace	CLEAR	groupFile/Other	High		matches extensive Flm-ArmA-SwordA sibling family, all CLEAR/CLEAR/Other	P88	
+bone150	Bone150	OPAQUE	a generic numbered bone with no functional or regional word	NOT_APPLICABLE		High		matches extensive bone15# sibling series, all OPAQUE/NOT_APPLICABLE	P88	
+wing_left_5_1	Wing_Left_5_1	CLEAR	a numbered left wing control	CLEAR	groupFile/Wings	High		direct sibling Wing_Left_5_2, CLEAR/CLEAR/Wings	P88	
+rbrow2	rBrow2	CLEAR	a numbered right eyebrow control	CLEAR	groupFile/Face/Upper Face	High		matches extensive rbrow sibling family, all CLEAR/CLEAR/Face/Upper Face	P88	
+fin-rig-shorts-r	Fin-Rig-Shorts-R	CLEAR	a right shorts garment control on the Fin-Rig internal namespace	CLEAR	groupFile/Clothing	High		direct sibling Fin-Rig-Shorts-L, CLEAR/CLEAR/Clothing; namespace distinct from the anatomical fin family (rule 18)	P88	
+pcube1	pCube1	OPAQUE	a DCC-default primitive mesh identifier	NOT_APPLICABLE		High		matches extensive pCube## sibling series, all OPAQUE/NOT_APPLICABLE (Section 5)	P88	
+wep_slidecharger	WEP_SlideCharger	CLEAR	a weapon slide-charger mechanism control	CLEAR	groupFile/Other	High		recognized weapon hardware part (rule 16)	P88	
+valvebiped.bip01_r_index	ValveBiped.Bip01_R_Index	CLEAR	a right index-finger bone	CLEAR	groupFile/Arms/RightArm/RightFingers	High		matches ValveBiped.Bip01_R_Index01/02/03 sibling series, all CLEAR/CLEAR/RightFingers	P88	
+crumple_l	Crumple_L	CLEAR	a left 'crumple' shape function, no owner named	NEEDS_CONTEXT		Medium	owner (skin/cloth/paper) not established	matches the fold/wrinkle unresolved-owner pattern (rule 22a)	P88	
+ohlookacarfromdriversf	OHLOOKACARFROMDRIVERSF	OPAQUE	a bare joke/flavor-text phrase with no owning object or feature	NOT_APPLICABLE		Medium		"matches prior bare-phrase-no-referent OPAQUE precedent (e.g. ""it's your funeral"")"	P88	
+dlid_r_2	DLid_R_2	CLEAR	a right eyelid control, numbered	CLEAR	groupFile/Face/Eyes	High		matches DLid_R_3/DLid_L_2/3 sibling series, all CLEAR/CLEAR/Face/Eyes	P88	
+l ulid a	L Ulid A	CLEAR	a left upper-eyelid control, variant A	CLEAR	groupFile/Face/Eyes	High		matches 'l ulid b'/'l ulid d' sibling series, all CLEAR/CLEAR/Face/Eyes	P88	
+anus.ring	Anus.Ring	CLEAR	an anal-ring shape control	CLEAR	groupFile/Body Morphs	Medium		matches the anus-shape sibling family, all CLEAR/CLEAR/Body Morphs	P88	
+bone._l.003	Bone._L.003	OPAQUE	a generic numbered bone with no functional or regional word	NOT_APPLICABLE		High		matches Bone._L/Bone._L.002 sibling series, both OPAQUE/NOT_APPLICABLE	P88	
+balls base	balls base	CLEAR	a bare structural testicle-base control	CLEAR	groupFile/Body	High		ordinary structural anatomy, no shape word (rule 6)	P88	
+object15	Object15	OPAQUE	a generic numbered placeholder object	NOT_APPLICABLE		High		matches extensive Object1# sibling series, all OPAQUE/NOT_APPLICABLE	P88	
+bip upperarmbase r	bip upperarmbase r	CLEAR	a right upper-arm base control	CLEAR	groupFile/Arms	High		direct sibling 'bip upperarmbase l', CLEAR/CLEAR/Arms	P88	
+belt front 00	belt front 00	CLEAR	a numbered front-belt garment control	CLEAR	groupFile/Clothing	High		matches extensive belt-front sibling family, all CLEAR/CLEAR/Clothing	P88	
+side table 2	Side table 2	CLEAR	a numbered side-table furniture prop	CLEAR	groupFile/Other	High		direct sibling 'Side table 1', CLEAR/CLEAR/Other	P88	
+bow left 2f	bow left 2f	PARTIAL	a 'bow' (decorative bow / archery bow / ship's bow), left side, lettered variant	NEEDS_CONTEXT		High	materially different core readings for 'bow' remain plausible	matches extensive bow-left-2-lettered sibling family, all PARTIAL/NEEDS_CONTEXT	P88	
+browleft	BrowLeft	CLEAR	a left eyebrow control	CLEAR	groupFile/Face/Upper Face	High		matches direct sibling BrowLeftDown, CLEAR/CLEAR/Face/Upper Face	P88	
+kickhighinner	KickHighInner	CLEAR	a high-kick inner-variant pose function, no owner named	NEEDS_CONTEXT		High	owner not established	direct sibling KickHighOutter, CLEAR/NEEDS_CONTEXT	P88	
+chain_27	chain_27	PARTIAL	a 'chain' (jewelry/mechanical/physics), numbered	NEEDS_CONTEXT		High	materially different core readings for 'chain' remain plausible	matches the majority chain_2N sibling pattern, PARTIAL/NEEDS_CONTEXT	P88	
+doodad.bell_string_1	Doodad.Bell_String_1	CLEAR	a bell-string decorative accessory control, numbered	CLEAR	groupFile/Clothing	High		matches Doodad.Bell_Root_Left/Right sibling series, all CLEAR/CLEAR/Clothing	P88	
+mosok41	Mosok41+mosok41	OPAQUE	a bare ungrounded numbered token	NOT_APPLICABLE		Medium		no sibling series or recognized convention grounds 'Mosok' (rule 23)	P88	
+arm.right_length	Arm.Right_Length	CLEAR	a right-arm length shape control	CLEAR	groupFile/Body Morphs	High		explicit body-shape size word (rule 7), matches forearmshrink/armcirclegrow pattern	P88	
+anime angry  bl	Anime angry  bL	CLEAR	a whole-face 'angry' expression preset, variant bl	CLEAR	groupFile/Face/Expressions	Medium	'bl' qualifier meaning not independently confirmed	matches direct sibling 'anime angry  bottom', CLEAR/CLEAR/Face/Expressions	P88	
+eyebigl	EyeBigL	CLEAR	a left eye-size 'big' shape control	CLEAR	groupFile/Face/Eyes	High		direct sibling EyeBigR, CLEAR/CLEAR/Face/Eyes	P88	
+r-tiny-eye	R-Tiny-Eye	CLEAR	a right eye-size 'tiny' shape control	CLEAR	groupFile/Face/Eyes	High		localized eye-shape mechanism (rule 12)	P88	
+pussparent.002_r.017	PussParent.002_R.017	CLEAR	a right vulva-parent rig control, numbered	CLEAR	groupFile/Body	High		matches extensive PussParent sibling family, all CLEAR/CLEAR/Body	P88	
+book turnpage6	Book TurnPage6	CLEAR	a numbered book page-turn control	CLEAR	groupFile/Other	High		matches extensive Book TurnPage sibling family, all CLEAR/CLEAR/Other	P88	
+body-belly-stuffed	Body-Belly-Stuffed	CLEAR	a belly-stuffed shape/state control	CLEAR	groupFile/Body Morphs	High		explicit body-shape/state word (rule 7)	P88	
+cervixright	CervixRight	CLEAR	a bare structural cervix control, right side	CLEAR	groupFile/Body	High		matches direct sibling CervixLeft, CLEAR/CLEAR/Body (side marker only, no shape word, rule 6)	P88	
+penis_f_3	penis_f_3	CLEAR	a penis control, variant F, numbered	CLEAR	groupFile/Body	High		matches the penis/cock structural sibling family, all CLEAR/CLEAR/Body	P88	
+v_weapon.root25	v_weapon.Root25	CLEAR	a numbered weapon-hand root control	CLEAR	groupFile/Other	High		matches the majority v_weapon.Root## sibling pattern, all CLEAR/CLEAR/Other	P88	

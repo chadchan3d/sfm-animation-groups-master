@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+left hand screw	Left hand screw	PARTIAL	a left hand-screw mechanism control, no owner named	NEEDS_CONTEXT		Medium	siblings split between CLEAR/Arms/LeftArm (screw 1) and PARTIAL/NEEDS_CONTEXT (screw 2/3)	matches the majority 'left hand screw' numbered sibling pattern, PARTIAL/NEEDS_CONTEXT	P90	
+level2_root	Level2_Root	OPAQUE	a generic LOD/level rig-root marker	NOT_APPLICABLE		Medium		generic technical root marker, no anatomical/functional content	P90	
+uuuh	uuuh	OPAQUE	a bare nonsense-sound token with no content	NOT_APPLICABLE		High		no readable anatomical/functional content (rule 22)	P90	
+buttshrink	ButtShrink	CLEAR	a butt-shrink shape control	CLEAR	groupFile/Body Morphs	High		explicit body-shape size word (rule 7)	P90	
+liplower_r1	lipLower_R1	CLEAR	a right lower-lip control, numbered	CLEAR	groupFile/Face/Lower Face	High		matches extensive liplower sibling family, all CLEAR/CLEAR/Face/Lower Face	P90	
+l_front_holster_0u_10v	l_front_holster_0u_10v	CLEAR	a left front-holster control, UV-indexed	CLEAR	groupFile/Clothing	High		matches extensive front_holster sibling family, all CLEAR/CLEAR/Clothing	P90	
+strap_a.01	Strap_A.01	CLEAR	a numbered strap accessory, variant A	NEEDS_CONTEXT		High	no owner/garment named	matches Strap_A.02/03/04/05 sibling series, all CLEAR/NEEDS_CONTEXT	P90	
+bip elbowfront l	bip elbowfront l	CLEAR	a left elbow-front control	CLEAR	groupFile/Arms	High		direct sibling 'bip elbowfront r', CLEAR/CLEAR/Arms	P90	
+upzip_bone_m_02	upzip_bone_m_02	CLEAR	a zipper-bone control, middle, numbered	CLEAR	groupFile/Clothing	High		direct sibling upzip_bone_m_01, CLEAR/CLEAR/Clothing	P90	
+right_11	right_11	OPAQUE	a bare positional label with no object named	NOT_APPLICABLE		High		matches right_10/13/15/19 sibling series, all OPAQUE/NOT_APPLICABLE	P90	
+arm left finger pinky	arm left finger pinky	CLEAR	a left pinky-finger bone	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		ordinary individual digit segment, LeftFingers verified subpath (rule 10)	P90	
+futa version 1	Futa Version 1	CLEAR	a body-type/anatomy variant selector, numbered	CLEAR	groupFile/Body	Medium	no garment qualifier present, unlike the sibling 'Shorts Non Futa Shadow'	unqualified 'futa' denotes an anatomy/body-type variant, not a garment feature	P90	
+unused head.021	unused head.021	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		explicit self-declared 'unused' marker (rule 15)	P90	
+tailleft2_7	TailLeft2_7	CLEAR	a numbered left tail segment	CLEAR	groupFile/Tail	High		matches extensive TailLeft2 sibling series, all CLEAR/CLEAR/Tail	P90	
+stomp-1	stomp-1	CLEAR	a 'stomp' pose function, numbered, no owner named	NEEDS_CONTEXT		High	owner not established	matches stomp-3/4/8 sibling series, all CLEAR/NEEDS_CONTEXT	P90	
+canine_reye	Canine_REye	CLEAR	a right eye control on a canine rig	CLEAR	groupFile/Face/Eyes	High		ordinary eye anatomy (rule 12)	P90	
+eyes angry right	eyes angry right	CLEAR	a right 'eyes angry' expression control	CLEAR	groupFile/Face/Eyes	High		direct sibling 'eyes angry left', CLEAR/CLEAR/Face/Eyes	P90	
+facial_bone_eye_up_r	Facial_Bone_Eye_UP_R	CLEAR	a right upper-eye facial bone	CLEAR	groupFile/Face/Eyes	High		direct sibling Facial_Bone_Eye_UP_L, CLEAR/CLEAR/Face/Eyes	P90	
+bone027	Bone027	OPAQUE	a generic numbered bone with no functional or regional word	NOT_APPLICABLE		High		matches extensive bone02# sibling series, all OPAQUE/NOT_APPLICABLE	P90	
+llotwist1	lLoTwist1	PARTIAL	a left-side twist bone with an undecoded 'Lo' region abbreviation	NEEDS_CONTEXT		Medium	'Lo' is not grounded by other content in the literal or a confirmed sibling series	direct sibling rLoTwist1 (Tranche 9, P82), PARTIAL/NEEDS_CONTEXT	P90	
+fa_under_chin_left_out	fa_under_chin_left_out	CLEAR	a left under-chin control, outer	CLEAR	groupFile/Face/Lower Face	High		matches direct sibling fa_under_chin_center, CLEAR/CLEAR/Face/Lower Face	P90	
+table	Table+table	CLEAR	a table furniture prop	CLEAR	groupFile/Other	High		matches Side table 1/2 sibling series, all CLEAR/CLEAR/Other	P90	
+lkakato03n	LKakato03N	CLEAR	a numbered heel/leg bone (Japanese 'kakato' = heel)	CLEAR	groupFile/Legs	High		matches LKakato01N/02N sibling series, all CLEAR/CLEAR/Legs	P90	
+pcylinder9	pCylinder9	OPAQUE	a DCC-default primitive mesh identifier	NOT_APPLICABLE		High		matches extensive pCylinder## sibling series, all OPAQUE/NOT_APPLICABLE (Section 5)	P90	
+l top lid	L top lid	CLEAR	a left top-eyelid control	CLEAR	groupFile/Face/Eyes	High		ordinary eyelid mechanism (rule 12)	P90	
+bhr48	BhR48	OPAQUE	a cryptic alphanumeric code, numbered	NOT_APPLICABLE		High		matches BhR43/45/46/444 sibling series, all OPAQUE/NOT_APPLICABLE	P90	
+wep_magazine2_bullet	WEP_Magazine2_Bullet	CLEAR	a weapon magazine-bullet prop	CLEAR	groupFile/Other	High		matches WEP_Magazine2_Bullet1/2/3 sibling series, all CLEAR/CLEAR/Other	P90	
+bip01_l_forearm019	Bip01_L_Forearm019	CLEAR	a left forearm bone, numbered	CLEAR	groupFile/Arms	High		ordinary structural arm anatomy (rule 6); bare Arms per rule 10 default	P90	
+pb_l_cmy01_fhair_02	pb_L_CMY01_FHair_02	CLEAR	a left hair-strand control, numbered	CLEAR	groupFile/Hair	High		matches pb_R_CMY01_FHair sibling family, all CLEAR/CLEAR/Hair	P90	
+leg left boot tassle 4b	leg left boot tassle 4b	CLEAR	a left boot-tassel garment control, numbered	CLEAR	groupFile/Clothing	High		matches extensive 'leg left/right boot tassle' sibling family, all CLEAR/CLEAR/Clothing	P90	
+bip_l_horn_01	bip_l_horn_01	CLEAR	a numbered left horn segment	CLEAR	groupFile/Other	High		settled Rule 18 horn precedent, matches bip_l_horn/b/c sibling family	P90	
+bip01_neck019	Bip01_Neck019	CLEAR	a neck bone, numbered	CLEAR	groupFile/Body	High		ordinary structural neck anatomy (rule 6)	P90	
+spike_05_m	Spike_05_M	CLEAR	a numbered spike control, variant M, no owner named	NEEDS_CONTEXT		Medium	owner not established; one sibling (spike_03_m) is CLEAR/Other without a stated distinguishing reason	matches the majority spike_0#_m sibling pattern, CLEAR/NEEDS_CONTEXT	P90	
+unused 1	unused 1	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		explicit self-declared 'unused' marker (rule 15)	P90	
+bow left a 3	bow left a 3	PARTIAL	a 'bow' (decorative bow / archery bow / ship's bow), left side, lettered variant	NEEDS_CONTEXT		High	materially different core readings for 'bow' remain plausible	matches extensive bow-left-a-lettered sibling family, all PARTIAL/NEEDS_CONTEXT	P90	
+right thumb intermediate	Right Thumb Intermediate	CLEAR	a right thumb intermediate phalanx bone	CLEAR	groupFile/Arms/RightArm/RightFingers	High		matches extensive 'right thumb' sibling family, all CLEAR/CLEAR/RightFingers	P90	
+left_16	left_16	OPAQUE	a bare positional label with no object named	NOT_APPLICABLE		High		matches bare positional-label-no-owner OPAQUE precedent	P90	
+bipqwn lthightwist	BipQwn LThighTwist	CLEAR	a left thigh twist bone on the BipQwn rig namespace	CLEAR	groupFile/Legs	High		direct sibling BipQwn LThighTwist1, CLEAR/CLEAR/Legs	P90	
+right index finger 1 expansion 1	Right index finger 1 expansion 1	CLEAR	a right index-finger expansion control, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		matches extensive 'right index finger' sibling family, all CLEAR/CLEAR/RightFingers	P90	
+microphone_2	Microphone_2	CLEAR	a numbered microphone prop	CLEAR	groupFile/Other	High		matches Microphone_1/3/5 sibling series, all CLEAR/CLEAR/Other	P90	
+side_right_4	side_right_4	OPAQUE	a bare positional label with no object named	NOT_APPLICABLE		High		matches bare positional-label-no-owner OPAQUE precedent (distinct from the namespaced 'bas.side_right_4' family)	P90	
+uppereye.l	uppereye.l	CLEAR	a left upper-eye control	CLEAR	groupFile/Face/Eyes	High		matches liduppereye.r/l and uppereye.r sibling series, all CLEAR/CLEAR/Face/Eyes	P90	
+unused.036	unused.036	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		explicit self-declared 'unused' marker (rule 15)	P90	
+crush-29	crush-29	CLEAR	a 'crush' function control, numbered, no owner named	NEEDS_CONTEXT		High	owner not established	matches the majority crush- sibling pattern, CLEAR/NEEDS_CONTEXT	P90	
+toungmiddle	ToungMiddle	CLEAR	a tongue-middle control ('toung' spelling variant of 'tongue')	CLEAR	groupFile/Face/Tongue	High		matches direct sibling ToungMiddleLeft, CLEAR/CLEAR/Face/Tongue	P90	
+lthumbna	LThumbNa	CLEAR	a left thumb bone, unresolved 'Na' suffix	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium	'Na' suffix meaning not independently confirmed	'Thumb' is grounded regardless of the suffix hedge (rule 22); ordinary digit routing (rule 10)	P90	
+body-bulge-high	Body-Bulge-high	CLEAR	a body-bulge shape control, high variant	CLEAR	groupFile/Body Morphs	High		matches Body-Bulge-pushout/low/bottom/mid sibling series, all CLEAR/CLEAR/Body Morphs	P90	
+dyng b 03	dyng b 03	CLEAR	a dynamic-physics jiggle function, B axis/variant, no owner named, numbered	NEEDS_CONTEXT		High	owner not established	matches 'dyng b 01/02' sibling series, all CLEAR/NEEDS_CONTEXT	P90	
+indent	Indent	CLEAR	an 'indent' shape function, no owner named	NEEDS_CONTEXT		Medium	owner not established	shape function stable (rule 22) but no anchor object	P90	
+bow left 1c	bow left 1c	PARTIAL	a 'bow' (decorative bow / archery bow / ship's bow), left side, lettered variant	NEEDS_CONTEXT		High	materially different core readings for 'bow' remain plausible	matches extensive bow-left-1-lettered sibling family, all PARTIAL/NEEDS_CONTEXT (majority)	P90	
+bas.rear_left_1	BAS.Rear_Left_1	OPAQUE	a bare BAS.<position> internal-namespace label with no function word	NOT_APPLICABLE		Medium	a minority sibling (bas.rear_left_3, bare) is CLEAR/Body without a stated distinguishing reason	matches the majority bare-position BAS. precedent (namespace set aside, no content remains, rule 6)	P90	
+taurenmale_hd_bone_135	taurenmale_hd_bone_135	OPAQUE	a generic numbered bone tied only to a model/variant prefix	NOT_APPLICABLE		High	two siblings (_64, _92) are CLEAR/Body without a stated distinguishing reason	matches the overwhelming majority taurenmale_hd_bone_## sibling pattern, OPAQUE/NOT_APPLICABLE (rule 24)	P90	
+pc_broken	pc_broken	OPAQUE	an ungrounded 'PC'+'broken' code	NOT_APPLICABLE		Medium		matches sibling pc_mother's ungrounded 'PC' abbreviation reasoning (rule 23)	P90	
+hat_left_tassel_1	Hat_Left_Tassel_1	CLEAR	a numbered left hat-tassel garment control	CLEAR	groupFile/Clothing	High		matches Hat_Left_Tassel_3/4 sibling series, all CLEAR/CLEAR/Clothing	P90	
+egg.wall_13	Egg.Wall_13	CLEAR	a numbered egg-wall prop panel	CLEAR	groupFile/Other	High		matches extensive Egg.Wall sibling family, all CLEAR/CLEAR/Other	P90	
+wep_stock_ar	WEP_Stock_AR	CLEAR	an AR weapon stock control	CLEAR	groupFile/Other	High		matches WEP_Stock_AR_Lever/Lever_MOE sibling series, all CLEAR/CLEAR/Other	P90	
+l belta a phy	L BeltA a Phy	CLEAR	a left BeltA garment physics control, variant A	CLEAR	groupFile/Clothing	High		matches r belta a phy/l belta spo/r belta spo sibling series, all CLEAR/CLEAR/Clothing	P90	
+cleavagelower	CleavageLower	CLEAR	a cleavage-lowering breast-shape control	CLEAR	groupFile/Body Morphs	High		explicit body-shape word (rule 7)	P90	
+cape 1a	Cape 1a	CLEAR	a cape garment control, numbered variant A	CLEAR	groupFile/Clothing	High		direct sibling 'Cape 1d', CLEAR/CLEAR/Clothing	P90	
+hokage hat right 3a_jiggle	hokage hat right 3a_jiggle	CLEAR	a right hokage-hat jiggle control, numbered variant	CLEAR	groupFile/Clothing	High		matches extensive 'hokage hat' sibling family, all CLEAR/CLEAR/Clothing	P90	
+shape-ninja-cleavage	shape-ninja-cleavage	CLEAR	a ninja-themed cleavage shape control	CLEAR	groupFile/Body Morphs	High		matches direct sibling shape-petite-cleavage, CLEAR/CLEAR/Body Morphs	P90	
+object009	Object009	OPAQUE	a generic numbered placeholder object	NOT_APPLICABLE		High		matches extensive Object00# sibling series, all OPAQUE/NOT_APPLICABLE	P90	
+jacket.neck_rear	Jacket.Neck_Rear	CLEAR	a rear jacket-neck garment control	CLEAR	groupFile/Clothing	High		matches Jacket.Neck_Right/Left/Front sibling series, all CLEAR/CLEAR/Clothing	P90	
+calfleft	CalfLeft	CLEAR	a left calf control	CLEAR	groupFile/Legs	High		ordinary structural leg anatomy (rule 6)	P90	
+bobcut.side_left_1_1	Bobcut.Side_Left_1_1	CLEAR	a bob-cut hairstyle control, side-left, numbered	CLEAR	groupFile/Hair	High		matches extensive Bobcut sibling family, all CLEAR/CLEAR/Hair	P90	
+vag_l.001	Vag_L.001	CLEAR	a left vagina control, numbered	CLEAR	groupFile/Body	High		matches ValveBiped.Bip01_Vag_L_0/1/2/3 sibling series, all CLEAR/CLEAR/Body	P90	
+belt front right a	belt front right a	CLEAR	a right front-belt garment control, variant A	CLEAR	groupFile/Clothing	High		matches extensive belt-front sibling family, all CLEAR/CLEAR/Clothing	P90	
+outerbrows_down_l	outerbrows_down_l	CLEAR	a left outer-eyebrow down control	CLEAR	groupFile/Face/Upper Face	High		matches outerbrows_raise_l/r sibling series, all CLEAR/CLEAR/Face/Upper Face	P90	
+chain_17	chain_17	PARTIAL	a 'chain' (jewelry/mechanical/physics), numbered	NEEDS_CONTEXT		High	materially different core readings for 'chain' remain plausible	matches the majority chain_1N sibling pattern, PARTIAL/NEEDS_CONTEXT	P90	
+fa_up_lid_right_outer	fa_up_lid_right_outer	CLEAR	a right outer upper-eyelid control	CLEAR	groupFile/Face/Eyes	High		matches extensive fa_up_lid sibling family, all CLEAR/CLEAR/Face/Eyes	P90	
+anusgapeout	AnusGapeOut	CLEAR	an anus gape-out shape control	CLEAR	groupFile/Body Morphs	High		matches the anus/vagina gape sibling family, all CLEAR/CLEAR/Body Morphs	P90	
+right_hand_twist2_end	right_hand_twist2_end	CLEAR	a right-hand twist end control, numbered	CLEAR	groupFile/Arms/RightArm	High		matches direct sibling right_hand_twist_end, CLEAR/CLEAR/Arms/RightArm	P90	
+wep_belt_bullet13	WEP_Belt_Bullet13	CLEAR	a numbered weapon belt-bullet prop	CLEAR	groupFile/Other	High		matches extensive wep_belt_bullet sibling family, all CLEAR/CLEAR/Other	P90	
+shell.wall_4	Shell.Wall_4	CLEAR	a numbered wall-shell prop panel	CLEAR	groupFile/Other	Medium	a minority of Shell.Wall_N siblings are OPAQUE with no stated distinguishing reason	matches the majority Shell.Wall_N sibling pattern, all CLEAR/CLEAR/Other	P90	
+bow right b 2	bow right b 2	PARTIAL	a 'bow' (decorative bow / archery bow / ship's bow), right side, variant B, numbered	NEEDS_CONTEXT		High	materially different core readings for 'bow' remain plausible	matches 'bow right bcd'/'bow right bcd root' sibling family, all PARTIAL/NEEDS_CONTEXT	P90	
+cloth left 4 jb	cloth left 4 JB	CLEAR	a left cloth garment control, numbered	CLEAR	groupFile/Clothing	High		matches direct sibling 'cloth left 4', CLEAR/CLEAR/Clothing	P90	
+facial_bone_lowrlip	Facial_Bone_LowrLip	CLEAR	a bare lower-lip facial bone	CLEAR	groupFile/Face/Lower Face	High		matches extensive facial_bone_lowrlip sibling family, all CLEAR/CLEAR/Face/Lower Face	P90	
+crush-25	crush-25	CLEAR	a 'crush' function control, numbered, no owner named	NEEDS_CONTEXT		High	owner not established	matches the majority crush- sibling pattern, CLEAR/NEEDS_CONTEXT	P90	
+island_collar_03_wind_helper	island_collar_03_wind_helper	CLEAR	a numbered collar wind-simulation helper control	CLEAR	groupFile/Clothing	High		matches extensive island_collar sibling family, all CLEAR/CLEAR/Clothing	P90	
+phalangesright	PhalangesRight	PARTIAL	a bare 'phalanges' (finger bones) reference, right, ambiguous owner	NEEDS_CONTEXT		High		direct sibling PhalangesLeft, PARTIAL/NEEDS_CONTEXT	P90	
+band.bend_right_3	Band.Bend_Right_3	CLEAR	a right band-bend accessory control, numbered	NEEDS_CONTEXT		High	no owner/garment named	matches Band.Bend_Right_1/Left_1/2/3 sibling series, all CLEAR/NEEDS_CONTEXT	P90	
+fixbraceletclipping	FixBraceletClipping	CLEAR	a bracelet clipping-prevention corrective control	CLEAR	groupFile/Correctives	Medium		explicit stated 'fix' purpose (rule 5), matches direct analog ArmJacketFIX -> Correctives	P90	
+scale-down	scale-down	CLEAR	a 'scale down' shape function, no owner named	NEEDS_CONTEXT		Medium	owner not established	shape function stable (rule 22) but no anchor object	P90	
+generichuman_r_browajnt	GenericHuman_r_browAJnt	CLEAR	a right eyebrow joint control, variant A	CLEAR	groupFile/Face/Upper Face	High		localized eyebrow mechanism (rule 12)	P90	
+head nostril right a	head nostril right a	CLEAR	a right nostril control, variant A	CLEAR	groupFile/Face/Mid Face	High		matches extensive 'head nostril right' sibling family, all CLEAR/CLEAR/Face/Mid Face	P90	
+bone_face_eye_l_shape_u_mid	Bone_Face_Eye_L_Shape_U_Mid	CLEAR	a left eye-shape facial bone, upper-mid variant	CLEAR	groupFile/Face/Eyes	High		matches extensive Bone_Face_Eye sibling family, all CLEAR/CLEAR/Face/Eyes	P90	
+sk_l_b_leg_3	SK_L_B_leg_3	CLEAR	a left back-leg bone, numbered	CLEAR	groupFile/Legs	High		matches SK_L_B_leg_1/2/4 sibling series, all CLEAR/CLEAR/Legs	P90	
+wep_fx_peq_flashlight	WEP_FX_PEQ_Flashlight	CLEAR	a weapon PEQ flashlight effect control	CLEAR	groupFile/Other	High		matches WEP_FX_PEQ_Light/wep_fx_peq_laser sibling family, all CLEAR/CLEAR/Other	P90	
+r_pinkya	r_pinkya	CLEAR	a right pinky-finger bone, spelling variant	CLEAR	groupFile/Arms/RightArm/RightFingers	Medium		matches extensive pinky sibling family, all CLEAR/CLEAR/RightFingers; literal spelling preserved (rule 12)	P90	
+bip_woolpelvis_0_r	bip_WoolPelvis_0_R	CLEAR	a right wool-pelvis garment control, numbered	CLEAR	groupFile/Clothing	High		matches extensive bip_woolpelvis sibling family, all CLEAR/CLEAR/Clothing	P90	
+bip_bowtieupper_r	bip_BowtieUpper_R	CLEAR	a right bowtie garment control, upper section	CLEAR	groupFile/Clothing	High		direct sibling bip_BowtieUpper_L, CLEAR/CLEAR/Clothing	P90	
+jig_top	Jig_TOP	CLEAR	a jiggle-physics control for a top garment	CLEAR	groupFile/Clothing	Medium	'Jig' abbreviation for 'jiggle' not independently confirmed	'Top' is a well-established garment word in this corpus (Topvoluptuous, Top_01)	P90	
+lipupper_r4	lipUpper_R4	CLEAR	a right upper-lip control, numbered	CLEAR	groupFile/Face/Lower Face	High		matches extensive lipupper sibling family, all CLEAR/CLEAR/Face/Lower Face	P90	
+mot01_head2	MOT01_Head2	CLEAR	a head bone on a motion-capture namespace, numbered	CLEAR	groupFile/Body	High		matches direct sibling bare MOT01_Head, CLEAR/CLEAR/Body	P90	
+face_tonsils	Face_Tonsils	CLEAR	a tonsils control	CLEAR	groupFile/Face/Tongue	Medium		mouth-internal soft-tissue anatomy grouped with tongue (rule 12)	P90	
+cloth middle 7	cloth middle 7	CLEAR	a middle cloth garment control, numbered	CLEAR	groupFile/Clothing	High		matches extensive 'cloth middle' sibling family, all CLEAR/CLEAR/Clothing	P90	
+sofa	Sofa+sofa	CLEAR	a sofa furniture prop	CLEAR	groupFile/Other	High		recognized furniture prop (rule 16)	P90	
+unused mot01_head001	unused mot01_head001	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		explicit self-declared 'unused' marker (rule 15)	P90	
+r dlipin a	R Dlipin A	CLEAR	a right lower-lip control, inner variant A	CLEAR	groupFile/Face/Lower Face	High		matches DLip/dlip sibling family, all CLEAR/CLEAR/Face/Lower Face	P90	
+l ulipin b	L Ulipin B	CLEAR	a left upper-lip control, inner variant B	CLEAR	groupFile/Face/Lower Face	High		matches 'r ulipin a/b' sibling series, all CLEAR/CLEAR/Face/Lower Face	P90	

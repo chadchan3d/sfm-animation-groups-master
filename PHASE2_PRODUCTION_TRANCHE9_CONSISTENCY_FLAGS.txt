@@ -1,0 +1,253 @@
+PHASE 2 PRODUCTION TRANCHE 9 -- CONSISTENCY AUDIT
+Canonical positions 8501-9500 (batches P81-P90)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv (9500 rows after this tranche)
+
+============================================================
+1. SETTLED-RULE DRIFT CHECK (Section 21)
+============================================================
+
+Mechanically re-grouped every Tranche-9 row belonging to the watch-list
+families (tentacle, fin, horn, Box_Face_##_M, balloon-flat, Rig-Hole) and
+verified each against the current authoritative destination before
+classifying, per the Section 2 authority order.
+
+  Tentacle family (6 rows: bip_tentacle.003, tenta_b_2_l, bip_tentacle.010,
+  tenta_b_6_r, tentaclebottompleft1, uppertentacle4): all
+  CLEAR/CLEAR/groupFile/Other. Matches settled Rule 18 + finalized
+  calibration. No drift.
+
+  Fin family (3 rows: fin_top_b_a, r_fin_back_c, fin_top_d_a): all
+  CLEAR/CLEAR/groupFile/Other, matching the settled species-neutral fin
+  precedent. Two "Fin-Rig-*" namespace rows (fin-rig-hat-hood-l ->
+  Clothing, fin-rig-shorts-r -> Clothing) were correctly excluded from
+  this family -- "Fin" there is an internal rig namespace, not the
+  anatomical word, matching the documented Rule-18 exception.
+
+  Horn family (2 rows: bip_horn_01, bip_l_horn_01): both
+  CLEAR/CLEAR/groupFile/Other, matching settled Rule 18 precedent.
+
+  Box_Face_##_M family (4 rows: box_face_07_m, box_face_09_m,
+  box_face_12_m, box_face_05_m): all PARTIAL/NEEDS_CONTEXT/blank, matching
+  the Tranche 7 family-reconciliation precedent. No drift.
+
+  Balloon-flat family: no member appeared this tranche.
+
+  Rig-Hole family (Qwn/Flm/Pbg/Brk/Mar-Rig-Hole): no member appeared this
+  tranche.
+
+No settled-rule drift found in this tranche.
+
+============================================================
+2. INTERNAL-NAMESPACE CONSISTENCY (BAS.)
+============================================================
+
+BAS. family recurred 4 times this tranche: bas.right_3 (bare position,
+no jiggle) -> OPAQUE/NOT_APPLICABLE; bas.side_left_2_jiggle,
+bas.side_right_2_jiggle, bas.right_3_jiggle (all jiggle-suffixed) ->
+CLEAR/NEEDS_CONTEXT; bas.rear_left_1 (bare position, no jiggle) ->
+OPAQUE/NOT_APPLICABLE. This matches the majority pattern documented in
+the full-family mechanical dump performed during P81 classification
+(17/20 bare-position rows OPAQUE, 14/17 jiggle-suffixed rows
+NEEDS_CONTEXT). Six pre-existing outlier rows were identified in that
+full-family dump (bas.rear_right_2, bas.back_2, bas.rear_left_3 bare, and
+bas.rear_right_1_jiggle, bas.rear_left_3_jiggle, bas.back_2_jiggle, all
+CLEAR/CLEAR/Body) that break the majority pattern with no internally
+consistent distinguishing rule (e.g. bas.rear_right_3 bare is OPAQUE
+while bas.rear_right_2 bare is Body). This is flagged as a PRE-EXISTING
+observational note only -- it predates this tranche (all six outliers
+were already in the ledger before position 8501), is not decisive enough
+to correct narrowly (no single clean rule recovers it), and is NOT
+applied or corrected here per Section 23's narrow-scope restriction.
+
+============================================================
+3. MANDATORY OPAQUE REVIEW (Section 19, 6-question test)
+============================================================
+
+All 130 Tranche-9 OPAQUE rows were reviewed individually at
+classification time against the six questions (direct readability;
+hidden namespace content; project-grounded strange tokens;
+genericity-vs-opacity; DCC-authoring-residue vs. real content; unknown
+destination vs. unknown semantics). They resolve into these
+mechanically-tallied categories:
+
+  - Generic numbered rig bones (Bone###, bone.###, bone_skin_###,
+    bone middle 06): 26
+  - DCC-default primitive mesh names (polySurface##, pCylinder#, pCube#,
+    Cylinder001): 9
+  - Generic numbered placeholder objects (Object##): 9
+  - Bare positional/side-marker labels with no owning object (d_right,
+    d_left, l03, frontl1, bottom_4, right_1/7/11, left_8/16,
+    side_right_4/8, frontfront, upper_left_raise, lower_left_drop,
+    _left_x_up, センター): 16
+  - Internal-namespace codenames with no independent content (bas.right_3,
+    bas.rear_left_1, bipbrk (bare), mar-base, valvebiped.hip,
+    bip01 op1.r, valvebiped.joint2/14, valvebiped.group4, hara__null): 10
+  - Character/model-name-prefix plus generic numbered bone with no
+    independent content (orcmale_hd_fixed_bone42, kargathbladefist_bone100,
+    saberon_bone22, taurenmale_hd_bone_135): 4
+  - Pure numeric literals with zero other content (57, 46, 30, 21): 4
+  - Bare joke/flavor-text phrases with no owning object ("it's your
+    funeral", ohlookacarfromdriversf, uuuh): 3
+  - Cryptic 2-6 character abbreviation/code fragments with no sibling
+    grounding (asout, smac, fntac_3rd, fh19.l, fh01, r.madder, bh002.r,
+    mosok41, kio_04, hoppy, kondishn, bone_afr, be2, b8, b14, e8, whr_7,
+    f13, h5, c5, t1, bhr444/bh41/bhr48, c_arr_b01, c_bck_a01,
+    milkshape3d_skele, helper_rtc, pivot_point, level2_root, bone_main,
+    bone135_l_hoho5_joint, flex_noise1, whl_4, depth_8, rough_small_6,
+    bone._l.003, submesh_00_lod_1.2922, option 11, special_flex_2,
+    bip01-xtra004, dummy04/10, lower_03, pc_broken, pc_mother, baffle.r,
+    jiggle3): 49
+
+Every category applied a direct sibling match, an exact-template
+precedent, or a Section-23 grounding test -- none used substring-majority
+routing. No case where a real object/action/relationship survived was
+misclassified OPAQUE (question 6 test); no DCC-primitive name was
+mistaken for real content (question 5 test, e.g. polysurface/pcylinder/
+pcube/cylinder001/submesh); no project-grounded strange token was missed
+(question 3 test -- none of this tranche's cryptic tokens matched an
+established grounded convention like donger/Brown/gib/splat).
+
+============================================================
+4. MANDATORY FACE REVIEW (Section 20)
+============================================================
+
+All 14 new Face/Expressions rows were reviewed against complete-template
+and mechanically-re-verified precedent, never substring-majority:
+
+  exfear, angry_ud, asked left, neutralr, alertr -- bare whole-emotion/
+    mood words with no compounded localized feature (matches established
+    cangry2 / "anime angry bottom" / troubled-right bare-word pattern).
+  fa_eyebag_right_out, fa_eyebag_right_inn -- direct sibling match to
+    fa_eyebag_left_mid (Expressions), a settled family-specific routing.
+  lightexpression -- "Expression" itself grounds the whole-face-preset
+    reading regardless of the "Light" qualifier.
+  troubled left -- direct sibling of "troubled right" from the Tranche 7
+    verified Face/Expressions audit.
+  au6, au1au4 -- matches the corpus's own bare-AU-number FACS convention
+    (au1/4/13/15/26/27, au2au4), mechanically re-verified against the
+    current ledger; the pre-existing au18/au18z/au6z/au27z OPAQUE outliers
+    were reviewed and found to be their own inconsistency (contradicting
+    the same-family reasoning used for the other bare AU numbers), not
+    counter-evidence against this tranche's au6/au1au4 rows.
+  fbx_rinko_face_none -- direct instance of the fbx_[character]_face_
+    [state] whole-face-preset template (the doctrine's own proof example).
+  tear up l -- direct sibling "Tear up R".
+  anime angry  bl -- direct sibling "anime angry  bottom".
+
+No substring-majority routing was used at any point. Suspicious Upper/
+Lower Face rows whose classification depended on an expression-state word
+(e.g. sneer_right/right_sneer/leftsneer -> Lower Face; brows-full-furrow,
+rbrow2, outerbrows_down_l -> Upper Face) were checked against complete
+sibling templates and found consistent.
+
+============================================================
+5. DCC-DEFAULT-IDENTIFIER REVIEW (Section 5E)
+============================================================
+
+Reviewed 9 DCC-default-name candidates this tranche: polysurface26,
+polysurface73, polysurface59, polysurface16, polysurface27,
+pcylinder2, pcylinder9, pcube1, cylinder001, submesh_00_lod_1.2922 (10
+total counting submesh) -- all correctly kept OPAQUE/NOT_APPLICABLE per
+the DCC-authoring-residue principle (the primitive type a mesh started
+from does not describe what it became after reshaping, and no
+independent evidence in this tranche overrides that default).
+
+============================================================
+6. PRECEDENT-INTEGRITY CHECK / CROSS-TRANCHE FINDING (Section 22/23)
+============================================================
+
+While classifying "fringe 4" (P81, position 8544) against the corpus's
+"fringe" family, a decisive pre-existing error was discovered
+incidentally: four earlier-production rows (fringe 1, fringe 6,
+fringe 20, fringe 17 jb -- from Tranches 1, 5, 5, and 4 respectively,
+batches P03/P46/P42/P30) had been classified PARTIAL/NEEDS_CONTEXT on the
+theory that "fringe" is a genuinely ambiguous multi-sense word (hair
+bangs vs. decorative garment trim) with no disambiguating content. A
+direct grep of the live canonical Master (sfm_defaultanimationgroups.txt)
+found an extensive, unambiguous, 100%-consistent bare-word template
+precedent: bip_fringe/bip_fringe1/3-8 (lines 43571-43578), Fringe0
+through Fringe10 (lines 48125-48145), HairFringeFront/Left/Right
+(lines 55196+), HairFrontFringeALeft (lines 55417+), skin_fringe_C_*
+(lines 59099+), and "hair fringe left/middle/right" (lines 62020+) -- all
+confirmed groupFile/Hair via the structural parser, with zero
+counter-example of "fringe" as a decorative-trim reading anywhere in the
+Master. This is Authority-order tier 4 (direct live-Master template
+precedent), which outranks the unsupported "materially different core
+senses" assumption the original four rows were built on -- that
+assumption was never checked against the Master itself.
+
+Per Section 23, this was corrected narrowly (only these 4 rows, found
+incidentally, not via a broader retrospective audit):
+
+  fringe 1      (originally batch P03): PARTIAL/NEEDS_CONTEXT/blank
+                -> CLEAR/CLEAR/groupFile/Hair
+  fringe 6      (originally batch P46): PARTIAL/NEEDS_CONTEXT/blank
+                -> CLEAR/CLEAR/groupFile/Hair
+  fringe 20     (originally batch P42): PARTIAL/NEEDS_CONTEXT/blank
+                -> CLEAR/CLEAR/groupFile/Hair
+  fringe 17 jb  (originally batch P30): PARTIAL/NEEDS_CONTEXT/blank
+                -> CLEAR/CLEAR/groupFile/Hair
+
+Evidence: sfm_defaultanimationgroups.txt lines 43571-43578, 48125-48145,
+55196-55207, 55417-55421, 59099-59107, 62020-62045 (verified via the
+structural parser in tools/validate_master.py's parse_structure
+function, cross-checked against each control's resolved full_path).
+The original raw batch files (P03/P30/P42/P46) are NOT rewritten --
+they remain the immutable historical record of the original
+classification; only the current ledger's authoritative fields were
+corrected, with each row's short_reason updated to document the
+correction and the original batch_id preserved for provenance.
+
+This correction resolves the ambiguity for these 4 rows only. It does
+not generalize to a "fringe is always Hair" rule for any future novel
+compound (e.g. a hypothetical "belt_fringe" or "curtain_fringe" literal
+would still need its own semantic judgment) -- it specifically applies to
+the bare "fringe"/"fringe_N" template that the Master itself
+demonstrates is a hair-bangs convention in this corpus.
+
+No other precedent-integrity issues were found. Every "matches sibling
+X" claim used in this tranche's short_reason fields was mechanically
+re-verified against the current ledger's authoritative fields at
+classification time (not against memory, old raw batch files, or old
+tranche reports), consistent with Section 3.
+
+============================================================
+7. OTHER OBSERVATIONAL NOTES (non-blocking)
+============================================================
+
+  - The Flm-ArmB-Leg-* and Flm-ArmB-Arm-* 1-3-letter-suffix-code families
+    continue to show an unresolved, inconsistent split between
+    CLEAR/CLEAR/Legs(or Arms) and CLEAR/NEEDS_CONTEXT across many
+    tranches for different exact suffix codes with no recoverable single
+    rule. This tranche's new codes (lbd, lm, lua, lg, lh) were each
+    classified NEEDS_CONTEXT by conservative default when no identical
+    sibling existed, consistent with the pattern established in Tranches
+    7-8. Not corrected (would require a broader retrospective decode of
+    the whole namespace, out of narrow scope).
+  - The "whisker" family (whisker_r_1 -> Mid Face, whisker_r_2 ->
+    NEEDS_CONTEXT, r/l whiskers a phy -> Hair) shows a genuine three-way
+    split for what may be the same word used in different senses (animal
+    facial whisker vs. hair-like strand). This tranche's new member
+    (whisker_l_2) was routed NEEDS_CONTEXT by matching its closest exact
+    sibling (whisker_r_2). Not corrected -- observational only.
+  - The "moustache" family shows a 9-vs-3 majority split (Hair vs. Face/
+    Lower Face) for near-identical numbered literals with no stated
+    reason for the 3 outliers (moustache_l_25, moustache_r, moustache_r_2).
+    This tranche's new member (moustache_r_12) was routed to the majority
+    (Hair). Not corrected -- observational only, does not meet the
+    "decisive" bar for a Section 23 fix.
+  - The bare "condom N" family shows a 1-vs-1 split (condom 3 -> Other,
+    condom 4 -> Clothing) predating this tranche; this tranche's new
+    member (condom 5) was routed to Clothing (worn-equipment reading).
+    Not corrected -- observational only, tied precedent, no decisive
+    evidence either way.
+  - The "AU" (FACS Action Unit) family shows isolated OPAQUE outliers
+    (au18, au18z, au6z, au27z) alongside a strong majority CLEAR/
+    Expressions pattern for bare AU-numbers. Reviewed in Section 4 above;
+    not corrected here (a full audit of the AU family would exceed narrow
+    scope).
+
+============================================================
+CUMULATIVE CROSS-TRANCHE CORRECTIONS THIS TRANCHE: 4 rows (the fringe
+family, documented in Section 6)
+============================================================
