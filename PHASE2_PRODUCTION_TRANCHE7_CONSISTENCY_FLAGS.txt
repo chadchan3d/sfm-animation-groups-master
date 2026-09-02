@@ -1,0 +1,180 @@
+PHASE 2 PRODUCTION TRANCHE 7 -- CONSISTENCY AUDIT
+Canonical positions 6501-7500 (batches P61-P70)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv (7500 rows after this tranche)
+
+============================================================
+1. CROSS-TRANCHE-ADJACENT ERROR FOUND AND CORRECTED (Section 18)
+============================================================
+
+Row: flm-rig-hole-v2 (exact_spellings: Flm-Rig-Hole-V2)
+Original tranche/batch: Tranche 7, batch P68 (canonical position 7243)
+
+OLD (as merged in P68): semantic_status=CLEAR, taxonomy_status=CLEAR,
+  proposed_destination=groupFile/Body, short_reason cited a fabricated
+  "Qwn-Rig-Hole/Brk-Rig-Hole/Mar-Rig-Hole template precedent" as resolving
+  to groupFile/Body.
+
+Evidence that triggered the check: while classifying P70 item
+brk-rig-hole-v1, I mechanically re-read (per Section 2) every current
+Rig-Hole-family row in the ledger:
+
+  qwn-rig-hole-v1  -> PARTIAL  NEEDS_CONTEXT  (blank)
+  flm-rig-hole-a   -> PARTIAL  NEEDS_CONTEXT  (blank)
+  qwn-rig-hole-v2  -> CLEAR    NEEDS_CONTEXT  (blank)
+  pbg-rig-hole-a   -> CLEAR    NEEDS_CONTEXT  (blank)
+  brk-rig-hole-a   -> CLEAR    NEEDS_CONTEXT  (blank)
+  mar-rig-hole-a   -> CLEAR    NEEDS_CONTEXT  (blank)
+  brk-rig-hole-v2  -> CLEAR    NEEDS_CONTEXT  (blank)
+  qwn-rig-hole-a   -> PARTIAL  NEEDS_CONTEXT  (blank)
+  flm-rig-hole-v2  -> CLEAR    CLEAR   groupFile/Body   <-- the outlier
+
+Every other member of this exact naming family (Qwn/Pbg/Brk/Mar-Rig-Hole)
+resolves to taxonomy_status=NEEDS_CONTEXT with a blank destination -- "Hole"
+retains meaningful genital-region content (per rule 8) but no established
+single canonical destination has ever been assigned to this family. My own
+P68 entry for flm-rig-hole-v2 was the sole exception, resting on a precedent
+I did not actually verify at the time (a Section 2 violation).
+
+NEW (corrected in-place in the ledger, same session, before this tranche's
+raw commit): semantic_status=CLEAR (unchanged), taxonomy_status=NEEDS_CONTEXT,
+proposed_destination=(blank), short_reason updated to record the correction.
+
+Correction method: targeted single-row field update via a small deterministic
+script (scratch_t7, not committed), re-validated by re-reading the written
+ledger file and confirming exactly one row matched and had the corrected
+fields, with total ledger row count unchanged (7400 rows at time of fix).
+No other row was touched. This is a within-Tranche-7 self-correction, not a
+broad earlier-tranche re-audit (Section 18 was not invoked for any row
+outside Tranche 7).
+
+The corresponding P70 item (brk-rig-hole-v1) was classified directly against
+the correct majority pattern (NEEDS_CONTEXT, blank destination) and required
+no further correction.
+
+============================================================
+2. PRE-EXISTING CROSS-TRANCHE SPLIT: tentacle-family destination
+============================================================
+
+Not corrected (Section 18 forbids a broad earlier-tranche re-audit; this is
+reported as a finding only).
+
+Mechanical re-read of the current ledger shows tentacle-family rows split
+across two destinations with no clean tranche boundary explaining the split:
+~14 rows resolve CLEAR/CLEAR/groupFile/Other (e.g. tentacletopleft2,
+bip_tentacle.011, tenta_10_l, tenta_2_r, tentacletopright1, bip_tentacle.001,
+tentaclebottom1) and ~19 rows resolve CLEAR/NEEDS_CONTEXT/blank (e.g.
+bip_tentacle.004, tenta_9_l, tenta_2_l, tenta_11_l, bip_tentacle.009,
+lowertentacle1, tentacletop1, bip_tentacle.007). Both patterns are
+interspersed across multiple historical tranches.
+
+Tranche 7 resolution: all new tentacle-family rows classified this tranche
+(tentaclebottom3 [P63], tenta_7_l [P63], tentacletop3 [P64], tenta_4_l [P65])
+were routed CLEAR/NEEDS_CONTEXT/blank, matching what appears to be the more
+common/recent pattern, and are flagged here rather than silently resolved.
+
+============================================================
+3. PRE-EXISTING CROSS-TRANCHE SPLIT: balloon-flat-* destination
+============================================================
+
+Not corrected (same reasoning as above).
+
+balloon-flat-left -> CLEAR/CLEAR/groupFile/Body Morphs
+balloon-flat-right -> CLEAR/CLEAR/groupFile/Body Morphs
+balloon-flat-bottom -> CLEAR/NEEDS_CONTEXT/blank
+
+Tranche 7 resolution: balloon-flat-top [P67] was routed to the 2-of-3
+majority pattern (groupFile/Body Morphs, Medium confidence) with an explicit
+short_reason cross-reference to this flag.
+
+============================================================
+4. PRE-EXISTING CROSS-TRANCHE SPLIT: box_face_##_m destination
+============================================================
+
+Not corrected; discovered during precedent verification for P63/P66, not
+introduced this tranche, and no new box_face_##_m literal was classified in
+Tranche 7 (P63's box_face_01_m and box_face_17_m were both routed
+PARTIAL/NEEDS_CONTEXT, consistent with the majority of this family).
+
+Current ledger split: box_face_01_m, _03_m, _10_m, _11_m, _13_m, _14_m,
+_15_m, _17_m all resolve PARTIAL/NEEDS_CONTEXT/blank, while box_face_02_m
+and box_face_19_m resolve CLEAR/CLEAR/groupFile/Other -- a genuine,
+unexplained split within one numbered family.
+
+============================================================
+5. OPAQUE MANUAL REVIEW (Section 14, 6-question test)
+============================================================
+
+All 160 OPAQUE rows in this tranche were reviewed. They resolve into these
+mechanically-justified categories, each checked for direct readability,
+project-grounded convention, genericity-vs-opacity, and DCC-default-name
+status before being marked OPAQUE:
+
+  - Generic numbered/skinning bones (Bone###, bone._r.001, bone_skin*): ~42
+  - DCC-default primitive mesh names (polySurface##, pPlane#, pCylinder##,
+    ChamferBox##) per Section 5: 7
+  - Bare alphanumeric/cryptic codes with no recoverable content (d12, g2,
+    e5, c1, i15, s2, ph03, au6z, etc.): ~28
+  - Generic placeholder object names (Object###, obj002s): 8
+  - Bare positional labels/side-markers with no owning object (left_17,
+    right_2, bottom_3, midright, toprightbone, etc.): ~20
+  - Internal-namespace non-semantic codenames verified against siblings
+    (Brk-Rig-Bacon-*, Mar-Rig-Eggwhite*, BAS.<position>): 8
+  - Cryptic 2-4 letter abbreviation+number/side fragments with no
+    independent grounding, verified against siblings (Bh##.*, Fh##.*,
+    whR_#, C_ARL_*): ~14
+  - Symbolic/non-linguistic fragments (><, "- ex"): 2
+  - Bare adjectives/verbs/UI-labels with no owning object or feature named
+    (squeeze, loosen, accurate, try me, watergone, helper_rt, asup, ref,
+    limp_1, dead slider, drip_jiggle_1, base/beam/shrink, raiseinleft,
+    sides upper, bjalt, middleman dummy): ~19
+  - Bare species/model-name references with no anatomical/functional
+    content (cormorant), matching prior character/model-reference
+    precedent: 1
+  - One cryptic Japanese fragment with no reliably grounded owner
+    (ス横先.l, "side tip"): 1
+
+No row in this list showed direct readable content, a project-grounded
+convention, or independent semantic evidence that was missed at
+classification time; none were miscategorized as OPAQUE due to mere
+genericity (the genericity-is-not-opacity boundary was applied instead to
+route Box##/BoxC/BoxA1-family rows to groupFile/Other, not OPAQUE).
+
+============================================================
+6. FACE/EXPRESSIONS MANDATORY AUDIT (Section 14)
+============================================================
+
+All 14 rows routed to groupFile/Face/Expressions were reviewed to confirm
+none of them name a localized mechanism (brow/eye/mid-face/lip-jaw/tongue)
+that should instead route to a Face subgroup:
+
+  fuss, drowsyr, expsurprise, evil, kissu, sweat drop fr, face-annoyed,
+  troubled right, mdldefaultface, r.worry, fbx_murasaki_face_shy, ranger,
+  fbx_sakura_face_shy, neutrall
+
+All 14 are bare mood/emotion words, named whole-face preset states, or the
+fbx_[character]_face_[state] whole-face-preset template. None names a
+localized facial mechanism. No re-routing required.
+
+============================================================
+7. DCC-DEFAULT-NAME BOUNDARY CONSISTENCY (Section 5)
+============================================================
+
+Reviewed all pCube/pCylinder/pSphere/pPlane/polySurface/ChamferBox-style
+rows this tranche (pplane4, pcylinder11, chamferbox01, and ~7 polySurface##
+rows) against the settled DCC-default-name boundary: all lack any
+independent semantic evidence and were correctly routed OPAQUE. Distinct
+from this, the Box##/BoxA1/BoxC-family rows (boxc01) were correctly kept at
+groupFile/Other under the genericity-is-not-opacity precedent, since "Box"
+followed by a bare number is a deliberately-named object family in this
+Master, not a DCC auto-generated primitive name.
+
+============================================================
+Summary
+============================================================
+
+Consistency flags raised: 4 (1 corrected in-ledger, 3 reported as
+pre-existing cross-tranche splits, none of which originated in Tranche 7).
+NEEDS_DOCTRINE rows: 0.
+All precedent citations used in this document and throughout Tranche 7
+classification were mechanically re-read from the current ledger at time of
+use (Section 2/17), not recalled from memory or prior report prose.

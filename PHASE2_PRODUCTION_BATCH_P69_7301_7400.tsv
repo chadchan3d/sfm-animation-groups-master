@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+r3rdnc	R3rdNc	OPAQUE	cryptic alphanumeric fragment, no recoverable content	NOT_APPLICABLE		Low		no readable content	P69
+camera.mount_z	camera.mount_z	CLEAR	a camera prop's mount, Z-axis	CLEAR	groupFile/Other	High		recognized non-character prop	P69
+open_holes	Open_Holes	PARTIAL	"holes" (garment holes, body orifices, or another sense), open state	NEEDS_CONTEXT		Low	"holes" has materially different plausible readings with nothing to disambiguate	multi-sense bare word	P69
+jiggle spine 3	jiggle spine 3	CLEAR	a spine jiggle-physics control, numbered	CLEAR	groupFile/Body	High		jiggle-physics is a dynamics mechanism on plain structural spine anatomy	P69
+under_lid	Under_Lid	CLEAR	eyelid control, under	CLEAR	groupFile/Face/Eyes	High		eyelid is an eye-region feature	P69
+legthumb3_r	LegThumb3_R	CLEAR	a control naming both "Leg" and "Thumb", right, numbered	NEEDS_CONTEXT		Medium	"Leg" and "Thumb" name two materially different anatomical owners with no way to tell which governs	matches the settled Leg+Finger mixed-region precedent	P69
+sk_r_b_leg_2	SK_R_B_leg_2	CLEAR	right leg, numbered	CLEAR	groupFile/Legs	High		plain leg anatomy	P69
+cock.shaft_5_skin	Cock.Shaft_5_Skin	CLEAR	penis anatomy, shaft, numbered	CLEAR	groupFile/Body	High		plain structural genital anatomy	P69
+arm right wrist twist 2	arm right wrist twist 2	CLEAR	right wrist twist, numbered	CLEAR	groupFile/Arms	High		plain arm anatomy	P69
+wrinkles-4	wrinkles-4	CLEAR	a skin-wrinkle shape/texture control, numbered	CLEAR	groupFile/Body Morphs	Medium		explicit skin-texture appearance descriptor (rule 7)	P69
+wep_stock_ar_lever	WEP_Stock_AR_Lever	CLEAR	a weapon stock lever part	CLEAR	groupFile/Other	High		matches the settled WEP_Stock_AR_Lever_MOE sibling precedent (this tranche)	P69
+body-big-ass	Body-Big-Ass	CLEAR	buttock anatomy, "big" size	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor (rule 7)	P69
+dyng c 01	dyng c 01	CLEAR	a "dyng" (jiggle-physics) function, numbered	NEEDS_CONTEXT		Medium	no owning object named for the jiggle-physics function	matches the settled "dyng" jiggle-physics project convention (verified this tranche); owner unresolved	P69
+narrowbc	NarrowBC	CLEAR	a "narrow" shape control, undecoded qualifier ("BC"), no owning object named	NEEDS_CONTEXT		Medium	no owning body part or garment named for the narrowing control	explicit shape-word content, but owner unresolved	P69
+l middle 03	l middle 03	CLEAR	left middle finger, bare, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy, verified LeftFingers subpath	P69
+polysurface8	polySurface8	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		matches the settled polySurface### DCC-default precedent	P69
+anusopensuitexposed	AnusOpenSuitExposed	CLEAR	anus anatomy, open state, suit-exposed context	CLEAR	groupFile/Body	Medium		matches the settled anusopenex sibling precedent (verified this tranche)	P69
+bip chinfront01 r	bip chinfront01 r	CLEAR	chin control, front, right, numbered	CLEAR	groupFile/Face/Lower Face	High		chin is a jaw/mouth-region feature	P69
+submesh_00_lod_1.3479	submesh_00_LOD_1.3479	OPAQUE	a generic level-of-detail mesh artifact, no anatomical content	NOT_APPLICABLE		Low		no readable anatomical or functional content	P69
+arm right bracelet 01	arm right bracelet 01	CLEAR	a bracelet (jewelry accessory) on the right arm, numbered	CLEAR	groupFile/Clothing	High		worn jewelry/accessory term	P69
+bip_tailc04	bip_tailC04	CLEAR	tail, variant, numbered	CLEAR	groupFile/Tail	High		explicit tail anatomy	P69
+hand_rotate_l	Hand_Rotate_L	CLEAR	left hand rotation control	CLEAR	groupFile/Arms	High		plain arm/hand anatomy	P69
+lipbitel	LipBiteL	CLEAR	a "lip bite" control, left	CLEAR	groupFile/Face/Lower Face	High		lip is a mouth/lower-face feature	P69
+tears left width	Tears left width	CLEAR	a tear-effect width control, left	CLEAR	groupFile/Face/Eyes	High		tears are an eye-region feature	P69
+bip upperarmtwist2 l	bip upperarmtwist2 l	CLEAR	left upper-arm twist, numbered	CLEAR	groupFile/Arms	High		plain arm anatomy	P69
+flex_fat_bottom	Flex_Fat_Bottom	CLEAR	a "fat" shape control, bottom	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor (rule 7)	P69
+bone pinky 06	bone pinky 06	CLEAR	pinky finger, no side named, numbered	NEEDS_CONTEXT		Medium	no side named for the pinky finger	"pinky" is grounded finger content despite the generic "bone" wrapper; side/owner unresolved	P69
+bip_stripes1_l	bip_stripes1_L	PARTIAL	"stripes" (pattern/texture decoration, or another sense), left, numbered	NEEDS_CONTEXT		Low	"stripes" has materially different plausible readings with nothing to disambiguate	multi-sense bare word	P69
+bip_b_nic_pelvis	bip_B_Nic_Pelvis	CLEAR	pelvis, unsided	CLEAR	groupFile/Body	High		unsided pelvis stays Body (rule 26)	P69
+leg right boot tassle 3a	leg right boot tassle 3a	CLEAR	a boot tassel accessory, right leg, numbered	CLEAR	groupFile/Clothing	High		matches the sibling boot tassel precedent (verified this tranche)	P69
+gun_2_r	gun_2_R	CLEAR	a gun (weapon), right, numbered	CLEAR	groupFile/Other	High		matches the sibling gun_2_l precedent (this tranche)	P69
+sight_glass	sight_glass	CLEAR	a weapon/prop sight glass part	CLEAR	groupFile/Other	High		recognized prop-part term	P69
+(ripped) shirt (shirt)	(RIPPED) Shirt (SHIRT)	CLEAR	a shirt garment, "ripped" state	CLEAR	groupFile/Clothing	High		explicit garment term	P69
+fin_top_a_b	fin_top_a_b	CLEAR	fin anatomy (creature appendage), top, variant	CLEAR	groupFile/Body	Medium		matches the settled fin_top_b_d sibling precedent (verified this tranche)	P69
+bip_pelvis_jiggle	bip_pelvis_jiggle	CLEAR	a pelvis jiggle-physics control	CLEAR	groupFile/Body	High		jiggle-physics is a dynamics mechanism; unsided pelvis stays Body (rule 26)	P69
+ashikubi_l__rot_ashi_l__x100__offset	ashikubi_l__rot_ashi_l__x100__offset	CLEAR	ankle/leg anatomy ("ashikubi"=ankle, "ashi"=leg/foot, Japanese), left, rotation offset	CLEAR	groupFile/Legs	High		foreign-language terms ground the plain leg/ankle-anatomy reading (rule 10)	P69
+fringe 5 jb	fringe 5 JB	CLEAR	hair fringe (bangs), numbered	CLEAR	groupFile/Hair	High		named hairstyle term	P69
+rtoeindex02	rToeIndex02	CLEAR	right toe (index), numbered	CLEAR	groupFile/Toes/RightToes	High		plain toe anatomy, verified RightToes subpath	P69
+prf_murasaki_costume_1_aos	prf_murasaki_costume_1_aos	CLEAR	a costume on a named character, numbered	CLEAR	groupFile/Clothing	High		explicit costume/garment term	P69
+bone045	Bone045	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		matches the settled Bone### precedent	P69
+bip_leg.008	Bip_leg.008	CLEAR	leg, bare structural, numbered	CLEAR	groupFile/Legs	High		plain leg anatomy	P69
+leg left thigh ctrl 1	leg left thigh ctrl 1	CLEAR	left thigh, control, numbered	CLEAR	groupFile/Legs	High		plain leg anatomy	P69
+fa_up_lid_left_outer	fa_up_lid_left_outer	CLEAR	upper eyelid, left, outer	CLEAR	groupFile/Face/Eyes	High		eyelid is an eye-region feature	P69
+bip shoulderbackin r	bip shoulderbackin r	CLEAR	right shoulder, back, in	CLEAR	groupFile/Arms	High		plain arm anatomy	P69
+bone pinky 07	bone pinky 07	CLEAR	pinky finger, no side named, numbered	NEEDS_CONTEXT		Medium	no side named for the pinky finger	matches the settled bone pinky 06 sibling precedent (this tranche); side/owner unresolved	P69
+helper_rt	Helper_RT	OPAQUE	a generic "helper" label, no location or object named	NOT_APPLICABLE		Low		no reliable core referent	P69
+bip_l_horn_b	bip_l_horn_b	CLEAR	horn (creature appendage), left, variant	CLEAR	groupFile/Other	High		matches the settled bip_r_horn_a/b sibling precedent (verified current ledger values)	P69
+widey	WideY	CLEAR	a "wide" scaling/shape control along the Y axis, no owning body part named	NEEDS_CONTEXT		Medium	no owning body part or garment named for the widening control	matches the settled WideX sibling precedent (this tranche); owner unresolved	P69
+pb_r_cmy01_bhair_3	pb_R_CMY01_BHair_3	CLEAR	a hair bone, right, numbered	CLEAR	groupFile/Hair	Medium		matches the settled pb_l_cmy01_bhair_1 sibling precedent (verified this tranche)	P69
+bip_head12_l	bip_head12_l	CLEAR	head, bare structural, numbered, left	CLEAR	groupFile/Body	Medium		bare head with no specific facial feature defaults to Body	P69
+r index 01	r index 01	CLEAR	right index finger, bare, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy, verified RightFingers subpath	P69
+book coverpage turn1	Book CoverPage Turn1	CLEAR	a book prop's cover-page turn mechanism, numbered	CLEAR	groupFile/Other	High		recognized non-character prop	P69
+doorhandleboneleft	DoorHandleBoneLeft	CLEAR	a door-handle prop, left	CLEAR	groupFile/Other	High		recognized environment/prop part	P69
+l ujacketa spo	L uJacketA Spo	CLEAR	a jacket garment control, left, variant, undecoded trailing qualifier ("Spo")	CLEAR	groupFile/Clothing	Medium		explicit garment term despite the undecoded trailing qualifier	P69
+wep_m203_nade_shell	WEP_M203_Nade_Shell	CLEAR	a weapon (M203 launcher) grenade shell	CLEAR	groupFile/Other	High		recognized weapon-part prop	P69
+head nasolabial furrow right	Head Nasolabial Furrow Right	CLEAR	a nasolabial furrow (cheek fold), right	CLEAR	groupFile/Face/Mid Face	High		matches the settled laughline/nasolabial sibling precedent	P69
+bodyshape-lithe	bodyshape-lithe	CLEAR	a "lithe" body-shape control	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor (rule 7)	P69
+pussy right 1	pussy right 1	CLEAR	genital anatomy, right, numbered	CLEAR	groupFile/Body	High		plain structural genital anatomy	P69
+bottle5_liquid	bottle5_liquid	CLEAR	a bottle-liquid prop, numbered	CLEAR	groupFile/Other	High		matches the sibling bottle6_liquid precedent (this tranche)	P69
+lever.lock	Lever.Lock	CLEAR	a lever prop's lock mechanism	CLEAR	groupFile/Other	Medium		mechanical prop control	P69
+arm left shoulder ctr2	arm left shoulder ctr2	CLEAR	left shoulder, numbered	CLEAR	groupFile/Arms	High		plain arm anatomy	P69
+armcloth_left_4	ArmCloth_Left_4	CLEAR	an arm-sleeve cloth control, left, numbered	CLEAR	groupFile/Clothing	Medium		generic clothing term (rule 8)	P69
+leg left knee adj. 4	leg left knee adj. 4	CLEAR	left knee, adjustment, numbered	CLEAR	groupFile/Legs	High		plain leg anatomy	P69
+pantiesbulgem	PantiesBulgeM	CLEAR	panties garment with a bulge feature, variant	CLEAR	groupFile/Clothing	High		matches the settled pantiesbulges sibling precedent (verified current ledger value)	P69
+c_dred_l1_04	C_Dred_L1_04	CLEAR	a dreadlock hairstyle, left, numbered	CLEAR	groupFile/Hair	Medium		matches the settled c_dred_r2_05 sibling precedent (this tranche)	P69
+ruby_rt_pinkycup_jnt	Ruby_rt_pinkyCup_jnt	CLEAR	right pinky finger joint on a named character	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy, verified RightFingers subpath	P69
+bone_arr	Bone_ARR	OPAQUE	cryptic fragment ("ARR"), no recoverable anatomical or functional content	NOT_APPLICABLE		Low		no readable content, no grounding found	P69
+chin2.r	chin2.R	CLEAR	chin, right, numbered	CLEAR	groupFile/Face/Lower Face	High		chin is a jaw/mouth-region feature	P69
+bottomleft	BottomLeft	OPAQUE	a positional label combining "bottom" and "left", no object named	NOT_APPLICABLE		Low		matches the settled bare positional-label-no-object precedent	P69
+c_dred_c1_06	C_Dred_C1_06	CLEAR	a dreadlock hairstyle, center, numbered	CLEAR	groupFile/Hair	Medium		matches the settled c_dred sibling precedent (this tranche)	P69
+chain_9	chain_9	CLEAR	a "chain" accessory, numbered	NEEDS_CONTEXT		Medium	no owner named for the chain accessory	bare accessory noun, ownership unresolved (rule 25)	P69
+wep_fx_muzzle10	WEP_FX_Muzzle10	CLEAR	a weapon muzzle-flash effect, numbered	CLEAR	groupFile/Other	High		matches the settled wep_fx_muzzle sibling precedent (this tranche)	P69
+poke03	Poke03	PARTIAL	a "poke" (unowned; possibly nipple-poke or another sense), numbered	NEEDS_CONTEXT		Low	"poke" has materially different plausible readings with nothing to disambiguate	multi-sense bare word	P69
+bip_bobby_l_uparmtwist	Bip_BOBBY_L_UpArmTwist	CLEAR	left upper-arm twist	CLEAR	groupFile/Arms	High		plain arm anatomy	P69
+h_r_index1	h_R_Index1	CLEAR	right index finger, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy, verified RightFingers subpath	P69
+canine_lfrontleg2	Canine_LFrontLeg2	CLEAR	a creature front leg (forelimb), left, numbered	CLEAR	groupFile/Arms	High		matches the settled canine_rfrontleg2 sibling precedent (this tranche)	P69
+wep_fronsight_flipup_kac	WEP_FronSight_FlipUp_KAC	CLEAR	a weapon front sight (KAC brand, flip-up)	CLEAR	groupFile/Other	High		recognized weapon-part prop	P69
+bip01 op2.r	Bip01 Op2.R	OPAQUE	a cryptic "op2" fragment, no recoverable anatomical or functional content, right	NOT_APPLICABLE		Low		no readable content, no grounding found	P69
+wep_bipod_leftleg2	WEP_Bipod_LeftLeg2	CLEAR	a weapon bipod part, "left leg" component, numbered	CLEAR	groupFile/Other	High		bipod leg is a weapon-part component, not character anatomy	P69
+fbx_sakura_face_shy	fbx_sakura_face_shy	CLEAR	a whole-face "shy" preset state on a named character	CLEAR	groupFile/Face/Expressions	High		matches the settled fbx_[character]_face_[state] whole-face-preset template	P69
+watergone	WaterGone	OPAQUE	a "water gone" state phrase, no owning object named	NOT_APPLICABLE		Low		no reliable core referent	P69
+pussyopensuitexposed	PussyOpenSuitExposed	CLEAR	genital anatomy, open state, suit-exposed context	CLEAR	groupFile/Body	Medium		matches the settled anusopensuitexposed sibling precedent (this tranche)	P69
+bow left 3b	bow left 3b	CLEAR	a "bow" accessory, left, numbered	NEEDS_CONTEXT		Medium	no owner named for the bow accessory	bare accessory noun, ownership unresolved (rule 25)	P69
+ph03	PH03	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no readable content	P69
+tail 1 jb	tail 1 JB	CLEAR	tail, numbered	CLEAR	groupFile/Tail	High		explicit tail anatomy	P69
+cloth_bone_up_r_06	cloth_bone_up_r_06	CLEAR	a generic cloth/garment control, right, numbered	CLEAR	groupFile/Clothing	Medium		generic clothing term (rule 8)	P69
+arm left shoulder ctrl 1	arm left shoulder ctrl 1	CLEAR	left shoulder, control, numbered	CLEAR	groupFile/Arms	High		plain arm anatomy	P69
+rope_7	Rope_7	CLEAR	a rope (prop object), numbered	CLEAR	groupFile/Other	Medium		recognized prop-object term	P69
+wep_peq2	WEP_PEQ2	CLEAR	a weapon PEQ (laser designator) accessory, numbered	CLEAR	groupFile/Other	High		recognized weapon-part prop	P69
+bip_righteye	bip_RightEye	CLEAR	right eye	CLEAR	groupFile/Face/Eyes	High		explicit eye-region feature	P69
+toprightbone	TopRightBone	OPAQUE	a positional label combining "top" and "right", no anatomical content	NOT_APPLICABLE		Low		matches the settled bare positional-label-no-object precedent	P69
+pantsvagopen	PantsVagOpen	CLEAR	pants garment with a vaginal-opening feature	CLEAR	groupFile/Clothing	High		matches the settled pantsvaginalopen sibling precedent (this tranche)	P69
+bone156	Bone156	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		matches the settled Bone### precedent	P69
+right_hand_twist3_end	right_hand_twist3_end	CLEAR	right hand twist, numbered	CLEAR	groupFile/Arms	High		plain arm/hand anatomy	P69
+enlarge_y	enlarge_y	CLEAR	an "enlarge" shape control along the Y axis, no owning object named	NEEDS_CONTEXT		Medium	no owning body part or garment named for the enlarging control	explicit shape-word content, but owner unresolved	P69
+tasselc	TasselC	CLEAR	a tassel accessory, variant	NEEDS_CONTEXT		Medium	no owner named for the tassel accessory	bare accessory noun, ownership unresolved (rule 25)	P69
+reyehalfclose	REyeHalfClose	CLEAR	right eye, half-close	CLEAR	groupFile/Face/Eyes	High		explicit eye-region feature	P69
+bodyshape-body-size-min	bodyshape-body-size-min	CLEAR	a body-size shape control, minimum	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor (rule 7)	P69
+knee fix.l	Knee Fix.L	CLEAR	a knee joint corrective, left	CLEAR	groupFile/Correctives	High		explicit "Fix" repair-purpose language on a knee joint (rule 5)	P69
+wakazashi.handle	Wakazashi.Handle	CLEAR	a wakizashi (sword) handle	CLEAR	groupFile/Other	High		weapon-part prop	P69

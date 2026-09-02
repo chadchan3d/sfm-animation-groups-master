@@ -1,0 +1,108 @@
+PHASE 2 PRODUCTION TRANCHE 7 -- REPORT
+Canonical positions 6501-7500 (1000 families, batches P61-P70, 100 each)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv
+
+============================================================
+TRANCHE-ONLY STATISTICS (1000 rows, this tranche)
+============================================================
+
+semantic_status:
+  CLEAR:   803
+  PARTIAL:  37
+  OPAQUE:  160
+
+taxonomy_status:
+  CLEAR:          751
+  NEEDS_CONTEXT:   89
+  NOT_APPLICABLE: 160
+  NEEDS_DOCTRINE:   0
+
+confidence:
+  High:   536
+  Medium: 273
+  Low:    191
+
+Rule 21 invariant (OPAQUE <=> NOT_APPLICABLE) check: 0 violations across
+all 1000 rows.
+
+Proposed-destination counts (CLEAR taxonomy rows only, 751 total):
+  groupFile/Clothing                    121
+  groupFile/Other                       109
+  groupFile/Body                         91
+  groupFile/Arms                         73
+  groupFile/Legs                         46
+  groupFile/Face/Lower Face              45
+  groupFile/Face/Eyes                    41
+  groupFile/Body Morphs                  41
+  groupFile/Useless                      32
+  groupFile/Arms/LeftArm/LeftFingers     30
+  groupFile/Hair                         23
+  groupFile/Arms/RightArm/RightFingers   19
+  groupFile/Face/Upper Face              17
+  groupFile/Face/Expressions             14
+  groupFile/Face/Mid Face                11
+  groupFile/Tail                         10
+  groupFile/Face/Ears                     6
+  groupFile/Toes/LeftToes                 6
+  groupFile/Correctives                   6
+  groupFile/Toes/RightToes                5
+  groupFile/Wings                         2
+  groupFile/Face                          2
+  groupFile/Face/Tongue                   1
+
+NEEDS_CONTEXT rows: 89 (blank destination; mixed-region literals, unowned
+bare-accessory nouns, unresolved side/owner anatomy, multi-sense words with
+materially different competing readings, and the tentacle/balloon-flat
+family rows deliberately matched to their split precedent -- see the
+Tranche 7 consistency-flags document).
+
+NEEDS_DOCTRINE rows: 0. No genuinely new policy problem was encountered;
+production continued through all 10 batches without a hard stop.
+
+Consistency flags raised: 4 (documented in
+PHASE2_PRODUCTION_TRANCHE7_CONSISTENCY_FLAGS.txt) -- 1 corrected in-ledger
+(flm-rig-hole-v2, a Tranche-7-internal mis-citation caught and fixed before
+the raw commit), 3 reported as pre-existing cross-tranche splits
+(tentacle-family, balloon-flat-*, box_face_##_m) that were not corrected,
+per the restriction against a broad earlier-tranche re-audit.
+
+OPAQUE rows manually reviewed (6-question test): 160 / 160.
+Face/Expressions rows reviewed (mandatory face audit): 14 / 14.
+DCC-default-name candidates reviewed: 10 (7 polySurface##/pPlane#/
+pCylinder## rows + chamferbox01, all OPAQUE; plus the boxc01
+genericity-is-not-opacity row correctly kept at groupFile/Other rather than
+OPAQUE).
+Cross-tranche corrections applied: 1 (flm-rig-hole-v2; see consistency-
+flags document section 1 for the full before/after record).
+Precedent claims mechanically re-verified against current ledger/FINAL.tsv
+fields before use (not cited from memory): every claim in every batch file
+and in this report that references a sibling row's semantic_status,
+taxonomy_status, or proposed_destination.
+
+============================================================
+CUMULATIVE STATISTICS (after Tranche 7)
+============================================================
+
+calibration_families_complete:        500
+production_families_classified:      7000
+total ledger rows:                   7500
+next_canonical_phase2_position:      7501
+remaining_production_families:       6782
+
+============================================================
+Batch-level record (for resumability)
+============================================================
+
+P61 (6501-6600): merged, ledger reached 6600 rows
+P62 (6601-6700): merged, ledger reached 6700 rows
+P63 (6701-6800): merged, ledger reached 6800 rows
+P64 (6801-6900): merged, ledger reached 6900 rows
+P65 (6901-7000): merged, ledger reached 7000 rows
+P66 (7001-7100): merged, ledger reached 7100 rows
+P67 (7101-7200): merged, ledger reached 7200 rows
+P68 (7201-7300): merged, ledger reached 7300 rows
+P69 (7301-7400): merged, ledger reached 7400 rows
+P70 (7401-7500): merged, ledger reached 7500 rows
+
+All 10 batches for Tranche 7 are complete and merged. No batch remains
+pending.

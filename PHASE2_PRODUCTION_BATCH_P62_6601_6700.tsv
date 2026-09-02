@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+enginelf	EngineLF	CLEAR	a vehicle/mechanical engine, left-front position	CLEAR	groupFile/Other	Medium		recognized mechanical prop	P62
+bas.rear_right_3	BAS.Rear_Right_3	OPAQUE	within the already-unreliable BAS. internal namespace, a bare position label supplies no further content	NOT_APPLICABLE		Low		matches the settled BAS. internal-namespace precedent	P62
+bone175	Bone175	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		matches the settled Bone### precedent	P62
+left_pussy_widen2	Left_pussy_widen2	CLEAR	a genital "widen" shape morph, left, numbered	CLEAR	groupFile/Body Morphs	High		explicit shape/state deformation word (rule 7)	P62
+chamber	Chamber	PARTIAL	a "chamber" (mechanical/weapon part vs. a room/environment feature)	NEEDS_CONTEXT		Low	"chamber" has materially different core senses with nothing to disambiguate	multi-sense bare word	P62
+bip001-head	Bip001-Head	CLEAR	head, bare structural, no specific feature named	CLEAR	groupFile/Body	High		bare head with no specific feature defaults to Body (rule 13)	P62
+valvebiped.joint5	ValveBiped.joint5	OPAQUE	generic numbered joint on a generic rig prefix	NOT_APPLICABLE		Low		matches the settled generic-numbered-joint precedent	P62
+catch2	catch2	CLEAR	a "catch" mechanism/function, numbered	NEEDS_CONTEXT		Medium	no owning object named for the catch mechanism	stable function word, owner unresolved	P62
+middleleft2	MiddleLeft2	OPAQUE	a positional label ("middle," "left"), no object named	NOT_APPLICABLE		Low		bare position label with no object	P62
+cross_02	cross_02	CLEAR	a cross/crucifix accessory, numbered	NEEDS_CONTEXT		Low	no owner named for the cross accessory	bare decorative-accessory noun, ownership unresolved (rule 25)	P62
+d13	D13	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no readable content	P62
+unused b_l_ankle3helper	unused b_l_ankle3helper	CLEAR	a self-declared unused/duplicate placeholder	CLEAR	groupFile/Useless	High		explicit self-declared "unused" marker (rule 15)	P62
+boobsie4	boobsie4	CLEAR	breast anatomy (informal term), numbered	CLEAR	groupFile/Body	Medium		plain structural anatomy, no explicit shape/action word (rule 6)	P62
+def-brows1_r	DEF-brows1_R	CLEAR	right eyebrow, numbered (DEF- generic rig prefix)	CLEAR	groupFile/Face/Upper Face	High		DEF- prefix carries no destination signal (rule 9); brows are an upper-face feature	P62
+bip_zipper_1	bip_zipper_1	CLEAR	a zipper (garment fastener), numbered	CLEAR	groupFile/Clothing	High		explicit garment-fastener term (rule 8)	P62
+valvebiped.bip01_l_vulva	ValveBiped.Bip01_L_Vulva	CLEAR	genital anatomy, left	CLEAR	groupFile/Body	High		plain structural genital anatomy	P62
+bip_l_cloth_b_04	bip_l_cloth_b_04	CLEAR	a generic cloth/garment control, left, variant, numbered	CLEAR	groupFile/Clothing	Medium		generic clothing term (rule 8)	P62
+c11	C11	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no readable content	P62
+unused150	unused150	CLEAR	a self-declared unused/duplicate placeholder, numbered	CLEAR	groupFile/Useless	High		explicit self-declared "unused" marker (rule 15)	P62
+bone012	Bone012	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		matches the settled Bone### precedent	P62
+face-facialfat	Face-FacialFat	CLEAR	an overall facial-fat/weight shape morph	CLEAR	groupFile/Body Morphs	Medium		explicit shape/weight descriptor, matching the settled muscle/fat-definition Body Morphs precedent (verified current muclesdefine value)	P62
+shell.root	Shell.Root	CLEAR	a "Shell" environment element, root/anchor node	CLEAR	groupFile/Other	Medium		matches the sibling Shell.Wall environment-prop family	P62
+low seat 1	Low seat 1	CLEAR	a low seat (furniture prop), numbered	CLEAR	groupFile/Other	High		recognized furniture prop	P62
+cloth_side_a_4_l	cloth_side_A_4_L	CLEAR	a generic cloth/garment control, side, variant, left	CLEAR	groupFile/Clothing	Medium		generic clothing term (rule 8)	P62
+bh43	Bh43	OPAQUE	cryptic abbreviation ("Bh"), no grounding for any expansion, numbered	NOT_APPLICABLE		Low		matches the settled Bh01.r precedent (verified current ledger value)	P62
+r_foot_00003	r_foot_00003	CLEAR	right foot, numbered	CLEAR	groupFile/Legs	High		plain leg/foot anatomy	P62
+bip01_r_toe3	Bip01_R_Toe3	CLEAR	right toe, numbered	CLEAR	groupFile/Toes/RightToes	High		plain toe anatomy, verified RightToes subpath	P62
+stomp-4	stomp-4	CLEAR	a "stomp" action, numbered variant; owning body part not stated	NEEDS_CONTEXT		Medium	no anatomical owner named for the stomp action	matches the settled stomp-3 precedent from this same tranche (verified current ledger value)	P62
+bld_gen_camp_tent_b_blue_a_mesh	BLD_GEN_Camp_Tent_B_Blue_A_Mesh	CLEAR	a camp tent (environment prop), blue variant	CLEAR	groupFile/Other	High		BLD_GEN_ generator-style prefix and _Mesh suffix do not determine destination (rule 17); named object is "Camp Tent"	P62
+pants_down_full_1	pants_down_full_1	CLEAR	pants garment, "down" state, numbered	CLEAR	groupFile/Clothing	High		explicit "pants" garment term (rule 8)	P62
+l__frontpaw	L__FrontPaw	CLEAR	a whole front paw/limb-end assembly, left	CLEAR	groupFile/Arms	Medium		a whole paw is the limb-end assembly, not a digit (rule 18)	P62
+root face	root face	CLEAR	a face-region root/anchor node, no specific feature named	CLEAR	groupFile/Face	Medium		"face" is grounded content routing to the bare Face destination (rule 24)	P62
+big eyes	Big eyes	CLEAR	an eye-size shape control ("big")	CLEAR	groupFile/Face/Eyes	Medium		facial shape/size control stays within the region's own Face subgroup	P62
+smollchin	SmollChin	CLEAR	a chin-size shape control ("small," stylized spelling)	CLEAR	groupFile/Face/Lower Face	Medium		chin is a mouth/jaw-region feature	P62
+highlight	Highlight	PARTIAL	a "highlight" (hair-color highlight vs. lighting/material highlight)	NEEDS_CONTEXT		Low	"highlight" has materially different core senses with nothing to disambiguate	multi-sense bare word	P62
+leg left thigh twist upper 2	leg left thigh twist upper 2	CLEAR	left thigh twist bone, upper, numbered	CLEAR	groupFile/Legs	High		twist bones are ordinary leg anatomy (rule 3)	P62
+chair hot001	Chair Hot001	CLEAR	a chair (furniture prop), numbered	CLEAR	groupFile/Other	High		recognized furniture prop	P62
+c ujacketb a phy	C uJacketB a Phy	CLEAR	a jacket garment, variant B, physics-simulated	CLEAR	groupFile/Clothing	High		explicit "Jacket" garment term (rule 8)	P62
+flag4	flag4	CLEAR	a flag (prop/accessory), numbered	NEEDS_CONTEXT		Low	unclear whether this is a prop banner, a garment element, or a technical toggle	real recognizable object, ownership category unresolved	P62
+earleft6	EarLeft6	CLEAR	left ear, numbered	CLEAR	groupFile/Face/Ears	High		plain ear anatomy	P62
+object031_002	Object031_002	OPAQUE	generic placeholder object name, no referent	NOT_APPLICABLE		Low		matches the settled Object### placeholder precedent	P62
+right_cuff	Right_cuff	PARTIAL	a "cuff" (garment sleeve/pant cuff vs. a restraint cuff), right	NEEDS_CONTEXT		Low	"cuff" has materially different core senses with nothing to disambiguate	multi-sense bare word	P62
+bone_wrr	Bone_WRR	OPAQUE	cryptic abbreviation ("WRR"), no grounding for any expansion	NOT_APPLICABLE		Low		no readable content beyond a generic "bone" wrapper	P62
+canine_lfrontleg1	Canine_LFrontLeg1	CLEAR	a dog's front leg, left, numbered	CLEAR	groupFile/Legs	High		front leg is species-neutral leg anatomy (rule 19)	P62
+butt_left_root	butt_Left_root	CLEAR	left buttock, root/anchor node	CLEAR	groupFile/Body	High		buttock remains Body regardless of side marker (rule 26)	P62
+rachel head forehead right	Rachel head forehead right	CLEAR	forehead, right, on a named character	CLEAR	groupFile/Face/Upper Face	High		forehead is an explicit upper-face feature (rule 13's specific-feature exception)	P62
+lindex	LIndex	CLEAR	left index finger	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy, verified LeftFingers subpath	P62
+helena head forehead left	Helena head forehead left	CLEAR	forehead, left, on a named character	CLEAR	groupFile/Face/Upper Face	High		forehead is an explicit upper-face feature	P62
+x_shift_8	x_shift_8	CLEAR	a "shift" transform control, X axis, numbered	NEEDS_CONTEXT		Medium	no owning object named for the shift function	stable function word (shift) per rule 22; owner unresolved	P62
+beltcontrol.010	BeltControl.010	CLEAR	a belt garment control, numbered	CLEAR	groupFile/Clothing	High		explicit "belt" garment term	P62
+loincloth_front_2	Loincloth_front_2	CLEAR	a loincloth garment, front, numbered	CLEAR	groupFile/Clothing	High		explicit garment term	P62
+twothirds	TwoThirds	OPAQUE	a bare fraction/proportion label, no object or function named	NOT_APPLICABLE		Low		no readable content beyond an unattached numeric proportion	P62
+righteyehide	RightEyeHIde+RightEyeHide	CLEAR	a right-eye visibility/hide toggle	CLEAR	groupFile/Face/Eyes	High		explicit eye-region control	P62
+lowerlippullup	LowerLipPullUp	CLEAR	a lower-lip pull-up control	CLEAR	groupFile/Face/Lower Face	High		lip is a mouth/lower-face feature	P62
+mot15_neck	MOT15_Neck	CLEAR	neck, bare structural (under a "MOT15" cryptic prefix)	CLEAR	groupFile/Body	Medium		"Neck" is grounded content despite the ungrounded prefix (rule 24); bare neck defaults to Body	P62
+head facial root	head facial root	CLEAR	head/face region, root/anchor node, no specific feature named	CLEAR	groupFile/Body	Medium		bare head/face with no specific feature defaults to Body (rule 13)	P62
+lthumbnb	LThumbNb	PARTIAL	left thumb control, undecoded qualifier ("Nb")	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium	"Nb" is an actual undecoded token attached to a clear thumb owner	thumb owner is clear; qualifier is genuinely undecoded (rule 22 PARTIAL test)	P62
+bip wristtwistbase r	bip wristtwistbase r	CLEAR	right wrist-twist base bone	CLEAR	groupFile/Arms	High		twist bones are ordinary arm anatomy (rule 3)	P62
+obj002s	OBJ002s	OPAQUE	generic placeholder object name, no referent	NOT_APPLICABLE		Low		matches the settled Object### placeholder precedent	P62
+cormorant	Cormorant	OPAQUE	a bird-species/model-name reference, no functional or regional content	NOT_APPLICABLE		Low		bare species/model-name reference with no anatomical or functional content, matching the settled character/model-reference precedent	P62
+foot_middle_1_l	foot_middle_1_L	CLEAR	left foot, middle segment, numbered	CLEAR	groupFile/Legs	High		plain leg/foot anatomy	P62
+wheel_5.rotate	Wheel_5.Rotate	CLEAR	a wheel's rotation function, numbered	CLEAR	groupFile/Other	High		recognized mechanical prop/mechanism	P62
+cloth_side_a_4_r	cloth_side_A_4_R	CLEAR	a generic cloth/garment control, side, variant, right	CLEAR	groupFile/Clothing	Medium		matches the sibling cloth_side_a_4_l from this same batch	P62
+arm right shoulder 2 adj. 1	arm right shoulder 2 adj. 1	CLEAR	right shoulder adjustment control, variant	CLEAR	groupFile/Arms	Medium		"adj." alone is not explicit repair/correction language (rule 5); ordinary structural arm control	P62
+head hat wardpaper 3	head hat wardpaper 3	CLEAR	a hat (headwear garment), numbered, with a cryptic decorative qualifier ("wardpaper")	CLEAR	groupFile/Clothing	Medium		"hat" is the explicit worn-garment object (rule 8)	P62
+bottle6_liquid	bottle6_liquid	CLEAR	a bottle's liquid contents, numbered	CLEAR	groupFile/Other	High		recognized handheld prop	P62
+tach1	tach1	OPAQUE	cryptic fragment ("tach"), no recoverable anatomical or functional content, numbered	NOT_APPLICABLE		Low		no readable content, no grounding found	P62
+bone051	Bone051	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		matches the settled Bone### precedent	P62
+09	09	OPAQUE	bare number, no words at all	NOT_APPLICABLE		Low		no readable content	P62
+tubes_r	tubes_R	CLEAR	tubes (mechanical hose vs. anatomical tube), right	NEEDS_CONTEXT		Low	unclear whether this is a mechanical or anatomical tube	real recognizable object, ownership category unresolved	P62
+bone_face_eye_l_shape_in	Bone_Face_Eye_L_Shape_In	CLEAR	left eye shape control, inward	CLEAR	groupFile/Face/Eyes	High		explicit eye-region feature	P62
+toplip1.001	TopLip1.001	CLEAR	upper (top) lip, numbered	CLEAR	groupFile/Face/Lower Face	High		lip is a mouth/lower-face feature regardless of upper/lower qualifier	P62
+bip_tie_1_l	bip_Tie_1_L	CLEAR	a necktie (garment accessory), left, numbered	CLEAR	groupFile/Clothing	High		explicit worn-accessory term	P62
+blink2r	Blink2R	CLEAR	an eye-blink control, right, numbered	CLEAR	groupFile/Face/Eyes	High		explicit blink/eye control	P62
+eyeswide-right	EyesWide-Right	CLEAR	eyes-wide shape/expression control, right	CLEAR	groupFile/Face/Eyes	High		explicit eye-region control	P62
+fh12.l	Fh12.L	OPAQUE	cryptic abbreviation ("Fh"), no grounding for any expansion, numbered, left	NOT_APPLICABLE		Low		matches the settled Fh15.r precedent (verified current ledger value)	P62
+head hat root	head hat root	CLEAR	a hat (headwear garment), root/anchor node	CLEAR	groupFile/Clothing	Medium		"hat" is the explicit worn-garment object; root is only its anchor (rule 8)	P62
+teeth small	Teeth Small	CLEAR	teeth-size shape control	CLEAR	groupFile/Face/Lower Face	Medium		teeth are a mouth-region feature	P62
+unused.023	unused.023	CLEAR	a self-declared unused/duplicate placeholder, numbered	CLEAR	groupFile/Useless	High		explicit self-declared "unused" marker (rule 15)	P62
+car02_controller	Car02_controller	CLEAR	a car (vehicle) control node, numbered	CLEAR	groupFile/Other	Medium		recognized vehicle mechanism	P62
+upperlipsraise	UpperLipsRaise	CLEAR	an upper-lip raise control	CLEAR	groupFile/Face/Lower Face	High		lip is a mouth/lower-face feature	P62
+r sideburn b phy	r sideburn b phy	CLEAR	a sideburn (facial hair), right, physics-simulated, variant b	CLEAR	groupFile/Hair	High		sideburn is facial hair	P62
+lsmalltoe2 2	lsmalltoe2 2	CLEAR	left small toe, segment 2, variant 2	CLEAR	groupFile/Toes/LeftToes	High		plain toe anatomy, verified LeftToes subpath	P62
+suitcase_lid	suitcase_lid	CLEAR	a suitcase's lid (prop part)	CLEAR	groupFile/Other	High		recognized prop	P62
+smirk_right	smirk_Right	CLEAR	a smirk expression, right	CLEAR	groupFile/Face/Lower Face	High		matches the extensively settled bare "Smirk" precedent (verified current smirk_left value)	P62
+browlraiserlower	BrowLRaiseRLower	CLEAR	eyebrow raise/lower control, mixed sides	CLEAR	groupFile/Face/Upper Face	High		explicit eyebrow feature	P62
+arm right shoulder 2 adj. 4	arm right shoulder 2 adj. 4	CLEAR	right shoulder adjustment control, variant	CLEAR	groupFile/Arms	Medium		matches the sibling arm right shoulder 2 adj. 1 from this same batch	P62
+left_9	left_9	OPAQUE	bare side marker with a number, no object or function named	NOT_APPLICABLE		Low		matches the settled bare side-marker-plus-number precedent	P62
+muscle - back	Muscle - Back	CLEAR	a back-muscle definition/tone shape control	CLEAR	groupFile/Body Morphs	Medium		matches the settled muscle-definition Body Morphs precedent (verified current muclesdefine value)	P62
+tailstopc2	TailsTopC2	CLEAR	tail, top position, numbered variant	CLEAR	groupFile/Tail	High		explicit tail anatomy	P62
+r laughline b	R Laughline B	CLEAR	a right laugh line (nasolabial fold), variant b	CLEAR	groupFile/Face/Mid Face	High		nasolabial fold is a mid-face feature	P62
+evil	Evil	CLEAR	an "evil" whole-face mood expression	CLEAR	groupFile/Face/Expressions	High		matches the settled bare mood-word (Playful/Troubled/Drowsy/Fuss) pattern	P62
+r_head_13	r_head_13	CLEAR	right head, bare structural, no specific feature named, numbered	CLEAR	groupFile/Body	Medium		bare head with no specific feature defaults to Body (rule 13)	P62
+bh11.r	Bh11.R	OPAQUE	cryptic abbreviation ("Bh"), no grounding for any expansion, numbered, right	NOT_APPLICABLE		Low		matches the settled Bh01.r precedent (verified current ledger value)	P62
+pan pan r shift	Pan Pan R shift	CLEAR	a "shift" function, right (cryptic "Pan Pan" prefix)	NEEDS_CONTEXT		Low	the "Pan Pan" prefix has no established grounding, and no owning object is named for the shift function	stable function word (shift) per rule 22; prefix and owner unresolved	P62
+bip_ears6_r	bip_Ears6_R	CLEAR	right ear, numbered	CLEAR	groupFile/Face/Ears	High		plain ear anatomy	P62
+valvebiped_bullet10	ValveBiped_Bullet10	CLEAR	a bullet (ammunition), numbered	CLEAR	groupFile/Other	High		recognized ammunition prop (rule 16)	P62
+mune2plus_d__offset	mune2plus_d__offset	CLEAR	chest/breast (Japanese "mune") rig control, variant, offset	CLEAR	groupFile/Body	Medium		matches the settled Japanese-anatomical-term pattern (e.g. koshiplus_d__offset)	P62
+hitomi head neck upper	Hitomi head neck upper	CLEAR	head/neck region, upper, on a named character, no specific facial feature named	CLEAR	groupFile/Body	Medium		bare head/neck with no specific feature defaults to Body (rule 13)	P62
+i6	I6	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no readable content	P62

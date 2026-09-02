@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+wristfix	WristFix	CLEAR	an explicit wrist-repair/fix control	CLEAR	groupFile/Correctives	High		explicit "Fix" repair-purpose language (rule 5)	P63
+unused_7	Unused_7	CLEAR	a self-declared unused/duplicate placeholder, numbered	CLEAR	groupFile/Useless	High		explicit self-declared "unused" marker (rule 15)	P63
+wep_stock_ar_lever_moe	WEP_Stock_AR_Lever_MOE	CLEAR	a weapon stock lever part	CLEAR	groupFile/Other	High		recognized weapon-part prop (rule 16)	P63
+beltsfit	BeltsFIT	CLEAR	a belts-fitting garment adjustment control	CLEAR	groupFile/Clothing	Medium		explicit garment-fit term (rule 8)	P63
+unused head.041	unused head.041	CLEAR	a self-declared unused/duplicate placeholder, numbered	CLEAR	groupFile/Useless	High		explicit self-declared "unused" marker takes priority over anatomical content (rule 15)	P63
+plant pot 1	Plant pot 1	CLEAR	a plant pot (furniture/environment prop), numbered	CLEAR	groupFile/Other	High		recognized environment prop	P63
+legtoetip2_r	LegToeTip2_R	CLEAR	right leg/toe tip, numbered	CLEAR	groupFile/Toes/RightToes	High		plain toe anatomy, verified RightToes subpath	P63
+left_17	left_17	OPAQUE	bare side marker with a number, no object or function named	NOT_APPLICABLE		Low		matches the settled bare side-marker-plus-number precedent	P63
+g2	G2	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no readable content	P63
+whr_5	whR_5	OPAQUE	cryptic fragment ("whR"), no recoverable anatomical or functional content, numbered	NOT_APPLICABLE		Low		no readable content, no grounding found	P63
+bip_fpinky03_l	Bip_FPinky03_L	CLEAR	left pinky finger, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy, verified LeftFingers subpath	P63
+midtoe1_l	midToe1_l	CLEAR	left middle toe, numbered	CLEAR	groupFile/Toes/LeftToes	High		plain toe anatomy, verified LeftToes subpath	P63
+l_stretcher	L_stretcher	CLEAR	a "stretcher" (stretch-transform) function, left	NEEDS_CONTEXT		Medium	no owning object named for the stretch function	stable function word, owner unresolved	P63
+bootybigger	BootyBigger	CLEAR	a "bigger" buttock shape morph	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor (rule 7)	P63
+polysurface69	polySurface69	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		matches the settled polySurface### DCC-default precedent	P63
+arm right wrist a	arm right wrist a	CLEAR	right wrist, variant a	CLEAR	groupFile/Arms	High		plain arm/wrist anatomy	P63
+shorthair_bone_04	shortHair_bone_04	CLEAR	a short-hair bone, numbered	CLEAR	groupFile/Hair	High		matches the sibling shorthair_bone_03 precedent (verified current ledger value)	P63
+kissu	Kissu	CLEAR	a "kiss" expression/action (Japanese loanword "kissu")	CLEAR	groupFile/Face/Expressions	Medium		matches the settled face-kiss whole-face expression pattern	P63
+unused spine upper	unused spine upper	CLEAR	a self-declared unused/duplicate placeholder	CLEAR	groupFile/Useless	High		explicit self-declared "unused" marker (rule 15)	P63
+object008	Object008	OPAQUE	generic placeholder object name, no referent	NOT_APPLICABLE		Low		matches the settled Object### placeholder precedent	P63
+eyes-full-shocked	Eyes-Full-Shocked	CLEAR	a "shocked" expression localized to the eyes	CLEAR	groupFile/Face/Eyes	High		matches the settled "eyes shocked" precedent (verified current ledger value) -- localized eye compound	P63
+bippbg l finger4	BipPBG L Finger4	CLEAR	left finger 4, numbered (under a "BipPBG" rig prefix)	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		finger anatomy is grounded content despite the rig-namespace prefix (rule 24)	P63
+tentaclebottom3	TentacleBottom3	CLEAR	tentacle anatomy, bottom portion, numbered	NEEDS_CONTEXT		Medium	no established single Master destination convention for tentacle anatomy (see Tranche 7 audit note on the split tentacle-family precedent)	tentacle anatomy is clear, but the destination is genuinely split within the ledger's own precedent (some Other, some NEEDS_CONTEXT) with no clear resolution	P63
+body_a	body_a	CLEAR	body, bare structural, variant a, no specific feature named	CLEAR	groupFile/Body	Medium		bare structural body reference	P63
+pupils-blankemote-r	Pupils-BlankEmote-R	CLEAR	a "blank"/neutral pupil-expression control, right	CLEAR	groupFile/Face/Eyes	Medium		pupils are an explicit eye-region feature	P63
+fingerbase_l	fingerbase_L	CLEAR	left finger base	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy, verified LeftFingers subpath	P63
+l_butt_right	L_Butt_right	CLEAR	buttock anatomy (contradictory L/right side markers)	CLEAR	groupFile/Body	Medium		buttock remains Body regardless of any side marker (rule 26)	P63
+jiggle_stomach_lower	jiggle_stomach_lower	CLEAR	a stomach jiggle-physics (dynamics) control, lower	CLEAR	groupFile/Body	Medium		jiggle-physics is a dynamics mechanism, not an appearance/shape statement (rule 7); ordinary structural/physics posing	P63
+small pupil	Small pupil	CLEAR	a pupil-size shape control ("small")	CLEAR	groupFile/Face/Eyes	Medium		facial shape/size control on a named eye feature stays within Face/Eyes	P63
+hatcloth_bone_01	hatCloth_bone_01	CLEAR	a hat's cloth bone, numbered	CLEAR	groupFile/Clothing	High		explicit "hat" garment term	P63
+grip.009	grip.009	CLEAR	a "grip" function, numbered	NEEDS_CONTEXT		Medium	no owning object named for the grip function	stable function word per rule 22; owner unresolved	P63
+flex_noise_01	Flex_Noise_01	OPAQUE	generic "flex" category term with a procedural-noise qualifier, no specific object	NOT_APPLICABLE		Low		matches the settled flex_noise_03 precedent (verified current ledger value)	P63
+arm left cloth 3c	arm left cloth 3c	CLEAR	an arm-sleeve cloth control, left, variant	CLEAR	groupFile/Clothing	Medium		generic clothing term (rule 8)	P63
+balloon-flat-bottom	balloon-flat-bottom	CLEAR	a "balloon" (literal balloon object vs. breast-slang usage), flat-bottomed	NEEDS_CONTEXT		Low	"balloon" has materially different plausible readings in this content genre	multi-sense bare word	P63
+loincloth_front_3	Loincloth_front_3	CLEAR	a loincloth garment, front, numbered	CLEAR	groupFile/Clothing	High		matches the sibling loincloth_front_2 precedent	P63
+eyes lusty	Eyes Lusty	CLEAR	a "lusty" expression localized to the eyes	CLEAR	groupFile/Face/Eyes	Medium		explicit eye-region feature named	P63
+tenta_7_l	tenta_7_L	CLEAR	tentacle anatomy, left, numbered	NEEDS_CONTEXT		Medium	no established single Master destination convention for tentacle anatomy (see Tranche 7 audit note on the split tentacle-family precedent)	tentacle anatomy is clear, but the destination is genuinely split within the ledger's own precedent	P63
+bas.rear_center_1_jiggle	BAS.Rear_Center_1_jiggle	CLEAR	a "jiggle" (dynamic-physics) function, rear-center position (BAS. internal namespace)	NEEDS_CONTEXT		Medium	no owning object is named for the jiggle-physics function	"jiggle" is grounded function content that survives the otherwise-unreliable BAS. namespace (rule 24-style)	P63
+left little distal	Left Little Distal	CLEAR	left pinky (little) finger, distal segment	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy, verified LeftFingers subpath	P63
+pussparent.002_r.008	PussParent.002_R.008	CLEAR	genital rig-parent node, right, numbered	CLEAR	groupFile/Body	Medium		plain structural genital anatomy	P63
+def-foot.001.02.l	DEF-foot.001.02.L	CLEAR	left foot, numbered (DEF- generic rig prefix)	CLEAR	groupFile/Legs	High		DEF- prefix carries no destination signal (rule 9); foot is plain leg anatomy	P63
+pot belly	Pot Belly	CLEAR	a "pot belly" shape descriptor	CLEAR	groupFile/Body Morphs	High		recognized body-shape idiom (explicit appearance descriptor, rule 7)	P63
+innerbrows_down_l	innerbrows_down_l	CLEAR	inner eyebrow, down direction, left	CLEAR	groupFile/Face/Upper Face	High		explicit eyebrow feature	P63
+wep_boltcatch	WEP_BoltCatch	CLEAR	a weapon bolt-catch part	CLEAR	groupFile/Other	High		recognized weapon-part prop	P63
+front 2_1	Front 2_1	OPAQUE	a positional label ("front") with numbers, no object named	NOT_APPLICABLE		Low		matches the settled bare positional-label-no-object precedent	P63
+bobcut.front_left_1	Bobcut.Front_Left_1	CLEAR	a "bob cut" hairstyle, front-left, numbered	CLEAR	groupFile/Hair	High		named hairstyle term	P63
+biceps_r	biceps_R	CLEAR	right bicep	CLEAR	groupFile/Arms	High		plain arm anatomy	P63
+asdown	Asdown	OPAQUE	cryptic fragment ("Asdown"), no recoverable anatomical or functional content	NOT_APPLICABLE		Low		no clear word segmentation or grounding found	P63
+collar_l1	Collar_L1	CLEAR	a left collar/clavicle rig bone, numbered	CLEAR	groupFile/Arms	Medium		bare unqualified "collar" matches the settled biped-clavicle precedent (no garment qualifier present)	P63
+bip01-r-hand001	Bip01-R-Hand001	CLEAR	right hand, numbered	CLEAR	groupFile/Arms	High		plain arm/hand anatomy	P63
+bone043	Bone043	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		matches the settled Bone### precedent	P63
+box_face_01_m	Box_Face_01_M	PARTIAL	a "Box Face" (a geometric face/panel of a box object vs. a character's face), numbered, variant M	NEEDS_CONTEXT		Low	"Box Face" plausibly reads as either a 3D-modeling term (a box primitive's geometric face/panel) or a character-face reference; nothing disambiguates which	materially different core readings, not merely an unnamed owner	P63
+unusedtransform2 cmn sl alison	unusedtransform2 cmn sl alison	CLEAR	a self-declared unused/duplicate placeholder, with an attached character reference	CLEAR	groupFile/Useless	High		explicit self-declared "unused" marker (rule 15)	P63
+maid.necktie_left_outer_3	Maid.Necktie_Left_Outer_3	CLEAR	a maid costume's necktie, left, outer, numbered	CLEAR	groupFile/Clothing	High		explicit worn-garment/accessory term	P63
+wep_stock_para	WEP_Stock_Para	CLEAR	a weapon stock, "para" (paratrooper) variant	CLEAR	groupFile/Other	High		recognized weapon-part prop	P63
+bip facelipridge1out r	bip facelipridge1out r	CLEAR	a lip-ridge control, outward, right	CLEAR	groupFile/Face/Lower Face	High		lip is a mouth/lower-face feature	P63
+bip_stone _r_finger_globe_2_	Bip_STONE _R_Finger_Globe_2_	PARTIAL	right finger control, undecoded qualifier ("Globe")	CLEAR	groupFile/Arms/RightArm/RightFingers	Medium	"Globe" is an actual undecoded token, matching rule 22's own documented Finger_Globe_* example	finger owner is clear; "Globe" qualifier is genuinely undecoded (rule 22 PARTIAL test)	P63
+bone20	Bone20	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		matches the settled Bone### precedent	P63
+wrinkle_small_1	wrinkle_small_1	CLEAR	a small skin-wrinkle shape/texture control, numbered	CLEAR	groupFile/Body Morphs	Medium		explicit skin-texture appearance descriptor (rule 7)	P63
+gun_2_l	gun_2_L	CLEAR	a gun (weapon), left, numbered	CLEAR	groupFile/Other	High		recognized weapon prop	P63
+jiggleboob	jiggleboob	CLEAR	a breast jiggle-physics (dynamics) control	CLEAR	groupFile/Body	Medium		jiggle-physics is a dynamics mechanism, not an appearance/shape statement (rule 7); ordinary structural/physics posing	P63
+bone26	Bone26	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		matches the settled Bone### precedent	P63
+sweat drop fr	Sweat drop fR	CLEAR	a sweat-drop expression effect, front-right	CLEAR	groupFile/Face/Expressions	High		matches the settled sweat drop fl precedent (verified current ledger value)	P63
+leg right finger 3	leg right finger 3	CLEAR	a leg control with an incompatible "finger" qualifier, right, numbered	NEEDS_CONTEXT		Medium	"Leg" and "Finger" name two materially different anatomical owners with no way to tell which governs	matches the settled Leg+Finger mixed-region precedent from Tranches 3-4	P63
+valvebiped.bip01_l_thumb	ValveBiped.Bip01_L_Thumb	CLEAR	left thumb	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy, verified LeftFingers subpath	P63
+tits - push	Tits - Push	CLEAR	a breast "push" appearance/state control	CLEAR	groupFile/Body Morphs	Medium		soft tissue with no ordinary skeletal articulation strongly supports a Body-Morph interpretation of the direction word (rule 7)	P63
+donghide	donghide	CLEAR	a genital ("dong") visibility-hide toggle	CLEAR	groupFile/Body	Medium		matches the settled donger genital-region grounding; "hide" is a visibility function on structural anatomy	P63
+island_collar_02_wind_helper	island_collar_02_wind_helper	CLEAR	an island-themed costume collar, numbered, with a wind-physics helper	CLEAR	groupFile/Clothing	Medium		garment-collar with an explicit cloth-simulation ("wind") context	P63
+belt_bone_fr_03	belt_bone_fr_03	CLEAR	a belt garment bone, front, numbered	CLEAR	groupFile/Clothing	High		explicit "belt" garment term	P63
+bone41	Bone41	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		matches the settled Bone### precedent	P63
+tailleft1_1	TailLeft1_1	CLEAR	left tail, numbered	CLEAR	groupFile/Tail	High		explicit tail anatomy	P63
+areolaadjust	AreolaAdjust	CLEAR	an areola adjustment control, no explicit shape/state word	CLEAR	groupFile/Body	Medium		"adjust" alone is not explicit shape/size/appearance-state language (rule 7); ordinary structural control	P63
+wep_m203_trigger	WEP_M203_Trigger	CLEAR	a weapon (M203 launcher) trigger part	CLEAR	groupFile/Other	High		recognized weapon-part prop	P63
+strings 6 jb	strings 6 JB	CLEAR	a "strings" accessory, numbered	NEEDS_CONTEXT		Medium	no owner named for the strings accessory	bare accessory noun, ownership unresolved (rule 25)	P63
+box_face_17_m	Box_Face_17_M	PARTIAL	a "Box Face" (a geometric face/panel of a box object vs. a character's face), numbered, variant M	NEEDS_CONTEXT		Low	"Box Face" plausibly reads as either a 3D-modeling term or a character-face reference; nothing disambiguates which	matches the sibling box_face_01_m from this same batch	P63
+sightfront	sightFront	CLEAR	a weapon gun-sight, front	CLEAR	groupFile/Other	High		recognized weapon-part prop	P63
+right ring finger 3	Right ring finger 3	CLEAR	right ring finger, segment 3	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy, verified RightFingers subpath	P63
+flm-arma-sworda-n	Flm-ArmA-SwordA-N	CLEAR	a "SwordA" weapon element within the internal Flm-ArmA namespace, variant N	CLEAR	groupFile/Other	Medium		matches the settled Flm-ArmA-SwordA weapon-grounded sibling precedent	P63
+leftmetatarsus	LeftMetatarsus	CLEAR	left metatarsus (foot bone)	CLEAR	groupFile/Legs	High		plain foot/leg anatomy	P63
+bone.015.l	Bone.015.l	OPAQUE	generic numbered bone, no anatomical content, left	NOT_APPLICABLE		Low		matches the settled Bone### precedent; a side marker alone does not change this	P63
+bip_stoolclothlower_0_l	bip_StoolClothLower_0_L	CLEAR	a stool's lower cloth covering, left, numbered	CLEAR	groupFile/Other	Low		furniture-object-owned cloth stays with the furniture prop, not character Clothing	P63
+innerlipsdown	InnerLipsDown	CLEAR	inner lips, down direction	CLEAR	groupFile/Face/Lower Face	High		lip is a mouth/lower-face feature	P63
+nippokejoke	NipPokeJoke	CLEAR	a nipple "poke" appearance/state control	CLEAR	groupFile/Body Morphs	Medium		matches the calibrated "nipple up"-style precedent (soft tissue, no ordinary joint, direction word)	P63
+bip_r_teeth	bip_r_teeth	CLEAR	right teeth	CLEAR	groupFile/Face/Lower Face	High		teeth are a mouth-region feature	P63
+v_weapon.root19	v_weapon.Root19	CLEAR	a viewmodel-weapon rig root/anchor node, numbered	CLEAR	groupFile/Other	Medium		generic weapon-rig root, matching the v_weapon non-anatomical-part precedent	P63
+bip01_neck008	Bip01_Neck008	CLEAR	neck, bare structural, numbered	CLEAR	groupFile/Body	High		bare neck with no specific feature defaults to Body (rule 13)	P63
+cape_9_l	cape_9_L	CLEAR	a cape garment, left, numbered	CLEAR	groupFile/Clothing	High		explicit garment term	P63
+rightnipple3	RightNipple3	CLEAR	right nipple, numbered	CLEAR	groupFile/Body	Medium		plain structural anatomy, no explicit shape/direction word (rule 6)	P63
+bone_legfr3	Bone_LegFR3	CLEAR	leg anatomy (front?), numbered	CLEAR	groupFile/Legs	Medium		"Leg" is grounded anatomical content despite the generic "bone" wrapper	P63
+r string1 sec root	r string1 sec root	CLEAR	a "string" accessory, secondary, root/anchor, right, numbered	NEEDS_CONTEXT		Medium	no owner named for the string accessory	bare accessory noun, ownership unresolved (rule 25)	P63
+foot_left	foot_left	CLEAR	left foot	CLEAR	groupFile/Legs	High		plain leg/foot anatomy	P63
+plant 1	Plant 1	CLEAR	a plant (environment prop), numbered	CLEAR	groupFile/Other	High		recognized environment prop	P63
+bip_arm_rotate1_r	bip_Arm_Rotate1_R	CLEAR	right arm rotation control, numbered	CLEAR	groupFile/Arms	High		plain arm-posing control	P63
+pantsvaginalopen	Pantsvaginalopen	CLEAR	pants garment with a vaginal-opening feature	CLEAR	groupFile/Clothing	High		"Pants" is the primary named object; the anatomical opening is a feature OF the pants (rule 8's own PantsAnalOpen example)	P63
+waist height	Waist Height	CLEAR	a waist-height shape/size control	CLEAR	groupFile/Body Morphs	High		explicit size descriptor (rule 7)	P63
+chamferbox01	ChamferBox01	OPAQUE	a generic default-named primitive mesh (3ds Max ChamferBox), numbered	NOT_APPLICABLE		Low		matches the settled DCC-default-primitive-name precedent (pCube/pCylinder/etc.)	P63
+earleft3	EarLeft3	CLEAR	left ear, numbered	CLEAR	groupFile/Face/Ears	High		plain ear anatomy	P63
+valvebiped.bip01_r_butthelper	ValveBiped.Bip01_R_ButtHelper	CLEAR	right buttock, "helper" bone	CLEAR	groupFile/Body	High		buttock remains Body regardless of side marker or helper qualifier (rules 4, 26)	P63
+cloth front middle 2	cloth front middle 2	CLEAR	a generic cloth/garment control, front-middle, numbered	CLEAR	groupFile/Clothing	Medium		generic clothing term (rule 8)	P63
+body tone lower details	Body Tone Lower Details	CLEAR	a lower-body tone/definition shape control	CLEAR	groupFile/Body Morphs	High		explicit tone/detail shape descriptor, matching the settled muscle/fat-definition precedent	P63
