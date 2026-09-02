@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+r femorisa spo	R FemorisA Spo	CLEAR	thigh (femoris) muscle anatomy, right, variant A	CLEAR	groupFile/Legs	Medium		'Femoris' is grounded anatomical Latin for the thigh muscle group (Rule 12 foreign/specialist-language grounding).	P77	
+jacket back middle a	jacket back middle a	CLEAR	a jacket garment, back, middle, variant	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P77	
+hose_07	Hose_07	PARTIAL	'hose' (garment hosiery/stockings, or a mechanical hose/tube), numbered	NEEDS_CONTEXT		Low	materially different core senses compete	No disambiguating context for which 'hose' sense applies.	P77	
+bone_bed_06	bone_bed_06	OPAQUE	a generic bone with an ungrounded 'bed' qualifier, numbered	NOT_APPLICABLE		Medium		No grounding for 'bed' combined with a generic bone reference.	P77	
+saberon_bone13	saberon_Bone13	OPAQUE	a generic numbered bone under an ungrounded 'Saberon' prefix	NOT_APPLICABLE		Medium		Matches the model/character-prefix-plus-generic-bone OPAQUE pattern (Rule 24); 'Saberon' is not independently grounded.	P77	
+r_outer_lower	r_outer_lower	OPAQUE	a bare positional compound with no owning object	NOT_APPLICABLE		Medium		Matches established 'bare positional label, no owner' OPAQUE precedent.	P77	
+lookdn	LookDn	CLEAR	a look-down eye-direction control	CLEAR	groupFile/Face/Eyes	High		Explicit eye-direction anatomy.	P77	
+valvebiped.bip01_l_forearmtwist1	ValveBiped.Bip01_L_ForearmTwist1	CLEAR	left forearm twist, standard biped rig, numbered	CLEAR	groupFile/Arms	High		Standard rig twist-bone anatomy (Rule 3).	P77	
+outerbrows_raise_r	outerbrows_raise_r	CLEAR	outer brow raise, right	CLEAR	groupFile/Face/Upper Face	High		Explicit brow anatomy.	P77	
+org-palm.04.r	ORG-palm.04.R	CLEAR	palm (hand) anatomy, right, numbered, 'ORG-' rig control-bone prefix	CLEAR	groupFile/Arms	High		'ORG-' is a well-known Rigify-style control-bone prefix; palm is explicit hand anatomy.	P77	
+eyebigr	EyeBigR	CLEAR	an eye-size ('big') control, right	CLEAR	groupFile/Face/Eyes	Medium		Face-region appearance/size changes stay within Face subgroups by established convention, not Body Morphs.	P77	
+root hips.001	root hips.001	CLEAR	a hip root/anchor bone, numbered	CLEAR	groupFile/Body	High		Hip is central/unsided anatomy (Rule 26).	P77	
+sneer_out	Sneer_OUT	CLEAR	a sneer (upper-lip curl) expression, outward	CLEAR	groupFile/Face/Lower Face	Medium		Sneer is primarily a mouth/lip-curl action.	P77	
+frown_right	frown_right	CLEAR	a frown mouth expression, right	CLEAR	groupFile/Face/Lower Face	High		Matches the settled Frown bare-word family precedent (mouth-specific, like Smile/Smirk).	P77	
+arm right finger 4 a	arm right finger 4 a	CLEAR	right pinky (4th) finger anatomy, variant A	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Explicit finger anatomy.	P77	
+fa_temple_left	fa_temple_left	CLEAR	the temple region, left	CLEAR	groupFile/Face/Upper Face	High		The temple is an upper-face/side-head anatomical region, matching established precedent.	P77	
+arm left elbow ctr 2	arm left elbow ctr 2	CLEAR	a left elbow control/center point, numbered	CLEAR	groupFile/Arms	High		Explicit elbow anatomy.	P77	
+opt_acs_maehir_s4	OPT_acs_MaeHir_S4	OPAQUE	an accessory under an ungrounded 'OPT_acs' prefix with an ungrounded 'MaeHir' token, numbered	NOT_APPLICABLE		Medium		Matches the settled OPT_acs OPAQUE precedent; 'MaeHir' has no independent grounding.	P77	
+mitt_thumb_0	mitt_thumb_0	CLEAR	a mitt/mitten glove's thumb section, numbered	CLEAR	groupFile/Clothing	Medium		'Mitt' names a worn hand-covering garment; this describes its thumb section.	P77	
+sideleftloopclose	SideLeftLoopClose	PARTIAL	a 'loop' closure mechanism (garment loop/buckle vs. other), side, left	NEEDS_CONTEXT		Low	which loop object and closure type unresolved	Matches established 'loop closure' precedent (backleftloopclose, this ledger).	P77	
+tassele	TasselE	CLEAR	a decorative tassel accessory, variant E	NEEDS_CONTEXT		Low	no owning garment/object named	Matches established bare unowned tassel-accessory NEEDS_CONTEXT precedent.	P77	
+unusedtransform7 cmn sl alison	unusedtransform7 cmn sl alison	CLEAR	a self-declared unused transform control	CLEAR	groupFile/Useless	High		Explicit 'unused' declaration.	P77	
+cons_potion_healing_a_contents	CONS_Potion_Healing_A_Contents	CLEAR	a healing-potion consumable game-item prop, variant, contents	CLEAR	groupFile/Other	High		Recognized game-item prop object (Rule 16).	P77	
+lmiddle2	LMiddle2	CLEAR	left middle finger anatomy, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium		Matches the 'middle' finger-position convention (this ledger).	P77	
+chain_1	Chain_1+chain_1	PARTIAL	a 'chain' (jewelry / mechanical / physics), numbered	NEEDS_CONTEXT		Low	materially different core readings compete	Matches the established multi-sense 'chain' calibration precedent.	P77	
+l2ndna	L2ndNa	OPAQUE	a cryptic 'L2ndNa' code	NOT_APPLICABLE		Medium		'Na' has no independent grounding, preventing confident resolution of the compound.	P77	
+chesnut_skin	chesnut_skin	PARTIAL	a 'chestnut' color/material variant (hair color vs. skin tone)	NEEDS_CONTEXT		Low	which owner (hair vs. skin) is unresolved	'Chestnut' names a real brown color, but whether it colors hair or overall skin tone is not specified.	P77	
+wep_bullet8_round	WEP_Bullet8_Round	CLEAR	a weapon ammunition round, numbered	CLEAR	groupFile/Other	High		Recognized ammunition object.	P77	
+bip_medallian	bip_medallian	CLEAR	a medallion jewelry accessory (typo'd spelling)	CLEAR	groupFile/Clothing	High		Worn jewelry accessory despite the typo (Rule 12).	P77	
+root ground.002	root ground.002	OPAQUE	a generic technical ground/world-reference root anchor, numbered	NOT_APPLICABLE		Medium		'Ground' suggests a non-anatomical world/floor-reference anchor rather than body content.	P77	
+valvebiped.joint8	ValveBiped.joint8	OPAQUE	a generic numbered joint	NOT_APPLICABLE		High		Generic joint+number pattern, no anatomical content, matches Bone###/jnt_### precedent.	P77	
+valvebiped.bip01_l_ring04	ValveBiped.Bip01_L_Ring04	CLEAR	left ring finger anatomy, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy.	P77	
+bip_lowerarm	bip_lowerArm	CLEAR	forearm anatomy	CLEAR	groupFile/Arms	High		Plain structural forearm anatomy.	P77	
+chair.root	Chair.Root	CLEAR	a chair prop's root anchor	CLEAR	groupFile/Other	High		Recognized furniture object (Rule 16).	P77	
+loincloth back 1b	loincloth back 1b	CLEAR	a loincloth garment, back, variant	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P77	
+brows-front	brows-front	CLEAR	brow anatomy, front	CLEAR	groupFile/Face/Upper Face	High		Explicit brow anatomy.	P77	
+chain_15	chain_15	PARTIAL	a 'chain' (jewelry / mechanical / physics), numbered	NEEDS_CONTEXT		Low	materially different core readings compete	Matches the established multi-sense 'chain' calibration precedent.	P77	
+bone190	Bone190	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P77	
+opt_as_r_elbow	OPT_AS_R_Elbow	CLEAR	right elbow joint anatomy, OPT_AS prefix	CLEAR	groupFile/Arms	Medium		OPT_AS is an ungrounded prefix (Rule 24) set aside; remaining content names an explicit elbow joint, matching the opt_as_r_hip precedent.	P77	
+bone.001_l.038	Bone.001_L.038	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P77	
+bone thumb 1	bone thumb 1	CLEAR	thumb anatomy, numbered, side unspecified	NEEDS_CONTEXT		Low	side (left/right) is not specified, and this Master's Fingers destinations require a side subgroup	Thumb anatomy is clear, but with no side named, the correct Left/RightFingers destination cannot be determined.	P77	
+bulgethickerfit	bulgethickerFIT	PARTIAL	a bulge-thickness adjustment, either a body-shape bulge or a garment-fit accommodation for a bulge	NEEDS_CONTEXT		Low	materially different core readings (body-shape morph vs. garment-fit adjustment) compete	No content resolves whether this is a body-morph bulge or a clothing-fit adjustment around a bulge.	P77	
+hachime	Hachime	OPAQUE	a cryptic term/name with no recoverable anatomical content	NOT_APPLICABLE		Low		No grounding for 'Hachime' in this corpus.	P77	
+key.white_40	Key.White_40	CLEAR	a white piano/keyboard key prop, numbered	CLEAR	groupFile/Other	High		Matches the established Key.White grounded sibling-series template.	P77	
+pencil02	pencil02	CLEAR	a pencil prop, numbered	CLEAR	groupFile/Other	Medium		Recognized prop object (Rule 16).	P77	
+cock_01	Cock_01	CLEAR	penis anatomy, numbered	CLEAR	groupFile/Body	High		Plain structural genital anatomy reference.	P77	
+canine_rbacklegpalm	Canine_RBackLegPalm	CLEAR	a hind-leg paw/palm, right, canine species descriptor	CLEAR	groupFile/Legs	Medium		Whole-paw/limb anatomy routes to the plain limb group (Rule 18 spirit); species prefix doesn't change destination.	P77	
+arm left finger 1 c	arm left finger 1 c	CLEAR	left thumb (finger 1) anatomy, variant C	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy.	P77	
+vagina_right	vagina_right	CLEAR	vaginal structural anatomy, right	CLEAR	groupFile/Body	High		Explicit genital anatomy.	P77	
+r_elbow_outer_lower_helper	r_elbow_outer_lower_helper	CLEAR	a right elbow helper bone, outer-lower	CLEAR	groupFile/Arms	High		Explicit elbow anatomy; 'helper' is a common auxiliary-bone rig term.	P77	
+fbx_weapon_sakura_3_l	fbx_weapon_sakura_3_L	CLEAR	a weapon component, 'Sakura' character-name prefix, numbered, left	CLEAR	groupFile/Other	Medium		Character-name prefix (Rule 24) set aside; 'fbx_weapon' establishes a weapon object.	P77	
+polysurface29	polySurface29	OPAQUE	a DCC default primitive mesh name	NOT_APPLICABLE		High		Matches settled DCC-default-name boundary.	P77	
+leg right finger 2	leg right finger 2	CLEAR	leg + finger, mixed-region compound, right, numbered	NEEDS_CONTEXT		Medium	competing anatomical owners unresolved	Matches established mixed leg+finger compound precedent (this ledger).	P77	
+fin-rig-hat-hood-b	Fin-Rig-Hat-Hood-B	CLEAR	a hat/hood garment, under a 'Fin-Rig' internal namespace, variant B	CLEAR	groupFile/Clothing	Medium		'Fin-Rig' matches the established X-Rig- internal-namespace template (Qwn/Pbg/Brk/Mar/Flm/Fio-Rig, Rule 6) and is set aside; remaining 'Hat-Hood' is an explicit worn headwear garment.	P77	
+bow right 3g	bow right 3g	PARTIAL	a 'bow' (decorative ribbon-bow / archery bow / other sense), right, variant	NEEDS_CONTEXT		Low	materially different core senses compete	Matches the established multi-sense 'bow' precedent (this ledger).	P77	
+middle_02	Middle_02	PARTIAL	'middle' (a middle finger / a middle position / another object), numbered	NEEDS_CONTEXT		Low	materially different core senses compete	No feature or body part is named to disambiguate which 'middle' sense applies.	P77	
+bip armpitbase r	bip armpitbase r	CLEAR	a right armpit base anchor	CLEAR	groupFile/Arms	High		Explicit armpit/arm-region anatomy.	P77	
+dummy08	Dummy08	OPAQUE	a generic technical placeholder/dummy node, numbered	NOT_APPLICABLE		Medium		Matches established 'dummy##' non-semantic technical helper-node precedent.	P77	
+cock-tall	cock-tall	CLEAR	penis anatomy, 'tall' size descriptor	CLEAR	groupFile/Body Morphs	High		Explicit size descriptor on genital anatomy.	P77	
+fronthair awake a joint	fronthair awake a joint	CLEAR	front hair anatomy, 'awake' qualifier, variant, joint	CLEAR	groupFile/Hair	Medium		Explicit hair anatomy; 'awake' qualifier ungrounded but doesn't disturb the core reading.	P77	
+arm left finger 1 a	arm left finger 1 a	CLEAR	left thumb (finger 1) anatomy, variant A	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy.	P77	
+v_weapon.root21	v_weapon.Root21	CLEAR	a weapon rig root/anchor bone, numbered	CLEAR	groupFile/Other	Low		'v_weapon' establishes this as a weapon-rig object even though 'root21' alone is generic.	P77	
+frily_21.r	Frily_21.R	CLEAR	a frilly garment trim/decoration, numbered, right	CLEAR	groupFile/Clothing	Medium		'Frily' ('frilly') names a decorative garment-trim feature.	P77	
+pjcmnecktwist22r	pJCMNeckTwist22R	CLEAR	a joint-corrective morph (pJCM) for neck-twist, numbered, right	CLEAR	groupFile/Correctives	High		'JCM' (Joint Corrective Morph) is a widely recognized rigging abbreviation for corrective shapes (Rule 23b).	P77	
+h11	H11	OPAQUE	a bare alphanumeric code	NOT_APPLICABLE		Medium		No grounding for standalone 'H11'.	P77	
+wing_left_1_2	Wing_Left_1_2	CLEAR	wing anatomy, left, numbered	CLEAR	groupFile/Wings	High		Explicit wing anatomy.	P77	
+arm right wrist_roll	arm right wrist_roll	CLEAR	right wrist roll, standard rig anatomy	CLEAR	groupFile/Arms	High		Standard rig twist/roll-bone anatomy (Rule 3).	P77	
+39	39	OPAQUE	a bare number	NOT_APPLICABLE		High		No semantic content.	P77	
+valvebiped.valvebiped1	ValveBiped.ValveBiped1	OPAQUE	a bare repeated rig-namespace name with no additional content	NOT_APPLICABLE		Medium		No semantic content beyond the bare namespace prefix itself.	P77	
+fh11.r	Fh11.R	OPAQUE	an ungrounded 'Fh11' code, right	NOT_APPLICABLE		Low		Insufficient grounding to confidently equal the established 'fhair' (facial-hair) abbreviation (Rule 23 standard); truncates too much for confident inference.	P77	
+brows	Brows	CLEAR	eyebrow anatomy	CLEAR	groupFile/Face/Upper Face	High		Explicit bare brow anatomy.	P77	
+blip	Blip	OPAQUE	a generic technical/UI marker word with no anatomical content	NOT_APPLICABLE		Medium		No recoverable object or feature.	P77	
+arm right elbow ctr3	arm right elbow ctr3	CLEAR	a right elbow control/center point, numbered	CLEAR	groupFile/Arms	High		Explicit elbow anatomy.	P77	
+midlips_upper_curl	midlips_upper_curl	CLEAR	upper-lip curl, middle	CLEAR	groupFile/Face/Lower Face	High		Explicit lip anatomy.	P77	
+key.white_55	Key.White_55	CLEAR	a white piano/keyboard key prop, numbered	CLEAR	groupFile/Other	High		Matches the established Key.White grounded sibling-series template.	P77	
+engine	engine	CLEAR	a vehicle/machine engine	CLEAR	groupFile/Other	High		Recognized mechanism object.	P77	
+^ open	^ Open	OPAQUE	a symbolic fragment combined with a bare 'open' state, no owning object	NOT_APPLICABLE		Low		The symbol carries no content and 'open' names no object, matching the established symbolic-fragment precedent.	P77	
+right little finger 2 grip 2	Right little finger 2 grip 2	CLEAR	right little (pinky) finger anatomy, grip pose variant	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Explicit pinky-finger anatomy.	P77	
+unused.015	unused.015	CLEAR	a self-declared unused control	CLEAR	groupFile/Useless	High		Explicit 'unused' declaration.	P77	
+pantiesstomachinflate2	PantiesStomachInflate2	CLEAR	a panties garment with a stomach-inflation body-shape effect, numbered	CLEAR	groupFile/Clothing	Medium		Matches the direct live-Master 'TubeTop-Morph-*' precedent: a garment-prefixed body-shape-change control stays with the garment (groupFile/Clothing) rather than routing to Body Morphs.	P77	
+bone042	Bone042	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P77	
+taurenmale_hd_bone_134	taurenmale_hd_bone_134	OPAQUE	a generic numbered bone under a character/model-name prefix ('TaurenMale HD')	NOT_APPLICABLE		High		Matches the settled TaurenMale_HD_bone_78 precedent.	P77	
+head eyefold right 3	head eyefold right 3	CLEAR	the eyefold (eyelid crease), right, numbered	CLEAR	groupFile/Face/Eyes	High		Matches established 'eyefold' eyelid-crease precedent (this ledger).	P77	
+object32	Object32	OPAQUE	a generic placeholder object name	NOT_APPLICABLE		High		Matches established 'Object###' generic-placeholder OPAQUE precedent.	P77	
+right thumb proximal	Right Thumb Proximal	CLEAR	right thumb anatomy, proximal segment	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Explicit thumb anatomy.	P77	
+leg left boot tassle 1a	leg left boot tassle 1a	CLEAR	a boot tassel accessory, left, variant	CLEAR	groupFile/Clothing	High		Unlike bare unowned tassel rows, the owning garment ('boot') is explicitly named here.	P77	
+bip_panty_left	bip_panty_left	CLEAR	a panty garment, left	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P77	
+bow left 2g	bow left 2g	PARTIAL	a 'bow' (decorative ribbon-bow / archery bow / other sense), left, variant	NEEDS_CONTEXT		Low	materially different core senses compete	Matches the established multi-sense 'bow' precedent (this ledger).	P77	
+boobs upward l	Boobs Upward L	CLEAR	breast shape, upward direction, left	CLEAR	groupFile/Body Morphs	High		Matches the calibrated 'Bikini Boobs Upward R'-style precedent exactly.	P77	
+leg_2.lower	leg_2.lower	CLEAR	lower leg anatomy, numbered	CLEAR	groupFile/Legs	High		Plain structural leg anatomy.	P77	
+bunnyearboneright_1	BunnyEarBoneRight_1	CLEAR	a bunny-ear costume accessory, right, numbered	CLEAR	groupFile/Clothing	High		Recognized worn costume headwear accessory.	P77	
+bottomlip_l	bottomlip_L	CLEAR	lower lip anatomy, left	CLEAR	groupFile/Face/Lower Face	High		Explicit lip anatomy.	P77	
+llid_lower_drop	Llid_lower_drop	CLEAR	a lower-eyelid drop action, left	CLEAR	groupFile/Face/Eyes	High		Explicit lower-eyelid anatomy.	P77	
+indexleft2	IndexLeft2	CLEAR	left index finger anatomy, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit index-finger anatomy.	P77	
+urethralorificebigger	UrethralOrificeBigger	CLEAR	the urethral orifice, size-increase state	CLEAR	groupFile/Body Morphs	High		Explicit size descriptor on genital anatomy.	P77	
+wep_mag_bullet3	WEP_Mag_Bullet3	CLEAR	a weapon magazine's ammunition round, numbered	CLEAR	groupFile/Other	High		Recognized ammunition object.	P77	
+belt_front_l	belt_front_L	CLEAR	a belt garment, front, left	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P77	
+jiggleroot	JiggleRoot	CLEAR	a jiggle-physics root anchor	NEEDS_CONTEXT		Low	no owning body part or object named	Jiggle function is clear but no anatomical owner is named.	P77	
+cockball_r	CockBall_R	CLEAR	penis and testicle anatomy, right	CLEAR	groupFile/Body	High		Explicit genital anatomy compound.	P77	
+left foot d	Left foot D	CLEAR	left foot anatomy, variant D	CLEAR	groupFile/Legs	High		Plain structural foot anatomy.	P77	

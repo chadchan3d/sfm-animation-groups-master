@@ -1,0 +1,113 @@
+PHASE 2 PRODUCTION TRANCHE 8 -- REPORT
+Canonical positions 7501-8500 (1000 families, batches P71-P80, 100 each)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv
+
+============================================================
+TRANCHE-ONLY STATISTICS (1000 rows, this tranche)
+============================================================
+
+semantic_status:
+  CLEAR:   760
+  PARTIAL:  73
+  OPAQUE:  167
+
+taxonomy_status:
+  CLEAR:          705
+  NEEDS_CONTEXT:  128
+  NOT_APPLICABLE: 167
+  NEEDS_DOCTRINE:   0
+
+confidence:
+  High:   582
+  Medium: 279
+  Low:    139
+
+Rule 21 invariant (OPAQUE <=> NOT_APPLICABLE) check: 0 violations across
+all 1000 rows.
+
+Proposed-destination counts (CLEAR taxonomy rows only, 705 total):
+  groupFile/Other                       128
+  groupFile/Clothing                     92
+  groupFile/Arms                         61
+  groupFile/Body                         57
+  groupFile/Face/Eyes                    49
+  groupFile/Legs                         48
+  groupFile/Body Morphs                  46
+  groupFile/Face/Lower Face              36
+  groupFile/Hair                         33
+  groupFile/Arms/LeftArm/LeftFingers     30
+  groupFile/Useless                      27
+  groupFile/Arms/RightArm/RightFingers   21
+  groupFile/Face/Upper Face              21
+  groupFile/Tail                         13
+  groupFile/Correctives                   9
+  groupFile/Face/Mid Face                 8
+  groupFile/Face/Expressions              6
+  groupFile/Face/Ears                     6
+  groupFile/Wings                         6
+  groupFile/Toes/RightToes                5
+  groupFile/Toes/LeftToes                 2
+  groupFile/Face                          1
+
+NEEDS_CONTEXT rows: 128 (blank destination; mixed-region literals, unowned
+bare-accessory nouns [string/rope/tassel/knot/pad/straps], multi-sense
+words with materially different competing readings [bow/chain/ball/glass/
+crush/tank/drum/fold/hose/tear/gag/loop/hull/bulb/catch/bottom/faceplate],
+BAS./Student. jiggle-function-but-no-owner rows, and unresolved
+"lowerer"/"flex"/"wrinkle"/"crease"/"length"/"shorten"/"unwiden"/"poke"/
+"jiggleroot"-style unowned-function words).
+
+NEEDS_DOCTRINE rows: 0. No genuinely new taxonomy-policy question was
+encountered; production continued through all 10 batches without a hard
+stop.
+
+Consistency flags raised: 0 corrections (see
+PHASE2_PRODUCTION_TRANCHE8_CONSISTENCY_FLAGS.txt for the full audit,
+including 3 non-blocking observational notes for future-tranche
+awareness and confirmation that the BAS./Student. two-way splits are a
+single coherent applied rule, not drift).
+
+OPAQUE rows manually reviewed (6-question test): 167 / 167.
+Face/Expressions rows reviewed (mandatory face audit): 6 / 6.
+Settled-rule drift candidates reviewed: tentacle (4 rows), fin (2 rows),
+Box_Face_##_M (1 row), balloon (0 true family members), Rig-Hole (0
+members this tranche), horn (3 rows) -- all matched current authoritative
+destinations with no drift.
+DCC-default-name candidates reviewed: 8 (polySurface##/pCylinder#/pCube#
+rows, all OPAQUE), plus rustCylinder/Tube001/Box02 correctly kept at
+groupFile/Other under the genericity-is-not-opacity precedent.
+Cross-tranche corrections applied: 0 (none found; see consistency-flags
+document Section 6).
+Precedent claims mechanically verified against current ledger/Master
+fields before use: every claim in every batch file and in this report
+that references a sibling row's semantic_status, taxonomy_status, or
+proposed_destination, and every live-Master grep cited as evidence
+(dlid/dlip/whisker/leotoard/fur/tube/grin/gen/right_N patterns).
+
+============================================================
+CUMULATIVE STATISTICS (after Tranche 8)
+============================================================
+
+calibration_families_complete:        500
+production_families_classified:      8000
+total ledger rows:                   8500
+next_canonical_phase2_position:      8501
+remaining_production_families:       5782
+
+============================================================
+Batch-level record (for resumability)
+============================================================
+
+P71 (7501-7600): merged, ledger reached 7600 rows
+P72 (7601-7700): merged, ledger reached 7700 rows
+P73 (7701-7800): merged, ledger reached 7800 rows
+P74 (7801-7900): merged, ledger reached 7900 rows
+P75 (7901-8000): merged, ledger reached 8000 rows
+P76 (8001-8100): merged, ledger reached 8100 rows
+P77 (8101-8200): merged, ledger reached 8200 rows
+P78 (8201-8300): merged, ledger reached 8300 rows
+P79 (8301-8400): merged, ledger reached 8400 rows
+P80 (8401-8500): merged, ledger reached 8500 rows
+
+All 10 batches for Tranche 8 are complete and merged. No batch remains
+pending.

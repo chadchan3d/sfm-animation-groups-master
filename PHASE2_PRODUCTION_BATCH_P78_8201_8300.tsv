@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+bip_giroscopex	bip_giroscopeX	OPAQUE	a technical gyroscope-style counter-rotation stabilizer bone, axis X	NOT_APPLICABLE		Medium		Gyroscope-style bones are typically non-anatomical physics-stabilization technical helpers, not body content.	P78	
+risorius02_r	risorius02_R	CLEAR	the risorius muscle (real facial anatomy, pulls the mouth corner), numbered, right	CLEAR	groupFile/Face/Lower Face	High		'Risorius' is grounded anatomical terminology for a mouth-region muscle (Rule 12 foreign/specialist-language grounding).	P78	
+hide_eyelashes	hide_eyelashes	CLEAR	an eyelash-visibility toggle	CLEAR	groupFile/Face/Eyes	High		Explicit eyelash anatomy, visibility function.	P78	
+musclebispts	MuscleBispts	CLEAR	bicep muscle control points	CLEAR	groupFile/Arms	Medium		'Bis' plausibly abbreviates 'biceps', explicit arm-muscle content.	P78	
+flex_sh3_long	Flex_SH3_LONG	CLEAR	a 'flex' (shape-key) mechanism, cryptic 'sh3' qualifier, 'long' state	NEEDS_CONTEXT		Low	'sh3' object/body-part reference unresolved	Flex/shape-change function is clear but the 'sh3' qualifier does not clearly identify a body part or object.	P78	
+bow right bcd	bow right bcd	PARTIAL	a 'bow' (decorative ribbon-bow / archery bow / other sense), right, variant	NEEDS_CONTEXT		Low	materially different core senses compete	Matches the established multi-sense 'bow' precedent (this ledger).	P78	
+penis shaft 6	penis shaft 6	CLEAR	penis shaft anatomy, numbered	CLEAR	groupFile/Body	High		Explicit genital anatomy.	P78	
+unused_3	Unused_3	CLEAR	a self-declared unused control	CLEAR	groupFile/Useless	High		Explicit 'unused' declaration.	P78	
+cape_adjust_bone	CAPE_ADJUST_BONE	CLEAR	a cape garment adjuster bone	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P78	
+taurenmale_hd_bone_82	taurenmale_hd_bone_82	OPAQUE	a generic numbered bone under a character/model-name prefix ('TaurenMale HD')	NOT_APPLICABLE		High		Matches the settled TaurenMale_HD_bone_78 precedent.	P78	
+bone_bed_12	bone_bed_12	OPAQUE	a generic bone with an ungrounded 'bed' qualifier, numbered	NOT_APPLICABLE		Medium		Matches sibling bone_bed_06 precedent (this ledger).	P78	
+lithe upper details	Lithe Upper Details	CLEAR	a 'lithe' (slender) body-shape descriptor, upper region	CLEAR	groupFile/Body Morphs	Medium		Explicit body-shape descriptor (Rule 12).	P78	
+rustcylinder	rustCylinder	CLEAR	a rusted cylindrical prop object	CLEAR	groupFile/Other	Medium		'Rust' adds deliberate descriptive content beyond a bare DCC-default primitive name, matching the Rule 10 deliberately-named-generic-object exception.	P78	
+bip_l_ring	bip_l_ring	CLEAR	left ring finger anatomy	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy.	P78	
+eyes close tight	Eyes Close Tight	CLEAR	an eyes-close-tight action	CLEAR	groupFile/Face/Eyes	High		Explicit eye action.	P78	
+bas.right_1	BAS.Right_1	OPAQUE	an internal 'BAS.' namespace position code with no function word	NOT_APPLICABLE		Medium		Matches established 'BAS.<position>' internal-namespace OPAQUE precedent.	P78	
+right_6	Right_6+right_6	OPAQUE	a bare positional label with no owning object	NOT_APPLICABLE		High		Matches established 'bare positional label, no owner' OPAQUE precedent.	P78	
+fa_eye_right	fa_eye_right	CLEAR	eye anatomy, right	CLEAR	groupFile/Face/Eyes	High		'fa_' is a common face-abbreviation prefix; eye is explicit.	P78	
+right_outerbrowraise	Right_outerbrowraise	CLEAR	outer brow raise, right	CLEAR	groupFile/Face/Upper Face	High		Explicit brow anatomy.	P78	
+wep_fx_laser	WEP_FX_Laser	CLEAR	a weapon laser effect	CLEAR	groupFile/Other	High		Recognized weapon effect.	P78	
+medal	Medal	CLEAR	a medal decoration accessory	CLEAR	groupFile/Clothing	Medium		Worn decoration/accessory.	P78	
+cockthickbase	CockThickBase	CLEAR	penis anatomy, thickness state, base	CLEAR	groupFile/Body Morphs	High		Explicit size descriptor on genital anatomy.	P78	
+faceplate	Faceplate	PARTIAL	a 'faceplate' (worn armor/mask face-covering, or a machine/panel faceplate)	NEEDS_CONTEXT		Low	materially different core senses compete	No disambiguating context for which 'faceplate' sense applies.	P78	
+unused.007	unused.007	CLEAR	a self-declared unused control	CLEAR	groupFile/Useless	High		Explicit 'unused' declaration.	P78	
+head root hips	head root hips	PARTIAL	a technical anchor/hierarchy reference naming both head and hip regions	NEEDS_CONTEXT		Low	competing anatomical owners (head vs. hip) unresolved	No single anatomical owner is established between the head and hip references.	P78	
+taurenmale_hd_bone_99	taurenmale_hd_bone_99	OPAQUE	a generic numbered bone under a character/model-name prefix ('TaurenMale HD')	NOT_APPLICABLE		High		Matches the settled TaurenMale_HD_bone_78 precedent.	P78	
+submesh_00_lod_1.1781	submesh_00_LOD_1.1781	OPAQUE	a generic technical submesh/LOD (level-of-detail) reference, numbered	NOT_APPLICABLE		Medium		No anatomical content; 'LOD' is a generic technical mesh-detail term.	P78	
+foot_pinky_1_l	foot_pinky_1_L	CLEAR	left foot pinky toe anatomy, numbered	CLEAR	groupFile/Toes/LeftToes	High		Explicit toe anatomy.	P78	
+bow left 1f	bow left 1f	PARTIAL	a 'bow' (decorative ribbon-bow / archery bow / other sense), left, variant	NEEDS_CONTEXT		Low	materially different core senses compete	Matches the established multi-sense 'bow' precedent (this ledger).	P78	
+v_weapon.root26	v_weapon.Root26	CLEAR	a weapon rig root/anchor bone, numbered	CLEAR	groupFile/Other	Low		Matches sibling v_weapon.root21 precedent (this ledger).	P78	
+bip facelipridge1out l	bip facelipridge1out l	CLEAR	the lip ridge (philtrum-adjacent facial feature), numbered, outward, left	CLEAR	groupFile/Face/Lower Face	Medium		Explicit lip-adjacent facial anatomy.	P78	
+temporalis02_l.002	temporalis02_L.002	CLEAR	the temporalis muscle (real facial/temple anatomy), numbered, left	CLEAR	groupFile/Face/Upper Face	Medium		'Temporalis' is grounded anatomical terminology for the temple region, matching the established temple-region destination.	P78	
+unusedbone226	unusedbone226	CLEAR	a self-declared unused bone	CLEAR	groupFile/Useless	High		Explicit 'unused' declaration.	P78	
+bip_bobby_r_calftwist1	Bip_BOBBY_R_CalfTwist1	CLEAR	right calf twist, 'Bobby' rig/character qualifier, numbered	CLEAR	groupFile/Legs	High		Standard rig twist-bone anatomy (Rule 3); calf-twist reading is stable regardless of the 'Bobby' qualifier.	P78	
+pelvis.001	pelvis.001	CLEAR	pelvis anatomy, numbered	CLEAR	groupFile/Body	High		Pelvis is central/unsided anatomy (Rule 26).	P78	
+bippbg r finger2	BipPBG R Finger2	CLEAR	right finger anatomy, PBG namespace, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Explicit finger anatomy.	P78	
+bip_index_2wirst	bip_index_2Wirst	PARTIAL	an 'index' finger vs. 'wrist' compound, unclear side, numbered	NEEDS_CONTEXT		Low	competing anatomical owners (index finger vs wrist) and unspecified side unresolved	The index/wrist compound does not clearly identify a single anatomical target, and no side is specified.	P78	
+clothingon	ClothingOn	CLEAR	a clothing-visibility toggle ('on')	CLEAR	groupFile/Clothing	High		Explicit 'clothing' object named directly.	P78	
+hand finger left 3a	hand finger left 3a	CLEAR	left ring (3rd) finger anatomy, variant A	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy.	P78	
+v_weapon.right_pinky03	v_weapon.Right_Pinky03	CLEAR	right pinky finger anatomy, viewmodel weapon-rig prefix, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Matches established v_weapon.* finger precedent.	P78	
+frily_10.l	Frily_10.L	CLEAR	a frilly garment trim/decoration, numbered, left	CLEAR	groupFile/Clothing	Medium		Matches sibling frily_21.r precedent (this ledger).	P78	
+student.back_3_jiggle	Student.Back_3_jiggle	CLEAR	a jiggle-physics control, back position, numbered, under an ungrounded 'Student' namespace	NEEDS_CONTEXT		Medium	function clear but no owning body part or object named	Matches sibling student.left_2_jiggle precedent (this ledger).	P78	
+bip_mustache_l	bip_Mustache_L	CLEAR	a moustache, left	CLEAR	groupFile/Hair	High		Moustache is unambiguous facial hair.	P78	
+cock.shaft_1_skin	Cock.Shaft_1_Skin	CLEAR	penis shaft anatomy, numbered, skin qualifier	CLEAR	groupFile/Body	High		Plain structural genital anatomy.	P78	
+left_hip_cancel	left_hip_cancel	CLEAR	a left hip joint counter-rotation/cancel control	CLEAR	groupFile/Legs	Medium		Explicitly sided hip joint, matching Rule 26's sided-hip exception.	P78	
+mot05_lefthand	MOT05_LeftHand	CLEAR	left hand anatomy, motion-reference numbering	CLEAR	groupFile/Arms	Medium		'MOT05' is a technical numeric prefix; 'left hand' is explicit anatomical content.	P78	
+bip_stone_l_thightwist1	Bip_STONE_L_ThighTwist1	CLEAR	left thigh twist, 'STONE' rig/character qualifier, numbered	CLEAR	groupFile/Legs	High		Standard rig twist-bone anatomy (Rule 3), matching sibling bip_stone_l_uparmtwist precedent (this ledger).	P78	
+bite1l	bite1L	CLEAR	a bite (jaw/mouth) action, numbered, left	CLEAR	groupFile/Face/Lower Face	Medium		'Bite' is a mouth/jaw action.	P78	
+r2ndnb	R2ndNb	OPAQUE	a cryptic 'R2ndNb' code	NOT_APPLICABLE		Medium		Matches sibling l2ndna OPAQUE precedent (this ledger); 'Nb' has no independent grounding.	P78	
+bobcut.back_3_jiggle	Bobcut.Back_3_jiggle	CLEAR	a bob-haircut hair strand, back, numbered, jiggle-physics	CLEAR	groupFile/Hair	High		'Bobcut' is an unambiguous hairstyle name.	P78	
+pb_r_cmy01_bhair_2	pb_R_CMY01_BHair_2	CLEAR	body hair, right, numbered, cryptic model-code infix	CLEAR	groupFile/Hair	Medium		Matches sibling pb_l_cmy01_bhair_5 precedent (this ledger).	P78	
+ball1	Ball1	PARTIAL	'ball' (testicle / spherical prop / ball-joint), numbered	NEEDS_CONTEXT		Low	materially different core senses compete	Matches established multi-sense 'ball' precedent (this ledger).	P78	
+kneethicc	KneeThicc	CLEAR	a knee-region size ('thicc') descriptor	CLEAR	groupFile/Body Morphs	High		Explicit size descriptor (Rule 12).	P78	
+bow right 2b	bow right 2b	PARTIAL	a 'bow' (decorative ribbon-bow / archery bow / other sense), right, variant	NEEDS_CONTEXT		Low	materially different core senses compete	Matches the established multi-sense 'bow' precedent (this ledger).	P78	
+bikini butt big	Bikini Butt Big	CLEAR	buttock size, described in bikini context	CLEAR	groupFile/Body Morphs	High		Matches the calibrated 'Bikini Boobs'-style precedent: explicit size descriptor on body anatomy routes to Body Morphs regardless of garment-context framing.	P78	
+wep_mag_bullet1	WEP_Mag_Bullet1	CLEAR	a weapon magazine's ammunition round, numbered	CLEAR	groupFile/Other	High		Recognized ammunition object.	P78	
+valvebiped.bip01_r_ear0	ValveBiped.Bip01_R_Ear0	CLEAR	right ear anatomy, standard biped rig, numbered	CLEAR	groupFile/Face/Ears	High		Explicit ear anatomy.	P78	
+student.back_2_jiggle	Student.Back_2_jiggle	CLEAR	a jiggle-physics control, back position, numbered, under an ungrounded 'Student' namespace	NEEDS_CONTEXT		Medium	function clear but no owning body part or object named	Matches sibling student.back_3_jiggle precedent (this batch).	P78	
+belt_l2	Belt_L2	CLEAR	a belt garment, left, numbered	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P78	
+tail05n	Tail05N	CLEAR	tail anatomy, numbered, variant N	CLEAR	groupFile/Tail	High		Explicit tail anatomy.	P78	
+arm left shoulder 2 twist	arm left shoulder 2 twist	CLEAR	left shoulder twist, numbered	CLEAR	groupFile/Arms	High		Standard rig twist-bone anatomy (Rule 3).	P78	
+uppereye.r	uppereye.r	CLEAR	upper eyelid, right	CLEAR	groupFile/Face/Eyes	High		Explicit eyelid anatomy.	P78	
+i5	I5	OPAQUE	a bare alphanumeric code	NOT_APPLICABLE		Medium		No grounding for standalone 'I5'.	P78	
+l_front_holster_0u_8v	l_front_holster_0u_8v	CLEAR	a weapon holster, left, front, technical position code	CLEAR	groupFile/Other	Medium		Matches r_rear_holster sibling precedent (this ledger).	P78	
+bow left 2a	bow left 2a	PARTIAL	a 'bow' (decorative ribbon-bow / archery bow / other sense), left, variant	NEEDS_CONTEXT		Low	materially different core senses compete	Matches the established multi-sense 'bow' precedent (this ledger).	P78	
+toplip1.r	TopLip1.R	CLEAR	upper lip anatomy, numbered, right	CLEAR	groupFile/Face/Lower Face	High		Explicit lip anatomy.	P78	
+headfurtip.r	HeadFurTip.R	CLEAR	head fur, tip segment, right	CLEAR	groupFile/Hair	Medium		Matches sibling headfurtip.l precedent (this ledger).	P78	
+object014	Object014	OPAQUE	a generic placeholder object name	NOT_APPLICABLE		High		Matches established 'Object###' generic-placeholder OPAQUE precedent.	P78	
+bow left 1b	bow left 1b	PARTIAL	a 'bow' (decorative ribbon-bow / archery bow / other sense), left, variant	NEEDS_CONTEXT		Low	materially different core senses compete	Matches the established multi-sense 'bow' precedent (this ledger).	P78	
+bikini thick thigs	Bikini Thick Thigs	CLEAR	thigh size (thick), described in bikini context (typo'd 'thighs')	CLEAR	groupFile/Body Morphs	High		Matches the calibrated 'Bikini'-context body-shape-descriptor precedent.	P78	
+vip_gibhead03	VIP_gibHead03	CLEAR	a destructible head-gib fragment prop, numbered	CLEAR	groupFile/Other	High		Matches sibling vip_gibhead02 precedent (this ledger).	P78	
+right thumb 0	Right thumb 0	CLEAR	right thumb anatomy, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Explicit thumb anatomy.	P78	
+body-outfit-sock	Body-Outfit-Sock	CLEAR	a sock garment	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P78	
+bottomexposed	BottomExposed	PARTIAL	'bottom' (buttock anatomy vs. bottom-half garment), exposed state	NEEDS_CONTEXT		Low	materially different core readings compete	No content resolves whether 'bottom' names buttock anatomy or a garment piece.	P78	
+pants butt big	Pants Butt Big	CLEAR	buttock size, described in pants context	CLEAR	groupFile/Body Morphs	Medium		Matches the 'Bikini Butt Big'-style precedent: 'Butt Big' names a body-part-plus-size descriptor rather than a garment cut feature (unlike 'PantsWideHips', which describes the pants' own shape).	P78	
+tlccurve	TLCCurve	OPAQUE	a cryptic 'TLC' curve control	NOT_APPLICABLE		Low		Insufficient corpus evidence to confidently ground 'TLC' (e.g. as 'thoracolumbar curve') per Rule 23d's standard.	P78	
+eyeright1	EyeRight1	CLEAR	right eye anatomy, numbered	CLEAR	groupFile/Face/Eyes	High		Explicit eye anatomy.	P78	
+valvebiped.group1	ValveBiped.group1	OPAQUE	a generic numbered rig-hierarchy group label	NOT_APPLICABLE		Medium		No anatomical content; a generic technical grouping label.	P78	
+upleg_l	UpLeg_L	CLEAR	left upper leg anatomy	CLEAR	groupFile/Legs	High		Plain structural leg anatomy.	P78	
+bip01_pelvis012	Bip01_Pelvis012	CLEAR	pelvis anatomy, standard biped rig, numbered	CLEAR	groupFile/Body	High		Pelvis is central/unsided anatomy (Rule 26).	P78	
+wep_magazine2_bullet2	WEP_Magazine2_Bullet2	CLEAR	a weapon magazine's ammunition round, numbered	CLEAR	groupFile/Other	High		Recognized ammunition object.	P78	
+pussy.ring_left_front	Pussy.Ring_Left_Front	CLEAR	vaginal opening ('ring') structural anatomy, left, front	CLEAR	groupFile/Body	Medium		'Ring' reads as an anatomical shape descriptor for the vaginal opening, not jewelry, given the explicit genital context.	P78	
+bip01_r_upperarm004	Bip01_R_UpperArm004	CLEAR	right upper-arm anatomy, numbered	CLEAR	groupFile/Arms	High		Plain structural upper-arm anatomy.	P78	
+head chin side right	Head Chin Side Right	CLEAR	chin anatomy, side, right	CLEAR	groupFile/Face/Lower Face	High		Explicit chin anatomy.	P78	
+pubesthickpenis	PubesThickPenis	PARTIAL	a 'thick' descriptor applied ambiguously to pubic hair or to the penis	NEEDS_CONTEXT		Low	competing owners (pubic hair vs. penis) for the 'thick' descriptor unresolved	No content resolves whether 'thick' modifies the pubic hair or the penis.	P78	
+maid.necktie_left_inner_2	Maid.Necktie_Left_Inner_2	CLEAR	a maid-costume necktie, left, inner, numbered	CLEAR	groupFile/Clothing	High		Explicit worn garment; 'maid' is a costume-archetype qualifier.	P78	
+key.1	Key.1	CLEAR	a piano/keyboard key prop, numbered	CLEAR	groupFile/Other	High		Matches the established Key.<label> grounded sibling-series template.	P78	
+wing_right_5_3	Wing_Right_5_3	CLEAR	wing anatomy, right, numbered	CLEAR	groupFile/Wings	High		Explicit wing anatomy.	P78	
+unused.045	unused.045	CLEAR	a self-declared unused control	CLEAR	groupFile/Useless	High		Explicit 'unused' declaration.	P78	
+maskroot	MaskRoot	CLEAR	a mask accessory's root anchor	CLEAR	groupFile/Clothing	Medium		'Mask' is a worn face-covering accessory.	P78	
+key.tilde	Key.Tilde	CLEAR	a tilde keyboard-key prop	CLEAR	groupFile/Other	High		Matches the established Key.<label> grounded sibling-series template.	P78	
+egg.wall_12	Egg.Wall_12	CLEAR	an environment/structure 'egg wall' segment, numbered	CLEAR	groupFile/Other	Medium		Matches sibling egg.wall_11 precedent (this ledger).	P78	
+bone-l-upperarm-twist1	Bone-L-UpperArm-Twist1	CLEAR	left upper-arm twist, numbered	CLEAR	groupFile/Arms	High		Standard rig twist-bone anatomy (Rule 3).	P78	
+browsoutterdownleft	BrowsOutterDownLeft	CLEAR	outer brow, down direction, left	CLEAR	groupFile/Face/Upper Face	High		Explicit brow anatomy.	P78	
+lbrow inner	lbrow inner	CLEAR	left inner eyebrow	CLEAR	groupFile/Face/Upper Face	High		Explicit brow anatomy.	P78	
+freaks	Freaks	OPAQUE	an unclear label ('freaks') with no recoverable anatomical or object content	NOT_APPLICABLE		Low		No grounding for this term as an anatomical feature or prop object.	P78	
+eye-l-anger	Eye-L-Anger	CLEAR	an eye-region 'anger' emotional expression, left	CLEAR	groupFile/Face/Eyes	Medium		Matches sibling eye-r-anger precedent (this ledger).	P78	
+bottom_02	Bottom_02	PARTIAL	'bottom' (buttock anatomy vs. bottom-half garment), numbered	NEEDS_CONTEXT		Low	materially different core readings compete	Matches established 'bottomexposed'-style ambiguity (this batch).	P78	
+pantslegsize	PantsLegsize	CLEAR	a pants garment's leg-portion size (cut/fit feature)	CLEAR	groupFile/Clothing	Medium		'Leg size' in a pants-garment context reads as a garment cut/fit feature, matching the PantsWideHips-style precedent (garment shape, not body shape).	P78	
+bip_leaf	bip_leaf	PARTIAL	a 'leaf' (fig-leaf-style garment covering / plant prop / decorative accessory)	NEEDS_CONTEXT		Low	materially different core senses compete	No disambiguating context for which 'leaf' sense applies.	P78	

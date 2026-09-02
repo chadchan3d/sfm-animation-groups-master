@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+head-wide	head-wide	CLEAR	a head-shape width descriptor	CLEAR	groupFile/Body Morphs	Medium		Explicit head-shape size descriptor, matches Rule 12 shape/size->Body Morphs convention.	P73	
+pantsvagclose	PantsVagClose	CLEAR	pants garment with a vaginal-close mechanism	CLEAR	groupFile/Clothing	High		Matches Rule 8's PantsAnalOpen/PantsAnusOpen worked example: named garment (pants) is the primary object.	P73	
+bone_arl	Bone_ARL	OPAQUE	a generic bone with an ungrounded 'ARL' code	NOT_APPLICABLE		High		No grounding for 'ARL'.	P73	
+openl	openL	CLEAR	an open state, left	NEEDS_CONTEXT		Low	no object/owner named	Bare 'open' state with no anatomical noun or object named.	P73	
+left index finger 3 grip 1	Left index finger 3 grip 1	CLEAR	left index finger anatomy, grip pose variant	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit index finger anatomy.	P73	
+tailrootbone	TailRootBone	CLEAR	tail root/anchor bone	CLEAR	groupFile/Tail	High		Explicit tail anatomy.	P73	
+door1	Door1	CLEAR	a door prop	CLEAR	groupFile/Other	Medium		Recognized object (Rule 16).	P73	
+arm left finger knuckle ring	arm left finger knuckle ring	CLEAR	left finger knuckle joint anatomy	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium		'Arm/finger/knuckle' fully establishes finger anatomy; 'ring' reads as a knuckle joint-type qualifier rather than a jewelry accessory.	P73	
+bow right 3c	bow right 3c	PARTIAL	a 'bow' (decorative ribbon-bow / archery bow / other sense), right, variant	NEEDS_CONTEXT		Low	materially different core senses compete	Matches the established multi-sense 'bow' precedent (this ledger).	P73	
+bone_skin_097	Bone_skin_097	OPAQUE	a generic numbered skinning bone	NOT_APPLICABLE		High		Generic Bone_skin+number pattern.	P73	
+middlewirebulgedown	MiddleWireBulgeDown	PARTIAL	a 'wire' bulge-deformation control (literal wire object, or a rig control-wire jargon term), middle, downward	NEEDS_CONTEXT		Low	materially different core readings compete	No content resolves whether 'wire' names a literal wire object or a rig-control jargon term.	P73	
+def-spine.006_r.010	DEF-spine.006_R.010	CLEAR	spine anatomy, DEF- deform-bone rig prefix, right, numbered	CLEAR	groupFile/Body	High		'DEF-' is a well-known deform-bone rigging prefix; spine is plain structural anatomy.	P73	
+r middle 03	r middle 03	CLEAR	right middle finger anatomy, numbered segment	CLEAR	groupFile/Arms/RightArm/RightFingers	Medium		'Middle' finger-position convention, matches sibling bip_r_middle_03 (this batch).	P73	
+charge_handle	charge_handle	CLEAR	a firearm charging-handle component	CLEAR	groupFile/Other	High		Recognized weapon part.	P73	
+tailleft3_6	TailLeft3_6	CLEAR	tail anatomy, left, numbered	CLEAR	groupFile/Tail	High		Explicit tail anatomy.	P73	
+leftbrowraise	LeftbrowRaise	CLEAR	a left eyebrow raise action	CLEAR	groupFile/Face/Upper Face	High		Explicit brow anatomy.	P73	
+~	~	OPAQUE	a symbolic/non-linguistic fragment	NOT_APPLICABLE		High		Matches established symbolic-fragment OPAQUE precedent (Tranche 7 audit).	P73	
+oris06	oris06	CLEAR	a mouth-region control (Latin 'oris' = mouth, as in orbicularis oris), numbered	CLEAR	groupFile/Face/Lower Face	Medium		'Oris' is grounded anatomical Latin for mouth (Rule 12 foreign/specialist-language grounding).	P73	
+crow_1.humerus_r	Crow_1.Humerus_R	CLEAR	humerus (upper-arm bone) anatomy, right, creature-prefixed	CLEAR	groupFile/Arms	High		Humerus is species-neutral arm-bone anatomy.	P73	
+five_bullet02	Five_Bullet02	CLEAR	an ammunition round for a 'Five' weapon model, numbered	CLEAR	groupFile/Other	Medium		Recognized ammunition object (Rule 16).	P73	
+bippbg lthightwist	BipPBG LThighTwist	CLEAR	left thigh twist, BipPbg namespace	CLEAR	groupFile/Legs	High		Standard rig twist-bone anatomy (Rule 3); BipPbg is an established namespace prefix.	P73	
+bas.back_1	BAS.Back_1	OPAQUE	an internal 'BAS.' namespace position code with no function word	NOT_APPLICABLE		Medium		Matches established 'BAS.<position>' internal-namespace OPAQUE precedent.	P73	
+dummy01	Dummy01	OPAQUE	a generic technical placeholder/dummy node, numbered	NOT_APPLICABLE		Medium		'Dummy' is a common non-semantic technical helper-node term with no inherent geometry/meaning.	P73	
+tentacletop2	TentacleTop2	CLEAR	a tentacle, top position, numbered	CLEAR	groupFile/Other	High		Settled Rule 18 species-neutral precedent (tentacle->Other), confirmed by finalized calibration.	P73	
+valvebiped.chain_aligned7	ValveBiped.chain_aligned7	PARTIAL	a 'chain' (jewelry / mechanical / physics-aligned bone chain), numbered	NEEDS_CONTEXT		Low	materially different core readings compete	Matches the established multi-sense 'chain' calibration precedent.	P73	
+jiggle spine 4	jiggle spine 4	CLEAR	a jiggle-physics control on spine anatomy, numbered	CLEAR	groupFile/Body	High		Jiggle function with an explicitly named anatomical owner (spine).	P73	
+chainfront_l	ChainFront_L	PARTIAL	a 'chain' (jewelry / mechanical / physics), front, left	NEEDS_CONTEXT		Low	materially different core readings compete	Matches the established multi-sense 'chain' calibration precedent.	P73	
+moustache_r_1	Moustache_R_1	CLEAR	a moustache, right, numbered	CLEAR	groupFile/Hair	High		Moustache is unambiguous facial hair.	P73	
+left arm screw 3	Left arm screw 3	PARTIAL	a left-arm 'screw'-type joint mechanism, or a screw prop held/attached at the arm	NEEDS_CONTEXT		Low	materially different core readings compete	Matches the established left-hand-screw precedent (this ledger).	P73	
+donger03_chain	donger03_chain	CLEAR	genital anatomy ('donger', established grounded term), numbered, bone-chain qualifier	CLEAR	groupFile/Body	Medium		'Donger' is a previously-grounded genital-slang term; 'chain' reads as a technical bone-chain descriptor, not jewelry.	P73	
+wep_pin	WEP_Pin	CLEAR	a weapon pin component	CLEAR	groupFile/Other	High		Recognized weapon part.	P73	
+shirt_exposed_tie_left_2	Shirt_Exposed_Tie_Left_2	CLEAR	a shirt tie, left, numbered	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P73	
+flex_flat	Flex_FLAT	CLEAR	a 'flex' (shape-key) mechanism, flat state	NEEDS_CONTEXT		Low	no body region/object named	'Flex' is a generic shape-change mechanism term; no body region or object is named.	P73	
+vheightvwidthback	VheightVwidthBack	PARTIAL	a dimensional (height/width) adjustment control, back position, 'V' qualifier ungrounded	NEEDS_CONTEXT		Low	owning body-part/object and 'V' meaning unresolved	Height/width are real dimensional words but the owning object and 'V' qualifier are ungrounded.	P73	
+unused145	unused145	CLEAR	a self-declared unused control	CLEAR	groupFile/Useless	High		Explicit 'unused' declaration.	P73	
+pad1_1	pad1_1	PARTIAL	a 'pad' accessory (shoulder pad / knee pad / other padding), numbered	NEEDS_CONTEXT		Low	which pad and owner unresolved	Bare unowned 'pad' accessory noun with no disambiguating garment context.	P73	
+vip_gibhead02	VIP_gibHead02	CLEAR	a destructible head-gib fragment prop, numbered	CLEAR	groupFile/Other	High		Matches established 'gib' destructible-fragment precedent, explicit 'head' object.	P73	
+flaresback	flaresback	PARTIAL	'flares' (lens-flare effect / flared garment shape / flare weapon), back	NEEDS_CONTEXT		Low	materially different core senses compete	No disambiguating context for which 'flares' sense applies.	P73	
+whl_3	whL_3	CLEAR	a vehicle wheel, numbered ('whl' abbreviation)	CLEAR	groupFile/Other	Medium		'Whl' is a common grounded wheel abbreviation.	P73	
+bip chinlo	bip chinlo	CLEAR	chin anatomy, low variant	CLEAR	groupFile/Face/Lower Face	High		Explicit chin anatomy.	P73	
+left little finger 1 grip 1	Left little finger 1 grip 1	CLEAR	left little (pinky) finger anatomy, grip pose variant	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit little-finger anatomy.	P73	
+bip_l_finger_c_01	bip_l_finger_c_01	CLEAR	a left finger, variant C, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy.	P73	
+head eye inner upper right	Head Eye Inner Upper Right	CLEAR	eye anatomy, inner upper, right	CLEAR	groupFile/Face/Eyes	High		Explicit eye anatomy.	P73	
+crotch.rear	Crotch.Rear	CLEAR	crotch/genital-region anatomy, rear	CLEAR	groupFile/Body	High		Explicit genital-region anatomy.	P73	
+leotardcameltoe	LeotardCameltoe	CLEAR	a leotard garment-fit visual feature (cameltoe)	CLEAR	groupFile/Clothing	High		'Leotard' is an established Clothing garment term; cameltoe is a garment-fit feature.	P73	
+valvebiped.bip01_r_vulvab	ValveBiped.Bip01_R_VulvaB	CLEAR	vulva anatomy, right, variant B	CLEAR	groupFile/Body	High		Explicit genital anatomy.	P73	
+wrinkles-7	wrinkles-7	CLEAR	a wrinkle appearance/texture control, numbered	NEEDS_CONTEXT		Low	appearance function clear but no body region/feature named	Matches established 'wrinkle_small_3'-style NEEDS_CONTEXT precedent (this ledger).	P73	
+bip_strands1_l	bip_Strands1_L	CLEAR	hair strands, numbered, left	CLEAR	groupFile/Hair	High		Explicit hair anatomy.	P73	
+box_face_20_m	Box_Face_20_M	PARTIAL	a 'Box Face' (a geometric face/panel of a box object vs. a character's face), numbered, variant M	NEEDS_CONTEXT		Medium	no positive evidence resolves the 20-member template in either direction	Matches the settled Box_Face_##_M majority-sibling precedent (Tranche 7 family reconciliation); settled-rule drift check applied (Section 17).	P73	
+tail 4 jb	tail 4 JB	CLEAR	tail anatomy, numbered, jiggle-bone variant	CLEAR	groupFile/Tail	High		Explicit tail anatomy.	P73	
+arm left elbow pad	arm left elbow pad	CLEAR	a left elbow pad, a worn protective garment piece	CLEAR	groupFile/Clothing	High		Elbow pad is a specific, unambiguous worn protective accessory.	P73	
+lighthearted	LightHearted	CLEAR	a lighthearted mood/expression state	CLEAR	groupFile/Face/Expressions	Medium		Bare whole-face mood word with no localized facial feature named.	P73	
+r_rear_holster_0u_8v	r_rear_holster_0u_8v	CLEAR	a weapon holster, right, rear, technical position code	CLEAR	groupFile/Other	Medium		Holster is a weapon-carrying accessory; matches the belt_dagger-style precedent of routing weapon-related worn accessories to Other rather than Clothing.	P73	
+left_vag_d_2	left_vag_d_2	CLEAR	vaginal structural anatomy, left, directional qualifier, numbered	CLEAR	groupFile/Body	Medium		Structural genital anatomy, positional qualifier.	P73	
+bodyvolup	BodyVolup	CLEAR	a body-volume increase control	CLEAR	groupFile/Body Morphs	High		Explicit body-volume/size descriptor.	P73	
+crow_1.phalanges1_l	Crow_1.Phalanges1_L	CLEAR	phalanges (finger bones) anatomy, left, creature-prefixed	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Phalanges is species-neutral finger-bone anatomy.	P73	
+narrow2	Narrow2	CLEAR	a 'narrow' shape-adjustment control, numbered	NEEDS_CONTEXT		Low	no object/owner named	Shape function is clear but no body region or object is named.	P73	
+bip_hb1_l	bip_hb1_L	OPAQUE	a generic bone with an ungrounded 'hb' code, left, numbered	NOT_APPLICABLE		Medium		No grounding for 'hb' abbreviation.	P73	
+backleftloopclose	BackLeftLoopClose	PARTIAL	a 'loop' closure mechanism (garment loop/buckle vs. other), back, left	NEEDS_CONTEXT		Low	which loop object and closure type unresolved	No content resolves what kind of loop is being closed.	P73	
+head-skinny	head-skinny	CLEAR	a head-shape 'skinny' descriptor	CLEAR	groupFile/Body Morphs	Medium		Matches sibling head-wide (this batch): explicit head-shape size descriptor.	P73	
+bip_r_middle_03	bip_r_middle_03	CLEAR	right middle finger anatomy, numbered segment	CLEAR	groupFile/Arms/RightArm/RightFingers	Medium		'Middle' finger-position convention, matches sibling 'r middle 03' (this batch).	P73	
+bipqwn l foretwist	BipQwn L ForeTwist	CLEAR	left forearm twist, BipQwn namespace	CLEAR	groupFile/Arms	High		Standard rig twist-bone anatomy (Rule 3); BipQwn is an established Qwn-Rig namespace prefix.	P73	
+squinch left	squinch left	CLEAR	a squinch (eye/face scrunching) expression, left	CLEAR	groupFile/Face/Eyes	Medium		'Squinch' is a recognized eye-region facial expression term.	P73	
+bone115	Bone115	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P73	
+tailright3_2	TailRight3_2	CLEAR	tail anatomy, right, numbered	CLEAR	groupFile/Tail	High		Explicit tail anatomy.	P73	
+rtoeindex01	rToeIndex01	CLEAR	right index toe anatomy, numbered	CLEAR	groupFile/Toes/RightToes	High		Explicit toe anatomy.	P73	
+valvebiped.bip01_l_fingerbase4	ValveBiped.Bip01_L_FingerBase4	CLEAR	left finger base anatomy, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy.	P73	
+helperbody1l	helperBody1L	CLEAR	a generic body helper bone, numbered, left	CLEAR	groupFile/Body	Medium		'Helper' is a common auxiliary-bone rig term; 'body' names the general anatomical owner.	P73	
+flower pattern	Flower pattern	CLEAR	a decorative flower fabric/texture pattern	NEEDS_CONTEXT		Low	which garment or surface carries the pattern is unnamed	Pattern/design content is clear but the owning garment or surface is not named.	P73	
+bone 1061	bone 1061	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P73	
+bone119	Bone119	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P73	
+browmiddle_right_up	browMiddle_Right_Up	CLEAR	right eyebrow, middle, raised/up	CLEAR	groupFile/Face/Upper Face	High		Explicit brow anatomy.	P73	
+bip kneetwisttopout l	bip kneetwisttopout l	CLEAR	left knee twist, top-out variant	CLEAR	groupFile/Legs	High		Standard rig twist-bone anatomy (Rule 3).	P73	
+v_weapon	v_weapon	OPAQUE	a bare viewmodel-weapon namespace prefix with no additional content	NOT_APPLICABLE		Medium		No semantic content beyond the bare rig/namespace prefix itself.	P73	
+sperm.tail_1	Sperm.Tail_1	CLEAR	a sperm-cell effect prop's tail, numbered	CLEAR	groupFile/Other	Medium		Recognized effect/prop object, matches established fluid/effect-prop precedent.	P73	
+c collar tip sec	c collar tip sec	CLEAR	a garment collar, tip section	CLEAR	groupFile/Clothing	Medium		'Collar' is an established garment feature in this Master (jacket_collar_l, collar_r1, collar right 4), routed to Clothing regardless of the 'tip sec' suffix.	P73	
+bobcut.rear_left_3	Bobcut.Rear_Left_3	CLEAR	a bob-haircut hair strand, rear-left, numbered	CLEAR	groupFile/Hair	High		'Bobcut' is an unambiguous hairstyle name.	P73	
+wep_belt_bullet10	WEP_Belt_Bullet10	CLEAR	a weapon ammunition belt, numbered round	CLEAR	groupFile/Other	High		Recognized ammunition object.	P73	
+jnt_128	jnt_128	OPAQUE	a generic numbered joint	NOT_APPLICABLE		High		Generic joint+number pattern, no anatomical content, matches Bone### precedent.	P73	
+nostril open right	Nostril Open Right	CLEAR	a nostril-open/flare posing control, right	CLEAR	groupFile/Face/Mid Face	High		Nostril flare is ordinary facial posing, not a body-shape morph; nostril is a mid-face feature.	P73	
+tank	Tank	PARTIAL	'tank' (military vehicle / tank-top garment / storage tank)	NEEDS_CONTEXT		Low	materially different core senses compete	No disambiguating context for which 'tank' sense applies.	P73	
+nasolabialmiddle_l	NasolabialMiddle_L	CLEAR	the nasolabial fold (real facial anatomy term), middle, left	CLEAR	groupFile/Face/Mid Face	High		'Nasolabial' is grounded anatomical terminology for the nose-to-mouth fold, a mid-face feature.	P73	
+shoulder_bone_correct_r_02	shoulder_bone_correct_r_02	CLEAR	a shoulder corrective control, right, numbered	CLEAR	groupFile/Correctives	High		Explicit 'correct' correction language (Rule 5).	P73	
+shirt_full_tie_left_1	Shirt_Full_Tie_Left_1	CLEAR	a shirt tie, left, numbered	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P73	
+rwing01	RWing01	CLEAR	right wing anatomy, numbered	CLEAR	groupFile/Wings	High		Explicit wing anatomy.	P73	
+necklace 3	necklace 3	CLEAR	a necklace, numbered	CLEAR	groupFile/Clothing	High		Worn jewelry accessory.	P73	
+valvebiped.bip01_r_shoulder_twist	ValveBiped.Bip01_R_Shoulder_Twist	CLEAR	right shoulder twist, standard biped rig	CLEAR	groupFile/Arms	High		Standard rig twist-bone anatomy.	P73	
+shell.wall_11	Shell.Wall_11	CLEAR	an environment/structure 'shell wall' segment, numbered	CLEAR	groupFile/Other	High		Matches exact sibling shell.wall template (this ledger).	P73	
+v_sil	v_sil	OPAQUE	an ungrounded viewmodel-prefixed 'sil' code	NOT_APPLICABLE		Low		No sufficiently strong corpus evidence resolves 'sil' (Rule 23d) between silencer/silhouette/other senses.	P73	
+holster_l	holster_L	CLEAR	a weapon holster, left	CLEAR	groupFile/Other	High		Matches r_rear_holster sibling precedent (this ledger); weapon-carrying accessory routed to Other.	P73	
+pedal.right	Pedal.Right	CLEAR	a vehicle/mechanism pedal, right	CLEAR	groupFile/Other	High		Recognized mechanism part.	P73	
+jacket right back c	jacket right back c	CLEAR	a jacket garment, back, right, variant	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P73	
+canine_pelvis	Canine_Pelvis	CLEAR	pelvis anatomy, canine species descriptor	CLEAR	groupFile/Body	High		Pelvis is central/unsided anatomy (Rule 26); species prefix doesn't change the destination.	P73	
+throat swallow	Throat Swallow	CLEAR	a throat-swallow action	CLEAR	groupFile/Body	Medium		Throat/neck is structural Body anatomy.	P73	
+happy_open	happy_open	CLEAR	a 'happy' whole-face expression, open-mouth variant	CLEAR	groupFile/Face/Expressions	Medium		'Happy' is a whole-face mood word; 'open' describes a variant of the expression.	P73	
+strench	strench	PARTIAL	'strench' (likely 'stretch' deformation function, or 'stench' odor effect)	NEEDS_CONTEXT		Low	materially different core readings compete	Ambiguous between a stretch-deformation reading and a stench/smell-effect reading, with no disambiguating content.	P73	
+shirt up	shirt up	CLEAR	a shirt garment, up state/position	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P73	
+bip legtwistbottom r	bip legtwistbottom r	CLEAR	right leg twist, bottom variant	CLEAR	groupFile/Legs	High		Standard rig twist-bone anatomy (Rule 3).	P73	
+eyeslookleft	EyesLookLeft	CLEAR	eyes look-left direction control	CLEAR	groupFile/Face/Eyes	High		Explicit eye-direction anatomy.	P73	
+egg.wall_11	Egg.Wall_11	CLEAR	an environment/structure 'egg wall' segment, numbered	CLEAR	groupFile/Other	Medium		Matches the shell.wall structural-segment template (this ledger); 'egg' plausibly an environment/structure name.	P73	

@@ -1,0 +1,213 @@
+PHASE 2 PRODUCTION TRANCHE 8 -- CONSISTENCY AUDIT
+Canonical positions 7501-8500 (batches P71-P80)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv (8500 rows after this tranche)
+
+============================================================
+1. SETTLED-RULE DRIFT CHECK (Section 17)
+============================================================
+
+Mechanically re-grouped every Tranche-8 row belonging to the watch-list
+families named in Section 17 (tentacle, fin, Box_Face_##_M, balloon-flat,
+Rig-Hole) and verified each against the current authoritative destination
+before classifying, per the Section 2 authority order.
+
+  Tentacle family (4 rows: bip_tentacle.008, tentacletop2, tenta_1_r,
+  tentaclebottompright2): all CLEAR/CLEAR/groupFile/Other. Matches settled
+  Rule 18 + finalized calibration. No drift.
+
+  Fin family (2 rows): r_fin_front_b -> CLEAR/CLEAR/groupFile/Other,
+  matching settled precedent. "bipfin r finger2" was deliberately NOT
+  routed under the fin precedent -- its literal names an explicit
+  "Finger", a stronger and more specific reading than the bare
+  "Fin"/"Fin_" appendage pattern, so it was routed to
+  groupFile/Arms/RightArm/RightFingers instead. This is a reasoned
+  distinction (documented in the row's short_reason), not drift.
+
+  Box_Face_##_M family (1 row: box_face_20_m): PARTIAL/NEEDS_CONTEXT/blank,
+  matching the 8-of-10 majority-sibling precedent from the Tranche 7
+  family reconciliation. No drift.
+
+  Balloon family: no true "balloon" body-shape family member appeared this
+  tranche. "ref condom balloon" (a literal condom/balloon novelty prop) is
+  unrelated to the Body-Morphs "Balloon" precedent and was correctly
+  routed to groupFile/Other.
+
+  Rig-Hole family (Qwn/Pbg/Brk/Mar/Flm/Fio-Rig-Hole): zero members
+  appeared in canonical positions 7501-8500.
+
+  Horn family (3 rows: bip_l_horn_c, bip_r_horn_c, bip_horn): all
+  CLEAR/CLEAR/groupFile/Other, matching settled Rule 18 precedent.
+
+No settled-rule drift found in this tranche.
+
+============================================================
+2. INTERNAL-NAMESPACE CONSISTENCY (BAS., Student.)
+============================================================
+
+Two internal-namespace families recurred enough this tranche to warrant a
+consistency check: BAS.<position> and Student.<position>. Each shows an
+apparent two-way split, but the split is a single coherent, deliberately
+applied rule -- not drift -- distinguishing rows that carry a jiggle
+function word from bare position-only rows:
+
+  BAS. family (6 rows):
+    bas.rear_right_3_jiggle -> CLEAR/NEEDS_CONTEXT (has "_jiggle")
+    bas.back_3_jiggle       -> CLEAR/NEEDS_CONTEXT (has "_jiggle")
+    bas.rear_center_1       -> OPAQUE/NOT_APPLICABLE (bare position)
+    bas.back_1              -> OPAQUE/NOT_APPLICABLE (bare position)
+    bas.right_1             -> OPAQUE/NOT_APPLICABLE (bare position)
+    bas.rear_right_1        -> OPAQUE/NOT_APPLICABLE (bare position)
+
+  Student. family (5 rows):
+    student.left_2_jiggle -> CLEAR/NEEDS_CONTEXT (has "_jiggle")
+    student.back_3_jiggle -> CLEAR/NEEDS_CONTEXT (has "_jiggle")
+    student.back_2_jiggle -> CLEAR/NEEDS_CONTEXT (has "_jiggle")
+    student.right_3       -> OPAQUE/NOT_APPLICABLE (bare position)
+    student.back_3        -> OPAQUE/NOT_APPLICABLE (bare position)
+
+Rule applied consistently: the internal namespace prefix is set aside
+(Rule 6); a bare position label with no function word remaining is OPAQUE
+(matches the Tranche 7-audited "BAS.<position>" precedent); a position
+label plus an explicit "jiggle" function word is CLEAR (function known)
+but NEEDS_CONTEXT (no anatomical owner named), per Rule 25.
+
+============================================================
+3. MANDATORY OPAQUE REVIEW (Section 18, 6-question test)
+============================================================
+
+All 167 Tranche-8 OPAQUE rows were reviewed individually at classification
+time against the six questions (direct readability; hidden namespace
+content; project-grounded strange tokens; genericity-vs-opacity; DCC
+default vs. real object; unknown destination vs. unknown semantics).
+They resolve into these mechanically-justified categories:
+
+  - Generic numbered rig bones (Bone###, bone.###, bone_skin_###,
+    jnt_###, valvebiped.joint#): ~70
+  - DCC-default primitive mesh names (polySurface##, pCylinder#, pCube#)
+    per Section 5/Rule 10: 8 (polysurface62, pcylinder4, polysurface2,
+    pcube5, polysurface29, polysurface210, polysurface100, plus one
+    additional numbered polySurface row)
+  - Generic placeholder object names (Object##, object0##_001): 8
+  - Bare positional labels/side-markers with no owning object
+    (right_10, right_19, right_6, left_4, front 1, side_left_9,
+    backleft, etc.): ~12
+  - Internal-namespace codenames verified against siblings (BAS.<pos>,
+    Student.<pos>, Brk-Rig-Bacon-F, bare v_weapon/Flm/BipQwn/
+    ValveBiped.ValveBiped1 namespace-only tokens): ~14
+  - Character/model-name prefix plus generic numbered bone/token with no
+    independent content (TaurenMale_HD_bone_##: 5 rows; Kargathbladefist_
+    Bone46; Saberon_Bone13/43; "very uncensored taki"): ~9
+  - Cryptic 2-5 letter abbreviation/code fragments with no independent
+    grounding (r ucor, hm, srs, rm01/05/2, l2ndna, r2ndnb, r1stnb/na, e15,
+    g10/11, h11, i5, l5/6/02, lc1, lm04, ad96l, au18, b13, c_lur_a00,
+    bone_arl, bone_afl, bone_bed_06/12, v_pp, v_ss, v_sil, fh11.r, x d,
+    etc.): ~35
+  - OPT_acs-prefixed accessory rows with no independently grounded content
+    beyond an ungrounded token or physics-type label (opt_acs_maehir_s4,
+    opt_acs_osage_l14/l17): 3
+  - Bare numbers (5, 9, 23, 39, 55, 06, 008, 004, "23", bone 89, etc.): ~8
+  - Symbolic/non-linguistic fragments (~, ^ open): 2
+  - Bare generic technical/administrative terms with no anatomical anchor
+    (state, phys, blip, drawcall_0034, level5_center, root ground.002,
+    valvebiped.group1, submesh_00_lod_1.1781, btn.sleep, thicken/outline,
+    jittereflex, reflexsite, special05_l/06_l, dummy01/08, bip_giroscopeX,
+    bone.giroscopeX): ~17
+  - Bare/unclear proper-noun-like or unresolved terms (hachime, freaks,
+    comichalloween, tigger, tlccurve): 5
+
+No row in this list showed direct readable content, a project-grounded
+convention, or independent semantic evidence that was missed at
+classification time. Genericity was not mistaken for opacity: recognizable
+deliberately-named generic objects (Box02, rustCylinder, Tube001) were
+correctly kept at groupFile/Other rather than marked OPAQUE, consistent
+with the Rule 10 boundary and Tranche 7's established precedent.
+
+============================================================
+4. MANDATORY FACE/EXPRESSIONS AUDIT (Section 19)
+============================================================
+
+All 6 rows routed to groupFile/Face/Expressions this tranche were
+reviewed:
+
+  cangry2, lighthearted, happy_open, daze, dazel, face orgasm
+
+All six are bare mood/emotion words or the "[X] + emotion-word" whole-face
+template (no localized brow/eye/mid-face/lip-jaw/tongue mechanism is
+named in any of them). No re-routing required.
+
+Suspicious Upper/Lower Face rows whose routing depended on an emotion
+token (facegrin, smileright, smile2.r, frown_right, sneer_out) were also
+re-examined: each names a mouth-specific action/shape word (grin, smile,
+frown, sneer) matching the settled bare-word family precedent
+(Smile/Frown/Smirk/Grin -> Lower Face), not a whole-face preset. No
+re-routing required.
+
+============================================================
+5. DCC-DEFAULT-NAME BOUNDARY CONSISTENCY (Section 5)
+============================================================
+
+All polySurface##/pCylinder#/pCube#-style rows this tranche were routed
+OPAQUE per the settled boundary. Distinct from this, "rustCylinder"
+(rust + cylinder) and "Tube001"/"Box02" were correctly kept at
+groupFile/Other under the genericity-is-not-opacity / deliberately-named
+generic-real-object precedent, since each carries descriptive content
+("rust", a real generic object name, or a direct live-Master "tube"/"Box"
+family precedent) beyond a bare DCC auto-generated primitive name.
+
+============================================================
+6. CROSS-TRANCHE FINDINGS (Section 21)
+============================================================
+
+No new decisive cross-tranche error was discovered this tranche. Every
+precedent cited during Tranche 8 classification (tentacle, fin, horn,
+Box_Face_##_M, dyng, Key.<label>, Page<N>_<letter>, Leotoard, whisker,
+fhair/bhair, dred, JCM, TaurenMale_HD_bone, OPT_acs, BAS.<position>, bare
+"tube"/"fur"/"Grin"/"Gen"-numbered-series/"Boobs Upward") was mechanically
+re-read from the current ledger or the live Master before use (Section 20),
+and every citation's fields matched the claimed current state. No
+precedent-integrity violation was found.
+
+============================================================
+7. UNRESOLVED WITHIN-TRANCHE FAMILY OBSERVATIONS (non-blocking)
+============================================================
+
+The following are recorded as observations for future-tranche awareness,
+not corrected here (each is an isolated PARTIAL/NEEDS_CONTEXT judgment
+call, not a doctrine violation):
+
+  - "bow ___" (11 rows across this tranche): consistently routed
+    PARTIAL/NEEDS_CONTEXT per the Rule 22/25 multi-sense precedent. If a
+    future tranche accumulates strong corpus evidence for one bow-sense
+    dominance, this family should be revisited as a block.
+  - "chain_N" / "chain word" (multiple rows): consistently routed
+    PARTIAL/NEEDS_CONTEXT per the established multi-sense chain
+    calibration precedent.
+  - Genital "directional-state" convention applied this tranche: "in" /
+    "out" treated as positional/structural (-> Body); "open" / "close" /
+    "spread" / "gape" / "tighten" treated as shape/state words
+    (-> Body Morphs). This is a new explicit articulation of a
+    distinction implicit in earlier tranches' AnusOpen/vag-inner
+    precedents; flagged here so a future QA pass can verify it holds
+    against the full corpus if desired.
+  - Garment-prefixed body-shape compounds ("Pants Butt Big" / "Bikini
+    Butt Big" / "Shirt Thick Thighs" -> Body Morphs) vs. garment-cut
+    compounds ("PantsWideHips" / "PantsLegsize" / "PantsSlimLegs" /
+    "BootsLegsize" -> Clothing): distinguished by whether the descriptor
+    names a body part directly (body-shape reading) or describes the
+    garment's own cut/fit (garment reading). Documented per-row; flagged
+    for future-tranche consistency awareness.
+
+============================================================
+Summary
+============================================================
+
+Consistency flags raised: 0 corrections applied (no drift, no
+cross-tranche errors found). 3 non-blocking observational notes recorded
+in Section 7 above for future-tranche awareness.
+NEEDS_DOCTRINE rows: 0.
+Rule 21 invariant: 0 violations across all 1000 Tranche-8 rows.
+Internal duplicate fold_keys within Tranche 8: 0.
+All precedent citations used in this document and throughout Tranche 8
+classification were mechanically re-read from the current ledger or the
+live Master at time of use (Section 2/17/20), not recalled from memory or
+prior report prose.

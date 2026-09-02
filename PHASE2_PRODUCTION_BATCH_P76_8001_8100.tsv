@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+unusedbone57	unusedbone57	CLEAR	a self-declared unused bone	CLEAR	groupFile/Useless	High		Explicit 'unused' declaration.	P76	
+bone162	Bone162	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P76	
+bone159	Bone159	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P76	
+taurenmale_hd_bone_86	taurenmale_hd_bone_86	OPAQUE	a generic numbered bone under a character/model-name prefix ('TaurenMale HD')	NOT_APPLICABLE		High		Matches the settled TaurenMale_HD_bone_78 precedent.	P76	
+pelvis_adj	pelvis_adj	CLEAR	a pelvis adjuster control	CLEAR	groupFile/Body	High		Pelvis is central/unsided anatomy (Rule 26).	P76	
+leftarmgib	LeftArmGib+leftArmGib	CLEAR	a destructible left-arm gib fragment prop	CLEAR	groupFile/Other	High		Matches established 'gib' destructible-fragment precedent, explicit 'arm' object.	P76	
+pantswidehips	Pantswidehips	CLEAR	pants garment with a wide-hips fit variant	CLEAR	groupFile/Clothing	High		Matches Rule 8's worked example: named garment (pants) is the primary object.	P76	
+student.right_3	Student.Right_3	OPAQUE	a bare positional label under an ungrounded 'Student' costume/character namespace	NOT_APPLICABLE		Medium		'Student' is a costume/character-archetype prefix (Rule 24) set aside; remaining 'right_3' is a bare positional label with no owning object, matching established precedent.	P76	
+rip00 joint	rip00 joint	PARTIAL	a 'rip' (tear/damage effect, or unclear compound), numbered, joint	NEEDS_CONTEXT		Low	affected object/meaning of 'rip' unresolved	Matches sibling 'rip01 joint' precedent (this ledger).	P76	
+second_arms_r_index1	Second_Arms_R_Index1	CLEAR	an extra/second right arm, index finger, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Matches established extra-limb finger precedent.	P76	
+state	State	OPAQUE	a bare generic technical/administrative term	NOT_APPLICABLE		Medium		No anatomical or object content; a generic state-machine-style parameter name.	P76	
+liplower_l1	lipLower_L1	CLEAR	lower lip anatomy, left, numbered	CLEAR	groupFile/Face/Lower Face	High		Explicit lip anatomy.	P76	
+decocker	Decocker	CLEAR	a firearm decocking-lever safety mechanism	CLEAR	groupFile/Other	High		Recognized weapon part.	P76	
+sidelockleft1	SideLockLeft1	CLEAR	a hair sidelock strand, left, numbered	CLEAR	groupFile/Hair	High		Matches sibling 'sidelockleft1 jiggle' precedent (this ledger).	P76	
+frontflapnarrower	FrontFlapNarrower	CLEAR	a garment front-flap narrowing adjuster	CLEAR	groupFile/Clothing	Medium		'Flap' names a garment feature (e.g. coat/jacket flap).	P76	
+middlebulgeout	MiddleBulgeOut	CLEAR	a bulge/deformation control, middle, outward	NEEDS_CONTEXT		Low	which body region or object bulges is unnamed	Bulge/deformation function is clear but the affected region or object is not named.	P76	
+unused l jacketc spo	unused l jacketc spo	CLEAR	a self-declared unused control referencing a jacket, left	CLEAR	groupFile/Useless	High		Explicit 'unused' declaration overrides the garment content (Rule 15).	P76	
+ref condom balloon	REF CONDOM BALLOON	CLEAR	a condom-balloon reference prop	CLEAR	groupFile/Other	Medium		Recognized novelty/reference prop object (Rule 16).	P76	
+gag_l_07	Gag_L_07	PARTIAL	a 'gag' (a physical mouth-gag object, or a gag-reflex mouth action), left, numbered	NEEDS_CONTEXT		Low	materially different core readings compete	No content resolves whether this is a worn/held gag object or an intraoral gag-reflex action.	P76	
+pincer left tip	Pincer Left Tip	CLEAR	a pincer/claw appendage, left, tip segment	CLEAR	groupFile/Other	Medium		Matches sibling 'pincer right tip' precedent (this ledger).	P76	
+shirt_bottom_lift	shirt_bottom_lift	CLEAR	a shirt garment, bottom-lift feature	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P76	
+body-r-ass-smack	Body-R-Ass-Smack	CLEAR	a buttock impact/jiggle ('smack') reaction control, right	CLEAR	groupFile/Body	Medium		Structural jiggle/impact-reaction function on buttock anatomy.	P76	
+r leg string sec root	r leg string sec root	CLEAR	a decorative 'string' accessory, leg position, section root, right	NEEDS_CONTEXT		Low	no specific owning garment/object named	Matches established bare unowned string/cord accessory NEEDS_CONTEXT precedent; 'leg' names position, not a competing owner.	P76	
+bip_r_horn_c	bip_r_horn_c	CLEAR	a horn, right side, variant C	CLEAR	groupFile/Other	High		Settled Rule 18 species-neutral precedent (horn->Other).	P76	
+bone23	Bone23	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P76	
+pjcmthighback35l	pJCMThighBack35L	CLEAR	a joint-corrective morph (pJCM) for the thigh-back region, numbered, left	CLEAR	groupFile/Correctives	High		'JCM' (Joint Corrective Morph) is a widely recognized rigging abbreviation for corrective shapes (Rule 23b).	P76	
+wrinkle_medium_2	wrinkle_medium_2	CLEAR	a wrinkle appearance/texture control, medium, numbered	NEEDS_CONTEXT		Low	appearance function clear but no body region/feature named	Matches established 'wrinkle'-style NEEDS_CONTEXT precedent (this ledger).	P76	
+swimsuit-exposed	Swimsuit-Exposed	CLEAR	a swimsuit garment, exposed state	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P76	
+bas.back_3_jiggle	BAS.Back_3_jiggle	CLEAR	a jiggle-physics control, back position, numbered	NEEDS_CONTEXT		Medium	function clear but no owning body part or object named	BAS. is an established non-semantic internal namespace; remaining content names only position + jiggle function (Rule 25 unowned-function pattern), matching sibling bas.rear_right_3_jiggle.	P76	
+lock2	lock2	PARTIAL	'lock' (a hair lock / a mechanical lock), numbered	NEEDS_CONTEXT		Low	materially different core senses compete	No disambiguating context for which 'lock' sense applies.	P76	
+canine_lupperlip	Canine_LUpperLip	CLEAR	upper lip anatomy, left, canine species descriptor	CLEAR	groupFile/Face/Lower Face	High		Lip anatomy is species-neutral; species prefix doesn't change destination.	P76	
+head nostril middle lower	head nostril middle lower	CLEAR	nostril/nose anatomy, middle, lower	CLEAR	groupFile/Face/Mid Face	High		'Head' is a location prefix; nostril is a mid-face feature.	P76	
+bip_stoolclothlower_1_r	bip_StoolClothLower_1_R	CLEAR	a stool's cloth covering, lower section, right, numbered	CLEAR	groupFile/Other	Medium		Matches established stool-cloth furniture-prop precedent (this ledger).	P76	
+bip_cape_0_l	bip_Cape_0_L	CLEAR	a cape garment, numbered, left	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P76	
+tentaclebottompright2	TentacleBottompRight2	CLEAR	a tentacle, bottom-right position, numbered	CLEAR	groupFile/Other	High		Settled Rule 18 species-neutral precedent (tentacle->Other), confirmed by finalized calibration.	P76	
+doorhandlebone	DoorHandleBone	CLEAR	a door-handle mechanism bone	CLEAR	groupFile/Other	High		Recognized mechanism/prop part.	P76	
+small_earring.r	Small_Earring.R	CLEAR	a small earring, right	CLEAR	groupFile/Clothing	High		Worn jewelry accessory.	P76	
+l6	L6	OPAQUE	a bare alphanumeric code	NOT_APPLICABLE		Medium		No grounding for standalone 'L6'.	P76	
+pendant.chain_3	Pendant.Chain_3	CLEAR	a pendant necklace's chain, numbered	CLEAR	groupFile/Clothing	High		'Pendant' clearly establishes jewelry context, resolving the otherwise-ambiguous 'chain' term.	P76	
+au18	AU18	OPAQUE	a bare alphanumeric code	NOT_APPLICABLE		Medium		No grounding for standalone 'AU18'.	P76	
+v_pp	v_pp	OPAQUE	an ungrounded viewmodel-prefixed 'pp' code	NOT_APPLICABLE		Low		No sufficiently strong corpus evidence resolves 'pp' (Rule 23d).	P76	
+genitals base	genitals base	CLEAR	genital anatomy, base/root	CLEAR	groupFile/Body	High		Explicit genital anatomy.	P76	
+lockhinge_m	LockHinge_M	CLEAR	a lock-hinge mechanism, variant M	CLEAR	groupFile/Other	Medium		Recognized mechanism part.	P76	
+moustache right control	moustache right control	CLEAR	a moustache control, right	CLEAR	groupFile/Hair	High		Moustache is unambiguous facial hair.	P76	
+bip_pussyside_1_l	bip_PussySide_1_L	CLEAR	vaginal structural anatomy, side, numbered, left	CLEAR	groupFile/Body	High		Explicit genital anatomy.	P76	
+armbase	ArmBase	CLEAR	an arm root/anchor bone	CLEAR	groupFile/Arms	Medium		Explicit arm anatomy, root/base function.	P76	
+bone130	Bone130	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P76	
+head eyeref left	head eyeref left	CLEAR	eye anatomy, reference marker, left, head location prefix	CLEAR	groupFile/Face/Eyes	Medium		'Head' is a location prefix; 'eye' is explicit anatomy; 'ref' is a reference-marker qualifier.	P76	
+fa_low_lid_left_center	fa_low_lid_left_center	CLEAR	lower eyelid, left, center	CLEAR	groupFile/Face/Eyes	High		'fa_' is a common face-abbreviation prefix; lower eyelid is explicit.	P76	
+crush-1	crush-1	PARTIAL	'crush' (a physical impact/deformation function, or a romantic-infatuation emotion), numbered	NEEDS_CONTEXT		Low	materially different core senses compete	No disambiguating context for which 'crush' sense applies.	P76	
+bip01_r_clavicle007	Bip01_R_Clavicle007	CLEAR	right clavicle anatomy, numbered	CLEAR	groupFile/Arms	High		Clavicle/shoulder-girdle anatomy.	P76	
+bone176	Bone176	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P76	
+wep_magazine_bullet1	WEP_Magazine_Bullet1	CLEAR	a weapon magazine's ammunition round, numbered	CLEAR	groupFile/Other	High		Recognized ammunition object.	P76	
+wing_left_spine_3	Wing_Left_Spine_3	CLEAR	wing spine/strut anatomy, left, numbered	CLEAR	groupFile/Wings	High		Explicit wing anatomy.	P76	
+jnt_023	jnt_023	OPAQUE	a generic numbered joint	NOT_APPLICABLE		High		Generic joint+number pattern, no anatomical content.	P76	
+bip01-r-upperarm001	Bip01-R-UpperArm001	CLEAR	right upper-arm anatomy, numbered	CLEAR	groupFile/Arms	High		Plain structural upper-arm anatomy.	P76	
+arm pits	arm pits	CLEAR	armpit anatomy	CLEAR	groupFile/Arms	Medium		Armpit is arm/shoulder-region anatomy.	P76	
+magazinecacth	Magazinecacth	CLEAR	a magazine-catch weapon component (typo'd 'catch')	CLEAR	groupFile/Other	High		Recognized weapon part despite the typo (Rule 12).	P76	
+mlip_l	MLip_L	CLEAR	lip anatomy, 'M' qualifier, left	CLEAR	groupFile/Face/Lower Face	High		Explicit lip anatomy.	P76	
+bip_bowtielower_l	bip_BowtieLower_L	CLEAR	a bowtie garment, lower, left	CLEAR	groupFile/Clothing	High		Matches sibling bip_bowtielower_r precedent (this ledger).	P76	
+shorten_1	shorten_1	CLEAR	a 'shorten' size-adjustment control, numbered	NEEDS_CONTEXT		Low	no object/owner named	Size-adjustment function is clear but no object is named.	P76	
+liplower_middle1	lipLower_Middle1	CLEAR	lower lip anatomy, middle, numbered	CLEAR	groupFile/Face/Lower Face	High		Explicit lip anatomy.	P76	
+head01n	Head01N	CLEAR	head anatomy, numbered, variant N	CLEAR	groupFile/Body	Medium		Plain structural head anatomy with no specific facial feature named, matching bip_head_top precedent.	P76	
+box02	Box02	CLEAR	a box prop, numbered	CLEAR	groupFile/Other	Medium		Matches established Box##-family deliberately-named generic-real-object precedent (Rule 10).	P76	
+head back 2	head back 2	CLEAR	head anatomy, back position, numbered	CLEAR	groupFile/Body	Medium		Plain structural head anatomy, matching head01n/bip_head_top precedent.	P76	
+facegrin	FaceGrin	CLEAR	a grinning mouth expression, face-prefixed	CLEAR	groupFile/Face/Lower Face	High		Matches settled Grin bare-word family precedent (mouth-specific).	P76	
+foot_b_r	Foot_B_R	CLEAR	right foot anatomy, variant B	CLEAR	groupFile/Legs	High		Plain structural foot anatomy.	P76	
+gag_r_06	Gag_R_06	PARTIAL	a 'gag' (a physical mouth-gag object, or a gag-reflex mouth action), right, numbered	NEEDS_CONTEXT		Low	materially different core readings compete	Matches sibling gag_l_07 precedent (this batch).	P76	
+spine lower_l.001	spine lower_L.001	CLEAR	lower spine anatomy, left, numbered	CLEAR	groupFile/Body	High		Plain structural spine anatomy.	P76	
+teeth_top_r	teeth_top_r	CLEAR	upper teeth anatomy, right	CLEAR	groupFile/Face/Lower Face	High		Teeth are mouth anatomy.	P76	
+special06_l	special06_L	OPAQUE	a generic 'special' label with no identifiable content, numbered, left	NOT_APPLICABLE		Medium		No object or feature named; matches established bare-generic-label OPAQUE precedent.	P76	
+lowlid_right1	lowLid_Right1	CLEAR	lower eyelid, right, numbered	CLEAR	groupFile/Face/Eyes	High		Explicit lower-eyelid anatomy.	P76	
+fa_forehead_right_inn	fa_forehead_right_inn	CLEAR	forehead anatomy, right, inner	CLEAR	groupFile/Face/Upper Face	High		'fa_' is a common face-abbreviation prefix; forehead is explicit.	P76	
+bone015	Bone015	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P76	
+bipqwn l finger1	BipQwn L Finger1	CLEAR	left finger anatomy, BipQwn namespace, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy.	P76	
+crush-7	crush-7	PARTIAL	'crush' (a physical impact/deformation function, or a romantic-infatuation emotion), numbered	NEEDS_CONTEXT		Low	materially different core senses compete	Matches sibling crush-1 precedent (this batch).	P76	
+valvebiped.right_hand_trigger	ValveBiped.right_hand_trigger	CLEAR	a right-hand trigger-pull control, standard biped rig	CLEAR	groupFile/Arms	Medium		Hand-region control; no specific finger named, defaults to plain Arms (Rule 10).	P76	
+bip_upperarm_l_roll	bip_upperArm_L_roll	CLEAR	left upper-arm roll, standard rig anatomy	CLEAR	groupFile/Arms	High		Standard rig twist/roll-bone anatomy (Rule 3).	P76	
+page1_l	Page1_L	CLEAR	a book page-turning prop control, numbered, variant	CLEAR	groupFile/Other	High		Matches Rule 23's Page<N>_<letter> grounded sibling-series template.	P76	
+legthumb2_r	LegThumb2_R	CLEAR	leg + thumb, mixed-region compound, right, numbered	NEEDS_CONTEXT		Medium	competing anatomical owners unresolved	Matches established mixed leg+finger compound precedent (this ledger).	P76	
+bone_afl	Bone_AFL	OPAQUE	a generic bone with an ungrounded 'AFL' code	NOT_APPLICABLE		High		No grounding for 'AFL'.	P76	
+leg right ankle ctr	leg right ankle ctr	CLEAR	a right ankle control/center point	CLEAR	groupFile/Legs	High		Explicit ankle anatomy.	P76	
+r1stnb	R1stNb	OPAQUE	a bare cryptic alphanumeric code	NOT_APPLICABLE		Medium		No grounding for 'R1stNb'.	P76	
+underwear-expand	Underwear-Expand	CLEAR	an underwear garment, expand state	CLEAR	groupFile/Clothing	High		Explicit worn garment.	P76	
+r_lowerer	R_lowerer	CLEAR	a 'lowerer' facial-muscle function, right	NEEDS_CONTEXT		Low	which feature (brow/lip/eyelid) is being lowered is unnamed	'Lowerer' is a real function word (cf. FACS muscle-action terminology) but no specific feature is named.	P76	
+student.left_2_jiggle	Student.Left_2_jiggle	CLEAR	a jiggle-physics control, left, numbered, under an ungrounded 'Student' namespace	NEEDS_CONTEXT		Medium	function clear but no owning body part or object named	'Student' namespace set aside (Rule 24); remaining content names only position + jiggle function, matching the BAS.*_jiggle unowned-function pattern.	P76	
+flm-armb-arm-lc	Flm-ArmB-Arm-LC	CLEAR	arm anatomy, Flm-ArmB namespace, 'LC' qualifier	CLEAR	groupFile/Arms	Medium		Flm-ArmB namespace set aside; remaining 'Arm' is plain structural anatomy.	P76	
+v_weapon.eff9	v_weapon.eff9	CLEAR	a weapon effect, numbered	CLEAR	groupFile/Other	Medium		Recognized weapon-effect object.	P76	
+pedal.center	Pedal.Center	CLEAR	a vehicle/mechanism pedal, center	CLEAR	groupFile/Other	High		Recognized mechanism part.	P76	
+pad2_2	pad2_2	PARTIAL	a 'pad' accessory (shoulder pad / knee pad / other padding), numbered	NEEDS_CONTEXT		Low	which pad and owner unresolved	Matches sibling pad1_1 precedent (this ledger).	P76	
+ldown	LDown	CLEAR	a 'down' directional/state control, left	NEEDS_CONTEXT		Low	no object/owner named	Bare directional/state word with no anatomical noun or object named.	P76	
+r sideburn f phy	r sideburn f phy	CLEAR	a sideburn hair strand, right, variant, physics	CLEAR	groupFile/Hair	High		Sideburn is unambiguous facial hair.	P76	
+bip_l_foot_thumb_03	bip_l_foot_thumb_03	CLEAR	left big-toe ('foot thumb') anatomy, numbered	CLEAR	groupFile/Toes/LeftToes	Medium		'Foot thumb' is a recognized convention for the big toe.	P76	
+mot01_head	MOT01_Head	CLEAR	head anatomy, motion-reference numbering	CLEAR	groupFile/Body	Medium		'MOT01' is a technical numeric prefix; 'head' is explicit anatomical content.	P76	
+length2	Length2	CLEAR	a 'length' size-adjustment control, numbered	NEEDS_CONTEXT		Low	no object/owner named	Size-adjustment function is clear but no object is named.	P76	
+l string6 tip sec	l string6 tip sec	CLEAR	a decorative 'string' accessory, left, numbered, tip section	NEEDS_CONTEXT		Low	no owner named	Matches established bare unowned string/cord accessory NEEDS_CONTEXT precedent.	P76	
+unused left testicle jiggle item_penis	unused left testicle jiggle item_penis	CLEAR	a self-declared unused control referencing genital anatomy	CLEAR	groupFile/Useless	High		Explicit 'unused' declaration overrides the anatomical content (Rule 15).	P76	
+bip facetemplemiout l	bip facetemplemiout l	CLEAR	facial temple region, middle-out, left	CLEAR	groupFile/Face/Upper Face	Medium		The temple is an upper-face/side-head anatomical region.	P76	
+leg left knee adjust a	leg left knee adjust a	CLEAR	left knee adjuster, variant A	CLEAR	groupFile/Legs	High		Explicit knee anatomy.	P76	
+bone006	Bone006	OPAQUE	a generic numbered rig bone	NOT_APPLICABLE		High		Generic Bone+number pattern.	P76	
