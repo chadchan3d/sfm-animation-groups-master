@@ -8,23 +8,34 @@ through PHASE2_PRODUCTION_BATCH_P50_5401_5500.tsv.
 ----------------------------------------------------------------------
 1. TRANCHE-ONLY STATISTICS (the 1,000 rows classified in this tranche)
 ----------------------------------------------------------------------
+[UPDATED post-QA-correction; see PHASE2_PRODUCTION_TRANCHE5_QA_APPLIED_
+REPORT.txt for the full evidence trail. Originally reported CLEAR 815/
+OPAQUE 128 and CLEAR(taxonomy) 738/NOT_APPLICABLE 128. Three TRUE
+Tranche-5 rows (csmile, roar, c_bck_b00) were corrected. Four further
+rows found by the same targeted QA pass (blowl+blowr, ah3,
+undereye_right_in, bedroomeyes) belong to Tranches 3 and 4, not
+Tranche 5, and are NOT reflected in these tranche-only figures -- see
+the applied report for their cross-tranche detail. Figures below
+reflect the corrected ledger, Tranche 5 rows only (positions
+4501-5500).]
+
 semantic_status:
-  CLEAR   : 815
+  CLEAR   : 816
   PARTIAL : 57
-  OPAQUE  : 128
+  OPAQUE  : 127
 
 taxonomy_status:
-  CLEAR          : 738
-  NEEDS_CONTEXT  : 134
+  CLEAR          : 737
+  NEEDS_CONTEXT  : 136
   NEEDS_DOCTRINE : 0
-  NOT_APPLICABLE : 128
+  NOT_APPLICABLE : 127
 
 confidence:
-  High   : 614
-  Medium : 226
+  High   : 615
+  Medium : 225
   Low    : 160
 
-proposed_destination distribution (CLEAR rows only, 738 total):
+proposed_destination distribution (CLEAR rows only, 737 total):
   Clothing                    : 135
   Other                       : 111
   Body                        : 69
@@ -32,7 +43,7 @@ proposed_destination distribution (CLEAR rows only, 738 total):
   Arms                        : 54
   Legs                        : 50
   Body Morphs                 : 34
-  Face/Lower Face             : 31
+  Face/Lower Face             : 32
   Arms/LeftArm/LeftFingers    : 29
   Hair                        : 27
   Useless                     : 25
@@ -41,7 +52,7 @@ proposed_destination distribution (CLEAR rows only, 738 total):
   Toes/RightToes              : 11
   Toes/LeftToes               : 9
   Tail                        : 8
-  Face/Expressions            : 8
+  Face/Expressions            : 6
   Face/Mid Face               : 8
   Face/Ears                   : 7
   Wings                       : 6
@@ -54,7 +65,7 @@ proposed_destination distribution (CLEAR rows only, 738 total):
   Arms/RightArm/RightCarpals  : 1
   Arms/LeftArm/LeftCarpals    : 1
 
-NEEDS_CONTEXT: 134
+NEEDS_CONTEXT: 136
 NEEDS_DOCTRINE: 0 (no doctrine-escalation report was needed; no
   hard-stop occurred at any point across all 10 batches)
 
@@ -114,8 +125,8 @@ Full detail in PHASE2_PRODUCTION_TRANCHE5_CONSISTENCY_FLAGS.txt. Every
 candidate finding was run through the six mandatory precedent-check
 questions.
 
-Result: 8 confirmed likely classification errors -- c_bck_b00 (a
-genuinely grounded "Bck"="Back" corpus convention was mistakenly
+Result (ORIGINAL): 8 confirmed likely classification errors -- c_bck_b00
+(a genuinely grounded "Bck"="Back" corpus convention was mistakenly
 treated as an ungrounded abbreviation), plus 6 confident + 1 lower-
 confidence expression-word destination inconsistencies (shocked l,
 csmile, lsuprise, mocking, hurt, roar routed to the generic Face/
@@ -124,14 +135,36 @@ precedent, which for several of these words leans heavily toward a
 specific Face subgroup or, for zero-precedent words, toward
 NEEDS_CONTEXT rather than a confident pick; face ahegaostyle flagged
 with lower confidence given genuinely split evidence). None auto-
-corrected, per instruction (Section 13: do not auto-apply consistency
-flags before the raw-tranche commit).
+corrected at the time, per instruction (Section 13: do not auto-apply
+consistency flags before the raw-tranche commit).
 
-CONSISTENCY FLAGS: 8
+Result (CORRECTED, follow-up targeted QA pass -- see
+PHASE2_PRODUCTION_TRANCHE5_QA_APPLIED_REPORT.txt): the "shocked l,"
+"mocking," "lsuprise," "face ahegaostyle," and "hurt" flags were
+themselves wrong -- the 75%/74% "shocked"/"surprise" word-frequency
+majorities conflated bare whole-face literals with unrelated Brow/Eye-
+compound literals, and the "zero Master hits" findings for mocking/hurt
+wrongly overrode the settled HurtR/SurpriseL calibration precedent. All
+five were RETAINED at Face/Expressions. "csmile" was confirmed correct
+and moved to Face/Lower Face (the bare "smile" word family is itself
+100% Lower Face in the Master, unlike shocked/surprised). "roar" was
+corrected to NEEDS_CONTEXT/blank rather than the originally-proposed
+Face subgroup. c_bck_b00 was corrected as originally proposed. A
+follow-up narrow sweep of ALL production rows (positions 501-5500,
+not just Tranche 5) routed to Face/Expressions additionally found and
+corrected 4 more rows belonging to Tranches 3 and 4 (blowl+blowr, ah3,
+undereye_right_in, bedroomeyes) -- these are NOT part of this tranche's
+own statistics above.
 
-TRANCHE OPAQUE ROWS MANUALLY REVIEWED: 128
+CONSISTENCY FLAGS: 3 confirmed and corrected within Tranche 5 (csmile,
+roar, c_bck_b00); 5 reviewed and retained unchanged (shocked l,
+mocking, lsuprise, face ahegaostyle, hurt); 4 additional cross-tranche
+corrections found and applied outside Tranche 5's own scope (see
+PHASE2_PRODUCTION_TRANCHE5_QA_APPLIED_REPORT.txt)
+
+TRANCHE OPAQUE ROWS MANUALLY REVIEWED: 128 (127 confirmed correctly OPAQUE; c_bck_b00 corrected)
 DIRECT-READABILITY FALSE-OPAQUE FLAGS: 0
-PROJECT-GROUNDED FALSE-OPAQUE FLAGS: 1 (c_bck_b00)
+PROJECT-GROUNDED FALSE-OPAQUE FLAGS: 1 (c_bck_b00 -- CORRECTED, see PHASE2_PRODUCTION_TRANCHE5_QA_APPLIED_REPORT.txt)
 
 ----------------------------------------------------------------------
 4. VALIDATION RESULTS (all batches, mechanical)

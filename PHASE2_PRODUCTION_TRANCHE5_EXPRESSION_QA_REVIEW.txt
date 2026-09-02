@@ -1,0 +1,344 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 5 -- EXPRESSION TAXONOMY PRECEDENT
+RECONCILIATION, QA REVIEW
+Reconciles the Tranche-5 consistency audit's expression-word findings
+against finalized calibration (HurtR, SurpriseL) and against COMPLETE-
+LITERAL Master precedent (not substring word-frequency majorities).
+No ledger row has been modified by this document -- see
+PHASE2_PRODUCTION_TRANCHE5_QA_APPLIED_REPORT.txt for the applied result.
+======================================================================
+
+----------------------------------------------------------------------
+METHODOLOGY CORRECTION ESTABLISHED FIRST
+----------------------------------------------------------------------
+For "shocked" and "surprise," the original audit's word-frequency
+percentages (75% Upper Face, 74% Upper Face) were computed over EVERY
+literal containing the substring, which conflates two genuinely
+different templates:
+
+  Template 1 -- BARE/whole-face preset: the word alone, or with only a
+    side marker or number (Shocked, shocked2, shocked3, Shocked2;
+    Surprise, Surprised, Surprised 1, SurprisedLeftRight, surprised).
+  Template 2 -- LOCALIZED component: the word compounded with an
+    explicit anatomical feature name (Brow_Shocked, BrowsShockedL,
+    Eye-Shocked-L, Eyelid-L-Shocked, shocked eye left; Brows-Surprise-L,
+    Eye Left Surprise, eyebrow surprised left, Eyes-Surprised-Both).
+
+Checked exhaustively against the live Master:
+  "shocked": ALL 5 bare/side-marker-only forms -> Face/Expressions
+    (100%). ALL 20 remaining hits explicitly name Brow/Eyebrow/Eye/
+    Eyelid -> Face/Upper Face (100% of THAT template).
+  "surpris*": bare/whole-word forms (Surprise, Surprised, Surprised 1,
+    SurprisedLeftRight, Surprised_1, surprised, surprise, plus Emote-
+    Surprised, Iris Left/Right Surprise(2)) -> 100% Face/Expressions.
+    Every other hit explicitly names Brow/Eyebrow/Eye/Eyelid/Eyelash ->
+    Face/Upper Face (or Face/Eyes for Eyelashes-Surprise-*).
+
+This is not a close call decided by majority -- it is two internally
+100%-consistent templates that the original word-frequency count
+merged into one misleading statistic. The 75%/74% figures were
+technically accurate counts but the wrong evidence for the question
+being asked (they describe the LOCALIZED-COMPONENT template, which is
+larger by volume, not the BARE template that Shocked L/LSuprise
+actually belong to).
+
+----------------------------------------------------------------------
+A. c_bck_b00 (exact: C_BCK_B00)
+----------------------------------------------------------------------
+Current: OPAQUE / NOT_APPLICABLE / [blank] / Low.
+Complete-literal reading: "C" (variant/character prefix) + "Bck" +
+"B00" (variant/index), numbered.
+Calibration precedent: none directly.
+Master evidence (re-verified): BckHair_1/2, dl_hairFaceBck_1/2_L/R,
+dl_hairSideBck_1/2_L/R, dyn_waist_fur_l/r_bck (Hair); bip_hood_bck,
+dyn_hood_bck (Clothing) -- "Bck" = "Back" is a real, coherent,
+established abbreviation in this exact corpus, splitting by owner
+(Hair vs. Clothing/hood) rather than resolving to one destination.
+The original audit's grounding finding survives full re-verification.
+VERDICT: confirmed classification error (semantic content is grounded;
+OPAQUE cannot be reconciled with the sibling series). Destination is
+genuinely split by owner and not confidently assignable from this
+literal alone -- NEEDS_CONTEXT, not a forced Hair majority pick.
+FINAL FIELDS: semantic_status CLEAR; semantic_referent "a back-position
+reference using the corpus-grounded 'Bck' abbreviation; exact owning
+object not established"; taxonomy_status NEEDS_CONTEXT; destination
+blank; confidence Medium.
+
+----------------------------------------------------------------------
+B. Shocked L (exact: Shocked L)
+----------------------------------------------------------------------
+Current: CLEAR / CLEAR / Face/Expressions / High.
+Complete-literal reading: "Shocked" + side marker "L" -- no anatomical
+feature named.
+Calibration precedent: HurtR/SurpriseL (bare emotion/expression state
+with no specific facial feature named -> Face/Expressions).
+Master precedent (see Methodology section above): every bare/side-
+marker-only "Shocked" form (5/5) -> Face/Expressions; only compounds
+that EXPLICITLY name Brow/Eye/Eyelid go to Upper Face.
+Was the 75%-Upper-Face majority misleading or genuinely applicable?
+MISLEADING -- it counted the localized-component template, not the
+bare template this literal belongs to.
+VERDICT: the original audit's proposed move to Upper Face is REJECTED.
+No stronger anatomical evidence exists for this specific bare-plus-side
+literal than for the already-accepted HurtR/SurpriseL pattern.
+FINAL FIELDS: UNCHANGED -- CLEAR / CLEAR / groupFile/Face/Expressions /
+High.
+
+----------------------------------------------------------------------
+C. CSmile (exact: CSmile)
+----------------------------------------------------------------------
+Current: CLEAR / CLEAR / Face/Expressions / Medium.
+Complete-literal reading: "C" (variant prefix) + "Smile".
+Calibration precedent: none directly names "smile"; HurtR/SurpriseL
+established the GENERAL whole-face-expression-with-no-feature-named
+rule, which is the rule under test here.
+Master precedent (re-verified directly, not by substring majority):
+the BARE/exact-word "smile" family itself -- Smile, smile, Smile2,
+smile2, SmileL, SmileR, Smile1 through Smile6, SmileBig, Smiled,
+Smiles, Smiley, smile_l, smile_r, smilel, smiler -- is OVERWHELMINGLY
+and SPECIFICALLY groupFile/Face/Lower Face (40+ bare/near-bare forms,
+effectively 100% once "Smile L"/"Smile R" -- a different, space-
+separated tokenization -- are set aside as a minor exception). This is
+categorically different from shocked/surprised: there, the BARE word
+itself went to Expressions and only compounds went anatomical. For
+"smile," the BARE word itself already goes anatomical (Lower Face).
+This reflects a real semantic difference: "smile" inherently denotes a
+specific mouth/lip shape change (the action IS a lip movement), unlike
+"shocked"/"surprised"/"hurt," which name whole-face emotional states
+with no single defining physical mechanism.
+Was raw majority misleading here? NO -- unlike shocked/surprised,
+where majority conflated two templates, here the BARE-word subset
+ITSELF (not a diluted compound-inclusive count) is consistently Lower
+Face. This is genuine, on-point, template-matched evidence, not the
+kind of statistical artifact rejected elsewhere in this review.
+VERDICT: confirmed classification error. This is the one row where the
+Tranche-5 audit's instinct (that smile behaves differently from hurt/
+shocked/surprise) was correct, even though its justification (raw
+substring majority) used the wrong method for the OTHER rows.
+FINAL FIELDS: semantic_status CLEAR (unchanged); semantic_referent "a
+smile expression, variant C -- matches the Master's bare-word 'Smile'
+family destination"; taxonomy_status CLEAR (unchanged); destination
+groupFile/Face/Expressions -> groupFile/Face/Lower Face; confidence
+Medium -> High.
+
+----------------------------------------------------------------------
+D. Mocking (exact: Mocking)
+----------------------------------------------------------------------
+Current: CLEAR / CLEAR / Face/Expressions / Medium.
+Complete-literal reading: "Mocking" -- a named emotional/expressive
+facial state, no feature named.
+Calibration precedent: HurtR/SurpriseL's general rule applies directly
+-- "Mocking" is the same KIND of word (a bare named expression/
+emotional state) as "Hurt."
+Master precedent: 0 hits for "mock." The original audit treated this
+absence as evidence AGAINST Face/Expressions. Per this task's explicit
+instruction, zero precedent is not evidence against an already-settled
+semantic rule -- the rule does not require Master corroboration to
+apply (matching the Tranche 4 lesson that ordinary-word readability,
+and by extension an already-settled destination rule for that word
+CLASS, does not need Master confirmation).
+VERDICT: the original audit's proposed move to NEEDS_CONTEXT is
+REJECTED.
+FINAL FIELDS: UNCHANGED -- CLEAR / CLEAR / groupFile/Face/Expressions /
+Medium.
+
+----------------------------------------------------------------------
+E. LSuprise (exact: LSuprise)
+----------------------------------------------------------------------
+Current: CLEAR / CLEAR / Face/Expressions / High.
+Complete-literal reading: "L" + "Suprise" (obvious misspelling of
+"Surprise") -- no anatomical feature named.
+Calibration precedent: SurpriseL is DIRECTLY on point -- same word,
+same side-marker pattern, differing only in side (L vs R) and spelling
+("Suprise" vs "Surprise," already correctly treated as the same
+semantic content by the existing row).
+Master precedent (Methodology section): every bare "Surprise"/
+"Surprised" form -> 100% Face/Expressions; only Brow/Eye/Eyelid/
+Eyelash compounds -> Upper Face/Eyes. LSuprise matches the bare
+template exactly.
+Does the 74%-Upper-Face majority override the calibration precedent?
+NO, and it should not by count alone -- it is the same kind of
+template-conflation error as "shocked," and even if it were a clean
+statistic, a raw majority does not outweigh a direct, on-point,
+same-word finalized calibration precedent (SurpriseL) that this
+project has explicitly treated as authoritative throughout Phase 2.
+VERDICT: the original audit's proposed move to Upper Face is REJECTED.
+FINAL FIELDS: UNCHANGED -- CLEAR / CLEAR / groupFile/Face/Expressions /
+High.
+
+----------------------------------------------------------------------
+F. Face AhegaoStyle (exact: Face AhegaoStyle)
+----------------------------------------------------------------------
+Current: CLEAR / CLEAR / Face/Expressions / Medium.
+Complete-literal reading: "Face" + "Ahegao" + "Style" -- explicitly
+frames itself as a whole-FACE style/preset, not a single-feature
+control.
+Master precedent (re-verified directly): bare/whole-face Ahegao forms
+-- Ahegao, Emote-Ahegao, Emote-Ahegao2, ExpAhegao1, and critically
+FaceFullExpres2Ahegao (an almost exact structural template match: also
+uses "Face" + "Full/Expres" framing) -- are ALL 5/5 Face/Expressions.
+Every other Ahegao hit explicitly names the localized feature: Brows-
+*-Ahegao (Upper Face), Eye-Ahegao-* (Upper Face), Mouth*Ahegao (Lower
+Face), Tongue-Ahegao / TongueOut AhegaoStyle (Tongue).
+Does the component split (5 Expr/4 Upper/3 Lower/2 Tongue) contradict
+Face/Expressions? NO -- once separated into whole-face-preset vs.
+localized-component templates (exactly as instructed), the split
+components are EXPECTED, not contradictory, and the whole-face template
+(which this literal matches, down to the "Face...Style" framing
+mirroring FaceFullExpres2Ahegao) is itself internally 100% consistent.
+VERDICT: the original audit's proposed move to NEEDS_CONTEXT is
+REJECTED -- the literal itself positively supports Face/Expressions,
+it is not merely the largest remaining bucket by elimination.
+FINAL FIELDS: UNCHANGED -- CLEAR / CLEAR / groupFile/Face/Expressions /
+Medium.
+
+----------------------------------------------------------------------
+G. Hurt (exact: Hurt)
+----------------------------------------------------------------------
+Current: CLEAR / CLEAR / Face/Expressions / High.
+Complete-literal reading: "Hurt" -- identical in kind to the
+calibration's own HurtR, minus the side marker.
+Calibration precedent: HurtR -- CLEAR / CLEAR / Face/Expressions /
+High, explicitly reasoned as "bare emotion/expression state with no
+specific facial feature named routes to Face/Expressions."
+Master precedent: 0 hits for "hurt." Per instruction, this does not
+override the direct calibration precedent -- rule 22's own text cites
+HurtR as a worked example, and its taxonomy conclusion (Face/
+Expressions) is part of that same settled example, not merely its
+semantic_status half. The original audit's claim that rule 22 only
+established semantic clarity, not the destination, is incorrect: the
+calibration row explicitly carries taxonomy_status=CLEAR/Face/
+Expressions as settled fact, not as an open question rule 22 leaves
+unresolved.
+No distinguishing feature exists between "Hurt" and "HurtR" other than
+the side marker.
+VERDICT: the original audit's proposed move to NEEDS_CONTEXT is
+REJECTED.
+FINAL FIELDS: UNCHANGED -- CLEAR / CLEAR / groupFile/Face/Expressions /
+High.
+
+----------------------------------------------------------------------
+H. ROAR (exact: ROAR)
+----------------------------------------------------------------------
+Current: CLEAR / CLEAR / Face/Expressions / Medium.
+Complete-literal reading: "Roar" -- a vocal/action pose, not a pure
+emotion-state word like Hurt/Mocking/Shocked/Surprised.
+Calibration precedent: none directly (HurtR/SurpriseL govern pure
+emotion-STATE words; "Roar" is more naturally an ACTION word, closer
+in kind to "Smile"/"Blow"/"Ah," which this review confirms below are
+Lower Face-specific, than to "Hurt"/"Mocking").
+Master precedent: 0 hits for "roar" (verified).
+Analysis: unlike a static emotional state, roaring is definitionally a
+mouth-open vocalization -- the action largely IS the mouth/jaw
+movement, similar in kind to "smile" (defined by a lip movement) and
+"blow" (defined by a mouth/lip shape, confirmed Lower Face below).
+However, "roar" could equally describe an aggressive WHOLE-FACE
+expression (bared teeth, narrowed eyes, furrowed brow) in this genre's
+usage, and -- critically, unlike smile/blow/ah -- there is NO Master or
+corpus precedent of any kind to confirm which reading this specific
+corpus intends. Forcing Lower Face here would repeat the exact
+overconfidence error this review exists to correct, just in the
+opposite direction (asserting a destination the evidence does not
+actually establish).
+VERDICT: genuinely undetermined between whole-face and mouth-specific
+readings, with zero tie-breaking evidence either way.
+FINAL FIELDS: semantic_status CLEAR (unchanged -- "roar" is a real,
+recognizable action); semantic_referent "a 'roar' vocal/action pose;
+whether this is a whole-face expression or a specifically mouth/jaw
+action is not established by the literal or by any Master/corpus
+precedent"; taxonomy_status CLEAR -> NEEDS_CONTEXT; destination
+groupFile/Face/Expressions -> [blank]; confidence Medium -> Low.
+
+----------------------------------------------------------------------
+I. ADDITIONAL GENUINE CONTRADICTIONS FOUND (narrow 501-5500 sweep of
+   all 48 production rows currently routed to groupFile/Face/
+   Expressions)
+----------------------------------------------------------------------
+Method: every one of the 48 rows was read for whether its complete
+literal explicitly identifies a localized anatomical mechanism (per
+Section 6's exact test). IMPORTANT PROVENANCE NOTE: this 48-row set
+spans ALL of positions 501-5500, per Section 6's explicit instruction
+("perform one NARROW audit over: production positions 501-5500") --
+it is not limited to Tranche 5. Checking each row's actual ledger
+position found that all four rows below belong to Tranche 3 (positions
+2501-3500) or Tranche 4 (3501-4500), NOT Tranche 5. Correcting them is
+explicitly authorized by Section 6's own stated scope (a narrow,
+targeted exception to the general "do not reopen Tranches 1-4"
+instruction, limited strictly to this one Face/Expressions check) --
+it is not a broader reopening of either tranche's classification work.
+These corrections are therefore reported here for completeness but are
+NOT included in Tranche 5's own statistics (PHASE2_PRODUCTION_
+TRANCHE5_REPORT.txt Section 1 reflects Tranche 5 only: csmile, roar,
+and c_bck_b00).
+
+  bedroomeyes (exact: bedroomeyes; position 3761, batch P33 -- TRANCHE
+    4): referent already says "'bedroom eyes' (a seductive eye
+    expression)." Master precedent: the EXACT phrase "Bedroom eyes"
+    exists in the Master (plus "Bedroom Eye 1/2/3 S") -- 4/4 ->
+    groupFile/Face/Upper Face. This is an exact bare-literal match, not
+    a substring artifact. VERDICT: classification error. CORRECTED:
+    taxonomy_status CLEAR (unchanged); destination groupFile/Face/
+    Expressions -> groupFile/Face/Upper Face; confidence Medium -> High;
+    semantic_status CLEAR (unchanged).
+
+  blowl+blowr (exact: BlowL+BlowR; position 2860, batch P24 -- TRANCHE
+    3): referent already says "a 'blow' (cheek/mouth) expression."
+    Master precedent: Blow, BLOW, blow, Mouth-Blow, Mouth-Blow-Full,
+    Mouth-Blow-L, Mouth-Blow-R -- 7/7 -> groupFile/Face/Lower Face,
+    including the bare word itself. VERDICT: classification error.
+    CORRECTED: destination groupFile/Face/Expressions -> groupFile/
+    Face/Lower Face; confidence Medium -> High.
+
+  ah3 (exact: ah3; position 3319, batch P29 -- TRANCHE 3): referent
+    already says "an 'ah' mouth-shape/viseme expression, numbered."
+    Master precedent: AH, AH0, AH2, Ah, ah, Ah2, ah2 -- 7/7 ->
+    groupFile/Face/Lower Face, including the bare word itself. VERDICT:
+    classification error. CORRECTED: destination groupFile/Face/
+    Expressions -> groupFile/Face/Lower Face; confidence Medium ->
+    High.
+
+A fourth row from within the same 48-row Face/Expressions set was found
+during the "under-eye" precedent check run for the bedroomeyes/eyebag
+comparison above:
+
+  undereye_right_in (exact: underEye_Right_IN; position 3757, batch
+    P33 -- TRANCHE 4), currently CLEAR/CLEAR/groupFile/Face/
+    Expressions. Referent already says "under-eye area, right, inward."
+    Master precedent: bare UnderEye_L/R and underEye_left/Right (no
+    "cheek" qualifier) -- 4/4 among the bare-word family -> groupFile/
+    Face/Upper Face (a separate "Cheek_UnderEye_*" family -> Mid Face,
+    and "cheek_upper_undereye_*" -> Lower Face, but neither template
+    matches this literal, which has no "cheek" token). VERDICT:
+    classification error. CORRECTED: destination groupFile/Face/
+    Expressions -> groupFile/Face/Upper Face; confidence Medium ->
+    Medium (kept at Medium, not raised to High, since this is a close
+    structural analog rather than an exact bare-literal match).
+
+The remaining 44 of 48 Face/Expressions rows (rebootface, face-kiss,
+face weird 1/2, dazer, shocked r, hurtl, playful, r.mad, angery left,
+fullanger, mad.l, enthusiasm, au1/4/13/22z/26z/27/2au4, l.worry, face-
+worry, sweat drop fl, sadness_l, exclamation/1, csad, disgustleft,
+disgusting, fa_eyebag_left_mid, drowsy, question1, troubled, anime
+angry bottom, fullupset, tears right width) were individually checked
+and found to be either (a) generic mood/emotion words with no
+localized feature named (matching the settled Hurt/Mocking pattern), or
+(b) explicitly checked against Master precedent for their specific
+compound content and confirmed consistent (fa_eyebag_left_mid ->
+"eyebag" is 3/3 Expressions in the Master, a cosmetic-effect category
+distinct from structural Eye anatomy; tears right width -> "tears"
+[the crying-effect sense] is 12/14 Expressions; the AU-numbered FACS
+rows -> bare "AU##" is 5/6 Expressions in the Master, the operative
+convention for this specific corpus regardless of the real-world FACS
+standard's per-muscle mapping). No further contradictions found. This
+sweep did not extend beyond the 48-row Face/Expressions set (per
+instruction, no broadening into a general Face taxonomy re-review).
+
+----------------------------------------------------------------------
+NO DOCTRINE BLOCKER
+----------------------------------------------------------------------
+Every correction and every retention above is a direct application of
+the already-settled whole-face-expression rule (HurtR/SurpriseL) and
+ordinary Rule-22/23 evidence discipline. No genuinely new taxonomy-
+policy question arose. HurtR and SurpriseL themselves were not touched
+-- calibration remains untouched throughout this review.
+======================================================================

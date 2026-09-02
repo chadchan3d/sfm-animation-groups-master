@@ -166,6 +166,33 @@ in question) -- only the taxonomy_status/proposed_destination is
 flagged as likely needing correction to NEEDS_CONTEXT or a different
 specific Face subgroup.
 
+*** RESOLUTION (follow-up targeted QA pass -- see
+PHASE2_PRODUCTION_TRANCHE5_EXPRESSION_QA_REVIEW.txt and
+PHASE2_PRODUCTION_TRANCHE5_QA_APPLIED_REPORT.txt for full evidence) ***
+This section's own diagnosis was itself methodologically flawed for
+5 of these 7 rows: the 75%/74% "shocked"/"surprise" majority figures
+conflated two genuinely different Master templates (bare/whole-face
+forms vs. compounds that explicitly name Brow/Eye/Eyelid), and the
+"zero Master hits" findings for mocking/hurt/roar were wrongly treated
+as evidence against the already-settled HurtR/SurpriseL whole-face-
+expression calibration precedent.
+  shocked l, mocking, lsuprise, face ahegaostyle, hurt: RETAINED at
+    Face/Expressions -- the proposed moves were REJECTED after
+    re-verification against exact bare-word Master families and direct
+    calibration precedent.
+  csmile: CONFIRMED correct instinct, corrected to Face/Lower Face --
+    unlike shocked/surprised, the bare "smile" word family itself
+    (not a diluted compound count) is 100% Lower Face in the Master.
+  roar: corrected, but to NEEDS_CONTEXT/blank (not the "generic
+    technical mode-switch"-style NEEDS_CONTEXT originally proposed) --
+    genuinely undetermined between a whole-face and a mouth-specific
+    reading, with zero tie-breaking evidence.
+The same follow-up pass additionally found and corrected 4 further
+Face/Expressions rows this section did not flag: bedroomeyes (-> Upper
+Face, exact "Bedroom eyes" Master match), blowl+blowr and ah3 (-> Lower
+Face, 100%-consistent bare-word Master families), and
+undereye_right_in (-> Upper Face, bare UnderEye_L/R Master family).
+
 ----------------------------------------------------------------------
 3. OTHER CHECKS (no findings)
 ----------------------------------------------------------------------
@@ -210,11 +237,32 @@ Clothing) -- these are two genuinely different naming templates, not
 an inconsistent split of one template.
 
 ----------------------------------------------------------------------
-SUMMARY
+SUMMARY (ORIGINAL, AS-AUDITED)
 ----------------------------------------------------------------------
 Total flags: 8 confirmed likely classification errors (c_bck_b00, plus
 6 confident + 1 lower-confidence expression-word destination
 inconsistencies). None auto-corrected. No other classification errors,
 metadata defects, or unjustified family splits were found across this
 tranche's 1,000 rows.
+
+----------------------------------------------------------------------
+SUMMARY (CORRECTED -- see PHASE2_PRODUCTION_TRANCHE5_EXPRESSION_QA_
+REVIEW.txt and PHASE2_PRODUCTION_TRANCHE5_QA_APPLIED_REPORT.txt)
+----------------------------------------------------------------------
+Of the original 8 flags: c_bck_b00 was confirmed and corrected as
+originally proposed. Of the 7 expression-word flags, 5 (shocked l,
+mocking, lsuprise, face ahegaostyle, hurt) were REJECTED and retained
+at Face/Expressions after re-verification against exact bare-word
+Master families and direct calibration precedent (HurtR/SurpriseL); 2
+(csmile, roar) were confirmed as genuine corrections, though roar's
+final destination (NEEDS_CONTEXT/blank) differs from this section's
+original proposal. A follow-up targeted sweep of all 48 production
+rows routed to Face/Expressions additionally found and corrected 4
+rows this audit missed (bedroomeyes, blowl+blowr, ah3,
+undereye_right_in).
+
+FINAL total: 7 confirmed classification corrections applied to the
+ledger (c_bck_b00, csmile, roar, bedroomeyes, blowl+blowr, ah3,
+undereye_right_in). 5 rows explicitly reviewed and confirmed unchanged
+(shocked l, mocking, lsuprise, face ahegaostyle, hurt).
 ======================================================================

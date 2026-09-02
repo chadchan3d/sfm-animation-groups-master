@@ -1,0 +1,197 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 5 -- EXPRESSION TAXONOMY QA, APPLIED REPORT
+Records every ledger correction actually applied following
+PHASE2_PRODUCTION_TRANCHE5_EXPRESSION_QA_REVIEW.txt (full evidence
+trail there).
+======================================================================
+
+----------------------------------------------------------------------
+1. SCOPE AND OUTCOME
+----------------------------------------------------------------------
+Reviewed: c_bck_b00 (re-verification of the original flag) and 7
+expression-word rows (Shocked L, CSmile, Mocking, LSuprise, Face
+AhegaoStyle, Hurt, ROAR) named by the task, PLUS a narrow sweep of all
+48 production rows (positions 501-5500) currently routed to
+groupFile/Face/Expressions, per Section 6's explicit cross-tranche
+scope.
+
+7 total ledger rows corrected:
+  - 3 belong to Tranche 5 (positions 4501-5500): csmile, roar,
+    c_bck_b00.
+  - 4 belong to EARLIER, already-committed tranches, found only
+    because Section 6 explicitly authorized checking positions
+    501-5500 (not just Tranche 5) for this one specific Face/
+    Expressions question: blowl+blowr and ah3 (Tranche 3, positions
+    2501-3500), undereye_right_in and bedroomeyes (Tranche 4, positions
+    3501-4500). This is a narrow, explicitly-authorized exception to
+    "do not reopen Tranches 1-4" -- it does not reopen either tranche's
+    classification work generally, only this one Face/Expressions
+    contradiction check.
+
+5 rows were explicitly reviewed and CONFIRMED UNCHANGED after the
+original audit's proposed moves were found to be themselves wrong:
+Shocked L, Mocking, LSuprise, Face AhegaoStyle, Hurt (all remain
+CLEAR/CLEAR/groupFile/Face/Expressions).
+
+No genuinely new doctrine question arose -- every correction and every
+retention is a direct application of the already-settled whole-face-
+expression rule (calibration's HurtR/SurpriseL) and ordinary ownership-
+evidence discipline (Rule 22/23). HurtR and SurpriseL themselves were
+NOT touched. PHASE2_SEMANTIC_PILOT_500_FINAL.tsv, raw batch TSVs
+(P21-P50), PHASE2_SEMANTIC_RULEBOOK_FINAL.txt,
+PHASE2_SEMANTIC_BATCH_RULES.txt, and the Master were NOT modified.
+
+----------------------------------------------------------------------
+2. THE CORE METHODOLOGICAL ERROR BEING CORRECTED
+----------------------------------------------------------------------
+The original Tranche-5 consistency audit computed word-frequency
+percentages across EVERY Master literal containing a target substring
+("shocked" 75% Upper Face, "surprise" 74% Upper Face) and treated that
+majority as evidence for the destination of a BARE word-plus-side-
+marker literal. Re-verification found this conflates two genuinely
+different naming templates that the Master keeps cleanly separate:
+
+  Template 1 (bare/whole-face preset): the word alone, or with only a
+    side marker or number -- e.g. Shocked, shocked2, shocked3,
+    Surprise, Surprised, Surprised 1. Master destination: 100%
+    groupFile/Face/Expressions, with zero exceptions found for either
+    word.
+  Template 2 (localized component): the word compounded with an
+    explicit anatomical feature name -- e.g. Brow_Shocked, Eye-
+    Shocked-L, Eyebrows-Surprise-L, Eyes-Surprised-Both. Master
+    destination: 100% the named feature's own Face subgroup (Upper
+    Face, or Face/Eyes for eyelash-specific compounds).
+
+Template 2 is larger by raw literal count (hence the 75%/74% figures),
+but Shocked L and LSuprise belong to Template 1, not Template 2. The
+majority statistic was real but answered the wrong question.
+
+Separately, the audit treated "zero Master hits" for mocking/hurt/roar
+as evidence AGAINST Face/Expressions. This is also wrong: absence of
+Master corroboration does not override an already-settled calibration
+precedent (HurtR, SurpriseL) for the same KIND of word (a bare named
+emotional/expressive state with no feature named), any more than
+absence of Master corroboration made "spiral"/"pivot"/"tilt" OPAQUE in
+the Tranche 4 correction.
+
+----------------------------------------------------------------------
+3. LEDGER ROWS CHANGED (7)
+----------------------------------------------------------------------
+
+c_bck_b00 (Tranche 5, batch P48):
+  semantic_status:      OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  proposed_destination:  [blank] (unchanged)
+  confidence:            Low -> Medium
+
+csmile (Tranche 5, batch P43):
+  proposed_destination:  groupFile/Face/Expressions -> groupFile/Face/
+    Lower Face
+  confidence:            Medium -> High
+  (semantic_status CLEAR, taxonomy_status CLEAR both unchanged)
+
+roar (Tranche 5, batch P45):
+  taxonomy_status:       CLEAR -> NEEDS_CONTEXT
+  proposed_destination:  groupFile/Face/Expressions -> [blank]
+  confidence:            Medium -> Low
+  (semantic_status CLEAR unchanged)
+
+blowl+blowr (TRANCHE 3, position 2860, batch P24):
+  proposed_destination:  groupFile/Face/Expressions -> groupFile/Face/
+    Lower Face
+  confidence:            Medium -> High
+
+ah3 (TRANCHE 3, position 3319, batch P29):
+  proposed_destination:  groupFile/Face/Expressions -> groupFile/Face/
+    Lower Face
+  confidence:            Medium -> High
+
+undereye_right_in (TRANCHE 4, position 3757, batch P33):
+  proposed_destination:  groupFile/Face/Expressions -> groupFile/Face/
+    Upper Face
+  confidence:            Medium -> Medium (unchanged)
+
+bedroomeyes (TRANCHE 4, position 3761, batch P33):
+  proposed_destination:  groupFile/Face/Expressions -> groupFile/Face/
+    Upper Face
+  confidence:            Medium -> High
+
+For every row above: fold_key, exact_spellings, batch_id, and
+scanner_lines were hard-asserted unchanged. Full old/new semantic_
+referent/short_reason text for every row is in
+PHASE2_PRODUCTION_TRANCHE5_EXPRESSION_QA_REVIEW.txt.
+
+----------------------------------------------------------------------
+4. REVIEWED, CONFIRMED NO CHANGE (5, all Tranche 5)
+----------------------------------------------------------------------
+Shocked L, Mocking, LSuprise, Face AhegaoStyle, Hurt -- all remain
+CLEAR / CLEAR / groupFile/Face/Expressions with their original
+confidence values. The original audit's proposed moves for all five
+were rejected after direct calibration-precedent and exact-Master-
+family re-verification (see QA_REVIEW.txt Sections B, D, E, F, G).
+
+----------------------------------------------------------------------
+5. REVISED DISTRIBUTIONS -- TRANCHE 5 ONLY (positions 4501-5500)
+----------------------------------------------------------------------
+Only csmile, roar, and c_bck_b00 affect these figures; the four
+cross-tranche corrections belong to Tranches 3/4 and are excluded here.
+
+semantic_status:
+  CLEAR   : 815 -> 816
+  PARTIAL : 57  -> 57
+  OPAQUE  : 128 -> 127
+
+taxonomy_status:
+  CLEAR           : 738 -> 737
+  NEEDS_CONTEXT   : 134 -> 136
+  NEEDS_DOCTRINE  : 0   -> 0
+  NOT_APPLICABLE  : 128 -> 127
+
+confidence:
+  High   : 614 -> 615
+  Medium : 226 -> 225
+  Low    : 160 -> 160
+
+proposed_destination (Tranche-5-only CLEAR rows): groupFile/Face/
+  Expressions 8 -> 6; groupFile/Face/Lower Face 31 -> 32.
+
+----------------------------------------------------------------------
+6. CROSS-TRANCHE CORRECTIONS (NOT part of Tranche 5's own statistics)
+----------------------------------------------------------------------
+Tranche 3 (positions 2501-3500): blowl+blowr and ah3 corrected from
+groupFile/Face/Expressions to groupFile/Face/Lower Face. Tranche 4
+(positions 3501-4500): undereye_right_in and bedroomeyes corrected from
+groupFile/Face/Expressions to groupFile/Face/Upper Face. Per
+instruction, PHASE2_PRODUCTION_TRANCHE3_CONSISTENCY_FLAGS.txt/_REPORT.txt
+and PHASE2_PRODUCTION_TRANCHE4_CONSISTENCY_FLAGS.txt/_REPORT.txt were
+NOT modified by this pass -- only PHASE2_PRODUCTION_TRANCHE5_
+CONSISTENCY_FLAGS.txt and PHASE2_PRODUCTION_TRANCHE5_REPORT.txt were
+updated, as explicitly listed in this task's Section 8. This report is
+the durable record of the cross-tranche correction for both rows'
+actual home tranches.
+
+----------------------------------------------------------------------
+7. GLOBAL LEDGER VALIDATION (mechanical, post-correction, re-opened
+   from disk)
+----------------------------------------------------------------------
+row_count_5500:                      PASS
+first_500_identical_to_final:        PASS
+fold_key_sequence_identical:         PASS
+exact_spellings_unchanged:           PASS
+batch_id_unchanged:                  PASS
+zero_duplicates:                     PASS
+rule21_global (OPAQUE iff NOT_APPLICABLE, all 5,500 rows): PASS
+hurtr_unchanged:                     PASS
+surprisel_unchanged:                 PASS
+all_destinations_valid:              PASS
+no_destination_on_non_clear_taxonomy_row: PASS
+no_position_5501_plus:               PASS
+exactly_seven_rows_changed:          PASS
+
+ALL CHECKS PASS: True
+
+Raw batch files P21-P50 were NOT modified. FINAL.tsv, calibration rows
+1-500 (including HurtR and SurpriseL specifically), PHASE2_SEMANTIC_
+RULEBOOK_FINAL.txt, PHASE2_SEMANTIC_BATCH_RULES.txt, and the Master
+were NOT modified.
+======================================================================
