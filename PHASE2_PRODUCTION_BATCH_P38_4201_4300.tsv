@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+clipping shirt	Clipping Shirt	CLEAR	a shirt garment, clipping-related state/control	CLEAR	groupFile/Clothing	High		explicit garment ownership; whether a clip-fix or clip-state, it stays with the garment (rule 8)	P38
+bone136	Bone136	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P38
+root waist r	root waist r	CLEAR	waist, right, root bone	CLEAR	groupFile/Body	High		plain torso/waist anatomy	P38
+testis_f_r	testis_f_R	CLEAR	"testis, explicit genital anatomy, right, qualifier (""f"") unresolved"	CLEAR	groupFile/Body	High		real anatomical term, matches the calibration regression-set genital-anatomy precedent	P38
+unused b_r_ankle4helper	unused b_r_ankle4helper	CLEAR	a self-declared unused placeholder referencing an ankle helper	CLEAR	groupFile/Useless	High		"self-declared ""unused"" (rule 15), applies regardless of the anatomical content named"	P38
+student.left_3_jiggle	Student.Left_3_jiggle	CLEAR	"a jiggle-physics function, left, numbered, on the ""Student"" character/costume model"	NEEDS_CONTEXT		Medium	the owning object/body part is not named beyond the character/costume prefix	function is clear (jiggle), object/owner unknown; character/costume prefix set aside (rule 24)	P38
+lowlid_left1	lowLid_Left1	CLEAR	lower eyelid, left, numbered	CLEAR	groupFile/Face/Upper Face	High		matches Master's bottom/lower-lid precedent	P38
+second_arms_r_ring1	Second_Arms_R_Ring1	CLEAR	"right ring finger, on a ""Second Arms"" extra-limb chain, numbered"	CLEAR	groupFile/Arms/RightArm/RightFingers	High		matches the settled Tranche 3 extra-limb finger-numbered precedent	P38
+ventilation grid 2	Ventilation Grid 2	CLEAR	a ventilation grid prop, numbered	CLEAR	groupFile/Other	High		recognized real-world environment/mechanical object	P38
+ス横先.r	ス横先.R	OPAQUE	"Japanese position phrase (""side-tip""/""side-end""), no anatomical or functional object named, right side"	NOT_APPLICABLE		Low	"""横先"" (side-tip) is a real position term, but no owning object is identified"	position phrase only, no object	P38
+collar bone detail	Collar bone Detail	CLEAR	clavicle (collarbone), appearance/detail shape refinement	CLEAR	groupFile/Body Morphs	Medium		matches the established -Detail-suffix Body-Morphs pattern (BallsDetail4/BodyDetails)	P38
+music_gen_guitar_lute_a_mesh.001	MUSIC_GEN_Guitar_Lute_A_Mesh.001	CLEAR	a guitar/lute musical-instrument prop mesh, numbered	CLEAR	groupFile/Other	High		recognized real-world object	P38
+mo2l+mo2r	MO2L+MO2R	OPAQUE	"cryptic code (""MO2""), no recoverable anatomical or functional content, left+right combined"	NOT_APPLICABLE		Low	"zero Master/corpus precedent for ""MO2"""	ungrounded code	P38
+earleft2	EarLeft2	CLEAR	left ear, numbered	CLEAR	groupFile/Face/Ears	High		plain ear anatomy	P38
+pc_lp	pc_lp	OPAQUE	"cryptic abbreviation (""PC""/""LP""), no grounding for any expansion"	NOT_APPLICABLE		Low	zero Master/corpus precedent	ungrounded abbreviation	P38
+apron e3	Apron e3	CLEAR	an apron garment, numbered variant	CLEAR	groupFile/Clothing	High		plain garment item	P38
+thinbullet	ThinBullet	CLEAR	a thin-profile bullet/ammunition prop	CLEAR	groupFile/Other	High		"recognized weapon/ammunition object; ""thin"" describes the object's own shape, not a character morph"	P38
+wep_sight_flipup	WEP_Sight_FlipUp	CLEAR	a weapon flip-up sight accessory	CLEAR	groupFile/Other	High		recognized weapon accessory object	P38
+arm right forearm adj	arm right forearm adj	CLEAR	right forearm, adjustment control	CLEAR	groupFile/Arms/RightArm	High		plain arm anatomy	P38
+earring.left_2	Earring.Left_2	CLEAR	an earring accessory, left, numbered	CLEAR	groupFile/Clothing	High		worn jewelry accessory	P38
+bootstretch	BootStretch	CLEAR	a boot garment, stretch deformation	CLEAR	groupFile/Clothing	High		garment-owned deformation stays with the garment (rule 8)	P38
+body-penis-off	Body-Penis-OFF	CLEAR	"penis, an ""off"" state/visibility toggle"	CLEAR	groupFile/Body	Medium	"whether ""off"" is a visibility toggle or a retracted-shape state is not fully certain"	plain structural genital anatomy; a binary state toggle is not clearly a shape/deformation (rule 7's caution)	P38
+nipples_large	Nipples_large+nipples_large	CLEAR	"nipples, ""large"" shape/size morph"	CLEAR	groupFile/Body Morphs	High		explicit shape/size deformation word on anatomy	P38
+urethrasidepushleft	UrethraSidePushLeft	CLEAR	"urethra, side, ""push"" deformation, left"	CLEAR	groupFile/Body Morphs	High		explicit deformation-direction word on genital anatomy	P38
+unused head neck lower attached_ssx h #2 head neck lower a.002	unused head neck lower attached_ssx h #2 head neck lower a.002	CLEAR	a self-declared unused placeholder, extensive technical/anatomical content	CLEAR	groupFile/Useless	High		"self-declared ""unused"" (rule 15), applies regardless of the anatomical content named"	P38
+rightbone	RightBone	OPAQUE	"a bare ""bone"" designation with a side marker, no specific anatomical content"	NOT_APPLICABLE		Low		no recoverable referent beyond a generic bone label	P38
+tl	TL	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no recoverable referent	P38
+v_weapon.left_hand	v_weapon.Left_Hand	CLEAR	left hand attachment point on a viewmodel weapon	CLEAR	groupFile/Arms/LeftArm	High		matches the settled v_weapon finger/hand-taxonomy regression-set precedent	P38
+cloth4	Cloth4	CLEAR	a cloth/garment item, numbered	CLEAR	groupFile/Clothing	High		explicit garment ownership	P38
+shrink_03	Shrink_03	CLEAR	"a ""shrink"" deformation function, numbered"	NEEDS_CONTEXT		Medium	the owning object/body part is not named	matches the shrink_01 precedent	P38
+valvebiped.polysurface15	ValveBiped.polySurface15	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		matches the settled polySurface DCC-default-placeholder precedent	P38
+bowtie.bow_left_1	Bowtie.Bow_Left_1	CLEAR	a bowtie accessory, left, numbered	CLEAR	groupFile/Clothing	High		"""Bowtie"" context disambiguates ""bow"" as a decorative costume accessory"	P38
+bipbrk rthightwist1	BipBrk RThighTwist1	CLEAR	"right thigh twist bone, variant 1, within an internal ""BipBrk"" namespace"	CLEAR	groupFile/Legs	High		ordinary twist-bone anatomy, not corrective (rule 3)	P38
+bld_gen_circus_tent_medium_a_top_a_mesh	BLD_GEN_Circus_Tent_Medium_A_Top_A_Mesh	CLEAR	a circus tent prop mesh, medium variant/section labeled	CLEAR	groupFile/Other	High		recognized real-world object (tent), matches the bld_gen_army_tent precedent	P38
+pussparent.002_r.012	PussParent.002_R.012	CLEAR	a parent/root rig bone for the vaginal control chain, right, numbered	CLEAR	groupFile/Body	High		matches the pussparent.002 precedent	P38
+hatcloth_bone_06	hatCloth_bone_06	CLEAR	a hat's cloth rig bone, numbered	CLEAR	groupFile/Clothing	High		matches the hatcloth_bone_05 precedent	P38
+obigger	OBigger	PARTIAL	"a ""bigger"" shape descriptor with an unresolved qualifier (""O"")"	NEEDS_CONTEXT		Low	no anatomical anchor object is stated for what is getting bigger	real shape word but no clear owner	P38
+ul+ur	UL+UR	OPAQUE	bare letter-pair code, no anatomical or functional content	NOT_APPLICABLE		Low		ungrounded code	P38
+rarmtwist1	rArmTwist1	CLEAR	right arm twist bone, numbered	CLEAR	groupFile/Arms/RightArm	High		ordinary twist-bone anatomy, not corrective (rule 3)	P38
+earring left 2	earring left 2	CLEAR	an earring accessory, left, numbered	CLEAR	groupFile/Clothing	High		worn jewelry accessory	P38
+crush-32	crush-32	CLEAR	"a ""crush"" deformation function, numbered"	NEEDS_CONTEXT		Medium	the owning object/body part being crushed is not named	matches the crush-16/crush-13 precedent	P38
+innerbrows_raise_l	innerbrows_raise_l	CLEAR	inner eyebrows, raise, left	CLEAR	groupFile/Face/Upper Face	High		plain eyebrow-posing control	P38
+level1_west	Level1_West	OPAQUE	a technical level/geography tag with no anatomical or recognizable object content	NOT_APPLICABLE		Low		matches the level2_east precedent	P38
+bikini_07	Bikini_07	CLEAR	a bikini garment, numbered variant	CLEAR	groupFile/Clothing	High		plain garment item	P38
+leg left thigh twist a	leg left thigh twist a	CLEAR	left thigh twist bone, variant a	CLEAR	groupFile/Legs	High		ordinary twist-bone anatomy, not corrective (rule 3)	P38
+r_upper_leg_thigh_helper	r_upper_leg_thigh_helper	CLEAR	upper leg (thigh), right, helper	CLEAR	groupFile/Legs	High		"plain leg anatomy; ""helper"" is not corrective evidence by itself (rule 4)"	P38
+bottle	BOTTLE+Bottle+bottle	CLEAR	a bottle prop object	CLEAR	groupFile/Other	High		recognized real-world object	P38
+r lowerlip 02	r lowerlip 02	CLEAR	lower lip, right, numbered	CLEAR	groupFile/Face/Lower Face	High		plain lip anatomy	P38
+h3jiggleroot	H3JiggleRoot	CLEAR	"a jiggle-physics chain root bone, qualifier (""H3"") unresolved"	NEEDS_CONTEXT		Medium	"the owning object represented by ""H3"" is not established"	jiggle function is clear via the physics-chain root, object/owner unclear	P38
+interior	interior	PARTIAL	"""interior"" with no clear anatomical or object anchor"	NEEDS_CONTEXT		Low	could describe an internal anatomical structure or an environment/scene reference	materially different core readings compete	P38
+bonehigh05	BoneHigh05	OPAQUE	"a bare ""bone"" designation with a position qualifier (""high""), numbered, no specific anatomical content"	NOT_APPLICABLE		Low		no recoverable referent beyond a generic bone label	P38
+open	OPen+Open	CLEAR	"an ""open"" state/deformation function, no object named"	NEEDS_CONTEXT		Medium	no anatomical object is stated for what is opening	state/function word is clear, object unstated (unlike AnusOpen/pussy_open which name the anatomy)	P38
+bodyshape-fitness-size	bodyshape-fitness-size	CLEAR	body fitness/muscle-tone size morph	CLEAR	groupFile/Body Morphs	High		matches the bodyshape-bodybuilder-details precedent	P38
+bip_zipper_0	bip_zipper_0	CLEAR	a zipper garment-fastener accessory, numbered	CLEAR	groupFile/Clothing	High		recognized garment-fastener object	P38
+roothair	RootHair	CLEAR	hair, root bone	CLEAR	groupFile/Hair	High		explicit hair content	P38
+shaftshortenfix	ShaftShortenFix	CLEAR	penis shaft, shorten corrective	CLEAR	groupFile/Correctives	High		"explicit ""Fix"" repair-purpose language on a body-anatomy shape correction, matches the leg-fix/thigh-fix precedent"	P38
+watch_base_helper	watch_base_helper	CLEAR	a wristwatch accessory, base, helper	CLEAR	groupFile/Clothing	High		worn jewelry/accessory object	P38
+glutes upper depth	Glutes Upper Depth	CLEAR	"gluteal (buttock) muscle, upper, ""depth"" shape parameter"	CLEAR	groupFile/Body Morphs	High		explicit shape/dimension parameter on anatomy	P38
+bip_fring01_r	Bip_FRing01_R	CLEAR	right ring finger, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy	P38
+thickness	Thickness	CLEAR	"a ""thickness"" shape parameter, no object named"	NEEDS_CONTEXT		Medium	no anatomical object is stated for what has this thickness	shape parameter is clear, object unstated	P38
+valvebiped.box	ValveBiped.box	CLEAR	a generic box prop/object	CLEAR	groupFile/Other	High		matches the settled Box family calibration precedent	P38
+exclamation	exclamation	CLEAR	an excited/shocked facial expression	CLEAR	groupFile/Face/Expressions	Medium	a UI/marker-element reading remains a weaker competing possibility	matches the Sad/Disgusting/Question basic-emotion expression-word precedent	P38
+shirt_exposed_tie_left_1	Shirt_Exposed_Tie_Left_1	CLEAR	a shirt garment, exposed state, tie point, left, numbered	CLEAR	groupFile/Clothing	High		explicit garment ownership	P38
+bip_r_wing_04	bip_r_wing_04	CLEAR	wing, right, numbered	CLEAR	groupFile/Wings	High		"explicit ""wing"" content, unambiguous unlike the fin/tentacle creature-appendage cases"	P38
+rope_small	rope_small	CLEAR	a rope accessory, small size	NEEDS_CONTEXT		Medium	no owner is named for the rope accessory	matches the settled bare-accessory-no-owner cord/rope/knot family precedent (rule 25 pattern)	P38
+battleship	battleship	CLEAR	a battleship prop/vehicle object	CLEAR	groupFile/Other	High		recognized real-world object	P38
+bipbrk rthightwist	BipBrk RThighTwist	CLEAR	"right thigh twist bone, within an internal ""BipBrk"" namespace"	CLEAR	groupFile/Legs	High		matches the bipbrk rthightwist1 precedent	P38
+ol+or	OL+OR	OPAQUE	bare letter-pair code, no anatomical or functional content	NOT_APPLICABLE		Low		matches the ul+ur precedent	P38
+skinfoward	skinfoward	CLEAR	"skin, forward direction/pose (""foward"" is an obvious misspelling of ""forward"")"	CLEAR	groupFile/Body	Medium		plain structural reference; a direction word alone is not a sufficient Body-Morphs trigger (rule 7)	P38
+canine_lear_wolf	Canine_LEar_Wolf	CLEAR	left ear, on a canine/wolf creature model	CLEAR	groupFile/Face/Ears	High		explicit ear content grounds this regardless of species prefixes (rule 18)	P38
+cloth right 5 jb	cloth right 5 JB	CLEAR	a cloth/garment control, right, numbered, jiggle bone	CLEAR	groupFile/Clothing	High		"explicit garment (""cloth"") ownership"	P38
+levator04_l	levator04_L	PARTIAL	"a ""levator"" (lifting/elevating) muscle, left, numbered; target organ/region not established by the bare word"	NEEDS_CONTEXT		Low	"""levator"" is a generic elevator-muscle function word used across multiple unrelated regions; no target-organ qualifier is present"	matches the corrected levator03_r/levator06_r precedent	P38
+midass	MidAss	CLEAR	buttock, middle position, plain structural anatomy	CLEAR	groupFile/Body	High		plain structural anatomy, no shape/deformation word present	P38
+bip eye l.001	bip eye l.001	CLEAR	eye, left, numbered	CLEAR	groupFile/Face/Eyes	High		plain eye anatomy	P38
+cons_potion_healing_a_greater_mesh	CONS_Potion_Healing_A_Greater_Mesh	CLEAR	a healing-potion consumable game-item prop mesh, variant	CLEAR	groupFile/Other	High		recognized real-world/game-item object	P38
+bip_fring03_r	Bip_FRing03_R	CLEAR	right ring finger, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy	P38
+v_weapon.lighter_hinge	v_weapon.lighter_hinge	CLEAR	a cigarette lighter prop's hinge mechanism, on a viewmodel weapon	CLEAR	groupFile/Other	High		recognized real-world object part	P38
+f_l_eyehigh	f_L_EyeHigh	CLEAR	"eye, left, high position, qualifier (""f"") unresolved"	CLEAR	groupFile/Face/Eyes	High		"explicit ""eye"" content dominates regardless of the unresolved ""f"" prefix (rule 22)"	P38
+bip_stone _l_finger_globe_1_02	Bip_STONE _L_Finger_Globe_1_02	PARTIAL	"left finger, ""Globe"" qualifier, on the ""STONE"" character model, numbered"	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium	"""Globe"" does not resolve to a specific meaning"	"matches the settled ""Globe on finger"" precedent exactly"	P38
+head nostril right 01	head nostril right 01	CLEAR	nostril, right, numbered	CLEAR	groupFile/Face/Mid Face	High		plain nose-region anatomy	P38
+headgear_l.003	Headgear_L.003	CLEAR	a headgear/helmet garment, left, numbered	CLEAR	groupFile/Clothing	High		worn equipment, matches rule 16's explicit helmet example	P38
+cloth_bone_up_l_01	cloth_bone_up_l_01	CLEAR	a cloth/garment rig bone, up position, left, numbered	CLEAR	groupFile/Clothing	High		"explicit garment (""cloth"") ownership"	P38
+earring.pendant_left_1	Earring.Pendant_Left_1	CLEAR	an earring pendant accessory, left, numbered	CLEAR	groupFile/Clothing	High		worn jewelry accessory	P38
+hokage hat left 2c	hokage hat left 2c	CLEAR	"a hat garment (""Hokage"" is a themed/character reference), left, variant"	CLEAR	groupFile/Clothing	High		"explicit ""hat"" content; thematic/character prefix set aside (rule 24)"	P38
+bip01_l_upperarm008	Bip01_L_UpperArm008	CLEAR	left upper arm, numbered sub-bone	CLEAR	groupFile/Arms/LeftArm	High		plain anatomical term	P38
+beadhangfrontduo a2	BeadHangFrontDuo A2	CLEAR	a hanging-bead hair accessory, front-duo variant, numbered	CLEAR	groupFile/Hair	Medium		matches the established BeadHangFront* naming family	P38
+shell.wall_57	Shell.Wall_57	CLEAR	a wall shell/structural segment prop, numbered	CLEAR	groupFile/Other	Medium		matches the shell.wall family precedent	P38
+e7	E7	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no recoverable referent	P38
+bip wristtwistw r	bip wristtwistw r	CLEAR	right wrist twist bone, variant w	CLEAR	groupFile/Arms/RightArm	High		ordinary twist-bone anatomy, not corrective (rule 3)	P38
+polysurface206	polySurface206	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		matches the settled polySurface DCC-default-placeholder precedent	P38
+bip01_r_thigh003	Bip01_R_Thigh003	CLEAR	right thigh, numbered sub-bone	CLEAR	groupFile/Legs	High		plain anatomical term	P38
+aex	AEX	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no recoverable referent	P38
+unused138	unused138	CLEAR	a self-declared unused placeholder, numbered	CLEAR	groupFile/Useless	High		"self-declared ""unused"" (rule 15)"	P38
+upperblinkl+upperblinkr	UpperBlinkL+UpperBlinkR	CLEAR	upper eyelid blink pose, left+right combined	CLEAR	groupFile/Face/Upper Face	High		matches Master's exact UpperBlinkL+UpperBlinkR precedent	P38
+beadhangback1	BeadHangBack1	CLEAR	a hanging-bead hair accessory, back position, numbered	CLEAR	groupFile/Hair	Medium		matches Master's exact BeadHangBack1/BeadHangBack2 precedent	P38
+colonyship	colonyship	CLEAR	a colony-ship prop/vehicle object	CLEAR	groupFile/Other	High		recognized real-world/sci-fi object	P38
+baffle_bottom.l	baffle_bottom.L	CLEAR	a mechanical baffle component, bottom, left	CLEAR	groupFile/Other	Medium	exact object type is not fully certain	matches the baffle_bottom.back precedent	P38
+bip01_r_clavicle009	Bip01_R_Clavicle009	CLEAR	right clavicle, numbered sub-bone	CLEAR	groupFile/Arms/RightArm	High		explicit clavicle/shoulder-girdle anatomy	P38
+def-forearm.r	DEF-forearm.R	CLEAR	"forearm, right, on a ""DEF-"" deform-bone prefix"	CLEAR	groupFile/Arms/RightArm	High		"plain arm anatomy; ""DEF-"" prefix is not itself corrective evidence (rule 4)"	P38
+torso pipe b r 2c	torso pipe B R 2c	CLEAR	"a ""pipe"" attached to the torso, right side, variant 2c"	NEEDS_CONTEXT		High		matches the finalized calibration torso-pipe precedent exactly (mirror of torso pipe B R 1a)	P38

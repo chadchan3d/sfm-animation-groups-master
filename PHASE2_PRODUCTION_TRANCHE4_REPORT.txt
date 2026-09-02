@@ -1,0 +1,189 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 4 -- REPORT
+Canonical positions 3501-4500 (1,000 production families), batches
+P31-P40. Raw batch files: PHASE2_PRODUCTION_BATCH_P31_3501_3600.tsv
+through PHASE2_PRODUCTION_BATCH_P40_4401_4500.tsv.
+======================================================================
+
+----------------------------------------------------------------------
+1. TRANCHE-ONLY STATISTICS (the 1,000 rows classified in this tranche)
+----------------------------------------------------------------------
+semantic_status:
+  CLEAR   : 815
+  PARTIAL : 33
+  OPAQUE  : 152
+
+taxonomy_status:
+  CLEAR          : 755
+  NEEDS_CONTEXT  : 93
+  NEEDS_DOCTRINE : 0
+  NOT_APPLICABLE : 152
+
+confidence:
+  High   : 646
+  Medium : 169
+  Low    : 185
+
+proposed_destination distribution (CLEAR rows only, 755 total):
+  Clothing                    : 140
+  Other                       : 115
+  Body Morphs                 : 59
+  Body                        : 59
+  Legs                        : 41
+  Face/Lower Face             : 38
+  Face/Eyes                   : 32
+  Face/Upper Face             : 31
+  Arms/RightArm/RightFingers  : 31
+  Arms/RightArm               : 30
+  Useless                     : 26
+  Arms/LeftArm/LeftFingers    : 26
+  Hair                        : 24
+  Arms/LeftArm                : 22
+  Face/Expressions            : 17
+  Face/Mid Face               : 16
+  Tail                        : 11
+  Toes/RightToes              : 9
+  Correctives                 : 5
+  Toes/LeftToes               : 5
+  Arms                        : 5
+  Face/Tongue                 : 4
+  Face/Ears                   : 3
+  Wings                       : 2
+  Fingers                     : 2
+  Face                        : 2
+
+NEEDS_CONTEXT: 93
+NEEDS_DOCTRINE: 0 (no doctrine-escalation report was needed; no
+  hard-stop occurred at any point across all 10 batches)
+
+----------------------------------------------------------------------
+2. RECURRING UNCERTAINTY THEMES (NEEDS_CONTEXT / OPAQUE drivers)
+----------------------------------------------------------------------
+- Generic numbered/mesh/placeholder technical artifacts (the largest
+  OPAQUE contributor): bare "Bone###", "polySurface###", "pCube/
+  pCylinder###", "Object###", bare numbers, "null"/"Armature"/
+  "skeleton_grp"-style organizational nodes.
+- Bare function/deformation words with no anatomical object named:
+  jiggle, crush, poke, squish, shrink, thickness, open, lift, raiser --
+  function is clear (rule 22's jiggle-example pattern), owning body
+  part/object unknown, ~20 occurrences.
+- Bare multi-sense object words with no disambiguating context: "bow"
+  (4), "chain" (3, see Section 4 audit note), "muzzle" (2), "mirror",
+  "quad/shell" (2), "highlight", "interior", "toothless", "backside" --
+  each genuinely supports more than one materially different reading.
+- Bird shoulder-girdle-bone caution (rule 18): crow/raven clavicle
+  ("clavical", an obvious misspelling of clavicle) occurrences (3) --
+  correctly NOT assumed to be Wings by elimination; NEEDS_CONTEXT per
+  the rule's own explicit bird caution.
+- Creature-appendage anatomy with no established Master destination
+  convention: tentacle (5 occurrences) and fin (2 occurrences),
+  consistent with the Tranche 3 finding.
+- Corrected foreign/Latin generic-function-word caution applied
+  proactively: "levator" (2 occurrences this tranche) classified
+  PARTIAL/NEEDS_CONTEXT from the outset, matching the Tranche 3 QA
+  correction rather than repeating the original mistake.
+- Internal rig/model namespaces with no independently-grounded content:
+  BAS., Fio-Rig-Strip, Qwn/PBG-Rig-Hole, Mar-Rig (non-anatomical
+  suffix instances) -- consistently NEEDS_CONTEXT or OPAQUE depending
+  on whether a real function/object word survives after the namespace
+  is set aside, exactly mirroring the Flm-Arm precedent.
+- Bare accessory-no-owner terms (rule 25 pattern): strap (6), cord/rope/
+  knot (5), tassel (2), band -- object clear, ownership missing.
+- Mixed-region compounds forced to NEEDS_CONTEXT rather than a silent
+  pick: hip+foot, tail+wing, quad+shell (2) -- matching the Tranche 2/3
+  leg+finger precedent.
+- Undecoded qualifiers on an otherwise-clear anatomical owner (rule 22's
+  genuine-undecoded-token pattern): "Globe" on finger (2, matching the
+  settled Tranche 3 precedent exactly), "AS"/"StF"/"FL"/"RFL"/"Bolsh"
+  on various otherwise-clear anatomy -- owner established, qualifier
+  itself not.
+
+----------------------------------------------------------------------
+3. CONSISTENCY AUDIT
+----------------------------------------------------------------------
+Full detail in PHASE2_PRODUCTION_TRANCHE4_CONSISTENCY_FLAGS.txt. Every
+candidate finding was run through the five mandatory precedent-check
+questions (calibration precedent; corrected Tranche 1-3 precedent;
+live Master/corpus grounding for a supposedly cryptic token; does the
+row contradict that evidence; verdict A/B/C/D).
+
+Result: 2 confirmed classification errors -- flex_splat_01 (OPAQUE,
+should be CLEAR/CLEAR/groupFile/Other on the strength of the Master's
+own 5/5-consistent "Splat 1-5" precedent) and an internal-consistency
+slip in this tranche's own chain-family treatment (chain_12 and
+chain_4 written CLEAR/NEEDS_CONTEXT when their own cited precedent,
+valvebiped.chain_aligned2/chain00_00, is PARTIAL/NEEDS_CONTEXT).
+Neither was auto-corrected, per instruction (Section 12: do not
+auto-apply consistency flags before the raw-tranche commit). One
+reviewed/no-change candidate (switch_mode) and four mechanically-
+surfaced Sweep B false positives (rforward, level2_east, that_it?,
+l dcor -- all substring-matching artifacts, not real grounding) are
+also documented in the flags file.
+
+CONSISTENCY FLAGS: 2 (flex_splat_01; chain_12+chain_4 as one linked
+issue)
+
+----------------------------------------------------------------------
+4. OPAQUE FALSE-NEGATIVE SWEEP RESULTS
+----------------------------------------------------------------------
+Sweep A (real-world concept discarded as OPAQUE merely for genericity,
+the Box10/Box22 failure mode): mechanically checked all 152 tranche
+OPAQUE rows' fold_keys against a list of ~50 common real-world object
+nouns. 5 candidates surfaced (4x "key N", 1x "plane.002") -- all
+individually confirmed to be correctly OPAQUE, matching already-settled
+precedent (the "Key N" keyframe-preset series is distinct from the
+physical "Key.<label>" prop series per Tranche 3; "plane.002" is a
+generic DCC-default primitive name, not a real "plane" object). 0
+additional Box10-style errors found -- this precedent was applied
+proactively throughout classification rather than only caught in
+retrospect.
+
+OPAQUE REAL-CONCEPT CANDIDATES REVIEWED: 5
+
+Sweep B (project-grounded convention discarded as cryptic, the donger/
+r_brown failure mode): mechanically tokenized all 152 OPAQUE rows'
+fold_keys and compared tokens against live-Master control families
+(>=3 hits, >=60% single-destination consistency). 6 unique candidate
+rows surfaced (rforward, level2_east, that_it?, flex_splat_01, l dcor,
+switch_mode). Each was individually inspected: flex_splat_01 confirmed
+a genuine classification error (see Section 3); switch_mode reviewed
+and confirmed correctly OPAQUE (evidence real but too thin/context-
+split to cross the grounding threshold); the remaining 4 (rforward,
+level2_east, that_it?, l dcor) confirmed to be substring-matching
+artifacts with zero genuine word-boundary grounding, not real Master
+conventions.
+
+OPAQUE GROUNDED-CONVENTION CANDIDATES REVIEWED: 6
+
+----------------------------------------------------------------------
+5. VALIDATION RESULTS (all batches, mechanical)
+----------------------------------------------------------------------
+Every one of the 10 batches (P31-P40) independently passed, before
+merge, per-batch validation: exactly 100 expected canonical positions;
+exact fold_key match against PHASE2_PRODUCTION_ORDER.tsv; exact_spellings
+byte-for-byte; no duplicate family within the batch; valid enums; valid
+destinations; destination blank unless taxonomy_status=CLEAR; OPAQUE iff
+NOT_APPLICABLE; no calibration-family reuse; no already-classified
+production-family reuse.
+
+After each of the 10 merges, the entire ledger was independently
+re-validated (not just the newly appended rows): row count matched the
+expected running total (3600, 3700, ..., 4500); the first 500 rows
+remained field-identical to PHASE2_SEMANTIC_PILOT_500_FINAL.tsv at
+every step; production fold_keys corresponded exactly to canonical
+positions 501 through the latest completed position, in order; zero
+duplicates; Rule 21 held globally at every checkpoint.
+
+Final full-ledger check (post P40): 4,500 rows total. Rule 21 holds
+across all 4,500 rows (verified independently, not just for this
+tranche's 1,000).
+
+======================================================================
+6. CUMULATIVE PHASE 2 STATE (kept separate from tranche-only stats)
+======================================================================
+  calibration families complete            : 500
+  cumulative production families classified: 4000
+  total ledger rows                        : 4500
+  next canonical Phase 2 position          : 4501
+  production families remaining after 4500 : 9782
+======================================================================

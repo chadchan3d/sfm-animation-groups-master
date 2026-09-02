@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+bip01_l_upperarm016	Bip01_L_UpperArm016	CLEAR	left upper arm, numbered sub-bone 016	CLEAR	groupFile/Arms/LeftArm	High		plain anatomical term, matches the corrected Bip01_R_UpperArm016 calibration precedent	P34
+palmlsred1	PalmLSred1	CLEAR	"palm anatomy, side/variant qualifiers (""LS""/""red"") unresolved"	CLEAR	groupFile/Arms	Medium	"exact side and ""red""/numbered qualifier are not fully established"	"""Palm"" is the dominant anatomical content; matches Master's side-explicit LeftPalm/RightPalm -> bare Arms precedent"	P34
+tenta_6_r	tenta_6_R	CLEAR	tentacle appendage, right, numbered	NEEDS_CONTEXT		Medium	no existing group among the Master's valid destinations is confirmed as the right home for tentacle anatomy	matches the settled tentacle/creature-appendage precedent from Tranche 3	P34
+generichuman_c_upplipjnt	GenericHuman_c_uppLipJnt	CLEAR	"upper lip, center, on a ""GenericHuman"" rig-template prefix"	CLEAR	groupFile/Face/Lower Face	High		"explicit ""upper lip"" content grounds this regardless of the GenericHuman template prefix (rule 24)"	P34
+body-r-ass-down	Body-R-Ass-Down	CLEAR	right buttock, downward pose	CLEAR	groupFile/Body	High		"plain structural buttock anatomy; ""down"" alone is a posing direction, not a sufficient Body-Morphs trigger (rule 7)"	P34
+cock-defined	cock-defined	CLEAR	"penis, ""defined"" shape/appearance descriptor"	CLEAR	groupFile/Body Morphs	High		explicit shape/appearance descriptor on genital anatomy	P34
+moustache_r_2	Moustache_R_2	CLEAR	a moustache, right side, numbered	CLEAR	groupFile/Face/Lower Face	High		matches the moustache_r precedent	P34
+opt_as_l_upleg_a	OPT_AS_L_UpLeg_A	CLEAR	left upper leg (thigh), variant A (optional control)	CLEAR	groupFile/Legs	Medium	"the ""AS"" token is unexplained"	"explicit ""UpLeg"" content is dominant, matches the opt_as_r_armtwist_b pattern"	P34
+roottrans	rootTrans	CLEAR	root transform/translation control	CLEAR	groupFile/Body	High		matches Master's exact root_transform/rootTransform/RootTransform precedent	P34
+top_mid	TOP_MID	PARTIAL	"a ""top""+""mid"" compound; could be a top garment, mid position, or a pure position label"	NEEDS_CONTEXT		Low	"both tokens are positional in nature, but ""top"" could alternatively name a garment; no disambiguating content"	materially different core readings compete	P34
+key.p	Key.P	CLEAR	a physical keyboard key, letter P	CLEAR	groupFile/Other	High		"matches the established period-separated ""Key.<label>"" physical-prop series"	P34
+r_shoulder_twist_a_helper	r_shoulder_twist_a_helper	CLEAR	right shoulder twist bone, variant a, helper	CLEAR	groupFile/Arms/RightArm	High		"ordinary twist-bone anatomy, not corrective (rule 3); ""helper"" is not corrective evidence by itself (rule 4)"	P34
+h_r_middle1	h_R_Middle1	CLEAR	right middle finger, segment 1	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger content, matches ValveBiped middle-finger naming convention	P34
+thicken/beam	Thicken/beam	PARTIAL	"a ""thicken"" deformation applied to a ""beam"" object"	NEEDS_CONTEXT		Low	"whether this is a body-morph or a prop/technical ""beam"" control is not established"	"function word is real (rule 7's own list) but the object (""beam"") does not match any anatomical or clearly-established prop category"	P34
+student.left_3	Student.Left_3	OPAQUE	"after setting aside the ""Student"" character/costume prefix, only a bare side marker and number remain, with no anatomical or functional content"	NOT_APPLICABLE		Low		character/costume prefix set aside (rule 24); no recoverable referent remains	P34
+rightinhandpinky	RightInHandPinky	CLEAR	right pinky finger, curled/positioned in-hand	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy with a pose descriptor	P34
+l_neck_30	l_neck_30	CLEAR	neck, numbered, left	CLEAR	groupFile/Body	High		plain structural neck anatomy	P34
+left index finger 2	Left index finger 2	CLEAR	left index finger, segment 2	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy	P34
+strap_l_2	Strap_L_2	CLEAR	a strap accessory, left, numbered	NEEDS_CONTEXT		Medium	no owner is named for the strap accessory	matches rule 25's own Strap_B.02 bare-accessory-no-owner example	P34
+clit.barbell_rear	Clit.Barbell_Rear	CLEAR	a clitoral piercing (barbell) jewelry accessory, rear position	CLEAR	groupFile/Clothing	High		worn body-jewelry accessory, matches earring/nipplechain worn-accessory pattern	P34
+earring.ring_4	Earring.Ring_4	CLEAR	an earring accessory, ring style, numbered	CLEAR	groupFile/Clothing	High		worn jewelry accessory	P34
+tailwing_02	tailwing_02	CLEAR	a combined tail+wing appendage element, numbered	NEEDS_CONTEXT		Medium	"""Tail"" and ""Wing"" are two different established destination groups and the compound does not establish which governs"	mixed-region compound, matches the leg+finger precedent pattern	P34
+bas.side_left_1	BAS.Side_Left_1	OPAQUE	"within the already-unreliable BAS. namespace, ""side_left"" supplies no further anatomical or functional content beyond position/side markers"	NOT_APPLICABLE		Low		matches the established BAS. cryptic-prefix precedent -- no grounded content beyond position markers	P34
+needlearm	needlearm	CLEAR	"""needle""-thin arm shape descriptor"	CLEAR	groupFile/Body Morphs	High		matches the settled ThinArms Body-Morphs precedent	P34
+sperm.tail_7	Sperm.Tail_7	CLEAR	a sperm-cell prop with its own tail, numbered	CLEAR	groupFile/Other	Medium		matches the sperm.tail_5 precedent	P34
+taurenback	taurenBack	CLEAR	"back, on a ""Tauren"" creature model"	CLEAR	groupFile/Body	High		"explicit ""Back"" content grounds this regardless of the species/character prefix (rule 18/24)"	P34
+bulge big	Bulge Big+Bulge big	CLEAR	"a ""big"" bulge-size morph"	CLEAR	groupFile/Body Morphs	High		matches the established Bulge-family Body Morphs precedent	P34
+l beltc a phy	L BeltC a Phy	CLEAR	a belt garment, variant C, left, physics-simulated	CLEAR	groupFile/Clothing	High		matches the established L CollarC a Phy clothing physics-sim pattern	P34
+rightmasseter	RightMasseter	CLEAR	right masseter (jaw/chewing) muscle	CLEAR	groupFile/Face/Mid Face	High		matches Master's exact bare L_Masseter/R_Masseter precedent	P34
+level2_east	Level2_East	OPAQUE	a technical level/geography tag with no anatomical or recognizable object content	NOT_APPLICABLE		Low		no recoverable referent	P34
+leftlwrmasseter	LeftLwrMasseter	CLEAR	left lower masseter (jaw/chewing) muscle	CLEAR	groupFile/Face/Lower Face	High		matches Master's exact DEF-LeftMasseterLow precedent	P34
+lower_scale__group	lower_scale__group	OPAQUE	"a generic ""lower scale"" organizational grouping node, no specific anatomical content"	NOT_APPLICABLE		Low	"the ""_group"" suffix indicates a rig-organizational container rather than a specific control"	matches the settled generic organizational rig-node precedent (e.g. skeleton_grp)	P34
+bip_stone _l_finger_globe_2_02	Bip_STONE _L_Finger_Globe_2_02	PARTIAL	"left finger, ""Globe"" qualifier, on the ""STONE"" character model, numbered"	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium	"""Globe"" does not resolve to a specific meaning"	"matches the settled ""Globe on finger"" precedent exactly -- the finger owner is established even though the qualifier is not"	P34
+that_it?	That_it?	OPAQUE	a placeholder-style phrase with no anatomical or functional content	NOT_APPLICABLE		Low		no recoverable referent	P34
+wep_slingloop	WEP_SlingLoop	CLEAR	a weapon sling-loop accessory	CLEAR	groupFile/Other	High		recognized weapon accessory object	P34
+pbg-rig-hole-a	PBG-Rig-Hole-A	CLEAR	"a ""hole"" element within the internal ""PBG-Rig"" namespace, variant a"	NEEDS_CONTEXT		Low	"the namespace has no established functional mapping and ""hole"" alone is too generic to fix a destination"	matches the settled qwn-rig-hole-v2 precedent	P34
+leg right thigh twist b	leg right thigh twist b	CLEAR	right thigh twist bone, variant b	CLEAR	groupFile/Legs	High		ordinary twist-bone anatomy, not corrective (rule 3)	P34
+unused137	unused137	CLEAR	a self-declared unused placeholder, numbered	CLEAR	groupFile/Useless	High		"self-declared ""unused"" (rule 15)"	P34
+strapon_3	strapon_3	CLEAR	a strap-on worn device/accessory, numbered	CLEAR	groupFile/Clothing	Medium		worn equipment defaults to Clothing (rule 16)	P34
+fronttop	FrontTop	PARTIAL	"a ""front""+""top"" compound; could be a pure position label or ""front of a top garment"""	NEEDS_CONTEXT		Low	"both tokens are positional in nature, but ""top"" could alternatively name a garment; no disambiguating content"	materially different core readings compete	P34
+hat_left_3	Hat_Left_3	CLEAR	a hat garment, left, numbered	CLEAR	groupFile/Clothing	High		plain garment item	P34
+bas.left_3_jiggle	BAS.Left_3_jiggle	CLEAR	"a jiggle-physics function, left, numbered, within the internal ""BAS."" namespace"	NEEDS_CONTEXT		Medium	the owning object/body part is not named and the BAS. namespace provides no ownership either	function is clear (jiggle), object/owner unknown	P34
+hat_right_tassel_3	Hat_Right_Tassel_3	CLEAR	a hat's tassel accessory, right, numbered	CLEAR	groupFile/Clothing	High		"explicit ""hat"" ownership resolves the otherwise-bare tassel accessory"	P34
+teeth_bot_r	teeth_bot_r	CLEAR	bottom teeth, right	CLEAR	groupFile/Face/Mid Face	High		plain mouth-region anatomy	P34
+bip01_head016	Bip01_Head016	CLEAR	head, numbered sub-bone	CLEAR	groupFile/Body	High		bare structural head defaults to Body (rule 13)	P34
+insidecase	InsideCase	CLEAR	a case/container prop, inner position	CLEAR	groupFile/Other	Medium		recognized generic container object	P34
+camera_case	camera_case	CLEAR	a camera equipment case	CLEAR	groupFile/Other	High		recognized real-world object	P34
+fringe 17	fringe 17	CLEAR	a hair fringe, numbered	CLEAR	groupFile/Hair	High		recognized hairstyle feature	P34
+fringe_1	Fringe_1	CLEAR	a hair fringe, numbered	CLEAR	groupFile/Hair	High		recognized hairstyle feature	P34
+flat face	Flat Face	CLEAR	"a ""flat"" facial-shape descriptor"	CLEAR	groupFile/Face/Mid Face	Medium		facial shape control stays within Face subgroups, matching the cheek-fill/dimpler convention	P34
+eyes angry left	eyes angry left	CLEAR	left eye, angry expression	CLEAR	groupFile/Face/Eyes	High		plain eye expression control	P34
+wep_flashlight_and_peq2	WEP_Flashlight_And_PEQ2	CLEAR	a weapon-mounted flashlight and PEQ laser/IR designator accessory, numbered	CLEAR	groupFile/Other	High		recognized weapon accessory objects	P34
+bip legtwisttop l	bip legtwisttop l	CLEAR	left leg twist bone, top variant	CLEAR	groupFile/Legs	High		ordinary twist-bone anatomy, not corrective (rule 3)	P34
+toplid_corner_r	toplid_corner_R	CLEAR	upper eyelid, corner, right	CLEAR	groupFile/Face/Upper Face	High		matches Master's upper-lid precedent	P34
+shape-busty-nude	shape-busty-nude	CLEAR	"breast size (""busty"") shape descriptor, nude-context variant"	CLEAR	groupFile/Body Morphs	High		explicit breast-shape descriptor	P34
+oris07_r	oris07_R	CLEAR	"mouth-region facial muscle (Latin ""oris"" = mouth); the specific named muscle is not established by the bare token alone"	CLEAR	groupFile/Face/Lower Face	Medium		matches the corrected oris04_l/oris06_l precedent	P34
+polysurface11	polySurface11	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		matches the settled polySurface DCC-default-placeholder precedent	P34
+necklace right	necklace right	CLEAR	a necklace jewelry accessory, right-side element	CLEAR	groupFile/Clothing	High		worn jewelry accessory	P34
+fio-rig-eye-lu	Fio-Rig-Eye-LU	CLEAR	"eye control, within the internal ""Fio-Rig"" namespace, left-upper variant"	CLEAR	groupFile/Face/Eyes	High		"explicit ""Eye"" content grounds this regardless of the Fio-Rig namespace prefix (rule 24)"	P34
+radio	Radio	CLEAR	a radio prop object	CLEAR	groupFile/Other	High		recognized real-world object	P34
+jacket_closed	jacket_closed	CLEAR	a jacket garment, closed state	CLEAR	groupFile/Clothing	High		garment-owned state control (rule 8)	P34
+bip_pussyside_2_l	bip_PussySide_2_L	CLEAR	vaginal region, side, numbered, left	CLEAR	groupFile/Body	High		plain structural genital anatomy	P34
+face-ee	Face-Ee	CLEAR	"an ""EE"" viseme (lip-sync mouth shape)"	CLEAR	groupFile/Face/Lower Face	High		mouth-shape/viseme posing control	P34
+rthumb0	rThumb0	CLEAR	right thumb, numbered segment	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain finger anatomy	P34
+bip_strands2_l	bip_Strands2_L	CLEAR	hair strands, left, numbered	CLEAR	groupFile/Hair	High		explicit hair ownership	P34
+bip_ear6_r	bip_Ear6_R	CLEAR	ear, numbered, right	CLEAR	groupFile/Face/Ears	High		plain ear anatomy	P34
+bip_head11_l	bip_head11_l	CLEAR	head, numbered, left	CLEAR	groupFile/Body	Medium	the left-side marker on an otherwise unsided body part is unusual	bare structural head defaults to Body (rule 13); the side marker does not change the core reading	P34
+pantstexspose	PantstExspose	CLEAR	pants garment, texture/expose state control	CLEAR	groupFile/Clothing	High		garment-owned state control (rule 8)	P34
+top_3	Top_3	CLEAR	a top garment, numbered variant	CLEAR	groupFile/Clothing	Medium	a pure position-label reading remains a weaker competing possibility	matches the garment+number pattern precedent (belt_17/cape_8_l/bikini_14)	P34
+l bearda a phy	l bearda a phy	CLEAR	a beard, variant A, left, physics-simulated	CLEAR	groupFile/Face/Lower Face	High		"facial hair stays in Face subgroups, matching the moustache convention; ""Phy"" matches the established physics-sim clothing/face pattern"	P34
+quad/shell	quad/shell	PARTIAL	"a ""quad""+""shell"" compound"	NEEDS_CONTEXT		Low	"both ""quad"" (muscle / vehicle / geometry) and ""shell"" (armor / wall / ammunition) independently support multiple different readings"	materially different core readings compete, no disambiguating content	P34
+aufsatz	aufsatz	CLEAR	"a weapon attachment/mount (German ""Aufsatz"" = attachment)"	CLEAR	groupFile/Other	Medium	exact object type is not fully certain	real German-language grounding for a weapon-accessory attachment	P34
+bipmar l finger3	BipMar L Finger3	CLEAR	"left finger 3, within an internal ""BipMar"" namespace"	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		"explicit ""Finger"" content grounds this regardless of the BipMar prefix (rule 24)"	P34
+jig_right	Jig_RIGHT	CLEAR	a jiggle-physics function, right, object unstated	NEEDS_CONTEXT		Medium	the owning object/body part is not named	"function is clear (""jig"" = jiggle), object/owner unknown, matches jig_bot pattern"	P34
+f collar	f collar	CLEAR	"a garment collar, ""f"" (likely front) variant"	CLEAR	groupFile/Clothing	Medium	"exact meaning of ""f"" is not certain (plausibly ""front"")"	matches the b collar precedent -- garment collar reading is dominant	P34
+strapleftout	StrapLeftOut	CLEAR	a strap accessory, left, outward	NEEDS_CONTEXT		Medium	no owner is named for the strap accessory	matches rule 25's own bare-accessory-no-owner precedent	P34
+d10	D10	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no recoverable referent	P34
+highlight 2	Highlight 2	PARTIAL	"a ""highlight"", numbered"	NEEDS_CONTEXT		Low	"""highlight"" has materially different core senses (hair color highlight vs. a visual shine/glint effect)"	no disambiguating content favors either reading	P34
+beadhangfrontsmall b1	BeadHangFrontSmall B1	CLEAR	a hanging-bead hair accessory, front-small variant, numbered	CLEAR	groupFile/Hair	Medium		matches the established BeadHangFront* naming family	P34
+lowerlidlowerl	LowerLidLowerL	CLEAR	lower eyelid, left	CLEAR	groupFile/Face/Upper Face	High		matches Master's bottom/lower-lid precedent	P34
+flipoutrightdown	FlipoutRightDown	CLEAR	"a ""flip-out"" deformation function, right, down"	NEEDS_CONTEXT		Medium	the owning body part/object is not named	"function is clear (rule 22's jiggle-example pattern; ""flip-out"" is a recognized bare function word), object/owner unknown"	P34
+valvebiped.bip01_belly	ValveBiped.Bip01_Belly	CLEAR	belly, plain structural anatomy	CLEAR	groupFile/Body	High		plain structural anatomy, no shape/deformation word present	P34
+tophair1	TopHair1	CLEAR	hair on top of the head, numbered	CLEAR	groupFile/Hair	High		explicit hair content	P34
+top_01	Top_01	CLEAR	a top garment, numbered variant	CLEAR	groupFile/Clothing	Medium	a pure position-label reading remains a weaker competing possibility	matches the top_3/garment+number pattern precedent	P34
+left ring finger 2	Left ring finger 2	CLEAR	left ring finger, segment 2	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain finger anatomy	P34
+saberon_bone34	saberon_Bone34	OPAQUE	a generic numbered bone under a named-character prefix; no anatomical content in the number itself	NOT_APPLICABLE		Low	character/model prefix is not itself semantic ownership (rule 24); the bare numbered bone carries no anatomical specificity	matches the settled saberon_boneNN precedent	P34
+wrinkle-3	wrinkle-3	CLEAR	a skin wrinkle shape/appearance descriptor, numbered	CLEAR	groupFile/Body Morphs	Medium	the specific body region is not stated	explicit shape/appearance descriptor, matches the general appearance-detail Body Morphs pattern	P34
+innerbrowsup	InnerBrowsUp	CLEAR	inner eyebrows, upward pose	CLEAR	groupFile/Face/Upper Face	High		plain eyebrow-posing control	P34
+level3_root	Level3_Root	OPAQUE	a generic level/hierarchy root node, no anatomical content	NOT_APPLICABLE		Low		matches the settled generic organizational rig-node precedent	P34
+leg fix front 90 r	Leg Fix Front 90 R	CLEAR	right leg corrective, front, 90 degrees	CLEAR	groupFile/Correctives	High		"explicit ""fix"" repair-purpose language, matches the settled legfix90sw l precedent"	P34
+shorten_3	shorten_3	CLEAR	"a ""shorten"" deformation function, numbered"	NEEDS_CONTEXT		Medium	the owning object/body part is not named	function is clear (rule 22's jiggle-example pattern), object/owner unknown	P34
+glovevoluptuous	Glovevoluptuous	CLEAR	"a glove garment, ""voluptuous"" (full/puffy) style variant"	CLEAR	groupFile/Clothing	Medium		"explicit ""Glove"" garment ownership dominates"	P34
+bone134	Bone134	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P34
+asshool_6	Asshool_6	CLEAR	"anus/buttock (""Asshool"" is an obvious misspelling of ""asshole""), numbered"	CLEAR	groupFile/Body	High		plain structural anatomy, obvious misspelling accepted, matches the calibration regression-set genital/anus precedent	P34
+head eyeblack left	head eyeblack left	CLEAR	eye-black (dark eye-region marking/makeup), left	CLEAR	groupFile/Face/Eyes	Medium	"exact meaning of ""black"" (makeup vs. iris color) is not fully certain"	eye-region content is clear regardless	P34
+bip_pads_r	bip_pads_r	CLEAR	protective pad(s) worn accessory, right	CLEAR	groupFile/Clothing	Medium	specific pad location (knee/elbow/shoulder) is not stated	matches Master's exact bip_ElbowPad/KneePad/ShoulderPad -> Clothing precedent (26/26)	P34
+spine chest	spine chest	CLEAR	spine, chest region	CLEAR	groupFile/Body	High		both spine and chest are Body-destination anatomy, a consistent combination	P34
+tounge 	Tounge 	CLEAR	"tongue (""Tounge"" is an obvious misspelling of ""tongue"")"	CLEAR	groupFile/Face/Tongue	High		obvious misspelling accepted	P34
+smack ass left	smack ass left	CLEAR	"left buttock, ""smack"" impact-reaction morph"	CLEAR	groupFile/Body Morphs	High		matches the settled R-Ass-Smack calibration precedent	P34
+object011	Object011	OPAQUE	generic placeholder object name, no referent	NOT_APPLICABLE		Low		matches the settled Object### placeholder precedent	P34

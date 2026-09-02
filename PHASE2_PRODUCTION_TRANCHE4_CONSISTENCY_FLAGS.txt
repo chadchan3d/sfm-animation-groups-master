@@ -1,0 +1,199 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 4 -- CONSISTENCY AUDIT
+Positions 3501-4500 (1,000 production families). Flag-only audit. No
+ledger rows were changed during this audit -- confirmed classification
+errors are flagged here for a future targeted QA-application pass,
+mirroring the Tranche 2 (box10/box22) and Tranche 3 (donger04_chain/
+r_brown) precedent.
+======================================================================
+
+----------------------------------------------------------------------
+METHOD
+----------------------------------------------------------------------
+For every candidate finding, five questions were explicitly worked
+through:
+  1. Does finalized calibration contain a relevant precedent?
+  2. Does corrected production from Tranches 1-3 contain a relevant
+     precedent?
+  3. Does live Master/corpus evidence ground any supposedly cryptic
+     token?
+  4. Does the current row actually contradict that evidence?
+  5. Verdict: A (classification error) / B (metadata/reason error) /
+     C (legitimate distinction) / D (unresolved/new-policy issue).
+
+----------------------------------------------------------------------
+MECHANICAL CHECKS (automated, full-population)
+----------------------------------------------------------------------
+- Rule 21 biconditional (OPAQUE iff NOT_APPLICABLE): 0 violations
+  across all 1,000 rows (verified against the full 4,500-row ledger).
+- NEEDS_DOCTRINE count: 0.
+- Correctives destination check: all 5 Correctives rows carry explicit
+  "fix"/"correct"/"deformation-fix" repair-purpose language (rule 5) --
+  0 unsupported Correctives found.
+- Self-declared "unused" routing: all 26 self-declared-unused rows in
+  this tranche route to groupFile/Useless (26/26) -- 0 misrouting.
+- Coherent-family destination-split scan: mechanically compared every
+  member of 16 recurring naming families (crush-N, chain*, jiggle*,
+  bow *, levator*, tentacle/tenta_, fin_*, bird clavical, strap_*,
+  torso pipe, BAS. namespace, hip*, unused*, flm-arma-sword*,
+  flm-armb*, box###) for internal consistency. Apparent splits in
+  jiggle* (owned vs. unowned jiggle bones), BAS. namespace (position-
+  only vs. jiggle-bearing), hip* (mixed-region vs. plain-shape-word),
+  and flm-armb* (content-grounded vs. ungrounded-function) were each
+  individually checked and found to be CORRECT, not errors -- the
+  split in each case tracks a real distinguishing feature (an explicit
+  owner named, or a real function word present) rather than
+  inconsistent treatment of the same pattern. One genuine split was
+  found and is flagged below (chain*).
+
+----------------------------------------------------------------------
+1. FLAGGED ROW: flex_splat_01 -- CLASSIFICATION ERROR
+----------------------------------------------------------------------
+Current: OPAQUE / NOT_APPLICABLE / [blank] / Low
+Current semantic_referent: "generic 'flex' category term with an
+effect qualifier ('splat'), no specific object"
+
+  1. Calibration precedent? No calibration row addresses "splat"
+     directly.
+  2. Corrected Tranche 1-3 precedent? The established flex_thin/
+     flex_noise "generic flex category term" treatment was applied
+     here by analogy -- but that precedent was for qualifiers with NO
+     independent Master grounding (thin, noise-as-generic-adjective).
+  3. Live Master/corpus evidence? YES, decisively: the Master contains
+     "Splat 1", "Splat 2", "Splat 3", "Splat 4", "Splat 5" -- five
+     exact, coherent, 100%-consistently-routed literals, all ->
+     groupFile/Other. This establishes "Splat" as a real, recognized
+     object/effect reference in this Master's own vocabulary, not an
+     ungrounded technical filler word (unlike "thin"/"noise" as bare
+     qualifiers, which have no such standalone grounding).
+  4. Contradiction? Yes -- OPAQUE/NOT_APPLICABLE asserts no
+     recoverable object exists, directly contradicted by the Master's
+     own 5/5 consistent "Splat N" precedent.
+  5. Verdict: A -- classification error. The "flex_" prefix does not
+     erase this grounding, the same way "OPT_"/"CK"/character-name
+     prefixes did not erase grounded content elsewhere in this tranche.
+
+RECOMMENDED CORRECTION (not applied in this pass):
+  semantic_status:      OPAQUE -> CLEAR
+  semantic_referent:    -> "a 'splat' effect/object, within the
+    generic 'flex' category naming"
+  taxonomy_status:       NOT_APPLICABLE -> CLEAR
+  proposed_destination:  [blank] -> groupFile/Other
+  confidence:            Low -> Medium
+  short_reason:          -> "'Splat' is a recognized real object/effect
+    reference in this Master (Splat 1-5, 100% -> Other); the 'flex_'
+    prefix does not erase this grounding (rule 24-style reasoning)."
+
+----------------------------------------------------------------------
+2. FLAGGED ROWS: chain_12, chain_4 -- CLASSIFICATION ERROR (internal
+   inconsistency within this tranche's own chain-family treatment)
+----------------------------------------------------------------------
+Current (both): semantic_status=CLEAR, taxonomy_status=NEEDS_CONTEXT,
+proposed_destination=[blank], confidence=Medium, short_reason cites
+"the settled valvebiped.chain_aligned2/chain00_00 precedent."
+
+  1. Calibration precedent? N/A directly.
+  2. Corrected Tranche 1-3 precedent? YES -- valvebiped.chain_aligned2
+     (Tranche 3) is PARTIAL/NEEDS_CONTEXT, not CLEAR/NEEDS_CONTEXT.
+     Within THIS tranche, chain00_00 (batch P31) was correctly
+     classified PARTIAL/NEEDS_CONTEXT, explicitly matching that
+     precedent.
+  3. Live Master/corpus evidence? No new evidence changes the analysis
+     -- "chain" remains genuinely multi-sense (jewelry/physics-sim/
+     mechanical) per rule 22's own documented example, which both
+     rows' own uncertainty_reason text already states verbatim.
+  4. Contradiction? Yes -- chain_12 and chain_4 assert
+     semantic_status=CLEAR while citing, in their own short_reason, a
+     precedent (valvebiped.chain_aligned2 / chain00_00) that is
+     PARTIAL. Per rule 22, "materially different core readings
+     compete" is the definition of PARTIAL, not CLEAR -- these two
+     rows' own stated reasoning (identical multi-sense uncertainty
+     text) supports PARTIAL, and their semantic_status field simply
+     was not updated to match when the row was written.
+  5. Verdict: A -- classification error (an internal-consistency
+     slip: correct precedent was cited but not correctly applied to
+     the semantic_status field). chain00_00 itself is NOT part of this
+     flag -- it was already correctly written PARTIAL.
+
+RECOMMENDED CORRECTION (not applied in this pass), both rows:
+  semantic_status:      CLEAR -> PARTIAL
+  (taxonomy_status, proposed_destination, confidence, semantic_referent,
+   uncertainty_reason, short_reason all remain unchanged -- they
+   already correctly describe the multi-sense situation)
+
+----------------------------------------------------------------------
+3. REVIEWED, NO CHANGE: switch_mode
+----------------------------------------------------------------------
+Current: OPAQUE / NOT_APPLICABLE / [blank] / Low.
+Surfaced by the mechanical Sweep B candidate search (tokens "switch"
+and "mode" each independently matched >=3 Master hits at >=60% single-
+destination consistency).
+
+  1. Calibration precedent? None.
+  2. Corrected Tranche 1-3 precedent? None directly.
+  3. Live Master/corpus evidence? Checked individually: bare "Switch"/
+     "switch" -> groupFile/Other, but only 2 exact hits (the word
+     itself, case-variant duplicates, not a coherent numbered series
+     like Splat 1-5). Bare "mode" -> 7 hits, SPLIT between Body Morphs
+     (dick mode, egril mode, SFW MODE -- all thematically anatomical/
+     content-specific) and Other (mp_Chest mode, mp_pelvis mode, etc.
+     -- all carrying an "mp_" technical prefix). "Switch_Mode" matches
+     neither the anatomical-thematic pattern nor the "mp_" technical-
+     prefix pattern.
+  4. Contradiction? No -- the evidence is real (not a substring false
+     positive, unlike several other Sweep B candidates below) but is
+     too thin and too context-dependent (2 bare hits; a "mode" family
+     that itself splits by context) to confidently assign a single
+     destination, unlike the tight, 5-member, 100%-consistent "Splat
+     N" series that grounded flex_splat_01.
+  5. Verdict: C -- legitimate distinction. The evidence found is real
+     but does not cross the grounding threshold; OPAQUE/NOT_APPLICABLE
+     is retained.
+
+----------------------------------------------------------------------
+4. SWEEP B FALSE-POSITIVE CANDIDATES (mechanically surfaced, individually
+   rejected -- documented per instruction, no change)
+----------------------------------------------------------------------
+The mechanical Sweep B search additionally surfaced 4 candidates that,
+on individual inspection, were substring-matching artifacts rather than
+real grounding:
+
+  rforward (RForward): substring "rforward" matched 6 Master literals,
+    but all are UNRELATED compounds merely ENDING in "...Forward"
+    (LeftMouthCornerForward, LipsLowerForward, M_HairForward_L, etc.)
+    -- none establishes a home for bare "R"+"Forward" with no object
+    named. Verdict C, no change (OPAQUE retained).
+
+  level2_east (Level2_East): substring "east" matched 2,554 Master
+    literals at 82% "consistency" -- but a word-boundary re-check
+    confirms 0 genuine bare-word "east" hits; the 2,554 figure is
+    entirely coincidental substring matches inside words like "breast"
+    (contains "...br-EAST..."). Verdict C, no change (OPAQUE retained).
+    This is a textbook illustration of the task's own caution:
+    "substring overlap alone is insufficient."
+
+  that_it? (That_it?): substring "that" matched 6 literals at 67%
+    "consistency" -- a word-boundary re-check confirms 0 genuine
+    bare-word "that" hits; coincidental substring matches. Verdict C,
+    no change (OPAQUE retained).
+
+  l dcor (L Dcor): substring "dcor" matched 16 literals at 62%
+    "consistency" -- every hit is a coincidental substring spanning a
+    word boundary (e.g. "eyeliD" + "COR-rective/-ner" in
+    "EyelidCorrectiveKey", "DEF-LeftEyelidCornerIn.B"). No literal
+    actually contains "dcor" as a real token. Verdict C, no change
+    (OPAQUE retained, consistent with the established l dcorin/r dcorin
+    precedent).
+
+----------------------------------------------------------------------
+SUMMARY
+----------------------------------------------------------------------
+Total flags: 2 confirmed classification errors (flex_splat_01;
+chain_12 and chain_4 as one linked internal-consistency issue), 1
+reviewed/no-change candidate with documented reasoning (switch_mode),
+and 4 mechanically-surfaced false positives individually rejected and
+documented (rforward, level2_east, that_it?, l dcor). No ledger row was
+changed during this audit. No other classification errors, metadata
+defects, or unjustified family splits were found across this tranche's
+1,000 rows.
+======================================================================
