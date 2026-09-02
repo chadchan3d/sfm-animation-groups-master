@@ -8,25 +8,34 @@ through PHASE2_PRODUCTION_BATCH_P40_4401_4500.tsv.
 ----------------------------------------------------------------------
 1. TRANCHE-ONLY STATISTICS (the 1,000 rows classified in this tranche)
 ----------------------------------------------------------------------
+[UPDATED post-QA-correction; see PHASE2_PRODUCTION_TRANCHE4_QA_APPLIED_
+REPORT.txt for the full evidence trail. Originally reported CLEAR 815/
+PARTIAL 33/OPAQUE 152 and CLEAR(taxonomy) 755/NOT_APPLICABLE 152. Two
+already-flagged rows (flex_splat_01, chain_12+chain_4) and 9 additional
+false-opacity rows found by a follow-up manual Rule-22 readability
+sweep (switch_mode, level2_east, rforward, level1_west, level3_root,
+tilt45, spiral, pivot, all parents) were corrected -- 12 rows total.
+Figures below reflect the corrected ledger.]
+
 semantic_status:
-  CLEAR   : 815
-  PARTIAL : 33
-  OPAQUE  : 152
+  CLEAR   : 822
+  PARTIAL : 36
+  OPAQUE  : 142
 
 taxonomy_status:
-  CLEAR          : 755
-  NEEDS_CONTEXT  : 93
+  CLEAR          : 756
+  NEEDS_CONTEXT  : 102
   NEEDS_DOCTRINE : 0
-  NOT_APPLICABLE : 152
+  NOT_APPLICABLE : 142
 
 confidence:
   High   : 646
-  Medium : 169
-  Low    : 185
+  Medium : 178
+  Low    : 176
 
-proposed_destination distribution (CLEAR rows only, 755 total):
+proposed_destination distribution (CLEAR rows only, 756 total):
   Clothing                    : 140
-  Other                       : 115
+  Other                       : 116
   Body Morphs                 : 59
   Body                        : 59
   Legs                        : 41
@@ -52,7 +61,7 @@ proposed_destination distribution (CLEAR rows only, 755 total):
   Fingers                     : 2
   Face                        : 2
 
-NEEDS_CONTEXT: 93
+NEEDS_CONTEXT: 102
 NEEDS_DOCTRINE: 0 (no doctrine-escalation report was needed; no
   hard-stop occurred at any point across all 10 batches)
 
@@ -107,21 +116,34 @@ questions (calibration precedent; corrected Tranche 1-3 precedent;
 live Master/corpus grounding for a supposedly cryptic token; does the
 row contradict that evidence; verdict A/B/C/D).
 
-Result: 2 confirmed classification errors -- flex_splat_01 (OPAQUE,
-should be CLEAR/CLEAR/groupFile/Other on the strength of the Master's
-own 5/5-consistent "Splat 1-5" precedent) and an internal-consistency
-slip in this tranche's own chain-family treatment (chain_12 and
-chain_4 written CLEAR/NEEDS_CONTEXT when their own cited precedent,
+Result (ORIGINAL): 2 confirmed classification errors -- flex_splat_01
+(OPAQUE, should be CLEAR/CLEAR/groupFile/Other on the strength of the
+Master's own 5/5-consistent "Splat 1-5" precedent) and an internal-
+consistency slip in this tranche's own chain-family treatment (chain_12
+and chain_4 written CLEAR/NEEDS_CONTEXT when their own cited precedent,
 valvebiped.chain_aligned2/chain00_00, is PARTIAL/NEEDS_CONTEXT).
-Neither was auto-corrected, per instruction (Section 12: do not
-auto-apply consistency flags before the raw-tranche commit). One
+Neither was auto-corrected at the time, per instruction (Section 12:
+do not auto-apply consistency flags before the raw-tranche commit). One
 reviewed/no-change candidate (switch_mode) and four mechanically-
 surfaced Sweep B false positives (rforward, level2_east, that_it?,
-l dcor -- all substring-matching artifacts, not real grounding) are
+l dcor -- all substring-matching artifacts, not real grounding) were
 also documented in the flags file.
 
-CONSISTENCY FLAGS: 2 (flex_splat_01; chain_12+chain_4 as one linked
-issue)
+Result (CORRECTED, follow-up targeted QA pass -- see
+PHASE2_PRODUCTION_TRANCHE4_QA_APPLIED_REPORT.txt): the "switch_mode"
+no-change verdict and the "rforward"/"level2_east" false-positive
+rejections were themselves wrong -- they conflated semantic_status with
+taxonomy_status (thin/absent Master destination evidence does not mean
+the literal lacks semantic content under rule 22). A subsequent full
+manual Rule-22 readability sweep of all 152 Tranche-4 OPAQUE rows
+additionally found level1_west, level3_root, tilt45, spiral, pivot, and
+"all parents" to be false opacity. All 12 rows (flex_splat_01,
+chain_12, chain_4, switch_mode, level2_east, rforward, level1_west,
+level3_root, tilt45, spiral, pivot, all parents) were corrected and
+applied to the ledger.
+
+CONSISTENCY FLAGS: 12 confirmed and corrected (see
+PHASE2_PRODUCTION_TRANCHE4_QA_APPLIED_REPORT.txt)
 
 ----------------------------------------------------------------------
 4. OPAQUE FALSE-NEGATIVE SWEEP RESULTS
@@ -154,6 +176,15 @@ artifacts with zero genuine word-boundary grounding, not real Master
 conventions.
 
 OPAQUE GROUNDED-CONVENTION CANDIDATES REVIEWED: 6
+
+[CORRECTED: the "switch_mode reviewed and confirmed correctly OPAQUE"
+and "rforward/level2_east confirmed substring artifacts, no genuine
+grounding" conclusions above were themselves wrong -- the substring-
+artifact finding for rforward/level2_east was factually correct (no
+genuine Master destination evidence exists for either), but that
+finding was misapplied to semantic_status rather than only to
+taxonomy_status. All three were corrected in a follow-up QA pass; see
+PHASE2_PRODUCTION_TRANCHE4_QA_APPLIED_REPORT.txt.]
 
 ----------------------------------------------------------------------
 5. VALIDATION RESULTS (all batches, mechanical)

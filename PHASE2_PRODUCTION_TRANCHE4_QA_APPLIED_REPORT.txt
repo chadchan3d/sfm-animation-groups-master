@@ -1,0 +1,169 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 4 -- TARGETED QA APPLICATION, APPLIED REPORT
+Records every ledger correction actually applied following
+PHASE2_PRODUCTION_TRANCHE4_QA_REVIEW.txt (full evidence trail there).
+======================================================================
+
+----------------------------------------------------------------------
+1. SCOPE AND OUTCOME
+----------------------------------------------------------------------
+Reviewed: 2 already-confirmed audit flags (flex_splat_01; chain_12/
+chain_4), 4 explicitly-named reopen candidates (switch_mode,
+Level2_East, RForward, and the confirmation-only pair That_it?/L Dcor),
+and all 152 Tranche-4 OPAQUE rows under a manual Rule-22 readability
+sweep.
+
+No genuinely new doctrine question arose -- every correction below is
+an application of already-settled Rule 22 (a real object/function/
+concept is not OPAQUE merely because it lacks an owner or Master
+destination corroboration) and the already-settled multi-sense-word
+principle (for chain_12/chain_4). PHASE2_SEMANTIC_RULEBOOK_FINAL.txt
+and PHASE2_SEMANTIC_BATCH_RULES.txt were NOT modified.
+
+12 rows corrected. 2 rows explicitly reviewed and confirmed correctly
+unchanged (That_it?, L Dcor). 138 further OPAQUE rows individually
+reviewed and confirmed to have no stable core semantic content (see
+PHASE2_PRODUCTION_TRANCHE4_QA_REVIEW.txt Section C for the full
+category breakdown).
+
+----------------------------------------------------------------------
+2. LEDGER ROWS CHANGED (12)
+----------------------------------------------------------------------
+
+flex_splat_01:
+  semantic_status:      OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> CLEAR
+  proposed_destination:  [blank] -> groupFile/Other
+  confidence:            Low -> Medium
+  (semantic_referent, short_reason rewritten; see QA_REVIEW.txt)
+
+chain_12:
+  semantic_status:       CLEAR -> PARTIAL
+  (taxonomy_status NEEDS_CONTEXT, proposed_destination blank,
+  confidence Medium all unchanged; short_reason rewritten)
+
+chain_4:
+  semantic_status:       CLEAR -> PARTIAL
+  (taxonomy_status, proposed_destination, confidence unchanged;
+  short_reason rewritten)
+
+switch_mode:
+  semantic_status:       OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  confidence:            Low -> Medium
+  (proposed_destination remains blank)
+
+level2_east:
+  semantic_status:       OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  confidence:            Low -> Medium
+
+level1_west:
+  semantic_status:       OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  confidence:            Low -> Medium
+
+level3_root:
+  semantic_status:       OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  confidence:            Low -> Medium
+
+tilt45:
+  semantic_status:       OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  confidence:            Low -> Medium
+
+spiral:
+  semantic_status:       OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  confidence:            Low -> Medium
+
+pivot:
+  semantic_status:       OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  confidence:            Low -> Medium
+
+all parents:
+  semantic_status:       OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  confidence:            Low -> Low (unchanged -- single-instance
+    evidence only)
+
+rforward:
+  semantic_status:       OPAQUE -> PARTIAL
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  confidence:            Low -> Medium
+
+For every row above: fold_key, exact_spellings, batch_id, and
+scanner_lines were hard-asserted unchanged; proposed_destination
+remains blank except flex_splat_01 (the only row where taxonomy_status
+became CLEAR). Full old/new field text for every row is in
+PHASE2_PRODUCTION_TRANCHE4_QA_REVIEW.txt Sections A/B.
+
+----------------------------------------------------------------------
+3. REVIEWED, CONFIRMED NO CHANGE (2, explicitly named by instruction)
+----------------------------------------------------------------------
+That_it? and L Dcor: both re-verified to have no stable animator-facing
+referent or function, and no grounding evidence of any kind (unlike
+donger/brown). OPAQUE/NOT_APPLICABLE remains correct for both. Not
+changed.
+
+----------------------------------------------------------------------
+4. REVISED TRANCHE-4 DISTRIBUTIONS (positions 3501-4500 only)
+----------------------------------------------------------------------
+semantic_status:
+  CLEAR   : 815 -> 822
+  PARTIAL : 33  -> 36
+  OPAQUE  : 152 -> 142
+
+taxonomy_status:
+  CLEAR           : 755 -> 756
+  NEEDS_CONTEXT   : 93  -> 102
+  NEEDS_DOCTRINE  : 0   -> 0
+  NOT_APPLICABLE  : 152 -> 142
+
+confidence:
+  High   : 646 -> 646
+  Medium : 169 -> 178
+  Low    : 185 -> 176
+
+proposed_destination: groupFile/Other 115 -> 116 (+1, flex_splat_01)
+
+----------------------------------------------------------------------
+5. SCRATCH DIRECTORY HYGIENE
+----------------------------------------------------------------------
+scratch_t4/ (left untracked after the raw Tranche 4 commit) was
+inspected. It contains only disposable intermediate working files from
+the raw-classification pass: per-batch Python data/list/check scripts
+(p31_data.py through p39_data.py, p3*_list.txt, p3*_check.txt),
+exploratory probe outputs (probe1-3.txt), a pickled row cache
+(tranche4_rows.pkl), a __pycache__ directory, and two generic helper
+scripts (validate_batch.py, write_and_merge.py). None of this is unique
+evidence -- every substantive finding it produced is already fully
+captured in the raw batch TSVs (committed) and the consistency-flags/
+report files (committed). The directory was deleted; nothing in it was
+required for the audit trail.
+
+----------------------------------------------------------------------
+6. GLOBAL LEDGER VALIDATION (mechanical, post-correction, re-opened
+   from disk)
+----------------------------------------------------------------------
+row_count_4500:                      PASS
+first_500_identical_to_final:        PASS
+fold_key_sequence_identical:         PASS
+exact_spellings_unchanged:           PASS
+batch_id_unchanged:                  PASS
+zero_duplicates:                     PASS
+rule21_global (OPAQUE iff NOT_APPLICABLE, all 4,500 rows): PASS
+all_destinations_valid:              PASS
+no_destination_on_non_clear_taxonomy_row: PASS
+no_position_4501_plus:               PASS
+exactly_twelve_rows_changed:         PASS
+
+ALL CHECKS PASS: True
+
+Raw batch files PHASE2_PRODUCTION_BATCH_P31 through _P40 were NOT
+modified. FINAL.tsv, calibration rows 1-500, Tranches 1-3 (rows
+501-3500), PHASE2_SEMANTIC_RULEBOOK_FINAL.txt,
+PHASE2_SEMANTIC_BATCH_RULES.txt, and the Master were NOT modified.
+======================================================================

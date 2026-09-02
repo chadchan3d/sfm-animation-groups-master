@@ -124,7 +124,15 @@ RECOMMENDED CORRECTION (not applied in this pass), both rows:
 ----------------------------------------------------------------------
 3. REVIEWED, NO CHANGE: switch_mode
 ----------------------------------------------------------------------
-Current: OPAQUE / NOT_APPLICABLE / [blank] / Low.
+*** SUPERSEDED -- see the corrected summary at the end of this file and
+PHASE2_PRODUCTION_TRANCHE4_QA_APPLIED_REPORT.txt. This section's Master-
+evidence findings (points 1-4 below) remain accurate and are kept for
+the record, but verdict 5 conflated semantic_status with taxonomy_status:
+thin/absent Master destination evidence shows taxonomy should be
+NEEDS_CONTEXT, not that the row is semantically OPAQUE. Corrected to
+CLEAR/NEEDS_CONTEXT. ***
+
+Current (at time of original audit): OPAQUE / NOT_APPLICABLE / [blank] / Low.
 Surfaced by the mechanical Sweep B candidate search (tokens "switch"
 and "mode" each independently matched >=3 Master hits at >=60% single-
 destination consistency).
@@ -154,6 +162,18 @@ destination consistency).
 4. SWEEP B FALSE-POSITIVE CANDIDATES (mechanically surfaced, individually
    rejected -- documented per instruction, no change)
 ----------------------------------------------------------------------
+*** PARTIALLY SUPERSEDED -- rforward and level2_east below were
+correctly found to have NO grounded Master destination evidence (the
+substring-match rejections stand), but that only means taxonomy cannot
+be safely assigned -- it does not mean the literals are semantically
+OPAQUE. "Forward" (rforward) and "Level + compass direction"
+(level2_east, matching the accepted level5_south precedent from
+Tranche 1) both carry real, readable content independent of Master
+corroboration. Corrected to PARTIAL/NEEDS_CONTEXT and CLEAR/
+NEEDS_CONTEXT respectively -- see the corrected summary and
+PHASE2_PRODUCTION_TRANCHE4_QA_APPLIED_REPORT.txt. that_it? and l dcor
+below remain correctly OPAQUE, unchanged. ***
+
 The mechanical Sweep B search additionally surfaced 4 candidates that,
 on individual inspection, were substring-matching artifacts rather than
 real grounding:
@@ -186,7 +206,7 @@ real grounding:
     precedent).
 
 ----------------------------------------------------------------------
-SUMMARY
+SUMMARY (ORIGINAL, AS-AUDITED)
 ----------------------------------------------------------------------
 Total flags: 2 confirmed classification errors (flex_splat_01;
 chain_12 and chain_4 as one linked internal-consistency issue), 1
@@ -196,4 +216,26 @@ documented (rforward, level2_east, that_it?, l dcor). No ledger row was
 changed during this audit. No other classification errors, metadata
 defects, or unjustified family splits were found across this tranche's
 1,000 rows.
+
+----------------------------------------------------------------------
+SUMMARY (CORRECTED -- see PHASE2_PRODUCTION_TRANCHE4_QA_REVIEW.txt and
+PHASE2_PRODUCTION_TRANCHE4_QA_APPLIED_REPORT.txt for full evidence)
+----------------------------------------------------------------------
+A follow-up targeted QA pass found that this audit's "switch_mode:
+reviewed, no-change" verdict and its "rforward"/"level2_east" false-
+positive rejections were themselves wrong -- they conflated
+semantic_status with taxonomy_status (absence of a Master destination
+was treated as absence of semantic content). A subsequent full manual
+Rule-22 readability sweep of all 152 Tranche-4 OPAQUE rows also
+surfaced 6 additional false-opacity errors this audit missed entirely
+(level1_west, level3_root, tilt45, spiral, pivot, all parents).
+
+FINAL total: 12 confirmed classification corrections --
+  flex_splat_01 (OPAQUE -> CLEAR/CLEAR/Other)
+  chain_12, chain_4 (CLEAR -> PARTIAL, taxonomy/destination unchanged)
+  switch_mode, level2_east, level1_west, level3_root, tilt45, spiral,
+    pivot, all parents (OPAQUE -> CLEAR/NEEDS_CONTEXT)
+  rforward (OPAQUE -> PARTIAL/NEEDS_CONTEXT)
+"that_it?" and "l dcor" were re-confirmed correctly OPAQUE and were NOT
+changed. All 12 corrections were applied to the ledger.
 ======================================================================

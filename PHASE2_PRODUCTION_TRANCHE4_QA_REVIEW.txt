@@ -1,0 +1,281 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 4 -- QA REVIEW
+Targeted QA application over positions 3501-4500, covering: the two
+already-confirmed audit flags, four explicitly-named reopen candidates
+(switch_mode, Level2_East, RForward, plus the confirmation-only pair
+That_it?/L Dcor), and a full manual Rule-22 readability sweep of all
+152 Tranche-4 OPAQUE rows. No ledger row has been modified yet by this
+document -- see PHASE2_PRODUCTION_TRANCHE4_QA_APPLIED_REPORT.txt for
+the applied result and validation.
+======================================================================
+
+----------------------------------------------------------------------
+A. CONFIRMED ORIGINAL CONSISTENCY FLAGS (3 rows)
+----------------------------------------------------------------------
+
+FOLD KEY: flex_splat_01 (exact: Flex_SPLAT_01)
+  Evidence: live Master "Splat 1" through "Splat 5" -> 5/5 groupFile/
+  Other. "Splat" is a real, recognizable effect/object word (unlike
+  "thin"/"noise"/"special", which are pure modifiers with no built-in
+  object identity of their own -- this is why flex_thin_bottom,
+  special_flex_1, and flex_sh3_arrange_01 correctly remain OPAQUE while
+  this one does not). Not claimed as same-model identity inheritance --
+  convention/family evidence only, per instruction.
+  old: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  new: CLEAR / CLEAR / groupFile/Other / Medium
+  new referent: "'splat' effect/object control in a flex-prefixed
+    naming form"
+  reason: Master precedent (Splat 1-5, 5/5 -> Other) establishes
+    "splat" as a real, destination-consistent concept in this corpus;
+    the flex_ prefix is a naming-convention wrapper, not evidence
+    against it.
+
+FOLD KEY: chain_12 (exact: chain_12)
+  Evidence: this same tranche's own chain00_00 (PARTIAL/NEEDS_CONTEXT)
+  and Tranche 3's valvebiped.chain_aligned2 (PARTIAL/NEEDS_CONTEXT)
+  already settled that bare, unqualified "chain" is multi-sense
+  (jewelry / physics-simulation / mechanical), which is a
+  semantic_status=PARTIAL condition under rule 22 (materially different
+  core readings compete), not CLEAR. chain_12's own short_reason cited
+  this exact precedent while inconsistently keeping semantic_status=
+  CLEAR.
+  old: CLEAR / NEEDS_CONTEXT / [blank] / Medium
+  new: PARTIAL / NEEDS_CONTEXT / [blank] / Medium (taxonomy/destination/
+    confidence unchanged -- only semantic_status corrected)
+
+FOLD KEY: chain_4 (exact: Chain_4+chain_4)
+  Same evidence and correction as chain_12.
+  old: CLEAR / NEEDS_CONTEXT / [blank] / Medium
+  new: PARTIAL / NEEDS_CONTEXT / [blank] / Medium
+
+----------------------------------------------------------------------
+B. NEWLY DISCOVERED SEMANTIC-READABILITY FALSE-OPACITY ERRORS (9 rows)
+----------------------------------------------------------------------
+
+B1. Explicitly reopened by instruction:
+
+FOLD KEY: switch_mode (exact: Switch_Mode)
+  Original reasoning conflated semantic_status with taxonomy_status:
+  because no single Master destination could be established, the row
+  was marked fully OPAQUE. Under rule 22, "switch/change a mode" is a
+  stable animator-facing FUNCTION regardless of which mode or which
+  owning system -- exactly analogous to the already-accepted jiggle/
+  shift/poke/push/kick/scale/flip/open/lift pattern. The Master's own
+  "Switch" family was deliberately NOT used to force a destination
+  (bare "Switch"/switch_L/switch_R/FireSwitch/detail_Switch* all go to
+  Other, but eye_Switch/Eyes_Switch go to Face/Eyes -- i.e. even the
+  Master's own precedent is destination-inconsistent by owner, which if
+  anything reinforces NEEDS_CONTEXT rather than a forced Other).
+  old: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  new: CLEAR / NEEDS_CONTEXT / [blank] / Medium
+  new referent: "control that switches/changes a mode; owning system
+    and specific mode not established"
+
+FOLD KEY: level2_east (exact: Level2_East)
+  The prior audit correctly noted the mechanical Master search for
+  "east" only produced substring noise ("breast") -- but that shows the
+  MASTER doesn't corroborate a destination, not that the literal itself
+  is unreadable. The accepted Tranche 1 production precedent
+  level5_south (CLEAR/NEEDS_CONTEXT, "a level/waypoint reference, south
+  direction") already establishes that a Level-N + compass-direction
+  literal has a stable core reading under rule 22. Note: the Master's
+  own 6 bare "level" hits (Level Brow Left/Right/Row, Level eyebrow...)
+  use "level" as a VERB (to level/even out an eyebrow) -- a completely
+  different sense, and were NOT used as evidence here; only the
+  accepted ledger precedent (level5_south) was relied on.
+  old: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  new: CLEAR / NEEDS_CONTEXT / [blank] / Medium
+  new referent: "a level/waypoint reference, east direction (matches
+    the accepted level5_south precedent)"
+
+FOLD KEY: rforward (exact: RForward)
+  "Forward" is extensively grounded (156 live-Master hits across many
+  owners -- Body Morphs, Face/Lower Face, Face/Upper Face, Correctives,
+  Clothing -- confirming it is a real, stable directional/morph term,
+  though not one consistent destination). The side marker "R" is NOT
+  independently confirmed for this specific literal: the residual
+  corpus contains "RForward" but no sibling "LForward" to bilaterally
+  confirm R=Right (unlike, e.g., the earlier-settled eyebrown_l/r or
+  L_Brown/R_Brown pairs). Per instruction, R is not expanded to "Right"
+  merely because that expansion is common. Verdict: PARTIAL, not fully
+  CLEAR -- "forward" is grounded but the side marker remains a
+  materially unresolved token.
+  old: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  new: PARTIAL / NEEDS_CONTEXT / [blank] / Medium
+  new referent: "a \"forward\" directional/positional control with a
+    side marker (\"R\"); \"forward\" is a well-established directional
+    term but \"R\" is not independently confirmed as \"right\" for this
+    specific literal (no sibling \"LForward\" exists)"
+
+B2. Discovered during the manual Rule-22 sweep (Section 6 of the task),
+    same underlying pattern as level2_east:
+
+FOLD KEY: level1_west (exact: Level1_West)
+  Identical pattern and precedent as level2_east.
+  old: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  new: CLEAR / NEEDS_CONTEXT / [blank] / Medium
+  new referent: "a level/waypoint reference, west direction (matches
+    the accepted level5_south precedent)"
+
+FOLD KEY: level3_root (exact: Level3_Root)
+  "Level" is grounded as a real owner-category by the same level5_south
+  precedent; "root" is a recognized hierarchy-anchor concept once a
+  real owner is established (the same reasoning already applied to
+  "donger root"/"hip root" in earlier tranches) -- distinguished from
+  bare, ungrounded "root"/"base" attached to a genuinely cryptic prefix
+  (e.g. mx_base, boon_root_left, both left unchanged below, where the
+  prefix itself has zero grounding).
+  old: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  new: CLEAR / NEEDS_CONTEXT / [blank] / Medium
+  new referent: "a level/waypoint hierarchy anchor (\"root\"), matching
+    the accepted level5_south \"level\" reference precedent"
+
+FOLD KEY: tilt45 (exact: tilt45)
+  "Tilt" is a stable, ordinary-English posing/action word, matching the
+  jiggle/shift/poke/push/kick/scale/flip/open/lift pattern the task
+  lists as already-settled examples of function-without-owner. The
+  Master's own 8 "Tilt" hits (all "Left/Right Eyelid ... Tilt") were
+  checked and NOT used as grounding, since they always pair Tilt with
+  an eyelid owner already stated -- this literal's own readability
+  under rule 22 does not require that corroboration.
+  old: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  new: CLEAR / NEEDS_CONTEXT / [blank] / Medium
+  new referent: "a \"tilt\" rotational/pose control, 45-degree variant;
+    owning object/body part not established"
+
+FOLD KEY: spiral (exact: spiral)
+  "Spiral" is a stable, ordinary-English shape/motion word. Zero Master
+  hits exist for "spiral" -- none needed, since rule 22 CLEAR does not
+  require Master corroboration, only a stable core reading from the
+  literal itself (matching the jiggle4-style precedent, where ordinary
+  word-recognition alone is sufficient).
+  old: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  new: CLEAR / NEEDS_CONTEXT / [blank] / Medium
+  new referent: "a \"spiral\" shape/motion descriptor; owning object not
+    established"
+
+FOLD KEY: pivot (exact: Pivot)
+  "Pivot" is a stable, recognized rig-function concept (a rotation-
+  center/anchor). Zero Master hits exist for "pivot" -- same readability
+  reasoning as spiral/tilt45: ordinary-word recognition is sufficient
+  for CLEAR under rule 22 without needing Master corroboration.
+  old: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  new: CLEAR / NEEDS_CONTEXT / [blank] / Medium
+  new referent: "a \"pivot\" rotation-center/anchor control; owning
+    object not established"
+
+FOLD KEY: all parents (exact: All parents)
+  Live Master contains the exact phrase "all_parents" (single instance)
+  -> groupFile/Body. This is a genuine exact-phrase match, not a
+  substring coincidence, and shows the concept exists as an actual
+  posable control in real production use, not merely an organizational
+  UI label (distinguishing it from blank/separator/skeleton_grp/
+  armature.001/blend_root/lower_scale__group, which remain unchanged
+  below as genuine organizational-node cases). Given only a single
+  instance, this is treated as evidence the CONCEPT is real, not as
+  evidence for a specific destination -- Body is NOT proposed here on
+  the strength of one data point (per instruction: Master occurrence
+  alone does not establish semantic equivalence, and this single
+  instance is far weaker than, e.g., donger's 34/35 or eyebrow's 30/38
+  pattern).
+  old: OPAQUE / NOT_APPLICABLE / [blank] / Low
+  new: CLEAR / NEEDS_CONTEXT / [blank] / Low
+  new referent: "a control referencing/affecting \"all parent\"
+    elements in a hierarchy (a genuine exact-phrase Master precedent,
+    all_parents -> Body, exists, though as a single instance it does
+    not by itself establish a destination)"
+
+----------------------------------------------------------------------
+C. REVIEWED, NO CHANGE
+----------------------------------------------------------------------
+
+Explicitly re-confirmed per instruction (Section 5):
+
+FOLD KEY: that_it? (exact: That_it?) -- REVIEWED, NO CHANGE.
+  No stable animator-facing referent or function can be recovered from
+  a bare "is that it?"-style phrase; OPAQUE/NOT_APPLICABLE remains
+  correct.
+
+FOLD KEY: l dcor (exact: L Dcor) -- REVIEWED, NO CHANGE.
+  "Dcor" has no established grounding anywhere in the corpus (unlike
+  donger/brown); matches the already-vetted l dcorin/r dcorin sibling
+  pattern (itself cited approvingly in the Tranche 2 audit as the
+  correct neutral-OPAQUE phrasing). OPAQUE/NOT_APPLICABLE remains
+  correct.
+
+All remaining Tranche-4 OPAQUE rows (140 of the original 152) were
+individually reviewed under the same Rule-22 readability test and
+confirmed to have no stable core semantic content once genuinely
+generic technical wrappers/prefixes are set aside. Representative
+categories, each checked against Master/corpus evidence where a
+borderline call existed:
+
+  - Bare alphanumeric codes with no word content (r1, g1, m02, t8, a14,
+    s1, m03, d10, i11, f00, e7, aex, aa13, rm04, c3, f5, c8, l3, tl):
+    no readable content at all. No change.
+  - Established "Key N" preset-marker family (key 4/7/11/22): settled,
+    distinct from the physical Key.<label> series (rule 23). No change.
+  - Bare numbered "Bone###"/"bone ####" family (bone002/011/012/016/
+    025/049/073/074/082/124/129/134/136/138/142/153/.011, bone 77/1003/
+    1018/1052/1059/1076/1078): the largest and most extensively settled
+    negative pattern in the whole project. No change.
+  - Generic "flex_" category terms other than splat (flex_thin_bottom,
+    special_flex_1, flex_sh3_arrange_01): the qualifiers ("thin",
+    "special", an unresolved code) are pure modifiers with no built-in
+    object identity, unlike "splat." No change.
+  - Generic placeholder "Object###"/"Object0##_0##" family (obj0001,
+    object010_002, object011, object08, object22, object25_003 [sic
+    object025_003], object28, object31, object33_006, object38):
+    settled negative pattern. No change.
+  - DCC-default primitive-mesh names (pCylinder3, pCube27, ValveBiped.
+    pCube46, Plane.002, polySurface3/11/21/54/116/206/1, ValveBiped.
+    polySurface15/17/347/374): settled negative pattern; Plane.002
+    explicitly reconfirmed per instruction Section 7. No change.
+  - Character-prefixed generic numbered bones (kargathbladefist_bone16,
+    saberon_bone34/45, taurenmale_hd_bone_62/71/74/118): settled rule-24
+    pattern -- the character prefix is set aside and the bare number
+    carries no anatomical content. No change.
+  - Cryptic abbreviations with no corpus/Master grounding found (bip_
+    hs2_l "hs", fh15.r/bh01.r "Fh"/"Bh", c_arr_a01/c_arl_a01 "ARR"/
+    "ARL", bone_ra1/bone_rfl1/bone_lfl1 "RA"/"RFL"/"LFL", l1stnb/l2ndnb
+    "Nb", pc_lp "PC"/"LP", mo2l+mo2r "MO2", boon_root_left "boon",
+    mx_base "MX", washroot "wash"+"root" as a compound, magrel, hou 5_1
+    "Hou"): individually checked against the live Master (zero hits for
+    wash, boon, pivot-adjacent tokens, magrel, hou) and found no
+    grounding of any kind, unlike donger/brown. No change.
+  - Organizational/hierarchy grouping nodes (armature.001, blend_root,
+    lower_scale__group, null2 [a real DCC node TYPE, not a specific
+    referent], skeleton-node-style entries): consistent with the
+    already-settled skeleton_grp precedent (Tranche 2). No change.
+  - Self-declared or UI/meta placeholders (blank, separator): these
+    name real concepts but describe non-animatable UI/organizational
+    chrome, not a posing function -- distinguished from all_parents
+    (above), which the Master confirms exists as an actual control.
+    No change.
+  - Bare position/side markers with no object (right_13, right_8, front
+    1_2/2_2, left side, upper_02, student.left_3, bas.side_left_1/3,
+    " side1lf", "ス横先.r" [Japanese "side-tip/side-end"], ul+ur, ol+or,
+    rightbone, bonehigh05, botleftbone): a position/side word alone,
+    with no object it modifies, has no recoverable core referent --
+    contrast tilt45/spiral/pivot/switch_mode, which are ACTION/FUNCTION
+    words, not bare position labels. No change.
+  - Bare numbers/ordinals with no accompanying word (03, 26, 001, 3rd,
+    25, 54, 60, 3): no change.
+  - Character/model-name or reference-marker phrases (one culture
+    character left, imaginary frankie, giraffe_reference): proper-noun/
+    reference markers, not functions. No change.
+  - Internal rig-namespace arbitrary code-names (brk-rig-bacon-fr
+    "Bacon", mar-rig-eggwhite4 "Eggwhite"): matches the already-settled
+    Flm-ArmA/Mar-Rig internal-namespace pattern -- the namespace-local
+    word does not describe the control's actual function/anatomy. No
+    change.
+  - bone_bed_04 ("bone"+"bed" compound): no recognizable combined
+    meaning. No change.
+  - jnt_left, jnt_129: generic numbered/technical joint, no functional/
+    regional word, matching the bone### pattern. No change.
+
+No genuinely new doctrine question arose during this review -- every
+correction above is an application of already-settled rule 22 (and, for
+the "chain" pair, an application of the already-settled multi-sense-word
+principle), not a new policy.
+======================================================================
