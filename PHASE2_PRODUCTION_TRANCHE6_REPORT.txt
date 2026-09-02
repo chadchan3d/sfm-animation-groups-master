@@ -8,26 +8,35 @@ TRANCHE-ONLY STATISTICS (rows 5501-6500)
 ================================================================================
 Total tranche rows: 1000
 
+[UPDATED post-QA-correction; see PHASE2_PRODUCTION_TRANCHE6_QA_APPLIED_
+REPORT.txt for the full evidence trail. Originally reported CLEAR 834/
+OPAQUE 135 and CLEAR(taxonomy) 764/NOT_APPLICABLE 135. Concernt,
+Qwn-Rig-Hole-A, and paulinggib002 were corrected as originally flagged;
+fbx_asagi_face_shy and Plane08 were reviewed and confirmed unchanged;
+pCylinder10 and pCylinder12 were found to be a separate, previously
+undetected drift and reverted to OPAQUE. Figures below reflect the
+corrected ledger.]
+
 semantic_status distribution:
-  CLEAR:   834
-  PARTIAL:  31
+  CLEAR:   833
+  PARTIAL:  32
   OPAQUE:  135
 
 taxonomy_status distribution:
-  CLEAR:            764
-  NEEDS_CONTEXT:    101
+  CLEAR:            763
+  NEEDS_CONTEXT:    102
   NEEDS_DOCTRINE:     0
   NOT_APPLICABLE:   135
 
 Rule 21 (OPAQUE <-> NOT_APPLICABLE) holds exactly: 135 = 135.
 
 confidence distribution:
-  High:   612
-  Medium: 197
+  High:   613
+  Medium: 196
   Low:    191
 
-proposed_destination distribution (764 CLEAR rows with a destination):
-  133  groupFile/Other
+proposed_destination distribution (763 CLEAR rows with a destination):
+  132  groupFile/Other
   126  groupFile/Clothing
    73  groupFile/Body
    56  groupFile/Arms
@@ -39,9 +48,9 @@ proposed_destination distribution (764 CLEAR rows with a destination):
    28  groupFile/Arms/LeftArm/LeftFingers
    27  groupFile/Arms/RightArm/RightFingers
    22  groupFile/Hair
-   20  groupFile/Face/Upper Face
+   21  groupFile/Face/Upper Face
    14  groupFile/Tail
-   12  groupFile/Face/Expressions
+   11  groupFile/Face/Expressions
     8  groupFile/Face/Mid Face
     7  groupFile/Wings
     7  groupFile/Correctives
@@ -56,13 +65,25 @@ proposed_destination distribution (764 CLEAR rows with a destination):
 NEEDS_DOCTRINE occurrences this tranche: 0 (no genuinely new policy question arose;
 no batch stop was required).
 
-Consistency flags raised: 5 within-tranche findings (documented, not auto-applied
-to the ledger before this commit; see PHASE2_PRODUCTION_TRANCHE6_CONSISTENCY_FLAGS.txt):
-  1. Concernt (P58) -> should be groupFile/Face/Upper Face (currently Expressions)
-  2. fbx_asagi_face_shy (P59) -> should be groupFile/Face/Lower Face (currently Expressions)
-  3. Qwn-Rig-Hole-A (P57) -> should be PARTIAL/NEEDS_CONTEXT (currently OPAQUE)
-  4. paulinggib002 (P56) -> should be CLEAR/groupFile/Other (currently OPAQUE)
-  5. Plane08 (P55) -> likely should be CLEAR/groupFile/Other (currently OPAQUE), borderline
+Consistency flags raised: 5 within-tranche findings, documented at raw-tranche-
+commit time and NOT auto-applied then; resolved in a follow-up targeted QA pass
+(see PHASE2_PRODUCTION_TRANCHE6_CONSISTENCY_FLAGS.txt and
+PHASE2_PRODUCTION_TRANCHE6_QA_APPLIED_REPORT.txt):
+  1. Concernt (P58) -> groupFile/Face/Upper Face -- CONFIRMED and applied
+     (100%-consistent bare-word Master family).
+  2. fbx_asagi_face_shy (P59) -> REJECTED after a narrow template audit found a
+     coherent fbx_[character]_face_[state] whole-face preset system (with a
+     "_face_none" sibling for 3 of 4 characters); RETAINED at Face/Expressions.
+  3. Qwn-Rig-Hole-A (P57) -> PARTIAL/NEEDS_CONTEXT -- CONFIRMED and applied
+     (matches an 8-member *-Rig-Hole-* template).
+  4. paulinggib002 (P56) -> CLEAR/groupFile/Other -- CONFIRMED and applied
+     ("gib" extensively grounded elsewhere in this ledger).
+  5. Plane08 (P55) -> REJECTED. Full-ledger check found Plane/pPlane is 7/7
+     OPAQUE with zero exceptions; RETAINED as OPAQUE. This ALSO revealed that
+     the audit's own claim "pCylinder8/10/12 all CLEAR/Other" was wrong:
+     pCylinder8 was (and remains) correctly OPAQUE, and pCylinder10/pCylinder12
+     were themselves an undetected drift, corrected back to OPAQUE/
+     NOT_APPLICABLE/blank.
 
 OPAQUE rows manually reviewed (Section 13): all 135, individually, against the four
 review questions (literal readability, generic-real-object discard risk, corpus/Master
@@ -78,9 +99,13 @@ majority counts:
 Of these, 10 were confirmed correct by direct Master lookup or by same-tranche
 synonym grounding to an already-confirmed Master sibling (mad/Mad, Shocked/Shocked2,
 Happy 1, Tears 1/Tears 2, AU24/AU32/AU38, and Glad/Amazed via synonym grounding to
-Happy/Shocked respectively). 2 (concernt, fbx_asagi_face_shy) were found to
-contradict a direct Master lookup and are documented as Finding 1 and Finding 2
-above (not yet applied). Upper Face and Lower Face routings (20 and 38 rows
+Happy/Shocked respectively). 2 (concernt, fbx_asagi_face_shy) were flagged as
+appearing to contradict a direct Master lookup (Finding 1 and Finding 2). A
+follow-up targeted QA pass confirmed Finding 1 (Concernt, corrected to Face/
+Upper Face) but REJECTED Finding 2 after a narrow template audit established
+fbx_asagi_face_shy as part of a coherent whole-face preset system (retained
+at Face/Expressions) -- see PHASE2_PRODUCTION_TRANCHE6_QA_APPLIED_REPORT.txt.
+Upper Face and Lower Face routings (20 and 38 rows
 respectively) were spot-checked; two bare-mouth-word extensions beyond the
 rulebook's documented "smile" example (RFrown3, smirk_Left) were independently
 verified against the live Master (bare Frown/frown/FrownL/FrownR and Smirk/smirk

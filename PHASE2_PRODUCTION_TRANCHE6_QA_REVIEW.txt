@@ -1,0 +1,231 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 6 -- TARGETED QA RECONCILIATION
+FACE TEMPLATE + DCC PRIMITIVE BOUNDARY, QA REVIEW
+No ledger row has been modified by this document -- see
+PHASE2_PRODUCTION_TRANCHE6_QA_APPLIED_REPORT.txt for the applied
+result and validation.
+======================================================================
+
+----------------------------------------------------------------------
+0. EBALLLOWERR / EBALLLOWERL -- REVALIDATED, NO CHANGE
+----------------------------------------------------------------------
+Re-checked directly against the live ledger: both rows already carry
+groupFile/Face/Upper Face with the corrected referent ("eyebrow, all/
+whole segment, lowered (corrected from an earlier mistaken 'eye'
+reading)"). The coherent EBInnerLowerer*/EBOuterLowerer*/EBAllRaiser*
+sibling series (all CLEAR/Face/Upper Face) remains solid template
+grounding. No evidence contradicts this. CONFIRMED, no change. The
+original Tranche 3 raw batch files (P21, P27) and report remain
+untouched.
+
+----------------------------------------------------------------------
+1. Concernt
+----------------------------------------------------------------------
+OLD: CLEAR / CLEAR / groupFile/Face/Expressions / Medium.
+Complete-literal reading: "Concernt" -- obvious misspelling of
+"Concerned"/"Concern," a bare emotion word with no localized feature
+named.
+Strongest accepted precedent: none directly from calibration; the
+Tranche-5 whole-face-vs-localized template distinction governs the
+method here.
+Strongest contrary/comparable precedent: live Master "concern" family
+-- 23/23 hits (100%), INCLUDING every bare/near-bare form (Concern,
+Concerned, ConcernL, L_Concern) -- all route to groupFile/Face/Upper
+Face. Unlike "shocked"/"surprised" (where only compounds are Upper
+Face and bare forms are Expressions), "concern" behaves like "smile":
+even the bare word itself is anatomically localized in this Master's
+convention, most plausibly because "concern" is conventionally
+expressed via a specific furrowed/raised-brow action.
+This is not a substring-majority argument -- it is a 100%-consistent,
+bare-word-inclusive family match, the same standard of evidence that
+justified moving CSmile to Face/Lower Face in the Tranche 5 QA pass.
+VERDICT: confirmed classification error.
+FINAL FIELDS: semantic_status CLEAR (unchanged); taxonomy_status CLEAR
+(unchanged); proposed_destination groupFile/Face/Expressions ->
+groupFile/Face/Upper Face; confidence Medium -> High.
+
+----------------------------------------------------------------------
+2. Qwn-Rig-Hole-A
+----------------------------------------------------------------------
+OLD: OPAQUE / NOT_APPLICABLE / [blank] / Low.
+Complete-literal reading: "Qwn-Rig" (internal rig namespace) + "Hole"
++ "A" (variant).
+Strongest accepted precedent: this exact "*-Rig-Hole-*" template is
+extensively established elsewhere in the SAME ledger, across FIVE
+different rig namespaces, all PARTIAL-or-CLEAR / NEEDS_CONTEXT (never
+OPAQUE): qwn-rig-hole-v1 (PARTIAL/NEEDS_CONTEXT), qwn-rig-hole-v2
+(CLEAR/NEEDS_CONTEXT), flm-rig-hole-a (PARTIAL/NEEDS_CONTEXT),
+pbg-rig-hole-a (CLEAR/NEEDS_CONTEXT), brk-rig-hole-a and
+brk-rig-hole-v2 (CLEAR/NEEDS_CONTEXT), mar-rig-hole-a (CLEAR/
+NEEDS_CONTEXT), plus the bare "hole" row itself (PARTIAL/NEEDS_CONTEXT,
+"a 'hole'/opening"). This is not merely a comparable pattern -- it is
+the identical naming template, including the SAME "Qwn-Rig" namespace
+(qwn-rig-hole-v1/v2 are the SAME character-rig prefix as this row).
+Strongest contrary precedent: none -- "Qwn-Rig-Hole-A" is the sole
+outlier in an otherwise unbroken 8-member family.
+VERDICT: confirmed classification error, exactly as the task expected.
+Anatomical orifice / mechanical opening / garment hole remain
+materially different core senses (matching bare "hole"'s own PARTIAL
+treatment), so PARTIAL is the correct semantic_status, not CLEAR.
+FINAL FIELDS: semantic_status OPAQUE -> PARTIAL; semantic_referent "a
+'hole' element within the internal Qwn-Rig namespace, variant A --
+anatomical orifice, mechanical opening, and garment hole remain
+materially different core senses (matches the established *-Rig-Hole-*
+template)"; taxonomy_status NOT_APPLICABLE -> NEEDS_CONTEXT;
+proposed_destination [blank] (unchanged); confidence Low -> Medium.
+
+----------------------------------------------------------------------
+3. paulinggib002
+----------------------------------------------------------------------
+OLD: OPAQUE / NOT_APPLICABLE / [blank] / Low.
+Complete-literal reading: "pauling" (a name -- possibly a character/
+model reference, not independently grounded as to WHO) + "gib"
+(destructible/gore-fragment prop, a well-established Source-engine
+domain term) + "002" (numbered variant).
+Strongest accepted precedent: "gib" is extensively grounded elsewhere
+in this SAME ledger as a real Source-domain object concept -- gib_2,
+vip_gibhead01, gib2, leftleggib, rightarmgib, gib_1, and critically
+window_urban_sash_48_88_full_gib04, present in this SAME tranche
+(batch P59), an exact structural sibling (a named-element prefix +
+"gib" + numbered suffix). All of these read "gib" as "destructible/
+gore/debris fragment," never as anything else, and the pattern is
+consistent regardless of what precedes it.
+Strongest contrary precedent: none. "Pauling" itself has zero Master
+hits and is not independently identified (per instruction, this is
+NOT overstated as any specific named character -- it is treated only
+as an unresolved name/model-reference prefix, the same way character
+prefixes are handled under rule 24 elsewhere in this project).
+VERDICT: confirmed classification error. The character/name prefix
+does not need to be independently understood for the row to be CLEAR,
+because the remaining content ("gib," numbered) is itself sufficiently
+grounded -- this is the same rule-24 logic already applied successfully
+throughout Phase 2, just with a grounded suffix instead of an
+ungrounded one this time.
+FINAL FIELDS: semantic_status OPAQUE -> CLEAR; semantic_referent "a
+'gib' (destructible/gore-fragment) prop associated with a named
+element ('Pauling,' not independently identified), numbered";
+taxonomy_status NOT_APPLICABLE -> CLEAR; proposed_destination [blank]
+-> groupFile/Other; confidence Low -> Medium.
+
+----------------------------------------------------------------------
+4. fbx_asagi_face_shy
+----------------------------------------------------------------------
+OLD: CLEAR / CLEAR / groupFile/Face/Expressions / High.
+Complete-literal reading: "fbx_asagi_face_shy" -- character prefix
+("asagi") + "face" + "shy."
+Live-Master "Shy" precedent (weak, thin): only 2 hits total -- "Shy
+eyes" (explicit "eyes" -> Upper Face) and bare "Shy" (-> Lower Face, a
+SINGLE data point, not a family).
+Narrow template audit performed per instruction, searching
+PHASE2_RESIDUAL_TERMS.txt for fbx_asagi_face_*, asagi_face_*, *_face_
+shy, and comparable fbx_*_face_<emotion> siblings (explicitly NOT
+treating lexical adjacency in the sorted list as same-model
+provenance -- the finding below rests on the NAMING TEMPLATE's internal
+structure, not on proximity):
+
+  fbx_asagi_face, fbx_asagi_face_none, fbx_asagi_face_shy
+  fbx_murasaki_face, fbx_murasaki_face_none, fbx_murasaki_face_shy
+  fbx_rinko_face, fbx_rinko_face_none, fbx_rinko_face_shy
+  fbx_sakura_face_shy, fbx_sakura_zero_face, fbx_sakura_zero_face_none
+  fbx_monster_oboro_face
+
+This is a coherent, multi-character (asagi/murasaki/rinko/sakura)
+template: fbx_[CHARACTER]_face_[STATE], where [STATE] includes "none"
+and "shy" applied in parallel across every character. The decisive
+element is the "_face_none" sibling present for three of the four
+characters: "none" cannot be a localized mouth/lip control -- there is
+no meaningful "no mouth movement" reading -- it only makes sense as one
+selectable state in a per-character WHOLE-FACE expression-preset
+selector system, with "shy" as another selectable state in that same
+system. This directly answers the task's question: the "face_" wrapper
+here is semantically meaningful (a whole-face preset-selector marker),
+not a mere namespace wrapper, and it identifies a whole-face expression
+system, not the same localized mechanism as the Master's single bare
+"Shy" instance.
+VERDICT: positive template evidence supports Face/Expressions. The
+weak, single-instance bare-"Shy"-> Lower Face precedent does not
+outweigh this direct, coherent, multi-member, same-corpus template
+match.
+FINAL FIELDS: UNCHANGED -- CLEAR / CLEAR / groupFile/Face/Expressions /
+High.
+
+----------------------------------------------------------------------
+5-8. DCC-PRIMITIVE BOUNDARY: Plane08, pCylinder8, pCylinder10,
+     pCylinder12
+----------------------------------------------------------------------
+Full-ledger precedent check (every existing pCube/pCylinder/pSphere/
+pPlane/Plane/polySurface row across all 6500 rows, not just this
+tranche):
+
+  polySurface family: 44/44 -> OPAQUE (zero exceptions)
+  pCube family:         7/7  -> OPAQUE (zero exceptions)
+  pSphere family:       1/1  -> OPAQUE (zero exceptions)
+  Plane/pPlane family:  7/7  -> OPAQUE (zero exceptions) -- pplane3,
+    pplane2, plane07, plane06, plane05, plane.002, AND Plane08 itself,
+    spanning Tranches 1, 2, 3, 3, 4, and 6.
+  pCylinder family:     7 total -- pcylinder13, pcylinder6, pcylinder3,
+    valvebiped.pcylinder27, AND pcylinder8 (all 5 OPAQUE, spanning
+    Tranches 3, 3, 4, 4, and this tranche's own batch P56) -- but
+    pcylinder10 (batch P59) and pcylinder12 (batch P60) are CLEAR/
+    groupFile/Other, an internal contradiction WITHIN the very same
+    family, introduced late in this tranche.
+
+This resolves the question definitively: 65 of 67 total DCC-default-
+primitive-identifier rows across the entire ledger are OPAQUE,
+including pcylinder8 itself (correctly classified in this SAME
+tranche, one batch before the drift began). Plane08 is fully consistent
+with an unbroken, 7/7 same-family, cross-tranche precedent -- there is
+no positive evidence anywhere that a bare "PlaneNN"/"pCylinderNN"
+literal identifies the animator-facing object rather than merely
+exposing Maya/Blender's own auto-generated default name for the
+primitive the mesh started from (a distinction rule 22 and the settled
+Tranche 3-5 precedent both already draw, separate from "Box10"-style
+literals that are deliberately chosen English object names, not tool-
+generated defaults).
+VERDICT: Plane08 CONFIRMED correctly OPAQUE, no change. pcylinder8
+CONFIRMED correctly OPAQUE, no change. pcylinder10 and pcylinder12 are
+the actual drift and must be corrected back to match the established,
+overwhelming precedent (including their own tranche's own P56 sibling).
+FINAL FIELDS:
+  Plane08: UNCHANGED -- OPAQUE / NOT_APPLICABLE / [blank] / Low.
+  pCylinder8: UNCHANGED -- OPAQUE / NOT_APPLICABLE / [blank] / Low.
+  pCylinder10: semantic_status CLEAR -> OPAQUE; semantic_referent "a
+    cylinder (generic real geometric object), numbered" -> "a generic
+    default-named primitive mesh (Maya pCylinder), numbered";
+    taxonomy_status CLEAR -> NOT_APPLICABLE; proposed_destination
+    groupFile/Other -> [blank]; confidence Medium -> Low; short_reason
+    -> "generic DCC primitive/object name, actual modeled referent
+    unknown -- matches the established pCube/pCylinder/pSphere/pPlane/
+    polySurface OPAQUE precedent (65/67 across the full ledger,
+    including this row's own sibling pcylinder8); the earlier 'genericity
+    is not opacity' analogy to Box10/Box22 does not apply here because a
+    DCC tool's own auto-generated primitive name is not a deliberately
+    chosen object name."
+  pCylinder12: identical correction pattern to pCylinder10.
+
+----------------------------------------------------------------------
+9. ADDITIONAL DCC-DEFAULT INCONSISTENCIES (Section 7 narrow sweep)
+----------------------------------------------------------------------
+Mechanical enumeration of every pCube<N>/pCylinder<N>/pSphere<N>/
+pPlane<N>/polySurface<N>/Plane.<N>/Plane<N> row across positions
+501-6500, individually inspected:
+
+  pCube:        7/7 OPAQUE, no exceptions.
+  pSphere:      1/1 OPAQUE, no exceptions.
+  polySurface: 44/44 OPAQUE, no exceptions.
+  Plane/pPlane: 7/7 OPAQUE, no exceptions (including Plane08 itself).
+  pCylinder:    5/7 OPAQUE; pCylinder10 and pCylinder12 are the only
+    two exceptions found anywhere in the full ledger -- both addressed
+    above.
+
+No other DCC-default-primitive inconsistency was found. This sweep was
+not broadened into a general OPAQUE audit, per instruction.
+
+----------------------------------------------------------------------
+NO DOCTRINE BLOCKER
+----------------------------------------------------------------------
+Every correction and every retention above is a direct application of
+already-settled Rule 22/23/24 evidence discipline and the Tranche 5
+whole-face-vs-localized template distinction. No genuinely new
+taxonomy-policy question arose.
+======================================================================

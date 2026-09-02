@@ -1,0 +1,191 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 6 -- FACE TEMPLATE + DCC PRIMITIVE BOUNDARY,
+APPLIED REPORT
+Records every ledger correction actually applied following
+PHASE2_PRODUCTION_TRANCHE6_QA_REVIEW.txt (full evidence trail there).
+======================================================================
+
+----------------------------------------------------------------------
+1. SCOPE AND OUTCOME
+----------------------------------------------------------------------
+Reviewed: the 5 within-tranche findings from the raw-tranche consistency
+audit (Concernt, fbx_asagi_face_shy, Qwn-Rig-Hole-A, paulinggib002,
+Plane08), a revalidation of the already-applied cross-tranche EB
+correction, and a full-ledger DCC-default-primitive consistency sweep
+(pCube/pCylinder/pSphere/pPlane/polySurface, positions 501-6500).
+
+5 ledger rows corrected: Concernt, Qwn-Rig-Hole-A, paulinggib002,
+pCylinder10, pCylinder12. The last two were NOT part of the original
+5 findings -- they were discovered only because verifying the audit's
+"Plane08 should match its pCylinder8/10/12 siblings" argument required
+checking those siblings directly, which revealed pCylinder10/12 were
+themselves the actual drift.
+
+2 rows explicitly reviewed and CONFIRMED UNCHANGED after the original
+audit's proposed moves were found to be wrong: fbx_asagi_face_shy
+(retained Face/Expressions) and Plane08 (retained OPAQUE).
+
+EBAllLowerR/EBAllLowerL (the Tranche 3 cross-tranche correction already
+applied in the raw-tranche commit) were revalidated and left unchanged
+-- still correct.
+
+No genuinely new doctrine question arose. PHASE2_SEMANTIC_PILOT_500_
+FINAL.tsv, raw batch TSVs (all tranches), PHASE2_SEMANTIC_RULEBOOK_
+FINAL.txt, PHASE2_SEMANTIC_BATCH_RULES.txt, prior closed tranche
+reports (Tranche 3's specifically), and the Master were NOT modified.
+
+----------------------------------------------------------------------
+2. LEDGER ROWS CHANGED (5)
+----------------------------------------------------------------------
+
+Concernt:
+  proposed_destination:  groupFile/Face/Expressions -> groupFile/Face/
+    Upper Face
+  confidence:            Medium -> High
+  (semantic_status CLEAR, taxonomy_status CLEAR both unchanged)
+  Evidence: live Master "concern" family, 23/23 (100%) -> Face/Upper
+  Face, including every bare/near-bare form (Concern, Concerned,
+  ConcernL, L_Concern) -- not a substring majority, a bare-word-
+  inclusive family match, matching the CSmile standard from the
+  Tranche 5 QA correction.
+
+Qwn-Rig-Hole-A:
+  semantic_status:       OPAQUE -> PARTIAL
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  proposed_destination:  [blank] (unchanged)
+  confidence:            Low -> Medium
+  Evidence: an 8-member "*-Rig-Hole-*" template already established
+  across 5 different rig namespaces (qwn-rig-hole-v1/v2, flm-rig-
+  hole-a, pbg-rig-hole-a, brk-rig-hole-a/v2, mar-rig-hole-a, bare
+  "hole") -- this row was the sole OPAQUE outlier in that family.
+
+paulinggib002:
+  semantic_status:       OPAQUE -> CLEAR
+  taxonomy_status:       NOT_APPLICABLE -> CLEAR
+  proposed_destination:  [blank] -> groupFile/Other
+  confidence:            Low -> Medium
+  Evidence: "gib" (destructible/gore-fragment prop, a real Source-
+  engine domain term) is extensively grounded elsewhere in this
+  ledger (gib_2, vip_gibhead01, gib2, leftleggib, rightarmgib, and
+  this same tranche's own window_urban_sash_48_88_full_gib04); "Pauling"
+  is treated only as an unidentified name/model-reference prefix
+  (rule 24), not claimed to identify any specific person or character.
+
+pCylinder10:
+  semantic_status:       CLEAR -> OPAQUE
+  taxonomy_status:       CLEAR -> NOT_APPLICABLE
+  proposed_destination:  groupFile/Other -> [blank]
+  confidence:            Medium -> Low
+  Evidence: reverts a drift -- see Section 3 below.
+
+pCylinder12: identical correction pattern to pCylinder10.
+
+For every row above: fold_key, exact_spellings, batch_id, and
+scanner_lines were hard-asserted unchanged. Full old/new field text is
+in PHASE2_PRODUCTION_TRANCHE6_QA_REVIEW.txt.
+
+----------------------------------------------------------------------
+3. THE DCC-PRIMITIVE BOUNDARY (Plane08 / pCylinder8/10/12)
+----------------------------------------------------------------------
+The raw-tranche audit's Finding 5 argued that pCylinder8/10/12 were all
+CLEAR/groupFile/Other, and that Plane08 should therefore match them
+under the Box10/Box22 "genericity is not opacity" precedent. Direct
+verification found this factually wrong in its own premise: pCylinder8
+was (and remains) correctly OPAQUE. Only pCylinder10 and pCylinder12
+had drifted to CLEAR/Other.
+
+A full-ledger check of every pCube/pCylinder/pSphere/pPlane/
+polySurface row (not substring-sampled, the complete set) found:
+  polySurface: 44/44 OPAQUE
+  pCube:        7/7  OPAQUE
+  pSphere:      1/1  OPAQUE
+  Plane/pPlane: 7/7  OPAQUE (including Plane08 itself)
+  pCylinder:    5/7  OPAQUE (pCylinder10, pCylinder12 were the only
+    2 exceptions anywhere in the entire ledger)
+
+65 of 67 total rows in this family are OPAQUE, spanning Tranches 1
+through 6. This is the established, overwhelming precedent, consistent
+with the settled distinction (already documented in Tranches 3-5)
+between a DCC tool's own auto-generated primitive default name (pCube#/
+pCylinder#/pSphere#/pPlane#/polySurface#/Plane#) -- which tells us
+nothing about what the finished, reshaped mesh actually represents --
+and a deliberately chosen English object name like "Box10" (the
+calibration-settled "genericity is not opacity" precedent). The Box10/
+Box22 analogy does not transfer to DCC-default identifiers.
+
+RESULT: Plane08 retained OPAQUE (no change -- it was never the
+anomaly). pCylinder10 and pCylinder12 corrected back to OPAQUE/
+NOT_APPLICABLE/blank to match the established, near-unanimous
+precedent, including their own tranche's own sibling pCylinder8.
+
+----------------------------------------------------------------------
+4. REVIEWED, CONFIRMED NO CHANGE (2)
+----------------------------------------------------------------------
+
+fbx_asagi_face_shy: UNCHANGED -- CLEAR / CLEAR / groupFile/Face/
+  Expressions / High. A narrow template audit of PHASE2_RESIDUAL_
+  TERMS.txt (not treating lexical adjacency as provenance) found a
+  coherent fbx_[character]_face_[state] preset system spanning 4
+  characters (asagi, murasaki, rinko, sakura), with a "_face_none"
+  sibling for 3 of them -- "none" cannot be a localized mouth control,
+  so this positively establishes a whole-face expression-preset
+  selector template, overriding the thin, single-instance bare-"Shy"
+  Master precedent the original audit relied on.
+
+Plane08: UNCHANGED -- OPAQUE / NOT_APPLICABLE / [blank] / Low. See
+  Section 3.
+
+----------------------------------------------------------------------
+5. EBALLLOWERR / EBALLLOWERL -- REVALIDATED, CONFIRMED CORRECT
+----------------------------------------------------------------------
+No change. The already-applied Tranche 3 cross-tranche correction
+(groupFile/Face/Eyes -> groupFile/Face/Upper Face) remains well
+grounded by the coherent EBInnerLowerer*/EBOuterLowerer*/EBAllRaiser*
+sibling series. The original Tranche 3 raw batch files and report
+remain untouched, as they were in the raw-tranche commit.
+
+----------------------------------------------------------------------
+6. REVISED TRANCHE-6 DISTRIBUTIONS (positions 5501-6500 only)
+----------------------------------------------------------------------
+semantic_status:
+  CLEAR   : 834 -> 833
+  PARTIAL : 31  -> 32
+  OPAQUE  : 135 -> 135
+
+taxonomy_status:
+  CLEAR           : 764 -> 763
+  NEEDS_CONTEXT   : 101 -> 102
+  NEEDS_DOCTRINE  : 0   -> 0
+  NOT_APPLICABLE  : 135 -> 135
+
+confidence:
+  High   : 612 -> 613
+  Medium : 197 -> 196
+  Low    : 191 -> 191
+
+proposed_destination: groupFile/Other 133 -> 132 (-1); groupFile/Face/
+  Upper Face 20 -> 21 (+1); groupFile/Face/Expressions 12 -> 11 (-1).
+
+----------------------------------------------------------------------
+7. GLOBAL LEDGER VALIDATION (mechanical, post-correction, re-opened
+   from disk)
+----------------------------------------------------------------------
+row_count_6500:                      PASS
+first_500_identical_to_final:        PASS
+fold_key_sequence_identical:         PASS
+exact_spellings_unchanged:           PASS
+batch_id_unchanged:                  PASS
+zero_duplicates:                     PASS
+rule21_global (OPAQUE iff NOT_APPLICABLE, all 6,500 rows): PASS
+all_destinations_valid:              PASS
+no_destination_on_non_clear_taxonomy_row: PASS
+no_position_6501_plus:               PASS
+exactly_five_rows_changed:           PASS
+
+ALL CHECKS PASS: True
+
+Raw batch files (all tranches) were NOT modified. FINAL.tsv, calibration
+rows 1-500, Tranche 3's raw files and report specifically, PHASE2_
+SEMANTIC_RULEBOOK_FINAL.txt, PHASE2_SEMANTIC_BATCH_RULES.txt, and the
+Master were NOT modified.
+======================================================================

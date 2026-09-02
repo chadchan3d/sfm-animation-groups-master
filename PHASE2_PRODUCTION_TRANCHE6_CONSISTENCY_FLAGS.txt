@@ -205,7 +205,7 @@ OTHER OBSERVATIONS (no action)
   than assumed.
 
 ================================================================================
-SUMMARY
+SUMMARY (ORIGINAL, AS-AUDITED)
 ================================================================================
 Findings requiring correction (verdict A), NOT yet applied to the ledger (per
 instructions not to auto-apply consistency flags before the raw-tranche commit):
@@ -218,5 +218,46 @@ instructions not to auto-apply consistency flags before the raw-tranche commit):
 Findings already applied (cross-tranche, per Section 15):
   6. EBAllLowerR (Tranche 3) -> groupFile/Face/Upper Face (from Eyes) -- APPLIED
   7. EBAllLowerL (Tranche 3) -> groupFile/Face/Upper Face (from Eyes) -- APPLIED
+
+================================================================================
+SUMMARY (CORRECTED -- see PHASE2_PRODUCTION_TRANCHE6_QA_REVIEW.txt and
+PHASE2_PRODUCTION_TRANCHE6_QA_APPLIED_REPORT.txt for full evidence)
+================================================================================
+A follow-up targeted QA pass confirmed findings 1, 3, and 4 as proposed, but
+REJECTED finding 2 and REJECTED finding 5, and additionally found that this
+audit's own "Plane08 sibling" claim -- that pCylinder8/10/12 were all CLEAR/
+Other -- was factually wrong: pCylinder8 was (and remains) correctly OPAQUE,
+and pCylinder10/pCylinder12 were themselves the drift that needed reverting,
+not evidence for promoting Plane08.
+
+  1. Concernt           -> groupFile/Face/Upper Face -- CONFIRMED, applied
+     (100%-consistent bare-word Master family, matching the CSmile standard).
+  2. fbx_asagi_face_shy -> REJECTED. A narrow template audit of the corpus
+     found a coherent fbx_[character]_face_[state] preset system (asagi/
+     murasaki/rinko/sakura, each with a "_face_none" sibling) that positively
+     establishes this as a whole-face expression-preset selector, not a
+     localized mouth control. RETAINED at Face/Expressions.
+  3. Qwn-Rig-Hole-A -> PARTIAL/NEEDS_CONTEXT -- CONFIRMED, applied (matches
+     an 8-member *-Rig-Hole-* template this row was the sole outlier in).
+  4. paulinggib002 -> CLEAR/groupFile/Other -- CONFIRMED, applied ("gib" is
+     extensively grounded elsewhere in this ledger, including this same
+     tranche's window_urban_sash_48_88_full_gib04).
+  5. Plane08 -> REJECTED. Full-ledger check found Plane/pPlane is 7/7 OPAQUE
+     with zero exceptions across 6 tranches, and polySurface (44/44), pCube
+     (7/7), and pSphere (1/1) are likewise 100% OPAQUE. RETAINED as OPAQUE.
+  6-7. EBAllLowerR/EBAllLowerL: revalidated, no change -- confirmed correct.
+
+ADDITIONAL FINDING (not in the original audit): pCylinder10 and pCylinder12
+were themselves misclassified CLEAR/groupFile/Other -- the only 2 exceptions
+in an otherwise unbroken 65/67-row OPAQUE precedent across the entire
+pCube/pCylinder/pSphere/pPlane/polySurface family, including their own
+sibling pCylinder8 (correctly OPAQUE, same tranche, one batch earlier).
+Both corrected back to OPAQUE/NOT_APPLICABLE/blank.
+
+FINAL total: 5 ledger corrections applied this pass (Concernt,
+Qwn-Rig-Hole-A, paulinggib002, pCylinder10, pCylinder12), on top of the
+2 cross-tranche EB corrections already applied in the raw-tranche commit.
+2 rows explicitly reviewed and confirmed unchanged (fbx_asagi_face_shy,
+Plane08).
 
 No NEEDS_DOCTRINE stop occurred in Tranche 6.
