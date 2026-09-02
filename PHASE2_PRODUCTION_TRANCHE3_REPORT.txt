@@ -8,23 +8,30 @@ through PHASE2_PRODUCTION_BATCH_P30_3401_3500.tsv.
 ----------------------------------------------------------------------
 1. TRANCHE-ONLY STATISTICS (the 1,000 rows classified in this tranche)
 ----------------------------------------------------------------------
+[UPDATED post-QA-correction; see PHASE2_PRODUCTION_TRANCHE3_QA_APPLIED_
+REPORT.txt. Originally reported CLEAR 828 / OPAQUE 133 and
+CLEAR(taxonomy) 758 / NOT_APPLICABLE 133 -- donger04_chain and r_brown
+were corrected from OPAQUE/NOT_APPLICABLE: donger04_chain to
+PARTIAL/NEEDS_CONTEXT, r_brown to CLEAR/CLEAR/Face/Upper Face. Figures
+below reflect the corrected ledger.]
+
 semantic_status:
-  CLEAR   : 828
-  PARTIAL : 39
-  OPAQUE  : 133
+  CLEAR   : 829
+  PARTIAL : 40
+  OPAQUE  : 131
 
 taxonomy_status:
-  CLEAR          : 758
-  NEEDS_CONTEXT  : 109
+  CLEAR          : 759
+  NEEDS_CONTEXT  : 110
   NEEDS_DOCTRINE : 0
-  NOT_APPLICABLE : 133
+  NOT_APPLICABLE : 131
 
 confidence:
-  High   : 586
-  Medium : 247
-  Low    : 167
+  High   : 587
+  Medium : 248
+  Low    : 165
 
-proposed_destination distribution (CLEAR rows only, 758 total):
+proposed_destination distribution (CLEAR rows only, 759 total):
   Clothing                    : 133
   Other                       : 130
   Body Morphs                 : 59
@@ -38,7 +45,7 @@ proposed_destination distribution (CLEAR rows only, 758 total):
   Face/Lower Face             : 24
   Tail                        : 19
   Hair                        : 16
-  Face/Upper Face             : 16
+  Face/Upper Face             : 17
   Face/Expressions            : 11
   Face/Mid Face               : 10
   Face/Ears                   : 9
@@ -53,7 +60,7 @@ proposed_destination distribution (CLEAR rows only, 758 total):
   Fingers                     : 3
   Arms/LeftArm/LeftCarpals    : 1
 
-NEEDS_CONTEXT: 109
+NEEDS_CONTEXT: 110
 NEEDS_DOCTRINE: 0 (no doctrine-escalation report was needed; no
   hard-stop occurred at any point across all 10 batches)
 
@@ -106,28 +113,42 @@ NEEDS_DOCTRINE: 0 (no doctrine-escalation report was needed; no
 ----------------------------------------------------------------------
 3. CONSISTENCY AUDIT
 ----------------------------------------------------------------------
-Full detail in PHASE2_PRODUCTION_TRANCHE3_CONSISTENCY_FLAGS.txt. Every
-candidate finding was run through the four mandatory precedent-check
-questions (does an accepted calibration/production precedent address
-the pattern; does the current classification contradict it; is it a
-classification error, metadata error, or legitimate distinction).
+Full detail in PHASE2_PRODUCTION_TRANCHE3_CONSISTENCY_FLAGS.txt (updated
+post-review; see PHASE2_PRODUCTION_TRANCHE3_QA_APPLIED_REPORT.txt for
+the full correction record). Every candidate finding was run through
+the four mandatory precedent-check questions (does an accepted
+calibration/production precedent address the pattern; does the current
+classification contradict it; is it a classification error, metadata
+error, or legitimate distinction).
 
-Result: 1 flag. "donger04_chain" (OPAQUE) was found to likely
-contradict this same tranche's own "valvebiped.chain_aligned2"
-(PARTIAL/NEEDS_CONTEXT) -- both rows contain "chain" as their only
-content-bearing word, and rule 24's ignore-the-ungrounded-prefix
-principle (applied successfully elsewhere throughout this tranche)
-would treat "donger" the same way as any other cryptic/model prefix,
-leaving "chain" to stand on its own as PARTIAL rather than being
-dragged down to OPAQUE. Flagged as a likely classification error for a
-future targeted correction pass; NOT auto-corrected here, per
-instruction. Several other apparent inconsistencies (the collar
-sub-pattern split, the Flm-Arm namespace family, the bow/ring/chain/
-strap "bare accessory" families) were individually checked against the
-four questions and confirmed to be legitimate, already-justified
+Result (CORRECTED): 2 confirmed classification errors, both corrected
+in a follow-up QA-application pass -- "donger04_chain" and "r_brown"
+(the latter surfaced by a targeted grounded-prefix false-opacity sweep
+triggered by the donger review; see the applied report). The original
+audit's own proposed fix for donger04_chain (discard "donger" under
+Rule 24 as an ungrounded prefix, classify on "chain" alone) was itself
+wrong -- "donger" is directly grounded as penis/genital-region naming by
+both the live Master (34/35 "donger"/"Donger" literals -> Body Morphs)
+and Silkworm's reference Master (structural group membership in "Body
+Shape Controls/Body Shape Bones/Penis Bones" alongside Penis_A/B/C).
+donger04_chain was corrected to PARTIAL/NEEDS_CONTEXT/blank/Medium
+(owner grounded, but "chain" itself remains genuinely multi-sense, per
+valvebiped.chain_aligned2's own precedent). r_brown was corrected to
+CLEAR/CLEAR/groupFile/Face/Upper Face/High ("Brown" is this corpus's
+own "Brow"+"n" eyebrow spelling variant, confirmed by both Master and
+corpus sibling series). A companion sweep candidate, "rotator", was
+individually inspected and confirmed correctly OPAQUE as-is (the
+Master's own "Rotator" family always requires an anatomical qualifier;
+a bare "rotator" genuinely lacks one). Several other apparent
+inconsistencies (the collar sub-pattern split, the Flm-Arm namespace
+family, the bow/ring/chain/strap "bare accessory" families) were
+individually checked against the four questions and confirmed to be
+legitimate, already-justified
 distinctions (verdict C), not errors.
 
-CONSISTENCY FLAGS: 1
+CONSISTENCY FLAGS: 2 (donger04_chain, r_brown -- both confirmed
+classification errors and corrected; see
+PHASE2_PRODUCTION_TRANCHE3_QA_APPLIED_REPORT.txt)
 
 ----------------------------------------------------------------------
 4. VALIDATION RESULTS (all batches, mechanical)

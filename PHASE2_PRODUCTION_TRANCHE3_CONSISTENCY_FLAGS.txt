@@ -92,50 +92,116 @@ TARGETED FAMILY-CONSISTENCY SPOT CHECKS
 ----------------------------------------------------------------------
 
 FOLD KEY: donger04_chain (exact: donger04_chain)
-  Current: OPAQUE / NOT_APPLICABLE / [blank] / Low
-  Current semantic_referent: "cryptic fragment ('donger'), no
+  Original (as-flagged): OPAQUE / NOT_APPLICABLE / [blank] / Low
+  Original semantic_referent: "cryptic fragment ('donger'), no
   recoverable content"
 
-  1. Does an accepted precedent address this pattern? Yes -- this same
-     tranche independently classified "valvebiped.chain_aligned2" as
-     PARTIAL/NEEDS_CONTEXT on the strength of "chain" alone being a
-     real, recognizable (if multi-sense) word, per rule 22's own
-     documented "chain" example (jewelry chain / physics-sim chain /
-     mechanical chain).
-  2. Does a corrected Tranche 1/2 precedent address it? Yes, by
-     extension -- rule 24's "ignore an ungrounded/model-character prefix
-     and classify whatever meaningful, independently-grounded content
-     remains" principle, applied repeatedly and successfully throughout
-     Tranches 1-3 (e.g. Mar-Rig-Face, GenericHuman_l_browAJnt,
-     Flm-ArmA-SwordA-D), would treat "donger" the same way a cryptic or
-     character-style prefix is treated elsewhere: set it aside and
-     classify the remaining word, "chain."
-  3. Does the current classification contradict that precedent? Yes --
-     "donger04_chain" was classified fully OPAQUE (no reliable core
-     referent at all), which is a stricter conclusion than
-     "valvebiped.chain_aligned2" reached from the same content word.
-     Nothing in "donger" was shown to overwrite or redirect the meaning
-     of "chain" (no evidence "donger" is itself a grounded modifier that
-     changes what kind of chain is meant) -- it was simply left
-     ungrounded, exactly like the "aligned"/"valvebiped." padding around
-     the other row's own "chain."
-  4. Verdict: A -- likely classification error. "donger04_chain" should
-     probably read semantic_status=PARTIAL (chain is meaningful but
-     multi-sense, matching rule 22's own example), taxonomy_status=
-     NEEDS_CONTEXT, consistent with valvebiped.chain_aligned2, rather
-     than semantic_status=OPAQUE/taxonomy_status=NOT_APPLICABLE.
+  *** SUPERSEDED ANALYSIS -- CORRECTED BELOW (see
+  PHASE2_PRODUCTION_TRANCHE3_QA_APPLIED_REPORT.txt for full evidence) ***
 
-DISPOSITION: flagged only, per instruction -- not corrected in this
-pass. Recommend a targeted QA-application pass (mirroring the box10/
-box22 pattern from Tranche 2) to review and, if confirmed, correct this
-single row.
+  The original audit's own proposed fix (treat "donger" as an ungrounded
+  Rule-24-style prefix, discard it, and classify on "chain" alone,
+  landing on PARTIAL/NEEDS_CONTEXT by analogy with
+  valvebiped.chain_aligned2) is ITSELF WRONG. External review and a
+  targeted re-audit found that "donger" is NOT an ungrounded/cryptic
+  prefix -- it is a directly grounded penis/genital-region naming
+  convention:
+    - The LIVE Master routes 34 of 35 "donger"/"Donger" literals (donger
+      1-7, donger base/root, Donger00-10, Donger_00-10, ThickenDonger,
+      ThickerDonger -- including Donger04 itself) to groupFile/Body
+      Morphs. The lone exception, mp_Donger -> Other, carries a
+      different "mp_" model-prefix convention and does not weaken this.
+    - Silkworm's historical reference Master places "donger root",
+      "donger 4", and "Donger04" as direct structural members (real
+      brace-parsed group membership, not lexical-list adjacency) of the
+      explicitly named group "Body Shape Controls/Body Shape Bones/
+      Penis Bones", alongside Penis_A/B/C, Gen0-10, FK_Penis00-30,
+      Cock.Shaft0-10, and bip_penis4-10.
+  Rule 24 exists to discard prefixes that carry NO grounded meaning
+  (character/model-variant labels with zero corpus support). Applying it
+  here erased a prefix that a two-minute Master/reference search shows
+  is directly and repeatedly grounded. This was the actual audit defect
+  -- not merely an under-confident classification, but a misapplication
+  of Rule 24 to a token that fails its own precondition (ungroundedness).
+
+  1. Does an accepted precedent address this pattern? Yes, TWO: (a) the
+     "donger" family's own established Body Morphs destination (live
+     Master + Silkworm reference, above); (b) valvebiped.chain_aligned2
+     (PARTIAL/NEEDS_CONTEXT), which remains the correct precedent for
+     the *"chain"* component specifically once "donger" is properly
+     recognized as a grounded owner rather than noise.
+  2. Does a corrected Tranche 1/2 precedent address it? Not directly --
+     no prior tranche classified a "donger" family member; this is the
+     first.
+  3. Does the current classification contradict a precedent? Yes,
+     decisively: OPAQUE/NOT_APPLICABLE asserts NO reliable core
+     referent exists at all, directly contradicted by the "donger"
+     family's own settled Body Morphs precedent.
+  4. Verdict: A -- confirmed classification error (not merely the
+     originally-suspected metadata/reason-only issue, and not the
+     originally-proposed PARTIAL-via-Rule-24-discard fix either).
+
+  CORRECTED disposition: "donger" is grounded (penis/genital region);
+  "chain" remains genuinely multi-sense (physics/jiggle-simulation
+  chain vs. mechanical/rig chain vs. decorative/worn chain) even once
+  the owner is known -- grounding the owner does not by itself resolve
+  which kind of "chain" is meant, so a confident Body/Body Morphs/
+  Clothing destination is still not safely established. CORRECTED TO:
+  semantic_status=PARTIAL, taxonomy_status=NEEDS_CONTEXT,
+  proposed_destination=[blank], confidence=Medium. Applied to the
+  ledger; full field values in
+  PHASE2_PRODUCTION_TRANCHE3_QA_APPLIED_REPORT.txt.
 
 ----------------------------------------------------------------------
-SUMMARY
+2. ADDITIONAL GROUNDED-PREFIX FALSE-OPACITY SWEEP (TASK B)
 ----------------------------------------------------------------------
-Total flags: 1 (donger04_chain) -- a candidate classification error
-(OPAQUE -> likely PARTIAL/NEEDS_CONTEXT), flagged for a future targeted
-correction. No other classification errors, metadata defects, or
-unjustified family splits were found in this tranche's 1,000 rows. No
-ledger row was changed during this audit.
+A narrow mechanical sweep (Python enumeration/comparison only, no
+semantic decisions) checked all 133 Tranche-3 OPAQUE rows' fold_key
+tokens against live-Master control families for coherent, consistently-
+routed matches (>=3 Master hits, >=70% single-destination consistency).
+It surfaced 3 candidates, each individually inspected by Claude:
+
+  donger04_chain: confirmed grounded and corrected -- see above.
+
+  r_brown (exact: R_Brown): CONFIRMED classification error, corrected.
+  "Brown" in this literal is not the color -- it is this corpus's own
+  established "Brow"+"n" spelling variant for eyebrow, confirmed by
+  BOTH the live Master (eyebrown_l/r, EyeBrowN.l/r, eyeBrowNeutral.L/R,
+  Eyebrowns_1/2/3, Angry/Annoyed Eyebrowns -- 30 consistent
+  Face/Upper Face hits) AND this same residual corpus's own sibling
+  series (L_Brown, BrownFrontUp, BrownMoveLeft, BrownMoveRight,
+  MadBrownLeft1, MadBrownRight1). The mechanical sweep's other 8 "brown"
+  Master hits (browning_base/bolt/trigger/ironsight/etc.) are an
+  unrelated "Browning" firearm-brand homograph and do not weaken this --
+  they were individually checked and excluded, not averaged in. Verdict:
+  A, classification error. CORRECTED TO: semantic_status=CLEAR,
+  taxonomy_status=CLEAR, proposed_destination=groupFile/Face/Upper Face,
+  confidence=High.
+
+  rotator (exact: Rotator+rotator): INSPECTED, NO CHANGE -- verdict C,
+  legitimate distinction. The Master's only "rotator" family members
+  (Left/Right_Upper/Lower_Eyelid_Rotator, 4/4 hits) ALWAYS pair
+  "Rotator" with an anatomical qualifier ("Eyelid"); the Master contains
+  no bare, unqualified "Rotator" control. This does not ground the bare
+  token -- if anything it confirms that a bare "rotator" with no stated
+  target genuinely lacks a recoverable object, exactly matching this
+  row's existing OPAQUE/NOT_APPLICABLE classification. Left unchanged.
+
+No other production OPAQUE row in positions 501-3500 was found to have
+a mechanically-detectable grounded-family match under this sweep.
+
+----------------------------------------------------------------------
+SUMMARY (CORRECTED)
+----------------------------------------------------------------------
+Total flags: 3 rows inspected (donger04_chain, r_brown, rotator).
+  donger04_chain: CONFIRMED classification error, corrected to
+    PARTIAL/NEEDS_CONTEXT/blank/Medium (not the originally-proposed
+    Rule-24-discard reasoning -- see above).
+  r_brown: CONFIRMED classification error, corrected to
+    CLEAR/CLEAR/groupFile/Face/Upper Face/High.
+  rotator: inspected, correctly OPAQUE as-is, no change (legitimate
+    distinction).
+Both corrections were applied to the ledger. No other classification
+errors, metadata defects, or unjustified family splits were found in
+this tranche's 1,000 rows.
 ======================================================================

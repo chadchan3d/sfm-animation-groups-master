@@ -1,0 +1,261 @@
+======================================================================
+PHASE 2 PRODUCTION TRANCHE 3 -- DONGER04_CHAIN + GROUNDED-PREFIX
+FALSE-OPACITY QA, APPLIED REPORT
+Targeted correction pass over positions 2501-3500, triggered by
+external review challenging the Tranche 3 audit's own proposed fix for
+donger04_chain and requesting a narrow sweep for the same underlying
+failure mode (an OPAQUE row discarding a token that is actually
+grounded).
+======================================================================
+
+----------------------------------------------------------------------
+TASK A: DONGER04_CHAIN RE-AUDIT
+----------------------------------------------------------------------
+
+1. EXACT EVIDENCE FOUND FOR "DONGER"
+----------------------------------------------------------------------
+Live Master (sfm_defaultanimationgroups.txt), word-search "donger"
+(case-insensitive), NOT modified, read-only:
+  35 total hits. 34 -> groupFile/Body Morphs:
+    donger 1, donger 2, donger 3, donger 4, donger 5, donger 6, donger 7,
+    donger base, donger root,
+    Donger00, Donger01, Donger02, Donger03, Donger04, Donger05, Donger06,
+    Donger07, Donger08, Donger09, Donger10,
+    Donger_00, Donger_01, Donger_02, Donger_03, Donger_04, Donger_05,
+    Donger_06, Donger_07, Donger_08, Donger_09, Donger_10, Donger_Base,
+    ThickenDonger, ThickerDonger
+  1 exception -> groupFile/Other: mp_Donger (a distinct "mp_" model-
+    prefix convention, not weakening the 34/35 signal -- this exact
+    "mp_" pattern was already established elsewhere, e.g. mp_BunnyTail
+    -> Other, as a different, separately-grounded naming convention).
+
+Silkworm reference Master (reference/sfm_defaultanimationgroups_
+silkworm.txt), read-only, consulted per this file's own read-only/
+historical-comparison-only status:
+  Parsed via the same brace-structure parser used for the live Master
+  (tools/validate_master.py's parse_structure -- NOT lexical/textual
+  adjacency). "donger root", "donger 4", and "Donger04" are direct
+  members of the group:
+    groupFile/Body Shape Controls/Body Shape Bones/Penis Bones
+  The same group also directly contains: bip_penis4-10, Cock.root,
+  Cock.Shaft0-10, FK_BaseBone, FK_Penis00-30, peen.shaft.001-030,
+  peener.mid.FILL, shaft.1-6, shaft.expand.6/1-5, shaft.tip, tip.open,
+  Gen0-10, Penis_A, Penis_B, Penis_C, and NPC Genitals00-02[Gen00-02].
+  This is real, positive, brace-parsed group membership in a structured
+  hierarchical Master file -- not lexical adjacency in a sorted list --
+  and it unambiguously identifies this group as a penis/genital control
+  group.
+
+Phase 2 residual/scanner corpus search for "donger04_chain",
+"donger*_chain", "donger*chain", and closely related family members:
+  No exact or near match for "donger...chain" was found anywhere in
+  PHASE2_RESIDUAL_TERMS.txt, PHASE2_RESIDUAL_INVENTORY.tsv, or the
+  scanner dump beyond the single ledger entry itself. "donger04_chain"
+  appears to be a standalone literal in the residual corpus with no
+  sibling "_chain" variant (no donger01_chain, donger02_chain, etc.
+  found). Per instruction, no same-model provenance is claimed from any
+  lexical proximity observed during this search.
+
+2. CONSISTENCY OF RELATED-LITERAL DESTINATIONS
+----------------------------------------------------------------------
+Yes -- overwhelmingly and specifically consistent: 34 of 35 live-Master
+"donger" literals (97%) route to the SAME destination, groupFile/Body
+Morphs, and the Silkworm reference independently corroborates the same
+semantic domain (an explicitly named "...Penis Bones" group under
+"Body Shape Controls/Body Shape Bones" -- i.e. a shape/morph-oriented
+penis control category, not bare structural anatomy). The two sources
+agree with each other on domain (penis/genital) and the live Master
+resolves the specific destination (Body Morphs, not plain Body).
+
+3. ACCEPTED CALIBRATION/PRODUCTION PRECEDENT FOR A DONGER/PENIS/
+   GENITAL-CHAIN OR STRUCTURALLY ANALOGOUS FAMILY
+----------------------------------------------------------------------
+No calibration or production row classifies a "donger" family member
+directly (this is the first). The relevant precedent actually in play
+is valvebiped.chain_aligned2 (Tranche 3, PARTIAL/NEEDS_CONTEXT), which
+already settled that bare "chain" is multi-sense (physics-simulation
+chain / mechanical chain / decorative-jewelry chain) and does not by
+itself resolve to a single destination -- this precedent governs the
+"_chain" component of donger04_chain once "donger" is correctly
+recognized as a grounded owner rather than noise.
+
+4. JUDGMENT: DONGER04_CHAIN
+----------------------------------------------------------------------
+The external review's core objection is confirmed correct: "donger" is
+not an ungrounded/cryptic prefix, and Rule 24 (discard an ungrounded
+prefix, classify what remains) does not apply to it -- Rule 24's own
+precondition (the discarded token is actually ungrounded) fails here.
+The original Tranche 3 audit's own proposed fix (discard "donger",
+classify "chain" alone as PARTIAL/NEEDS_CONTEXT) reached the right
+taxonomy_status by lucky coincidence but for the wrong reason, and
+underclaimed what is actually known about the row.
+
+Per instruction, "donger04" and "donger04_chain" are different strict-
+ASCII families -- Donger04's destination is NOT copied by identity.
+Instead, the GROUNDING that "donger" = penis/genital-region naming
+transfers as semantic precedent, exactly as the task specifies. What it
+establishes: the OWNER/region (penis/genital) is now known. What it
+does NOT establish: which sense of "_chain" applies -- physics/jiggle-
+simulation chain (would suggest Body, ordinary dynamics/structural
+control), a decorative/worn chain (would suggest Clothing), or a
+mechanical/rig chain unrelated to either. Nothing in the literal or in
+either evidence source disambiguates "_chain" the way it disambiguates
+"donger."
+
+Verdict: Option B. OPAQUE/NOT_APPLICABLE does not survive -- it cannot
+be reconciled with the demonstrated grounding of "donger" (an OPAQUE
+verdict asserts no reliable core referent exists at all, which the
+34/35 Master precedent and the Silkworm "Penis Bones" group membership
+directly contradict). Option A (CLEAR/CLEAR/Body) is NOT adopted either,
+because "chain"'s own multi-sense ambiguity is not resolved merely by
+knowing the owner, and forcing a destination would repeat the exact
+error (confident selection without genuine grounding) this task exists
+to correct.
+
+CORRECTED FIELDS (donger04_chain):
+  semantic_status:      OPAQUE -> PARTIAL
+  semantic_referent:    "cryptic fragment (\"donger\"), no recoverable
+    content" -> "a \"chain\"-type control associated with the penis/
+    genital region (\"donger\"); exact mechanism (physics-simulation/
+    jiggle chain vs. worn/decorative chain vs. other) not established"
+  taxonomy_status:       NOT_APPLICABLE -> NEEDS_CONTEXT
+  proposed_destination:  [blank] (unchanged, still blank)
+  confidence:            Low -> Medium
+  uncertainty_reason:    [blank] -> (full grounding citation; see the
+    ledger row / PHASE2_PRODUCTION_TRANCHE3_CONSISTENCY_FLAGS.txt)
+  short_reason:          "no grounding for \"donger\" as a word or
+    convention" -> (rewritten to state the owner is grounded but
+    \"chain\" remains multi-sense; see the ledger row)
+  fold_key, exact_spellings, batch_id, scanner_lines: unchanged.
+
+----------------------------------------------------------------------
+TASK B: NARROW GROUNDED-PREFIX FALSE-OPACITY SWEEP
+----------------------------------------------------------------------
+Method: a Python script enumerated all 133 Tranche-3 OPAQUE rows,
+tokenized each fold_key into alphabetic substrings (length >= 4,
+excluding a stopword list of known rig/technical terms already
+established as ungrounded in prior tranches -- bone, object, joint,
+polysurface, pcube, pplane, flex, dummy, bip, ctrl, helper, etc.), and
+for each token searched the live Master for control literals containing
+it, flagging a token as a candidate only if it produced >= 3 Master
+hits with >= 70% of those hits sharing one single destination. This is
+enumeration/comparison only -- the script made no semantic_status,
+taxonomy_status, or destination decision; it only produced candidates
+for individual inspection.
+
+CANDIDATE COUNT: 3 rows surfaced (donger04_chain, r_brown, rotator).
+
+Each was individually inspected against the four-question precedent
+check:
+
+  donger04_chain: see Task A above. VERDICT A (classification error),
+    corrected.
+
+  r_brown (exact: R_Brown):
+    1. Accepted precedent? Yes -- the live Master's eyebrown_l/r,
+       EyeBrowN.l/r, eyeBrowNeutral.L/R, Eyebrowns_1/2/3, Angry/Annoyed
+       Eyebrowns (30 literals, 100% consistent to groupFile/Face/Upper
+       Face once the unrelated "Browning" firearm-brand homograph is
+       excluded -- see below) establish "Brow"+"n" as this corpus's own
+       spelling convention for eyebrow. This same residual corpus
+       additionally contains L_Brown, BrownFrontUp, BrownMoveLeft,
+       BrownMoveRight, MadBrownLeft1, MadBrownRight1 -- a coherent
+       sibling series using the identical convention, including a
+       genuine bilateral L_Brown/R_Brown pair.
+    2. Corrected Tranche 1/2 precedent? Not directly, but the same
+       methodology as the calibration-set's own accepted misspelling
+       recognitions (e.g. "Left_stomach_buldge" read as "bulge") applies
+       directly: an established, repeated, in-corpus spelling variant is
+       treated as decoded, not guessed.
+    3. Contradiction? Yes -- OPAQUE/NOT_APPLICABLE asserted no object
+       was named at all ("a color word... no object named"), which both
+       the Master's own eyebrow-family spelling convention and this
+       corpus's own sibling series directly contradict.
+    4. Verdict: A, classification error. The mechanical sweep's other 8
+       "brown" Master hits (browning_base/bolt/bolt_handle/ironsight/
+       lid/rotate/trigger) were individually checked: all are "Browning"
+       (the firearm brand) weapon-part names -- an unrelated homograph
+       that does not weaken the eyebrow reading, and was excluded from
+       the grounding claim, not averaged into it.
+    CORRECTED FIELDS:
+      semantic_status:      OPAQUE -> CLEAR
+      semantic_referent:    "a color word (\"Brown\") with a side
+        marker, no object named" -> "right eyebrow (this corpus's own
+        \"brow\"+\"n\" spelling variant...)"
+      taxonomy_status:       NOT_APPLICABLE -> CLEAR
+      proposed_destination:  [blank] -> groupFile/Face/Upper Face
+      confidence:            Low -> High
+      short_reason:          rewritten to cite the Master + corpus
+        evidence and explicitly exclude the Browning homograph.
+      fold_key, exact_spellings, batch_id, scanner_lines: unchanged.
+
+  rotator (exact: Rotator+rotator):
+    1. Accepted precedent? The Master contains exactly 4 "rotator"
+       literals: Left_Lower_Eyelid_Rotator, Left_Upper_Eyelid_Rotator,
+       Right_Lower_Eyelid_Rotator, Right_Upper_Eyelid_Rotator -- 4/4
+       (100%), but EVERY one pairs "Rotator" with an explicit anatomical
+       qualifier ("Eyelid"). The Master contains zero bare, unqualified
+       "Rotator" controls.
+    2. Corrected Tranche 1/2 precedent? None directly on point.
+    3. Contradiction? No -- if anything this CONFIRMS the row's own
+       existing reasoning ("no reliable object or anatomical referent
+       for a bare rotation mechanism"): the Master's own convention
+       requires a target-organ qualifier for "Rotator" to mean anything
+       specific, and this literal supplies none.
+    4. Verdict: C, legitimate distinction -- not an error. NO CHANGE.
+
+No other production OPAQUE row in positions 501-3500 was flagged by
+this mechanical sweep.
+
+----------------------------------------------------------------------
+LEDGER ROWS CHANGED (2)
+----------------------------------------------------------------------
+donger04_chain and r_brown, exactly as detailed above. Full old/new
+field values are also recorded in the corrected
+PHASE2_PRODUCTION_TRANCHE3_CONSISTENCY_FLAGS.txt. No other ledger row
+was touched. Calibration (rows 1-500) and Tranches 1-2 (rows 501-2500)
+were not altered -- this audit produced no direct contradiction
+requiring that scope.
+
+----------------------------------------------------------------------
+REVISED TRANCHE-3 DISTRIBUTIONS (positions 2501-3500 only)
+----------------------------------------------------------------------
+semantic_status:
+  CLEAR   : 828 -> 829
+  PARTIAL : 39  -> 40
+  OPAQUE  : 133 -> 131
+
+taxonomy_status:
+  CLEAR           : 758 -> 759
+  NEEDS_CONTEXT   : 109 -> 110
+  NEEDS_DOCTRINE  : 0   -> 0
+  NOT_APPLICABLE  : 133 -> 131
+
+confidence:
+  High   : 586 -> 587
+  Medium : 247 -> 248
+  Low    : 167 -> 165
+
+proposed_destination: groupFile/Face/Upper Face 16 -> 17 (+1, r_brown)
+
+----------------------------------------------------------------------
+VALIDATION RESULTS (mechanical, post-correction, re-opened from disk)
+----------------------------------------------------------------------
+row_count_3500:                      PASS
+first_500_identical_to_final:        PASS
+fold_key_sequence_identical:         PASS
+exact_spellings_unchanged:           PASS
+batch_id_unchanged:                  PASS
+zero_duplicates:                     PASS
+rule21_global (OPAQUE iff NOT_APPLICABLE, all 3,500 rows): PASS
+all_destinations_valid:              PASS
+no_destination_on_non_clear_taxonomy_row: PASS
+no_position_3501_plus:               PASS
+exactly_two_rows_changed:            PASS (donger04_chain, r_brown only)
+
+ALL CHECKS PASS: True
+
+Raw batch files PHASE2_PRODUCTION_BATCH_P21 through _P30 were NOT
+modified. FINAL.tsv, calibration rows 1-500, Tranches 1-2 (rows
+501-2500), and the Master were NOT modified.
+======================================================================
