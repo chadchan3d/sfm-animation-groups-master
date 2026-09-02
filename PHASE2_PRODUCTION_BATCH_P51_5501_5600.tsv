@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+belt_14	belt_14	CLEAR	"a ""belt"" (clothing accessory)"	CLEAR	groupFile/Clothing	High		plain worn accessory item	P51
+bone 1038	bone 1038	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P51
+bone022	Bone022	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P51
+key.black_8	Key.Black_8	CLEAR	a keyboard-prop key, black key series, index 8	CLEAR	groupFile/Other	High		matches the settled Key.Black_N/Key.White_N coherent keyboard-prop series (rule 23)	P51
+bhr45	BhR45	OPAQUE	"cryptic abbreviation (""Bh""), right, numbered; no grounding for any expansion"	NOT_APPLICABLE		Low		ungrounded abbreviation, matches the bh001.r/fh15.r pattern	P51
+head_skinny	head_skinny	CLEAR	"head shape descriptor (""skinny"")"	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor	P51
+bh001.r	Bh001.R	OPAQUE	"cryptic abbreviation (""Bh""), right, numbered; no grounding for any expansion"	NOT_APPLICABLE		Low		ungrounded abbreviation	P51
+bip_tie_4_l	bip_Tie_4_L	CLEAR	"a ""tie"" (necktie/fastening accessory), numbered, left"	CLEAR	groupFile/Clothing	High		worn accessory item	P51
+bip_tentacle.001	Bip_Tentacle.001	CLEAR	"a ""tentacle"" appendage, numbered"	CLEAR	groupFile/Other	High		species-neutral anatomical word with settled rule-18 precedent (tentacle -> Other)	P51
+sakura_costume_1_f	sakura_costume_1_F	CLEAR	"a ""costume"" element under a character prefix, variant 1, female"	CLEAR	groupFile/Clothing	High		"character prefix set aside (rule 24); ""costume"" is meaningful grounded content"	P51
+arm left lower 1	arm left lower 1	CLEAR	left lower arm (forearm), variant 1	CLEAR	groupFile/Arms	High		ordinary structural anatomy	P51
+upperlip_middle	upperLip_middle	CLEAR	upper lip, middle	CLEAR	groupFile/Face/Lower Face	High		plain mouth/lip anatomy	P51
+object48	Object48	OPAQUE	generic placeholder object name, no referent	NOT_APPLICABLE		Low		generic placeholder object name	P51
+right_smile2	Right_smile2	CLEAR	a smile expression, right, variant 2	CLEAR	groupFile/Face/Lower Face	High		"matches the settled bare-""smile""-family Lower Face precedent (Tranche 5 correction)"	P51
+dyng r single earing 01	dyng r single earing 01	CLEAR	"a jiggle-physics (""dyng"") earring control, right, single, numbered"	CLEAR	groupFile/Clothing	High		"""dyng"" is a grounded jiggle-physics convention (rule 23); ""earing""=earring is the owning object, a worn jewelry accessory"	P51
+wing_right_1_2	Wing_Right_1_2	CLEAR	a wing segment, right, numbered	CLEAR	groupFile/Wings	High		explicit wing anatomy	P51
+legfit	Legfit	CLEAR	"a ""fit""/toned leg shape descriptor"	CLEAR	groupFile/Body Morphs	Medium		shape/tone descriptor on the leg	P51
+rearsight	RearSight	CLEAR	a firearm rear sight	CLEAR	groupFile/Other	High		recognized weapon-part object	P51
+leg right thigh helper	leg right thigh helper	CLEAR	right thigh, structural helper	CLEAR	groupFile/Legs	High		"ordinary structural anatomy; ""helper"" is neutral (rule 4)"	P51
+penus base	penus base	CLEAR	"penis (misspelled ""penus""), base/root"	CLEAR	groupFile/Body	High		obvious misspelling recognized; plain structural genital anatomy	P51
+nostrill	nostrill	CLEAR	nostril (double-l spelling)	CLEAR	groupFile/Face/Mid Face	High		plain nose-region anatomy	P51
+object58	Object58	OPAQUE	generic placeholder object name, no referent	NOT_APPLICABLE		Low		generic placeholder object name	P51
+eyes-r-squinch	Eyes-R-Squinch	CLEAR	eyes, right, squinch (squint-like) expression	CLEAR	groupFile/Face/Eyes	High		localized eye expression	P51
+pinkyright1	PinkyRight1	CLEAR	pinky finger, right, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		ordinary finger anatomy, verified RightFingers subpath (rule 10)	P51
+arm left finger 3 a	arm left finger 3 a	CLEAR	left arm finger 3, variant a	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		ordinary finger anatomy, verified LeftFingers subpath	P51
+bip01_r_forearm002	Bip01_R_Forearm002	CLEAR	right forearm, numbered segment	CLEAR	groupFile/Arms	High		ordinary structural anatomy	P51
+v_weapon.lighter	v_weapon.lighter	CLEAR	a lighter (handheld object) on a viewmodel-weapon prefix	CLEAR	groupFile/Other	High		recognized handheld prop object	P51
+bone 701	bone 701	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P51
+bip chinlo l	bip chinlo l	CLEAR	chin, low position, left	CLEAR	groupFile/Face/Lower Face	Medium	"exact meaning of ""lo"" (plausibly ""low"") is a cosmetic spelling question, not a functional gap"	chin is a grounded lower-face anatomical referent	P51
+lipsbottomcurlin	lipsbottomcurlin	CLEAR	lower lip, curl inward	CLEAR	groupFile/Face/Lower Face	High		explicit mouth/lip action	P51
+beadhangfrontduo a1	BeadHangFrontDuo A1	CLEAR	a hanging bead accessory, front, paired (duo), variant A1	CLEAR	groupFile/Clothing	High		worn/hanging decorative accessory	P51
+flm-armb-leg-luc	Flm-ArmB-Leg-LUC	CLEAR	"a ""leg"" element within the internal ""Flm-ArmB"" namespace, variant LUC"	CLEAR	groupFile/Legs	Medium		"internal namespace set aside (rule 24); ""leg"" is meaningful grounded content, matching the settled Flm-Arm* precedent for named suffixes"	P51
+depth_7	depth_7	OPAQUE	"generic ""depth"" parameter, numbered; no object named"	NOT_APPLICABLE		Low		technical parameter word, no anatomical content, matches settled depth_6 precedent	P51
+jittes	JitteS	CLEAR	a jitte (recognized traditional weapon)	CLEAR	groupFile/Other	Medium		recognized real-world weapon object	P51
+lowerlipraise	LowerLipRaise	CLEAR	lower lip, raise	CLEAR	groupFile/Face/Lower Face	High		explicit mouth/lip action	P51
+bip_middle_2_l_end	bip_middle_2_L_end	CLEAR	"a ""middle"" positioned chain segment, numbered, left, end"	NEEDS_CONTEXT		Low	whether this is a middle-finger segment or a bare positional chain link is not established by the literal alone	positional word without an explicit anatomical object name (finger/toe)	P51
+leg right butt 2	leg right butt 2	CLEAR	right leg region near the buttock, numbered	CLEAR	groupFile/Legs	Medium		"leg is the explicit dominant/leading token, matching the settled ""leg left hip"" adjacency precedent"	P51
+bottom_7	bottom_7	OPAQUE	"a positional label (""bottom""), numbered; no object named"	NOT_APPLICABLE		Low		position label only, no object	P51
+key.black_29	Key.Black_29	CLEAR	a keyboard-prop key, black key series, index 29	CLEAR	groupFile/Other	High		matches the settled Key.Black_N coherent keyboard-prop series	P51
+balls detail 2	Balls Detail 2	CLEAR	testicle detail morph, variant 2	CLEAR	groupFile/Body Morphs	High		matches the settled BallsDetail4 calibration precedent	P51
+bone.016.l	Bone.016.l	OPAQUE	generic numbered bone, left, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P51
+dong_root	Dong_Root	CLEAR	"penis (""dong"", recognized slang) root/anchor"	CLEAR	groupFile/Body Morphs	Medium		"""dong"" is recognized English slang for penis; ""root"" mirrors the settled donger root/Donger_Base -> Body Morphs family structure"	P51
+c_tiel_c08	C_TieL_C08	CLEAR	"a ""tie"" (necktie/fastening accessory), left, variant C08"	CLEAR	groupFile/Clothing	Medium		worn accessory item	P51
+castera_0	CasterA_0	CLEAR	a caster (mechanical wheel object), variant A, numbered	CLEAR	groupFile/Other	Medium		recognized mechanical/furniture object	P51
+bone-r-upperarm-twist	Bone-R-UpperArm-Twist	CLEAR	right upper arm, twist	CLEAR	groupFile/Arms	High		ordinary rig anatomy; twist is not corrective evidence (rule 3)	P51
+chain_6	chain_6	PARTIAL	"a ""chain"", numbered"	NEEDS_CONTEXT		Medium	"""chain"" has materially different core senses (jewelry chain / physics-simulation chain / mechanical chain)"	matches the settled chain00_00/chain_12/chain_4 bare-multi-sense-word precedent	P51
+rightfinger04	RightFinger04	CLEAR	right hand finger, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		ordinary finger anatomy, verified RightFingers subpath	P51
+spinea_helper	spinea_helper	CLEAR	"a ""spine"" reference, variant a, structural helper"	NEEDS_CONTEXT		Medium	no anatomical/DEF-/SK_-style rig prefix or garment/hair-object noun establishes ownership	bare/referent-free spine literal, matching rule 14's NEEDS_CONTEXT branch	P51
+anusleft	AnusLeft	CLEAR	anus, left	CLEAR	groupFile/Body	High		plain structural genital/anal anatomy	P51
+ltoethumb02	lToeThumb02	CLEAR	"big toe (""toe thumb""), left, numbered"	CLEAR	groupFile/Toes/LeftToes	High		ordinary toe anatomy	P51
+l1stna	L1stNa	OPAQUE	cryptic abbreviation, left, no grounding for any expansion	NOT_APPLICABLE		Low		matches the settled l1stnb/l2ndnb pattern	P51
+dyng r necklace 02	dyng r necklace 02	CLEAR	"a jiggle-physics (""dyng"") necklace control, right, numbered"	CLEAR	groupFile/Clothing	High		"""dyng"" is a grounded jiggle-physics convention (rule 23); necklace is the owning worn accessory"	P51
+nostrildown	NostrilDown	CLEAR	nostril, downward action	CLEAR	groupFile/Face/Mid Face	High		plain nose-region anatomy/action	P51
+h4	H4+h4	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no interpretable content	P51
+valvebiped.bip01_r_clavivle	ValveBiped.Bip01_R_Clavivle	CLEAR	"right clavicle (misspelled ""Clavivle"")"	CLEAR	groupFile/Arms	High		obvious misspelling recognized; plain shoulder-girdle anatomy	P51
+bip01_r_upperarm009	Bip01_R_UpperArm009	CLEAR	right upper arm, numbered segment	CLEAR	groupFile/Arms	High		ordinary structural anatomy	P51
+openner	openner	CLEAR	"an ""open"" function (misspelled with double n)"	NEEDS_CONTEXT		Medium	no object/body part stated for what is being opened	function word with one stable reading, per rule 22's open/lift/switch pattern	P51
+jiggle spine 2	jiggle spine 2	CLEAR	jiggle-physics function on the spine, numbered	CLEAR	groupFile/Body	High		explicit anatomical spine owner with a physics/dynamics function, not a shape/state morph	P51
+open_blank	open_blank	CLEAR	"an ""open"" function applied to an unspecified (""blank"") state"	NEEDS_CONTEXT		Low	"owning object/context for the open action is not stated beyond the vague ""blank"" qualifier"	function word (open) has one stable reading even with an unstated object	P51
+sidelockrightroot	SideLockRightRoot	CLEAR	a side hair lock, right, root/anchor	CLEAR	groupFile/Hair	High		"""side"" disambiguates ""lock"" as a hair lock, not a mechanical lock"	P51
+wep_shell1	WEP_Shell1	CLEAR	a weapon shell/ammunition casing, numbered	CLEAR	groupFile/Other	High		recognized ammunition object	P51
+unused b_l_ankle4helper	unused b_l_ankle4helper	CLEAR	a self-declared unused ankle helper control	CLEAR	groupFile/Useless	High		"explicit self-declared ""unused"" marker (rule 15)"	P51
+hatf	HatF	CLEAR	a hat, variant F	CLEAR	groupFile/Clothing	High		recognized worn clothing item	P51
+cop.zipperring	Cop.ZipperRing	CLEAR	a zipper pull ring (clothing hardware)	CLEAR	groupFile/Clothing	High		recognized garment hardware	P51
+muscleabs	MuscleAbs	CLEAR	abdominal muscle definition	CLEAR	groupFile/Body Morphs	High		explicit muscle/appearance descriptor	P51
+taurenmale_hd_bone_65	taurenmale_hd_bone_65	OPAQUE	a generic numbered bone in the TaurenMale_HD model/variant series; anatomical region/function unknown	NOT_APPLICABLE		Low		matches settled taurenmale_hd_bone_* precedent	P51
+door low left	Door low left	CLEAR	a door, low position, left	CLEAR	groupFile/Other	High		recognized real-world object, matches Door2 precedent	P51
+rtoes	RToes+rToes+rtoes	CLEAR	right toes	CLEAR	groupFile/Toes/RightToes	High		ordinary toe anatomy, verified RightToes subpath	P51
+sk_spine_1	SK_spine_1	CLEAR	"spine, numbered, on a generic skeleton rig prefix (""SK_"")"	CLEAR	groupFile/Body	High		explicit anatomical spine literal per rule 14's generic-skeleton-prefix branch	P51
+eyehappyr	EyeHappyR	CLEAR	eye, happy expression, right	CLEAR	groupFile/Face/Eyes	High		localized eye expression	P51
+page2_l	Page2_L	CLEAR	a book/document page prop, page 2, variant L	CLEAR	groupFile/Other	High		matches the settled coherent Page<N>_<letter> series (rule 23); book/page props route to Other	P51
+bobcut.side_left_1_3	Bobcut.Side_Left_1_3	CLEAR	a bob-cut hairstyle element, side, left, numbered	CLEAR	groupFile/Hair	High		recognized hairstyle	P51
+brownmoveright	BrownMoveRight	CLEAR	"eyebrow (""Brow""+""n"" spelling), move right"	CLEAR	groupFile/Face/Upper Face	High		"matches the settled ""Brown""=eyebrow corpus convention and its own sibling series (r_brown correction, Tranche 3/4)"	P51
+bip01_l_forearm013	Bip01_L_Forearm013	CLEAR	left forearm, numbered segment	CLEAR	groupFile/Arms	High		ordinary structural anatomy	P51
+waist-wide	waist-wide	CLEAR	waist, wide shape descriptor	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor	P51
+browsinvertleft	BrowsInvertLeft	CLEAR	eyebrows, invert, left	CLEAR	groupFile/Face/Upper Face	High		localized eyebrow control	P51
+vent_cover	vent_cover	CLEAR	a vent cover (mechanical/furniture object)	CLEAR	groupFile/Other	High		recognized real-world object	P51
+bone080	Bone080	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P51
+key.black_28	Key.Black_28	CLEAR	a keyboard-prop key, black key series, index 28	CLEAR	groupFile/Other	High		matches the settled Key.Black_N coherent keyboard-prop series	P51
+bip_pussyupper_0_r	bip_PussyUpper_0_R	CLEAR	vagina, upper, numbered, right	CLEAR	groupFile/Body	High		plain structural genital anatomy	P51
+legmiddlefinger2_r	LegMiddleFinger2_R	CLEAR	"a ""leg""+""middle finger"" mixed-region compound, right, numbered"	NEEDS_CONTEXT		Medium	two incompatible anatomical owners (leg vs. finger) are both named with no resolving relation	matches the settled Tranche 3/4 Leg+Finger mixed-region precedent	P51
+pussy left 3	pussy left 3	CLEAR	vagina, left, numbered	CLEAR	groupFile/Body	High		plain structural genital anatomy	P51
+bip_strap_l	bip_strap_l	CLEAR	a strap (bare accessory), left	NEEDS_CONTEXT		Medium	no owner/mount is named for the strap	bare decorative-accessory noun with no named owner (rule 25)	P51
+streaks open l	Streaks open L	PARTIAL	"a ""streaks"" effect, open, left"	NEEDS_CONTEXT		Low	"""streaks"" has materially different plausible readings (hair-color streaks / tear or liquid streaks / other)"	genuinely competing core readings, no disambiguating owner in the literal	P51
+bip_l_cloth_b_01	bip_l_cloth_b_01	CLEAR	a generic cloth control, left, variant b, numbered	CLEAR	groupFile/Clothing	High		matches rule 22's own generic-cloth-control CLEAR example	P51
+belt_16	belt_16	CLEAR	a belt (clothing accessory)	CLEAR	groupFile/Clothing	High		plain worn accessory item	P51
+trigger_pos_00	Trigger_Pos_00	CLEAR	a weapon trigger position, numbered	CLEAR	groupFile/Other	High		recognized weapon-part object	P51
+| butt size | +	| Butt Size | +	CLEAR	buttock size descriptor	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor; surrounding punctuation is formatting only	P51
+prop_02	prop_02	OPAQUE	"a generic ""prop"" category label, numbered; no specific object named"	NOT_APPLICABLE		Low		category label only, no specific real-world object identified	P51
+handle_lock	handle_lock	CLEAR	a handle lock (mechanical/door object)	CLEAR	groupFile/Other	High		recognized real-world mechanical object	P51
+rfrown3	RFrown3	CLEAR	a frown expression, right, variant 3	CLEAR	groupFile/Face/Lower Face	High		"frown is inherently a mouth/lip shape, matching the settled bare-""smile""-family Lower Face precedent by the same reasoning"	P51
+hitomi head eyeball left	Hitomi head eyeball left	CLEAR	eyeball, left, on a named-character head prefix	CLEAR	groupFile/Face/Eyes	High		"character prefix set aside (rule 24); ""eyeball"" is the explicit localized feature (rule 13)"	P51
+funnelr	FunnelR+funnelr	CLEAR	a funnel, right	CLEAR	groupFile/Other	High		recognized real-world object	P51
+opt_hand_right_index2	OPT_Hand_Right_Index2	CLEAR	right hand index finger, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		ordinary finger anatomy, verified RightFingers subpath	P51
+shape-busty-cleavage	shape-busty-cleavage	CLEAR	breast shape, busty/cleavage descriptor	CLEAR	groupFile/Body Morphs	High		explicit breast shape/appearance descriptor	P51
+widez	WideZ	OPAQUE	"a generic axis-scale parameter (""Wide""+""Z""), no object named"	NOT_APPLICABLE		Low		technical axis-parameter word, matches the settled x_shift_9-style precedent	P51
++ boobs	+ Boobs	CLEAR	"breasts (""boobs"")"	CLEAR	groupFile/Body	High		plain anatomical term; surrounding punctuation is formatting only	P51
+not thicc	Not thicc	CLEAR	"a body-thickness shape state, negated (""not thicc"")"	CLEAR	groupFile/Body Morphs	Medium		"""thicc"" is an established shape/size descriptor; ""not"" names the opposite/default preset within that same shape system"	P51
+key.white_32	Key.White_32	CLEAR	a keyboard-prop key, white key series, index 32	CLEAR	groupFile/Other	High		matches the settled Key.Black_N/Key.White_N coherent keyboard-prop series	P51
+unused.039	unused.039	CLEAR	a self-declared unused placeholder, numbered	CLEAR	groupFile/Useless	High		"explicit self-declared ""unused"" marker (rule 15)"	P51

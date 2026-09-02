@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+wep_fireselect	WEP_FireSelect	CLEAR	a weapon fire-select function	CLEAR	groupFile/Other	High		recognized weapon-part object	P55
+left_butt	Left_Butt+left_butt	CLEAR	buttock, left	CLEAR	groupFile/Body	High		plain structural anatomy	P55
+rkakato03n	RKakato03N	CLEAR	"heel (Japanese ""kakato""), right, numbered"	CLEAR	groupFile/Legs	Medium		"matches the settled ""kakato""=heel Japanese-term precedent"	P55
+row_chair012	row_chair012	CLEAR	a chair, row-numbered	CLEAR	groupFile/Other	High		recognized furniture object	P55
+second_arms_r_1	Second_Arms_R_1	CLEAR	"an extra (""second"") arm, right, numbered"	CLEAR	groupFile/Arms	High		limb count does not change destination (rule 19); ordinary structural anatomy	P55
+key.n	Key.N	CLEAR	a keyboard-prop key, N key	CLEAR	groupFile/Other	High		matches the settled period-separated Key.<label> coherent keyboard-prop series	P55
+c_dred_c2_07	C_Dred_C2_07	CLEAR	"dreadlocks (""Dred""), variant, numbered"	CLEAR	groupFile/Hair	Medium		recognized hairstyle abbreviation	P55
+rsmalltoe4 2	rsmalltoe4 2	CLEAR	small toe (pinky toe), right, numbered	CLEAR	groupFile/Toes/RightToes	High		ordinary toe anatomy, verified RightToes subpath	P55
+tails4	Tails4	CLEAR	tail, numbered	CLEAR	groupFile/Tail	High		explicit tail anatomy	P55
+flm-armb-belt-lb	Flm-ArmB-Belt-LB	CLEAR	"a ""belt"" element within the internal ""Flm-ArmB"" namespace, variant LB"	CLEAR	groupFile/Clothing	Medium		"internal namespace set aside (rule 24); ""belt"" is grounded clothing content"	P55
+helena head neck upper	Helena head neck upper	CLEAR	neck, upper, on a named-character head prefix	CLEAR	groupFile/Body	High		"character prefix set aside; ""neck"" is plain structural anatomy"	P55
+l_wrist_upper_b_helper	l_wrist_upper_b_helper	CLEAR	left wrist, upper, structural helper	CLEAR	groupFile/Arms	High		ordinary structural anatomy; helper is neutral (rule 4)	P55
+polysurface43_8147	polySurface43_8147	OPAQUE	a generic mesh-name artifact, no anatomical content	NOT_APPLICABLE		Low		technical DCC-artifact naming	P55
+wep_cylinder_drum	WEP_Cylinder_Drum	CLEAR	a weapon revolver cylinder/drum	CLEAR	groupFile/Other	High		recognized weapon-part object	P55
+bip_tie_2_l	bip_Tie_2_L	CLEAR	"a ""tie"" (necktie/fastening accessory), numbered, left"	CLEAR	groupFile/Clothing	High		worn accessory item	P55
+flm-rig-face	Flm-Rig-Face	CLEAR	a face-related marker, on an internal rig namespace	CLEAR	groupFile/Face	High		matches rule 24's own fbx_sakura_face precedent pattern; internal namespace set aside	P55
+18	18	OPAQUE	bare number, no words at all	NOT_APPLICABLE		Low		a number alone carries no semantic content	P55
+unusedtransform10 cmn sl alison	unusedtransform10 cmn sl alison	CLEAR	a self-declared unused transform control	CLEAR	groupFile/Useless	High		"explicit self-declared ""unused"" marker"	P55
+eyes-full-open	Eyes-Full-Open	CLEAR	eyes, full open	CLEAR	groupFile/Face/Eyes	High		localized eye action	P55
+c_dred_r2_02	C_Dred_R2_02	CLEAR	"dreadlocks (""Dred""), variant, numbered"	CLEAR	groupFile/Hair	Medium		recognized hairstyle abbreviation	P55
+valvebiped.chord_joint_jiggle	ValveBiped.chord_joint_jiggle	CLEAR	"a jiggle-physics function on a ""chord""/""cord"" joint"	NEEDS_CONTEXT		Low	"the owning object for the joint (""chord""/""cord"") is unresolved"	"""jiggle"" is a grounded dynamic-bone-physics function per rule 22"	P55
+wep_stock_underfolding_2	WEP_StocK_Underfolding_2	CLEAR	a weapon stock, underfolding type, numbered	CLEAR	groupFile/Other	High		recognized weapon-part object	P55
+pantstoraxwide	Pantstoraxwide	CLEAR	pants, torso/thorax, wide fit deformation	CLEAR	groupFile/Clothing	Medium		object-specific garment-fit deformation stays with the garment (rule 8)	P55
+dick_skinny	dick_skinny	CLEAR	"penis (""dick""), skinny shape descriptor"	CLEAR	groupFile/Body Morphs	High		explicit shape descriptor on genital anatomy	P55
+c ulip	C Ulip	CLEAR	"upper lip (""U""+""lip""), variant C"	CLEAR	groupFile/Face/Lower Face	Medium		"matches the established ""lip""+direction+side shorthand template (cf. lipul/lipur)"	P55
+blinkcorrection	BlinkCorrection	CLEAR	a blink correction	CLEAR	groupFile/Correctives	High		explicit repair/correction-purpose language (rule 5)	P55
+bow left 2b	bow left 2b	PARTIAL	"a ""bow"", left, variant 2b"	NEEDS_CONTEXT		Medium	"""bow"" has materially different core senses (decorative bow / archery bow / ship's bow)"	"matches the settled bare-""bow""-multi-sense precedent"	P55
+gentle_6	gentle_6	OPAQUE	"a quality/intensity adjective (""gentle"") with no named object, numbered"	NOT_APPLICABLE		Low		matches the settled gentle_2/gentle_5 precedent	P55
+bip_bobby_r_finger_globe_2_02	Bip_BOBBY_R_Finger_Globe_2_02	PARTIAL	"right hand finger; ""Globe"" qualifier unresolved"	CLEAR	groupFile/Arms/RightArm/RightFingers	High	matches rule 22's own documented Finger_Globe_* PARTIAL example	"""finger"" independently establishes the Fingers destination despite the undecoded ""Globe"" qualifier"	P55
+plane08	Plane08	OPAQUE	a generic default-named primitive mesh (Plane), numbered	NOT_APPLICABLE		Low		generic DCC primitive/object name, actual modeled referent unknown	P55
+bip ankle l	bip ankle l	CLEAR	left ankle	CLEAR	groupFile/Legs	High		ordinary structural anatomy	P55
+def-spine.025	DEF-spine.025	CLEAR	"spine, numbered segment, on an explicit anatomical deform-bone prefix (""DEF-"")"	CLEAR	groupFile/Body	High		explicit anatomical spine literal per rule 14	P55
+cord11	Cord11	CLEAR	a cord (bare accessory), numbered	NEEDS_CONTEXT		Medium	no owner/mount is named for the cord	bare decorative-accessory noun with no named owner (rule 25)	P55
+straprightlower	StrapRightLower	CLEAR	a strap (bare accessory), right, lower	NEEDS_CONTEXT		Medium	no owner/mount is named for the strap	bare decorative-accessory noun with no named owner (rule 25)	P55
+bone index 4	bone index 4	CLEAR	index finger, numbered, side-neutral	CLEAR	groupFile/Fingers	High		ordinary finger anatomy, no side marker	P55
+r06	R06	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no interpretable content	P55
+cloth_bone_up_l_05	cloth_bone_up_l_05	CLEAR	a generic cloth control, up, left, numbered	CLEAR	groupFile/Clothing	High		matches rule 22's generic-cloth-control CLEAR example	P55
+pb_r_cmy01_bhair_9	pb_R_CMY01_BHair_9	CLEAR	body hair, right, numbered	CLEAR	groupFile/Hair	Medium		"explicit hair content despite the cryptic ""CMY01"" wrapper"	P55
+bip01_spine3_016	Bip01_Spine3_016	CLEAR	spine, numbered segment, on an explicit anatomical biped prefix	CLEAR	groupFile/Body	High		explicit anatomical spine literal per rule 14	P55
+es1	ES1	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no interpretable content	P55
+unused_2	Unused_2	CLEAR	a self-declared unused placeholder, numbered	CLEAR	groupFile/Useless	High		"explicit self-declared ""unused"" marker"	P55
+smilealt	SmileAlt	CLEAR	a smile expression, alternate variant	CLEAR	groupFile/Face/Lower Face	High		"matches the settled bare-""smile""-family Lower Face precedent"	P55
+leg right thigh_adj	leg right thigh_adj	CLEAR	right thigh, adjustment	CLEAR	groupFile/Legs	High		ordinary structural anatomy	P55
+bippbg rcalftwist	BipPBG RCalfTwist	CLEAR	right calf, twist, on a rig prefix	CLEAR	groupFile/Legs	High		ordinary rig anatomy; twist is not corrective evidence	P55
+upperlips_anger_l	upperlips_anger_l	CLEAR	upper lip, anger expression, left	CLEAR	groupFile/Face/Lower Face	High		localized mouth-region expression (explicit feature named, unlike bare whole-face anger words)	P55
+frontcurloutalt	FrontCurlOutAlt	CLEAR	front hair, curl outward, alternate variant	CLEAR	groupFile/Hair	Medium		recognized hairstyle action	P55
+valvebiped.bip01_beltupper	ValveBiped.Bip01_BeltUpper	CLEAR	a belt, upper	CLEAR	groupFile/Clothing	High		explicit worn clothing accessory	P55
+upperlidsdownl	UpperlidsDownL	CLEAR	upper eyelids, down, left	CLEAR	groupFile/Face/Eyes	High		localized eyelid action	P55
+flexor radialis	Flexor Radialis	CLEAR	flexor carpi radialis (specific forearm muscle)	CLEAR	groupFile/Arms	High		a real, specific named anatomical muscle, not a generic function word	P55
+fit jacket	fit Jacket+fit jacket	CLEAR	a jacket, fit	CLEAR	groupFile/Clothing	High		explicit worn clothing item	P55
+soap	Soap	CLEAR	a bar of soap (real object)	CLEAR	groupFile/Other	High		recognized real-world object	P55
+hood 1	hood 1	CLEAR	a hood (clothing item), numbered	CLEAR	groupFile/Clothing	Medium		recognized worn clothing item	P55
+jacket_jig	jacket_jig	CLEAR	"a jacket, jiggle-physics (abbreviated ""jig"")"	CLEAR	groupFile/Clothing	High		explicit worn clothing item with a physics-sim marker	P55
+bip01_spine1_011	Bip01_Spine1_011	CLEAR	spine, numbered segment, on an explicit anatomical biped prefix	CLEAR	groupFile/Body	High		explicit anatomical spine literal per rule 14	P55
+pussparent.002_r.010	PussParent.002_R.010	CLEAR	"vagina (""puss""), parent/hierarchy reference, right, numbered"	CLEAR	groupFile/Body	Medium		recognized genital-anatomy abbreviation with a generic rig-hierarchy suffix	P55
+areolaplump	AreolaPlump	CLEAR	areola, plump shape descriptor	CLEAR	groupFile/Body Morphs	High		explicit shape descriptor on nipple/areola anatomy	P55
+nip1	Nip1	CLEAR	"nipple (""nip""), numbered"	CLEAR	groupFile/Body	High		plain structural anatomy	P55
+arm right shoulder 2 ctr 2	arm right shoulder 2 ctr 2	CLEAR	right shoulder, numbered, control variant	CLEAR	groupFile/Arms	High		ordinary structural anatomy	P55
+thiccer	Thiccer+thiccer	CLEAR	"body-thickness shape descriptor (comparative ""thiccer"")"	CLEAR	groupFile/Body Morphs	High		explicit shape/size descriptor	P55
+popsiclelowerbite	popsiclelowerbite	CLEAR	a lower-jaw bite pose/action	CLEAR	groupFile/Face/Lower Face	Medium		"""lower bite"" is the acting mouth/jaw mechanism; ""popsicle"" is only scene/context"	P55
+wep_button3	WEP_Button3	CLEAR	a weapon button, numbered	CLEAR	groupFile/Other	High		recognized weapon-part object	P55
+bip001-r-foretwist	Bip001-R-ForeTwist	CLEAR	right forearm, twist	CLEAR	groupFile/Arms	High		ordinary rig anatomy; twist is not corrective evidence	P55
+r_elbow_twist_b_base_helper	r_elbow_twist_b_base_helper	CLEAR	right elbow, twist, structural helper	CLEAR	groupFile/Arms	High		ordinary rig anatomy; twist/helper are not corrective evidence	P55
+maid.necktie_right_outer_1	Maid.Necktie_Right_Outer_1	CLEAR	a necktie, right, outer, numbered, on a costume prefix	CLEAR	groupFile/Clothing	High		explicit worn clothing accessory	P55
+r_index_metacarpal	r_index_metacarpal	CLEAR	index finger metacarpal, right	CLEAR	groupFile/Arms/RightArm/RightCarpals	High		explicit metacarpal (palm-bone) anatomical term	P55
+left knee d	Left knee D	CLEAR	left knee, variant D	CLEAR	groupFile/Legs	High		ordinary structural anatomy	P55
+energy_gun	Energy_gun	CLEAR	an energy gun (weapon)	CLEAR	groupFile/Other	High		recognized weapon object	P55
+knob_band	Knob_Band	CLEAR	a control knob/dial (mechanical object)	CLEAR	groupFile/Other	Medium		recognized mechanical object	P55
+kargathbladefist_bone87_rthumb	kargathbladefist_Bone87_RThumb	CLEAR	right thumb, on a named-character bone prefix	CLEAR	groupFile/Arms/RightArm/RightFingers	High		"character prefix set aside (rule 24); ""RThumb"" is meaningful, independently-grounded finger content"	P55
+foot_index_1_r	foot_index_1_R	CLEAR	index toe, right, numbered	CLEAR	groupFile/Toes/RightToes	High		ordinary toe anatomy, digit-naming convention applied to the foot	P55
+asshool_4	Asshool_4	CLEAR	"anus (misspelled ""asshool""), numbered"	CLEAR	groupFile/Body	High		obvious misspelling recognized; plain structural anatomy	P55
+butt armor left	butt armor left	CLEAR	armor (clothing) covering the buttock, left	CLEAR	groupFile/Clothing	Medium		object-specific armor/garment stays with the garment (rule 8)	P55
+l belta spo	L BeltA Spo	CLEAR	a belt, left, variant A	CLEAR	groupFile/Clothing	High		explicit worn clothing accessory	P55
+r_rear_holster_0u_3v	r_rear_holster_0u_3v	CLEAR	a rear holster, right, worn character equipment	CLEAR	groupFile/Clothing	High		matches the settled holster-as-worn-equipment precedent (rule 16) exactly	P55
+bone29	Bone29	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		bare numbered bone label	P55
+book coverpage turn2	Book CoverPage Turn2	CLEAR	a book, cover-page turn action, numbered	CLEAR	groupFile/Other	High		recognized real-world object	P55
+bip01_pelvis013	Bip01_Pelvis013	CLEAR	pelvis, numbered segment	CLEAR	groupFile/Body	High		plain structural anatomy	P55
+cloth_side_b_r	cloth_side_B_R	CLEAR	a generic cloth control, side, variant b, right	CLEAR	groupFile/Clothing	High		matches rule 22's generic-cloth-control CLEAR example	P55
+skull_09	skull_09	CLEAR	skull, numbered	CLEAR	groupFile/Body	High		bare structural skull reference with no specific facial feature named (rule 13)	P55
+wall door b	WALL DOOR B	CLEAR	a wall and door (environment objects), variant b	CLEAR	groupFile/Other	High		recognized real-world environment objects	P55
+upperarmtwist2left	UpperArmTwist2Left	CLEAR	left upper arm, twist, numbered	CLEAR	groupFile/Arms	High		ordinary rig anatomy; twist is not corrective evidence	P55
+r_horselink	r_horselink	OPAQUE	"cryptic compound (""horselink""), right; a confirmed bilateral L/R pair proves the name is systematic but does not decode its meaning"	NOT_APPLICABLE		Low		matches rule 22's own documented horselink bilateral-pair caution -- systematicity does not establish semantic content	P55
+maid.bow_left_upper_2	Maid.Bow_Left_Upper_2	CLEAR	a decorative bow (costume accessory), left, upper, numbered, on a maid-costume prefix	CLEAR	groupFile/Clothing	Medium		"the ""Maid"" costume context resolves ""bow"" to the decorative-accessory reading, unlike bare unowned ""bow"" instances"	P55
+bip_bucketroot	bip_BucketRoot	CLEAR	a bucket (real object), root/anchor	CLEAR	groupFile/Other	Medium		recognized real-world object	P55
+thongcentershiftright	ThongCenterShiftRight	CLEAR	a thong (clothing), center, shift, right	CLEAR	groupFile/Clothing	High		explicit worn clothing item	P55
+i7	I7	OPAQUE	bare alphanumeric code, no object or function named	NOT_APPLICABLE		Low		no interpretable content	P55
+pantsvaginalopen2	PantsVaginalOpen2	CLEAR	pants (clothing) with a vaginal-open feature, numbered	CLEAR	groupFile/Clothing	High		matches rule 8's own PantsAnalOpen example exactly -- pants are the primary named object	P55
+42	42	OPAQUE	bare number, no words at all	NOT_APPLICABLE		Low		a number alone carries no semantic content	P55
+lipdr	lipdr	CLEAR	"lower lip, right (compact ""lip""+direction+side shorthand paralleling lipUpper/lipLower series)"	CLEAR	groupFile/Face/Lower Face	Medium		matches the settled lipul/lipur coherent shorthand-template precedent exactly (d=down/lower, r=right)	P55
+b. peel off l	B. peel off L	CLEAR	"a ""peel off"" action, left, variant B"	NEEDS_CONTEXT		Low	the object being peeled off is not stated	peel-off is a stable action reading even without a named object, per rule 22's function-word pattern	P55
+cape_5_l	cape_5_L	CLEAR	a cape, numbered, left	CLEAR	groupFile/Clothing	High		recognized worn clothing item	P55
+linea alba depth	Linea Alba Depth	CLEAR	linea alba (specific abdominal anatomical line), depth/prominence descriptor	CLEAR	groupFile/Body Morphs	Medium		a real, specific named anatomical feature with a shape/appearance-depth parameter	P55
+knee02	knee02	CLEAR	knee, numbered	CLEAR	groupFile/Legs	High		ordinary structural anatomy	P55
+valvebiped.bip01_r_toe03	ValveBiped.Bip01_R_Toe03	CLEAR	right toe, numbered	CLEAR	groupFile/Toes/RightToes	High		ordinary toe anatomy	P55
+maid.necktie_right_outer_2	Maid.Necktie_Right_Outer_2	CLEAR	a necktie, right, outer, numbered, on a costume prefix	CLEAR	groupFile/Clothing	High		explicit worn clothing accessory	P55
+arm right shoulder 2 ctr 1	arm right shoulder 2 ctr 1	CLEAR	right shoulder, numbered, control variant	CLEAR	groupFile/Arms	High		ordinary structural anatomy	P55
+arm cape right shoulder 2	arm cape right shoulder 2	CLEAR	a cape draped over the right shoulder, numbered	CLEAR	groupFile/Clothing	Medium		object-specific garment (cape) stays with the garment (rule 8)	P55
+au26	AU26	CLEAR	a facial Action Unit (FACS-style) parameter, numbered 26	CLEAR	groupFile/Face/Expressions	High		matches the settled bare-AU-number Master precedent	P55
+valvebiped.bip01_r_shoulder_ctr	ValveBiped.Bip01_R_Shoulder_CTR	CLEAR	right shoulder, control/center marker	CLEAR	groupFile/Arms	High		ordinary structural anatomy	P55
+shirtfront_l	shirtfront_L	CLEAR	a shirt, front, left	CLEAR	groupFile/Clothing	High		explicit worn clothing item	P55

@@ -1,0 +1,222 @@
+PHASE 2 PRODUCTION TRANCHE 6 -- CONSISTENCY AUDIT
+Canonical positions audited: 5501-6500 (ledger rows 5501-6500, batches P51-P60)
+Scope: mandatory Face/Expressions audit (rulebook Section 12), mandatory OPAQUE review
+(Section 13), general consistency audit (Section 11), cross-tranche check.
+This file documents findings only. Per instructions, within-Tranche-6 findings below
+were NOT applied to the ledger before the raw-tranche commit. The two cross-tranche
+findings (Findings 6 and 7) WERE applied, per Section 15, and are documented in the
+Tranche 6 report's "cross-tranche corrections" section as well.
+
+PRECEDENT-CHECK METHODOLOGY (applied to every flag below)
+  1. Is the complete literal directly readable as written?
+  2. Is a recognizable generic real object/word being discarded merely for genericity?
+  3. Does in-corpus or in-Master evidence ground a supposedly cryptic/undecided token?
+  4. Is lack of destination evidence being mistaken for lack of semantics (Q1 vs Q2)?
+  5. Does an established sibling series or coherent naming family exist for this literal?
+  6. Does the live Master (brace-parsed, exact-literal or same-word-family lookup)
+     confirm, contradict, or stay silent on the current classification?
+  7. Is the same underlying word/concept classified differently elsewhere in this
+     tranche (or, if surfaced, an earlier tranche) without a stated distinguishing reason?
+  8. Net verdict:
+       A = confirmed error, correction warranted
+       B = plausible concern, insufficient evidence to correct now
+       C = no error, current classification is correct/defensible as documented
+       D = pre-existing/out-of-scope, no action
+
+================================================================================
+FINDING 1 -- "Concernt" routed to Face/Expressions, should be Face/Upper Face
+================================================================================
+Row: fold_key "concernt", exact spelling "Concernt", batch P58.
+1. Literal is directly readable ("concerned", misspelled).
+2. N/A (not a generic-object question).
+3. N/A.
+4. The row was classified by generalizing "bare whole-face emotion word with no
+   localized feature named -> Expressions" from the Hurt/Surprised/Mocking/Shocked/
+   Mad/Happy family, without checking this specific word family against the Master.
+5. Sibling family: bare "Concern" and its many compounds (BrowConcern, ConcernBrows,
+   ConcernedBrows, ConcernedEyebrows, ConcernL, etc.) all live in the corpus.
+6. Direct brace-parsed Master lookup: bare literal "Concern" -> groupFile/Face/Upper
+   Face (line 5980), NOT Expressions. The Master's own embedded doctrine comment
+   (lines 111-124) explicitly frames this exact distinction: some emotion words name
+   "the conventional... action" of a specific facial region (its worked example is
+   Smile = mouth-corner action, routed locally) while others "represent an overall
+   facial state" (its example is Happy = Expressions). "Concern" is evidently in the
+   first bucket (a conventional brow-furrow action), not the second.
+7. Yes -- "Concernt" (Expressions) contradicts the Master's own bare "Concern"
+   (Upper Face) for the same word family, with no stated distinguishing reason.
+8. VERDICT: A -- confirmed error. Correct destination is groupFile/Face/Upper Face.
+
+================================================================================
+FINDING 2 -- "fbx_asagi_face_shy" routed to Face/Expressions, should be Face/Lower Face
+================================================================================
+Row: fold_key "fbx_asagi_face_shy", batch P59.
+1. Literal is directly readable ("face, shy", on a named-character prefix).
+2/3. N/A.
+4. Same over-generalization as Finding 1: "shy" was treated as a bare whole-face
+   state word by analogy to Happy/Mad/Shocked, without checking the Master.
+5. No large compound sibling family found for "shy" comparable to Concern's, but a
+   small family exists (ShyGuyEyeAngry, ShyGuyEyeHappy, ShyGuyMouthFrown/Longer/
+   Smile/Wider, MMDMiscShy, MMDMiscShyHorizontal).
+6. Direct brace-parsed Master lookup: bare literal "Shy" -> groupFile/Face/Lower
+   Face (line 18565), NOT Expressions.
+7. Yes -- same pattern as Finding 1: an assumed "no anatomical feature named -> must
+   be Expressions" heuristic contradicted by the Master's own bare-word placement.
+8. VERDICT: A -- confirmed error. Correct destination is groupFile/Face/Lower Face.
+
+Note on Findings 1-2: "Glad" and "Amazed" (also routed to Expressions this tranche
+via bare-word reasoning) were re-checked against this same risk and are NOT flagged:
+both are direct synonyms of an already Master-confirmed Expressions-bucket sibling
+("Happy 1" -> Expressions; "Shocked"/"Shocked2"/"mad"/"Mad" -> Expressions), and
+neither has a Master compound family suggesting a specific conventional local action
+the way Concern (brow furrow) and Shy (a specific mouth/lip treatment) do. Verdict: C.
+
+================================================================================
+FINDING 3 -- "Qwn-Rig-Hole-A" marked OPAQUE, should be PARTIAL/NEEDS_CONTEXT
+================================================================================
+Row: fold_key "qwn-rig-hole-a", batch P57.
+1. Literal is directly readable: internal "Qwn-Rig" namespace (set aside per rule
+   24, matching the already-established Fio-Rig/Mar-Rig/Fin-Rig pattern) + "Hole".
+2. N/A.
+3. "Hole" itself was independently classified this same tranche (batch P58, exact
+   spelling "Hole", fold_key "hole") as PARTIAL/NEEDS_CONTEXT with reasoning "'hole'
+   has materially different core senses (anatomical orifice / mechanical opening /
+   torn garment hole) -- genuinely competing core readings." That is exactly Rule
+   22's PARTIAL definition, not OPAQUE (no reliable core referent at all).
+4. Yes -- this is a direct instance of mistaking "no destination evidence" for "no
+   semantic content." The Fio-Rig/Mar-Rig/Fin-Rig precedent already establishes that
+   setting the internal-namespace prefix aside and evaluating the remaining word on
+   its own merits is the correct procedure (that is exactly how "Fio-Rig-Eye-R" was
+   correctly read as CLEAR "eye" content); the same procedure applied to "Hole"
+   yields PARTIAL, not OPAQUE.
+5. Sibling: bare "Hole" (P58, same tranche).
+6. N/A (no Master lookup needed; this is an internal ledger consistency question).
+7. Yes -- direct self-contradiction within Tranche 6: the same word ("hole") is
+   PARTIAL in one row and treated as contentless in another, with no stated reason
+   for the difference beyond the "-Rig-" prefix, which the established procedure
+   says to set aside rather than treat as semantically neutralizing.
+8. VERDICT: A -- confirmed error. Correct classification: semantic_status=PARTIAL,
+   taxonomy_status=NEEDS_CONTEXT, destination blank, matching the "Hole" row exactly
+   (the "-Rig-" prefix does not add or remove information about which sense of
+   "hole" is meant, so it does not change the semantic verdict).
+
+================================================================================
+FINDING 4 -- "paulinggib002" marked OPAQUE, should be CLEAR / groupFile/Other
+================================================================================
+Row: fold_key "paulinggib002", batch P56.
+1. Literal is directly readable: "pauling" (a proper-name fragment, e.g. a
+   character name) + "gib" (a recognized Source-engine/Half-Life-modding term for
+   a breakable debris/ragdoll-remains chunk) + a numbered suffix.
+2. Yes -- this is exactly the risk Section 13 warns about: a real, recognized
+   convention term ("gib") was discarded as "no reliable core referent" merely
+   because it was fused into an unfamiliar-looking compound with a name fragment.
+3. Corpus evidence within this SAME tranche: "window_urban_sash_48_88_full_gib04"
+   (batch P59) was independently classified CLEAR / groupFile/Other with reasoning
+   "an urban window sash gib (breakable debris chunk), numbered -- recognized
+   environment/prop debris object." "gib" carries identical, self-sufficient
+   semantic content in both literals.
+4. Yes -- directly on point: "paulinggib002" was marked as having no reliable core
+   referent, when in fact "gib" alone already supplies one, independently confirmed
+   elsewhere in this tranche.
+5. Sibling: "window_urban_sash_48_88_full_gib04" (P59, same tranche).
+6. N/A.
+7. Yes -- direct self-contradiction: the same recognized term ("gib") is CLEAR
+   content in one row and "no reliable core referent" in another, with no stated
+   distinguishing reason.
+8. VERDICT: A -- confirmed error. Correct classification: semantic_status=CLEAR,
+   semantic_referent "a gib (breakable debris/remains prop), associated with a
+   named character (\"Pauling\"), numbered", taxonomy_status=CLEAR,
+   proposed_destination=groupFile/Other, confidence Medium.
+
+================================================================================
+FINDING 5 -- "Plane08" marked OPAQUE, likely should be CLEAR / groupFile/Other
+================================================================================
+Row: fold_key "plane08", batch P55.
+1. Literal is directly readable: "Plane" (a default DCC primitive name, but also
+   a plain, recognizable real-world geometric/flat-surface shape) + a number.
+2. This is the crux of the flag. Tranche 2 QA established that a generic, numbered
+   REAL OBJECT (Box10/Box22) is not opaque merely for being generic -- "genericity
+   is not opacity." During this tranche I extended that same precedent to
+   "pCylinder8/10/12" (CLEAR / groupFile/Other), reasoning that a cylinder is a
+   generic real geometric object just as a box is. "Plane" is the same category of
+   default-DCC-primitive-that-also-names-a-real-shape as Box and Cylinder.
+3/4. Same concern as Finding 4, applied to a different family: a generic-but-real
+   shape name was treated as an opaque DCC artifact in one place (Plane08) while a
+   structurally identical case (pCylinder*) was treated as grounded content
+   elsewhere in the SAME tranche.
+5. Sibling: pCylinder8 (P56), pCylinder10 (P59), pCylinder12 (P60) -- all CLEAR /
+   groupFile/Other this same tranche; Box10/Box22 (Tranche 2, calibration
+   precedent) also CLEAR / groupFile/Other.
+6. N/A.
+7. Yes -- "Plane" and "Cylinder" are the same category of object (a named,
+   generic-but-real geometric primitive) but were classified oppositely with no
+   stated distinguishing reason.
+8. VERDICT: A (with caveat) -- likely a confirmed error under the Box/Cylinder
+   precedent as I applied it. Flagged as slightly softer than Findings 1-4 because
+   "Plane" is arguably a step more abstract/less obviously a "real-world object"
+   than "Box" (a container) or "Cylinder" (a tube/can-like solid) -- a flat
+   geometric plane is a shape more than a discrete object. Recommend the same
+   correction (CLEAR / groupFile/Other) for full internal consistency with this
+   tranche's own Cylinder rulings, but flagged as a borderline "genericity is not
+   opacity" case rather than a clear-cut misread, and left for explicit review
+   alongside Findings 1-4 rather than assumed uncontroversial.
+
+================================================================================
+FINDING 6 & 7 -- CROSS-TRANCHE: "EBAllLowerR" / "EBAllLowerL" (Tranche 3) -- APPLIED
+================================================================================
+See PHASE2_PRODUCTION_TRANCHE6_REPORT.txt, "Cross-tranche corrections" section, for
+full detail. Summary: while grounding "EB" for this tranche's "EBInnerUpperL"
+(ebinnerupperl, P60), the audit surfaced that Tranche 3 had classified
+"EBAllLowerR" (ledger row 2593, batch P21) and "EBAllLowerL" (ledger row 3197,
+batch P27) as CLEAR / groupFile/Face/Eyes ("eye anatomy read from an unusual
+capitalization"), while Tranches 4-5 established a coherent EB-as-eyebrow sibling
+series (EBInnerLowererL/R, EBOuterLowererL, EBAllRaiserL/R -- all CLEAR /
+groupFile/Face/Upper Face). "EBAllLower" is unmistakably the same systematic
+[EB]+[Inner/Outer/All]+[Lowerer/Raiser] naming family as its Upper-Face-confirmed
+siblings, not an "eye" reading. VERDICT: A -- confirmed decisive error in an
+earlier tranche. Per rulebook Section 15, this was corrected in the ledger now
+(destination changed from groupFile/Face/Eyes to groupFile/Face/Upper Face for
+both rows); the original Tranche 3 raw batch files (P21, P27) and the Tranche 3
+report were left unmodified, per instructions.
+
+================================================================================
+OTHER OBSERVATIONS (no action)
+================================================================================
+- Bare FACS "AU" numbers: this tranche's au15/au26 were routed to Face/Expressions
+  per the Tranche 5-established "bare AU number -> Expressions" convention. A
+  direct Master lookup for the general AU family found AU24/AU32/AU38 confirmed at
+  Face/Expressions, but AU31 filed at Face/Upper Face -- a pre-existing minority
+  exception in the Master itself, not something introduced by this tranche.
+  VERDICT: D -- pre-existing, majority-supported convention; not a Tranche 6 error,
+  no action taken.
+- Rule 26 hip/pelvis boundary: all 8 Tranche 6 hip/pelvis-adjacent rows (HipsWider,
+  Bip01_Pelvis013, hip right, bip hiphelper r, PantsHipPlump, ValveBiped.Bip01_
+  Pelvis.024, bip hipside r) were checked and are internally consistent with Rule
+  26 and with each other. VERDICT: C -- no error.
+- Correctives vs. plain "helper"/"twist" rig plumbing: all 19 Tranche 6 rows
+  containing "fix", "correct", or "helper" were checked. "helper"/"twist" alone
+  were consistently treated as neutral rig plumbing (Arms/Legs), while only rows
+  with explicit corrective-purpose language (FIX, Correction, Corrector) were
+  routed to Correctives. VERDICT: C -- no error, internally consistent.
+- Bare-mouth-word family (smile/frown/smirk): "RFrown3" and "smirk_Left" extended
+  the Tranche-5-established "bare mouth-shape word -> Lower Face" reasoning beyond
+  its documented "smile" example. Both extensions were independently verified
+  against the live Master (bare "Frown"/"frown"/"FrownL"/"FrownR" and "Smirk"/
+  "smirk" all resolve to Face/Lower Face). VERDICT: C -- no error, verified rather
+  than assumed.
+
+================================================================================
+SUMMARY
+================================================================================
+Findings requiring correction (verdict A), NOT yet applied to the ledger (per
+instructions not to auto-apply consistency flags before the raw-tranche commit):
+  1. Concernt                -> groupFile/Face/Upper Face (from Expressions)
+  2. fbx_asagi_face_shy      -> groupFile/Face/Lower Face (from Expressions)
+  3. Qwn-Rig-Hole-A          -> PARTIAL/NEEDS_CONTEXT (from OPAQUE)
+  4. paulinggib002           -> CLEAR/groupFile/Other (from OPAQUE)
+  5. Plane08                 -> CLEAR/groupFile/Other (from OPAQUE), borderline
+
+Findings already applied (cross-tranche, per Section 15):
+  6. EBAllLowerR (Tranche 3) -> groupFile/Face/Upper Face (from Eyes) -- APPLIED
+  7. EBAllLowerL (Tranche 3) -> groupFile/Face/Upper Face (from Eyes) -- APPLIED
+
+No NEEDS_DOCTRINE stop occurred in Tranche 6.

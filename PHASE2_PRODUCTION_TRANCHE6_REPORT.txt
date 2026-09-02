@@ -1,0 +1,115 @@
+PHASE 2 PRODUCTION CLASSIFICATION -- TRANCHE 6 REPORT
+Canonical positions: 5501-6500 (1000 families)
+Batches: P51 (5501-5600) through P60 (6401-6500), 10 batches of 100
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv
+
+================================================================================
+TRANCHE-ONLY STATISTICS (rows 5501-6500)
+================================================================================
+Total tranche rows: 1000
+
+semantic_status distribution:
+  CLEAR:   834
+  PARTIAL:  31
+  OPAQUE:  135
+
+taxonomy_status distribution:
+  CLEAR:            764
+  NEEDS_CONTEXT:    101
+  NEEDS_DOCTRINE:     0
+  NOT_APPLICABLE:   135
+
+Rule 21 (OPAQUE <-> NOT_APPLICABLE) holds exactly: 135 = 135.
+
+confidence distribution:
+  High:   612
+  Medium: 197
+  Low:    191
+
+proposed_destination distribution (764 CLEAR rows with a destination):
+  133  groupFile/Other
+  126  groupFile/Clothing
+   73  groupFile/Body
+   56  groupFile/Arms
+   48  groupFile/Body Morphs
+   43  groupFile/Legs
+   43  groupFile/Face/Eyes
+   38  groupFile/Face/Lower Face
+   34  groupFile/Useless
+   28  groupFile/Arms/LeftArm/LeftFingers
+   27  groupFile/Arms/RightArm/RightFingers
+   22  groupFile/Hair
+   20  groupFile/Face/Upper Face
+   14  groupFile/Tail
+   12  groupFile/Face/Expressions
+    8  groupFile/Face/Mid Face
+    7  groupFile/Wings
+    7  groupFile/Correctives
+    5  groupFile/Toes/RightToes
+    5  groupFile/Arms/RightArm/RightCarpals
+    4  groupFile/Toes/LeftToes
+    4  groupFile/Face/Ears
+    3  groupFile/Fingers
+    2  groupFile/Face
+    2  groupFile/Arms/LeftArm/LeftCarpals
+
+NEEDS_DOCTRINE occurrences this tranche: 0 (no genuinely new policy question arose;
+no batch stop was required).
+
+Consistency flags raised: 5 within-tranche findings (documented, not auto-applied
+to the ledger before this commit; see PHASE2_PRODUCTION_TRANCHE6_CONSISTENCY_FLAGS.txt):
+  1. Concernt (P58) -> should be groupFile/Face/Upper Face (currently Expressions)
+  2. fbx_asagi_face_shy (P59) -> should be groupFile/Face/Lower Face (currently Expressions)
+  3. Qwn-Rig-Hole-A (P57) -> should be PARTIAL/NEEDS_CONTEXT (currently OPAQUE)
+  4. paulinggib002 (P56) -> should be CLEAR/groupFile/Other (currently OPAQUE)
+  5. Plane08 (P55) -> likely should be CLEAR/groupFile/Other (currently OPAQUE), borderline
+
+OPAQUE rows manually reviewed (Section 13): all 135, individually, against the four
+review questions (literal readability, generic-real-object discard risk, corpus/Master
+grounding for cryptic tokens, lack-of-destination-evidence vs. lack-of-semantics).
+Findings 3, 4, and 5 above emerged directly from this review.
+
+Face/Expressions rows reviewed (Section 12): all 12 rows routed to
+groupFile/Face/Expressions this tranche, using complete-literal Master lookups
+(brace-parsed exact-control-to-full-path resolution), not substring/word-frequency
+majority counts:
+  l.mad, head eye sack upper left, glad, au26, tears 1 upper, shocked 2, au15,
+  concernt, amazed, fbx_asagi_face_shy, little_happy2, tear up r
+Of these, 10 were confirmed correct by direct Master lookup or by same-tranche
+synonym grounding to an already-confirmed Master sibling (mad/Mad, Shocked/Shocked2,
+Happy 1, Tears 1/Tears 2, AU24/AU32/AU38, and Glad/Amazed via synonym grounding to
+Happy/Shocked respectively). 2 (concernt, fbx_asagi_face_shy) were found to
+contradict a direct Master lookup and are documented as Finding 1 and Finding 2
+above (not yet applied). Upper Face and Lower Face routings (20 and 38 rows
+respectively) were spot-checked; two bare-mouth-word extensions beyond the
+rulebook's documented "smile" example (RFrown3, smirk_Left) were independently
+verified against the live Master (bare Frown/frown/FrownL/FrownR and Smirk/smirk
+all resolve to Face/Lower Face) rather than assumed by analogy.
+
+Cross-tranche corrections found and applied this session (Section 15):
+  EBAllLowerR (ledger row 2593, Tranche 3, batch P21) and EBAllLowerL (ledger row
+  3197, Tranche 3, batch P27) were originally classified CLEAR / groupFile/Face/Eyes
+  ("eye anatomy read from an unusual capitalization, similar to the 'buldge'='bulge'
+  precedent"). While grounding "EB" for this tranche's EBInnerUpperL (P60), the audit
+  found a coherent EB-as-eyebrow sibling series already established in Tranches 4-5
+  (EBInnerLowererL/R, EBOuterLowererL, EBAllRaiserL/R -- all CLEAR /
+  groupFile/Face/Upper Face). "EBAllLower" is unmistakably the same systematic
+  [EB]+[Inner/Outer/All]+[Lowerer/Raiser] naming family, not an "eye" reading. This
+  is a concrete, decisively evidenced error, so per Section 15 it was corrected in
+  the ledger now: both rows' proposed_destination changed from groupFile/Face/Eyes
+  to groupFile/Face/Upper Face (semantic_referent and short_reason updated to record
+  the correction and its evidence). The original Tranche 3 raw batch files (the P21
+  and P27 batch TSVs) and the Tranche 3 report were left unmodified, per
+  instructions -- only the ledger was corrected, and this report documents it. This
+  was applied via a standalone atomic script (write-temp -> re-open -> validate
+  row_count/first_500_identical/Rule21/zero_dup/all_dest_valid -> promote), not by
+  hand-editing the ledger file.
+
+================================================================================
+CUMULATIVE STATISTICS (through canonical position 6500)
+================================================================================
+Calibration families classified:      500
+Production families classified:     6,000
+Total ledger rows:                  6,500
+Next canonical Phase 2 position:    6,501
+Remaining production families:      7,782
