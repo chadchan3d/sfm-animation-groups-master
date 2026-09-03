@@ -1,0 +1,431 @@
+======================================================================
+PHASE 2 -- TRANCHE 9 TARGETED FAMILY QA RECONCILIATION
+BAS / FLM-ARMB / WHISKER / MOUSTACHE / CONDOM / FACS-AU
+Evidence-gathering review. No ledger changes recorded in this file.
+======================================================================
+
+Ledger state at start of this review: 9500 rows (500 calibration + 9000
+production). Raw Tranche 9 commit: 4f6a726.
+
+----------------------------------------------------------------------
+0. FRINGE CORRECTION RE-VERIFICATION
+----------------------------------------------------------------------
+Mechanically re-read from the current ledger:
+  fringe 1      -> CLEAR / CLEAR / groupFile/Hair
+  fringe 6      -> CLEAR / CLEAR / groupFile/Hair
+  fringe 20     -> CLEAR / CLEAR / groupFile/Hair
+  fringe 17 jb  -> CLEAR / CLEAR / groupFile/Hair
+
+Matches expected values exactly. Grounded by the live Master's coherent
+bare/numbered Fringe/bip_fringe/HairFringe family (all groupFile/Hair).
+NOT broadened into a universal "fringe" keyword rule -- no other
+"*_fringe" compound (e.g. hypothetical belt_fringe/curtain_fringe) was
+touched or considered here.
+VERDICT: CONFIRMED CORRECT, no change.
+
+----------------------------------------------------------------------
+1. BAS. FAMILY -- SIX BODY OUTLIERS
+----------------------------------------------------------------------
+Full family mechanically enumerated: 44 rows (all fold_key "bas.*").
+
+Distribution:
+  Bare BAS.<position>, no jiggle : 20 rows -> 17 OPAQUE/NOT_APPLICABLE,
+        3 outliers CLEAR/CLEAR/groupFile/Body (rear_right_2, back_2,
+        rear_left_3)
+  BAS.<position>_jiggle          : 24 rows -> 21 CLEAR/NEEDS_CONTEXT
+        (blank), 3 outliers CLEAR/CLEAR/groupFile/Body
+        (rear_right_1_jiggle, rear_left_3_jiggle, back_2_jiggle)
+
+Live Master evidence (mechanically searched): the Master contains a
+"BAS." dot-namespace but ONLY with an explicit middle owner token --
+BAS.Bang_Left/Right_# (hair bangs jiggle drivers, dot-separator) and a
+separate BAS_Dress.Front/Rear/Side_Left/Right_# family (dress-jiggle
+drivers, underscore-then-dot). No literal in the live Master matches
+the bare "BAS.<position>[_jiggle]" shape found in this ledger family --
+i.e. this ledger's family lacks a middle semantic token (no "Bang", no
+"Dress") that would name what BAS. actually anchors to in either
+grounded Master template. This directly confirms the majority reading
+already in the ledger: "BAS." is an ungrounded internal-namespace code
+whose owning object is not stated, independent of the specific position
+word used.
+
+Per-outlier check (A: positive Body evidence? B: is BAS. merely
+namespace? C: does rear/back/side/left/right establish only position,
+not owner? D: for jiggle rows, does "jiggle" establish function while
+leaving the object unknown?):
+
+  bas.rear_right_2 (referent given: "buttock control, right, numbered")
+    A: No positive evidence in the literal or the Master ties this
+       specific numbered variant to a buttock/Body reading; "buttock"
+       is asserted, not derived from any token in "BAS.Rear_Right_2".
+    B: Yes -- ungrounded per Master search above.
+    C: Yes -- "rear"/"right" are pure spatial descriptors.
+    Numeric-sibling check: bas.rear_right_1 = OPAQUE, bas.rear_right_2 =
+       CLEAR/Body (outlier), bas.rear_right_3 = OPAQUE. No suffix-number
+       rule explains why "_2" specifically would resolve to Body while
+       "_1" and "_3" (same position, same namespace) do not.
+    VERDICT: CONFIRMED ERROR.
+
+  bas.back_2 (referent given: "back/spine-region control, numbered")
+    Numeric-sibling check: bas.back_1 = OPAQUE, bas.back_2 = CLEAR/Body
+       (outlier). Only two bare "back" positions exist; no positive
+       evidence distinguishes them.
+    VERDICT: CONFIRMED ERROR.
+
+  bas.rear_left_3 (referent given: "buttock anatomy, left, numbered")
+    Numeric-sibling check: bas.rear_left_1 = OPAQUE, bas.rear_left_3 =
+       CLEAR/Body (outlier; no bas.rear_left_2 exists in the classified
+       corpus to compare). Same reasoning as rear_right_2 applies.
+    VERDICT: CONFIRMED ERROR.
+
+  bas.rear_right_1_jiggle (referent: "buttock jiggle-physics chain,
+      right, numbered")
+    D: "jiggle" establishes a dynamic-physics function; the jiggled
+       object is not named anywhere in the literal.
+    Numeric-sibling check: rear_right_2_jiggle, rear_right_3_jiggle,
+       rear_right_4_jiggle are ALL CLEAR/NEEDS_CONTEXT. rear_right_1_
+       jiggle is the sole Body outlier among its own four numbered
+       siblings.
+    VERDICT: CONFIRMED ERROR.
+
+  bas.rear_left_3_jiggle (referent: "buttock jiggle-physics chain,
+      left, numbered")
+    Numeric-sibling check: rear_left_1_jiggle = CLEAR/NEEDS_CONTEXT;
+       rear_left_3_jiggle = CLEAR/Body (outlier).
+    VERDICT: CONFIRMED ERROR.
+
+  bas.back_2_jiggle (referent: "a back jiggle-physics control,
+      numbered")
+    Numeric-sibling check: back_3_jiggle = CLEAR/NEEDS_CONTEXT;
+       back_2_jiggle = CLEAR/Body (outlier).
+    VERDICT: CONFIRMED ERROR.
+
+CONCLUSION: All six are CONFIRMED ERRORS, not legitimate distinctions.
+No positive Master or corpus evidence singles out these six numbered
+variants from their direct siblings; the assigned "buttock"/"back"
+referents are unsupported assertions. Corrected to match the family's
+own established majority pattern:
+  Bare BAS.<position>       -> OPAQUE / NOT_APPLICABLE / (blank)
+  BAS.<position>_jiggle     -> CLEAR / NEEDS_CONTEXT / (blank)
+
+----------------------------------------------------------------------
+2. FLM-ARMB ARM/LEG SUFFIX-CODE FAMILY
+----------------------------------------------------------------------
+Full family mechanically enumerated: 39 rows (fold_key "flm-armb-*").
+Sub-word breakdown and behavior:
+
+  Foot   (3 rows: lb, rb, ra)         -> 100% CLEAR/CLEAR/groupFile/Legs
+  Neck   (2 rows: b, r)               -> 100% CLEAR/CLEAR/groupFile/Body
+  Belt   (4 rows: la, b1, lc, lb, ld) -> 100% CLEAR/CLEAR/groupFile/Clothing
+  Float  (9 rows)                     -> 8x CLEAR/NEEDS_CONTEXT, 1x OPAQUE
+                                          (object that "floats" never named)
+  Leg    (13 rows, incl. 1 calibration)-> SPLIT: 5x CLEAR/Legs,
+                                          7x NEEDS_CONTEXT, 1 calibration
+                                          PARTIAL/NEEDS_CONTEXT
+  Arm    (9 rows)                     -> SPLIT: 4x CLEAR/Arms,
+                                          5x NEEDS_CONTEXT
+  Back   (3 rows)                     -> SPLIT: 1x CLEAR/Body,
+                                          2x NEEDS_CONTEXT
+
+Central question: does "Arm"/"Leg" function as a real semantic owner
+token in this namespace, or is it opaque namespace filler needing the
+suffix to mean anything?
+
+Suffix-decoding check (mandatory before any normalization): inspected
+every Leg suffix (RBC/RM/RBD/RBA/RBB/LUB/RUC/LBC/LUC/RUB/LBD/LM/LUA) and
+every Arm suffix (LF/RI/LB/RE/RG/LC/RB/LH/LG) for a letter-length or
+letter-position rule that would predict CLEAR vs NEEDS_CONTEXT. None
+exists: e.g. LUC->Legs but LUB and LUA (same "LU" head)->NEEDS_CONTEXT;
+RBC(calibration)->NEEDS_CONTEXT but LBC->Legs (same tail "BC"); RG->Arms
+but LG->NEEDS_CONTEXT (same tail "G"). No coherent suffix-decoding rule
+is recoverable -- confirming the task's caution against speculative
+decoding was warranted, but also showing the suffix itself carries no
+information either way.
+
+Decisive comparison: Foot, Neck, and Belt are each a plain concrete
+noun exactly parallel in position to Leg/Arm/Back within this same
+"Flm-ArmB-<Word>-<suffix>" template, and each resolves 100% consistently
+to its body-part/clothing destination regardless of its own suffix code
+(Foot suffixes LB/RB/RA -- all Legs; Neck suffixes B/R -- both Body;
+Belt suffixes LA/B1/LC/LB/LD -- all Clothing). This is not speculative
+suffix decoding -- it is direct, mechanically-verified within-family
+precedent: in this specific namespace, an undecoded suffix does not
+disqualify CLEAR (Rule 22's "missing subtype/variant doesn't disqualify
+CLEAR" applies) once the Flm-ArmB prefix is set aside (Rule 24, already
+invoked correctly on every currently-CLEAR row in this family). "Float"
+is the sole family member that behaves differently, and correctly so --
+"float" is an abstract technical/function word, not a concrete
+owned-object noun, so its NEEDS_CONTEXT/OPAQUE treatment (object that
+floats is never named) is a LEGITIMATE DISTINCTION, not touched here.
+
+Leg, Arm, and Back are concrete body-part/region nouns exactly like
+Foot and Neck. Their NEEDS_CONTEXT rows are drift, not legitimate
+distinctions -- several of their own uncertainty_reason fields already
+admit this explicitly (e.g. flm-armb-leg-lbd: "family shows a mixed,
+unresolved pattern between CLEAR/Legs and NEEDS_CONTEXT for similar
+codes"; flm-armb-arm-lh: "family shows a mixed pattern (lb->Arms,
+lf/ri->NEEDS_CONTEXT)").
+
+CONFIRMED ERRORS (normalize UP to CLEAR, matching the Foot/Neck/Belt
+within-family precedent):
+  Leg -> groupFile/Legs:  flm-armb-leg-rbd, -rba, -rbb, -lub, -lbd, -lm,
+                           -lua   (7 rows)
+  Arm -> groupFile/Arms:  flm-armb-arm-lf, -ri, -re, -lh, -lg  (5 rows)
+  Back -> groupFile/Body: flm-armb-back-u1, -u2  (2 rows)
+
+NOT TOUCHED:
+  flm-armb-leg-rbc -- calibration row (batch "3", frozen
+     PILOT_500_FINAL.tsv). Same suffix-is-noise conclusion would apply,
+     but this task does not name this specific row for calibration
+     override, so it is left untouched per the standing calibration-
+     freeze rule. Flagged here as a pre-existing calibration
+     inconsistency for the user's awareness, not corrected.
+  Float family (9 rows) -- legitimate distinction (abstract function
+     word, no named object), left as-is.
+
+----------------------------------------------------------------------
+3. WHISKER FAMILY -- TWO TEMPLATES
+----------------------------------------------------------------------
+Full family mechanically enumerated: 5 rows.
+  "r whiskers a phy"  -> CLEAR/CLEAR/groupFile/Hair
+  "l whiskers a phy"  -> CLEAR/CLEAR/groupFile/Hair
+  whisker_r_1         -> CLEAR/CLEAR/groupFile/Face/Mid Face  (outlier)
+  whisker_r_2         -> CLEAR/NEEDS_CONTEXT/(blank)
+  whisker_l_2         -> CLEAR/NEEDS_CONTEXT/(blank)
+
+Live Master evidence (mechanically searched, 246 total "whisker" hits):
+  - "bip_Whisker00_L".."bip_Whisker20_L"/R and the underscored variant
+    "bip_Whisker_00_L" etc (84 hits, ALL carry the "bip_" skeleton-bone
+    prefix, NO Upper/Middle/Lower qualifier) -> groupFile/Face/Mid Face.
+  - "Whisker_00_L".."Whisker_10_L"/R (22 hits, NO "bip_" prefix) ->
+    groupFile/Hair.
+  - "whisker 1 l".."whisker 6 r", "whisker l"/"whisker r",
+    "Whiskers1_l".."Whiskers4_r" (24 hits, space/plural forms, no
+    "bip_" prefix) -> groupFile/Hair.
+  - "bip_LowerWhisker*/MiddleWhisker*/UpperWhisker*" and reordered
+    "WhiskerLower*/WhiskerMiddle*/WhiskerUpper*" (32 hits, explicit
+    Upper/Middle/Lower qualifier) -> groupFile/Hair.
+  - "Whisker_L"/"Whisker_R" bare, no number (2 hits) -> groupFile/Other.
+
+The decisive split in the Master is the "bip_" prefix: EVERY "bip_"-
+prefixed bare numbered whisker (no Upper/Middle/Lower qualifier) routes
+to Face/Mid Face (a skeleton-bone-driven structural facial feature);
+EVERY non-"bip_"-prefixed numbered or sided whisker control (bare
+"Whisker_NN_side", "whisker N side", "Whiskers#_side") routes to Hair.
+
+whisker_r_1, whisker_r_2, and whisker_l_2 (exact_spellings Whisker_R_1,
+Whisker_R_2, Whisker_L_2) carry NO "bip_" prefix. They match the
+non-"bip_" "Whisker_NN_side" Hair template exactly (token order
+side-then-number instead of number-then-side, a known and already-
+tolerated corpus variance elsewhere in this project), not the "bip_"
+Mid-Face template.
+
+(A) "_1" vs "_2" distinction: none found -- both are the same bare
+    non-"bip_" numbered-whisker shape; no positive evidence justifies
+    splitting them.
+(B) whisker_r_1's Mid Face destination is a CONFIRMED ERROR: it does
+    not carry the "bip_" prefix that is the actual grounding for every
+    Mid Face whisker hit in the Master.
+
+CONFIRMED ERRORS -- normalize all three to match the non-"bip_" Master
+Hair template:
+  whisker_r_1, whisker_r_2, whisker_l_2 -> CLEAR/CLEAR/groupFile/Hair
+
+The two "a phy" rows are unaffected (already correctly Hair, a
+separate, already-resolved physics/hair-style template per Section 4's
+instruction to keep A and B distinct).
+
+----------------------------------------------------------------------
+4. MOUSTACHE FAMILY
+----------------------------------------------------------------------
+Full family mechanically enumerated: 18 rows.
+Current distribution: 14 -> groupFile/Hair, 4 -> groupFile/Face/Lower
+Face (bip_mustache_r [calibration], moustache_l_2 [calibration],
+moustache_l_22, moustache_l_13, "moustache left control" are Hair;
+moustache_r, moustache_r_2, moustache_l_25, bip_mustacheroot are Lower
+Face). Correcting the earlier "approximately 9 -> Hair, 3 -> Lower Face"
+audit count: mechanical enumeration finds 14 Hair / 4 Lower Face among
+18 total rows.
+
+Live Master evidence (mechanically searched, 9 total "moustache"/
+"mustache" hits):
+  - "bip_mustache" (bare, unsided, unnumbered, 1 hit) ->
+    groupFile/Face/Lower Face.
+  - "bip_mustache_0_L/R", "bip_mustache_1_L/R" (numbered, WITH "bip_"
+    prefix, 4 hits) -> groupFile/Hair.
+  - "Mustache1_L/R" (numbered, NO "bip_" prefix, 2 hits) ->
+    groupFile/Hair.
+  - "Mustache_L"/"Mustache_R" (bare, sided, NO number, NO "bip_"
+    prefix, 2 hits) -> groupFile/Hair.
+
+8 of 9 Master hits (every sided and/or numbered form, "bip_"-prefixed
+or not) resolve to Hair. The single Lower Face exception is the one
+completely bare, unsided, unnumbered "bip_mustache" -- a materially
+different (less specific) shape than any of the four disputed ledger
+rows, all of which carry an explicit side marker (_r/_l).
+
+moustache_r, moustache_r_2, moustache_l_25 (exact_spellings Moustache_R,
+Moustache_R_2, Moustache_L_25) match the Master's "Mustache_L"/
+"Mustache_R" bare-sided-no-number Hair template and the numbered
+"Mustache1_L/R" Hair template directly -- not the single bare-unsided
+Lower Face exception. bip_mustacheroot (bip_MustacheRoot) matches the
+"bip_mustache_0/1_L/R" numbered-with-bip_-prefix Hair template, treating
+"Root" as a base/anchor-position variant parallel to a "_0" index, not
+as a mouth/lip-deformation indicator; no token in the literal names a
+lip or mouth mechanism independent of the moustache hair itself.
+
+Per the task's instruction, a Lower Face destination requires positive
+evidence the literal represents a mouth/lip deformation rather than the
+moustache hair itself -- no such evidence exists for any of the four
+disputed rows.
+
+CONFIRMED ERRORS -- normalize to the dominant (8/9) Master template:
+  moustache_r, moustache_r_2, moustache_l_25, bip_mustacheroot ->
+    CLEAR/CLEAR/groupFile/Hair
+
+This makes the entire non-calibration moustache family (16 production
+rows) uniformly groupFile/Hair, with the 2 calibration rows
+(bip_mustache_r, moustache_l_2, both already Hair) untouched and
+consistent.
+
+----------------------------------------------------------------------
+5. CONDOM NUMBERED FAMILY
+----------------------------------------------------------------------
+Full family mechanically enumerated: 5 rows.
+  condom 4            -> CLEAR/CLEAR/groupFile/Clothing (calibration)
+  condom 3            -> CLEAR/CLEAR/groupFile/Other        (outlier)
+  ref condom balloon  -> CLEAR/CLEAR/groupFile/Other
+  condom root         -> CLEAR/CLEAR/groupFile/Other
+  condom 5            -> CLEAR/CLEAR/groupFile/Clothing
+
+Live Master evidence (mechanically searched, 74 total "condom" hits):
+  - "Condom_0".."Condom_40" (41 bare numbered-underscore hits) ->
+    groupFile/Clothing.
+  - "Condom", "condom", "CondomFit" (bare/near-bare, 3 hits) ->
+    groupFile/Clothing.
+  - ~26 named-mechanism compounds (Condom-Shaft-*, Condom-Sheath-*,
+    Condom-Medial-Ring-*, Condom-Tip-Inflate) -> groupFile/Clothing.
+  - "Condom-Fill", "Condom_DripLiquid" (2 hits, explicit fluid/effect
+    content) -> groupFile/Other.
+  - "mp_Condom" (1 hit, model/mode-prefixed variant) ->
+    groupFile/Other.
+
+71 of 74 Master hits resolve Clothing; the only 3 Other exceptions all
+carry positive independent evidence (an explicit fluid/liquid-effect
+word, or a distinguishing prefix) that condom 3/4/5 do not.
+
+"condom 3", "condom 4", and "condom 5" are the exact same bare
+numbered-object shape as the Master's dominant 41-member "Condom_N"
+template (space vs. underscore is not a meaningful distinction
+elsewhere in this corpus). "condom 3"'s current short_reason ("object/
+effect item ... rule 7's fluid/effect-object treatment") misapplies the
+fluid/effect exception -- "condom 3" names no fluid, drip, or fill
+content, unlike the two genuine Master Other-exceptions above.
+
+CONFIRMED ERROR:
+  condom 3 -> CLEAR/CLEAR/groupFile/Clothing (matches condom 4/5 and
+    the 41-member Condom_N Master template)
+
+NOT TOUCHED (legitimate distinctions, not part of the bare-numbered
+template):
+  "ref condom balloon" -- an explicit reference/novelty prop (Rule 16),
+    parallel to no numbered Condom_N Master member.
+  "condom root" -- a rig anchor/root control, not itself the worn
+    object; parallel to no numbered Condom_N Master member.
+
+----------------------------------------------------------------------
+6. FACS AU FAMILY -- FALSE-OPACITY AUDIT
+----------------------------------------------------------------------
+Full comparable family mechanically enumerated: 16 rows.
+  au18z (calibration) -> OPAQUE/NOT_APPLICABLE
+  au17d               -> CLEAR/CLEAR/groupFile/Face/Lower Face
+  au4, au27, au2au4, au13, au22z, au1, au26z, au26, au15, au6,
+    au1au4    -> all CLEAR/CLEAR/groupFile/Face/Expressions (11 rows)
+  au6z                -> OPAQUE/NOT_APPLICABLE   (outlier)
+  au27z               -> OPAQUE/NOT_APPLICABLE   (outlier)
+  au18                -> OPAQUE/NOT_APPLICABLE   (outlier)
+
+Live Master evidence (mechanically searched, bare "AU<digits>" word-
+boundary hits): AU17R+AU17L, AU24, AU32, AU38, AU9R+AU9L (5 hits) ->
+groupFile/Face/Expressions; AU31 (1 hit) -> groupFile/Face/Upper Face.
+This confirms bare/combined AU-number literals are an established,
+project-grounded FACS Action Unit convention routing predominantly to
+Face/Expressions, exactly as the rulebook and 11 already-CLEAR ledger
+rows already hold.
+
+(A) Does AU18 clearly denote FACS Action Unit 18? Yes -- identical
+    shape to AU1/AU4/AU6/AU13/AU15/AU26/AU27, all already CLEAR/
+    Expressions in this same ledger. "au18"'s current short_reason ("No
+    grounding for standalone AU18") directly contradicts the ledger's
+    own settled bare-AU-number precedent with no distinguishing feature
+    cited. CONFIRMED ERROR -- semantic_status cannot remain OPAQUE.
+
+(B) Does suffix "z" function as a known variant/index in this corpus?
+    Yes -- au22z and au26z (both current production rows) are ALREADY
+    CLEAR/CLEAR/Face/Expressions, with au26z's own short_reason stating
+    explicitly: "the Z variant suffix does not change the core AU
+    identity." This is direct, current, same-ledger precedent for the
+    exact "AU<number>Z" shape.
+
+(C) Even if "z" were unresolved, does the grounded AU<number> portion
+    preserve enough meaning for CLEAR rather than OPAQUE? Yes, per Rule
+    24 (an ungrounded suffix does not erase independently grounded
+    content) -- and this is moot here since (B) shows "z" is not even
+    unresolved in this corpus; it has a settled, current precedent.
+
+au6z and au27z are the same "AU<number>Z" shape as the already-CLEAR
+au22z/au26z and must resolve identically -- their current OPAQUE status
+is a direct sibling-family inconsistency, not a legitimate distinction.
+au27z's own short_reason claims it "matches the settled AU6Z sibling
+precedent" -- circularly citing au6z, itself also mis-set, rather than
+the actually-settled au22z/au26z precedent (the Section 17 mandatory-
+verification failure this project has hit before).
+
+CONFIRMED ERRORS -- correct semantic false-opacity, then apply the
+established bare/Z-suffix AU destination (Face/Expressions):
+  au18  -> CLEAR/CLEAR/groupFile/Face/Expressions
+  au6z  -> CLEAR/CLEAR/groupFile/Face/Expressions
+  au27z -> CLEAR/CLEAR/groupFile/Face/Expressions
+
+NOT TOUCHED:
+  au18z -- calibration row (batch "4", frozen PILOT_500_FINAL.tsv).
+    The same au22z/au26z precedent logic would apply to it (i.e. it
+    appears to be the same kind of pre-existing calibration
+    inconsistency as flm-armb-leg-rbc above), but this task does not
+    name it for calibration override, so it is left untouched and
+    flagged here for the user's awareness only.
+  au17d -- a distinct, independently-grounded AU+letter-suffix template
+    (AU17 = Chin Raiser, explicitly routed to Lower Face on its own
+    anatomical merits), not part of the AU-number-alone or AU-number-Z
+    templates audited here. Not named by the task, not touched.
+
+----------------------------------------------------------------------
+7. NEEDS_DOCTRINE CHECK
+----------------------------------------------------------------------
+No family in this review required new doctrine. Every conclusion above
+rests on: (1) mechanical live-Master template search, (2) direct
+same-ledger sibling precedent already carrying High/settled reasoning
+(au22z/au26z, Foot/Neck/Belt), or (3) internal numeric-sibling
+consistency checks within the disputed family itself. No case reached a
+genuine two-sided doctrinal ambiguity.
+NEEDS_DOCTRINE: 0
+
+----------------------------------------------------------------------
+8. SUMMARY OF PROPOSED CORRECTIONS (before apply)
+----------------------------------------------------------------------
+  BAS:        6 rows  (3 bare -> OPAQUE/NOT_APPLICABLE; 3 jiggle ->
+                        CLEAR/NEEDS_CONTEXT)
+  Flm-ArmB:  14 rows  (7 Leg, 5 Arm -> CLEAR up; 2 Back -> CLEAR up)
+  Whisker:    3 rows  (-> CLEAR/CLEAR/Hair)
+  Moustache:  4 rows  (-> CLEAR/CLEAR/Hair)
+  Condom:     1 row   (-> CLEAR/CLEAR/Clothing)
+  AU:         3 rows  (-> CLEAR/CLEAR/Face/Expressions, from OPAQUE)
+  TOTAL:     31 rows
+
+Two pre-existing CALIBRATION inconsistencies were found and are
+reported, NOT corrected (out of this task's scope, calibration frozen):
+  flm-armb-leg-rbc (batch 3)
+  au18z (batch 4)
+
+No files have been modified by this review. Section 10 (apply) follows
+only after this document is complete.

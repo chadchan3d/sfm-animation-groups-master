@@ -1,0 +1,168 @@
+======================================================================
+PHASE 2 -- TRANCHE 9 FAMILY QA, APPLIED REPORT
+Records every ledger correction actually applied following
+PHASE2_PRODUCTION_TRANCHE9_FAMILY_QA_REVIEW.txt (full evidence trail
+there).
+======================================================================
+
+----------------------------------------------------------------------
+1. SCOPE AND OUTCOME
+----------------------------------------------------------------------
+31 ledger rows corrected across 6 families (all in the production range,
+positions 501-9500; zero calibration rows touched):
+  BAS:        6 rows
+  Flm-ArmB:  14 rows
+  Whisker:    3 rows
+  Moustache:  4 rows
+  Condom:     1 row
+  AU:         3 rows
+
+Production families classified remains exactly 9000 -- this pass
+corrected existing rows' fields only; it did not classify any new
+family or touch canonical position 9501+.
+
+The fringe correction (fringe 1/6/20/17 jb, already applied by the raw
+Tranche 9 fork) was re-verified and left unchanged.
+
+NEEDS_DOCTRINE: 0. PHASE2_SEMANTIC_PILOT_500_FINAL.tsv, all raw batch
+TSVs, all historical closed tranche reports, PHASE2_SEMANTIC_RULEBOOK_
+FINAL.txt, PHASE2_SEMANTIC_BATCH_RULES.txt, and the Master were NOT
+modified.
+
+----------------------------------------------------------------------
+2. BAS CORRECTIONS (6 rows)
+----------------------------------------------------------------------
+Bare position, 3 rows: semantic_status CLEAR->OPAQUE; semantic_referent
+-> "ungrounded \"BAS\" code with a bare position, no object";
+taxonomy_status CLEAR->NOT_APPLICABLE; proposed_destination groupFile/
+Body->[blank]; confidence Medium (unchanged value); short_reason
+rewritten citing the numeric-sibling audit.
+  bas.rear_right_2, bas.back_2, bas.rear_left_3
+
+Position+jiggle, 3 rows: semantic_status remains CLEAR; semantic_
+referent -> "a jiggle-physics function on an unresolved \"BAS\" object,
+numbered"; taxonomy_status CLEAR->NEEDS_CONTEXT; proposed_destination
+groupFile/Body->[blank]; confidence Medium (unchanged value);
+short_reason rewritten citing the numeric-sibling audit.
+  bas.rear_right_1_jiggle, bas.rear_left_3_jiggle, bas.back_2_jiggle
+
+----------------------------------------------------------------------
+3. FLM-ARMB CORRECTIONS (14 rows)
+----------------------------------------------------------------------
+All 14: taxonomy_status NEEDS_CONTEXT->CLEAR; uncertainty_reason
+cleared; confidence Medium (unchanged value); short_reason rewritten to
+cite the Foot/Neck/Belt within-family precedent (Rule 22 + Rule 24).
+semantic_status and semantic_referent unchanged on every row (already
+CLEAR with a stable Leg/Arm/Back reading).
+
+  proposed_destination -> groupFile/Legs (7): flm-armb-leg-rbd, -rba,
+    -rbb, -lub, -lbd, -lm, -lua
+  proposed_destination -> groupFile/Arms (5): flm-armb-arm-lf, -ri,
+    -re, -lh, -lg
+  proposed_destination -> groupFile/Body (2): flm-armb-back-u1, -u2
+
+NOT touched: flm-armb-leg-rbc (calibration, batch 3) and the Float
+sub-family (9 rows, legitimate distinction) -- see review document
+Section 2.
+
+----------------------------------------------------------------------
+4. WHISKER CORRECTIONS (3 rows)
+----------------------------------------------------------------------
+  whisker_r_1: taxonomy_status remains CLEAR; proposed_destination
+    groupFile/Face/Mid Face -> groupFile/Hair; confidence High
+    (unchanged value); short_reason rewritten citing the live-Master
+    "bip_" prefix template audit.
+  whisker_r_2, whisker_l_2: taxonomy_status NEEDS_CONTEXT->CLEAR;
+    uncertainty_reason cleared; proposed_destination [blank] ->
+    groupFile/Hair; confidence -> High; short_reason rewritten
+    identically.
+semantic_status remains CLEAR on all three (unchanged).
+
+----------------------------------------------------------------------
+5. MOUSTACHE CORRECTIONS (4 rows)
+----------------------------------------------------------------------
+All 4: taxonomy_status remains CLEAR; proposed_destination groupFile/
+Face/Lower Face -> groupFile/Hair; confidence High (unchanged value);
+short_reason rewritten citing the live-Master 8/9-hit Hair template
+audit. semantic_status and semantic_referent unchanged.
+  moustache_r, moustache_r_2, moustache_l_25, bip_mustacheroot
+
+----------------------------------------------------------------------
+6. CONDOM CORRECTION (1 row)
+----------------------------------------------------------------------
+  condom 3: taxonomy_status remains CLEAR; proposed_destination
+    groupFile/Other -> groupFile/Clothing; confidence High (unchanged
+    value); short_reason rewritten citing the 71/74-hit live-Master
+    Condom_N template audit. semantic_status and semantic_referent
+    unchanged.
+
+----------------------------------------------------------------------
+7. AU CORRECTIONS (3 rows, semantic false-opacity)
+----------------------------------------------------------------------
+  au18: semantic_status OPAQUE->CLEAR; semantic_referent -> "Facial
+    Action Unit 18 (FACS convention)"; taxonomy_status NOT_APPLICABLE
+    ->CLEAR; proposed_destination [blank]->groupFile/Face/Expressions;
+    confidence -> High; short_reason rewritten citing the bare-AU-
+    number sibling precedent and live-Master evidence.
+  au6z, au27z: semantic_status OPAQUE->CLEAR; semantic_referent ->
+    "Facial Action Unit <N>, variant \"Z\" (FACS convention)";
+    taxonomy_status NOT_APPLICABLE->CLEAR; proposed_destination
+    [blank]->groupFile/Face/Expressions; confidence -> High;
+    short_reason rewritten citing the current au22z/au26z same-ledger
+    "AU<number>Z" precedent and Rule 24.
+
+NOT touched: au18z (calibration, batch 4) and au17d (a distinct,
+independently-grounded AU+letter template) -- see review document
+Section 6.
+
+----------------------------------------------------------------------
+8. GLOBAL LEDGER VALIDATION (mechanical, post-correction, re-opened
+   from disk)
+----------------------------------------------------------------------
+row_count_9500:                       PASS
+first_500_identical_to_final:         PASS
+fold_key_sequence_identical:          PASS
+exact_spellings_unchanged:            PASS
+batch_id_unchanged:                   PASS
+zero_duplicates:                      PASS
+rule21_global (OPAQUE iff NOT_APPLICABLE, all 9,500 rows): PASS
+all_destinations_valid:               PASS
+no_destination_on_non_clear_taxonomy_row: PASS
+no_missing_destination_on_clear_taxonomy_row: PASS
+exactly_31_rows_changed:              PASS
+no_calibration_row_changed:           PASS
+
+ALL CHECKS PASS: True
+
+tools/verify_phase2_production_order.py: ALL CHECKS PASS: True
+  full sequence SHA256:       d43e0aa97e96608b165b993428af54084f3cfbe110379d22af8c416251618494 (unchanged)
+  production-only SHA256:     ad4c1e865c8edc18e039f233466731a56bf44170a9eacbd208e39c56f3dd4858 (unchanged)
+tools/validate_master.py sfm_defaultanimationgroups.txt: PASS
+  (structural parse PASS, 0 exact duplicate literals, 0 cross-path
+  native-Rebuild casefold invariant violations, "No files have been
+  modified.")
+
+production_families_classified remains 9000 (field-value corrections
+only, no new family classified). next_canonical_phase2_position
+remains 9501.
+
+Raw batch files (all tranches) were NOT modified. FINAL.tsv, calibration
+rows 1-500, all historical closed tranche raw files and reports,
+PHASE2_SEMANTIC_RULEBOOK_FINAL.txt, PHASE2_SEMANTIC_BATCH_RULES.txt, and
+the Master were NOT modified.
+
+----------------------------------------------------------------------
+9. PRE-EXISTING CALIBRATION INCONSISTENCIES FLAGGED, NOT CORRECTED
+----------------------------------------------------------------------
+Two calibration rows (PHASE2_SEMANTIC_PILOT_500_FINAL.tsv) appear to
+follow the same error pattern corrected above but were left untouched
+because this task did not name them for calibration override:
+  flm-armb-leg-rbc (batch 3): PARTIAL/NEEDS_CONTEXT; the Foot/Neck/Belt
+    within-family precedent (Section 2) would suggest CLEAR/groupFile/
+    Legs if this were a production row.
+  au18z (batch 4): OPAQUE/NOT_APPLICABLE; the au22z/au26z "AU<number>Z"
+    precedent (Section 6) would suggest CLEAR/groupFile/Face/
+    Expressions if this were a production row.
+Both require explicit user authorization naming the specific calibration
+row before any correction, per the standing calibration-freeze rule.
+======================================================================

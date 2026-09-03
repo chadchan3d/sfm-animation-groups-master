@@ -59,6 +59,19 @@ were already in the ledger before position 8501), is not decisive enough
 to correct narrowly (no single clean rule recovers it), and is NOT
 applied or corrected here per Section 23's narrow-scope restriction.
 
+*** SUPERSEDED -- see PHASE2_PRODUCTION_TRANCHE9_FAMILY_QA_REVIEW.txt
+Section 1 and _APPLIED_REPORT.txt Section 2. A targeted family QA pass
+mechanically re-verified the live Master's "BAS." namespace (confirming
+it only ever appears with an explicit middle owner token -- Bang or
+Dress -- neither present in this family) and ran a numeric-sibling check
+on each of the six outliers (e.g. rear_right_1/2/3 bare: 1 and 3 are
+OPAQUE, only 2 was the outlier, with no rule explaining why). All six
+were CONFIRMED ERRORS and corrected: the 3 bare-position rows (rear_
+right_2, back_2, rear_left_3) -> OPAQUE/NOT_APPLICABLE; the 3 jiggle
+rows (rear_right_1_jiggle, rear_left_3_jiggle, back_2_jiggle) -> CLEAR/
+NEEDS_CONTEXT/blank, normalizing them to their own family's majority
+pattern. ***
+
 ============================================================
 3. MANDATORY OPAQUE REVIEW (Section 19, 6-question test)
 ============================================================
@@ -224,28 +237,93 @@ tranche reports), consistent with Section 3.
     sibling existed, consistent with the pattern established in Tranches
     7-8. Not corrected (would require a broader retrospective decode of
     the whole namespace, out of narrow scope).
+
+    *** SUPERSEDED -- see PHASE2_PRODUCTION_TRANCHE9_FAMILY_QA_REVIEW.txt
+    Section 2 and _APPLIED_REPORT.txt Section 3. A targeted family QA
+    pass found the suffix codes carry no recoverable pattern (confirmed,
+    not merely suspected), but also found direct within-family precedent
+    that resolves the split anyway: the sibling words Foot/Neck/Belt in
+    this same "Flm-ArmB-<Word>-<suffix>" template resolve 100%
+    consistently to their destination regardless of their own undecoded
+    suffix. Leg/Arm/Back are equally concrete body-part/region nouns and
+    were normalized to match: 7 Leg rows (rbd/rba/rbb/lub/lbd/lm/lua) ->
+    CLEAR/groupFile/Legs, 5 Arm rows (lf/ri/re/lh/lg) -> CLEAR/groupFile/
+    Arms, 2 Back rows (u1/u2) -> CLEAR/groupFile/Body. This tranche's own
+    new codes (lbd, lm, lua, lg, lh) are included in that correction. The
+    calibration row flm-armb-leg-rbc (batch 3) was NOT touched -- flagged
+    as a pre-existing calibration inconsistency requiring separate
+    explicit authorization. The Float sub-family (an abstract function
+    word, not a concrete noun) is a legitimate distinction and was left
+    unchanged. ***
   - The "whisker" family (whisker_r_1 -> Mid Face, whisker_r_2 ->
     NEEDS_CONTEXT, r/l whiskers a phy -> Hair) shows a genuine three-way
     split for what may be the same word used in different senses (animal
     facial whisker vs. hair-like strand). This tranche's new member
     (whisker_l_2) was routed NEEDS_CONTEXT by matching its closest exact
     sibling (whisker_r_2). Not corrected -- observational only.
+
+    *** SUPERSEDED -- see PHASE2_PRODUCTION_TRANCHE9_FAMILY_QA_REVIEW.txt
+    Section 3 and _APPLIED_REPORT.txt Section 4. A targeted family QA
+    pass found the live Master's actual decisive split is the "bip_"
+    prefix (bip_-prefixed bare numbered whisker -> Face/Mid Face,
+    non-bip_-prefixed numbered/sided whisker -> Hair, 106 hits), not a
+    "facial whisker vs. hair-strand" sense split. whisker_r_1, whisker_
+    r_2, and whisker_l_2 all lack the "bip_" prefix, matching the Hair
+    template. All three corrected to CLEAR/CLEAR/groupFile/Hair. The two
+    "a phy" rows were already correctly Hair and are unchanged. ***
   - The "moustache" family shows a 9-vs-3 majority split (Hair vs. Face/
     Lower Face) for near-identical numbered literals with no stated
     reason for the 3 outliers (moustache_l_25, moustache_r, moustache_r_2).
     This tranche's new member (moustache_r_12) was routed to the majority
     (Hair). Not corrected -- observational only, does not meet the
     "decisive" bar for a Section 23 fix.
+
+    *** SUPERSEDED -- see PHASE2_PRODUCTION_TRANCHE9_FAMILY_QA_REVIEW.txt
+    Section 4 and _APPLIED_REPORT.txt Section 5. Mechanical enumeration
+    found the actual split is 14-vs-4, not 9-vs-3. A targeted family QA
+    pass found 8 of 9 live-Master moustache/mustache hits (every sided
+    and/or numbered form) resolve Hair; the sole Lower Face hit is a
+    materially different bare/unsided/unnumbered shape. The 4 outliers
+    (moustache_r, moustache_r_2, moustache_l_25, and the additionally-
+    discovered bip_mustacheroot) were CONFIRMED ERRORS and corrected to
+    CLEAR/CLEAR/groupFile/Hair, making the entire family uniformly Hair.
+    ***
   - The bare "condom N" family shows a 1-vs-1 split (condom 3 -> Other,
     condom 4 -> Clothing) predating this tranche; this tranche's new
     member (condom 5) was routed to Clothing (worn-equipment reading).
     Not corrected -- observational only, tied precedent, no decisive
     evidence either way.
+
+    *** SUPERSEDED -- see PHASE2_PRODUCTION_TRANCHE9_FAMILY_QA_REVIEW.txt
+    Section 5 and _APPLIED_REPORT.txt Section 6. This was not actually a
+    tied precedent: a targeted family QA pass found 71 of 74 live-Master
+    "condom" hits resolve Clothing, including a direct 41-member bare
+    numbered "Condom_N" template that "condom 3/4/5" match exactly.
+    condom 3's Other classification (via a misapplied fluid/effect
+    rationale -- it names no fluid/drip content) was a CONFIRMED ERROR
+    and corrected to CLEAR/CLEAR/groupFile/Clothing, matching condom 4/5.
+    ***
   - The "AU" (FACS Action Unit) family shows isolated OPAQUE outliers
     (au18, au18z, au6z, au27z) alongside a strong majority CLEAR/
     Expressions pattern for bare AU-numbers. Reviewed in Section 4 above;
     not corrected here (a full audit of the AU family would exceed narrow
     scope).
+
+    *** SUPERSEDED -- see PHASE2_PRODUCTION_TRANCHE9_FAMILY_QA_REVIEW.txt
+    Section 6 and _APPLIED_REPORT.txt Section 7. A targeted family QA
+    pass confirmed au18 is identical in shape to the settled bare-AU-
+    number CLEAR/Expressions precedent (au1/4/6/13/15/26/27), and that
+    au6z/au27z match the current same-ledger "AU<number>Z" precedent
+    (au22z, au26z, both already CLEAR/Expressions, explicitly stating the
+    Z suffix does not change the core AU identity) -- au27z's own
+    short_reason had circularly cited au6z (itself mis-set) rather than
+    the actually-settled au22z/au26z rows. All three (au18, au6z, au27z)
+    were CONFIRMED ERRORS and corrected to CLEAR/CLEAR/groupFile/Face/
+    Expressions. au18z (calibration, batch 4) was NOT touched -- flagged
+    as a pre-existing calibration inconsistency requiring separate
+    explicit authorization. au17d (a distinct, independently-grounded
+    AU+letter template) was not part of this audit and is unaffected.
+    ***
 
 ============================================================
 CUMULATIVE CROSS-TRANCHE CORRECTIONS THIS TRANCHE: 4 rows (the fringe
