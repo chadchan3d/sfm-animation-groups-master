@@ -1,0 +1,253 @@
+======================================================================
+PHASE 2 -- TARGETED BODY VS BODY-MORPHS REVIEW: PUSSY CHITSU BASE
+Evidence-gathering review. No ledger changes recorded in this document.
+======================================================================
+
+Ledger state at start: 10500 rows (500 calibration + 10000 production).
+Doctrine checkpoint: 8175e43 (Rule 27). Not reopened here.
+
+----------------------------------------------------------------------
+1. CURRENT AUTHORITATIVE ROW: pussy chitsu base
+----------------------------------------------------------------------
+Mechanically fetched from PHASE2_SEMANTIC_LEDGER.tsv:
+  fold_key:              pussy chitsu base
+  exact_spellings:       pussy chitsu base
+  semantic_status:       CLEAR
+  semantic_referent:     a vaginal shape control base ('chitsu'=Japanese
+                         for vagina)
+  taxonomy_status:       CLEAR
+  proposed_destination:  groupFile/Body Morphs
+  confidence:            High
+  uncertainty_reason:    (blank)
+  short_reason:          'pussy' directly grounds this per the extensive
+                         live-Master Pussy family (344 hits); 'chitsu'
+                         is a Japanese-loanword synonym (rule 23-style)
+  batch_id:              P98
+  canonical position:    10294
+
+----------------------------------------------------------------------
+2. CALIBRATION PRECEDENT: PussParent.002_L.008
+----------------------------------------------------------------------
+Mechanically fetched from PHASE2_SEMANTIC_PILOT_500_FINAL.tsv (row
+identical in the ledger's first 500):
+  fold_key:              pussparent.002_l.008
+  exact_spellings:       PussParent.002_L.008
+  semantic_status:       CLEAR
+  semantic_referent:     vagina parent/root bone (truncated "Puss" =
+                         "Pussy"), left, numbered
+  taxonomy_status:       CLEAR
+  proposed_destination:  groupFile/Body
+  confidence:            High
+  short_reason:          Explicit "parent/root bone" -- plain structural
+                         segment, not a shape/size/state descriptor; per
+                         settled doctrine, routes to Body, not Body
+                         Morphs.
+  batch_id:              5
+
+Provenance check (mechanical, per Section 3's mandatory precedent-
+verification discipline): grepped PHASE2_SEMANTIC_PILOT_500_AUDIT_V2_
+REPORT.txt and its CHANGES_REVIEW companion. This was a deliberate V2
+audit correction (Body Morphs -> Body), applied under a general
+"structural anchor word (root/parent) implies Body, not Body Morphs"
+heuristic, alongside several other unrelated anatomical regions (penis
+root, vag inner2 2, ValveBiped.Bip01_Vag_L_2, foreskin_right). The
+correction was NOT independently checked against this specific genital
+region's own live-Master convention at the time -- see Section 3 below,
+which found decisive evidence that this specific region does not follow
+that general heuristic.
+
+----------------------------------------------------------------------
+3. LIVE-MASTER EVIDENCE FOR THE EXACT GENITAL "BASE"/"ROOT"/"PARENT"
+   AND BARE-SIDED TEMPLATES (mechanically re-verified via
+   tools/validate_master.py's parse_structure)
+----------------------------------------------------------------------
+Full "pussy"/"vagina" word-boundary population: 507 hits.
+  groupFile/Body Morphs : 498
+  groupFile/Clothing    :   5
+  groupFile/Other       :   4
+  groupFile/Body        :   0   <-- zero, out of 507
+
+"chitsu" itself: 0 live-Master hits (a Japanese loanword synonym not
+otherwise present in the Master; grounded here only via the co-occurring
+English "pussy" token, per Rule 23).
+
+Exact "[pussy|vagina] + base" template (4 hits, matches "pussy chitsu
+base" directly):
+  pussy base          -> groupFile/Body Morphs
+  vagina base         -> groupFile/Body Morphs
+  vagina base left    -> groupFile/Body Morphs
+  vagina base right   -> groupFile/Body Morphs
+  4/4 -> Body Morphs. No exception.
+
+Exact "[pussy|vagina] + root/parent" template (22 hits):
+  PussParent.002, PussParent.002_L(.001-.006), PussParent.002_R(.001-
+  .005), PussParent.003, Pussy Root, Pussy_Root, pussyroot,
+  bip_puss_root, bip_pussyroot, Vagina_Root
+  22/22 -> groupFile/Body Morphs. No exception. This is the SAME exact
+  numbered family as the calibration's PussParent.002_L.008 (.001
+  through .006 already live in the Master, one number-step below the
+  calibration's .008) -- and every member of it sits in Body Morphs,
+  not Body.
+
+Exact bare "[pussy|vagina] + side, no other qualifier" template (15
+hits, direct match to "pussy chitsu left"/"pussy chitsu right"):
+  L Pussy, Left pussy, Pussy L, pussy left, Pussy R, pussy right,
+  Pussy-left, pussy.L, pussy.R, R Pussy, Right Pussy, vagina left,
+  vagina right, Vagina.L, Vagina.R
+  15/15 -> groupFile/Body Morphs. No exception.
+
+Conclusion: in this Master's actual convention, the entire pussy/vagina
+control hierarchy -- including its structural parent/root bones and its
+bare sided anatomy, not merely its shape/size/state controls -- is
+organized under groupFile/Body Morphs. There is no plain-Body bucket for
+this anatomical region anywhere in the Master (0/507). This differs from
+how most other anatomical regions in this Master split Body (structural)
+from Body Morphs (deformation) -- for this specific region, the entire
+hierarchy appears to live under Body Morphs as a matter of this
+particular model's rig implementation, not an inconsistency to
+"correct" toward the general split.
+
+----------------------------------------------------------------------
+4. STRUCTURAL VS MORPH TEST (Section 4 questions)
+----------------------------------------------------------------------
+A. Does "base" denote a structural genital/anatomical base or anchor?
+   The word alone could mean either a structural anchor point or a
+   blendshape "base" (neutral/rest) shape in a morph-target system.
+   Decisive evidence resolves this for THIS domain: the Master's own
+   "pussy base"/"vagina base [left/right]" template (4/4 hits) already
+   uses exactly this word in exactly this domain, and all 4 are Body
+   Morphs. "Base" here tracks the Master's morph-system convention, not
+   a skeletal-anchor reading.
+
+B. Is there positive evidence in the complete literal that this control
+   changes shape/state/appearance? Not from the word "base" alone taken
+   in isolation -- but the DIRECT template match (pussy base/vagina base
+   [side], 4/4 Body Morphs) supplies that evidence externally, the same
+   way "AU<number>" or "donger" supply grounding externally (Rule 23/27
+   category G).
+
+C. Was the current Body Morphs destination inferred merely from broad
+   Pussy-family majority? No -- the existing short_reason cites the
+   general 344-hit population, which risks looking like majority
+   reasoning, but the CORRECT and stronger justification (developed in
+   this review) is the exact 4/4 "[pussy|vagina]+base" template match,
+   not raw majority. The destination itself is confirmed; the STATED
+   reason is upgraded below to the exact-template evidence.
+
+D. Does the exact base/left/right template look structural rather than
+   morph-state based? No -- see Section 3: 100% of the exact "base"
+   template (4/4) and 100% of the exact bare-sided template (15/15,
+   covering left/right too) are Body Morphs in the live Master. Neither
+   sub-template shows a structural-Body reading anywhere.
+
+E. Does finalized calibration provide a directly comparable structural-
+   genital precedent? PussParent.002_L.008 is comparable in DOMAIN
+   (genital anatomy) and in ABSTRACT CATEGORY (a structural-sounding
+   word: "parent/root"), but it is not an exact word match to "base" --
+   and, more importantly, its own exact literal family (PussParent.002_
+   L.001-.006, already present in the live Master) sits in Body Morphs,
+   not Body. The calibration's "Body" value for this row is itself in
+   direct tension with 22/22 live-Master hits for its own exact family.
+   This calibration precedent is therefore NOT strong enough to override
+   the decisive, exactly-on-point "base"/bare-sided template evidence
+   found directly for the literal in question.
+
+----------------------------------------------------------------------
+5. VERDICT: pussy chitsu base
+----------------------------------------------------------------------
+Strongest evidence for Body Morphs (current destination): 4/4 exact
+"[pussy|vagina]+base" live-Master template hits, all Body Morphs; 15/15
+exact bare-sided template hits, all Body Morphs; 498/507 (98.2%) of the
+entire pussy/vagina domain, all Body Morphs; 0/507 hits anywhere in this
+domain resolve to plain Body.
+
+Strongest evidence for Body: only the calibration's PussParent.002_
+L.008, itself contradicted by its own exact live-Master family (22/22
+hits, Body Morphs) and not an exact word match to "base."
+
+VERDICT: CURRENT_CLASSIFICATION_CONFIRMED
+
+pussy chitsu base remains CLEAR / CLEAR / groupFile/Body Morphs. No
+ledger change to this row. Its short_reason is upgraded (not its
+destination) to cite the decisive exact-template evidence in place of
+the weaker general-population citation -- see Applied Report Section 2
+if this rewording is applied; if not applied, this is documented as an
+optional wording improvement only, not a required correction, since the
+destination itself was already correct.
+
+----------------------------------------------------------------------
+6. NARROW SIBLING CHECK: pussy chitsu left / pussy chitsu right
+----------------------------------------------------------------------
+Both are already-classified production rows (not future/unclassified):
+  pussy chitsu left  -> canonical position 3458, batch P30, currently
+    CLEAR/CLEAR/groupFile/Body
+  pussy chitsu right -> canonical position 6921, batch P65, currently
+    CLEAR/CLEAR/groupFile/Body
+
+Both are the exact bare "[pussy]+chitsu+side" shape -- an exact match to
+the live-Master's bare "[pussy|vagina]+side, no other qualifier"
+template (Section 3), which resolves 15/15 to groupFile/Body Morphs,
+with zero exceptions. Their own current short_reason fields explicitly
+frame "chitsu" as a redundant bilingual reinforcement of "pussy" (not
+independent content) -- meaning the category-determining content in
+both rows really is just "pussy + side," the exact shape the Master
+template covers.
+
+This is a decisively established structural template contradiction, not
+a broad Pussy-family majority argument (the comparison set is the exact
+15-member bare-sided sub-template, not the full 507-item population).
+Per Section 6's explicit authorization, both are corrected below --
+they are already-classified production rows, and the template evidence
+decisively contradicts their current Body destination.
+
+VERDICT: PRODUCTION_CLASSIFICATION_ERROR for both pussy chitsu left and
+pussy chitsu right.
+
+Proposed correction for both (destination only; semantic_status/
+semantic_referent's core reading is unchanged -- both already correctly
+identify plain genital anatomy, side-marked):
+  taxonomy_status:      CLEAR (unchanged)
+  proposed_destination: groupFile/Body -> groupFile/Body Morphs
+  confidence:           High (unchanged)
+  short_reason:         rewritten to cite the exact 15/15 bare-sided
+                         live-Master template (Section 3), superseding
+                         the prior "plain structural genital anatomy"
+                         framing, which did not check this region's
+                         actual Master convention.
+
+----------------------------------------------------------------------
+7. FUTURE/UNCLASSIFIED SIBLINGS
+----------------------------------------------------------------------
+None. All three exact "pussy chitsu <modifier>" family members (base,
+left, right) are already classified in the current ledger. No
+unclassified sibling of this exact fold_key family exists beyond
+canonical position 10500.
+
+----------------------------------------------------------------------
+8. CALIBRATION_EXCEPTION_CANDIDATE (flagged, NOT corrected, out of
+   scope for this task)
+----------------------------------------------------------------------
+PussParent.002_L.008 (calibration, batch 5) is flagged as a candidate
+for a SEPARATE, future, explicitly-authorized calibration review: its
+"Body" destination is contradicted by 22/22 live-Master hits for its own
+exact numbered family (PussParent.002_L.001-.006, PussParent.002_R,
+PussParent.003, Pussy Root, Vagina_Root, bip_puss_root, bip_pussyroot),
+all of which resolve to Body Morphs. This appears to stem from a general
+"root/parent implies structural Body" heuristic applied in an earlier
+audit round (PHASE2_SEMANTIC_PILOT_500_AUDIT_V2_REPORT.txt) without a
+region-specific Master check. Per this task's explicit scope
+restriction ("do not perform a broader genital/Pussy-family audit"),
+this candidate is documented only, not corrected, and no other row from
+that same V2 audit round (penis root, vag inner2 2, ValveBiped.Bip01_
+Vag_L_2, foreskin_right) was inspected or touched.
+
+----------------------------------------------------------------------
+9. NEEDS_DOCTRINE
+----------------------------------------------------------------------
+None. This resolves entirely on exact-template live-Master evidence
+already covered by existing rules (rule 6 ordinary structural anatomy;
+rule 23 abbreviation/loanword grounding; the Body vs Body Morphs
+purpose-based distinction of rule 7). No new rule is required.
+
+No files have been modified by this review. Application follows only
+after this document is complete, per the task's own Section 8 ordering.

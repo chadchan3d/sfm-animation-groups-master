@@ -1,0 +1,123 @@
+======================================================================
+PHASE 2 -- PUSSY CHITSU TARGETED REVIEW, APPLIED REPORT
+Records what was actually applied following
+PHASE2_PUSSY_CHITSU_BASE_TARGETED_REVIEW.txt (full evidence trail
+there).
+======================================================================
+
+----------------------------------------------------------------------
+1. OUTCOME SUMMARY
+----------------------------------------------------------------------
+pussy chitsu base: CURRENT_CLASSIFICATION_CONFIRMED. Not touched. Its
+CLEAR/CLEAR/groupFile/Body Morphs classification is correct, grounded by
+a 4/4 exact "[pussy|vagina]+base" live-Master template match and a
+15/15 exact bare-sided template match -- stronger, more directly on-
+point evidence than the calibration's PussParent.002_L.008 precedent,
+which turned out to be itself in tension with its own exact live-Master
+family.
+
+pussy chitsu left and pussy chitsu right: PRODUCTION_CLASSIFICATION_
+ERROR. Both corrected from groupFile/Body to groupFile/Body Morphs,
+per Section 6's explicit authorization to correct already-classified
+production siblings against a decisively established exact template.
+
+2 ledger rows changed total. Both are production rows (positions 3458
+and 6921); no calibration row was touched; no raw batch TSV was
+touched; the Master was not touched. Production families classified is
+unaffected (field-value corrections only, no new family classified,
+remains 10000).
+
+----------------------------------------------------------------------
+2. PUSSY CHITSU LEFT -- CORRECTION
+----------------------------------------------------------------------
+OLD (batch P30, canonical position 3458):
+  taxonomy_status:      CLEAR
+  proposed_destination: groupFile/Body
+  short_reason:         redundant bilingual naming doubly grounds plain
+                         structural genital anatomy
+
+NEW:
+  taxonomy_status:      CLEAR (unchanged)
+  proposed_destination: groupFile/Body Morphs
+  short_reason:         exact-template live-Master audit (targeted
+                         Pussy Chitsu review): the bare "[pussy|vagina]
+                         +side, no other qualifier" template (L Pussy,
+                         Pussy L, pussy left, Pussy R, pussy right,
+                         vagina left, vagina right, etc. -- 15 direct
+                         hits) resolves 15/15 to groupFile/Body Morphs,
+                         with zero exceptions. This is the exact shape
+                         of this literal ("chitsu" is a redundant
+                         bilingual reinforcement of "pussy," not
+                         independent content). The prior "plain
+                         structural genital anatomy -> Body" framing
+                         did not check this region's own live-Master
+                         convention, where the entire pussy/vagina
+                         domain (498/507 hits) lives under Body Morphs
+                         with zero hits resolving to plain Body.
+
+semantic_status, semantic_referent, confidence, uncertainty_reason,
+fold_key, exact_spellings, batch_id, scanner_lines: unchanged.
+
+----------------------------------------------------------------------
+3. PUSSY CHITSU RIGHT -- CORRECTION
+----------------------------------------------------------------------
+OLD (batch P65, canonical position 6921):
+  taxonomy_status:      CLEAR
+  proposed_destination: groupFile/Body
+  short_reason:         foreign-language qualifier reinforces the plain
+                         genital-anatomy reading (rule 10)
+
+NEW:
+  taxonomy_status:      CLEAR (unchanged)
+  proposed_destination: groupFile/Body Morphs
+  short_reason:         (identical to pussy chitsu left's new
+                         short_reason above)
+
+semantic_status, semantic_referent, confidence, uncertainty_reason,
+fold_key, exact_spellings, batch_id, scanner_lines: unchanged.
+
+----------------------------------------------------------------------
+4. PUSSY CHITSU BASE -- NO CHANGE
+----------------------------------------------------------------------
+Verified CLEAR/CLEAR/groupFile/Body Morphs, batch P98, canonical
+position 10294. Not modified.
+
+----------------------------------------------------------------------
+5. CALIBRATION_EXCEPTION_CANDIDATE FLAGGED, NOT CORRECTED
+----------------------------------------------------------------------
+PussParent.002_L.008 (calibration, batch 5, currently CLEAR/CLEAR/
+groupFile/Body) is flagged for a separate, future, explicitly-
+authorized calibration review: its own exact numbered family
+(PussParent.002_L.001-.006, PussParent.002_R, PussParent.003, Pussy
+Root, Vagina_Root, bip_puss_root, bip_pussyroot -- 22/22 live-Master
+hits) resolves to Body Morphs, not Body. Not touched in this task, per
+the explicit "no broader genital/Pussy-family audit" restriction. No
+other row from the earlier V2 audit round that reclassified similar
+genital "root" controls (penis root, vag inner2 2, ValveBiped.Bip01_
+Vag_L_2, foreskin_right) was inspected or touched.
+
+----------------------------------------------------------------------
+6. GLOBAL LEDGER VALIDATION (mechanical, post-correction, re-opened
+   from disk)
+----------------------------------------------------------------------
+row_count_10500:                     PASS
+first_500_identical_to_final:        PASS
+fold_key_sequence_identical:         PASS
+exact_spellings_unchanged:           PASS
+batch_id_unchanged:                  PASS
+zero_duplicates:                     PASS
+rule21_global (all 10,500 rows):     PASS
+all_destinations_valid:              PASS
+exactly_2_rows_changed:              PASS
+no_calibration_row_changed:          PASS
+
+ALL CHECKS PASS: True
+
+tools/verify_phase2_production_order.py: ALL CHECKS PASS: True
+tools/validate_master.py sfm_defaultanimationgroups.txt: PASS
+  ("No files have been modified.")
+
+production_families_classified remains 10000. next_canonical_phase2_
+position remains 10501. No calibration row, raw batch file, historical
+report, rulebook file, or the Master was modified.
+======================================================================
