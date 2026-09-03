@@ -1,0 +1,116 @@
+PHASE 2 PRODUCTION TRANCHE 10 -- REPORT
+Canonical positions 9501-10500 (1000 families, batches P91-P100, 100 each)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv
+
+============================================================
+TRANCHE-ONLY STATISTICS (1000 rows, this tranche)
+============================================================
+
+semantic_status:
+  CLEAR:   839
+  PARTIAL:  18
+  OPAQUE:  143
+
+taxonomy_status:
+  CLEAR:          793
+  NEEDS_CONTEXT:   64
+  NOT_APPLICABLE: 143
+  NEEDS_DOCTRINE:   0
+
+confidence:
+  High:   602
+  Medium: 204
+  Low:    194
+
+Rule 21 invariant (OPAQUE <=> NOT_APPLICABLE) check: 0 violations across
+all 1000 rows.
+
+Proposed-destination counts (CLEAR taxonomy rows only, 793 total):
+  groupFile/Clothing                    151
+  groupFile/Other                       148
+  groupFile/Face/Eyes                    61
+  groupFile/Body                         60
+  groupFile/Body Morphs                  60
+  groupFile/Arms                         55
+  groupFile/Legs                         49
+  groupFile/Face/Lower Face              37
+  groupFile/Arms/RightArm/RightFingers   24
+  groupFile/Useless                      24
+  groupFile/Arms/LeftArm/LeftFingers     23
+  groupFile/Hair                         19
+  groupFile/Face/Upper Face              19
+  groupFile/Face/Expressions             12
+  groupFile/Tail                         11
+  groupFile/Toes/RightToes                9
+  groupFile/Toes/LeftToes                 7
+  groupFile/Face/Ears                     7
+  groupFile/Correctives                   5
+  groupFile/Face/Mid Face                 4
+  groupFile/Face/Tongue                   3
+  groupFile/Fingers                       2
+  groupFile/Wings                         2
+  groupFile/Face                          1
+
+NEEDS_CONTEXT rows: 64 (blank destination; unowned bare-accessory nouns
+[strap/pipe/brace/string/tie/crush/wrinkle/creaseT/knot], BAS./
+Flm-ArmB-Float/dyng/chain_aligned jiggle-or-function-but-no-owner rows,
+undecoded Rig-Hole/Fio-Rig-Strip internal-namespace-object rows, and a
+handful of genuinely unresolved multi-sense compounds).
+
+NEEDS_DOCTRINE rows: 0. No genuinely new taxonomy-policy question was
+encountered; production continued through all 10 batches without a hard
+stop.
+
+Consistency flags raised: see PHASE2_PRODUCTION_TRANCHE10_CONSISTENCY_
+FLAGS.txt for the full audit -- 1 cross-batch error found and corrected
+within this same tranche (r collara a phy, P91 -> Clothing), 0 stale-
+calibration violations, 0 calibration-exception candidates, 0 settled-
+family drift.
+
+OPAQUE rows manually reviewed (7-question test): 143 / 143.
+Face/Expressions rows reviewed (mandatory face audit): 12 / 12.
+Settled-rule families reviewed: tentacle (8), fin (1), horn (1), fringe
+  (2), Box_Face_##_M (1), Rig-Hole (1), BAS. (4), Flm-ArmB (5), moustache
+  (1), condom (1), AU-family (2) -- 8 families, 27 total rows, 0 drift.
+DCC-default candidates reviewed: 10 (plane01/04, pcylinder1, pcube28,
+  polysurface76/90/125/40, valvebiped.polysurface11/24), all correctly
+  OPAQUE/NOT_APPLICABLE.
+Stale-calibration check: PASS (0 violations; see consistency-flags
+  Section 1).
+Cross-tranche/cross-batch corrections applied: 1 (r collara a phy; see
+  consistency-flags Section 2 for the full before/after record).
+Calibration-exception candidates: 0.
+Precedent claims mechanically re-verified against current ledger/FINAL
+  .tsv fields before use (not cited from memory): every claim in every
+  batch file and in this report that references a sibling row's
+  semantic_status, taxonomy_status, or proposed_destination.
+
+============================================================
+CUMULATIVE STATISTICS (after Tranche 10)
+============================================================
+
+calibration_families_complete:        500
+production_families_classified:     10000
+total ledger rows:                  10500
+next_canonical_phase2_position:     10501
+remaining_production_families:       3782
+
+============================================================
+Batch-level record (for resumability)
+============================================================
+
+P91  (9501-9600):   merged, ledger reached  9600 rows
+P92  (9601-9700):   merged, ledger reached  9700 rows
+P93  (9701-9800):   merged, ledger reached  9800 rows
+P94  (9801-9900):   merged, ledger reached  9900 rows
+P95  (9901-10000):  merged, ledger reached 10000 rows
+P96  (10001-10100): merged, ledger reached 10100 rows
+P97  (10101-10200): merged, ledger reached 10200 rows
+P98  (10201-10300): merged, ledger reached 10300 rows
+P99  (10301-10400): merged, ledger reached 10400 rows
+P100 (10401-10500): merged, ledger reached 10500 rows
+
+All 10 batches for Tranche 10 are complete and merged. No batch remains
+pending. One post-merge cross-batch field correction was applied
+in-place to the P91 row "r collara a phy" (see consistency-flags Section
+2); this did not change the row count or canonical order.

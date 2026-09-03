@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+toplid_r2	toplid_R2	CLEAR	upper eyelid anatomy, right, numbered	CLEAR	groupFile/Face/Eyes	High		eyelid anatomy is an eye-specific feature	P95	
+arm left finger 2 d	arm left finger 2 d	CLEAR	left hand finger 2, variant D	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit finger digit anatomy	P95	
+fur_gen_bed_rich_gothic_orin_a_frame_mesh	FUR_GEN_Bed_Rich_Gothic_Orin_A_Frame_Mesh	CLEAR	a gothic-style bed-frame furniture prop mesh	CLEAR	groupFile/Other	High		recognized real-world furniture/prop object, matches dummy_fur_gen_bed sibling precedent	P95	
+45	45	OPAQUE	a bare numeric literal with no other content	NOT_APPLICABLE		Low	pure numeric label, no anatomical/functional word	matches settled pure-numeric-literal precedent	P95	
+oris05	oris05	OPAQUE	cryptic fragment, numbered	NOT_APPLICABLE		Low	no corpus-grounded convention establishes 'oris' as a semantic anatomical reference here	matches direct sibling oris01 (this ledger)	P95	
+cloth_collar_2_m	cloth_collar_2_M	CLEAR	a cloth-simulation collar garment component, numbered, model variant	CLEAR	groupFile/Clothing	High		'cloth'+'collar' names an explicit worn garment component	P95	
+nosie02	Nosie02	CLEAR	nose anatomy (misspelling accepted), numbered	CLEAR	groupFile/Face/Mid Face	Medium		'Nosie' plausibly reads as a misspelling of 'Nose' (rule 12), a mid-face feature	P95	
+lipupperdrop	LipUpperDrop	CLEAR	an upper-lip drop function	CLEAR	groupFile/Face/Lower Face	High		lip anatomy is Lower Face	P95	
+wep_fx_top_peq2_laser	WEP_FX_Top_PEQ2_Laser	CLEAR	a weapon laser-sight effect (PEQ2), top mount	CLEAR	groupFile/Other	High		recognized weapon-part prop	P95	
+box_face_16_m	Box_Face_16_M	PARTIAL	a 'Box Face' (geometric-face-of-a-box vs. character-face) reading, numbered, variant M	NEEDS_CONTEXT		Medium	no positive evidence resolves this 20-member template in either direction	matches the extensive current-ledger Box_Face_##_M sibling family (Tranche 7 family reconciliation), all PARTIAL/NEEDS_CONTEXT	P95	
+bip_l_cloth_d_01	bip_l_cloth_d_01	CLEAR	a cloth simulation bone, left, variant D, numbered	CLEAR	groupFile/Clothing	High		matches live-Master/ledger cloth-bone-simulation precedent	P95	
+helper_headr	Helper_HeadR	CLEAR	head anatomy, helper qualifier, right	CLEAR	groupFile/Body	High		bare structural head anatomy defaults to Body (rule 13); helper does not imply Correctives (rule 3)	P95	
+tailmiddle_3	TailMiddle_3	CLEAR	tail anatomy, middle chain, numbered	CLEAR	groupFile/Tail	High		explicit tail anatomy	P95	
+arm right finger knuckle index	arm right finger knuckle index	CLEAR	right index-finger knuckle anatomy	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger digit anatomy	P95	
+eyewinkler	EyeWinkleR	CLEAR	an eye-wink function control	CLEAR	groupFile/Face/Eyes	High		wink is an eye-specific function	P95	
+c ulipin	C Ulipin	CLEAR	a lip (mouth/lower-face) control, undecoded 'U' prefix, variant C	CLEAR	groupFile/Face/Lower Face	High		matches current-ledger 'r ulipin a/b'/'l ulipin a/b' sibling family, all CLEAR/CLEAR/Face/Lower Face	P95	
+unusedbone219	unusedbone219	CLEAR	self-declared unused marker, numbered bone	CLEAR	groupFile/Useless	High		matches the extensive current-ledger unusedbone### sibling series, all CLEAR/CLEAR/Useless (rule 15)	P95	
+pussy left 1	pussy left 1	CLEAR	a vaginal shape control, left, numbered	CLEAR	groupFile/Body Morphs	High		matches extensive live-Master Pussy family (344 hits), all groupFile/Body Morphs	P95	
+righteyewide	RightEyeWide	CLEAR	a right-eye-wide expression	CLEAR	groupFile/Face/Eyes	High		eye-specific shape/expression control	P95	
+valvebiped.hip_r_ulna	ValveBiped.Hip_R_Ulna	CLEAR	right forearm (ulna) anatomy, Hip model-name prefix	CLEAR	groupFile/Arms	High		matches direct current-ledger sibling ValveBiped.Hip_L_Ulna, CLEAR/CLEAR/Arms; 'Hip' is a model-name prefix here, not anatomical (an ulna cannot be hip-owned)	P95	
+microright	MicroRight	OPAQUE	a 'micro' size qualifier plus a bare side marker, no owning object	NOT_APPLICABLE		Low	no anatomical/object content beyond a size-adjective and side marker	no Master/ledger precedent recovers an owner for this fragment	P95	
+canine_lfrontlegpalm	Canine_LFrontLegPalm	CLEAR	canine front-leg paw/palm anatomy, left	CLEAR	groupFile/Legs	Medium		species-neutral front-leg/paw anatomy (rule 18-style), left front leg	P95	
+cklegsplitsr72	CKLegSplitsR72	CLEAR	a leg-splits joint-corrective control, right, numbered, CK namespace	CLEAR	groupFile/Correctives	High		matches direct current-ledger sibling cklegsplitsl72 and live-Master 'Model Legs Splits Corrective L/R' precedent	P95	
+tag_1	Tag_1	CLEAR	a tag prop object, numbered	CLEAR	groupFile/Other	Low		recognized generic real-world object, no anatomical/clothing context	P95	
+left_15	left_15	OPAQUE	a bare side marker plus a bare number	NOT_APPLICABLE		Low	no anatomical/object content beyond a side+number label	matches settled bare-positional-label-no-object precedent	P95	
+heelstrap	heelstrap	CLEAR	a heel/shoe strap accessory	CLEAR	groupFile/Clothing	High		explicit worn footwear-accessory content	P95	
+tenta_b_9_r	tenta_b_9_R	CLEAR	a tentacle segment, variant B, numbered, right	CLEAR	groupFile/Other	High		settled Rule 18 tentacle precedent	P95	
+def-thigh.r.005	DEF-thigh.R.005	CLEAR	right thigh anatomy, DEF naming convention, numbered	CLEAR	groupFile/Legs	High		explicit thigh anatomy grounds this regardless of the 'DEF' rig-naming prefix	P95	
+rdown	RDown	CLEAR	a right-side, downward-direction function	NEEDS_CONTEXT		Low	directional function has one stable reading even without a named object (matches valvebiped.updown precedent)	owning object not stated	P95	
+fullsuprise	FullSuprise	CLEAR	a full-surprise whole-face expression (misspelling accepted)	CLEAR	groupFile/Face/Expressions	High		matches the extensively settled bare 'Surprise' family precedent (expsurprise/surprisel), misspelling accepted per rule 12	P95	
+belthat_bone_r_04	beltHat_bone_r_04	CLEAR	a belt garment accessory bone, right, numbered	CLEAR	groupFile/Clothing	Medium		'belt' is the clearer explicit garment noun; 'Hat' compound unclear but does not erase the belt reading	P95	
+eve_empty	Eve_Empty	OPAQUE	a generic 'empty' placeholder marker, Eve character namespace	NOT_APPLICABLE		Low	'empty' is a generic technical placeholder term, matching the settled dummy/empty-placeholder precedent	matches dummy_root/dummy-flex-style organizational-placeholder OPAQUE precedent	P95	
+ulip_2	ULip_2	CLEAR	upper lip anatomy, numbered	CLEAR	groupFile/Face/Lower Face	High		matches ulipin family precedent, lip anatomy is Lower Face	P95	
+upper_03	Upper_03	CLEAR	a bare 'upper' position label, numbered	NEEDS_CONTEXT		Low	'upper' alone names a position, not a specific feature/object	no owning anatomy/object is named	P95	
+left_hand_twist2_end	left_hand_twist2_end	CLEAR	left hand/forearm twist anatomy, end segment, numbered	CLEAR	groupFile/Arms	High		ordinary twist-bone anatomy, not corrective (rule 3)	P95	
+valvebiped.right_hand	ValveBiped.right_hand	CLEAR	a right hand-region control	CLEAR	groupFile/Arms	High		hand-region control with no specific finger named defaults to plain Arms (rule 10)	P95	
+bas.right_1_jiggle	BAS.Right_1_jiggle	CLEAR	a jiggle-physics function on an unresolved 'BAS' object, right, numbered	NEEDS_CONTEXT		Medium		matches direct current-ledger sibling bas.right_2_jiggle/bas.right_3_jiggle, both CLEAR/NEEDS_CONTEXT	P95	
+flex_noise2	Flex_Noise2	OPAQUE	a generic flex-system noise/jitter technical parameter, numbered	NOT_APPLICABLE		Low	no anatomical/object content, generic technical modifier	matches the settled 'flex_noise1' cryptic-fragment precedent (Tranche 9 audit)	P95	
+llotwist0	lLoTwist0	CLEAR	left lower-limb twist anatomy, numbered	CLEAR	groupFile/Legs	Medium		'lLoTwist' reads as 'Left Lower Twist', ordinary twist-bone leg anatomy (rule 3)	P95	
+tophair4	TopHair4	CLEAR	top-of-head hair, numbered	CLEAR	groupFile/Hair	High		explicit hair content	P95	
+pad3_5	pad3_5	CLEAR	a padding/pad accessory, numbered	CLEAR	groupFile/Clothing	Medium		matches direct sibling pad2_5 (this ledger), recognized worn padding accessory	P95	
+bone08	Bone08	OPAQUE	generic numbered skinning bone	NOT_APPLICABLE		Medium	no anatomical/functional content	matches settled Bone### precedent	P95	
+close happy eyes left	Close Happy Eyes Left	CLEAR	a happy-eyes-closing expression, left	CLEAR	groupFile/Face/Eyes	High		eye-specific expression control	P95	
+eye-blink-happy-left	eye-blink-happy-left	CLEAR	a happy eye-blink expression, left	CLEAR	groupFile/Face/Eyes	High		matches direct sibling 'close happy eyes left' (this batch), eye-specific expression control	P95	
+l_sneer	l_sneer	CLEAR	a sneer (mouth/lip-curl) expression, left	CLEAR	groupFile/Face/Lower Face	High		matches direct current-ledger sibling sneer_right/right_sneer/leftsneer, all CLEAR/CLEAR/Face/Lower Face (sided sneer compound, distinct from the bare unsided 'Sneer'->Expressions Master template)	P95	
+i14	I14	OPAQUE	bare 2-character alphanumeric code	NOT_APPLICABLE		Low	no readable content	matches settled bare-cryptic-code precedent	P95	
+r collara spo	R CollarA Spo	CLEAR	a right collarbone (clavicle) control, undecoded variant 'Spo'	CLEAR	groupFile/Arms	Medium		matches direct current-ledger sibling 'r collara a phy' (this ledger): bare 'collar' denotes the clavicle bone in this corpus	P95	
+wheel_4.base	Wheel_4.Base	CLEAR	a wheel prop, numbered, base component	CLEAR	groupFile/Other	High		matches live-Master Wheel/Wheel1-4 precedent	P95	
+bip01 op1.l	Bip01 Op1.L	OPAQUE	a cryptic 'Op1' technical operator/option bone, left	NOT_APPLICABLE		Low	no anatomical/functional content beyond a generic technical operator label	no Master/ledger precedent recovers this fragment	P95	
+right little finger 3 grip 2	Right little finger 3 grip 2	CLEAR	right pinky finger, grip variant, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger digit anatomy	P95	
+valvebiped.bip01_r_ear04	ValveBiped.Bip01_R_Ear04	CLEAR	right ear anatomy, numbered	CLEAR	groupFile/Face/Ears	High		matches extensive current-ledger ValveBiped.Bip01_[L/R]_Ear0# sibling series, all CLEAR/CLEAR/Face/Ears	P95	
+key.comma	Key.Comma	CLEAR	a comma-labeled piano/instrument key prop	CLEAR	groupFile/Other	Medium		matches key.black/white sibling family, recognized instrument-prop object	P95	
+headband tail left a	headband tail left a	CLEAR	a headband garment accessory, tail portion, left, variant A	CLEAR	groupFile/Clothing	High		matches extensive live-Master headband family (33 hits), predominantly groupFile/Clothing	P95	
+r leg string tip sec	r leg string tip sec	CLEAR	a leg-wrap string/lace accessory, right, tip section	CLEAR	groupFile/Clothing	Medium		'string' on the leg reads as a worn lace/wrap accessory	P95	
+bone pinky 1	bone pinky 1	CLEAR	a pinky finger digit, unsided, numbered	CLEAR	groupFile/Fingers	Medium		explicit finger anatomy with no side marker, matches the bare top-level Fingers destination	P95	
+triceps medial head	Triceps Medial Head	CLEAR	triceps muscle anatomy, medial head	CLEAR	groupFile/Arms	High		explicit arm muscle anatomy	P95	
+sweats-bottom-big	Sweats-Bottom-Big	CLEAR	a sweatpants garment, bottom portion, big size variant	CLEAR	groupFile/Clothing	High		explicit worn garment ('Sweats')	P95	
+key.up	Key.UP	CLEAR	an up-labeled piano/instrument key prop	CLEAR	groupFile/Other	Medium		matches key.black/white/comma sibling family, recognized instrument-prop object	P95	
+browinnerlowerl+browinnerlowerr	BrowInnerLowerL+BrowInnerLowerR	CLEAR	inner-lower eyebrow control, combined left+right	CLEAR	groupFile/Face/Upper Face	High		brow anatomy is Upper Face	P95	
+key.white_11	Key.White_11	CLEAR	a white piano/instrument key prop, numbered	CLEAR	groupFile/Other	Medium		matches direct current-ledger sibling key.white_21, groupFile/Other	P95	
+expsmile	ExpSmile	CLEAR	a smile whole-face expression preset	CLEAR	groupFile/Face/Expressions	High		matches live-Master 'Expression-Smile'->Expressions precedent; the 'Exp'/'Expression' prefix signals a whole-face-preset template overriding the bare-Smile->Lower Face default	P95	
+cigarette_end	Cigarette_end	CLEAR	a cigarette prop, end portion	CLEAR	groupFile/Other	High		recognized real-world prop object	P95	
+beadhangback duo a2	BeadHangBack Duo A2	CLEAR	a hanging bead accessory, back position, duo variant	CLEAR	groupFile/Clothing	Medium		recognized worn decorative accessory	P95	
+bone_face_eye_r_shape_out	Bone_Face_Eye_R_Shape_Out	CLEAR	a right eye shape control, outer variant	CLEAR	groupFile/Face/Eyes	High		explicit eye anatomy/shape control	P95	
+facefix	facefix	CLEAR	a whole-face corrective/reset control	CLEAR	groupFile/Face	Low	no specific facial feature is named beyond 'face' itself	bare 'face'+'fix' with no specific localized feature; routed to the top-level Face destination	P95	
+splitfixbackr	SplitFixBackR	CLEAR	a garment split-fix control, back, right	CLEAR	groupFile/Clothing	Medium		matches live-Master DRESS-SplitFix/PantsSplitFix precedent: 'SplitFix' denotes fixing a garment's side-slit, not a leg-splits pose	P95	
+loincloth back 1a	loincloth back 1a	CLEAR	a loincloth garment, back, numbered	CLEAR	groupFile/Clothing	High		matches live-Master loincloth_back## precedent	P95	
+ex_4	Ex_4	OPAQUE	cryptic 'Ex' abbreviation plus a number	NOT_APPLICABLE		Low	no independent grounding	no Master/ledger precedent recovers this fragment	P95	
+valvebiped.bip01_pelvis.021	ValveBiped.Bip01_Pelvis.021	CLEAR	pelvis anatomy, numbered	CLEAR	groupFile/Body	High		matches extensive current-ledger ValveBiped.Bip01_Pelvis sibling series, all CLEAR/CLEAR/Body (rule 26 central branch)	P95	
+anusopene	AnusOpenE	CLEAR	an anus-opening shape control, variant E	CLEAR	groupFile/Body Morphs	High		matches the VagOpen/vagopen genital-opening shape-family pattern, groupFile/Body Morphs	P95	
+bunnyearboneleft_3	BunnyEarBoneLeft_3	CLEAR	a bunny-ear costume/hair-piece bone, left, numbered	CLEAR	groupFile/Face/Ears	High		matches extensive live-Master 'Bunny Ear'/bip_BunnyEars family (74 hits), all groupFile/Face/Ears	P95	
+legmiddlefinger3_r	LegMiddleFinger3_R	CLEAR	a right middle-toe digit (hand-finger-naming template projected onto the leg), numbered	CLEAR	groupFile/Toes/RightToes	Medium		matches the leglittlefinger2_l cross-limb digit-naming precedent (this ledger)	P95	
+surpriser	SurpriseR	CLEAR	a surprise whole-face expression, right variant	CLEAR	groupFile/Face/Expressions	High		matches the extensively settled bare 'Surprise' family precedent (expsurprise/surprisel), whole-emotion word with no localized feature named	P95	
+sk_tail	SK_tail	CLEAR	tail anatomy, SK model namespace	CLEAR	groupFile/Tail	High		explicit tail anatomy grounds this regardless of namespace prefix (rule 24)	P95	
+wep_ironsight_rear2	WEP_Ironsight_Rear2	CLEAR	a weapon iron-sight attachment, rear, numbered	CLEAR	groupFile/Other	High		recognized weapon-part prop	P95	
+head_s_r	Head_S_R	CLEAR	head anatomy, undecoded variant codes S/R	CLEAR	groupFile/Body	Medium		bare structural head anatomy defaults to Body absent a specific facial feature (rule 13), matches head_a_t/l_head_3/m_head_1 sibling pattern	P95	
+bone113	Bone113	OPAQUE	generic numbered technical bone	NOT_APPLICABLE		Medium	no anatomical/functional content	matches settled Bone### precedent	P95	
+spine lute	spine lute	PARTIAL	competing readings: spine anatomy vs. an unrelated 'lute' musical-instrument object	NEEDS_CONTEXT		Low	'spine' and 'lute' are materially different domains combined with no disambiguation	no Master/ledger precedent resolves this compound	P95	
+right_frown	Right_Frown+Right_frown	CLEAR	a frown expression, right	CLEAR	groupFile/Face/Lower Face	High		matches established 'Frown' bare-word Lower Face precedent	P95	
+def-spine.006_l.017	DEF-spine.006_L.017	CLEAR	spine anatomy, numbered, DEF naming convention, left	CLEAR	groupFile/Body	High		plain structural spine anatomy grounds this regardless of the 'DEF' rig-naming prefix	P95	
+frily_root_1.r	Frily_Root_1.R	CLEAR	a frilly decorative-trim accessory, root anchor, right, numbered	CLEAR	groupFile/Clothing	Medium		'frilly' is a recognizable worn decorative-trim descriptor	P95	
+r thumb 02	r thumb 02	CLEAR	right thumb digit, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit thumb anatomy	P95	
+pullasidepantyright	PullAsidePantyRight	CLEAR	a panty pull-aside garment interaction control, right	CLEAR	groupFile/Clothing	High		matches live-Master Panties-PullAside/PullAside precedent	P95	
+size2	size2	CLEAR	a bare 'size' adjustment, numbered	NEEDS_CONTEXT		Low	'size' names a real shape concept but no owning object/region is named	no Master/ledger precedent names the owner	P95	
+bip_hand_rotate_l	bip_Hand_Rotate_L	CLEAR	left hand rotation function	CLEAR	groupFile/Arms	High		hand-region control with no specific finger named defaults to plain Arms (rule 10)	P95	
+lower 2 right	Lower 2 Right	OPAQUE	a bare 'lower' position label, numbered, right	NOT_APPLICABLE		Low	'lower' alone names a position, not a specific feature/object	matches settled bare-positional-label-no-object precedent	P95	
+bip upperarmtwistbottom r	bip upperarmtwistbottom r	CLEAR	right upper-arm twist anatomy, bottom variant	CLEAR	groupFile/Arms	High		ordinary twist-bone anatomy, not corrective (rule 3)	P95	
+student.left_2	Student.Left_2	OPAQUE	a bare character/model-reference prefix plus a side marker and number	NOT_APPLICABLE		Low	'Student' names no anatomical/functional content beyond a possible character reference	matches the established bare character/model-name-reference-with-no-content precedent	P95	
+eyes-full-blink	Eyes-Full-Blink	CLEAR	a full eye-blink expression	CLEAR	groupFile/Face/Eyes	High		eye-specific function	P95	
+cloth_bone_up_l_02	cloth_bone_up_l_02	CLEAR	a cloth simulation bone, upper, left, numbered	CLEAR	groupFile/Clothing	High		matches direct current-ledger sibling cloth_bone_up_l_03, groupFile/Clothing	P95	
+kargathbladefist_bone6	kargathbladefist_Bone6	OPAQUE	bare numbered technical bone under a character-name prefix	NOT_APPLICABLE		Low	character/model prefix is not itself semantic ownership (rule 24); the bare numbered bone carries no anatomical specificity	matches the extensive current-ledger kargathbladefist_bone## sibling series, all OPAQUE/NOT_APPLICABLE	P95	
+arm right finger 4 5	arm right finger 4 5	CLEAR	right hand finger 4, segment 5	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger digit anatomy	P95	
+bip_r_foot_thumb_02	bip_r_foot_thumb_02	CLEAR	a right foot big-toe digit (hand-digit-naming template projected to the foot), numbered	CLEAR	groupFile/Toes/RightToes	High		matches direct current-ledger sibling bip_l_foot_thumb, cross-limb digit-naming pattern	P95	
+strecherr	StrecherR	CLEAR	a stretch/stretcher function, right variant (misspelling accepted)	NEEDS_CONTEXT		Low	'stretch' names a stable function even without a named object	owning anatomy/object not stated	P95	
+muscle - chest	Muscle - Chest	CLEAR	a chest muscle-definition shape control	CLEAR	groupFile/Body Morphs	High		matches extensive live-Master Muscle/muscle-back family precedent	P95	
+piercing	piercing	CLEAR	a piercing jewelry accessory	CLEAR	groupFile/Clothing	High		explicit worn jewelry accessory	P95	
+chin_right_3	chin_right_3	CLEAR	chin anatomy, right, numbered	CLEAR	groupFile/Face/Lower Face	High		matches direct current-ledger sibling chin_right_1, chin is a lower-face feature	P95	
+blink_happy_right	blink_happy_right	CLEAR	a happy eye-blink expression, right	CLEAR	groupFile/Face/Eyes	High		eye-specific expression control	P95	
+leftnipple7	LeftNipple7	CLEAR	left nipple anatomy, numbered	CLEAR	groupFile/Body	High		plain structural breast-region anatomy, no shape/size descriptor (rule 12)	P95	
+eye tired	Eye Tired	CLEAR	a tired-eye expression	CLEAR	groupFile/Face/Eyes	High		eye-specific expression control	P95	

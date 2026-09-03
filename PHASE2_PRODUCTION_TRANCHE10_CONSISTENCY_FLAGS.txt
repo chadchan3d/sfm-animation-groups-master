@@ -1,0 +1,284 @@
+PHASE 2 PRODUCTION TRANCHE 10 -- CONSISTENCY AUDIT
+Canonical positions 9501-10500 (batches P91-P100)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv (10500 rows after this tranche)
+
+============================================================
+1. MANDATORY STALE-CALIBRATION CHECK (Section 19)
+============================================================
+
+The calibration was corrected immediately before this tranche at commit
+36f9533 (flm-armb-leg-rbc: PARTIAL/NEEDS_CONTEXT -> CLEAR/CLEAR/Legs;
+au18z: OPAQUE/NOT_APPLICABLE -> CLEAR/CLEAR/Face/Expressions). Every
+Tranche-10 row's short_reason and uncertainty_reason field was
+mechanically searched for a citation of either fold_key by name: zero
+matches found. No helper/scratch script in this tranche was built from
+a cached pre-36f9533 FINAL.tsv snapshot -- every lookup script
+(lookup.py, build_and_merge.py) read PHASE2_SEMANTIC_PILOT_500_FINAL.tsv
+fresh from disk at run time, after the correction commit.
+
+Where the corrected Flm-ArmB and AU precedents were materially relied
+upon, the citation was to the current-ledger sibling family as a whole
+(e.g. "matches the corrected settled Flm-ArmB-Arm-* sub-family... Tranche
+9 family QA", "matches the settled bare-AU-number convention
+(AU1/4/6/13/15/18/26/27)"), not to the specific corrected calibration
+row -- and in every such case the cited sibling rows were re-fetched
+live from the current ledger at classification time (see Section 5 of
+PHASE2_PRODUCTION_TRANCHE10_REPORT.txt for the full family-by-family
+mechanical re-verification).
+
+STALE-CALIBRATION VIOLATIONS FOUND: 0
+
+============================================================
+2. CROSS-BATCH ERROR FOUND AND CORRECTED (Section 24)
+============================================================
+
+Row: r collara a phy (exact_spellings: R CollarA a Phy)
+Original batch: P91 (canonical position 9551)
+
+While classifying P96 (r collarc a phy, position 10054) and P97
+(r collarb a phy, position 10104), a live-Master search for "collar"
+surfaced two distinct templates that had not both been checked at the
+time P91 was classified:
+  - ValveBiped-prefixed/skeleton-bone-style "collar" (valvebiped.l_collar,
+    CollarBookPhysicsParent) -> groupFile/Arms (denotes the clavicle
+    bone).
+  - Descriptive multi-word "collar left/right/front/back"-style names
+    (28 direct live-Master hits) -> groupFile/Clothing (denotes the
+    garment collar).
+
+P91's original "r collara a phy" -> groupFile/Arms classification cited
+only the first (ValveBiped-prefixed) template, which does not match this
+literal's descriptive multi-word shape. The second, much larger (28-hit)
+template is the correct match -- confirmed directly by this tranche's
+own "r collarb a phy" (P97) and "r collarc a phy" (P96), and by "collar
+left 1" (P96), all independently classified groupFile/Clothing under
+the same evidence before the P91 row was revisited.
+
+OLD (as merged in P91): semantic_status=CLEAR, taxonomy_status=CLEAR,
+  semantic_referent="a right collarbone (clavicle) physics/jiggle
+  control, variant A", proposed_destination=groupFile/Arms.
+
+NEW (corrected in-place in the ledger, same session, before the raw
+Tranche 10 commit): semantic_status=CLEAR (unchanged), taxonomy_status=
+CLEAR (unchanged), semantic_referent="a right garment collar, physics
+variant, A", proposed_destination=groupFile/Clothing.
+
+Correction method: targeted single-row field update via a small
+deterministic script, re-validated by re-reading the written ledger file
+and confirming exactly one row (this one) differed from the pre-edit
+ledger, with total row count unchanged (10500 rows) and the first 500
+rows still identical to FINAL.tsv. No other row was touched. This is a
+within-Tranche-10 self-correction (both the error and its discovery
+occurred inside this same tranche), not a broad retrospective audit.
+
+CROSS-TRANCHE ERRORS FOUND: 1 (documented above; corrected)
+CALIBRATION_EXCEPTION_CANDIDATES: 0 (the corrected row is a production
+  row, not a calibration row; no new calibration inconsistency was
+  discovered this tranche)
+
+============================================================
+3. MANDATORY OPAQUE REVIEW (Section 20, 7-question test)
+============================================================
+
+All 143 Tranche-10 OPAQUE rows were reviewed individually at
+classification time against the seven questions (direct readability;
+hidden namespace content; project-grounded strange terminology;
+genericity-vs-opacity; DCC-authoring-residue vs. real content; unknown
+destination vs. unknown meaning; grounded root erased by an unresolved
+suffix). They resolve into these mechanically-tallied categories:
+
+  - Generic numbered skinning/technical bones (Bone###, bone.###,
+    bone ###): 33
+  - Character/model-name-prefix + generic numbered bone with no
+    independent content (kargathbladefist_bone##, taurenmale_hd_bone_##,
+    saberon_bone##): 12
+  - DCC-default primitive mesh/geometry placeholders (polySurface##,
+    pCube##, pCylinder#, Plane##, submesh_00_lod_*): 10
+  - Generic DCC placeholder objects (Object##, Object033_###): 6
+  - Generic technical placeholder/dummy/rig-plumbing terms (dummy##,
+    eve_empty, bip01 nonaccum, agl bas bindpose, jnt_right/jnt_022,
+    global, flex_noise#, flex_twist, bone ring 07, scale_z_up/down,
+    z_shift_5): 12
+  - Bare numeric literals with zero other content (007, 002, 6, 45, 61,
+    05, _05, 47): 8
+  - Bare positional/side-marker labels with no owning object (left_15,
+    left_2, side_left_6, lower 2 right, bottom_2, back 2_1, backbottom,
+    rear a_1, microright): 9
+  - Cryptic 2-6 character abbreviation/code fragments with no sibling
+    grounding (bh##.*, l1, al+ar, brc, i3/i14, h7, f9, ex_4, co, t3,
+    d2/d8/d15, e12/e16, g4/g6, m05, rm03, tri, c_stm_b01, whr_3, v_ou,
+    fullsite, platine, oris01/05, houjin, l3rdnc, rhumb1, less2): 34
+  - Internal-namespace/technical codenames verified against siblings
+    (bas.<bare position>, bip01_r_horselink, top untouched shadow,
+    ctr bero1 joint pos, flatten/outline2, flatten/beam2, btn.time,
+    student.left_2, generichumandummyhead): 10
+  - Bare joke/flavor-text phrase with no owning object ("head 4 da
+    lulz"): 1
+
+Every category applied a direct sibling match, an exact-template
+precedent, or a Section-5/20 grounding test -- none used substring-
+majority routing. No case where a real object/action/relationship
+survived was misclassified OPAQUE; no DCC-primitive name was mistaken
+for real content; no project-grounded strange token (donger-, Bck-,
+gib-, momo-/ashi-/sakotsu-/ude-/hiza-/tsumasaki-/chitsu-style loanword
+or abbreviation) was missed -- each of those was positively identified
+and routed CLEAR instead of OPAQUE (see Section 6 below).
+
+============================================================
+4. DCC-DEFAULT-IDENTIFIER BOUNDARY CONSISTENCY (Section 9)
+============================================================
+
+Reviewed all 10 DCC-default-name candidates this tranche: plane01,
+plane04, pcylinder1, pcube28, polysurface76/90/125/40,
+valvebiped.polysurface11/24 -- all correctly kept OPAQUE/NOT_APPLICABLE
+per the DCC-authoring-residue principle. None was confused with a
+deliberately-named generic object (the Box##/Chain#/Cape#-style bare-
+numbered-object precedent, which stayed CLEAR/Other or CLEAR/Clothing
+throughout this tranche).
+
+============================================================
+5. MANDATORY FACE/EXPRESSIONS REVIEW (Section 21)
+============================================================
+
+All 12 rows routed to groupFile/Face/Expressions were reviewed to
+confirm none of them names a localized mechanism (brow/eye/mid-face/
+lip-jaw/tongue) that should instead route to a Face subgroup:
+
+  sadness_r, fullsuprise, surpriser -- bare whole-emotion words with no
+    localized feature, matching the sadness_l/expsurprise/surprisel
+    precedent.
+  expsmile, exp_sad -- "Exp"/"Expression"-prefixed whole-face-preset
+    convention (matches live-Master Expression-Smile), overriding the
+    ordinary bare-word-per-feature default.
+  au12au25, au12 -- bare/combined FACS Action Unit notation, matching
+    the corrected settled AU-number convention.
+  fbx_murasaki_face_none, face-facialgigachad -- instances of the
+    fbx_[character]_face_[state] whole-face-preset template (the latter
+    a meme/joke preset name, not a localized mechanism).
+  eh!? -- a vocalized exclamation/reaction, a whole-face state.
+  fa_eyebag_right_mid -- direct sibling of the already-settled
+    fa_eyebag_left_mid/right_out/right_inn family-specific Expressions
+    routing (an established exception to the general 'fa_' prefix's
+    otherwise localized-feature routing, confirmed in Section 6 of the
+    Tranche 9 QA precedent and re-verified live this tranche).
+  shiocked l -- misspelling of "Shocked", matching the established
+    whole-face "Shocked" Expressions precedent.
+
+No substring-majority routing was used. All 12 were checked against a
+direct sibling, an exact-template precedent, or explicit live-Master
+evidence before being classified.
+
+============================================================
+6. GROUNDED-LOANWORD / ABBREVIATION REVIEW (Rule 23)
+============================================================
+
+This tranche surfaced an unusually large number of grounded Japanese
+anatomical loanwords, each verified against a coherent same-corpus
+sibling series (not invented ad hoc):
+
+  momo (thigh): momo_l_d__offset, momo_md_l__prot_x50__offset -- both
+    grounded via live-Master momotwist_L/R/momotwist2_L/R (-> Legs).
+  ashi (leg): ashi_r_d__offset, ashi_l_d__offset -- grounded by direct
+    parallel construction to the momo family (-> Legs).
+  sakotsu (collarbone): sakotsu_rt_r_d__offset,
+    sakotsu_rt_r__const_kata_r__rot_sakotsu_r__x0 -- grounded by
+    internal sibling-pair consistency (-> Arms).
+  ude (arm): ude_md_r__rot_te_r__x50__offset -- grounded by parallel
+    construction to momo/ashi/sakotsu (-> Arms).
+  hiza (knee): hizakozo_r__rot_hiza_r__z50__offset -- grounded the same
+    way (-> Legs).
+  tsumasaki (toe/finger-tip): tsumasaki_r_d__offset -- grounded the same
+    way, and cross-checked against the offset-suffix pattern to resolve
+    toe- vs. finger-tip ownership (-> Toes/RightToes).
+  chitsu (vagina): "pussy chitsu base" -- grounded directly by the
+    co-occurring English "pussy" token plus the extensive live-Master
+    Pussy family (-> Body Morphs).
+
+Also applied: Bck=Back (c_bck_a00, matching the already-settled c_bck_b00
+sibling), gib=gore/fx object (paulinggib008, gib1, window_urban_sash_
+..._gib03), and several accepted misspellings under rule 12 (Nosie->
+Nose, Toung->Tongue, mucle->muscle, theeth->teeth, lowr->lower, Suprise
+->Surprise, Shiocked->Shocked, Tental->Tentacle).
+
+Each loanword/abbreviation grounding cites an internal corpus-coherence
+argument (parallel construction to an already-grounded sibling, or a
+co-occurring English token), consistent with Rule 23's requirement that
+an abbreviation/expansion be grounded by sibling-series or corpus
+evidence, not asserted from outside knowledge alone.
+
+============================================================
+7. SETTLED-FAMILY DRIFT CHECK (Section 22)
+============================================================
+
+Mechanically re-enumerated every Tranche-10 member of each settled
+recurring family and verified 100% consistency with current corrected
+doctrine (no drift found in any family):
+
+  tentacle/tenta_ (8 rows) -> all groupFile/Other
+  fin (1 row)               -> groupFile/Other
+  horn (1 row)              -> groupFile/Other
+  fringe (2 rows)           -> all groupFile/Hair
+  Box_Face_##_M (1 row)     -> PARTIAL/NEEDS_CONTEXT/blank
+  Rig-Hole (1 row)          -> CLEAR/NEEDS_CONTEXT/blank
+  BAS. (4 rows)             -> 2 bare-position OPAQUE, 2 jiggle
+                               NEEDS_CONTEXT, matching the Tranche 9
+                               corrected majority pattern
+  Flm-ArmB (5 rows)         -> Belt->Clothing, Float->NEEDS_CONTEXT,
+                               2x Arm->Arms, Neck->Body, matching the
+                               Tranche 9 corrected sub-family templates
+  moustache (1 row)         -> groupFile/Hair
+  condom (1 row)            -> groupFile/Clothing (matches the corrected
+                               numbered-Condom_N template)
+  AU-family (2 rows)        -> both groupFile/Face/Expressions
+  balloon-flat              -> no member this tranche
+  whisker                   -> no member this tranche
+
+No pre-existing split was treated as unresolved merely because a raw
+historical classification once differed; current doctrine/calibration
+was checked first in every case (authority-order discipline).
+
+============================================================
+8. OTHER NOTABLE PATTERNS (non-blocking, resolved during classification)
+============================================================
+
+  - "collar": two coexisting templates confirmed this tranche (ValveBiped-
+    prefixed skeletal clavicle -> Arms, vs. descriptive multi-word
+    garment collar -> Clothing, 28 direct hits). Applied consistently
+    after the P91 cross-batch correction (Section 2).
+  - Cross-limb digit-naming template ("Leg"/"Foot" + hand-finger-name):
+    leglittlefinger2_l, foot_index_0_l/2_r, bip_l_foot_thumb/
+    bip_r_foot_thumb(_02), legmiddlefinger3_r, foot_fingerbase2_r,
+    foot_pinky_0_l -- consistently read as the corresponding toe digit
+    (Toes/LeftToes or Toes/RightToes), not a literal anatomical
+    contradiction.
+  - "CK"/"pJCM"/explicit "correct" naming as Joint-Corrective-Morph
+    convention, confirmed directly against live-Master Correctives
+    precedent (Model Legs Splits Corrective L/R, LegFix90SWSPLIT,
+    CorrectiveShoulderGap, Arm-Bend-L/R): cklegsplitsl72/sr72,
+    ckarmbendl, pjcmchestside24l, shoulder_bone_correct_l_03 -- all
+    routed groupFile/Correctives. Distinguished from the much larger
+    "helper"/"twist"/"adjust"/generic "fix" population, which stayed
+    with their anatomy destination per section 12/rule 3 throughout.
+  - "SplitFix" specifically (as opposed to "CK*Split*") verified against
+    live-Master DRESS-SplitFix/PantsSplitFix as a garment-slit-fix term,
+    not a leg-splits pose corrective: splitfixbackr/backl, topclothfix
+    toptorso -> Clothing.
+
+============================================================
+Summary
+============================================================
+
+Stale-calibration violations found: 0
+Cross-tranche/cross-batch errors found and corrected: 1 (r collara a
+  phy, Section 2)
+Calibration-exception candidates: 0
+OPAQUE rows manually reviewed: 143 / 143
+Face/Expressions rows reviewed: 12 / 12
+DCC-default candidates reviewed: 10 / 10
+Settled-family drift candidates reviewed: 8 families, 23 total rows, 0
+  drift found
+NEEDS_DOCTRINE: 0
+All precedent citations used in this tranche's classification and in
+this document were mechanically re-read from the current ledger/FINAL
+.tsv at time of use (Section 3), not recalled from memory or prior
+report prose.
