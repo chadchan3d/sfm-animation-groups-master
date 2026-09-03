@@ -1,0 +1,177 @@
+PHASE 2 FINAL PRODUCTION TRANCHE 14 -- REPORT
+Canonical positions 13501-14282 (782 families, batches P131-P138,
+100 each for P131-P137, 82 for P138)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv
+
+THIS TRANCHE COMPLETES PHASE 2 PRODUCTION CLASSIFICATION.
+
+============================================================
+TRANCHE-ONLY STATISTICS (782 rows, this tranche)
+============================================================
+
+semantic_status:
+  CLEAR:   641
+  PARTIAL:  23
+  OPAQUE:  118
+
+taxonomy_status:
+  CLEAR:          602
+  NEEDS_CONTEXT:   62
+  NOT_APPLICABLE: 118
+  NEEDS_DOCTRINE:   0
+
+confidence:
+  High:   489
+  Medium: 235
+  Low:     58
+
+Rule 21 invariant (OPAQUE <=> NOT_APPLICABLE) check: 0 violations across
+all 782 rows.
+
+Proposed-destination counts (CLEAR taxonomy rows only, 602 total):
+  groupFile/Other                          105
+  groupFile/Clothing                        94
+  groupFile/Body                            67
+  groupFile/Legs                            47
+  groupFile/Body Morphs                     45
+  groupFile/Arms                            43
+  groupFile/Face/Lower Face                 34
+  groupFile/Face/Eyes                       33
+  groupFile/Arms/RightArm/RightFingers      21
+  groupFile/Hair                            17
+  groupFile/Arms/LeftArm/LeftFingers        15
+  groupFile/Useless                         15
+  groupFile/Tail                            15
+  groupFile/Toes                            10
+  groupFile/Face/Upper Face                 10
+  groupFile/Face/Expressions                10
+  groupFile/Wings                            7
+  groupFile/Fingers                          4
+  groupFile/Face/Mid Face                    4
+  groupFile/Face/Ears                        3
+  groupFile/Correctives                      2
+  groupFile/Arms/RightArm/RightCarpals       1
+
+NEEDS_CONTEXT rows: 62 (blank destination; unowned bare-accessory nouns
+[strap/string/chain/link/handles/flap/hose/bow/buff/guns/folds/ringer/
+brace-type polysemous or owner-unresolved literals], stable function
+words with unstated owners [squish/crush/shrink/heighten/narrow/widen/
+poke/stomp/throb/grip/release/jiggle], BAS-jiggle-family pattern,
+Flm-armb-leg-lbd-style undecoded-suffix family members not present this
+tranche, and the "Finger_Globe" genuinely-undecoded-token example
+matching rule 22's own worked precedent).
+
+NEEDS_DOCTRINE rows: 0. No genuinely new taxonomy-policy question was
+encountered; production continued through all 8 batches without a hard
+stop.
+
+Consistency flags: see PHASE2_PRODUCTION_TRANCHE14_CONSISTENCY_FLAGS.txt
+for the full audit -- 1 cross-tranche doctrine-era tension found and
+documented (not corrected), 0 cross-tranche errors, 0 stale-Master-
+precedent violations, 0 calibration-exception candidates.
+
+OPAQUE rows manually reviewed (Rule 27, both directions): 118 / 118.
+Face/Expressions rows reviewed (mandatory face audit): 10 / 10.
+Settled-rule families reviewed: 15 (tentacle, spike, fringe, BAS,
+  Flm-ArmB/A, AU/FACS, collar/clavicle, cross-limb digit-naming,
+  Japanese anatomical loanwords, DCC-default boundary, and others with
+  zero members this tranche checked for completeness) -- 0 drift found.
+DCC-default candidates reviewed: 10 / 10.
+Structural Body-vs-Morph rows reviewed: 112 (all Body/Body-Morphs
+  destinations this tranche) -- 1 flag (Section 1 of consistency
+  document).
+Future Sexual Bones migration candidates (informational only): 36.
+Intentional doctrine-driven Master divergences: 36.
+Stale-Master-precedent violations: 0.
+Cross-tranche errors found and corrected: 0.
+Calibration exception candidates: 0.
+Master integrity interruptions: 0. Master hash mechanically re-verified
+  9 times (start + after each of 8 batch merges), never changed, never
+  missing: 29aaf43e393de84e8af4a9aec4c3fbc37a04859b213f17666573d92ae552dcb7
+  throughout.
+Precedent claims mechanically re-verified against current ledger/Master/
+  FINAL.tsv fields before use (not cited from memory): every claim in
+  every batch and in this report -- including the direct re-verification
+  of the live Master's Arms collar population (69 hits, confirming
+  CollarLeftMidLower already resident there before classifying its
+  mirror sibling collarrightmidlower), the L_butt_jiggle_root/R_butt_
+  jiggle_root and cc_butt.r precedents, and the CC_/CC_Base_ skeleton-
+  bone convention (107 hits, all structural).
+
+============================================================
+PRODUCTION-COMPLETION VALIDATION (mechanical, full ledger, re-opened
+from disk)
+============================================================
+
+total_ledger_rows:                        14282   (expected 14282)  PASS
+calibration_rows:                           500   (expected 500)    PASS
+production_rows:                          13782   (expected 13782)  PASS
+remaining_production_families:                0   (expected 0)      PASS
+first_500_rows_match_current_FINAL:                                 PASS
+positions_501_14282_match_canonical_order (fold_key AND
+  exact_spellings, all 13782 rows, zero mismatches):                PASS
+every_canonical_family_occurs_exactly_once (zero duplicate
+  fold_keys across all 14282 rows):                                 PASS
+no_missing_canonical_position:                                      PASS
+no_extra_production_family:                                         PASS
+all_semantic_status_enums_legal:                                    PASS
+all_taxonomy_status_enums_legal:                                    PASS
+rule21_global (OPAQUE iff NOT_APPLICABLE, all 14282 rows):          PASS
+all_CLEAR_taxonomy_destinations_populated_and_valid:                PASS
+no_destination_on_non_CLEAR_taxonomy_row:                           PASS
+strict_ASCII_family_invariants (tools/validate_master.py cross-path
+  check against the current Master): 0 conflicts                    PASS
+
+tools/verify_phase2_production_order.py: ALL CHECKS PASS: True
+  full sequence SHA256:      d43e0aa97e96608b165b993428af54084f3cfbe110379d22af8c416251618494
+  production-only SHA256:    ad4c1e865c8edc18e039f233466731a56bf44170a9eacbd208e39c56f3dd4858
+  (both unchanged from every prior tranche -- confirms positions 1-14282
+  were never regenerated, reseeded, or altered)
+
+tools/validate_master.py sfm_defaultanimationgroups.txt: PASS
+  (structural parse PASS, 0 exact duplicate literals, 0 cross-path
+  native-Rebuild casefold invariant violations, "No files have been
+  modified.")
+
+Master SHA-256 (before and after this entire tranche):
+  29aaf43e393de84e8af4a9aec4c3fbc37a04859b213f17666573d92ae552dcb7
+  (unchanged)
+
+============================================================
+CUMULATIVE / FINAL STATISTICS (PHASE 2 PRODUCTION CLASSIFICATION
+COMPLETE)
+============================================================
+
+calibration_families_complete:        500
+production_families_classified:     13782
+total ledger rows:                  14282
+last_completed_canonical_position:  14282
+next_canonical_phase2_position:     14283 (one-past-end sentinel;
+  production canonical classification is COMPLETE, no family exists at
+  or beyond this position)
+remaining_production_families:         0
+
+============================================================
+Batch-level record (for resumability / historical audit)
+============================================================
+
+P131 (13501-13600): merged, ledger reached 13600 rows
+P132 (13601-13700): merged, ledger reached 13700 rows
+P133 (13701-13800): merged, ledger reached 13800 rows
+P134 (13801-13900): merged, ledger reached 13900 rows
+P135 (13901-14000): merged, ledger reached 14000 rows
+P136 (14001-14100): merged, ledger reached 14100 rows
+P137 (14101-14200): merged, ledger reached 14200 rows
+P138 (14201-14282): merged, ledger reached 14282 rows (82 rows, exact)
+
+All 8 batches for the final tranche are complete and merged. No batch
+remains pending. PHASE 2 PRODUCTION CLASSIFICATION IS COMPLETE across
+all 14,282 canonical families (500 calibration + 13,782 production).
+
+Per this task's explicit scope: this is a PRODUCTION-COMPLETION
+validation only, not the separate full Phase-2 semantic consistency/
+reconciliation review across all 14,282 rows. That review, along with
+resolution of the cross-tranche doctrine-era tension documented in
+PHASE2_PRODUCTION_TRANCHE14_CONSISTENCY_FLAGS.txt Section 1, is the
+next stage, to occur only after explicit human review and authorization
+-- not begun here.

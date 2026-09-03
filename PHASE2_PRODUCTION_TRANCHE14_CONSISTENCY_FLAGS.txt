@@ -1,0 +1,302 @@
+PHASE 2 FINAL PRODUCTION TRANCHE 14 -- CONSISTENCY AUDIT
+Canonical positions 13501-14282 (batches P131-P138, 782 families)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv (14282 rows -- PRODUCTION COMPLETE)
+
+============================================================
+1. CRITICAL FLAG: CROSS-TRANCHE DOCTRINE-ERA TENSION --
+   BARE "[GENITAL]+SIDE" TEMPLATE
+============================================================
+
+This is the single most important finding in this tranche's audit.
+
+Two Tranche-14 rows were classified under the CURRENT "structural sexual
+anatomy -> Body" doctrine (established at Tranche 12 QA, checkpoint
+8950c85, and reaffirmed through Tranche 13/14):
+
+  pussy right 3   (P131, position 13534) -> CLEAR/CLEAR/groupFile/Body
+  vagina_left     (P135, position 13936) -> CLEAR/CLEAR/groupFile/Body
+
+Both are the exact bare "[pussy|vagina]+side[+number]" shape -- no
+shape/size/state/deformation word present.
+
+However, this EXACT shape was already resolved DIFFERENTLY, earlier in
+this project, by the dedicated "Pussy Chitsu" targeted QA (checkpoint
+dca9566, itself resting on a decisive 15/15 exact live-Master template
+match for bare "[pussy|vagina]+side" literals, all resolving to Body
+Morphs):
+
+  pussy chitsu left   (P30, position 3458)  -> CLEAR/CLEAR/groupFile/Body Morphs
+  pussy chitsu right  (P65, position 6921)  -> CLEAR/CLEAR/groupFile/Body Morphs
+
+Both resolutions were correct under the doctrine that was authoritative
+at the time each was made:
+  - dca9566 (Pussy Chitsu QA) explicitly weighed live-Master template
+    evidence as decisive for this specific bare-sided shape (15/15
+    exact hits, Body Morphs) and treated that as stronger, more
+    specific evidence than an abstract structural-vs-morph default.
+  - 8950c85 (Tranche 12 QA) and this tranche's governing brief
+    explicitly instruct the OPPOSITE weighting for structural sexual
+    anatomy specifically: current Master majority placement is evidence
+    only, not authority, and a plain structural/positional literal with
+    no shape/state word should classify to Body regardless of Master
+    placement.
+
+This tranche's two new rows were classified per the CURRENT, most
+recent, most explicit governing doctrine (per the authority-order rule:
+current instruction outranks an earlier QA's narrower conclusion for
+the same doctrinal question). This is NOT a Tranche-14 classification
+error -- it is a genuine, pre-existing tension between two different
+points in this project's doctrine evolution, now made concrete by two
+near-identical literals sitting on opposite sides of the same
+destination split.
+
+This is NOT corrected here. Per this task's explicit scope restriction
+(no retrospective sweep, no reopening of earlier tranches or the
+frozen-calibration-adjacent Pussy Chitsu QA), this is documented for
+the separate, future FULL PHASE-2 CONSISTENCY/RECONCILIATION stage,
+where the two doctrine eras should be reconciled deliberately (most
+likely by revisiting whether the Pussy Chitsu QA's conclusion should be
+reversed to match the now-settled structural-sexual-anatomy-to-Body
+rule, or by establishing why bare "[pussy|vagina]+side" specifically
+is a legitimate carve-out from that rule).
+
+CROSS-TRANCHE CLASSIFICATION_TENSIONS: 1 (affecting 2 historical rows +
+2 new rows this tranche; not corrected)
+
+============================================================
+2. STRUCTURAL BODY VS BODY MORPHS -- MANDATORY REPORTING
+============================================================
+
+STRUCTURAL_BODY_VS_MORPH_ROWS_REVIEWED: every Body/Body-Morphs-candidate
+row this tranche was evaluated against the structural-vs-morph
+distinction (structural anatomy/posing/roots/bases/anchors -> Body;
+shape/size/appearance/state/deformation -> Body Morphs). This covers
+the full 112 rows this tranche routed to Body (67) or Body Morphs (45).
+
+STRUCTURAL_BODY_VS_MORPH_FLAGS: 1 (Section 1 above -- the cross-
+tranche pussy/vagina-bare-sided tension). No other Body-vs-Morph
+conflict was found this tranche; every other structural-vs-morph call
+rested on the presence or absence of an actual shape/size/state/
+deformation word in the complete literal (e.g. "penis shaft 5" -- no
+shape word -> Body; "neck_widen" -- explicit shape word -> Body
+Morphs), consistent with both current doctrine and, where checked,
+direct live-Master precedent (e.g. valvebiped.bip01_l_butt0_jiggleroot
+directly matches the Master's own L_butt_jiggle_root/R_butt_jiggle_root
+precedent, already in plain Body; cc_butt.r.001 directly matches the
+QA-confirmed cc_butt.r sibling).
+
+FUTURE_SEXUAL_BONES_MIGRATION_CANDIDATES this tranche: 36 rows
+(informational tag only; no taxonomy was changed by this tag; no
+Sexual Bones destination was created or used). Families represented:
+penis/cock/shaft/donger segments, testicle/balls/scrotum, nipple/tits/
+bust, pussy/vagina, anus/anal-canal, foreskin, buttock-root/jiggle-root
+variants, and combined-side genital controls (e.g. Pussy2L+Pussy2R).
+
+============================================================
+3. MANDATORY MASTER INTEGRITY CHECK
+============================================================
+
+MASTER_INTEGRITY_INTERRUPTION: NO
+
+sfm_defaultanimationgroups.txt was mechanically re-verified present
+with SHA-256 29aaf43e393de84e8af4a9aec4c3fbc37a04859b213f17666573d92ae
+552dcb7 before classification began and after every one of the 8 batch
+merges (P131-P138) -- 9 checks total, all PASS, hash never changed,
+file never missing or altered in size. No git checkout or restoration
+action was needed or performed at any point.
+
+============================================================
+4. STALE MASTER-PATH CHECK
+============================================================
+
+STALE_MASTER_PRECEDENT_VIOLATIONS: 0
+
+Every Master-path lookup this tranche was made against the current
+post-6bb1f4e Master. The collar/clavicle family recurred twice this
+tranche and both uses of current (not stale) precedent were confirmed:
+  valvebiped.r_collar -> groupFile/Arms (ValveBiped-prefixed skeleton-
+    bone-style collar convention, established since Tranche 9 and
+    unaffected by the 6bb1f4e refinement, which only moved the bare
+    CollarL/CollarR/collarL/collarR quartet out of RigArms).
+  collarrightmidlower -> groupFile/Arms (direct mirror of the existing
+    Master-resident sibling literal "CollarLeftMidLower," itself
+    already in flat groupFile/Arms, confirmed during this tranche's
+    own Master inspection of the Arms collar population -- not a
+    residual assumption from an earlier tranche).
+Neither CollarL/collarL/CollarR/collarR nor rig_collar_*/rig_Bip_
+collar_* recurred as a Tranche-14 canonical family; no stale reasoning
+about their pre-refinement RigArms location was possible or attempted.
+
+============================================================
+5. INTENTIONAL DOCTRINE-DRIVEN MASTER DIVERGENCES
+============================================================
+
+INTENTIONAL_DOCTRINE_DRIVEN_MASTER_DIVERGENCES: 36 (the same 36 rows
+counted under FUTURE_SEXUAL_BONES_MIGRATION_CANDIDATES above)
+
+For every one of these 36 rows, the live Master's own historical
+population for the same anatomical word (pussy/vagina/penis/testicle/
+scrotum/nipple/breast/anus/foreskin) is overwhelmingly Body Morphs.
+Each row was deliberately classified Body instead, per the explicit
+current doctrine that this historical Body-Morphs population may
+reflect contamination rather than settled semantic authority, and that
+a plain structural/positional literal (no shape/state word) should
+route to Body regardless. This was consulted correctly (the Master was
+checked, not ignored) -- it was intentionally overridden by doctrine,
+which is the defining difference from a stale-precedent violation (see
+Section 4, count 0).
+
+============================================================
+6. SETTLED-FAMILY DRIFT CHECK
+============================================================
+
+Every Tranche-14 member of each settled recurring family was checked
+against current doctrine/calibration/ledger before classification:
+
+  tentacle (1 row: lowertentacle3)      -> groupFile/Other, no drift
+  fin (0 rows this tranche)
+  horn (0 rows this tranche)
+  spike (2 rows: spike_08_m, spikes_bigger) -> groupFile/Other,
+    matching the established species-neutral spike/horn/fin precedent
+    (spikes_bigger kept at Other per rule 8 -- object-specific
+    deformation stays with the object's own destination, not
+    automatically Body Morphs)
+  fringe (5 rows) -> all groupFile/Hair, no drift
+  moustache (0 rows this tranche)
+  condom (0 rows this tranche)
+  Box_Face_##_M (0 rows this tranche)
+  balloon-flat (0 rows this tranche)
+  Rig-Hole (0 rows this tranche)
+  BAS (2 rows: bas.rear_center_2 [bare, OPAQUE], bas.side_left_1_jiggle
+    [jiggle, CLEAR/NEEDS_CONTEXT]) -> both match the Tranche 9 corrected
+    majority pattern exactly, no drift
+  Flm-ArmB/Flm-ArmA (9 rows across Leg/Back/Sword/Tail sub-families)
+    -> all matched their corrected current owner-token templates
+    (namespace set aside, trailing word grounds the destination), no
+    drift
+  AU/FACS (4 rows: au9, au17, au1au4-style none this tranche) -> all
+    groupFile/Face/Expressions, matching the settled bare-AU-number
+    convention, no drift
+  whisker (0 rows this tranche)
+  collar/clavicle (2 rows, see Section 4) -> no drift, current
+    post-refinement precedent applied correctly
+  cross-limb digit-naming ("Leg"+finger-name = toe) (4 rows:
+    legringfinger3_l [Tranche 12], legringfinger2_l, legpeopledifference
+    finger2_r, leglittlefinger2_r) -> all groupFile/Toes, matching the
+    established Tranche 10 precedent, no drift
+  Japanese anatomical loanwords (kata=shoulder, ashikubi/ashi=ankle/leg)
+    (2 rows) -> grounded via the established sibling-series precedent
+    (momo/ashi/sakotsu/ude/hiza family), no drift
+  DCC-default-name boundary (10 rows: pPlane, polySurface x6, and
+    others) -> all correctly OPAQUE, no drift
+
+No historical raw-file split was treated as ambiguous without first
+checking current authority (rulebook/calibration/ledger/Master, in
+that order).
+
+============================================================
+7. MANDATORY OPAQUE REVIEW (Rule 27, both directions)
+============================================================
+
+All 118 Tranche-14 OPAQUE rows were reviewed individually against Rule
+27's two-direction test. They resolve into these mechanically-tallied
+categories:
+
+  - Generic numbered bones (Bone###, bone.###, bone NNN): ~30
+  - DCC-default primitive mesh names (polySurface##, pPlane#): 6
+  - Character-prefixed generic numbered bones (taurenmale_hd_bone_##,
+    saberon_bone##): 4
+  - Bare cryptic 1-4 letter+number/side codes with no grounding (Fh##,
+    Bh##.*, b/c/d/g/h/i letter-codes, dyng+axis codes): ~28
+  - Generic technical/hierarchy operations with no named subject
+    (scale_y_up, x_shift_4/10, rot, rotn, transn, level4/5_*, front 4,
+    right_20, corner up, bothwide-style, secret_move, lower_right_drop,
+    lowerinright, thinner/outline, flex_flat_bottom, front-pull-center):
+    ~20
+  - Generic placeholder object names (Object##, dummy02, null.003): 6
+  - Generic category labels ("prop"/"equipment" alone, not a specific
+    object: prop_03, prop.root, bip001 prop1, equipment 01): 4
+  - Pure numeric literals (01, 02): 2
+  - Generic joint/root labels with no specific anatomy (valvebiped.
+    joint4, right_joint): 2
+  - Self-declared-adjacent ungrounded fragments (bone, more, bj, bl,
+    just_like_cap, bip_toasty-cpu, red surface, alligator_reference,
+    bg1): ~9
+  - Internal non-semantic namespace codenames (brk-rig-bread, matching
+    the established Brk-Rig-Bacon/Mar-Rig-Eggwhite food-word-codename
+    precedent; student.left_1, bare BAS.-style position): 3
+
+No case where a real animator-useful referent survived was
+misclassified OPAQUE; no case where mere technical readability (an
+axis name, a generic joint/bone/level label, a cryptic abbreviation)
+was mistaken for animator-useful semantics. Conversely, no OPAQUE
+verdict was softened to CLEAR merely because a literal contained one
+recognizable word without a recoverable controlled referent (e.g.
+"secret_move," "lower_right_drop," and "corner up" all contain
+readable words but no stated subject, and remain OPAQUE).
+
+============================================================
+8. MANDATORY FACE/EXPRESSIONS REVIEW
+============================================================
+
+All 10 rows routed to groupFile/Face/Expressions were reviewed to
+confirm none names a localized mechanism that should route to a Face
+subgroup instead:
+
+  anime angry r, hmhm, face-aa, suck-duckface, fbx_asagi_face,
+  fbx_rinko_face_shy, au9, au17, calml, exanger
+
+All 10 are bare whole-face emotion/vocalization words, named whole-face
+preset states, members of the fbx_[character]_face_[state] template, or
+bare/numbered FACS Action Unit notation. None names a localized brow/
+eye/midface/lip-jaw/tongue mechanism. No re-routing required.
+
+============================================================
+9. DCC-DEFAULT-NAME BOUNDARY CONSISTENCY
+============================================================
+
+10 DCC-default candidates reviewed this tranche (pplane1_2590,
+polysurface122, polysurface103, polysurface36, polysurface25,
+submesh_00_lod_1.017, and 4 additional generic-placeholder/null
+candidates reviewed under the same boundary: object009/26/30/33,
+dummy02, null.003) -- all correctly routed OPAQUE/NOT_APPLICABLE, no
+independent semantic evidence for any of them.
+
+============================================================
+10. CALIBRATION EXCEPTION CANDIDATES
+============================================================
+
+CALIBRATION_EXCEPTION_CANDIDATES: 0
+
+No Tranche-14 family exposed a new calibration inconsistency. The two
+rows most closely touching a calibration-adjacent family
+(pussparent-style genital-root naming did not recur this tranche;
+bip_anusroot_r/l, butt root.r, and the buttock-jiggle-root literals
+were checked against the CC_Butt/PussParent-style precedent purely as
+production-ledger evidence, not calibration).
+
+============================================================
+11. CROSS-TRANCHE ERRORS FOUND
+============================================================
+
+CROSS-TRANCHE ERRORS FOUND (narrow, corrected): 0
+
+No decisive earlier-production ERROR (as distinct from the doctrine-era
+TENSION documented in Section 1, which is not an error in either
+row) was discovered this tranche.
+
+============================================================
+Summary
+============================================================
+
+Cross-tranche doctrine-era tensions found (not corrected, flagged for
+  future reconciliation): 1 (Section 1)
+Structural Body-vs-Morph flags: 1 (= Section 1)
+Future Sexual Bones migration candidates: 36
+Intentional doctrine-driven Master divergences: 36
+Stale-Master-precedent violations: 0
+Cross-tranche errors corrected: 0
+Calibration exception candidates: 0
+NEEDS_DOCTRINE: 0
+Master integrity interruptions: 0
+Settled-family drift: 0 found across every family actually encountered
