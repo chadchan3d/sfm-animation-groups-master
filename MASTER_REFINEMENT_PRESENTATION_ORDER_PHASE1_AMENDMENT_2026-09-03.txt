@@ -1,0 +1,192 @@
+======================================================================
+MASTER REFINEMENT -- PHASE 1 AMENDMENT (SUPERSEDES CONFLICTING PORTIONS
+OF MASTER_REFINEMENT_PRESENTATION_ORDER_PHASE1_PROPOSAL_2026-09-03.txt)
+Approved by user. No additional approval round required before
+execution. No files modified by this document itself.
+======================================================================
+
+----------------------------------------------------------------------
+A. NO NEW GROUPS
+----------------------------------------------------------------------
+The original proposal's RigArms/LeftArm and RigArms/RightArm are
+WITHDRAWN. This pass creates zero new groups. Group count before and
+after must be identical: 35.
+
+----------------------------------------------------------------------
+B. REVISED COLLAR/CLAVICLE DESTINATION LOGIC -- FULL RE-JUDGMENT
+----------------------------------------------------------------------
+All 18 direct RigArms controls re-examined individually. Two additional
+pieces of evidence gathered beyond the Phase 1 proposal:
+
+  1. groupFile/Arms already contains 69 pre-existing structural collar/
+     clavicle controls (bip_collar0_l/r, bip_collar2_L/R, bip_collar_L/
+     R and its numbered/twist/root variants, Collar_L, Collar_R,
+     CollarBookBackIKL1/2, CollarBookHandFrontIKL1/2,
+     CollarBookPhysicsParent, hlp_collar_L/R, lCollar/rCollar,
+     LeftCollar/RightCollar, M_Collar_L/R, unused collar L/R/2, Bip_
+     Collar_L/R, lcollar/rcollar) -- all sitting FLAT directly in
+     groupFile/Arms, none nested inside Arms/RightArm or Arms/LeftArm
+     (mechanically confirmed: zero "collar" literals exist in either
+     nested group today). This establishes structural collar/clavicle
+     as unambiguously Arms-taxonomy territory in this Master, regardless
+     of exact spelling convention (bare, underscored, prefixed,
+     numbered, twist/IK variants all already coexist there).
+  2. RigBody (29 controls) and RigLegs (12 controls) are 100% "rig_"-
+     prefixed with zero exceptions. RigArms's 18 controls are 14/18
+     "rig_"-prefixed (rig_collar_R/L, rig_Bip_collar_R/L, rig_elbow_R/L,
+     rig_hand_R/L, rig_Bip_elbow_R/L, rig_Bip_hand_R/L, rig_Bip_
+     LowerArm_R/L) and exactly 4/18 NOT "rig_"-prefixed (CollarL,
+     CollarR, collarL, collarR). Across all 59 controls in RigBody +
+     RigArms + RigLegs combined, these 4 are the ONLY ones that do not
+     follow the "rig_"/"rig_Bip_" naming convention that otherwise
+     defines "genuinely part of the RigArms/RigBody/RigLegs rig
+     interface" in this Master.
+
+Per-candidate verdicts:
+
+  Literal            Verdict                    Destination
+  -----------------  -------------------------  ------------------------
+  rig_collar_R        B: RIG-OWNED               KEEP -> groupFile/RigArms
+  rig_Bip_collar_R    B: RIG-OWNED               KEEP -> groupFile/RigArms
+  rig_collar_L        B: RIG-OWNED               KEEP -> groupFile/RigArms
+  rig_Bip_collar_L    B: RIG-OWNED               KEEP -> groupFile/RigArms
+  CollarR             A: STRUCTURAL ANATOMICAL   MOVE -> groupFile/Arms/RightArm
+  collarR             A: STRUCTURAL ANATOMICAL   MOVE -> groupFile/Arms/RightArm
+  CollarL             A: STRUCTURAL ANATOMICAL   MOVE -> groupFile/Arms/LeftArm
+  collarL             A: STRUCTURAL ANATOMICAL   MOVE -> groupFile/Arms/LeftArm
+
+Reasoning: the "rig_"/"rig_Bip_" prefix is the positively-evidenced,
+100%-internally-consistent marker of genuine rig-interface ownership in
+this specific group family (RigBody/RigArms/RigLegs combined). rig_
+collar_R/L and rig_Bip_collar_R/L carry that marker and are paired with
+their own complete rig-interface arm chains (rig_elbow/rig_hand and
+rig_Bip_elbow/rig_Bip_hand/rig_Bip_LowerArm respectively) -- they stay.
+CollarL/CollarR/collarL/collarR carry no such marker, are the sole
+exceptions to an otherwise-universal RigArms/RigBody/RigLegs naming
+discipline, and match an extensively-attested (69-member) existing
+Arms-taxonomy structural-collar naming ecosystem -- they move to the
+existing Arms/LeftArm or Arms/RightArm groups per the user's explicit
+routing instruction (Section 2A of the update), even though the
+Master's own 69 pre-existing Arms collar controls happen to sit flat in
+plain Arms rather than nested in RightArm/LeftArm -- that pre-existing
+inconsistency is a separate, out-of-scope observation, not a reason to
+deviate from the explicit destination given for these 4 confirmed
+candidates.
+
+No candidate resolved as C (AMBIGUOUS) after this re-judgment -- the
+"rig_" prefix marker gave a positive, mechanically-checkable basis for
+both verdicts.
+
+No collar/clavicle control moves to RigBody. None was ever a candidate
+for that (RigBody contains zero collar/clavicle literals).
+
+----------------------------------------------------------------------
+C. CASEFOLD SAFETY (re-confirmed under the revised destinations)
+----------------------------------------------------------------------
+  key "collarl": {CollarL, collarL} -- both currently groupFile/RigArms
+    (same-path, valid). BOTH move together to groupFile/Arms/LeftArm
+    (same-path after move, valid). No existing member of this fold key
+    exists anywhere else in the Master (the only near-miss, "Collar_L"
+    in groupFile/Arms, folds to "collar_l" -- a DIFFERENT key, because
+    ASCII-fold preserves the underscore -- so it is not part of this
+    family and is not touched).
+  key "collarr": {CollarR, collarR} -- both currently groupFile/RigArms.
+    BOTH move together to groupFile/Arms/RightArm (same-path after
+    move, valid). "Collar_R" is a separate, untouched fold key for the
+    same reason as above.
+  rig_collar_r / rig_collar_l / rig_bip_collar_r / rig_bip_collar_l:
+    single-member fold keys, unaffected (not moving).
+Result: ASCII CASEFOLD CROSS-PATH CONFLICTS = 0 both before and after.
+
+----------------------------------------------------------------------
+D. LEFT-BEFORE-RIGHT CANONICAL GROUP-ORDER AUDIT (complete, all 35
+   groups enumerated)
+----------------------------------------------------------------------
+Every parent and its ordered direct children were enumerated. Only two
+parents contain an unambiguous mirrored Left/Right sibling GROUP pair
+(same parent, both groups already exist):
+
+  Parent               Left child   Right child   Current order      New order         Change?
+  -------------------  -----------  ------------  -----------------  ----------------  -------
+  groupFile/Arms        LeftArm      RightArm      RightArm, LeftArm  LeftArm, RightArm YES
+  groupFile/Toes        LeftToes     RightToes     RightToes, LeftToes LeftToes, RightToes YES
+
+No other parent in the Master has a qualifying pair:
+  - groupFile/Arms/RightArm's children (RightFingers, RightCarpals) and
+    groupFile/Arms/LeftArm's children (LeftFingers, LeftCarpals) are
+    NOT siblings of each other (different parents: RightArm vs LeftArm)
+    -- NOT_APPLICABLE, not a sibling pair, not reordered.
+  - groupFile/Face's children (Eyes, Expressions, Upper Face, Mid Face,
+    Lower Face, Tongue, Ears) contain no Left/Right-named groups --
+    NOT_APPLICABLE.
+  - No LeftLeg/RightLeg groups exist anywhere -- NOT_APPLICABLE, GROUPS
+    ABSENT (Legs has zero child groups; per Section 7 of the update,
+    not invented).
+  - No LeftFoot/RightFoot groups exist anywhere -- NOT_APPLICABLE,
+    GROUPS ABSENT.
+  - No other Left/Right-named group exists anywhere in the remaining 35
+    - 2(pairs) - ... groups checked.
+
+This is a bounded GROUP-declaration reorder only. The 117,612 individual
+control literals inside RightArm/LeftArm/RightToes/LeftToes are NOT
+touched, renamed, or reordered relative to each other -- each group's
+entire internal content moves as one contiguous, internally-unmodified
+block (aside from the explicitly-authorized new selectable lines and
+the 4 collar-literal insertions into RightArm/LeftArm covered in
+Section B).
+
+----------------------------------------------------------------------
+E. REVISED "UNKNOWN" DISPOSITION
+----------------------------------------------------------------------
+STATIC_MASTER_UNKNOWN_GROUP_PRESENT: NO (confirmed, unchanged from
+  Phase 1 finding)
+UNKNOWN_GROUP_CREATED: NO
+NATIVE_UNKNOWN_FALLBACK_PRESERVED: YES (nothing in this pass touches
+  runtime fallback behavior; Other and Useless remain the last two
+  static root groups, untouched and unrenamed)
+
+----------------------------------------------------------------------
+F. UNCHANGED APPROVED ITEMS (carried forward from Phase 1 proposal,
+   re-confirmed against this amendment)
+----------------------------------------------------------------------
+  - Root order: move Tail (lines to be recomputed at execution time,
+    contiguous block) to immediately after RigLegs / immediately before
+    RigHelpers. Wings shifts up one slot as an unavoidable side effect.
+    Sequence: ... Toes, Wings, RigBody, RigArms, RigLegs, Tail,
+    RigHelpers, Attachments, Other, Useless.
+  - Root-transform control promotion: root_transform, rootTransform,
+    RootTransform promoted to the front of groupFile/Body's control
+    list (after the new "selectable" line), in their existing relative
+    order. rig_root promoted to the front of groupFile/RigBody's
+    control list (after the new "selectable" line). No other "root"-
+    containing literal promoted (bare Root/root/ROOT and all qualified
+    variants remain exactly where they are; the 30+ "[bodypart] right/
+    left root" hits were confirmed as false-positive substring matches
+    on "right"/"rig" and were never real candidates).
+  - Selectability: Body, Arms, Legs, RigBody, RigArms, RigLegs, Tail,
+    Wings -> selectable 1 (new lines, none currently exist). Arms/
+    RightArm, Arms/LeftArm -> selectable 1 (new lines; existing
+    groupColor values unchanged). Toes, Toes/RightToes, Toes/LeftToes
+    -> selectable 0 (new lines). RightFingers/LeftFingers already
+    selectable 1 (no change). RightCarpals/LeftCarpals already
+    selectable 0, no color override (no change).
+  - Canonical side colors: RightArm/LeftArm/RightToes/LeftToes already
+    carry the exact canonical RGBA values -- no color VALUE changes
+    anywhere in this pass.
+  - RigHelpers -> add selectable 0, visible 0 (both new; neither exists
+    today). Attachments -> add selectable 0, visible 0 (both new;
+    existing groupColor 104 188 255 255 unchanged).
+  - No blanket visible=1 anywhere.
+  - Metadata line order: where a group needs both selectable and an
+    existing/new groupColor, selectable is placed first (matching the
+    Master's own only two-key precedent, RightFingers/LeftFingers).
+    Where RigHelpers/Attachments need selectable + visible (+ existing
+    groupColor for Attachments), the order is: selectable, visible,
+    groupColor.
+  - Face/Eyes/Upper/Mid/Lower Face/Tongue/Expressions/Ears/Body Morphs/
+    Hair/Clothing/Correctives/Other/Useless/Fingers(root-level):
+    zero changes.
+
+No further approval round is required before execution per the user's
+explicit instruction. Proceeding to Phase 2 (execution).
+======================================================================

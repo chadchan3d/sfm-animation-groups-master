@@ -1,0 +1,316 @@
+======================================================================
+MASTER REFINEMENT -- CANONICAL PRESENTATION / ORDER / ROOT PRIORITY
+IMPLEMENTATION REPORT
+======================================================================
+Canonical Master: sfm_defaultanimationgroups.txt
+Governed by: CLAUDE.md (Preflight Approval Gate)
+Phase 1 proposal: MASTER_REFINEMENT_PRESENTATION_ORDER_PHASE1_PROPOSAL_2026-09-03.txt
+Phase 1 amendment (approved, supersedes conflicting portions of the
+  proposal): MASTER_REFINEMENT_PRESENTATION_ORDER_PHASE1_AMENDMENT_2026-09-03.txt
+
+----------------------------------------------------------------------
+1. ROOT GROUP ORDER
+----------------------------------------------------------------------
+BEFORE:
+  1. Face  2. Body Morphs  3. Hair  4. Clothing  5. Correctives  6. Body
+  7. Arms  8. Fingers  9. Legs  10. Toes  11. Tail  12. Wings
+  13. RigBody  14. RigArms  15. RigLegs  16. RigHelpers  17. Attachments
+  18. Other  19. Useless
+
+AFTER:
+  1. Face  2. Body Morphs  3. Hair  4. Clothing  5. Correctives  6. Body
+  7. Arms  8. Fingers  9. Legs  10. Toes  11. Wings  12. RigBody
+  13. RigArms  14. RigLegs  15. Tail  16. RigHelpers  17. Attachments
+  18. Other  19. Useless
+
+Change: Tail relocated as one contiguous block (originally lines
+104315-106380, 2,066 lines) from position 11 to immediately after
+RigLegs / immediately before RigHelpers (new position 15). Wings shifted
+from position 12 to 11 purely as a mechanical consequence of Tail's
+extraction; Wings itself was not reordered relative to any other group.
+No other root group's relative order changed.
+
+Constraint verification (mechanically re-parsed from the promoted
+Master):
+  RigBody before RigArms:          PASS
+  RigArms before RigLegs:           PASS
+  Tail immediately after RigLegs:   PASS
+  RigHelpers immediately after Tail: PASS
+  Attachments after main categories: PASS
+  Static Master "Unknown" group:    absent (confirmed both before and
+    after -- see Section 9)
+
+----------------------------------------------------------------------
+2. CANONICAL LEFT/RIGHT GROUP ORDER AUDIT
+----------------------------------------------------------------------
+Complete audit of all 35 groups (root and nested) for unambiguous
+mirrored Left/Right sibling GROUP pairs under a common parent:
+
+  Parent            Left group  Right group  Old order            New order            Changed?
+  ----------------  ----------  -----------  -------------------  -------------------  --------
+  groupFile/Arms    LeftArm     RightArm     RightArm, LeftArm    LeftArm, RightArm    YES
+  groupFile/Toes    LeftToes    RightToes    RightToes, LeftToes  LeftToes, RightToes  YES
+
+All other groups reviewed and found NOT_APPLICABLE:
+  - groupFile/Arms/RightArm's children (RightFingers, RightCarpals) and
+    groupFile/Arms/LeftArm's children (LeftFingers, LeftCarpals): not
+    siblings of each other (different parents) -- not reordered.
+  - groupFile/Face's 7 children (Eyes, Expressions, Upper Face, Mid
+    Face, Lower Face, Tongue, Ears): no Left/Right-named groups.
+  - LeftLeg/RightLeg: NOT_APPLICABLE -- GROUPS ABSENT (Legs has zero
+    child groups; not invented).
+  - LeftFoot/RightFoot: NOT_APPLICABLE -- GROUPS ABSENT (do not exist
+    anywhere in the Master; not invented).
+  - No other Left/Right-named group pair exists among the remaining 28
+    groups.
+
+Individual control literals inside RightArm/LeftArm/RightToes/LeftToes
+were NOT reordered relative to each other -- each group's entire
+pre-existing internal content moved as one contiguous block (aside from
+the explicitly-authorized new "selectable" line and, for RightArm/
+LeftArm, the 4 relocated collar/clavicle literals appended at the
+bottom -- see Section 4). No sweep of the 117,612 control literals for
+"_L/_R"/"left"/"right" was performed or authorized.
+
+----------------------------------------------------------------------
+3. ROOT/ROOT-TRANSFORM CONTROLS
+----------------------------------------------------------------------
+  Literal          Path              Old ordinal  New ordinal  Evidence
+  ---------------  ----------------  -----------  -----------  --------
+  root_transform    groupFile/Body    884 / 1512   1 / 1512     Recognized Source-engine/SFM
+                                                                 model-root-transform naming
+                                                                 convention; unqualified,
+                                                                 unnumbered, singular.
+  rootTransform     groupFile/Body    887 / 1512   2 / 1512     Same concept, camelCase spelling.
+  RootTransform     groupFile/Body    1437 / 1512  3 / 1512     Same concept, Pascal-case spelling
+                                                                 (same ASCII-fold key as
+                                                                 rootTransform).
+  rig_root          groupFile/RigBody 8 / 29       1 / 29       Sole "root"-named control in
+                                                                 RigBody, alongside rig_chest/
+                                                                 rig_head/rig_hips/rig_neck/
+                                                                 rig_pelvis/rig_spine_* -- a
+                                                                 top-level rig-chain anchor, not
+                                                                 a numbered/qualified variant.
+
+Relative order of the three Body literals preserved exactly (root_
+transform, then rootTransform, then RootTransform) -- no preferred
+spelling order was inferred, their pre-existing relative sequence was
+kept. No taxonomy destination changed for any of the 4 -- this is an
+in-group control-list reorder only (Section 18 of the original brief).
+
+LOCAL/NONPRINCIPAL ROOTS PROMOTED: 0. Every "root"-containing literal
+NOT promoted (Root, root, ROOT, root ground, Root Hips, root hips, root
+middle, root pelvis, root_0, root_1, Root_cat, root_hr, root_joint,
+Root_M, RootBone, rootbone, Root., Root.Bone, Root_Bone, and ~30
+"[bodypart] right/left root"-shaped literals that were substring false
+positives on "right"/"rig") remains exactly where it was, unmoved and
+unretouched. No Fingers/Carpals/Toes/hair/tail/helper/coded root was
+promoted.
+
+----------------------------------------------------------------------
+4. COLLAR/CLAVICLE MOVES
+----------------------------------------------------------------------
+All 18 direct groupFile/RigArms controls individually re-judged
+(anatomical vs. rig-owned vs. ambiguous), per the amendment's revised
+logic -- see MASTER_REFINEMENT_PRESENTATION_ORDER_PHASE1_AMENDMENT_2026-09-03.txt
+Section B for full reasoning.
+
+  Literal            Casefold family      Old path         Verdict        New path                Evidence
+  -----------------  -------------------  ---------------  -------------  ----------------------  --------
+  rig_collar_R        rig_collar_r (solo)  groupFile/RigArms  RIG-OWNED    groupFile/RigArms (KEEP)  "rig_" prefix; paired with rig_elbow_R/rig_hand_R rig-interface chain.
+  rig_Bip_collar_R    rig_bip_collar_r     groupFile/RigArms  RIG-OWNED    groupFile/RigArms (KEEP)  "rig_Bip_" prefix; paired with rig_Bip_elbow_R/rig_Bip_hand_R/rig_Bip_LowerArm_R.
+                      (solo)
+  rig_collar_L        rig_collar_l (solo)  groupFile/RigArms  RIG-OWNED    groupFile/RigArms (KEEP)  Mirrors rig_collar_R.
+  rig_Bip_collar_L    rig_bip_collar_l     groupFile/RigArms  RIG-OWNED    groupFile/RigArms (KEEP)  Mirrors rig_Bip_collar_R.
+                      (solo)
+  CollarR             collarr {CollarR,    groupFile/RigArms  STRUCTURAL   groupFile/Arms/RightArm   No "rig_" prefix -- the only 4
+                      collarR}                                ANATOMICAL                            non-"rig_"-prefixed controls in
+  collarR             collarr {CollarR,    groupFile/RigArms  STRUCTURAL   groupFile/Arms/RightArm   RigBody+RigArms+RigLegs combined
+                      collarR}                                ANATOMICAL                            (55/59 other controls ARE "rig_"-
+  CollarL             collarl {CollarL,    groupFile/RigArms  STRUCTURAL   groupFile/Arms/LeftArm    prefixed); matches the Master's
+                      collarL}                                ANATOMICAL                            existing 69-member structural
+  collarL             collarl {CollarL,    groupFile/RigArms  STRUCTURAL   groupFile/Arms/LeftArm    collar/clavicle naming ecosystem
+                      collarL}                                ANATOMICAL                            already resident in groupFile/Arms.
+
+The remaining 10 RigArms controls (rig_elbow_R/L, rig_hand_R/L, rig_Bip_
+elbow_R/L, rig_Bip_hand_R/L, rig_Bip_LowerArm_R/L) are not collar/
+clavicle controls and were explicitly out of this task's scope --
+untouched, still directly in groupFile/RigArms, in their original
+relative order.
+
+No collar/clavicle control moved to RigBody. No garment/decorative/
+ambiguous/unsided collar control was touched -- all such literals
+(jacket_collar, cloth_collar, bip_ClockCollar*, BAS_Dress.*, the 69
+pre-existing groupFile/Arms collar variants, the 100 Master-wide
+"clavicle" hits) live outside groupFile/RigArms and were not inspected
+for movement.
+
+CASEFOLD SAFETY: {CollarL, collarL} (fold key "collarl") moved together
+to groupFile/Arms/LeftArm; {CollarR, collarR} (fold key "collarr") moved
+together to groupFile/Arms/RightArm. Both families remain same-path
+after the move. "Collar_L"/"Collar_R" (fold keys "collar_l"/"collar_r",
+underscore preserved by ASCII-fold) are a DIFFERENT, untouched family
+already resident in groupFile/Arms. ASCII CASEFOLD CROSS-PATH CONFLICTS
+= 0, confirmed by tools/validate_master.py both before and after.
+
+Placement: CollarR/collarR appended at the bottom of groupFile/Arms/
+RightArm's existing control list (after the pre-existing rig_Palm_
+Ring_R, its prior last control); CollarL/collarL appended at the bottom
+of groupFile/Arms/LeftArm's existing control list. Internal relative
+order of each side's pair preserved (CollarR before collarR; CollarL
+before collarL, matching their original RigArms relative order).
+
+----------------------------------------------------------------------
+5. GROUP METADATA -- FULL BEFORE/AFTER
+----------------------------------------------------------------------
+  Full path                          Old groupColor          New groupColor  Old selectable  New selectable  Old visible  New visible
+  ----------------------------------  -----------------------  --------------  --------------  --------------  -----------  -----------
+  groupFile/Body                      (none)                    unchanged       (none)          1               (none)       unchanged
+  groupFile/Arms                      (none)                    unchanged       (none)          1               (none)       unchanged
+  groupFile/Legs                      (none)                    unchanged       (none)          1               (none)       unchanged
+  groupFile/RigBody                   (none)                    unchanged       (none)          1               (none)       unchanged
+  groupFile/RigArms                   (none)                    unchanged       (none)          1               (none)       unchanged
+  groupFile/RigLegs                   (none)                    unchanged       (none)          1               (none)       unchanged
+  groupFile/Tail                      (none)                    unchanged       (none)          1               (none)       unchanged
+  groupFile/Wings                     (none)                    unchanged       (none)          1               (none)       unchanged
+  groupFile/Toes                      (none)                    unchanged       (none)          0               (none)       unchanged
+  groupFile/Arms/RightArm             255 128 128 255 (kept)    unchanged       (none)          1               (none)       unchanged
+  groupFile/Arms/LeftArm              160 250 144 255 (kept)    unchanged       (none)          1               (none)       unchanged
+  groupFile/Arms/RightArm/RightFingers 255 128 128 255 (kept)   unchanged       1 (already)     unchanged       (none)       unchanged
+  groupFile/Arms/LeftArm/LeftFingers  160 250 144 255 (kept)    unchanged       1 (already)     unchanged       (none)       unchanged
+  groupFile/Arms/RightArm/RightCarpals (none, kept neutral)     unchanged       0 (already)     unchanged       (none)       unchanged
+  groupFile/Arms/LeftArm/LeftCarpals  (none, kept neutral)      unchanged       0 (already)     unchanged       (none)       unchanged
+  groupFile/Toes/RightToes            255 128 128 255 (kept)    unchanged       (none)          0               (none)       unchanged
+  groupFile/Toes/LeftToes             160 250 144 255 (kept)    unchanged       (none)          0               (none)       unchanged
+  groupFile/RigHelpers                (none)                    unchanged       (none)          0               (none)       0
+  groupFile/Attachments               104 188 255 255 (kept)    unchanged       (none)          0               (none)       0
+  groupFile/Correctives               240 210 255 255 (kept)    unchanged (not given new policy)
+
+Metadata line ordering convention used: where a group needed both
+"selectable" and an existing/new "groupColor", selectable was placed
+FIRST -- matching the Master's own only pre-existing 2-key precedent
+(RightFingers/LeftFingers). Where RigHelpers/Attachments needed
+"selectable" + "visible" (+ existing groupColor for Attachments), the
+order used was: selectable, visible, groupColor. Every new "selectable"/
+"visible" line uses the Master's existing single-space syntax
+("selectable" "1"), matching its 4 pre-existing "selectable" lines (no
+"visible" line existed anywhere before this pass -- this introduces
+that key using the same convention).
+
+No color VALUE changed anywhere -- RightArm/LeftArm/RightToes/LeftToes/
+Attachments/Correctives keep their exact pre-existing groupColor values.
+
+----------------------------------------------------------------------
+6. UNCHANGED / DELIBERATE OMISSIONS
+----------------------------------------------------------------------
+- ZERO new groups created (GROUPS CREATED: 0). The originally-proposed
+  RigArms/LeftArm and RigArms/RightArm subgroups were withdrawn per the
+  approved amendment.
+- No blanket "visible" "1" was added anywhere. Body, Arms, Legs,
+  RigBody, RigArms, RigLegs, Tail, Wings, Fingers, Toes and every other
+  group keep their native/default (absent) visible metadata except the
+  two explicitly-authorized intentional visible=0 groups (RigHelpers,
+  Attachments).
+- Face, Eyes, Upper/Mid/Lower Face, Tongue, Expressions, Ears, Body
+  Morphs, Hair, Clothing, Correctives, Other, Useless: zero metadata or
+  order changes.
+- The separate root-level "Fingers" group (distinct from Arms/RightArm/
+  RightFingers and Arms/LeftArm/LeftFingers) was not named anywhere in
+  this task and is completely untouched.
+- No RightLeg/LeftLeg/RightFoot/LeftFoot groups were created -- they do
+  not exist in this Master and were not invented.
+- No Fingers/Carpals/Toes control was moved into any Rig* branch, and no
+  active-rig-only contextual topology was introduced anywhere.
+- No static "Unknown" group was created, and neither "Other" nor
+  "Useless" was renamed.
+
+----------------------------------------------------------------------
+7. IDENTITY/STRUCTURE VALIDATION
+----------------------------------------------------------------------
+                                    BEFORE                                    AFTER
+  --------------------------------  ----------------------------------------  ----------------------------------------
+  SHA-256                            bf812c0d216e76f3aceae3fb2a593fcecf6e0977037f4f883b78774a2583a3af  29aaf43e393de84e8af4a9aec4c3fbc37a04859b213f17666573d92ae552dcb7
+  File size (bytes)                  3,615,925                                 3,616,250
+  Line count                         118,361                                   118,378  (+17; see note below)
+  Group count                        35                                        35
+  Open / close brace count           35 / 35                                   35 / 35
+  Control lines                      117,612                                   117,612
+  Unique exact literals              117,612                                   117,612
+  Unique ASCII-fold keys             113,881                                   113,881
+  Multi-spelling fold families       3,178 (all same-path)                     3,178 (all same-path)
+  Cross-path conflicts               0                                         0
+  Exact duplicate literals           0                                         0
+  Structural parse                   PASS                                      PASS
+
+Line-count delta explained exactly: +17 new lines total. 13 groups each
+gained exactly one new "selectable" line (Body, Arms, Legs, RigBody,
+RigArms, RigLegs, Tail, Wings, Arms/RightArm, Arms/LeftArm, Toes,
+Toes/RightToes, Toes/LeftToes = 13 lines), and 2 groups (RigHelpers,
+Attachments) each gained two new lines ("selectable" + "visible" = 4
+lines). 13 + 4 = 17, matching the measured delta (118,378 - 118,361)
+precisely. The 8 relocated collar/clavicle literals (RigArms ->
+Arms/RightArm or Arms/LeftArm) and the 4 relocated root-priority
+literals (reordered within Body/RigBody) contribute zero net line-count
+change, since each moved line is removed from exactly one location and
+reinserted at exactly one other location.
+
+Mechanically confirmed (independent re-parse of the promoted Master):
+  control literal multiset before == after:  PASS (exact Counter equality
+    over all 117,612 literals, not just aggregate counts)
+  no control literal added:                  PASS (0 literals in
+    after-not-in-before)
+  no control literal removed:                PASS (0 literals in
+    before-not-in-after)
+  no control literal renamed:                PASS (multiset equality
+    implies this; additionally each of the 8 collar/clavicle moves and
+    4 root-priority moves was individually confirmed to still exist by
+    exact spelling, once at its new path)
+  group_count unchanged:                     PASS (35 == 35)
+  cross_path_family_count:                   0 (unchanged)
+  exact_duplicate_count:                     0 (unchanged)
+  root order matches approved sequence:      PASS
+  Arms children == [LeftArm, RightArm]:      PASS
+  Toes children == [LeftToes, RightToes]:    PASS
+  CollarL/collarL in Arms/LeftArm, CollarR/
+    collarR in Arms/RightArm:                PASS
+  Body control #1-3 == root_transform,
+    rootTransform, RootTransform:            PASS
+  RigBody control #1 == rig_root:            PASS
+  RigArms retains exactly its 14 remaining
+    "rig_"-prefixed controls, in original
+    relative order:                          PASS
+
+tools/validate_master.py (promoted canonical Master): PASS
+
+----------------------------------------------------------------------
+8. GIT DIFF REVIEW
+----------------------------------------------------------------------
+git diff --check: 6 pre-existing trailing-whitespace lines flagged
+(lines 97080, 97193, 97201, 97202, 97395, 98918 in the new file) -- all
+6 mechanically confirmed to be EXACT relocations of lines that already
+had that trailing whitespace at their old position in the previous
+commit (e.g. "rig_Palm_Ring_R" with a trailing tab existed at old line
+95536; "rig_ValveBiped.Bip01_R_Finger53" with a trailing tab existed at
+old line 95730) -- not new whitespace introduced by this pass.
+
+git diff --stat: 1 file changed, 10,874 insertions(+), 10,857
+deletions(-). This large insertion/deletion count is expected and
+mechanically explained: git's line-based diff does not recognize
+whole-block relocation as a "move" by default, so the Tail block
+(2,066 lines), the RightArm/LeftArm swap, and the RightToes/LeftToes
+swap each appear as large delete+insert pairs even though their
+internal content is byte-identical at the new position (confirmed by
+the mechanical control-multiset and per-group content checks in
+Section 7, not by visual line-diff inspection).
+
+----------------------------------------------------------------------
+9. UNKNOWN GROUP DISPOSITION
+----------------------------------------------------------------------
+STATIC_MASTER_UNKNOWN_GROUP_PRESENT: NO (confirmed both before and
+  after this pass -- zero groups named "Unknown" exist anywhere in the
+  35-group hierarchy)
+UNKNOWN_GROUP_CREATED: NO
+NATIVE_UNKNOWN_FALLBACK_PRESERVED: YES (this pass makes no runtime/
+  fallback-topology change; "Other" and "Useless" remain the final two
+  static root groups, unrenamed)
+======================================================================

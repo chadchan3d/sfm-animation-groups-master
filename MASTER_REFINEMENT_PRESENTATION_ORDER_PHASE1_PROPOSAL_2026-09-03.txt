@@ -1,0 +1,442 @@
+======================================================================
+MASTER REFINEMENT -- CANONICAL PRESENTATION / ORDER / ROOT PRIORITY
+PHASE 1 PROPOSAL (READ-ONLY AUDIT). NO FILES MODIFIED.
+======================================================================
+
+Canonical Master: E:\SFM Animation Group Master\sfm_defaultanimationgroups.txt
+This document is the mandatory Phase 1 preflight report required by
+CLAUDE.md before any Master edit. Phase 2 (execution) does not begin
+until explicit approval ("Proceed") is given.
+
+----------------------------------------------------------------------
+0. BASELINE (mechanically captured, tools/validate_master.py)
+----------------------------------------------------------------------
+SHA-256:                      bf812c0d216e76f3aceae3fb2a593fcecf6e0977037f4f883b78774a2583a3af
+File size:                    3,615,925 bytes
+Line count:                   118,361
+Group count:                  35
+Control lines:                117,612
+Unique exact literals:        117,612
+Unique ASCII-fold keys:       113,881
+Multi-spelling fold families: 3,178 (all same-path -- valid)
+Cross-path conflicts:         0
+Exact duplicates:             0
+Structural parse:             PASS
+No blank-line separators exist between any of the 19 root (depth-2)
+group blocks anywhere in the file -- confirmed by direct inspection of
+every junction in the RigBody..Attachments..Other region. This means
+every root-group reorder below is a pure contiguous-block relocation
+with no separator lines to gain or lose.
+
+----------------------------------------------------------------------
+1. FLAGGED AMBIGUITY REQUIRING YOUR DECISION: "Unknown" DOES NOT EXIST
+----------------------------------------------------------------------
+The brief requires "Unknown" to be the final root declaration. I
+mechanically searched all 35 groups in the current Master (root and
+nested) for a group named "Unknown" (case-insensitive): zero matches.
+
+The two groups that already occupy the final two root positions are
+"Other" and "Useless" -- not "Unknown". Per CLAUDE.md's ambiguity rule
+("if a requested group name resolves to ... I have not given enough
+information ... STOP. Report the ambiguity. Do not guess"), I am NOT
+inventing an "Unknown" group, renaming "Other" or "Useless" to
+"Unknown", or otherwise guessing your intent.
+
+DEFAULT PROPOSED RESOLUTION (used in the plan below unless you say
+otherwise): treat this requirement as not-yet-applicable to the current
+Master. "Other" and "Useless" already sit last, satisfying the spirit
+of "fallback content comes last." No group is renamed or created. If
+you intended one of them to actually BE the "Unknown" fallback (e.g.
+"Other" is functionally your Unknown bucket) and want it renamed, or
+want a new empty "Unknown" group created, tell me explicitly and I will
+revise this plan before Phase 2.
+
+----------------------------------------------------------------------
+2. ROOT GROUP ORDER
+----------------------------------------------------------------------
+CURRENT (19 root/depth-2 groups, declaration order):
+  1. Face
+  2. Body Morphs
+  3. Hair
+  4. Clothing
+  5. Correctives
+  6. Body
+  7. Arms
+  8. Fingers            <- a separate, pre-existing root-level group,
+                           distinct from the canonical Arms/RightArm/
+                           RightFingers and Arms/LeftArm/LeftFingers
+                           nested groups; not named anywhere in this
+                           brief; left completely untouched.
+  9. Legs
+ 10. Toes
+ 11. Tail
+ 12. Wings
+ 13. RigBody
+ 14. RigArms
+ 15. RigLegs
+ 16. RigHelpers
+ 17. Attachments
+ 18. Other
+ 19. Useless
+
+Constraint check against current order:
+  RigBody before RigArms:            already satisfied (13 before 14)
+  RigArms before RigLegs:             already satisfied (14 before 15)
+  Tail immediately after RigLegs:     VIOLATED (Tail is at 11, RigLegs
+                                       at 15)
+  RigHelpers immediately after Tail:  currently true only because Tail
+                                       hasn't moved yet; must be
+                                       re-satisfied after Tail moves
+  Attachments below main categories:  already satisfied
+  Unknown last:                       N/A (does not exist -- see
+                                       Section 1)
+
+PROPOSED (minimum change satisfying every constraint; nothing else
+reordered):
+  1. Face
+  2. Body Morphs
+  3. Hair
+  4. Clothing
+  5. Correctives
+  6. Body
+  7. Arms
+  8. Fingers
+  9. Legs
+ 10. Toes
+ 11. Wings            <- shifts up one slot ONLY as a mechanical side
+                          effect of extracting Tail from between Toes
+                          and Wings; Wings' position relative to every
+                          OTHER group is unchanged, and Wings is not
+                          itself named by the ordering constraints, so
+                          this is not an "unnecessary reorder" of a
+                          governed category.
+ 12. RigBody
+ 13. RigArms
+ 14. RigLegs
+ 15. Tail             <- MOVED here (was position 11)
+ 16. RigHelpers        (unchanged relative position: still immediately
+                          after RigLegs/Tail)
+ 17. Attachments       (unchanged)
+ 18. Other             (unchanged, last-but-one)
+ 19. Useless           (unchanged, last)
+
+Mechanical basis for the move: Tail currently occupies lines
+104315-106380 (2,066 lines) as a single contiguous, separator-free
+block. It will be relocated as one exact unit to immediately follow
+RigLegs' close-brace line (currently 109389) and immediately precede
+RigHelpers' name line (currently 109390). No other block's internal
+content changes.
+
+----------------------------------------------------------------------
+3. ROOT/ROOT-TRANSFORM CONTROL PRIORITY CANDIDATES
+----------------------------------------------------------------------
+Mechanical candidate inventory: every control literal containing "root"
+(case-insensitive) anywhere in the Master (772 raw hits). The large
+majority are ordinary per-limb/per-accessory anchor points (e.g. "head
+eye right root", "breast right root", "cloak right root") -- NOT
+principal-model-root candidates; excluded below without individual
+listing per Section 6's own "finger/toe/hair/tail/local-limb root"
+exclusion category (these are the same kind of thing: a location- or
+object-owned local anchor, not a whole-model root).
+
+The following 8 literals were individually judged as genuine principal-
+root candidates, restricted to bare "root", "root_transform"-shape, and
+"rig_root"-shape literals per Section 5:
+
+  Literal            Path              Evidence                          Verdict
+  -----------------  ----------------  --------------------------------  -------
+  root_transform      groupFile/Body    Recognized Source-engine/SFM      YES -- promote
+                                        convention name for a model's
+                                        root transform bone; unqualified,
+                                        unnumbered, singular concept.
+  rootTransform       groupFile/Body    Same concept, camelCase spelling  YES -- promote
+                                        variant (different fold key from
+                                        root_transform: no underscore).
+  RootTransform       groupFile/Body    Same concept, Pascal-case         YES -- promote
+                                        spelling (same fold key as
+                                        rootTransform: "roottransform").
+  rig_root            groupFile/RigBody Sole "root"-named control in      YES -- promote
+                                        RigBody, sitting alongside
+                                        rig_chest/rig_head/rig_hips/
+                                        rig_neck/rig_pelvis/rig_spine_* --
+                                        a top-level rig-chain anchor,
+                                        not a numbered/qualified variant.
+  Root / root / ROOT groupFile/Body    Bare "root" is one of MANY         NO -- not promoted
+                                        competing local-root variants in
+                                        this exact group: root ground,
+                                        Root Hips / root hips, root
+                                        middle, root pelvis, root_0,
+                                        root_1, Root_cat, root_hr,
+                                        root_joint, Root_M, RootBone/
+                                        rootbone, Root./Root.Bone/
+                                        Root_Bone. No positive evidence
+                                        singles this bare spelling out as
+                                        THE principal model root rather
+                                        than one more member of this
+                                        noisy local-anchor family.
+  root ground / Root  groupFile/Body    Explicitly qualified (ground/     NO -- not promoted
+  Hips / root hips /                    hips/pelvis/middle/cat/joint/M) --
+  root middle / root                    a local or region-specific
+  pelvis / root_0 /                     anchor, not the whole-model
+  root_1 / Root_cat /                   root.
+  root_hr / root_joint
+  / Root_M / RootBone /
+  rootbone / Root. /
+  Root.Bone / Root_Bone
+
+  (30 additional "[bodypart] right/left root"-shaped hits, e.g. "head
+  eye right root", "breast right root", "cloak right root", "wing right
+  root", "arm right cannon root" -- all excluded per Section 6's local/
+  limb/accessory-root exclusion; none renamed or moved.)
+
+No candidate was promoted by a "contains root" substring rule -- every
+YES verdict rests on the literal being an unqualified, singular,
+recognized root-transform/rig-root naming convention, cross-checked
+against its own sibling family for competing qualified variants.
+
+PROPOSED MOVES (in-group reorder only -- Section 18 applies: this does
+NOT change any control's taxonomy path):
+
+  groupFile/Body (1,512 direct controls) -- move to the very front of
+  the control list, immediately after the new "selectable" metadata
+  line (Section 4 below), in this relative order (their current
+  relative order preserved):
+    root_transform   (was ordinal 884  -> becomes ordinal 1)
+    rootTransform     (was ordinal 887  -> becomes ordinal 2)
+    RootTransform     (was ordinal 1437 -> becomes ordinal 3)
+
+  groupFile/RigBody (29 direct controls) -- move to the very front of
+  the control list, immediately after the new "selectable" metadata
+  line:
+    rig_root          (was ordinal 8    -> becomes ordinal 1)
+
+Every other control in Body and RigBody keeps its exact current
+relative order; only these 4 literals are extracted and reinserted at
+the front, nothing is renamed, retyped, or retargeted to a different
+group.
+
+----------------------------------------------------------------------
+4. GROUP METADATA -- CURRENT VALUES / PROPOSED ADDITIONS
+----------------------------------------------------------------------
+Mechanically fetched (direct-child groupColor/selectable/visible lines
+only, not inherited/nested):
+
+  Path                              Old groupColor        Old selectable  Old visible  New groupColor  New selectable  New visible
+  --------------------------------  ---------------------  --------------  -----------  --------------  --------------  -----------
+  groupFile/Body                    (none)                  (none)          (none)       unchanged       1               unchanged
+  groupFile/Arms                    (none)                  (none)          (none)       unchanged       1               unchanged
+  groupFile/Legs                    (none)                  (none)          (none)       unchanged       1               unchanged
+  groupFile/RigBody                 (none)                  (none)          (none)       unchanged       1               unchanged
+  groupFile/RigArms                 (none)                  (none)          (none)       unchanged       1               unchanged
+  groupFile/RigLegs                 (none)                  (none)          (none)       unchanged       1               unchanged
+  groupFile/Arms/RightArm           255 128 128 255 (OK)    (none)          (none)       unchanged       1               unchanged
+  groupFile/Arms/LeftArm            160 250 144 255 (OK)    (none)          (none)       unchanged       1               unchanged
+  groupFile/Arms/RightArm/
+    RightFingers                    255 128 128 255 (OK)    1 (already OK)  (none)       unchanged       unchanged       unchanged
+  groupFile/Arms/LeftArm/
+    LeftFingers                     160 250 144 255 (OK)    1 (already OK)  (none)       unchanged       unchanged       unchanged
+  groupFile/Arms/RightArm/
+    RightCarpals                    (none -- already        0 (already OK) (none)       unchanged       unchanged       unchanged
+                                      neutral, correct)
+  groupFile/Arms/LeftArm/
+    LeftCarpals                     (none -- already         0 (already OK) (none)       unchanged       unchanged       unchanged
+                                      neutral, correct)
+  groupFile/Toes                    (none)                  (none)          (none)       unchanged       0               unchanged
+  groupFile/Toes/RightToes          255 128 128 255 (OK)    (none)          (none)       unchanged       0               unchanged
+  groupFile/Toes/LeftToes           160 250 144 255 (OK)    (none)          (none)       unchanged       0               unchanged
+  groupFile/Tail                    (none)                  (none)          (none)       unchanged       1               unchanged
+  groupFile/Wings                   (none)                  (none)          (none)       unchanged       1               unchanged
+  groupFile/RigHelpers               (none)                  (none)          (none)       unchanged       0               0
+  groupFile/Attachments             104 188 255 255         (none)          (none)       unchanged (kept) 0               0
+  groupFile/Correctives             240 210 255 255         (none)          (none)       UNCHANGED (Section 13: not given new policy)
+
+Legs/Toes side-specific groups (RightLeg, LeftLeg, RightFoot, LeftFoot):
+  NONE EXIST as groups in the current Master (Legs has zero direct
+  child groups -- 2,183 controls sit flat, undivided by side). Per
+  Section 9's own "where they exist" hedge, no color/selectable change
+  is proposed for these -- nothing to apply it to, and I am not creating
+  a side split that isn't already part of the Master's taxonomy.
+
+RightArm/LeftArm and RightToes/LeftToes groupColor values already
+exactly match the canonical RGBA constants given in the brief
+(255 128 128 255 / 160 250 144 255) -- no color VALUES change anywhere
+in this pass; only new "selectable"/"visible" lines are being added
+where authorized.
+
+Ordering convention for new metadata lines: the Master's own existing
+convention (RightFingers/LeftFingers, the only groups currently
+carrying both keys) places "selectable" BEFORE "groupColor". I will
+follow that existing convention rather than the brief's own
+illustrative example (which shows groupColor first and is explicitly
+labeled "Conceptual form"). For RigHelpers/Attachments, which need both
+"selectable" and a new "visible" key with no existing 2-key precedent to
+follow, I propose the order: selectable, then visible, then groupColor
+(if present) -- please flag now if you'd prefer a different order.
+
+Syntax: the Master's 4 existing "selectable" lines all use
+  "selectable" "N"
+(a single space, NOT the two-tab separator used by "control"/
+"groupColor"). I will match this exactly for every new "selectable"
+line. No "visible" key exists anywhere yet in the Master (0 hits) -- I
+will introduce it using the same single-space convention as the
+existing "selectable" lines, as the closest established precedent.
+
+----------------------------------------------------------------------
+5. SIDED COLLAR/CLAVICLE CANDIDATES IN BROAD RigArms
+----------------------------------------------------------------------
+RigArms currently has ZERO subgroups -- all 18 of its controls sit
+directly in it (no clavicle-word literals exist in RigArms; only
+"collar"-word literals do). Full mechanical enumeration, in current
+relative order:
+
+  #   Literal              Side known?  Structural (skeletal) or
+                                          garment/ambiguous?          Verdict
+  --  -------------------  -----------  ---------------------------  -------
+   1  rig_collar_R          R            structural (rig_* bone-chain MOVE -> RigArms/RightArm
+                                          convention, paired with
+                                          rig_elbow_R/rig_hand_R)
+   2  rig_elbow_R           R            not a collar/clavicle        out of scope (untouched)
+                                          control -- excluded from
+                                          this move regardless of side
+   3  rig_hand_R            R            not a collar/clavicle        out of scope (untouched)
+                                          control
+   4  rig_Bip_collar_R      R            structural (rig_Bip_* bone-  MOVE -> RigArms/RightArm
+                                          chain convention, paired
+                                          with rig_Bip_elbow_R/
+                                          rig_Bip_hand_R/
+                                          rig_Bip_LowerArm_R)
+   5  rig_Bip_elbow_R       R            not a collar/clavicle        out of scope (untouched)
+   6  rig_Bip_hand_R        R            not a collar/clavicle        out of scope (untouched)
+   7  rig_Bip_LowerArm_R    R            not a collar/clavicle        out of scope (untouched)
+   8  rig_collar_L          L            structural (mirrors #1)      MOVE -> RigArms/LeftArm
+   9  rig_elbow_L           L            not a collar/clavicle        out of scope (untouched)
+  10  rig_hand_L            L            not a collar/clavicle        out of scope (untouched)
+  11  rig_Bip_collar_L      L            structural (mirrors #4)      MOVE -> RigArms/LeftArm
+  12  rig_Bip_elbow_L       L            not a collar/clavicle        out of scope (untouched)
+  13  rig_Bip_hand_L        L            not a collar/clavicle        out of scope (untouched)
+  14  rig_Bip_LowerArm_L    L            not a collar/clavicle        out of scope (untouched)
+  15  CollarL               L            structural -- RigArms is a   MOVE -> RigArms/LeftArm
+                                          purely skeletal/rig-
+                                          presentation technical group
+                                          (its entire sibling
+                                          population is rig_*/Collar*
+                                          bone names; RigBody/RigLegs
+                                          are the same pattern with
+                                          zero clothing-type controls
+                                          anywhere in the three Rig*
+                                          groups) -- no garment reading
+                                          is plausible in this location
+  16  CollarR               R            structural (mirrors #15)     MOVE -> RigArms/RightArm
+  17  collarL               L            structural; ASCII-casefold   MOVE -> RigArms/LeftArm
+                                          twin of "CollarL" (fold key
+                                          "collarl") -- must move to
+                                          the SAME destination as
+                                          CollarL (Section 16)
+  18  collarR               R            structural; casefold twin    MOVE -> RigArms/RightArm
+                                          of "CollarR" (fold key
+                                          "collarr") -- must move with
+                                          it
+
+RESULT: 8 of 18 RigArms controls move (4 per side); the remaining 10
+(elbow/hand/LowerArm controls on both sides) are explicitly out of this
+task's authorized scope (Section 15 covers collar/clavicle only) and
+stay exactly where they are, in RigArms directly.
+
+CASEFOLD SAFETY (Section 16): two ASCII-casefold families are
+implicated --
+  key "collarl": {CollarL, collarL} -- currently both in
+    groupFile/RigArms (same-path, valid). Both move together to
+    groupFile/RigArms/LeftArm. Still same-path after the move (valid).
+  key "collarr": {CollarR, collarR} -- currently both in
+    groupFile/RigArms. Both move together to groupFile/RigArms/
+    RightArm. Still same-path after the move (valid).
+No other casefold family among the 8 moved literals has a member
+anywhere else in the Master (rig_collar_R/_L and rig_Bip_collar_R/_L
+each fold to a single unique key with only that one member.) Zero
+cross-path conflicts before or after.
+
+Proposed new structure:
+  "RigArms"
+  {
+      "RightArm"
+      {
+          "control"   "rig_collar_R"
+          "control"   "rig_Bip_collar_R"
+          "control"   "CollarR"
+          "control"   "collarR"
+      }
+      "LeftArm"
+      {
+          "control"   "rig_collar_L"
+          "control"   "rig_Bip_collar_L"
+          "control"   "CollarL"
+          "control"   "collarL"
+      }
+      "control"   "rig_elbow_R"
+      "control"   "rig_hand_R"
+      "control"   "rig_Bip_elbow_R"
+      "control"   "rig_Bip_hand_R"
+      "control"   "rig_Bip_LowerArm_R"
+      "control"   "rig_elbow_L"
+      "control"   "rig_hand_L"
+      "control"   "rig_Bip_elbow_L"
+      "control"   "rig_Bip_hand_L"
+      "control"   "rig_Bip_LowerArm_L"
+  }
+(new "selectable" "1" line for RigArms itself, per Section 4, sits
+before "RightArm", as the group's own metadata.)
+
+Side-ordering note: the brief's own Section 15 illustration lists
+"LeftArm" before "RightArm"; I am instead following the Master's own
+established convention for the analogous plain "Arms" group (where
+RightArm is declared before LeftArm) for consistency. Flag now if you
+want Left-before-Right here specifically.
+
+No unsided, garment, decorative, or ambiguous collar control exists in
+RigArms to mistakenly move -- all 100 Master-wide "clavicle" hits and
+every garment-type "collar" literal (jacket_collar, cloth_collar,
+bip_ClockCollar*, BAS_Dress.*, etc. -- see the Phase 2 Tranche 9 collar-
+template precedent) live in groupFile/Clothing or groupFile/Arms, not
+RigArms, and are not touched by this move.
+
+----------------------------------------------------------------------
+6. DELIBERATE OMISSIONS (confirming what is NOT changing)
+----------------------------------------------------------------------
+- No blanket "visible" "1" is added anywhere (Section 14). Body, Arms,
+  Legs, RigBody, RigArms, RigLegs, Fingers, Toes, and every other group
+  keep their current (absent) visible metadata untouched.
+- Face, Eyes, Upper/Mid/Lower Face, Tongue, Expressions, Ears, Body
+  Morphs, Hair, Clothing, Correctives, Other, Useless: zero metadata
+  changes (Section 13).
+- The separate root-level "Fingers" group (distinct from Arms/RightArm/
+  RightFingers and Arms/LeftArm/LeftFingers) is not named anywhere in
+  this brief and is left completely untouched.
+- No RightLeg/LeftLeg/RightFoot/LeftFoot groups are created -- they do
+  not currently exist, and Section 9 only authorizes acting on them
+  "where they exist."
+- No Fingers/Carpals/Toes control is moved into any Rig* branch, and no
+  active-rig-only topology is introduced anywhere.
+- Correctives' existing groupColor (240 210 255 255) is left exactly as
+  is.
+
+----------------------------------------------------------------------
+7. IDENTITY/STRUCTURE VALIDATION PLAN (to run after the edit)
+----------------------------------------------------------------------
+  - exact control literal multiset before == after (pure reorder/
+    metadata pass produces zero literal changes; the 8 collar/clavicle
+    moves change 8 literals' full_path only, never their spelling)
+  - control_count before (117,612) == control_count after (117,612)
+  - unique_exact_literals unchanged (117,612)
+  - unique_ascii_fold_keys unchanged (113,881)
+  - cross_path_family_count remains 0
+  - exact_duplicate_count remains 0
+  - structural parse PASS, brace balance preserved (35 groups become 37
+    after adding RigArms/RightArm and RigArms/LeftArm)
+  - group_count: 35 -> 37 (2 new groups: RigArms/RightArm,
+    RigArms/LeftArm)
+  - tools/validate_master.py PASS after promotion
+  - git diff review of the actual line-level change before commit
+
+======================================================================
+No files have been modified. Awaiting approval to execute this plan.
+======================================================================
