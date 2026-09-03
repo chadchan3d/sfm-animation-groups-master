@@ -1,0 +1,221 @@
+======================================================================
+PHASE 2 -- TRANCHE 12 STRUCTURAL BODY VS BODY-MORPHS TARGETED QA
+Four flagged families only: r_butt_bottem, leg left butt 1, cc_butt.r,
+r_butt_right
+======================================================================
+
+Checkpoint at start: 34d50c6. Master SHA-256 verified 29aaf43e393de84
+e8af4a9aec4c3fbc37a04859b213f17666573d92ae552dcb7 (exact match) before
+any work began.
+
+Governing principle for this QA (per task Section 2): the live Master's
+"butt" population being overwhelmingly Body Morphs is EVIDENCE only, not
+authority -- that unanimity may itself be historical taxonomy
+contamination. The question judged for each row is what the control
+means and what an animator would directly manipulate, not where old
+Master butt controls happen to be filed.
+
+----------------------------------------------------------------------
+1. r_butt_bottem
+----------------------------------------------------------------------
+fold_key:              r_butt_bottem
+exact_spellings:       R_Butt_bottem
+Current classification: CLEAR / CLEAR / groupFile/Body (batch P114,
+  canonical position 11820)
+Strict ASCII family:  single exact spelling, no casefold siblings found
+  elsewhere in the ledger or Master.
+
+Complete-literal reading: "Right Butt, bottom(-region)" -- "bottem" is
+an accepted misspelling of "bottom" (rule 12-style). No shape/size/
+appearance/state/deformation/opening/inflation vocabulary appears
+anywhere in the literal. The structure (side + anatomical noun +
+positional/regional qualifier, no verb, no adjective of degree) matches
+a plain segment-identifier naming pattern, not a shape-slider pattern.
+Two readings are both consistent with structural anatomy: (a) "bottom"
+names a specific lower sub-segment of a multi-segment buttock bone
+chain (parallel to spine_upper/spine_lower-style segment naming), or
+(b) "bottom" is a redundant synonym reinforcing "Butt" as a whole (both
+words mean the same anatomical region, similar to the "pussy chitsu"
+bilingual-redundancy pattern). Neither reading introduces any morph/
+state content.
+
+Master precedent observation (context only, not authority): the
+Master's ~352-member "butt" population is overwhelmingly Body Morphs,
+but is NOT perfectly unanimous -- bip_Butt_01_L and bip_Butt_01_R
+(bare, sided, numbered bone-style names, the same shape as ~100 other
+"bip_Butt_NN_side" members that ARE Body Morphs) already sit in plain
+groupFile/Body, alongside L_butt_jiggle_root/R_butt_jiggle_root
+(explicit jiggle-physics-chain root anchors). This shows the Master's
+own historical placement is not internally consistent even among
+identically-shaped literals -- corroborating the task's warning that
+the Body-Morphs unanimity should not be read as decisive doctrine.
+
+Semantic-function judgment: A (direct structural buttock posing/
+segment identification). No positive evidence of a shape/size/state/
+deformation function.
+
+QA DISPOSITION: CURRENT_CLASSIFICATION_CONFIRMED
+Ledger changed: NO
+Future Sexual Bones migration candidate: YES
+
+----------------------------------------------------------------------
+2. leg left butt 1
+----------------------------------------------------------------------
+fold_key:              leg left butt 1
+exact_spellings:       leg left butt 1
+Current classification: CLEAR / CLEAR / groupFile/Body (batch P115,
+  canonical position 11933)
+Strict ASCII family:  single exact spelling, no casefold siblings.
+
+Complete-literal reading: "leg left butt 1" -- judged as a complete
+literal per the task's explicit instruction (do not route to Legs
+merely because the token "leg" occurs). "Leg" here functions as a
+LOCATION/namespace prefix (owner-vs-location distinction, rule/
+Section-11 pattern already applied repeatedly this project to strap/
+pipe/brace-type controls) -- the buttock sits at the top of the leg
+region in many rig hierarchies and namespace groupings, and "leg" does
+not itself carry any competing anatomical claim once "butt" (the
+concrete anatomical noun) is present. "left" is the side marker, "1" a
+numbered variant. No shape/size/state/deformation vocabulary anywhere
+in the literal.
+
+Master precedent observation (context only): same 352-member butt
+population noted above; same minor-exception evidence (bip_Butt_01_L/R,
+L/R_butt_jiggle_root in plain Body) applies as corroborating context,
+not as the deciding factor.
+
+Semantic-function judgment: A (direct structural buttock segment,
+numbered). "Leg" correctly read as location, not owner -- "butt" is the
+owner. No morph/shape content.
+
+QA DISPOSITION: CURRENT_CLASSIFICATION_CONFIRMED
+Ledger changed: NO
+Future Sexual Bones migration candidate: YES
+
+----------------------------------------------------------------------
+3. cc_butt.r
+----------------------------------------------------------------------
+fold_key:              cc_butt.r
+exact_spellings:       cc_Butt.r
+Current classification: CLEAR / CLEAR / groupFile/Body (batch P114,
+  canonical position 11882)
+Strict ASCII family:  single exact spelling, no casefold siblings.
+
+Complete-literal reading: "CC_Butt.r" -- "CC" is the Reallusion
+Character Creator skeleton-bone naming prefix, independently confirmed
+in this exact Master (107 "CC_"/"CC_Base_" hits, mechanically re-
+verified this QA pass), every one of which names a literal skeleton
+bone in a structural anatomical destination: CC_Base_L_Eye/CC_Base_R_Eye
+(Face/Eyes), CC_Base_JawRoot/CC_Base_UpperJaw/CC_Base_Teeth01/02
+(Face/Lower Face), CC_Base_Tongue01-04 (Face/Tongue). Zero "CC_"-
+prefixed literals anywhere in this Master denote a shape/morph slider --
+the convention is exclusively used for rig/skeleton bones in this
+corpus. This is positive, project-grounded evidence (Rule 23/27
+category G) that "cc_Butt.r" names a skeletal buttock bone, not a shape
+control, independent of the general "butt" population's placement.
+
+Master precedent observation (context only): the general butt
+population's Body-Morphs unanimity is noted, but the "CC_" prefix
+evidence is more specific and more directly on-point for this literal
+than the general population statistic.
+
+Semantic-function judgment: A (direct structural buttock bone, "CC"
+skeleton-bone convention). No morph/shape content; the "CC_" prefix
+itself is positive structural evidence, not merely neutral.
+
+QA DISPOSITION: CURRENT_CLASSIFICATION_CONFIRMED
+Ledger changed: NO
+Future Sexual Bones migration candidate: YES
+
+----------------------------------------------------------------------
+4. r_butt_right
+----------------------------------------------------------------------
+fold_key:              r_butt_right
+exact_spellings:       R_Butt_right
+Current classification: CLEAR / CLEAR / groupFile/Body (batch P118,
+  canonical position 12280)
+Strict ASCII family:  single exact spelling, no casefold siblings.
+
+Complete-literal reading: "R_Butt_right" -- a redundant double side
+marker ("R_" prefix and "right" suffix both denote the same side) on
+plain "Butt", structurally identical in kind to "pussy chitsu left/
+right"'s redundant bilingual-side pattern this project has already
+handled. No shape/size/state/deformation vocabulary anywhere in the
+literal -- it reduces to "buttock, right side" stated twice.
+
+Master precedent observation (context only): same general butt
+population and same minor-exception precedent as above.
+
+Semantic-function judgment: A (direct structural buttock, side
+redundantly marked). No morph/shape content.
+
+QA DISPOSITION: CURRENT_CLASSIFICATION_CONFIRMED
+Ledger changed: NO
+Future Sexual Bones migration candidate: YES
+
+----------------------------------------------------------------------
+5. SUMMARY TABLE
+----------------------------------------------------------------------
+  fold_key          exact_spellings   current dest   evidence            judgment  disposition                          ledger  future SB
+  ----------------  ----------------  -------------  ------------------  --------  -----------------------------------  ------  ---------
+  r_butt_bottem      R_Butt_bottem     Body           positional/redun-   A         CURRENT_CLASSIFICATION_CONFIRMED      NO      YES
+                                                       dant, no morph word
+  leg left butt 1    leg left butt 1   Body           "leg"=location,     A         CURRENT_CLASSIFICATION_CONFIRMED      NO      YES
+                                                       "butt"=owner, no
+                                                       morph word
+  cc_butt.r          cc_Butt.r         Body           "CC_" = skeleton-   A         CURRENT_CLASSIFICATION_CONFIRMED      NO      YES
+                                                       bone convention
+                                                       (107 hits, all
+                                                       structural)
+  r_butt_right       R_Butt_right      Body           redundant side      A         CURRENT_CLASSIFICATION_CONFIRMED      NO      YES
+                                                       marker, no morph
+                                                       word
+
+All four: NO ledger change required. All four judged genuinely
+structural (case A) from their own complete-literal content, not from
+majority Master placement. All four are plausible future Sexual Bones
+migration candidates once that later, separately-authorized taxonomy
+migration occurs -- this field is informational only and changes
+nothing about their current groupFile/Body destination.
+
+----------------------------------------------------------------------
+6. TRANCHE 12 CONSISTENCY-FLAG DISPOSITION RECONCILIATION
+----------------------------------------------------------------------
+PHASE2_PRODUCTION_TRANCHE12_CONSISTENCY_FLAGS.txt Section 2 (the four
+STRUCTURAL_BODY_VS_MORPH_FLAGS) is hereby marked:
+
+  FLAG RAISED:    YES (Tranche 12, as originally recorded -- preserved,
+                  not deleted)
+  FLAG REVIEWED:  YES (this QA pass, PHASE2_TRANCHE12_STRUCTURAL_BODY_
+                  MORPH_TARGETED_QA.txt)
+  CURRENT CLASSIFICATION CONFIRMED: YES, for all four rows
+
+This QA does not retract, weaken, or rewrite the original Tranche 12
+consistency-flags document -- the flag, its reasoning, and the wider-
+scope observation (testicle/scrotum/foreskin/labia/cervix/pectoral/
+belly) it recorded all remain historically accurate and untouched.
+This document is the resolution record, not a replacement.
+
+rassimpactmoveup1 (the one genuine Tranche 12 error, corrected before
+the raw commit at 34d50c6) remains recorded as a corrected error in
+that same consistency-flags document and in the raw commit message --
+not touched or reclassified by this QA.
+
+----------------------------------------------------------------------
+7. SCOPE COMPLIANCE
+----------------------------------------------------------------------
+No broader breast/butt/genital/belly retrospective audit was performed.
+testicle/scrotum/foreskin/labia/cervix/pectoral/belly were not
+re-inspected or touched. No Sexual Bones group was created, referenced
+as a live destination, or written into any ledger row. No raw batch TSV
+(P111-P120) was modified. The Master was not modified.
+
+----------------------------------------------------------------------
+8. NEEDS_DOCTRINE
+----------------------------------------------------------------------
+None. All four rows resolved directly from the existing structural-vs-
+morph doctrine plus mechanically-verified complete-literal/project-
+convention evidence (Rule 23/27 category G for the "CC_" prefix). The
+future Sexual Bones category was not needed to reach a verdict for any
+of the four and was not invoked as a destination.
+======================================================================
