@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+n right chest	N right chest	CLEAR	chest, right, plain structural torso region ('N' cryptic prefix)	CLEAR	groupFile/Body	Medium		'chest' is plain torso anatomy; prefix does not erase it (rule 24)	P129
+maid.necktie_left_inner_4	Maid.Necktie_Left_Inner_4	CLEAR	necktie, left, inner, numbered ('Maid' costume theme)	CLEAR	groupFile/Clothing	High		necktie is a recognized worn garment	P129
+taurenmale_hd_bone_133	taurenmale_hd_bone_133	OPAQUE	character/model-prefixed generic numbered bone, no independent content	NOT_APPLICABLE		Low		matches the established 'taurenmale_hd_bone_NNN' -> OPAQUE precedent exactly	P129
+stock00	Stock00	CLEAR	weapon stock, numbered	CLEAR	groupFile/Other	High		matches this tranche's own 'stock01'	P129
+valvebiped.bip01_r_vulvaf	ValveBiped.Bip01_R_VulvaF	CLEAR	vulva, right, plain structural ValveBiped skeleton segment	CLEAR	groupFile/Body	Medium		no shape/state word; direct-pose structural sexual anatomy -> Body per current doctrine (Tranche 12 QA 8950c85). FUTURE_SEXUAL_BONES_MIGRATION_CANDIDATE.	P129
+jacketopen	JacketOpen	CLEAR	jacket garment open	CLEAR	groupFile/Clothing	High		explicit jacket garment	P129
+bipqwn rcalftwist1	BipQwn RCalfTwist1	CLEAR	calf twist, right, numbered ('BipQwn' internal namespace prefix)	CLEAR	groupFile/Legs	High		explicit calf anatomy; namespace prefix set aside (rule 24)	P129
+bip_eye_ref_track_l	bip_eye_ref_track_l	CLEAR	eye reference/tracking control, left	CLEAR	groupFile/Face/Eyes	High		explicit eye anatomy	P129
+frontr1	FrontR1	OPAQUE	bare positional word with side/number, no anatomical owner	NOT_APPLICABLE		Low		matches the exhaustive bare 'front N' -> OPAQUE precedent	P129
+right_pants_string_2	right_pants_string_2	CLEAR	pants garment string/tie, right, numbered	CLEAR	groupFile/Clothing	High		'pants' is the explicit garment owner	P129
+legthumb1_l	LegThumb1_L	CLEAR	big toe ('leg thumb'), left, numbered	CLEAR	groupFile/Toes/LeftToes	Medium		'leg thumb' is a recognized big-toe naming convention	P129
+futa version 2	Futa Version 2	CLEAR	'futa' body-type preset, numbered variant	CLEAR	groupFile/Body Morphs	Medium		a body-type/appearance-preset switch	P129
+muzzleattach_pos_00	MuzzleAttach_Pos_00	CLEAR	weapon muzzle attachment point, numbered	CLEAR	groupFile/Other	High		recognized weapon-attachment prop	P129
+wakazashi.tassel_rear_3	Wakazashi.Tassel_Rear_3	CLEAR	a wakizashi sword with a tassel decoration, rear, numbered	CLEAR	groupFile/Other	Medium		'Wakazashi' (wakizashi) is a recognized weapon object; matches the kunai_tassel-style weapon-with-decoration pattern	P129
+frily_21.l	Frily_21.L	CLEAR	frilly lace garment decoration, numbered, left	CLEAR	groupFile/Clothing	Medium		matches the established 'frily' garment-decoration family	P129
+bip_tailc02	bip_tailC02	CLEAR	tail, center, structural, numbered	CLEAR	groupFile/Tail	High		explicit tail anatomy	P129
+bellyinflatefeathers	BellyInflateFeathers	CLEAR	belly inflate, feathers variant	CLEAR	groupFile/Body Morphs	Medium		explicit 'inflate' state word	P129
+rightchinside	RightChinSide	CLEAR	chin, right, inside	CLEAR	groupFile/Face/Lower Face	High		matches this tranche's own 'leftchinside'	P129
+back left	Back Left	OPAQUE	bare positional+side descriptor, no anatomical owner	NOT_APPLICABLE		Low		matches direct sibling 'back right' -> OPAQUE/NOT_APPLICABLE exactly	P129
+bone 1057	bone 1057	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		rule 27: bare numbered bone	P129
+cape 1b	Cape 1b	CLEAR	cape garment, numbered variant	CLEAR	groupFile/Clothing	High		cape is a recognized worn garment	P129
+shrinkfeet	ShrinkFeet	CLEAR	feet size shrink	CLEAR	groupFile/Body Morphs	High		explicit 'shrink' size/shape word	P129
+shirt_neck_pull	shirt_neck_pull	CLEAR	shirt neck, pull action	CLEAR	groupFile/Clothing	High		explicit shirt garment	P129
+ruby_head_c_jnt	Ruby_head_c_jnt	CLEAR	head, center, structural joint ('Ruby' character prefix)	CLEAR	groupFile/Body	Medium		plain structural head anatomy; character prefix set aside (rule 24)	P129
+bip01_l_clavicle012	Bip01_L_Clavicle012	CLEAR	clavicle, structural ValveBiped skeleton segment, left, numbered	CLEAR	groupFile/Arms	High		ValveBiped skeletal clavicle convention -> Arms	P129
+left_lipupout	Left_LipUpOut	CLEAR	lip up-out, left	CLEAR	groupFile/Face/Lower Face	High		explicit lip anatomy	P129
+cloth_back_b_3_l	cloth_back_B_3_L	CLEAR	cloth garment, back, variant b, numbered, left	CLEAR	groupFile/Clothing	High		explicit 'cloth' garment word	P129
+gibface	GibFace	CLEAR	a gore/fx face fragment ('gib')	CLEAR	groupFile/Other	High		settled Rule-23 grounded 'gib' fx-object term	P129
+hat side left	hat side left	CLEAR	hat garment, side, left	CLEAR	groupFile/Clothing	High		hat is a recognized worn garment	P129
+sack_top	Sack_Top	CLEAR	scrotum sack, top, plain structural/positional segment	CLEAR	groupFile/Body	Medium		no shape/state word; direct-pose structural sexual anatomy -> Body per current doctrine (Tranche 12 QA 8950c85). FUTURE_SEXUAL_BONES_MIGRATION_CANDIDATE.	P129
+arm right finger 3 c	arm right finger 3 c	CLEAR	finger 3 (middle), right arm, variant c	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger anatomy	P129
+c_dred_l2_03	C_Dred_L2_03	CLEAR	dreadlock hair, left, numbered ('C_' model prefix)	CLEAR	groupFile/Hair	Medium		matches the established 'c_dred' -> Hair sibling family	P129
+back.bow_right_1	Back.Bow_Right_1	PARTIAL	bow (decorative bow / archery bow / ship's bow), back, right, numbered	NEEDS_CONTEXT		Medium	materially different core senses of 'bow' remain unresolved	matches the settled bow PARTIAL precedent; 'back' location does not disambiguate the sense here	P129
+flm-armb-arm-rh	Flm-ArmB-Arm-RH	CLEAR	arm anatomy, right, within the internal Flm-ArmB namespace, suffix RH	CLEAR	groupFile/Arms	Medium		matches the corrected Flm-ArmB-Arm->Arms template	P129
+music_gen_guitar_lute_b_ref_mesh.001	MUSIC_GEN_Guitar_Lute_B_REF_Mesh.001	CLEAR	a guitar/lute instrument reference-mesh prop	CLEAR	groupFile/Other	High		recognized musical-instrument prop object	P129
+saberon_bone36_lfingermiddle	saberon_Bone36_LFingerMiddle	CLEAR	middle finger, left ('Saberon' character prefix)	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit finger anatomy; character prefix set aside (rule 24)	P129
+arm left finger 3	arm left finger 3	CLEAR	finger 3, left arm	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit finger anatomy	P129
+launcher_right_root	launcher_right_root	CLEAR	a launcher weapon, right, structural root	CLEAR	groupFile/Other	Medium		recognized weapon object	P129
+bip_belt_l_2	bip_belt_L_2	CLEAR	belt, left, numbered	CLEAR	groupFile/Clothing	High		belt is a recognized worn garment accessory	P129
+bip chinup	bip chinup	CLEAR	chin up	CLEAR	groupFile/Face/Lower Face	High		explicit chin anatomy	P129
+c_dred_r1_04	C_Dred_R1_04	CLEAR	dreadlock hair, right, numbered ('C_' model prefix)	CLEAR	groupFile/Hair	Medium		matches the established 'c_dred' -> Hair sibling family	P129
+fronthair normal c joint	fronthair normal c joint	CLEAR	front hair, normal variant, structural joint	CLEAR	groupFile/Hair	High		explicit hair anatomy	P129
+toy_bone_20	toy_bone_20	CLEAR	a toy-bone prop object, numbered	CLEAR	groupFile/Other	Medium		matches this tranche's own 'toy_bone_15'	P129
+second_arms_r_middle4	Second_Arms_R_Middle4	CLEAR	middle finger, segment 4, right, on an alternate/extra arm set	CLEAR	groupFile/Arms/RightArm/RightFingers	High		matches the dominant second_arms_[side]_[finger][number] -> [side]Fingers template	P129
+crossbar1	Crossbar1	CLEAR	a crossbar mechanical/structural prop, numbered	CLEAR	groupFile/Other	Medium		recognized mechanical/prop object	P129
+balls_02	Balls_02	CLEAR	testicles, plain structural segment, numbered	CLEAR	groupFile/Body	Medium		matches the exact direct sibling 'balls_01' -> groupFile/Body precedent; no shape/state word; direct-pose structural sexual anatomy -> Body per current doctrine (Tranche 12 QA 8950c85). FUTURE_SEXUAL_BONES_MIGRATION_CANDIDATE.	P129
+length	Length	OPAQUE	generic dimension descriptor, no anatomical owner	NOT_APPLICABLE		Low		rule 27: generic technical dimension word with no recoverable subject	P129
+qwn-rig-eye-ru	Qwn-Rig-Eye-RU	CLEAR	eye control, right-upper ('Qwn-Rig' internal namespace prefix)	CLEAR	groupFile/Face/Eyes	High		matches the direct-established 'mar-rig-eye-ru'/'fio-rig-eye-ru'/'brk-rig-eye-ru' -> Face/Eyes precedent exactly	P129
+l fold b	L Fold B	PARTIAL	a fold (skin fold / garment fold / generic technical fold), left, variant b	NEEDS_CONTEXT		Low	materially different core readings compete	rule 22 PARTIAL test: no disambiguating content	P129
+ripple03	Ripple03	CLEAR	a ripple dynamic-effect function, numbered, owning object unstated	NEEDS_CONTEXT		Medium	the rippled object is not named	matches sibling 'ripple04'/'ripple02' -> CLEAR/NEEDS_CONTEXT	P129
+belt_front	belt_front	CLEAR	belt, front	CLEAR	groupFile/Clothing	High		belt is a recognized worn garment accessory	P129
+bottle5_cap	bottle5_cap	CLEAR	a bottle cap prop, numbered	CLEAR	groupFile/Other	Medium		recognized prop object	P129
+loincloth front 1a	loincloth front 1a	CLEAR	loincloth garment, front, numbered	CLEAR	groupFile/Clothing	High		loincloth is a recognized worn garment	P129
+saber_end	Saber_end	CLEAR	a saber (sword) prop, end segment	CLEAR	groupFile/Other	High		recognized weapon object	P129
+right_small_labia4	Right_Small_Labia4	CLEAR	labia minora ('small labia'), right, plain structural segment, numbered	CLEAR	groupFile/Body	Medium		'small'/'large' labia is real anatomical terminology (labia minora/majora), not a shape control; direct-pose structural sexual anatomy -> Body per current doctrine (Tranche 12 QA 8950c85). FUTURE_SEXUAL_BONES_MIGRATION_CANDIDATE.	P129
+bipfin lcalftwist	BipFin LCalfTwist	CLEAR	calf twist, left ('BipFin' internal namespace prefix)	CLEAR	groupFile/Legs	High		explicit calf anatomy; namespace prefix set aside (rule 24)	P129
+bone 1013	bone 1013	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		rule 27: bare numbered bone	P129
+opt_hand_left_ring1	OPT_Hand_Left_Ring1	CLEAR	ring finger, left hand, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		explicit finger anatomy	P129
+bipqwn r finger1	BipQwn R Finger1	CLEAR	finger 1, right ('BipQwn' internal namespace prefix)	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger anatomy; namespace prefix set aside (rule 24)	P129
+v_aa	v_aa	OPAQUE	bare 2-letter cryptic code, no grounding	NOT_APPLICABLE		Low		rule 27: cryptic abbreviation with no sibling grounding	P129
+innerlipsup	InnerLipsUp	CLEAR	inner lips up	CLEAR	groupFile/Face/Lower Face	High		explicit lip anatomy	P129
+key.white_59	Key.White_59	CLEAR	piano white key, numbered	CLEAR	groupFile/Other	High		matches the extensive key.white_N piano-prop family precedent	P129
+bootsbootsfit	BootsBootsFIt	CLEAR	boots garment fit (doubled 'Boots')	CLEAR	groupFile/Clothing	High		'boots' is the explicit garment owner	P129
+bipfin r finger4	BipFin R Finger4	CLEAR	finger 4, right ('BipFin' internal namespace prefix)	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger anatomy; namespace prefix set aside (rule 24)	P129
+belly ctr	belly ctr	CLEAR	belly, center, plain structural torso region	CLEAR	groupFile/Body	Medium		'ctr' is a positional qualifier, not a shape/state word; plain structural belly/torso anatomy	P129
+r6	R6	OPAQUE	bare alphanumeric code, no content	NOT_APPLICABLE		Low		matches the sibling r2/r5 -> OPAQUE precedent	P129
+wep_fx_top_peq2_light	WEP_FX_Top_PEQ2_Light	CLEAR	weapon laser/IR-pointer accessory light effect, numbered	CLEAR	groupFile/Other	High		matches the wep_* weapon-prop family precedent	P129
+hokage hat left 2a_jiggle	hokage hat left 2a_jiggle	CLEAR	Hokage-style hat garment, left, jiggle, numbered	CLEAR	groupFile/Clothing	High		matches the established 'hokage hat' precedent	P129
+il+ir	IL+IR	OPAQUE	bare 2-letter cryptic codes, combined, no grounding	NOT_APPLICABLE		Low		rule 27: cryptic abbreviation with no sibling grounding	P129
+bip01_r_hand002	Bip01_R_Hand002	CLEAR	hand, structural ValveBiped skeleton segment, right, numbered	CLEAR	groupFile/Arms	High		explicit hand anatomy	P129
+mila head nostril right 1	Mila head nostril right 1	CLEAR	nostril, right, numbered ('Mila' character prefix)	CLEAR	groupFile/Face/Mid Face	Medium		matches this tranche's own 'head nostril middle' -- nose/nostril is a recognized mid-face anatomical region	P129
+org-palm.03.l	ORG-palm.03.L	CLEAR	palm, structural ORG-rig deformation bone, numbered, left	CLEAR	groupFile/Arms	Medium		'ORG' is an ordinary rig-organization-bone prefix; 'palm' is plain hand anatomy	P129
+key.leftfn	Key.LeftFN	CLEAR	a keyboard function key	CLEAR	groupFile/Other	Medium		matches the key.[X] -> Other recognized-prop-key family pattern	P129
+valvebiped.w_m60	ValveBiped.W_m60	CLEAR	an M60 machine gun weapon prop	CLEAR	groupFile/Other	High		recognized weapon object	P129
+bone.020	Bone.020	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		rule 27: bare numbered bone	P129
+bone038	Bone038	OPAQUE	generic numbered bone, no anatomical content	NOT_APPLICABLE		Low		rule 27: bare numbered bone	P129
+mot09_rightfoot	MOT09_RightFoot	CLEAR	right foot ('MOT09' motion-set prefix)	CLEAR	groupFile/Legs	High		explicit foot anatomy; motion-capture-set prefix set aside (rule 24)	P129
+tape_l_01	Tape_L_01	CLEAR	tape (recognized object theme), left, numbered, owning category unstated	NEEDS_CONTEXT		Low	unclear whether medical, decorative, or another category of tape	'tape' is a recognizable bare-object noun with unresolved ownership	P129
+crow_2.phalanges3_r	Crow_2.Phalanges3_R	CLEAR	wing/finger phalanges, right, Crow character rig, chain segment 3	CLEAR	groupFile/Arms/RightArm/RightFingers	Medium		matches the established crow_N.phalangesM finger-anatomy precedent	P129
+tacgrip	TacGrip	CLEAR	a tactical weapon grip accessory	CLEAR	groupFile/Other	High		recognized weapon-accessory object	P129
+eye bedroom l	Eye Bedroom L	CLEAR	'bedroom eyes' seductive expression, left	CLEAR	groupFile/Face/Eyes	Medium		recognized expression term, explicit eye anatomy	P129
+generichuman_r_browcjnt	GenericHuman_r_browCJnt	CLEAR	eyebrow joint, right ('GenericHuman' model prefix)	CLEAR	groupFile/Face/Upper Face	High		explicit brow anatomy; model prefix set aside (rule 24)	P129
+window_urban_sash_48_88_full_gib05	window_urban_sash_48_88_full_gib05	CLEAR	an urban-window-sash gore/fx fragment prop, numbered	CLEAR	groupFile/Other	High		matches this tranche's own 'window_urban_sash..._gib10' -- settled Rule-23 grounded 'gib' precedent	P129
+hand finger right 2b	hand finger right 2b	CLEAR	finger 2, right hand, variant b	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger anatomy	P129
+mar-rig-hole-v2	Mar-Rig-Hole-V2	CLEAR	a hole, within the internal Mar-Rig namespace, numbered variant	NEEDS_CONTEXT		Medium	no established single canonical destination exists for this family	matches the settled Qwn/Flm/Pbg/Brk/Mar-Rig-Hole family precedent	P129
+bow right 2d	bow right 2d	PARTIAL	bow (decorative bow / archery bow / ship's bow), right, variant 2d	NEEDS_CONTEXT		Medium	materially different core senses of 'bow' remain unresolved	matches the settled bow PARTIAL precedent	P129
+maid.headband	Maid.Headband	CLEAR	a headband accessory ('Maid' costume theme)	CLEAR	groupFile/Clothing	High		headband is an unambiguous recognized worn accessory	P129
+crow_3.phalanges2_l	Crow_3.Phalanges2_L	CLEAR	wing/finger phalanges, left, Crow character rig, chain segment 2	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium		matches the established crow_N.phalangesM finger-anatomy precedent	P129
+tripod.root	tripod.root	CLEAR	a tripod prop, structural root anchor	CLEAR	groupFile/Other	Medium		recognized equipment prop object	P129
+pantiesp-ulldownfront	PantiesP-ullDownFront	CLEAR	panties garment pull-down, front (garbled spacing)	CLEAR	groupFile/Clothing	High		explicit panties garment	P129
+root_face	root_face	CLEAR	a master/root control for the whole face	CLEAR	groupFile/Face/Expressions	Medium		matches this tranche's own 'emotionsroot' whole-face-master-control reasoning	P129
+keychain.chain_8	Keychain.Chain_8	CLEAR	a keychain accessory, numbered	CLEAR	groupFile/Clothing	Medium		matches the established 'keychain.key' -> Clothing precedent	P129
+rough_small_3	rough_small_3	OPAQUE	cryptic generic descriptor, no anatomical/object referent	NOT_APPLICABLE		Low		matches the majority rough_small_N OPAQUE precedent	P129
+hizakozo_l__rot_hiza_l__z50__offset	hizakozo_l__rot_hiza_l__z50__offset	CLEAR	knee (Japanese 'hiza'), left, rotation, offset	CLEAR	groupFile/Legs	High		direct match to the settled Rule-23 worked example (hizakozo_r__rot_hiza_r__z50__offset)	P129
+key.black_16	Key.Black_16	CLEAR	piano black key, numbered	CLEAR	groupFile/Other	High		matches the extensive key.black_N piano-prop family precedent	P129
+headband tail right a	headband tail right a	CLEAR	headband ribbon tail, right, variant a	CLEAR	groupFile/Clothing	Medium		'headband' is the explicit garment owner	P129
+bucket	Bucket+bucket	CLEAR	a bucket prop	CLEAR	groupFile/Other	Medium		recognized prop object	P129
+cape_3_r	cape_3_R	CLEAR	cape garment, numbered, right	CLEAR	groupFile/Clothing	High		cape is a recognized worn garment	P129
+h_r_ring1	h_R_Ring1	CLEAR	ring finger, right, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		explicit finger anatomy	P129
+arm_rotate_r	Arm_Rotate_R	CLEAR	arm rotation, right	CLEAR	groupFile/Arms	High		explicit arm anatomy	P129

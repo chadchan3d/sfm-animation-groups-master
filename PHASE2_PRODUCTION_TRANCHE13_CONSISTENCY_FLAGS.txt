@@ -1,0 +1,274 @@
+PHASE 2 PRODUCTION TRANCHE 13 -- CONSISTENCY AUDIT
+Canonical positions 12501-13500 (batches P121-P130)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv (13500 rows after this tranche)
+
+============================================================
+1. MASTER INTEGRITY CHECK (Section 0/2, mandatory this tranche)
+============================================================
+
+MASTER_INTEGRITY_INTERRUPTION: NO
+
+sfm_defaultanimationgroups.txt was mechanically re-verified present with
+SHA-256 29aaf43e393de84e8af4a9aec4c3fbc37a04859b213f17666573d92ae552dcb7
+before classification began, after every one of the 10 batch merges
+(P121-P130), and after both within-tranche corrections (Sections 2-3
+below) -- 13 checks total, all PASS, hash never changed, file never
+missing.
+
+============================================================
+2. WITHIN-TRANCHE SELF-CORRECTION 1: c dlipin
+============================================================
+
+Row: c dlipin (exact_spellings: C Dlipin)
+Original batch: P121 (canonical position 12502)
+
+OLD (as merged in P121): semantic_status=OPAQUE, taxonomy_status=
+  NOT_APPLICABLE, short_reason argued "Dlipin" did not decode to any
+  established word or grounded convention.
+
+While classifying "r dlipout b" (P125, position 12999) I mechanically
+re-checked the ledger for the "dlip" family and found 18 other members
+(c dlip, c dlipout, l dlip a/b, l dlipin a/b, l dlipout a/b, r dlip a/b,
+r dlipin a/b, r dlipout a, dlip_1/2/4/5) all resolving CLEAR/CLEAR/
+groupFile/Face/Lower Face -- "Dlipin" decodes as D-lip-in (lip pushed
+in), and "c dlipin" was the sole outlier in this 19-member family.
+
+NEW (corrected in-place before the raw Tranche 13 commit): semantic_
+status OPAQUE->PARTIAL, taxonomy_status NOT_APPLICABLE->CLEAR,
+proposed_destination [blank]->groupFile/Face/Lower Face, matching
+direct sibling "c dlipout" (calibration, batch 2) in shape exactly.
+fold_key, exact_spellings, batch_id (P121) unchanged. Verified: exactly
+one row changed, first 500 still match FINAL.tsv, Rule 21 intact.
+
+============================================================
+3. WITHIN-TRANCHE SELF-CORRECTION 2: ball r
+============================================================
+
+Row: ball r (exact_spellings: Ball R)
+Original batch: P127 (canonical position 13132)
+
+OLD (as merged in P127): semantic_status=CLEAR, taxonomy_status=CLEAR,
+  proposed_destination=groupFile/Body Morphs, short_reason cited a
+  direct live-Master template match ("Ball left", 58/58 hits -> Body
+  Morphs).
+
+While classifying "balls_02" (P129, position 13346) I mechanically
+re-checked the ledger for pre-existing "ball(s)" precedent and found
+"balls_01" (batch P17, long pre-dating Tranche 12/13 doctrine) already
+CLEAR/CLEAR/groupFile/Body -- an exact-shape match to "balls_02" (both
+plural, numbered, no shape word). Citing the Master's bare "Ball left"
+majority as authority for "ball r" was itself an instance of exactly
+the reasoning error the current doctrine (Tranche 12 QA 8950c85,
+Tranche 13 Section 6) exists to prevent: treating a potentially-
+contaminated Master majority as authority over current doctrine for
+direct-pose structural sexual anatomy. Every other bare/numbered
+structural sexual-anatomy row this same tranche (27 total, Section 6
+of the report) was correctly classified to Body on this basis; "ball
+r" was the sole exception.
+
+NEW (corrected in-place before the raw Tranche 13 commit): taxonomy
+status remains CLEAR; proposed_destination groupFile/Body Morphs ->
+groupFile/Body; semantic_referent reworded; confidence Medium
+(unchanged value). fold_key, exact_spellings, batch_id (P127),
+semantic_status, taxonomy_status, uncertainty_reason unchanged.
+Verified: exactly one row changed, first 500 still match FINAL.tsv,
+Rule 21 intact.
+
+Per Section 7's "no broad historic Body-taxonomy audit" restriction,
+the two other pre-existing "ball" family members discovered incidentally
+(balls_01, batch P17, CLEAR/CLEAR/Body -- consistent; ball l, batch P29,
+PARTIAL/NEEDS_CONTEXT -- a materially different treatment, possibly
+reflecting a genuine "ball = literal toy vs. testicle" ambiguity judged
+differently at that time) were NOT touched. Only the two rows classified
+within Tranche 13 itself (c dlipin, ball r) were corrected.
+
+============================================================
+4. STRUCTURAL SEXUAL ANATOMY -> BODY (Section 6, extensive this tranche)
+============================================================
+
+27 rows this tranche named breast/buttock/genital/anogenital anatomy
+with no shape/size/state/deformation vocabulary and were classified
+groupFile/Body per current doctrine (direct-pose structural sexual
+anatomy -> Body; Tranche 12 QA precedent 8950c85), independent of
+whichever Master majority placement that word-family happens to carry:
+
+  valvebiped.bip02_r_butt, leg right_butt_ctr, kublaribiped_penis_r6,
+  genitals_inner_back_left, penis_06.004, genital right 2, penus 2,
+  boobsie22, pussparent.002_l.009, donger_end, ballsforward,
+  pussy clitoris 3, valvebiped.bip01_r_butt01, penis shaft 2,
+  ass bone_l, ball r (corrected), asshool_2, valvebiped.bip01_l_nipples,
+  leg right butt 1, foreskin_4, asshool_5, valvebiped.bip01_r_vulvaf,
+  sack_top, balls_02, right_small_labia4, asshool_3, canin_ball_l
+
+FUTURE_SEXUAL_BONES_MIGRATION_CANDIDATES: 27 (informational only, no
+taxonomy change; recorded for the separate, later, not-yet-authorized
+Sexual Bones migration).
+
+One of these (pussparent.002_l.009) directly implicates the live
+Master's own PussParent.002_L family (.001-.006 already present,
+Body Morphs, per the Pussy Chitsu targeted QA at dca9566) and, by
+extension, reconciles with rather than contradicts the calibration's
+own PussParent.002_L.008->Body value (previously flagged as a
+CALIBRATION_EXCEPTION_CANDIDATE candidate under the OLDER doctrine
+framing, before Tranche 12's explicit "doctrine outranks a
+potentially-contaminated Master majority" rule was established). This
+is noted as a STALE_MASTER_PRECEDENT observation (the live Master's
+PussParent.002_L.001-.006 placement in Body Morphs is not followed for
+.009), not as a new calibration-exception candidate -- the calibration
+row is now doctrinally consistent, not doctrinally anomalous.
+
+No broader retrospective sweep of earlier-tranche breast/butt/genital/
+belly rows was performed, per Section 7's explicit restriction.
+
+============================================================
+5. SETTLED-FAMILY DRIFT CHECK (Section 18/22)
+============================================================
+
+Every Tranche-13 member of each settled recurring family was checked
+against current doctrine/calibration/ledger before classification (no
+row was resolved by analogy to historical raw-file values):
+
+  tentacle/tenta_ (9 rows)   -> all groupFile/Other
+  fin (3 rows)               -> all groupFile/Other
+  horn (1 row)               -> groupFile/Other
+  fringe (2 rows)            -> all groupFile/Hair
+  Box_Face_##_M (0 rows)     -> none encountered this tranche
+  balloon-flat (0 rows)      -> none encountered this tranche
+  Rig-Hole (1 row: mar-rig-hole-v2) -> CLEAR/NEEDS_CONTEXT/blank,
+                                matching the settled family pattern
+  BAS (1 row: bas.rear_left_2_jiggle) -> CLEAR/NEEDS_CONTEXT, matching
+                                the Tranche 9 corrected majority pattern
+  Flm-ArmA/Flm-ArmB (11 rows) -> Foot/Leg/Arm/Neck/Belt/Sword
+                                sub-families all matched their
+                                corrected current templates
+  whisker (0 rows)           -> none encountered this tranche
+  moustache (2 rows)         -> all groupFile/Hair, matching the
+                                Tranche 9 corrected precedent
+  condom (0 rows)            -> none encountered this tranche
+  AU/FACS (3 rows: au25, au10, au20) -> all groupFile/Face/Expressions,
+                                matching the settled bare-AU convention
+  collar/clavicle (9 rows)   -> 5 ValveBiped/bip-skeletal-clavicle rows
+                                -> Arms; 3 descriptive garment-collar
+                                rows -> Clothing; 1 clavicle-roll row
+                                -> Arms/RightArm (matching its exact
+                                left-side sibling); none touched the
+                                specific CollarL/CollarR/rig_collar_*/
+                                rig_Bip_collar_* families that moved in
+                                the Master refinement
+
+No drift found in any family actually encountered.
+
+============================================================
+6. STALE MASTER-PATH CHECK (Section 2/16, mandatory this tranche)
+============================================================
+
+STALE_MASTER_PRECEDENT_VIOLATIONS: 0
+
+All Master precedent lookups this tranche were run against the current
+post-6bb1f4e Master (SHA-256 confirmed, see Section 1). The 9 collar/
+clavicle-adjacent literals this tranche (Section 5 above) were checked
+against the current Arms/RightArm, Arms/LeftArm, and RigArms paths;
+none matched the specific CollarL/collarL/CollarR/collarR/rig_collar_*/
+rig_Bip_collar_* families that moved or were confirmed rig-owned in the
+Master refinement (6bb1f4e) -- all 9 are ordinary ValveBiped-skeletal-
+clavicle or descriptive-garment-collar literals, routed consistently
+with pre-existing, unaffected precedent.
+
+The one Master-precedent TENSION genuinely encountered
+(pussparent.002_l.009 vs. the live Master's own PussParent.002_L.001-
+.006 population) is documented in Section 4 above as an intentional,
+doctrine-driven divergence, not a violation of current-Master-path
+usage -- the current Master state was correctly and freshly consulted;
+its majority placement was knowingly not followed, per Section 17's
+explicit instruction.
+
+============================================================
+7. MANDATORY OPAQUE REVIEW (Rule 27, both directions)
+============================================================
+
+All 142 Tranche-13 OPAQUE rows were reviewed individually against Rule
+27's two-direction test (erasing a real referent vs. mistaking
+readability for semantics). They resolve into these mechanically-
+tallied categories:
+
+  - Generic numbered bones (Bone###, bone.###, bone NNN): ~26
+  - DCC-default primitive mesh/shape names (polySurface##, pCube#,
+    pCylinder#, Plane##, Torus##): 10
+  - Character/model-prefixed generic numbered bones with no independent
+    content (taurenmale_hd_bone_133, kargathbladefist_bone104): 2
+  - Pure numeric literals (32, 36, 38, 27, 29, 44): 6
+  - Bare cryptic 1-4 letter+number/side codes with no grounding (b11,
+    f11, h16, c16, t6, r2/r5/r6, d5/d9, br, v_aa, v_ch, tr, ouy, il+ir,
+    bh##/bhl##/bhr##/fh##, ph0#/ph1#, a12, n2, e10): ~30
+  - Bare positional/side-marker labels with no owning object (front N,
+    right N, left N, side_[left/right]_N, under, length): ~15
+  - Generic technical-operation words with no recoverable subject
+    (z_shift_2/3, x_shift_5, level1_north, bone.root, groundroot,
+    lower_01, special03, less3, front base): 9
+  - Generic joint/bone/root labels matching Rule 27's own worked
+    example category (valvebiped.joint12, null.007, null1): 3
+  - Bare model/creature-name references with no functional content
+    (titan, genesis3female001): 2
+  - Cryptic bone labels with no anatomical qualifier (botrightbone,
+    bone_rfl2, bone_la2, helper_lb, helper_rbc): 5
+  - Bare adjectives/words with no owning object (limp_2, rough_small_3,
+    flareoutbotleft's sibling reasoning does NOT apply here -- that one
+    was CLEAR/NEEDS_CONTEXT, not OPAQUE): 1
+  - Cryptic gibberish/joke pose-name (flipoutleftright): 1
+
+No case where a real animator-useful referent survived was
+misclassified OPAQUE; no case where mere technical readability (an
+axis name, a generic joint/bone/level label, a cryptic abbreviation)
+was mistaken for animator-useful semantics.
+
+============================================================
+8. MANDATORY FACE/EXPRESSIONS REVIEW
+============================================================
+
+All 18 rows routed to groupFile/Face/Expressions were reviewed to
+confirm none names a localized mechanism that should route to a Face
+subgroup instead:
+
+  fbx_asagi_face_none, owdefaultface -- fbx_[character]_face_[state]
+    whole-face-preset template.
+  au25, au10, au20 -- bare FACS Action Unit notation, settled
+    convention.
+  little_happy, rsmug, grr, disgusting 2, exsmile -- bare whole-face
+    emotion/state words (exsmile matches the established compact-form
+    'expsmile' precedent, distinguished from the differently-treated
+    'exp_smile' with underscore, itself a pre-existing, not-this-
+    tranche inconsistency not touched here).
+  mouth open tongue out ahegaostyle -- matches the established
+    whole-face 'Ahegao' Expressions precedent.
+  exp_frown -- matches the established 'Exp_'/'Expression'-prefixed
+    whole-face-preset convention, overriding the ordinary bare-word
+    Frown->Lower-Face default.
+  emotionsroot, root_face -- whole-face master/root control concept.
+
+None names a localized brow/eye/midface/lip-jaw/tongue mechanism. No
+re-routing required.
+
+============================================================
+9. DCC-DEFAULT-NAME BOUNDARY CONSISTENCY
+============================================================
+
+10 DCC-default candidates reviewed this tranche (polysurface22/41/117/
+134/207, pcylinder5/7, pcube2, plane03, torus01) -- all correctly
+routed OPAQUE/NOT_APPLICABLE. "cube3" (no DCC-tool auto-generation
+prefix, unlike "pCube2") was distinguished and routed to groupFile/
+Other as a deliberately-named generic object, matching the established
+Box10-style precedent -- confirmed consistent, not a boundary
+violation.
+
+============================================================
+Summary
+============================================================
+
+Within-tranche self-corrections applied: 2 (c dlipin, Section 2; ball
+r, Section 3)
+Structural sexual-anatomy Body rows / future Sexual Bones candidates:
+27 (Section 4)
+Stale-Master-precedent violations: 0 (Section 6)
+Master integrity interruptions: 0 (Section 1)
+NEEDS_DOCTRINE: 0
+Settled-family drift: 0 found across every family actually encountered

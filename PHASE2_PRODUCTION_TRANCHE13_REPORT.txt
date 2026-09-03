@@ -1,0 +1,139 @@
+PHASE 2 PRODUCTION TRANCHE 13 -- REPORT
+Canonical positions 12501-13500 (1000 families, batches P121-P130, 100 each)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv
+
+============================================================
+TRANCHE-ONLY STATISTICS (1000 rows, this tranche)
+============================================================
+
+semantic_status:
+  CLEAR:   826
+  PARTIAL:  32
+  OPAQUE:  142
+
+taxonomy_status:
+  CLEAR:          789
+  NEEDS_CONTEXT:   69
+  NOT_APPLICABLE: 142
+  NEEDS_DOCTRINE:   0
+
+confidence:
+  High:   545
+  Medium: 277
+  Low:    178
+
+Rule 21 invariant (OPAQUE <=> NOT_APPLICABLE) check: 0 violations across
+all 1000 rows.
+
+Proposed-destination counts (CLEAR taxonomy rows only, 789 total):
+  groupFile/Other                        142
+  groupFile/Clothing                     118
+  groupFile/Body Morphs                   69
+  groupFile/Arms                          57
+  groupFile/Body                          54
+  groupFile/Face/Eyes                     50
+  groupFile/Legs                          46
+  groupFile/Face/Lower Face               36
+  groupFile/Hair                          34
+  groupFile/Arms/RightArm/RightFingers    30
+  groupFile/Useless                       27
+  groupFile/Face/Upper Face               26
+  groupFile/Arms/LeftArm/LeftFingers      25
+  groupFile/Face/Expressions              18
+  groupFile/Tail                          12
+  groupFile/Toes/LeftToes                 12
+  groupFile/Correctives                    7
+  groupFile/Face/Mid Face                  6
+  groupFile/Face/Ears                      5
+  groupFile/Wings                          5
+  groupFile/Toes/RightToes                 4
+  groupFile/Face/Tongue                    2
+  groupFile/Arms/RightArm                  1
+  groupFile/Arms/LeftArm/LeftCarpals       1
+  groupFile/Face                           1
+  groupFile/Fingers                        1
+
+NEEDS_CONTEXT rows: 69 (blank destination; recognized objects/functions
+with unnamed owner -- strap/string/tassel/pipe/pad/tape/rope/tube/knot,
+established stable functions -- lift/crush/shorten/stretch/thin/expand/
+throb/ripple/jiggle -- with unstated object, PARTIAL multi-sense words
+-- bow/chain/cup/feathers/fold/flash/stem/gen/shaft/trans/cover/
+translator/second_arms drift outliers, and the Rig-Hole/BAS-jiggle
+established-family pattern).
+
+NEEDS_DOCTRINE rows: 0. No genuinely new policy problem was encountered;
+production continued through all 10 batches without a hard stop.
+
+Consistency flags raised: 2 within-tranche self-corrections (c dlipin,
+ball r) and one intentional Master-precedent divergence
+(pussparent.002_l.009) -- see PHASE2_PRODUCTION_TRANCHE13_CONSISTENCY_
+FLAGS.txt for full detail.
+
+============================================================
+MANDATORY REVIEWS
+============================================================
+
+OPAQUE rows manually reviewed (Rule 27, both directions): 142 / 142.
+Face/Expressions rows reviewed (mandatory face audit): 18 / 18.
+Settled-rule families reviewed: 14 families / 42 total rows, 0 drift
+  found (tentacle 9, fin 3, horn 1, fringe 2, Rig-Hole 1, BAS 1,
+  Flm-ArmA/Flm-ArmB 11, moustache 2, AU/FACS 3, collar/clavicle 9;
+  Box_Face/balloon-flat/whisker/condom: 0 members encountered).
+DCC-default candidates reviewed: 10 / 10 (polysurface22/41/117/134/207,
+  pcylinder5/7, pcube2, plane03, torus01), all correctly OPAQUE;
+  "cube3" correctly distinguished as a deliberately-named object, not
+  DCC residue.
+Structural Body-vs-Morph rows reviewed: 54 (every Tranche-13 row routed
+  to groupFile/Body).
+Structural Body-vs-Morph flags: 0 (no row required flagging for later
+  QA -- every Body-destination row was judged individually against
+  complete-literal content and confirmed structural on its own merits,
+  matching the Tranche 12 QA methodology).
+Future Sexual Bones migration candidates: 27 (informational only; see
+  consistency-flags Section 4 for the full list).
+Stale-Master-precedent violations: 0.
+Cross-tranche/within-tranche errors found and corrected: 2 (c dlipin,
+  ball r -- both within Tranche 13 itself, see consistency-flags
+  Sections 2-3).
+Calibration-exception candidates: 0 (the pussparent.002_l.009 tension
+  reconciles with, rather than newly contradicts, the calibration's
+  existing PussParent.002_L.008->Body value; not a new candidate).
+Master integrity interruptions: 0. Master hash verified unchanged
+  before classification, after every batch merge, after both
+  within-tranche corrections, and before/after the raw commit
+  (29aaf43e393de84e8af4a9aec4c3fbc37a04859b213f17666573d92ae552dcb7
+  throughout).
+Precedent claims mechanically verified: every claim in every batch and
+  in this report was freshly re-checked against the current ledger/
+  FINAL.tsv/Master at time of use, not recalled from memory or prior
+  report prose.
+
+============================================================
+CUMULATIVE STATISTICS (after Tranche 13)
+============================================================
+
+calibration_families_complete:        500
+production_families_classified:     13000
+total ledger rows:                  13500
+next_canonical_phase2_position:     13501
+remaining_production_families:        782
+
+============================================================
+Batch-level record (for resumability)
+============================================================
+
+P121 (12501-12600): merged, ledger reached 12600 rows
+P122 (12601-12700): merged, ledger reached 12700 rows
+P123 (12701-12800): merged, ledger reached 12800 rows
+P124 (12801-12900): merged, ledger reached 12900 rows
+P125 (12901-13000): merged, ledger reached 13000 rows
+  [within-tranche correction: c dlipin applied after P125]
+P126 (13001-13100): merged, ledger reached 13100 rows
+P127 (13101-13200): merged, ledger reached 13200 rows
+P128 (13201-13300): merged, ledger reached 13300 rows
+P129 (13301-13400): merged, ledger reached 13400 rows
+  [within-tranche correction: ball r applied after P129]
+P130 (13401-13500): merged, ledger reached 13500 rows
+
+All 10 batches for Tranche 13 are complete and merged. No batch remains
+pending.
