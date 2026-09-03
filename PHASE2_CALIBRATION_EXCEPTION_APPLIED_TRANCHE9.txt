@@ -1,0 +1,167 @@
+======================================================================
+PHASE 2 -- FROZEN CALIBRATION EXCEPTION, APPLIED REPORT (TRANCHE 9
+FOLLOW-UP)
+Records the two calibration corrections actually applied, following
+PHASE2_CALIBRATION_EXCEPTION_REVIEW_TRANCHE9.txt (full evidence trail
+there).
+======================================================================
+
+----------------------------------------------------------------------
+1. SCOPE AND OUTCOME
+----------------------------------------------------------------------
+2 calibration rows corrected in BOTH PHASE2_SEMANTIC_PILOT_500_FINAL.tsv
+and their corresponding first-500 rows in PHASE2_SEMANTIC_LEDGER.tsv:
+  flm-armb-leg-rbc
+  au18z
+
+No other calibration row was touched. No production row (positions
+501-9500) was touched -- the mandatory propagation check (Section 3
+below) found zero production rows citing either old calibration value
+as their own classification basis, so no propagation correction was
+needed or applied. Production families classified remains exactly 9000;
+next canonical position remains 9501. Master unchanged.
+
+The frozen-calibration exception standard (concrete contradiction +
+stronger authoritative/template evidence than the original judgment had
++ no new doctrine + a clear replacement) was met for both rows -- see
+review document Section 4.
+
+----------------------------------------------------------------------
+2. FLM-ARMB-LEG-RBC CORRECTION
+----------------------------------------------------------------------
+OLD (PHASE2_SEMANTIC_PILOT_500_FINAL.tsv, batch 3):
+  semantic_status:      PARTIAL
+  semantic_referent:    an arm-to-leg strap/attachment, right side,
+                         "RBC" suffix unclear
+  taxonomy_status:      NEEDS_CONTEXT
+  proposed_destination: (blank)
+  confidence:           Low
+  uncertainty_reason:   combining "Arm" and "Leg" is unusual; likely a
+                         weapon/gear strap but not certain
+  short_reason:         arm+leg referents present but combined oddly,
+                         suffix unresolved
+
+NEW:
+  semantic_status:      CLEAR
+  semantic_referent:    leg anatomy, within the internal Flm-ArmB
+                         namespace, suffix RBC
+  taxonomy_status:      CLEAR
+  proposed_destination: groupFile/Legs
+  confidence:           Medium
+  uncertainty_reason:   (cleared)
+  short_reason:         within-family precedent audit (Phase 2
+                         calibration exception review): 12/12 non-
+                         calibration Flm-ArmB-Leg-* siblings (5 pre-
+                         existing, 7 corrected in the Tranche 9 family
+                         QA pass) uniformly read "Leg" alone with "Flm-
+                         ArmB" set aside as namespace, cross-confirmed
+                         by the 100%-consistent Foot/Neck/Belt sub-
+                         families under the same template; the original
+                         "arm-to-leg strap" reading is the sole
+                         exception in the entire 13-row Leg family and
+                         is not supported by any sibling or Master
+                         evidence.
+  fold_key, exact_spellings, batch_id, scanner_lines: unchanged
+
+Evidence: 12/12 non-calibration Flm-ArmB-Leg-* rows (5 pre-existing:
+rm/ruc/lbc/luc/rub; 7 Tranche-9-corrected: rbd/rba/rbb/lub/lbd/lm/lua),
+plus 100%-consistent Foot(3)/Neck(2)/Belt(4) sub-families under the same
+"Flm-ArmB-<Word>-<suffix>" template, all mechanically re-verified from
+the current ledger. Reason a frozen-calibration exception was warranted:
+the calibration judgment was an isolated single-literal reading made
+before any family-wide template check existed; it is now directly and
+concretely contradicted by every other member of its own exact template
+family, with zero supporting sibling or Master evidence in its favor.
+
+----------------------------------------------------------------------
+3. AU18Z CORRECTION
+----------------------------------------------------------------------
+OLD (PHASE2_SEMANTIC_PILOT_500_FINAL.tsv, batch 4):
+  semantic_status:      OPAQUE
+  semantic_referent:    ambiguous alphanumeric code
+  taxonomy_status:      NOT_APPLICABLE
+  proposed_destination: (blank)
+  confidence:           Low
+  uncertainty_reason:   no recognizable word content
+  short_reason:         opaque code
+
+NEW:
+  semantic_status:      CLEAR
+  semantic_referent:    Facial Action Unit 18, variant "Z" (FACS
+                         convention)
+  taxonomy_status:      CLEAR
+  proposed_destination: groupFile/Face/Expressions
+  confidence:           High
+  uncertainty_reason:   (cleared)
+  short_reason:         sibling-precedent audit (Phase 2 calibration
+                         exception review): identical "AU<number>Z"
+                         shape to the current-ledger's already-CLEAR
+                         au22z/au26z (predating this review) and
+                         Tranche-9-corrected au6z/au27z, all CLEAR/
+                         CLEAR/Face/Expressions with the "Z" suffix
+                         explicitly established as not changing the
+                         core AU identity; confirmed by 6 direct live-
+                         Master bare/combined AU-number hits. Rule 24:
+                         an ungrounded/variant suffix does not erase
+                         independently grounded AU-number content.
+  fold_key, exact_spellings, batch_id, scanner_lines: unchanged
+
+Evidence: 6 direct live-Master AU-number hits (AU17R+AU17L, AU24, AU32,
+AU38, AU9R+AU9L -> Expressions; AU31 -> Upper Face) plus 15/15 current
+non-calibration AU-number(+Z) ledger rows, all CLEAR/CLEAR/Face/
+Expressions, including 4/4 rows sharing au18z's exact "AU<number>Z"
+shape (au22z, au26z, au6z, au27z). Reason a frozen-calibration exception
+was warranted: the calibration judgment predates the AU/FACS convention's
+establishment (the rulebook itself contains no AU/FACS rule; this is a
+corpus-internal pattern discovered entirely through later production
+classification and live-Master verification the calibration pass never
+had access to), and is now the sole OPAQUE outlier in an otherwise
+completely uniform 15-row family.
+
+----------------------------------------------------------------------
+4. PROPAGATION CHECK
+----------------------------------------------------------------------
+Mechanically searched every production row's (positions 501-9500)
+short_reason, uncertainty_reason, and semantic_referent fields for a
+citation of "rbc" or "au18z" as a classification basis. Zero matches
+found. No production row was classified specifically from either old
+calibration value, so no propagation correction was needed or applied.
+
+PRODUCTION ROWS PROPAGATION-CORRECTED: 0
+
+----------------------------------------------------------------------
+5. GLOBAL VALIDATION (mechanical, post-correction, re-opened from disk)
+----------------------------------------------------------------------
+final_row_count_500:                     PASS
+ledger_row_count_9500:                   PASS
+ledger_first_500_equals_updated_final:   PASS
+final_fold_key_sequence_identical:       PASS
+ledger_fold_key_sequence_identical:      PASS
+ledger_exact_spellings_unchanged:        PASS
+ledger_batch_id_unchanged:               PASS
+ledger_zero_duplicates:                  PASS
+final_zero_duplicates:                   PASS
+rule21_global_ledger (all 9,500 rows):   PASS
+rule21_global_final (all 500 rows):      PASS
+all_destinations_valid:                  PASS
+exactly_2_final_rows_changed:            PASS
+exactly_2_ledger_rows_changed:           PASS
+only_calibration_rows_changed_in_ledger: PASS
+production_501_9500_unchanged:           PASS
+
+ALL CHECKS PASS: True
+
+tools/verify_phase2_production_order.py: ALL CHECKS PASS: True
+  full sequence SHA256:    d43e0aa97e96608b165b993428af54084f3cfbe110379d22af8c416251618494 (unchanged)
+  production-only SHA256:  ad4c1e865c8edc18e039f233466731a56bf44170a9eacbd208e39c56f3dd4858 (unchanged)
+tools/validate_master.py sfm_defaultanimationgroups.txt: PASS
+  (structural parse PASS, 0 exact duplicate literals, 0 cross-path
+  native-Rebuild casefold invariant violations, "No files have been
+  modified.")
+
+production_families_classified remains 9000. next_canonical_phase2_
+position remains 9501. No other calibration row was modified. No raw
+batch file, historical closed tranche report, PHASE2_SEMANTIC_
+RULEBOOK_FINAL.txt, PHASE2_SEMANTIC_BATCH_RULES.txt, or the Master was
+modified.
+======================================================================

@@ -1,0 +1,279 @@
+======================================================================
+PHASE 2 -- FROZEN CALIBRATION EXCEPTION REVIEW (TRANCHE 9 FOLLOW-UP)
+TWO CONCRETE COUNTEREXAMPLES ONLY: flm-armb-leg-rbc, au18z
+Evidence-gathering review. No file changes recorded in this document.
+======================================================================
+
+Ledger state at start: 9500 rows (500 calibration + 9000 production).
+Checkpoint: a08b6f1 (Reconcile Tranche 9 family consistency findings).
+Both calibration rows mechanically re-fetched fresh from
+PHASE2_SEMANTIC_PILOT_500_FINAL.tsv and independently confirmed
+identical in PHASE2_SEMANTIC_LEDGER.tsv (rows 1-500).
+
+PHASE2_SEMANTIC_RULEBOOK_FINAL.txt and PHASE2_SEMANTIC_BATCH_RULES.txt
+were re-read and confirmed byte-identical (diff: no output). Neither
+file contains any rule text mentioning "AU", "Action Unit", or "FACS" --
+the AU-notation convention is not frozen rulebook doctrine; it is a
+corpus-internal pattern established entirely by direct live-Master
+evidence and current-ledger sibling consistency (see Section 3 below).
+
+----------------------------------------------------------------------
+1. CURRENT AUTHORITATIVE FIELDS (mechanically re-fetched)
+----------------------------------------------------------------------
+
+flm-armb-leg-rbc (FINAL.tsv row == ledger row 1-500, identical):
+  exact_spellings:      Flm-ArmB-Leg-RBC
+  semantic_status:      PARTIAL
+  semantic_referent:    an arm-to-leg strap/attachment, right side,
+                         "RBC" suffix unclear
+  taxonomy_status:      NEEDS_CONTEXT
+  proposed_destination: (blank)
+  confidence:           Low
+  uncertainty_reason:   combining "Arm" and "Leg" is unusual; likely a
+                         weapon/gear strap but not certain
+  short_reason:         arm+leg referents present but combined oddly,
+                         suffix unresolved
+  batch_id:             3
+  scanner_lines:        14114
+
+au18z (FINAL.tsv row == ledger row 1-500, identical):
+  exact_spellings:      AU18Z
+  semantic_status:      OPAQUE
+  semantic_referent:    ambiguous alphanumeric code
+  taxonomy_status:      NOT_APPLICABLE
+  proposed_destination: (blank)
+  confidence:           Low
+  uncertainty_reason:   no recognizable word content
+  short_reason:         opaque code
+  batch_id:             4
+  scanner_lines:        4181
+
+----------------------------------------------------------------------
+2. FLM-ARMB-LEG-RBC
+----------------------------------------------------------------------
+
+Original reasoning (recoverable, quoted above): the calibration reading
+treats the literal as combining TWO real anatomical words -- "Arm" (read
+out of "ArmB") AND "Leg" -- into a single compound referent, "an arm-to-
+leg strap/attachment." This is the ONLY row anywhere in the entire
+Flm-ArmB family (calibration or production, 39 rows total) that reads
+"ArmB" as contributing independent anatomical content combined with the
+trailing word. It predates any family-wide template check.
+
+Directly comparable current production rows (mechanically enumerated,
+full Flm-ArmB-Leg-* sub-family, 12 non-calibration rows):
+  flm-armb-leg-rm  -> CLEAR/CLEAR/groupFile/Legs   (pre-existing)
+  flm-armb-leg-ruc -> CLEAR/CLEAR/groupFile/Legs   (pre-existing)
+  flm-armb-leg-lbc -> CLEAR/CLEAR/groupFile/Legs   (pre-existing)
+  flm-armb-leg-luc -> CLEAR/CLEAR/groupFile/Legs   (pre-existing)
+  flm-armb-leg-rub -> CLEAR/CLEAR/groupFile/Legs   (pre-existing)
+  flm-armb-leg-rbd -> CLEAR/CLEAR/groupFile/Legs   (Tranche 9 correction)
+  flm-armb-leg-rba -> CLEAR/CLEAR/groupFile/Legs   (Tranche 9 correction)
+  flm-armb-leg-rbb -> CLEAR/CLEAR/groupFile/Legs   (Tranche 9 correction)
+  flm-armb-leg-lub -> CLEAR/CLEAR/groupFile/Legs   (Tranche 9 correction)
+  flm-armb-leg-lbd -> CLEAR/CLEAR/groupFile/Legs   (Tranche 9 correction)
+  flm-armb-leg-lm  -> CLEAR/CLEAR/groupFile/Legs   (Tranche 9 correction)
+  flm-armb-leg-lua -> CLEAR/CLEAR/groupFile/Legs   (Tranche 9 correction)
+
+100% (12/12) of every non-calibration Flm-ArmB-Leg-* row now reads
+"Leg" alone as the sole content word, with "Flm-ArmB" set aside as a
+pure namespace prefix -- none of them read a combined "arm+leg"
+referent, including the 5 rows that were ALREADY CLEAR before Tranche 9
+touched anything (rm/ruc/lbc/luc/rub), which were never influenced by
+the Tranche-9 correction and therefore constitute independent
+pre-existing counterevidence, not merely "more of the same recent
+pass."
+
+Cross-word family confirmation (mechanically re-verified,
+PHASE2_PRODUCTION_TRANCHE9_FAMILY_QA_REVIEW.txt Section 2): Foot (3
+rows), Neck (2 rows), and Belt (4 rows) sub-families under the SAME
+"Flm-ArmB-<Word>-<suffix>" template resolve 100% consistently to their
+single-word destination (Legs/Body/Clothing respectively) regardless of
+suffix -- none of them read "arm+foot," "arm+neck," or "arm+belt."
+This establishes, independent of the Leg sub-family itself, that "Flm-
+ArmB-" is a fixed namespace/section prefix in this rig, not a
+contributing anatomical token.
+
+A. Does the complete Flm-ArmB-Leg-* template positively establish Legs?
+   Yes -- 12/12 non-calibration members, including 5 untouched by the
+   Tranche-9 pass.
+B. Is RBC itself independently decoded or irrelevant to owner? Irrelevant
+   -- the Tranche-9 audit found no suffix-letter/length rule anywhere in
+   this family (Leg or Arm), and Foot/Neck/Belt prove suffix identity
+   never changes the destination once the namespace is set aside.
+C. What did the Tranche-9 39-row family audit establish? That "Flm-ArmB"
+   is an internal namespace prefix (Rule 24, set aside) and the single
+   trailing word (Foot/Neck/Belt/Leg/Arm/Back) is the real semantic
+   owner; suffix codes carry no destination-relevant information.
+D. Why were 14 production rows corrected? Because their own NEEDS_CONTEXT
+   status rested on treating the undecoded suffix (or the "ArmB"
+   fragment) as blocking a CLEAR reading, contradicted by the 100%-
+   consistent Foot/Neck/Belt behavior in the exact same namespace.
+E. Does the calibration row now contradict a coherent, mechanically
+   verified family rule/template? Yes, decisively -- it is the sole
+   exception (1 of 13 total Leg-family members, calibration included)
+   to a rule independently confirmed by three other sub-families
+   (Foot/Neck/Belt) and 12/12 Leg siblings.
+
+Strongest evidence supporting the current PARTIAL/NEEDS_CONTEXT reading:
+  None found beyond the original, unverified "arm+leg strap" guess
+  itself -- no sibling row, live-Master literal, or rulebook text
+  supports reading "ArmB" as contributing real anatomical content in
+  this namespace.
+
+Strongest evidence contradicting it:
+  12/12 non-calibration Flm-ArmB-Leg-* siblings (5 pre-existing, 7
+  Tranche-9-corrected) uniformly read "Leg" alone; cross-confirmed by
+  100% consistency in the Foot/Neck/Belt sub-families of the identical
+  template.
+
+VERDICT: CALIBRATION_ERROR
+
+Proposed replacement fields:
+  semantic_status:      PARTIAL -> CLEAR
+  semantic_referent:    "an arm-to-leg strap/attachment, right side,
+                         \"RBC\" suffix unclear" -> "leg anatomy, within
+                         the internal Flm-ArmB namespace, suffix RBC"
+  taxonomy_status:      NEEDS_CONTEXT -> CLEAR
+  proposed_destination: (blank) -> groupFile/Legs
+  confidence:           Low -> Medium
+  uncertainty_reason:   cleared
+  short_reason:         within-family precedent audit (Phase 2
+                         calibration exception review): 12/12 non-
+                         calibration Flm-ArmB-Leg-* siblings (5 pre-
+                         existing, 7 corrected in the Tranche 9 family
+                         QA pass) uniformly read "Leg" alone with "Flm-
+                         ArmB" set aside as namespace, cross-confirmed
+                         by the 100%-consistent Foot/Neck/Belt sub-
+                         families under the same template; the original
+                         "arm-to-leg strap" reading is the sole
+                         exception in the entire 13-row Leg family and
+                         is not supported by any sibling or Master
+                         evidence.
+  batch_id, scanner_lines, exact_spellings, fold_key: unchanged (frozen)
+
+----------------------------------------------------------------------
+3. AU18Z
+----------------------------------------------------------------------
+
+Original reasoning (recoverable, quoted above): "no recognizable word
+content" / "opaque code" -- written with no reference to any AU/FACS
+convention, consistent with this being one of the calibration's earliest
+rows (batch 4), classified before the AU-number pattern's grounding was
+established by later live-Master and production-ledger evidence.
+
+Directly comparable current production/live-Master evidence (mechanically
+re-fetched):
+  Live Master (word-boundary "AU<digits>", 6 direct hits):
+    AU17R+AU17L, AU24, AU32, AU38, AU9R+AU9L -> groupFile/Face/Expressions
+    AU31                                     -> groupFile/Face/Upper Face
+  Current ledger, bare AU<number> (11 rows, all CLEAR/CLEAR/Expressions):
+    au1, au4, au6, au13, au15, au26, au27, au1au4, au2au4 (+au18, au6z,
+    au27z as of the Tranche 9 correction below)
+  Current ledger, AU<number>Z shape (4 rows, ALL CLEAR/CLEAR/Expressions
+    as of the Tranche 9 correction):
+    au22z, au26z (pre-existing), au6z, au27z (Tranche 9 corrected)
+  au17d (a distinct AU+letter-suffix template, CLEAR/CLEAR/Face/Lower
+    Face on its own independent anatomical grounding -- AU17 = Chin
+    Raiser -- not part of the bare-number or "Z"-suffix templates)
+
+A. Is AU18 itself semantically grounded? Yes -- identical "AU"+digits
+   shape to au1/4/6/13/15/26/27/18 (post-correction), all already
+   established as CLEAR via the same live-Master bare/combined-AU-
+   number precedent. Nothing about the specific number 18 differs from
+   1/4/6/13/15/26/27.
+B. What does suffix "z" do? Functions as a non-disruptive index/variant
+   marker on the AU number -- established directly, not inferred: au22z
+   and au26z (both current-ledger CLEAR/Expressions, predating this
+   review) each explicitly state in their short_reason that "the Z
+   variant suffix does not change the core AU identity."
+C. Is "z" a known family variant suffix? Yes, per (B) -- and further
+   reinforced by the Tranche 9 correction of au6z/au27z to the identical
+   CLEAR/Expressions destination on the same reasoning, making 4/4
+   current non-calibration "AU<number>Z" rows uniformly CLEAR/
+   Expressions.
+D. Even if "z" were unresolved, could AU18 alone justify CLEAR/PARTIAL
+   over OPAQUE? Yes, per Rule 24 (an ungrounded suffix does not erase
+   independently grounded content) -- moot here since (C) shows "z" is
+   not actually unresolved in this corpus.
+E. What do current AU*z and bare-AU rows establish? A completely uniform
+   pattern across 15 non-calibration AU-number(+Z) rows: every one
+   resolves CLEAR/CLEAR/groupFile/Face/Expressions. au18z (calibration)
+   is now the sole OPAQUE outlier in the entire family.
+
+Strongest evidence supporting the current OPAQUE reading:
+  None beyond the original pre-AU-convention "no recognizable word
+  content" assessment, which was written before any AU/FACS grounding
+  evidence (live-Master or ledger) existed to check against.
+
+Strongest evidence contradicting it:
+  6 direct live-Master AU-number hits (5 Expressions, 1 Upper Face) plus
+  15/15 current non-calibration AU-number(+Z) ledger rows, all CLEAR/
+  Expressions, including 4/4 rows sharing au18z's exact "AU<number>Z"
+  shape.
+
+VERDICT: CALIBRATION_ERROR
+
+Proposed replacement fields:
+  semantic_status:      OPAQUE -> CLEAR
+  semantic_referent:    "ambiguous alphanumeric code" -> "Facial Action
+                         Unit 18, variant \"Z\" (FACS convention)"
+  taxonomy_status:      NOT_APPLICABLE -> CLEAR
+  proposed_destination: (blank) -> groupFile/Face/Expressions
+  confidence:           Low -> High
+  uncertainty_reason:   cleared
+  short_reason:         sibling-precedent audit (Phase 2 calibration
+                         exception review): identical "AU<number>Z"
+                         shape to the current-ledger's already-CLEAR
+                         au22z/au26z (predating this review) and Tranche-
+                         9-corrected au6z/au27z, all CLEAR/CLEAR/Face/
+                         Expressions with the "Z" suffix explicitly
+                         established as not changing the core AU
+                         identity; confirmed by 6 direct live-Master
+                         bare/combined AU-number hits. Rule 24: an
+                         ungrounded/variant suffix does not erase
+                         independently grounded AU-number content.
+  batch_id, scanner_lines, exact_spellings, fold_key: unchanged (frozen)
+
+----------------------------------------------------------------------
+4. FROZEN-CALIBRATION STANDARD CHECK
+----------------------------------------------------------------------
+Both rows meet every element of the required standard:
+  - concrete contradiction: yes, for both (12/12 Leg siblings; 15/15
+    AU-number(+Z) siblings, plus direct live-Master hits for both).
+  - stronger authoritative/template evidence than the original
+    calibration had: yes, for both -- neither original judgment
+    referenced any family-wide template or live-Master search; both
+    were isolated single-literal guesses later falsified by systematic
+    evidence the calibration pass did not have.
+  - no new doctrine required: confirmed -- both corrections apply
+    already-settled reasoning (Rule 24, the Flm-ArmB namespace-
+    exclusion precedent, the AU-number FACS convention) mechanically
+    re-verified against current fields, not a new rule.
+  - clear replacement classification: yes, specified above for both.
+
+Neither case rests on "newer classification seems preferable" or mere
+production volume -- both rest on direct, mechanically-verified,
+100%-consistent sibling/template contradiction of the original isolated
+judgment.
+
+----------------------------------------------------------------------
+5. VERDICTS SUMMARY
+----------------------------------------------------------------------
+  flm-armb-leg-rbc : CALIBRATION_ERROR
+  au18z            : CALIBRATION_ERROR
+
+----------------------------------------------------------------------
+6. PROPAGATION CHECK (preview only, mechanical text search)
+----------------------------------------------------------------------
+Searched every production row's short_reason/uncertainty_reason/
+semantic_referent fields for a citation of "rbc" or "au18z" as their own
+classification basis: zero matches found outside the two calibration
+rows themselves. No production row was classified specifically from
+either old calibration value -- no propagation correction is expected.
+(Confirmed mechanically again after the calibration edit in Section 6
+of the Applied Report.)
+
+No files have been modified by this review. Application follows only
+after explicit approval, per the task's own Section 6 ("Apply only
+confirmed calibration errors").
