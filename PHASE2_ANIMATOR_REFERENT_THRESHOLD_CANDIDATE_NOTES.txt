@@ -1,0 +1,98 @@
+======================================================================
+PHASE 2 -- ANIMATOR-USEFUL REFERENT THRESHOLD (RULE 27)
+CANDIDATE NOTES ONLY -- NO LEDGER ROWS MODIFIED
+======================================================================
+
+Per Section 12 of the doctrine-clarification task: this is a mechanical
+identification of current-ledger rows the newly codified Rule 27 makes
+worth a future look. Nothing below was changed. No broad historic OPAQUE
+audit was performed -- this is a narrow, targeted grep against the exact
+categories Rule 27 names (pivot/scale/shift/global/generic root/flex-
+noise/flex-twist/flatten), not a general re-scan of all ~1,860 current
+OPAQUE/PARTIAL rows.
+
+----------------------------------------------------------------------
+1. "level_N_root" -- DIRECT SIBLING INCONSISTENCY (Rule 27's own named
+   example, already present in the corpus)
+----------------------------------------------------------------------
+  level1_root -> CLEAR / NEEDS_CONTEXT / (blank)   (batch P48)
+  level2_root -> OPAQUE / NOT_APPLICABLE           (batch P90)
+  level3_root -> CLEAR / NEEDS_CONTEXT / (blank)   (batch P34)
+
+All three are the identical bare "level<N>_root" template -- a generic
+hierarchy-level label with a generic "root" suffix, no anatomical/
+object/mechanism content of any kind. level2_root already matches Rule
+27's own worked example exactly (it is, in fact, the literal Rule 27
+cites). level1_root and level3_root currently disagree with it. This is
+the single clearest Rule-27-relevant candidate in the ledger. NOT
+corrected here -- flagged for a future targeted family QA pass.
+
+----------------------------------------------------------------------
+2. "pivot" (bare, no object stated)
+----------------------------------------------------------------------
+  pivot -> CLEAR / NEEDS_CONTEXT / (blank)   (batch P40)
+
+A bare "pivot" names an operation/hierarchy role with no stated subject
+-- squarely inside Rule 27's "pivot_point" example category. Its
+current CLEAR semantic_status may warrant re-examination toward OPAQUE
+under Rule 27 (no recoverable animator-useful referent survives once
+the bare operation word is set aside). NOT corrected here.
+
+Note: "lever.pivot" (CLEAR/CLEAR/groupFile/Other, batch P47) is NOT a
+candidate -- "lever" supplies a concrete object referent that bare
+"pivot" lacks, satisfying Rule 27 category B independently.
+
+----------------------------------------------------------------------
+3. "flatten/outline#" and "flatten/beam#" -- SPLIT WITHIN AN IDENTICAL
+   NUMBERED TEMPLATE
+----------------------------------------------------------------------
+  flatten/outline1 -> CLEAR   / NEEDS_CONTEXT / (blank)  (batch P04)
+  flatten/outline2 -> OPAQUE  / NOT_APPLICABLE            (batch P97)
+  flatten/beam1     -> PARTIAL / NEEDS_CONTEXT / (blank)  (batch P87)
+  flatten/beam2     -> OPAQUE  / NOT_APPLICABLE            (batch P97)
+
+Rule 27 Section 6 directly names "flatten/beam2" as an example of a
+literal that does not establish "beam2" as anatomy or even a body
+object. The already-OPAQUE _2 variants of both "outline" and "beam"
+match that reasoning; the _1 variants (CLEAR and PARTIAL respectively)
+currently disagree with their own numbered sibling. NOT corrected here
+-- flagged for a future targeted family QA pass, since resolving which
+side of the split is correct requires inspecting whatever additional
+context (if any) distinguishes "outline"/"beam" as concrete referents,
+which this narrow candidate-identification pass did not attempt.
+
+----------------------------------------------------------------------
+4. Already consistent with Rule 27 -- no action needed
+----------------------------------------------------------------------
+  global      -> OPAQUE/NOT_APPLICABLE (P97) -- correctly matches Rule
+                 27's own named example.
+  flex_twist  -> OPAQUE/NOT_APPLICABLE (P97) -- correctly matches Rule
+                 27 Section 6's flex/deformation guidance.
+  scale_[xyz]-style bare axis literals -- zero matches found in the
+                 current ledger; no existing row to reconsider.
+  Generic "bone.###"/"bone NNN"-style numbered bones (172 total
+                 "bone"/"jnt" hits reviewed) -- already uniformly
+                 OPAQUE when bare-numbered, and already uniformly CLEAR
+                 with an anatomical destination when a real anatomical
+                 word is present (e.g. "bone forearm01" -> Arms,
+                 "bone-r-upperarm-twist1" -> Arms) -- no drift found
+                 against Rule 27's generic-joint/bone guidance.
+  "pan pan r shift" (NEEDS_CONTEXT) vs. "pan pan l shift" (CLEAR/
+                 Clothing, batch P99) -- a pre-existing sibling split,
+                 but NOT a Rule-27 case: "shift" here is not a bare
+                 generic operation, it is attached to the named object
+                 "pan pan," so this split (if real) is an ordinary
+                 ownership/consistency question, not an OPAQUE-threshold
+                 question. Noted for completeness, not a Rule 27
+                 candidate.
+
+----------------------------------------------------------------------
+5. DISPOSITION
+----------------------------------------------------------------------
+No row was modified. These four families/rows (level_N_root, pivot,
+flatten/outline#, flatten/beam#) are recorded as candidates for a
+future targeted QA pass, to be resolved the same way every other
+settled-family reconciliation in this project has been: individually,
+against mechanically re-fetched current evidence, not by blanket
+keyword reclassification.
+======================================================================

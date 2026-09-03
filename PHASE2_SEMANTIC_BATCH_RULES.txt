@@ -644,6 +644,100 @@ remains authoritative.
         non-structural) is resolved by ordinary context rules, not by
         this rule.
 
+27. SETTLED: THE ANIMATOR-USEFUL REFERENT THRESHOLD FOR ESCAPING OPAQUE.
+    This rule clarifies, and does not replace, rule 22's OPAQUE
+    definition and "direct readability" language used in OPAQUE-review
+    reporting. Lexical/technical decipherability of the individual words
+    in a literal is NOT by itself sufficient to escape OPAQUE. "Direct
+    readability" means the complete literal identifies an animator-useful
+    controlled referent or function -- not merely that its words can be
+    individually translated or paraphrased. The controlling question is:
+    "does this identifier tell an animator what meaningful thing, body
+    part, object, mechanism, state, control function, or recognizable
+    controller they are manipulating, well enough to be useful in the
+    taxonomy?" -- not merely "can I explain the words?"
+
+    To escape OPAQUE, the complete literal must preserve at least one of:
+      A. an identifiable anatomical referent (elbow, jaw, left thumb,
+         clavicle, tail);
+      B. an identifiable object/equipment/garment referent (strap, hat,
+         collar, chain, sword, condom);
+      C. an identifiable facial mechanism or expression (brow furrow,
+         smile, shocked, eyelid, tongue);
+      D. an identifiable body state/morph/appearance control (belly
+         size, breast flatten, pussy open, muscle inflate);
+      E. a positively identified corrective purpose (shoulder gap
+         corrective, leg split fix, JCM bend corrective -- rules 2-5
+         still govern what counts as positive corrective evidence);
+      F. an identifiable animator-useful function whose role is itself
+         the referent -- this requires more than a generic transform
+         verb; it must be a stable, useful controller concept already
+         established by the complete literal or by coherent corpus/
+         template evidence (this is the existing rule 22 category
+         covering bare "lift"/"lower"/"drop"/"show"/"squish"/"crush"/
+         "switch"/"jiggle"-type functions -- those already qualify
+         because each names a specific, recognizable controller
+         behavior with no realistic competing sense in this naming
+         domain, NOT because they are merely readable verbs); or
+      G. a project-grounded convention, where current Master/
+         calibration/corpus evidence reliably establishes the actual
+         referent behind an otherwise cryptic literal (donger, Brown ->
+         brow, Bck -> back, AU<number> -> FACS Action Unit).
+
+    A generic technical operation, axis, direction, transform type,
+    hierarchy role, side, numbering, "root," "joint," "pivot," "global,"
+    "level," "scale," or "shift" does NOT by itself satisfy any of A-G.
+    Absent stronger family/template evidence placing it under G, a
+    literal built only from such generic technical vocabulary remains
+    OPAQUE even though its individual words are intelligible -- the
+    reason is not that the words are meaningless, but that the
+    controlled referent is not recoverable in an animator-useful way.
+    Examples likely OPAQUE absent stronger evidence: pivot_point,
+    scale_z_up, scale_z_down, z_shift_5, level2_root, global, jnt_right.
+    The same principle applies to generic joint/bone/root labels (bone135,
+    bone_middle_06, root_2): knowing something is a joint, bone, or root
+    does not by itself tell us WHAT anatomical or functional controller
+    it is, and such a literal must not be defaulted to Body merely
+    because it appears skeletal -- Body is not a catch-all for unknown
+    rig structure. Likewise, flex/deformation/flatten terms (flex_noise,
+    flex_twist, flatten, scale, crush, widen, shrink) must not
+    automatically imply Body Morphs, and must not automatically imply
+    Clothing merely because garments often use flexible/twist controls --
+    the semantic owner/purpose must be positively established before
+    escaping OPAQUE or receiving a taxonomy destination (contrast
+    "breast_flatten," where the body/anatomical owner is recoverable from
+    the literal itself, with a bare "flatten/beam2" or "flex_noise1,"
+    where it is not).
+
+    This rule does NOT collapse the semantic/taxonomy distinction (rule
+    12 and rule 22 remain in force). Use CLEAR/PARTIAL + NEEDS_CONTEXT
+    when the animator-useful referent itself IS recoverable (categories
+    A-G above) but ownership/category remains unresolved -- e.g. a bare
+    "strap" is CLEAR (a recognizable object) even with unresolved
+    ownership, per rule 22's existing "unnamed owner" guidance, which
+    this rule does not disturb. Use OPAQUE only when no such referent
+    survives -- e.g. "z_shift_5" names a known operation but no
+    recoverable controlled thing. The decision test:
+      (a) What would an animator understand this control to manipulate?
+          If the honest answer is only "something that scales/shifts,"
+          "some root," "some pivot," "some joint," or "something
+          global," semantic content is probably insufficient.
+      (b) Can the controlled referent be named without inventing missing
+          information? If no, OPAQUE may be correct.
+      (c) Is the missing information merely taxonomy ownership of an
+          otherwise identifiable thing? If yes, CLEAR/PARTIAL +
+          NEEDS_CONTEXT may be correct.
+      (d) Does current Master/calibration/corpus evidence recover the
+          otherwise missing referent (category G)? If yes, use that
+          evidence.
+
+    This is a clarification of existing OPAQUE discipline, not a new
+    taxonomy-policy category, and does not by itself authorize or
+    require reclassifying any existing ledger row -- existing rows are
+    reconsidered only when naturally encountered in later production,
+    exposed by a coherent-family consistency check, or explicitly
+    targeted by a future QA task.
+
 ==============================================================================
 END OF SETTLED RULES. Anything not covered above is an open question --
 apply rule 22 to determine semantic_status and rule 12 to determine
