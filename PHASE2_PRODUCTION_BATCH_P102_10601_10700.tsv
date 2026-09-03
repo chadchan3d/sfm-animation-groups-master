@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+flm-armb-foot-la	Flm-ArmB-Foot-LA	CLEAR	foot anatomy, Flm-ArmB namespace, left, variant A	CLEAR	groupFile/Legs	High		Matches the settled Flm-ArmB-Foot-* sub-family (100% consistent Legs regardless of suffix).	P102	
+bip01_r_clavicle011	Bip01_R_Clavicle011	CLEAR	clavicle structural bone, right, numbered	CLEAR	groupFile/Arms	High		Structural clavicle anatomy routes to Arms (current post-6bb1f4e Master collar/clavicle precedent).	P102	
+bone38	Bone38	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P102	
+page_curl_3	page_curl_3	CLEAR	a page-curl animation function, numbered variant	NEEDS_CONTEXT		Low		'Page curl' is a specific, stable function with one reading (rule 22 unnamed-owner-function pattern, parallel to jiggle/squish), but the owning prop (a book?) is unstated and no taxonomy precedent exists.	P102	
+fh14.r	Fh14.R	OPAQUE	cryptic 'Fh' code, numbered, side	NOT_APPLICABLE		Low		Matches the established cryptic 'Fh##.side' family precedent.	P102	
+cloth_back_b_2_l	cloth_back_B_2_L	CLEAR	cloth simulation control, back, variant B, numbered, left	CLEAR	groupFile/Clothing	High		Explicit cloth/garment content.	P102	
+right_pants_string_1	right_pants_string_1	CLEAR	pants drawstring, right, numbered	CLEAR	groupFile/Clothing	High		Explicit garment (pants) content.	P102	
+bip_head11_r	bip_head11_r	CLEAR	head-adjacent structural bone, numbered, sided	CLEAR	groupFile/Body	Medium		Standard bip head bone naming despite unusual side marker; plain structural head/body anatomy.	P102	
+anus-extreme-backward-out	anus-extreme-backward-out	CLEAR	an anus shape/state control, extreme backward-out position	CLEAR	groupFile/Body Morphs	High		Explicit genital anatomy plus explicit state/position descriptors (extreme/backward/out).	P102	
+arm left finger 5 c	arm left finger 5 c	CLEAR	pinky finger, left, variant c	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy and side.	P102	
+torso pipe b r 2a	torso pipe B R 2a	CLEAR	a pipe/tube object located at the torso, variant B, right, numbered	NEEDS_CONTEXT		Low		'Pipe' is a recognizable object (rule 22 unnamed-owner pattern); 'torso' may describe location rather than owner (rule 11); no precedent resolves mechanical-prop vs. anatomy-adjacent reading.	P102	
+bulgepullanus	BulgePullAnus	CLEAR	anus bulge-pull shape control	CLEAR	groupFile/Body Morphs	High		Explicit genital anatomy plus explicit shape/pull descriptor.	P102	
+pussparent.002_r.007	PussParent.002_R.007	CLEAR	vagina parent/root bone (truncated 'Puss'='Pussy'), right, numbered	CLEAR	groupFile/Body	High		Matches the settled finalized-calibration precedent PussParent.002_L.008 (CLEAR/CLEAR/Body) exactly, same numbered family, mirrored side. NOTE: PussParent.002_L.008 is a documented CALIBRATION_EXCEPTION_CANDIDATE (see PHASE2_CALIBRATION_EXCEPTION_REVIEW_TRANCHE9.txt) contradicted by 22/22 live-Master hits for this exact family (Body Morphs); production classification follows the CURRENT unmodified calibration for consistency until that candidate is separately resolved, per authority order (calibration outranks live-Master template pending explicit review).	P102	
+lowerblinkfull	LowerBlinkFull	CLEAR	lower eyelid full blink	CLEAR	groupFile/Face/Eyes	High		Explicit eyelid mechanism.	P102	
+earright4	EarRight4	CLEAR	ear anatomy, right, numbered	CLEAR	groupFile/Face/Ears	High		Explicit ear anatomy.	P102	
+ivy.bip01_l_shoulderarmor	Ivy.Bip01_L_ShoulderArmor	CLEAR	shoulder armor piece, left (character prefix set aside)	CLEAR	groupFile/Clothing	High		Explicit worn armor/garment content (rule 24 prefix set aside).	P102	
+necklace 3a	necklace 3a	CLEAR	necklace jewelry, numbered, variant a	CLEAR	groupFile/Clothing	High		Explicit jewelry/accessory content.	P102	
+waist_shrink	waist_shrink	CLEAR	waist size-shrink shape control	CLEAR	groupFile/Body Morphs	High		Explicit body-region shape/size descriptor.	P102	
+valvebiped.joint6	ValveBiped.joint6	OPAQUE	generic numbered joint, no anatomical content named	NOT_APPLICABLE		Low		Rule 27: bare 'joint' + number does not by itself identify an animator-useful anatomical referent.	P102	
+l_lat_helper	l_lat_helper	CLEAR	latissimus dorsi (back muscle) helper bone, left	CLEAR	groupFile/Body	Medium		'Lat' (back muscle) is structural torso anatomy despite the 'helper' qualifier.	P102	
+bow left d 2	bow left d 2	PARTIAL	a 'bow', left, variant D, numbered -- materially different core readings (decorative bow / archery bow / ship's bow)	NEEDS_CONTEXT		Low		Rule 22 PARTIAL example word ('bow') -- no disambiguating content present.	P102	
+bone_bed_01	bone_bed_01	OPAQUE	cryptic 'bone bed' compound, numbered, no recoverable content	NOT_APPLICABLE		Low		No grounding for 'bed' in this compound; no established convention.	P102	
+tv screen on	TV screen on	CLEAR	a TV screen prop, on state	CLEAR	groupFile/Other	High		Recognized real-world prop object (rule 16) with an on/off state.	P102	
+stock	Stock+stock	PARTIAL	'stock' -- materially different core readings (weapon stock / generic supply-stock concept)	NEEDS_CONTEXT		Low		Bare word with no WEP-style qualifying context to resolve which sense applies (rule 22 PARTIAL test).	P102	
+jacket belt l 1	Jacket belt L 1	CLEAR	jacket belt component, left, numbered	CLEAR	groupFile/Clothing	High		Explicit garment (jacket) content.	P102	
+lfoward	LFoward	OPAQUE	a bare directional term ('Foward'=misspelling of Forward), left, no controlled object named	NOT_APPLICABLE		Low		Rule 27: a bare direction alone does not identify what moves.	P102	
+bip_bobby_r_thightwist1	Bip_BOBBY_R_ThighTwist1	CLEAR	thigh twist bone, right, numbered (BOBBY character prefix set aside)	CLEAR	groupFile/Legs	High		Rule 24: prefix set aside; plain structural thigh anatomy.	P102	
+bipflm l finger1	BipFlm L Finger1	CLEAR	finger anatomy, left, numbered (BipFlm namespace prefix set aside)	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Rule 24: namespace prefix set aside; explicit finger anatomy and side.	P102	
+beltcontrol.005	BeltControl.005	CLEAR	belt garment control, numbered	CLEAR	groupFile/Clothing	High		Explicit garment (belt) content.	P102	
+student.right_2	Student.Right_2	OPAQUE	a bare name/label ('Student'), right, numbered -- no anatomical or object noun present	NOT_APPLICABLE		Low		No recoverable animator-useful referent beyond a bare character/costume label plus side and number.	P102	
+panties-pulldownback	Panties-PullDownBack	CLEAR	panties pull-down-back garment function	CLEAR	groupFile/Clothing	High		Explicit garment (panties) content.	P102	
+d16	D16	OPAQUE	bare cryptic alphanumeric code	NOT_APPLICABLE		Low		No recoverable content.	P102	
+tailleft4_7	TailLeft4_7	CLEAR	tail anatomy, left, segment 4, sub-numbered 7	CLEAR	groupFile/Tail	High		Explicit tail anatomy.	P102	
+smalll	smalll	OPAQUE	generic size adjective ('small'), no object named	NOT_APPLICABLE		Low		Rule 27: bare adjective with no controlled subject.	P102	
+frily_20.r	Frily_20.R	CLEAR	a frill/ruffle garment trim ('Frily'=Frilly misspelling accepted), numbered, right	CLEAR	groupFile/Clothing	High		Accepted misspelling (rule 12); explicit garment trim content.	P102	
+smolllips	SmollLips	CLEAR	a small-lips size/shape control ('Smoll'=internet slang for small)	CLEAR	groupFile/Face/Lower Face	Medium		Explicit lip mechanism; localized facial feature shape routes to Lower Face, matching this Master's established Face-taxonomy convention for lip/mouth controls over Body Morphs.	P102	
+earright2	EarRight2	CLEAR	ear anatomy, right, numbered	CLEAR	groupFile/Face/Ears	High		Explicit ear anatomy.	P102	
+nyotengu head forehead left	Nyotengu head forehead left	CLEAR	forehead anatomy, left (character prefix set aside)	CLEAR	groupFile/Face/Upper Face	High		Rule 24: character prefix set aside; explicit forehead mechanism.	P102	
+nippleleftin	NippleLeftIn	CLEAR	nipple position/state control, left, inward	CLEAR	groupFile/Body Morphs	High		Explicit anatomy with an explicit state/position descriptor (in).	P102	
+lipsstretcherl	LipsStretcherL	CLEAR	lip-stretch mechanism, left	CLEAR	groupFile/Face/Lower Face	High		Explicit mouth/lip mechanism.	P102	
+bip_fpinky00_l	Bip_FPinky00_L	CLEAR	pinky finger, left, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy and side.	P102	
+lipsstretcherr	LipsStretcherR	CLEAR	lip-stretch mechanism, right	CLEAR	groupFile/Face/Lower Face	High		Explicit mouth/lip mechanism.	P102	
+valvebiped_bullet13	ValveBiped_Bullet13	CLEAR	a bullet/ammunition prop, numbered	CLEAR	groupFile/Other	High		Recognized weapon-ammunition prop object.	P102	
+wep_carrierlatch	WEP_CarrierLatch	CLEAR	a weapon magazine-carrier latch mechanism	CLEAR	groupFile/Other	High		WEP prefix + recognized weapon-mechanism object.	P102	
+togue2	Togue2	CLEAR	tongue control, numbered (misspelling accepted)	CLEAR	groupFile/Face/Tongue	High		Accepted misspelling (rule 12: Togue->Tongue).	P102	
+bone 84	bone 84	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P102	
+body tone	Body Tone	CLEAR	a body-tone/muscle-tone appearance control	CLEAR	groupFile/Body Morphs	High		Explicit appearance/state descriptor for the whole body.	P102	
+torso-clothes-fit	Torso-Clothes-Fit	CLEAR	a torso clothing fit-adjustment control	CLEAR	groupFile/Clothing	High		Object-specific garment fit control stays with the garment (rule 8).	P102	
+bikini_a_jiggle	Bikini_a_jiggle	CLEAR	bikini garment jiggle physics, variant a	CLEAR	groupFile/Clothing	High		Explicit garment (bikini) content.	P102	
+helper_rb	Helper_RB	OPAQUE	a generic 'helper' with a cryptic 'RB' suffix, no anatomical content	NOT_APPLICABLE		Low		Rule 27: 'helper' alone names no animator-useful referent; 'RB' has no independent grounding.	P102	
+erovagina	EroVagina	CLEAR	vagina anatomy ('Ero'=cosmetic naming prefix set aside)	CLEAR	groupFile/Body Morphs	High		This Master's entire pussy/vagina domain (498/507 hits, including bare unqualified forms) resolves to Body Morphs with zero hits to plain Body; the 'Ero' prefix is cosmetic and does not change this.	P102	
+earring.pendant_left_2	Earring.Pendant_Left_2	CLEAR	pendant earring jewelry, left, numbered	CLEAR	groupFile/Clothing	High		Explicit jewelry/accessory content.	P102	
+chain_16	chain_16	PARTIAL	'chain' with no anchor word, numbered -- materially different core readings (jewelry chain / physics-sim chain / mechanical chain)	NEEDS_CONTEXT		Low		Rule 22 PARTIAL example word ('chain') -- no disambiguating content present.	P102	
+knotmedium3	KnotMedium3	CLEAR	a decorative knot, medium size variant, numbered	NEEDS_CONTEXT		Medium		'Knot' is a recognizable decorative object (rule 22 unnamed-owner pattern) with no stated garment/hair owner.	P102	
+leftfinge33	LeftFinge33	CLEAR	finger anatomy ('Finge'=truncated Finger), left, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Recognizable truncation of 'Finger'; explicit finger anatomy and side.	P102	
+camera_root	camera_root	CLEAR	a camera rig anchor point	CLEAR	groupFile/Other	Medium		'Camera' is a recognizable non-anatomical utility object.	P102	
+l-eee	L-EEE	OPAQUE	cryptic 'EEE' fragment, left, no recoverable content	NOT_APPLICABLE		Low		No grounding for 'EEE' in this corpus.	P102	
+small thigs	Small Thigs	CLEAR	a small-thighs size control ('Thigs'=truncated Thighs)	CLEAR	groupFile/Body Morphs	Medium		Recognizable truncation of 'Thighs'; explicit size descriptor on a body region.	P102	
+earring right 2	earring right 2	CLEAR	earring jewelry, right, numbered	CLEAR	groupFile/Clothing	High		Explicit jewelry/accessory content.	P102	
+bone_wfr	Bone_WFR	OPAQUE	cryptic 'WFR' suffix, no recoverable content	NOT_APPLICABLE		Low		No grounding for 'WFR' in this corpus.	P102	
+longear_bone_r_01	longear_bone_r_01	CLEAR	long-ear anatomy bone, right, numbered (species-neutral)	CLEAR	groupFile/Face/Ears	High		Explicit ear anatomy (species-neutral per rule 18/19).	P102	
+a13	A13	OPAQUE	bare cryptic alphanumeric code	NOT_APPLICABLE		Low		No recoverable content.	P102	
+bip_l_horn_a	bip_l_horn_a	CLEAR	horn anatomy, left, variant a (species-neutral)	CLEAR	groupFile/Other	High		Matches settled Rule 18 horn precedent (routes to Other).	P102	
+eye sus	Eye sus	CLEAR	a suspicious-look eye expression ('sus'=internet slang for suspicious)	CLEAR	groupFile/Face/Eyes	Medium		Localized eye mechanism for a specific expression state.	P102	
+legpeopledifferencefinger1_l	LegPeopleDifferenceFinger1_L	PARTIAL	a Leg+Finger digit-template compound with an unresolved 'PeopleDifference' middle token, left, numbered	NEEDS_CONTEXT		Low		Matches the established Leg+hand-finger-name -> toe-digit template shape (rule pattern from leglittlefinger2_l), but 'PeopleDifference' is a genuinely undecoded relation that does not parse as an ordinary finger-type qualifier (rule 22 PARTIAL test).	P102	
+flm-arma-swordb-f	Flm-ArmA-SwordB-F	CLEAR	a sword weapon prop, variant B/F (Flm-ArmA namespace set aside)	CLEAR	groupFile/Other	High		Rule 24: namespace prefix set aside; explicit weapon (sword) content.	P102	
+there	There	OPAQUE	bare word 'there', no object/anatomy/function named	NOT_APPLICABLE		Low		No recoverable animator-useful referent.	P102	
+tail_dn_c	tail_dn_c	CLEAR	tail down control, variant c	CLEAR	groupFile/Tail	High		Explicit tail anatomy.	P102	
+bip_tentacle.006	Bip_Tentacle.006	CLEAR	tentacle anatomy, numbered (species-neutral)	CLEAR	groupFile/Other	High		Matches settled Rule 18 tentacle precedent (routes to Other).	P102	
+tekubi_l__rot_te_l__x100__offset	tekubi_l__rot_te_l__x100__offset	CLEAR	wrist ('tekubi') and hand ('te') anatomy, left, offset	CLEAR	groupFile/Arms	High		Grounded Japanese loanwords, matching established sibling-series precedent; mirrors this tranche's own tekubi_r entry.	P102	
+frily_31.l	Frily_31.L	CLEAR	a frill/ruffle garment trim, numbered, left	CLEAR	groupFile/Clothing	High		Accepted misspelling (rule 12); explicit garment trim content.	P102	
+root.hat	root.hat	CLEAR	a structural root/anchor bone for a hat object	CLEAR	groupFile/Clothing	High		'Hat' is the explicit owner object; 'root' is a structural anchor descriptor that does not change ownership.	P102	
+toy_bone_19	toy_bone_19	CLEAR	a toy prop bone, numbered	CLEAR	groupFile/Other	High		Recognized prop object (toy).	P102	
+helper_headm	Helper_HeadM	CLEAR	head anatomy, variant M (helper qualifier set aside)	CLEAR	groupFile/Body	High		Explicit head anatomy despite the 'Helper' qualifier.	P102	
+bottemopen	BottemOpen	CLEAR	a bottom/rear opening state control ('Bottem'=misspelling of Bottom)	CLEAR	groupFile/Body Morphs	Medium		Accepted misspelling; explicit state/deformation descriptor (open) on a body region.	P102	
+bobcut.rear_center_2_jiggle	Bobcut.Rear_Center_2_jiggle	CLEAR	bob-cut hairstyle strand, rear-center, numbered, jiggle physics	CLEAR	groupFile/Hair	High		Explicit hairstyle (bob cut) content.	P102	
+bip001-monio	Bip001-Monio	OPAQUE	cryptic 'Monio' suffix, numbered bip prefix, no recoverable content	NOT_APPLICABLE		Low		No grounding for 'Monio' in this corpus.	P102	
+egg.wall_19	Egg.Wall_19	PARTIAL	an object combining 'egg' and 'wall', numbered -- unclear referent, matches the 'Shell.Wall' naming pattern seen in this same tranche	NEEDS_CONTEXT		Low		No Master precedent for 'egg'+'wall' compound; materially different core readings compete (rule 22 PARTIAL test), same unresolved pattern as shell.wall_26.	P102	
+unused149	unused149	CLEAR	a self-declared unused placeholder, numbered	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P102	
+upperchest	UpperChest	CLEAR	upper chest/torso anatomy	CLEAR	groupFile/Body	High		Plain structural torso anatomy.	P102	
+squintouter_l	SquintOuter_L	CLEAR	eye squint mechanism, outer, left	CLEAR	groupFile/Face/Eyes	High		Explicit eye mechanism.	P102	
+bone170	Bone170	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P102	
+r ulid a	R Ulid A	CLEAR	upper eyelid control ('Ulid'=Upper Lid), right, variant A	CLEAR	groupFile/Face/Eyes	Medium		'Ulid' grounded as 'Upper Lid' abbreviation, matching the established 'Ulip'=Upper Lip sibling pattern (rule 23-style).	P102	
+bolt_rotate	Bolt_Rotate	CLEAR	a bolt/fastener object, rotate function	NEEDS_CONTEXT		Low		'Bolt' is a recognizable mechanical object with a stated function, but no owner/location resolves its taxonomy destination.	P102	
+unused5	unused5	CLEAR	a self-declared unused placeholder, numbered	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P102	
+brows-doubt-left	brows-doubt-left	CLEAR	brow mechanism for a doubt expression, left	CLEAR	groupFile/Face/Upper Face	High		Explicit 'Brows' compound localizes the expression state to the brow mechanism.	P102	
+wep_topstrap	WEP_topstrap	CLEAR	a weapon top-strap accessory (e.g. sling strap)	CLEAR	groupFile/Other	High		WEP prefix + recognized weapon-accessory object.	P102	
+mask_base	Mask_Base	CLEAR	a mask garment/costume item, base anchor	CLEAR	groupFile/Clothing	High		Explicit worn item (mask).	P102	
+ascot.top_1	Ascot.Top_1	CLEAR	an ascot neckwear garment, top position, numbered	CLEAR	groupFile/Clothing	High		Explicit garment (ascot) content.	P102	
+right_lidloraise	Right_LidLoRaise	CLEAR	lower eyelid raise mechanism, right	CLEAR	groupFile/Face/Eyes	High		Explicit eyelid mechanism.	P102	
+flareoutbotright	FlareOutBotRight	CLEAR	a flare-out shape control at the bottom, right	NEEDS_CONTEXT		Low		'Flare out' is a stable shape/spread function, but the flared object (garment vs. body part) is unstated.	P102	
+door_top	Door_Top	CLEAR	a door prop, top position	CLEAR	groupFile/Other	High		Recognized non-anatomical prop object (door).	P102	
+generichuman_r_cornerlipjnt	GenericHuman_r_cornerLipJnt	CLEAR	mouth-corner (lip) joint, right (model prefix set aside)	CLEAR	groupFile/Face/Lower Face	High		Rule 24: model prefix set aside; explicit mouth-corner mechanism.	P102	
+box19	Box19	CLEAR	a generic box object, numbered	CLEAR	groupFile/Other	High		Matches the established Box##/BoxA1 calibration precedent (deliberately-named generic object, not a DCC-default identifier).	P102	
+bipfio r finger2	BipFio R Finger2	CLEAR	finger anatomy, right, numbered (Fio namespace prefix set aside)	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Rule 24: namespace prefix set aside; explicit finger anatomy and side.	P102	
+bip01_l_thigh016	Bip01_L_Thigh016	CLEAR	thigh structural bone, left, numbered	CLEAR	groupFile/Legs	High		Standard bip thigh bone, structural anatomy.	P102	
+boltprime	boltPrime	CLEAR	a bolt/fastener object, 'Prime' variant	NEEDS_CONTEXT		Low		'Bolt' is a recognizable mechanical object, but no owner/location resolves its taxonomy destination.	P102	
+brows-full-surprise	Brows-Full-Surprise	CLEAR	full brow-raise mechanism for a surprise expression	CLEAR	groupFile/Face/Upper Face	High		Explicit 'Brows' compound localizes the whole-face 'Surprise' state to the brow mechanism (matches the established brows-full-furrow precedent).	P102	
+bip_scraft_l	bip_Scraft_L	OPAQUE	cryptic 'Scraft' term, left, no recoverable content	NOT_APPLICABLE		Low		No positive grounding for 'Scraft' under rule 23 (not a clean misspelling match, no sibling series, no corpus evidence).	P102	
+unusedtransform3 cmn sl alison	unusedtransform3 cmn sl alison	CLEAR	a self-declared unused placeholder transform	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15) takes priority over the remaining cryptic suffix.	P102	

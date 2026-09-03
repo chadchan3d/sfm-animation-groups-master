@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+head-tall	head-tall	CLEAR	a head-height/tallness shape control	CLEAR	groupFile/Body Morphs	Medium		Explicit shape/size descriptor (tall) on head anatomy.	P110	
+opt_acs_osage_l12	OPT_acs_osage_l12	PARTIAL	an 'osage' (dangling-physics) accessory chain, left, numbered -- unclear whether hair-physics or accessory-physics	NEEDS_CONTEXT		Low		Matches the established opt_acs_osage_l13 unresolved pattern.	P110	
+bip01_l_thigh008	Bip01_L_Thigh008	CLEAR	thigh structural bone, left, numbered	CLEAR	groupFile/Legs	High		Standard bip thigh bone.	P110	
+l shouldersub spo	L ShoulderSub Spo	CLEAR	shoulder anatomy, sub variant, left	CLEAR	groupFile/Arms	High		Explicit shoulder anatomy.	P110	
+facial_bone_uprlip_r02	Facial_Bone_UprLip_R02	CLEAR	upper lip bone ('UprLip'=Upper Lip), right, numbered	CLEAR	groupFile/Face/Lower Face	High		Matches Facial_Bone_UprLip_L02 precedent.	P110	
+bhl49	BhL49	OPAQUE	cryptic 'Bh' code, numbered, side	NOT_APPLICABLE		Low		Matches the established cryptic 'Bh##.*' family precedent.	P110	
+bip_pinky_root_0_l	bip_pinky_root_0_L	CLEAR	pinky finger root anchor, numbered, left	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy and side.	P110	
+throb-front	throb-front	OPAQUE	a generic 'throb' effect, front position, no owning object named	NOT_APPLICABLE		Low		Rule 27: no owning object stated for the throb effect.	P110	
+taurenmale_hd_bone_63	taurenmale_hd_bone_63	OPAQUE	character/model-name prefix plus generic numbered bone, no independent content	NOT_APPLICABLE		Low		Matches the established 'character-prefix + generic numbered bone' OPAQUE precedent.	P110	
+unused spine lower	unused spine lower	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P110	
+bone.009	Bone.009	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P110	
+open aaa	Open AAA	OPAQUE	'open'+'AAA', no recoverable owning object	NOT_APPLICABLE		Low		Rule 27: 'AAA' has no grounding in this corpus and 'open' names no subject.	P110	
+mar-rig-hole-v1	Mar-Rig-Hole-V1	CLEAR	a meaningful but taxonomy-unresolved 'Hole' element, Mar-Rig namespace, numbered	NEEDS_CONTEXT		Medium		Matches the settled Rig-Hole family majority pattern (mar-rig-hole-a, brk-rig-hole-v2, etc., all CLEAR/NEEDS_CONTEXT).	P110	
+penisbuldgeleotard1	PenisBuldgeLeotard1	CLEAR	a leotard garment shape-deformation reacting to penis bulge, numbered	CLEAR	groupFile/Clothing	High		'Leotard' is the explicit garment owner; object-specific deformation stays with the garment (rule 8).	P110	
+bigbite	BigBite	CLEAR	a biting mouth expression, exaggerated	CLEAR	groupFile/Face/Lower Face	High		Explicit mouth (bite) mechanism.	P110	
+pb_r_cmy01_bhair_10	pb_R_CMY01_BHair_10	CLEAR	a back/body hair strand control, right, numbered	CLEAR	groupFile/Hair	Medium		'BHair' explicit hair content grounds this regardless of the cryptic prefix codes (rule 24), matches the pb_L_CMY01_FHair_05 sibling pattern.	P110	
+right ring finger 1 grip 2	Right ring finger 1 grip 2	CLEAR	ring finger, right, numbered, grip variant	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Explicit finger anatomy and side.	P110	
+right.001	Right.001	OPAQUE	bare side marker plus number, no object named	NOT_APPLICABLE		Low		Rule 27: generic side+number alone identifies no controlled referent.	P110	
+gag_r_07	Gag_R_07	PARTIAL	'gag', right, numbered -- materially different core readings (worn mouth-gag prop / gagging facial mechanism)	NEEDS_CONTEXT		Low		No disambiguating content resolves which sense of 'gag' applies (rule 22 PARTIAL test).	P110	
+liplowerraise	LipLowerRaise	CLEAR	lower lip raise mechanism	CLEAR	groupFile/Face/Lower Face	High		Explicit lip mechanism.	P110	
+genitals_outer_middle_right	Genitals_Outer_Middle_Right	CLEAR	genital anatomy, outer, middle, right	CLEAR	groupFile/Body Morphs	Medium		Matches the genitals_outer_* sibling precedent.	P110	
+center	Center+center	OPAQUE	bare generic positional term 'center', no object named	NOT_APPLICABLE		Low		Rule 27: generic positional label alone identifies no controlled referent.	P110	
+skinforward	SkinForward	OPAQUE	a generic 'skin'+'forward' shift, no specific object named	NOT_APPLICABLE		Low		Rule 27: 'skin' alone does not identify a specific anatomical object.	P110	
+toilet covert	Toilet covert	CLEAR	a toilet prop object	CLEAR	groupFile/Other	High		Recognized non-anatomical prop object.	P110	
+fin-rig-hat-hood-f	Fin-Rig-Hat-Hood-F	CLEAR	a hat/hood garment, Fin-Rig namespace, variant F	CLEAR	groupFile/Clothing	High		Rule 24: 'Fin-Rig' namespace prefix set aside; explicit garment (hat/hood) content.	P110	
+hokage hat right 2a	hokage hat right 2a	CLEAR	a hat garment (Hokage theme), right, variant	CLEAR	groupFile/Clothing	High		Explicit garment/headwear (hat) content.	P110	
+canteen4	Canteen4	CLEAR	a canteen worn-equipment item, numbered	CLEAR	groupFile/Clothing	Medium		Recognized worn equipment, matches the holster-style worn-gear convention.	P110	
+moustache_r_24	Moustache_R_24	CLEAR	moustache facial hair, right, numbered	CLEAR	groupFile/Hair	High		Matches the corrected bare/numbered moustache -> Hair precedent.	P110	
+unused139	unused139	CLEAR	a self-declared unused placeholder, numbered	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P110	
+left_21	left_21	OPAQUE	bare side marker plus number, no object named	NOT_APPLICABLE		Low		Rule 27: generic side+number alone identifies no controlled referent.	P110	
+third_arms_r_ring4	Third_Arms_R_Ring4	CLEAR	a ring-finger segment on a tertiary/extra right arm, numbered	NEEDS_CONTEXT		Medium		Matches the Second_Arms/Third_Arms nonstandard extra-limb namespace pattern.	P110	
+hokage hat left 2b	hokage hat left 2b	CLEAR	a hat garment (Hokage theme), left, variant	CLEAR	groupFile/Clothing	High		Matches hokage hat right 2a established this tranche.	P110	
+box21	Box21	CLEAR	a generic box object, numbered	CLEAR	groupFile/Other	High		Matches the established Box##/BoxA1 calibration precedent.	P110	
+jiggle.tassle_back_2	Jiggle.Tassle_Back_2	CLEAR	a tassel decoration ('Tassle'=misspelling of Tassel), back, numbered, jiggle physics	CLEAR	groupFile/Clothing	High		Accepted misspelling; explicit decorative accessory content.	P110	
+cape left 1	cape left 1	CLEAR	cape garment, left, numbered	CLEAR	groupFile/Clothing	High		Explicit garment (cape) content.	P110	
+bipfin l foretwist1	BipFin L ForeTwist1	CLEAR	forearm twist, left, numbered ('Fin' namespace prefix set aside)	CLEAR	groupFile/Arms	High		Rule 24: 'Fin' internal namespace prefix (parallel to BipFin LCalfTwist1) set aside; explicit forearm anatomy.	P110	
+l string3 sec root	l string3 sec root	CLEAR	a garment string, left, numbered, section root	CLEAR	groupFile/Clothing	Medium		Matches the established garment-string convention (l string1 sec root).	P110	
+magazine_empty	Magazine_empty	CLEAR	a weapon magazine, empty state	CLEAR	groupFile/Other	High		Recognized weapon-part object.	P110	
+blcraise	BLCRaise	CLEAR	a raise function, cryptic 'BLC' subject	NEEDS_CONTEXT		Low		'Raise' is a stable function word (rule 22 pattern); the raised feature ('BLC') is unstated/ungrounded.	P110	
+l bust02 sec	l bust02 sec	CLEAR	a bust (chest/breast) shape control section, left, numbered	CLEAR	groupFile/Body Morphs	Medium		Matches the BustN/r bust03 sec precedent.	P110	
+box13	Box13	CLEAR	a generic box object, numbered	CLEAR	groupFile/Other	High		Matches the established Box##/BoxA1 calibration precedent.	P110	
+rlegj	RLegJ	CLEAR	leg anatomy, right, cryptic 'J' suffix	CLEAR	groupFile/Legs	Medium		'Leg' grounds Legs regardless of the undecoded suffix (rule 24 pattern).	P110	
+row_chair015	row_chair015	CLEAR	a row-seating chair prop, numbered	CLEAR	groupFile/Other	High		Matches the row_chair## sibling precedent.	P110	
+stomp-6	stomp-6	CLEAR	a foot-stomping pose/animation control, numbered variant	CLEAR	groupFile/Legs	Medium		Matches the stomp-5 precedent; stable animator-useful function implying leg/foot action.	P110	
+bikini pregnant	Bikini Pregnant	CLEAR	a bikini garment variant fitted for a pregnant body	CLEAR	groupFile/Clothing	High		'Bikini' is the explicit garment owner; object-specific fit variant stays with the garment (rule 8).	P110	
+flex_fat_top	Flex_Fat_Top	OPAQUE	a generic flex/fat deformation control, no clearly owning object named	NOT_APPLICABLE		Low		Rule 27 Section 6: bare 'flex'+descriptors does not by itself establish an owning object, absent positive family/template evidence.	P110	
+doodad.bell_striker_left	Doodad.Bell_Striker_Left	CLEAR	a bell-striker mechanism, left	CLEAR	groupFile/Other	High		Recognized mechanical prop object.	P110	
+dick detail 1	Dick Detail 1	CLEAR	penis anatomy detail, numbered	CLEAR	groupFile/Body Morphs	Medium		Explicit genital anatomy, matches this Master's Body-Morphs-dominant genital-domain routing.	P110	
+eye surprised r	Eye Surprised R	CLEAR	a surprised eye expression, right	CLEAR	groupFile/Face/Eyes	High		Explicit 'Eye' qualifier localizes the expression to the eye mechanism.	P110	
+r string6 sec root	r string6 sec root	CLEAR	a garment string, right, numbered, section root	CLEAR	groupFile/Clothing	Medium		Matches the established garment-string convention.	P110	
+vwidthinbetweendown	VwidthInbetweenDown	PARTIAL	a 'V' width/inbetween/down shape control -- unclear whether 'V' denotes vagina or another referent	NEEDS_CONTEXT		Low		Matches the VWidthVout unresolved pattern from this tranche.	P110	
+hand finger left 2b	hand finger left 2b	CLEAR	index finger, left, variant b	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy and side.	P110	
+analhook	AnalHook	CLEAR	an anal-hook prop object	CLEAR	groupFile/Other	Medium		Recognized real-world prop object (a fetish accessory), not anatomy itself.	P110	
+left_joint	Left_joint	OPAQUE	a generic 'joint' label, left, no specific anatomical location named	NOT_APPLICABLE		Low		Rule 27: generic joint label with no anatomical content.	P110	
+squish-xy	squish-xy	CLEAR	a squish function, xy-axis	NEEDS_CONTEXT		Low		'Squish' is an accepted bare-function word (rule 22); the squished object is unstated.	P110	
+bip_l_finger_b_01	bip_l_finger_b_01	CLEAR	a finger control, left, variant b, numbered (no specific digit named)	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium		Side is known even though the exact digit is not specified.	P110	
+key.black_40	Key.Black_40	PARTIAL	a bare 'Key', color variant black, numbered -- same ambiguity as other Key entries	NEEDS_CONTEXT		Low		Materially different core readings (pose-key control vs. prop key object) compete.	P110	
+lipbiter	LipBiteR	CLEAR	a lip-bite mechanism, right	CLEAR	groupFile/Face/Lower Face	High		Explicit lip/mouth mechanism.	P110	
+valvebiped.r_uparm	Valvebiped.R_uparm	CLEAR	upper arm structural bone, right	CLEAR	groupFile/Arms	High		Standard bone naming, plain arm anatomy.	P110	
+headpiece	Headpiece	CLEAR	a headpiece garment/accessory	CLEAR	groupFile/Clothing	High		Explicit garment/headwear content.	P110	
+window_urban_sash_48_88_full_gib09	window_urban_sash_48_88_full_gib09	CLEAR	a window-sash gore/debris (gib) object, numbered	CLEAR	groupFile/Other	High		'gib' is a grounded gore/fx-object term (rule 23 established precedent).	P110	
+tenta_9_r	tenta_9_R	CLEAR	tentacle anatomy, numbered, right	CLEAR	groupFile/Other	High		Matches settled Rule 18 tentacle precedent.	P110	
+shape-assassin-nude	shape-assassin-nude	CLEAR	a whole-body build/shape control, assassin-theme variant	CLEAR	groupFile/Body Morphs	High		Explicit whole-body shape descriptor, matches shape-petite-nude precedent.	P110	
+flm-arma-sworda-ll	Flm-ArmA-SwordA-LL	CLEAR	a sword weapon prop, variant A/LL (Flm-ArmA namespace set aside)	CLEAR	groupFile/Other	High		Rule 24: namespace prefix set aside; explicit weapon (sword) content.	P110	
+bip01_spine3_004	Bip01_Spine3_004	CLEAR	spine structural bone, numbered	CLEAR	groupFile/Body	High		Standard bip spine bone.	P110	
+bone179	Bone179	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P110	
+hitomi head forehead right	Hitomi head forehead right	CLEAR	forehead anatomy, right (character prefix set aside)	CLEAR	groupFile/Face/Upper Face	High		Rule 24: character prefix set aside; explicit forehead mechanism.	P110	
+squish-x	squish-x	CLEAR	a squish function, x-axis	NEEDS_CONTEXT		Low		Matches squish-xy from this tranche; squished object unstated.	P110	
+bip_pussyside_0_r	bip_PussySide_0_R	CLEAR	vagina anatomy, side, numbered, right	CLEAR	groupFile/Body Morphs	High		Matches bip_PussySide_0_L precedent from this tranche.	P110	
+flm-rig-hole-v1	Flm-Rig-Hole-V1	CLEAR	a meaningful but taxonomy-unresolved 'Hole' element, Flm-Rig namespace, numbered	NEEDS_CONTEXT		Medium		Matches the settled Rig-Hole family majority pattern (flm-rig-hole-a, corrected flm-rig-hole-v2, etc., all CLEAR/NEEDS_CONTEXT).	P110	
+height adjustment	Height Adjustment	OPAQUE	a generic height-adjustment function, no specific owning object named	NOT_APPLICABLE		Low		Rule 27: no object stated for what has its height adjusted.	P110	
+bow right 2a	bow right 2a	PARTIAL	a 'bow', right, variant 2a -- materially different core readings	NEEDS_CONTEXT		Low		Rule 22 PARTIAL example word ('bow').	P110	
+c13	C13	OPAQUE	bare cryptic alphanumeric code	NOT_APPLICABLE		Low		No recoverable content.	P110	
+right_24	right_24	OPAQUE	bare side marker plus number, no object named	NOT_APPLICABLE		Low		Rule 27: generic side+number alone identifies no controlled referent.	P110	
+wheel_3.base	Wheel_3.Base	CLEAR	a wheel prop, numbered, base component	CLEAR	groupFile/Other	High		Recognized mechanical prop object (wheel).	P110	
+bip01_pelvis011	Bip01_Pelvis011	CLEAR	pelvis structural bone, numbered, central/unsided	CLEAR	groupFile/Body	High		Rule 26: central/unsided pelvis anchor routes to Body.	P110	
+up.l	up.l	OPAQUE	bare direction ('up'), left, no controlled object named	NOT_APPLICABLE		Low		Rule 27: a bare direction alone does not identify what moves.	P110	
+l_rear_holster_0u_2v	l_rear_holster_0u_2v	CLEAR	a holster accessory, rear, left, cryptic UV-style suffix	CLEAR	groupFile/Clothing	High		Matches the established 'holster'->Clothing live-Master template.	P110	
+pjcmabdomen2side24l	pJCMAbdomen2Side24L	CLEAR	a positive joint-corrective-morph for abdomen side motion, numbered, left	CLEAR	groupFile/Correctives	High		Explicit 'pJCM' Joint Corrective Morph convention.	P110	
+thigh expansion	thigh expansion	CLEAR	a thigh size/expansion shape control	CLEAR	groupFile/Body Morphs	High		Explicit shape/size descriptor on leg anatomy.	P110	
+unusedbone018	unusedbone018	CLEAR	a self-declared unused placeholder bone	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P110	
+leftbone	LeftBone	OPAQUE	a generic 'bone' label, left, no specific anatomical location named	NOT_APPLICABLE		Low		Rule 27: generic bone label with no anatomical content.	P110	
+cloth_back_b_3_r	cloth_back_B_3_R	CLEAR	cloth simulation control, back, variant B, numbered, right	CLEAR	groupFile/Clothing	High		Matches the cloth_back_b sibling precedent.	P110	
+rsmalltoe1 2	rsmalltoe1 2	CLEAR	small toe (pinky toe), right, numbered	CLEAR	groupFile/Toes/RightToes	High		Explicit toe digit anatomy and side.	P110	
+open zipper	Open Zipper	CLEAR	a garment zipper, open state	CLEAR	groupFile/Clothing	High		Explicit garment fastener content.	P110	
+upleg_r	UpLeg_R	CLEAR	upper leg/thigh anatomy, right	CLEAR	groupFile/Legs	High		Explicit leg anatomy.	P110	
+bone.001_r.042	Bone.001_R.042	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P110	
+nipplesmorph	NipplesMorph	CLEAR	nipple anatomy shape/morph control	CLEAR	groupFile/Body Morphs	High		Explicit anatomy plus explicit 'Morph' wording.	P110	
+toe_left_0	toe_left_0	CLEAR	toe anatomy, left, numbered (no specific digit)	CLEAR	groupFile/Toes/LeftToes	High		Explicit toe digit anatomy and side.	P110	
+bas.side_right_3_jiggle	BAS.Side_Right_3_jiggle	CLEAR	a jiggle-physics function on an unresolved 'BAS' object, right, numbered	NEEDS_CONTEXT		Medium		Matches the corrected BAS.<position>_jiggle majority pattern (Tranche 9 QA).	P110	
+lower_drop	lower_drop	CLEAR	a lower-position drop function	NEEDS_CONTEXT		Low		'Drop' is an accepted bare-function word (rule 22); the dropped object is unstated.	P110	
+arm right cloth 3b	arm right cloth 3b	CLEAR	cloth simulation on the arm, right, numbered, variant b	CLEAR	groupFile/Clothing	High		Explicit cloth/garment content.	P110	
+hat-narrow	hat-narrow	CLEAR	a hat garment, narrow variant	CLEAR	groupFile/Clothing	High		Explicit garment/headwear content.	P110	
+c9	C9	OPAQUE	bare cryptic alphanumeric code	NOT_APPLICABLE		Low		No recoverable content.	P110	
+bottle cap	Bottle cap	CLEAR	a bottle cap prop component	CLEAR	groupFile/Other	High		Recognized prop object component.	P110	
+feather 4a	feather 4a	CLEAR	a feather (wing or costume), numbered, variant a	NEEDS_CONTEXT		Medium		Matches the feather 5a precedent; owner ambiguous between Wings and Clothing.	P110	
+def-shin.r	DEF-shin.R	CLEAR	shin anatomy, right ('DEF' deform-rig prefix set aside)	CLEAR	groupFile/Legs	High		Rule 24: 'DEF' rig-namespace prefix set aside; explicit shin (leg) anatomy.	P110	
+valvebiped.bip01_l_hand_twist	ValveBiped.Bip01_L_Hand_Twist	CLEAR	hand twist, left	CLEAR	groupFile/Arms	High		Standard bone naming, plain hand anatomy.	P110	
+i1	I1	OPAQUE	bare cryptic alphanumeric code	NOT_APPLICABLE		Low		No recoverable content.	P110	
+left index distal	Left Index Distal	CLEAR	index finger distal phalanx, left	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy and side.	P110	

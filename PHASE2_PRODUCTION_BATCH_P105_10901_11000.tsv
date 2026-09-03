@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+forearmtwist1left	ForearmTwist1Left	CLEAR	forearm twist, left, numbered	CLEAR	groupFile/Arms	High		Plain structural arm anatomy.	P105	
+fronthair normal b joint	fronthair normal b joint	CLEAR	front hair strand, variant b, joint	CLEAR	groupFile/Hair	High		Explicit hair content.	P105	
+fa_forehead_left_inn	fa_forehead_left_inn	CLEAR	forehead mechanism, left, inner	CLEAR	groupFile/Face/Upper Face	High		Explicit forehead mechanism.	P105	
+fa_squint_right_out	fa_squint_right_out	CLEAR	eye squint mechanism, right, outer	CLEAR	groupFile/Face/Eyes	High		Explicit eye mechanism.	P105	
+baselarger	BaseLarger	OPAQUE	'base'+'larger', no object identified	NOT_APPLICABLE		Low		Rule 27: neither 'base' nor 'larger' names what is being enlarged.	P105	
+boobsie2	boobsie2	CLEAR	breast anatomy, numbered	CLEAR	groupFile/Body Morphs	High		Explicit breast anatomy.	P105	
+unused r jacketc spo	unused r jacketc spo	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P105	
+wep_belt_bullet12	WEP_Belt_Bullet12	CLEAR	a weapon belt-fed ammunition round, numbered	CLEAR	groupFile/Other	High		WEP prefix + recognized ammunition object.	P105	
+rshouldern	RShoulderN	CLEAR	shoulder anatomy, right, cryptic 'N' suffix	CLEAR	groupFile/Arms	Medium		'Shoulder' grounds arm anatomy regardless of the undecoded suffix; mirrors LShoulderN from this tranche's earlier batch.	P105	
+ckspine1bend90	CKSpine1Bend90	CLEAR	a joint-corrective-morph for spine bend, numbered	CLEAR	groupFile/Correctives	High		'CK' prefix matches the established Joint-Corrective-Morph convention.	P105	
+asshole_2	Asshole_2	CLEAR	anus anatomy, numbered	CLEAR	groupFile/Body Morphs	Medium		Bare genital-word + number matches the corrected bare-genital-domain Body Morphs template.	P105	
+key.rightcommand	Key.RightCommand	CLEAR	a keyboard-key-style control (right command key)	CLEAR	groupFile/Other	Medium		'RightCommand' is a specific keyboard-key name, resolving the ambiguous 'Key' reading to a literal input/UI-key object.	P105	
+r_deltoid_helper	r_deltoid_helper	CLEAR	deltoid muscle helper bone, right	CLEAR	groupFile/Arms	High		Explicit shoulder-muscle (deltoid) anatomy despite 'helper' qualifier.	P105	
+frily_root_2.l	Frily_Root_2.L	CLEAR	a frill/ruffle garment trim, root anchor, numbered, left	CLEAR	groupFile/Clothing	High		Accepted misspelling (Frily->Frilly); 'root' describes structural anchor, not ownership.	P105	
+veil_middle_2	VEIL_MIDDLE_2	CLEAR	a veil garment, middle position, numbered	CLEAR	groupFile/Clothing	High		Explicit garment (veil) content.	P105	
+facial_bone_uprlip_l02	Facial_Bone_UprLip_L02	CLEAR	upper lip bone ('UprLip'=Upper Lip), left, numbered	CLEAR	groupFile/Face/Lower Face	High		Explicit lip mechanism.	P105	
+asslower	AssLower	CLEAR	buttock anatomy, lower position	CLEAR	groupFile/Body	High		'Lower' is a positional qualifier, not a shape/size descriptor, so the plain 'Ass'->Body default applies (rule 26 override requires an actual shape/state word).	P105	
+bikini_string.back	Bikini_String.Back	CLEAR	bikini string component, back position	CLEAR	groupFile/Clothing	High		Explicit garment (bikini) content.	P105	
+fan.front_1	Fan.Front_1	CLEAR	a fan object, front position, numbered	NEEDS_CONTEXT		Low		'Fan' is a recognizable object (rule 22 unnamed-owner pattern) with no stated prop-vs-decoration ownership.	P105	
+sternum depth 	Sternum Depth 	CLEAR	a sternum-depth shape control	CLEAR	groupFile/Body Morphs	High		Explicit shape/depth descriptor on chest anatomy.	P105	
+toothup	TOOTHUP	CLEAR	a tooth-up mouth mechanism	CLEAR	groupFile/Face/Lower Face	High		Explicit mouth/teeth mechanism.	P105	
+hatplume_4	HatPlume_4	CLEAR	a hat plume decoration, numbered	CLEAR	groupFile/Clothing	High		Explicit garment/headwear (hat) content.	P105	
+h_l_ring1	h_L_Ring1	CLEAR	ring finger, left, numbered ('h'=hand)	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy and side.	P105	
+shell.wall_52	Shell.Wall_52	PARTIAL	an object combining 'shell' and 'wall', numbered -- unresolved as in the other Shell.Wall/Egg.Wall members	NEEDS_CONTEXT		Low		Matches the established unresolved Shell.Wall/Egg.Wall pattern (rule 22 PARTIAL test).	P105	
+row_chair010	row_chair010	CLEAR	a row-seating chair prop, numbered	CLEAR	groupFile/Other	High		Matches the row_chair019 sibling precedent (Other, furniture prop).	P105	
+right_16	right_16	OPAQUE	bare side marker plus number, no object named	NOT_APPLICABLE		Low		Rule 27: generic side+number alone identifies no controlled referent.	P105	
+hyper anus open	hyper anus open	CLEAR	anus anatomy, hyper-open state	CLEAR	groupFile/Body Morphs	High		Explicit genital anatomy plus explicit state descriptor (open).	P105	
+leg left thigh adj b	leg left thigh adj b	CLEAR	thigh adjustment, left, variant b	CLEAR	groupFile/Legs	High		Explicit leg/thigh anatomy.	P105	
+creepy	Creepy	OPAQUE	bare adjective, no object named	NOT_APPLICABLE		Low		Rule 27: no animator-useful referent from a bare quality adjective.	P105	
+r_lat_helper	r_lat_helper	CLEAR	latissimus dorsi (back muscle) helper bone, right	CLEAR	groupFile/Body	Medium		Mirrors l_lat_helper established this tranche; structural torso muscle anatomy.	P105	
+tente_b_5_l	tente_b_5_L	CLEAR	tentacle anatomy ('tente'=variant spelling of tenta), variant b, numbered, left	CLEAR	groupFile/Other	Medium		Matches settled Rule 18 tentacle precedent (near-identical spelling to the established tenta_ family).	P105	
+exsad	EXSad	CLEAR	a whole-face sad expression ('EX'=Expression prefix)	CLEAR	groupFile/Face/Expressions	High		Matches the established 'Exp'/'Expression'-prefixed whole-face-preset convention.	P105	
+moustache_r_5	Moustache_R_5	CLEAR	moustache facial hair, right, numbered	CLEAR	groupFile/Hair	High		Matches the corrected bare/numbered moustache -> Hair precedent (Tranche 9).	P105	
+second_arms_l_ring4	Second_Arms_L_Ring4	CLEAR	a ring-finger segment on a secondary/extra left arm, numbered	NEEDS_CONTEXT		Medium		Clear finger content, but 'Second_Arms' is a nonstandard extra-limb namespace with no established taxonomy mapping; mirrors second_arms_r_middle2 from this tranche.	P105	
+egg.wall_25	Egg.Wall_25	PARTIAL	an object combining 'egg' and 'wall', numbered -- unresolved pattern	NEEDS_CONTEXT		Low		Matches the established unresolved Egg.Wall/Shell.Wall pattern.	P105	
+mine	Mine	PARTIAL	'mine' -- materially different core readings (explosive landmine prop / possessive pronoun with no content)	NEEDS_CONTEXT		Low		No qualifying context (no WEP prefix) resolves which sense applies.	P105	
+cock.shaft_5	Cock.Shaft_5	CLEAR	penis shaft anatomy, numbered	CLEAR	groupFile/Body Morphs	Medium		Bare genital-word + numbered segment matches the corrected bare-genital-domain Body Morphs template.	P105	
+pack23	Pack23	CLEAR	a pack/pouch object, numbered	NEEDS_CONTEXT		Low		'Pack' is a recognizable object with no stated specific type/owner.	P105	
+mag f off	Mag F OFF	CLEAR	a weapon magazine, variant F, off state	CLEAR	groupFile/Other	Medium		'Mag' (magazine) is a recognized weapon-part object in this corpus's weapon-naming conventions.	P105	
+bone05	Bone05	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P105	
+c_dred_r1_00	C_Dred_R1_00	CLEAR	a dreadlock hair strand, variant R1, numbered	CLEAR	groupFile/Hair	High		Matches the c_dred_r2_00 sibling precedent established this tranche.	P105	
+foreskinrimsmaller	ForeskinRimSmaller	CLEAR	foreskin rim size-smaller shape control	CLEAR	groupFile/Body Morphs	High		Explicit genital anatomy plus explicit size descriptor (smaller).	P105	
+legthumb3_l	LegThumb3_L	CLEAR	a toe digit (Leg+hand-finger-name template), numbered, left	CLEAR	groupFile/Toes/LeftToes	High		Matches the established Leg+hand-finger-name -> toe-digit template precedent (Tranche 10).	P105	
+foot_a_l	Foot_A_L	CLEAR	whole-foot anatomy, variant a, left	CLEAR	groupFile/Legs	High		Whole-foot naming matches the Foot1_L/R live-Master precedent routing to Legs.	P105	
+oris03_r	oris03_R	CLEAR	orbicularis oris (mouth-encircling muscle) mechanism, numbered, right	CLEAR	groupFile/Face/Lower Face	High		'Oris' (Latin: mouth) is a recognized anatomical mouth-muscle term.	P105	
+bobcut.front_left_3	Bobcut.Front_Left_3	CLEAR	bob-cut hairstyle strand, front-left, numbered	CLEAR	groupFile/Hair	High		Explicit hairstyle content.	P105	
+piercing.nipple_ring_left	Piercing.Nipple_Ring_Left	CLEAR	a nipple-ring piercing accessory, left	CLEAR	groupFile/Clothing	Medium		Explicit worn jewelry/piercing accessory despite anatomical location.	P105	
+head eyefold right 2	head eyefold right 2	CLEAR	eyelid-fold mechanism, right, numbered	CLEAR	groupFile/Face/Eyes	High		Explicit eyelid mechanism.	P105	
+elbowbuff	ElbowBuff	CLEAR	elbow anatomy, 'buff' helper/support qualifier	CLEAR	groupFile/Arms	Medium		'Elbow' grounds Arms taxonomy; 'buff' treated as a support/helper qualifier, not a size/shape morph word.	P105	
+leftupperforearm_helper	LeftUpperForeArm_helper	CLEAR	forearm helper bone, left	CLEAR	groupFile/Arms	High		Explicit forearm anatomy despite 'helper' qualifier.	P105	
+nostrilr	nostrilr	CLEAR	nostril mechanism, right	CLEAR	groupFile/Face/Mid Face	High		Nose/nostril mechanism localizes to Mid Face per established taxonomy convention.	P105	
+asshole_4	Asshole_4	CLEAR	anus anatomy, numbered	CLEAR	groupFile/Body Morphs	Medium		Matches asshole_2 sibling precedent established this tranche.	P105	
+nudelowerbodyanusopen	NudeLowerBodyAnusOpen	CLEAR	anus open-state shape control	CLEAR	groupFile/Body Morphs	High		Explicit genital anatomy plus explicit state descriptor (open).	P105	
+l_fin_mid_a	l_fin_mid_a	CLEAR	fin anatomy, mid, left, variant a	CLEAR	groupFile/Other	High		Matches settled Rule 18 fin precedent.	P105	
+key.white_52	Key.White_52	PARTIAL	a bare 'Key', color variant white, numbered -- same ambiguity as other Key entries	NEEDS_CONTEXT		Low		Materially different core readings (pose-key control vs. prop key object) compete.	P105	
+moustache_r_22	Moustache_R_22	CLEAR	moustache facial hair, right, numbered	CLEAR	groupFile/Hair	High		Matches the corrected bare/numbered moustache -> Hair precedent.	P105	
+bip_l_foot_middle	bip_l_foot_middle	CLEAR	whole-foot anatomy, left, middle position	CLEAR	groupFile/Legs	High		Whole-foot naming routes to Legs.	P105	
+bip_pussylower_1_r	bip_PussyLower_1_R	CLEAR	vagina anatomy, lower position, numbered, right	CLEAR	groupFile/Body Morphs	High		Explicit genital anatomy in this Master's Body-Morphs-dominant pussy/vagina domain.	P105	
+pussy left in 1	pussy left in 1	CLEAR	vagina anatomy, left, inward state, numbered	CLEAR	groupFile/Body Morphs	High		Explicit genital anatomy plus explicit state descriptor (in).	P105	
+bas.rear_right_4	BAS.Rear_Right_4	OPAQUE	ungrounded 'BAS' code with a bare position, no object	NOT_APPLICABLE		Medium		Matches the corrected bare-BAS-position majority pattern (Tranche 9 QA).	P105	
+vagclosetiptop	VagCloseTipTop	CLEAR	vagina close/tip/top shape control	CLEAR	groupFile/Body Morphs	High		Explicit genital anatomy plus explicit shape/state descriptors.	P105	
+cloth_bone_up_l_04	cloth_bone_up_l_04	CLEAR	cloth simulation bone, up position, left, numbered	CLEAR	groupFile/Clothing	High		Mirrors cloth_bone_up_r_05; explicit cloth content.	P105	
+bow left a root	bow left a root	PARTIAL	a 'bow', left, variant a, structural root -- materially different core readings	NEEDS_CONTEXT		Low		Rule 22 PARTIAL example word ('bow'); 'root' describes anchor, does not resolve which kind of bow.	P105	
+jig_left	Jig_LEFT	PARTIAL	'jig', left -- materially different core readings (jiggle-physics abbreviation / mechanical jig / dance)	NEEDS_CONTEXT		Low		No established convention or sibling series grounds a single reading of 'jig' (rule 22 PARTIAL test).	P105	
+fa_eyebag_left_out	fa_eyebag_left_out	CLEAR	eyebag mechanism, left, outer	CLEAR	groupFile/Face/Expressions	High		Matches the settled fa_eyebag_* family-specific Expressions routing (Tranche 10 precedent).	P105	
+bone087	Bone087	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P105	
+metal_door_112_reference	metal_door_112_reference	CLEAR	a metal door prop, numbered, reference marker	CLEAR	groupFile/Other	High		Recognized non-anatomical prop object (door).	P105	
+bone index 05	bone index 05	CLEAR	index finger anatomy, side unspecified, numbered	NEEDS_CONTEXT		Medium		Finger anatomy is clear, but no side is stated and Fingers taxonomy is split by side.	P105	
+earring left c	earring left c	CLEAR	earring jewelry, left, variant c	CLEAR	groupFile/Clothing	High		Explicit jewelry/accessory content.	P105	
+facial_lod1_l_eyecornerouterlower	FACIAL_LOD1_L_EyeCornerOuterLower	CLEAR	eye-corner mechanism, outer, lower, left	CLEAR	groupFile/Face/Eyes	High		Explicit eye mechanism ('LOD1' is a technical detail-level marker, not semantic content).	P105	
+outerbrows_down_r	outerbrows_down_r	CLEAR	outer brow mechanism, down, right	CLEAR	groupFile/Face/Upper Face	High		Explicit brow mechanism.	P105	
+thigh muscular	Thigh Muscular	CLEAR	a thigh muscle-definition shape control	CLEAR	groupFile/Body Morphs	High		Explicit shape/size descriptor (muscular) on leg anatomy.	P105	
+cont_gen_pouch_leather_a_mesh	CONT_GEN_Pouch_Leather_A_Mesh	CLEAR	a leather pouch accessory, variant a, mesh	CLEAR	groupFile/Clothing	High		Explicit worn accessory (pouch) content.	P105	
+unused b_r_armroll2helper	unused b_r_armroll2helper	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P105	
+bipmar rthightwist1	BipMar RThighTwist1	CLEAR	thigh twist, right, numbered (Mar namespace set aside)	CLEAR	groupFile/Legs	High		Rule 24: namespace prefix set aside; plain structural thigh anatomy.	P105	
+bodybuffy	BodyBuffy	CLEAR	a whole-body muscle/shape ('buff') control	CLEAR	groupFile/Body Morphs	High		Explicit whole-body shape/appearance descriptor.	P105	
+unused hand_right_root	unused Hand_Right_Root	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P105	
+toungendleft	ToungEndLeft	CLEAR	tongue tip/end control, left (misspelling accepted)	CLEAR	groupFile/Face/Tongue	High		Mirrors toungendright established this tranche; accepted misspelling (rule 12).	P105	
+pussy.ring_left_rear	Pussy.Ring_Left_Rear	CLEAR	vagina anatomy, 'ring' component, left, rear	CLEAR	groupFile/Body Morphs	High		This Master's pussy/vagina domain resolves overwhelmingly to Body Morphs even for bare-sided/positional forms.	P105	
+squintdownright	SquintDownRight	CLEAR	eye squint mechanism, down, right	CLEAR	groupFile/Face/Eyes	High		Explicit eye mechanism.	P105	
+lwing01	LWing01	CLEAR	wing anatomy, left, numbered	CLEAR	groupFile/Wings	High		Explicit wing anatomy.	P105	
+bip01_r_hand012	Bip01_R_Hand012	CLEAR	hand structural bone, right, numbered	CLEAR	groupFile/Arms	High		Standard bip hand bone.	P105	
+student.right_2_jiggle	Student.Right_2_jiggle	CLEAR	a jiggle-physics function on an unresolved 'Student' namespace object, right, numbered	NEEDS_CONTEXT		Low		Consistent with the BAS.<position>_jiggle precedent: 'jiggle' establishes a stable dynamic-physics function (rule 22) even though the underlying 'Student.Right' label (already OPAQUE bare, this tranche) does not itself name a recoverable object.	P105	
+valvebiped.handle	ValveBiped.handle	CLEAR	a handle/grip object	NEEDS_CONTEXT		Low		'Handle' is a recognizable object with no stated specific type (weapon/door/tool).	P105	
+nosie1	Nosie1	CLEAR	nose anatomy, numbered (misspelling accepted)	CLEAR	groupFile/Face/Mid Face	High		Accepted misspelling (rule 12: Nosie->Nose); nose mechanism localizes to Mid Face.	P105	
+ebrow_bone_correct_l_01	ebrow_bone_correct_l_01	CLEAR	an eyebrow bone corrective, left, numbered	CLEAR	groupFile/Correctives	High		Explicit 'correct' wording satisfies the positive corrective-purpose requirement (rules 2-5).	P105	
+hydro	Hydro	OPAQUE	bare 'hydro' prefix, no object named	NOT_APPLICABLE		Low		No recoverable animator-useful referent.	P105	
+beard_r	Beard_R	CLEAR	beard facial hair, right	CLEAR	groupFile/Hair	High		Explicit facial-hair content.	P105	
+shirtnipples	ShirtNipples	CLEAR	a shirt shape-deformation reacting to nipples	CLEAR	groupFile/Clothing	Medium		'Shirt' is the explicit owner object; object-specific garment deformation stays with the garment (rule 8).	P105	
+bas.left_1_jiggle	BAS.Left_1_jiggle	CLEAR	a jiggle-physics function on an unresolved 'BAS' object, left, numbered	NEEDS_CONTEXT		Medium		Matches the corrected BAS.<position>_jiggle majority pattern (Tranche 9 QA).	P105	
+penis shaft 4	penis shaft 4	CLEAR	penis shaft anatomy, numbered	CLEAR	groupFile/Body Morphs	Medium		Bare genital-word + numbered segment matches the corrected bare-genital-domain Body Morphs template.	P105	
+c_lll_a01	C_LLL_A01	OPAQUE	cryptic 'LLL' code, no recoverable content	NOT_APPLICABLE		Low		No grounding for 'LLL' in this corpus.	P105	
+valvebiped.bip01_l_ring01	ValveBiped.Bip01_L_Ring01	CLEAR	ring finger, left, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy and side.	P105	
+bath	Bath	OPAQUE	bare word 'bath', no specific object/prop identified	NOT_APPLICABLE		Low		Rule 27: too underspecified to identify a concrete controlled referent (tub? water effect? room?).	P105	
+bip_lowerarm_l_1	bip_lowerarm_l_1	CLEAR	lower arm/forearm anatomy, left, numbered	CLEAR	groupFile/Arms	High		Plain structural arm anatomy.	P105	
+valvebiped.bip01_nutguard3	ValveBiped.Bip01_NutGuard3	CLEAR	a groin protective guard, numbered	CLEAR	groupFile/Clothing	High		Recognized worn protective equipment.	P105	
+flex_noise_2	Flex_NOISE_2	OPAQUE	a generic flex-noise deformation control, no owning object named	NOT_APPLICABLE		Low		Rule 27 Section 6: bare 'flex_noise'+number does not by itself establish an owning object, absent positive family/template evidence.	P105	
+au22	AU22	CLEAR	Facial Action Unit 22 (FACS convention)	CLEAR	groupFile/Face/Expressions	High		Matches the settled bare-AU-number FACS convention.	P105	
+unused	unused	CLEAR	a bare self-declared unused placeholder	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P105	
+wheel_4.rotate	Wheel_4.Rotate	CLEAR	a wheel prop, numbered, rotate function	CLEAR	groupFile/Other	High		Matches the wheel_3.rotate sibling precedent established this tranche.	P105	

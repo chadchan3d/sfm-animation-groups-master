@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id	scanner_lines
+bip armpit r	bip armpit r	CLEAR	armpit anatomy, right	CLEAR	groupFile/Arms	High		Armpit is arm-adjacent structural anatomy.	P107	
+panties down 1	Panties down 1	CLEAR	panties down state, numbered	CLEAR	groupFile/Clothing	High		Explicit garment (panties) content.	P107	
+drt_cutscene_stage_5-5_1_aos	drt_cutscene_stage_5-5_1_aos	OPAQUE	a cutscene/stage technical marker, no anatomical/object content	NOT_APPLICABLE		Low		Rule 27: technical scene/staging identifier, no animator-useful referent.	P107	
+side_right_2	side_right_2	OPAQUE	bare 'side' plus side marker and number, no object named	NOT_APPLICABLE		Low		Rule 27: generic positional label alone identifies no controlled referent.	P107	
+door_bottom	Door_Bottom	CLEAR	a door prop, bottom position	CLEAR	groupFile/Other	High		Recognized non-anatomical prop object.	P107	
+valvebiped.hinge	ValveBiped.hinge	OPAQUE	a generic 'hinge' mechanism, no owning object named	NOT_APPLICABLE		Low		Rule 27: 'hinge' alone does not identify what it hinges.	P107	
+pcube8	pCube8	OPAQUE	DCC-default primitive mesh name	NOT_APPLICABLE		Low		Maya pCube## auto-generated primitive name.	P107	
+bone_legrr1	Bone_LegRR1	CLEAR	leg anatomy, cryptic 'RR1' suffix	CLEAR	groupFile/Legs	Medium		'Leg' grounds Legs regardless of the undecoded suffix (rule 24 pattern), matches Bone_LegRL1 precedent.	P107	
+bip01_r_toe4	Bip01_R_Toe4	CLEAR	toe anatomy, right, numbered	CLEAR	groupFile/Toes/RightToes	High		Explicit toe digit anatomy and side.	P107	
+bh45	Bh45	OPAQUE	cryptic 'Bh' code, numbered	NOT_APPLICABLE		Low		Matches the established cryptic 'Bh##.*' family precedent.	P107	
+circle eye side collapse	circle Eye Side Collapse	CLEAR	an eye-shape mechanism, side-collapse manner	CLEAR	groupFile/Face/Eyes	Medium		Explicit 'Eye' qualifier localizes this to the eye mechanism (unlike bare whole-face 'collapse' entries).	P107	
+level4_root	Level4_Root	OPAQUE	generic hierarchy-level label with a generic 'root' suffix	NOT_APPLICABLE		Low		Rule 27's own named example category -- generic level/root label, no animator-useful referent.	P107	
+sperm.tail_8	Sperm.Tail_8	CLEAR	a sperm-cell effect/prop object, tail component, numbered	CLEAR	groupFile/Other	Medium		Recognized fluid/effect-object convention (rule 7 analog).	P107	
+fan	fan	CLEAR	a fan object	NEEDS_CONTEXT		Low		'Fan' is a recognizable object with no stated prop-vs-decoration ownership, matches fan.front_1 from this tranche.	P107	
+v_weapon.left_index01	v_weapon.Left_Index01	CLEAR	a weapon-rig finger-placement reference point, left, numbered	CLEAR	groupFile/Other	Medium		Matches the established v_weapon.* namespace family convention (routes to Other regardless of the specific content word).	P107	
+mch-eye.l.003	MCH-eye.L.003	CLEAR	eye mechanism helper bone ('MCH'=mechanism prefix), left, numbered	CLEAR	groupFile/Face/Eyes	High		Rule 24: 'MCH' rig-namespace prefix set aside; explicit eye content.	P107	
+bone184	Bone184	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P107	
+valvebiped.bip01_r_upperarmtwist1	ValveBiped.Bip01_R_UpperarmTwist1	CLEAR	upper arm twist, right, numbered	CLEAR	groupFile/Arms	High		Standard bone naming, plain arm anatomy.	P107	
+unused head neck lower attached_ssx h #2 head neck lower a.004	unused head neck lower attached_ssx h #2 head neck lower a.004	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P107	
+doorlockbone	DoorLockBone	CLEAR	a door lock prop, bone	CLEAR	groupFile/Other	High		Recognized non-anatomical prop object.	P107	
+cock-round	cock-round	CLEAR	penis shape control, round variant	CLEAR	groupFile/Body Morphs	High		Explicit genital anatomy plus explicit shape descriptor.	P107	
+genitalroot	GenitalRoot	CLEAR	genital anatomy structural root	CLEAR	groupFile/Body Morphs	Medium		This Master's genital-domain root/parent sub-family routes to Body Morphs (established via the PussParent live-Master family finding), not the general root->Body heuristic.	P107	
+left index finger 1	Left index finger 1	CLEAR	index finger, left, segment 1	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy and side.	P107	
+cons_potion_healing_a_superior_glass_mesh	CONS_Potion_Healing_A_Superior_Glass_Mesh	CLEAR	a healing potion prop, glass container, variant a	CLEAR	groupFile/Other	High		Recognized consumable prop object.	P107	
+mainlidlower	MainLidLower	CLEAR	lower eyelid mechanism	CLEAR	groupFile/Face/Eyes	High		Explicit eyelid mechanism.	P107	
+bone158	Bone158	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P107	
+flap.front_2	Flap.Front_2	CLEAR	a garment flap, front position, numbered	CLEAR	groupFile/Clothing	High		Matches flap.front_1 established precedent.	P107	
+pants_sides_out	pants_sides_out	CLEAR	pants sides out-state	CLEAR	groupFile/Clothing	High		Explicit garment (pants) content.	P107	
+waist cancel right	Waist cancel right	CLEAR	a waist motion-cancel control, right	CLEAR	groupFile/Body	Medium		Plain torso anatomy; 'cancel' is rig-plumbing function, not a repair purpose (rule 12), so Correctives is not indicated.	P107	
+outhouse_door001_dm01_01_reference	outhouse_door001_dm01_01_reference	CLEAR	an outhouse door prop, numbered, reference marker	CLEAR	groupFile/Other	High		Recognized non-anatomical prop object.	P107	
+bone 1012	bone 1012	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P107	
+prop_06	prop_06	OPAQUE	a bare generic 'prop' category term, numbered, no specific object type	NOT_APPLICABLE		Low		Rule 27: generic category word with no specific object identity.	P107	
+charmchain_adjust.r	CharmChain_Adjust.R	CLEAR	a charm-chain decoration, adjust function, right	CLEAR	groupFile/Clothing	High		Explicit decorative jewelry/accessory content.	P107	
+shirt_lift_full_1	shirt_lift_full_1	CLEAR	shirt garment lift-full function, numbered	CLEAR	groupFile/Clothing	High		Explicit garment (shirt) content.	P107	
+tailmiddle_6	TailMiddle_6	CLEAR	tail anatomy, middle, numbered	CLEAR	groupFile/Tail	High		Explicit tail anatomy.	P107	
+left_outer_raiser	Left_outer_raiser	CLEAR	an outer-raiser function, left	NEEDS_CONTEXT		Low		'Raiser' is a stable function word (rule 22 pattern, parallel to lift/lower), but the raised anatomical feature is unstated.	P107	
+l lowerlip 01	l lowerlip 01	CLEAR	lower lip control, left, numbered	CLEAR	groupFile/Face/Lower Face	High		Explicit lip mechanism.	P107	
+valvebiped.bip04_r_middle	ValveBiped.Bip04_R_Middle	CLEAR	middle finger, right	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Explicit finger anatomy and side.	P107	
+generichuman_c_lolipjnt	GenericHuman_c_loLipJnt	CLEAR	lower lip joint, central (model prefix set aside)	CLEAR	groupFile/Face/Lower Face	High		Rule 24: model prefix set aside; explicit lip mechanism.	P107	
+r_rear_holster_0u_10v	r_rear_holster_0u_10v	CLEAR	a holster accessory, rear, right, cryptic UV-style suffix	CLEAR	groupFile/Clothing	High		Matches the established 'holster'->Clothing live-Master template.	P107	
+bone_lrl1	bone_LRL1	OPAQUE	cryptic 'LRL1' code, no recoverable anatomical content	NOT_APPLICABLE		Low		No grounding for 'LRL1'; unlike Bone_LegRL1, no anatomical word is spelled out.	P107	
+rfront	RFront	OPAQUE	bare side marker plus 'front', no object named	NOT_APPLICABLE		Low		Rule 27: generic positional label alone identifies no controlled referent.	P107	
+sk_l_f_leg_4	SK_L_F_leg_4	CLEAR	leg anatomy, left, numbered (SK/F prefix codes set aside)	CLEAR	groupFile/Legs	Medium		'leg' grounds Legs regardless of cryptic prefix codes (rule 24 pattern).	P107	
+r_middle_metacarpal	r_middle_metacarpal	CLEAR	middle finger metacarpal bone, right	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Explicit hand-bone anatomy for the middle finger.	P107	
+question	question	CLEAR	a questioning whole-face expression state	CLEAR	groupFile/Face/Expressions	Medium		Matches the established bare-emotion/mood-word -> whole-face Expressions pattern.	P107	
+rfoot1	rFoot1	CLEAR	whole-foot anatomy, right, numbered	CLEAR	groupFile/Legs	High		Whole-foot naming matches the Foot1_L/R live-Master precedent routing to Legs.	P107	
+penbone	penbone	PARTIAL	'pen'+'bone' -- materially different core readings (writing-pen prop / other truncated meaning)	NEEDS_CONTEXT		Low		No disambiguating content resolves which sense of 'pen' applies (rule 22 PARTIAL test).	P107	
+sidelockright2	SideLockRight2	CLEAR	a side-lock hairstyle strand, right, numbered	CLEAR	groupFile/Hair	High		Matches sidelockleft4 precedent; explicit hair-lock content.	P107	
+flm-armb-back-u3	Flm-ArmB-Back-U3	CLEAR	back anatomy, Flm-ArmB namespace, undecoded suffix code, numbered	CLEAR	groupFile/Body	High		Matches the corrected Flm-ArmB-Back-* sub-family (Tranche 9), all suffix variants normalized to Body.	P107	
+unused143	unused143	CLEAR	a self-declared unused placeholder, numbered	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P107	
+bone092	Bone092	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P107	
+r_rear_holster_0u_9v	r_rear_holster_0u_9v	CLEAR	a holster accessory, rear, right, cryptic UV-style suffix	CLEAR	groupFile/Clothing	High		Matches the established 'holster'->Clothing live-Master template, mirrors r_rear_holster_0u_10v this batch.	P107	
+bip_waist_a	bip_waist_a	CLEAR	waist anatomy, variant a	CLEAR	groupFile/Body	High		Plain structural torso/waist anatomy.	P107	
+canin_pen_4	canin_pen_4	PARTIAL	'canin'(canine)+'pen', numbered -- unclear meaning of the combination	NEEDS_CONTEXT		Low		No Master precedent for this combination; materially different core readings compete (rule 22 PARTIAL test).	P107	
+ropebelt_tassel_front_2	RopeBelt_Tassel_Front_2	CLEAR	a rope belt with tassel decoration, front, numbered	CLEAR	groupFile/Clothing	High		Explicit garment (belt) content.	P107	
+donger08_chain	donger08_chain	CLEAR	genital anatomy ('donger'), numbered, chain segment	CLEAR	groupFile/Body Morphs	High		Matches the established grounded 'donger' precedent.	P107	
+skull_12	skull_12	CLEAR	skull anatomy, numbered	CLEAR	groupFile/Body	High		Plain structural head/skull anatomy.	P107	
+topleft	TopLeft	PARTIAL	'TopLeft' -- materially different core readings (a 'Top' garment, left variant / a generic positional label)	NEEDS_CONTEXT		Low		Unlike the established numbered 'Top_02' garment series, this compound reads ambiguously as a generic position label (rule 22 PARTIAL test).	P107	
+l lower lid	L lower lid	CLEAR	lower eyelid, left	CLEAR	groupFile/Face/Eyes	High		Explicit eyelid mechanism.	P107	
+bip kneetwisttopoutbase r	bip kneetwisttopoutbase r	CLEAR	knee twist structural base, right	CLEAR	groupFile/Legs	High		Matches bip kneetwisttopoutbase l precedent; explicit knee anatomy.	P107	
+bip_fpinky02_r	Bip_FPinky02_R	CLEAR	pinky finger, right, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		Explicit finger anatomy and side.	P107	
+fit lower 02	fit Lower 02	CLEAR	a lower-body garment fit adjustment, numbered	CLEAR	groupFile/Clothing	Medium		'Fit' matches the established garment-fit-adjustment convention (rule 8).	P107	
+areola_large	Areola_large	CLEAR	areola anatomy, large size variant	CLEAR	groupFile/Body Morphs	High		Explicit anatomy plus explicit size descriptor.	P107	
+left_24	left_24	OPAQUE	bare side marker plus number, no object named	NOT_APPLICABLE		Low		Rule 27: generic side+number alone identifies no controlled referent.	P107	
+eye-r-upset	Eye-R-Upset	CLEAR	an upset eye expression, right	CLEAR	groupFile/Face/Eyes	High		Explicit 'Eye' qualifier localizes the emotional expression to the eye mechanism.	P107	
+vertical crush	Vertical crush	CLEAR	a vertical crush function	NEEDS_CONTEXT		Low		'Crush' is an accepted bare-function word (rule 22); the crushed object is unstated.	P107	
+bip01-spine002	Bip01-Spine002	CLEAR	spine structural bone, numbered	CLEAR	groupFile/Body	High		Standard bip spine bone.	P107	
+r bust03 sec	r bust03 sec	CLEAR	a bust (chest/breast) shape control section, right, numbered	CLEAR	groupFile/Body Morphs	Medium		Matches the BustN precedent established this tranche.	P107	
+toy_bone_05	toy_bone_05	CLEAR	a toy prop bone, numbered	CLEAR	groupFile/Other	High		Matches the toy_bone_## sibling precedent.	P107	
+bipqwn rcalftwist	BipQwn RCalfTwist	CLEAR	calf twist, right (Qwn namespace prefix set aside)	CLEAR	groupFile/Legs	High		Rule 24: namespace prefix set aside; plain structural calf anatomy.	P107	
+helper_lt	Helper_LT	OPAQUE	a generic 'helper' with a cryptic 'LT' suffix, no anatomical content	NOT_APPLICABLE		Low		Matches the established Helper_RB OPAQUE precedent.	P107	
+bone 1051	bone 1051	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low		Bare numbered bone, no recoverable referent.	P107	
+arm right shoulder ctr1	arm right shoulder ctr1	CLEAR	shoulder anatomy, right, numbered	CLEAR	groupFile/Arms	High		Explicit shoulder anatomy.	P107	
+v_weapon.r_wrist_helper	v_weapon.R_wrist_helper	CLEAR	a weapon-rig wrist-placement helper, right	CLEAR	groupFile/Other	Medium		Matches the v_weapon.* namespace family convention established this tranche.	P107	
+forearmleft	ForearmLeft	CLEAR	forearm anatomy, left	CLEAR	groupFile/Arms	High		Plain structural arm anatomy.	P107	
+object033_002	Object033_002	OPAQUE	generic numbered placeholder object	NOT_APPLICABLE		Low		Matches the established generic-numbered-placeholder-object OPAQUE precedent.	P107	
+unusedhairroot4	unusedhairroot4	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P107	
+unusedbone_0c	unusedbone_0C	CLEAR	a self-declared unused placeholder bone	CLEAR	groupFile/Useless	High		Self-declared 'unused' placeholder (rule 15).	P107	
+bag_bone_s_01	bag_bone_s_01	CLEAR	a bag accessory, numbered	CLEAR	groupFile/Clothing	High		Explicit worn accessory (bag) content.	P107	
+earring_l_u_2	Earring_L_U_2	CLEAR	earring jewelry, left, variant U, numbered	CLEAR	groupFile/Clothing	High		Explicit jewelry/accessory content.	P107	
+taurenmale_hd_bone_124	taurenmale_hd_bone_124	OPAQUE	character/model-name prefix plus generic numbered bone, no independent content	NOT_APPLICABLE		Low		Matches the established 'character-prefix + generic numbered bone' OPAQUE precedent.	P107	
+balls_engorge	balls_engorge	CLEAR	testicle anatomy, engorge state	CLEAR	groupFile/Body Morphs	High		Explicit genital anatomy plus explicit shape/state descriptor.	P107	
+c_dred_c1_03	C_Dred_C1_03	CLEAR	a dreadlock hair strand, variant C1, numbered	CLEAR	groupFile/Hair	High		Matches the c_dred sibling precedent.	P107	
+hand finger left 3b	hand finger left 3b	CLEAR	finger anatomy, left, segment 3, variant b	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy and side.	P107	
+butt_right_root	butt_Right_root	CLEAR	buttock structural anchor, right	CLEAR	groupFile/Body	High		'Butt' routes to Body regardless of side marker; 'root' describes structural anchor, not shape/state.	P107	
+c_dred_c1_05	C_Dred_C1_05	CLEAR	a dreadlock hair strand, variant C1, numbered	CLEAR	groupFile/Hair	High		Matches c_dred_c1_03 established this tranche.	P107	
+release_latch	Release_Latch	CLEAR	a release latch mechanism	NEEDS_CONTEXT		Low		'Latch' is a recognizable mechanical object with no stated device/owner.	P107	
+pussy clitoris 2	pussy clitoris 2	CLEAR	vagina/clitoris anatomy, numbered	CLEAR	groupFile/Body Morphs	High		Bare genital-word + number matches this Master's Body-Morphs-dominant genital-domain routing.	P107	
+key.white_42	Key.White_42	PARTIAL	a bare 'Key', color variant white, numbered -- same ambiguity as other Key entries	NEEDS_CONTEXT		Low		Materially different core readings (pose-key control vs. prop key object) compete.	P107	
+bip_stripes2_l	bip_stripes2_L	PARTIAL	'stripes', numbered, left -- unclear whether hair-stripe, fur-pattern, or decorative-stripe content	NEEDS_CONTEXT		Low		No disambiguating content resolves which kind of stripe is meant (rule 22 PARTIAL test).	P107	
+belly side front right 1	belly side front right 1	CLEAR	belly/torso anatomy, side, front, right, numbered	CLEAR	groupFile/Body	High		Plain structural torso anatomy, positional descriptors only (no shape/size word).	P107	
+flex_noise_1	Flex_NOISE_1	OPAQUE	a generic flex-noise deformation control, no owning object named	NOT_APPLICABLE		Low		Matches the flex_noise_2/flex_twist OPAQUE precedent (rule 27 Section 6).	P107	
+prop_end_01	prop_end_01	OPAQUE	a bare generic 'prop' category term with 'end' qualifier, numbered	NOT_APPLICABLE		Low		Matches the prop_06 OPAQUE precedent from this tranche.	P107	
+bone middle 2	bone middle 2	PARTIAL	'bone middle', numbered -- unclear whether middle finger or a generic middle-positioned bone	NEEDS_CONTEXT		Low		'Middle' alone is a weaker finger-identity signal than 'ring'/'thumb'; materially different core readings compete (rule 22 PARTIAL test).	P107	
+rightlowerforearm_helper	RightLowerForeArm_helper	CLEAR	forearm helper bone, right	CLEAR	groupFile/Arms	High		Explicit forearm anatomy despite 'helper' qualifier.	P107	
+bellyout	BellyOut	CLEAR	belly out-state shape control	CLEAR	groupFile/Body Morphs	High		Explicit shape/state descriptor (out) on torso anatomy.	P107	
+left little finger 3 grips 1	Left little finger 3 grips 1	CLEAR	pinky finger, left, segment 3, grip variant	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		Explicit finger anatomy and side.	P107	
+adjust_kneecap_l	adjust_kneecap_L	CLEAR	kneecap adjustment, left	CLEAR	groupFile/Legs	High		Explicit knee anatomy.	P107	
+lup	LUp	OPAQUE	bare direction ('Up'), left, no controlled object named	NOT_APPLICABLE		Low		Rule 27: a bare direction alone does not identify what moves.	P107	
+wing left d	wing left d	CLEAR	wing anatomy, left, variant d	CLEAR	groupFile/Wings	High		Explicit wing anatomy.	P107	

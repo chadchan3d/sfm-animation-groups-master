@@ -1,0 +1,122 @@
+PHASE 2 PRODUCTION TRANCHE 11 -- REPORT
+Canonical positions 10501-11500 (1000 families, batches P101-P110, 100 each)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv
+
+============================================================
+PRE-GATES (both PASS before P101 began)
+============================================================
+
+Pre-Gate A (current Master authority): Master SHA-256 mechanically
+re-hashed and confirmed to match 29aaf43e393de84e8af4a9aec4c3fbc37a04859
+b213f17666573d92ae552dcb7 exactly. The 6bb1f4e presentation-order
+refinement changed zero control literals; PHASE2_PRODUCTION_ORDER.tsv
+required no regeneration.
+
+Pre-Gate B (pussy chitsu base): mechanically re-verified as already
+resolved at commit dca9566. CURRENT_CLASSIFICATION_CONFIRMED. No new
+correction applied.
+
+============================================================
+TRANCHE-ONLY STATISTICS (1000 rows, this tranche)
+============================================================
+
+semantic_status:
+  CLEAR:   780
+  PARTIAL:  59
+  OPAQUE:  161
+
+taxonomy_status:
+  CLEAR:          726
+  NEEDS_CONTEXT:  113
+  NOT_APPLICABLE: 161
+  NEEDS_DOCTRINE:   0
+
+confidence:
+  High:   615
+  Medium: 135
+  Low:    250
+
+Rule 21 invariant (OPAQUE <=> NOT_APPLICABLE) check: 0 violations across
+all 1000 rows.
+
+Proposed-destination counts (CLEAR taxonomy rows only, 726 total):
+  groupFile/Clothing                    137
+  groupFile/Other                        92
+  groupFile/Body Morphs                  77
+  groupFile/Legs                         55
+  groupFile/Arms                         48
+  groupFile/Body                         43
+  groupFile/Face/Lower Face              41
+  groupFile/Face/Eyes                    40
+  groupFile/Arms/LeftArm/LeftFingers     35
+  groupFile/Useless                      31
+  groupFile/Hair                         30
+  groupFile/Face/Upper Face              21
+  groupFile/Arms/RightArm/RightFingers   20
+  groupFile/Tail                         10
+  groupFile/Face/Expressions             10
+  groupFile/Wings                         7
+  groupFile/Correctives                   7
+  groupFile/Face/Mid Face                 6
+  groupFile/Face/Ears                     5
+  groupFile/Toes/LeftToes                 4
+  groupFile/Face/Tongue                   4
+  groupFile/Toes/RightToes                3
+
+NEEDS_CONTEXT rows: 113 (blank destination; unowned bare-accessory nouns
+[strap/spike/pad/tag/fan/plate/cup/chain/bow/knot], unresolved side
+finger/toe digits, BAS./Rig-Hole/Second-Third-Arms namespace-unresolved
+rows, generic bare-function words with unstated objects [switch/raise/
+drop/crush/squish], and multi-sense PARTIAL words -- see consistency-
+flags document).
+
+NEEDS_DOCTRINE rows: 0. No genuinely new taxonomy-policy question was
+encountered; production continued through all 10 batches without a
+hard stop.
+
+Consistency flags raised: 0 cross-tranche errors, 0 stale-Master-path
+violations, 0 new calibration-exception candidates (full detail in
+PHASE2_PRODUCTION_TRANCHE11_CONSISTENCY_FLAGS.txt).
+
+OPAQUE rows manually reviewed (Rule 27, both directions): 161 / 161.
+Face/Expressions rows reviewed (mandatory face audit): 10 / 10.
+Settled-family drift candidates reviewed: 13 families / 32 rows, 0
+drift found.
+DCC-default candidates reviewed: 6 / 6, all correctly OPAQUE.
+Stale-Master-precedent violations: 0 (collar/clavicle family
+specifically audited against current post-6bb1f4e paths).
+Cross-tranche corrections applied: 0.
+Calibration-exception candidates: 0 new (2 pre-existing candidates from
+earlier tranches remain open, untouched; PussParent.002 family
+consistently followed the current unmodified calibration value).
+Precedent claims mechanically re-verified against current ledger/
+FINAL.tsv/Master fields before use (not cited from memory): every claim
+in every batch and in this report.
+
+============================================================
+CUMULATIVE STATISTICS (after Tranche 11)
+============================================================
+
+calibration_families_complete:        500
+production_families_classified:     11000
+total ledger rows:                  11500
+next_canonical_phase2_position:     11501
+remaining_production_families:       2782
+
+============================================================
+Batch-level record (for resumability)
+============================================================
+
+P101 (10501-10600): merged, ledger reached 10600 rows
+P102 (10601-10700): merged, ledger reached 10700 rows
+P103 (10701-10800): merged, ledger reached 10800 rows
+P104 (10801-10900): merged, ledger reached 10900 rows
+P105 (10901-11000): merged, ledger reached 11000 rows
+P106 (11001-11100): merged, ledger reached 11100 rows
+P107 (11101-11200): merged, ledger reached 11200 rows
+P108 (11201-11300): merged, ledger reached 11300 rows
+P109 (11301-11400): merged, ledger reached 11400 rows
+P110 (11401-11500): merged, ledger reached 11500 rows
+
+All 10 batches for Tranche 11 are complete and merged. No batch remains
+pending.

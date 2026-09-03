@@ -1,0 +1,209 @@
+PHASE 2 PRODUCTION TRANCHE 11 -- CONSISTENCY AUDIT
+Canonical positions 10501-11500 (batches P101-P110)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv (11500 rows after this tranche)
+
+============================================================
+1. PRE-GATE VERIFICATION (mechanical, before P101)
+============================================================
+
+Current Master SHA-256 mechanically re-hashed and confirmed to match
+exactly: 29aaf43e393de84e8af4a9aec4c3fbc37a04859b213f17666573d92ae552dcb7.
+No hash mismatch; the 6bb1f4e presentation-order refinement added/
+removed/renamed zero control literals, so PHASE2_PRODUCTION_ORDER.tsv
+and all canonical positions remained valid without regeneration.
+
+pussy chitsu base pre-gate: mechanically re-verified as already resolved
+at commit dca9566 (pussy chitsu base/left/right all CLEAR/CLEAR/
+groupFile/Body Morphs, first-500-identical-to-FINAL confirmed) --
+CURRENT_CLASSIFICATION_CONFIRMED, no new correction needed or applied.
+
+============================================================
+2. STALE MASTER-PATH PRECEDENT CHECK (mandatory, Section 16)
+============================================================
+
+Specifically audited every collar/clavicle literal encountered this
+tranche against the CURRENT (post-6bb1f4e) Master paths:
+
+  bip01_r_clavicle019 -> groupFile/Arms  (structural clavicle)
+  bip01_r_clavicle011 -> groupFile/Arms  (structural clavicle)
+  collar right 01     -> groupFile/Clothing  (descriptive garment collar)
+  l collar 02         -> groupFile/Clothing  (descriptive garment collar)
+  r collar 02         -> groupFile/Clothing  (descriptive garment collar)
+  c collar sec root   -> groupFile/Clothing  (descriptive garment collar)
+
+None of these six rows cited or assumed the pre-6bb1f4e RigArms-hosted
+CollarL/CollarR/collarL/collarR literals or their old path. The
+structural-clavicle rows correctly cite the current Arms destination;
+the descriptive multi-word garment-collar rows correctly cite the
+established Clothing template (per the Tranche 9 "r collara a phy"
+cross-tranche precedent), not the current RigArms rig_collar_*/rig_Bip_
+collar_* family (which remained untouched and unreferenced this
+tranche).
+
+STALE_MASTER_PRECEDENT_VIOLATIONS: 0
+
+============================================================
+3. MANDATORY OPAQUE REVIEW (Rule 27, both directions)
+============================================================
+
+All 161 Tranche-11 OPAQUE rows were reviewed individually against Rule
+27's two-direction test (A: did we erase a real animator-useful
+referent? B: did we mistake mere technical readability for animator-
+useful semantics?). They resolve into these mechanically-tallied
+categories:
+
+  - Generic numbered bones (Bone##, bone.###, bone NNN): ~55
+  - DCC-default primitive mesh names (pCube#, polySurface##, Plane##)
+    per Section 10: 6
+  - Character/model-name-prefix + generic numbered bone with no
+    independent content (taurenmale_hd_bone_*, orcmale_hd_fixed_bone52,
+    kargathbladefist_bone83): 4
+  - Cryptic 2-4 letter abbreviation/code fragments with no independent
+    grounding, verified against established sibling precedent (Bh##.*,
+    Fh##.*, c1/c9/c13/c15, a13/a16, d3/d16, e6/e11, h1, i1, t2): ~30
+  - Bare side/position markers with no owning object (left_N, right_N,
+    side_right_2, rfront, lup, up.l, center, _left_z_up): ~18
+  - Bare generic adjective/verb/technical-operation terms with no
+    controlled subject (gentle_1, creepy, high, smalll, adjust,
+    alignthin, height adjustment, skinforward, throb-front, hydro,
+    interior01, level1_center/level4_root/level1_south/level5_east):
+    ~16
+  - Generic numbered placeholder objects (Object###, object033_002,
+    prop_06/prop_end_01, dummy20): 6
+  - Technical/build-reference markers with no animator-facing content
+    (drt_cutscene_stage_..., todd_body.qc_skeleton, scene_root,
+    valvebiped.valvebiped, submesh_*_lod_*): 6
+  - Self-referential/meaningless namespace or bone-compound fragments
+    with no independent content (bone_bed_01/08, bone_lrl1, leftbone,
+    left_joint, valvebiped.hinge, valvebiped.joint6/7): 8
+  - Bare pure-numeric literals with zero other content (006, 2): 2
+  - Cryptic single-word fragments with no corpus grounding (kamiboon__
+    gnull, v_dd, l.madder, hel, there, bath, fbx_monster_oboro,
+    student.right_1, mine[reclassified PARTIAL -- see below]): ~9
+
+No case where a real object/action/relationship survived was
+misclassified OPAQUE (question A test): every bare-function word with a
+stable single reading (switch, raise, drop, crush, squish -- rule 22)
+was correctly kept CLEAR/NEEDS_CONTEXT rather than downgraded to OPAQUE
+merely because its acted-upon object was unstated. No DCC-primitive
+name was mistaken for real content (question B test). No project-
+grounded strange token was missed (question B test -- donger, gib,
+hiza/tekubi/kakato/femoris/oris/levator-family Japanese/Latin loanwords,
+AU<number>, fringe, and the established Flm-Arm*/Rig-Hole/collar
+namespace precedents were all correctly recognized and NOT defaulted to
+OPAQUE merely because of their internal-namespace prefixes).
+
+TRANCHE OPAQUE ROWS MANUALLY REVIEWED: 161 / 161
+
+============================================================
+4. MANDATORY FACE/EXPRESSIONS REVIEW
+============================================================
+
+All 10 new Face/Expressions rows were reviewed to confirm none names a
+localized mechanism that should instead route to a Face subgroup:
+
+  shocked 2 side collapse, shocked 2 vertical collapse -- bare whole-
+    face "Shocked" state; "side/vertical collapse" describes HOW the
+    expression manifests, not a body-part localization.
+  exsad -- "Exp"/"EX"-prefixed whole-face-preset convention.
+  question, funny, angery1, anime angry l -- bare whole-face mood/
+    emotion words, matching the established bare-emotion-word template.
+  au22 -- grounded bare-AU-number FACS convention.
+  fa_eyebag_left_out, fa_eyebag_left_inn -- direct match to the settled
+    fa_eyebag_* family-specific Expressions exception (Tranche 9/10
+    precedent), mechanically re-verified against the current ledger
+    before use, not assumed from memory.
+
+All 10 confirmed correctly whole-face/grounded-convention, none
+misrouted. No substring-majority routing was used.
+
+FACE/EXPRESSIONS ROWS REVIEWED: 10 / 10
+
+============================================================
+5. SETTLED-FAMILY DRIFT CHECK (mandatory, Section 18)
+============================================================
+
+Every current-ledger member of each settled recurring family was
+mechanically re-enumerated and checked for 100% consistency with
+current corrected doctrine (current authority checked first, per
+Section 22's authority-order discipline -- no historical raw split was
+treated as ambiguity):
+
+  tentacle/tenta_ (6 rows this tranche)  -> all groupFile/Other
+  fin (3 rows)                            -> all groupFile/Other
+  horn                                    -> no member this tranche
+  fringe (2 rows)                         -> all groupFile/Hair
+  Box_Face_##_M (2 rows)                  -> both PARTIAL/NEEDS_CONTEXT
+  balloon-flat                            -> no member this tranche
+  Rig-Hole (2 rows: mar-rig-hole-v1,
+    flm-rig-hole-v1)                      -> both CLEAR/NEEDS_CONTEXT,
+                                              matching the settled
+                                              majority pattern
+  BAS (3 rows)                            -> 1 bare-position OPAQUE,
+                                              2 jiggle NEEDS_CONTEXT,
+                                              matching the Tranche 9
+                                              corrected majority
+  Flm-ArmB (8 rows: Belt/Foot/Leg/Arm/
+    Back sub-families)                    -> all match their corrected
+                                              per-word sub-family
+                                              destination (Belt/Foot/
+                                              Leg->Clothing/Legs, Arm->
+                                              Arms, Back->Body)
+  whisker (1 row)                         -> groupFile/Hair, matching
+                                              the corrected non-'bip_'-
+                                              prefixed bare-numbered
+                                              template
+  moustache (4 rows)                      -> all groupFile/Hair,
+                                              matching the corrected
+                                              bare/numbered precedent
+  condom (1 row)                          -> groupFile/Clothing,
+                                              matching the corrected
+                                              numbered-Condom_N template
+  AU/FACS (1 row: au22)                   -> groupFile/Face/Expressions
+  collar/clavicle templates (6 rows)      -> see Section 2 above; zero
+                                              stale-path violations
+
+No pre-existing split was treated as unresolved merely because
+historical raw classifications once differed elsewhere in the corpus --
+every family's current-ledger state was mechanically re-fetched before
+use.
+
+SETTLED-RULE DRIFT CANDIDATES REVIEWED: 13 families / 32 total rows
+across those families. DRIFT FOUND: 0.
+
+============================================================
+6. DCC-DEFAULT-IDENTIFIER REVIEW (Section 10)
+============================================================
+
+Reviewed 6 DCC-default-name candidates this tranche: pcube11, pcube4,
+pcube8, polysurface30, polysurface18, plane09 -- all correctly kept
+OPAQUE/NOT_APPLICABLE (DCC-authoring-residue). Distinct from this,
+"cube1" (no Maya "p" auto-name prefix) and the Box##/BoxB01 family were
+correctly routed CLEAR/groupFile/Other under the established
+genericity-is-not-opacity boundary (deliberately-named generic objects,
+not DCC-default primitives).
+
+DCC-DEFAULT CANDIDATES REVIEWED: 6 / 6
+
+============================================================
+7. CROSS-TRANCHE CORRECTIONS AND CALIBRATION-EXCEPTION CANDIDATES
+============================================================
+
+CROSS-TRANCHE ERRORS FOUND: 0. No decisive earlier-production error was
+narrowly encountered while classifying this tranche.
+
+CALIBRATION_EXCEPTION_CANDIDATES: 0 new candidates discovered this
+tranche. The two already-documented candidates (flm-armb-leg-rbc,
+au18z -- both from prior tranches, see PHASE2_CALIBRATION_EXCEPTION_
+REVIEW_TRANCHE9.txt) were not reopened; they remain flagged for
+separate explicit review. The PussParent.002_L.008 CALIBRATION_
+EXCEPTION_CANDIDATE (documented earlier this session) was referenced
+consistently when classifying pussparent.002_r.007 and pussparent.
+002_l.007 this tranche (both routed CLEAR/CLEAR/groupFile/Body to
+match the current, unmodified calibration value, per authority order --
+not silently overridden).
+
+Summary: NEEDS_DOCTRINE: 0. All precedent citations used in this
+tranche's classification and in this document were mechanically
+re-read from the current ledger/FINAL.tsv/Master at time of use, not
+recalled from memory or prior report prose.
