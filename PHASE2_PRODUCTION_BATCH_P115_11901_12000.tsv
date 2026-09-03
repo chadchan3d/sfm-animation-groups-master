@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+wep_m203_railsight	WEP_M203_RailSight	CLEAR	an M203 rail-sight weapon accessory	CLEAR	groupFile/Other	High		'wep_' weapon convention	P115
+brows-l-neutral	Brows-L-Neutral	CLEAR	left brow, neutral state	CLEAR	groupFile/Face/Upper Face	High		brow is an Upper Face mechanism	P115
+leg right hip adj	leg right hip adj	CLEAR	right hip articulation, adjustment variant	CLEAR	groupFile/Legs	High		explicitly sided structural hip joint -> Legs (rule 26); 'adj' alone is not corrective evidence (rule 2)	P115
+cervixback	CervixBack	CLEAR	cervix, back	CLEAR	groupFile/Body Morphs	High		matches the extensive live-Master cervix family (7 hits, all Body Morphs)	P115
+blink3	blink3	CLEAR	eye blink, numbered	CLEAR	groupFile/Face/Eyes	High		eyelid mechanism	P115
+bone_wfl	Bone_WFL	OPAQUE	generic bone with a cryptic suffix, no content	NOT_APPLICABLE		Low	'WFL' has no established expansion		P115
+shell.wall_12	Shell.Wall_12	PARTIAL	the wall/lining of a 'shell' -- materially different competing readings (creature shell / ammunition shell / decorative shell), numbered	NEEDS_CONTEXT		Low	no qualifier resolves which kind of shell this is	matches the established bare 'shell' PARTIAL precedent this tranche	P115
+waki_r__slerp_kata_r__i40_x0__offset	waki_r__slerp_kata_r__i40_x0__offset	CLEAR	armpit ('waki'), right, interpolated against shoulder ('kata'), numbered offset	CLEAR	groupFile/Arms/RightArm	Low	Japanese terms translated by general vocabulary knowledge, not independently corpus-cross-checked	matches the direct sibling 'waki_l__slerp_kata_l__i40_x0__offset' this tranche	P115
+flex_thin_x	Flex_Thin_X	OPAQUE	a generic flex+thin+axis operation with no stated subject	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27) -- 'flex' requires positive object/purpose evidence before escaping OPAQUE		P115
+bippbg r finger1	BipPBG R Finger1	CLEAR	right finger 1, 'BipPBG' rig-namespace prefix set aside	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain sided finger anatomy regardless of namespace prefix (rule 24)	P115
+earring_l_u_1	Earring_L_U_1	CLEAR	earring, left, upper variant, numbered	CLEAR	groupFile/Clothing	High		worn jewelry	P115
+right little finger 1	Right little finger 1	CLEAR	right pinky finger, segment 1	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain sided finger anatomy	P115
+stipa	Stipa	OPAQUE	an unrecognized word/name, no established anatomical or object content in this corpus	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)		P115
+opt_hand_right_middle1	OPT_Hand_Right_Middle1	CLEAR	right middle finger, segment 1	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain sided finger anatomy	P115
+valvebiped.chord_joint	ValveBiped.chord_joint	CLEAR	a technical 'chord' auxiliary joint (deformation-smoothing convention)	NEEDS_CONTEXT		Low	which body region this chord/anti-pinch joint serves is unstated, and no Master precedent exists for the term	'chord joint' is a real rigging-mechanism concept (a straight-line reference joint), distinct from any single anatomical owner	P115
+bipfin l finger3	BipFin L Finger3	CLEAR	left finger 3, 'BipFin' rig-namespace prefix set aside	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium		plain sided finger anatomy regardless of namespace prefix (rule 24)	P115
+mattressroot	MattressRoot	CLEAR	a mattress prop's structural root/anchor	CLEAR	groupFile/Other	High		recognized generic furniture prop	P115
+ball_large	ball_large	CLEAR	testicle ('ball'), large	CLEAR	groupFile/Body Morphs	High		matches the extensive live-Master bare 'ball'/'Ball.L' family (58 hits, all Body Morphs)	P115
+bone19	Bone19	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no anatomical or functional word		P115
+arm right shoulder adj b	arm right shoulder adj b	CLEAR	right shoulder, adjustment variant b	CLEAR	groupFile/Arms/RightArm	High		plain structural arm anatomy; 'adj' alone is not corrective evidence (rule 2)	P115
+unused mot15_neck	unused MOT15_Neck	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker (rule 15)	P115
+bone 1073	bone 1073	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no anatomical or functional word		P115
+muscle - abs	Muscle - Abs	CLEAR	abdominal muscle definition/appearance change	CLEAR	groupFile/Body Morphs	High		matches the 'muscle_up'-style muscle-definition Body Morphs precedent	P115
+veil_middle_3	VEIL_MIDDLE_3	CLEAR	veil garment, middle, numbered	CLEAR	groupFile/Clothing	High		worn garment	P115
+upper lid	upper lid	CLEAR	upper eyelid	CLEAR	groupFile/Face/Eyes	High		eyelid mechanism	P115
+cock-skinny	cock-skinny	CLEAR	penis, skinny (shape/size)	CLEAR	groupFile/Body Morphs	High		explicit genital shape/size change	P115
+bip01_pelvis004	Bip01_Pelvis004	CLEAR	central pelvis bone, numbered	CLEAR	groupFile/Body	High		central/unsided structural pelvis anchor -> Body (rule 26)	P115
+polymsh	polymsh	OPAQUE	generic DCC placeholder mesh name	NOT_APPLICABLE		Low	construction residue, no independent semantic evidence	DCC-default-identifier boundary	P115
+toungend	ToungEnd	CLEAR	tongue end/tip (accepted 'Toung' misspelling of tongue)	CLEAR	groupFile/Face/Tongue	High		rule 12 accepted misspelling	P115
+anus_open_pull_out	ANUS_OPEN_PULL_OUT	CLEAR	anus open, pull-out state	CLEAR	groupFile/Body Morphs	High		explicit genital deformation state	P115
+door up left	Door up left	CLEAR	a door object, up, left	CLEAR	groupFile/Other	Medium		recognized generic environment object	P115
+head eye inner lower right	Head Eye Inner Lower Right	CLEAR	right eye, inner-lower corner	CLEAR	groupFile/Face/Eyes	High		eye-corner mechanism	P115
+leg left butt 1	leg left butt 1	CLEAR	left buttock segment, numbered	CLEAR	groupFile/Body	Medium		central doctrine: plain structural buttock segment -> Body (rule 26); FLAGGED -- conflicts with the live Master's own 100%-Body-Morphs butt family, see consistency flags	P115
+bip armpitringbase r	bip armpitringbase r	CLEAR	right armpit deformation-ring base	CLEAR	groupFile/Arms/RightArm	Medium	'ring' function inferred by analogy to other structural ring/helper conventions, not independently grounded	armpit/shoulder region is arm anatomy	P115
+feather 3b	feather 3b	CLEAR	a feather accessory, numbered/lettered	CLEAR	groupFile/Clothing	Medium		matches the live-Master bare 'feather'/'arm feather' template (Clothing) rather than the wing-chain 'first/second/third feather' template (Wings), which this literal's shape does not match	P115
+fit upper 02	fit Upper 02	CLEAR	upper-body garment fit adjustment, numbered	CLEAR	groupFile/Clothing	High		garment-specific fit control stays with the garment	P115
+opt_acs_earringr3	OPT_acs_earringr3	CLEAR	earring accessory, right, numbered	CLEAR	groupFile/Clothing	High		worn jewelry	P115
+arm left finger 4 c	arm left finger 4 c	CLEAR	left arm finger 4, variant c	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain sided finger anatomy	P115
+bip_neck_08	bip_neck_08	CLEAR	neck bone, numbered	CLEAR	groupFile/Body	High		plain structural neck anatomy	P115
+body-l-ass-down	Body-L-Ass-Down	CLEAR	left buttock, downward pose/shape direction	CLEAR	groupFile/Body Morphs	High		matches the established 'Body-Ass-Size'/'Body-GlutesWiden' Body Morphs naming-convention template exactly	P115
+bip_hs1_l	bip_hs1_L	OPAQUE	cryptic 'HS1' code with a side marker, no content	NOT_APPLICABLE		Low	'HS1' has no established expansion		P115
+tlcraise	TLCRaise	CLEAR	a raise function on an unresolved 'TLC' object	NEEDS_CONTEXT		Low	'TLC' has no established expansion; raised object unstated	'raise' is a recognized function word (parallel to the accepted 'lift' function, rule 22) even though its object is unstated	P115
+body-r-ass-spread	Body-R-Ass-Spread	CLEAR	right buttock, spread pose/shape	CLEAR	groupFile/Body Morphs	High		matches the established 'Body-[side]-Ass-[state]' Body Morphs naming-convention template, and the live-Master 'Ass-Spread-L/R' precedent	P115
+v_weapon.root98	v_weapon.Root98	CLEAR	a weapon root control, numbered	CLEAR	groupFile/Other	High		matches the live-Master v_weapon.root## family	P115
+bottom_01	Bottom_01	OPAQUE	a bare 'bottom' positional label with no stated body part or object	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)		P115
+lowerjawfix	LowerJawFix	CLEAR	a lower-jaw corrective fix	CLEAR	groupFile/Correctives	High		explicit 'fix' establishes corrective purpose (rule 5)	P115
+bip_lipupper	bip_lipupper	CLEAR	upper lip bone	CLEAR	groupFile/Face/Lower Face	High		lip is a Lower Face mechanism	P115
+earring.pendant_left_1_jiggle	Earring.Pendant_Left_1_jiggle	CLEAR	earring pendant, left, numbered, jiggle physics	CLEAR	groupFile/Clothing	High		worn jewelry	P115
+kargathbladefist_bone88_rfingermiddle	kargathbladefist_Bone88_RFingerMiddle	CLEAR	right middle finger, 'kargathbladefist' character prefix set aside	CLEAR	groupFile/Arms/RightArm/RightFingers	High		unlike the ungrounded generic-numbered-bone precedent for this character prefix, this literal carries explicit 'RFingerMiddle' anatomical content (rule 24)	P115
+tooth.001	tooth.001	CLEAR	a tooth, numbered	CLEAR	groupFile/Face/Lower Face	High		teeth are a mouth/lower-face feature	P115
+thighshrink	Thighshrink	CLEAR	thigh shrink (shape/size decrease)	CLEAR	groupFile/Body Morphs	High		explicit shape/size change	P115
+sidehair_r_2	sidehair_R_2	CLEAR	side hair, right, numbered	CLEAR	groupFile/Hair	High		named hair feature	P115
+shell.wall_20	Shell.Wall_20	PARTIAL	the wall/lining of a 'shell' -- materially different competing readings, numbered	NEEDS_CONTEXT		Low	no qualifier resolves which kind of shell this is	matches the direct sibling 'shell.wall_12' this tranche	P115
+face-anger	Face-Anger	CLEAR	anger expression, whole face	CLEAR	groupFile/Face/Expressions	High		whole-face emotion word	P115
+neckl	neckL	CLEAR	neck, 'L' marker (unsided central structure)	CLEAR	groupFile/Body	Medium		neck/torso region has no Left/Right taxonomy subgroup; stays Body despite the side marker, matching the direct sibling 'bip_r_neck_a' this tranche	P115
+polysurface83	polySurface83	OPAQUE	DCC-default primitive mesh name	NOT_APPLICABLE		Low	construction residue	DCC-default-identifier boundary	P115
+lefthandball	LeftHandBall	PARTIAL	a 'hand ball' -- materially different competing readings (a closed-fist hand pose / a literal ball object held by or attached to the hand), left	NEEDS_CONTEXT		Low	no live-Master 'hand ball' precedent in either direction	rule 22 PARTIAL test	P115
+lower_body_d_end	lower_body_d_end	CLEAR	lower-body region, 'd' variant, end point of a chain	NEEDS_CONTEXT		Low	specific lower-body part and the 'd'/'end' qualifiers are unresolved	'lower body' establishes a broad but real region; the specific mechanism is unstated	P115
+bip01_l_toe3	Bip01_L_Toe3	CLEAR	left toe, numbered	CLEAR	groupFile/Toes/LeftToes	High		direct toe anatomy naming	P115
+rightfinger03	RightFinger03	CLEAR	right finger, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain sided finger anatomy	P115
+torso flange 1b	torso flange 1b	PARTIAL	a torso 'flange' (protruding rim/edge) -- materially different competing readings (armor/mechanical flange / anatomical protrusion), numbered	NEEDS_CONTEXT		Low	no live-Master precedent resolves which kind of flange this is	rule 22 PARTIAL test	P115
+l dlipin a	L Dlipin A	CLEAR	lower-lip-in control, left, variant a ('D'=down)	CLEAR	groupFile/Face/Lower Face	Medium	'D' inferred as 'down', not explicit	lip is a Lower Face mechanism, matching the direct sibling 'r dlipout a' this tranche	P115
+flm-rig-eye-r	Flm-Rig-Eye-R	CLEAR	right eye, 'Flm-Rig' internal namespace prefix set aside	CLEAR	groupFile/Face/Eyes	Medium		matches the established namespace-set-aside pattern (Rig-Hole family precedent); 'Eye' is grounded content	P115
+cock_02	Cock_02	CLEAR	penis, numbered	CLEAR	groupFile/Body Morphs	High		matches the extensive live-Master genital-domain Body Morphs convention	P115
+wep_decocker	WEP_Decocker	CLEAR	a firearm decocker safety mechanism	CLEAR	groupFile/Other	High		'wep_' weapon convention	P115
+lthumb0	lThumb0+lthumb0	CLEAR	left thumb, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain sided finger anatomy	P115
+bip_breat_04_r	bip_breat_04_r	CLEAR	breast (accepted 'breat' misspelling), right, numbered	CLEAR	groupFile/Body Morphs	High		matches this Master's breast-domain Body Morphs convention	P115
+bip_faringleg_l	bip_faringLeg_l	CLEAR	left leg, 'faring' qualifier unresolved	CLEAR	groupFile/Legs	Medium	'faring' undecoded	'Leg' is grounded anatomy; undecoded prefix does not erase it (rule 24)	P115
+pb_l_cmy01_bhair_11	pb_L_CMY01_BHair_11	CLEAR	back hair, left, numbered, cryptic 'CMY01' variant	CLEAR	groupFile/Hair	Medium	'CMY01' code undecoded	matches the direct sibling 'pb_l_cmy01_fhair_03' this tranche (Hair)	P115
+pjcmabdomen2side24r	pJCMAbdomen2Side24R	CLEAR	a joint-corrective-morph for the abdomen, side, numbered, right	CLEAR	groupFile/Correctives	High		matches the settled pJCM/CK Joint-Corrective-Morph convention (Correctives)	P115
+tenta_1_l	tenta_1_L	CLEAR	a tentacle, numbered	CLEAR	groupFile/Other	High		settled tentacle -> Other precedent	P115
+jiggle_thigh_l	jiggle_thigh_L	CLEAR	left thigh jiggle-physics control	CLEAR	groupFile/Legs	High		thigh is plain leg anatomy; jiggle is a recognized physics function	P115
+unusedbone037	unusedbone037	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker (rule 15)	P115
+shaft_2	shaft_2	PARTIAL	a bare 'shaft' -- materially different competing readings (penis shaft / weapon shaft / mechanical shaft), numbered	NEEDS_CONTEXT		Low	lacks the qualifier ('Cock.') the Master's own genital-shaft precedent always includes	rule 22 PARTIAL test	P115
+ce	CE	OPAQUE	cryptic 2-letter code, no content	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)		P115
+wep_fx_light2	WEP_FX_Light2	CLEAR	a weapon light effect, numbered	CLEAR	groupFile/Other	High		'wep_' weapon-effect convention	P115
+bone.006	Bone.006	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no anatomical or functional word		P115
+clit_pull	Clit_pull	CLEAR	clitoris pull (genital deformation)	CLEAR	groupFile/Body Morphs	High		explicit genital shape/state change	P115
+arm left finger 4xx	arm left finger 4xx	CLEAR	left arm finger 4, 'xx' suffix undecoded	CLEAR	groupFile/Arms/LeftArm/LeftFingers	Medium	'xx' suffix undecoded	plain sided finger anatomy regardless of undecoded suffix (rule 24)	P115
+_91	_91	OPAQUE	pure numeric literal with zero other content	NOT_APPLICABLE		Low	no word content at all		P115
+collectible reading.001	collectible reading.001	CLEAR	a readable collectible item, numbered	CLEAR	groupFile/Other	High		recognized generic prop/item	P115
+unused_face	unused_face	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker (rule 15)	P115
+bip_strands1_r	bip_Strands1_R	CLEAR	hair strands, right, numbered	CLEAR	groupFile/Hair	High		named hair feature	P115
+foreskinin	ForeskinIn	CLEAR	foreskin in-state	CLEAR	groupFile/Body Morphs	High		matches the extensive live-Master foreskin family (Body Morphs)	P115
+second_arms_l_wrist	Second_Arms_L_Wrist	CLEAR	left wrist, on an additional/second arm set	CLEAR	groupFile/Arms/LeftArm	Medium		wrist is plain arm anatomy; 'second' denotes an additional limb set, not a different taxonomy category	P115
+unused.048	unused.048	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker (rule 15)	P115
+corpusnarrow	CorpusNarrow	CLEAR	corpus (cavernosum) narrowing, genital shape change	CLEAR	groupFile/Body Morphs	High		near-exact match to the live-Master 'Corpus Narrow/Wider' precedent (Body Morphs)	P115
+lipupperinner_r	LipUpperInner_R	CLEAR	upper lip, inner, right	CLEAR	groupFile/Face/Lower Face	High		lip is a Lower Face mechanism	P115
+mila head forehead left	Mila head forehead left	CLEAR	forehead, left, 'Mila' character prefix set aside	CLEAR	groupFile/Face/Upper Face	High		forehead is an Upper Face mechanism regardless of character prefix (rule 24)	P115
+aerola up	aerola up	CLEAR	areola position/shape change, upward (accepted 'aerola' misspelling)	CLEAR	groupFile/Body Morphs	High		matches the direct sibling 'aerola small'/'aerolaPerk' pattern this tranche	P115
+left_hand_twist_end	left_hand_twist_end	CLEAR	left hand twist bone, end of chain	CLEAR	groupFile/Arms/LeftArm	High		plain structural arm/hand anatomy	P115
+rightfootball	RightFootBall	CLEAR	ball of the right foot (anatomical forefoot pad)	CLEAR	groupFile/Legs	High		plain structural foot anatomy	P115
+chains_mid	chains_mid	CLEAR	a chain accessory, middle	CLEAR	groupFile/Clothing	Medium		worn jewelry/accessory	P115
+left little finger 3	Left little finger 3	CLEAR	left pinky finger, segment 3	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain sided finger anatomy	P115
+foxearboneleft_1	FoxEarBoneLeft_1	CLEAR	fox-ear costume bone, left, numbered	CLEAR	groupFile/Face/Ears	High		matches the established costume-ear-bone precedent (Face/Ears)	P115
+taurenmale_hd_bone_59	taurenmale_hd_bone_59	OPAQUE	character/model-prefixed generic numbered bone, no independent content	NOT_APPLICABLE		Low	matches the established character-prefix+generic-numbered-bone precedent		P115
+glansup	GlansUp	CLEAR	glans (penis head), upward position/shape	CLEAR	groupFile/Body Morphs	High		explicit genital shape/position change	P115
+bobby_bone_necklace_14	BOBBY_Bone_NeckLace_14	CLEAR	a necklace, numbered, 'Bobby' character/model prefix set aside	CLEAR	groupFile/Clothing	High		worn jewelry regardless of character prefix (rule 24)	P115
+unused f_l_eyehigh	unused f_l_eyehigh	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker (rule 15)	P115
+palmlbezi	PalmLBezi	CLEAR	left palm, 'Bezi' suffix unresolved	CLEAR	groupFile/Arms/LeftArm	Medium	'Bezi' suffix undecoded	palm is plain hand/arm anatomy; undecoded suffix does not erase it (rule 24)	P115

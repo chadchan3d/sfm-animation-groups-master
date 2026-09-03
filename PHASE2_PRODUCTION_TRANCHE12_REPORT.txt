@@ -1,0 +1,126 @@
+PHASE 2 PRODUCTION TRANCHE 12 -- REPORT
+Canonical positions 11501-12500 (1000 families, batches P111-P120, 100 each)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv
+
+============================================================
+TRANCHE-ONLY STATISTICS (1000 rows, this tranche)
+============================================================
+
+semantic_status:
+  CLEAR:   807
+  PARTIAL:  43
+  OPAQUE:  150
+
+taxonomy_status:
+  CLEAR:          768
+  NEEDS_CONTEXT:   82
+  NOT_APPLICABLE: 150
+  NEEDS_DOCTRINE:   0
+
+confidence:
+  High:   601
+  Medium: 184
+  Low:    215
+
+Rule 21 invariant (OPAQUE <=> NOT_APPLICABLE) check: 0 violations across
+all 1000 rows.
+
+Proposed-destination counts (CLEAR taxonomy rows only, 768 total):
+  groupFile/Other                       131
+  groupFile/Clothing                    113
+  groupFile/Body Morphs                  97 (96 original + 1 within-
+                                              tranche self-correction,
+                                              see consistency flags)
+  groupFile/Face/Eyes                    51
+  groupFile/Legs                         44
+  groupFile/Arms/RightArm/RightFingers   37
+  groupFile/Arms/LeftArm/LeftFingers     36
+  groupFile/Body                         33 (34 original - 1 self-
+                                              correction)
+  groupFile/Face/Lower Face              32
+  groupFile/Useless                      31
+  groupFile/Hair                         29
+  groupFile/Arms/RightArm                29
+  groupFile/Arms/LeftArm                 23
+  groupFile/Face/Expressions             18
+  groupFile/Face/Upper Face              17
+  groupFile/Toes/LeftToes                10
+  groupFile/Correctives                   8
+  groupFile/Face/Ears                     7
+  groupFile/Arms                          5
+  groupFile/Fingers                       4
+  groupFile/Tail                          4
+  groupFile/Face/Mid Face                 3
+  groupFile/Toes/RightToes                3
+  groupFile/Face/Tongue                   2
+  groupFile/Wings                         1
+
+NEEDS_CONTEXT rows: 82 (blank destination; mixed-region literals,
+unowned bare-accessory nouns, PARTIAL-adjacent competing readings routed
+NEEDS_CONTEXT, BAS/Flm-ArmB-Float/Rig-Hole/pad/strap/charm/band-type
+unnamed-owner functions, "stretch"/"raise"/"crush"-type accepted bare-
+function words with unstated objects).
+
+NEEDS_DOCTRINE rows: 0. No genuinely new taxonomy-policy question was
+encountered; production continued through all 10 batches without a hard
+stop.
+
+Consistency flags raised: see PHASE2_PRODUCTION_TRANCHE12_CONSISTENCY_
+FLAGS.txt for the full audit -- 1 within-tranche self-correction applied
+(rassimpactmoveup1) and 4 structural-Body-vs-Morph flags on the buttock
+family (r_butt_bottem, cc_butt.r, leg left butt 1, r_butt_right), with a
+broader systemic observation recorded (the same 100%-Body-Morphs pattern,
+independently re-confirmed this tranche, also holds for testicle,
+scrotum, foreskin, labia majora, cervix, pectoral, and belly -- none of
+those were reopened or reclassified, per the task's explicit prohibition
+on a broad structural-body sweep this tranche).
+
+OPAQUE rows manually reviewed (Rule 27, both directions): 150 / 150.
+Face/Expressions rows reviewed (mandatory face audit): 18 / 18.
+Settled-family drift candidates reviewed: 9 families with at least one
+  member this tranche (tentacle, fin, horn/spikes, fringe, Rig-Hole,
+  BAS, Flm-ArmA/ArmB, AU/FACS, collar/clavicle-adjacent literals) -- 0
+  drift found.
+DCC-default candidates reviewed: 11 / 11, all correctly OPAQUE.
+Stale-Master-precedent violations: 0 (see consistency flags Section 3).
+Cross-tranche/within-tranche corrections applied: 1 (rassimpactmoveup1;
+  see consistency flags Section 1).
+Calibration-exception candidates: 0 (no new FINAL500 issue discovered
+  this tranche).
+Master integrity interruptions: 0. Master hash mechanically re-verified
+  (29aaf43e393de84e8af4a9aec4c3fbc37a04859b213f17666573d92ae552dcb7)
+  before classification began and after every one of the 10 batch
+  merges plus after the within-tranche correction -- 11 checks, all
+  PASS, never missing, never changed.
+Precedent claims mechanically re-verified against current ledger/Master
+  at time of use (not recalled from memory or prior report prose): every
+  claim in every batch this tranche.
+
+============================================================
+CUMULATIVE STATISTICS (after Tranche 12)
+============================================================
+
+calibration_families_complete:       500
+production_families_classified:    12000
+total ledger rows:                 12500
+next_canonical_phase2_position:    12501
+remaining_production_families:      1782
+
+============================================================
+Batch-level record (for resumability)
+============================================================
+
+P111 (11501-11600): merged, ledger reached 11600 rows
+P112 (11601-11700): merged, ledger reached 11700 rows
+P113 (11701-11800): merged, ledger reached 11800 rows
+P114 (11801-11900): merged, ledger reached 11900 rows
+P115 (11901-12000): merged, ledger reached 12000 rows
+P116 (12001-12100): merged, ledger reached 12100 rows
+P117 (12101-12200): merged, ledger reached 12200 rows
+P118 (12201-12300): merged, ledger reached 12300 rows
+P119 (12301-12400): merged, ledger reached 12400 rows
+P120 (12401-12500): merged, ledger reached 12500 rows
+
+All 10 batches for Tranche 12 are complete and merged. No batch remains
+pending. 1 within-tranche field-level self-correction was applied after
+P120 merged (row count unaffected, remains 12500).

@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+loincloth front 1b	loincloth front 1b	CLEAR	loincloth garment, front, variant 1b	CLEAR	groupFile/Clothing	High		garment anatomy	P112
+bip_lube	bip_lube	CLEAR	a lubricant/wetness-effect control (bip_ skeletal-bone convention)	NEEDS_CONTEXT		Low	which body region/taxonomy owns a lubricant-effect bone is unstated	'lube' is a real recognizable substance/effect concept, not cryptic jargon; owner unresolved	P112
+cloth_front_b_3	cloth_front_B_3	CLEAR	cloth/garment front panel, variant b, numbered	CLEAR	groupFile/Clothing	High		garment simulation control	P112
+flm-armb-arm-rd	Flm-ArmB-Arm-RD	CLEAR	arm anatomy, Flm-ArmB namespace, 'RD' qualifier	CLEAR	groupFile/Arms	Medium		Flm-ArmB namespace set aside (rule 24); 'Arm' is plain structural anatomy, matching the corrected Flm-ArmB-Arm-* family	P112
+brows-serious	brows-serious	CLEAR	brow expression, serious	CLEAR	groupFile/Face/Upper Face	High		brow is an Upper Face mechanism	P112
+valvebiped.bip01_l_testicle0	ValveBiped.Bip01_L_Testicle0	CLEAR	left testicle, numbered	CLEAR	groupFile/Body Morphs	High		matches the extensive live-Master testicle family (87 hits, including structural-looking bip_Testicle_L/R, FK_Testicle_L/R -- all Body Morphs; this genital region has no plain-Body destination in this Master)	P112
+eyes-look-down	eyes-look-down	CLEAR	eye-gaze direction, downward	CLEAR	groupFile/Face/Eyes	High		eye-gaze control	P112
+piercing.nipple_ring_right_jiggle	Piercing.Nipple_Ring_Right_jiggle	CLEAR	a nipple-ring piercing, right, jiggle physics	CLEAR	groupFile/Clothing	High		matches the live-Master 'NIPPLE PIERCING.L/R' precedent (Clothing, worn jewelry)	P112
+leg left sta	leg left StA	CLEAR	left leg, 'StA' suffix unresolved	CLEAR	groupFile/Legs	Medium	'StA' suffix undecoded	'leg' is grounded anatomy; undecoded suffix does not erase it (rule 24)	P112
+exclam1	Exclam1	CLEAR	an exclamation-mark reaction indicator, numbered	NEEDS_CONTEXT		Low	no established owning region (icon/overlay vs. facial expression) in this taxonomy	ordinary recognizable reaction-symbol concept (rule 22 category F), no Master precedent to resolve destination	P112
+lfaceparts	LFaceParts	CLEAR	left-side facial parts, unspecified mechanism	NEEDS_CONTEXT		Low	'parts' does not specify which Face subgroup/mechanism is affected	'Face' + left side is grounded; the specific localized mechanism is not	P112
+r collarb spo	R CollarB Spo	CLEAR	a garment collar, right, variant B, 'spo' qualifier	CLEAR	groupFile/Clothing	High		matches the settled descriptive multi-word garment-collar template (Clothing), matching direct siblings r collarc spo / r collara spo	P112
+bip_stone_r_uparmtwist1	Bip_STONE_R_UpArmTwist1	CLEAR	right upper-arm twist bone, 'STONE' model prefix set aside	CLEAR	groupFile/Arms/RightArm	High		plain structural arm anatomy regardless of model prefix (rule 24)	P112
+unusedbone173	unusedbone173	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker (rule 15)	P112
+cons_potion_healing_a_supreme_mesh	CONS_Potion_Healing_A_Supreme_Mesh	CLEAR	a healing-potion consumable item prop	CLEAR	groupFile/Other	High		recognized generic prop/item (rule 16)	P112
+lower_04	Lower_04	OPAQUE	a bare 'lower' positional label with no stated body part or object	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)	matches the established bare 'lower_NN' cryptic-fragment precedent	P112
+bip_pigtail_r_3	bip_pigtail_R_3	CLEAR	pigtail hairstyle, right, numbered	CLEAR	groupFile/Hair	High		named hairstyle feature	P112
+l05	L05	OPAQUE	a bare side+number label with no owning object	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)		P112
+bone146	Bone146	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no anatomical or functional word		P112
+腕捩1.l	腕捩1.L	CLEAR	arm twist, numbered, left (Japanese '腕'=arm, '捩'=twist)	CLEAR	groupFile/Arms/LeftArm	Medium	Japanese term translated, not independently corpus-cross-checked	grounded via the established 'ude'=arm Japanese-loanword precedent pattern (rule 23) applied to the parallel '腕' (arm) root	P112
+bone pinky 2	bone pinky 2	CLEAR	a pinky finger bone, numbered, side unstated	CLEAR	groupFile/Fingers	Medium	side not specified	'pinky' grounds finger anatomy; no side marker present, routed to the side-neutral Fingers group (rule 11)	P112
+r ujacketb c phy	R uJacketB c Phy	CLEAR	a jacket garment control, right, variant B, physics variant c	CLEAR	groupFile/Clothing	Medium		garment simulation control	P112
+b7	B7	OPAQUE	cryptic 2-character code, no content	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)		P112
+boobsie23	boobsie23	CLEAR	breast (slang 'boobsie'), numbered	CLEAR	groupFile/Body Morphs	Medium		'boobsie' is a recognizable breast-slang term (not a cryptic abbreviation); matches this Master's breast-domain convention (e.g. 'Right Breast Root'/'RightBreast_Root', already Body Morphs)	P112
+pad1_4	pad1_4	CLEAR	a pad accessory, numbered	NEEDS_CONTEXT		Low	which body region/garment the pad protects or mounts to is unstated	recognizable accessory object with unnamed owner, same kind of thing regardless of mount (rule 22)	P112
+wep_fx_muzzle9	WEP_FX_Muzzle9	CLEAR	a weapon muzzle-flash effect, numbered	CLEAR	groupFile/Other	High		'wep_' weapon-effect convention	P112
+ulid_r_2	ULid_R_2	CLEAR	upper eyelid, right, numbered	CLEAR	groupFile/Face/Eyes	Medium		eyelid mechanism	P112
+bone 1023	bone 1023	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no anatomical or functional word		P112
+wep_bolt	WEP_Bolt	CLEAR	a weapon bolt (crossbow bolt/mechanism)	CLEAR	groupFile/Other	High		'wep_' weapon convention; recognized weapon component	P112
+bip_r_neck_a	bip_r_neck_a	CLEAR	neck bone, right side, variant a	CLEAR	groupFile/Body	High		neck/torso region has no Left/Right taxonomy subgroup; stays Body despite the side marker	P112
+indextoe2_r	indexToe2_r	CLEAR	right index toe, numbered	CLEAR	groupFile/Toes/RightToes	High		direct toe anatomy naming	P112
+unused.013	unused.013	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker (rule 15)	P112
+thesword	TheSword	CLEAR	a sword prop	CLEAR	groupFile/Other	High		recognized weapon prop	P112
+angery right	angery right	CLEAR	angry expression (meme spelling 'angery'), right variant	CLEAR	groupFile/Face/Expressions	Medium		whole-face emotion word, matching the established angry-family Expressions precedent	P112
+necklace left	necklace left	CLEAR	necklace, left variant	CLEAR	groupFile/Clothing	High		worn jewelry	P112
+alertl	alertl	CLEAR	alert expression state, left/variant L	CLEAR	groupFile/Face/Expressions	Medium		whole-face emotion/state word	P112
+bip_pinky_root_0_r	bip_pinky_root_0_R	CLEAR	right pinky finger root, numbered	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain sided finger anatomy	P112
+beadhangfrontduo b2	BeadHangFrontDuo B2	CLEAR	a beaded accessory hanging in front, paired, variant b2	CLEAR	groupFile/Clothing	High		worn decorative accessory	P112
+wep_fx_muzzle11	WEP_FX_Muzzle11	CLEAR	a weapon muzzle-flash effect, numbered	CLEAR	groupFile/Other	High		'wep_' weapon-effect convention	P112
+jiggle leg right thigh 2	jiggle leg right thigh 2	CLEAR	right thigh jiggle-physics control, numbered	CLEAR	groupFile/Legs	High		thigh is plain leg anatomy; jiggle is a recognized physics function	P112
+rope_3	Rope_3	CLEAR	a rope prop, numbered	CLEAR	groupFile/Other	High		recognized generic object	P112
+ph09	PH09	OPAQUE	cryptic 'PH'+number code, no content	NOT_APPLICABLE		Low	matches the established ungrounded 'ph03'-style cryptic-fragment precedent		P112
+clothanushide	ClothAnusHide	CLEAR	garment control hiding the anus-area coverage	CLEAR	groupFile/Clothing	High		garment coverage/visibility control	P112
+bip_l_cloth_b_05	bip_l_cloth_b_05	CLEAR	left cloth-simulation bone, variant b, numbered	CLEAR	groupFile/Clothing	High		garment simulation control	P112
+wep_fx_laser3	WEP_FX_Laser3	CLEAR	a weapon laser effect, numbered	CLEAR	groupFile/Other	High		'wep_' weapon-effect convention	P112
+bas.left_2_jiggle	BAS.Left_2_jiggle	CLEAR	a jiggle-physics function on an unresolved 'BAS' object, left, numbered	NEEDS_CONTEXT		Medium	'BAS' prefix ungrounded; jiggled object unstated	matches the settled BAS.<position>_jiggle majority pattern (Tranche 9 corrected)	P112
+hatcloth_bone_09	hatCloth_bone_09	CLEAR	hat-cloth simulation bone, numbered	CLEAR	groupFile/Clothing	High		garment (hat) simulation control	P112
+fat belly	Fat Belly	CLEAR	belly fat/size increase	CLEAR	groupFile/Body Morphs	High		explicit size/shape change	P112
+fin_top_a_a	fin_top_a_a	CLEAR	a fin, numbered/lettered	CLEAR	groupFile/Other	High		settled fin -> Other precedent (rule 18)	P112
+bip_belt_r_0	bip_belt_R_0	CLEAR	belt, right, numbered	CLEAR	groupFile/Clothing	High		worn garment/equipment	P112
+arm right shoulder 2 twist	arm right shoulder 2 twist	CLEAR	right shoulder/arm twist bone, numbered	CLEAR	groupFile/Arms/RightArm	High		plain structural arm anatomy	P112
+pants pregnant	Pants Pregnant	CLEAR	pants fit adjustment for a pregnant belly	CLEAR	groupFile/Clothing	High		garment-specific fit adjustment stays with the garment (rule 8)	P112
+object14	Object14	OPAQUE	generic numbered placeholder object	NOT_APPLICABLE		Low	matches the established generic 'Object##' placeholder precedent		P112
+rightunderchin	RightUnderChin	CLEAR	under-chin region, right	CLEAR	groupFile/Face/Lower Face	High		chin/jaw is a Lower Face mechanism	P112
+arm left finger 4 d	arm left finger 4 d	CLEAR	left arm finger 4, variant d	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain sided finger anatomy	P112
+bip elbowhelper l	bip elbowhelper l	CLEAR	left elbow helper bone	CLEAR	groupFile/Arms/LeftArm	High		elbow is arm anatomy; 'helper' does not erase the anatomical owner (rule 4)	P112
+flm-armb-arm-le	Flm-ArmB-Arm-LE	CLEAR	arm anatomy, Flm-ArmB namespace, 'LE' qualifier	CLEAR	groupFile/Arms	Medium		matches the corrected Flm-ArmB-Arm-* family (namespace set aside, rule 24)	P112
+unusedtransform6 cmn sl alison	unusedtransform6 cmn sl alison	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker (rule 15)	P112
+eye close upper	Eye Close Upper	CLEAR	upper eyelid close control	CLEAR	groupFile/Face/Eyes	High		eyelid mechanism	P112
+object07	Object07	OPAQUE	generic numbered placeholder object	NOT_APPLICABLE		Low	matches the established generic 'Object##' placeholder precedent		P112
+foreskintipsmaller	ForeskinTipSmaller	CLEAR	foreskin tip size reduction	CLEAR	groupFile/Body Morphs	High		explicit genital shape/size change	P112
+cape 2d	Cape 2d	CLEAR	cape garment, variant 2d	CLEAR	groupFile/Clothing	High		worn garment	P112
+h3jiggle03	H3Jiggle03	CLEAR	a jiggle-physics function on an unresolved 'H3' object, numbered	NEEDS_CONTEXT		Medium	'H3' prefix ungrounded; jiggled object unstated	matches the direct sibling h3jiggle02 this tranche, CLEAR/NEEDS_CONTEXT	P112
+small_earring.l	Small_Earring.L	CLEAR	small earring, left	CLEAR	groupFile/Clothing	High		worn jewelry	P112
+outbrow_left_in	outBrow_left_IN	CLEAR	brow control, left, out/in variant	CLEAR	groupFile/Face/Upper Face	High		brow is an Upper Face mechanism	P112
+body_joint	body_joint	OPAQUE	a generic 'body'+'joint' label with no specific joint identified	NOT_APPLICABLE		Low	'body' does not specify which joint (rule 27 generic-joint-label caution)		P112
+trapezius	Trapezius	CLEAR	trapezius muscle (upper back/shoulder)	CLEAR	groupFile/Body	High		torso/back muscle anatomy	P112
+page2_b	Page2_B	OPAQUE	ambiguous UI/page reference with a bare letter suffix	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)	matches the direct sibling 'page1_g' this tranche, OPAQUE	P112
+throat-lower-bulge	throat-lower-bulge	CLEAR	lower-throat bulge (shape/appearance change)	CLEAR	groupFile/Body Morphs	High		explicit deformation/bulge state	P112
+bone 1026	bone 1026	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no anatomical or functional word		P112
+labiummajora2_l	LabiumMajora2_L	CLEAR	labium majora, numbered, left	CLEAR	groupFile/Body Morphs	High		near-exact match to the live-Master 'L_LabiumMajora2' precedent (Body Morphs); this genital region has no plain-Body destination in this Master	P112
+taurenmale_hd_bone_85	taurenmale_hd_bone_85	OPAQUE	character/model-prefixed generic numbered bone, no independent content	NOT_APPLICABLE		Low	matches the established character-prefix+generic-numbered-bone precedent (e.g. orcmale_hd_fixed_bone42)		P112
+bip01_head009	Bip01_Head009	CLEAR	head bone, numbered	CLEAR	groupFile/Body	High		plain structural head anatomy	P112
+armtwister	armTwister	CLEAR	an arm-twist mechanism, unsided	CLEAR	groupFile/Arms	High		plain structural arm anatomy, no side stated	P112
+egg.wall_23	Egg.Wall_23	CLEAR	the wall/lining of an egg or egg-sac, numbered	NEEDS_CONTEXT		Low	which creature/mechanism owns this egg-wall structure, and whether it is a soft-tissue morph or a discrete object, is unstated	'egg' + 'wall' forms one stable core reading (a real, describable structure) even though its owner/category is unresolved	P112
+foot_ring_2_l	foot_ring_2_L	PARTIAL	a 'ring' at the foot -- materially different competing readings (toe/ankle jewelry ring vs. a structural deformation ring)	NEEDS_CONTEXT		Low	no live-Master precedent for 'foot ring' in either direction	no qualifier (no 'bip_'/skeletal marker, no 'jewelry'/'toe' word) resolves which kind of ring this is (rule 22 PARTIAL test)	P112
+eye-r-surprise	Eye-R-Surprise	CLEAR	right eye, surprise-state variant	CLEAR	groupFile/Face/Eyes	High		explicit 'Eye' localizes this to the Eyes mechanism rather than the whole-face Surprise expression	P112
+canine_rbackleg1	Canine_RBackLeg1	CLEAR	canine creature, right back leg, numbered	CLEAR	groupFile/Legs	High		species-neutral leg anatomy (rule 18/19)	P112
+l ucor	L Ucor	OPAQUE	cryptic left+fragment, no grounding	NOT_APPLICABLE		Low	'Ucor' has no established expansion anywhere in the corpus	matches the established ungrounded cryptic-fragment precedent	P112
+w open	W open	OPAQUE	a cryptic 'W' with a generic 'open' action, no recoverable subject	NOT_APPLICABLE		Low	'W' does not identify what opens (rule 27)		P112
+fringe 16	fringe 16	CLEAR	hair fringe/bangs, numbered	CLEAR	groupFile/Hair	High		matches the settled bare/numbered fringe hair template	P112
+lipraise	lipraise	CLEAR	lip-raise mechanism	CLEAR	groupFile/Face/Lower Face	High		lip is a Lower Face mechanism	P112
+r fold b	R Fold B	PARTIAL	a 'fold' -- materially different competing readings (skin/eyelid fold, lip fold, garment fold), right, variant b	NEEDS_CONTEXT		Low	no body-part or garment qualifier resolves which fold this is	the Master's own eyelid-fold/lip-fold precedent always pairs 'fold' with a body-part word; this literal lacks one entirely (rule 22 PARTIAL test)	P112
+sword2 blade base	Sword2 Blade Base	CLEAR	sword prop, blade base, numbered	CLEAR	groupFile/Other	High		recognized weapon prop component	P112
+key.m	Key.M	CLEAR	a keyboard key, M	CLEAR	groupFile/Other	Medium		recognized generic keyboard-key object	P112
+lipsstretchl+lipsstretchr	LipsStretchL+LipsStretchR	CLEAR	combined lips-stretch control, left and right	CLEAR	groupFile/Face/Lower Face	High		lips are a Lower Face mechanism	P112
+waterhigh	WaterHigh	CLEAR	a water-level control, high state	NEEDS_CONTEXT		Low	which scene element/object this water effect belongs to is unstated, and no Master precedent establishes a destination	'water' + 'high' forms one stable functional reading (a water-level state) even though its owner is unresolved	P112
+arm right arm twist 2	arm right arm twist 2	CLEAR	right arm twist bone, numbered	CLEAR	groupFile/Arms/RightArm	High		plain structural arm anatomy	P112
+scrotum01	scrotum01	CLEAR	scrotum, numbered	CLEAR	groupFile/Body Morphs	High		matches the extensive live-Master scrotum family (27 hits, all Body Morphs; this genital region has no plain-Body destination in this Master)	P112
+taurenmale_hd_bone_60	taurenmale_hd_bone_60	OPAQUE	character/model-prefixed generic numbered bone, no independent content	NOT_APPLICABLE		Low	matches the established character-prefix+generic-numbered-bone precedent		P112
+unused genitalslag06	unused genitalslag06	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker dominates regardless of the remaining fragment (rule 15)	P112
+left thumb 1 grip 2	Left thumb 1 grip 2	CLEAR	left thumb, segment 1, grip variant 2	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain sided finger anatomy	P112
+leg1	leg1	CLEAR	leg, numbered, side unstated	CLEAR	groupFile/Legs	Medium	side not specified	plain leg anatomy, side-neutral (rule 11)	P112
+cloth right 7 jb	cloth right 7 JB	CLEAR	cloth/garment, right, numbered, 'jb' qualifier	CLEAR	groupFile/Clothing	Medium		garment control; 'jb' suffix undecoded but does not erase the grounded 'cloth' content (rule 24)	P112
+stockingheel.r	stockingheel.r	CLEAR	stocking heel, right	CLEAR	groupFile/Clothing	High		hosiery garment	P112
+wep_fx_muzzle1	WEP_FX_Muzzle1	CLEAR	a weapon muzzle-flash effect, numbered	CLEAR	groupFile/Other	High		'wep_' weapon-effect convention	P112
+l_side_holster_0u_0v_outer	l_side_holster_0u_0v_outer	CLEAR	a holster, left side, outer variant	CLEAR	groupFile/Clothing	High		matches the live-Master holster family (12 hits, all Clothing -- worn equipment)	P112
+flareoutright	FlareOutRight	PARTIAL	a 'flare out' -- materially different competing readings (nostril flare vs. garment flare vs. lens-flare/VFX), right	NEEDS_CONTEXT		Low	lacks the 'nose'/'nostril' qualifier the Master's own Nose-Flare family always includes	not safely groupable with the established Face/Mid Face nose-flare template, which never appears without 'nose'/'nostril' (rule 22 PARTIAL test)	P112
+polysurface138	polySurface138	OPAQUE	DCC-default primitive mesh name	NOT_APPLICABLE		Low	construction residue	DCC-default-identifier boundary	P112
+r_eye1a	r_eye1a	CLEAR	right eye, variant 1a	CLEAR	groupFile/Face/Eyes	High		eye anatomy	P112

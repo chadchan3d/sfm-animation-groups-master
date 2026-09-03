@@ -1,0 +1,258 @@
+PHASE 2 PRODUCTION TRANCHE 12 -- CONSISTENCY AUDIT
+Canonical positions 11501-12500 (batches P111-P120)
+Ledger: PHASE2_SEMANTIC_LEDGER.tsv (12500 rows after this tranche)
+
+============================================================
+1. WITHIN-TRANCHE SELF-CORRECTION (found and fixed before raw commit)
+============================================================
+
+Row: rassimpactmoveup1 (exact_spellings: RAssImpactMoveUp1)
+Batch: P114 (canonical position 11862)
+
+OLD (as merged in P114): semantic_status=CLEAR, taxonomy_status=CLEAR,
+  proposed_destination=groupFile/Body, short_reason argued this was a
+  "transient dynamic jiggle/reaction control... distinct in kind from
+  the static shape-morph controls in this family."
+
+While classifying later P118/P120 buttock-family rows (lbuttsmack,
+body-ass-grip) I mechanically re-checked the live Master for "smack"
+and found Ass-Smack-L/R and Butt-Smack-L/R/All (groupFile/Body Morphs,
+5/5) -- an exact functional match to "impact/reaction"-type dynamic
+buttock controls that I had not checked when classifying
+rassimpactmoveup1 itself. The original "dynamic = structural posing"
+distinction was an unverified assumption, not grounded in Master
+evidence.
+
+NEW (corrected in-place in the ledger, same session, before the raw
+Tranche 12 commit): taxonomy_status remains CLEAR; proposed_destination
+groupFile/Body -> groupFile/Body Morphs; short_reason rewritten to cite
+the Ass-Smack/Butt-Smack precedent. semantic_status, semantic_referent
+(reworded slightly), confidence, fold_key, exact_spellings, batch_id
+unchanged. Verified: exactly one ledger row changed, first 500 still
+match FINAL.tsv, Rule 21 intact, new destination valid.
+
+============================================================
+2. STRUCTURAL BODY VS BODY MORPHS -- MANDATORY REPORTING (Section 19)
+============================================================
+
+STRUCTURAL_BODY_VS_MORPH_ROWS_REVIEWED: every Body/Body-Morphs-candidate
+row this tranche was evaluated against the structural-vs-morph
+distinction (purpose: structural anatomy/posing/roots/bases/anchors ->
+Body; shape/size/appearance/state/deformation -> Body Morphs). This
+covers the full 130 rows this tranche routed to Body (33) or Body
+Morphs (97).
+
+STRUCTURAL_BODY_VS_MORPH_FLAGS: 4
+
+Four rows were classified per the task's explicit doctrine ("a plain
+structural buttock segment -> Body under current doctrine") even though
+they directly conflict with this Master's own actual, exhaustive
+buttock-family convention:
+
+  r_butt_bottem   (P114, groupFile/Body) -- "right buttock, bottom
+    region", no shape/state word.
+  leg left butt 1 (P115, groupFile/Body) -- "left buttock segment,
+    numbered", no shape/state word.
+  cc_butt.r       (P114, groupFile/Body) -- "right buttock (structural,
+    CC convention)", no shape/state word.
+  r_butt_right    (P118, groupFile/Body) -- "right buttock (structural,
+    redundant side marker)", no shape/state word.
+
+Live-Master evidence: "butt"/"_butt_" resolves 352/352 to groupFile/Body
+Morphs, including equally bare/positional members (bip_butt_0_L,
+bip_butt_out_L, bip_butt_inn_L, bip_butt_base_L, Bip_Butt_l -- an EXACT
+match to the task's own "bip_butt_l" worked doctrine example) with zero
+plain-Body exceptions found anywhere in the family.
+
+IMPORTANT WIDER-SCOPE OBSERVATION (not itself corrected, per Section 7's
+explicit "no broad retrospective sweep" instruction): the identical
+"100%-one-destination-regardless-of-structural-wording" pattern was
+independently confirmed this tranche for several OTHER anatomical
+domains, each checked only because a Tranche-12 candidate literal
+happened to require it (not via a deliberate sweep):
+
+  testicle:  87/87 hits -> Body Morphs (incl. bare bip_Testicle_L/R,
+             FK_Testicle_L/R)
+  scrotum:   27/27 hits -> Body Morphs (incl. bare "scrotum")
+  foreskin:  49/49 hits -> Body Morphs (incl. bare "foreskin")
+  labia majora: 125/125 hits -> Body Morphs (incl. bare L_LabiumMajora1/2)
+  cervix:    7/7 hits -> Body Morphs
+  ball (testicle sense): 58/58 hits -> Body Morphs (incl. bare "Ball left")
+  pectoral:  72/72 hits -> Body Morphs (incl. bip_Pectoral_L/R_1/2,
+             lPectoral_Base -- itself a "root"-shaped structural name)
+  belly:     100/100 hits -> Body Morphs (incl. bare "Belly", "Belly Base")
+  crease:    6/6 hits -> Body Morphs
+
+For THESE domains, Tranche-12 candidates matching the exact same shape
+(bare/positional/no-shape-word, e.g. "valvebiped.bip01_l_testicle0",
+"foreskin_left"/"foreskin_bottom"/"foreskin_top", "labiummajora2_l",
+"cervixback", "sack_middle", "lpectoral root") were classified per the
+Master's exhaustive, zero-exception evidence (Body Morphs), NOT
+re-flagged the same way as the four butt rows above -- doing so
+consistently would have required reopening/re-litigating dozens of
+already-classified rows across this and prior tranches, which Section 7
+of this task explicitly forbids ("Do not launch the wider structural-
+body audit until explicitly authorized").
+
+This creates an acknowledged internal inconsistency in how this tranche
+treated "plain structural anatomy" for butt (flagged, routed to Body per
+doctrine) versus testicle/scrotum/foreskin/labia/cervix/pectoral/belly
+(not flagged, routed to Body Morphs per exhaustive Master precedent) --
+recorded transparently here rather than silently resolved either way,
+since the user has stated they are separately, actively reviewing
+exactly this taxonomy boundary. Recommendation: when that review
+happens, treat butt/breast/genital/pectoral/belly as one coherent
+question rather than deciding butt in isolation.
+
+============================================================
+3. STALE MASTER-PATH CHECK (Section 16, mandatory this tranche)
+============================================================
+
+STALE_MASTER_PRECEDENT_VIOLATIONS: 0
+
+All Master precedent lookups this tranche were run against the current
+post-6bb1f4e Master (SHA-256 29aaf43e393de84e8af4a9aec4c3fbc37a04859b213f17666573d92ae552dcb7,
+mechanically re-verified before every batch and after every merge, see
+Section 5). 7 collar/clavicle-adjacent literals appeared this tranche
+(collar right 2, r collarb spo, bip01_r_clavicle008, bip01_r_clavicle004,
+collar front right, collartop, topcollarup) -- none matched the specific
+CollarL/CollarR/rig_collar_*/rig_Bip_collar_* families that moved in the
+Master refinement; all are ordinary descriptive garment-collar (Clothing)
+or clavicle (Arms) literals, routed consistently with pre-existing
+precedent that the refinement did not touch.
+
+============================================================
+4. SETTLED-FAMILY DRIFT CHECK (Section 18/22)
+============================================================
+
+Every Tranche-12 member of each settled recurring family was checked
+against current doctrine/calibration/ledger before classification (no
+row was resolved by analogy to historical raw-file values):
+
+  tentacle/tenta_ (9 rows)  -> all groupFile/Other
+  fin (2 rows)              -> groupFile/Other
+  horn (2 rows)             -> groupFile/Other (1 horn, 1 spikes --
+                               spikes extended the settled species-
+                               neutral-anatomy precedent, see Section 6)
+  fringe (3 rows)           -> all groupFile/Hair
+  Box_Face_##_M (1 row)     -> not encountered this tranche (0 hits;
+                               listed in family scan for completeness)
+  balloon-flat (0 rows)     -> none encountered this tranche
+  Rig-Hole (1 row: pbg-rig-hole-v1) -> CLEAR/NEEDS_CONTEXT/blank,
+                               matching the settled family pattern
+  BAS (3 rows)              -> all jiggle-suffixed, all CLEAR/
+                               NEEDS_CONTEXT, matching the Tranche 9
+                               corrected majority pattern; 0 bare-
+                               position BAS members this tranche
+  Flm-ArmB/Flm-ArmA (14 rows) -> Arm/Foot/Belt/Float sub-families all
+                               matched their corrected current templates;
+                               Flm-ArmA (a sibling namespace to Flm-ArmB)
+                               treated identically under rule 24
+  AU/FACS (3 rows: au1au2, au16, au2) -> all groupFile/Face/Expressions,
+                               matching the settled bare/combined-AU
+                               convention
+  whisker/moustache/condom (0 rows) -> none encountered this tranche
+
+No drift found in any family actually encountered. No historical raw-
+file split was treated as ambiguous without first checking current
+authority (rulebook/calibration/ledger/Master, in that order).
+
+============================================================
+5. MANDATORY MASTER INTEGRITY CHECK
+============================================================
+
+MASTER_INTEGRITY_INTERRUPTION: NO
+
+sfm_defaultanimationgroups.txt was mechanically re-verified present with
+SHA-256 29aaf43e393de84e8af4a9aec4c3fbc37a04859b213f17666573d92ae552dcb7
+before classification began and after every one of the 10 batch merges
+(P111-P120) plus after the Section 1 within-tranche correction --11
+checks total, all PASS, hash never changed, file never missing. No
+git checkout or restoration action was needed or performed.
+
+============================================================
+6. MANDATORY OPAQUE REVIEW (Rule 27, both directions)
+============================================================
+
+All 150 Tranche-12 OPAQUE rows were reviewed individually against Rule
+27's two-direction test (erasing a real referent vs. mistaking
+readability for semantics). They resolve into these mechanically-
+tallied categories:
+
+  - Generic numbered bones (Bone###, bone.###, bone NNN): ~28
+  - DCC-default primitive mesh names (polySurface##, pCube#, pCylinder#,
+    bare/numbered Plane): 11
+  - Character/model-prefixed generic numbered bones with no independent
+    content (taurenmale_hd_bone_##): 4
+  - Bare cryptic 1-4 letter+number/side codes with no grounding (h6/h9/
+    h10, f3/f8/f10, b7/b15, e9, g5/g15, t4, ce, cu, i10, d6, m04, bh##,
+    fh##.l/.r): ~30
+  - Bare positional/side-marker labels with no owning object (side_
+    left/right_N, left_N/right_N, mid_left, wide 2 left, bottom_01,
+    middle_01/03, x left): ~15
+  - Bare generic technical-operation words with no recoverable subject
+    (tighten, widen, shorten_4 [carried from Tranche 11's own precedent
+    family], flex_thin_x, flex_drop, narrow_y, depth_3/4, front_open2's
+    sibling reasoning does NOT apply here -- front_open2 was PARTIAL,
+    not OPAQUE): ~7
+  - Generic joint/bone/body labels with no specific anatomy (body_joint,
+    jnt_front, helper bone 2, bonehigh01, helperbody1r): 5
+  - Self-declared-adjacent but not quite Rule-15 bare adjectives/joke
+    text with no referent (gentle_7, singsang, gan, gengon001, stipa,
+    lol fuck you, dude_just_relax, flipoutrightright): 8
+  - Pure internal-namespace label with nothing surviving once set aside
+    (bipmar, bipbrk/bipfin-style prefixes elsewhere always paired with
+    real content and were NOT marked OPAQUE): 1 (bipmar)
+  - Pure numeric literals (24, _91): 2
+  - Level/hierarchy-label matching Rule 27's own worked example
+    (level5_root): 1
+
+No case where a real animator-useful referent survived was
+misclassified OPAQUE; no case where mere technical readability (an axis
+name, a generic joint/bone/level label, a cryptic abbreviation) was
+mistaken for animator-useful semantics.
+
+============================================================
+7. MANDATORY FACE/EXPRESSIONS REVIEW
+============================================================
+
+All 18 rows routed to groupFile/Face/Expressions were reviewed to
+confirm none names a localized mechanism that should route to a Face
+subgroup instead:
+
+  angery right, alertl, disgustright, anime angry br, rsuprise,
+  face-anger, ahappy, shock.r, shock.l, calmr, cangry1, laughter --
+  bare whole-face emotion/state words, matching established precedent.
+  skull_07 -- exact-template match to the live-Master bare skull_01/02/03
+  (Face/Expressions) skull-face-preset family.
+  au1au2, au16, au2 -- bare/combined FACS Action Unit notation, matching
+  the settled AU convention.
+  face-uu -- matches the "Face-[Word]" whole-face-state naming
+  convention (Face-Anger precedent).
+  fbx_rinko_face -- member of the coherent fbx_[character]_face_[state]
+  whole-face-preset series (no trailing state, permitted under rule 22's
+  coherent-series-membership allowance).
+
+None names a localized brow/eye/midface/lip-jaw/tongue mechanism. No
+re-routing required.
+
+============================================================
+8. DCC-DEFAULT-NAME BOUNDARY CONSISTENCY
+============================================================
+
+11 DCC-default candidates reviewed this tranche (polysurface4/14/83/92/
+93/124/138, pcube9, pcylinder14, plane, plane10) -- all correctly routed
+OPAQUE/NOT_APPLICABLE, no independent semantic evidence for any of them.
+
+============================================================
+Summary
+============================================================
+
+Cross-tranche/within-tranche corrections applied: 1 (rassimpactmoveup1,
+Section 1)
+Structural Body-vs-Morph flags: 4 (Section 2), with a broader systemic
+observation recorded for the user's separate planned review
+Stale-Master-precedent violations: 0
+Master integrity interruptions: 0
+NEEDS_DOCTRINE: 0
+Settled-family drift: 0 found across every family actually encountered

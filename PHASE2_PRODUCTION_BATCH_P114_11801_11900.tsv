@@ -1,0 +1,101 @@
+fold_key	exact_spellings	semantic_status	semantic_referent	taxonomy_status	proposed_destination	confidence	uncertainty_reason	short_reason	batch_id
+r femorisb spo	R FemorisB Spo	CLEAR	femoris (thigh muscle), right, variant B, physics qualifier	CLEAR	groupFile/Legs	High		thigh-muscle anatomy	P114
+legs-kneesock-fit	Legs-Kneesock-Fit	CLEAR	knee-sock garment fit adjustment	CLEAR	groupFile/Clothing	High		garment-specific fit control stays with the garment (rule 8)	P114
+pb_l_cmy01_fhair_03	pb_L_CMY01_FHair_03	CLEAR	facial/front hair, left, numbered, cryptic 'CMY01' variant	CLEAR	groupFile/Hair	Medium	'CMY01' code undecoded	'FHair' grounds hair content; undecoded variant code does not erase it (rule 24)	P114
+pincer left root	Pincer Left Root	PARTIAL	a 'Pincer' -- materially different competing readings (anatomical claw / mechanical gripper / weapon part), left, structural root	NEEDS_CONTEXT		Low	'root' establishes a structural anchor but does not resolve which kind of pincer this is	matches the settled rule-20 Pincer PARTIAL precedent	P114
+bone003	Bone003	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no anatomical or functional word		P114
+foreskin_bottom	foreskin_bottom	CLEAR	foreskin, bottom	CLEAR	groupFile/Body Morphs	High		matches the extensive live-Master foreskin family (Body Morphs)	P114
+flm-arma-swordb-jl	Flm-ArmA-SwordB-JL	CLEAR	a sword, Flm-ArmA namespace, variant B, 'JL' qualifier	CLEAR	groupFile/Other	Medium	'JL' suffix undecoded	'Sword' is grounded weapon content regardless of namespace prefix (rule 24); undecoded suffix does not erase it	P114
+pbg-rig-face	PBG-Rig-Face	CLEAR	a face-related control within an internal 'PBG-Rig' namespace	NEEDS_CONTEXT		Low	specific facial mechanism/subgroup is not stated	'Face' is grounded content once the namespace prefix is set aside (rule 24), matching the Rig-Hole family's namespace-set-aside/NEEDS_CONTEXT pattern	P114
+fulleyesopen	FullEyesOpen	CLEAR	eyes fully open state	CLEAR	groupFile/Face/Eyes	High		eyelid mechanism	P114
+book_back_m	Book_Back_M	CLEAR	a book prop, back, variant M	CLEAR	groupFile/Other	High		recognized generic prop	P114
+h10	H10+h10	OPAQUE	bare cryptic 'H10' code, no function word	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27) -- unlike the H3Jiggle family this tranche, no 'jiggle'/function word is present		P114
+toplid_l2	toplid_L2	CLEAR	upper eyelid, left, numbered	CLEAR	groupFile/Face/Eyes	High		eyelid mechanism	P114
+wep_stock_underfolding	WEP_StocK_Underfolding	CLEAR	a weapon stock underfolding mechanism	CLEAR	groupFile/Other	High		'wep_' weapon convention	P114
+shoulder_orb_right	SHOULDER_ORB_RIGHT	CLEAR	a shoulder-orb armor piece, right	CLEAR	groupFile/Clothing	Medium		worn shoulder-armor accessory	P114
+singsang	SingSang	OPAQUE	an unrecognized word/name, no anatomical or object content	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)		P114
+bipbrk sunglasses_l	BipBrk Sunglasses_L	CLEAR	sunglasses, left, 'BipBrk' rig-namespace prefix set aside	CLEAR	groupFile/Clothing	High		worn accessory regardless of internal namespace prefix (rule 24)	P114
+hatf_r	hatF_R	CLEAR	hat, variant F, right	CLEAR	groupFile/Clothing	High		worn garment	P114
+leg left finger 1	leg left finger 1	CLEAR	left toe digit (cross-limb hand-finger-name-for-toe naming), numbered	CLEAR	groupFile/Toes/LeftToes	Medium		matches the established cross-limb digit-naming template	P114
+eyelipupright	EyeLipUpRight	CLEAR	eyelid-crease control, upward, right	CLEAR	groupFile/Face/Upper Face	High		matches the extensive live-Master EyeLip family (Face/Upper Face)	P114
+r_butt_bottem	R_Butt_bottem	CLEAR	right buttock, bottom region (structural, accepted 'bottem' misspelling of bottom)	CLEAR	groupFile/Body	Medium		central doctrine: plain structural buttock segment -> Body (rule 26); FLAGGED -- the live Master's own extensive 'butt' family (352 hits, including equally bare/positional bip_butt_out_L/bip_butt_inn_L/bip_butt_base_L) is 100% Body Morphs, a potential historic taxonomy inconsistency, see consistency flags	P114
+arm left forearm adj a	arm left forearm adj a	CLEAR	left forearm, adjustment variant a	CLEAR	groupFile/Arms/LeftArm	High		plain structural arm anatomy; 'adj' alone is not corrective evidence (rule 2)	P114
+r shoulder2	r shoulder2	CLEAR	right shoulder, numbered	CLEAR	groupFile/Arms/RightArm	High		plain structural arm/shoulder anatomy	P114
+body-suit-fit-noupper	Body-Suit-Fit-NoUpper	CLEAR	bodysuit garment fit adjustment, no-upper variant	CLEAR	groupFile/Clothing	High		garment-specific fit control stays with the garment (rule 8)	P114
+langer	Langer	OPAQUE	an unrecognized word/name, no established anatomical or object content in this corpus	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27); no corpus grounding for any specific reading		P114
+unused.004	unused.004	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker (rule 15)	P114
+bone023	Bone023	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no anatomical or functional word		P114
+tsumasaki_l_d__offset	tsumasaki_l_d__offset	CLEAR	toe/finger-tip ('tsumasaki'), left, offset variant	CLEAR	groupFile/Toes/LeftToes	Medium		matches the settled tsumasaki Japanese-loanword precedent (Toes)	P114
+top.knot_left_2	Top.Knot_Left_2	CLEAR	top-knot hairstyle, left, numbered	CLEAR	groupFile/Hair	High		named hairstyle	P114
+baffle_bottom.r	baffle_bottom.R	OPAQUE	a 'baffle' with no stated owning object, bottom, right	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27) -- matches the established ungrounded bare 'baffle.r' precedent		P114
+body-bulge-pushup	Body-Bulge-pushup	CLEAR	muscle bulge/definition increase (pushup-context)	CLEAR	groupFile/Body Morphs	High		explicit shape/appearance change	P114
+bip01 thigh.r	Bip01 Thigh.R	CLEAR	right thigh bone	CLEAR	groupFile/Legs	High		plain structural leg anatomy	P114
+r dlipout a	R Dlipout A	CLEAR	lower-lip-out control, right, variant a ('D'=down)	CLEAR	groupFile/Face/Lower Face	Medium	'D' inferred as 'down', not explicit	lip is a Lower Face mechanism regardless of the abbreviated direction prefix	P114
+mune2_d__offset	mune2_d__offset	CLEAR	breast/chest ('mune'), numbered, offset variant	CLEAR	groupFile/Body Morphs	Medium	Japanese term translated by general vocabulary knowledge, not independently corpus-cross-checked	grounded via the same Japanese-loanword technical-suffix convention as momo/ashi/sakotsu/ude/hiza (rule 23); matches this Master's breast-domain Body Morphs convention	P114
+cc_backtoe1.l	cc_backtoe1.l	CLEAR	back toe, numbered, left, 'CC' Character-Creator convention	CLEAR	groupFile/Toes/LeftToes	High		direct toe anatomy naming	P114
+valvebiped.r_calf	Valvebiped.R_calf	CLEAR	right calf bone	CLEAR	groupFile/Legs	High		plain structural leg anatomy	P114
+middle_01	Middle_01	OPAQUE	a bare 'middle' positional label with no stated body part or object	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)		P114
+valvebiped.rboob1	ValveBiped.rboob1	CLEAR	right breast, numbered	CLEAR	groupFile/Body Morphs	High		matches this Master's breast-domain Body Morphs convention	P114
+middle_03	Middle_03	OPAQUE	a bare 'middle' positional label with no stated body part or object	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27); matches direct sibling 'middle_01' this tranche		P114
+flm-armb-float-b4	Flm-ArmB-Float-B4	CLEAR	a 'float' function in the Flm-ArmB internal namespace, variant B4	NEEDS_CONTEXT		Medium	object that floats is never named	matches the settled Flm-ArmB-Float sibling family	P114
+sack_middle	Sack_Middle	CLEAR	scrotum ('sack'), middle	CLEAR	groupFile/Body Morphs	Medium		'sack' is recognizable scrotum slang; matches this Master's extensive scrotum-domain Body Morphs convention	P114
+l dlid c	L Dlid C	CLEAR	lower-eyelid control, left, variant c ('D'=down)	CLEAR	groupFile/Face/Eyes	Medium	'D' inferred as 'down', not explicit	eyelid mechanism	P114
+arm right shoulder adj 4	arm right shoulder adj 4	CLEAR	right shoulder, adjustment variant 4	CLEAR	groupFile/Arms/RightArm	High		plain structural arm anatomy; 'adj' alone is not corrective evidence (rule 2)	P114
+wep_belt_bullet5	WEP_Belt_Bullet5	CLEAR	a weapon ammo-belt bullet, numbered	CLEAR	groupFile/Other	High		'wep_' weapon convention	P114
+pc_cable	pc_cable	CLEAR	a computer/power cable prop	CLEAR	groupFile/Other	Medium		recognized generic object	P114
+bip_upperarm_r_1	bip_upperarm_r_1	CLEAR	right upper arm bone, numbered	CLEAR	groupFile/Arms/RightArm	High		plain structural arm anatomy	P114
+facial_bone_uprlip_l01	Facial_Bone_UprLip_L01	CLEAR	upper-lip facial bone, left, numbered	CLEAR	groupFile/Face/Lower Face	High		lip is a Lower Face mechanism	P114
+crow_1.femur_l	Crow_1.Femur_L	CLEAR	left femur, 'Crow_1' model prefix set aside	CLEAR	groupFile/Legs	High		plain leg anatomy regardless of model prefix (rule 24)	P114
+root_hips	root_hips	CLEAR	central hip-pelvis structural root anchor	CLEAR	groupFile/Body	High		exact match to the live-Master 'Root Hips'/'root hips' precedent (Body); central/unsided structural hip-pelvis anchor (rule 26)	P114
+right_23	right_23	OPAQUE	a bare 'right' positional label with no owning object	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)		P114
+car04_controller	Car04_controller	CLEAR	a car/vehicle controller object, numbered	CLEAR	groupFile/Other	Medium		recognized generic vehicle-control object	P114
+bhl47	BhL47	OPAQUE	cryptic 2-4 letter abbreviation+number+side fragment, no grounding	NOT_APPLICABLE		Low	matches the established ungrounded Bh##.*/Fh##.* cryptic-fragment precedent		P114
+bobcut.side_left_2_3	Bobcut.Side_Left_2_3	CLEAR	Bobcut hairstyle, side left, numbered	CLEAR	groupFile/Hair	High		named hairstyle	P114
+v_weapon.right_ring02	v_weapon.Right_Ring02	CLEAR	right ring finger, numbered, weapon-grip namespace	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain sided finger anatomy	P114
+valvebiped.bip01_belt2	ValveBiped.Bip01_Belt2	CLEAR	belt, numbered	CLEAR	groupFile/Clothing	High		worn garment/equipment	P114
+balloon-flat-back	balloon-flat-back	CLEAR	a belly-ballooning shape effect, flat state, back	CLEAR	groupFile/Body Morphs	High		matches the settled balloon-flat sibling family (left/right/top/bottom, all Body Morphs), grounded by direct live-Master 'Balloon' precedent -- resolves the row explicitly left unclassified at Tranche 7	P114
+bone 1001	bone 1001	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no anatomical or functional word		P114
+bone 1081	bone 1081	OPAQUE	generic numbered bone	NOT_APPLICABLE		Low	no anatomical or functional word		P114
+v_weapon.right_index02	v_weapon.Right_Index02	CLEAR	right index finger, numbered, weapon-grip namespace	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain sided finger anatomy	P114
+dyng l single earing 02	dyng l single earing 02	CLEAR	a dangling single earring, left, numbered (accepted 'earing' misspelling)	CLEAR	groupFile/Clothing	Medium		worn jewelry	P114
+bottle_bone_br_02	bottle_bone_br_02	CLEAR	a bottle prop's animation bone, numbered	CLEAR	groupFile/Other	Medium		recognized generic prop	P114
+door low right	Door low right	CLEAR	a door object, low, right	CLEAR	groupFile/Other	Medium		recognized generic environment object	P114
+rassimpactmoveup1	RAssImpactMoveUp1	CLEAR	buttock impact/recoil reaction, move-up, numbered	CLEAR	groupFile/Body	Medium		a transient dynamic jiggle/reaction control (impact response), distinct in kind from the static shape-morph controls in this family; butt/ass structural-dynamic posing -> Body (rule 26)	P114
+tenta_5_r	tenta_5_R	CLEAR	a tentacle, numbered	CLEAR	groupFile/Other	High		settled tentacle -> Other precedent	P114
+aerola small	aerola small	CLEAR	areola size decrease (accepted 'aerola' misspelling)	CLEAR	groupFile/Body Morphs	High		explicit shape/size change	P114
+eyes-l-blink	Eyes-L-Blink	CLEAR	left eye blink	CLEAR	groupFile/Face/Eyes	High		eyelid mechanism	P114
+bone_back	Bone_Back	CLEAR	a back-region structural bone	CLEAR	groupFile/Body	Medium	'back' is a real torso region, though the specific bone is unnamed	'back' identifies a specific body region, unlike a purely generic joint/root label (rule 27)	P114
+l_inner_raise	l_inner_raise	CLEAR	brow inner-raiser mechanism, left	CLEAR	groupFile/Face/Upper Face	Medium	'brow' is not stated explicitly	matches the extensive live-Master 'Brow_Inner_Raise'/'brow inner raiser' family (46 hits, all localized to brow -> Face/Upper Face)	P114
+r_upper_leg_twist_b_helper	r_upper_leg_twist_b_helper	CLEAR	right upper leg twist helper, variant b	CLEAR	groupFile/Legs	High		plain structural leg anatomy; 'helper' does not erase the anatomical owner (rule 4)	P114
+mainlowerlidraise	MainLowerLidRaise	CLEAR	main lower-eyelid raise control	CLEAR	groupFile/Face/Eyes	High		eyelid mechanism	P114
+polysurface93	polySurface93	OPAQUE	DCC-default primitive mesh name	NOT_APPLICABLE		Low	construction residue	DCC-default-identifier boundary	P114
+t4	T4	OPAQUE	cryptic 1-letter+number code, no content	NOT_APPLICABLE		Low	matches the established ungrounded cryptic-fragment precedent		P114
+eye-r-squint	Eye-R-Squint	CLEAR	right eye squint	CLEAR	groupFile/Face/Eyes	High		eyelid mechanism	P114
+boobs +	Boobs +	CLEAR	breast size increase	CLEAR	groupFile/Body Morphs	High		explicit breast size change	P114
+wep_fx_peq2_light	WEP_FX_PEQ2_Light	CLEAR	a PEQ2 laser-sight light effect (weapon accessory)	CLEAR	groupFile/Other	High		'wep_' weapon-effect convention	P114
+top_8	Top_8	PARTIAL	a bare 'Top' -- materially different competing readings (a 'top' garment / anatomical 'top of X' / generic top position), numbered	NEEDS_CONTEXT		Low	no qualifier resolves which sense applies; the Master's own 'Top' family always pairs it with a body-part or garment word this literal lacks	rule 22 PARTIAL test	P114
+ah02	AH02	CLEAR	an 'AH' mouth-shape viseme, numbered	CLEAR	groupFile/Face/Lower Face	Medium		recognized phoneme/viseme mouth-shape convention for lip-sync	P114
+submesh_00_lod_1.3013	submesh_00_LOD_1.3013	OPAQUE	cryptic submesh/LOD technical identifier	NOT_APPLICABLE		Low	matches the established ungrounded 'submesh_00_lod_1.####' cryptic-fragment precedent		P114
+right ring finger 3 grip 1	Right ring finger 3 grip 1	CLEAR	right ring finger, segment 3, grip variant 1	CLEAR	groupFile/Arms/RightArm/RightFingers	High		plain sided finger anatomy	P114
+f3	F3	OPAQUE	cryptic 1-letter+number code, no content	NOT_APPLICABLE		Low	matches the established ungrounded cryptic-fragment precedent		P114
+bas.back_3	BAS.Back_3	OPAQUE	ungrounded 'BAS' code with a bare position, no object	NOT_APPLICABLE		Low	numeric-sibling audit shows no positive evidence distinguishing this from OPAQUE siblings	matches the corrected bare BAS.<position> majority pattern (Tranche 9 QA)	P114
+eye-l-shocked	Eye-L-Shocked	CLEAR	left eye, shocked-state variant	CLEAR	groupFile/Face/Eyes	High		explicit 'Eye' localizes this to the Eyes mechanism rather than the whole-face Shocked expression	P114
+cc_butt.r	cc_Butt.r	CLEAR	right buttock (structural, 'CC' Character-Creator convention)	CLEAR	groupFile/Body	Medium		central doctrine: plain structural buttock segment -> Body (rule 26); FLAGGED -- conflicts with the live Master's own 100%-Body-Morphs butt family, see consistency flags	P114
+arm left finger 4 a	arm left finger 4 a	CLEAR	left arm finger 4, variant a	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain sided finger anatomy	P114
+drt_cutscene_stage_10-5_aos	drt_cutscene_stage_10-5_aos	OPAQUE	a cutscene/production-staging technical marker, no animator-facing anatomical or object content	NOT_APPLICABLE		Low	not an animator-useful controlled referent in taxonomy terms (rule 27)		P114
+cloth middle 6	cloth middle 6	CLEAR	cloth/garment, middle, numbered	CLEAR	groupFile/Clothing	High		garment control	P114
+steerwheel2	steerwheel2	CLEAR	a steering-wheel prop, numbered	CLEAR	groupFile/Other	High		recognized generic vehicle-part prop	P114
+cloth_back_b_1_l	cloth_back_B_1_L	CLEAR	cloth/garment, back, variant b, numbered, left	CLEAR	groupFile/Clothing	High		garment control	P114
+bip_l_root_horn	bip_l_root_horn	CLEAR	left horn, structural root	CLEAR	groupFile/Other	High		settled horn -> Other precedent (rule 18); 'root' qualifier does not change the species-neutral-anatomy destination	P114
+bh04.r	Bh04.R	OPAQUE	cryptic 2-4 letter abbreviation+number+side fragment, no grounding	NOT_APPLICABLE		Low	matches the established ungrounded Bh##.*/Fh##.* cryptic-fragment precedent		P114
+rsuprise	RSuprise	CLEAR	surprise expression, right/variant R (accepted 'Suprise' misspelling)	CLEAR	groupFile/Face/Expressions	High		matches the settled whole-face Surprise -> Expressions precedent	P114
+unusedbone223	unusedbone223	CLEAR	a self-declared unused placeholder	CLEAR	groupFile/Useless	High		self-declared 'unused' marker (rule 15)	P114
+rootloona	RootLOONA	CLEAR	a structural root/anchor control, 'LOONA' character prefix set aside	CLEAR	groupFile/Body	Medium		character-prefixed structural root anchor (rule 24); not evaluated as a Master root-priority-promotion candidate, only as an ordinary semantic classification	P114
+depth_4	depth_4	OPAQUE	a bare 'depth' technical parameter with no stated subject	NOT_APPLICABLE		Low	no recoverable animator-useful referent (rule 27)		P114
+eyes wide right	eyes wide right	CLEAR	eyes wide, right	CLEAR	groupFile/Face/Eyes	High		eyelid mechanism	P114
+teeth-back	Teeth-Back	CLEAR	back teeth (molars) control	CLEAR	groupFile/Face/Lower Face	High		teeth are a mouth/lower-face feature	P114
+bip_fmiddle01_l	Bip_FMiddle01_L	CLEAR	left middle finger, numbered	CLEAR	groupFile/Arms/LeftArm/LeftFingers	High		plain sided finger anatomy	P114
+boobs press	Boobs Press	CLEAR	breast press (shape deformation)	CLEAR	groupFile/Body Morphs	High		explicit breast shape change	P114
+urethrainflate	UrethraInflate	CLEAR	urethra inflation state	CLEAR	groupFile/Body Morphs	High		explicit genital shape/state change	P114
+shin.r.001	shin.R.001	CLEAR	right shin, numbered	CLEAR	groupFile/Legs	High		plain structural leg anatomy	P114
+tenta_4_r	Tenta_4_R	CLEAR	a tentacle, numbered	CLEAR	groupFile/Other	High		settled tentacle -> Other precedent	P114
