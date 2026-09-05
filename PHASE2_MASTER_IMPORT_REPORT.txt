@@ -1,0 +1,200 @@
+======================================================================
+PHASE 2 -> MASTER IMPORT REPORT
+======================================================================
+
+PRE-IMPORT MASTER SHA256:  88a1559f43da0f2119cd601af45bcf4cb5193b4d42550e3c73bce19be9abf99c
+POST-IMPORT MASTER SHA256: 67226a5ab6220d59a908769ed0cdff3c76ca8d7ad99c799b691dc63444f377db
+
+REVIEWED LEDGER COMMIT: 0e0ef8c72ec8a3fc60f8073489d588585eb39482
+  "Complete Phase 2 production classification"
+  (Ledger working tree matched this commit exactly at import time --
+   see PHASE2_HUMAN_REVIEW_FINALIZATION_REPORT.txt. No separate
+   ledger-freeze commit was required or made.)
+
+LEDGER ROWS: 14282
+
+TAXONOMY STATUS (as frozen in the reviewed ledger)
+  CLEAR:           10852
+  NEEDS_CONTEXT:    1386
+  NOT_APPLICABLE:   2044
+  NEEDS_DOCTRINE:      0
+
+FAMILY-LEVEL IMPORT DISPOSITION (14282 fold_keys, sums exactly)
+  IMPORTABLE FAMILIES (CLEAR taxonomy, not hard-stopped):     10836
+    IMPORTED (new literals inserted):                         10820
+    ALREADY_PRESENT_SAME_PATH (no-op, already satisfied):        16
+  NOT-IMPORTED FAMILIES (by ledger status, no conflict):        3427
+    NOT_IMPORTED_NEEDS_CONTEXT:                                1383
+    NOT_IMPORTED_NOT_APPLICABLE:                                2044
+  MASTER_CONFLICT FAMILIES (hard-stopped, hierarchy-level
+    fold conflict with pre-existing Master content):               1
+  LEDGER_INTERNAL_CONFLICT FAMILIES (hard-stopped, non-standard
+    status -- see explanation below):                             18
+  ---------------------------------------------------------------
+  TOTAL:                                                       14282
+
+EXACT LITERAL COUNTS
+  BEFORE (Master, pre-import):        117612
+  AFTER  (Master, post-import):       128550
+  ADDED:                                10938
+  REMOVED:                                  0
+  RENAMED:                                  0
+
+STRUCTURAL / PRESENTATION INTEGRITY
+  Pre-existing control path changes:                  0
+  Non-import structural changes (groups created/removed): 0
+  Existing group order changes:                       0
+  Existing group metadata changes (groupColor set):   0
+  New groups created by this import:                  0
+    (all 31 destinations used were pre-existing canonical groups)
+  ASCII cross-path casefold conflicts (post-import):  0
+  Exact duplicate literals (post-import):             0
+
+MASTER VALIDATOR (tools/validate_master.py, read-only)
+  Candidate (.tmp) run:  PASS (0 exact duplicates, 0 cross-path conflicts)
+  Canonical (post-promotion) run:  PASS (0 exact duplicates, 0 cross-path conflicts)
+
+LEDGER <-> MASTER COVERAGE AUDIT (Section 13)
+  Expected CLEAR-and-eligible families (10852 CLEAR minus 16
+    hard-stopped conflict families):                          10836
+  Satisfied (every exact spelling resolves to reviewed
+    destination in the post-import Master):                   10836
+  Missing:                                                         0
+  Destination mismatches:                                          0
+  NEEDS_CONTEXT / NOT_APPLICABLE families confirmed NOT added
+    to the Master by this import:                             CONFIRMED
+    (0 manifest rows with import_status=IMPORTED whose
+     taxonomy_status was not CLEAR)
+
+DESTINATIONS TOUCHED BY THIS IMPORT (31 groups, all pre-existing)
+  groupFile/Clothing, groupFile/Other, groupFile/Body,
+  groupFile/Body Morphs, groupFile/Face/Eyes, groupFile/Legs,
+  groupFile/Arms, groupFile/Face/Lower Face, groupFile/Useless,
+  groupFile/Arms/LeftArm/LeftFingers, groupFile/Hair,
+  groupFile/Arms/RightArm/RightFingers, groupFile/Face/Upper Face,
+  groupFile/Tail, groupFile/Face/Expressions, groupFile/Face/Mid Face,
+  groupFile/Arms/RightArm, groupFile/Arms/LeftArm,
+  groupFile/Correctives, groupFile/Face/Ears,
+  groupFile/Toes/LeftToes, groupFile/Toes/RightToes, groupFile/Wings,
+  groupFile/Face/Tongue, groupFile/Fingers, groupFile/Face,
+  groupFile/Toes, groupFile/Arms/RightArm/RightCarpals,
+  groupFile/Arms/LeftArm/LeftCarpals, groupFile/RigBody,
+  groupFile/Attachments
+
+----------------------------------------------------------------------
+MASTER_CONFLICT DETAIL (1 family, hard-stopped -- Section 8 case C,
+found at the ASCII-fold-family level rather than the exact-literal
+level)
+----------------------------------------------------------------------
+fold_key: eyesblinkl+eyesblinkr
+  exact_spellings (reviewed ledger): EyesBlinkL+EyesBlinkR
+  reviewed_destination: groupFile/Face/Eyes
+  Conflict: the exact spellings "EyesBlinkL"/"EyesBlinkR" do not
+  themselves exist anywhere in the pre-import Master, but their
+  ASCII-fold keys ("eyesblinkl"/"eyesblinkr") already have members
+  in the Master -- "eyesBlinkL"/"eyesBlinkR" (different casing) --
+  at groupFile/Face/Upper Face, a DIFFERENT path than the reviewed
+  destination groupFile/Face/Eyes. Inserting the reviewed spelling at
+  Face/Eyes would create a native-Rebuild casefold family spanning two
+  paths, which tools/validate_master.py correctly rejects. This family
+  is excluded from this import round in its entirety (neither
+  "EyesBlinkL" nor "EyesBlinkR" was inserted). No existing Master
+  content was touched. This is a genuine ledger-vs-Master identity
+  disagreement, not a schema defect in the ledger itself, and is
+  reported under the task's existing MASTER_CONFLICT status.
+
+----------------------------------------------------------------------
+LEDGER_INTERNAL_CONFLICT DETAIL (18 fold_keys -- NON-STANDARD STATUS,
+explanation and justification)
+----------------------------------------------------------------------
+The task's closed import_status vocabulary (Section 11) is:
+  IMPORTED, ALREADY_PRESENT_SAME_PATH, NOT_IMPORTED_NEEDS_CONTEXT,
+  NOT_IMPORTED_NOT_APPLICABLE, MASTER_CONFLICT
+
+None of these five values accurately describes the 18 fold_keys below.
+They are not in conflict with the *Master* at all -- the Master was
+never touched for these literals. The conflict is entirely *within
+the reviewed ledger itself*: after correctly splitting multi-spelling
+"exact_spellings" fields (per the validated split_spellings() logic),
+10 distinct exact literals are each claimed by TWO different ledger
+rows (fold_keys) that disagree on either taxonomy_status or
+proposed_destination for that literal. Force-fitting this into
+MASTER_CONFLICT would misreport the root cause as a Master disagreement
+when it is actually a self-contradiction in the "authoritative" reviewed
+ledger. Per Section 4 ("Do not silently repair the reviewed ledger...
+If there is a STRUCTURAL/SCHEMA impossibility that prevents import,
+HARD STOP and report it"), these 18 fold_keys are excluded from this
+import round and reported here under the explicit, clearly-labeled
+non-standard status LEDGER_INTERNAL_CONFLICT so they are visible and
+traceable rather than silently resolved one way or the other. No
+literal belonging to any of these 18 fold_keys was inserted into the
+Master by this import.
+
+10 literals / 18 fold_keys, listed as literal -> conflicting rows:
+
+  bite1R
+    fold_key=bite1l+bite1r   CLEAR taxonomy -> groupFile/Face/Lower Face   (batch P12)
+    fold_key=bite1r          NEEDS_CONTEXT   -> (none)                    (batch P49)
+
+  CornerPullerL
+    fold_key=cornerpullerl+cornerpullerr  CLEAR -> groupFile/Face/Lower Face  (batch P15)
+    fold_key=cornerpullerl                NEEDS_CONTEXT -> (none)             (batch P47)
+
+  EBAllLowerR
+    fold_key=eballlowerr               CLEAR -> groupFile/Face/Upper Face  (batch P21)
+    fold_key=eballlowerl+eballlowerr   CLEAR -> groupFile/Face/Eyes        (batch P93)
+
+  EBAllLowerL
+    fold_key=eballlowerl               CLEAR -> groupFile/Face/Upper Face  (batch P27)
+    fold_key=eballlowerl+eballlowerr   CLEAR -> groupFile/Face/Eyes        (batch P93)
+
+  LowerLidLowerL
+    fold_key=lowerlidlowerl                CLEAR -> groupFile/Face/Upper Face  (batch P34)
+    fold_key=lowerlidlowerl+lowerlidlowerr CLEAR -> groupFile/Face/Eyes        (batch P70)
+
+  LowerLidRaiserL
+    fold_key=lowerlidraiserl                 CLEAR -> groupFile/Face/Upper Face  (batch P37)
+    fold_key=lowerlidraiserl+lowerlidraiserr CLEAR -> groupFile/Face/Eyes        (batch P92)
+
+  UpperLidRaiserR
+    fold_key=upperlidraiserr                 CLEAR -> groupFile/Face/Upper Face  (batch P37)
+    fold_key=upperlidraiserl+upperlidraiserr CLEAR -> groupFile/Face/Eyes        (batch P124)
+
+  UpperBlinkL
+    fold_key=upperblinkl+upperblinkr  CLEAR -> groupFile/Face/Upper Face  (batch P38)
+    fold_key=upperblinkl              CLEAR -> groupFile/Face/Eyes        (batch P101)
+
+  UpperBlinkR
+    fold_key=upperblinkl+upperblinkr  CLEAR -> groupFile/Face/Upper Face  (batch P38)
+    fold_key=upperblinkr              CLEAR -> groupFile/Face/Eyes        (batch P130)
+
+  FunnelR
+    fold_key=funnelr           CLEAR         -> groupFile/Other  (batch P51)
+    fold_key=funnell+funnelr   NEEDS_CONTEXT  -> (none)          (batch P133)
+
+Observed pattern: 8 of these 10 literals are individual-eyelid/eye-area
+blend-shape controls where one ledger row classified a BUNDLED L+R pair
+spelling to groupFile/Face/Eyes while a separate row classified an
+INDIVIDUAL-sided spelling of the apparently-same control to
+groupFile/Face/Upper Face (a real Eyes-vs-Upper-Face doctrine tension
+across two different review batches). The remaining 2 (bite1R/
+CornerPullerL/FunnelR pattern) are CLEAR-vs-NEEDS_CONTEXT disagreements
+on the same literal across batches. No attempt was made to decide which
+side is "correct" -- both are left untouched pending explicit human
+adjudication.
+
+----------------------------------------------------------------------
+FINAL DECLARATIONS
+----------------------------------------------------------------------
+PHASE 2 RAW BATCHES MODIFIED:        NO
+SEXUAL BONES CREATED:                NO
+ARM/LEG SIDE POST-PASS PERFORMED:    NO
+
+This import is family-level coverage expansion only. No existing
+Master control was moved, renamed, or removed. No existing group,
+groupColor, or root ordering was altered. All 10,938 newly inserted
+exact literals were appended as the last direct member(s) of their
+already-existing target group, immediately before that group's
+existing closing brace, in the exact spelling given by the reviewed
+ledger.
+======================================================================
