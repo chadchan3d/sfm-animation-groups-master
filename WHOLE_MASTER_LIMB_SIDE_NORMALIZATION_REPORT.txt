@@ -1,0 +1,201 @@
+======================================================================
+WHOLE-MASTER ARMS / LEGS SIDE NORMALIZATION -- REPORT
+======================================================================
+
+----------------------------------------------------------------------
+A. BASELINE
+----------------------------------------------------------------------
+Starting commit:            879c6cf72ec8a3fc60f8073489d588585eb39482... (879c6cf)
+                             "Import human-reviewed Phase 2 classifications"
+Starting Master SHA256:      67226a5ab6220d59a908769ed0cdff3c76ca8d7ad99c799b691dc63444f377db
+Starting literal count:       128,550
+Validator (pre-pass):         PASS (0 exact duplicates, 0 ASCII cross-path conflicts)
+Direct-population census (pre-pass, RigArms/RigLegs direct = 0):
+
+  groupFile/Arms                 893 exact literals   888 fold families
+  groupFile/Arms/LeftArm        1384 exact literals  1279 fold families
+  groupFile/Arms/RightArm       1384 exact literals  1278 fold families
+  groupFile/RigArms                0 exact literals     0 fold families
+  groupFile/RigArms/LeftArm        7 exact literals     7 fold families
+  groupFile/RigArms/RightArm       7 exact literals     7 fold families
+  groupFile/Legs                 730 exact literals   725 fold families
+  groupFile/Legs/LeftLeg         1075 exact literals  1008 fold families
+  groupFile/Legs/RightLeg        1072 exact literals  1004 fold families
+  groupFile/RigLegs                0 exact literals     0 fold families
+  groupFile/RigLegs/LeftLeg        6 exact literals     6 fold families
+  groupFile/RigLegs/RightLeg       6 exact literals     6 fold families
+
+RigArms/RigLegs had 0 direct controls -- no rig-controller-layer
+normalization was needed or performed.
+
+----------------------------------------------------------------------
+B. BEFORE COUNTS (direct populations subject to this pass)
+----------------------------------------------------------------------
+  Arms direct:  888 fold families / 893 exact literals
+  Legs direct:  725 fold families / 730 exact literals
+  Total direct families considered: 1613
+
+----------------------------------------------------------------------
+C. MOVEMENT COUNTS
+----------------------------------------------------------------------
+  Arms  -> LeftArm:    312 strict ASCII families   314 exact literals
+  Arms  -> RightArm:   316 strict ASCII families   319 exact literals
+  Legs  -> LeftLeg:    316 strict ASCII families   318 exact literals
+  Legs  -> RightLeg:   318 strict ASCII families   320 exact literals
+  ------------------------------------------------------------------
+  TOTAL MOVED:        1262 strict ASCII families  1271 exact literals
+
+  RigArms -> LeftArm/RightArm:  0 (no direct RigArms controls existed)
+  RigLegs -> LeftLeg/RightLeg:  0 (no direct RigLegs controls existed)
+
+Classification method: a token-based candidate retrieval (whole-word
+"left"/"right"; delimited "l"/"r"/"lside"/"rside" tokens; the decoy
+token "rt" -- confirmed via corpus inspection to mean "root", not
+"right", in every one of its 8 occurrences -- explicitly excluded)
+proposed LEFT/RIGHT/NONE per family. Every family in the LEFT and
+RIGHT buckets (610 in Arms, 578 in Legs) was read in full, not
+sampled, before being accepted. A small number of naming conventions
+the token classifier could not resolve (a lettered/numbered mirrored
+suffix scheme, e.g. "Flm-ArmB-Arm-LA".."LI"/"RA".."RI", and a
+front/mid/rear x left/right quadruped-leg code, e.g. "Bone_LegFL1"/
+"Bone_LegFR1") were individually verified for a COMPLETE, gap-free
+mirrored counterpart set within the same direct population before
+being force-classified; see Section D below for the specific families
+this applied to and the reasoning for each.
+
+----------------------------------------------------------------------
+D. NOTABLE MANUAL DECISIONS (beyond the base token classifier)
+----------------------------------------------------------------------
+MOVED, with manual verification (mirror confirmed within the same
+direct population before moving):
+  - Flm-ArmB-Arm-L[A-I] / -R[A-I] (Arms): complete 9/9 lettered mirror.
+  - Bone_LegFL[1-3]/FR[1-3], Bone_LegML[1-3]/MR[1-3],
+    Bone_LegRL[1-3]/RR[1-3] (Legs): complete front/mid/rear x
+    left/right quadruped-leg mirror (18 literals, 3 positions x 2
+    sides x 3 numbered variants).
+  - Flm-ArmA-Foot-L[1-5]/R[1-5], Flm-ArmA-Leg-L[0-2]/R[0-2],
+    Flm-ArmB-Foot-LA/LB/RA/RB, Flm-ArmB-Leg-L{BA,BB,BC,BD,M,UA,UB,UC}/
+    R{...} (Legs): complete mirrors, same "Flm-Arm[AB]-" plugin-rig
+    naming scheme as the Arms case above.
+  - CKLegBendForwardL120 / CKLegBendForwardR120 (Legs): confirmed
+    corrective-shape mirror pair.
+
+NOT MOVED, despite superficially resembling a side-letter suffix --
+individually checked against the ENTIRE 128,550-literal Master (not
+just Arms/Legs direct) and found to have no genuine mirrored
+counterpart, or only a misleading cross-domain "match":
+  - Collar_L1 (Arms): the only "Collar_R1" anywhere in the Master is
+    in groupFile/Clothing, an unrelated domain -- not a real
+    anatomical mirror.
+  - CollarBookBackIKL1, CollarBookBackIKL2, CollarBookHandFrontIKL1,
+    CollarBookHandFrontIKL2 (Arms): no "IKR"-pattern literal exists
+    anywhere in the Master.
+  - bone_LA1 (Arms): no "bone_RA1" or similar counterpart anywhere.
+  - bone_LFL2, bone_RRL1, bone_RRL2 (Legs): no confirmed mirrored
+    counterpart; a different, ambiguous 2-letter+digit scheme from
+    the confirmed Bone_Leg[FMR][LR]# family above.
+
+These 9 families were left directly under Arms/Legs and are reported
+as DEFERRED_UNCLEAR in the manifest (Section E below), not silently
+guessed either way.
+
+----------------------------------------------------------------------
+E. REMAINING DIRECT CONTROLS (intentionally left in place)
+----------------------------------------------------------------------
+  REMAINED_UNSIDED (Arms):  254 families -- generic/numbered chains
+    (arm00_0..arm30_2, arm_01_xx, arm_02_xx, "Forearm Twist 0..10"),
+    mid/shared markers (M_Forearm, M_Hand, M_UpperArm), flex/template
+    controls ("(FLEX) Arms", "(FLEX) Arms + Top"), unused-slot
+    placeholders (unused074-101, "unused upper mid"), and other
+    controls with no left/right marker of any kind.
+  REMAINED_UNSIDED (Legs):   88 families -- spine/pelvis controls
+    (Assist_spine0-9, bip_pelvis_hlp, "leg back pelvis"), generic
+    numbered leg/thigh chains (leg1-4, thigh01-03, "Bip_leg.001-008"),
+    bilateral/shared helpers (Body-Helper-ThighRaise and its casing
+    variant, Rig_FootHelper0-10, "TightThigh_LowerJiggleControl"),
+    and other unsided/generic controls.
+  DEFERRED_UNCLEAR (Arms): 6 families -- see Section D.
+  DEFERRED_UNCLEAR (Legs): 3 families -- see Section D.
+
+Total remaining direct controls after this pass:
+  Arms direct:  254 + 6 = 260 families (576 exact literals)
+  Legs direct:   88 + 3 =  91 families (191 exact literals)
+
+Full per-family listing (all 1613 families considered, with decision
+and reason) is in WHOLE_MASTER_LIMB_SIDE_NORMALIZATION_MANIFEST.tsv.
+
+----------------------------------------------------------------------
+F. VALIDATION
+----------------------------------------------------------------------
+  Literal count before:            128,550
+  Literal count after:             128,550
+  Literal count delta:                   0
+  Exact literals added:                  0
+  Exact literals removed:                0
+  Exact literals renamed:                0
+  Exact duplicates (post):               0
+  ASCII cross-path conflicts (post):     0
+  Non-limb-domain path changes:          0
+  Unexpected limb-domain path changes:   0
+  Group order changed:                  NO
+  Group metadata changed
+    (groupColor/selectable/visible/hidden): NO
+  New groups created:                     0
+  Groups removed:                         0
+
+  Path changes applied (all ALLOWED per Section 5 of the task):
+    groupFile/Arms -> groupFile/Arms/LeftArm:    314 literals
+    groupFile/Arms -> groupFile/Arms/RightArm:   319 literals
+    groupFile/Legs -> groupFile/Legs/LeftLeg:    318 literals
+    groupFile/Legs -> groupFile/Legs/RightLeg:   320 literals
+
+  Stable-group byte-identical content check (Fingers, Carpals, Toes,
+  Tail, RigHelpers, Attachments, Body, Body Morphs, Clothing, Hair,
+  Correctives, Face, Other, Useless, Wings, Fingers): ALL UNCHANGED
+
+  tools/validate_master.py (candidate):   PASS
+  tools/validate_master.py (canonical):   PASS
+  git diff --check:                        PASS
+  git diff --stat: 1271 insertions(+), 1271 deletions(-),
+                    0 net line-count change
+
+  Master SHA256 before this pass: 67226a5ab6220d59a908769ed0cdff3c76ca8d7ad99c799b691dc63444f377db
+  Master SHA256 after this pass:  65a4e7ed771cd05cf69d1bf013b860c4c239d0793b49bec1fbc5bce810c6288a
+
+----------------------------------------------------------------------
+PROVENANCE (diagnostic only; did not affect any destination decision)
+----------------------------------------------------------------------
+  Moved families originating from the Phase 2 import (commit 879c6cf):
+    1260 of 1262
+  Moved families that pre-date the Phase 2 import:
+    2 of 1262 -- fold_key "leftfingers" (exact spelling "LeftFingers")
+    and fold_key "rightfingers" (exact spelling "RightFingers"). These
+    are literal "control" entries (not group declarations) that
+    happen to share their exact spelling with the existing
+    LeftFingers/RightFingers subgroup names; per Section 6 the
+    LeftFingers/RightFingers GROUPS themselves were not touched, only
+    these two ordinary controls were side-placed as direct members of
+    Arms/LeftArm and Arms/RightArm respectively, consistent with the
+    narrow allowed transformation in Section 5.
+
+This confirms the task's own stated rationale: the vast majority of
+the pre-normalization direct-Arms/direct-Legs population was material
+added by the Phase 2 import (which correctly, but only broadly,
+targeted "Arms"/"Legs" before this side-repair pass existed), not a
+backlog of pre-existing unsided Master content.
+
+----------------------------------------------------------------------
+FINAL DECLARATIONS
+----------------------------------------------------------------------
+SEXUAL BONES CREATED:                 NO
+BODY / BODY MORPHS TAXONOMY CHANGED:  NO
+CLOTHING/HAIR/OTHER/CORRECTIVES/FACE TAXONOMY CHANGED: NO
+PROP CLEANUP PERFORMED:               NO
+CONTEXTUALIZER MODIFIED:              NO
+FOOT SUBGROUPS CREATED:               NO
+TOES MOVED:                           NO
+FINGERS/CARPALS REORGANIZED:          NO
+RIG* VS ORDINARY-ANATOMY DOCTRINE REVISITED: NO
+PHASE 2 LEDGERS REWRITTEN:             NO
+PHASE 2 QUARANTINED CONFLICTS RESOLVED: NO
+======================================================================
