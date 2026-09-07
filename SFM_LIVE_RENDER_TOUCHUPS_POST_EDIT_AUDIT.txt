@@ -1,0 +1,309 @@
+SFM MASTER — LIVE RENDER TOUCH-UPS: POST-EDIT AUDIT
+================================================================================
+MASTER HAS BEEN EDITED IN THIS PHASE. NOT YET COMMITTED. AWAITING APPROVAL TO COMMIT.
+
+A. BASELINE
+--------------------------------------------------------------------------
+Pre-mutation HEAD: 1487238fe7c7ccda97919002c987c758b858db6f ("Put rig_root first in RigBody")
+Master SHA-256 before this mutation: 01e611cd8a9ce733aaf3cc4021f881a2c312e9185a676789398fc8b2ce706418
+Master SHA-256 after this mutation:  6f344add0e2e67fd5e7b9c9e0cf09ebe1a09655c07544f8797c197e37d907aa8
+Backup written before promotion: sfm_defaultanimationgroups.txt.backup_pre_live_render_touchups
+  (verified SHA-256 == 01e611cd... i.e. identical to the pre-mutation canonical file)
+
+B. PRE-MUTATION FRESH VERIFICATION (Section 9 of the brief)
+--------------------------------------------------------------------------
+Fresh structural re-parse before any edit: 42 groups, 128,550 controls.
+Five live-unknown controls: confirmed absent (AnalGrip, Buff, BlowIn, BlowOut, n2) --
+  0 ASCII-family conflicts for any of the five.
+RigBody: confirmed exactly 34 controls, membership set identical to the expected
+  34-literal population -- no discrepancy found.
+Primary jaw candidates: all 8 explicitly-named candidates (jaw root, jaw_master, Jaw,
+  jaw, JAW, ValveBiped.Bip01_Jaw, GenericHuman_C_jawJnt, CC_Base_JawRoot) confirmed
+  present in Lower Face's BONE region; DEF-jaw confirmed present and confirmed
+  secondary (Scanner parent = "Jaw") -- correctly excluded from promotion.
+Phoneme candidates: 38 of the task's given "known approved examples" confirmed
+  present in Lower Face (all FLEX except A, e, I2 which were BONE); only "n2" from
+  the full example list was absent (added per item 3); "S/Z" was absent and is not
+  part of the five additions, so it is not part of this pass's phoneme block.
+
+C. EXACT FIVE ADDITIONS AND DESTINATIONS
+--------------------------------------------------------------------------
+  AnalGrip -> groupFile/Body Morphs, FLEX region (last FLEX content, immediately
+              before the BONE marker)
+  Buff     -> groupFile/Body Morphs, FLEX region (immediately after AnalGrip)
+  BlowIn   -> groupFile/Face/Mid Face, FLEX region (last FLEX content, immediately
+              before the BONE marker)
+  BlowOut  -> groupFile/Face/Mid Face, FLEX region (immediately after BlowIn)
+  n2       -> groupFile/Face/Lower Face, FLEX region (as part of the phoneme block,
+              see Section D)
+All five confirmed present exactly once, at their approved path, post-edit.
+
+D. EXACT PHONEME/VISEME BLOCK MEMBERSHIP AND ORDER
+--------------------------------------------------------------------------
+Location: groupFile/Face/Lower Face, FLEX region -- placed as the FIRST 39 lines of
+the FLEX region (immediately after the "// ---- FLEX CONTROLS ----" marker), fully
+contiguous, natural-alphabetized (case-insensitive, ASCII-fold text + numeric-aware
+comparison; strict ASCII case variants adjacent via a stable uppercase-before-
+lowercase tiebreak on exact ties).
+
+Final order (39 members -- 38 pre-existing + 1 newly added "n2"):
+  A, a, AA, AAA, AAAH, AAH, AE, AEEH, AEH, AH, BMP, CH, Ch, ch, CH-J-SH, CHJSH,
+  E, e, EE, F/V, FV, I, i, I2, i2, MB, N, n, n2, O, o, OO, OOH, OU, SH, SS, TH, U, u
+
+Verification basis: every member with Scanner occurrence data carries a "Mono: <name>"
+Flex Controller Reference (the standard SFM/Source phoneme-viseme flex-controller
+naming convention), confirming genuine phoneme identity. Members with zero Scanner
+rows (AAAH, AEEH, AEH, OOH, CHJSH) were included on the strength of unambiguous
+naming-pattern continuity with their Scanner-confirmed siblings (e.g. AAAH extends
+AA/AAA; CHJSH extends CH-J-SH) and zero contradicting evidence of any kind.
+No candidate was excluded from the phoneme block (see Section L for the one
+material exclusion notice, which concerns collision handling for A/e/I2, not
+membership).
+
+Explicit override applied (per the brief's authorization): A, e, and I2 were
+previously classified BONE (via the project's own "Scanner exact BOTH -> BONE"
+precedence rule, due to a single contaminating opposite-type Scanner occurrence
+each) and physically resided in the BONE presentation region, split from their
+case siblings a, E, i2 (FLEX). This physical split is now resolved: A, e, I2 have
+been relocated into the FLEX presentation region alongside their siblings, per the
+explicit human-reviewed override in this task. Their `presentation_type` value in
+the historical/active classification artifacts (MASTER_FLEX_BONE_FINAL_CLASSIFICATION_67431.tsv,
+MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60685.tsv) is NOT modified by this task and
+still reads BONE for these three literals -- this is a disclosed, deliberate,
+task-authorized divergence between physical presentation region and the historical
+classification record, not an oversight.
+
+E. EXACT PRIMARY-JAW PROMOTED SET AND ORDER
+--------------------------------------------------------------------------
+Location: groupFile/Face/Lower Face, BONE region -- placed as the FIRST 8 lines of
+the BONE region (immediately after the "// ---- BONE CONTROLS ----" marker), fully
+contiguous. All other Lower Face BONE controls retain their existing relative order
+after these 8 (verified via raw-line multiset equality -- see Section K).
+
+Final order (root/master tier, then generic tier, then convention-specific tier):
+  jaw root, jaw_master, Jaw, jaw, JAW, ValveBiped.Bip01_Jaw, GenericHuman_C_jawJnt,
+  CC_Base_JawRoot
+
+Evidence basis (Scanner Parent Bone / Bone Hierarchy):
+  Jaw                    -- parent bip_head/head (66 rows) -- genuinely primary
+  jaw                    -- parent head (204 rows) -- genuinely primary
+  JAW                    -- parent ValveBiped.Bip01_Head1 (3 rows) -- genuinely primary
+  ValveBiped.Bip01_Jaw   -- parent ValveBiped.Bip01_Head(1) (2 rows) -- genuinely primary
+  GenericHuman_C_jawJnt  -- parent GenericHumanDummyHead, children include
+                            GenericHuman_c_chinJnt/_loLipJnt etc. (13 rows) -- genuinely
+                            primary, root of a jaw-driven facial sub-hierarchy
+  jaw root, jaw_master, CC_Base_JawRoot -- 0 Scanner BONE rows in this dataset (no
+                            direct hierarchy evidence either way); included on the
+                            strength of unambiguous root/master naming convention and
+                            zero contradicting evidence
+  DEF-jaw (EXCLUDED)     -- parent = "Jaw" itself (5 rows) -- confirmed secondary
+                            deform bone driven by the primary "Jaw" bone; correctly
+                            excluded per the task's explicit known-exclusion instruction
+
+F. LOWERLIP/LOWERLIP PRESENTATION RESULT
+--------------------------------------------------------------------------
+Location: groupFile/Face/Lower Face, FLEX region -- placed as the LAST 2 lines of the
+FLEX region (immediately before the "// ---- BONE CONTROLS ----" marker), adjacent to
+each other, taxonomy destination unchanged (still groupFile/Face/Lower Face).
+Order: LowerLip, lowerlip
+Note: both literals' Scanner evidence showed genuine mixed FLEX/BONE occurrences
+(LowerLip: 1/1 BONE; lowerlip: 8 FLEX + 1 BONE), correctly classified BONE by the
+established rule; this is the same explicit human-reviewed presentation override as
+Section D -- physical presentation only, historical classification records unchanged.
+
+G. BULGE2/BULGE2 PRESENTATION RESULT
+--------------------------------------------------------------------------
+Location: groupFile/Body Morphs, FLEX region -- placed immediately before the two new
+additions (AnalGrip, Buff) at the end of the FLEX region, before the BONE marker.
+Order: Bulge2, bulge2, AnalGrip, Buff
+Taxonomy destination unchanged (still groupFile/Body Morphs). Same disclosed
+presentation-only override as Section D/F (Bulge2: 39 FLEX + 1 BONE; bulge2: 1 FLEX +
+1 BONE -- both correctly classified BONE by the established rule).
+
+H. FULL RIGBODY ORDER
+--------------------------------------------------------------------------
+Group metadata ("selectable" "1") remains the first content line, before all controls,
+unchanged in position and value. Full 34-control order (membership unchanged from the
+pre-mutation population; ascending numeric spine order preserved exactly as specified,
+NOT reversed):
+  rig_root, bip_origin, rig_head, rig_neck, rig_neck_upper, rig_neck_lower, rig_chest,
+  rig_spine_0, rig_spine_00, rig_spine_01, rig_spine_1, rig_spine_02, rig_spine_2,
+  rig_spine_03, rig_spine_3, rig_spine_04, rig_spine_4, rig_spine_05, rig_spine_5,
+  rig_spine_06, rig_spine_6, rig_spine_07, rig_spine_7, rig_spine_08, rig_spine_8,
+  rig_spine_09, rig_spine_9, rig_spine_10, rig_pelvis, rig_hips,
+  root ground2, root ground.001, RootGround, rootGround
+
+I. VALIDATOR RESULT
+--------------------------------------------------------------------------
+tools/validate_master.py run against the candidate BEFORE promotion: PASS
+tools/validate_master.py run against the canonical file AFTER promotion (fresh
+re-open from disk): PASS
+  Group count: 42, Control lines: 128,555, Unique exact literals: 128,555,
+  Unique ASCII-fold keys: 124,728, Multi-spelling ASCII-fold families: 3,267
+    (same-path valid: 3,267, cross-path invariant violation: 0)
+  Exact duplicate literals: 0, Structural parse: PASS
+
+J. TOTAL CONTROLS / DUPLICATE COUNT / ASCII CONFLICT COUNT
+--------------------------------------------------------------------------
+Total controls: 128,555 (128,550 + 5 new additions -- matches expected)
+Exact duplicate literals: 0
+ASCII cross-path conflicts: 0
+
+K. RAW-LITERAL PRESERVATION / UNRELATED-CHANGE CHECK
+--------------------------------------------------------------------------
+Raw-line multiset check (candidate vs. pre-mutation Master): every line of content is
+identical between the two files except for exactly 5 new lines (the 5 additions,
+verified byte-for-byte against their specified destination indentation convention --
+2 leading tabs for top-level Body Morphs, 3 leading tabs for nested Face/* groups,
+matching every sibling control line in each respective group). No line was removed,
+no line's text was altered -- every relocated control (LowerLip, lowerlip, Bulge2,
+bulge2, the 38 pre-existing phoneme literals, the 8 jaw literals, and all 34 RigBody
+literals) carries its exact original raw text, merely repositioned. Full control-set
+membership comparison confirmed 0 unexpected additions/removals anywhere in the file
+outside the 5 approved new literals.
+git diff --check -- sfm_defaultanimationgroups.txt: exit 0 (no whitespace errors).
+git diff --stat -- sfm_defaultanimationgroups.txt: 1 file changed, 59 insertions(+),
+  54 deletions(-) -- fully explained by the localized reorder/insert operations above
+  (line-based diff noise from repositioning within Lower Face, Body Morphs, Mid Face,
+  and RigBody); no unrelated group, metadata, or formatting change anywhere else in
+  the file.
+
+L. CANDIDATES INTENTIONALLY EXCLUDED FROM PHONEME/JAW PROMOTION
+--------------------------------------------------------------------------
+Phoneme block: no candidate from the task's given example list was excluded; "S/Z"
+was checked and found absent from the Master (not part of the five approved
+additions, so not created); it is simply not part of this pass's block.
+
+Primary jaw block: beyond the 8 explicitly-named candidates, a broader scan of
+Lower Face's BONE region found 94 additional literals containing "jaw" (case-
+insensitive) with no digit/side-suffix/obvious-secondary keyword in their name
+(e.g. "JawL"/"jawL"/"JawR"/"jawr" -- likely side-specific despite lacking an
+explicit "_L"/"_R" suffix; "Jaw_End", "Jaw_Jiggle_jnt" -- likely secondary/jiggle
+helpers; "Jaw Control", "JawController", "CTRL_Jaw" -- plausible additional primary
+candidates but with no direct Scanner hierarchy evidence gathered this pass; "head
+jaw main/middle/lower/ctr/halfed/belowjaw" -- an enumerated per-model set mixing a
+plausible primary ("head jaw main") with clearly secondary segments). None of these
+94 were promoted in this pass: per the task's explicit instruction ("If any jaw
+candidate is materially ambiguous: exclude it from automatic mutation, report it, do
+not guess"), this list is reported here for a possible future explicit review rather
+than being swept in or discarded. DEF-jaw remains excluded per its confirmed
+secondary/deform evidence.
+
+================================================================================
+SEMANTIC vs. PRESENTATION-ONLY SUMMARY
+================================================================================
+SEMANTIC taxonomy changes: ONLY the 5 newly added literals (AnalGrip, Buff, BlowIn,
+BlowOut, n2) -- these are additions, not relocations; no existing control's taxonomy
+destination (current_master_path) changed anywhere in the file.
+All other changes (LowerLip/lowerlip, Bulge2/bulge2, the 38 pre-existing phoneme
+literals, the 8 jaw literals, the 34 RigBody literals) are PRESENTATION-ORDER /
+PRESENTATION-REGION changes only, within their existing unchanged group.
+
+================================================================================
+OUTPUT ARTIFACTS
+================================================================================
+E:\SFM Animation Group Master\sfm_defaultanimationgroups.txt                          (EDITED)
+E:\SFM Animation Group Master\sfm_defaultanimationgroups.txt.backup_pre_live_render_touchups  (pre-edit backup, SHA verified)
+E:\SFM Animation Group Master\SFM_LIVE_RENDER_TOUCHUPS_POST_EDIT_AUDIT.txt            (this file)
+
+================================================================================
+MUTATION SUCCEEDED. NOT COMMITTED. NOT STAGED.
+STOPPING FOR HUMAN APPROVAL BEFORE COMMIT.
+================================================================================
+
+
+================================================================================
+ADDENDUM — PHONEME BLOCK APPROVAL + ACTIVE CLASSIFICATION FINALIZATION
+================================================================================
+READ-ONLY REVIEW COMPLETED, THEN ONE NEW READ-ONLY-DERIVED ARTIFACT CREATED.
+NO FURTHER MASTER EDIT. NO STAGING. NO COMMIT.
+
+M. PHONEME BLOCK — HUMAN REVIEW OUTCOME
+--------------------------------------------------------------------------
+The complete 39-member Lower Face FLEX phoneme/viseme block (Section D above) was
+presented to the human for inspection before commit and is APPROVED EXACTLY AS
+RENDERED, with NO exclusions -- including I2, whose underlying Scanner evidence
+(2 total occurrences, split 1 FLEX / 1 BONE) was flagged during review as the
+weakest-evidence member of the block. The human explicitly confirmed I2 remains
+paired with i2 because native SFM/Rebuild identity is ASCII case-insensitive and
+the presentation goal is to keep case variants together regardless of the thinness
+of I2's individual Scanner sample. This classification/membership question is now
+closed and must not be reopened without a new explicit request.
+
+N. ACTIVE CLASSIFICATION ARTIFACT — SEMANTICS CONFIRMED
+--------------------------------------------------------------------------
+Direct schema/lineage inspection of MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60685.tsv
+(columns: current_master_path, exact_literal, presentation_type, resolution_mechanism)
+confirms it is an EVIDENCE / IMPLEMENTATION-TYPE CLASSIFICATION artifact, not a live
+mirror of physical FLEX/BONE marker-region placement. The resolution_mechanism column
+(SILKWORM_EXACT, SCANNER_EXACT, SCANNER_EXACT_BOTH, PROVENANCE_SIBLING_BONES,
+HUMAN_REVIEWED, etc.) only makes sense as an evidence-provenance record and cannot be
+derived from, or represent, physical line position. Across this whole project,
+classification was always built first from Scanner/Silkworm/human evidence and then
+used to drive the physical Master edit -- never the reverse.
+
+Consequently, the seven literals whose PHYSICAL presentation region was overridden in
+this touch-up pass (A, e, I2, LowerLip, lowerlip, Bulge2, bulge2) correctly remain
+classified BONE in both MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60685.tsv and the new
+60690 successor artifact below -- this divergence between physical presentation and
+recorded classification is intentional, human-confirmed, and documented here as the
+durable record of that decision. It is NOT a defect and must not be "corrected" by a
+future pass without an explicit new human decision to actually reclassify these
+literals' underlying type.
+
+O. SUCCESSOR ACTIVE ARTIFACT CREATED
+--------------------------------------------------------------------------
+E:\SFM Animation Group Master\MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60690.tsv
+
+Built by taking the current 60,685-row active population unchanged and appending
+exactly 5 new rows for the newly added Master controls (all confirmed unanimous
+Scanner FLEX, recorded with resolution_mechanism = SCANNER_EXACT, consistent with the
+existing file's provenance-tagging convention):
+  groupFile/Body Morphs        AnalGrip  FLEX  SCANNER_EXACT
+  groupFile/Body Morphs        Buff      FLEX  SCANNER_EXACT
+  groupFile/Face/Mid Face      BlowIn    FLEX  SCANNER_EXACT
+  groupFile/Face/Mid Face      BlowOut   FLEX  SCANNER_EXACT
+  groupFile/Face/Lower Face    n2        FLEX  SCANNER_EXACT
+
+Verified fresh, re-opened independently from disk after writing:
+  TOTAL: 60,690  (60,685 + 5)
+  FLEX:  24,604  (24,599 + 5)
+  BONE:  36,086  (unchanged)
+  0 duplicate (current_master_path, exact_literal) keys
+
+None of the seven presentation-override literals were touched or reclassified in
+building this artifact -- they were carried forward from the 60685 population exactly
+as they were (still BONE), per Section N.
+
+P. HISTORICAL ARTIFACTS CONFIRMED UNTOUCHED
+--------------------------------------------------------------------------
+MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60685.tsv: only opened via csv.DictReader
+  (read-only) in this addendum; never opened for writing.
+  SHA-256 (post-task): 0f74a0c14998571ced5ebb964297ace34c41cc60496f69079b52ab1cb13d9e9c
+MASTER_FLEX_BONE_FINAL_CLASSIFICATION_67431.tsv: not opened at all in this addendum.
+  SHA-256 (post-task): d1517cbc9de04953edec2cdabe0a26a3e1c4e7745e41285d73ffe54d0b0e4f89
+Both remain exactly as they were before this addendum.
+
+Q. FINAL VALIDATION (THIS ADDENDUM)
+--------------------------------------------------------------------------
+[PASS] Master SHA-256 unchanged: 6f344add0e2e67fd5e7b9c9e0cf09ebe1a09655c07544f8797c197e37d907aa8
+[PASS] Master controls = 128,555; exact duplicates = 0; ASCII cross-path conflicts = 0
+[PASS] tools/validate_master.py: PASS
+[PASS] Phoneme block: exactly 39 members, contiguous, approved order unchanged
+[PASS] Jaw block: 8 approved primary-jaw bones remain first in Lower Face BONE region
+[PASS] RigBody: 34 controls, approved ascending-spine order unchanged
+[PASS] AnalGrip, Buff, BlowIn, BlowOut, n2: each present exactly once at approved
+       destination (unchanged from prior validation -- Master itself was not
+       re-edited in this addendum)
+[PASS] MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60690.tsv: 60,690 total / 24,604 FLEX /
+       36,086 BONE, 0 duplicates
+[PASS] 60685 and 67431 byte-unchanged (Section P)
+[PASS] git diff --check -- sfm_defaultanimationgroups.txt: clean (no Master re-edit
+       occurred, so this is identical to the prior check)
+[PASS] Nothing staged
+
+================================================================================
+PHONEME BLOCK APPROVED. ACTIVE CLASSIFICATION FINALIZED (60690 CREATED).
+MASTER STILL NOT COMMITTED, NOT STAGED.
+STOPPING FOR EXPLICIT COMMIT APPROVAL.
+================================================================================
