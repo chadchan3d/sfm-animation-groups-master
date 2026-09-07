@@ -1,0 +1,129 @@
+HELPERS TAXONOMY PASS 1G-I — FINAL HUMAN REVIEW + HUMAN-APPROVED PASS-1 MUTATION PROJECTION
+=============================================================================================
+Read-only pass. No Master mutation, staging, or commit performed or authorized.
+
+Baseline
+--------
+Canonical Master: E:\SFM Animation Group Master\sfm_defaultanimationgroups.txt
+Git HEAD at start and end of pass: 100f7e914396144e50857195a49778d665298711
+Master SHA256 at start and end of pass: 6f344add0e2e67fd5e7b9c9e0cf09ebe1a09655c07544f8797c197e37d907aa8 (unchanged)
+git status --short sfm_defaultanimationgroups.txt: empty (clean) at start and end
+tools/validate_master.py: PASS (0 cross-path casefold violations, 0 exact duplicates, structural parse PASS)
+
+1. ALL 80 FAMILIES HUMAN-REVIEWED
+------------------------------------
+Confirmed: HELPERS_PASS1G_HUMAN_DECISIONS_FINAL_80.tsv contains exactly 80 rows, no family omitted or
+duplicated (cross-checked against HELPERS_PASS1G_HUMAN_FAMILY_REVIEW_80.tsv's 80 ascii_fold keys).
+
+2. HELPERS families = 78
+3. KEEP_CURRENT families = 2
+4. Pending = 0
+
+5. Exact retained lowerarm literals and paths
+--------------------------------------------------
+  lowerArm_left   -> groupFile/Arms/LeftArm
+  lowerarm_left   -> groupFile/Arms/LeftArm
+  lowerArm_right  -> groupFile/Arms/RightArm
+  lowerarm_right  -> groupFile/Arms/RightArm
+(2 exact spellings per side, both members of each fold family confirmed at the same path -- ASCII
+invariant satisfied without any move.)
+
+6. Exact final Helpers projected population
+------------------------------------------------
+3,584 exact literals (verified by direct recomputation, not carried forward from the prior 3,588
+figure): 386 (RigHelpers-contamination-settled) + 3,112 (revised outside-RigHelpers population,
+3,114 minus the 2 Silkworm-sourced lowerarm literals now KEEP_CURRENT) + 86 (revised new casefold
+carryalong, 88 minus the 2 lowerarm carryalong literals now KEEP_CURRENT) = 3,584.
+
+7. Exact final RigHelpers population
+-----------------------------------------
+Exactly 8, unchanged: rig_heel_R, rig_reverseHeel_R, rig_footIK_R, rig_footHelper_R, rig_heel_L,
+rig_reverseHeel_L, rig_footIK_L, rig_footHelper_L.
+
+8. Projected destination totals (3,634 total affected literals)
+---------------------------------------------------------------------
+  groupFile/Helpers       : 3,584
+  groupFile/Fingers       :    18
+  groupFile/RigHelpers    :     8
+  groupFile/Legs/LeftLeg  :     4
+  groupFile/Legs/RightLeg :     4
+  groupFile/RigArms       :     3
+  groupFile/RigBody       :     2
+  groupFile/Face          :     2
+  groupFile/Sexual Bones  :     2
+  groupFile/Toes          :     2
+  groupFile/Arms/LeftArm  :     2
+  groupFile/Arms/RightArm :     2
+  groupFile/RigLegs       :     1
+  ------------------------------
+  Total                   : 3,634  (reconciles exactly: 402 + 3,144 + 88)
+
+This matches the task's expected revised totals exactly (Helpers 3,584; Arms/LeftArm 2; Arms/RightArm
+2; all other buckets unchanged from the provisional Pass 1G projection) -- confirmed by fresh
+recomputation, not assumed.
+
+9. Actual destination-change count
+----------------------------------------
+3,592 exact literals have a final_projected_path different from their current_master_path (out of
+3,634 total affected literals; the other 42 are already at their approved final path -- the 8 verified
+RigHelpers, the 22 KEEP_STRONGER_SEMANTIC_DESTINATION, the 8 KEEP_PRIMARY_ANATOMY, and the 4
+KEEP_CURRENT lowerarm literals = 42, reconciling exactly: 3,634 - 3,592 = 42).
+
+10. Exact casefold carry-along count
+------------------------------------------
+88 exact literals were pulled into this migration purely through full-Master ASCII-fold family
+recovery and were never independently supplied by Silkworm or any prior candidate population. Of
+these 88, 86 move to Helpers and 2 (lowerarm_left, lowerarm_right) remain at their current Arms path
+per human decision.
+
+11. Projected ASCII conflicts = 0
+----------------------------------------
+Re-ran the full 128,555-control live-Master fold closure against the final human-approved destination
+map: CLOSED 3,454 / SAFE_REQUIRED_CARRYALONG 180 / CONFLICT 0. Specifically verified:
+  lowerArm_left / lowerarm_left   -> both groupFile/Arms/LeftArm (match: True)
+  lowerArm_right / lowerarm_right -> both groupFile/Arms/RightArm (match: True)
+All 78 approved-Helpers families remain destination-closed (every member of every family maps to the
+same final path).
+
+12. Known FLEX-only controls projected into Helpers = 0
+--------------------------------------------------------------
+Re-checked every one of the 3,584 literals now projected to Helpers against the Scanner corpus: 0 have
+FLEX-only evidence (FLEX>0, BONE=0). Helpers-BONE-only invariant fully respected.
+
+13. Primary anatomy protection confirmed
+-----------------------------------------------
+The 8 KEEP_PRIMARY_ANATOMY literals from Pass 1F (Left thigh, Right thigh, Thigh_L, Thigh_R, left_foot,
+right_foot, pelvis.L, pelvis.R) plus the 4 newly human-confirmed KEEP_CURRENT lowerarm literals
+(lowerArm_left, lowerarm_left, lowerArm_right, lowerarm_right) = 12 literals total protected from the
+Helpers migration on primary-anatomy grounds. None share an ASCII-fold key with any approved-Helpers family.
+
+14. Corrective Flexes 201/201 clean, untouched
+-----------------------------------------------------
+201/201 in Correctives, 0 elsewhere, 0 missing, 0 ASCII splits. Not touched by any family in this
+80-family review population.
+
+15. Final Helpers group design (recorded for the next, mutation-authorizing pass; NOT created now)
+--------------------------------------------------------------------------------------------------------
+  Name: Helpers
+  Root-level, flat (no nested helper categories)
+  BONE-only
+  groupColor "240 210 255 255"
+  selectable "0"
+  Root position order: Correctives, Helpers, RigBody, RigArms, RigLegs, RigHelpers
+
+16-21. SAFETY CONFIRMATIONS
+--------------------------------
+[x] Master SHA256 unchanged: 6f344add0e2e67fd5e7b9c9e0cf09ebe1a09655c07544f8797c197e37d907aa8
+[x] tools/validate_master.py: PASS
+[x] git status --short sfm_defaultanimationgroups.txt: empty before and after this pass
+[x] No Master file write, staging, or commit occurred in this pass
+[x] No agents or subagents used
+22. Pass 2 (new-corpus discovery) not started.
+
+ARTIFACTS PRODUCED THIS PASS
+---------------------------------
+HELPERS_PASS1G_HUMAN_DECISIONS_61_80.tsv                      -- 20 rows
+HELPERS_PASS1G_HUMAN_DECISIONS_FINAL_80.tsv                    -- 80 rows, consolidated ledger
+HELPERS_PASS1G_HUMAN_APPROVED_FULL_PASS1_PROJECTION.tsv        -- 3,634 rows, definitive projection
+HELPERS_PASS1G_HUMAN_APPROVED_DESTINATION_CHANGE_SET.tsv       -- 3,592 rows, mutation-ready change set
+HELPERS_PASS1G_HUMAN_REVIEW_FINAL_AUDIT.txt                    -- this report

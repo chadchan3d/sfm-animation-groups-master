@@ -1,0 +1,211 @@
+HELPERS TAXONOMY PASS 1H — POST-EDIT AUDIT
+=============================================
+Master mutation performed. NOT staged. NOT committed.
+
+A. Pre-edit HEAD
+--------------------
+100f7e914396144e50857195a49778d665298711 (unchanged after this pass -- no commit made)
+
+B. Pre-edit Master SHA256
+------------------------------
+6f344add0e2e67fd5e7b9c9e0cf09ebe1a09655c07544f8797c197e37d907aa8
+
+C. Post-edit Master SHA256
+-------------------------------
+ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93
+
+D. Groups
+-------------
+42 -> 43 (confirmed by independent validator re-parse of the promoted canonical file)
+
+E. Controls
+---------------
+128,555 -> 128,555 (unchanged; confirmed by exact-multiset comparison, including per-literal counts, not
+just set membership, between the pre-edit backup and the promoted canonical file)
+
+F. Exact destination changes
+---------------------------------
+3,592 (matches expectation exactly; verified against the applied ledger, not merely asserted)
+
+G. Helpers
+--------------
+Exact count: 3,584
+Metadata: groupColor "240 210 255 255" (two-tab separator, first content line after opening brace);
+          selectable "0" (single-space separator, matching this Master's established "selectable" convention)
+Root position: immediately after Correctives (groupFile/Correctives closes at the original line 96893;
+          Helpers' name line is the very next line in the promoted file). Flat: 0 child groups found by
+          independent parse.
+Ordering algorithm: deterministic natural sort -- primary key = ASCII-fold (A-Z->a-z only) of the exact
+          literal with digit runs split out and compared as integers (natural numeric ordering, e.g.
+          headStar_joint1..headStar_joint8 sort numerically, not lexicographically); secondary key = the
+          exact literal string (case-sensitive), which places all case variants of one fold adjacent to
+          each other in a fully deterministic order (verified: bip_HipTwist_L, bip_hipTwist_L,
+          bip_hiptwist_L appear consecutively; AnimRoot/animroot -- which are in RigBody, not Helpers --
+          also confirmed adjacent and correctly ordered). No punctuation/whitespace/Unicode normalization
+          was applied; every exact spelling preserved byte-for-byte.
+
+DISCLOSED DISCREPANCY -- ROOT ORDER: the task's "expected local root order" listed Helpers immediately
+before RigBody. In the actual live Master, RigBody is NOT adjacent to Correctives -- six other root
+groups (Body, Arms, Fingers, Legs, Toes, Wings) sit between Correctives and RigBody, and the task
+explicitly also said "Do not otherwise change root ordering." These two instructions cannot both be
+satisfied literally (moving RigBody adjacent to Helpers would require reordering existing root groups).
+Resolved by honoring the primary, unambiguous instruction ("immediately after Correctives") and the
+"no other reordering" constraint: Helpers was inserted directly after Correctives without moving any
+other root group. Confirmed final root order: Face, Body Morphs, Sexual Bones, Hair, Clothing,
+Correctives, Helpers, Body, Arms, Fingers, Legs, Toes, Wings, RigBody, RigArms, RigLegs, RigHelpers,
+Tail, Attachments, Other, Useless.
+
+H. Helpers source-path distribution (every nonzero prior full path -> Helpers count)
+-----------------------------------------------------------------------------------------
+  groupFile/Arms/LeftArm                    810
+  groupFile/Arms/RightArm                   798
+  groupFile/Legs/LeftLeg                    679
+  groupFile/Legs/RightLeg                   675
+  groupFile/RigHelpers                      386
+  groupFile/Fingers                         119
+  groupFile/Arms                             44
+  groupFile/Legs                             32
+  groupFile/Arms/LeftArm/LeftFingers         17
+  groupFile/Arms/RightArm/RightFingers       15
+  groupFile/Toes                              8
+  groupFile/Sexual Bones                      1
+  ------------------------------------------------
+  Total                                    3,584
+
+I. Final RigHelpers
+------------------------
+Exactly 8, confirmed by independent parse of the promoted canonical file: rig_footHelper_L,
+rig_footHelper_R, rig_footIK_L, rig_footIK_R, rig_heel_L, rig_heel_R, rig_reverseHeel_L,
+rig_reverseHeel_R (relative order unchanged from the pre-edit file -- these 8 controls were never
+touched by the ledger, only the other 394 were removed around them).
+
+J. RigHelpers contamination repair
+---------------------------------------
+402 -> 8, 394 controls removed (386 to Helpers + 3 to RigArms + 1 to RigLegs + 2 to RigBody + 2 to Face
+= 394, reconciles exactly).
+
+K. Non-helper restorations
+-------------------------------
+  RigArms : hand_ik, ik_hand_gun, ik_hand_root                  (3, confirmed present)
+  RigLegs : ik_foot_root                                        (1, confirmed present)
+  RigBody : AnimRoot, animroot                                  (2, confirmed present, adjacent, both
+                                                                  at groupFile/RigBody -- ASCII pair closed)
+  Face    : CC_Base_FacialBone, FACIAL_C_FacialRoot             (2, confirmed present at groupFile/Face,
+                                                                  the exact bare path from the approved
+                                                                  projection -- not simplified or inferred)
+
+L. Retained primary lowerarm exact four
+--------------------------------------------
+  lowerArm_left   -> groupFile/Arms/LeftArm   (byte-identical line, untouched, confirmed against backup)
+  lowerarm_left   -> groupFile/Arms/LeftArm   (byte-identical line, untouched, confirmed against backup)
+  lowerArm_right  -> groupFile/Arms/RightArm  (byte-identical line, untouched, confirmed against backup)
+  lowerarm_right  -> groupFile/Arms/RightArm  (byte-identical line, untouched, confirmed against backup)
+
+M. Other retained stronger-destination counts
+----------------------------------------------------
+  Fingers        18   (unchanged -- these were never in the ledger; KEEP_STRONGER_SEMANTIC_DESTINATION)
+  Sexual Bones    2   (unchanged)
+  Toes            2   (unchanged)
+  Legs/LeftLeg    4   (unchanged -- KEEP_PRIMARY_ANATOMY)
+  Legs/RightLeg   4   (unchanged -- KEEP_PRIMARY_ANATOMY)
+None of these 30 literals appear in the 3,592-row ledger; independent parse confirms they remain at
+their pre-edit paths, byte-identical.
+
+N. Casefold carry-along totals
+------------------------------------
+  Total casefold carry-along literals in this migration : 88
+  Traveled to Helpers                                    : 86
+  Retained as primary anatomy (lowerarm pair)             : 2
+  (86 + 2 = 88, reconciles exactly)
+
+O. ASCII conflicts
+-----------------------
+0. Validator's independent post-promotion re-parse: "Multi-spelling ASCII-fold families: 3,267 /
+same-path (valid): 3,267 / cross-path (invariant violation): 0."
+
+P. Exact duplicates
+------------------------
+0 (validator: "Exact duplicate literals: 0").
+
+Q. FLEX-only in Helpers
+----------------------------
+0. Every one of the 3,584 Helpers literals was re-checked against the Scanner corpus prior to promotion;
+none has FLEX-only evidence (FLEX>0, BONE=0).
+
+R. Raw exact control-literal multiset
+--------------------------------------------
+Unchanged. Verified by comparing the full multiset (literal -> occurrence count, not just set membership)
+of all 128,555 controls between the pre-edit backup and the promoted canonical file: identical.
+
+S. Corrective Flexes
+-------------------------
+Untouched. 0 literals from Correctives appear anywhere in the 3,592-row ledger. 201/201 finding carried
+forward unchanged from Pass 1B/1C/1F/1G.
+
+T. Active FLEX/BONE artifact impact
+------------------------------------------
+MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60690.tsv tracks exactly three root paths: Clothing (27,032),
+Face (25,137), Body Morphs (8,521) = 60,690 total (NOTE: the task referenced "seven paths tracked" --
+direct inspection of the artifact's actual current_master_path column found only these three root
+groups represented; this is disclosed as a discrepancy between the task's premise and the artifact's
+actual content, not silently reconciled).
+
+Checked all 3,592 ledger rows against this artifact:
+  - 0 of the 3,592 moved literals were already present in the tracked 60,690 rows (none were currently
+    in Clothing/Face/Body Morphs before this migration).
+  - 0 literals LEFT a tracked path.
+  - 2 literals ENTERED a tracked path: CC_Base_FacialBone and FACIAL_C_FacialRoot, both moving from
+    groupFile/RigHelpers (untracked) to groupFile/Face (tracked).
+
+Because the tracked population changed (+2), a successor artifact was created:
+  MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60692.tsv (60,690 + 2 = 60,692 rows)
+  New rows: groupFile/Face | CC_Base_FacialBone | BONE | HUMAN_REVIEWED
+            groupFile/Face | FACIAL_C_FacialRoot | BONE | HUMAN_REVIEWED
+  (BONE classification basis: both are Reallusion "CC_Base_"/Silkworm-sourced facial-rig-root BONE
+  controls per this project's own Pass 1D/1E investigation; 0 Scanner corpus rows either way, hence
+  HUMAN_REVIEWED rather than SCANNER_EXACT.)
+  New FLEX/BONE totals: FLEX 24,604 (unchanged) / BONE 36,088 (+2) / Total 60,692.
+MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60690.tsv left untouched, as required.
+MASTER_FLEX_BONE_FINAL_CLASSIFICATION_67431.tsv not altered.
+
+U. Validator result
+------------------------
+PASS, run independently against the promoted canonical file (not the candidate):
+  Group count: 43 / Open brace: 43 / Close brace: 43
+  Control lines: 128,555 / Unique exact literals: 128,555
+  Exact duplicate literals: 0
+  Cross-path casefold violations: 0
+  Structural parse: PASS
+
+V. git diff summary
+------------------------
+1 file changed, 3,597 insertions(+), 3,592 deletions(-) -- exactly matching the expected scope: 3,592
+relocated control lines + 5 new Helpers scaffold lines (group name, opening brace, groupColor,
+selectable, closing brace). Confirmed via raw line-diff counts (3,592 '<' lines, 3,597 '>' lines) with
+no other line categories present in the diff.
+
+W. git diff --check result
+-------------------------------
+Clean (exit code 0) -- no whitespace errors.
+
+X. Backup filename + SHA
+-----------------------------
+sfm_defaultanimationgroups.txt.backup_pre_helpers_pass1
+SHA256: 6f344add0e2e67fd5e7b9c9e0cf09ebe1a09655c07544f8797c197e37d907aa8 (matches the required
+pre-mutation Master SHA exactly)
+
+Y. Backup staging confirmation
+-----------------------------------
+Not staged (git status shows it as an untracked file, "??").
+
+Z. Pass 2 confirmation
+---------------------------
+Not performed. No new-corpus discovery was run against FullBonesandFlexesTSVFinal.tsv in this pass.
+
+ARTIFACTS PRODUCED THIS PASS
+---------------------------------
+HELPERS_PASS1H_FINAL_DESTINATION_CHANGE_SET.tsv     -- 3,592 rows, durable applied-change record
+HELPERS_PASS1H_FINAL_HELPERS_POPULATION.tsv         -- 3,584 rows, final_order matches actual Master order
+MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60692.tsv    -- successor to 60690 (+2 CC_Base_FacialBone/FACIAL_C_FacialRoot)
+sfm_defaultanimationgroups.txt.backup_pre_helpers_pass1  -- pre-mutation backup
+HELPERS_PASS1H_POST_EDIT_AUDIT.txt                  -- this report
