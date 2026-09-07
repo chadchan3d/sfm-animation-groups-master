@@ -1,0 +1,199 @@
+SEXUAL BONES — PHASE A4: MASTER MUTATION EXECUTED + POST-EDIT AUDIT
+================================================================================
+MASTER HAS BEEN EDITED IN THIS PHASE. NOT YET COMMITTED. AWAITING APPROVAL TO COMMIT.
+
+A. BASELINE / SHA CHAIN
+--------------------------------------------------------------------------
+Accepted pre-mutation baseline commit: 263de1fed1d5605c2bfe42a00d2dede7ae94dde6
+Baseline pulled fresh via: git show 263de1fed1d5605c2bfe42a00d2dede7ae94dde6:sfm_defaultanimationgroups.txt
+  (NOT from any scratch backup) -- SHA-256: 52ef9fba46448f15847d314b6b415f5712194afb9a217f3041f2532a6f487b03
+  (confirms the pre-mutation working-tree file was byte-identical to the committed baseline)
+
+Master SHA-256 immediately before mutation: 52ef9fba46448f15847d314b6b415f5712194afb9a217f3041f2532a6f487b03
+Master SHA-256 immediately after mutation:  f33309819f1a5fcad60f083f8d6e32422860fd56ac45ec64166e02857c99ffb5
+Backup written before promotion: sfm_defaultanimationgroups.txt.backup_pre_sexual_bones_migration
+  (SHA-256 verified == 52ef9fba... i.e. identical to the pre-mutation canonical file)
+
+B. TRANSFORM METHOD
+--------------------------------------------------------------------------
+1. Re-read canonical Master from disk, confirmed SHA matched the expected pre-mutation value.
+2. Fresh structural parse (tools/validate_master.py's own tokenize/parse_structure) located
+   Body Morphs (open_line 29,348 / close_line 44,616) and confirmed Hair's name line
+   (44,617) is the very next line -- i.e. Sexual Bones needed to be spliced in directly
+   between those two lines, nothing else in between.
+3. Resolved each of the approved 6,631 (path, literal) pairs to its unique current line
+   number in Body Morphs (uniqueness guaranteed by the pre-existing 0-global-duplicate
+   invariant) and captured its ORIGINAL RAW LINE TEXT verbatim (no re-synthesis of the
+   control line -- the exact original tabs/quoting/key-casing were reused unchanged).
+4. Built the candidate by: copying every original line except the 6,631 removed control
+   lines; immediately after Body Morphs' closing brace, inserting 4 new lines -- the group
+   name "Sexual Bones" (1 leading tab, matching every other top-level group), its opening
+   brace (1 leading tab), an EXACT COPY of Body Morphs' own groupColor line text (2 leading
+   tabs, 2 literal tabs before the value -- "255 200 120 255", byte-identical to Body
+   Morphs' groupColor line), then the 6,631 relocated raw control lines in the approved
+   related-control-adjacency + natural-alphabetization order, then the closing brace
+   (1 leading tab).
+5. Wrote the candidate to a temporary file, re-opened it independently from disk, and ran
+   the full validation suite (Part C below) before promoting.
+6. Promoted atomically (os.replace) only after every check passed.
+7. Re-opened the canonical Master fresh from disk and re-ran validation (Part D below).
+
+C. PRE-PROMOTION CANDIDATE VALIDATION (all run against the actual candidate file re-opened
+   from disk, independently of the in-memory transform)
+--------------------------------------------------------------------------
+[PASS] Candidate parses cleanly (structural token parse succeeds)
+[PASS] Total control count unchanged: 128,550
+[PASS] Group count == 42 (41 baseline + Sexual Bones)
+[PASS] Sexual Bones has 0 child subgroups
+[PASS] Sexual Bones control count == 6,631
+[PASS] Sexual Bones literal SET matches the approved 6,631 exactly
+[PASS] Sexual Bones literal ORDER matches the approved related-adjacency + natural-sort
+       sequence exactly (SEXUAL_BONES_MIGRATION_CANDIDATE_PREVIEW.tsv order)
+[PASS] Body Morphs control count == 8,633
+[PASS] Sexual Bones groupColor is exactly "255 200 120 255", first content line after "{",
+       exactly one groupColor line in the group
+[PASS] Body Morphs FLEX marker present exactly once; BONE marker present exactly once
+[PASS] Body Morphs FLEX-region count == 8,144
+[PASS] Body Morphs BONE-region count == 489
+[PASS] FLEX marker followed by >=1 control; BONE marker followed by >=1 control
+[PASS] 0 exact global duplicate literals
+[PASS] 0 ASCII case-insensitive (A-Z->a-z only) cross-path conflicts anywhere in the file
+[PASS] All 9 explicit non-movers (Horse 05_Soraka_HorseCock.dmx, Human-03_Mesh_Human_03.dmx,
+       valvebiped.bip01_root, DONOTMOVE, Crotch-Hide, SFW MODE, Penis cutout, Hidegenitals,
+       legs) confirmed absent from Sexual Bones
+[PASS] Root order == Face, Body Morphs, Sexual Bones, Hair, Clothing, Correctives, Body,
+       Arms, Fingers, Legs, Toes, Wings, RigBody, RigArms, RigLegs, RigHelpers, Tail,
+       Attachments, Other, Useless -- Sexual Bones inserted exactly between Body Morphs and
+       Hair; every other top-level group in unchanged relative order
+[PASS] Raw-line multiset check: the ONLY line-content difference between the original file
+       and the candidate is the addition of exactly the 4 new Sexual Bones structural lines
+       (group name, opening brace, groupColor, closing brace) -- every one of the 6,631
+       relocated control lines is byte-identical to its pre-move original; zero unrelated
+       line changed
+[PASS] tools/validate_master.py run directly against the candidate file: "PASS: Master
+       validation succeeded" -- 42 groups, 128,550 control lines, 128,550 unique exact
+       literals, 3,267 multi-spelling ASCII-fold families (all same-path/valid, 0 cross-path
+       invariant violations), 0 exact duplicate literals, structural parse PASS
+
+D. POST-PROMOTION CANONICAL VALIDATION (fresh re-open from disk after atomic replace)
+--------------------------------------------------------------------------
+tools/validate_master.py run against the canonical file (no path argument -- default target):
+  PASS: Master validation succeeded
+  Group count: 42, Control lines: 128,550, Unique exact literals: 128,550,
+  Unique ASCII-fold keys: 124,723, Multi-spelling ASCII-fold families: 3,267
+    (same-path valid: 3,267, cross-path invariant violation: 0)
+  Exact duplicate literals: 0, Structural parse: PASS
+
+E. INDEPENDENT COMPARISON AGAINST THE TRUE GIT-COMMITTED BASELINE (263de1f)
+--------------------------------------------------------------------------
+Baseline pulled fresh via `git show 263de1f:sfm_defaultanimationgroups.txt` (not a scratch
+backup). Both baseline and current canonical file were independently re-parsed with the same
+structural parser for this comparison.
+
+[PASS] Baseline: 41 groups / 128,550 controls -- Current: 42 groups / 128,550 controls
+[PASS] Total control count identical (128,550) -- no control added, no control deleted
+[PASS] Exactly 6,631 literals changed (path,literal) membership between baseline and current
+[PASS] Every one of those 6,631 changed literals moved exactly
+       groupFile/Body Morphs -> groupFile/Sexual Bones (no other path involved, no partial
+       moves, no literal split across two destinations)
+[PASS] The 6,631 changed literals are EXACTLY the approved migration set -- no extra literal
+       moved, no approved literal left behind
+[PASS] Exactly one new group added: groupFile/Sexual Bones. No group removed.
+[PASS] Every pre-existing group (all 41 baseline groups) retains its exact full parent path
+       and nesting depth in the current file -- the migration touched no other group's
+       structure
+
+SEMANTIC vs. FORMATTING-ONLY DIFFERENCE, DISCLOSED SEPARATELY:
+  Semantic difference: exactly the approved 6,631 control relocations (Body Morphs ->
+  Sexual Bones) plus the creation of the new empty-of-anything-but-controls "Sexual Bones"
+  container (name, braces, one groupColor line). This is the ENTIRE semantic change.
+  Formatting-only difference: NONE. The raw-line multiset check in Part C already proved
+  every relocated control line is byte-identical to its original text (same tabs, same key
+  casing, same quoting) -- nothing was reformatted, re-cased, re-spaced, or renamed.
+
+`git diff --stat` for the Master shows a large line-based delta (959 insertions / 955
+deletions) purely because git's diff algorithm is line-based/positional, not semantic: moving
+a contiguous block of ~6,631 lines to a new location later in the file causes git to report
+the intervening region (everything from the old Body Morphs tail through the new insertion
+point) as changed lines, even though the actual line CONTENTS at each position are simply
+shifted, not altered. This positional diff noise is NOT a formatting change and is NOT a
+semantic change beyond the approved move -- it is an artifact of line-based diffing on a
+block relocation, exactly as previously seen and disclosed for the committed FLEX/BONE
+presentation-ordering edit.
+`git diff --check -- sfm_defaultanimationgroups.txt`: exit 0 (no whitespace errors).
+
+F. ACTIVE SEVEN-PATH CLASSIFICATION ARTIFACT (recomputed and cross-checked against the live
+   post-edit Master, not merely arithmetic)
+--------------------------------------------------------------------------
+Historical MASTER_FLEX_BONE_FINAL_CLASSIFICATION_67431.tsv: left completely untouched
+  (only read via csv.DictReader in this task, never opened for writing).
+
+New artifact created: MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60800.tsv
+  Built by removing the 6,631 migrated (path, literal) rows from the historical 67,431-row
+  file; every remaining row's presentation_type/resolution_mechanism is carried forward
+  unchanged (the migration is a taxonomy relocation, not a presentation reclassification).
+  Row count: 60,800  [PASS -- matches expected]
+  BONE:      36,198  [PASS -- matches expected]
+  FLEX:      24,602  [PASS -- matches expected]
+  Cross-checked against the live post-edit Master: all 60,800 active rows' (path, literal)
+  pairs were confirmed to still exist at their stated path in the current canonical file;
+  none of the 6,631 migrated controls remain at their old groupFile/Body Morphs location.
+
+Sexual Bones is confirmed outside this seven-path artifact (it was never one of the seven
+FLEX/BONE presentation-split target paths, and none of its rows appear in either the
+historical or the new active file).
+
+G. ORDERING METHOD DISCLOSURE (related-control adjacency, then natural alphabetization)
+--------------------------------------------------------------------------
+Per this phase's clarification, the doctrine is RELATED-CONTROL ADJACENCY first, then
+NATURAL ALPHABETIZATION -- not "natural sort with adjacency as a modifier." The implementation
+carried over unchanged from the approved Phase A3 plan already satisfies this, because most of
+the listed relationship types are inherent to the natural-sort key itself and required no
+additional code:
+  - Numbered sequences (e.g. Genitals.000...Genitals.011) and root+numbered-descendant pairs
+    (e.g. "Vulva" before "Vulva01") are kept contiguous and correctly ordered by the natural
+    sort key's digit-aware comparison alone -- verified present and correctly ordered in the
+    final Sexual Bones sequence.
+  - Obvious exact-name numeric series (e.g. Breast.00/.01/.02...) are likewise kept
+    contiguous by the same numeric-aware key.
+  - Strict case-variant spellings of the same series (e.g. two spellings differing only by
+    ASCII case) receive identical sort keys under the ASCII-fold-based text comparison, so a
+    stable sort places them contiguously by construction.
+  - The one relationship type NOT already implied by natural sort is left/right bilateral
+    counterparts (e.g. "Left Anus"/"Right Anus"), which do NOT share a common natural-sort
+    prefix. This is the one place explicit adjacency logic was applied: an exact L/R stem
+    match (prefix l_/r_/L_/R_, suffix _l/_r/_L/_R/.l/.r/.L/.R, or whole-word
+    Left/Right/left/right/LEFT/RIGHT) pairs the two literals into a single sort unit keyed by
+    the shared stem's natural-sort position.
+  - Where a stem had more than one candidate on either side (53 such stems, e.g.
+    "Anus.L"/"Anus.l" both reducing to stem "Anus" side L), no automatic pairing was made --
+    every literal from an ambiguous stem falls back to standalone natural-alphabetization
+    placement, per the standing "do not force relationships where the stem is genuinely
+    ambiguous" instruction. Verified lossless: 6,631 in, 6,631 out, 0 duplicates, 0 dropped.
+  - No new semantic classifier or taxonomy logic was introduced; the same conservative
+    bilateral-stem detector already established in the committed FLEX/BONE ordering project
+    was reused unchanged.
+Result: 5,596 total sort units (1,035 genuine L/R pairs + 4,561 standalone literals),
+producing the exact order recorded in SEXUAL_BONES_MIGRATION_CANDIDATE_PREVIEW.tsv, which is
+also the exact order now physically present in Sexual Bones (verified in Part C).
+
+H. GIT STATUS
+--------------------------------------------------------------------------
+Master modified in the working tree. NOT staged. NOT committed.
+git diff --check -- sfm_defaultanimationgroups.txt: PASS (exit 0, no whitespace errors)
+git diff --stat -- sfm_defaultanimationgroups.txt: 1 file changed, 959 insertions(+), 955
+  deletions(-) -- explained entirely in Part E as line-based positional diff noise from the
+  block relocation, not extra semantic or formatting changes.
+
+I. OUTPUT ARTIFACTS
+--------------------------------------------------------------------------
+E:\SFM Animation Group Master\sfm_defaultanimationgroups.txt                    (EDITED -- new canonical state)
+E:\SFM Animation Group Master\sfm_defaultanimationgroups.txt.backup_pre_sexual_bones_migration  (pre-edit backup, SHA verified)
+E:\SFM Animation Group Master\MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60800.tsv  (new, 60,800 rows)
+E:\SFM Animation Group Master\SEXUAL_BONES_PHASE_A4_POST_EDIT_AUDIT.txt         (this file)
+MASTER_FLEX_BONE_FINAL_CLASSIFICATION_67431.tsv -- UNCHANGED (historical artifact preserved)
+
+================================================================================
+MUTATION SUCCEEDED. ALL 20 REQUESTED VALIDATION ITEMS PASS. NOT COMMITTED.
+STOPPING FOR HUMAN APPROVAL BEFORE COMMIT.
+================================================================================
