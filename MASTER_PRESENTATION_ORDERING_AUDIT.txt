@@ -1,0 +1,176 @@
+MASTER PRESENTATION ORDERING — AUDIT REPORT
+========================================================================
+PRESENTATION-ONLY EDIT. NO TAXONOMY CHANGES. NO AGENTS USED.
+
+A. BASELINE
+------------------------------------------------------------------------
+Pre-edit commit: 6633d7538a7d0d26e17d4bc9e7ad119c1c96b702 "Move Tail after RigHelpers"
+Pre-edit Master SHA-256: f3dae24a33cf0b8ad277a61c001af9321d8dda79b106b3b2f574be82a8da820d -- MATCH
+Post-edit Master SHA-256: 52ef9fba46448f15847d314b6b415f5712194afb9a217f3041f2532a6f487b03
+Backup written: sfm_defaultanimationgroups.txt.backup_pre_presentation_ordering
+  (byte-identical to the pre-edit file; SHA-256 f3dae24a33cf0b8ad277a61c001af9321d8dda79b106b3b2f574be82a8da820d)
+
+B. FINAL 67,431-CONTROL CLASSIFICATION RECONCILIATION
+------------------------------------------------------------------------
+direct BONE                       42,047
+direct FLEX                       15,844
+narrow provenance-resolved FLEX    6,667
+human-reviewed residual (final)    2,873  (BONE 776 / FLEX 2,097)
+                                 -------
+TOTAL                             67,431   -- reconciles exactly
+
+Final aggregate (direct + provenance + human-reviewed):
+  BONE: 42,047 + 776                     = 42,823
+  FLEX: 15,844 + 6,667 + 2,097            = 24,608
+  TOTAL                                   = 67,431   -- MATCH
+
+Artifact: MASTER_FLEX_BONE_FINAL_CLASSIFICATION_67431.tsv
+  rows = 67,431, columns: current_master_path, exact_literal, presentation_type,
+  resolution_mechanism. Zero unresolved, zero duplicate path+literal keys
+  (verified programmatically before use).
+
+C. PRE/POST MASTER COUNTS
+------------------------------------------------------------------------
+                        pre-edit      post-edit
+control lines           128,550       128,550
+unique exact literals   128,550       128,550
+group count             41            41
+open/close brace count  41 / 41       41 / 41
+line count              129,346       129,359  (+13 net: +14 inserted FLEX/BONE
+                                                  separator comments, -1 dropped
+                                                  stray meaningless mid-list blank
+                                                  line -- see section H)
+
+D. EXACT LITERAL MULTISET / SEMANTIC PATH EQUALITY
+------------------------------------------------------------------------
+Verified programmatically (structural re-parse of both pre- and post-edit
+files using the same tokenizer as tools/validate_master.py, not text diff):
+  - multiset of (exact_literal, full_semantic_path) pairs: EQUAL (all 128,550)
+  - multiset of each control's exact RAW LINE TEXT (byte-for-byte, including
+    any pre-existing indentation/whitespace quirks): EQUAL (all 128,550)
+  - set of all group full_paths: EQUAL (all 41)
+  - top-level (direct groupFile child) group order: UNCHANGED
+      Face, Body Morphs, Hair, Clothing, Correctives, Body, Arms, Fingers,
+      Legs, Toes, Wings, RigBody, RigArms, RigLegs, RigHelpers, Tail,
+      Attachments, Other, Useless
+  - required relevant-order subsequence RigBody, RigArms, RigLegs,
+    RigHelpers, Tail, Attachments: PRESENT, UNCHANGED, in that exact order
+
+Result: ZERO controls added, ZERO lost, ZERO moved to a different semantic
+path, ZERO spelling/case/whitespace mutations to any existing control line.
+
+E. VALIDATOR RESULT
+------------------------------------------------------------------------
+python tools/validate_master.py sfm_defaultanimationgroups.txt (post-edit):
+  PASS
+  Control lines: 128,550
+  Unique exact literals: 128,550
+  Exact duplicate literals: 0
+  Unique ASCII-fold keys: 124,723
+  Multi-spelling ASCII-fold families: 3,267 (same-path 3,267 / cross-path 0)
+  Structural parse: PASS
+
+F. DUPLICATE / ASCII CROSS-PATH CONFLICT RESULT
+------------------------------------------------------------------------
+Exact duplicate literals: 0 (unchanged from pre-edit)
+ASCII cross-path casefold conflicts: 0 (unchanged from pre-edit)
+
+G. FLEX/BONE TARGET-PATH PRESENTATION CHECK
+------------------------------------------------------------------------
+All 67,431 target controls independently re-verified, by re-parsing the
+post-edit file and confirming each control's line number falls strictly
+after its path's "// ---- FLEX CONTROLS ----" marker and before "// ---- BONE
+CONTROLS ----" (for FLEX) or strictly after the BONE marker (for BONE):
+  checked: 67,431 / 67,431 -- 0 mismatches
+
+Final per-path FLEX/BONE split (both markers present in all 7 paths;
+counts pulled directly from MASTER_FLEX_BONE_FINAL_CLASSIFICATION_67431.tsv
+and cross-checked against the post-edit file's actual region placement --
+exact match):
+  Face/Eyes            FLEX 1,452  BONE 1,520
+  Face/Upper Face      FLEX 4,774  BONE 4,068
+  Face/Mid Face        FLEX   671  BONE 1,652
+  Face/Lower Face      FLEX 5,460  BONE 4,508
+  Face/Expressions     FLEX   778  BONE   251
+  Body Morphs          FLEX 8,150  BONE 7,114
+  Clothing             FLEX 3,323  BONE 23,710
+  ------------------------------------------
+  TOTAL                FLEX 24,608 BONE 42,823  -- matches section B exactly
+
+H. STRAY BLANK LINE DISCLOSURE
+------------------------------------------------------------------------
+One pre-existing blank line (original line 90926, inside Clothing's flat
+control list) had no structural meaning: it was not a group-boundary
+separator, sat directly between two ordinary control lines, and would --
+left in place -- have split Clothing's single control run into two disjoint
+runs, each independently receiving its own FLEX/BONE split (four section
+headers instead of two). It was dropped (not relocated) so Clothing gets
+exactly one continuous FLEX region and one continuous BONE region, matching
+the required presentation form for all seven target paths uniformly. No
+other blank line in the file was altered; five other pre-existing blank/
+whitespace-only lines that sit immediately before a subgroup (in
+LeftArm>LeftFingers/LeftCarpals, RightArm>RightFingers/RightCarpals, and
+Toes>LeftToes) were preserved exactly in place, unchanged.
+
+I. PROTECTED-ANCHOR AND SPECIAL-CASE CHECKS
+------------------------------------------------------------------------
+Protected root/global anchor: "root_transform" is the only literal in the
+entire Master matching the given example and already positioned first in
+its group. Re-verified first control in groupFile/Body (post-edit):
+  root_transform  -- CONFIRMED FIRST
+No other literal was treated as a protected anchor (no anchors were
+inferred from name content alone).
+
+LeftToes (groupFile/Toes/LeftToes): first control (post-edit) = bip_toe_l -- CONFIRMED
+RightToes (groupFile/Toes/RightToes): first control (post-edit) = bip_toe_r -- CONFIRMED
+
+J. ORDERING METHOD (applied uniformly, whole Master)
+------------------------------------------------------------------------
+Within each group's own direct control list (each contiguous run,
+independent of any sibling subgroups), controls were ordered by:
+  1. protected root/global anchor (root_transform only), if present and
+     already first
+  2. explicit special exception (bip_toe_l / bip_toe_r), if applicable
+  3. in the seven target paths only: FLEX region before BONE region
+  4. within each resulting region (or the whole run, for non-target
+     groups): natural alphanumeric sort (ASCII case-insensitive, numeric
+     chunks compared as integers so item2 < item3 < item10) with a narrow,
+     conservative bilateral-adjacency pass -- only exact prefix (l_/r_,
+     L_/R_), exact suffix (_l/_r, _L/_R, .l/.r, .L/.R), or exact whole-word
+     (Left/Right, left/right, LEFT/RIGHT) marker swaps were treated as
+     "obvious" pairs and kept adjacent (matching stem's natural-sort
+     position); anything not matching one of these exact patterns was
+     natural-sorted as a standalone item, per instruction not to infer
+     relationships that aren't obvious.
+No family-inference system, token scorer, or semantic classifier was built
+or used for ordering -- this is a fixed, narrow pattern list applied
+identically everywhere.
+
+K. FILES CHANGED
+------------------------------------------------------------------------
+Modified:
+  sfm_defaultanimationgroups.txt        (presentation-only: reordering +
+                                          FLEX/BONE separator comments)
+Created (new, untracked):
+  sfm_defaultanimationgroups.txt.backup_pre_presentation_ordering
+  MASTER_FLEX_BONE_FINAL_CLASSIFICATION_67431.tsv
+  MASTER_PRESENTATION_ORDERING_AUDIT.txt (this file)
+
+L. GIT DIFF SUMMARY
+------------------------------------------------------------------------
+git diff --stat -- sfm_defaultanimationgroups.txt:
+  1 file changed, 126,621 insertions(+), 126,608 deletions(-)
+(Expected for a whole-file reorder: a line-based text diff cannot recognize
+"this exact line moved," so nearly every control line shows as a paired
+delete+insert even though its content is byte-identical -- already
+independently confirmed above via structural re-parse, not text diff.)
+
+git diff --check flags 7 pre-existing trailing-whitespace lines (e.g.
+"rig_Palm_Ring_R"  and "rig_ValveBiped.Bip01_R_Finger53" with trailing
+tabs) as "+" lines -- these are NOT new mutations; they are pre-existing
+quirks in those exact original lines that now appear as diff insertions
+because their position changed. Verified byte-identical to their original
+line text (section D).
+
+Not committed. Working tree left for human inspection, as instructed.
+========================================================================
