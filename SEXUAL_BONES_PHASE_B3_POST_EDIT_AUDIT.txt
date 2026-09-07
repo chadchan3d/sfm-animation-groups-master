@@ -1,0 +1,215 @@
+SEXUAL BONES — PHASE B3: EXECUTE FINAL 566-CONTROL HUMAN-APPROVED MIGRATION
+================================================================================
+MASTER HAS BEEN EDITED IN THIS PHASE. NOT YET COMMITTED. AWAITING APPROVAL TO COMMIT.
+
+A. BASELINE COMMIT AND SHA
+--------------------------------------------------------------------------
+Baseline commit: 1bffa4fd8e0088f2d954e87b43df590abcbdec89 ("Add Sexual Bones taxonomy group")
+Baseline pulled fresh via `git show 1bffa4fd8e0088f2d954e87b43df590abcbdec89:sfm_defaultanimationgroups.txt`
+  (NOT a scratch backup) -- SHA-256: f33309819f1a5fcad60f083f8d6e32422860fd56ac45ec64166e02857c99ffb5
+  (confirms the pre-mutation working-tree file was byte-identical to the committed baseline)
+Master SHA-256 immediately before this mutation: f33309819f1a5fcad60f083f8d6e32422860fd56ac45ec64166e02857c99ffb5
+
+B. POST-EDIT MASTER SHA
+--------------------------------------------------------------------------
+15d760a86be1d9d356f2ed751899f1f4f7fab074fa3e3281eec46b26cdeec7e7
+Backup written before promotion: sfm_defaultanimationgroups.txt.backup_pre_b3_second_migration
+  (verified SHA-256 == f33309819f1a5fcad60f083f8d6e32422860fd56ac45ec64166e02857c99ffb5, i.e.
+  identical to the pre-mutation canonical file)
+
+C. EXACT MOVE COUNT
+--------------------------------------------------------------------------
+566 (561 HUMAN_APPROVED_INCLUDE + 5 APPROVED_ASCII_CARRYALONG), per
+SEXUAL_BONES_PHASE_B2_FINAL_HUMAN_APPROVED_MOVE_SET.tsv, moved exactly as approved -- no
+semantic reclassification performed, no additional literals consulted or added.
+
+D. MOVE COUNT BY ORIGINAL PATH
+--------------------------------------------------------------------------
+  groupFile/Body               443
+  groupFile/Body Morphs        114
+  groupFile/Legs/RightLeg         3
+  groupFile/Useless               2
+  groupFile/RigHelpers            1
+  groupFile/Clothing              1
+  groupFile/Other                 1
+  groupFile/Legs/LeftLeg          1
+  TOTAL                         566
+All confirmed via fresh re-parse: each source path's control count dropped by exactly its
+expected amount, and no other path's count changed except Sexual Bones' gain.
+
+E. SEXUAL BONES BEFORE/AFTER COUNTS
+--------------------------------------------------------------------------
+Before: 6,631   After: 7,197   (gain = +566, matches exactly)
+0 child groups (before and after). groupColor "255 200 120 255" unchanged, exactly one
+groupColor line, first content line after "{". All 6,631 previously-present controls
+confirmed still present (verified: literal SET after == literal SET before UNION the 566
+new literals, exactly).
+
+F. BODY MORPHS BEFORE/AFTER COUNTS
+--------------------------------------------------------------------------
+Before: 8,633   After: 8,519   (loss = -114, matches exactly)
+
+G. EXACT BODY MORPHS FLEX/BONE REMOVALS
+--------------------------------------------------------------------------
+Inspected the PHYSICAL marker region of each of the 114 removed Body Morphs controls before
+removal (per-line position relative to the FLEX/BONE marker comments), rather than assuming
+BONE-source provenance implied BONE-region residency:
+  FLEX region: 3 removed   (Body Morphs FLEX: 8,144 -> 8,141)
+  BONE region: 111 removed (Body Morphs BONE: 489 -> 378)
+  3 + 111 = 114  [OK, matches expected total loss]
+Both marker regions remain structurally valid post-edit (FLEX marker followed by 8,141
+controls, BONE marker followed by 378 controls; both >= 1; marker wording unaltered).
+
+H. EXACT CLOTHING FLEX/BONE REMOVAL
+--------------------------------------------------------------------------
+1 control removed, physically located in the BONE region (literal: "Flap3.R").
+Clothing FLEX: 3,323 -> 3,323 (unchanged)
+Clothing BONE: 23,710 -> 23,709 (-1)
+Both marker regions remain structurally valid post-edit.
+
+I. NEW ACTIVE SEVEN-PATH CLASSIFICATION (recomputed from live edited Master + prior
+   classification provenance, NOT inferred from the BONE-only discovery source)
+--------------------------------------------------------------------------
+Removed 115 controls total from the seven tracked paths (114 Body Morphs + 1 Clothing).
+Historical MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60800.tsv (60,800 rows: FLEX 24,602 / BONE
+36,198) had those 115 (path, literal) rows removed; every remaining row's
+presentation_type/resolution_mechanism carried forward unchanged.
+  TOTAL: 60,685   [OK -- matches expected 60,800 - 115]
+  FLEX:  24,599   (24,602 - 3, matching the 3 FLEX-region Body Morphs removals exactly)
+  BONE:  36,086   (36,198 - 112, matching the 111 BONE-region Body Morphs + 1 BONE-region
+                   Clothing removal = 112 exactly)
+  check: 24,599 + 36,086 = 60,685  [OK]
+Cross-checked against the live post-edit Master: all 60,685 active rows' (path, literal)
+pairs confirmed to still exist at their stated path; none of the 566 migrated controls
+remain at their old locations.
+
+J. EXACT DUPLICATE COUNT
+--------------------------------------------------------------------------
+0 (fresh structural re-parse of the promoted canonical Master; also confirmed by
+tools/validate_master.py: "Exact duplicate literals: 0")
+
+K. ASCII CROSS-PATH CONFLICT COUNT
+--------------------------------------------------------------------------
+0 (fresh structural re-parse; also confirmed by tools/validate_master.py: "Multi-spelling
+ASCII-fold families: 3,267 -- same-path (valid): 3,267, cross-path (invariant violation): 0")
+This includes full closure for the 5 approved carry-along siblings (Bulbus_Left/Bulbus_Right/
+Ass/ForeSkin/foreskin) -- each now shares groupFile/Sexual Bones with its approved anchor,
+eliminating the cross-path split that existed before this migration.
+
+L. VALIDATOR RESULT
+--------------------------------------------------------------------------
+tools/validate_master.py run against the candidate BEFORE promotion: PASS
+tools/validate_master.py run against the canonical file AFTER promotion (fresh re-open from
+disk, no path argument -- default target): PASS
+  Group count: 42, Control lines: 128,550, Unique exact literals: 128,550,
+  Unique ASCII-fold keys: 124,723, Multi-spelling ASCII-fold families: 3,267
+    (same-path valid: 3,267, cross-path invariant violation: 0)
+  Exact duplicate literals: 0, Structural parse: PASS
+
+M. SEMANTIC MEMBERSHIP DIFF AGAINST git show 1bffa4f
+--------------------------------------------------------------------------
+Baseline pulled fresh via `git show 1bffa4f:sfm_defaultanimationgroups.txt` (not a scratch
+backup) and independently re-parsed alongside the current canonical file with the same
+structural parser.
+[PASS] Baseline: 42 groups / 128,550 controls -- Current: 42 groups / 128,550 controls
+[PASS] Total control count identical (128,550) -- no control added, no control deleted
+[PASS] Exactly 566 literals changed (path, literal) membership between baseline and current
+[PASS] The 566 changed literals are EXACTLY the approved
+       SEXUAL_BONES_PHASE_B2_FINAL_HUMAN_APPROVED_MOVE_SET.tsv population -- no extra
+       literal moved, no approved literal left behind
+[PASS] Every one of the 566 changed literals moved from its recorded approved old path to
+       groupFile/Sexual Bones (no partial moves, no unexpected destination)
+[PASS] No group added or removed; every pre-existing group retains its exact full parent
+       path and nesting depth
+
+N. PRESENTATION-ONLY DIFF ACCOUNTING (distinguished explicitly from semantic membership)
+--------------------------------------------------------------------------
+SEMANTIC membership differences: exactly the 566 approved control relocations (Section M).
+This is the entire semantic change -- no other control's group membership changed anywhere
+in the file.
+
+PRESENTATION-ORDER differences (permitted, disclosed separately): the ENTIRE Sexual Bones
+population (now 7,197 controls) was re-integrated using the same related-control-adjacency
++ natural-alphabetization method used for every prior Sexual Bones ordering pass in this
+project -- the pre-existing 6,631 controls were NOT left in their old relative order with
+the 566 new ones merely appended; the complete 7,197-item set was re-sorted together so that
+new arrivals interleave correctly with existing bilateral pairs, numbered series, and
+naming-family clusters. This reordering is presentation-only: every one of the 7,197 raw
+control lines is byte-identical to its source text (verified in Section Q's raw-line
+multiset check) -- only line POSITION within Sexual Bones changed, never content. No
+presentation reordering occurred in Body Morphs, Clothing, or any other group; their
+remaining controls retain their original relative order untouched (only the 115/451
+specific approved lines were removed from Body Morphs/other groups, nothing repositioned
+among the survivors).
+
+`git diff --stat` shows 570 insertions(+) / 570 deletions(-) -- this is entirely explained by
+the two effects above (566 line removals from 8 source groups interacting with git's
+line-based diff algorithm, plus the full re-sort of the 7,197-line Sexual Bones body) and is
+NOT evidence of any additional formatting or semantic change; the raw-line multiset check
+(Section Q) proves this conclusively.
+`git diff --check`: exit 0 (no whitespace errors).
+
+O. CONFIRMATION: PREVIOUS 60800 AND HISTORICAL 67431 ARTIFACTS UNTOUCHED
+--------------------------------------------------------------------------
+MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60800.tsv: only opened via csv.DictReader (read-only)
+  in this task; never opened for writing. SHA-256 (post-task): 2894531cd826f93529a89e98d802bdc1292235891a8643d65625495fcc02e7e0
+MASTER_FLEX_BONE_FINAL_CLASSIFICATION_67431.tsv: only opened via csv.DictReader (read-only,
+  indirectly through the 60800 file's provenance) in this task; never opened for writing.
+  SHA-256 (post-task): d1517cbc9de04953edec2cdabe0a26a3e1c4e7745e41285d73ffe54d0b0e4f89
+  (matches the value recorded as unchanged in the Phase A5 commit report and every
+  subsequent phase's audit -- consistently untouched across the whole Sexual Bones project)
+Both remain exactly as committed at 1bffa4f.
+
+P. NEW 60685 ARTIFACT PATH
+--------------------------------------------------------------------------
+E:\SFM Animation Group Master\MASTER_FLEX_BONE_ACTIVE_CLASSIFICATION_60685.tsv (60,685 rows,
+FLEX 24,599 / BONE 36,086, cross-checked live -- see Section I)
+
+Q. RAW-LINE PRESERVATION / GIT STATUS
+--------------------------------------------------------------------------
+Raw-line multiset check (candidate vs. pre-mutation Master, run before promotion): 0 lines
+present only in the candidate, 0 lines present only in the original -- every line of content
+in the file is identical before and after; only positions changed. This proves no exact
+control text changed merely because its line moved, for all 566 relocated controls AND for
+the 6,631 pre-existing Sexual Bones controls that were repositioned during the re-sort.
+
+git status --short:
+  M sfm_defaultanimationgroups.txt
+  (plus this task's new artifacts, backup file, and the same long-standing set of untracked
+  prior-session scratch/process files already disclosed in every previous phase's audit)
+Nothing staged. Nothing committed.
+
+================================================================================
+GLOBAL POST-MUTATION VALIDATION -- ALL 20 REQUESTED ITEMS: PASS
+================================================================================
+ 1. Master parses cleanly: PASS
+ 2. Total controls == 128,550: PASS
+ 3. Sexual Bones == 7,197: PASS
+ 4. Sexual Bones 0 child groups, groupColor "255 200 120 255": PASS
+ 5. Body Morphs == 8,519: PASS
+ 6. Exactly 566 approved literals changed taxonomy destination: PASS
+ 7. Every one changed old-approved-path -> groupFile/Sexual Bones: PASS
+ 8. No control added: PASS (128,550 before == 128,550 after)
+ 9. No control deleted: PASS
+10. No non-approved control changed taxonomy path: PASS (566 changed == exactly the approved set)
+11. Source-path losses exactly match Section D: PASS
+12. Exact duplicates == 0: PASS
+13. ASCII cross-path conflicts == 0: PASS
+14. tools/validate_master.py: PASS (candidate and canonical, both re-checked)
+15. Root order: Face, Body Morphs, Sexual Bones, Hair, Clothing, Correctives, Body, Arms,
+    Fingers, Legs, Toes, Wings, RigBody, RigArms, RigLegs, RigHelpers, Tail, Attachments,
+    Other, Useless -- PASS, unchanged
+16. All unrelated root ordering unchanged: PASS
+17. All exact quoted control literals preserved byte-for-byte: PASS (Section Q)
+18. No unrelated metadata changes: PASS (only groupColor lines touched are Sexual Bones'
+    own single pre-existing line, reused verbatim; no other group's groupColor/metadata
+    touched)
+19. No unrelated formatting-only changes outside the intentional Sexual Bones reordering:
+    PASS (Section Q raw-line multiset proves this)
+20. All previous 6,631 Sexual Bones controls still present: PASS (verified set-equality:
+    new 7,197-literal set == old 6,631-literal set UNION the 566 approved literals, exactly)
+
+================================================================================
+MUTATION SUCCEEDED. NOT COMMITTED. NOT STAGED.
+STOPPING FOR HUMAN APPROVAL BEFORE COMMIT.
+================================================================================
