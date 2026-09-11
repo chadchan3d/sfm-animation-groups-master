@@ -1,0 +1,437 @@
+{
+  "valid": [
+    {
+      "filename": "fixtures/valid/01_minimal_wrapper.txt",
+      "category": "valid",
+      "notable_properties": "smallest possible valid document: wrapper only, no content",
+      "expected_core_parse": "pass",
+      "expected_group_count": 1,
+      "expected_control_count": 0,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/02_wrapper_owned_control.txt",
+      "category": "valid",
+      "notable_properties": "wrapper directly owns a control (M1/wrapper-as-ordinary-group check)",
+      "expected_core_parse": "pass",
+      "expected_group_count": 1,
+      "expected_control_count": 1,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/03_wrapper_owned_metadata.txt",
+      "category": "valid",
+      "notable_properties": "wrapper directly owns metadata",
+      "expected_core_parse": "pass",
+      "expected_group_count": 1,
+      "expected_control_count": 1,
+      "expected_metadata_count": 1,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/04_custom_wrapper_name.txt",
+      "category": "valid",
+      "notable_properties": "wrapper name is NOT 'groupFile' -- proves no hardcoded wrapper name assumption",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 2,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/05_nested_groups.txt",
+      "category": "valid",
+      "notable_properties": "3 levels of nesting under the wrapper",
+      "expected_core_parse": "pass",
+      "expected_group_count": 4,
+      "expected_control_count": 1,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/06_sibling_groups.txt",
+      "category": "valid",
+      "notable_properties": "3 sibling groups under the wrapper",
+      "expected_core_parse": "pass",
+      "expected_group_count": 4,
+      "expected_control_count": 3,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/07_same_line_group_declarations.txt",
+      "category": "valid",
+      "notable_properties": "two sibling groups declared on one source line (declare_order tie-break case)",
+      "expected_core_parse": "pass",
+      "expected_group_count": 3,
+      "expected_control_count": 2,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/08_controls_before_nested_child.txt",
+      "category": "valid",
+      "notable_properties": "direct-member controls appear before a nested child group",
+      "expected_core_parse": "pass",
+      "expected_group_count": 3,
+      "expected_control_count": 3,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/09_controls_after_nested_child.txt",
+      "category": "valid",
+      "notable_properties": "direct-member controls appear after a nested child group",
+      "expected_core_parse": "pass",
+      "expected_group_count": 3,
+      "expected_control_count": 3,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/10_repeated_identical_control_one_group.txt",
+      "category": "valid",
+      "notable_properties": "same exact literal occurs 3 times in one group",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 3,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/11_repeated_identical_control_across_groups.txt",
+      "category": "valid",
+      "notable_properties": "same exact literal occurs in two different groups",
+      "expected_core_parse": "pass",
+      "expected_group_count": 3,
+      "expected_control_count": 2,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/12_same_fold_same_destination.txt",
+      "category": "valid",
+      "notable_properties": "3 case-variant spellings, one fold, one destination -- no conflict",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 3,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/13_same_fold_different_destinations.txt",
+      "category": "valid",
+      "notable_properties": "2 case-variant spellings, one fold, two destinations -- FOLD_CONFLICT expectation",
+      "expected_core_parse": "pass",
+      "expected_group_count": 3,
+      "expected_control_count": 2,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/14_exact_spelling_inside_conflicting_fold.txt",
+      "category": "valid",
+      "notable_properties": "3 case-variant spellings, one fold, three destinations -- exact-match-inside-conflict expectation",
+      "expected_core_parse": "pass",
+      "expected_group_count": 4,
+      "expected_control_count": 3,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/15_duplicate_metadata_keys.txt",
+      "category": "valid",
+      "notable_properties": "same metadata key appears twice in one group with different values",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 2,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/16_metadata_value_zero.txt",
+      "category": "valid",
+      "notable_properties": "explicit metadata value \"0\" -- must not be conflated with absence",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 1,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/17_unknown_metadata_key.txt",
+      "category": "valid",
+      "notable_properties": "a metadata key outside {groupColor,selectable,visible} -- must be preserved opaquely",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 1,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/18_empty_metadata_value.txt",
+      "category": "valid",
+      "notable_properties": "a metadata value that is a zero-length quoted string",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 1,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/19_non_ascii_bmp_text.txt",
+      "category": "valid",
+      "notable_properties": "non-ASCII BMP characters (kanji) in both a group name and a control literal",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/20_non_bmp_text.txt",
+      "category": "valid",
+      "notable_properties": "a non-BMP (astral-plane) character (emoji) inside a control literal -- exercises 4-byte UTF-8",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/21_escaped_quote_spelling.txt",
+      "category": "valid",
+      "notable_properties": "a literal contains a backslash-escaped quote sequence; must round-trip with backslashes intact, unescaped",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/22_escaped_backslash_spelling.txt",
+      "category": "valid",
+      "notable_properties": "a literal contains literal backslash characters; must round-trip exactly, unescaped",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/23_whitespace_distinctions.txt",
+      "category": "valid",
+      "notable_properties": "literals containing a double space and an embedded tab -- whitespace inside a quoted value is significant",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 2,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/24_bom_source.txt",
+      "category": "valid",
+      "notable_properties": "source begins with a UTF-8 BOM",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/25_no_bom_source.txt",
+      "category": "valid",
+      "notable_properties": "byte-identical content to 24 without the BOM, for contrast",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/26_final_entry_before_eof.txt",
+      "category": "valid",
+      "notable_properties": "final control immediately precedes EOF with no trailing newline",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 1,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/27_deep_nesting.txt",
+      "category": "valid",
+      "notable_properties": "15 levels of nesting, deeper than any official-Master case",
+      "expected_core_parse": "pass",
+      "expected_group_count": 16,
+      "expected_control_count": 1,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    },
+    {
+      "filename": "fixtures/valid/28_large_alias_family.txt",
+      "category": "valid",
+      "notable_properties": "30 case-variant spellings of one fold family, same destination",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 30,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": true
+    }
+  ],
+  "unsupported": [
+    {
+      "filename": "fixtures/unsupported/empty_document.txt",
+      "category": "unsupported",
+      "notable_properties": "zero groups at all (comment-only source) -- core-parseable, zero parentless groups",
+      "expected_core_parse": "pass",
+      "expected_group_count": 0,
+      "expected_control_count": 0,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": false
+    },
+    {
+      "filename": "fixtures/unsupported/multiple_parentless_groups.txt",
+      "category": "unsupported",
+      "notable_properties": "two independent top-level groups with no common wrapper -- core-parseable, two parentless groups",
+      "expected_core_parse": "pass",
+      "expected_group_count": 2,
+      "expected_control_count": 2,
+      "expected_metadata_count": 0,
+      "expected_sidecar_profile_eligible": false
+    }
+  ],
+  "malformed": [
+    {
+      "filename": "fixtures/malformed/dangling_quoted_token.txt",
+      "category": "malformed",
+      "notable_properties": "a lone quoted token with no group-name/key-value partner -> dangling_token",
+      "expected_core_parse": "fail",
+      "expected_group_count": null,
+      "expected_control_count": null,
+      "expected_metadata_count": null,
+      "expected_sidecar_profile_eligible": false,
+      "expected_core_grammar_error_kinds": [
+        "dangling_token"
+      ]
+    },
+    {
+      "filename": "fixtures/malformed/duplicate_sibling_group_path.txt",
+      "category": "malformed",
+      "notable_properties": "two sibling groups share the same exact name -> duplicate_group_path",
+      "expected_core_parse": "fail",
+      "expected_group_count": null,
+      "expected_control_count": null,
+      "expected_metadata_count": null,
+      "expected_sidecar_profile_eligible": false,
+      "expected_core_grammar_error_kinds": [
+        "duplicate_group_path"
+      ]
+    },
+    {
+      "filename": "fixtures/malformed/incomplete_key_value_pair.txt",
+      "category": "malformed",
+      "notable_properties": "a 'control' key with no following value token -> dangling_token",
+      "expected_core_parse": "fail",
+      "expected_group_count": null,
+      "expected_control_count": null,
+      "expected_metadata_count": null,
+      "expected_sidecar_profile_eligible": false,
+      "expected_core_grammar_error_kinds": [
+        "dangling_token"
+      ]
+    },
+    {
+      "filename": "fixtures/malformed/malformed_bare_property_value.txt",
+      "category": "malformed",
+      "notable_properties": "a fully unquoted key/value pair -> bare_property_value_pair",
+      "expected_core_parse": "fail",
+      "expected_group_count": null,
+      "expected_control_count": null,
+      "expected_metadata_count": null,
+      "expected_sidecar_profile_eligible": false,
+      "expected_core_grammar_error_kinds": [
+        "bare_property_value_pair"
+      ]
+    },
+    {
+      "filename": "fixtures/malformed/malformed_utf8.txt",
+      "category": "malformed",
+      "notable_properties": "a raw invalid UTF-8 byte sequence -> UnicodeDecodeError at the decode stage, before grammar parsing",
+      "expected_core_parse": "fail",
+      "expected_core_grammar_error_kinds": [
+        "unicode_decode_error"
+      ],
+      "expected_group_count": null,
+      "expected_control_count": null,
+      "expected_metadata_count": null,
+      "expected_sidecar_profile_eligible": false
+    },
+    {
+      "filename": "fixtures/malformed/slash_in_group_name.txt",
+      "category": "malformed",
+      "notable_properties": "a group name contains '/' -> slash_in_group_name",
+      "expected_core_parse": "fail",
+      "expected_group_count": null,
+      "expected_control_count": null,
+      "expected_metadata_count": null,
+      "expected_sidecar_profile_eligible": false,
+      "expected_core_grammar_error_kinds": [
+        "slash_in_group_name"
+      ]
+    },
+    {
+      "filename": "fixtures/malformed/trailing_unconsumed_token.txt",
+      "category": "malformed",
+      "notable_properties": "a stray token after the document's sole group closes -> dangling_token",
+      "expected_core_parse": "fail",
+      "expected_group_count": null,
+      "expected_control_count": null,
+      "expected_metadata_count": null,
+      "expected_sidecar_profile_eligible": false,
+      "expected_core_grammar_error_kinds": [
+        "dangling_token"
+      ]
+    },
+    {
+      "filename": "fixtures/malformed/unmatched_closing_brace.txt",
+      "category": "malformed",
+      "notable_properties": "an extra closing brace with no matching open -> unmatched_closing_brace",
+      "expected_core_parse": "fail",
+      "expected_group_count": null,
+      "expected_control_count": null,
+      "expected_metadata_count": null,
+      "expected_sidecar_profile_eligible": false,
+      "expected_core_grammar_error_kinds": [
+        "unmatched_closing_brace"
+      ]
+    },
+    {
+      "filename": "fixtures/malformed/unmatched_opening_brace.txt",
+      "category": "malformed",
+      "notable_properties": "a group is never closed -> stack_depth_at_eof > 0, unmatched_opens non-empty",
+      "expected_core_parse": "fail",
+      "expected_group_count": null,
+      "expected_control_count": null,
+      "expected_metadata_count": null,
+      "expected_sidecar_profile_eligible": false,
+      "expected_core_grammar_error_kinds": []
+    },
+    {
+      "filename": "fixtures/malformed/unterminated_quote.txt",
+      "category": "malformed",
+      "notable_properties": "a quoted string never closes before EOL -> reported as unrecognized_content/unquoted_metadata_value (still core.ok=False)",
+      "expected_core_parse": "fail",
+      "expected_group_count": null,
+      "expected_control_count": null,
+      "expected_metadata_count": null,
+      "expected_sidecar_profile_eligible": false,
+      "expected_core_grammar_error_kinds": [
+        "unquoted_metadata_value",
+        "unrecognized_content"
+      ]
+    }
+  ]
+}

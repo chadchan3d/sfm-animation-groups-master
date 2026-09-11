@@ -1,0 +1,12 @@
+groupFile
+{
+	"Parent"
+	{
+		"control"		"Before1"
+		"control"		"Before2"
+		"Child"
+		{
+			"control"		"Inner"
+		}
+	}
+}
