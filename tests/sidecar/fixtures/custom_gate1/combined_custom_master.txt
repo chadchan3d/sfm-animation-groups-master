@@ -1,0 +1,23 @@
+CustomRoot
+{
+	"selectable"	"1"
+	"NestedA"
+	{
+		"visible"	"1"
+		"control"		"Foo"
+		"control"		"foo"
+		"control"		"FOO"
+		"NestedB"
+		{
+			"control"		"Bar"
+			"control"		"Bar"
+			"someCustomKey"	"someValue"
+		}
+	}
+	"NestedC"
+	{
+		"control"		"bar"
+		"control"		"注視Tips"
+		"control"		"He said \"hi\""
+	}
+}
