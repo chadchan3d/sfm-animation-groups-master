@@ -181,6 +181,27 @@ def _validate_and_decode(buf):
             header.payload_length, total_len,
         ))
 
+    # Embedded integrity digest is checked here -- immediately after the
+    # header itself is minimally sane, and BEFORE any SECTION DIRECTORY row
+    # is decoded or structurally checked (Phase B2C finding: digest
+    # computation only needs the whole buffer, never the directory's own
+    # content, so there is no reason to defer it behind directory-row
+    # checks). This ordering is what makes the final spec Section 39
+    # checksum-aware doctrine's two forms actually distinct in practice: a
+    # CHECKSUM-INVALID mutation (digest left stale) now always fails HERE,
+    # at the digest comparison, regardless of what else about the file was
+    # also mutated; a CHECKSUM-VALID mutation (digest correctly recomputed
+    # over the mutated bytes) passes this check and must be caught by a
+    # later, specific structural check instead -- proving that check pulls
+    # real independent weight. Before this fix, a directory-row-level
+    # mutation (e.g. a wrong row_size) could be caught by the structural
+    # check below even with a stale digest, making the digest branch
+    # unreachable for that class of mutation.
+    digest_off = fmt.embedded_integrity_digest_offset()
+    recomputed = fmt.compute_embedded_integrity_digest(buf, digest_off)
+    if recomputed != header.embedded_integrity_digest:
+        _fail("embedded_integrity_digest mismatch -- file content does not match its own recorded digest")
+
     normative_row_sizes = fmt.NORMATIVE_ROW_SIZES[header.format_contract_version]
 
     protected = [(0, fmt.HEADER_SIZE, "HEADER")]
@@ -239,11 +260,6 @@ def _validate_and_decode(buf):
                 prev_name, prev_off, prev_off + prev_len, cur_name, cur_off, cur_off + cur_len,
             ))
 
-    digest_off = fmt.embedded_integrity_digest_offset()
-    recomputed = fmt.compute_embedded_integrity_digest(buf, digest_off)
-    if recomputed != header.embedded_integrity_digest:
-        _fail("embedded_integrity_digest mismatch -- file content does not match its own recorded digest")
-
     def section_bytes(section_id):
         row = directory[section_id]
         return buf[row.offset:row.offset + row.length]
@@ -269,6 +285,10 @@ def _validate_and_decode(buf):
     # --- B. String Table + STRING POOL. ---
     pool = section_bytes(fmt.SECTION_STRING_POOL)
     pool_len = len(pool)
+    if pool_len > fmt.LIMIT_STRING_POOL_TOTAL_BYTES:
+        _fail("STRING POOL byte size %d exceeds the resource limit %d" % (
+            pool_len, fmt.LIMIT_STRING_POOL_TOTAL_BYTES,
+        ))
     string_table_blob = section_bytes(fmt.SECTION_STRING_TABLE)
     strings = []
     for i in range(string_count):
@@ -277,6 +297,10 @@ def _validate_and_decode(buf):
         except Exception as exc:
             _fail("failed to unpack STRING TABLE row %d: %r" % (i, exc))
         _check_bounds(row.offset, row.length, pool_len, "STRING TABLE row %d" % i)
+        if row.length > fmt.LIMIT_SINGLE_STRING_BYTE_LENGTH:
+            _fail("STRING TABLE row %d declares length %d exceeding the single-string resource limit %d" % (
+                i, row.length, fmt.LIMIT_SINGLE_STRING_BYTE_LENGTH,
+            ))
         raw = pool[row.offset:row.offset + row.length]
         try:
             s = raw.decode("utf-8")
