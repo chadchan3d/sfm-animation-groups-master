@@ -24,104 +24,28 @@ Exit codes:
 """
 
 import argparse
-import re
 import sys
-from collections import Counter, defaultdict
+from collections import defaultdict
 from pathlib import Path
 
-TOKEN_RE = re.compile(r'"((?:[^"\\]|\\.)*)"|(\{)|(\})|(//[^\n]*)|([^\s"{}]+)')
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from sfm_master_core import (  # noqa: E402
+    ascii_fold,
+    tokenize,
+    parse_structure,
+    ParseResult,
+    TOKEN_RE,
+)
 
-
-def ascii_fold(literal):
-    """Fold ONLY ASCII A-Z to a-z. Every other character, including all
-    non-ASCII code points, punctuation, digits, and whitespace, passes
-    through unchanged. This is deliberately not Unicode casefold/lower."""
-    return "".join(
-        chr(ord(ch) + 32) if "A" <= ch <= "Z" else ch for ch in literal
-    )
-
-
-def tokenize(lines):
-    tokens = []
-    for line_no, line in enumerate(lines, start=1):
-        for m in TOKEN_RE.finditer(line):
-            if m.group(1) is not None:
-                tokens.append((line_no, "STR", m.group(1)))
-            elif m.group(2):
-                tokens.append((line_no, "OPEN", "{"))
-            elif m.group(3):
-                tokens.append((line_no, "CLOSE", "}"))
-            elif m.group(4):
-                break
-            elif m.group(5):
-                tokens.append((line_no, "WORD", m.group(5)))
-    return tokens
-
-
-class ParseResult:
-    def __init__(self):
-        self.groups = []  # list of dicts: name, full_path, name_line, open_line, close_line, depth
-        self.controls = []  # list of (literal, full_path, line_no)
-        self.unmatched_closes = []  # line numbers
-        self.unmatched_opens = []  # (name, name_line)
-        self.stack_depth_at_eof = 0
-
-
-def parse_structure(lines):
-    """Structurally parse group/control hierarchy by brace depth and full
-    path, independent of line-based formatting assumptions. Comments and
-    header prose are ignored via the tokenizer; unusual-but-valid historical
-    formatting (e.g. a brace sharing a line with other content) parses
-    identically to conventional formatting, because detection is
-    token-order-based, not line-shape-based."""
-    tokens = tokenize(lines)
-    result = ParseResult()
-    stack = []  # list of dicts: name, name_line, open_line
-    idx = 0
-    n = len(tokens)
-    while idx < n:
-        line_no, kind, val = tokens[idx]
-        if kind in ("STR", "WORD"):
-            if idx + 1 < n and tokens[idx + 1][1] == "OPEN":
-                stack.append({"name": val, "name_line": line_no, "open_line": tokens[idx + 1][0]})
-                idx += 2
-                continue
-            elif idx + 1 < n and tokens[idx + 1][1] == "STR":
-                key = val
-                value = tokens[idx + 1][2]
-                if key == "control":
-                    current_path = "/".join(frame["name"] for frame in stack)
-                    result.controls.append((value, current_path, line_no))
-                idx += 2
-                continue
-            else:
-                idx += 1
-                continue
-        elif kind == "CLOSE":
-            if not stack:
-                result.unmatched_closes.append(line_no)
-                idx += 1
-                continue
-            frame = stack.pop()
-            full_path = "/".join([f["name"] for f in stack] + [frame["name"]])
-            result.groups.append({
-                "name": frame["name"],
-                "full_path": full_path,
-                "name_line": frame["name_line"],
-                "open_line": frame["open_line"],
-                "close_line": line_no,
-                "depth": len(stack) + 1,
-            })
-            idx += 1
-            continue
-        elif kind == "OPEN":
-            # An OPEN not immediately preceded by a STR/WORD name has no
-            # attributable group name; nothing meaningful to push here.
-            idx += 1
-            continue
-    result.unmatched_opens = [(f["name"], f["name_line"]) for f in stack]
-    result.stack_depth_at_eof = len(stack)
-    return result
+# ascii_fold / tokenize / parse_structure / ParseResult / TOKEN_RE are no
+# longer defined in this file (Phase B0). They are re-exported here,
+# unchanged in behavior for valid input, from tools/sfm_master_core.py --
+# the single production semantic authority shared with the future compiler.
+# See sfm_master_core.py's module docstring for the grammar this validator
+# relies on, and for the one intentional hardening change (a quoted string
+# must close on the same line it opens; an unterminated quote is now a
+# reported grammar error instead of a silently dropped character -- see
+# SFM_MASTER_SIDECAR_PHASE_B0_SEMANTIC_CORE_AUDIT.md for full detail).
 
 
 def validate(path):
@@ -193,6 +117,19 @@ def validate(path):
             "stack_depth_at_eof": parsed.stack_depth_at_eof,
         }
         report["failures"].append({"kind": "structural_parse", "evidence": evidence})
+
+    # Grammar errors (Phase B0 hardening): content the supported grammar
+    # cannot classify -- e.g. a quoted string left unterminated on its
+    # line, or a "{" not attributable to any preceding group name. These
+    # were previously silently dropped/ignored; they are now explicit,
+    # reported failures. See sfm_master_core.py's module docstring.
+    report["grammar_error_count"] = len(parsed.grammar_errors)
+    if parsed.grammar_errors:
+        evidence = [
+            {"kind": e.kind, "line": e.line, "col": e.col, "message": e.message}
+            for e in parsed.grammar_errors
+        ]
+        report["failures"].append({"kind": "grammar_error", "evidence": evidence})
 
     # Exact duplicate control literals
     by_exact = defaultdict(list)
@@ -283,6 +220,7 @@ def format_report(report):
     lines.append(f"  cross-path (invariant violation): {report['cross_path_family_count']}")
     lines.append(f"Exact duplicate literals: {report['exact_duplicate_count']}")
     lines.append(f"Structural parse: {'PASS' if report['structural_parse_pass'] else 'FAIL'}")
+    lines.append(f"Grammar errors: {report['grammar_error_count']}")
     lines.append("")
 
     if report.get("warnings"):
@@ -308,6 +246,12 @@ def format_report(report):
                 lines.append(f"  literal: {item['literal']!r}")
                 for occ in item["occurrences"]:
                     lines.append(f"    path: {occ['path']!r}  line: {occ['line']}")
+            lines.append("")
+        elif kind == "grammar_error":
+            lines.append("Grammar error evidence (content the supported grammar could not classify):")
+            for item in evidence:
+                col = f" col {item['col']}" if item["col"] is not None else ""
+                lines.append(f"  [{item['kind']}] line {item['line']}{col}: {item['message']}")
             lines.append("")
         elif kind == "cross_path_casefold":
             lines.append("FAIL: native-Rebuild casefold family spans multiple paths")
