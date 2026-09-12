@@ -129,10 +129,34 @@ class _Backing(object):
     )
 
 
-def _read_all(path_or_bytes):
-    if isinstance(path_or_bytes, (bytes, bytearray)):
-        return bytes(path_or_bytes)
-    f = open(path_or_bytes, "rb")
+def _coerce_bytes(data):
+    """Explicit BYTES entry point. `data` is ALWAYS treated as already-loaded
+    complete sidecar artifact bytes -- never opened, never interpreted as a
+    filesystem path, regardless of its Python type or Python version. Raises
+    `TypeError` if it is not actually `bytes`/`bytearray` (defense-in-depth
+    only -- callers of the explicit bytes entry points are expected to
+    already know they hold bytes; this never attempts to guess otherwise)."""
+    if not isinstance(data, (bytes, bytearray)):
+        raise TypeError(
+            "open_generation_bytes()/open_generation_unbound_bytes() require bytes or bytearray, "
+            "got %r -- use open_generation_path()/open_generation_unbound_path() for a filesystem path" % (
+                type(data),
+            )
+        )
+    return bytes(data)
+
+
+def _read_path(path):
+    """Explicit PATH entry point. `path` is ALWAYS opened as a filesystem
+    path in binary mode and read completely -- never interpreted as raw
+    artifact bytes, regardless of its Python type or Python version. This is
+    the ONLY function in this module that ever calls `open()` on its
+    argument; there is no type-based dispatch anywhere in this file (the
+    final spec's Correction: under Python 2.7, `bytes is str`, so an
+    ordinary path string is indistinguishable from raw artifact bytes by
+    type alone -- the input MODE must be chosen explicitly by the caller,
+    never inferred)."""
+    f = open(path, "rb")
     try:
         return f.read()
     finally:
@@ -621,19 +645,40 @@ def _validate_and_decode(buf):
 
 
 class SidecarReader(object):
-    """One opened sidecar generation. Never constructed directly -- use
-    `open_generation` or `open_generation_unbound`."""
+    """One opened sidecar generation. Never constructed directly -- use one
+    of the explicit entry points below.
+
+    Input-mode contract (corrected -- see the module's Python-2.7 path/bytes
+    input fix): every entry point's NAME states, explicitly, whether its
+    argument is a filesystem path or already-loaded artifact bytes. There is
+    NO entry point that infers this from the argument's Python type --
+    under Python 2.7, `bytes is str`, so an ordinary path string is
+    indistinguishable from raw artifact bytes by type alone, and any
+    type-based dispatch is therefore genuinely ambiguous on that runtime,
+    not merely inconvenient.
+
+        open_generation_bytes(data, expected_source_sha256)         -- bytes, authority-bound
+        open_generation_path(path, expected_source_sha256)          -- path, authority-bound
+        open_generation_unbound_bytes(data)                         -- bytes, diagnostic-only
+        open_generation_unbound_path(path)                          -- path, diagnostic-only
+
+    `open_generation(...)` and `open_generation_unbound(...)` remain, as
+    explicitly documented BYTES-ONLY aliases for `open_generation_bytes`/
+    `open_generation_unbound_bytes` (never a path, on any Python version,
+    regardless of argument type) -- kept for backward compatibility with
+    existing callers that already only ever pass bytes. New code should
+    prefer the explicit `_bytes`/`_path` names."""
 
     STATE_VALID = "VALID"
     STATE_INVALID = "INVALID"
     STATE_CLEANED = "CLEANED"
 
     def __init__(self):
-        raise TypeError("use SidecarReader.open_generation(...) or open_generation_unbound(...)")
+        raise TypeError("use one of SidecarReader.open_generation_bytes(...)/open_generation_path(...)/"
+                         "open_generation_unbound_bytes(...)/open_generation_unbound_path(...)")
 
     @classmethod
-    def _open(cls, path_or_bytes, expected_source_sha256, bound):
-        buf = _read_all(path_or_bytes)
+    def _open_from_buf(cls, buf, expected_source_sha256, bound):
         backing = _validate_and_decode(buf)
         if bound:
             actual_hex = binascii.hexlify(backing.header.source_sha256).decode("ascii").lower()
@@ -651,21 +696,55 @@ class SidecarReader(object):
         return self
 
     @classmethod
-    def open_generation_unbound(cls, path_or_bytes):
-        """Diagnostic open: performs the full Section 20 structural
-        validation but does NOT verify the sidecar matches any particular
-        source. NOT authority-usable -- `lookup_fold` (and any other
-        authority query) raises `AuthorityUnavailable` on a handle opened
-        this way (Section 21)."""
-        return cls._open(path_or_bytes, None, bound=False)
+    def open_generation_unbound_bytes(cls, data):
+        """Diagnostic open from already-loaded artifact BYTES. Performs the
+        full Section 20 structural validation but does NOT verify the
+        sidecar matches any particular source. NOT authority-usable --
+        `lookup_fold` (and any other authority query) raises
+        `AuthorityUnavailable` on a handle opened this way (Section 21).
+        `data` is never interpreted as a filesystem path."""
+        return cls._open_from_buf(_coerce_bytes(data), None, bound=False)
 
     @classmethod
-    def open_generation(cls, path_or_bytes, expected_source_sha256):
-        """Authority-bound open. Raises `SourceMismatchError` (a subclass of
-        `AuthorityUnavailable`) before returning a usable handle if the
-        sidecar's embedded `source_sha256` does not match
-        `expected_source_sha256` (a lowercase or uppercase hex string)."""
-        return cls._open(path_or_bytes, expected_source_sha256, bound=True)
+    def open_generation_unbound_path(cls, path):
+        """Diagnostic open from a filesystem PATH, read in binary mode.
+        Same diagnostic-only (not authority-usable) contract as
+        `open_generation_unbound_bytes`. `path` is always opened as a file;
+        never interpreted as raw artifact bytes."""
+        return cls._open_from_buf(_read_path(path), None, bound=False)
+
+    @classmethod
+    def open_generation_bytes(cls, data, expected_source_sha256):
+        """Authority-bound open from already-loaded artifact BYTES. Raises
+        `SourceMismatchError` (a subclass of `AuthorityUnavailable`) before
+        returning a usable handle if the sidecar's embedded `source_sha256`
+        does not match `expected_source_sha256` (a lowercase or uppercase
+        hex string). `data` is never interpreted as a filesystem path."""
+        return cls._open_from_buf(_coerce_bytes(data), expected_source_sha256, bound=True)
+
+    @classmethod
+    def open_generation_path(cls, path, expected_source_sha256):
+        """Authority-bound open from a filesystem PATH, read in binary mode.
+        Same source-binding contract as `open_generation_bytes`. `path` is
+        always opened as a file; never interpreted as raw artifact bytes."""
+        return cls._open_from_buf(_read_path(path), expected_source_sha256, bound=True)
+
+    @classmethod
+    def open_generation_unbound(cls, data):
+        """Legacy alias for `open_generation_unbound_bytes` -- explicitly
+        BYTES-ONLY, on every Python version, regardless of `data`'s type.
+        Never guesses, never accepts a path. Prefer
+        `open_generation_unbound_bytes`/`open_generation_unbound_path`
+        explicitly in new code."""
+        return cls.open_generation_unbound_bytes(data)
+
+    @classmethod
+    def open_generation(cls, data, expected_source_sha256):
+        """Legacy alias for `open_generation_bytes` -- explicitly
+        BYTES-ONLY, on every Python version, regardless of `data`'s type.
+        Never guesses, never accepts a path. Prefer `open_generation_bytes`/
+        `open_generation_path` explicitly in new code."""
+        return cls.open_generation_bytes(data, expected_source_sha256)
 
     # -- Lifetime --
 
@@ -677,8 +756,10 @@ class SidecarReader(object):
         self._require_valid()
         if not self._bound:
             raise AuthorityUnavailable(
-                "this handle was opened via open_generation_unbound (diagnostic only); authority "
-                "queries require open_generation(path_or_bytes, expected_source_sha256)"
+                "this handle was opened via an unbound diagnostic entry point "
+                "(open_generation_unbound_bytes/open_generation_unbound_path/open_generation_unbound); "
+                "authority queries require an authority-bound open "
+                "(open_generation_bytes/open_generation_path/open_generation)"
             )
 
     def is_valid(self):

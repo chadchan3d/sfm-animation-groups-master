@@ -4,6 +4,21 @@ Qualification only, closing the sole remaining mandatory Gate 1 blocker: real Py
 `tools/sfm_master_sidecar/format.py` and `tools/sfm_master_sidecar/reader.py`. Not Gate 2 — no memory, VAS,
 timing, backing-strategy, or Normalizer work was performed or measured.
 
+> **STATUS UPDATE (superseding note — see Section 22 for full detail):** the run documented below is the
+> **original** H1 run. It exercised ONLY the legacy `open_generation(bytes, ...)` call shape — it never
+> passed a path string to the reader. A later Gate 2A resource-baseline task discovered that the reader's
+> then-current path/bytes type-dispatch (`isinstance(x, (bytes, bytearray))`) is inherently ambiguous under
+> Python 2.7 (where `bytes is str`), and reproduced a genuine defect when a path string was passed. That
+> discovery formally **REOPENED Gate 1 H1** — this document's original PASS verdict (Sections 1, 19–20) is
+> preserved below **exactly as it was recorded**, as an accurate historical record of what was actually
+> tested at the time, and must **not** be read as having covered the path-input boundary. A separate,
+> complete requalification was performed after the reader was corrected (explicit
+> `open_generation_bytes`/`open_generation_path`/`open_generation_unbound_bytes`/`open_generation_unbound_path`
+> entry points, no type dispatch) — see
+> `SFM_MASTER_SIDECAR_PY27_PATH_INPUT_FIX_AUDIT.md` Sections 8–11 for that full requalification's evidence,
+> and Section 22 below for the reconciliation. Gate 1 H1 is, as of that requalification, **RE-CLOSED / PASS**
+> against the corrected `reader.py`.
+
 ## 1. VERDICT
 
 **PASS.** The actual embedded Python 2.7.5 interpreter shipped inside this machine's real Source Filmmaker
@@ -329,3 +344,45 @@ own instruction ("Do not begin Gate 2 automatically").
 - Nothing staged, nothing committed (`git status --porcelain` unchanged from the pre-task baseline aside
   from this new audit file itself, which remains untracked pending a separate commit authorization).
 - No agents or subagents were used.
+
+## 22. ADDENDUM — Path-Input Defect Discovery, H1 Reopening, and Requalification
+
+This section is an ADDITION appended after the fact. **Sections 1–21 above are preserved unedited as the
+exact historical record of the original H1 run** — they are not retroactively reinterpreted as having tested
+anything they did not actually test.
+
+**What the original run above actually covered:** every check in Sections 7–17 called the reader exclusively
+through `open_generation(<already-decoded bytes>, expected_source_sha256)` (Section 6's artifacts were
+embedded as base64 text and decoded to bytes BEFORE being handed to the reader). **The original run never
+once passed a path string to the reader.** Its PASS verdict is accurate for exactly what it tested — bytes
+input — and remains true. It is not accurate to describe it, after the fact, as having qualified path-string
+input, and this document does not do so.
+
+**Why that mattered:** a later task (Gate 2A, embedded SFM x86 Candidate A resource baseline) called
+`reader.SidecarReader.open_generation(ARTIFACT_PATH, SOURCE_SHA256)` with a PATH STRING, inside the same real
+embedded Python 2.7.5 interpreter, and found the path text itself was misread as the artifact's own bytes.
+Root cause: the reader's `_read_all(path_or_bytes)` used `isinstance(path_or_bytes, (bytes, bytearray))` to
+decide whether to treat its argument as raw content or as a path to open — and under Python 2.7, `bytes IS
+str`, so an ordinary path string always satisfies that check. This is documented in full in
+`SFM_MASTER_SIDECAR_GATE2A_CANDIDATE_A_EMBEDDED_BASELINE_AUDIT.md` (left unchanged, a factual record of that
+blocked attempt) and formally reopened Gate 1 H1, since the original qualification above never exercised the
+call shape that actually failed.
+
+**Correction and requalification:** `reader.py` was corrected to remove all type-based path/bytes dispatch,
+replacing it with four explicit entry points (`open_generation_bytes`, `open_generation_path`,
+`open_generation_unbound_bytes`, `open_generation_unbound_path`); the legacy `open_generation`/
+`open_generation_unbound` names remain as explicitly-documented bytes-only aliases. Full root-cause analysis,
+the chosen API, and complete regression evidence are in `SFM_MASTER_SIDECAR_PY27_PATH_INPUT_FIX_AUDIT.md`.
+That document's Section 11 records a **complete H1 requalification**, run inside the real embedded Python
+2.7.5 interpreter against the newly-corrected `reader.py` (SHA-256
+`d79f7ae87c1999b7fe728f7dd6ddafb29b7cc62c246cd332f061875095288b00`, superseding the original run's
+`dd1e5da29058394c99e37f5eeaffd262c0b07421d052661ca51b06f1e11e7b02`): all 18 original checks from Sections
+7–17 above re-passed against the corrected file, PLUS three new checks specifically closing the Gate
+2A-discovered gap — explicit path-open PASS, explicit bytes-open PASS, and path/bytes semantic equivalence
+PASS (21/21 total).
+
+**Current status:** Gate 1 H1 is **RE-CLOSED / PASS**, qualified against the corrected `reader.py`
+identified above, per the requalification evidence in `SFM_MASTER_SIDECAR_PY27_PATH_INPUT_FIX_AUDIT.md`. The
+verdict text in Sections 1, 19, and 20 above is retained as-is because it was — and remains — a true
+statement about the original run's own (bytes-only) scope; it is this Section 22, not an edit to that
+original text, that carries the reopening/re-closure history forward.

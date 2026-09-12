@@ -70,7 +70,7 @@ class CustomMasterPublicCompilerTests(unittest.TestCase):
             result = publisher.publish(FIXTURES_ROOT / "valid" / "13_same_fold_different_destinations.txt", out)
             m = publisher.read_active_manifest(out)
             gen_path = Path(out) / m.generation_basename
-            r = reader.SidecarReader.open_generation(str(gen_path), m.source_sha256)
+            r = reader.SidecarReader.open_generation_path(str(gen_path), m.source_sha256)
             try:
                 res = r.lookup_fold(b"Bar")
                 self.assertIsInstance(res, reader.FoldConflict)
@@ -184,7 +184,7 @@ class CombinedCustomGateOneATests(unittest.TestCase):
             self.assertEqual(m.counts["groups"], 4)
             self.assertEqual(m.counts["occurrences"], 8)
 
-            r = reader.SidecarReader.open_generation(str(Path(out) / m.generation_basename), m.source_sha256)
+            r = reader.SidecarReader.open_generation_path(str(Path(out) / m.generation_basename), m.source_sha256)
             try:
                 res = r.lookup_fold(b"bar")
                 self.assertIsInstance(res, reader.FoldConflict)

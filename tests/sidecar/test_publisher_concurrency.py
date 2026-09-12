@@ -140,7 +140,7 @@ class TwoConcurrentPublishersTests(TempNamespaceTestCase):
         self.assertTrue(Path(gen_path).exists())
 
         from sfm_master_sidecar import reader
-        r = reader.SidecarReader.open_generation(gen_path, m.source_sha256)
+        r = reader.SidecarReader.open_generation_path(gen_path, m.source_sha256)
         try:
             self.assertTrue(r.is_valid())
         finally:

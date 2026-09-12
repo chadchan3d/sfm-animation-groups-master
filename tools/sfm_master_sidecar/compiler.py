@@ -211,8 +211,10 @@ def verify_semantic_parity(result, r):
 def self_validate_from_bytes(outcome):
     """Self-validation entry point for `--check-only` (no disk I/O): opens
     the compiled artifact directly from its in-memory bytes, via the real
-    production reader, and runs the full semantic-parity check."""
-    r = reader_module.SidecarReader.open_generation(outcome.blob, outcome.result.source_sha256)
+    production reader, and runs the full semantic-parity check. Uses the
+    explicit bytes entry point -- `outcome.blob` is never a filesystem
+    path."""
+    r = reader_module.SidecarReader.open_generation_bytes(outcome.blob, outcome.result.source_sha256)
     try:
         verify_semantic_parity(outcome.result, r)
     finally:
@@ -223,8 +225,10 @@ def self_validate_from_path(outcome, artifact_path):
     """Self-validation entry point for a real publication: opens the
     compiled artifact from the ACTUAL BYTES WRITTEN TO DISK (not the
     in-memory `blob`), proving what will be published is what was
-    validated, not merely what was intended."""
-    r = reader_module.SidecarReader.open_generation(str(artifact_path), outcome.result.source_sha256)
+    validated, not merely what was intended. Uses the explicit path entry
+    point -- `artifact_path` is always opened as a file, never treated as
+    raw bytes."""
+    r = reader_module.SidecarReader.open_generation_path(str(artifact_path), outcome.result.source_sha256)
     try:
         verify_semantic_parity(outcome.result, r)
     finally:

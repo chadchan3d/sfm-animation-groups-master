@@ -8,8 +8,11 @@ modified during this pass.
 
 **GATE 1 PASS.**
 
-**Closed in the H1 closure pass** (see `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`): H1, the sole
-remaining mandatory Gate 1 blocker, is now **PASS** — the real, committed, byte-verified
+**Closed in the H1 closure pass** (see `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`), **briefly
+REOPENED**, and **RE-CLOSED via a corrected-reader requalification** (see Section 24 for the full
+reopen/re-close history — the original H1 closure text immediately below is retained as the accurate record
+of what that first pass covered; do not read it as covering the path-input boundary, which it did not): H1,
+the sole remaining mandatory Gate 1 blocker, is now **PASS** — the real, committed, byte-verified
 `tools/sfm_master_sidecar/{format,reader}.py` executed successfully inside the actual embedded Python 2.7.5
 interpreter shipped in this machine's real Source Filmmaker installation
 (`E:\SteamLibrary\steamapps\common\SourceFilmmaker\game\sfm.exe`, Python 2.7.5, MSC v.1600, 32-bit Intel),
@@ -17,20 +20,25 @@ passing all 18 required bounded runtime-compatibility checks (HIT, same-destinat
 cross-destination FoldConflict, exact-spelling-inside-conflict, MasterUnknown, group/metadata/occurrence
 iteration, checksum-invalid rejection, source-mismatch rejection, close/close/post-close/lazy-after-close,
 and the mandatory error-classification distinction) with zero uncaught exceptions and zero incorrect
-results. Combined with the current, explicitly-adopted public-compiler support contract — **Windows only,
+results — **now proven for both the explicit path-open and explicit bytes-open entry points, and their
+semantic equivalence, per Section 24 / `SFM_MASTER_SIDECAR_PY27_PATH_INPUT_FIX_AUDIT.md`.** Combined with the
+current, explicitly-adopted public-compiler support contract — **Windows only,
 CPython 3.10.x only** (Section 23) — under which cross-OS determinism and cross-Python-3-minor-version
 determinism are both **NOT REQUIRED FOR GATE 1** (they are not mandatory items for a contract that does not
 itself claim that breadth), **there are no remaining Gate 1 blockers of any kind.**
 
 Every implementation/correctness requirement this project controls has actual, current, re-verified
-evidence: 395 tests / 255 subtests passing, the validator PASS, the official artifact reproducing its exact
-qualified SHA through the public compiler, every phase-critical suite (B2A oracle parity, B2C corruption
-matrix, B2D full official parity, B2E publication/concurrency/custom-compiler) re-run fresh and passing at
-full, non-sampled strength, and now real embedded-target Python 2.7 execution. No test failed. No
-correctness defect was found anywhere. **Final Gate 1 matrix: 36 / 36 mandatory items PASS. 0 OPEN. 0
-FAIL.** Gate 2 (embedded x86 resource/performance qualification), the Normalizer consumer-contract check,
-SFM/DME byte-Unicode consumer adaptation, and format v1 freeze all remain explicitly post-Gate-1 (Section
-20) and are NOT begun by this verdict.
+evidence: 411 tests / 255 subtests passing (Section 24), the validator PASS, the official artifact reproducing
+its exact qualified SHA through the public compiler (unchanged even after the H1 path/bytes reader
+correction), every phase-critical suite (B2A oracle parity, B2C corruption matrix, B2D full official parity,
+B2E publication/concurrency/custom-compiler) re-run fresh and passing at full, non-sampled strength, and now
+real embedded-target Python 2.7 execution of the corrected reader, over BOTH its bytes and path entry points.
+No test failed. No correctness defect remains open anywhere. **Final Gate 1 matrix: 36 / 36 mandatory items
+PASS. 0 OPEN. 0 FAIL.** Gate 2 (embedded x86 resource/performance qualification), the Normalizer
+consumer-contract check, SFM/DME byte-Unicode consumer adaptation, and format v1 freeze all remain explicitly
+post-Gate-1 (Section 20) and are NOT begun by this verdict. Gate 2A's own first attempt remains a separate,
+still-blocked historical record (Section 24) — a fresh Gate 2A resource-baseline run may now proceed as its
+own, separately-authorized task.
 
 ## 2. QUALIFIED BASELINE / COMMIT
 
@@ -80,7 +88,7 @@ SFM/DME byte-Unicode consumer adaptation, and format v1 freeze all remain explic
 | G6 | Publication | Concurrent publishers never corrupt the namespace | **PASS** | B2E; re-run passing (real subprocess race test) |
 | G7 | Publication | Crash/failure preservation (prior manifest survives) | **PASS** | B2E; re-confirmed live in this pass |
 | G8 | Publication | Generation reuse (no duplicate churn) | **PASS** | B2E; re-confirmed live in this pass |
-| H1 | Runtime compatibility | Real Python 2.7 execution of the reader | **PASS** | `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`: real embedded Python 2.7.5 (32-bit) inside `sfm.exe`, 18/18 checks PASS (Section 14) |
+| H1 | Runtime compatibility | Real Python 2.7 execution of the reader (bytes AND explicit path input) | **PASS** | `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md` (original 18/18 bytes-only run, Section 14) + Section 22 addendum there + `SFM_MASTER_SIDECAR_PY27_PATH_INPUT_FIX_AUDIT.md` Section 11 (corrected-reader requalification: 21/21, including explicit path-open, explicit bytes-open, and path/bytes equivalence, inside real embedded Python 2.7.5) — see Section 24 below |
 | I1 | Determinism environments | Cross-Python-3-minor-version identical output | **NOT REQUIRED (Section 23)** | Current contract: CPython 3.10.x only — no range claimed |
 | I2 | Determinism environments | Cross-OS identical output | **NOT REQUIRED (Section 23)** | Current contract: Windows only — SFM/EXE target is Windows-only |
 
@@ -287,6 +295,11 @@ clarity):
 
 No test was skipped, weakened, or sampled to obtain these results.
 
+**Superseded by Section 24:** following the H1 reopening and the reader's path/bytes correction, the suite
+was re-run again and now stands at **411 passed, 0 failed, 255 subtests passed** — the +16 delta is exactly
+the new `tests/sidecar/test_reader_path_bytes_input.py` regression file; no other test count changed, and the
+four suite counts in the table above are unchanged and still individually re-confirmed passing (Section 24).
+
 ## 18. VALIDATOR
 
 `python tools/validate_master.py sfm_defaultanimationgroups.txt` → **PASS**. Groups=43, controls=128,555,
@@ -462,3 +475,63 @@ fixture only, no timing/memory measurement, no official-Master-scale operation) 
 mistaken for, or accidentally slide into, Gate 2 performance/memory qualification work. **Recommended next
 concrete step, for a separately-authorized future task:** first confirm SFM's actual installation path and
 its script-execution surface on this machine, before attempting to build or run any probe.
+
+## 24. H1 REOPENING AND CORRECTED-READER RE-CLOSURE (Python 2.7 path/bytes input-boundary fix)
+
+This section records a subsequent event that briefly reopened, and has now re-closed, H1 — appended after the
+fact; Sections 1–23 above are otherwise left as the historical record of the passes that produced them.
+
+**Reopening.** A later task (Gate 2A, embedded SFM x86 Candidate A resource baseline) called
+`reader.SidecarReader.open_generation(ARTIFACT_PATH, SOURCE_SHA256)` with a PATH STRING, inside the real
+embedded Python 2.7.5 interpreter, and found the path text itself was misread as the artifact's own content.
+Root cause: `reader.py`'s `_read_all(path_or_bytes)` used `isinstance(path_or_bytes, (bytes, bytearray))` to
+choose between "open this as a file" and "treat this as already-loaded content" — and under Python 2.7,
+`bytes IS str`, so an ordinary path string always satisfied that check. This is a categorical, 100%
+reproducible defect for any path-string call, not an edge case. It was invisible to every prior test and to
+the original H1 run (Sections 2–19 of `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`) because that run
+exclusively passed already-decoded bytes, never a path string, to the reader. Full record of the discovery:
+`SFM_MASTER_SIDECAR_GATE2A_CANDIDATE_A_EMBEDDED_BASELINE_AUDIT.md` (left unchanged — its own verdict remains
+"STOP — GENUINE DEFECT DISCOVERED... Candidate A resource verdict NOT REACHED"; Gate 2A's OWN resource
+verdict is still not reached and is a separate matter from this H1 reclosure).
+
+This formally reopened H1: the original run's PASS verdict was true for what it tested (bytes input) but had
+never exercised the call shape that turned out to be broken (path input) — so H1 could not be treated as
+covering path-string input until that gap was closed.
+
+**Correction.** `reader.py` was corrected to eliminate all type-based path/bytes dispatch. Four explicit
+classmethods now exist — `open_generation_bytes`, `open_generation_path`, `open_generation_unbound_bytes`,
+`open_generation_unbound_path` — and the legacy `open_generation`/`open_generation_unbound` names remain as
+explicitly-documented, bytes-only aliases (never a path, on any Python version, regardless of the argument's
+runtime type). `compiler.py`'s two call sites, and four test call sites, were migrated to state their bytes/
+path intent explicitly. Full root-cause analysis, chosen API, and complete regression evidence:
+`SFM_MASTER_SIDECAR_PY27_PATH_INPUT_FIX_AUDIT.md`.
+
+**Re-closure evidence.**
+- New `reader.py` SHA-256: `d79f7ae87c1999b7fe728f7dd6ddafb29b7cc62c246cd332f061875095288b00` (was
+  `dd1e5da29058394c99e37f5eeaffd262c0b07421d052661ca51b06f1e11e7b02`).
+- Official artifact SHA-256 recompiled through the unchanged public compiler: still exactly
+  `bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b` — proves the fix touched only reader
+  input handling, never the binary format.
+- Complete H1 requalification, run inside the real embedded Python 2.7.5 interpreter in `sfm.exe` against the
+  corrected `reader.py`: all 18 original H1 checks re-passed, plus 3 new checks (explicit path-open, explicit
+  bytes-open, path/bytes semantic equivalence) — **21 / 21 PASS**
+  (`SFM_MASTER_SIDECAR_PY27_PATH_INPUT_FIX_AUDIT.md` Sections 8–11;
+  `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md` Section 22).
+- Full repository regression: `python -m pytest tests/ -q` → **411 passed, 0 failed, 255 subtests passed**
+  (prior baseline 395/255; the +16 delta is exactly the new `test_reader_path_bytes_input.py` file).
+  Validator PASS (Groups=43, controls=128,555, fold keys=124,728, 0 duplicates, 0 cross-path invariant
+  violations). `git diff --check` clean. B2A/B2C/B2D/B2E suites individually re-confirmed still passing.
+
+**Current status: H1 is RE-CLOSED / PASS**, qualified against the corrected `reader.py` identified above.
+**Final Gate 1 matrix stands, unchanged in count, at 36 / 36 mandatory items PASS, 0 OPEN, 0 FAIL** — the
+reopening and re-closure both occurred within this consolidation's own H1 row and did not, at any point,
+leave the overall Gate 1 verdict in a PASS state that was not actually earned; Sections 1 and 3 above have
+been updated in place to point here and to the corrected evidence, per the normal practice of this living
+consolidation document (distinct from the dedicated H1 runtime-audit document, which preserves its original
+run as an unedited historical record — see that document's own Section 22).
+
+Gate 2A's blocked first attempt remains exactly as recorded in
+`SFM_MASTER_SIDECAR_GATE2A_CANDIDATE_A_EMBEDDED_BASELINE_AUDIT.md` — not superseded by this section, since
+that document's verdict was about resource measurement being blocked, not about H1. A fresh Gate 2A run,
+now unblocked by this correction, is available as a separate, separately-authorized future task; it was not
+begun or resumed here.

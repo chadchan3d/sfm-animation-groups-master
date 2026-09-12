@@ -135,7 +135,7 @@ class ManifestReadbackTests(TempNamespaceTestCase):
         actual_sha = hashlib.sha256(Path(gen_path).read_bytes()).hexdigest()
         self.assertEqual(actual_sha, m.sidecar_sha256)
 
-        r = reader.SidecarReader.open_generation(gen_path, m.source_sha256)
+        r = reader.SidecarReader.open_generation_path(gen_path, m.source_sha256)
         try:
             self.assertTrue(r.is_valid())
         finally:
