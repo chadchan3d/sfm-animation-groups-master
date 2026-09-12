@@ -6,24 +6,31 @@ modified during this pass.
 
 ## 1. VERDICT
 
-**GATE 1 QUALIFIED EXCEPT FOR EXTERNAL ENVIRONMENT EVIDENCE.**
+**GATE 1 PASS.**
 
-**Revised in the reconciliation pass (see Section 23):** the current, explicitly-adopted public-compiler
-support contract is **Windows only, CPython 3.10.x only** (no broader OS or Python-3-minor-version range has
-ever been documented, tested, or promised anywhere in this project's history). Under that honestly-scoped
-contract, cross-OS determinism and cross-Python-3-minor-version determinism are both **NOT REQUIRED FOR
-GATE 1** — they are not mandatory items for a contract that does not itself claim that breadth. This leaves
-exactly **one** remaining mandatory Gate 1 blocker: **H1, real Python 2.7 execution of the reader**, still
-genuinely OPEN (no interpreter available; none installed, per explicit instruction).
+**Closed in the H1 closure pass** (see `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`): H1, the sole
+remaining mandatory Gate 1 blocker, is now **PASS** — the real, committed, byte-verified
+`tools/sfm_master_sidecar/{format,reader}.py` executed successfully inside the actual embedded Python 2.7.5
+interpreter shipped in this machine's real Source Filmmaker installation
+(`E:\SteamLibrary\steamapps\common\SourceFilmmaker\game\sfm.exe`, Python 2.7.5, MSC v.1600, 32-bit Intel),
+passing all 18 required bounded runtime-compatibility checks (HIT, same-destination alias family,
+cross-destination FoldConflict, exact-spelling-inside-conflict, MasterUnknown, group/metadata/occurrence
+iteration, checksum-invalid rejection, source-mismatch rejection, close/close/post-close/lazy-after-close,
+and the mandatory error-classification distinction) with zero uncaught exceptions and zero incorrect
+results. Combined with the current, explicitly-adopted public-compiler support contract — **Windows only,
+CPython 3.10.x only** (Section 23) — under which cross-OS determinism and cross-Python-3-minor-version
+determinism are both **NOT REQUIRED FOR GATE 1** (they are not mandatory items for a contract that does not
+itself claim that breadth), **there are no remaining Gate 1 blockers of any kind.**
 
 Every implementation/correctness requirement this project controls has actual, current, re-verified
 evidence: 395 tests / 255 subtests passing, the validator PASS, the official artifact reproducing its exact
-qualified SHA through the public compiler, and every phase-critical suite (B2A oracle parity, B2C corruption
+qualified SHA through the public compiler, every phase-critical suite (B2A oracle parity, B2C corruption
 matrix, B2D full official parity, B2E publication/concurrency/custom-compiler) re-run fresh and passing at
-full, non-sampled strength. No test failed. No defect was found. Per this task's own Part 11 rule, "all
-implementation work PASS, one or more required environmental executions currently unavailable" is exactly
-"GATE 1 QUALIFIED EXCEPT FOR EXTERNAL ENVIRONMENT EVIDENCE," not GATE 1 PASS and not GATE 1 FAIL — and that
-single remaining required execution is now precisely identified as H1 alone.
+full, non-sampled strength, and now real embedded-target Python 2.7 execution. No test failed. No
+correctness defect was found anywhere. **Final Gate 1 matrix: 36 / 36 mandatory items PASS. 0 OPEN. 0
+FAIL.** Gate 2 (embedded x86 resource/performance qualification), the Normalizer consumer-contract check,
+SFM/DME byte-Unicode consumer adaptation, and format v1 freeze all remain explicitly post-Gate-1 (Section
+20) and are NOT begun by this verdict.
 
 ## 2. QUALIFIED BASELINE / COMMIT
 
@@ -73,14 +80,13 @@ single remaining required execution is now precisely identified as H1 alone.
 | G6 | Publication | Concurrent publishers never corrupt the namespace | **PASS** | B2E; re-run passing (real subprocess race test) |
 | G7 | Publication | Crash/failure preservation (prior manifest survives) | **PASS** | B2E; re-confirmed live in this pass |
 | G8 | Publication | Generation reuse (no duplicate churn) | **PASS** | B2E; re-confirmed live in this pass |
-| H1 | Runtime compatibility | Real Python 2.7 execution of the reader | **OPEN — ENVIRONMENT UNAVAILABLE** | No interpreter found (Section 14) |
-| I1 | Determinism environments | Cross-Python-3-minor-version identical output | **NOT REQUIRED (revised, Section 23)** | Current contract: CPython 3.10.x only — no range claimed |
-| I2 | Determinism environments | Cross-OS identical output | **NOT REQUIRED (revised, Section 23)** | Current contract: Windows only — SFM/EXE target is Windows-only |
+| H1 | Runtime compatibility | Real Python 2.7 execution of the reader | **PASS** | `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`: real embedded Python 2.7.5 (32-bit) inside `sfm.exe`, 18/18 checks PASS (Section 14) |
+| I1 | Determinism environments | Cross-Python-3-minor-version identical output | **NOT REQUIRED (Section 23)** | Current contract: CPython 3.10.x only — no range claimed |
+| I2 | Determinism environments | Cross-OS identical output | **NOT REQUIRED (Section 23)** | Current contract: Windows only — SFM/EXE target is Windows-only |
 
-**Mandatory Gate 1 items (revised): 35 of 36 mandatory rows PASS. 1 row (H1) OPEN — ENVIRONMENT
-UNAVAILABLE. Zero FAIL rows. I1/I2 are explicitly NOT mandatory under the current, honestly-scoped
-support contract (Section 23) and are excluded from the mandatory PASS/OPEN/FAIL count — they remain
-listed for traceability, not because they block this verdict.**
+**Mandatory Gate 1 items: 36 of 36 mandatory rows PASS. 0 OPEN. 0 FAIL. I1/I2 are explicitly NOT mandatory
+under the current, honestly-scoped support contract (Section 23) and are excluded from the mandatory
+PASS/OPEN/FAIL count — they remain listed for traceability, not because they ever blocked this verdict.**
 
 ## 4. SOURCE SEMANTICS
 
@@ -180,26 +186,43 @@ call to a temporary namespace (Section 9), producing the identical generation ba
 
 ## 14. PYTHON 2.7 REAL-EXECUTION STATUS
 
-**Available: NO.** Conservative search performed, no installation/download attempted, per explicit
-instruction:
+**Status: PASS — CLOSED.** No standalone Python 2.7 interpreter was ever found or installed on this
+development machine (the original conservative search below remains accurate and is retained for the
+historical record), but this project's own actual target runtime — Source Filmmaker's embedded Python
+2.7 — was located, confirmed genuine, and used directly, per explicit user authorization, in a dedicated
+follow-up task. Full detail: `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`.
 
-- `py -0` (the Python Launcher for Windows' own registry of installed versions): lists only `-V:3.10`.
-- `py -2 --version`: falls through to Python 3.10.6 (the launcher has no `-2` mapping registered; it silently
-  ran the only version it knows about instead of failing outright).
-- `where python2` / `where python2.7` / `where python27`: all report "Could not find files for the given
-  pattern(s)."
-- No `C:\Python27`, `C:\Program Files\Python27`, `C:\Program Files (x86)\Python27`, or
-  `%LOCALAPPDATA%\Programs\Python\Python27` directory exists.
-- `%LOCALAPPDATA%\Programs\Python\` contains only a `Python310` subdirectory (confirmed by direct listing).
-- No `conda` or `pyenv` executable found on `PATH`.
-- The `PATH` environment variable does contain a `Python311` entry, but the directory it points to does not
-  exist on disk (a stale/orphaned PATH entry, not a real interpreter) — checked directly and explicitly
-  rejected as evidence rather than assumed usable.
+- **Target:** `E:\SteamLibrary\steamapps\common\SourceFilmmaker\game\sfm.exe`, located via Steam's own
+  library configuration (never modified).
+- **Interpreter identity, recorded directly from `sys` inside the running process:** `sys.version = '2.7.5
+  (default, Jul 3 2013, 16:44:46) [MSC v.1600 32 bit (Intel)]'`; `sys.executable` resolved to `sfm.exe`
+  itself; pointer size 32-bit.
+- **Runtime module identity:** `format.py` SHA-256 `b401967db8d07943e9f171058a006c30f0e23eb70a7b43bb5ab950203a3c3259`
+  and `reader.py` SHA-256 `dd1e5da29058394c99e37f5eeaffd262c0b07421d052661ca51b06f1e11e7b02` — the exact
+  committed repository files, confirmed byte-identical both before deployment and from inside the running
+  probe itself. No hand-edited compatibility copy was used.
+- **Method:** a single temporary script placed in SFM's own already-existing, already-proven startup-script
+  location (`usermod\scripts\sfm\autoinit\`, evidenced by the pre-existing `sfm_init.py`'s own comment
+  identifying it as "Initial Script after SFM started up"). Executed once; fully removed afterward.
+- **Result: 18 / 18 required bounded runtime-compatibility checks PASS** — import, ordinary HIT,
+  same-destination alias family (complete evidence), cross-destination FoldConflict, exact-spelling-inside-
+  conflict (still FoldConflict, never Hit), MasterUnknown (and never substituted for any error case), full
+  group/metadata/occurrence iteration, ASCII-only byte-fold with non-ASCII bytes and escape spelling
+  preserved exactly, checksum-invalid rejection, source-mismatch rejection, and the full close/close/
+  post-close/lazy-after-close lifecycle sequence.
+- No production code was modified as a result of this run. One documentation-wording discrepancy was found
+  and corrected (the Python 2 reader's decoded strings are `unicode`-valued via strict UTF-8 decoding, not
+  plain `str`/bytes as one now-corrected sentence in the H1 audit's first draft had implied) — this caused
+  no functional defect and does not affect this PASS status; final SFM/DME-facing byte/Unicode representation
+  choices remain explicitly post-Gate-1 consumer/Gate-2 work (Section 20).
 
-**Status: OPEN — ENVIRONMENT UNAVAILABLE.** No interpreter was installed, downloaded, or bundled, per
-explicit instruction. Static/import-discipline evidence (`test_runtime_import_boundary.py`, unchanged since
-B2B, still passing under Python 3) remains supporting evidence only and is NOT substituted for real
-execution anywhere in this document.
+**Original conservative standalone-interpreter search (historical record, superseded as the blocking
+concern by the above):** `py -0` listed only `-V:3.10`; `py -2 --version` fell through to 3.10.6 (no `-2`
+mapping registered); `where python2`/`python2.7`/`python27` all failed to match; no `Python27` install
+directory existed anywhere checked; no `conda`/`pyenv` found; a `Python311` `PATH` entry was confirmed
+stale (directory does not exist) and was not used as evidence. No interpreter was ever installed,
+downloaded, or bundled to close this gap — it was closed exclusively by locating and using an
+already-installed, already-existing target environment, per explicit authorization.
 
 ## 15. PYTHON 3 DETERMINISM STATUS
 
@@ -272,41 +295,38 @@ unchanged from every prior phase's baseline.
 
 ## 19. OPEN EXTERNAL EVIDENCE
 
-**Revised in the reconciliation pass (Section 23):** with cross-OS and cross-Python-3-minor-version both
-reclassified NOT REQUIRED under the now-explicit Windows-only/CPython-3.10.x-only current support contract,
-exactly **one** item remains open:
-
-1. **Real Python 2.7 execution** of `format.py`/`reader.py` (Section 14) — the single remaining Gate 1A gap,
-   and now the sole remaining mandatory Gate 1 blocker of any kind.
-
-This is environmental (requires a resource — a Python 2.7 interpreter, or access to SFM's own embedded one —
-not currently exercised) rather than a correctness defect. No implementation code is implicated. Section 23
-assesses whether SFM's own embedded Python 2.7 could serve as a stronger, narrower evidence path than an
-unrelated standalone install, without beginning any Gate 2 work.
+**None remain.** H1 (real Python 2.7 execution) is now PASS (Section 14), closed via SFM's own embedded
+interpreter. Cross-OS and cross-Python-3-minor-version determinism are both NOT REQUIRED under the current,
+explicitly-adopted support contract (Section 23). There is no mandatory Gate 1 item, of any kind, left
+without evidence.
 
 ## 20. EXPLICITLY POST-GATE-1 WORK
 
-The following are explicitly NOT Gate 1 blockers and are not evaluated by this audit:
+The following are explicitly NOT Gate 1 blockers, were NOT evaluated or begun by this audit or the H1
+closure pass, and remain future work requiring separate authorization:
 
 - Embedded SFM x86 memory/VAS behavior, open-time latency, and input-string conversion cost (final spec
   Section 42, Gate 2 deferred measurements).
 - Generation-overlap cost during a hot-swap inside a running SFM process (Gate 2).
 - The Candidate A vs. B vs. C backing comparison (Gate 2 — only Candidate A is built or required for Gate 1,
   per the final spec's own explicit scoping, unchanged since B1.2).
+- **SFM/DME byte-Unicode consumer adaptation** — the H1 probe proved the reader's own `unicode`-valued
+  decoding is internally correct and defect-free (Section 14), but the eventual choice of what string
+  representation the Normalizer/DME-facing consumer boundary actually wants (`unicode`, `str`, or a specific
+  DME-compatible type) has not been decided or implemented anywhere.
 - The Normalizer adapter/provider seam and any real consumer-contract check against the actual Normalizer
   (final spec Section 43/44 — explicitly deferred past Gate 1 by the spec itself).
 - Format v1 freeze (final spec Section 44's milestone sequence places this strictly after Final Gate 1 PASS
-  AND a Gate 2 measurement AND the Normalizer check — none of which have occurred).
+  AND a Gate 2 measurement AND the Normalizer check — Final Gate 1 PASS is now satisfied, but the other two
+  have not occurred).
 
 ## 21. GATE 2 READINESS
 
-**Revised:** once the single remaining environmental gap (Section 14 — real Python 2.7 execution) is
-closed — by locating an already-available interpreter (standalone, or via SFM's own embedded Python 2.7, see
-Section 23), or by separate future authorization to provision one — Final Gate 1 PASS can be declared
-without any further implementation work, since every correctness requirement this project controls already
-has current, passing, non-sampled evidence, and both determinism-environment items (I1/I2) are no longer
-mandatory blockers under the now-explicit support contract. Gate 2's own scope (Section 20) has not been
-started and is not claimed as started anywhere in this document.
+**Gate 1 is now fully closed (Section 1/3): every correctness requirement this project controls has current,
+passing, non-sampled evidence, including real embedded-target Python 2.7 execution.** Gate 2 (Section 20)
+may now be authorized as a separate, explicit next step whenever desired — it has NOT been started, and
+nothing in this document or the H1 closure pass began any Gate 2 measurement, Normalizer integration, or
+format v1 freeze.
 
 ## 22. GIT / SAFETY STATE
 
@@ -321,11 +341,15 @@ started and is not claimed as started anywhere in this document.
   its own script; confirmed via `find . -iname "*.bin"` / `*.json` / `*.lock` returning nothing outside
   `.git/`).
 - `git diff --check`: clean.
-- HEAD unchanged: `1c05db9f8ef06e52c27a7f6205be21a358447c76`.
-- `git status`: identical to the pre-pass baseline (only the single pre-existing unrelated untracked file,
-  `tools/extract_phase2_human_review.py`, PLUS this audit document itself and every other historical
-  untracked file already present in the repository root before Phase B2A began — see Section 23.1 for the
-  full explanation of why an earlier report of this fact was imprecise).
+- HEAD at the start of the original reconciliation pass: `1c05db9f8ef06e52c27a7f6205be21a358447c76`; at the
+  start of the subsequent H1-closure documentation pass (this revision): `4a63f7fad30874d1d38933786bbaba97b3444caa`
+  (the commit that checkpointed this document's prior revision) — both unchanged by their own respective
+  passes' production-code diffs.
+- `git status`: identical in composition to the pre-pass baseline (only the single pre-existing unrelated
+  untracked file, `tools/extract_phase2_human_review.py`, plus this audit document and
+  `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`, plus every other historical untracked file already
+  present in the repository root before Phase B2A began — see Section 23.1 for the full explanation of why
+  an earlier report of this fact was imprecise).
 - No agents or subagents were used.
 
 ## 23. RECONCILIATION ADDENDUM (support-contract + audit-file git-state + Python 2.7 path assessment)
@@ -395,13 +419,18 @@ could be honestly made.
 - **Cross-OS determinism → NOT REQUIRED FOR GATE 1**, under the Windows-only contract (23.2).
 - **Cross-Python-3-minor-version determinism → NOT REQUIRED FOR GATE 1**, under the CPython-3.10.x-only
   contract (23.2). Hash-seed determinism (a different, already-PASSing axis) is unaffected and remains PASS.
-- **Python 2.7 real execution (H1): UNCHANGED, remains OPEN.** Nothing in this addendum touches its status;
-  Part 5's own instruction is explicit that only actual execution evidence can close it.
+- **Python 2.7 real execution (H1): subsequently CLOSED — now PASS**, in a dedicated follow-up task, via
+  real execution inside SFM's own embedded interpreter (Section 14; full detail in
+  `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`). This addendum's original text (below, in 23.4)
+  correctly identified that path as feasible before it was actually attempted; the assessment is retained
+  unmodified as the historical record of that reasoning.
 
 ### 23.4 Feasibility assessment: SFM's own embedded Python 2.7 as a narrower Gate 1 test path
 
-**Not attempted in this pass (SFM was not run, per explicit instruction) — assessment only, for a possible
-future task.**
+**Historical record.** At the time this section was originally written, this was assessment only — SFM had
+not been run. It was subsequently attempted, with explicit user authorization, and succeeded completely
+(Section 14; `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`). The reasoning below is preserved
+unmodified as the record of that assessment.
 
 Source Filmmaker ships with an embedded CPython 2.7 interpreter as part of its own scripting/console
 environment (this is the runtime the eventual Normalizer/consumer integration would actually use — the same
@@ -420,7 +449,9 @@ file, since capturing console stdout back into this automation session may not b
 **This machine shows evidence of SFM being used** (multiple `SourceFilmMaker Sessions` project directories
 exist on two drives), but **no evidence was found of the actual SFM game installation directory itself**
 (no `steamapps\common\SourceFilmmaker`-style path was located in the locations checked) — this would need
-to be confirmed as the concrete first step of any future attempt, before anything else.
+to be confirmed as the concrete first step of any future attempt, before anything else. *(Superseded: the
+subsequent H1 closure task did locate it, via Steam's own library configuration —
+`E:\SteamLibrary\steamapps\common\SourceFilmmaker` — see Section 14.)*
 
 **Assessed as plausible and potentially stronger evidence** than an unrelated standalone Python 2.7 install,
 specifically because it would exercise the actual runtime this project ultimately cares about, PROVIDED all
