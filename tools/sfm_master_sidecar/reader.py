@@ -904,6 +904,18 @@ class SidecarReader(object):
                     len(query), fmt.LIMIT_READER_QUERY_BYTE_LENGTH,
                 )
             )
+        # Gate A1 correction: `query` must be validated as strict, exact
+        # UTF-8 BEFORE ASCII folding / binary search / absence
+        # classification -- malformed bytes are an input/query error
+        # (ValueError, via the same UnicodeDecodeError the STRING TABLE's
+        # own decode step already uses for stored-string corruption, since
+        # UnicodeDecodeError IS a ValueError subclass -- no new exception
+        # class, matching the existing TypeError/ValueError query-boundary
+        # philosophy exactly), never a silently-accepted "absent" query.
+        # The decoded value itself is discarded: folding still operates on
+        # the original bytes, unchanged from before this correction -- this
+        # is a validation-only step, not a decoding/normalization step.
+        query.decode("utf-8")
         folded = fmt.ascii_fold_bytes(query)
 
         backing = self._backing

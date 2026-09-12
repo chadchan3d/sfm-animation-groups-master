@@ -8,6 +8,12 @@ modified during this pass.
 
 **GATE 1 PASS.**
 
+**Reopened a second time, narrowly, by an independent review finding (query-boundary correctness — malformed
+UTF-8 query bytes could silently resolve to `MasterUnknown` instead of raising an input error) and RE-CLOSED
+again after a bounded correction and full requalification — see Section 25 for that full history.** This
+second reopening did not touch H1, path/bytes correctness, artifact identity, structural corruption
+rejection, compiler determinism, or publication qualification — those remain exactly as closed in Section 24.
+
 **Closed in the H1 closure pass** (see `SFM_MASTER_SIDECAR_GATE1_H1_PY27_RUNTIME_AUDIT.md`), **briefly
 REOPENED**, and **RE-CLOSED via a corrected-reader requalification** (see Section 24 for the full
 reopen/re-close history — the original H1 closure text immediately below is retained as the accurate record
@@ -28,11 +34,13 @@ determinism are both **NOT REQUIRED FOR GATE 1** (they are not mandatory items f
 itself claim that breadth), **there are no remaining Gate 1 blockers of any kind.**
 
 Every implementation/correctness requirement this project controls has actual, current, re-verified
-evidence: 411 tests / 255 subtests passing (Section 24), the validator PASS, the official artifact reproducing
-its exact qualified SHA through the public compiler (unchanged even after the H1 path/bytes reader
-correction), every phase-critical suite (B2A oracle parity, B2C corruption matrix, B2D full official parity,
-B2E publication/concurrency/custom-compiler) re-run fresh and passing at full, non-sampled strength, and now
-real embedded-target Python 2.7 execution of the corrected reader, over BOTH its bytes and path entry points.
+evidence: 421 tests / 265 subtests passing (Section 25 supersedes Section 24's 411/255 figure — the +10/+10
+delta is exactly the new Gate A1 malformed-query regression suite), the validator PASS, the official artifact
+reproducing its exact qualified SHA through the public compiler (unchanged even after both the H1 path/bytes
+reader correction and the Gate A1 query-boundary correction), every phase-critical suite (B2A oracle parity,
+B2C corruption matrix, B2D full official parity, B2E publication/concurrency/custom-compiler) re-run fresh and
+passing at full, non-sampled strength, and now real embedded-target Python 2.7 execution of the corrected
+reader, over BOTH its bytes and path entry points, and over both valid and malformed query encodings.
 No test failed. No correctness defect remains open anywhere. **Final Gate 1 matrix: 36 / 36 mandatory items
 PASS. 0 OPEN. 0 FAIL.** Gate 2 (embedded x86 resource/performance qualification), the Normalizer
 consumer-contract check, SFM/DME byte-Unicode consumer adaptation, and format v1 freeze all remain explicitly
@@ -62,7 +70,7 @@ own, separately-authorized task.
 | C1 | Format/writer/reader | Deterministic layout | **PASS** | B2B; re-confirmed same-process + cross-`PYTHONHASHSEED` in this pass (B2D/B2E suites) |
 | C2 | Format/writer/reader | Exact round-trip (28/28 fixtures + official Master) | **PASS** | B2B, B2D |
 | C3 | Format/writer/reader | Source binding (exact digest, no prefix match) | **PASS** | B2C/B2D/B2E `SourceMismatchError` tests, all re-run passing |
-| C4 | Format/writer/reader | Fold semantics (Hit/FoldConflict/MasterUnknown, never conflated) | **PASS** | B2B/B2C/B2D/B2E, exhaustive |
+| C4 | Format/writer/reader | Fold semantics (Hit/FoldConflict/MasterUnknown, never conflated) | **PASS** | B2B/B2C/B2D/B2E, exhaustive; malformed-UTF-8 query boundary corrected and requalified per Section 25 / `SFM_MASTER_SIDECAR_GATE_A1_QUERY_BOUNDARY_FIX_AUDIT.md` |
 | C5 | Format/writer/reader | Metadata/occurrence preservation (order, duplicates, legal semantics) | **PASS** | B2B/B2C/B2D |
 | D1 | Integrity | Embedded checksum (computed/verified correctly, checked before structural checks) | **PASS** | B2C's digest-ordering fix, re-verified in this pass |
 | D2 | Integrity | Checksum-valid structural corruption rejected (71/71 cases) | **PASS** | B2C, re-run in this pass: 123 tests / 6 subtests, 0 failures |
@@ -300,6 +308,12 @@ was re-run again and now stands at **411 passed, 0 failed, 255 subtests passed**
 the new `tests/sidecar/test_reader_path_bytes_input.py` regression file; no other test count changed, and the
 four suite counts in the table above are unchanged and still individually re-confirmed passing (Section 24).
 
+**Further superseded by Section 25:** following the Gate A1 query-boundary reopening and correction, the
+suite was re-run again and now stands at **421 passed, 0 failed, 265 subtests passed** — the +10/+10 delta is
+exactly the new `MalformedQueryEncodingTests` regression class in `test_reader_lookup.py`; no other test
+count changed, and B2C/B2D/B2E were individually re-confirmed still passing (116/6, 54/5, 77/59) per Section
+25.
+
 ## 18. VALIDATOR
 
 `python tools/validate_master.py sfm_defaultanimationgroups.txt` → **PASS**. Groups=43, controls=128,555,
@@ -535,3 +549,69 @@ Gate 2A's blocked first attempt remains exactly as recorded in
 that document's verdict was about resource measurement being blocked, not about H1. A fresh Gate 2A run,
 now unblocked by this correction, is available as a separate, separately-authorized future task; it was not
 begun or resumed here.
+
+## 25. GATE A1 REOPENING AND QUERY-BOUNDARY CORRECTION RE-CLOSURE (malformed-UTF-8 query defect)
+
+This section records a subsequent, narrower reopening/re-closure, appended after the fact. Sections 1–24
+above are otherwise left as the historical record of the passes that produced them; this section does not
+rewrite any of them.
+
+**Reopening.** An independent Astra review reproduced a genuine query-boundary correctness defect: calling
+`reader.SidecarReader.lookup_fold(query)` with **malformed UTF-8 query bytes** (e.g. an isolated continuation
+byte, a truncated multibyte sequence, an invalid leading byte, or an invalid continuation sequence) silently
+resolved to `MasterUnknown` — as if the query were well-formed but simply absent from the Master — instead of
+raising a distinct input/query error. Root cause: `lookup_fold` folded the raw query bytes
+(`fmt.ascii_fold_bytes(query)`, a purely byte-level operation with no UTF-8 validation) and searched for that
+folded value directly, without ever validating that `query` was actually valid UTF-8 first. Since a malformed
+byte string essentially never coincides with any real folded key, the binary search simply found no match and
+returned `MasterUnknown` — a **correctness defect**, not a performance or resource concern: the authority
+contract requires a VALID-but-absent query to produce `MasterUnknown` and a MALFORMED query to produce a
+distinct input/query error, and conflating the two (as the pre-correction code did) meant a caller could never
+distinguish "this name genuinely isn't in the Master" from "this input was garbage," which is exactly the
+distinction Section 20/24 of the final implementation spec require never be conflated. This is a query-input
+defect, not source/backing corruption, and not a defect in the exhaustive structural validation (§20 A–J)
+this project already qualified — those were never in question. Existing tests (`test_reader_lookup.py`)
+already covered oversized-length and wrong-type malformed input but never malformed UTF-8 encoding
+specifically — the exact gap Astra's review identified.
+
+**Correction.** `lookup_fold` was corrected to validate `query` as strict UTF-8 (`query.decode("utf-8")`,
+the decoded value discarded — used for validation only, not for any decoding/normalization of the folding
+itself) immediately after the existing type/length checks and before ASCII folding or the binary search.
+Malformed bytes now raise `UnicodeDecodeError` — already a `ValueError` subclass, so no new exception class
+was introduced; this matches the existing query-boundary philosophy exactly (plain-type `TypeError` for wrong
+type, plain `ValueError` for oversized length, now `ValueError`-subclass `UnicodeDecodeError` for malformed
+encoding). Full root-cause analysis, the exact one-call fix, the regression matrix, and complete Python 3 +
+real embedded Python 2.7 evidence are in `SFM_MASTER_SIDECAR_GATE_A1_QUERY_BOUNDARY_FIX_AUDIT.md`.
+
+**Re-closure evidence.**
+- New `reader.py` SHA-256: `c0ed4250cfe13b892e54baf0538ee3bab946f000f20466d5c4da5b15c60bf2a9` (was
+  `d79f7ae87c1999b7fe728f7dd6ddafb29b7cc62c246cd332f061875095288b00`).
+- Official artifact SHA-256 recompiled through the unchanged public compiler: still exactly
+  `bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b` — proves the fix touched only the
+  query-input boundary, never the binary format or compiler semantics.
+- New regression suite (`MalformedQueryEncodingTests`, 10 new test methods in `test_reader_lookup.py`)
+  proving, side by side: valid ASCII HIT unchanged; valid non-ASCII UTF-8 HIT unchanged, no Unicode-casefold
+  substitution; valid absent query still `MasterUnknown`; all four representative malformed-UTF-8 shapes now
+  raise `UnicodeDecodeError` and never `MasterUnknown`/`Hit`/`FoldConflict`; wrong-type/oversized contracts
+  unchanged; `FoldConflict`/exact-spelling-inside-conflict unchanged; ASCII case-variant families unchanged;
+  and an explicit side-by-side assertion that a well-formed absent query and a malformed query can never be
+  conflated.
+- Complete real embedded Python 2.7.5 requalification (`SFM_MASTER_SIDECAR_GATE_A1_QUERY_BOUNDARY_FIX_AUDIT.md`
+  Section 11), inside `sfm.exe`, against the corrected reader, on the same small hand-composed fixture used
+  in the original Gate 1 H1 run: valid ASCII HIT, valid ASCII absent → `MasterUnknown`, valid non-ASCII UTF-8
+  HIT, all four malformed-UTF-8 cases correctly raising `UnicodeDecodeError` (never `AuthorityUnavailable`,
+  never a silent result), `FoldConflict` behavior unchanged, close/double-close/post-close behavior
+  unchanged — **all PASS, zero uncaught exceptions.**
+- Full repository regression: `python -m pytest tests/ -q` → **421 passed, 0 failed, 265 subtests passed**
+  (prior baseline 411/255; the +10/+10 delta is exactly the new malformed-query regression suite). Validator
+  PASS (unchanged: 43 groups, 128,555 controls, 124,728 fold keys, 0 duplicates, 0 cross-path invariant
+  violations). `git diff --check` clean. B2C/B2D/B2E suites individually re-confirmed still passing
+  (116/6, 54/5, 77/59 — unchanged from every prior pass).
+
+**Current status: the query-boundary reopening is CLOSED.** Final Gate 1 matrix stands, unchanged in count,
+at **36 / 36 mandatory items PASS, 0 OPEN, 0 FAIL** — this was always a narrow, single-method correctness
+correction, never a broad reader redesign, and never touched H1, path/bytes correctness, structural corruption
+rejection, source binding, compiler determinism, artifact identity, or publication qualification, all of which
+remain exactly as closed in Sections 1–24. Sequence, for the historical record: original Gate 1 PASS → later
+independent Astra review found the malformed-query gap → query boundary reopened narrowly (this section) →
+defect corrected → Python 3 + real embedded Python 2.7 requalified → Gate 1 reclosed.
