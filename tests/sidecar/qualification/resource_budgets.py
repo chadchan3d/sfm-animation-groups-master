@@ -22,17 +22,16 @@ BUDGET_ONE_FAMILY_RESULT_OCCURRENCE_ROWS = 5000               # rows
 BUDGET_ONE_CONSUMER_SNAPSHOT_OCCURRENCE_ROWS = 50000          # rows
 BUDGET_TOTAL_PINNED_VIEWS_ESTIMATED_BYTES = 20 * 1024 * 1024  # 20 MiB
 
-# Gate C2R -- the owner-level reusable same-generation coverage cache
-# (Gate C2's `_EpochCoverage`) was found to have NO enforced bound at all
-# in the original C2 report; these two provisional values close that gap.
-# Deliberately set well above BUDGET_TOTAL_PINNED_VIEWS_ESTIMATED_BYTES
-# (the cache legitimately outlives any one view -- released views' facts
-# remain cached for reuse) but still a real, enforced ceiling: exceeding
-# either evicts the oldest (FIFO) reusable entries, never a currently-
-# published view's own payload, and never changes a subsequent lookup's
-# truth -- only whether it must re-query the provider to get it.
-BUDGET_COVERAGE_CACHE_POSITIVE_ESTIMATED_BYTES = 32 * 1024 * 1024  # 32 MiB
-BUDGET_COVERAGE_CACHE_NEGATIVE_MAX_ENTRIES = 100000                # entries
+# Round 3 foundation repair: the C2R owner-level reusable same-generation
+# coverage cache (`_EpochCoverage`) that BUDGET_COVERAGE_CACHE_* used to
+# bound was REMOVED ENTIRELY (Repair F) -- the Astra Round 3 audit found
+# the qualification owner had accumulated more cache/accounting/lifecycle
+# machinery than the consumer evidence justified. There is no owner-level
+# cross-action cache left to bound, so those two constants are removed
+# rather than kept unused. `BUDGET_STRING_CACHE_ESTIMATED_BYTES` above
+# remains, and is now the bound enforced (Repair G) against the
+# PROVIDER's own reusable decoded-string/metadata working set on every
+# `acquire_view` attempt, ordinary or refused/faulted.
 
 
 class ResourceBudgetExceeded(Exception):

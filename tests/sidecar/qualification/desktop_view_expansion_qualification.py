@@ -123,36 +123,41 @@ def main():
     folds_A, folds_B = real_disjoint_fold_sets(source_sha256)
 
     # -----------------------------------------------------------------
-    # C2.1 -- warm covered reacquisition
+    # C2.1 -- repeated request, no owner-level cross-action cache
+    # (Round 3 Repair F: the C2 `_EpochCoverage` reusable positive/
+    # negative cache was REMOVED. A repeated identical request now always
+    # re-resolves against the already-admitted provider -- intentionally
+    # not optimized in this repair -- but must still produce a
+    # semantically identical result, and must not cause a second
+    # admission/provider allocation.)
     # -----------------------------------------------------------------
-    section("C2.1 -- warm covered reacquisition")
+    section("C2.1 -- repeated request without an owner-level cache (Round3 Repair F)")
     so._reset_registry_for_testing()
     ns1 = make_namespace_identity(source_sha256, "-c21")
     owner1 = make_owner(ns1)
 
     t0 = time.perf_counter()
     lease_a1, view_a1 = owner1.acquire_view("ConsumerA", folds_A, _PE)
-    t_cold = time.perf_counter() - t0
+    t_first = time.perf_counter() - t0
     admissions_after_first = owner1.admission_success_count
     providers_after_first = owner1.provider_allocation_count
-    lookups_after_first = owner1._coverage.lookup_call_count
 
     owner1.release_lease(lease_a1)
 
     t0 = time.perf_counter()
     lease_a2, view_a2 = owner1.acquire_view("ConsumerA2", folds_A, _PE)
-    t_warm = time.perf_counter() - t0
+    t_second = time.perf_counter() - t0
 
-    check("C2.1 provider allocation count unchanged", owner1.provider_allocation_count == providers_after_first,
+    check("C2.1 provider allocation count unchanged (one provider still shared across requests)",
+          owner1.provider_allocation_count == providers_after_first,
           "before=%d after=%d" % (providers_after_first, owner1.provider_allocation_count))
-    check("C2.1 admission count unchanged", owner1.admission_success_count == admissions_after_first,
+    check("C2.1 admission count unchanged (lazy admission still happens exactly once)",
+          owner1.admission_success_count == admissions_after_first,
           "before=%d after=%d" % (admissions_after_first, owner1.admission_success_count))
-    check("C2.1 no provider.lookup_fold re-invocation for already-covered folds",
-          owner1._coverage.lookup_call_count == lookups_after_first,
-          "before=%d after=%d" % (lookups_after_first, owner1._coverage.lookup_call_count))
-    check("C2.1 warm reacquisition recorded as a reuse hit", owner1._coverage.reuse_hit_count >= 1)
-    check("C2.1 resulting payload structurally identical", payload_digest(view_a1.payload) == payload_digest(view_a2.payload))
-    print("  (timing, not a claimed speedup target) cold=%.5fs warm=%.5fs" % (t_cold, t_warm))
+    check("C2.1 repeated request produces a semantically identical payload (re-resolved, not cached)",
+          payload_digest(view_a1.payload) == payload_digest(view_a2.payload))
+    print("  (timing, informational only -- Repair F intentionally removed the reuse-hit "
+          "fast path) first=%.5fs second=%.5fs" % (t_first, t_second))
     owner1.release_lease(lease_a2)
 
     # -----------------------------------------------------------------
@@ -185,39 +190,36 @@ def main():
     owner2.release_lease(lease_b)
 
     # -----------------------------------------------------------------
-    # C2.3 -- true negative coverage
+    # C2.3 -- positive / proven-negative / uncovered distinction WITHIN
+    # one action view (Round 3 Repair F coverage contract). There is no
+    # owner-level cross-action cache any more, so "uncovered" is no
+    # longer a cross-call cache state -- it is simply any fold not
+    # included in THIS action's `wanted_folds`. A global negative is
+    # never inferred from a fold's absence in some OTHER view.
     # -----------------------------------------------------------------
-    section("C2.3 -- true negative coverage")
+    section("C2.3 -- positive / proven-negative / uncovered within one view")
     so._reset_registry_for_testing()
     ns3 = make_namespace_identity(source_sha256, "-c23")
     owner3 = make_owner(ns3)
+    sorted_folds_a = sorted(folds_A)
+    POS = sorted_folds_a[0]
+    UNREQUESTED = sorted_folds_a[1]  # a real fold, deliberately never requested by this action
     NEG1 = cp.ascii_fold_unicode("Gate_C2_Neg_Sentinel_One_999")
-    NEG2 = cp.ascii_fold_unicode("Gate_C2_Neg_Sentinel_Two_777")
 
-    # Force admission (empty vocabulary) so `_coverage` exists, WITHOUT
-    # touching NEG1/NEG2 -- this is what "uncovered" means: the owner is
-    # admitted and could answer, but has simply never been asked yet.
-    lease_empty, _ = owner3.acquire_view("ConsumerBootstrap", set(), _PE)
-    owner3.release_lease(lease_empty)
-    check("C2.3 NEG2 genuinely uncovered before any request (neither positive nor negative)",
-          NEG2 not in owner3._coverage.positive and NEG2 not in owner3._coverage.negative)
+    lease3, view3 = owner3.acquire_view("ConsumerMixed", {POS, NEG1}, _PE)
+    check("C2.3 requested positive fold appears in folded", POS in view3.payload["folded"])
+    check("C2.3 requested proven-negative fold is in proven_negative_folds, never in folded (never a false positive)",
+          NEG1 in view3.payload["proven_negative_folds"] and NEG1 not in view3.payload["folded"])
+    check("C2.3 a fold this action never requested is in neither collection (no inferred global negative)",
+          UNREQUESTED not in view3.payload["folded"] and UNREQUESTED not in view3.payload["proven_negative_folds"])
+    owner3.release_lease(lease3)
 
-    lease_neg1a, view_neg1a = owner3.acquire_view("ConsumerNeg", {NEG1}, _PE)
-    check("C2.3 NEG1 first request: recorded as true negative coverage", NEG1 in owner3._coverage.negative)
-    check("C2.3 NEG1 absent from folded payload (never a false positive)", NEG1 not in view_neg1a.payload["folded"])
-    lookups_after_neg1 = owner3._coverage.lookup_call_count
-    owner3.release_lease(lease_neg1a)
-
-    lease_neg1b, view_neg1b = owner3.acquire_view("ConsumerNeg2", {NEG1}, _PE)
-    check("C2.3 repeated NEG1 request: no re-lookup (reused from negative coverage)",
-          owner3._coverage.lookup_call_count == lookups_after_neg1,
-          "before=%d after=%d" % (lookups_after_neg1, owner3._coverage.lookup_call_count))
-    check("C2.3 repeated NEG1 remains true absence (no invented positive)", NEG1 not in view_neg1b.payload["folded"])
-    owner3.release_lease(lease_neg1b)
-
-    lease_neg2, view_neg2 = owner3.acquire_view("ConsumerNeg3", {NEG2}, _PE)
-    check("C2.3 NEG2 independently proven negative", NEG2 in owner3._coverage.negative)
-    owner3.release_lease(lease_neg2)
+    # Repeated identical negative request: re-resolved (no cache), but
+    # must remain a true absence, never an invented positive.
+    lease3b, view3b = owner3.acquire_view("ConsumerMixed2", {NEG1}, _PE)
+    check("C2.3 repeated negative request remains a true absence (re-resolved against the provider, not cached)",
+          NEG1 in view3b.payload["proven_negative_folds"] and NEG1 not in view3b.payload["folded"])
+    owner3.release_lease(lease3b)
 
     # -----------------------------------------------------------------
     # C2.4 -- complete family / result-budget semantics
@@ -269,9 +271,8 @@ def main():
         owner4b.acquire_view("ConsumerLFOver", {big_fold}, _PE)
         check("C2.4.B too-small family budget refused", False, "did not raise")
     except so.ResourceRefused as exc:
-        check("C2.4.B too-small family budget refused before publishing, no partial family, no partial negative",
-              len(owner4b._views) == 0 and big_fold not in owner4b._coverage.positive
-              and big_fold not in owner4b._coverage.negative, repr(exc))
+        check("C2.4.B too-small family budget refused before publishing, no partial view published",
+              len(owner4b._views) == 0, repr(exc))
 
     # -----------------------------------------------------------------
     # C2.5 -- snapshot/pinned-view budget atomicity
@@ -279,8 +280,14 @@ def main():
     section("C2.5 -- snapshot/pinned-view budget atomicity")
     so._reset_registry_for_testing()
     ns5 = make_namespace_identity(source_sha256, "-c25")
+    # This test is about family-row/pinned-byte budgeting specifically
+    # (Repair H's separate per-fold accounting overhead is exercised in
+    # its own dedicated section), so the per-view/per-fold overhead is
+    # explicitly zeroed to preserve this test's original row-based
+    # calibration.
     small_budgets = so.ViewBudgets(one_family_result_rows=5000, one_snapshot_rows=1000,
-                                    total_pinned_bytes=2500, estimated_bytes_per_row=20)
+                                    total_pinned_bytes=2500, estimated_bytes_per_row=20,
+                                    per_view_fixed_overhead_bytes=0, per_requested_fold_overhead_bytes=0)
     owner5 = make_owner(ns5, budgets=small_budgets)
     small_a = set(list(folds_A)[:50])   # ~50 rows * 20 bytes = ~1000 bytes
     small_b = set(list(folds_B)[:50])   # would add ~1000 more -> still might fit; force bigger
@@ -297,10 +304,6 @@ def main():
         check("C2.5 existing A lease/view remains valid",
               owner5.get_view_via_lease(lease5a).view_id == view5a.view_id)
         check("C2.5 owner/provider stays READY", owner5.state == so.STATE_READY and owner5.provider.is_valid())
-        newly_requested_only = big_expansion - small_a
-        leaked = newly_requested_only & (set(owner5._coverage.positive.keys()) | set(owner5._coverage.negative.keys()))
-        check("C2.5 candidate B coverage not falsely published (staged-then-committed contract)",
-              len(leaked) == 0, "leaked=%r" % (leaked,))
     owner5.release_lease(lease5a)
 
     # -----------------------------------------------------------------
@@ -313,8 +316,6 @@ def main():
     lease6a, view6a = owner6.acquire_view("ConsumerA", folds_A, _PE)
     views_before = dict(owner6._views)
     leases_before = dict(owner6._leases)
-    coverage_positive_before = dict(owner6._coverage.positive)
-    coverage_negative_before = dict(owner6._coverage.negative)
 
     class _InjectedFault(Exception):
         pass
@@ -329,8 +330,6 @@ def main():
     except _InjectedFault:
         check("C2.6 no candidate view published after injected fault", owner6._views == views_before)
         check("C2.6 no candidate lease published after injected fault", owner6._leases == leases_before)
-        check("C2.6 no partial coverage published after injected fault",
-              owner6._coverage.positive == coverage_positive_before and owner6._coverage.negative == coverage_negative_before)
         check("C2.6 existing A remains valid", owner6.get_view_via_lease(lease6a).view_id == view6a.view_id)
         check("C2.6 owner/provider remains READY after qualification-level candidate failure",
               owner6.state == so.STATE_READY and owner6.provider.is_valid())
@@ -371,89 +370,152 @@ def main():
     owner7.release_lease(lease7a)
 
     # -----------------------------------------------------------------
-    # Cache eviction: performance only, never truth (Section 11).
+    # REMOVED (Round 3 Repair F): the "Cache eviction -- performance only,
+    # never truth" section and the "Gate C2R -- enforced coverage-cache
+    # bound (FIFO eviction)" section that used to appear here both tested
+    # the owner-level `_EpochCoverage` cache, which no longer exists --
+    # there is nothing left at the owner level to evict or bound. See
+    # SFM_MASTER_SIDECAR_ROUND3_FOUNDATION_SIMPLIFICATION_REPAIR_AUDIT.md
+    # for the removal rationale. The PROVIDER's own decode-cache bound
+    # (a different mechanism, Repair G) is exercised in the new section
+    # immediately below.
     # -----------------------------------------------------------------
-    section("Cache eviction -- performance only, never truth")
+
+    # -----------------------------------------------------------------
+    # Round 3 Repair G -- provider decode-cache bound enforced on every
+    # acquire_view path (ordinary, refused, injected-failure).
+    # -----------------------------------------------------------------
+    section("Round3 Repair G -- provider decode-cache bound enforced on every path")
     so._reset_registry_for_testing()
-    ns8 = make_namespace_identity(source_sha256, "-c2evict")
-    owner8 = make_owner(ns8)
-    lease8, view8 = owner8.acquire_view("ConsumerEvict", folds_A, _PE)
-    digest_before_evict = payload_digest(view8.payload)
-    owner8.evict_reusable_coverage_cache()
-    check("Cache eviction clears owner-level coverage", len(owner8._coverage.positive) == 0
-          and len(owner8._coverage.negative) == 0)
-    check("Already-published view payload unaffected by eviction (independent copy)",
-          payload_digest(view8.payload) == digest_before_evict)
-    lease8b, view8b = owner8.acquire_view("ConsumerEvict2", folds_A, _PE)
-    check("Reacquisition after eviction returns semantically identical result (truth unchanged)",
-          payload_digest(view8b.payload) == digest_before_evict)
-    owner8.release_lease(lease8)
-    owner8.release_lease(lease8b)
+    ns8 = make_namespace_identity(source_sha256, "-c2decodebound")
+    tiny_decode_budgets = so.ViewBudgets(
+        one_family_result_rows=5000, one_snapshot_rows=5000, total_pinned_bytes=100_000_000,
+        estimated_bytes_per_row=256, decode_cache_estimated_bytes_budget=64,  # deliberately tiny
+    )
+    owner8 = make_owner(ns8, budgets=tiny_decode_budgets)
+
+    lease8a, view8a = owner8.acquire_view("ConsumerOrdinary", folds_A, _PE)
+    check("Repair G: decode cache bound enforced after an ordinary request",
+          owner8.provider.string_cache_estimated_bytes() <= tiny_decode_budgets.decode_cache_estimated_bytes_budget,
+          "estimated=%d budget=%d" % (
+              owner8.provider.string_cache_estimated_bytes(), tiny_decode_budgets.decode_cache_estimated_bytes_budget,
+          ))
+    digest_after_bound_enforced = payload_digest(view8a.payload)
+    check("Repair G: held action view remains valid after decode-cache eviction",
+          payload_digest(owner8.get_view_via_lease(lease8a).payload) == digest_after_bound_enforced)
+    owner8.release_lease(lease8a)
+
+    # Reuses the large-family fixture (500 occurrences for one fold, from
+    # C2.4) rather than folds_A, so the family-row refusal is guaranteed
+    # to trigger regardless of how many single-occurrence folds folds_A
+    # happens to contain.
+    ns8b = so.NamespaceIdentity(
+        source_path="large_family_fixture", source_sha256=lf_meta["source_sha256"],
+        artifact_sha256="test-lf-decodebound", format_version=0, authority_version=0,
+        profile_version="normalizer-v1-groupfile-no-backslash-decodebound",
+    )
+    strict_family_budgets = so.ViewBudgets(
+        one_family_result_rows=1, one_snapshot_rows=5000, total_pinned_bytes=100_000_000,
+        estimated_bytes_per_row=256, decode_cache_estimated_bytes_budget=64,
+    )
+    owner8b = so.get_or_create_owner(
+        ns8b, lf_artifact_path, sufficient_snapshot, so.GuardPolicy.provisional_default(),
+        strict_family_budgets, bounded_provider, bounded_view,
+    )
+    try:
+        owner8b.acquire_view("ConsumerRefused", {big_fold}, _PE)
+        check("Repair G setup: refusal actually occurred", False, "did not raise")
+    except so.ResourceRefused:
+        check("Repair G: decode cache bound enforced after a refused (over-budget) request",
+              owner8b.provider.string_cache_estimated_bytes() <= strict_family_budgets.decode_cache_estimated_bytes_budget,
+              "estimated=%d" % owner8b.provider.string_cache_estimated_bytes())
+
+    ns8c = make_namespace_identity(source_sha256, "-c2decodeboundfault")
+    owner8c = make_owner(ns8c, budgets=tiny_decode_budgets)
+
+    class _InjectedDecodeFault(Exception):
+        pass
+
+    def fault_after_first(resolved_count, fold_key):
+        if resolved_count == 1:
+            raise _InjectedDecodeFault("qualification-only injected failure")
+
+    try:
+        owner8c.acquire_view("ConsumerFaulted", folds_A, _PE, fault_injector=fault_after_first)
+        check("Repair G setup: injected fault actually occurred", False, "did not raise")
+    except _InjectedDecodeFault:
+        check("Repair G: decode cache bound enforced after an injected candidate failure",
+              owner8c.provider.string_cache_estimated_bytes() <= tiny_decode_budgets.decode_cache_estimated_bytes_budget,
+              "estimated=%d" % owner8c.provider.string_cache_estimated_bytes())
 
     # -----------------------------------------------------------------
-    # Gate C2R -- the coverage cache is EXPLICITLY BOUNDED (positive by
-    # estimated bytes, negative by entry count); exceeding it evicts the
-    # OLDEST entries (FIFO), never a currently-published view's payload,
-    # and never changes a subsequent request's semantic result.
+    # Round 3 Repair H -- action-view accounting must charge negative-only
+    # views a nonzero amount, and must charge mixed positive+negative
+    # views more than the equivalent positive-only content.
     # -----------------------------------------------------------------
-    section("Gate C2R -- enforced coverage-cache bound (FIFO eviction)")
+    section("Round3 Repair H -- action-view accounting charges negative-only views")
     so._reset_registry_for_testing()
-    ns9 = make_namespace_identity(source_sha256, "-c2rbound")
-    # Deliberately tiny bound: at ~1000 bytes/row estimate, 3000 bytes
-    # holds ~3 single-row entries before a 4th forces FIFO eviction.
-    tiny_bound_budgets = so.ViewBudgets(
-        one_family_result_rows=5000, one_snapshot_rows=5000, total_pinned_bytes=100_000_000,
-        estimated_bytes_per_row=1000, coverage_positive_max_bytes=3000, coverage_negative_max_entries=100000,
-    )
-    owner9 = make_owner(ns9, budgets=tiny_bound_budgets)
+    ns9 = make_namespace_identity(source_sha256, "-c2negacct")
+    owner9 = make_owner(ns9)
+    NEGX = cp.ascii_fold_unicode("Gate_Round3_NegAcct_Sentinel")
+    NEGY = cp.ascii_fold_unicode("Gate_Round3_NegAcct_Sentinel_2")
+    pos_fold = sorted(folds_A)[0]
 
-    singleton_folds = sorted(folds_A)[:6]  # 6 distinct real folds, requested one at a time
-    digests_by_fold = {}
-    for fk in singleton_folds:
-        lease_i, view_i = owner9.acquire_view("ConsumerSingleton_%s" % fk, {fk}, _PE)
-        digests_by_fold[fk] = payload_digest(view_i.payload)
-        owner9.release_lease(lease_i)
+    lease9pos, view9pos = owner9.acquire_view("ConsumerPosOnly", {pos_fold}, _PE)
+    positive_only_bytes = view9pos.accounted_bytes
+    owner9.release_lease(lease9pos)
 
-    check("C2R bound: cache did not grow past the configured byte bound",
-          owner9._coverage.positive_bytes() <= tiny_bound_budgets.coverage_positive_max_bytes,
-          "positive_bytes=%d bound=%d" % (owner9._coverage.positive_bytes(), tiny_bound_budgets.coverage_positive_max_bytes))
-    check("C2R bound: FIFO eviction actually occurred", owner9._coverage.bound_eviction_count > 0,
-          "bound_eviction_count=%d" % owner9._coverage.bound_eviction_count)
-    oldest_fold, newest_fold = singleton_folds[0], singleton_folds[-1]
-    check("C2R bound: oldest entry was evicted (FIFO)", oldest_fold not in owner9._coverage.positive)
-    check("C2R bound: newest entry survived", newest_fold in owner9._coverage.positive)
+    lease9neg, view9neg = owner9.acquire_view("ConsumerNegOnly", {NEGX}, _PE)
+    check("Repair H: negative-only view has nonzero accounted size", view9neg.accounted_bytes > 0,
+          "accounted_bytes=%d" % view9neg.accounted_bytes)
 
-    # Re-requesting the evicted (oldest) fold must still produce the exact
-    # same correct semantic result -- eviction cost performance (a fresh
-    # provider lookup), never truth.
-    lookups_before_reacquire = owner9._coverage.lookup_call_count
-    lease_re, view_re = owner9.acquire_view("ConsumerReacquireEvicted", {oldest_fold}, _PE)
-    check("C2R bound: re-acquiring an evicted fold re-queries the provider (lookup_call_count increased)",
-          owner9._coverage.lookup_call_count > lookups_before_reacquire)
-    check("C2R bound: re-acquired evicted fold's payload is semantically identical to its first resolution",
-          payload_digest(view_re.payload) == digests_by_fold[oldest_fold])
-    owner9.release_lease(lease_re)
+    lease9mixed, view9mixed = owner9.acquire_view("ConsumerMixedAcct", {pos_fold, NEGY}, _PE)
+    check("Repair H: mixed positive+negative accounting exceeds equivalent positive-only accounting",
+          view9mixed.accounted_bytes > positive_only_bytes,
+          "mixed=%d positive_only=%d" % (view9mixed.accounted_bytes, positive_only_bytes))
 
-    # Negative-side entry-count bound, proven the same way with a tiny cap.
-    ns10 = make_namespace_identity(source_sha256, "-c2rboundneg")
-    tiny_neg_budgets = so.ViewBudgets(
-        one_family_result_rows=5000, one_snapshot_rows=5000, total_pinned_bytes=100_000_000,
-        estimated_bytes_per_row=256, coverage_positive_max_bytes=100_000_000, coverage_negative_max_entries=3,
-    )
-    owner10 = make_owner(ns10, budgets=tiny_neg_budgets)
-    neg_sentinels = ["Gate_C2R_Neg_Bound_%d" % i for i in range(6)]
-    for neg in neg_sentinels:
-        lease_i, _ = owner10.acquire_view("ConsumerNegBound_%s" % neg, {neg}, _PE)
-        owner10.release_lease(lease_i)
-    check("C2R bound: negative-entry cap enforced", len(owner10._coverage.negative) <= 3,
-          "count=%d" % len(owner10._coverage.negative))
-    check("C2R bound: negative FIFO eviction occurred", owner10._coverage.bound_eviction_count > 0)
-    check("C2R bound: oldest negative sentinel evicted", neg_sentinels[0] not in owner10._coverage.negative)
-    check("C2R bound: newest negative sentinel retained", neg_sentinels[-1] in owner10._coverage.negative)
-    lease_reneg, view_reneg = owner10.acquire_view("ConsumerRenegAcquire", {neg_sentinels[0]}, _PE)
-    check("C2R bound: re-acquiring an evicted negative fold remains a true absence (never becomes a false positive)",
-          neg_sentinels[0] not in view_reneg.payload["folded"])
-    owner10.release_lease(lease_reneg)
+    before_release_pinned = owner9.total_pinned_view_bytes()
+    owner9.release_lease(lease9neg)
+    check("Repair H: release drops pinned accounting", owner9.total_pinned_view_bytes() < before_release_pinned)
+    owner9.release_lease(lease9mixed)
+
+    ns9b = make_namespace_identity(source_sha256, "-c2negacctrefuse")
+    tiny_pinned_budgets = so.ViewBudgets(one_family_result_rows=5000, one_snapshot_rows=5000,
+                                          total_pinned_bytes=1, estimated_bytes_per_row=256)
+    owner9b = make_owner(ns9b, budgets=tiny_pinned_budgets)
+    try:
+        owner9b.acquire_view("ConsumerNegTinyBudget", {NEGX}, _PE)
+        check("Repair H: negative-only view under a deliberately tiny budget is refused", False, "did not raise")
+    except so.ResourceRefused as exc:
+        check("Repair H: negative-only view under a deliberately tiny budget is refused", True, repr(exc))
+
+    # -----------------------------------------------------------------
+    # Round 3 Repair I -- detached action-view mutation isolation.
+    # -----------------------------------------------------------------
+    section("Round3 Repair I -- detached action-view mutation isolation")
+    so._reset_registry_for_testing()
+    ns10 = make_namespace_identity(source_sha256, "-c2detach")
+    owner10 = make_owner(ns10)
+    detach_fold = sorted(folds_A)[0]
+
+    lease_a10, view_a10 = owner10.acquire_view("ConsumerDetachA", {detach_fold}, _PE)
+    lease_b10, view_b10 = owner10.acquire_view("ConsumerDetachB", {detach_fold}, _PE)
+    digest_b_before_mutation = payload_digest(view_b10.payload)
+
+    view_a10.payload["folded"][detach_fold][0]["literal"] = "MUTATED_BY_TEST"
+    view_a10.payload["folded"][detach_fold].append({
+        "literal": "INJECTED", "destination": "x", "global_index": -1, "local_index": -1,
+    })
+
+    check("Repair I: mutating view A's rows does not affect view B",
+          payload_digest(view_b10.payload) == digest_b_before_mutation)
+
+    owner10.release_lease(lease_a10)
+    lease_c10, view_c10 = owner10.acquire_view("ConsumerDetachC", {detach_fold}, _PE)
+    check("Repair I: after releasing mutated A, reacquiring C returns authoritative unmutated data",
+          payload_digest(view_c10.payload) == digest_b_before_mutation)
+    owner10.release_lease(lease_b10)
+    owner10.release_lease(lease_c10)
 
     # -----------------------------------------------------------------
     # Semantic parity through expansion (Section 14).

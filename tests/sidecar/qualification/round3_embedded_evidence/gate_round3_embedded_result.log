@@ -1,0 +1,48 @@
+[1789277586.973] Round3 embedded probe loaded, pid=1884 sys.version='2.7.5 (default, Jul  3 2013, 16:44:46) [MSC v.1600 32 bit (Intel)]'
+[1789277586.974] PySide import PASS
+[1789277586.974] Round3 embedded probe scheduled.
+[1789277589.972] STAGE BEGIN
+[1789277590.320]   PASS: session_owner has no _EpochCoverage class (Repair F removal is real in this runtime) 
+[1789277590.320]   PASS: GuardPolicy has no committed-ceiling criterion in this runtime (Repair D removal is real) 
+[1789277592.613] folds_A=216 folds_B=17
+[1789277592.614] STAGE MODULE_IMPORT_END
+[1789277592.725] STAGE P1_INIT_LAZY_BEGIN
+[1789277592.726]   PASS: 1: 3 init call sites -> 1 owner object ids=1,1,1
+[1789277592.726]   PASS: 1: init_call_count == 3 count=3
+[1789277592.727]   PASS: 1: no provider before first acquisition (lazy admission) 
+[1789277594.727]   PASS: 2: one admitted provider after first acquisition 
+[1789277594.728] STAGE P1_INIT_LAZY_END
+[1789277594.830] STAGE P2_FOREIGN_LEASE_BEGIN
+[1789277596.722]   PASS: 3: owner1's lease cannot authorize owner2 LeaseRejected('lease 1 belongs to owner 1, not this owner 2 -- does not authorize access',)
+[1789277596.722]   PASS: 3: owner1's lease cannot release/mutate owner2's lease LeaseRejected('lease 1 belongs to owner 1, not this owner 2 -- cannot be released here',)
+[1789277596.723]   PASS: 3: owner2's lease remains valid after both foreign attempts 
+[1789277596.728]   PASS: 3: owner1's own lease still authorizes owner1 
+[1789277596.733] STAGE P2_FOREIGN_LEASE_END
+[1789277596.849] STAGE P3_RELEASE_CLOSE_BEGIN
+[1789277596.850]   PASS: 4: release removes owner-held record (no tombstone) 
+[1789277596.850]   PASS: 4: repeated release is a documented no-op 
+[1789277596.851]   PASS: 4: repeated release grows no central history 
+[1789277596.854]   PASS: 5: close with active lease is deferred 'deferred-active-leases:2'
+[1789277596.859]   PASS: 6: terminal close succeeds once zero leases remain 'closed'
+[1789277596.863]   PASS: 6: terminal close removes owner from the process registry 
+[1789277596.870]   PASS: 6: owner2 terminal close also succeeds/idempotent 'closed'
+[1789277596.874] STAGE P3_RELEASE_CLOSE_END
+[1789277596.989] STAGE P4_DETACHED_VIEWS_BEGIN
+[1789277598.958]   PASS: 7: mutating view A's rows does not affect view B 
+[1789277598.959]   PASS: 7: reacquiring after mutated A returns authoritative unmutated data 
+[1789277598.965] STAGE P4_DETACHED_VIEWS_END
+[1789277599.093] STAGE P5_NEG_ACCOUNTING_BEGIN
+[1789277601.100]   PASS: 8: negative-only view has nonzero accounted size accounted_bytes=320
+[1789277601.100]   PASS: 8: negative fold correctly represented as proven-negative, not folded 
+[1789277601.101]   PASS: 8: mixed positive+negative accounting exceeds positive-only accounting mixed=640 positive_only=576
+[1789277601.108] STAGE P5_NEG_ACCOUNTING_END
+[1789277601.230] STAGE P6_DECODE_BOUND_BEGIN
+[1789277601.243]   PASS: 9: decode cache bound enforced after a refused (over-budget) request estimated=0
+[1789277601.244] STAGE P6_DECODE_BOUND_END
+[1789277601.352] STAGE P7_SEMANTIC_PARITY_BEGIN
+[1789277603.293]   PASS: 10: representative positive fold present in folded 
+[1789277603.295]   PASS: 10: representative negative fold proven absent, never a false positive 
+[1789277603.303]   PASS: 11: clean final release/close 'closed'
+[1789277603.310] STAGE P7_SEMANTIC_PARITY_END
+[1789277603.428] Round3 embedded probe RESULT: 26 PASS / 0 FAIL
+[1789277603.468] STAGE DONE

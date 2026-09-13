@@ -117,13 +117,9 @@ def main():
 
     check("C1.1 exactly one owner object for the namespace (identity)", owner1 is owner2 is owner3,
           "owner_id=%r,%r,%r" % (owner1.owner_id, owner2.owner_id, owner3.owner_id))
-    check("C1R Repair A: init_call_count == 3 (3 call sites)", owner1.init_call_count == 3,
+    check("Round3 Repair C: init_call_count == 3 (3 call sites -> 1 owner object; no simulated "
+          "registration-install claim is tracked or asserted)", owner1.init_call_count == 3,
           "count=%d" % owner1.init_call_count)
-    check("C1R Repair A: registration_install_count == 1 (one owner, one installed registration)",
-          owner1.registration_install_count == 1, "count=%d" % owner1.registration_install_count)
-    check("C1R Repair A: registration_identity stable across all three call sites",
-          owner1.registration_identity == owner2.registration_identity == owner3.registration_identity,
-          repr(owner1.registration_identity))
     check("C1.1 no provider admitted merely by initialization", owner1.provider is None and owner1.state == so.STATE_EMPTY)
     check("C1.1 no duplicate provider allocation at init", owner1.provider_allocation_count == 0)
 
@@ -150,11 +146,10 @@ def main():
     # -----------------------------------------------------------------
     section("Part 7 -- pre-admission resource guard")
     guard_policy = so.GuardPolicy.provisional_default()
-    print("provisional policy: min_free_vas=%d min_largest_region=%d min_committed_ceiling_reserve=%d "
-          "artifact_budget=%d assumed_ceiling=%d" % (
+    print("provisional policy (Round3 Repair D: redundant 4th criterion removed): min_free_vas=%d "
+          "min_largest_region=%d artifact_budget=%d" % (
               guard_policy.min_free_vas_bytes, guard_policy.min_largest_free_region_bytes,
-              guard_policy.min_committed_ceiling_reserve_bytes, guard_policy.artifact_budget_bytes,
-              guard_policy.assumed_address_space_ceiling_bytes,
+              guard_policy.artifact_budget_bytes,
           ))
 
     def make_guard_test_owner(snapshot_fn, artifact_path=ARTIFACT_PATH):
@@ -195,32 +190,28 @@ def main():
         check("Guard C: insufficient largest free region refused, no provider allocated",
               owner_c.state == so.STATE_UNAVAILABLE and owner_c.provider_allocation_count == 0, repr(exc))
 
-    # D. C1R Repair C: insufficient committed-VAS-ceiling reserve, and
-    # ONLY that -- free VAS and largest free region are both deliberately
-    # set comfortably ABOVE their own minimums here, so a failure can only
-    # come from the independent committed-ceiling criterion (proving it
-    # really is independent, per the brief's explicit requirement that
-    # criteria 1-2 hold PASSING while only this one fails).
-    def insufficient_committed_ceiling_reserve():
-        ceiling = guard_policy.assumed_address_space_ceiling_bytes
-        return so.ResourceSnapshot(
-            private_usage=400 * 1024 * 1024,
-            committed_vas=ceiling - (8 * 1024 * 1024),  # only 8 MiB of reserve left against the ceiling
-            reserved_vas=300 * 1024 * 1024,
-            free_vas=500 * 1024 * 1024,          # well above min_free_vas_bytes (64 MiB)
-            largest_free_region=200 * 1024 * 1024,  # well above min_largest_free_region_bytes (32 MiB)
-        )
-    snap_d = insufficient_committed_ceiling_reserve()
-    check("Guard D setup: free VAS and largest free region are independently above their own minimums",
-          snap_d.free_vas >= guard_policy.min_free_vas_bytes
-          and snap_d.largest_free_region >= guard_policy.min_largest_free_region_bytes)
-    owner_d = make_guard_test_owner(insufficient_committed_ceiling_reserve)
-    try:
-        owner_d.acquire_view("ConsumerD", {"x"}, _PE)
-        check("Guard D: insufficient committed-ceiling reserve refused", False, "did not raise")
-    except so.ResourceRefused as exc:
-        check("Guard D: insufficient committed-ceiling reserve refused (independently of criteria 1-2), no provider allocated",
-              owner_d.state == so.STATE_UNAVAILABLE and owner_d.provider_allocation_count == 0, repr(exc))
+    # D. Round3 Repair D: the redundant fourth guard criterion
+    # (`4 GiB - committed_vas`) is REMOVED, along with its own isolation
+    # fixture, which the Astra Round 3 audit found summed
+    # private+committed+reserved+free to ~4,888 MiB against a declared
+    # 4,096 MiB (4 GiB) address-space ceiling model -- a physically
+    # impossible snapshot. As a regression guard against reintroducing
+    # that mistake, every guard-test fixture used in this file is checked
+    # here for basic physical consistency (its four VAS components must
+    # not sum to more than the assumed 4 GiB ceiling).
+    _ASSUMED_CEILING_BYTES = 4 * 1024 * 1024 * 1024
+
+    def assert_physically_consistent(label, snapshot):
+        total = (snapshot.private_usage + snapshot.committed_vas
+                 + snapshot.reserved_vas + snapshot.free_vas)
+        check("Guard D: %s fixture is physically consistent (total %d <= ceiling %d)" % (
+                  label, total, _ASSUMED_CEILING_BYTES,
+              ),
+              total <= _ASSUMED_CEILING_BYTES, "total=%d" % total)
+
+    assert_physically_consistent("sufficient_snapshot", sufficient_snapshot())
+    assert_physically_consistent("insufficient_free_vas", insufficient_free_vas())
+    assert_physically_consistent("insufficient_largest_region", insufficient_largest_region())
 
     # E. artifact exceeds artifact budget.
     oversized_path = ARTIFACT_PATH + ".oversized"
@@ -297,6 +288,8 @@ def main():
     lease_p, view_p = owner_order1.acquire_view("ConsumerP", real_folds_b, _PE)
     r1 = owner_order1.release_lease(lease_n)
     check("Order1: release N -> 'released'", r1 == "released")
+    check("Round3 RepairB: release removes N's owner-held record (no tombstone retained)",
+          lease_n.lease_id not in owner_order1._leases)
     try:
         envelope = owner_order1.get_view_via_lease(lease_p)
         check("Order1: P's still-active lease authorizes access after N released", envelope.view_id == view_p.view_id)
@@ -308,8 +301,12 @@ def main():
         check("Order1: N's released lease no longer authorizes access", False, "did not raise")
     except so.LeaseRejected as exc:
         check("Order1: N's released lease no longer authorizes access", True, repr(exc))
+    leases_before_repeat = len(owner_order1._leases)
     r1_repeat = owner_order1.release_lease(lease_n)
     check("Order1: repeated release of N is idempotent ('already-released-noop')", r1_repeat == "already-released-noop")
+    check("Round3 RepairB: repeated release of an already-released lease grows no central history "
+          "(owner-held lease-record count unchanged)",
+          len(owner_order1._leases) == leases_before_repeat)
     r2 = owner_order1.release_lease(lease_p)
     check("Order1: release P -> 'released'", r2 == "released")
     check("Order1: active view/lease accounting decreased to zero", owner_order1.active_lease_count() == 0
@@ -404,21 +401,34 @@ def main():
           owner_resetd_fresh is not owner_resetd)
     check("RepairD: fresh owner has no admitted provider yet", owner_resetd_fresh.provider is None)
 
-    # Prove reset is also harmless against an already-closed owner still
-    # sitting in the registry (edge case the brief explicitly calls out).
+    # Round3 Repair B: close() now REMOVES itself from the registry
+    # immediately (no longer only cleaned up by a later reset) -- so this
+    # is checked directly, before any reset call, rather than only via
+    # the registry ending up empty after `_reset_registry_for_testing()`.
     lease_fresh, _ = owner_resetd_fresh.acquire_view("ConsumerResetDFresh", real_folds_a, _PE)
     owner_resetd_fresh.release_lease(lease_fresh)
     owner_resetd_fresh.close()
+    check("Round3 RepairB: closed owner immediately removed from the registry (discoverable via "
+          "get_or_create_owner check, no reset required)",
+          so._OWNER_REGISTRY.get(ns_resetd_again) is not owner_resetd_fresh)
     so._reset_registry_for_testing()
-    check("RepairD: reset against an already-closed owner is harmless", len(so._OWNER_REGISTRY) == 0)
+    check("RepairD: reset against an already-closed (already self-deregistered) owner is harmless",
+          len(so._OWNER_REGISTRY) == 0)
 
     # -----------------------------------------------------------------
     # C1.5 -- bounded owner cache/view lifetime
     # -----------------------------------------------------------------
     section("C1.5 -- bounded owner cache/view accounting")
     so._reset_registry_for_testing()
+    # Round3 Repair H added a per-view/per-requested-fold accounting
+    # overhead (nonzero by default, so a negative-only view is never
+    # zero-charged); this legacy row-count-calibrated budget test is about
+    # pinned/family-row budgeting specifically (Repair H's own dedicated
+    # accounting behavior is exercised separately), so it explicitly
+    # zeroes that overhead to preserve its original row-based calibration.
     small_budgets = so.ViewBudgets(one_family_result_rows=5000, one_snapshot_rows=200,
-                                    total_pinned_bytes=4000, estimated_bytes_per_row=20)
+                                    total_pinned_bytes=4000, estimated_bytes_per_row=20,
+                                    per_view_fixed_overhead_bytes=0, per_requested_fold_overhead_bytes=0)
     ns_c15 = make_namespace_identity_variant(source_sha256, "-c15")
     owner_c15 = make_owner(ns_c15, budgets=small_budgets)
 
@@ -444,7 +454,8 @@ def main():
     # C/D. pinned-view budget: acquire a view, then request one that would exceed total_pinned_bytes.
     ns_c15d = make_namespace_identity_variant(source_sha256, "-c15d")
     small_budgets_d = so.ViewBudgets(one_family_result_rows=5000, one_snapshot_rows=200,
-                                      total_pinned_bytes=2200, estimated_bytes_per_row=20)
+                                      total_pinned_bytes=2200, estimated_bytes_per_row=20,
+                                      per_view_fixed_overhead_bytes=0, per_requested_fold_overhead_bytes=0)
     owner_c15d = make_owner(ns_c15d, budgets=small_budgets_d)
     lease_first, view_first = owner_c15d.acquire_view("ConsumerFirst", small_a, _PE)  # ~50 rows * 20 = 1000 bytes
     check("C1.5.C first view within pinned budget", owner_c15d.total_pinned_view_bytes() <= small_budgets_d.total_pinned_bytes)
