@@ -1,0 +1,43 @@
+[1789281257.676] Minimum C3 embedded probe loaded, pid=24932 sys.version='2.7.5 (default, Jul  3 2013, 16:44:46) [MSC v.1600 32 bit (Intel)]'
+[1789281257.677] PySide import PASS
+[1789281257.677] Minimum C3 embedded probe scheduled.
+[1789281260.676] STAGE BEGIN
+[1789281260.698] STAGE MODULE_IMPORT_END
+[1789281260.800] STAGE P1_ADMIT_G1_BEGIN
+[1789281260.802]   PASS: 1: G1 admitted, fold 'aaa' present 
+[1789281260.805]   PASS: 2: two active leases under G1 
+[1789281260.805]   PASS: 2: one provider allocation for G1 
+[1789281260.810] STAGE P1_ADMIT_G1_END
+[1789281260.926] STAGE P2_SOURCE_CHANGE_RETIRE_BEGIN
+[1789281260.933]   PASS: 3: command boundary detects the source change (new owner object) 
+[1789281260.934]   PASS: 4: old G1 owner is RETIRED 
+[1789281260.934]   PASS: 9: G2 not yet admitted (preparation stays lazy) 
+[1789281260.935]   PASS: 5: new G1 acquisition refused after retirement ResourceRefused('owner is RETIRED (a newer source generation was detected at a command boundary) -- no new lease/view may be created; existing already-issued leases may still drain',)
+[1789281260.935]   PASS: 6: stale (RETIRED, not yet closed) lease payload remains inspectable 
+[1789281260.936] STAGE P2_SOURCE_CHANGE_RETIRE_END
+[1789281261.051] STAGE P3_DRAIN_CLOSE_BEGIN
+[1789281261.052]   PASS: 7: release N -> 'released' 
+[1789281261.052]   PASS: 7: provider remains alive because P is still active 
+[1789281261.058]   PASS: 8: close deferred while P still active 'deferred-active-leases:1'
+[1789281261.063]   PASS: 7: release P -> 'released' 
+[1789281261.068]   PASS: 8: G1 closes once drained 'closed'
+[1789281261.071]   PASS: 8: no provider overlap -- exactly one provider allocation across G1's whole lifetime 
+[1789281261.076]   PASS: 11: stale G1 lease rejected once G1 is CLOSED (not merely RETIRED) LeaseRejected('owner is CLOSED -- lease no longer authorizes access',)
+[1789281261.080] STAGE P3_DRAIN_CLOSE_END
+[1789281261.190] STAGE P4_ADMIT_G2_BEGIN
+[1789281261.191]   PASS: 9: G2 admitted only now, on this later explicit step 
+[1789281261.197]   PASS: 10: G2 changed semantic visible ('ccc' present) 
+[1789281261.198]   PASS: 10: old fold 'aaa' correctly absent/proven-negative in G2 
+[1789281261.202]   PASS: 2: G2 receives a new authorization epoch 
+[1789281261.208]   PASS: 11: old G1 owner remains rejected after G2 exists ResourceRefused('owner is CLOSED -- no new lease/view may be created',)
+[1789281261.208] STAGE P4_ADMIT_G2_END
+[1789281261.314] STAGE P5_FAILURE_RECOVERY_BEGIN
+[1789281261.316]   PASS: 12: missing manifest/pointer refused recoverably ResourceRefused("manifest/pointer missing or unreadable: IOError(2, 'No such file or directory')",)
+[1789281261.323]   PASS: 12: later explicit retry after correction succeeds 
+[1789281261.325]   PASS: 12: retry reuses the existing G2 owner (nothing else changed) 
+[1789281261.326] STAGE P5_FAILURE_RECOVERY_END
+[1789281261.437] STAGE P6_CLEANUP_BEGIN
+[1789281261.438]   PASS: 13: final cleanup -- G2 closes cleanly 'closed'
+[1789281261.439] STAGE P6_CLEANUP_END
+[1789281261.561] Minimum C3 embedded probe RESULT: 24 PASS / 0 FAIL
+[1789281261.562] STAGE DONE

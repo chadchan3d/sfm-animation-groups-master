@@ -91,13 +91,15 @@ STATE_EMPTY = "EMPTY"
 STATE_PREPARING = "PREPARING"
 STATE_READY = "READY"
 STATE_UNAVAILABLE = "UNAVAILABLE"
+STATE_RETIRED = "RETIRED"
 STATE_CLOSED = "CLOSED"
 
 _VALID_TRANSITIONS = {
-    STATE_EMPTY: {STATE_PREPARING},
-    STATE_PREPARING: {STATE_READY, STATE_UNAVAILABLE, STATE_CLOSED},
-    STATE_READY: {STATE_CLOSED},
-    STATE_UNAVAILABLE: {STATE_PREPARING, STATE_CLOSED},
+    STATE_EMPTY: {STATE_PREPARING, STATE_RETIRED},
+    STATE_PREPARING: {STATE_READY, STATE_UNAVAILABLE, STATE_CLOSED, STATE_RETIRED},
+    STATE_READY: {STATE_CLOSED, STATE_RETIRED},
+    STATE_UNAVAILABLE: {STATE_PREPARING, STATE_CLOSED, STATE_RETIRED},
+    STATE_RETIRED: {STATE_CLOSED},
     STATE_CLOSED: set(),  # terminal
 }
 
@@ -500,6 +502,11 @@ class MasterAuthorityOwner(object):
         """
         if self.state == STATE_CLOSED:
             raise ResourceRefused("owner is CLOSED -- no new lease/view may be created")
+        if self.state == STATE_RETIRED:
+            raise ResourceRefused(
+                "owner is RETIRED (a newer source generation was detected at a command boundary) -- "
+                "no new lease/view may be created; existing already-issued leases may still drain"
+            )
 
         ok, reason = self._ensure_admitted()
         if not ok:
@@ -545,6 +552,11 @@ class MasterAuthorityOwner(object):
                             epoch_at_start, self.epoch,
                         )
                     )
+                if self.state in (STATE_RETIRED, STATE_CLOSED):
+                    raise ResourceRefused(
+                        "owner was retired/closed during resolution (now %r) -- candidate discarded, "
+                        "nothing published; no mixed-generation publication" % (self.state,)
+                    )
 
             # Global stats/hierarchy (mapping_count/destination_count/
             # group_sibling_order/group_metadata) are scope-independent --
@@ -588,6 +600,11 @@ class MasterAuthorityOwner(object):
                 raise ResourceRefused(
                     "owner epoch changed just before publication (expected %r, now %r) -- "
                     "candidate discarded" % (epoch_at_start, self.epoch)
+                )
+            if self.state in (STATE_RETIRED, STATE_CLOSED):
+                raise ResourceRefused(
+                    "owner was retired/closed during expansion (now %r) -- candidate discarded, "
+                    "nothing published; no mixed-generation publication" % (self.state,)
                 )
 
             view_payload = {
@@ -739,6 +756,43 @@ class MasterAuthorityOwner(object):
         if isinstance(result, str) and result.startswith("deferred-active-leases:"):
             raise OwnerBusy(result)
         return result
+
+    # -- minimum C3: retirement --
+
+    def retire(self):
+        """Minimum C3: idempotent. Called ONLY at an explicit command
+        boundary (never by a watcher/poller -- this module has none) when
+        that boundary's freshness check finds this owner's own admitted
+        source generation no longer matches the current Master TXT bytes.
+
+        Transitions any live state straight to RETIRED -- checked
+        identically to the existing CLOSED check at the top of
+        `acquire_view` and again just before publication (so a retirement
+        injected mid-resolution/mid-publication is caught the same way an
+        epoch change is: candidate discarded, nothing published). No new
+        `acquire_view()` is authorized afterward.
+
+        Existing already-issued leases are COMPLETELY UNAFFECTED:
+        `get_view_via_lease` keeps authorizing them exactly as before (the
+        already-published, detached payload remains inspectable), and
+        `release_lease`/`close` work exactly as they always have -- so a
+        retired owner still drains and closes through the normal API, it
+        just never accepts new work in the meantime.
+
+        Also removes this owner from the process-wide registry
+        immediately (if that registry entry still points to this exact
+        owner), mirroring `close()`'s own registry-removal behavior -- a
+        retired owner is never offered again for new command-boundary
+        acquisition, even before it has finished draining/closing."""
+        if self.state == STATE_CLOSED:
+            return "already-closed-noop"
+        if self.state == STATE_RETIRED:
+            return "already-retired-noop"
+        prior = self.state
+        self._set_state(prior, STATE_RETIRED)
+        if _OWNER_REGISTRY.get(self.namespace_identity) is self:
+            del _OWNER_REGISTRY[self.namespace_identity]
+        return "retired"
 
 
 class ViewBudgets(object):
