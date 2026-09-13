@@ -200,6 +200,22 @@ class BoundedProvider(object):
         self._ensure_groups()
         return len(self._groups)
 
+    def evict_reusable_cache(self):
+        """Gate C1.5 -- clears every RE-DERIVABLE cache (decoded string
+        cache, group/metadata cache, per-group full-path cache). Never
+        evicts anything a caller could not re-derive identically from the
+        still-resident packed backing bytes -- so truth/semantic results
+        on reacquisition are unchanged, only slower to re-decode. Never
+        touches `self._buf` (the packed backing itself) and never affects
+        any already-published ViewEnvelope payload (those are plain dicts,
+        independent of this provider's internal caches once returned)."""
+        self._require_valid()
+        self._string_cache = {}
+        self._groups = None
+        self._group_full_path_cache = {}
+        self._child_index = None
+        self._metadata_rows = None
+
     # -- Gate C0.4/C0.7 resource introspection (qualification-only; never
     # used to change lookup/view semantics, only to REPORT what is
     # currently resident so "bounded" is a measured claim, not an assumed
