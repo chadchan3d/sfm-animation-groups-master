@@ -364,23 +364,23 @@ def _validate_and_decode(buf):
 
     # Path-identity uniqueness: reconstruct every full path and confirm none
     # collide (a full O(n) check, not assumed true because the compiler is
-    # trusted).
+    # trusted). A single forward pass, not a recursive closure: the
+    # anti-cycle check above already guarantees parent_path_id < i for
+    # every non-root row, so by the time index i is reached,
+    # full_paths[row.parent_path_id] has already been computed in an
+    # earlier iteration -- no recursion, and (Gate C0.3 / Astra Round 2
+    # finding) no self-referential nested-closure reference cycle that
+    # would otherwise only be reclaimed by a later cyclic-GC pass rather
+    # than deterministically by refcounting the moment this function
+    # returns.
     full_paths = [None] * group_count
-
-    def full_path_of(idx, _seen=None):
-        if full_paths[idx] is not None:
-            return full_paths[idx]
-        row = groups[idx]
+    for i in range(group_count):
+        row = groups[i]
         name = strings[row.name_string_id]
         if row.parent_path_id == fmt.ROOT_SENTINEL:
-            fp = name
+            full_paths[i] = name
         else:
-            fp = full_path_of(row.parent_path_id) + "/" + name
-        full_paths[idx] = fp
-        return fp
-
-    for i in range(group_count):
-        full_path_of(i)
+            full_paths[i] = full_paths[row.parent_path_id] + "/" + name
     if len(set(full_paths)) != len(full_paths):
         _fail("two or more GROUP TABLE rows reconstruct to the same full path")
 
