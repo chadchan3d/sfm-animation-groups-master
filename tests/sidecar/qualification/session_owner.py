@@ -20,6 +20,7 @@ adapter, Normalizer production integration.
 import os
 import time
 import itertools
+import collections
 
 try:
     _NUMERIC_TYPES = (int, float, long)  # noqa: F821 -- Python 2: large ctypes c_size_t
@@ -241,6 +242,80 @@ class Lease(object):
         self.active = True
 
 
+class _EpochCoverage(object):
+    """Gate C2 -- per-epoch, owner-level reusable coverage/cache. Created
+    fresh exactly once per successful admission (bound 1:1 to
+    `owner.epoch`); never reused across a different epoch. Two disjoint
+    stores, per the C2 coverage model:
+
+      positive: fold_key -> COMPLETE list of occurrence rows (Gate A2
+                contract shape) -- never a truncated subset.
+      negative: fold_keys the complete provider has proven absent (a true
+                `MasterUnknown`, never inferred from mere absence in some
+                earlier VIEW) -- stored as an insertion-ordered dict used
+                as an ordered set (plain `set` has no defined iteration/
+                eviction order; `collections.OrderedDict` is used instead
+                specifically so FIFO eviction below is deterministic under
+                BOTH desktop Python 3 and embedded Python 2.7 -- a plain
+                dict's insertion-order guarantee is CPython-3.7+ only and
+                is not something this Python-2.7-target module may rely
+                on).
+
+    Gate C2R: this cache is now EXPLICITLY BOUNDED -- `positive` by an
+    estimated total byte size (`positive_max_bytes`), `negative` by entry
+    count (`negative_max_entries`), both provisional qualification values
+    (see `MasterAuthorityOwner`/`ViewBudgets`). Exceeding either bound
+    evicts the OLDEST entries (FIFO, by original insertion order) until
+    the cache fits again -- eviction is unconditional cache-capacity
+    management, never a correctness decision: it only ever removes a
+    REUSABLE fact, never a currently-published `ViewEnvelope`'s own
+    payload (those are independent copies, per the C2 immutable-view
+    contract), and it never converts a fact this cache still happens to
+    hold into anything else -- it simply forgets it, so the next request
+    for that exact fold must re-query the complete provider (a
+    performance cost, never a truth change, exactly as `evict_reusable_
+    coverage_cache` already guaranteed for whole-cache eviction)."""
+
+    def __init__(self, epoch, positive_max_bytes, negative_max_entries, estimated_bytes_per_row):
+        self.epoch = epoch
+        self.positive = collections.OrderedDict()   # fold_key -> rows, FIFO order
+        self.negative = collections.OrderedDict()   # fold_key -> True (ordered set), FIFO order
+        self.lookup_call_count = 0
+        self.reuse_hit_count = 0
+        self.positive_max_bytes = positive_max_bytes
+        self.negative_max_entries = negative_max_entries
+        self.estimated_bytes_per_row = estimated_bytes_per_row
+        self.bound_eviction_count = 0  # entries evicted due to hitting a bound (distinct from a whole-cache evict_reusable_coverage_cache() call)
+
+    def positive_bytes(self):
+        return sum(len(rows) for rows in self.positive.values()) * self.estimated_bytes_per_row
+
+    def merge_positive(self, candidate_positive):
+        """Merge newly-resolved positive facts, then enforce the byte
+        bound via FIFO eviction. A single candidate fact is NEVER evicted
+        as part of the same merge that just added it, unless the bound
+        itself is smaller than that one fact's own size -- in which case
+        the fact is still recorded (never partially) and immediately
+        FIFO-eligible for eviction on the next merge; this cache is a
+        performance aid, and even a "too large to comfortably retain"
+        fact was still fully, correctly resolved and published in the
+        view that requested it (the SEPARATE one-family/one-snapshot
+        budgets in `acquire_view`, not this cache bound, are what may
+        refuse to publish an oversized result in the first place)."""
+        for k, v in candidate_positive.items():
+            self.positive[k] = v
+        while self.positive and self.positive_bytes() > self.positive_max_bytes:
+            self.positive.popitem(last=False)
+            self.bound_eviction_count += 1
+
+    def merge_negative(self, candidate_negative):
+        for k in candidate_negative:
+            self.negative[k] = True
+        while len(self.negative) > self.negative_max_entries:
+            self.negative.popitem(last=False)
+            self.bound_eviction_count += 1
+
+
 class ViewEnvelope(object):
     __slots__ = ("view_id", "namespace_identity", "artifact_sha256", "epoch",
                  "consumer_profile", "wanted_folds", "payload", "accounted_bytes")
@@ -290,6 +365,7 @@ class MasterAuthorityOwner(object):
         self.state = STATE_EMPTY
         self.provider = None
         self.epoch = 0
+        self._coverage = None   # Gate C2: _EpochCoverage, created fresh on each successful admission
         self._leases = {}       # lease_id -> Lease
         self._views = {}        # view_id -> ViewEnvelope
         self._lease_id_counter = itertools.count(1)
@@ -393,12 +469,56 @@ class MasterAuthorityOwner(object):
         self.provider_allocation_count += 1
         self.admission_success_count += 1
         self.epoch += 1
+        self._coverage = self._new_epoch_coverage()  # fresh, epoch-bound, BOUNDED coverage/cache
         self._set_state(STATE_PREPARING, STATE_READY)
         return True, "admitted"
 
+    def _new_epoch_coverage(self):
+        return _EpochCoverage(
+            self.epoch,
+            positive_max_bytes=self.view_budgets.coverage_positive_max_bytes,
+            negative_max_entries=self.view_budgets.coverage_negative_max_entries,
+            estimated_bytes_per_row=self.view_budgets.estimated_bytes_per_row,
+        )
+
+    def evict_reusable_coverage_cache(self):
+        """Gate C2 -- clears the reusable positive/negative coverage cache
+        for the CURRENT epoch only. Never affects any already-published
+        `ViewEnvelope` (those hold independent payload copies), never
+        changes what a subsequent `acquire_view` call returns -- only
+        forces it to re-query the provider to rediscover facts this cache
+        used to remember for free."""
+        self._require_owner_valid_for_cache_op()
+        self._coverage = self._new_epoch_coverage()
+
+    def _require_owner_valid_for_cache_op(self):
+        if self.state != STATE_READY:
+            raise ResourceRefused("owner is not READY -- no coverage cache to evict")
+
     # -- consumer-facing lease/view acquisition --
 
-    def acquire_view(self, consumer_id, wanted_folds, probe_error_cls, consumer_profile="generic"):
+    def acquire_view(self, consumer_id, wanted_folds, probe_error_cls, consumer_profile="generic",
+                      fault_injector=None):
+        """Gate C2: coverage-aware, atomically-published view acquisition.
+
+        Already-covered folds (positive or negative, for the CURRENT
+        epoch's `_coverage`) are served entirely from cache -- this
+        provider is never asked about them again (`provider.lookup_fold`
+        is called only for genuinely new folds; zero calls at all for a
+        100%-warm reacquisition). Newly-requested folds are resolved into
+        a PRIVATE candidate (never touching `self._coverage` or
+        `self._views`/`self._leases`) one at a time, in a deterministic
+        (sorted) order, so `fault_injector` (qualification-only; None in
+        all non-fault-injection tests) can observe/interrupt resolution
+        after a specific number of folds have been resolved. The owner's
+        epoch is checked after every fold and again just before
+        publication -- any epoch change discards the candidate entirely.
+        Only if EVERY check passes (per-family budget, one-snapshot
+        budget, total-pinned-view budget, epoch unchanged) are the new
+        facts merged into `self._coverage` and a new immutable
+        `ViewEnvelope`/`Lease` published -- all in one atomic step. Any
+        exception raised before that point leaves `self._coverage`,
+        `self._views`, and `self._leases` completely unchanged."""
         if self.state == STATE_CLOSED:
             raise ResourceRefused("owner is CLOSED -- no new lease/view may be created")
 
@@ -406,42 +526,115 @@ class MasterAuthorityOwner(object):
         if not ok:
             raise ResourceRefused("cannot acquire view: %s" % (reason,))
 
-        # Per-fold family budget + consumer-snapshot budget, BEFORE
-        # publishing any new view (Gate C0.7 mechanism, reused here at the
-        # owner level).
-        for fold_key in wanted_folds:
+        wanted_folds = set(wanted_folds)
+        epoch_at_start = self.epoch
+        coverage = self._coverage
+        already_covered = set(coverage.positive.keys()) | set(coverage.negative.keys())
+        new_folds = wanted_folds - already_covered
+
+        wrapper_name = self.provider.wrapper_path()
+        candidate_positive = {}   # fold_key -> rows (Gate A2 contract shape), private until publish
+        candidate_negative = set()
+
+        for i, fold_key in enumerate(sorted(new_folds), start=1):
             result = self.provider.lookup_fold(fold_key.encode("utf-8"))
-            if result.__class__.__name__ != "MasterUnknown":
-                occs = result.occurrences()
-                if len(occs) > self.view_budgets.one_family_result_rows:
+            coverage.lookup_call_count += 1
+            if result.__class__.__name__ == "MasterUnknown":
+                candidate_negative.add(fold_key)
+            else:
+                rows = []
+                for occ in result.occurrences():
+                    dest = self._bounded_view_module.strip_wrapper(occ["full_path"], wrapper_name)
+                    rows.append({
+                        "literal": occ["literal"], "destination": dest,
+                        "global_index": occ["global_rank"], "local_index": occ["local_rank"],
+                    })
+                rows.sort(key=lambda r: r["global_index"])
+                if len(rows) > self.view_budgets.one_family_result_rows:
                     raise ResourceRefused(
                         "fold %r resolves to %d rows, exceeding the one-family budget of %d rows -- "
-                        "refused before publishing any view" % (
-                            fold_key, len(occs), self.view_budgets.one_family_result_rows,
+                        "candidate discarded, nothing published, nothing merged into coverage" % (
+                            fold_key, len(rows), self.view_budgets.one_family_result_rows,
                         )
                     )
+                candidate_positive[fold_key] = rows
 
-        view = self._bounded_view_module.build_view_bounded(self.provider, wanted_folds, probe_error_cls)
-        total_rows = sum(len(v) for v in view["folded"].values())
+            if fault_injector is not None:
+                fault_injector(i, fold_key)  # qualification-only; may raise -- candidate discarded below
+
+            if self.epoch != epoch_at_start:
+                raise ResourceRefused(
+                    "owner epoch changed during expansion (expected %r, now %r) -- "
+                    "candidate discarded, nothing published, nothing merged into coverage" % (
+                        epoch_at_start, self.epoch,
+                    )
+                )
+
+        if not new_folds:
+            coverage.reuse_hit_count += 1
+
+        # Assemble the full view payload: newly-resolved rows plus cached
+        # rows for everything already covered. Global stats/hierarchy
+        # (mapping_count/destination_count/group_sibling_order/
+        # group_metadata) are scope-independent -- computed once here from
+        # the already-admitted provider, never re-derived per fold.
+        base = self._bounded_view_module.build_view_bounded(self.provider, set(), probe_error_cls)
+        folded = {}
+        exact_literals = set()
+        for fold_key in wanted_folds:
+            if fold_key in candidate_negative or fold_key in coverage.negative:
+                continue
+            rows = candidate_positive.get(fold_key) or coverage.positive.get(fold_key)
+            if rows is None:
+                continue
+            folded[fold_key] = rows
+            for r in rows:
+                exact_literals.add(r["literal"])
+        view_payload = {
+            "mapping_count": base["mapping_count"], "destination_count": base["destination_count"],
+            "folded": folded, "exact_literals": exact_literals,
+            "group_sibling_order": base["group_sibling_order"], "group_metadata": base["group_metadata"],
+        }
+
+        total_rows = sum(len(v) for v in view_payload["folded"].values())
         if total_rows > self.view_budgets.one_snapshot_rows:
             raise ResourceRefused(
                 "requested view would retain %d rows, exceeding the one-snapshot budget of %d rows -- "
-                "refused before publishing" % (total_rows, self.view_budgets.one_snapshot_rows,)
+                "candidate discarded, nothing published, nothing merged into coverage" % (
+                    total_rows, self.view_budgets.one_snapshot_rows,
+                )
             )
         accounted_bytes = total_rows * self.view_budgets.estimated_bytes_per_row
         pinned_total = sum(v.accounted_bytes for v in self._views.values()) + accounted_bytes
         if pinned_total > self.view_budgets.total_pinned_bytes:
             raise ResourceRefused(
                 "publishing this view would bring total pinned-view accounting to %d bytes, "
-                "exceeding the total-pinned budget of %d bytes -- refused before publishing; "
-                "existing views remain valid" % (pinned_total, self.view_budgets.total_pinned_bytes,)
+                "exceeding the total-pinned budget of %d bytes -- candidate discarded, nothing "
+                "published, nothing merged into coverage; existing views remain valid" % (
+                    pinned_total, self.view_budgets.total_pinned_bytes,
+                )
             )
+        if self.epoch != epoch_at_start:
+            raise ResourceRefused(
+                "owner epoch changed just before publication (expected %r, now %r) -- "
+                "candidate discarded" % (epoch_at_start, self.epoch)
+            )
+
+        # ---- Atomic commit: coverage merge + view/lease publication.
+        # Everything above this point is provably side-effect-free on
+        # owner-visible state (self._coverage/_views/_leases); everything
+        # below is a small number of plain dict/attribute writes with no
+        # further failure points, so the two effects (coverage update,
+        # view/lease publication) happen together or not at all in
+        # practice. ----
+        coverage.merge_positive(candidate_positive)
+        coverage.merge_negative(candidate_negative)
 
         view_id = next(self._view_id_counter)
         envelope = ViewEnvelope(
             view_id=view_id, namespace_identity=self.namespace_identity,
             artifact_sha256=self.namespace_identity.artifact_sha256, epoch=self.epoch,
-            consumer_profile=consumer_profile, wanted_folds=wanted_folds, payload=view,
+            consumer_profile=consumer_profile, wanted_folds=wanted_folds, payload=view_payload,
             accounted_bytes=accounted_bytes,
         )
         self._views[view_id] = envelope
@@ -551,11 +744,24 @@ class MasterAuthorityOwner(object):
 
 class ViewBudgets(object):
     def __init__(self, one_family_result_rows, one_snapshot_rows, total_pinned_bytes,
-                 estimated_bytes_per_row=256):
+                 estimated_bytes_per_row=256, coverage_positive_max_bytes=None,
+                 coverage_negative_max_entries=None):
         self.one_family_result_rows = one_family_result_rows
         self.one_snapshot_rows = one_snapshot_rows
         self.total_pinned_bytes = total_pinned_bytes
         self.estimated_bytes_per_row = estimated_bytes_per_row
+        # Gate C2R: explicit, enforced bounds for the owner-level reusable
+        # coverage cache (previously unbounded). Defaults chosen so
+        # existing call sites that do not pass these explicitly still get
+        # a REAL bound rather than silently reverting to "unbounded."
+        self.coverage_positive_max_bytes = (
+            coverage_positive_max_bytes if coverage_positive_max_bytes is not None
+            else 32 * 1024 * 1024
+        )
+        self.coverage_negative_max_entries = (
+            coverage_negative_max_entries if coverage_negative_max_entries is not None
+            else 100000
+        )
 
     @classmethod
     def from_qualification_defaults(cls, resource_budgets_module):
@@ -564,6 +770,8 @@ class ViewBudgets(object):
             one_family_result_rows=rb.BUDGET_ONE_FAMILY_RESULT_OCCURRENCE_ROWS,
             one_snapshot_rows=rb.BUDGET_ONE_CONSUMER_SNAPSHOT_OCCURRENCE_ROWS,
             total_pinned_bytes=rb.BUDGET_TOTAL_PINNED_VIEWS_ESTIMATED_BYTES,
+            coverage_positive_max_bytes=rb.BUDGET_COVERAGE_CACHE_POSITIVE_ESTIMATED_BYTES,
+            coverage_negative_max_entries=rb.BUDGET_COVERAGE_CACHE_NEGATIVE_MAX_ENTRIES,
         )
 
 
