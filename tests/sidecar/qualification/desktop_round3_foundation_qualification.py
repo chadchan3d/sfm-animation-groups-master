@@ -24,8 +24,6 @@ REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.p
 sys.path.insert(0, os.path.join(REPO_ROOT, "tools"))
 sys.path.insert(0, os.path.join(REPO_ROOT, "tests", "sidecar"))
 sys.path.insert(0, os.path.join(REPO_ROOT, "tests", "sidecar", "qualification"))
-SCRATCH_DIR = r"C:\Users\REDACTED\AppData\Local\Temp\claude\E--SFM-Animation-Group-Master\67454949-e69f-4280-93d9-87c1f4464330\scratchpad"
-sys.path.insert(0, SCRATCH_DIR)
 
 import official_master_fixture as fx  # noqa: E402
 import bounded_provider  # noqa: E402
@@ -55,7 +53,7 @@ class _PE(Exception):
 
 
 ARTIFACT_PATH = os.path.join(REPO_ROOT, "tests", "sidecar", "qualification", "_round3_official_sidecar_scratch.bin")
-FIXTURES_DIR = os.path.join(SCRATCH_DIR, "gate_a2_adversarial")
+FIXTURES_DIR = os.path.join(REPO_ROOT, "tests", "sidecar", "fixtures", "gate_a2_adversarial")
 
 
 def write_official_artifact():

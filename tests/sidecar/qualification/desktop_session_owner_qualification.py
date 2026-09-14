@@ -484,9 +484,6 @@ def main():
     # inside-conflict / metadata-path / malformed-query semantics.
     # -----------------------------------------------------------------
     section("Part 16 -- semantic regression through the owner")
-    scratch_dir = r"C:\Users\REDACTED\AppData\Local\Temp\claude\E--SFM-Animation-Group-Master\67454949-e69f-4280-93d9-87c1f4464330\scratchpad"
-    if scratch_dir not in sys.path:
-        sys.path.insert(0, scratch_dir)
     import gate_a2_compat_producer as cp  # reused folding utility only, not an oracle mirror
 
     def owner_for_fixture(name, bin_dir):
@@ -510,7 +507,7 @@ def main():
         )
         return owner, fixture_artifact_path
 
-    fixtures_dir = r"C:\Users\REDACTED\AppData\Local\Temp\claude\E--SFM-Animation-Group-Master\67454949-e69f-4280-93d9-87c1f4464330\scratchpad\gate_a2_adversarial"
+    fixtures_dir = os.path.join(REPO_ROOT, "tests", "sidecar", "fixtures", "gate_a2_adversarial")
 
     # HIT + metadata/path payload.
     owner_hit, path_hit = owner_for_fixture("same_destination_aliases", fixtures_dir)

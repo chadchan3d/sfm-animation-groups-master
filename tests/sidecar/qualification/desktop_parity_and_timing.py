@@ -36,31 +36,37 @@ import json
 import sys
 import time
 import os
+import tempfile
 
 try:
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 except Exception:
     pass
 
-REPO_ROOT = r"E:\SFM Animation Group Master"
-SCRATCH = r"C:\Users\REDACTED\AppData\Local\Temp\claude\E--SFM-Animation-Group-Master\67454949-e69f-4280-93d9-87c1f4464330\scratchpad"
+REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 QUAL_DIR = os.path.join(REPO_ROOT, "tests", "sidecar", "qualification")
 TEST_DIR = os.path.join(REPO_ROOT, "tests", "sidecar")
-ADVERSARIAL_DIR = os.path.join(SCRATCH, "gate_a2_adversarial")
+ADVERSARIAL_DIR = os.path.join(REPO_ROOT, "tests", "sidecar", "fixtures", "gate_a2_adversarial")
 
 sys.path.insert(0, os.path.join(REPO_ROOT, "tools"))
 sys.path.insert(0, TEST_DIR)
 sys.path.insert(0, QUAL_DIR)
-sys.path.insert(0, SCRATCH)
 
 import official_master_fixture as fx  # noqa: E402
 from sfm_master_sidecar import reader as prod_reader  # noqa: E402
 import gate_a2_compat_producer as cp  # noqa: E402
-import gate_a2_normalizer_oracle_extract as oracle_mod  # noqa: E402
 import bounded_provider  # noqa: E402
 import bounded_view  # noqa: E402
 
-ProbeError = oracle_mod.ProbeError
+
+class ProbeError(Exception):
+    """Local probe-only exception. This harness never calls the real
+    Normalizer's own extracted parsing functions (it treats the production
+    `SidecarReader` as frozen ground truth, per the module docstring above),
+    so it only ever needs a plain exception type to raise/catch through
+    `gate_a2_compat_producer`, not the byte-for-byte Normalizer extraction
+    used elsewhere during Gate A2. Kept local and trivial so this harness
+    has no dependency on any not-publicly-distributed module."""
 
 _pass = [0]
 _fail = [0]
@@ -295,7 +301,7 @@ def main():
         "failures": _fail_details,
         "timings": timings,
     }
-    out_path = os.path.join(SCRATCH, "gate_b_desktop_parity_result.json")
+    out_path = os.path.join(tempfile.gettempdir(), "gate_b_desktop_parity_result.json")
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2, default=str)
     print("\nWrote %s" % out_path)
