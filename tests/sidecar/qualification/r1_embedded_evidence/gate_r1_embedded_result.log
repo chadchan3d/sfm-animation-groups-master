@@ -1,0 +1,30 @@
+[1789288214.597] R1 embedded probe loaded, pid=12228 sys.version='2.7.5 (default, Jul  3 2013, 16:44:46) [MSC v.1600 32 bit (Intel)]'
+[1789288214.598] PySide import PASS
+[1789288214.598] R1 embedded probe scheduled.
+[1789288217.603] STAGE BEGIN
+[1789288217.661]   PASS: real manual/live modules imported natively (no stub needed in real SFM) 
+[1789288217.681] STAGE MODULE_IMPORT_END
+[1789288217.789] STAGE P1_HIT_ALIAS_BEGIN
+[1789288217.790]   PASS: 1: real parse_targeted_master runs natively in embedded SFM 
+[1789288217.791]   PASS: 2: real TXT-parsed and sidecar-projected manual master_lookup agree exactly txt={'known': True, 'global_index': 0, 'local_index': 0, 'destination': u'Grp', 'mode': 'EXACT'} sidecar={'known': True, 'global_index': 0, 'local_index': 0, 'destination': u'Grp', 'mode': 'EXACT'}
+[1789288217.795]   PASS: 3: whole-source mapping_count agrees 
+[1789288217.799]   PASS: 3: whole-source destination_count agrees 
+[1789288217.800]   PASS: 3: complete fold family size agrees 
+[1789288217.800] STAGE P1_HIT_ALIAS_END
+[1789288217.914] STAGE P2_CONFLICT_BEGIN
+[1789288217.915]   PASS: 4: both real-TXT and sidecar-projected master_lookup raise the same conflict category txt=ProbeError("Multiple targeted Master destinations for 'Bar': [u'GrpA', u'GrpB']",) sidecar=ProbeError("Multiple targeted Master destinations for 'Bar': [u'GrpA', u'GrpB']",)
+[1789288217.921]   PASS: 5: targeted conflict timing preserved (broad-scope fold not yet active does not reject) 
+[1789288217.921]   PASS: 5: subset validation rejects once active subset includes the conflict ProbeError("Targeted live-Master casefold conflict(s): [('bar', [u'GrpA', u'GrpB'])]",)
+[1789288217.925] STAGE P2_CONFLICT_END
+[1789288218.040] STAGE P3_LIVE_SNAP_BEGIN
+[1789288218.042]   PASS: 6: real live t120_parse_master (native) and sidecar live projection agree via t120_master_lookup txt={'known': True, 'global_index': 0, 'local_index': 0, 'destination': u'Grp', 'mode': 'EXACT'} sidecar={'known': True, 'global_index': 0, 'local_index': 0, 'destination': u'Grp', 'mode': 'EXACT'}
+[1789288218.047]   PASS: 6: T95 bridge runs on the sidecar-built live projection 
+[1789288218.049]   PASS: 7: real live parser accepts 'snap' alias natively 
+[1789288218.052]   PASS: 7: sidecar live projection accepts 'snap' alias identically 
+[1789288218.053] STAGE P3_LIVE_SNAP_END
+[1789288218.164] STAGE P4_DETACHED_CLEANUP_BEGIN
+[1789288218.165]   PASS: 8: backing provider closed 
+[1789288218.165]   PASS: 8: detached manual projection (built in phase 1) still consumable via real master_lookup after complete backing has been closed 
+[1789288218.172] STAGE P4_DETACHED_CLEANUP_END
+[1789288218.289] R1 embedded probe RESULT: 15 PASS / 0 FAIL
+[1789288218.290] STAGE DONE
