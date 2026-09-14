@@ -51,14 +51,50 @@ python -m pytest tests/
 python tools/validate_master.py sfm_defaultanimationgroups.txt
 ```
 
-Some qualification harnesses under `tests/sidecar/qualification/` compare
-the sidecar against the real, externally-owned SFM Normalizer/T130 source.
-Those files aren't distributed with this repository; the harnesses that
-need them report a clear skip with the exact environment variable
-(`SFM_NORMALIZER_ORACLE_PATH`, `SFM_T130_ORACLE_PATH`) to set if you have
-your own copies.
+Most qualification harnesses under `tests/sidecar/qualification/` are fully
+self-contained and need nothing beyond this repository (`desktop_session_owner_qualification.py`,
+`desktop_view_expansion_qualification.py`, `desktop_round3_foundation_qualification.py`,
+`desktop_parity_and_timing.py`, `desktop_minimum_c3_qualification.py`).
+
+One, `desktop_r1_consumer_projection_qualification.py`, additionally
+compares the sidecar against the *real* SFM Normalizer/T130 source as a
+read-only oracle, to prove the compiled sidecar reproduces that consumer's
+exact behavior rather than a reimplementation of it. That real source is:
+
+- `SFM_NORMALIZER_ORACLE_PATH` — the live, currently-deployed
+  `Rebuild_Control_Groups_Normalizer.py` from your own SFM install
+  (`usermod/scripts/sfm/mainmenu/...`);
+- `SFM_T130_ORACLE_PATH` — a T130 live-trigger requalification snapshot of
+  that same Normalizer.
+
+Neither file is distributed with this repository — they are externally
+owned and maintained outside this project, and this repo does not claim
+any redistribution right over them. Set both environment variables to the
+exact local paths of your own copies to run this harness end-to-end. If
+either is unset or doesn't resolve to a real file, the harness prints a
+single `SKIPPED: ...` line naming both variables and exits successfully
+(code 0) without running any oracle-dependent check — it never reports a
+false PASS, and it never crashes for lack of these files.
+
+## Limitations
+
+- The sidecar qualification work establishes desktop-Python-3 and
+  real-embedded-Python-2.7 parity against the real Normalizer/T130
+  consumer contract; it does not itself constitute a live-SFM Qt-main-thread
+  production integration (see the `SFM_MASTER_SIDECAR_*` gate audits for
+  exactly what has and has not been qualified).
+- `desktop_r1_consumer_projection_qualification.py` loads both real oracle
+  files once at startup and uses them throughout, including its
+  hand-audited/manual-profile checks — it is an all-or-nothing harness, not
+  split into an oracle-free subset. Without both external files it reports
+  the SKIPPED result above rather than running any part of the suite.
 
 ## License
 
-Original material in this repository is released under CC0 1.0 (see
-`LICENSE`) — public domain dedication, no rights reserved.
+Original material in this repository — wholly authored within this
+project — is released under CC0 1.0 (see `LICENSE`): public domain
+dedication, no rights reserved. This does **not** extend to any
+externally-owned material referenced but not included here (the real SFM
+Normalizer/T130 source above, or any other third-party input a harness
+may optionally consume) — CC0 applies only to what this repository
+actually contains and that ChadChan3D has the right to dedicate.
