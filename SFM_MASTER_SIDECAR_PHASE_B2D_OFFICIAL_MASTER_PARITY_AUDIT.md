@@ -319,14 +319,14 @@ open for whenever Final Gate 1 is formally pursued.
 - `tools/sfm_master_core.py`, `tools/validate_master.py`: unchanged.
 - `tests/sidecar/oracle.py`, `fixtures/`, `fixture_manifest.json`: unchanged.
 - `tools/sfm_master_sidecar/{format,writer,reader}.py`: unchanged (byte-for-byte identical to the B2C
-  checkpoint commit `d105962d63eb1a8d5438bab7e485668d17072b15`).
+  checkpoint commit `1a1dd8246cb2c24d3c258ef233ee4bd653aff956`).
 - Validator re-run fresh after the full qualification: PASS, all canonical facts unchanged (groups=43,
   controls=128,555, folds=124,728, duplicates=0, cross-path conflicts=0).
 - `git diff --check`: clean.
 - No public CLI, manifest, publisher lock, or Normalizer-adjacent code exists anywhere in this phase.
 - **No official-Master sidecar was persisted anywhere** — confirmed via `find . -iname "*.bin"` returning
   nothing outside `.git/` after the complete test suite ran.
-- HEAD unchanged: `d105962d63eb1a8d5438bab7e485668d17072b15`.
+- HEAD unchanged: `1a1dd8246cb2c24d3c258ef233ee4bd653aff956`.
 - `git status`: only 5 new, untracked files (`tests/sidecar/official_master_fixture.py` and the 4 new
   `test_official_master_*.py` files) plus this audit document. **Nothing staged, nothing committed.**
 - No agents or subagents were used.

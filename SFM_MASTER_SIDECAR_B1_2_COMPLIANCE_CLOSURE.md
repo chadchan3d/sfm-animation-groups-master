@@ -3,7 +3,7 @@
 Full spec: `SFM_MASTER_SIDECAR_PHASE_B1_2_FINAL_IMPLEMENTATION_SPEC.md` (supersedes B1 and B1.1 for
 implementation). This document is the compact closure record.
 
-Baseline: HEAD `82fba3596eb7c8e1aacad10c808d92e954624f5e`, Master SHA
+Baseline: HEAD `8b4f0cb54750a5360a9897bb981af5463ab28681`, Master SHA
 `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`, validator PASS, tests 52 passed.
 
 ---
@@ -113,7 +113,7 @@ GATE 1 EVIDENCE / GATE 2 EVIDENCE table above), not an unresolved design questio
 ## Safety Confirmation
 
 - Master unchanged, SHA `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
-- HEAD unchanged, `82fba3596eb7c8e1aacad10c808d92e954624f5e`
+- HEAD unchanged, `8b4f0cb54750a5360a9897bb981af5463ab28681`
 - validator PASS, tests 52 passed (reconfirmed fresh)
 - Nothing staged, nothing committed
 - No compiler/reader/sidecar implementation begun

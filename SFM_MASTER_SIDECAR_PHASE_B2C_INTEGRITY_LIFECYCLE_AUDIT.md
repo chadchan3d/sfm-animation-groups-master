@@ -342,7 +342,7 @@ authority-usable.
 - No public CLI, manifest, publisher lock, or Normalizer-adjacent code exists anywhere in this phase.
 - No official-Master sidecar was generated.
 - No persistent generated `.bin` artifact exists anywhere in the repository.
-- HEAD unchanged: `5ea55a2352e5d4609f8f267e94d22bb9219040b9`.
+- HEAD unchanged: `3aaace3f8e349084e885f33773b2d8c6910d3a95`.
 - `git status`: `tools/sfm_master_sidecar/reader.py` shows modified; `tests/sidecar/corruption_helpers.py`
   and the 8 new test files, plus this audit document, are new/untracked. **Nothing staged, nothing
   committed.**

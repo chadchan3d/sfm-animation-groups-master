@@ -1,7 +1,7 @@
 # SFM Master Sidecar — Round 3 Foundation Simplification / Repair Audit
 
 Controlling architecture decision: `SFM_SIDECAR_ASTRA_ROUND3_HOLISTIC_AUDIT_2026-09-13.md`
-(committed at `11993073644c4ba9bb23b082d8e2b575c374b1d0`, "Record sidecar Round 3 architecture audit").
+(committed at `7af34a78194fa22a573280bbced79dcd813f3feb`, "Record sidecar Round 3 architecture audit").
 
 This is a **subtractive** foundation repair, not another architecture-expansion gate. Nothing
 in this document authorizes, begins, or scaffolds C3. Nothing here touches production
@@ -49,7 +49,7 @@ Per the Astra Round 3 holistic audit and the repair brief, this repair:
 ## 3. BASELINE
 
 - Repository: `E:\SFM Animation Group Master`
-- Expected baseline HEAD: `11993073644c4ba9bb23b082d8e2b575c374b1d0` "Record sidecar Round 3
+- Expected baseline HEAD: `7af34a78194fa22a573280bbced79dcd813f3feb` "Record sidecar Round 3
   architecture audit" — confirmed matching before any change was made.
 - `git status --short` before any change: clean except the same long-standing pool of
   unrelated pre-existing untracked files (Flex Bone/Sexual Bones/Phase2/historical Gate
@@ -478,7 +478,7 @@ explicit instruction, C3 requires its own separate task and its own brief.
 
 ## 23. GIT STATE
 
-- HEAD unchanged throughout this repair: `11993073644c4ba9bb23b082d8e2b575c374b1d0` "Record
+- HEAD unchanged throughout this repair: `7af34a78194fa22a573280bbced79dcd813f3feb` "Record
   sidecar Round 3 architecture audit".
 - Nothing staged (`git diff --cached --name-only` empty throughout).
 - No commits made.

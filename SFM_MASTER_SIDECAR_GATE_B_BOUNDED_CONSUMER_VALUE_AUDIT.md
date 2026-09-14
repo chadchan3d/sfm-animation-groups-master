@@ -9,7 +9,7 @@ Nothing in this gate was committed; see Section 24.
 
 ## 1. Baseline verification
 
-- Expected HEAD at task start: `bddaeae9961bc197d8fbb060a9cf79744689a3a3` ("Qualify
+- Expected HEAD at task start: `51476f04b251768243f1b81b8a0b20b191acc76f` ("Qualify
   Normalizer sidecar view parity") — confirmed.
 - Canonical Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93` — unchanged throughout.
 - `tools/sfm_master_sidecar/reader.py` SHA-256: `c0ed4250cfe13b892e54baf0538ee3bab946f000f20466d5c4da5b15c60bf2a9` — unchanged throughout (never modified this gate).

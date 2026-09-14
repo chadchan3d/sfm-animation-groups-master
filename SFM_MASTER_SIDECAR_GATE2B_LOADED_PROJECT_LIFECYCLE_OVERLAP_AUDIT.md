@@ -252,7 +252,7 @@ Candidate A as settled.
 
 ## 17. GIT / SAFETY STATE
 
-- HEAD before and after this task: `06cb52b39e2b302b05728ac089f8e6af016528d6` — unchanged.
+- HEAD before and after this task: `ea7401bc71c6d10022dc96aa1cb448738b10b05e` — unchanged.
 - `sfm_defaultanimationgroups.txt`: unchanged (`ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`).
 - `tools/sfm_master_sidecar/reader.py`: unchanged
   (`d79f7ae87c1999b7fe728f7dd6ddafb29b7cc62c246cd332f061875095288b00`) — every deployment in this task used a

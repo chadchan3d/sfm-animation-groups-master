@@ -10,7 +10,7 @@ compiler model, Python 3 compiler / Python 2.7 reader split, immutable generatio
 fold-family conflict semantics, whole-family view semantics, Gate 2 strategy, format-freeze timing) — it
 corrects five localized defects (A–E below) plus the escape-wording and consistency points Astra flagged.
 
-Baseline (reconfirmed fresh before writing this document): HEAD `82fba3596eb7c8e1aacad10c808d92e954624f5e`,
+Baseline (reconfirmed fresh before writing this document): HEAD `8b4f0cb54750a5360a9897bb981af5463ab28681`,
 Master SHA `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`, groups 43, occurrences
 128,555, folds 124,728, duplicates 0, ASCII conflicts 0, validator PASS, tests 52 passed.
 
@@ -1015,7 +1015,7 @@ happening "after Gate 1 passes" while Gate 1's own scope already required public
 ## Safety Confirmation
 
 - `sfm_defaultanimationgroups.txt`: unchanged, SHA `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
-- HEAD: unchanged, `82fba3596eb7c8e1aacad10c808d92e954624f5e`
+- HEAD: unchanged, `8b4f0cb54750a5360a9897bb981af5463ab28681`
 - `tools/validate_master.py`: PASS; tests: 52 passed, 0 failed (both reconfirmed fresh before writing
   this document, and again after all edits in this pass — no production code was touched)
 - Nothing staged, nothing committed

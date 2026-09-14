@@ -36,7 +36,7 @@ a regression of anything previously qualified.
 
 That first attempt was blocked by the Python-2 path/bytes ambiguity defect (a call-shape bug: a path string
 was misread as artifact bytes). That defect is now fixed and separately, fully qualified
-(`SFM_MASTER_SIDECAR_PY27_PATH_INPUT_FIX_AUDIT.md`; committed at `a52171251d9c837a85bff04b7dea8000f68ba140`).
+(`SFM_MASTER_SIDECAR_PY27_PATH_INPUT_FIX_AUDIT.md`; committed at `de6e9564447acbc52fd580cbe2612bec69c8977e`).
 This rerun used the corrected reader's explicit path entry point and never encountered that defect — it hit a
 **different, previously-unobserved** blocker: the real, full-scale open call did not complete inside a live
 SFM process, for reasons not yet root-caused. Candidate A's actual resource cost (retained memory, peak,
@@ -44,7 +44,7 @@ etc.) is **still not measured**, now for the second, unrelated reason.
 
 ## 3. QUALIFIED BASELINE
 
-- HEAD at start and end of this task: `a52171251d9c837a85bff04b7dea8000f68ba140` (unchanged).
+- HEAD at start and end of this task: `de6e9564447acbc52fd580cbe2612bec69c8977e` (unchanged).
 - Final Gate 1: PASS, 36/36, 0 OPEN, 0 FAIL (unaffected by this task).
 - Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93` (reconfirmed unchanged,
   Section 7).
@@ -354,7 +354,7 @@ root-caused** (a new, required precondition this task adds).
 
 ## 27. GIT / SAFETY STATE
 
-- HEAD before and after this task: `a52171251d9c837a85bff04b7dea8000f68ba140` — unchanged.
+- HEAD before and after this task: `de6e9564447acbc52fd580cbe2612bec69c8977e` — unchanged.
 - `sfm_defaultanimationgroups.txt`: unchanged (`ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`).
 - `tools/sfm_master_sidecar/reader.py`: unchanged (`d79f7ae87c1999b7fe728f7dd6ddafb29b7cc62c246cd332f061875095288b00`, the already-committed corrected
   file) — this task deployed only a read-only byte-verified COPY to a temporary SFM location; the

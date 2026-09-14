@@ -309,7 +309,7 @@ discrepancy, not a functional defect).
 ## 20. GATE 1 FINAL STATUS
 
 Per this task's own Part 15 closure rule: **H1 PASS, and all previously qualified evidence
-(SFM_MASTER_SIDECAR_FINAL_GATE1_AUDIT.md, commit `4a63f7fad30874d1d38933786bbaba97b3444caa`) remains valid
+(SFM_MASTER_SIDECAR_FINAL_GATE1_AUDIT.md, commit `8efb70b2e3d5d8ff2d686626795ee89b254fc52a`) remains valid
 and unchanged** — nothing in this task altered the Master, the semantic core, the validator, or any
 production sidecar code. Therefore, per that rule:
 

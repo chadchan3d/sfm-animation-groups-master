@@ -2,7 +2,7 @@
 
 2026-09-13. Review only: no repository implementation changed, no SFM process operated, no C3 implementation or qualification begun.
 
-Primary evidence: the supplied Round 3 delta package at checkpoint `9c445248d140c5795396cd80b0ac2e6c87077708`. I verified all 19 listed bundle hashes. Current owner/provider/budget/view source and production reader/format match the packaged versions. The two supplied ledger copies are byte-identical. I located the actual [Round 2 review](C:/Users/REDACTED/Documents/Codex/2026-09-07/files-pasted-by-the-user-use/outputs/SFM_SIDECAR_ASTRA_ROUND2_AUDIT_2026-09-12.md), which the delta manifest had not located.
+Primary evidence: the supplied Round 3 delta package at checkpoint `3518173f5652ecb136f303cbdea2bfe656c051ca`. I verified all 19 listed bundle hashes. Current owner/provider/budget/view source and production reader/format match the packaged versions. The two supplied ledger copies are byte-identical. I located the actual [Round 2 review](C:/Users/REDACTED/Documents/Codex/2026-09-07/files-pasted-by-the-user-use/outputs/SFM_SIDECAR_ASTRA_ROUND2_AUDIT_2026-09-12.md), which the delta manifest had not located.
 
 Evidence terms: **verified source** means inspected implementation; **reproduced** means desktop Python checks against that implementation in this review; **reported embedded** means the supplied audit's account, not a new independently replayed SFM result. No new whole-suite or embedded run was necessary for the findings below.
 

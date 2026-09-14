@@ -340,7 +340,7 @@ No design contradiction, writer/reader interpretation mismatch, or semantic-core
   to confirm it would pass the eligibility gate — it was never passed to `compile_sidecar`).
 - No persistent generated `.bin` artifact exists in the repository (`find . -name "*.bin"` returns nothing
   outside `.git/`; all tests operate on in-memory `bytes`).
-- HEAD unchanged: `494dd26fad77a17ba717b326fcc59d88fb01edac`.
+- HEAD unchanged: `d2d37b9c9bf2e354444f2fa0aea0e0253b5a93a9`.
 - `git status`: only new, untracked files (`tools/sfm_master_sidecar/`, the 7 new `tests/sidecar/test_*.py`
   files, this audit document) — nothing staged, nothing committed, nothing modified in place.
 - No agents or subagents were used.

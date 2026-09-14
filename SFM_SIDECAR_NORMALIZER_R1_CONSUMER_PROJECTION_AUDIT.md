@@ -31,7 +31,7 @@ the R2 cost benchmark those exact vocabularies exist to serve.
 
 ## 2. BASELINE
 
-- Expected/actual HEAD: `e1ef50e3990a9773760e0d92a1d9d3380cd3e9d7` "Qualify sidecar
+- Expected/actual HEAD: `1028adcde35dd7681cfad7db2bbc7c367c7b2565` "Qualify sidecar
   source freshness lifecycle" — confirmed matching before any change.
 - `git status --short` / staged files: clean except the same long-standing pool of
   unrelated pre-existing untracked files; nothing staged at any point.
@@ -356,7 +356,7 @@ controlling review's own next-step plan.
 
 ## 22. GIT STATE
 
-- HEAD unchanged throughout: `e1ef50e3990a9773760e0d92a1d9d3380cd3e9d7`.
+- HEAD unchanged throughout: `1028adcde35dd7681cfad7db2bbc7c367c7b2565`.
 - Nothing staged at any point; no commits made.
 - `git diff --check`: PASS.
 - New (untracked): `tests/sidecar/qualification/normalizer_oracle_import.py`,

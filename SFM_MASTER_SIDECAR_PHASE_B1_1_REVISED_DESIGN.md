@@ -3,7 +3,7 @@
 Design revision only. No binary/compiler/reader code written. `sfm_defaultanimationgroups.txt` unchanged.
 Nothing staged, nothing committed.
 
-Baseline: HEAD `82fba3596eb7c8e1aacad10c808d92e954624f5e`, Master SHA `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`, groups 43, occurrences 128,555, folds 124,728, duplicates 0, ASCII conflicts 0, validator PASS, tests 52 passed (all reconfirmed fresh before writing this document).
+Baseline: HEAD `8b4f0cb54750a5360a9897bb981af5463ab28681`, Master SHA `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`, groups 43, occurrences 128,555, folds 124,728, duplicates 0, ASCII conflicts 0, validator PASS, tests 52 passed (all reconfirmed fresh before writing this document).
 
 This document **supersedes** `SFM_MASTER_SIDECAR_PHASE_B1_DESIGN.md` wherever the two disagree. It does not repeat unchanged rationale at B1's length; where a B1 decision stands unmodified, it is stated concisely with a pointer back to the corresponding B1 section rather than re-derived.
 
@@ -687,7 +687,7 @@ Unchanged in spirit from B1 §28, resequenced to front-load the `runtime_safe` b
 ## Safety Confirmation
 
 - `sfm_defaultanimationgroups.txt`: unchanged, SHA `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
-- HEAD: unchanged, `82fba3596eb7c8e1aacad10c808d92e954624f5e`
+- HEAD: unchanged, `8b4f0cb54750a5360a9897bb981af5463ab28681`
 - `tools/validate_master.py`: PASS (reconfirmed fresh before writing this document)
 - Tests: 52 passed, 0 failed (reconfirmed fresh before writing this document)
 - No production code changed in this phase (design-only)

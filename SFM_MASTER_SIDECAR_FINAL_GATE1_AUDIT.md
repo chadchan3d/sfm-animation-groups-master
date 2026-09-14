@@ -50,7 +50,7 @@ own, separately-authorized task.
 
 ## 2. QUALIFIED BASELINE / COMMIT
 
-- HEAD: `1c05db9f8ef06e52c27a7f6205be21a358447c76` (the B2E checkpoint commit), unchanged throughout this pass.
+- HEAD: `0ec3d9955f9db4e8f36923945c122b3bad908f0e` (the B2E checkpoint commit), unchanged throughout this pass.
 - Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`, unchanged.
 - `git status` before and after this pass: identical (only the single pre-existing, unrelated
   `tools/extract_phase2_human_review.py` untracked file, present since before Phase B2A and not touched by
@@ -368,8 +368,8 @@ format v1 freeze.
   its own script; confirmed via `find . -iname "*.bin"` / `*.json` / `*.lock` returning nothing outside
   `.git/`).
 - `git diff --check`: clean.
-- HEAD at the start of the original reconciliation pass: `1c05db9f8ef06e52c27a7f6205be21a358447c76`; at the
-  start of the subsequent H1-closure documentation pass (this revision): `4a63f7fad30874d1d38933786bbaba97b3444caa`
+- HEAD at the start of the original reconciliation pass: `0ec3d9955f9db4e8f36923945c122b3bad908f0e`; at the
+  start of the subsequent H1-closure documentation pass (this revision): `8efb70b2e3d5d8ff2d686626795ee89b254fc52a`
   (the commit that checkpointed this document's prior revision) — both unchanged by their own respective
   passes' production-code diffs.
 - `git status`: identical in composition to the pre-pass baseline (only the single pre-existing unrelated

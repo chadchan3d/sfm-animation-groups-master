@@ -1,6 +1,6 @@
 # SFM Sidecar — Astra Post-C3 Holistic Evidence Manifest
 
-Current HEAD: `e1ef50e3990a9773760e0d92a1d9d3380cd3e9d7`
+Current HEAD: `1028adcde35dd7681cfad7db2bbc7c367c7b2565`
 Current subject: `Qualify sidecar source freshness lifecycle`
 Branch: `master`
 Collected: 2026-09-13. Evidence-collection only.

@@ -34,7 +34,7 @@ thing being checked against that oracle's real, current, unmodified behavior.
 
 ## 3. BASELINE IDENTITIES
 
-- HEAD before and after this task: `452d5232641fa9511eb7d1a2bfb8c9559978161e` — verified, matches expected,
+- HEAD before and after this task: `24a337a66673c2a9c496225f171378ce427d9520` — verified, matches expected,
   subject "Reject malformed sidecar query encoding".
 - Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93` — verified.
 - Official sidecar: 9,506,244 bytes, SHA-256

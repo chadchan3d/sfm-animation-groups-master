@@ -3,7 +3,7 @@
 Full revision: `SFM_MASTER_SIDECAR_PHASE_B1_1_REVISED_DESIGN.md` (this document summarizes compliance for a
 short check, not a fresh full architecture review).
 
-Baseline: HEAD `82fba3596eb7c8e1aacad10c808d92e954624f5e`, Master SHA `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`, validator PASS, tests 52 passed.
+Baseline: HEAD `8b4f0cb54750a5360a9897bb981af5463ab28681`, Master SHA `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`, validator PASS, tests 52 passed.
 
 ---
 

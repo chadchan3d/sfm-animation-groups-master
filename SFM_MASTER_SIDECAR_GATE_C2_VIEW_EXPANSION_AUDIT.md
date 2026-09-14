@@ -21,7 +21,7 @@ verified evidence, both desktop and real embedded SFM.
 
 ## 2. BASELINE
 
-- HEAD at task start: `0a4790ed19436a3d38ff01fb39ee41379c20b4af` "Qualify sidecar shared-owner foundation" — confirmed, no drift.
+- HEAD at task start: `61cd3292849d23160b9cb3cf82facfeb2fb99525` "Qualify sidecar shared-owner foundation" — confirmed, no drift.
 - `git status --short`: clean except pre-existing unrelated untracked files; nothing staged.
 - C1 qualification files enumerated: `bounded_provider.py`, `bounded_view.py`, `desktop_parity_and_timing.py`, `desktop_session_owner_qualification.py`, `normalizer_source_profile.py`, `resource_budgets.py`, `session_owner.py`, `shared_txt_session.py`.
 - SHA-256 (all confirmed matching prior-gate recorded values before any C2 edit): Master `ac45e5c1...904d93`; official sidecar (freshly recompiled) 9,506,244 bytes / `bcd97641...305750b`; `reader.py` `1b95261c...52719f`; `format.py` `b401967d...3c3259`; `bounded_provider.py` `8e70a47a...cea979`; `session_owner.py` `f6784a2b...bfdcae0`; external Normalizer `6656aa90...453d92`.

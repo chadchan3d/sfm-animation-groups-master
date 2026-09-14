@@ -25,7 +25,7 @@ explicitly, not silently assumed equivalent.
 
 ## 2. BASELINE
 
-- HEAD at task start: `d12c821c26bad6102e9a033a7478fe5bb3490050` "Close sidecar promotion prerequisites" — confirmed, no drift.
+- HEAD at task start: `5cd084bcba55545a2026c04d4aecbd02f0fb2f87` "Close sidecar promotion prerequisites" — confirmed, no drift.
 - `git status --short`: clean except pre-existing unrelated untracked files; nothing staged.
 - SHA-256 (all confirmed matching the brief's/C0's recorded values): Master `ac45e5c1...904d93`; official sidecar (freshly recompiled) 9,506,244 bytes / `bcd97641...305750b`; `reader.py` `1b95261c...52719f` (the C0.3 closure-cycle fix, unchanged again in C1); `format.py` `b401967d...3c3259`; `bounded_provider.py` `4a0d8a80...98eec` (pre-C1, then modified again in C1 — see §26); `resource_budgets.py` `eb8f6bf3...eee834`.
 - External Normalizer SHA-256: `6656aa90...453d92` — unchanged.

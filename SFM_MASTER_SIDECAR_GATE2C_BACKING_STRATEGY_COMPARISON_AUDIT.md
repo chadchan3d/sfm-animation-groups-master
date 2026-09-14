@@ -318,7 +318,7 @@ instruction not to implement a production replacement in Gate 2C itself.
 
 ## 20. GIT / SAFETY
 
-- HEAD before and after this task: `647294428aa552695571f10ad0c207612c53ec7c` — unchanged.
+- HEAD before and after this task: `b3090f60b6193b9b1cb1ad85c409232afe5d4abe` — unchanged.
 - `sfm_defaultanimationgroups.txt`: unchanged (`ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`).
 - `tools/sfm_master_sidecar/reader.py`: unchanged (`d79f7ae87c1999b7fe728f7dd6ddafb29b7cc62c246cd332f061875095288b00`).
 - `tools/sfm_master_sidecar/format.py`: unchanged (`b401967db8d07943e9f171058a006c30f0e23eb70a7b43bb5ab950203a3c3259`).

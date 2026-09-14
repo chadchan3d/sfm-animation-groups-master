@@ -28,7 +28,7 @@ headroom, generation-overlap cost, and repeated open/close behavior remain unmea
 - Attempt 2 (`SFM_MASTER_SIDECAR_GATE2A_CANDIDATE_A_EMBEDDED_BASELINE_RERUN_AUDIT.md`): corrected reader,
   invoked from a `threading.Timer` worker thread, never completed after ~24.1 minutes.
 - Execution-context diagnostic (`SFM_MASTER_SIDECAR_GATE2_EXECUTION_CONTEXT_DIAGNOSTIC_AUDIT.md`, wording
-  corrected in commit `cb1f7d436b070b234bccea371372ff1af79b1742`): established the worker thread is not
+  corrected in commit `7cd930435a6aadb5735f771b53ea059c1d2e909e`): established the worker thread is not
   generically starved for ordinary Python bytecode, but the production open call is severely
   execution-context-specific-slowed on a worker thread, and completes correctly (1.847 s) on the main/event
   thread. Mechanism unresolved.
@@ -370,7 +370,7 @@ Explicitly not begun or resolved by this baseline PASS, per this task's own Part
 
 ## 25. GIT / SAFETY STATE
 
-- HEAD before and after this task: `cb1f7d436b070b234bccea371372ff1af79b1742` — unchanged.
+- HEAD before and after this task: `7cd930435a6aadb5735f771b53ea059c1d2e909e` — unchanged.
 - `sfm_defaultanimationgroups.txt`: unchanged (`ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`).
 - `tools/sfm_master_sidecar/reader.py`: unchanged (`d79f7ae87c1999b7fe728f7dd6ddafb29b7cc62c246cd332f061875095288b00`) — this task deployed only a
   read-only, byte-verified COPY; the repository's own file was never opened for writing.

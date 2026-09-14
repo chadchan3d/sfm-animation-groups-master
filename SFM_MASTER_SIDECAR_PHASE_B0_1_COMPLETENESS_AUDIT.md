@@ -143,7 +143,7 @@ The semantic core's group-identity, parent-validity, and ordering facts are now 
 ## 18. Git / Safety State
 
 - `sfm_defaultanimationgroups.txt`: unchanged, SHA `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
-- HEAD: unchanged, `3487afd5fac95308e1e5f8205593f69e42a34d70`
+- HEAD: unchanged, `aa77a9199a363f5a783f6e6043b8831f071f39bf`
 - `git diff --check`: clean (exit 0)
 - Tracked-file diff: none changed in this pass beyond what B0 already modified (`tools/validate_master.py`, untouched again here); `tools/sfm_master_core.py` remains untracked (never committed), so its B0.1 edits do not appear in `git diff` against HEAD
 - New untracked file: `tests/test_sfm_master_core_b01.py`

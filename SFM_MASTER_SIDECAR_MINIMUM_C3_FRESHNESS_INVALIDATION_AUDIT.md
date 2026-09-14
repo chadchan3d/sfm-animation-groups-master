@@ -33,7 +33,7 @@ A separate C4 is **not** automatically authorized by this PASS (§22).
 
 ## 2. BASELINE
 
-- Expected/actual HEAD before edits: `eace35b395ab2a0202c1ffa9ccdae13dccc03bc9` "Simplify sidecar owner foundation" — confirmed matching.
+- Expected/actual HEAD before edits: `1dd3e16cd6b6d8b05f131944e581787a27faae0f` "Simplify sidecar owner foundation" — confirmed matching.
 - `git status --short` before edits: clean except the same long-standing pool of unrelated pre-existing untracked files.
 - Nothing staged before edits.
 - `git diff --check`: PASS, before and after.
@@ -448,7 +448,7 @@ brief's own framing ("A separate C4 is not automatically authorized by C3 PASS")
 
 ## 23. GIT STATE
 
-- HEAD unchanged throughout this gate: `eace35b395ab2a0202c1ffa9ccdae13dccc03bc9`
+- HEAD unchanged throughout this gate: `1dd3e16cd6b6d8b05f131944e581787a27faae0f`
   "Simplify sidecar owner foundation".
 - Nothing staged (`git diff --cached --name-only` empty throughout).
 - No commits made.

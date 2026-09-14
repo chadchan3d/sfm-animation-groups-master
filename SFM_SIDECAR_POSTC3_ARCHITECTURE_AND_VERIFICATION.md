@@ -1,6 +1,6 @@
 # SFM Sidecar — Post-C3 Architecture Map and Direct Source Verification
 
-Collected at HEAD `e1ef50e3990a9773760e0d92a1d9d3380cd3e9d7` "Qualify sidecar source
+Collected at HEAD `1028adcde35dd7681cfad7db2bbc7c367c7b2565` "Qualify sidecar source
 freshness lifecycle". Evidence-collection only — no implementation code was changed
 while producing this document.
 

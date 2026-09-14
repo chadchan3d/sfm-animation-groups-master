@@ -383,7 +383,7 @@ prerequisites before format v1 can ever be declared stable.
 - **No persistent test publication artifact exists anywhere** — every test used
   `tempfile.TemporaryDirectory()`/`tempfile.mkdtemp()` with cleanup, and `find . -iname "*.bin"` returns
   nothing outside `.git/` after the complete suite ran.
-- HEAD unchanged: `3d73e77bd97406323c39303ae28fcaca648fc7fa`.
+- HEAD unchanged: `2a132490d27c7e196171990a7b7502f8329ad306`.
 - `git status`: only new, untracked files — 4 new production modules, 7 new test files, 1 new fixture
   directory (`tests/sidecar/fixtures/custom_gate1/`), and this audit document. **Nothing staged, nothing
   committed.**

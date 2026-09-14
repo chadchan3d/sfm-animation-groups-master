@@ -3,7 +3,7 @@
 Assessment only. No Master edit, no staging, no commit, no implementation performed.
 
 Baseline at time of assessment:
-- HEAD: `3487afd5fac95308e1e5f8205593f69e42a34d70`
+- HEAD: `aa77a9199a363f5a783f6e6043b8831f071f39bf`
 - Master: `sfm_defaultanimationgroups.txt`
 - Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
 - groups: 43, controls: 128,555, exact duplicates: 0, ASCII cross-path conflicts: 0, validator: PASS (all re-confirmed fresh below)
@@ -368,7 +368,7 @@ This assessment does not authorize starting any of the above; it identifies them
 ## Safety Confirmation
 
 - Master file: unchanged (not opened for writing at any point in this assessment)
-- HEAD: unchanged, `3487afd5fac95308e1e5f8205593f69e42a34d70`
+- HEAD: unchanged, `aa77a9199a363f5a783f6e6043b8831f071f39bf`
 - Nothing staged, nothing committed
 - No sidecar/compiler/reader implementation begun; only read-only repository inspection was performed
 - No agents or subagents used

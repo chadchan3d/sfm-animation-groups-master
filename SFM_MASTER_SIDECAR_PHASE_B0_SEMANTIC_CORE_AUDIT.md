@@ -106,7 +106,7 @@ Assessed, not changed. It is not imported by, and does not import, `sfm_master_c
 ## Safety confirmation
 
 - `sfm_defaultanimationgroups.txt`: unchanged, SHA `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
-- HEAD: unchanged, `3487afd5fac95308e1e5f8205593f69e42a34d70`
+- HEAD: unchanged, `aa77a9199a363f5a783f6e6043b8831f071f39bf`
 - `git diff --check`: clean (exit 0)
 - `git diff --stat`: `tools/validate_master.py | 134 +++++++------------------ (39 insertions, 95 deletions)` — the only modified tracked file
 - Nothing staged (`git diff --cached --name-only` empty), nothing committed

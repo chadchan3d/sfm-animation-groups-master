@@ -28,7 +28,7 @@ in a numbered C0.x section below.
 
 ## 3. BASELINE IDENTITIES
 
-- HEAD at task start: `8c4afedbe6053cd98dd4b1c86cd104dff3d99c86` "Qualify bounded sidecar consumer value" — confirmed, no drift.
+- HEAD at task start: `1c1afde59e1f472e09d18586c44c454a7e43d296` "Qualify bounded sidecar consumer value" — confirmed, no drift.
 - `git status --short` at task start: clean except pre-existing unrelated untracked files (Flex Bone/Sexual Bones/Phase2 review artifacts, Master backups) and the Astra Round 2 evidence bundle from the prior task; nothing staged.
 - Canonical Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93` — matches expected, unchanged throughout C0.
 - Official sidecar (freshly recompiled via the production writer, never a stored copy): 9,506,244 bytes, SHA-256 `bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b` — matches expected exactly, unchanged throughout C0.

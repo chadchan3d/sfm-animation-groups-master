@@ -61,7 +61,7 @@ performance, close) were never reached and have no data.**
 
 ## 2. QUALIFIED BASELINE
 
-- HEAD before and after this task: `1265dace83e221db94e041bdd3e1b88a23d7cbb2` (unchanged).
+- HEAD before and after this task: `59be3a5c044cae29b4d1890c9fa1fdf2998a90f3` (unchanged).
 - Final Gate 1: PASS, 36/36 mandatory requirements, 0 OPEN, 0 FAIL (unaffected by this finding — Gate 1 H1
   never exercised the path-string code path, so its own PASS verdict remains factually accurate for what it
   actually tested).
@@ -333,6 +333,6 @@ run:
   committed to the repo).
 - No Normalizer code touched.
 - No persistent official sidecar, manifest, or publisher-lock artifact anywhere (repository or SFM install).
-- HEAD unchanged: `1265dace83e221db94e041bdd3e1b88a23d7cbb2`.
+- HEAD unchanged: `59be3a5c044cae29b4d1890c9fa1fdf2998a90f3`.
 - Nothing staged, nothing committed.
 - No agents or subagents were used.

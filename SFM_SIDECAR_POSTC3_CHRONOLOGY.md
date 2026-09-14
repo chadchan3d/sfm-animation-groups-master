@@ -3,7 +3,7 @@
 Purpose: let an independent reviewer judge whether this project learns from
 correction or repeatedly overclaims. Each phase states the question being
 answered, the original result, any later correction/reopening, and current
-standing as of HEAD `e1ef50e3990a9773760e0d92a1d9d3380cd3e9d7`.
+standing as of HEAD `1028adcde35dd7681cfad7db2bbc7c367c7b2565`.
 
 ## B0/B1/B2 — sidecar design and compiler/writer/manifest build
 
