@@ -29,13 +29,17 @@ full TXT file on every query.
   against the real, unmodified Normalizer/T130 consumer source as a
   read-only oracle (desktop Python 3, cross-checked against real embedded
   Python 2.7 where noted).
-- **`SFM_MASTER_SIDECAR_*.md`, `SFM_SIDECAR_*.md`** — the gate-by-gate
-  design and qualification audit trail for the sidecar work: architecture
-  decisions, resource/performance baselines, and the evidence behind each
-  qualification verdict.
-- **`HELPERS_*`, `MASTER_*`, `PHASE2_*`, `SEXUAL_BONES_*`** — the taxonomy
-  classification ledgers and human-review records behind the Master's
-  current organization.
+- **`docs/qualification/`** — the gate-by-gate design and qualification
+  audit trail for the sidecar work (`SFM_MASTER_SIDECAR_*.md`,
+  `SFM_SIDECAR_*.md`): architecture decisions, resource/performance
+  baselines, and the evidence behind each qualification verdict.
+- **`audit/master-content/`** — the taxonomy classification ledgers and
+  human-review records behind the Master's current organization
+  (`phase2/`, `flex-bone/`, `imports/`, `helpers/`, `sexual-bones/`,
+  `whole-master/`), kept separate from the software qualification material
+  above since it documents Master *content* decisions, not sidecar
+  behavior. See `audit/master-content/README.md` and
+  `docs/qualification/README.md` for what's in each.
 
 ## Editing the Master
 
@@ -81,8 +85,8 @@ false PASS, and it never crashes for lack of these files.
 - The sidecar qualification work establishes desktop-Python-3 and
   real-embedded-Python-2.7 parity against the real Normalizer/T130
   consumer contract; it does not itself constitute a live-SFM Qt-main-thread
-  production integration (see the `SFM_MASTER_SIDECAR_*` gate audits for
-  exactly what has and has not been qualified).
+  production integration (see the `docs/qualification/SFM_MASTER_SIDECAR_*`
+  gate audits for exactly what has and has not been qualified).
 - `desktop_r1_consumer_projection_qualification.py` loads both real oracle
   files once at startup and uses them throughout, including its
   hand-audited/manual-profile checks — it is an all-or-nothing harness, not

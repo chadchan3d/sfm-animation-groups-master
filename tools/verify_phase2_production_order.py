@@ -5,7 +5,8 @@ production-order v1 sequence against PHASE2_PRODUCTION_ORDER.tsv.
 This script performs no semantic classification, writes no project
 artifact, and does not depend on Python's random module, hash(),
 set/dict iteration order, locale collation, or filesystem order.
-See PHASE2_PRODUCTION_SEQUENCE_SPEC.txt for the full specification.
+See audit/master-content/phase2/PHASE2_PRODUCTION_SEQUENCE_SPEC.txt for the
+full specification.
 """
 import csv
 import hashlib
@@ -13,9 +14,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-INVENTORY = ROOT / "PHASE2_RESIDUAL_INVENTORY.tsv"
-FINAL = ROOT / "PHASE2_SEMANTIC_PILOT_500_FINAL.tsv"
-ORDER = ROOT / "PHASE2_PRODUCTION_ORDER.tsv"
+PHASE2_DIR = ROOT / "audit" / "master-content" / "phase2"
+INVENTORY = PHASE2_DIR / "PHASE2_RESIDUAL_INVENTORY.tsv"
+FINAL = PHASE2_DIR / "PHASE2_SEMANTIC_PILOT_500_FINAL.tsv"
+ORDER = PHASE2_DIR / "PHASE2_PRODUCTION_ORDER.tsv"
 SPEC_EXPECTED_FULL_SHA256 = "d43e0aa97e96608b165b993428af54084f3cfbe110379d22af8c416251618494"
 SPEC_EXPECTED_PRODUCTION_SHA256 = "ad4c1e865c8edc18e039f233466731a56bf44170a9eacbd208e39c56f3dd4858"
 

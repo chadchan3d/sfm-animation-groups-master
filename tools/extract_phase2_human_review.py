@@ -132,14 +132,18 @@ def extract(xlsx_path, out_path):
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("xlsx", nargs="?", default=None,
-                         help="Path to PHASE2_FULL_HUMAN_REVIEW.xlsx (default: repository root copy)")
+                         help="Path to PHASE2_FULL_HUMAN_REVIEW.xlsx "
+                              "(default: .local/working/ copy, a local-only "
+                              "working input not tracked in the repository)")
     parser.add_argument("-o", "--output", default=None,
-                         help="Output TSV path (default: PHASE2_HUMAN_DECISIONS.tsv in the repository root)")
+                         help="Output TSV path (default: PHASE2_HUMAN_DECISIONS.tsv "
+                              "in .local/working/, a local-only working directory)")
     args = parser.parse_args(argv)
 
     repo_root = Path(__file__).resolve().parent.parent
-    xlsx_path = Path(args.xlsx) if args.xlsx else repo_root / "PHASE2_FULL_HUMAN_REVIEW.xlsx"
-    out_path = Path(args.output) if args.output else repo_root / "PHASE2_HUMAN_DECISIONS.tsv"
+    local_working = repo_root / ".local" / "working"
+    xlsx_path = Path(args.xlsx) if args.xlsx else local_working / "PHASE2_FULL_HUMAN_REVIEW.xlsx"
+    out_path = Path(args.output) if args.output else local_working / "PHASE2_HUMAN_DECISIONS.tsv"
 
     extract(xlsx_path, out_path)
 
