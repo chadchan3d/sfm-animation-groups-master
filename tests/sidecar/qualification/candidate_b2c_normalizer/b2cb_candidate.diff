@@ -1,0 +1,109 @@
+--- E:/SteamLibrary/steamapps/common/SourceFilmmaker/game/usermod/scripts/sfm/mainmenu/ChadChan3D/Rebuild_Control_Groups_Normalizer.py	2026-09-05 21:43:36.385141400 -0400
++++ "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_candidate.py"	2026-09-16 06:10:19.048643300 -0400
+@@ -124,6 +124,29 @@
+ except NameError:
+     long = int
+ 
++# ===========================================================================
++# R3-B2C-B (candidate-only; frozen production file unaffected -- see
++# tests/sidecar/qualification/R3_B2C_B_Normalizer_ReadOnly_Migration_
++# Report.md for the exact diff). Minimal plumbing so the single
++# parse_targeted_master(...) authority-acquisition call site below can
++# be replaced with the qualified shared-authority compatibility adapter.
++# parse_targeted_master itself is left fully intact (see its own
++# definition, unchanged) -- kept callable for A/B read-only comparison,
++# simply no longer reached by the production call site.
++# ===========================================================================
++_B2C_QUALIFIED_AUTHORITY_ROOT = (
++    r"E:\SFM Animation Group Master\tests\sidecar\qualification\candidate_b2c"
++)
++if _B2C_QUALIFIED_AUTHORITY_ROOT not in sys.path:
++    sys.path.insert(0, _B2C_QUALIFIED_AUTHORITY_ROOT)
++
++_B2C_SIDECAR_TOOLS_ROOT = r"E:\SFM Animation Group Master\tools"
++if _B2C_SIDECAR_TOOLS_ROOT not in sys.path:
++    sys.path.insert(0, _B2C_SIDECAR_TOOLS_ROOT)
++
++from sfm_master_authority import runtime as _b2c_authority_runtime
++from sfm_master_authority import normalizer_compat_adapter as _b2c_normalizer_adapter
++
+ EXPECTED_SHA256 = (
+     "12504c248047e181d31a8500fb6693d1"
+     "a2d3c805e841fc2227e41aa4e2d2b47e"
+@@ -1413,6 +1436,55 @@
+     return rgba
+ 
+ 
++def acquire_master_index_via_qualified_authority(
++        master_path,
++        wanted_folds,
++        shipped_root,
++        allow_local_candidates=False,
++        local_pointer_path=None,
++        generated_root=None,
++        runtime_cap_bytes=None):
++    """R3-B2C-B migrated authority acquisition -- replaces the single
++    parse_targeted_master(...) call site below. Returns the EXACT SAME
++    return-dict contract (mapping_count, destination_count, folded,
++    exact_literals, group_sibling_order, group_metadata) -- see
++    normalizer_compat_adapter.py's module docstring for field-by-field
++    provenance and the real-Python-2.7.5 full-corpus equivalence proof
++    (combined canonical structure hash
++    3c806e2d3f7a07267961dd970d35595feaf54e6a6a7ee3fd7179337615d010e2,
++    matched exactly on both sides across all 124,728 real folds).
++
++    Uses the ONE canonical broker (authority_runtime.get_broker) and
++    acquire_or_reuse_views -- generation-stable cache reuse, at most one
++    provider open for a cache miss, zero for a cache hit; never a second,
++    ad hoc broker instance. is_main_thread_fn is intentionally omitted:
++    this function is only ever reached from the Normalizer's own single
++    Qt/Python thread, by the whole file's existing architecture (see
++    module docstring's Qt-callback responsiveness policy) -- there is no
++    separate thread-identity claim to make here that isn't already true
++    of every other call in this file.
++
++    `shipped_root` MUST be supplied by the caller -- there is deliberately
++    no built-in default. Real-production shipped-sidecar deployment
++    location has not yet been finalized by any prior B2 stage (see the
++    B2C-B report's "open item" note); the production call site below
++    passes a provisional, clearly-flagged path derived from the already-
++    resolved usermod_dir, not a settled production convention."""
++    broker = _b2c_authority_runtime.get_broker()
++    folded_key = frozenset(wanted_folds)
++    builder = _b2c_normalizer_adapter.build_targeted_master_compatible_projection(folded_key)
++    request_specs = {"normalizer_compat": (folded_key, builder)}
++    detached = broker.acquire_or_reuse_views(
++        master_path, request_specs,
++        allow_local_candidates=allow_local_candidates,
++        local_pointer_path=local_pointer_path,
++        generated_root=generated_root,
++        shipped_root=shipped_root,
++        runtime_cap_bytes=runtime_cap_bytes,
++    )
++    return detached["normalizer_compat"].payload
++
++
+ def parse_targeted_master(
+     path,
+     wanted_folds,
+@@ -13191,11 +13263,18 @@
+ 
+             index_started = time.time()
+ 
++            # R3-B2C-B: migrated from parse_targeted_master(...) to the
++            # qualified shared-authority compatibility adapter. shipped_root
++            # is a PROVISIONAL path (see acquire_master_index_via_qualified_
++            # authority's own docstring) -- real-production shipped-sidecar
++            # deployment location is not yet finalized by any prior B2 stage.
+             self.master_index = (
+-                parse_targeted_master(
++                acquire_master_index_via_qualified_authority(
+                     self.master_path,
+                     self.master_index_scope_folds,
+-                    validate_conflicts=False,
++                    shipped_root=os.path.join(
++                        usermod_dir, "scripts", "sfm", "gate_r2_formal_deploy",
++                    ),
+                 )
+             )
+ 

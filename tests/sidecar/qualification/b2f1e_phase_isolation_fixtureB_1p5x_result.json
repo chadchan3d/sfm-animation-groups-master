@@ -1,0 +1,93 @@
+{
+  "child_index_decoded_during_builder": false, 
+  "metadata_decoded_during_builder": true, 
+  "groups_decoded_during_builder": true, 
+  "estimated_bytes": 194238, 
+  "peak_delta_from_p0": 23187456, 
+  "peak_phase": "P2", 
+  "sidecar_bytes": 14181874, 
+  "peak_overall": 27017216, 
+  "fixture": "fixtureB_1p5x", 
+  "phases": [
+    {
+      "peak_working_set": 9936896, 
+      "peak_pagefile_usage": 3829760, 
+      "working_set": 9932800, 
+      "note": "clean process baseline, before any authority import", 
+      "private_bytes": 3829760, 
+      "phase": "P0"
+    }, 
+    {
+      "peak_working_set": 10137600, 
+      "peak_pagefile_usage": 3948544, 
+      "working_set": 10133504, 
+      "note": "infrastructure imported (authority package modules)", 
+      "private_bytes": 3948544, 
+      "phase": "P1"
+    }, 
+    {
+      "peak_working_set": 12292096, 
+      "peak_pagefile_usage": 6127616, 
+      "working_set": 11264000, 
+      "note": "ensure_loaded() complete (FINAL R3-A2B validator/provider dynamic-loaded)", 
+      "private_bytes": 4931584, 
+      "phase": "P1b"
+    }, 
+    {
+      "peak_working_set": 33382400, 
+      "peak_pagefile_usage": 27017216, 
+      "working_set": 11452416, 
+      "note": "selection.select_sidecar_candidate() complete -- this call performs its OWN internal bounded-read+full-validate+close pass (via sidecar_contract.validate_selected_artifact inside _find_matching_artifact) purely to resolve the artifact path/identity; that buffer is already closed by the time this returns", 
+      "private_bytes": 5042176, 
+      "phase": "P2"
+    }, 
+    {
+      "peak_working_set": 33382400, 
+      "peak_pagefile_usage": 27017216, 
+      "working_set": 25645056, 
+      "note": "cohort-level BoundedProvider.open_path() complete: SECOND bounded read + complete structural validation, backing (_buf) now live, packed artifact bytes strongly referenced via provider._buf; groups/metadata/child_index still None (lazy, not yet decoded)", 
+      "private_bytes": 19410944, 
+      "phase": "P2_3"
+    }, 
+    {
+      "peak_working_set": 33382400, 
+      "peak_pagefile_usage": 27017216, 
+      "working_set": 25645056, 
+      "note": "about to call the Normalizer-like builder_fn(provider) -- projection construction begins; provider._buf still live, decoded caches still None", 
+      "private_bytes": 19410944, 
+      "phase": "P4"
+    }, 
+    {
+      "peak_working_set": 33382400, 
+      "peak_pagefile_usage": 27017216, 
+      "working_set": 25690112, 
+      "note": "builder_fn(provider) returned -- detached projection payload now allocated (estimated_bytes=194238); provider._buf and any lazily-decoded caches (_groups/_metadata_rows/_child_index) it populated are STILL live simultaneously with the new payload", 
+      "private_bytes": 19451904, 
+      "phase": "P5"
+    }, 
+    {
+      "peak_working_set": 33382400, 
+      "peak_pagefile_usage": 27017216, 
+      "working_set": 11505664, 
+      "note": "provider.close() complete -- _buf/_groups/_metadata_rows/_child_index all released (set to None); only the detached payload remains live", 
+      "private_bytes": 5234688, 
+      "phase": "P6"
+    }, 
+    {
+      "peak_working_set": 33382400, 
+      "peak_pagefile_usage": 27017216, 
+      "working_set": 11505664, 
+      "note": "DetachedView constructed and held (mirrors broker cache publication + consumer retaining the view only) -- packed backing already released at P6", 
+      "private_bytes": 5234688, 
+      "phase": "P7_8"
+    }, 
+    {
+      "peak_working_set": 33382400, 
+      "peak_pagefile_usage": 27017216, 
+      "working_set": 11505664, 
+      "note": "released local references + gc.collect()", 
+      "private_bytes": 5234688, 
+      "phase": "P9"
+    }
+  ]
+}

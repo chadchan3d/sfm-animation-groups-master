@@ -1,0 +1,119 @@
+[
+  {
+    "est_retained": 78392, 
+    "name": "official_control", 
+    "est_transient_16mib": 28109532, 
+    "gt_transient": null, 
+    "shape": "ResourceShape(artifact_bytes=9506244L, format_contract_version=0, source_byte_length=3972355, group_count=43, metadata_count=54, occurrence_count=128555, fold_count=124728, string_count=221565, string_pool_bytes=3148556, group_table_bytes=1720, metadata_table_bytes=864, occurrence_table_bytes=2056880, fold_table_bytes=1496736, child_id_index_bytes=168, occ_by_group_index_bytes=514220, occ_by_fold_index_bytes=514220)", 
+    "admit_at_16mib": "ADMIT", 
+    "gt_retained": 69155
+  }, 
+  {
+    "est_retained": 736724, 
+    "name": "fixtureA_1p0x", 
+    "est_transient_16mib": 24750853, 
+    "gt_transient": null, 
+    "shape": "ResourceShape(artifact_bytes=9531047L, format_contract_version=0, source_byte_length=4619138, group_count=127, metadata_count=252, occurrence_count=21024, fold_count=21024, string_count=42303, string_pool_bytes=8425783, group_table_bytes=5080, metadata_table_bytes=4032, occurrence_table_bytes=336384, fold_table_bytes=252288, child_id_index_bytes=504, occ_by_group_index_bytes=84096, occ_by_fold_index_bytes=84096)", 
+    "admit_at_16mib": "ADMIT", 
+    "gt_retained": 271176
+  }, 
+  {
+    "est_retained": 736724, 
+    "name": "fixtureA_1p25x", 
+    "est_transient_16mib": 24967333, 
+    "gt_transient": null, 
+    "shape": "ResourceShape(artifact_bytes=11917607L, format_contract_version=0, source_byte_length=5770178, group_count=127, metadata_count=252, occurrence_count=26304, fold_count=26304, string_count=52863, string_pool_bytes=10537783, group_table_bytes=5080, metadata_table_bytes=4032, occurrence_table_bytes=420864, fold_table_bytes=315648, child_id_index_bytes=504, occ_by_group_index_bytes=105216, occ_by_fold_index_bytes=105216)", 
+    "admit_at_16mib": "ADMIT", 
+    "gt_retained": 271176
+  }, 
+  {
+    "est_retained": 736724, 
+    "name": "fixtureA_1p5x", 
+    "est_transient_16mib": 25183813, 
+    "gt_transient": 21753856, 
+    "shape": "ResourceShape(artifact_bytes=14304167L, format_contract_version=0, source_byte_length=6921218, group_count=127, metadata_count=252, occurrence_count=31584, fold_count=31584, string_count=63423, string_pool_bytes=12649783, group_table_bytes=5080, metadata_table_bytes=4032, occurrence_table_bytes=505344, fold_table_bytes=379008, child_id_index_bytes=504, occ_by_group_index_bytes=126336, occ_by_fold_index_bytes=126336)", 
+    "admit_at_16mib": "ADMIT", 
+    "gt_retained": 271176
+  }, 
+  {
+    "est_retained": 736724, 
+    "name": "fixtureA_2p0x", 
+    "est_transient_16mib": 25608901, 
+    "gt_transient": null, 
+    "shape": "ResourceShape(artifact_bytes=18990503L, format_contract_version=0, source_byte_length=9181442, group_count=127, metadata_count=252, occurrence_count=41952, fold_count=41952, string_count=84159, string_pool_bytes=16796983, group_table_bytes=5080, metadata_table_bytes=4032, occurrence_table_bytes=671232, fold_table_bytes=503424, child_id_index_bytes=504, occ_by_group_index_bytes=167808, occ_by_fold_index_bytes=167808)", 
+    "admit_at_16mib": "REFUSE(raw_cap)", 
+    "gt_retained": 271176
+  }, 
+  {
+    "est_retained": 205292, 
+    "name": "fixtureB_1p0x", 
+    "est_transient_16mib": 28298297, 
+    "gt_transient": null, 
+    "shape": "ResourceShape(artifact_bytes=9456946L, format_contract_version=0, source_byte_length=3761210, group_count=127, metadata_count=126, occurrence_count=121056, fold_count=121056, string_count=242366, string_pool_bytes=3152042, group_table_bytes=5080, metadata_table_bytes=2016, occurrence_table_bytes=1936896, fold_table_bytes=1452672, child_id_index_bytes=504, occ_by_group_index_bytes=484224, occ_by_fold_index_bytes=484224)", 
+    "admit_at_16mib": "ADMIT", 
+    "gt_retained": 194190
+  }, 
+  {
+    "est_retained": 205292, 
+    "name": "fixtureB_1p25x", 
+    "est_transient_16mib": 29538137, 
+    "gt_transient": null, 
+    "shape": "ResourceShape(artifact_bytes=11815666L, format_contract_version=0, source_byte_length=4698650, group_count=127, metadata_count=126, occurrence_count=151296, fold_count=151296, string_count=302846, string_pool_bytes=3938282, group_table_bytes=5080, metadata_table_bytes=2016, occurrence_table_bytes=2420736, fold_table_bytes=1815552, child_id_index_bytes=504, occ_by_group_index_bytes=605184, occ_by_fold_index_bytes=605184)", 
+    "admit_at_16mib": "ADMIT", 
+    "gt_retained": 194190
+  }, 
+  {
+    "est_retained": 205292, 
+    "name": "fixtureB_1p5x", 
+    "est_transient_16mib": 30781913, 
+    "gt_transient": 27017216, 
+    "shape": "ResourceShape(artifact_bytes=14181874L, format_contract_version=0, source_byte_length=5639066, group_count=127, metadata_count=126, occurrence_count=181632, fold_count=181632, string_count=363518, string_pool_bytes=4727018, group_table_bytes=5080, metadata_table_bytes=2016, occurrence_table_bytes=2906112, fold_table_bytes=2179584, child_id_index_bytes=504, occ_by_group_index_bytes=726528, occ_by_fold_index_bytes=726528)", 
+    "admit_at_16mib": "ADMIT", 
+    "gt_retained": 194190
+  }, 
+  {
+    "est_retained": 205292, 
+    "name": "fixtureB_2p0x", 
+    "est_transient_16mib": 33261593, 
+    "gt_transient": null, 
+    "shape": "ResourceShape(artifact_bytes=18899314L, format_contract_version=0, source_byte_length=7513946, group_count=127, metadata_count=126, occurrence_count=242112, fold_count=242112, string_count=484478, string_pool_bytes=6299498, group_table_bytes=5080, metadata_table_bytes=2016, occurrence_table_bytes=3873792, fold_table_bytes=2905344, child_id_index_bytes=504, occ_by_group_index_bytes=968448, occ_by_fold_index_bytes=968448)", 
+    "admit_at_16mib": "REFUSE(raw_cap)", 
+    "gt_retained": 194190
+  }, 
+  {
+    "est_retained": 13231328, 
+    "name": "fixtureC_1p0x", 
+    "est_transient_16mib": 42145509, 
+    "gt_transient": null, 
+    "shape": "ResourceShape(artifact_bytes=9568377L, format_contract_version=0, source_byte_length=11169694, group_count=2729, metadata_count=10912, occurrence_count=190464, fold_count=19001, string_count=51647, string_pool_bytes=4061029, group_table_bytes=109160, metadata_table_bytes=174592, occurrence_table_bytes=3047424, fold_table_bytes=228012, child_id_index_bytes=10912, occ_by_group_index_bytes=761856, occ_by_fold_index_bytes=761856)", 
+    "admit_at_16mib": "REFUSE(transient)", 
+    "gt_retained": 10970574
+  }, 
+  {
+    "est_retained": 22561448, 
+    "name": "fixtureC_1p25x", 
+    "est_transient_16mib": 52997877, 
+    "gt_transient": 40681472, 
+    "shape": "ResourceShape(artifact_bytes=12179112L, format_contract_version=0, source_byte_length=13728598, group_count=2729, metadata_count=19096, occurrence_count=190464, fold_count=19001, string_count=59834, string_pool_bytes=6475324, group_table_bytes=109160, metadata_table_bytes=305536, occurrence_table_bytes=3047424, fold_table_bytes=228012, child_id_index_bytes=10912, occ_by_group_index_bytes=761856, occ_by_fold_index_bytes=761856)", 
+    "admit_at_16mib": "REFUSE(retained)", 
+    "gt_retained": 16732110
+  }, 
+  {
+    "est_retained": 32720784, 
+    "name": "fixtureC_1p5x", 
+    "est_transient_16mib": 64679461, 
+    "gt_transient": null, 
+    "shape": "ResourceShape(artifact_bytes=14789847L, format_contract_version=0, source_byte_length=16287502, group_count=2729, metadata_count=27280, occurrence_count=190464, fold_count=19001, string_count=68021, string_pool_bytes=8889619, group_table_bytes=109160, metadata_table_bytes=436480, occurrence_table_bytes=3047424, fold_table_bytes=228012, child_id_index_bytes=10912, occ_by_group_index_bytes=761856, occ_by_fold_index_bytes=761856)", 
+    "admit_at_16mib": "REFUSE(retained)", 
+    "gt_retained": 22493646
+  }, 
+  {
+    "est_retained": 51151488, 
+    "name": "fixtureC_2p0x", 
+    "est_transient_16mib": 85647245, 
+    "gt_transient": null, 
+    "shape": "ResourceShape(artifact_bytes=19141077L, format_contract_version=0, source_byte_length=20565982, group_count=2729, metadata_count=40920, occurrence_count=190464, fold_count=19001, string_count=81666, string_pool_bytes=12913449, group_table_bytes=109160, metadata_table_bytes=654720, occurrence_table_bytes=3047424, fold_table_bytes=228012, child_id_index_bytes=10912, occ_by_group_index_bytes=761856, occ_by_fold_index_bytes=761856)", 
+    "admit_at_16mib": "REFUSE(raw_cap)", 
+    "gt_retained": 32109846
+  }
+]

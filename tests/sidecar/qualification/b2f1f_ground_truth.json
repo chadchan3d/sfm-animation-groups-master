@@ -1,0 +1,58 @@
+{
+  "official_control": {
+    "outcome": "accepted",
+    "retained_detached_views": 69155
+  },
+  "fixtureA_1p0x": {
+    "outcome": "accepted",
+    "retained_detached_views": 271176
+  },
+  "fixtureA_1p25x": {
+    "outcome": "accepted",
+    "retained_detached_views": 271176
+  },
+  "fixtureA_1p5x": {
+    "outcome": "accepted",
+    "retained_detached_views": 271176
+  },
+  "fixtureA_2p0x": {
+    "outcome": "accepted",
+    "retained_detached_views": 271176
+  },
+  "fixtureB_1p0x": {
+    "outcome": "accepted",
+    "retained_detached_views": 194190
+  },
+  "fixtureB_1p25x": {
+    "outcome": "accepted",
+    "retained_detached_views": 194190
+  },
+  "fixtureB_1p5x": {
+    "outcome": "accepted",
+    "retained_detached_views": 194190
+  },
+  "fixtureB_2p0x": {
+    "outcome": "accepted",
+    "retained_detached_views": 194190
+  },
+  "fixtureC_1p0x": {
+    "outcome": "accepted",
+    "retained_detached_views": 10970574
+  },
+  "fixtureC_1p25x": {
+    "outcome": "accepted",
+    "retained_detached_views": 16732110
+  },
+  "fixtureC_1p5x": {
+    "outcome": "refused",
+    "type": "ViewAdmissionRefused",
+    "detail": "admitting a 22493646-byte view would exceed the retained promotion gate (16777216 bytes) and no further unpinned view could be evicted.",
+    "estimated_bytes_from_refusal": 22493646
+  },
+  "fixtureC_2p0x": {
+    "outcome": "refused",
+    "type": "ViewAdmissionRefused",
+    "detail": "admitting a 32109846-byte view would exceed the retained promotion gate (16777216 bytes) and no further unpinned view could be evicted.",
+    "estimated_bytes_from_refusal": 32109846
+  }
+}
