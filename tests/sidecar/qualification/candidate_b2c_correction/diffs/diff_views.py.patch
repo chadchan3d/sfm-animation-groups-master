@@ -1,0 +1,106 @@
+--- "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c/sfm_master_authority_productionized/views.py"	2026-09-16 05:23:34.680918900 -0400
++++ "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/views.py"	2026-09-16 18:11:49.281220100 -0400
+@@ -16,10 +16,13 @@
+     a property of an ACQUISITION ATTEMPT (see `errors.py`), never of an
+     already-published view's coverage lookup.
+ """
++import itertools
+ import time
+ 
+ from . import errors
+ 
++_lease_id_counter = itertools.count(1)
++
+ KNOWN = "Known"
+ MASTER_UNKNOWN = "MasterUnknown"
+ UNCOVERED = "Uncovered"
+@@ -93,17 +96,51 @@
+             )
+ 
+ 
++class ViewLease(object):
++    """Astra F3 correction: explicit CONSUMER ownership, kept structurally
++    distinct from CACHE ownership. A DetachedView is "leased" (not merely
++    Boolean-`pinned`) by zero or more independent ViewLease tokens, one
++    per real consumer/operation that is actively holding it -- never a
++    single shared flag that cannot represent two simultaneous borrowers,
++    or a same-key replacement racing an in-flight borrower. Deterministic
++    release is the caller's responsibility (command completion,
++    cancellation, failure, or dialog/operation close) -- never implicit
++    garbage-collection-timing-dependent (`__del__` is deliberately NOT
++    used for release; a leaked, never-released lease is a caller bug,
++    surfaced by `ViewCache.outstanding_lease_count()` diagnostics, not
++    silently masked by relying on GC to eventually reclaim it)."""
++    __slots__ = ("lease_id", "view", "_released")
++
++    def __init__(self, lease_id, view):
++        self.lease_id = lease_id
++        self.view = view
++        self._released = False
++
++    def is_released(self):
++        return self._released
++
++    def __repr__(self):
++        return "ViewLease(lease_id=%r, released=%r)" % (self.lease_id, self._released)
++
++
+ class DetachedView(object):
+     """The B2B detached-view envelope. Immutable payload by convention;
+     a separate, independently-revocable authorization token. Never holds
+     a provider reference, packed backing bytes, validation scratch, a
+     file handle, or an acquisition-time traceback frame -- `payload` is
+     always plain, already-decoded data assembled by a projection builder
+-    while the provider was open, never a live reference into it."""
++    while the provider was open, never a live reference into it.
++
++    Astra F3 correction: `pinned` (a single Boolean, unable to represent
++    more than one simultaneous borrower) is REPLACED by `_active_leases`,
++    a set of outstanding ViewLease ids. `has_live_leases()` is the
++    eviction-safety predicate ViewCache now consults instead of the old
++    `pinned` flag."""
+     __slots__ = (
+         "semantic_generation", "artifact_identity", "coverage",
+         "projection_contract_version", "admission_id", "created_at",
+-        "consumer_kind", "payload", "authorization", "estimated_bytes", "pinned",
++        "consumer_kind", "payload", "authorization", "estimated_bytes",
++        "_active_leases",
+     )
+ 
+     def __init__(self, semantic_generation, artifact_identity, coverage,
+@@ -119,7 +156,34 @@
+         self.payload = payload
+         self.authorization = authorization
+         self.estimated_bytes = estimated_bytes
+-        self.pinned = False
++        self._active_leases = set()
++
++    def acquire_lease(self):
++        lease = ViewLease(next(_lease_id_counter), self)
++        self._active_leases.add(lease.lease_id)
++        return lease
++
++    def release_lease(self, lease):
++        if lease.is_released():
++            return  # idempotent -- a caller releasing twice is not itself an error
++        if lease.view is not self:
++            raise errors.ViewInvalidated(
++                "attempted to release a lease that was issued by a different view"
++            )
++        self._active_leases.discard(lease.lease_id)
++        lease._released = True
++
++    def has_live_leases(self):
++        return len(self._active_leases) > 0
++
++    def live_lease_count(self):
++        return len(self._active_leases)
++
++    # Backward-compatible read-only shim: existing code/tests that only
++    # ever READ `.pinned` (never assign it) keep working unchanged.
++    @property
++    def pinned(self):
++        return self.has_live_leases()
+ 
+     def is_stale(self):
+         return not self.authorization.is_valid()

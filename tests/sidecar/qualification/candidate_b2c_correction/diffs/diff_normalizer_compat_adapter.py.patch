@@ -1,0 +1,59 @@
+--- "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c/sfm_master_authority_productionized/normalizer_compat_adapter.py"	2026-09-16 05:57:04.482021000 -0400
++++ "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/normalizer_compat_adapter.py"	2026-09-16 18:08:11.609145900 -0400
+@@ -102,6 +102,8 @@
+ """
+ import re
+ 
++from . import errors
++from . import resource_estimator
+ from . import views
+ 
+ _METADATA_FIELD_MAP = {
+@@ -184,7 +186,20 @@
+     consumer_kind in this package's builder_fns dict expects. `payload`
+     IS the parse_targeted_master()-compatible dict described in this
+     module's docstring -- an existing caller reading only that dict shape
+-    needs no further translation."""
++    needs no further translation.
++
++    Astra F2 correction: the returned callable carries an explicit
++    `.declared_request_scale` attribute (== len(wanted_folds)) so
++    Cohort/Broker can compute an AGGREGATE requested-vocabulary size
++    across every builder_fn in a batch, BEFORE opening the provider, and
++    forward it to the preflight/admission layer -- the pre-correction
++    adapter gave callers no way to learn the request's own scale at all.
++    Independently, `_builder` itself enforces
++    resource_estimator.MAX_SINGLE_FOLD_OCCURRENCE_ROWS as a hard runtime
++    backstop: materialization aborts (ResourceAdmissionRefusal) the
++    moment any ONE requested fold's REAL, observed occurrence count
++    exceeds that cap -- the single-pathological-family case no
++    structural, pre-open estimate can predict."""
+     wanted_folds = list(wanted_folds)
+ 
+     def _builder(provider):
+@@ -307,6 +322,17 @@
+             else:  # FoldConflict -- still a real, covered result
+                 occs = hit.occurrences()
+                 destination = sorted(_strip(d) for d in hit.destinations)
++            # Astra F2 hard runtime backstop: a single requested fold's
++            # REAL, observed occurrence family must never exceed the
++            # explicit cap, regardless of what any pre-open estimate
++            # predicted. Aborts materialization immediately -- never
++            # finishes building an oversized single-family payload first.
++            if len(occs) > resource_estimator.MAX_SINGLE_FOLD_OCCURRENCE_ROWS:
++                raise errors.ResourceAdmissionRefusal(
++                    "requested fold %r resolved to %d occurrences, exceeding the hard single-family "
++                    "cap of %d -- refusing before materializing this family"
++                    % (folded, len(occs), resource_estimator.MAX_SINGLE_FOLD_OCCURRENCE_ROWS)
++                )
+             coverage_entries[folded] = views.CoverageResult(views.KNOWN, destination, occs)
+             rows = []
+             for occ in occs:
+@@ -331,6 +357,7 @@
+         coverage = views.CoverageDescriptor(coverage_entries)
+         estimated_bytes = _estimate_payload_bytes(payload)
+         return payload, coverage, estimated_bytes
++    _builder.declared_request_scale = len(wanted_folds)
+     return _builder
+ 
+ 

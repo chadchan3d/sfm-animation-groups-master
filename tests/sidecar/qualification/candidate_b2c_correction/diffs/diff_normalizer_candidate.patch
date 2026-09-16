@@ -1,0 +1,123 @@
+--- "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_candidate.py"	2026-09-16 06:10:19.048643300 -0400
++++ "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c_correction_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction_candidate.py"	2026-09-16 18:19:04.441612600 -0400
+@@ -1445,15 +1445,31 @@
+         generated_root=None,
+         runtime_cap_bytes=None):
+     """R3-B2C-B migrated authority acquisition -- replaces the single
+-    parse_targeted_master(...) call site below. Returns the EXACT SAME
+-    return-dict contract (mapping_count, destination_count, folded,
+-    exact_literals, group_sibling_order, group_metadata) -- see
+-    normalizer_compat_adapter.py's module docstring for field-by-field
+-    provenance and the real-Python-2.7.5 full-corpus equivalence proof
+-    (combined canonical structure hash
++    parse_targeted_master(...) call site below. Returns
++    (payload, lease): `payload` is the EXACT SAME return-dict contract
++    (mapping_count, destination_count, folded, exact_literals,
++    group_sibling_order, group_metadata) -- see normalizer_compat_
++    adapter.py's module docstring for field-by-field provenance and the
++    real-Python-2.7.5 full-corpus equivalence proof (combined canonical
++    structure hash
+     3c806e2d3f7a07267961dd970d35595feaf54e6a6a7ee3fd7179337615d010e2,
+     matched exactly on both sides across all 124,728 real folds).
+ 
++    Astra F3 correction: `lease` is a views.ViewLease the caller now
++    holds explicit, trackable ownership of `payload` through -- the
++    pre-correction version returned the bare payload dict alone, so a
++    consumer's continued use of it after the underlying view was evicted
++    from the broker's cache (e.g. by a later, unrelated acquisition
++    under memory pressure) was invisible to the ledger: a real,
++    reproduced undercount. The caller MUST release this lease
++    deterministically once done with `payload` (command completion,
++    cancellation, failure, or dialog/operation close) via
++    `broker.release_view_lease(lease)` -- never relying on Python
++    garbage-collection timing. `payload` itself remains the SAME plain
++    dict as before (no wrapper), preserving existing downstream
++    GATE/TARGET/reconciliation code unchanged; only the call site needs
++    to additionally hold and release the lease.
++
+     Uses the ONE canonical broker (authority_runtime.get_broker) and
+     acquire_or_reuse_views -- generation-stable cache reuse, at most one
+     provider open for a cache miss, zero for a cache hit; never a second,
+@@ -1469,8 +1485,25 @@
+     location has not yet been finalized by any prior B2 stage (see the
+     B2C-B report's "open item" note); the production call site below
+     passes a provisional, clearly-flagged path derived from the already-
+-    resolved usermod_dir, not a settled production convention."""
+-    broker = _b2c_authority_runtime.get_broker()
++    resolved usermod_dir, not a settled production convention.
++
++    Astra F6 correction: main-thread policy is now enforced at this REAL
++    entry point via the standard Qt idiom (is the current thread the
++    same thread QCoreApplication itself lives on) instead of being
++    silently omitted (the pre-correction call passed no
++    is_main_thread_fn at all, so get_broker()'s own main-thread check
++    was skipped entirely on first construction). NOTE: this idiom is
++    the well-established, standard PySide/Qt pattern, but has not been
++    exercised against a live real-SFM Qt event loop by this offline
++    correction gate ("Do not run SFM") -- flagged explicitly rather than
++    silently assumed correct; real-SFM verification remains an open item
++    before B2C-R."""
++    broker = _b2c_authority_runtime.get_broker(
++        is_main_thread_fn=lambda: (
++            QtCore.QThread.currentThread() is QtCore.QCoreApplication.instance().thread()
++            if QtCore.QCoreApplication.instance() is not None else True
++        )
++    )
+     folded_key = frozenset(wanted_folds)
+     builder = _b2c_normalizer_adapter.build_targeted_master_compatible_projection(folded_key)
+     request_specs = {"normalizer_compat": (folded_key, builder)}
+@@ -1482,7 +1515,9 @@
+         shipped_root=shipped_root,
+         runtime_cap_bytes=runtime_cap_bytes,
+     )
+-    return detached["normalizer_compat"].payload
++    view = detached["normalizer_compat"]
++    lease = broker.lease_view(view)
++    return view.payload, lease
+ 
+ 
+ def parse_targeted_master(
+@@ -12564,6 +12599,24 @@
+ 
+         self.finished = True
+ 
++        # Astra F3 correction: this is the single, guarded ("if self.
++        # finished: return") command-completion point reached regardless
++        # of success or failure -- release the master_index lease
++        # deterministically here, never relying on GC timing. Defensive
++        # getattr: the lease may not exist if the command aborted before
++        # the master_index build ever ran.
++        _lease = getattr(self, "_master_index_lease", None)
++        if _lease is not None:
++            try:
++                _broker = _b2c_authority_runtime.get_broker()
++                _broker.release_view_lease(_lease)
++            except Exception as _lease_exc:
++                self.log(
++                    "R3-B2C-B correction: master_index lease release failed non-fatally: %r"
++                    % (_lease_exc,)
++                )
++            self._master_index_lease = None
++
+         try:
+             self.section(
+                 "FINAL RESULT"
+@@ -13268,7 +13321,17 @@
+             # is a PROVISIONAL path (see acquire_master_index_via_qualified_
+             # authority's own docstring) -- real-production shipped-sidecar
+             # deployment location is not yet finalized by any prior B2 stage.
+-            self.master_index = (
++            #
++            # Astra F3 correction: the function now also returns an explicit
++            # ViewLease alongside the payload dict -- held here for the
++            # remainder of this command's lifetime and released
++            # deterministically (never GC-timing-dependent) at every real
++            # exit path: normal completion, the run-lock/probe-error abort
++            # paths, and the outer exception handler, so a later, unrelated
++            # acquisition evicting this generation from the broker's cache
++            # under memory pressure can never silently undercount memory
++            # this command is still actively using.
++            self.master_index, self._master_index_lease = (
+                 acquire_master_index_via_qualified_authority(
+                     self.master_path,
+                     self.master_index_scope_folds,

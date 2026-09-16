@@ -1,0 +1,315 @@
+--- "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c/sfm_master_authority_productionized/resource_estimator.py"	2026-09-16 05:23:59.655344500 -0400
++++ "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/resource_estimator.py"	2026-09-16 18:03:27.565095200 -0400
+@@ -67,25 +67,53 @@
+ 
+ _MAX_PREFLIGHT_REGION_BYTES = 64 * 1024  # explicit small bound (Section 8 "Bounded"), independent of artifact scale
+ 
++# Astra post-B2C-B correction gate, finding F1: an absolute, independent
++# sanity ceiling on runtime_cap_bytes itself, checked before ANY I/O
++# happens (not derived from file content, never file-controlled) -- a
++# garbage or hostile cap value must never itself become the size of a
++# later `f.read(runtime_cap_bytes + 1)` call. Deliberately far above the
++# real 16/32 MiB promotion gates (this is not a new production limit,
++# only a backstop against a malformed/hostile cap value reaching I/O).
++ABSOLUTE_RUNTIME_CAP_CEILING_BYTES = 256 * 1024 * 1024
++
++try:
++    _INT_TYPES = (int, long)  # noqa: F821 -- Python 2.7 only
++except NameError:
++    _INT_TYPES = (int,)
++
++
++def validate_runtime_cap_bytes(value):
++    """F1 repair step 1: validate type/range BEFORE any I/O. Raises
++    PreflightCorruptOrIncompatible (never does any file operation) on a
++    non-integer, boolean, non-positive, or absurdly large value. Returns
++    `value` unchanged on success, so callers can write
++    `runtime_cap_bytes = validate_runtime_cap_bytes(runtime_cap_bytes)`."""
++    if isinstance(value, bool) or not isinstance(value, _INT_TYPES):
++        raise PreflightCorruptOrIncompatible(
++            "runtime_cap_bytes must be a plain integer, got %r (%s)" % (value, type(value).__name__)
++        )
++    if value <= 0:
++        raise PreflightCorruptOrIncompatible("runtime_cap_bytes must be positive, got %r" % (value,))
++    if value > ABSOLUTE_RUNTIME_CAP_CEILING_BYTES:
++        raise PreflightCorruptOrIncompatible(
++            "runtime_cap_bytes %r exceeds the absolute sanity ceiling of %r bytes"
++            % (value, ABSOLUTE_RUNTIME_CAP_CEILING_BYTES)
++        )
++    return value
+ 
+-def parse_resource_shape(buf_or_prefix, artifact_bytes):
+-    """`buf_or_prefix`: at least the first HEADER_SIZE + (declared
+-    section_count * DIRECTORY_ROW_SIZE) bytes of the artifact -- callers
+-    integrating this for real would read exactly that many bytes from an
+-    already-open handle (same-handle rule, Section 2 of the design doc).
+-    This pure function only ever indexes into what it is given; it never
+-    reads beyond `artifact_bytes` (checked) and never touches STRING_POOL/
+-    GROUP_TABLE/METADATA_TABLE/OCCURRENCE_TABLE row content.
+ 
+-    Raises PreflightCorruptOrIncompatible for any malformed/inconsistent
+-    header or directory. Never raises PreflightResourceRefusal itself --
+-    that is the caller's job, after calling the estimator functions below.
+-    """
+-    buf = buf_or_prefix
+-    if len(buf) < fmt.HEADER_SIZE:
+-        raise PreflightCorruptOrIncompatible("buffer shorter than fixed header size")
+-
+-    header = fmt.unpack_header(buf, 0)
++def _validate_header_and_bound_directory_region(header, artifact_bytes):
++    """F1 repair steps 2-3, factored out as the SINGLE source of truth so
++    no caller can ever compute a directory-region read size without
++    these checks having already run. Uses ONLY the fixed-size header
++    fields already unpacked (never re-reads the file) plus
++    `artifact_bytes` (an OS-level fstat() size, never file content) --
++    every check here can run before a single directory-region byte has
++    been read. Returns the checked, SAFE region size (HEADER_SIZE up to
++    and including the full directory), which is guaranteed to be both
++    `<= _MAX_PREFLIGHT_REGION_BYTES` and `<= artifact_bytes`. Raises
++    PreflightCorruptOrIncompatible on any violation, before returning
++    anything a caller could use to size a read."""
+     if header.magic != fmt.MAGIC:
+         raise PreflightCorruptOrIncompatible("magic mismatch")
+     if header.format_contract_version not in fmt.NORMATIVE_ROW_SIZES:
+@@ -95,7 +123,6 @@
+     # Checked range/overflow: section_count must be exactly the known
+     # section set for this format version -- never trust a larger count
+     # that could drive an unbounded directory-region read.
+-    normative_sizes = fmt.NORMATIVE_ROW_SIZES[header.format_contract_version]
+     if header.section_count != len(fmt.SECTION_ORDER):
+         raise PreflightCorruptOrIncompatible(
+             "section_count %r does not match the %d sections this format version defines"
+@@ -108,18 +135,65 @@
+     if artifact_bytes > fmt.LIMIT_SIDECAR_BYTE_SIZE:
+         raise PreflightCorruptOrIncompatible("artifact_bytes exceeds the format's own absolute ceiling")
+ 
++    # dir_region_size depends only on section_count, which is ALREADY
++    # pinned to the exact expected constant by the check above -- it is
++    # not independently file-controlled at this point. The genuinely
++    # file-controlled, unbounded-in-principle field is
++    # section_directory_offset (this is exactly the field Astra's F1
++    # reproduction changed to force a ~1.07 GB requested read): checked
++    # here, against artifact_bytes, BEFORE it is ever used to size a
++    # read, not merely after.
+     dir_region_size = header.section_count * fmt.DIRECTORY_ROW_SIZE
+-    # Checked addition -- overflow-safe in Python (ints are arbitrary
+-    # precision), but still explicitly bounded against the buffer/artifact
+-    # size rather than trusted.
+-    dir_region_end = header.section_directory_offset + dir_region_size
+-    if dir_region_end > artifact_bytes:
+-        raise PreflightCorruptOrIncompatible("section directory region extends past artifact_bytes")
+     if dir_region_size > _MAX_PREFLIGHT_REGION_BYTES:
+         raise PreflightCorruptOrIncompatible(
+             "declared section_count implies a directory region larger than the preflight's "
+             "own explicit small bound (%d bytes) -- refusing to trust it" % _MAX_PREFLIGHT_REGION_BYTES
+         )
++    dir_region_end = header.section_directory_offset + dir_region_size
++    if dir_region_end > artifact_bytes:
++        raise PreflightCorruptOrIncompatible("section directory region extends past artifact_bytes")
++    return dir_region_end
++
++
++def checked_preflight_region_size(header_bytes, artifact_bytes):
++    """F1 repair: the ONLY sanctioned way to compute how many bytes a
++    real integration should read to call parse_resource_shape. Unlike
++    the old, removed, unchecked preflight_region_size (which returned
++    section_directory_offset + section_count*DIRECTORY_ROW_SIZE with NO
++    validation at all -- the exact defect Astra's F1 reproduction
++    exploited), this function runs the COMPLETE header-level bound
++    checks first and raises PreflightCorruptOrIncompatible rather than
++    ever returning an unchecked value. Callers must treat this
++    exception as 'reject before any further read', never fall through
++    to a bigger read."""
++    if len(header_bytes) < fmt.HEADER_SIZE:
++        raise PreflightCorruptOrIncompatible("buffer shorter than fixed header size")
++    header = fmt.unpack_header(header_bytes, 0)
++    return _validate_header_and_bound_directory_region(header, artifact_bytes)
++
++
++def parse_resource_shape(buf_or_prefix, artifact_bytes):
++    """`buf_or_prefix`: at least the first HEADER_SIZE + (declared
++    section_count * DIRECTORY_ROW_SIZE) bytes of the artifact -- callers
++    integrating this for real would read exactly that many bytes from an
++    already-open handle (same-handle rule, Section 2 of the design doc),
++    sized via `checked_preflight_region_size` (never the removed,
++    unchecked `preflight_region_size`). This pure function only ever
++    indexes into what it is given; it never reads beyond `artifact_bytes`
++    (checked) and never touches STRING_POOL/GROUP_TABLE/METADATA_TABLE/
++    OCCURRENCE_TABLE row content.
++
++    Raises PreflightCorruptOrIncompatible for any malformed/inconsistent
++    header or directory. Never raises PreflightResourceRefusal itself --
++    that is the caller's job, after calling the estimator functions below.
++    """
++    buf = buf_or_prefix
++    if len(buf) < fmt.HEADER_SIZE:
++        raise PreflightCorruptOrIncompatible("buffer shorter than fixed header size")
++
++    header = fmt.unpack_header(buf, 0)
++    normative_sizes = fmt.NORMATIVE_ROW_SIZES.get(header.format_contract_version)
++    dir_region_end = _validate_header_and_bound_directory_region(header, artifact_bytes)
+     if dir_region_end > len(buf):
+         raise PreflightCorruptOrIncompatible(
+             "caller-supplied prefix buffer does not contain the full declared directory region"
+@@ -182,14 +256,17 @@
+     )
+ 
+ 
+-def preflight_region_size(buf_or_header):
+-    """How many bytes a real integration needs to read to call
+-    parse_resource_shape: HEADER_SIZE, then re-read once more with the
+-    declared section_directory_offset + section_count*DIRECTORY_ROW_SIZE
+-    once the header is known. Exposed so an integration can size its own
+-    single same-handle read precisely."""
+-    header = fmt.unpack_header(buf_or_header, 0)
+-    return header.section_directory_offset + header.section_count * fmt.DIRECTORY_ROW_SIZE
++# Astra post-B2C-B correction gate, finding F1: the unchecked
++# preflight_region_size(buf_or_header) function that used to live here
++# (HEADER_SIZE, then section_directory_offset + section_count*
++# DIRECTORY_ROW_SIZE, with ZERO validation) has been REMOVED entirely,
++# not merely deprecated -- it was reproducibly exploitable: a corrupted
++# section_directory_offset field alone drove a ~1.07 GB requested read
++# before any validation ran. checked_preflight_region_size() above is
++# the only sanctioned replacement; it performs the complete header-level
++# bound checks BEFORE returning any value a caller could use to size a
++# read, and raises PreflightCorruptOrIncompatible instead of returning
++# an unchecked number.
+ 
+ 
+ # ---------------------------------------------------------------------------
+@@ -244,12 +321,88 @@
+     return max(1, shape.string_pool_bytes // shape.string_count)
+ 
+ 
+-def estimate_retained(shape):
++# === Astra post-B2C-B correction gate, finding F2 ===
++# The pre-correction estimator modeled ONLY the full-hierarchy groups/
++# metadata payload -- it never received the caller's actual requested
++# fold/literal vocabulary at all, so a request whose OWN folded-payload
++# size (one entry + occurrence rows per REQUESTED fold, potentially a
++# large, pathological single family) could grow unboundedly without
++# ever being reflected in the estimate. Two-layer repair:
++#   (1) a request-aware PREFLIGHT term below, using the file's own
++#       structural occurrence_count/fold_count to derive an average
++#       occurrences-per-fold figure and scaling it by the caller's
++#       ACTUAL requested fold count (known before any I/O) -- this is a
++#       real, not assumed, statistical expectation, not a guess;
++#   (2) a hard, unconditional RUNTIME cap enforced in
++#       normalizer_compat_adapter.py's own builder loop
++#       (MAX_SINGLE_FOLD_OCCURRENCE_ROWS below), which aborts
++#       materialization the moment any ONE requested fold's real,
++#       observed occurrence count exceeds it -- catching the
++#       "single oversized family" case the preflight AVERAGE assumption
++#       cannot see coming (a pathological Master where one fold's
++#       occurrence family vastly exceeds the file-wide average).
++# This is an explicitly declared, qualified support domain (per Astra's
++# own "if arbitrary shapes cannot be conservatively supported, fail
++# closed outside it" instruction), not a claim of unconditional
++# correctness for any conceivable Master shape.
++PER_OCCURRENCE_ROW_DICT_OVERHEAD_BYTES = 260  # 4-key dict (literal/destination/global_index/local_index)
++PER_OCCURRENCE_ROW_INT_FIELDS_BYTES = 2 * PER_INT_FIELD_BYTES  # global_index, local_index
++# Hard hard-coded hard cap, independent of any preflight estimate: no
++# single requested fold's real, materialized occurrence family may
++# exceed this many rows. Chosen well above any real fold family size
++# observed in the qualified corpus (the real canonical Master's largest
++# family is small; W1/W2's real per-target/per-scope families are all
++# under 2,000), while still bounding a pathological worst case (e.g. a
++# custom/local Master with one degenerate, massively-duplicated control
++# name) to a materialization cost this estimator's own per-row term
++# above keeps comfortably inside the 16 MiB retained gate on its own.
++MAX_SINGLE_FOLD_OCCURRENCE_ROWS = 20000
++
++
++def _avg_occurrences_per_fold(shape):
++    if shape.fold_count <= 0:
++        return 0
++    return shape.occurrence_count / float(shape.fold_count)
++
++
++def _requested_folded_payload_bytes(shape, requested_fold_count):
++    """Conservative expected size of the `folded`/`exact_literals`
++    payload for a request of `requested_fold_count` distinct folds
++    against this artifact -- NOT the pre-correction estimator's
++    omission. Uses the file's own average occurrences-per-fold (a real
++    structural quantity, zero extra I/O) scaled by the caller's actual
++    requested count; never assumes zero, never silently ignores the
++    request size. The complementary hard per-family cap
++    (MAX_SINGLE_FOLD_OCCURRENCE_ROWS) is enforced separately, at
++    materialization time, for the single-pathological-family case this
++    average-based estimate cannot predict from structure alone."""
++    if requested_fold_count <= 0:
++        return 0
++    effective_folds = min(requested_fold_count, shape.fold_count) if shape.fold_count > 0 else requested_fold_count
++    avg_occ = _avg_occurrences_per_fold(shape)
++    estimated_occurrence_rows = effective_folds * avg_occ
++    per_row_bytes = (
++        PER_OCCURRENCE_ROW_DICT_OVERHEAD_BYTES
++        + PER_OCCURRENCE_ROW_INT_FIELDS_BYTES
++        + 2 * (PER_STRING_OBJECT_FIXED_OVERHEAD_BYTES)  # literal + destination string references
++    )
++    # Per-fold dict-of-list bucket overhead (folded[fold] = [...]).
++    per_fold_bucket_bytes = 80
++    return int(estimated_occurrence_rows * per_row_bytes + effective_folds * per_fold_bucket_bytes)
++
++
++def estimate_retained(shape, requested_fold_count=0):
+     """Conservative upper bound (bytes) on the retained detached-view
+     payload a Normalizer-like acquisition produces for this shape. Must
+     never fall below the EXISTING system's own authoritative post-build
+     AggregateLedger estimate (`_estimate_payload_bytes`) for any known
+-    sample -- verified in the qualification matrix, not assumed."""
++    sample -- verified in the qualification matrix, not assumed.
++
++    `requested_fold_count` (Astra F2): the caller's ACTUAL requested
++    fold/literal vocabulary size, known before any I/O -- defaults to 0
++    ONLY for backward-compatible direct callers that genuinely have no
++    request-scale information (e.g. a pure structural-shape probe); any
++    real acquisition path must pass its true count."""
+     avg_chars = _avg_string_len_chars(shape)
+     per_string_bytes = PER_STRING_OBJECT_FIXED_OVERHEAD_BYTES + avg_chars * BYTES_PER_DECODED_CHAR
+ 
+@@ -269,7 +422,9 @@
+     per_metadata_bytes = PER_METADATA_DICT_OVERHEAD_BYTES + PER_INT_FIELD_BYTES + 2 * per_string_bytes
+     metadata_total = shape.metadata_count * per_metadata_bytes + shape.group_count * PER_METADATA_TABLE_DICT_ENTRY_BYTES
+ 
+-    return int(groups_total + metadata_total + FIXED_PAYLOAD_OVERHEAD_BYTES)
++    folded_payload_total = _requested_folded_payload_bytes(shape, requested_fold_count)
++
++    return int(groups_total + metadata_total + folded_payload_total + FIXED_PAYLOAD_OVERHEAD_BYTES)
+ 
+ 
+ # -- Transient model --
+@@ -328,13 +483,22 @@
+     )
+ 
+ 
+-def estimate_transient(shape, runtime_cap_bytes):
++def estimate_transient(shape, runtime_cap_bytes, requested_fold_count=0):
+     """Conservative upper bound (bytes) on the peak process memory delta
+     during one Normalizer-like acquisition of this shape, under the given
+     runtime_cap_bytes. For the current frozen bounded-read implementation,
+     read_bound = runtime_cap_bytes + 1 (B2F1B: Python 2.7's file.read(size)
+     allocates according to the REQUESTED size, not the actual bytes
+-    returned)."""
++    returned).
++
++    `requested_fold_count` (Astra F2): forwarded to estimate_retained so
++    the transient peak (which includes the projection payload as one of
++    its simultaneously-live components) also reflects the caller's
++    actual requested vocabulary size -- the pre-correction code called
++    `estimate_retained(shape)` with no request-scale argument at all,
++    silently defaulting the projection component to the (then-only)
++    full-hierarchy-only estimate regardless of how much vocabulary was
++    actually requested."""
+     read_bound = runtime_cap_bytes + 1
+ 
+     # provider._groups: group_count GroupTableRow namedtuples.
+@@ -351,7 +515,7 @@
+     provider_decode_upper = groups_cache + metadata_cache + string_cache_slots
+     validator_scratch_upper = _validator_scratch_upper(shape)
+ 
+-    projection_upper = estimate_retained(shape)
++    projection_upper = estimate_retained(shape, requested_fold_count=requested_fold_count)
+ 
+     return int(
+         read_bound + provider_decode_upper + validator_scratch_upper + projection_upper

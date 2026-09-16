@@ -1,0 +1,34 @@
+--- "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c/sfm_master_authority_productionized/cohort.py"	2026-09-16 05:25:46.751890900 -0400
++++ "E:/SFM Animation Group Master/tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/cohort.py"	2026-09-16 18:05:46.636234700 -0400
+@@ -34,7 +34,8 @@
+     STATE_CANCELLED = "CANCELLED"
+ 
+     def __init__(self, master_path, allow_local_candidates=False, local_pointer_path=None,
+-                 generated_root=None, shipped_root=None, runtime_cap_bytes=None, broker=None):
++                 generated_root=None, shipped_root=None, runtime_cap_bytes=None, broker=None,
++                 requested_fold_count=0):
+         self.cohort_id = next(_cohort_id_counter)
+         self.master_path = master_path
+         self.allow_local_candidates = allow_local_candidates
+@@ -43,6 +44,12 @@
+         self.shipped_root = shipped_root
+         self.runtime_cap_bytes = runtime_cap_bytes
+         self._broker = broker
++        # Astra F2: the aggregate requested fold/literal vocabulary size
++        # across every builder_fn this cohort will build, known at
++        # construction time (before any I/O) -- forwarded to the
++        # preflight/admission layer so a candidate's resource decision
++        # reflects the caller's actual requested scale.
++        self.requested_fold_count = requested_fold_count
+         self.state = self.STATE_OPEN
+         self.h0 = None
+         self.h1 = None
+@@ -81,6 +88,8 @@
+                 generated_root=self.generated_root,
+                 shipped_root=self.shipped_root,
+                 runtime_cap_bytes=self.runtime_cap_bytes,
++                requested_fold_count=self.requested_fold_count,
++                ledger=self._broker._ledger if self._broker is not None else None,
+             )
+         except Exception as exc:
+             self.last_selection_instrumentation = getattr(exc, "instrumentation", None)

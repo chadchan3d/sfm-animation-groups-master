@@ -1,0 +1,432 @@
+# -*- coding: utf-8 -*-
+"""R3-B2C productionized single canonical open-and-identify primitive.
+Ports R3-B2F1F Stage F5's `preflight_gate_f5.candidate_open_and_identify_
+with_preflight` into the shared authority package namespace -- same
+logic, package-relative imports instead of dependency injection (this
+module lives INSIDE sfm_master_authority now, not loaded from outside
+it via sys.path the way the F5 candidate was).
+
+Collapses what the frozen call graph does for a winning candidate --
+FIVE full reads (F5 report Section 1: two full reads inside
+sidecar_contract.validate_selected_artifact, called twice for the
+winner via selection.py's scan-then-reidentify pattern, plus a fifth
+via cohort.py's own separate BoundedProvider.open_path) -- into exactly
+ONE open, ONE preflight parse (<=360 bytes), and (only if admitted) ONE
+full bounded read, ONE structural validation. Returns an ALREADY-OPEN,
+caller-owned provider plus its ArtifactIdentity.
+
+Reuses the EXISTING, unmodified BoundedProvider._open_from_buf (hence
+the EXACT SAME candidate_packed_validator.validate_packed) and the
+EXISTING errors.ResourceAdmissionRefusal/SourceGenerationMismatch/
+SidecarCorrupt classes -- no second authored validator, no new
+exception types reaching callers.
+
+`sidecar_artifact_sha256` is computed from the ALREADY-READ in-memory
+buffer (hashlib.sha256(data)), not a second disk read -- mathematically
+identical to sidecar_contract._sha256_of_file(path), zero behavior
+change, one fewer full read.
+
+=== Astra post-B2C-B correction gate (2026-09-16) ===
+
+F1 -- bound preflight before any file-controlled variable read:
+Astra reproduced a tiny artifact whose changed section_directory_offset
+caused a requested read of ~1.07 GB before validation, because the old
+(now-removed) `resource_estimator.preflight_region_size()` returned
+`section_directory_offset + section_count*DIRECTORY_ROW_SIZE` with NO
+bound checking at all, and THAT unchecked value directly sized the next
+`f.read(...)` call here. Fixed by: (1) validating runtime_cap_bytes
+type/range before any I/O; (2) reading only the fixed HEADER_SIZE
+bytes; (3) computing the directory-region size exclusively through
+`resource_estimator.checked_preflight_region_size()`, which validates
+magic/version/section-count/directory-offset/checked-arithmetic/
+containment BEFORE returning any value; (4) reading only that checked,
+bounded number of directory bytes; (5) never reading a directory region
+that exceeds `_MAX_PREFLIGHT_REGION_BYTES` or `artifact_bytes`. Every
+`read(size)` call is now instrumented (requested size, bytes returned,
+position, running preflight total, max single requested size) via
+`_instrumented_read()` below -- Test 1 asserts the max requested read
+never exceeds the explicit preflight bound before admission.
+
+F5 -- bind admission to the actual full-read snapshot: same-handle
+alone does not defend against an in-place overwrite altering bytes
+visible through that same handle between the preflight read and the
+full bounded read (already documented, F3/B2C-A). The preflight
+decision is no longer trusted as final: after the one full bounded
+read, the header+directory are RE-PARSED from that exact in-memory
+buffer (never a second disk read) via the same checked_preflight_
+region_size/parse_resource_shape functions, and admission is
+RE-EVALUATED against that reparsed shape. If the snapshot's structural
+shape differs from what preflight saw (a same-handle overwrite raced
+the two reads), the NEW shape's own re-evaluation is authoritative: it
+is safely re-admitted if it still passes both gates, or refused/failed
+closed if it does not -- never silently trusting the earlier, now-stale
+preflight verdict. Order is now: reparse+re-admit from the full-read
+snapshot -> compute artifact SHA from that same buffer -> run the full
+validator (BoundedProvider._open_from_buf).
+
+STILL A CANDIDATE, isolated under tests/sidecar/qualification/
+candidate_b2c_correction/ -- not yet the frozen production package, and
+NOT the same directory as the pre-correction B2C-A/B candidate (which
+remains as historical evidence, unmodified).
+"""
+import binascii
+import hashlib
+import os
+
+from . import errors
+from . import descriptors
+from . import sidecar_contract
+from . import resource_estimator
+
+fmt = resource_estimator.fmt
+
+RETAINED_GATE_BYTES = 16 * 1024 * 1024
+TRANSIENT_GATE_BYTES = 32 * 1024 * 1024  # 33,554,432 bytes exactly (32 MiB) -- see B2F1F F6 note on the
+                                          # earlier "33 MiB" mislabeling bug, corrected before F6 and carried
+                                          # forward here unchanged.
+
+
+class ReadCallRecord(object):
+    __slots__ = ("requested_size", "bytes_returned", "position_before", "position_after")
+
+    def __init__(self, requested_size, bytes_returned, position_before, position_after):
+        self.requested_size = requested_size
+        self.bytes_returned = bytes_returned
+        self.position_before = position_before
+        self.position_after = position_after
+
+    def to_dict(self):
+        return {
+            "requested_size": self.requested_size, "bytes_returned": self.bytes_returned,
+            "position_before": self.position_before, "position_after": self.position_after,
+        }
+
+
+class CandidateOpenInstrumentation(object):
+    __slots__ = (
+        "candidate_path", "file_open_count", "file_close_count",
+        "raw_artifact_bytes", "preflight_bytes_read", "preflight_parse_deferred",
+        "full_bounded_read_call_count", "full_bounded_read_bytes_returned",
+        "validator_call_count", "estimator_model_version",
+        "estimated_retained_bytes", "estimated_transient_bytes",
+        "retained_gate_bytes", "transient_gate_bytes", "runtime_cap_bytes",
+        "outcome", "reason",
+        # Astra F1 correction: explicit per-read instrumentation.
+        "read_calls", "max_single_requested_read", "total_preflight_bytes_requested",
+        # Astra F5 correction: snapshot re-validation outcome.
+        "snapshot_reparsed", "snapshot_shape_differed_from_preflight", "snapshot_readmission_outcome",
+    )
+
+    def __init__(self):
+        for k in self.__slots__:
+            setattr(self, k, None)
+        self.file_open_count = 0
+        self.file_close_count = 0
+        self.preflight_bytes_read = 0
+        self.preflight_parse_deferred = False
+        self.full_bounded_read_call_count = 0
+        self.validator_call_count = 0
+        self.estimator_model_version = resource_estimator.ESTIMATOR_MODEL_VERSION
+        self.retained_gate_bytes = RETAINED_GATE_BYTES
+        self.transient_gate_bytes = TRANSIENT_GATE_BYTES
+        self.read_calls = []
+        self.max_single_requested_read = 0
+        self.total_preflight_bytes_requested = 0
+        self.snapshot_reparsed = False
+        self.snapshot_shape_differed_from_preflight = False
+        self.snapshot_readmission_outcome = None
+
+    def record_read(self, requested_size, bytes_returned, position_before, position_after, counts_as_preflight):
+        rec = ReadCallRecord(requested_size, bytes_returned, position_before, position_after)
+        self.read_calls.append(rec)
+        if requested_size > self.max_single_requested_read:
+            self.max_single_requested_read = requested_size
+        if counts_as_preflight:
+            self.total_preflight_bytes_requested += requested_size
+
+    def to_dict(self):
+        d = dict((k, getattr(self, k)) for k in self.__slots__ if k != "read_calls")
+        d["read_calls"] = [r.to_dict() for r in self.read_calls]
+        return d
+
+
+def _instrumented_read(f, size, inst, counts_as_preflight):
+    """The ONLY way this module reads from an open file handle -- every
+    call is recorded (requested size, bytes actually returned, position
+    before/after) so Test 1 can assert the max single requested read
+    never exceeds the explicit preflight bound before admission."""
+    position_before = f.tell()
+    data = f.read(size)
+    position_after = f.tell()
+    inst.record_read(size, len(data), position_before, position_after, counts_as_preflight)
+    return data
+
+
+def _reparse_shape_from_buffer(buf, artifact_bytes):
+    """Shared by both the preflight-prefix parse and the post-full-read
+    snapshot reparse (F5): given a buffer that contains at least
+    HEADER_SIZE bytes, computes the checked directory-region size and
+    parses the full ResourceShape from it, entirely in-memory (never a
+    disk read). Returns None (not an exception) if the buffer's header
+    is malformed/incompatible -- deferring, exactly as before, to the
+    real full validator as sole authority on corruption."""
+    try:
+        region_size = resource_estimator.checked_preflight_region_size(buf[:fmt.HEADER_SIZE], artifact_bytes)
+        if region_size > len(buf):
+            return None
+        return resource_estimator.parse_resource_shape(buf[:region_size], artifact_bytes)
+    except resource_estimator.PreflightCorruptOrIncompatible:
+        return None
+    except Exception:
+        return None
+
+
+def candidate_open_and_identify_with_preflight(path, expected_source_sha256, runtime_cap_bytes=None, inst=None,
+                                                requested_fold_count=0, ledger=None):
+    """Returns (provider, identity, instrumentation) with `provider` left
+    OPEN -- caller owns it and must eventually .close() it. Raises the
+    EXISTING, real error classes (never a locally-invented type):
+      errors.ResourceAdmissionRefusal  -- valid but resource-expensive
+      errors.SourceGenerationMismatch  -- embedded source_sha256 mismatch
+      errors.SidecarCorrupt            -- malformed/fails structural validation
+      errors.FormatUnsupported         -- checksum-consistent but declares
+                                           an unsupported format_contract_version
+    On a ResourceAdmissionRefusal, the instrumentation is attached to the
+    raised exception as `.instrumentation` so callers/scanners can report
+    genuine refusal-path counters without a second call.
+
+    `runtime_cap_bytes=None` (the caller omits it) is a REAL, pre-existing
+    contract preserved from the frozen path: sidecar_contract.
+    validate_selected_artifact only forwards runtime_cap_bytes when it is
+    not None, letting BoundedProvider.open_path's own default
+    (DEFAULT_RUNTIME_ADMISSION_CAP_BYTES, 16 MiB) apply. This function
+    resolves that SAME default here (via the frozen provider module
+    itself, not a re-typed constant) before doing anything cap-dependent,
+    so a None cap behaves identically to the frozen call graph rather
+    than crashing. A caller-SUPPLIED (non-None) value is validated by
+    `resource_estimator.validate_runtime_cap_bytes` before any I/O
+    (Astra F1 repair step 1)."""
+    if inst is None:
+        inst = CandidateOpenInstrumentation()
+    inst.candidate_path = path
+
+    sidecar_contract.ensure_loaded()
+    if runtime_cap_bytes is None:
+        runtime_cap_bytes = sidecar_contract._provider_module.DEFAULT_RUNTIME_ADMISSION_CAP_BYTES
+    else:
+        runtime_cap_bytes = resource_estimator.validate_runtime_cap_bytes(runtime_cap_bytes)
+    inst.runtime_cap_bytes = runtime_cap_bytes
+
+    f = open(path, "rb")
+    inst.file_open_count += 1
+    try:
+        artifact_bytes = os.fstat(f.fileno()).st_size
+        inst.raw_artifact_bytes = artifact_bytes
+        if artifact_bytes > runtime_cap_bytes:
+            inst.outcome = "refused"
+            inst.reason = "artifact_bytes"
+            exc = errors.ResourceAdmissionRefusal(
+                "sidecar file size %d exceeds runtime admission cap %d bytes -- refusing to read "
+                "(preflight Gate A, no estimator parse needed)" % (artifact_bytes, runtime_cap_bytes)
+            )
+            exc.instrumentation = inst
+            raise exc
+
+        header_bytes = _instrumented_read(f, fmt.HEADER_SIZE, inst, counts_as_preflight=True)
+        shape = None
+        try:
+            # Astra F1: checked_preflight_region_size validates magic,
+            # format_contract_version, section_count, section_directory_
+            # offset, checked arithmetic, and containment within
+            # artifact_bytes BEFORE returning any size -- the read below
+            # can never be driven by an unchecked file-controlled value.
+            region_size = resource_estimator.checked_preflight_region_size(header_bytes, artifact_bytes)
+            f.seek(0)
+            prefix = _instrumented_read(f, region_size, inst, counts_as_preflight=True)
+            inst.preflight_bytes_read = len(prefix)
+            shape = resource_estimator.parse_resource_shape(prefix, artifact_bytes)
+        except resource_estimator.PreflightCorruptOrIncompatible:
+            # Do NOT invent a corruption verdict here -- preflight is a
+            # negative admission filter only. Fall through to the
+            # existing full validation path, which remains the sole
+            # authority on corruption/incompatibility.
+            inst.preflight_parse_deferred = True
+            shape = None
+        except Exception:
+            inst.preflight_parse_deferred = True
+            shape = None
+
+        if shape is not None:
+            # Astra F2: est_retained/est_transient now reflect the
+            # caller's ACTUAL requested fold/literal vocabulary size,
+            # not only the full-hierarchy groups/metadata payload.
+            est_retained = resource_estimator.estimate_retained(shape, requested_fold_count=requested_fold_count)
+            est_transient = resource_estimator.estimate_transient(
+                shape, runtime_cap_bytes, requested_fold_count=requested_fold_count)
+            inst.estimated_retained_bytes = est_retained
+            inst.estimated_transient_bytes = est_transient
+            # Astra F2: aggregate-aware admission -- when a ledger is
+            # supplied (the real acquisition path always supplies one),
+            # ask it whether ADMITTING this candidate's estimate on top
+            # of every OTHER currently-charged category (existing
+            # retained views, other concurrent consumers' pending
+            # projections, provider caches, validator scratch, stale-
+            # but-referenced views, replacement overlap) would exceed
+            # the gate -- never the single-artifact-in-isolation
+            # comparison alone, which is blind to what else the process
+            # is already carrying.
+            retained_exceeds = (
+                ledger.would_exceed_retained_gate(est_retained) if ledger is not None
+                else est_retained > RETAINED_GATE_BYTES
+            )
+            transient_exceeds = (
+                ledger.would_exceed_transient_gate(est_transient) if ledger is not None
+                else est_transient > TRANSIENT_GATE_BYTES
+            )
+            if retained_exceeds:
+                inst.outcome = "refused"
+                inst.reason = "estimated_retained"
+                exc = errors.ResourceAdmissionRefusal(
+                    "preflight estimated retained charge %d bytes would exceed the retained gate "
+                    "%d bytes (%s; estimator_model_version=%s, requested_fold_count=%d)" % (
+                        est_retained, RETAINED_GATE_BYTES,
+                        "aggregate ledger-aware" if ledger is not None else "single-artifact-only",
+                        resource_estimator.ESTIMATOR_MODEL_VERSION, requested_fold_count)
+                )
+                exc.instrumentation = inst
+                raise exc
+            if transient_exceeds:
+                inst.outcome = "refused"
+                inst.reason = "estimated_transient"
+                exc = errors.ResourceAdmissionRefusal(
+                    "preflight estimated transient delta %d bytes would exceed the transient gate "
+                    "%d bytes (%s; estimator_model_version=%s, requested_fold_count=%d)" % (
+                        est_transient, TRANSIENT_GATE_BYTES,
+                        "aggregate ledger-aware" if ledger is not None else "single-artifact-only",
+                        resource_estimator.ESTIMATOR_MODEL_VERSION, requested_fold_count)
+                )
+                exc.instrumentation = inst
+                raise exc
+
+        f.seek(0)
+        data = _instrumented_read(f, runtime_cap_bytes + 1, inst, counts_as_preflight=False)
+        inst.full_bounded_read_call_count += 1
+        inst.full_bounded_read_bytes_returned = len(data)
+        if len(data) > runtime_cap_bytes:
+            inst.outcome = "refused"
+            inst.reason = "post_read_length"
+            exc = errors.ResourceAdmissionRefusal(
+                "sidecar content exceeds runtime admission cap %d bytes" % runtime_cap_bytes
+            )
+            exc.instrumentation = inst
+            raise exc
+    finally:
+        f.close()
+        inst.file_close_count += 1
+
+    # --- Astra F5: reparse + re-admit from the actual full-read snapshot,
+    # BEFORE any allocation-heavy validation/decoding. Never a second
+    # disk read -- `data` is the exact bytes the full validator will see.
+    snapshot_shape = _reparse_shape_from_buffer(data, len(data))
+    inst.snapshot_reparsed = snapshot_shape is not None
+    if snapshot_shape is not None:
+        differed = (shape is None) or any(
+            getattr(snapshot_shape, field) != getattr(shape, field) for field in snapshot_shape.__slots__
+        )
+        inst.snapshot_shape_differed_from_preflight = differed
+        if differed:
+            # The file's structural shape at full-read time does not
+            # match what preflight saw on the earlier, smaller read --
+            # a same-handle in-place overwrite raced the two reads
+            # (exactly the scenario F3/B2C-A's real overwrite probe
+            # exercised, now checked structurally, not only via the
+            # existing exact source_sha256/generation check further
+            # below). Re-run admission fresh against the NEW shape --
+            # never trust the earlier, now-stale preflight verdict.
+            snap_retained = resource_estimator.estimate_retained(snapshot_shape)
+            snap_transient = resource_estimator.estimate_transient(snapshot_shape, runtime_cap_bytes)
+            if snap_retained > RETAINED_GATE_BYTES or snap_transient > TRANSIENT_GATE_BYTES:
+                inst.snapshot_readmission_outcome = "refused"
+                inst.outcome = "refused"
+                inst.reason = "snapshot_shape_changed_estimated_exceeds_gate"
+                exc = errors.ResourceAdmissionRefusal(
+                    "full-read snapshot's reparsed structural shape differs from the preflight "
+                    "snapshot and its own re-evaluated estimate (retained=%d, transient=%d) exceeds "
+                    "a gate (retained_gate=%d, transient_gate=%d) -- refusing rather than trusting "
+                    "the earlier, now-stale preflight admission decision"
+                    % (snap_retained, snap_transient, RETAINED_GATE_BYTES, TRANSIENT_GATE_BYTES)
+                )
+                exc.instrumentation = inst
+                raise exc
+            inst.snapshot_readmission_outcome = "readmitted"
+        else:
+            inst.snapshot_readmission_outcome = "unchanged"
+    elif shape is not None:
+        # Preflight successfully parsed a shape, but the SAME header
+        # region within the full-read snapshot no longer parses at all
+        # -- the file changed into something structurally broken between
+        # the two reads. Fail closed rather than proceeding on a
+        # preflight verdict that no longer describes the actual bytes
+        # about to be validated/decoded.
+        inst.snapshot_shape_differed_from_preflight = True
+        inst.snapshot_readmission_outcome = "refused_unparseable_snapshot"
+        inst.outcome = "refused"
+        inst.reason = "snapshot_unparseable_after_admission"
+        exc = errors.SidecarCorrupt(
+            "full-read snapshot no longer parses as the structurally valid shape preflight admitted "
+            "-- the candidate changed between the preflight read and the full read"
+        )
+        exc.instrumentation = inst
+        raise exc
+    # else: neither preflight nor the snapshot could parse a shape --
+    # unchanged from the pre-correction behavior of deferring entirely
+    # to the full validator as sole authority on corruption.
+
+    sidecar_contract.ensure_loaded()
+    provider_mod = sidecar_contract._provider_module
+    try:
+        provider = provider_mod.BoundedProvider._open_from_buf(data, expected_source_sha256, bound=True)
+    except provider_mod.SourceMismatchError as exc2:
+        inst.outcome = "refused"
+        inst.reason = "source_generation_mismatch"
+        raise errors.SourceGenerationMismatch(str(exc2))
+    except provider_mod.AuthorityUnavailable as exc2:
+        msg = str(exc2)
+        inst.outcome = "refused"
+        if "admission cap" in msg:
+            inst.reason = "estimated_transient_post_read"
+            raise errors.ResourceAdmissionRefusal(msg)
+        # Astra F7: a checksum-consistent (well-formed magic/structure)
+        # but unsupported format_contract_version is preserved as its
+        # own distinct classification rather than collapsed into generic
+        # SidecarCorrupt -- re-inspects the already-in-memory header
+        # bytes (never a second read) so this distinction is available
+        # even when the full validator's own message text doesn't
+        # separately say so.
+        try:
+            header_for_classification = fmt.unpack_header(data[:fmt.HEADER_SIZE], 0)
+            if (header_for_classification.magic == fmt.MAGIC
+                    and header_for_classification.format_contract_version not in fmt.NORMATIVE_ROW_SIZES):
+                inst.reason = "format_unsupported"
+                raise errors.FormatUnsupported(msg)
+        except errors.FormatUnsupported:
+            raise
+        except Exception:
+            pass
+        inst.reason = "corrupt"
+        raise errors.SidecarCorrupt(msg)
+    inst.validator_call_count += 1
+    inst.outcome = "accepted"
+    inst.reason = None
+
+    header = provider._header
+    embedded_source_hex = binascii.hexlify(header.source_sha256).decode("ascii").lower()
+    identity = descriptors.ArtifactIdentity(
+        sidecar_artifact_sha256=hashlib.sha256(data).hexdigest(),  # in-memory -- no second disk read
+        format_contract_version=header.format_contract_version,
+        authority_semantics_version=header.authority_semantics_version,
+        projection_contract_version=None,
+        embedded_source_sha256=embedded_source_hex,
+        embedded_source_byte_length=header.source_byte_length,
+    )
+    return provider, identity, inst
