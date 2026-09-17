@@ -1,0 +1,61 @@
+diff --git tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/runtime.py tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/runtime.py
+index 42919c5..3428cc7 100644
+--- tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/runtime.py
++++ tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/runtime.py
+@@ -32,6 +32,23 @@ import sys
+ 
+ RUNTIME_API_VERSION = "1.0.0-b2a"
+ 
++# Astra second-correction-gate F6/F8: a SEPARATE, more granular build
++# identity, distinct from RUNTIME_API_VERSION. RUNTIME_API_VERSION names
++# the broad B2A generation of the acquire_generation/acquire_cohort
++# calling contract (unchanged since B2A); RUNTIME_BUILD_ID names THIS
++# specific package build/implementation, which real bootstrap code can
++# check to reject a build that shares the same API generation but is
++# NOT the exact corrected implementation it requires (e.g. the
++# pre-correction B2C-A/B candidate at candidate_b2c/, which shares
++# RUNTIME_API_VERSION "1.0.0-b2a" but lacks the lease/generation-binding
++# API this build adds -- a caller checking ONLY RUNTIME_API_VERSION
++# could not tell the two apart, which is exactly how the corrected
++# Normalizer candidate ended up bootstrapping the WRONG package build in
++# the first correction attempt). Bump this string whenever a build adds
++# or changes an API surface that callers depend on, even if
++# RUNTIME_API_VERSION does not change.
++RUNTIME_BUILD_ID = "b2c-correction2-lease-generation-binding-2026-09-16"
++
+ STATE_UNINITIALIZED = "UNINITIALIZED"
+ STATE_INITIALIZING = "INITIALIZING"
+ STATE_READY = "READY"
+@@ -92,6 +109,10 @@ def get_runtime_api_version():
+     return RUNTIME_API_VERSION
+ 
+ 
++def get_runtime_build_id():
++    return RUNTIME_BUILD_ID
++
++
+ def get_actual_origin_dir():
+     """The real, on-disk directory this module was actually loaded
+     from (captured once, at initialization, from `_this_module.__file__`
+@@ -145,7 +166,7 @@ def assert_main_thread_context(is_main_thread_fn):
+         )
+ 
+ 
+-def get_broker(expected_api_version=None, is_main_thread_fn=None):
++def get_broker(expected_api_version=None, expected_build_id=None, is_main_thread_fn=None):
+     """The one canonical broker-factory entry point. Every caller --
+     Normalizer, Character Preset, Autoinit, direct menu invocation, the
+     runtime identity probe -- must call exactly this function (via the
+@@ -169,6 +190,12 @@ def get_broker(expected_api_version=None, is_main_thread_fn=None):
+             "mismatched API expectations (a second, incompatible package is "
+             "likely on sys.path)." % (expected_api_version, RUNTIME_API_VERSION)
+         )
++    if expected_build_id is not None and expected_build_id != RUNTIME_BUILD_ID:
++        raise errors.BrokerIdentityConflict(
++            "caller expects sfm_master_authority runtime build id %r, but "
++            "the loaded runtime is build %r -- refusing (same API generation, "
++            "different/incompatible implementation build)." % (expected_build_id, RUNTIME_BUILD_ID)
++        )
+ 
+     if not is_canonical():
+         raise errors.BrokerIdentityConflict(

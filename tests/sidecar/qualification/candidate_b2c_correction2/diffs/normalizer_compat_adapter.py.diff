@@ -1,0 +1,18 @@
+diff --git tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/normalizer_compat_adapter.py tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/normalizer_compat_adapter.py
+index b6bf2b7..cecb202 100644
+--- tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/normalizer_compat_adapter.py
++++ tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/normalizer_compat_adapter.py
+@@ -358,6 +358,13 @@ def build_targeted_master_compatible_projection(wanted_folds):
+         estimated_bytes = _estimate_payload_bytes(payload)
+         return payload, coverage, estimated_bytes
+     _builder.declared_request_scale = len(wanted_folds)
++    # Astra second-correction-gate F2: the REAL requested fold SET (not
++    # merely its size) -- broker.py's acquire_cohort reads this to build
++    # requested_folds_by_consumer for the packed-per-family cumulative
++    # admission check (resource_estimator.evaluate_cumulative_admission),
++    # which needs the actual folds to look up their real packed
++    # occurrence counts, not just a count to multiply an average by.
++    _builder.declared_request_folds = frozenset(wanted_folds)
+     return _builder
+ 
+ 

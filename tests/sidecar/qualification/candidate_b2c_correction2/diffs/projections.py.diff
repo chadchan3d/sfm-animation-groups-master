@@ -1,0 +1,28 @@
+diff --git tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/projections.py tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/projections.py
+index bcee73d..35f1851 100644
+--- tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/projections.py
++++ tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/projections.py
+@@ -45,6 +45,14 @@ def build_normalizer_like_projection(exact_literals):
+         }
+         coverage = views.CoverageDescriptor(coverage_entries)
+         return payload, coverage, _estimate_payload_bytes(payload)
++    # Astra second-correction-gate F2: expose the real requested fold set
++    # (folded, matching what the packed-family admission layer expects)
++    # so this fixture builder participates in cumulative admission the
++    # SAME way normalizer_compat_adapter's real builders do -- never a
++    # silent "zero requested folds" blind spot for qualification tests
++    # that exercise near-gate-boundary conditions.
++    _builder.declared_request_folds = frozenset(_ascii_fold(lit) for lit in exact_literals)
++    _builder.declared_request_scale = len(_builder.declared_request_folds)
+     return _builder
+ 
+ 
+@@ -65,6 +73,8 @@ def build_character_preset_like_projection(vocabulary_literals):
+         payload = {"lookup_results": results}
+         coverage = views.CoverageDescriptor(coverage_entries)
+         return payload, coverage, _estimate_payload_bytes(payload)
++    _builder.declared_request_folds = frozenset(_ascii_fold(lit) for lit in vocabulary_literals)
++    _builder.declared_request_scale = len(_builder.declared_request_folds)
+     return _builder
+ 
+ 

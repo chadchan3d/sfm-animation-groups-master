@@ -1,0 +1,46 @@
+diff --git tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/cohort.py tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/cohort.py
+index 6d141ce..f55874d 100644
+--- tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/cohort.py
++++ tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/cohort.py
+@@ -35,7 +35,7 @@ class Cohort(object):
+ 
+     def __init__(self, master_path, allow_local_candidates=False, local_pointer_path=None,
+                  generated_root=None, shipped_root=None, runtime_cap_bytes=None, broker=None,
+-                 requested_fold_count=0):
++                 requested_folds_by_consumer=None):
+         self.cohort_id = next(_cohort_id_counter)
+         self.master_path = master_path
+         self.allow_local_candidates = allow_local_candidates
+@@ -44,12 +44,12 @@ class Cohort(object):
+         self.shipped_root = shipped_root
+         self.runtime_cap_bytes = runtime_cap_bytes
+         self._broker = broker
+-        # Astra F2: the aggregate requested fold/literal vocabulary size
+-        # across every builder_fn this cohort will build, known at
+-        # construction time (before any I/O) -- forwarded to the
+-        # preflight/admission layer so a candidate's resource decision
+-        # reflects the caller's actual requested scale.
+-        self.requested_fold_count = requested_fold_count
++        # Astra second-correction-gate F2: the REAL per-consumer
++        # requested fold SETS (not a bare count) this cohort will build,
++        # known at construction time (before any I/O) -- forwarded to
++        # the preflight/admission layer for packed-per-family cumulative
++        # reservation, never an average/count-only proxy.
++        self.requested_folds_by_consumer = requested_folds_by_consumer or {}
+         self.state = self.STATE_OPEN
+         self.h0 = None
+         self.h1 = None
+@@ -88,8 +88,11 @@ class Cohort(object):
+                 generated_root=self.generated_root,
+                 shipped_root=self.shipped_root,
+                 runtime_cap_bytes=self.runtime_cap_bytes,
+-                requested_fold_count=self.requested_fold_count,
+-                ledger=self._broker._ledger if self._broker is not None else None,
++                requested_folds_by_consumer=self.requested_folds_by_consumer,
++                aggregate_existing_retained_bytes=(
++                    self._broker._ledger.total_retained_bytes() if self._broker is not None else 0
++                ),
++                diagnostics=self._broker._diagnostics if self._broker is not None else None,
+             )
+         except Exception as exc:
+             self.last_selection_instrumentation = getattr(exc, "instrumentation", None)

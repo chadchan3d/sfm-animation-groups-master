@@ -1,0 +1,274 @@
+diff --git tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/broker.py tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/broker.py
+index 9be0a86..1b03945 100644
+--- tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/broker.py
++++ tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/broker.py
+@@ -222,7 +222,8 @@ class Broker(object):
+ 
+     def acquire_cohort(self, master_path, builder_fns, allow_local_candidates=False,
+                         local_pointer_path=None, generated_root=None, shipped_root=None,
+-                        runtime_cap_bytes=None, retries_remaining=1, requested_fold_count=None):
++                        runtime_cap_bytes=None, retries_remaining=1, requested_folds_by_consumer=None,
++                        expected_generation=None):
+         """The B2B finite-cohort acquisition flow. `builder_fns` is a dict
+         of {consumer_kind: callable(provider) -> (payload, coverage,
+         estimated_bytes)}. Serializes cohort construction on this
+@@ -232,18 +233,35 @@ class Broker(object):
+         can arise in a single-threaded process (a REENTRANT call, e.g. a
+         builder_fn side effect calling back into acquire_cohort).
+ 
+-        `requested_fold_count` (Astra F2): the aggregate requested fold/
+-        literal vocabulary size across every builder_fn in this batch,
+-        forwarded to the Cohort/preflight/admission layer. If omitted
+-        (None, the direct-call default), computed automatically from
+-        each builder_fn's own `.declared_request_scale` attribute where
+-        present (normalizer_compat_adapter.py's builders set this;
+-        callers that pass an explicit value -- e.g. acquire_or_reuse_
+-        views, which already knows the exact per-consumer fold-set
+-        sizes -- always take precedence over this fallback)."""
+-        if requested_fold_count is None:
+-            requested_fold_count = sum(
+-                getattr(fn, "declared_request_scale", 0) for fn in builder_fns.values()
++        `requested_folds_by_consumer` (Astra second correction gate F2):
++        {consumer_kind: iterable_of_folded_keys} -- the REAL per-consumer
++        requested fold sets for this batch, forwarded to the resource-
++        admission layer for packed-per-family cumulative reservation
++        (never an average/count-only proxy). If omitted (None), derived
++        automatically from each builder_fn's own `.declared_request_
++        folds` attribute where present (normalizer_compat_adapter.py's
++        builders set this); callers that pass an explicit value always
++        take precedence over this fallback.
++
++        `expected_generation` (Astra F4): if given, every view this call
++        returns must carry EXACTLY this `semantic_generation.master_
++        sha256` -- checked here, at the SAME point the internal H0/H1
++        cross-check already runs, so a caller pinning a command-level
++        generation can never silently receive a different one even on a
++        cache-bypassing direct call.
++
++        `retries_remaining` (Astra F4 -- ONE total retry budget): when
++        called directly, defaults to 1 (matching the pre-existing H0/H1-
++        instability contract). When called FROM `acquire_or_reuse_views`
++        (which owns a single combined retry budget covering BOTH H0/H1
++        instability AND post-acquisition generation-mismatch), this is
++        explicitly passed as 0 so this method never retries on its own
++        -- all retry decisions surface to that single outer caller,
++        never two independently-stacking budgets."""
++        if requested_folds_by_consumer is None:
++            requested_folds_by_consumer = dict(
++                (consumer_kind, getattr(fn, "declared_request_folds", frozenset()))
++                for consumer_kind, fn in builder_fns.items()
+             )
+         if self._active_cohort is not None and self._active_cohort.state == cohort_mod.Cohort.STATE_OPEN:
+             raise errors.AuthorityBusy(
+@@ -261,7 +279,7 @@ class Broker(object):
+         cohort = cohort_mod.Cohort(
+             master_path, allow_local_candidates, local_pointer_path,
+             generated_root, shipped_root, runtime_cap_bytes, broker=self,
+-            requested_fold_count=requested_fold_count,
++            requested_folds_by_consumer=requested_folds_by_consumer,
+         )
+         self._active_cohort = cohort
+         try:
+@@ -273,7 +291,9 @@ class Broker(object):
+                 return self.acquire_cohort(
+                     master_path, builder_fns, allow_local_candidates, local_pointer_path,
+                     generated_root, shipped_root, runtime_cap_bytes,
+-                    retries_remaining=retries_remaining - 1, requested_fold_count=requested_fold_count,
++                    retries_remaining=retries_remaining - 1,
++                    requested_folds_by_consumer=requested_folds_by_consumer,
++                    expected_generation=expected_generation,
+                 )
+             raise
+         except Exception:
+@@ -283,17 +303,49 @@ class Broker(object):
+             self._active_cohort = None
+ 
+         new_master_sha256 = cohort.semantic_generation.master_sha256
++
++        # Astra F4: explicit command/view generation binding -- checked
++        # BEFORE any cache mutation, so a mismatch never gets a chance to
++        # publish anything (consistent with F3's "no partial cache
++        # mutations" requirement).
++        if expected_generation is not None and new_master_sha256 != expected_generation:
++            self._record("expected_generation_mismatch", {
++                "cohort_id": cohort.cohort_id, "expected": expected_generation, "actual": new_master_sha256,
++            })
++            if retries_remaining > 0:
++                return self.acquire_cohort(
++                    master_path, builder_fns, allow_local_candidates, local_pointer_path,
++                    generated_root, shipped_root, runtime_cap_bytes,
++                    retries_remaining=retries_remaining - 1,
++                    requested_folds_by_consumer=requested_folds_by_consumer,
++                    expected_generation=expected_generation,
++                )
++            raise errors.AuthorityChangedDuringAcquisition(
++                "acquire_cohort: command pinned to expected generation %r, but this acquisition "
++                "produced generation %r -- refusing to publish or return it."
++                % (expected_generation, new_master_sha256)
++            )
++
+         if (self._last_known_master_sha256 is not None
+                 and self._last_known_master_sha256 != new_master_sha256):
+             self._view_cache.invalidate_generation(self._last_known_master_sha256)
+         self._last_known_master_sha256 = new_master_sha256
+ 
+-        for consumer_kind, view in detached.items():
+-            pending_key = ("pending", cohort.cohort_id, consumer_kind)
++        # Astra F3: ATOMIC batch publication -- compute/verify/charge the
++        # WHOLE batch as one unit (view_cache.admit_batch), never one
++        # `admit()` call per view (which let a later view's own eviction
++        # silently orphan an earlier view from the SAME batch that the
++        # caller still received). If the whole batch cannot be admitted,
++        # `admit_batch` raises BEFORE touching the cache/ledger at all --
++        # nothing here needs to roll anything back.
++        views_list = list(detached.values())
++        pending_keys = [("pending", cohort.cohort_id, consumer_kind) for consumer_kind in detached.keys()]
++        for pending_key, view in zip(pending_keys, views_list):
+             self._ledger.charge(memory_accounting.CATEGORY_PENDING_PROJECTION, pending_key, view.estimated_bytes)
+-            try:
+-                self._view_cache.admit(view)
+-            finally:
++        try:
++            self._view_cache.admit_batch(views_list)
++        finally:
++            for pending_key in pending_keys:
+                 self._ledger.release(memory_accounting.CATEGORY_PENDING_PROJECTION, pending_key)
+ 
+         self._record("cohort_acquired", {
+@@ -325,7 +377,7 @@ class Broker(object):
+ 
+     def acquire_or_reuse_views(self, master_path, request_specs, allow_local_candidates=False,
+                                 local_pointer_path=None, generated_root=None, shipped_root=None,
+-                                runtime_cap_bytes=None, retries_remaining=1):
++                                runtime_cap_bytes=None, retries_remaining=1, expected_generation=None):
+         """`request_specs`: {consumer_kind: (frozenset_of_folded_keys,
+         builder_fn)}. Checks the view cache FIRST using a cheap H0
+         observation alone (no provider open) -- if every requested
+@@ -343,27 +395,34 @@ class Broker(object):
+         projection_contract_version would need this pre-check taught how
+         to predict it before this shortcut remains correct.
+ 
+-        Astra F4 correction: `h0` above is a snapshot taken BEFORE the
+-        cache lookup; a missing-kind acquisition later calls
+-        acquire_cohort(), which takes its OWN fresh H0 internally
+-        (Cohort._open_provider_once). If the Master changed in that
+-        window, the freshly ACQUIRED views would carry a different
+-        generation than the REUSED (cached) views selected against the
+-        earlier snapshot -- returning a dict silently mixing two
+-        generations under one call, with nothing to catch it. Detected
+-        here by comparing the acquired batch's own semantic generation
+-        (every view from one cohort always shares exactly one, by
+-        Cohort's own design) against `h0.sha256`; on a mismatch, the
+-        WHOLE combined batch (reused AND acquired alike -- the reused
+-        half was selected against the now-superseded h0 too) is
+-        discarded and the ENTIRE call is retried from scratch, bounded
+-        exactly like acquire_cohort's own H0/H1 retry (at most one retry
+-        total), then raises AuthorityChangedDuringAcquisition rather
+-        than ever returning a mixed-generation result."""
++        `expected_generation` (Astra F4): the COMMAND's own pinned
++        expected source generation (e.g. the Normalizer's `self.
++        master_hash` at command start) -- if given, EVERY view this call
++        returns (reused AND freshly acquired alike) must carry exactly
++        this `semantic_generation.master_sha256`. Distinct from, and in
++        ADDITION to, the internal h0-vs-acquired-batch cross-check below
++        (that check only proves internal self-consistency for ONE
++        acquisition; this one proves the result matches what the
++        COMMAND, across its whole lifetime, actually expects -- e.g. a
++        pure cache-hit with zero fresh acquisition would never otherwise
++        be checked against the command's own pin at all). Do NOT treat
++        either hash check as a file lock -- both are content-hash
++        observations with the documented edit-then-exact-restore blind
++        spot already established in B2A; they detect drift, they do not
++        prevent it.
++
++        Astra F4 correction (ONE total retry budget, re-affirmed):
++        `retries_remaining` is the SOLE retry budget for this entire
++        operation, covering BOTH the internal H0/H1-instability failure
++        class AND the mixed-generation / expected-generation-mismatch
++        failure class -- `acquire_cohort` is always called with
++        `retries_remaining=0` from here, so it never independently
++        retries; every retry decision is made exactly once, at this single
++        outer level, never stacking two separate budgets."""
+         h0 = observation.observe_master(master_path)
+         reused = {}
+         missing_specs = {}
+-        missing_fold_counts = {}
++        missing_folds_by_consumer = {}
+         for consumer_kind, (folded_keys, builder_fn) in request_specs.items():
+             candidate_key = (h0.sha256, None, frozenset(folded_keys), consumer_kind)
+             cached = self._view_cache.get(candidate_key)
+@@ -371,25 +430,50 @@ class Broker(object):
+                 reused[consumer_kind] = cached
+             else:
+                 missing_specs[consumer_kind] = builder_fn
+-                missing_fold_counts[consumer_kind] = len(folded_keys)
++                missing_folds_by_consumer[consumer_kind] = frozenset(folded_keys)
+ 
+         if not missing_specs:
++            if expected_generation is not None and h0.sha256 != expected_generation:
++                self._record("expected_generation_mismatch_cache_only", {
++                    "expected": expected_generation, "actual": h0.sha256,
++                })
++                if retries_remaining > 0:
++                    return self.acquire_or_reuse_views(
++                        master_path, request_specs, allow_local_candidates, local_pointer_path,
++                        generated_root, shipped_root, runtime_cap_bytes,
++                        retries_remaining=retries_remaining - 1, expected_generation=expected_generation,
++                    )
++                raise errors.AuthorityChangedDuringAcquisition(
++                    "acquire_or_reuse_views: command pinned to expected generation %r, but the "
++                    "fully-cached result (no fresh acquisition needed) is generation %r."
++                    % (expected_generation, h0.sha256)
++                )
+             self._record("fully_reused_no_provider_open", {"consumers": list(reused.keys())})
+             return reused
+ 
+-        aggregate_requested_fold_count = sum(missing_fold_counts.values())
+-        acquired = self.acquire_cohort(
+-            master_path, missing_specs, allow_local_candidates, local_pointer_path,
+-            generated_root, shipped_root, runtime_cap_bytes,
+-            requested_fold_count=aggregate_requested_fold_count,
+-        )
++        try:
++            acquired = self.acquire_cohort(
++                master_path, missing_specs, allow_local_candidates, local_pointer_path,
++                generated_root, shipped_root, runtime_cap_bytes,
++                retries_remaining=0,  # single combined budget owned here -- see docstring
++                requested_folds_by_consumer=missing_folds_by_consumer,
++            )
++        except errors.AuthorityChangedDuringAcquisition:
++            if retries_remaining > 0:
++                return self.acquire_or_reuse_views(
++                    master_path, request_specs, allow_local_candidates, local_pointer_path,
++                    generated_root, shipped_root, runtime_cap_bytes,
++                    retries_remaining=retries_remaining - 1, expected_generation=expected_generation,
++                )
++            raise
+ 
+         acquired_generations = set(
+             view.semantic_generation.master_sha256 for view in acquired.values()
+         )
+-        if acquired_generations and (h0.sha256 not in acquired_generations or len(acquired_generations) != 1):
++        expected_for_batch = expected_generation if expected_generation is not None else h0.sha256
++        if acquired_generations and (expected_for_batch not in acquired_generations or len(acquired_generations) != 1):
+             self._record("mixed_generation_partial_reuse_discarded", {
+-                "expected_generation": h0.sha256,
++                "expected_generation": expected_for_batch,
+                 "acquired_generations": sorted(acquired_generations),
+                 "consumers": list(acquired.keys()),
+             })
+@@ -397,12 +481,12 @@ class Broker(object):
+                 return self.acquire_or_reuse_views(
+                     master_path, request_specs, allow_local_candidates, local_pointer_path,
+                     generated_root, shipped_root, runtime_cap_bytes,
+-                    retries_remaining=retries_remaining - 1,
++                    retries_remaining=retries_remaining - 1, expected_generation=expected_generation,
+                 )
+             raise errors.AuthorityChangedDuringAcquisition(
+                 "acquire_or_reuse_views: partial cache reuse observed generation(s) %r while the "
+                 "freshly-acquired batch expected generation %r -- refusing to return a mixed-"
+-                "generation result." % (sorted(acquired_generations), h0.sha256)
++                "generation result." % (sorted(acquired_generations), expected_for_batch)
+             )
+ 
+         acquired.update(reused)

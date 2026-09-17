@@ -1,0 +1,141 @@
+diff --git tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/view_cache.py tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/view_cache.py
+index 5ad328e..a33b53c 100644
+--- tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/view_cache.py
++++ tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/view_cache.py
+@@ -57,6 +57,21 @@ class ViewCache(object):
+         cache_key = view.cache_key()
+         needed = view.estimated_bytes
+ 
++        # Astra SECOND correction gate F3/F4 ("second-view failure" /
++        # no-partial-effects requirement, found while building Test 4):
++        # if `needed` ALONE already exceeds the gate, no amount of
++        # evicting OTHER, unrelated cache entries could ever make this
++        # fit -- evicting them anyway would needlessly destroy perfectly
++        # good, still-useful cache state for a request that was doomed
++        # from the start. Refuse immediately, before touching anything
++        # (including this view's own same-key predecessor, if any).
++        if needed > memory_accounting.RETAINED_PROMOTION_GATE_BYTES:
++            raise errors.ViewAdmissionRefused(
++                "admitting a %d-byte view ALONE exceeds the retained promotion gate (%d bytes) "
++                "-- no eviction of anything else could ever make this fit; refusing without "
++                "touching any existing cache state." % (needed, memory_accounting.RETAINED_PROMOTION_GATE_BYTES)
++            )
++
+         if cache_key in self._entries:
+             self._remove(cache_key)
+ 
+@@ -74,6 +89,80 @@ class ViewCache(object):
+         self._ledger.charge(memory_accounting.CATEGORY_RETAINED_VIEWS, cache_key, needed)
+         return view
+ 
++    def admit_batch(self, views):
++        """Astra SECOND correction gate F3/F4: the ONLY sanctioned way to
++        publish MORE THAN ONE view from a single acquisition. Fixes a
++        real, reproduced bug in the per-view `admit()` loop the first
++        correction still used at the Broker level: admitting view A then
++        view B (two SEPARATE `admit()` calls) let B's own eviction pass
++        evict A -- moments after A had JUST been charged/inserted in the
++        SAME batch -- while the CALLER still returned both A and B to
++        its own caller. The ledger then reflected only B's charge while
++        the caller-visible result still included A, and a lease taken on
++        the now-evicted A never restored any charge.
++
++        Fix: compute the TOTAL bytes needed for the WHOLE batch UP
++        FRONT, evict (existing, unrelated, already-cached entries only --
++        never a member of THIS batch, since none of them are in
++        `self._entries` yet) until the total fits or nothing more can be
++        evicted, and ONLY THEN charge+insert EVERY view in the batch
++        together. If the whole batch cannot be made to fit, NOTHING is
++        published -- no partial admission, no partial charge, the
++        pre-existing visible cache state is left completely untouched
++        (since nothing was written to `self._entries`/the ledger before
++        this point, there is nothing to roll back). No view in `views`
++        is ever gettable/leaseable while uncharged, because charging and
++        insertion happen together, after the fits-check has already
++        succeeded for the batch as a whole."""
++        if not views:
++            return []
++
++        total_needed = sum(v.estimated_bytes for v in views)
++
++        # Astra SECOND correction gate F3/F4 (found while building Test 4
++        # -- Section 13's "second-view failure" case): if the batch's OWN
++        # total already exceeds the gate, no amount of evicting OTHER,
++        # unrelated cache entries could ever make it fit -- doing so
++        # anyway would needlessly destroy perfectly good, still-useful
++        # cache state for a request that was doomed from the start,
++        # violating this method's own "pre-existing visible cache state
++        # is left completely untouched" promise on failure. Refuse
++        # immediately, before evicting or retiring anything.
++        if total_needed > memory_accounting.RETAINED_PROMOTION_GATE_BYTES:
++            raise errors.ViewAdmissionRefused(
++                "admitting a %d-byte batch of %d view(s) ALONE exceeds the retained promotion "
++                "gate (%d bytes) -- no eviction of anything else could ever make this fit; "
++                "refusing without touching any existing cache state."
++                % (total_needed, len(views), memory_accounting.RETAINED_PROMOTION_GATE_BYTES)
++            )
++
++        while self._ledger.would_exceed_retained_gate(total_needed) and self._evict_one():
++            pass
++        if self._ledger.would_exceed_retained_gate(total_needed):
++            raise errors.ViewAdmissionRefused(
++                "admitting a %d-byte batch of %d view(s) would exceed the retained promotion "
++                "gate (%d bytes) and no further unpinned view could be evicted."
++                % (total_needed, len(views), memory_accounting.RETAINED_PROMOTION_GATE_BYTES)
++            )
++
++        # Retire any pre-existing same-key entries FIRST (same
++        # old+new-overlap-preserving path `admit()` already established),
++        # entirely before charging/inserting the new batch, so a
++        # same-key collision WITHIN the batch's own retirement step can
++        # never interleave with the batch's own charge/insert step below.
++        for view in views:
++            cache_key = view.cache_key()
++            if cache_key in self._entries:
++                self._remove(cache_key)
++
++        for view in views:
++            cache_key = view.cache_key()
++            self._entries[cache_key] = view
++            self._insertion_order.append(cache_key)
++            self._ledger.charge(memory_accounting.CATEGORY_RETAINED_VIEWS, cache_key, view.estimated_bytes)
++
++        return views
++
+     def _evict_one(self):
+         """Eviction order: (1) unpinned stale views (already invalidated,
+         cheapest to drop -- their payload is diagnostic-only at this
+@@ -128,7 +217,32 @@ class ViewCache(object):
+         cache's own membership -- returns a views.ViewLease token the
+         caller must eventually pass to release_lease() (deterministically,
+         on command completion/cancellation/failure/dialog-close, never
+-        relying on garbage-collection timing)."""
++        relying on garbage-collection timing).
++
++        Astra SECOND correction gate F3/F4 ("lease attempt on an evicted
++        returned view"): a caller may still hold a plain Python reference
++        to a view returned by an EARLIER acquisition, after a LATER,
++        unrelated acquisition's eviction pressure has since dropped it
++        from the cache. Since `DetachedView.acquire_lease()` itself has
++        no notion of cache membership, honoring such a call unconditionally
++        would create a live lease with ZERO backing ledger charge (the
++        charge was already released at eviction, since the view had no
++        live lease at that moment -- otherwise it would have become a
++        leased orphan instead, see `_remove()`). Refuse unless `view` is
++        still tracked in SOME accounted state: either still the live
++        entry at its own cache_key, or already a leased orphan (which by
++        definition already has >=1 live lease and a preserved, re-keyed
++        charge -- gaining a further lease on it is exactly the normal
++        multi-consumer-sharing case, not this defect)."""
++        cache_key = view.cache_key()
++        currently_cached = self._entries.get(cache_key) is view
++        is_leased_orphan = id(view) in self._leased_orphans
++        if not currently_cached and not is_leased_orphan:
++            raise errors.EvictedViewLeaseRefused(
++                "cannot lease this view: it is no longer tracked by the cache in any accounted "
++                "state (evicted with zero live leases, so its retained-bytes charge was already "
++                "released) -- re-acquire a fresh view instead of leasing a stale reference"
++            )
+         return view.acquire_lease()
+ 
+     def release_lease(self, lease):

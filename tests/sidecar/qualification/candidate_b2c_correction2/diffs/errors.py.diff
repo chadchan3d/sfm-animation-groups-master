@@ -1,0 +1,21 @@
+diff --git tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/errors.py tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/errors.py
+index 4136b9b..2481c8f 100644
+--- tests/sidecar/qualification/candidate_b2c_correction/sfm_master_authority_productionized/errors.py
++++ tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/errors.py
+@@ -103,3 +103,16 @@ class AggregateResourceRefusal(BrokerError):
+ 
+ class CohortCancelled(BrokerError):
+     """A cohort was explicitly cancelled before publication."""
++
++
++class EvictedViewLeaseRefused(BrokerError):
++    """Astra SECOND correction gate F3/F4: a caller attempted to lease a
++    view that the cache no longer tracks in ANY accounted state -- not a
++    current cache entry, and not a leased orphan (a view evicted while at
++    least one lease was already live keeps its deferred charge and may
++    still gain further leases; see ViewCache._remove/acquire_lease). A
++    view reaching this state was evicted with ZERO live leases at the
++    time, so its ledger charge was already fully released -- honoring a
++    new lease on it would create an active lease backed by no retained-
++    bytes charge at all. The caller must re-acquire a fresh view instead
++    of leasing a stale Python reference to a previously-returned one."""
