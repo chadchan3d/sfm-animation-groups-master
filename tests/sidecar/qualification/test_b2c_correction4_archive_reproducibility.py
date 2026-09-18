@@ -112,9 +112,14 @@ check("part2.0 fresh root is not under the original repo path",
 
 if CANDIDATE4_IS_TRACKED:
     zip2 = os.path.join(FRESH_ROOT, "full.zip")
+    # sidecar_contract.py resolves the frozen validator/provider as
+    # SIBLINGS of the candidate root -- must be included in the SAME
+    # archive alongside the candidate itself, or ensure_loaded() cannot
+    # find them from the fresh extraction.
     git("archive", "--format=zip", "--worktree-attributes", "-o", zip2, "HEAD", "--",
         "tests/sidecar/qualification/candidate_b2c_correction4",
-        "tests/sidecar/qualification/candidate_b2c_correction4_normalizer", "tools")
+        "tests/sidecar/qualification/candidate_b2c_correction4_normalizer", "tools",
+        VALIDATOR_REL, PROVIDER_REL)
     subprocess.check_call(["tar", "-xf", zip2, "-C", FRESH_ROOT])
     fresh_correction4 = os.path.join(FRESH_ROOT, "tests", "sidecar", "qualification", "candidate_b2c_correction4")
     fresh_normalizer = os.path.join(FRESH_ROOT, "tests", "sidecar", "qualification", "candidate_b2c_correction4_normalizer")
