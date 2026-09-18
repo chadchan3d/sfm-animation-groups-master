@@ -1,0 +1,67 @@
+--- tests/sidecar/qualification/candidate_b2c_correction4/sfm_master_authority_productionized/resource_preflight.py	2026-09-18 14:56:02.301177400 -0400
++++ tests/sidecar/qualification/candidate_b2c_correction5/sfm_master_authority_productionized/resource_preflight.py	2026-09-18 17:04:17.748163800 -0400
+@@ -1,6 +1,25 @@
+ # -*- coding: utf-8 -*-
+ """R3-B2C productionized single canonical open-and-identify primitive.
+ 
++=== Independent RE-AUDIT of 6e942f6 (2026-09-18) -- Correction5 ===
++
++The Correction4 preliminary (pre-full-read) gate correctly folded
++`aggregate_existing_retained_bytes` into its RETAINED comparison, but
++its TRANSIENT comparison compared the incoming/preliminary transient
++estimate alone against `TRANSIENT_GATE_BYTES` -- omitting the same
++`aggregate_existing_retained_bytes` term that the authoritative,
++post-full-read `resource_estimator.evaluate_cumulative_admission`
++already includes in its own transient sum (interpretation B, added in
++Correction3). Independently reproduced: preliminary incoming transient
++~23,075,300 B + existing retained 10,485,760 B = 33,561,060 B, over the
++32 MiB (33,554,432 B) gate -- yet the one full bounded read still ran
++once before the later, correctly-aggregated Stage 3 check refused.
++Fixed by computing the same aggregate sum (`aggregate_existing_
++retained_bytes + prelim_transient`) BEFORE deciding whether the full
++read is allowed, using the identical `aggregate_existing_retained_
++bytes` input already passed into this function -- no second,
++independent notion of retained authority.
++
+ === Independent RE-AUDIT of 6bf803f (2026-09-18) -- BLOCKER 1 ===
+ 
+ The prior (Correction3) fix bounded the directory-region READ, but this
+@@ -308,14 +327,33 @@
+                 )
+                 exc.instrumentation = inst
+                 raise exc
+-            if prelim_transient > TRANSIENT_GATE_BYTES:
++            # Independent-re-audit Correction5 fix: the aggregate
++            # cumulative transient model (resource_estimator.
++            # evaluate_cumulative_admission, "interpretation B") counts
++            # aggregate_existing_retained_bytes as part of the 32 MiB
++            # transient envelope, because that many bytes are already
++            # resident authority state for the whole acquisition window.
++            # This preliminary, PRE-FULL-READ gate must apply that same
++            # aggregate figure BEFORE deciding whether the one full
++            # bounded read (`f.read(runtime_cap_bytes + 1)` below) is
++            # even allowed to happen -- otherwise a request whose
++            # preliminary/incoming transient estimate alone is under the
++            # gate can still perform the full read once, and only refuse
++            # afterward, once the final Stage 3 cumulative check adds
++            # existing retained state. Uses the SAME
++            # aggregate_existing_retained_bytes input the caller already
++            # passed in (the broker's own ledger figure) -- no second,
++            # independent notion of retained authority is introduced.
++            prelim_total_transient = aggregate_existing_retained_bytes + prelim_transient
++            if prelim_total_transient > TRANSIENT_GATE_BYTES:
+                 inst.outcome = "refused"
+                 inst.reason = "preliminary_estimated_transient"
+                 exc = errors.ResourceAdmissionRefusal(
+-                    "preliminary (header+directory-only) estimate: transient delta %d bytes would "
+-                    "exceed the transient gate %d bytes -- refusing before the full read "
+-                    "(estimator_model_version=%s)" % (
+-                        prelim_transient, TRANSIENT_GATE_BYTES, resource_estimator.ESTIMATOR_MODEL_VERSION)
++                    "preliminary (header+directory-only) estimate: transient delta %d bytes plus "
++                    "existing %d bytes would exceed the transient gate %d bytes -- refusing before "
++                    "the full read (estimator_model_version=%s)" % (
++                        prelim_transient, aggregate_existing_retained_bytes, TRANSIENT_GATE_BYTES,
++                        resource_estimator.ESTIMATOR_MODEL_VERSION)
+                 )
+                 exc.instrumentation = inst
+                 raise exc

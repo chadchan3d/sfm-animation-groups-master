@@ -1,0 +1,26 @@
+--- tests/sidecar/qualification/candidate_b2c_correction4_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction4_candidate.py	2026-09-18 14:59:34.552476600 -0400
++++ tests/sidecar/qualification/candidate_b2c_correction5_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction5_candidate.py	2026-09-18 17:04:45.605507700 -0400
+@@ -161,19 +161,19 @@
+ # reproducibility) exercises.
+ # ===========================================================================
+ _B2C_THIS_FILE_DIR = os.path.dirname(os.path.abspath(__file__))
+-# this file lives at .../candidate_b2c_correction4_normalizer/<this file>;
++# this file lives at .../candidate_b2c_correction5_normalizer/<this file>;
+ # its sibling authority candidate root is one level up, then over.
+ _B2C_QUALIFIED_AUTHORITY_ROOT = os.path.normpath(os.path.join(
+-    _B2C_THIS_FILE_DIR, os.pardir, "candidate_b2c_correction4",
++    _B2C_THIS_FILE_DIR, os.pardir, "candidate_b2c_correction5",
+ ))
+ _B2C_EXPECTED_ORIGIN_DIR = os.path.join(_B2C_QUALIFIED_AUTHORITY_ROOT, "sfm_master_authority")
+ _B2C_EXPECTED_API_VERSION = "1.0.0-b2a"
+-_B2C_EXPECTED_BUILD_ID = "b2c-correction4-final-infra-targeted-2026-09-18"
++_B2C_EXPECTED_BUILD_ID = "b2c-correction5-prerad-transient-targeted-2026-09-18"
+ 
+ if _B2C_QUALIFIED_AUTHORITY_ROOT not in sys.path:
+     sys.path.insert(0, _B2C_QUALIFIED_AUTHORITY_ROOT)
+ 
+-# .../candidate_b2c_correction4_normalizer/ -> qualification/ -> sidecar/
++# .../candidate_b2c_correction5_normalizer/ -> qualification/ -> sidecar/
+ # -> tests/ -> repo root -> tools/
+ _B2C_REPO_ROOT = os.path.normpath(os.path.join(
+     _B2C_THIS_FILE_DIR, os.pardir, os.pardir, os.pardir, os.pardir,
