@@ -1,0 +1,79 @@
+diff --git C:/Users/Eman/AppData/Local/Temp/tmp.p73bpxKJFu/tests/sidecar/qualification/candidate_b2c_correction3/sfm_master_authority_productionized/resource_preflight.py tests/sidecar/qualification/candidate_b2c_correction4/sfm_master_authority_productionized/resource_preflight.py
+index 2fe869b..eb532a2 100644
+--- C:/Users/Eman/AppData/Local/Temp/tmp.p73bpxKJFu/tests/sidecar/qualification/candidate_b2c_correction3/sfm_master_authority_productionized/resource_preflight.py
++++ tests/sidecar/qualification/candidate_b2c_correction4/sfm_master_authority_productionized/resource_preflight.py
+@@ -1,6 +1,26 @@
+ # -*- coding: utf-8 -*-
+ """R3-B2C productionized single canonical open-and-identify primitive.
+ 
++=== Independent RE-AUDIT of 6bf803f (2026-09-18) -- BLOCKER 1 ===
++
++The prior (Correction3) fix bounded the directory-region READ, but this
++module still reassembled a SPARSE prefix buffer (`bytearray(dir_region_
++end)`) purely so `parse_resource_shape`'s absolute-offset indexing would
++line up -- `dir_region_end` includes the file-controlled `section_
++directory_offset`, so a genuinely valid artifact under the 16 MiB raw
++cap with a large directory offset (e.g. 15.9 MiB) still forced an
++allocation of comparable size BEFORE any resource-admission decision
++(independently reproduced: ~8 MiB offset -> ~16 MiB peak, ~15.9 MiB ->
++~31.8 MiB). Fixed by never reconstructing that sparse buffer at all:
++`resource_estimator.parse_resource_shape_parts(header_bytes,
++directory_bytes, artifact_bytes)` consumes the two already-separately-
++bounded buffers directly, indexing directory rows at LOCAL offsets
++within `directory_bytes` rather than the file's absolute offset.
++Preliminary-stage allocation here is now proportional only to
++HEADER_SIZE + the bounded directory region, never to `section_
++directory_offset` itself -- a `seek()` costs nothing to allocate for,
++only to move to.
++
+ === Astra SECOND correction gate (2026-09-16) -- re-opening F1/F2/F5 ===
+ 
+ F1 (re-opened): the FIRST correction's `checked_preflight_region_size`
+@@ -238,16 +258,21 @@ def candidate_open_and_identify_with_preflight(path, expected_source_sha256, run
+                 raise resource_estimator.PreflightCorruptOrIncompatible(
+                     "directory read returned fewer bytes than the validated directory region size"
+                 )
+-            # Reassemble a small (header-size + directory-size) buffer,
+-            # positioned so parse_resource_shape can index it exactly as
+-            # it would a contiguous prefix -- header at [0:HEADER_SIZE),
+-            # directory at [section_directory_offset:dir_region_end).
+-            # Never larger than HEADER_SIZE + _MAX_PREFLIGHT_REGION_BYTES
+-            # regardless of where section_directory_offset actually is.
+-            prefix = bytearray(dir_region_end)
+-            prefix[0:len(header_bytes)] = header_bytes
+-            prefix[header.section_directory_offset:dir_region_end] = directory_bytes
+-            preliminary_shape = resource_estimator.parse_resource_shape(bytes(prefix), artifact_bytes)
++            # Independent-re-audit BLOCKER 1 fix: the prior version
++            # reconstructed a SPARSE prefix (`bytearray(dir_region_end)`)
++            # purely so parse_resource_shape's absolute-offset indexing
++            # would line up -- `dir_region_end` includes the file-
++            # controlled `section_directory_offset`, so a valid artifact
++            # under the raw cap with a large directory offset (e.g. 15.9
++            # MiB) still forced an allocation of comparable size before
++            # any admission decision. Fixed: parse_resource_shape_parts
++            # consumes `header_bytes`/`directory_bytes` as two SEPARATE,
++            # already-bounded buffers (never reassembled into one sparse
++            # buffer) -- allocation here is proportional only to
++            # HEADER_SIZE + the bounded directory region, never to
++            # section_directory_offset itself.
++            preliminary_shape = resource_estimator.parse_resource_shape_parts(
++                header_bytes, directory_bytes, artifact_bytes)
+             inst.preliminary_shape_present = True
+         except resource_estimator.PreflightCorruptOrIncompatible:
+             # Do NOT invent a corruption verdict here -- preflight is a
+@@ -321,7 +346,14 @@ def candidate_open_and_identify_with_preflight(path, expected_source_sha256, run
+     try:
+         final_header = fmt.unpack_header(data[:fmt.HEADER_SIZE], 0)
+         dir_end = resource_estimator._validate_header_and_bound_directory_region(final_header, len(data))
+-        final_shape = resource_estimator.parse_resource_shape(data[:dir_end], len(data))
++        # Same BLOCKER 1 fix applied here too: `data[:dir_end]` would
++        # copy up to the whole directory-offset-sized prefix out of the
++        # already-fully-read buffer; slicing out only the bounded
++        # directory region (≤ _MAX_PREFLIGHT_REGION_BYTES) and using
++        # parse_resource_shape_parts avoids that redundant large copy.
++        final_directory_bytes = data[final_header.section_directory_offset:dir_end]
++        final_shape = resource_estimator.parse_resource_shape_parts(
++            data[:fmt.HEADER_SIZE], final_directory_bytes, len(data))
+     except resource_estimator.PreflightCorruptOrIncompatible:
+         final_shape = None
+     except Exception:

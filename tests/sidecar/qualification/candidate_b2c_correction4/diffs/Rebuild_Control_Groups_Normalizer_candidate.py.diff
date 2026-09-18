@@ -1,0 +1,230 @@
+diff --git C:/Users/Eman/AppData/Local/Temp/tmp.p73bpxKJFu/tests/sidecar/qualification/candidate_b2c_correction3_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction3_candidate.py tests/sidecar/qualification/candidate_b2c_correction4_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction4_candidate.py
+index 720e280..2e7b5a5 100644
+--- C:/Users/Eman/AppData/Local/Temp/tmp.p73bpxKJFu/tests/sidecar/qualification/candidate_b2c_correction3_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction3_candidate.py
++++ tests/sidecar/qualification/candidate_b2c_correction4_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction4_candidate.py
+@@ -161,19 +161,19 @@ except NameError:
+ # reproducibility) exercises.
+ # ===========================================================================
+ _B2C_THIS_FILE_DIR = os.path.dirname(os.path.abspath(__file__))
+-# this file lives at .../candidate_b2c_correction3_normalizer/<this file>;
++# this file lives at .../candidate_b2c_correction4_normalizer/<this file>;
+ # its sibling authority candidate root is one level up, then over.
+ _B2C_QUALIFIED_AUTHORITY_ROOT = os.path.normpath(os.path.join(
+-    _B2C_THIS_FILE_DIR, os.pardir, "candidate_b2c_correction3",
++    _B2C_THIS_FILE_DIR, os.pardir, "candidate_b2c_correction4",
+ ))
+ _B2C_EXPECTED_ORIGIN_DIR = os.path.join(_B2C_QUALIFIED_AUTHORITY_ROOT, "sfm_master_authority")
+ _B2C_EXPECTED_API_VERSION = "1.0.0-b2a"
+-_B2C_EXPECTED_BUILD_ID = "b2c-correction3-post-audit-targeted-2026-09-18"
++_B2C_EXPECTED_BUILD_ID = "b2c-correction4-final-infra-targeted-2026-09-18"
+ 
+ if _B2C_QUALIFIED_AUTHORITY_ROOT not in sys.path:
+     sys.path.insert(0, _B2C_QUALIFIED_AUTHORITY_ROOT)
+ 
+-# .../candidate_b2c_correction3_normalizer/ -> qualification/ -> sidecar/
++# .../candidate_b2c_correction4_normalizer/ -> qualification/ -> sidecar/
+ # -> tests/ -> repo root -> tools/
+ _B2C_REPO_ROOT = os.path.normpath(os.path.join(
+     _B2C_THIS_FILE_DIR, os.pardir, os.pardir, os.pardir, os.pardir,
+@@ -238,6 +238,14 @@ DEFER_MS = 100
+ CONTEXTUALIZER_TARGET_CALLBACK_DEFER_MS = 0
+ READ_BLOCK = 65536
+ 
++# Independent-re-audit BLOCKER 2: bounded lease-release retry budget --
++# a finite attempt count, never an unbounded/GC-timing-dependent retry.
++# Production tuning of the interval is a later deployment concern; this
++# offline qualification gate only needs the budget to be finite and the
++# terminal behavior to be explicit and observable.
++_B2C_LEASE_RELEASE_RETRY_LIMIT = 3
++_B2C_LEASE_RELEASE_RETRY_INTERVAL_MS = 50
++
+ # Settled layered-isolation cadence.
+ # Exhaustive whole-session deep verification runs every 12 non-final shots,
+ # providing evenly spaced cross-shot checkpoints with low expected overhead.
+@@ -9107,6 +9115,12 @@ class RebuildControlGroupsProductionRun(
+         # already succeeded"; never a proxy for "command succeeded"
+         # (a command can fail its main work and still cleanly release).
+         self.master_index_cleanup_incomplete = False
++        # Independent-re-audit BLOCKER 2: bounded-retry attempt counter
++        # and the explicit terminal-failure flag set only after the
++        # retry budget is exhausted and the lease has been handed off
++        # to the broker's own durable reconciliation registry.
++        self.master_index_lease_release_attempts = 0
++        self.master_index_cleanup_terminal_failure = False
+         self.master_index_scope_folds = set()
+         self.master_index_builds = 0
+         self.master_index_build_seconds = 0.0
+@@ -12697,51 +12711,91 @@ class RebuildControlGroupsProductionRun(
+         )
+ 
+ 
+-    def _b2c_release_master_index_lease(self):
+-        """Independent-audit BLOCKER C correction (replaces the second
+-        correction's `finally: self._master_index_lease = None`, which
+-        unconditionally discarded the only cleanup handle even when
+-        `release_view_lease` itself raised -- the audit's exact finding:
+-        "the command discards the only cleanup handle while the broker/
+-        view may still consider the lease live").
+-
+-        Ownership contract:
+-          - No lease held (`self._master_index_lease is None`): no-op.
+-            Also covers the idempotent "already cleaned up" case, since
+-            a successful release below always clears the reference.
+-          - Release succeeds: clear the reference exactly once and mark
+-            cleanup complete (`master_index_cleanup_incomplete = False`).
+-          - Release fails: the lease handle is RETAINED (never cleared),
+-            `master_index_cleanup_incomplete` is set True, and the
+-            failure is logged -- never silently swallowed, never
+-            converted into an untracked leak. The SAME retained handle
+-            lets a caller invoke this exact method again later
+-            (deterministic retry/reconciliation) without needing any
+-            out-of-band repair; `views.DetachedView.release_lease` is
+-            itself idempotent (a second release of an already-released
+-            lease is defined as a safe no-op), so a retry can never
+-            double-release even in a hypothetical race.
+-
+-        Callable independently of final_report() -- a caller that
+-        inspects `self.master_index_cleanup_incomplete` after final_
+-        report() returns can retry cleanup by calling this method again
+-        directly, with no other repair needed."""
++    def _b2c_attempt_lease_release_or_schedule_retry(self):
++        """Independent-re-audit BLOCKER 2 correction. Replaces the
++        Correction3 `_b2c_release_master_index_lease()`, whose ONLY real
++        exercise path was an extracted-function-plus-manual-second-call
++        test pattern -- the audit's exact finding: "no production path
++        retries lease release afterward... that does not prove durable
++        production cleanup." This method IS the real production retry
++        path, reachable only from final_report's own `finally` clause
++        (never a synthetic second call from outside the command).
++
++        Real production ownership contract:
++          - No lease held: nothing to release -- proceed straight to
++            `_b2c_finalize_teardown()` (release the run lock, unparent/
++            schedule deletion normally).
++          - Release succeeds (first attempt or any retry): clear the
++            reference, mark cleanup complete, finalize.
++          - Release fails, retry budget NOT exhausted: mark cleanup
++            incomplete, log (never silently swallowed), and schedule
++            ANOTHER call to THIS SAME method on the Qt event loop via
++            `QtCore.QTimer.singleShot` -- crucially, `_b2c_finalize_
++            teardown()` is NOT called yet, so `release_run_lock()`/
++            `setParent(None)`/`deleteLater()` do not run: the command
++            remains a durable Qt owner for as long as reconciliation is
++            pending. A retry only ever re-attempts the release call
++            itself -- no mutation/report logic re-runs. Never relies on
++            Python object finalizers/GC.
++          - Retry budget exhausted: explicit terminal-failure state
++            (`master_index_cleanup_terminal_failure = True`), and the
++            still-unreleased lease is handed off to the broker's OWN
++            durable reconciliation registry (`register_unreleased_
++            lease`) -- responsibility transfers, the lease is never
++            simply discarded -- after which `_b2c_finalize_teardown()`
++            DOES proceed (the command does not have to live forever
++            merely because ITS OWN retry budget did not succeed; the
++            broker's cleanup responsibility continues independently of
++            this command's lifetime)."""
+         lease = self._master_index_lease
+         if lease is None:
++            self._b2c_finalize_teardown()
+             return
++
++        self.master_index_lease_release_attempts += 1
+         try:
+             _broker = _b2c_authority_runtime.get_broker()
+             _broker.release_view_lease(lease)
+         except Exception as _lease_exc:
+             self.master_index_cleanup_incomplete = True
+             self.log(
+-                "R3-B2C-B correction: master_index lease release failed -- RETAINING the "
+-                "lease handle for deterministic retry/reconciliation (command cleanup "
+-                "marked incomplete, never silently discarded): %r" % (_lease_exc,)
++                "R3-B2C-B correction: master_index lease release attempt %d failed: %r"
++                % (self.master_index_lease_release_attempts, _lease_exc)
+             )
++            if self.master_index_lease_release_attempts < _B2C_LEASE_RELEASE_RETRY_LIMIT:
++                self.log(
++                    "R3-B2C-B correction: scheduling bounded retry %d of %d -- command remains "
++                    "the durable owner, NOT unparented/deleted yet."
++                    % (self.master_index_lease_release_attempts + 1, _B2C_LEASE_RELEASE_RETRY_LIMIT)
++                )
++                QtCore.QTimer.singleShot(
++                    _B2C_LEASE_RELEASE_RETRY_INTERVAL_MS,
++                    self._b2c_attempt_lease_release_or_schedule_retry,
++                )
++                return
++            self.master_index_cleanup_terminal_failure = True
++            self.log(
++                "R3-B2C-B correction: exhausted the bounded lease-release retry budget (%d "
++                "attempts) -- handing the still-unreleased lease off to the broker's own "
++                "durable reconciliation registry; this command may now finalize, the broker's "
++                "cleanup responsibility continues independently." % (self.master_index_lease_release_attempts,)
++            )
++            _broker.register_unreleased_lease(lease, description="final_report terminal handoff")
++            self._master_index_lease = None  # ownership transferred, never simply discarded
++            self._b2c_finalize_teardown()
+             return
++
+         self._master_index_lease = None
+         self.master_index_cleanup_incomplete = False
++        self._b2c_finalize_teardown()
++
++    def _b2c_finalize_teardown(self):
++        """The part of command teardown that must wait until lease
++        ownership is settled (success OR explicit broker hand-off) --
++        releasing the SFM run lock and unparenting/scheduling deletion
++        of this command object. Reached ONLY from `_b2c_attempt_lease_
++        release_or_schedule_retry()`, never called directly."""
++        self.release_run_lock()
+ 
+     def final_report(
+             self,
+@@ -12752,24 +12806,19 @@ class RebuildControlGroupsProductionRun(
+         self.finished = True
+ 
+         # Astra second-correction-gate F3 (re-opening the first
+-        # correction's teardown): the prior version released the lease
+-        # here but left `self.master_index` (the command's OWN reference
+-        # to the exact same payload dict the lease/view holds) untouched
+-        # -- the lease accounting then claimed "no live owner" while this
+-        # object (which can genuinely outlive final_report, e.g. still
+-        # reachable via Qt/other references) still held a live reference
+-        # to the payload. Fixed by following the REAL command-teardown
+-        # order Astra specified: (1) this IS the point of last use of
++        # correction's teardown): this IS the point of last use of
+         # self.master_index (nothing after final_report reads it -- the
+         # whole rebuild/reconciliation pipeline runs strictly BEFORE this
+-        # method, per the file's own architecture); (2) drop the
+-        # command-held payload reference FIRST; (3) THEN release the
+-        # consumer lease via _b2c_release_master_index_lease(), which
+-        # (independent-audit BLOCKER C) retains the handle instead of
+-        # discarding it on failure -- see that method's own docstring
+-        # for the full ownership contract."""
++        # method, per the file's own architecture) -- drop the command-
++        # held payload reference here, immediately, regardless of the
++        # lease's own eventual release outcome (independent-re-audit
++        # BLOCKER 2 concerns the LEASE's ownership specifically; the
++        # payload reference itself is unrelated and safe to drop now).
++        # The lease itself is now handled at the very end of this
++        # method's `finally` clause -- see _b2c_attempt_lease_release_
++        # or_schedule_retry()'s own docstring for the full bounded-
++        # retry/broker-hand-off ownership contract.
+         self.master_index = None
+-        self._b2c_release_master_index_lease()
+ 
+         try:
+             self.section(
+@@ -13267,7 +13316,13 @@ class RebuildControlGroupsProductionRun(
+                 pass
+ 
+             self.fp = None
+-            self.release_run_lock()
++            # Independent-re-audit BLOCKER 2: run-lock release/command
++            # deletion is now GATED on lease-ownership reconciliation --
++            # this call may schedule bounded Qt-event-loop retries and
++            # return WITHOUT releasing the run lock yet if the lease
++            # release itself is still failing; see that method's own
++            # docstring.
++            self._b2c_attempt_lease_release_or_schedule_retry()
+ 
+ 
+     def start(self):

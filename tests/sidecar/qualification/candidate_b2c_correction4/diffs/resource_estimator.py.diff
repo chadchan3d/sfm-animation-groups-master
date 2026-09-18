@@ -1,0 +1,135 @@
+diff --git C:/Users/Eman/AppData/Local/Temp/tmp.p73bpxKJFu/tests/sidecar/qualification/candidate_b2c_correction3/sfm_master_authority_productionized/resource_estimator.py tests/sidecar/qualification/candidate_b2c_correction4/sfm_master_authority_productionized/resource_estimator.py
+index ab9cc09..d507735 100644
+--- C:/Users/Eman/AppData/Local/Temp/tmp.p73bpxKJFu/tests/sidecar/qualification/candidate_b2c_correction3/sfm_master_authority_productionized/resource_estimator.py
++++ tests/sidecar/qualification/candidate_b2c_correction4/sfm_master_authority_productionized/resource_estimator.py
+@@ -184,38 +184,22 @@ def checked_preflight_region_size(header_bytes, artifact_bytes):
+     return _validate_header_and_bound_directory_region(header, artifact_bytes)
+ 
+ 
+-def parse_resource_shape(buf_or_prefix, artifact_bytes):
+-    """`buf_or_prefix`: at least the first HEADER_SIZE + (declared
+-    section_count * DIRECTORY_ROW_SIZE) bytes of the artifact -- callers
+-    integrating this for real would read exactly that many bytes from an
+-    already-open handle (same-handle rule, Section 2 of the design doc),
+-    sized via `checked_preflight_region_size` (never the removed,
+-    unchecked `preflight_region_size`). This pure function only ever
+-    indexes into what it is given; it never reads beyond `artifact_bytes`
+-    (checked) and never touches STRING_POOL/GROUP_TABLE/METADATA_TABLE/
+-    OCCURRENCE_TABLE row content.
+-
+-    Raises PreflightCorruptOrIncompatible for any malformed/inconsistent
+-    header or directory. Never raises PreflightResourceRefusal itself --
+-    that is the caller's job, after calling the estimator functions below.
+-    """
+-    buf = buf_or_prefix
+-    if len(buf) < fmt.HEADER_SIZE:
+-        raise PreflightCorruptOrIncompatible("buffer shorter than fixed header size")
+-
+-    header = fmt.unpack_header(buf, 0)
+-    normative_sizes = fmt.NORMATIVE_ROW_SIZES.get(header.format_contract_version)
+-    dir_region_end = _validate_header_and_bound_directory_region(header, artifact_bytes)
+-    if dir_region_end > len(buf):
+-        raise PreflightCorruptOrIncompatible(
+-            "caller-supplied prefix buffer does not contain the full declared directory region"
+-        )
+-
++def _parse_directory_rows_local(header, directory_bytes, artifact_bytes, normative_sizes):
++    """Independent-re-audit BLOCKER 1 fix: reads each directory row at a
++    LOCAL offset (`i * DIRECTORY_ROW_SIZE`) WITHIN `directory_bytes` --
++    never at the file's absolute `header.section_directory_offset +
++    i * DIRECTORY_ROW_SIZE`. `directory_bytes` is expected to be EXACTLY
++    the directly-read directory region (its own byte 0 IS the directory's
++    first byte), so this never requires the caller to have reconstructed
++    a sparse, offset-sized buffer just to make absolute indexing line up.
++    All containment/row-size/duplicate checks are unchanged from the
++    prior single-function implementation -- only the offset arithmetic
++    for LOCATING each row changed."""
+     rows = {}
+     seen_ids = set()
+     for i in range(header.section_count):
+-        row_off = header.section_directory_offset + i * fmt.DIRECTORY_ROW_SIZE
+-        row = fmt.unpack_directory_row(buf, row_off)
++        row_off = i * fmt.DIRECTORY_ROW_SIZE
++        row = fmt.unpack_directory_row(directory_bytes, row_off)
+         if row.section_id not in fmt.SECTION_NAMES:
+             raise PreflightCorruptOrIncompatible("unknown section_id %r" % (row.section_id,))
+         if row.section_id in seen_ids:
+@@ -247,7 +231,10 @@ def parse_resource_shape(buf_or_prefix, artifact_bytes):
+     for sid in fmt.SECTION_ORDER:
+         if sid not in rows:
+             raise PreflightCorruptOrIncompatible("directory is missing required section_id %r" % (sid,))
++    return rows
+ 
++
++def _build_resource_shape(header, rows, artifact_bytes):
+     return ResourceShape(
+         artifact_bytes=artifact_bytes,
+         format_contract_version=header.format_contract_version,
+@@ -269,6 +256,67 @@ def parse_resource_shape(buf_or_prefix, artifact_bytes):
+     )
+ 
+ 
++def parse_resource_shape_parts(header_bytes, directory_bytes, artifact_bytes):
++    """Independent-re-audit BLOCKER 1 fix -- THE preferred, allocation-
++    bounded preflight entry point. `header_bytes`: exactly the fixed
++    HEADER_SIZE bytes, read from file offset 0. `directory_bytes`:
++    exactly the directly-read directory-region bytes (i.e. what a caller
++    gets by `seek()`-ing straight to `header.section_directory_offset`
++    and reading `dir_region_end - section_directory_offset` bytes -- see
++    resource_preflight.py's own Stage 1) -- NEVER a sparse, offset-sized
++    buffer with the header and directory bytes placed at their absolute
++    file positions and everything in between left as unallocated/zero
++    padding. Memory used by this function is therefore proportional only
++    to `len(header_bytes) + len(directory_bytes)` (bounded: HEADER_SIZE +
++    up to `_MAX_PREFLIGHT_REGION_BYTES`), regardless of how large
++    `header.section_directory_offset` itself is -- a `seek()` offset
++    costs nothing to allocate for, only to move to.
++
++    Raises PreflightCorruptOrIncompatible for any malformed/inconsistent
++    header or directory. Never raises PreflightResourceRefusal itself --
++    that is the caller's job, after calling the estimator functions
++    below."""
++    if len(header_bytes) < fmt.HEADER_SIZE:
++        raise PreflightCorruptOrIncompatible("header buffer shorter than fixed header size")
++    header = fmt.unpack_header(header_bytes, 0)
++    normative_sizes = fmt.NORMATIVE_ROW_SIZES.get(header.format_contract_version)
++    dir_region_end = _validate_header_and_bound_directory_region(header, artifact_bytes)
++    dir_region_size = dir_region_end - header.section_directory_offset
++    if len(directory_bytes) < dir_region_size:
++        raise PreflightCorruptOrIncompatible(
++            "caller-supplied directory buffer does not contain the full declared directory region"
++        )
++    rows = _parse_directory_rows_local(header, directory_bytes, artifact_bytes, normative_sizes)
++    return _build_resource_shape(header, rows, artifact_bytes)
++
++
++def parse_resource_shape(buf_or_prefix, artifact_bytes):
++    """Compatibility entry point for callers that already hold one
++    REAL, CONTIGUOUS buffer whose byte 0 is the artifact's actual byte 0
++    (e.g. resource_preflight.py's Stage 3, which slices a prefix out of
++    the genuinely fully-read buffer -- never a reconstructed sparse
++    prefix). Internally slices out the directory-region sub-buffer at
++    its own true position within `buf_or_prefix` and delegates to the
++    SAME row-parsing logic `parse_resource_shape_parts` uses -- there is
++    only one directory-row-parsing implementation now, not two. Do NOT
++    use this entry point with a sparse/reconstructed buffer merely to
++    satisfy this signature -- use `parse_resource_shape_parts` directly
++    for any caller that only has the header and directory bytes
++    separately (the whole point of BLOCKER 1's fix)."""
++    buf = buf_or_prefix
++    if len(buf) < fmt.HEADER_SIZE:
++        raise PreflightCorruptOrIncompatible("buffer shorter than fixed header size")
++
++    header = fmt.unpack_header(buf, 0)
++    dir_region_end = _validate_header_and_bound_directory_region(header, artifact_bytes)
++    if dir_region_end > len(buf):
++        raise PreflightCorruptOrIncompatible(
++            "caller-supplied prefix buffer does not contain the full declared directory region"
++        )
++    directory_bytes = buf[header.section_directory_offset:dir_region_end]
++    return parse_resource_shape_parts(buf[:fmt.HEADER_SIZE], directory_bytes, artifact_bytes)
++
++
+ # Astra post-B2C-B correction gate, finding F1: the unchecked
+ # preflight_region_size(buf_or_header) function that used to live here
+ # (HEADER_SIZE, then section_directory_offset + section_count*

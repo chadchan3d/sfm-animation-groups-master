@@ -1,0 +1,77 @@
+diff --git C:/Users/Eman/AppData/Local/Temp/tmp.p73bpxKJFu/tests/sidecar/qualification/candidate_b2c_correction3/sfm_master_authority_productionized/broker.py tests/sidecar/qualification/candidate_b2c_correction4/sfm_master_authority_productionized/broker.py
+index e859814..3789c98 100644
+--- C:/Users/Eman/AppData/Local/Temp/tmp.p73bpxKJFu/tests/sidecar/qualification/candidate_b2c_correction3/sfm_master_authority_productionized/broker.py
++++ tests/sidecar/qualification/candidate_b2c_correction4/sfm_master_authority_productionized/broker.py
+@@ -65,6 +65,20 @@ class Broker(object):
+         # BOTH acquire_generation and acquire_cohort.
+         self._legacy_acquisition_in_progress = False
+ 
++        # Independent-re-audit BLOCKER 2: durable, broker-owned fallback
++        # for a lease a command could NOT release even after its own
++        # bounded retry budget was exhausted. A command hands a lease
++        # off here (register_unreleased_lease) only as a LAST resort,
++        # after its own retries fail -- this is never the first line of
++        # defense, and never relies on Python finalizers/GC. Once here,
++        # the lease remains observably tracked (never silently lost) and
++        # reconciliation may be retried later (retry_unreleased_leases),
++        # bounded and explicit, entirely independent of the command
++        # object's own lifetime (the command may be destroyed once
++        # hand-off succeeds; the broker's own accounting responsibility
++        # continues regardless).
++        self._unreleased_lease_registry = []  # list of dicts: lease, description, registered_at, reconcile_attempts
++
+     def _record(self, event, detail=None):
+         entry = {"event": event, "t": time.time(), "detail": detail}
+         self._diagnostics.append(entry)
+@@ -375,6 +389,51 @@ class Broker(object):
+     def outstanding_lease_count(self):
+         return self._view_cache.outstanding_lease_count()
+ 
++    def register_unreleased_lease(self, lease, description=None):
++        """Independent-re-audit BLOCKER 2: durable, observable, broker-
++        owned fallback for a lease a command's OWN bounded retry budget
++        could not release. This is the terminal hand-off, never the
++        first attempt -- a command must exhaust its own retries first.
++        The lease remains a real, live, accounted-for object here (its
++        underlying view's `_active_leases` membership -- and therefore
++        the broker's ledger charge -- is untouched by this call; only
++        WHO is now responsible for eventually releasing it changes)."""
++        self._unreleased_lease_registry.append({
++            "lease": lease, "description": description, "registered_at": time.time(),
++            "reconcile_attempts": 0,
++        })
++        self._record("unreleased_lease_registered", {"description": description})
++
++    def unreleased_lease_count(self):
++        return len(self._unreleased_lease_registry)
++
++    def retry_unreleased_leases(self):
++        """Attempts to release every currently-registered unreleased
++        lease exactly once each; each success is removed from the
++        registry, each failure's `reconcile_attempts` is incremented and
++        it remains registered (bounded only by however many times a
++        caller chooses to invoke this -- this method itself never loops
++        internally, so it can never itself hang or spin). Returns
++        (succeeded_count, still_failing_count). Never relies on Python
++        object finalizers/GC -- this is the SOLE sanctioned path for a
++        broker-owned lease to ever actually be released."""
++        succeeded = 0
++        still_pending = []
++        for entry in self._unreleased_lease_registry:
++            try:
++                self._view_cache.release_lease(entry["lease"])
++                succeeded += 1
++                self._record("unreleased_lease_reconciled", {"description": entry["description"]})
++            except Exception as exc:
++                entry["reconcile_attempts"] += 1
++                self._record("unreleased_lease_reconcile_failed", {
++                    "description": entry["description"], "attempts": entry["reconcile_attempts"],
++                    "detail": str(exc),
++                })
++                still_pending.append(entry)
++        self._unreleased_lease_registry = still_pending
++        return succeeded, len(still_pending)
++
+     def acquire_or_reuse_views(self, master_path, request_specs, allow_local_candidates=False,
+                                 local_pointer_path=None, generated_root=None, shipped_root=None,
+                                 runtime_cap_bytes=None, retries_remaining=1, expected_generation=None):

@@ -3,3 +3,16 @@ sfm_defaultanimationgroups.txt text eol=lf
 
 # Silkworm reference Master: preserve exact original bytes (CRLF), never normalize
 reference/sfm_defaultanimationgroups_silkworm.txt -text
+
+# Independent-re-audit BLOCKER 3 (2026-09-18): force LF for hash-pinned
+# offline-qualification validator/provider source and for exact-byte
+# Master fixtures compiled into hash-pinned sidecars. Without an
+# explicit attribute, `git archive`'s zip writer can mark these blobs
+# with a platform-text flag; some zip extractors then translate
+# LF -> CRLF on extraction, so the ARCHIVED bytes stop matching the
+# SHA-256 pinned in sidecar_contract.py / fixture manifests even though
+# the git blob itself (as read via `git show`, unaffected by any zip
+# extractor) already matches exactly.
+tests/sidecar/qualification/candidate_packed_validator_r3a2b.py text eol=lf
+tests/sidecar/qualification/candidate_packed_provider_r3a2b.py text eol=lf
+tests/sidecar/qualification/candidate_b2c_correction*/fixtures_ab/*_master.txt text eol=lf
