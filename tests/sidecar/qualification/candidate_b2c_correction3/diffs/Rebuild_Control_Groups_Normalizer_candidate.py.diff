@@ -1,0 +1,157 @@
+diff --git C:/Users/Eman/AppData/Local/Temp/tmp.44SH0XQV7U/tests/sidecar/qualification/candidate_b2c_correction2_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction2_candidate.py tests/sidecar/qualification/candidate_b2c_correction3_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction3_candidate.py
+index 3371525..720e280 100644
+--- C:/Users/Eman/AppData/Local/Temp/tmp.44SH0XQV7U/tests/sidecar/qualification/candidate_b2c_correction2_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction2_candidate.py
++++ tests/sidecar/qualification/candidate_b2c_correction3_normalizer/Rebuild_Control_Groups_Normalizer_B2CB_correction3_candidate.py
+@@ -148,21 +148,37 @@ except NameError:
+ # correction fixes the path AND adds real, enforced identity checks at
+ # this actual entry point (never merely defined-but-unused), so a wrong
+ # package can no longer silently load here again.
++#
++# Independent-audit NARROW ISSUE E (post-second-correction finding): the
++# fix above still hardcoded an ABSOLUTE, qualification-machine-specific
++# root (`E:\SFM Animation Group Master\...`) directly into this
++# candidate file -- reusable candidate/bootstrap logic must not depend
++# on where THIS machine happens to keep its checkout. Both roots below
++# are now derived entirely from this file's OWN on-disk location
++# (`__file__`), never a hardcoded drive/path string, so this candidate
++# boots correctly from any checkout location, a fresh clone, or an
++# extracted archive root -- exactly the property Test D (path/fixture
++# reproducibility) exercises.
+ # ===========================================================================
+-_B2C_QUALIFIED_AUTHORITY_ROOT = (
+-    r"E:\SFM Animation Group Master\tests\sidecar\qualification\candidate_b2c_correction2"
+-)
+-_B2C_EXPECTED_ORIGIN_DIR = (
+-    r"E:\SFM Animation Group Master\tests\sidecar\qualification\candidate_b2c_correction2"
+-    r"\sfm_master_authority"
+-)
++_B2C_THIS_FILE_DIR = os.path.dirname(os.path.abspath(__file__))
++# this file lives at .../candidate_b2c_correction3_normalizer/<this file>;
++# its sibling authority candidate root is one level up, then over.
++_B2C_QUALIFIED_AUTHORITY_ROOT = os.path.normpath(os.path.join(
++    _B2C_THIS_FILE_DIR, os.pardir, "candidate_b2c_correction3",
++))
++_B2C_EXPECTED_ORIGIN_DIR = os.path.join(_B2C_QUALIFIED_AUTHORITY_ROOT, "sfm_master_authority")
+ _B2C_EXPECTED_API_VERSION = "1.0.0-b2a"
+-_B2C_EXPECTED_BUILD_ID = "b2c-correction2-lease-generation-binding-2026-09-16"
++_B2C_EXPECTED_BUILD_ID = "b2c-correction3-post-audit-targeted-2026-09-18"
+ 
+ if _B2C_QUALIFIED_AUTHORITY_ROOT not in sys.path:
+     sys.path.insert(0, _B2C_QUALIFIED_AUTHORITY_ROOT)
+ 
+-_B2C_SIDECAR_TOOLS_ROOT = r"E:\SFM Animation Group Master\tools"
++# .../candidate_b2c_correction3_normalizer/ -> qualification/ -> sidecar/
++# -> tests/ -> repo root -> tools/
++_B2C_REPO_ROOT = os.path.normpath(os.path.join(
++    _B2C_THIS_FILE_DIR, os.pardir, os.pardir, os.pardir, os.pardir,
++))
++_B2C_SIDECAR_TOOLS_ROOT = os.path.join(_B2C_REPO_ROOT, "tools")
+ if _B2C_SIDECAR_TOOLS_ROOT not in sys.path:
+     sys.path.insert(0, _B2C_SIDECAR_TOOLS_ROOT)
+ 
+@@ -9082,6 +9098,15 @@ class RebuildControlGroupsProductionRun(
+ 
+         # CONTEXTUALIZER immutable scoped Master index. Pure Python only; no DME refs.
+         self.master_index = None
++        self._master_index_lease = None
++        # Independent-audit BLOCKER C: True whenever a lease-release
++        # attempt has failed and the lease handle is being RETAINED (not
++        # discarded) for deterministic retry/reconciliation -- see
++        # _b2c_release_master_index_lease() and final_report() below.
++        # False means either "nothing to release yet" or "cleanup
++        # already succeeded"; never a proxy for "command succeeded"
++        # (a command can fail its main work and still cleanly release).
++        self.master_index_cleanup_incomplete = False
+         self.master_index_scope_folds = set()
+         self.master_index_builds = 0
+         self.master_index_build_seconds = 0.0
+@@ -12672,6 +12697,52 @@ class RebuildControlGroupsProductionRun(
+         )
+ 
+ 
++    def _b2c_release_master_index_lease(self):
++        """Independent-audit BLOCKER C correction (replaces the second
++        correction's `finally: self._master_index_lease = None`, which
++        unconditionally discarded the only cleanup handle even when
++        `release_view_lease` itself raised -- the audit's exact finding:
++        "the command discards the only cleanup handle while the broker/
++        view may still consider the lease live").
++
++        Ownership contract:
++          - No lease held (`self._master_index_lease is None`): no-op.
++            Also covers the idempotent "already cleaned up" case, since
++            a successful release below always clears the reference.
++          - Release succeeds: clear the reference exactly once and mark
++            cleanup complete (`master_index_cleanup_incomplete = False`).
++          - Release fails: the lease handle is RETAINED (never cleared),
++            `master_index_cleanup_incomplete` is set True, and the
++            failure is logged -- never silently swallowed, never
++            converted into an untracked leak. The SAME retained handle
++            lets a caller invoke this exact method again later
++            (deterministic retry/reconciliation) without needing any
++            out-of-band repair; `views.DetachedView.release_lease` is
++            itself idempotent (a second release of an already-released
++            lease is defined as a safe no-op), so a retry can never
++            double-release even in a hypothetical race.
++
++        Callable independently of final_report() -- a caller that
++        inspects `self.master_index_cleanup_incomplete` after final_
++        report() returns can retry cleanup by calling this method again
++        directly, with no other repair needed."""
++        lease = self._master_index_lease
++        if lease is None:
++            return
++        try:
++            _broker = _b2c_authority_runtime.get_broker()
++            _broker.release_view_lease(lease)
++        except Exception as _lease_exc:
++            self.master_index_cleanup_incomplete = True
++            self.log(
++                "R3-B2C-B correction: master_index lease release failed -- RETAINING the "
++                "lease handle for deterministic retry/reconciliation (command cleanup "
++                "marked incomplete, never silently discarded): %r" % (_lease_exc,)
++            )
++            return
++        self._master_index_lease = None
++        self.master_index_cleanup_incomplete = False
++
+     def final_report(
+             self,
+             success):
+@@ -12693,31 +12764,12 @@ class RebuildControlGroupsProductionRun(
+         # whole rebuild/reconciliation pipeline runs strictly BEFORE this
+         # method, per the file's own architecture); (2) drop the
+         # command-held payload reference FIRST; (3) THEN release the
+-        # consumer lease exactly once (guarded by the same `if self.
+-        # finished: return` this method already starts with, so this
+-        # whole block cannot execute twice); (4) the lease's own `.view`
+-        # reference dies naturally once `self._master_index_lease = None`
+-        # drops the last reference to the lease object itself -- no
+-        # separate explicit clear needed. Defensive getattr: the lease
+-        # may not exist if the command aborted before the master_index
+-        # build ever ran. A release failure is logged, never silently
+-        # swallowed, and never discards the fact that this was the only
+-        # cleanup handle (the lease reference is still dropped either way
+-        # in the `finally`, so a failed release cannot be retried nor
+-        # mistaken for a live lease on any subsequent inspection)."""
++        # consumer lease via _b2c_release_master_index_lease(), which
++        # (independent-audit BLOCKER C) retains the handle instead of
++        # discarding it on failure -- see that method's own docstring
++        # for the full ownership contract."""
+         self.master_index = None
+-        _lease = getattr(self, "_master_index_lease", None)
+-        if _lease is not None:
+-            try:
+-                _broker = _b2c_authority_runtime.get_broker()
+-                _broker.release_view_lease(_lease)
+-            except Exception as _lease_exc:
+-                self.log(
+-                    "R3-B2C-B correction: master_index lease release failed non-fatally: %r"
+-                    % (_lease_exc,)
+-                )
+-            finally:
+-                self._master_index_lease = None
++        self._b2c_release_master_index_lease()
+ 
+         try:
+             self.section(

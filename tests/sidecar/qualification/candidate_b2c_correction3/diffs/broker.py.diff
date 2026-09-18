@@ -1,0 +1,34 @@
+diff --git C:/Users/Eman/AppData/Local/Temp/tmp.MJthLNVXe6/tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/broker.py tests/sidecar/qualification/candidate_b2c_correction3/sfm_master_authority_productionized/broker.py
+index 1b03945..e859814 100644
+--- C:/Users/Eman/AppData/Local/Temp/tmp.MJthLNVXe6/tests/sidecar/qualification/candidate_b2c_correction2/sfm_master_authority_productionized/broker.py
++++ tests/sidecar/qualification/candidate_b2c_correction3/sfm_master_authority_productionized/broker.py
+@@ -457,6 +457,29 @@ class Broker(object):
+                 generated_root, shipped_root, runtime_cap_bytes,
+                 retries_remaining=0,  # single combined budget owned here -- see docstring
+                 requested_folds_by_consumer=missing_folds_by_consumer,
++                # Independent-audit BLOCKER A fix: this call previously
++                # never forwarded `expected_generation` at all, so
++                # acquire_cohort's OWN pre-publication mismatch check
++                # (lines ~305-327 above -- which already runs BEFORE
++                # `_view_cache.invalidate_generation`/`admit_batch`, i.e.
++                # already correctly ordered) was always skipped here --
++                # acquire_cohort would happily invalidate the old
++                # generation and publish the freshly-acquired one to the
++                # SHARED cache, and only AFTER that publication had
++                # already happened did this method's own post-hoc
++                # `acquired_generations` check (below) notice the
++                # mismatch and reject the RETURN VALUE -- but the cache
++                # mutation itself was never undone. Forwarding
++                # `expected_generation` here means the SAME existing
++                # check now actually runs where it was designed to: a
++                # mismatch is rejected inside acquire_cohort itself,
++                # strictly BEFORE any cache invalidation or publication
++                # occurs, so wrong-generation authority can no longer
++                # mutate shared cache state at all, partially or
++                # otherwise. No second/redundant generation system was
++                # added; this is the exact wiring the existing check
++                # already required.
++                expected_generation=expected_generation,
+             )
+         except errors.AuthorityChangedDuringAcquisition:
+             if retries_remaining > 0:
