@@ -16,3 +16,12 @@ reference/sfm_defaultanimationgroups_silkworm.txt -text
 tests/sidecar/qualification/candidate_packed_validator_r3a2b.py text eol=lf
 tests/sidecar/qualification/candidate_packed_provider_r3a2b.py text eol=lf
 tests/sidecar/qualification/candidate_b2c_correction*/fixtures_ab/*_master.txt text eol=lf
+
+# B2C-C GitHub Checkpoint (2026-09-19): the same archive-export CRLF
+# corruption class as above, found again for the B2C-C synthetic
+# authority fixture (a different directory naming convention the
+# pattern above does not cover) via this checkpoint's own
+# archive-extraction execution proof (Section 19) -- the git blob
+# itself was always correct; only `git archive`'s export lacked an
+# explicit eol=lf attribute for this path.
+tests/sidecar/qualification/candidate_b2c_c/fixtures_authority/*_master.txt text eol=lf
