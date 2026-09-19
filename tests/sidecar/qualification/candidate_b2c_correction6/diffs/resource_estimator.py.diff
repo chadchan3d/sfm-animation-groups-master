@@ -1,0 +1,34 @@
+--- tests/sidecar/qualification/candidate_b2c_correction5/sfm_master_authority_productionized/resource_estimator.py	2026-09-18 17:03:14.986792500 -0400
++++ tests/sidecar/qualification/candidate_b2c_correction6/sfm_master_authority_productionized/resource_estimator.py	2026-09-18 19:49:49.427636700 -0400
+@@ -593,6 +593,31 @@
+     return estimate_transient_preliminary(shape, runtime_cap_bytes, requested_fold_count=requested_fold_count)
+ 
+ 
++# Independent-re-audit Correction6 fix: a SHAPE-INDEPENDENT lower bound on
++# the transient cost of performing the one full bounded read
++# (`f.read(runtime_cap_bytes + 1)`), using ONLY trusted/runtime-known
++# inputs (`runtime_cap_bytes`, plus the same two fixed margin constants
++# `estimate_transient_preliminary` already charges) -- requires NO
++# ResourceShape, so it can be evaluated even when the fixed header itself
++# fails to parse (bad magic, unsupported format version, short/truncated
++# header, invalid section count, invalid directory offset/extent, or any
++# other malformed-directory-row case that leaves `preliminary_shape`
++# `None`). Every shape-DEPENDENT term (provider_decode_upper,
++# validator_scratch_upper, projection_upper) is strictly >= 0, so this is
++# a genuine lower bound on `estimate_transient_preliminary` for ANY
++# possible shape -- never an independent, possibly-larger estimate that
++# could itself introduce a false refusal.
++def estimate_minimum_full_read_transient(runtime_cap_bytes):
++    """The known-minimum transient cost of the one full bounded read,
++    independent of any parsed shape. Single-sourced from the SAME
++    `read_bound`/`FIXED_TRANSIENT_RUNTIME_OVERHEAD_BYTES`/
++    `MEASUREMENT_MODEL_GUARD_BYTES` constants `estimate_transient_
++    preliminary` uses -- no constant is duplicated into a second
++    module."""
++    read_bound = runtime_cap_bytes + 1
++    return int(read_bound + FIXED_TRANSIENT_RUNTIME_OVERHEAD_BYTES + MEASUREMENT_MODEL_GUARD_BYTES)
++
++
+ # ===========================================================================
+ # Astra SECOND correction gate F2 -- THE authoritative, primary admission
+ # model. Replaces average-family extrapolation with REAL packed

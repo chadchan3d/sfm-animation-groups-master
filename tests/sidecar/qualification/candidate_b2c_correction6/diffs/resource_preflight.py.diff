@@ -1,0 +1,76 @@
+--- tests/sidecar/qualification/candidate_b2c_correction5/sfm_master_authority_productionized/resource_preflight.py	2026-09-18 17:04:17.748163800 -0400
++++ tests/sidecar/qualification/candidate_b2c_correction6/sfm_master_authority_productionized/resource_preflight.py	2026-09-18 19:50:12.413142600 -0400
+@@ -1,6 +1,32 @@
+ # -*- coding: utf-8 -*-
+ """R3-B2C productionized single canonical open-and-identify primitive.
+ 
++=== Independent RE-AUDIT of 3bb3468 (2026-09-18) -- Correction6 ===
++
++Correction5's pre-full-read aggregate transient check only ran inside
++`if preliminary_shape is not None:` -- i.e. only on the path where the
++fixed header AND directory both parsed successfully. Any header/
++directory parse failure (bad magic, unsupported format_contract_
++version, a short/truncated header, an invalid section_count, an invalid
++directory offset/extent, or a malformed directory row) set
++`preflight_parse_deferred = True` / `preliminary_shape = None` and fell
++through to the one full bounded read UNCONDITIONALLY, with no aggregate-
++transient check of any kind. Independently reproduced with a malformed
++1 KiB candidate, runtime_cap_bytes=16 MiB, aggregate_existing_retained_
++bytes=10 MiB: the shape-independent known-minimum transient cost alone
++(read_bound + FIXED_TRANSIENT_RUNTIME_OVERHEAD_BYTES +
++MEASUREMENT_MODEL_GUARD_BYTES = 33,554,433 B) already exceeds the 32 MiB
++gate (33,554,432 B) by one byte -- yet the full read still ran once.
++Fixed by adding one new, SHAPE-INDEPENDENT floor check
++(`resource_estimator.estimate_minimum_full_read_transient`), evaluated
++unconditionally right after Gate A and BEFORE Stage 1's header read --
++so it applies on every path that could reach the full read, including
++every parse-failure case above, not only the parseable-shape path
++Correction5's own check covered. When the floor alone fits under the
++gate, malformed/unsupported candidates still proceed to the full,
++authoritative validator (this fix never converts a parse failure into a
++resource refusal by itself) -- see Section 4 of the governing prompt.
++
+ === Independent RE-AUDIT of 6e942f6 (2026-09-18) -- Correction5 ===
+ 
+ The Correction4 preliminary (pre-full-read) gate correctly folded
+@@ -256,6 +282,40 @@
+             )
+             exc.instrumentation = inst
+             raise exc
++
++        # --- Independent-re-audit Correction6 fix: a SHAPE-INDEPENDENT
++        # minimum-transient floor, applied on EVERY path that could reach
++        # the one full bounded read below -- valid/parseable header+
++        # directory, bad magic, unsupported format version, short/
++        # truncated header, invalid section count, invalid directory
++        # offset/extent, malformed directory row, or any other
++        # `preflight_parse_deferred` case. Correction5's own pre-full-read
++        # aggregate check only ran INSIDE `if preliminary_shape is not
++        # None`, so a header/directory parse failure skipped it entirely
++        # and reached the full read unconditionally. This floor uses ONLY
++        # trusted/runtime-known inputs (runtime_cap_bytes,
++        # aggregate_existing_retained_bytes) -- it requires no
++        # ResourceShape and therefore cannot itself be bypassed by a
++        # malformed candidate. It never rejects a request the richer,
++        # shape-aware Correction5 filters below would have admitted
++        # (every shape-dependent term omitted here is >= 0), so it never
++        # weakens final validation -- only closes the gap where NO gate
++        # ran at all. ---
++        minimum_full_read_transient = resource_estimator.estimate_minimum_full_read_transient(runtime_cap_bytes)
++        minimum_aggregate_transient = aggregate_existing_retained_bytes + minimum_full_read_transient
++        if minimum_aggregate_transient > TRANSIENT_GATE_BYTES:
++            inst.outcome = "refused"
++            inst.reason = "minimum_floor_estimated_transient"
++            exc = errors.ResourceAdmissionRefusal(
++                "shape-independent minimum transient floor: existing %d bytes plus the known-"
++                "minimum full-read transient cost %d bytes (runtime_cap_bytes=%d) would exceed "
++                "the transient gate %d bytes -- refusing before the full read, before any header/"
++                "directory parse (estimator_model_version=%s)" % (
++                    aggregate_existing_retained_bytes, minimum_full_read_transient, runtime_cap_bytes,
++                    TRANSIENT_GATE_BYTES, resource_estimator.ESTIMATOR_MODEL_VERSION)
++            )
++            exc.instrumentation = inst
++            raise exc
+ 
+         # --- Stage 1 (Astra F1): fixed-header read, then seek DIRECTLY
+         # to the validated directory offset and read ONLY the bounded

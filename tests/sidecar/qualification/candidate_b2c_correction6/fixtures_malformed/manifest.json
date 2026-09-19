@@ -1,0 +1,16 @@
+{
+  "fixtures": {
+    "malformed_1kib": {
+      "artifact_bytes": 1024,
+      "artifact_relative_path": "malformed_1kib.sfmsidecar"
+    },
+    "truncated_directory": {
+      "artifact_bytes": 112,
+      "artifact_relative_path": "truncated_directory.sfmsidecar"
+    },
+    "unsupported_format": {
+      "artifact_bytes": 1024,
+      "artifact_relative_path": "unsupported_format.sfmsidecar"
+    }
+  }
+}
