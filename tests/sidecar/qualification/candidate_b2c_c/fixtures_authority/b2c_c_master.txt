@@ -1,0 +1,30 @@
+"groupFile"
+{
+"RigArms"
+{
+	"control"		"valve.l_upperarm"
+	"control"		"collapsing_control"
+	"control"		"sibling_control_a"
+	"control"		"sibling_control_b"
+	"control"		"eye_flex_control"
+	"control"		"eye_bone_control"
+}
+"RigLegs"
+{
+	"control"		"normalizing_control"
+}
+"HiddenGroup"
+{
+	"control"		"stranded_control"
+	"control"		"valve.l_hand"
+	"control"		"valve.r_hand"
+	"control"		"unrigged_stranded"
+}
+"Body"
+{
+	"Tail"
+	{
+		"control"		"tail_control"
+	}
+}
+}

@@ -1,0 +1,621 @@
+{
+  "scenarios": [
+    {
+      "baseline_decision_plan_hash": "e40a3e5e33b6e7cf69c060a00ed4605ef3937dbf0b1d321617b8a81f8a7342a4",
+      "baseline_final_tree_hash": "1262861e86471fcdc390af66bb76e911c685703da9176b55bf918b206f35ecaf",
+      "baseline_native_mutation_stream_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "composer_result": {
+        "already_correct_count": 0,
+        "created_paths": [],
+        "desired_count": 0,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 0,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms"
+          ],
+          "RigArms": []
+        },
+        "root_order": [
+          "RigArms"
+        ],
+        "toe_translation": false
+      },
+      "initial_post_hash": "9621901b7dbb775fd5da96750b7bf5bc292a5023aaaf25616b1d265904c529c3",
+      "migrated_decision_plan_hash": "e40a3e5e33b6e7cf69c060a00ed4605ef3937dbf0b1d321617b8a81f8a7342a4",
+      "migrated_final_tree_hash": "1262861e86471fcdc390af66bb76e911c685703da9176b55bf918b206f35ecaf",
+      "migrated_native_mutation_stream_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "mutation_count": 0,
+      "note": "control already correctly placed and visible; classify_production should emit no rows for it",
+      "outcome": "composed",
+      "scenario": "A1_noop_static",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "valve.l_upperarm"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "59d1df64268ae62307bf753c7c06210a87c9b2e8f8a98e2db5c9390455c29eee",
+      "baseline_final_tree_hash": "1262861e86471fcdc390af66bb76e911c685703da9176b55bf918b206f35ecaf",
+      "baseline_native_mutation_stream_hash": "272830b61519b0314ea3ae4652ca4e0daca490a93832e752b6a58d6222bd4816",
+      "composer_result": {
+        "already_correct_count": 1,
+        "created_paths": [],
+        "desired_count": 1,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 0,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms"
+          ],
+          "RigArms": []
+        },
+        "root_order": [
+          "RigArms"
+        ],
+        "toe_translation": false
+      },
+      "initial_post_hash": "3268edac372046638e8f4079b79f26e6fa3fd792fdf472bcac9cea6bf11e0071",
+      "migrated_decision_plan_hash": "59d1df64268ae62307bf753c7c06210a87c9b2e8f8a98e2db5c9390455c29eee",
+      "migrated_final_tree_hash": "1262861e86471fcdc390af66bb76e911c685703da9176b55bf918b206f35ecaf",
+      "migrated_native_mutation_stream_hash": "272830b61519b0314ea3ae4652ca4e0daca490a93832e752b6a58d6222bd4816",
+      "mutation_count": 4,
+      "note": "RigArms visible in PRE, invisible in POST -- classic native-Rebuild rig loss",
+      "outcome": "composed",
+      "scenario": "A2_rig_owned_effective_control",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "valve.l_upperarm"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "250494f2c687da04048525d0a51e6c8b7616f112c88bbffee1ca3eebad58721e",
+      "baseline_final_tree_hash": "81fafcdcad48e4c100e32fe7a4a491d78641c6c7badf665a9e65202c4179dd4f",
+      "baseline_native_mutation_stream_hash": "292101fcf1d14125708689ef6283d4ae377b1fb1cb94eaece305945771355b2e",
+      "composer_result": {
+        "already_correct_count": 1,
+        "created_paths": [],
+        "desired_count": 1,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 0,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms",
+            "HiddenGroup"
+          ],
+          "RigArms": []
+        },
+        "root_order": [
+          "RigArms",
+          "HiddenGroup"
+        ],
+        "toe_translation": false
+      },
+      "initial_post_hash": "1aed725b8d0c4e656b920dc0bef66c229062168188900f7704a95d7dbb3de287",
+      "migrated_decision_plan_hash": "250494f2c687da04048525d0a51e6c8b7616f112c88bbffee1ca3eebad58721e",
+      "migrated_final_tree_hash": "81fafcdcad48e4c100e32fe7a4a491d78641c6c7badf665a9e65202c4179dd4f",
+      "migrated_native_mutation_stream_hash": "292101fcf1d14125708689ef6283d4ae377b1fb1cb94eaece305945771355b2e",
+      "mutation_count": 8,
+      "note": "non-owned control's own group matches its Master destination exactly, but that group is hidden (plus a genuinely rig-owned, already-correctly-placed anchor control, so this fixture's rig is genuinely SUPPORTED_ACTIVE_RIG and can reach production_generic_composer)",
+      "outcome": "composed",
+      "scenario": "A3_master_known_but_stranded",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "stranded_control",
+        "valve.l_upperarm"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "a45c3fe7ac95cf8b60ef872a945e2f32321c3df9f882e0fe0845c758aaee3b58",
+      "baseline_final_tree_hash": "204f0006b8b2a424c4f655538766997765a0593a725afccde7f6a969837b4a7e",
+      "baseline_native_mutation_stream_hash": "b6629c6270e4c3fde3a4d7fc276f0c7765e259c0250a4865692f0d86b4bb5319",
+      "composer_result": {
+        "already_correct_count": 0,
+        "created_paths": [
+          "RigArms/Sub"
+        ],
+        "desired_count": 1,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 1,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms"
+          ],
+          "RigArms": [
+            "Sub"
+          ]
+        },
+        "root_order": [
+          "RigArms"
+        ],
+        "toe_translation": false
+      },
+      "initial_post_hash": "4cb9ede8a5dac4f230aa57a75c8cda0be313aece220aa2ff6437dcfa208b3b79",
+      "migrated_decision_plan_hash": "a45c3fe7ac95cf8b60ef872a945e2f32321c3df9f882e0fe0845c758aaee3b58",
+      "migrated_final_tree_hash": "204f0006b8b2a424c4f655538766997765a0593a725afccde7f6a969837b4a7e",
+      "migrated_native_mutation_stream_hash": "b6629c6270e4c3fde3a4d7fc276f0c7765e259c0250a4865692f0d86b4bb5319",
+      "mutation_count": 17,
+      "note": "owned+visible control collapsed from RigArms/Sub (PRE) to its immediate parent RigArms (POST)",
+      "outcome": "composed",
+      "scenario": "A4_rig_owned_visible_parent_collapse",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "collapsing_control"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "a0e2353ad8dbfb0c67b78350be4c0e6e237b6c87fc461ae260ba93c3f972391f",
+      "baseline_final_tree_hash": "640fa5f45e9c6500bf9040bc8cf5a5a4c824c51f70986d3bb84b99e6cf3ae9ff",
+      "baseline_native_mutation_stream_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "composer_result": {
+        "already_correct_count": 0,
+        "created_paths": [],
+        "desired_count": 0,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 0,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms",
+            "RigLegs"
+          ],
+          "RigArms": [],
+          "RigLegs": []
+        },
+        "root_order": [
+          "RigArms",
+          "RigLegs"
+        ],
+        "toe_translation": false
+      },
+      "initial_post_hash": "ae7208efcd1c98845913b54e5eb88b6f8ee94cb2e8df23f6d4f5a94541332bf5",
+      "migrated_decision_plan_hash": "a0e2353ad8dbfb0c67b78350be4c0e6e237b6c87fc461ae260ba93c3f972391f",
+      "migrated_final_tree_hash": "640fa5f45e9c6500bf9040bc8cf5a5a4c824c51f70986d3bb84b99e6cf3ae9ff",
+      "migrated_native_mutation_stream_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "mutation_count": 0,
+      "note": "owned+visible control moved RigArms(PRE) -> RigLegs(POST), matching its own Master destination exactly",
+      "outcome": "composed",
+      "scenario": "A5_rig_owned_visible_master_normalization",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "normalizing_control"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "db060c8a9785e6c119a0a48bcb19832b6be5d7fd56d30227964602f39e34000e",
+      "baseline_final_tree_hash": "82e157c6669edacd9875a3bcbbff5ed5bf37497af94aaec03da7ff550eebec40",
+      "baseline_native_mutation_stream_hash": "292101fcf1d14125708689ef6283d4ae377b1fb1cb94eaece305945771355b2e",
+      "composer_result": {
+        "already_correct_count": 1,
+        "created_paths": [],
+        "desired_count": 1,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 0,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms",
+            "HiddenGroup"
+          ],
+          "RigArms": []
+        },
+        "root_order": [
+          "RigArms",
+          "HiddenGroup"
+        ],
+        "toe_translation": false
+      },
+      "initial_post_hash": "35fdb3b1e4ac7bd414361becffd62af509219d321a50a6b611f5c2cc88ee5f63",
+      "migrated_decision_plan_hash": "db060c8a9785e6c119a0a48bcb19832b6be5d7fd56d30227964602f39e34000e",
+      "migrated_final_tree_hash": "82e157c6669edacd9875a3bcbbff5ed5bf37497af94aaec03da7ff550eebec40",
+      "migrated_native_mutation_stream_hash": "292101fcf1d14125708689ef6283d4ae377b1fb1cb94eaece305945771355b2e",
+      "mutation_count": 8,
+      "note": "control literal 'Stranded_Control' differs from the folded wanted-vocabulary entry only by ASCII case (plus a genuinely rig-owned anchor control, see A3's fixed-bug note)",
+      "outcome": "composed",
+      "scenario": "B1_ascii_fold_match",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "stranded_control",
+        "valve.l_upperarm"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "3a056c0b2c996ec3da23ba449cb1a18b93d90ad5b7f80d374952ce3eb6443796",
+      "baseline_final_tree_hash": "9deda097b677561326ed77927c1a9d471f3210d0f951413e63cf19909b855097",
+      "baseline_native_mutation_stream_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "composer_result": {
+        "already_correct_count": 0,
+        "created_paths": [],
+        "desired_count": 0,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 0,
+        "order_result": {
+          "<ROOT>": [
+            "Unknown"
+          ]
+        },
+        "root_order": [
+          "Unknown"
+        ],
+        "toe_translation": false
+      },
+      "initial_post_hash": "8eacfb8956538b8b7f121d57d164f625baddead734b7b9edfb9bbb9ca431517f",
+      "migrated_decision_plan_hash": "3a056c0b2c996ec3da23ba449cb1a18b93d90ad5b7f80d374952ce3eb6443796",
+      "migrated_final_tree_hash": "9deda097b677561326ed77927c1a9d471f3210d0f951413e63cf19909b855097",
+      "migrated_native_mutation_stream_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "mutation_count": 0,
+      "note": "control absent from the wanted-fold vocabulary entirely; native POST routes it to Unknown",
+      "outcome": "composed",
+      "scenario": "B2_master_unknown_unmatched",
+      "verdict": "PASS",
+      "wanted_folds": []
+    },
+    {
+      "baseline_decision_plan_hash": "d276b452e10318ed0aac8dd846217f18070bdc87bb72fb3d30eaaebb49158a38",
+      "baseline_final_tree_hash": "8446d1c1656d06cfd0140b8a5841645ab53e4e9b526b57f01259adf554ab600b",
+      "baseline_native_mutation_stream_hash": "ade27aa3ae74373c92bcac039b7b9542247854b0c595540ede21658abda0ebce",
+      "composer_result": {
+        "already_correct_count": 0,
+        "created_paths": [
+          "RigArms/A",
+          "RigArms/B"
+        ],
+        "desired_count": 2,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 2,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms"
+          ],
+          "RigArms": [
+            "A",
+            "B"
+          ]
+        },
+        "root_order": [
+          "RigArms"
+        ],
+        "toe_translation": false
+      },
+      "initial_post_hash": "8b96990649cf7a342d883964907008823836137605742641c067bfa72a270ff6",
+      "migrated_decision_plan_hash": "d276b452e10318ed0aac8dd846217f18070bdc87bb72fb3d30eaaebb49158a38",
+      "migrated_final_tree_hash": "8446d1c1656d06cfd0140b8a5841645ab53e4e9b526b57f01259adf554ab600b",
+      "migrated_native_mutation_stream_hash": "ade27aa3ae74373c92bcac039b7b9542247854b0c595540ede21658abda0ebce",
+      "mutation_count": 34,
+      "note": "two owned controls both parent-collapse into RigArms from distinct nested paths -- exercises ordering across multiple simultaneous rows",
+      "outcome": "composed",
+      "scenario": "B3_nested_sibling_ordering",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "sibling_control_a",
+        "sibling_control_b"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "1e1c0a98eb3b55017f23de6b772ef1b1e7a2a45dc8434900ea09fe88d8776e90",
+      "baseline_final_tree_hash": "9d61680e25ca4efaba78fb0d708e653da2af6e7e29aeb576f41d2c07960dcb2f",
+      "baseline_native_mutation_stream_hash": "292101fcf1d14125708689ef6283d4ae377b1fb1cb94eaece305945771355b2e",
+      "composer_result": {
+        "already_correct_count": 2,
+        "created_paths": [],
+        "desired_count": 2,
+        "destination_direct_order_authorities": {
+          "HiddenGroup": {
+            "authority": "EXACT_MASTER_DESTINATION_TOTAL_ORDER",
+            "order": [
+              "valve.l_hand",
+              "valve.r_hand"
+            ]
+          }
+        },
+        "master_selectability_rows": [],
+        "moved_count": 0,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms",
+            "HiddenGroup"
+          ],
+          "RigArms": []
+        },
+        "root_order": [
+          "RigArms",
+          "HiddenGroup"
+        ],
+        "toe_translation": false
+      },
+      "initial_post_hash": "0ecc76cf5a49905497876bac71575f14a15f834ca98b2ec2b07284874bcdf04c",
+      "migrated_decision_plan_hash": "1e1c0a98eb3b55017f23de6b772ef1b1e7a2a45dc8434900ea09fe88d8776e90",
+      "migrated_final_tree_hash": "9d61680e25ca4efaba78fb0d708e653da2af6e7e29aeb576f41d2c07960dcb2f",
+      "migrated_native_mutation_stream_hash": "292101fcf1d14125708689ef6283d4ae377b1fb1cb94eaece305945771355b2e",
+      "mutation_count": 8,
+      "note": "paired left/right controls, both master-known-but-stranded under the same hidden group (plus a genuinely rig-owned anchor control, see A3's fixed-bug note)",
+      "outcome": "composed",
+      "scenario": "B4_left_right_side_normalization",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "valve.l_hand",
+        "valve.l_upperarm",
+        "valve.r_hand"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "baseline_final_tree_hash": "58063c7bf40f6e35329798739b26f4dfcee86ad2aa79fdcab2b787ea52519dde",
+      "baseline_native_mutation_stream_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "composer_result": null,
+      "initial_post_hash": "58063c7bf40f6e35329798739b26f4dfcee86ad2aa79fdcab2b787ea52519dde",
+      "migrated_decision_plan_hash": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "migrated_final_tree_hash": "58063c7bf40f6e35329798739b26f4dfcee86ad2aa79fdcab2b787ea52519dde",
+      "migrated_native_mutation_stream_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "mutation_count": 0,
+      "note": "rig_status=UNRIGGED throughout -- no rig-owned controls, only a non-owned master-stranded control",
+      "outcome": "native_post_fallback:UNRIGGED",
+      "scenario": "C1_unrigged_target",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "unrigged_stranded"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "6554acf171598b7b546627cd066d7981074add08e5be1bbf0bba284bae5e1949",
+      "baseline_final_tree_hash": "4d0b34a03e7e4f58074f120845a8286dd565790aa0f8cd7eec8e1da725d23251",
+      "baseline_native_mutation_stream_hash": "f181f7ace5aa73423fdbd6c0b1e4912e023a11fda40fcf56022f7f30c91dc977",
+      "broker_mediated_sanity": false,
+      "composer_result": {
+        "already_correct_count": 0,
+        "created_paths": [
+          "RigLegs/LeftLeg/LeftToes",
+          "RigLegs/RightLeg/RightToes"
+        ],
+        "desired_count": 2,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 2,
+        "order_result": {
+          "<ROOT>": [
+            "RigLegs",
+            "Toes"
+          ],
+          "RigLegs": [
+            "LeftLeg",
+            "RightLeg"
+          ],
+          "RigLegs/LeftLeg": [
+            "LeftToes"
+          ],
+          "RigLegs/RightLeg": [
+            "RightToes"
+          ]
+        },
+        "root_order": [
+          "RigLegs",
+          "Toes"
+        ],
+        "toe_translation": true
+      },
+      "control_count": 3,
+      "determinism_confirmed": true,
+      "fixture_artifact_path": "candidate_b2c_c\\fixtures_authority\\b2c_c.sfmsidecar",
+      "fixture_master_sha256": "312fd3da83e1cc321ddfc0687a5da0ceae25a3610c668a164c2c3ca1ebbd7f78",
+      "group_count": 7,
+      "initial_post_hash": "a01e471ab9745d48f504a29fdb380468692c0cdb900ff06f37a8d75190b2ac43",
+      "migrated_decision_plan_hash": "6554acf171598b7b546627cd066d7981074add08e5be1bbf0bba284bae5e1949",
+      "migrated_final_tree_hash": "4d0b34a03e7e4f58074f120845a8286dd565790aa0f8cd7eec8e1da725d23251",
+      "migrated_native_mutation_stream_hash": "f181f7ace5aa73423fdbd6c0b1e4912e023a11fda40fcf56022f7f30c91dc977",
+      "mutation_count": 43,
+      "note": "canonical model-backed toe controls (Toes/LeftToes, Toes/RightToes) relocate beneath RigLegs/LeftLeg/Toes and RigLegs/RightLeg/Toes purely from an active RigLegs rig's presence, even though the rig owns no dedicated toe control itself; an unrelated rig-owned leg control must be preserved untouched",
+      "outcome": "composed",
+      "scenario": "D1_active_rig_toe_relocation",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "canon_toe_l",
+        "canon_toe_r",
+        "leg_owned_control"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "48b49e45b3e4ed4d487a2eeaa3802d54f91f1dfb301b52367be0341a9ed55456",
+      "baseline_final_tree_hash": "0558e55109a34aa11a4b7ec33f57ef6ea3612215f9a3469c39fa8a563aeae78d",
+      "baseline_native_mutation_stream_hash": "272830b61519b0314ea3ae4652ca4e0daca490a93832e752b6a58d6222bd4816",
+      "broker_mediated_sanity": false,
+      "composer_result": {
+        "already_correct_count": 1,
+        "created_paths": [],
+        "desired_count": 1,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 0,
+        "order_result": {
+          "<ROOT>": [
+            "RigBody"
+          ]
+        },
+        "root_order": [
+          "RigBody"
+        ],
+        "toe_translation": false
+      },
+      "control_count": 1,
+      "determinism_confirmed": true,
+      "fixture_artifact_path": "candidate_b2c_c\\fixtures_authority\\b2c_c.sfmsidecar",
+      "fixture_master_sha256": "312fd3da83e1cc321ddfc0687a5da0ceae25a3610c668a164c2c3ca1ebbd7f78",
+      "group_count": 2,
+      "initial_post_hash": "7ebea8dffeac9dc1b51bd915b1da312597b86423d8fc325aa97a1f0db29b3747",
+      "migrated_decision_plan_hash": "48b49e45b3e4ed4d487a2eeaa3802d54f91f1dfb301b52367be0341a9ed55456",
+      "migrated_final_tree_hash": "0558e55109a34aa11a4b7ec33f57ef6ea3612215f9a3469c39fa8a563aeae78d",
+      "migrated_native_mutation_stream_hash": "272830b61519b0314ea3ae4652ca4e0daca490a93832e752b6a58d6222bd4816",
+      "mutation_count": 4,
+      "note": "rig-owned tail_control's rig-visible PRE path is RigBody (visible), hidden in native POST (classic rig-loss); Master destination Body/Tail is refined by _active_rig_counterpart_destination to the active RigBody root -- the same active-rig-family-counterpart mechanism as fixture A, applied to the RigBody family",
+      "outcome": "composed",
+      "scenario": "D2_tail_relocation",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "tail_control"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "a59dfb4f4533202ed4d02cc0d6129be70d40aab5b2a931427b3ce9d1bc10e816",
+      "baseline_final_tree_hash": "2098aa4dbf691feeab956d781a49d3259ef27652f4921866fd1a28e784dc40dd",
+      "baseline_native_mutation_stream_hash": "292101fcf1d14125708689ef6283d4ae377b1fb1cb94eaece305945771355b2e",
+      "broker_mediated_sanity": false,
+      "composer_result": {
+        "already_correct_count": 2,
+        "created_paths": [],
+        "desired_count": 2,
+        "destination_direct_order_authorities": {
+          "HiddenGroup": {
+            "authority": "EXACT_MASTER_DESTINATION_TOTAL_ORDER",
+            "order": [
+              "stranded_control",
+              "Stranded_Control"
+            ]
+          }
+        },
+        "master_selectability_rows": [],
+        "moved_count": 0,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms",
+            "HiddenGroup"
+          ],
+          "RigArms": []
+        },
+        "root_order": [
+          "RigArms",
+          "HiddenGroup"
+        ],
+        "toe_translation": false
+      },
+      "control_count": 3,
+      "determinism_confirmed": true,
+      "fixture_artifact_path": "candidate_b2c_c\\fixtures_authority\\b2c_c.sfmsidecar",
+      "fixture_master_sha256": "312fd3da83e1cc321ddfc0687a5da0ceae25a3610c668a164c2c3ca1ebbd7f78",
+      "group_count": 3,
+      "initial_post_hash": "7eb15d113f23b1fd1fb4b39954e0f72b059843d1852930f8bbf30134269a7ec8",
+      "migrated_decision_plan_hash": "a59dfb4f4533202ed4d02cc0d6129be70d40aab5b2a931427b3ce9d1bc10e816",
+      "migrated_final_tree_hash": "2098aa4dbf691feeab956d781a49d3259ef27652f4921866fd1a28e784dc40dd",
+      "migrated_native_mutation_stream_hash": "292101fcf1d14125708689ef6283d4ae377b1fb1cb94eaece305945771355b2e",
+      "mutation_count": 8,
+      "note": "two DISTINCT exact-literal controls ('stranded_control', 'Stranded_Control') sharing one ASCII-folded key both legitimately exist and are independently classified/placed -- neither is dropped, collapsed, or given an extra duplicate membership (plus a genuinely rig-owned anchor control, see A3's fixed-bug note)",
+      "outcome": "composed",
+      "scenario": "D3_repeated_control_preservation",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "stranded_control",
+        "valve.l_upperarm"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "7d07ef2ef81702a8aa7b03d410946e620613039034054b420d719bfe95dda2e2",
+      "baseline_final_tree_hash": "fac7ea91697f42c5df4529a951e647c5bf6f0964d0ca94116de7c00a11a47548",
+      "baseline_native_mutation_stream_hash": "519fe6e9ff100d8022c80bf72ece2d08f6c90450e240b0553d0b713fa06bb6cb",
+      "broker_mediated_sanity": false,
+      "composer_result": {
+        "already_correct_count": 0,
+        "created_paths": [],
+        "desired_count": 0,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 0,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms",
+            "CustomUserGroup"
+          ],
+          "RigArms": []
+        },
+        "root_order": [
+          "RigArms",
+          "CustomUserGroup"
+        ],
+        "toe_translation": false
+      },
+      "control_count": 2,
+      "determinism_confirmed": true,
+      "fixture_artifact_path": "candidate_b2c_c\\fixtures_authority\\b2c_c.sfmsidecar",
+      "fixture_master_sha256": "312fd3da83e1cc321ddfc0687a5da0ceae25a3610c668a164c2c3ca1ebbd7f78",
+      "group_count": 4,
+      "initial_post_hash": "03192d1005ba1c0b56e29c6fb78daad9047eeaee48c48ea7c2dddb23cb95d8be",
+      "migrated_decision_plan_hash": "7d07ef2ef81702a8aa7b03d410946e620613039034054b420d719bfe95dda2e2",
+      "migrated_final_tree_hash": "fac7ea91697f42c5df4529a951e647c5bf6f0964d0ca94116de7c00a11a47548",
+      "migrated_native_mutation_stream_hash": "519fe6e9ff100d8022c80bf72ece2d08f6c90450e240b0553d0b713fa06bb6cb",
+      "mutation_count": 4,
+      "note": "a pre-existing custom/unrelated subtree (CustomUserGroup/Nested, with its own control) that no rig ownership, Master mapping, or classification touches must remain byte-identical -- only valve.l_upperarm (already correctly placed) is in scope",
+      "outcome": "composed",
+      "scenario": "D4_untouched_custom_group_preservation",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "valve.l_upperarm"
+      ]
+    },
+    {
+      "baseline_decision_plan_hash": "97dd76696d66b28f79093e5e3377f572774bec7cf62076d56ddcda9050496a7d",
+      "baseline_final_tree_hash": "f8c03fe0c15d85ffc60e661b40f9c3793e668362f2666e0d591e47396520662f",
+      "baseline_native_mutation_stream_hash": "9ac67ce0ef60906730542b6bdece188be34bc0840a82981f0d0ba7496bc9b858",
+      "broker_mediated_sanity": true,
+      "composer_result": {
+        "already_correct_count": 0,
+        "created_paths": [
+          "RigArms/Sub"
+        ],
+        "desired_count": 2,
+        "destination_direct_order_authorities": {},
+        "master_selectability_rows": [],
+        "moved_count": 2,
+        "order_result": {
+          "<ROOT>": [
+            "RigArms"
+          ],
+          "RigArms": [
+            "Sub"
+          ]
+        },
+        "root_order": [
+          "RigArms"
+        ],
+        "toe_translation": false
+      },
+      "control_count": 2,
+      "determinism_confirmed": true,
+      "fixture_artifact_path": "candidate_b2c_c\\fixtures_authority\\b2c_c.sfmsidecar",
+      "fixture_master_sha256": "312fd3da83e1cc321ddfc0687a5da0ceae25a3610c668a164c2c3ca1ebbd7f78",
+      "group_count": 2,
+      "initial_post_hash": "e084dcbf81a1cba281bacde90ef4b8b7a27ec74c0391113979053fe432259265",
+      "migrated_decision_plan_hash": "97dd76696d66b28f79093e5e3377f572774bec7cf62076d56ddcda9050496a7d",
+      "migrated_final_tree_hash": "f8c03fe0c15d85ffc60e661b40f9c3793e668362f2666e0d591e47396520662f",
+      "migrated_native_mutation_stream_hash": "9ac67ce0ef60906730542b6bdece188be34bc0840a82981f0d0ba7496bc9b858",
+      "mutation_count": 18,
+      "note": "two owned controls both parent-collapse from the SAME nested RigArms/Sub path into RigArms, both Master-exact-known (flex declared before bone in the authority Master TXT) -- policy_direct_order's cohort ordering by real Master global_index/local_index determines the exact order add_control_to_group is called in",
+      "outcome": "composed",
+      "scenario": "D5_flex_first_ordering",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "eye_bone_control",
+        "eye_flex_control"
+      ]
+    },
+    {
+      "baseline_result": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "migrated_result": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "note": "target/scope-discovery authority-sensitive island (low-bone/no-ALH skip gate)",
+      "scenario": "GATE_is_alh_arm_leg_head",
+      "verdict": "PASS"
+    }
+  ]
+}

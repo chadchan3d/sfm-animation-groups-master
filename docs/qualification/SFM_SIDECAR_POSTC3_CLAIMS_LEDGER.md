@@ -30,3 +30,66 @@ count from THIS evidence-collection session (§6 of the architecture/verificatio
 document), not merely a historical audit's PASS claim. Every "NARROWED" or
 "UNPROVEN" row states exactly what part of the original claim no longer holds or
 was never established, rather than leaving the gap implicit.
+
+---
+
+## Addendum (2026-09-18): R3 B2C-B/B2C-C arc — a DIFFERENT, later architecture
+
+Everything above this line describes an EARLIER architecture (`session_owner.py`,
+retirement/drain/close generation lifecycle) that the current `sfm_master_authority`
+broker/view_cache/resource_preflight package (qualified through Correction2–6,
+commit `514a100a380e33b6b6281afdc489921fd68728e1`) has since superseded. The rows
+above are NOT re-validated against, and do not describe, the current architecture —
+they are preserved here only as the historical record for the arc they actually
+audited. This addendum is the current arc's own append point (per B2C-C's governing
+prompt, Section 17); no dedicated "cumulative empirical ledger" existed yet for the
+B2/B2C arc before this entry.
+
+| Script/test identity | Scope | Evidence | Interpretation | Verdict | Proves | Does NOT prove | Design consequence | Next decision |
+|---|---|---|---|---|---|---|---|---|
+| `test_b2c_c_plan_layer_equivalence.py` (candidate `candidate_b2c_c/`) | Downstream decision layer (`classify_production`, `order_candidate_rows_by_policy`, `preflight_reconciliation_plan`, `derive_generic_uniformity_plan`) — 10 fixtures, 4 negative controls, real Python 2.7.5 | 37/37 PASS, `R3_B2C_C_plan_layer_ledger.json` (per-fixture hashes/counts) | RAW (fresh run this session), CURRENT SOURCE (extracted verbatim by exact line range from the frozen production file, SHA-256-pinned) | **SUPPORTED, narrow** | The qualified Correction6 authority (broker/adapter) produces BYTE-IDENTICAL downstream classification/ordering/uniformity-plan decisions to the frozen production parser, across every distinct `classify_production` category and several structural edge cases (ASCII-fold, left/right pairing, unrigged target, simultaneous multi-row ordering) | Native mutation EXECUTION (`production_generic_composer` and ~15-function closure, 7 native primitive wrappers) — never invoked, not compared; live target/scope-eligibility discovery (`snapshot_work`) — never exercised; authority-generation/lease sanity under the REAL broker-mediated acquisition path (this harness opens the provider directly, one layer below the broker) | B2C-C cannot reach a full PASS on the strength of this evidence alone — the decision layer is qualified, the execution layer is not | Before any further B2C-C attempt: either build and independently validate a fake-DME-object-model sufficient for `production_generic_composer`'s closure, or explicitly re-scope B2C-C's own PASS criteria to acknowledge a decision-layer-only qualification tier |
+| Frozen production Normalizer negative controls (NC1, NC2/NC2b, Section-8 swap detection) | Proves the comparison oracle actually detects real disagreements (destination misroute, authority-subject swap) rather than being vacuously insensitive | 4/4 negative controls produced their expected result (3 detected a real perturbation; 1 — NC2's first attempt — was disclosed as an ineffective perturbation choice, not a harness insensitivity, and superseded by NC2b) | RAW (fresh run this session) | **SUPPORTED** | The canonical-hash comparison mechanism is sensitive to real destination/routing disagreements and to authority-subject-identity swaps | Sensitivity to native-execution-layer differences (order of native calls, group-creation timing) — not tested, since that layer is not exercised at all | The decision-layer oracle is trustworthy for what it covers | Same as above |
+
+**Strictness note (addendum):** the "SUPPORTED, narrow" verdict above is deliberately
+narrow — it is scoped exactly to what `test_b2c_c_plan_layer_equivalence.py` actually
+exercises (Section 2 of `R3_B2C_C_Downstream_Mutation_Equivalence_Report.md` has the
+full justification), not a general "B2C-C passed" claim. The governing prompt's own
+final verdict for this round is `B2C-C PARTIAL`, not PASS — B2C-D is NOT authorized.
+
+---
+
+## Addendum 2 (2026-09-19): execution-layer continuation
+
+| Script/test identity | Scope | Evidence | Interpretation | Verdict | Proves | Does NOT prove | Design consequence | Next decision |
+|---|---|---|---|---|---|---|---|---|
+| `test_b2c_c_execution_layer_equivalence.py` (candidate `candidate_b2c_c/fake_dme.py` + `production_execution_layer.py`) | Native-mutation EXECUTION layer (`production_generic_composer` and its authority-sensitive closure, `_gate_is_alh`) — same 10 decision fixtures, 5 negative-control types (2 first attempts disclosed ineffective, superseded), full determinism gate, real Python 2.7.5 | 67/67 PASS, `R3_B2C_C_execution_layer_ledger.json` (per-fixture decision-plan/native-mutation-stream/final-tree hashes) | RAW (fresh run this session), CURRENT SOURCE (execution-layer functions extracted verbatim by exact line range, SHA-256-pinned against the same frozen production file) | **SUPPORTED, narrow** | For all 10 qualified fixtures, the qualified Correction6 authority produces BYTE-IDENTICAL native mutation streams AND resulting logical control-group trees to the frozen production parser, when both are run through the SAME real extracted `production_generic_composer` closure against independently-constructed-but-identical fake-DME worlds; the ONE authority-sensitive target/scope-eligibility function (`_gate_is_alh`) also matches; a real bug (non-exclusive `AddChild` reparenting) was found and fixed in the fake model itself, caught by the REAL production code's own postcondition checks | A specific named subset of Section 8's mutation-sensitive expansion fixtures (toe relocation, flex-first ordering, Tail relocation, repeated-control preservation, dedicated untouched-custom-group case) — not attempted; live target/scope enumeration (`snapshot_work`'s real scene/shot/project walk) — confirmed authority-independent by dependency analysis but never exercised, explicitly deferred to a future live-runtime gate | B2C-C's decision AND execution layers are now both qualified for the fixture set actually built; B2C-D remains unauthorized pending the named remaining fixtures | Before B2C-D: either build the remaining named expansion fixtures (toe relocation is the highest-value, since its code path is already fully read and mapped) or explicitly accept a fixture-set-scoped PASS tier |
+| `test_b2c_c_broker_mediated_authority_sanity.py` | Real `Broker.acquire_or_reuse_views`/`lease_view` integration seam (not the direct-provider-open shortcut the plan/execution harnesses otherwise use) | 8/8 PASS, both Python 3.10 and real Python 2.7.5 | RAW (fresh run this session) | **SUPPORTED** | The real production integration seam a Normalizer command would actually use reaches the would-be mutation boundary with agreeing source/embedded/command generations, a valid lease, zero open providers, and no TXT fallback | That this seam was wired all the way through the fake-DME execution harness itself in this round (a natural, not-yet-done extension) | The real integration seam, not just the isolated provider-open shortcut, is sound for at least one case | Wire the broker-mediated path directly into the execution harness in a future round if a stronger end-to-end claim is needed |
+
+**Strictness note (addendum 2):** the execution-layer "SUPPORTED, narrow" verdict is scoped
+exactly to the 10 fixtures + gate function + negative controls actually built (Section 21-22 of
+the updated report). The governing prompt's own final verdict for this round remains
+`B2C-C PARTIAL` — B2C-D is NOT authorized. The gap narrowed substantially between Addendum 1 and
+Addendum 2 (from "entire execution layer uncovered" to "a specific named subset of expansion
+fixtures uncovered"), which is itself evidence the methodology is converging, not evidence of
+completion.
+
+---
+
+## Addendum 3 (2026-09-19): Final Offline Expansion Fixtures — closes the named gap
+
+| Script/test identity | Scope | Evidence | Interpretation | Verdict | Proves | Does NOT prove | Design consequence | Next decision |
+|---|---|---|---|---|---|---|---|---|
+| `test_b2c_c_plan_layer_equivalence.py` + `test_b2c_c_execution_layer_equivalence.py`, extended `candidate_b2c_c/scenarios.py` (15 fixtures total) | Decision layer AND native-mutation execution layer, now including the 5 named expansion fixtures (active-rig toe relocation, flex-first ordering, Tail relocation, repeated-control preservation, untouched custom/unrelated group preservation) | Decision layer 52/52 PASS, execution layer 117/117 PASS, both real Python 2.7.5, `R3_B2C_C_execution_layer_ledger.json`/`R3_B2C_C_plan_layer_ledger.json` (per-fixture hashes/counts, enriched with fixture SHA/group-control counts/determinism/broker-mediated flags for D1-D5) | RAW (fresh run this session), CURRENT SOURCE (same verbatim-extracted functions, unchanged this round) | **SUPPORTED** | For all 15 fixtures (the original 10 plus the 5 named expansion fixtures), the qualified Correction6 authority produces BYTE-IDENTICAL decision-plan streams, native mutation streams, AND resulting logical control-group trees to the frozen production parser; a real harness defect (masked mutual failure via a missing upstream `NativePostFallback` gate, affecting A3/B1/B4/C1/D3/D5) was found and fixed; all 5 new fixtures have effective negative controls, with two disclosed-ineffective first attempts (NC-D-a, NC-E-a) honestly superseded rather than hidden; full determinism confirmed for all 5; a new broker-mediated sanity case (flex-first content, through the REAL `Broker.acquire_or_reuse_views`/`lease_view` path) also passes (17/17 total, up from 8/8) | Live target/scope enumeration (`snapshot_work`'s real scene/shot/project walk, on-disk MDL reads) — still never exercised, explicitly deferred to a future live-runtime gate per the dependency cut (unchanged from Addendum 2); the native `ifm.dll` rebuild callback itself is still never emulated (by design) | The named gap from Addendum 2 (a specific subset of expansion fixtures) is now closed; B2C-C reaches a full offline PASS conditioned on the live-enumeration deferral remaining valid | B2C-D is candidate-authorized by this local result, but per the governing checkpoint prompt's own governance clause, treat this as `B2C-C CANDIDATE PASS — INDEPENDENT AUDIT REQUIRED BEFORE B2C-D`, not a self-authorized production promotion |
+| `test_b2c_c_broker_mediated_authority_sanity.py` (extended) | Real `Broker.acquire_or_reuse_views`/`lease_view` integration seam, now including a SECOND case using this round's own flex-first fixture content (`eye_flex_control`/`eye_bone_control`), not just the pre-existing Correction6 "left"/"right" fixture | 17/17 PASS (8 original + 9 new), real Python 2.7.5 | RAW (fresh run this session) | **SUPPORTED** | The real integration seam also works end-to-end for this round's own new fixture content, closing Addendum 2's own noted "not yet done" extension | Nothing beyond the two fixture cases exercised (generic left/right, flex-first) — not every fixture's content was independently run through the real broker path, only one representative new case, per the governing prompt's "at least one" requirement | The real broker/adapter integration seam is sound for the fixture content this round added, not just the pre-existing content | None — this closes Addendum 2's explicitly named follow-up |
+
+**Strictness note (addendum 3):** this addendum's "SUPPORTED" verdicts are still scoped to what
+was actually built and run offline this round (Section 32-42 of the updated report) — they do
+NOT constitute live-runtime qualification, and live target/scope enumeration remains explicitly
+deferred, not fabricated. The local result is:
+
+`B2C-C DOWNSTREAM MUTATION EQUIVALENCE PASS — AUTHORIZE B2C-D`
+
+but per the governing GitHub-checkpoint prompt's own governance clause, this local result must be
+treated as `B2C-C CANDIDATE PASS — INDEPENDENT AUDIT REQUIRED BEFORE B2C-D` until an independent
+audit of the pushed checkpoint confirms it. B2C-D has NOT begun. No self-authorized production
+promotion is claimed anywhere in this addendum.
