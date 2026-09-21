@@ -165,3 +165,8 @@ print("\nRESULT: %d/%d %s" % (
     sum(1 for _, c in RESULTS if c), len(RESULTS),
     "ALL PASS" if all(c for _, c in RESULTS) else "SOME FAILED"
 ))
+
+# B2C-C Targeted Audit Correction, Section 4: a failed check must cause
+# a failed process.
+if not all(condition for _, condition in RESULTS):
+    sys.exit(1)

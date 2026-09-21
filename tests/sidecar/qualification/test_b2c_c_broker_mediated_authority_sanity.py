@@ -209,7 +209,96 @@ flex_final_counters = b.provider_counters()
 check("flex_lease_release_clean (D5) provider_counters() still shows zero open providers after "
       "the lease is released", flex_final_counters["current_open_provider_count"] == 0, flex_final_counters)
 
+# ---------------------------------------------------------------------
+# B2C-C Targeted Audit Correction, Section 6: make broker-to-execution
+# composition explicit. This does NOT re-qualify B2C-B/the broker's own
+# lease/generation logic (already qualified, Corrections 2-6) -- it
+# proves the payload the REAL broker hands back for D5 IS, byte-for-
+# byte, the exact payload whose downstream native-mutation behavior
+# B2C-C already qualified (117+/117+ execution-layer PASS) via the
+# direct-provider shortcut every other B2C-C comparison in this project
+# uses. `flex_view`/`flex_master_path`/`flex_artifact_path`/
+# `flex_master_sha256` are the SAME broker-acquired objects Section
+# 10-18's flex-first checks above already established.
+# ---------------------------------------------------------------------
+print("\n=== Broker-to-execution composition closure (D5) ===")
+import canon  # noqa: E402
+import production_execution_layer as pel  # noqa: E402
+import fake_dme  # noqa: E402
+from scenarios import SCENARIOS  # noqa: E402
+
+d5_spec = SCENARIOS["D5_flex_first_ordering"]
+
+# 2+3: canonical-hash the broker-returned payload AND the direct-
+# provider Correction6 adapter projection the ordinary D5 execution
+# harness (`test_b2c_c_execution_layer_equivalence.py`) actually uses.
+direct_provider_master = ap.compute_migrated_master(d5_spec["wanted_folds"], flex_artifact_path, flex_master_sha256)
+flex_payload_hash = canon.sha_of(flex_view.payload)
+direct_provider_hash = canon.sha_of(direct_provider_master)
+
+# 4: require exact equality.
+check("broker_payload_equals_direct_provider_projection (D5) canonical-hashing the REAL broker's "
+      "flex_view.payload exactly equals canonical-hashing the direct-provider Correction6 adapter "
+      "projection the ordinary D5 execution harness uses -- proves the broker-returned payload IS "
+      "the exact payload whose downstream native-mutation behavior B2C-C already qualified",
+      flex_payload_hash == direct_provider_hash, (flex_payload_hash, direct_provider_hash))
+
+# 5: run one D5 migrated execution using flex_view.payload DIRECTLY (not
+# the direct-provider projection) and require the same mutation-stream/
+# final-tree hashes as the direct-provider projection's own run.
+_exec_ns, _exec_blocks = pel.build_full_namespace()
+_exec_ns["vs"] = fake_dme.FakeVsModule()
+
+
+class _ClosureFakeCommand(object):
+    def __init__(self):
+        self.class_totals = {
+            "pre_hidden_master_active": 0, "rig_losses": 0, "master_stranded": 0,
+            "parent_collapses": 0, "master_normalizations": 0, "master_unknown_unknown": 0,
+            "weak_unknown_diagnostics": 0, "ambiguous_losses": 0, "unresolved_owned_drift": 0,
+        }
+        self.production_mixed_direct_by_target = {}
+        self.log_calls = []
+
+    def log(self, msg):
+        self.log_calls.append(msg)
+
+
+def _closure_run_execution(spec, master):
+    shot, aset, root, mlog, handles, groups_by_path, controls_by_name = fake_dme.build_world(
+        spec["post_groups_spec"], spec["post_control_specs"],
+        rig_status=spec["rig_status"], hidden_groups=spec["hidden_groups"])
+    rig_context = _exec_ns["discover_rig_context"](shot, aset)
+    post = _exec_ns["capture_snapshot_explicit"](shot, aset, "POST", rig_context)
+    pre = spec["pre"]
+    cmd = _ClosureFakeCommand()
+    plan = _exec_ns["preflight_reconciliation_plan_pure"](cmd, pre, post, master, (u"shot1", u"aset1"))
+    uniformity_plan = _exec_ns["derive_generic_uniformity_plan"](pre, post, master, plan)
+    composer_result = _exec_ns["production_generic_composer"](root, pre, post, master, shot, aset, plan, uniformity_plan)
+    final_rig_context = _exec_ns["discover_rig_context"](shot, aset)
+    final_tree = _exec_ns["capture_snapshot_explicit"](shot, aset, "FINAL", final_rig_context)
+    return {"native_mutation_stream": list(mlog.entries), "final_tree": final_tree, "composer_result": composer_result}
+
+
+run_via_direct_provider = _closure_run_execution(d5_spec, direct_provider_master)
+run_via_broker_payload = _closure_run_execution(d5_spec, flex_view.payload)
+
+check("broker_payload_execution_stream_matches (D5) running the SAME D5 fixture through the real "
+      "production_generic_composer with the broker-acquired flex_view.payload as `master` produces "
+      "the IDENTICAL native mutation stream as running it with the direct-provider projection",
+      canon.sha_of(run_via_direct_provider["native_mutation_stream"]) == canon.sha_of(run_via_broker_payload["native_mutation_stream"]))
+
+check("broker_payload_execution_tree_matches (D5) running the SAME D5 fixture through the real "
+      "production_generic_composer with the broker-acquired flex_view.payload as `master` produces "
+      "the IDENTICAL final logical control-group tree as running it with the direct-provider "
+      "projection", canon.sha_of(run_via_direct_provider["final_tree"]) == canon.sha_of(run_via_broker_payload["final_tree"]))
+
 print("\nRESULT: %d/%d %s" % (
     sum(1 for _, c in RESULTS if c), len(RESULTS),
     "ALL PASS" if all(c for _, c in RESULTS) else "SOME FAILED"
 ))
+
+# B2C-C Targeted Audit Correction, Section 4: a failed check must cause
+# a failed process.
+if not all(condition for _, condition in RESULTS):
+    sys.exit(1)

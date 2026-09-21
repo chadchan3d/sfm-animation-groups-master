@@ -248,7 +248,9 @@ def compare_scenario(scenario_name, spec):
     # qualified 37/37) must STILL match here, fed by the SAME
     # `pre`/`post` this execution harness independently derives.
     decision_hash_b = canon.sha_of(baseline_run1["decision_plan"])
+    decision_hash_b2 = canon.sha_of(baseline_run2["decision_plan"])
     decision_hash_m = canon.sha_of(migrated_run1["decision_plan"])
+    decision_hash_m2 = canon.sha_of(migrated_run2["decision_plan"])
     decision_match = decision_hash_b == decision_hash_m
     check("%s.decision_plan_regression the already-qualified decision-plan stream still "
           "matches baseline vs migrated when derived from this execution harness's own "
@@ -297,6 +299,17 @@ def compare_scenario(scenario_name, spec):
     )
     verdict = "PASS" if (decision_match and outcome_match and stream_match and tree_match
                           and no_unexplained_exception) else "FAIL"
+    # Deterministic fixture-spec identity SHA (governing prompt Section 5)
+    # -- the declarative spec itself (groups/controls/wanted_folds/rig
+    # status/hidden groups), independent of any run's output, so a
+    # fixture's own identity is separately verifiable from its evidence.
+    fixture_spec_hash = canon.sha_of({
+        "post_groups_spec": spec["post_groups_spec"],
+        "post_control_specs": spec["post_control_specs"],
+        "wanted_folds": sorted(spec["wanted_folds"]),
+        "rig_status": spec["rig_status"],
+        "hidden_groups": spec["hidden_groups"],
+    })
     LEDGER.append({
         "scenario": scenario_name,
         "note": spec["note"],
@@ -305,6 +318,26 @@ def compare_scenario(scenario_name, spec):
         "mutation_count": len(baseline_run1["native_mutation_stream"]),
         "composer_result": baseline_run1["composer_result"],
         "initial_post_hash": canon.sha_of(baseline_run1["initial_post"]),
+        "fixture_spec_hash": fixture_spec_hash,
+        # Full repeat-1/repeat-2, baseline/migrated evidence (governing
+        # prompt Section 5) -- NOT replaced with only
+        # `determinism_confirmed: true`; every one of the 12 required
+        # SHAs is preserved explicitly.
+        "baseline_decision_plan_hash_repeat1": decision_hash_b,
+        "baseline_decision_plan_hash_repeat2": decision_hash_b2,
+        "migrated_decision_plan_hash_repeat1": decision_hash_m,
+        "migrated_decision_plan_hash_repeat2": decision_hash_m2,
+        "baseline_native_mutation_stream_hash_repeat1": b1_stream_hash,
+        "baseline_native_mutation_stream_hash_repeat2": b2_stream_hash,
+        "migrated_native_mutation_stream_hash_repeat1": m1_stream_hash,
+        "migrated_native_mutation_stream_hash_repeat2": m2_stream_hash,
+        "baseline_final_tree_hash_repeat1": b1_tree_hash,
+        "baseline_final_tree_hash_repeat2": b2_tree_hash,
+        "migrated_final_tree_hash_repeat1": m1_tree_hash,
+        "migrated_final_tree_hash_repeat2": m2_tree_hash,
+        # Back-compat convenience aliases (repeat-1 values) -- kept so
+        # any existing tooling/report text referencing the older
+        # unsuffixed field names still resolves to a value.
         "baseline_decision_plan_hash": decision_hash_b,
         "migrated_decision_plan_hash": decision_hash_m,
         "baseline_native_mutation_stream_hash": b1_stream_hash,
@@ -601,34 +634,36 @@ check("NC-B (flex-first ordering) swapping eye_flex_control's declared order to 
       "eye_bone_control in the migrated authority is detected in the native mutation stream "
       "(add_control_to_group call order changes)", nc_b_differs)
 
-# NC-C (Fixture C / Tail relocation): move tail_control's rig-visible
-# PRE path to an ADJACENT WRONG path (RigLegs instead of RigBody) in the
-# migrated run's fixture construction, keeping master identical --
-# proves the oracle detects a wrong relocation target.
-tail_spec = SCENARIOS["D2_tail_relocation"]
+# NC-C (Fixture C / Tail relocation, CORRECTED fixture D6): retain
+# 'tail_control_a' in its prior path (WrongGroup) instead of relocating
+# it into the real Master-declared "Tail" group -- suppress AddControl
+# for that one control only, mirroring NC-A's proven pattern.
+tail_spec = SCENARIOS["D6_tail_relocation"]
 tail_baseline_master = ap.compute_baseline_master(tail_spec["wanted_folds"], master_path)
+tail_migrated_master = ap.compute_migrated_master(tail_spec["wanted_folds"], artifact_path, master_sha256)
 baseline_run_tail = run_execution(tail_spec, tail_baseline_master)
-wrong_path_pre = dict(tail_spec["pre"])
-wrong_path_pre = json.loads(json.dumps(tail_spec["pre"], default=list))
-# Relabel the control's PRE group from RigBody to RigLegs (an adjacent,
-# wrong active-rig family) -- everything else stays identical.
-if u"RigBody" in wrong_path_pre["groups"]:
-    body_meta = wrong_path_pre["groups"].pop(u"RigBody")
-    body_meta["path"] = u"RigLegs"
-    body_meta["name"] = u"RigLegs"
-    wrong_path_pre["groups"][u"RigLegs"] = body_meta
-wrong_path_pre["memberships"] = {u"tail_control": [u"RigLegs"]}
-wrong_spec = dict(tail_spec)
-wrong_spec["pre"] = wrong_path_pre
-migrated_run_tail_wrong = run_execution(wrong_spec, tail_baseline_master)
+
+_orig_add_control_tail = fake_dme.FakeDmeControlGroup.AddControl
+
+
+def _suppress_one_tail_move(self, control):
+    if control.GetName() == u"tail_control_a":
+        return  # retain this control in its prior path (WrongGroup) -- suppressed
+    _orig_add_control_tail(self, control)
+
+
+fake_dme.FakeDmeControlGroup.AddControl = _suppress_one_tail_move
+try:
+    migrated_run_tail_wrong = run_execution(tail_spec, tail_migrated_master)
+finally:
+    fake_dme.FakeDmeControlGroup.AddControl = _orig_add_control_tail
+
 nc_c_differs = (
     canon.sha_of(baseline_run_tail["native_mutation_stream"]) != canon.sha_of(migrated_run_tail_wrong["native_mutation_stream"])
     or canon.sha_of(baseline_run_tail["final_tree"]) != canon.sha_of(migrated_run_tail_wrong["final_tree"])
-    or baseline_run_tail["outcome"] != migrated_run_tail_wrong["outcome"]
 )
-check("NC-C (Tail relocation) relabeling tail_control's rig-visible PRE family from RigBody to "
-      "an adjacent wrong family (RigLegs) is detected", nc_c_differs,
-      (baseline_run_tail["outcome"], migrated_run_tail_wrong["outcome"]))
+check("NC-C (Tail relocation, D6) retaining 'tail_control_a' in its prior path (WrongGroup) "
+      "instead of relocating it into the real Master-declared 'Tail' group is detected", nc_c_differs)
 
 # NC-D (Fixture D / repeated-control preservation): D3's two repeated-
 # key controls ('stranded_control', 'Stranded_Control') are BOTH
@@ -703,26 +738,52 @@ nc_d_b_differs = (
 check("NC-D-b (repeated-control preservation) an accidental extra membership mutation reparenting "
       "'Stranded_Control' into RigArms is detected", nc_d_b_differs)
 
-# NC-E (Fixture E / untouched custom group): D4's CustomUserGroup/
-# Nested subtree receives ZERO direct native mutations from real
-# production at all (confirmed by direct inspection: D4's native
-# mutation stream contains only ROOT sibling-reorder operations, never
-# touching CustomUserGroup) -- monkeypatching `SetVisible` is therefore
-# ineffective (disclosed below as NC-E-a); the effective negative
+# NC-E (Fixture E / untouched custom group, REDESIGNED D4): the
+# corrected UserCustomGroup/{Alpha,Beta} subtree receives ZERO direct
+# native mutations from real production at all (confirmed below by an
+# EXACT handle/name-based scan of the mutation log, not just a hash
+# comparison) -- monkeypatching `SetVisible` is therefore ineffective
+# (disclosed below as NC-E-a, same reason as before: real production
+# never calls SetVisible on this group at all); the effective negative
 # control instead injects one accidental mutation directly into the
-# live world's CustomUserGroup at construction time, superseded as
+# live world's UserCustomGroup at construction time, superseded as
 # NC-E-b.
 custom_spec = SCENARIOS["D4_untouched_custom_group_preservation"]
 custom_baseline_master = ap.compute_baseline_master(custom_spec["wanted_folds"], master_path)
 custom_migrated_master = ap.compute_migrated_master(custom_spec["wanted_folds"], artifact_path, master_sha256)
 baseline_run_custom = run_execution(custom_spec, custom_baseline_master)
 
+# Precise, handle/name-based proof (governing prompt Section 3): "zero
+# mutation-log entries target any group/control handle inside the
+# custom subtree" -- stronger than a hash-equality check, which could in
+# principle mask a mutation that happened to leave the final state
+# byte-identical (e.g. a set-then-reset toggle). Build one throwaway
+# world from the SAME declarative spec purely to read out the custom
+# subtree's real handles/names, then scan the ACTUAL baseline run's own
+# mutation log against them directly.
+_probe_shot, _probe_aset, _probe_root, _probe_mlog, _probe_handles, _probe_groups_by_path, _probe_controls_by_name = (
+    fake_dme.build_world(custom_spec["post_groups_spec"], custom_spec["post_control_specs"],
+                          rig_status=custom_spec["rig_status"], hidden_groups=custom_spec["hidden_groups"])
+)
+custom_subtree_group_handles = set(
+    _probe_groups_by_path[p].GetHandle() for p in
+    (u"UserCustomGroup", u"UserCustomGroup/Alpha", u"UserCustomGroup/Beta")
+)
+custom_subtree_control_names = {u"custom_control_alpha", u"custom_control_beta"}
+custom_subtree_touched = [
+    e for e in baseline_run_custom["native_mutation_stream"]
+    if e.get("target") in custom_subtree_group_handles or e.get("control") in custom_subtree_control_names
+]
+check("custom_subtree.zero_mutation_log_entries zero mutation-log entries (by exact group handle "
+      "or control name) target anything inside UserCustomGroup/{Alpha,Beta}", len(custom_subtree_touched) == 0,
+      custom_subtree_touched)
+
 _orig_set_visible = fake_dme.FakeDmeControlGroup.SetVisible
 
 
 def _accidental_custom_mutation(self, value):
     _orig_set_visible(self, value)
-    if self.name == u"CustomUserGroup":
+    if self.name == u"UserCustomGroup":
         _orig_set_visible(self, not value)  # accidental extra, wrong-value toggle
 
 
@@ -737,8 +798,8 @@ nc_e_a_differs = (
     or canon.sha_of(baseline_run_custom["final_tree"]) != canon.sha_of(migrated_run_custom_a["final_tree"])
 )
 print("[NC-E-a, disclosed ineffective] wrapping SetVisible with an accidental extra toggle on "
-      "'CustomUserGroup' produced a difference: %r (expected False -- real production never calls "
-      "SetVisible on CustomUserGroup at all, so the wrapper is never invoked for it; superseded by "
+      "'UserCustomGroup' produced a difference: %r (expected False -- real production never calls "
+      "SetVisible on UserCustomGroup at all, so the wrapper is never invoked for it; superseded by "
       "NC-E-b)" % (nc_e_a_differs,))
 
 _orig_build_world_e = fake_dme.build_world
@@ -747,7 +808,7 @@ _orig_build_world_e = fake_dme.build_world
 def _build_world_accidental_custom_mutation(*args, **kwargs):
     result = _orig_build_world_e(*args, **kwargs)
     shot, aset, root, mlog, handles, groups_by_path, controls_by_name = result
-    custom_group = groups_by_path.get(u"CustomUserGroup")
+    custom_group = groups_by_path.get(u"UserCustomGroup")
     if custom_group is not None:
         # Accidental mutation no fixture-intended code path should ever
         # perform against this untouched, unrelated subtree.
@@ -766,7 +827,7 @@ nc_e_b_differs = (
     or canon.sha_of(baseline_run_custom["final_tree"]) != canon.sha_of(migrated_run_custom_b["final_tree"])
 )
 check("NC-E-b (untouched custom group) an accidental SetVisible(False) mutation targeting "
-      "'CustomUserGroup' (which no fixture-intended code path should ever touch) is detected", nc_e_b_differs)
+      "'UserCustomGroup' (which no fixture-intended code path should ever touch) is detected", nc_e_b_differs)
 
 # Final Expansion Fixtures evidence enrichment (governing prompt's
 # "Evidence" section): fixture SHA (the shared b2c_c authority Master/
@@ -803,3 +864,8 @@ print("\nRESULT: %d/%d %s" % (
     sum(1 for _, c in RESULTS if c), len(RESULTS),
     "ALL PASS" if all(c for _, c in RESULTS) else "SOME FAILED"
 ))
+
+# B2C-C Targeted Audit Correction, Section 4: a failed check must cause
+# a failed process.
+if not all(condition for _, condition in RESULTS):
+    sys.exit(1)

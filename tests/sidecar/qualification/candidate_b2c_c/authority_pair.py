@@ -89,16 +89,34 @@ MASTER_TXT_BODY = (
     u'\t"control"\t\t"valve.r_hand"\n'
     u'\t"control"\t\t"unrigged_stranded"\n'
     u"}\n"
-    # B2C-C Final Expansion Fixtures -- D2 (Tail relocation): an ordinary
-    # anatomical "Body/Tail" destination, refined to the active-rig
+    # B2C-C Targeted Audit Correction (2026-09-19) -- D2 was RENAMED from
+    # "Tail relocation" to "RigBody family-counterpart refinement" (it
+    # never satisfied Fixture C -- see the corrected report). Kept as an
+    # ordinary anatomical "Body" destination, refined to the active-rig
     # counterpart "RigBody" by _active_rig_counterpart_destination when
     # fresh PRE proves the control is currently RigBody-rooted.
     u'"Body"\n'
     u"{\n"
-    u'\t"Tail"\n'
-    u"\t{\n"
-    u'\t\t"control"\t\t"tail_control"\n'
-    u"\t}\n"
+    u'\t"control"\t\t"rigbody_family_control"\n'
+    u"}\n"
+    # B2C-C Targeted Audit Correction -- D6 (the CORRECTED Tail
+    # relocation fixture, Fixture C). The REAL canonical Master
+    # (sfm_defaultanimationgroups.txt, line 116343) declares "Tail" as a
+    # ROOT-LEVEL group -- a direct sibling of "Body"/"RigBody"/"RigArms"/
+    # etc, NOT nested under "Body" (grep-confirmed via structural
+    # parsing; see the report's Tail-disposition section). Declared here,
+    # at root level, matching that real structure exactly. Two controls,
+    # in this declared order, so a genuine relocation into "Tail" is
+    # observable via the SAME generic MASTER_NORMALIZATION reconciliation
+    # category every other non-rig-family fixture already uses -- no
+    # Tail-specific runtime branch exists anywhere in the frozen source
+    # (grep-confirmed: zero case-insensitive "tail" matches in the entire
+    # 13,594-line file), so none is invented here either.
+    u'"Tail"\n'
+    u"{\n"
+    u'\t"selectable"\t\t"1"\n'
+    u'\t"control"\t\t"tail_control_a"\n'
+    u'\t"control"\t\t"tail_control_b"\n'
     u"}\n"
 )
 

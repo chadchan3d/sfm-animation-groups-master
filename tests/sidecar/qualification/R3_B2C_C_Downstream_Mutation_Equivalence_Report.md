@@ -732,3 +732,275 @@ All PASS criteria from the governing prompt are now satisfied:
 Do NOT self-authorize production promotion. Do NOT begin B2C-D work in this turn — this verdict
 authorizes a future B2C-D phase; it does not constitute performing it. No SFM run. No
 staging/commit/push performed as part of reaching this verdict.
+
+---
+
+# Part 4 — Targeted Independent-Audit Correction (2026-09-19/21)
+
+Governing prompt: `SFM_CGN_B2C_C_Targeted_Audit_Correction_ClaudeCode_Prompt_2026-09-19.md`.
+Independent audit target: pushed commit `5cc98966d2425ca25ffcf310809fd01ae8514ff8`. Independent
+verdict: `B2C-C PARTIAL — CORE DOWNSTREAM EQUIVALENCE EVIDENCE SUPPORTED; TWO FINAL-FIXTURE
+CONTRACT GAPS BLOCK B2C-D`. This Part closes those two named gaps (Fixture C / Tail; Fixture E /
+custom-subtree preservation), hardens harness exit status, completes per-fixture evidence, and adds
+an explicit broker-to-execution composition proof — without redoing the successful B2C-C
+architecture (the 10 core fixtures, D1/D3/D5, the masked-mutual-failure fix, the fake-DME exclusive
+`AddChild` fix, and the dependency cut/live-enumeration deferral were re-run as regression checks,
+unchanged, per Section 1).
+
+## 43. Correction record: D2 was NOT a true Tail relocation fixture (explicit retraction)
+
+**Prior report claim (Sections 2–31 above, superseded by this section):** D2 ("Tail relocation")
+demonstrated Fixture C. **This claim is retracted as stated.** The independent audit correctly
+identified that D2 declared a synthetic `Body/Tail/tail_control` Master entry that does not match
+the real canonical Master's actual structure, always reported `already_correct_count=1`/
+`moved_count=0` (never created or moved a control into any group literally named "Tail"), and
+silently refined the destination back to "RigBody" — a real, legitimate, already-qualified
+mechanism (`_active_rig_counterpart_destination`'s RigBody-family refinement), but not a
+demonstration of Tail placement.
+
+**Disposition determined this round (Case A, verified fresh from the frozen source and the real
+canonical Master, not assumed):**
+
+1. **No Tail-specific Normalizer runtime branch exists.** Re-confirmed by a fresh, full
+   case-insensitive grep of the entire 13,594-line frozen production source for the literal
+   "tail": **zero matches**. "Tail relocation" is a Master-taxonomy fact only, reconciled entirely
+   by the same generic reconciliation machinery every other destination group uses.
+2. **D2 is renamed to `D2_rigbody_family_counterpart_refinement`** in `candidate_b2c_c/scenarios.py`
+   and `candidate_b2c_c/authority_pair.py`'s Master TXT (control renamed `tail_control` →
+   `rigbody_family_control`, Master destination moved from the fictitious `Body/Tail` to a plain
+   `Body`). It is RETAINED — per the correction prompt's explicit allowance — as valid evidence for
+   the RigBody-family refinement mechanism only. It is no longer claimed to satisfy Fixture C
+   anywhere in this report or the ledgers.
+3. **The current canonical `Tail` authority/path is proven** through the frozen parser, the
+   Correction6 adapter/projection, and exact destination/order/metadata — against the REAL
+   canonical `sfm_defaultanimationgroups.txt` (not a synthetic stand-in), in a new dedicated test:
+   `test_b2c_c_tail_real_canonical_authority.py`, **15/15 PASS**:
+   - Structural re-derivation (a fresh brace/indent walk, not cited from memory): `"Tail"` sits at
+     indent depth 1 in `sfm_defaultanimationgroups.txt` (line 116343) — a direct child of the
+     top-level `groupFile` wrapper, i.e. a ROOT-LEVEL group, a sibling of `Body`/`RigBody`/
+     `RigArms`/etc, **never nested under `Body`**.
+   - Three real tail control literals (`BaseTail`, `Back_tail_01_L`, `Back_tail_01_R`, in their
+     real declared order) resolve to destination `Tail` identically via `parse_targeted_master`
+     (real Python 2.7.5) AND the Correction6 adapter (via the real, pre-existing
+     `official.sfmsidecar` compiled from the actual canonical Master) — full canonical-hash
+     equality, not just spot-checked fields.
+   - `group_metadata["Tail"]` agrees: `selectable_explicit: True` (matching the Master's own
+     declared `"selectable" "1"` field), sourced identically by both sides.
+4. **A new downstream generic execution fixture, `D6_tail_relocation`,** makes Tail placement
+   genuinely observable through the real generic machinery (see Section 44).
+
+## 44. D6 — the corrected Tail relocation fixture
+
+`candidate_b2c_c/authority_pair.py`'s synthetic Master TXT now declares `"Tail"` at ROOT LEVEL
+(matching the real canonical Master's actual structure exactly, per Section 43 item 3), containing
+two controls in this exact order: `tail_control_a`, `tail_control_b`.
+
+D6 exercises the SAME `RIG_OWNED_EFFECTIVE_CONTROL` / "rig-loss" category fixture A2 already uses
+(a rig-owned, visible control whose OWN native group becomes hidden in POST) — not a Tail-specific
+mechanism (none exists), but the real generic mechanism that reconciles it once a rig-owned control
+becomes "lost." Both controls start owned+visible in `WrongGroup`; `WrongGroup` becomes hidden in
+native POST; Master destination is the real root-level `Tail`.
+
+Verified by direct execution (`production_generic_composer`'s own `composer_result`):
+`created_paths: ["Tail"]`, `moved_count: 2`, both controls' `add_control_to_group` calls recorded
+with `source_path="WrongGroup"`, `destination_path="Tail"`, and
+`destination_direct_order_authorities: {"Tail": {"order": ("tail_control_a", "tail_control_b"),
+"authority": "EXACT_MASTER_DESTINATION_TOTAL_ORDER"}}` — the SAME Master-declaration-order
+authority mechanism D5 already qualified, now applied to a genuinely-CREATED destination group
+(not merely an already-correct one). Final tree: `Tail` contains both controls, in that exact
+order.
+
+Decision layer (`test_b2c_c_plan_layer_equivalence.py`) and execution layer (`test_b2c_c_execution_
+layer_equivalence.py`) both re-run with D6 included: baseline and migrated agree EXACTLY at
+decision-plan, native-mutation-stream, and final-tree level (see Section 46's fresh totals).
+
+**Negative control NC-C** (redesigned for D6): suppressing `AddControl` for `tail_control_a` only
+(retaining it in `WrongGroup` instead of relocating it into `Tail`) is detected via mutation-stream
+and final-tree hash divergence. **Effective**, no disclosed-ineffective attempt was needed this
+time (unlike D1/D5's fixtures, D6's move is never skipped by an "already-correct" branch, so the
+direct suppress-one-control pattern works on the first attempt).
+
+## 45. Correction record: D4's "zero custom-subtree mutations" claim (explicit correction)
+
+**Prior report claim (Section 25 area above, superseded by this section):** D4 proved
+`CustomUserGroup/Nested` received zero native mutations. **This claim was not actually supported by
+the original design and is corrected here.** The independent audit correctly found: D4's root
+children started as `{"CustomUserGroup", "RigArms"}`; `fake_dme.build_world` creates root-level
+groups in ALPHABETICAL order regardless of `groups_spec` declaration order (`"CustomUserGroup" <
+"RigArms"`), while the real, frozen `production_reorder_children_by_master`'s `desired` order for
+`<ROOT>` always places every Master-KNOWN group (`RigArms`) before every contextual/unknown group
+(`CustomUserGroup`) — so `current_names` never equalled `desired`, and the real (unconditional-
+when-order-differs) RemoveChild-all/AddChild-all root reorder genuinely fired, touching the custom
+group's own position among root children even though nothing about ITS OWN semantics was wrong.
+
+**Root-cause finding (verified by direct reading of the frozen source, not assumed):**
+`production_reorder_children_by_master` (frozen source, ~line 6650) has an early exit —
+`if desired == current_names: return desired` — evaluated BEFORE any `RemoveChild`/`AddChild` call.
+The original D4 design never reached that early exit.
+
+**Fix, verified empirically:** renaming the custom group to `UserCustomGroup` (which sorts AFTER
+`"RigArms"` alphabetically — matching where a contextual group always lands in `desired` anyway)
+makes `current_names` for `<ROOT>` already equal `desired`, so the early exit fires and **zero**
+`RemoveChild`/`AddChild` calls touch `<ROOT>` at all. `UserCustomGroup` is also not one of the 6
+named branches `production_reorder_contextual_tree` recurses into, so its own children are never
+reorder candidates regardless of their order. Direct execution confirms: **`mutation_count == 0`**
+for the corrected D4 fixture — the "zero native mutations" claim IS now genuinely true, for the
+corrected design.
+
+**Non-trivial per the correction prompt's explicit requirements** (`fixture_builder.py`/
+`fake_dme.py` were extended with OPTIONAL per-group `selectable`/`snappable`/`group_color`
+overrides — defaulting to the same True/True/[255,255,255,255] every pre-existing fixture already
+relies on, zero behavior change for any fixture that omits them — to make this representable at
+all):
+- Two custom child groups in a known order: `UserCustomGroup/Alpha`, `UserCustomGroup/Beta`
+  (created in that order by the same alphabetical fake-tree construction rule).
+- Two custom controls: `custom_control_alpha`, `custom_control_beta`.
+- Non-default `selectable`/`snappable`/`group_color` on `UserCustomGroup` itself
+  (`False`/`False`/`[11,22,33,255]`), non-default `group_color` on `Alpha`
+  (`[44,55,66,255]`), non-default `visible`/`selectable` on `Beta` (`False`/`False`).
+
+**Precise "zero mutation-log entries" proof (governing prompt Section 3, stronger than a hash-
+equality check):** a dedicated check (`custom_subtree.zero_mutation_log_entries`) builds one
+throwaway world from the SAME declarative spec to read out the exact real handles of
+`UserCustomGroup`/`Alpha`/`Beta` and the exact control names `custom_control_alpha`/
+`custom_control_beta`, then scans the ACTUAL baseline run's mutation log directly against those
+handles/names — **zero matching entries**, confirmed by direct execution, not inferred from an
+unrelated hash comparison (which could in principle mask a set-then-reset toggle).
+
+**Negative controls** (both categories required by the correction prompt, honestly disclosed as
+before): **NC-E-a** (disclosed ineffective — wrapping `SetVisible` with an accidental toggle;
+ineffective because real production never calls `SetVisible` on `UserCustomGroup` at all, so the
+wrapper is never invoked) superseded by **NC-E-b** (effective — injecting one accidental
+`SetVisible(False)` call directly into the live world's `UserCustomGroup` at construction time,
+detected via mutation-stream/final-tree divergence).
+
+Group handle/child-order/metadata preservation was already covered by the pre-existing
+`final_tree` hash-equality check (`D4_untouched_custom_group_preservation.final_tree`, PASS) —
+now additionally reinforced by the precise zero-mutation-log-entries check above.
+
+## 46. Fresh regression totals (this Part, real Python 2.7.5 / Windows)
+
+| Suite | Result | Exit code |
+|---|---|---|
+| Decision layer (`test_b2c_c_plan_layer_equivalence.py`, now 16 named fixtures incl. D6) | **55/55 PASS** | 0 |
+| Execution layer (`test_b2c_c_execution_layer_equivalence.py`) | **125/125 PASS** | 0 |
+| Broker-mediated sanity (`test_b2c_c_broker_mediated_authority_sanity.py`) | **20/20 PASS** | 0 |
+| Semantic regression (`test_b2c_correction6_semantic_regression.py`) | **14/14 PASS** | 0 |
+| Fake-DME `AddChild` regression (`test_b2c_c_fake_dme_addchild_regression.py`) | **11/11 PASS** | 0 |
+| New Tail real-canonical-authority closure (`test_b2c_c_tail_real_canonical_authority.py`) | **15/15 PASS** | 0 |
+| Exit-status hardening self-test (`test_b2c_c_exit_status_self_test.py`) | **4/4 PASS** | 0 |
+
+Canonical structure hash unchanged: `3c806e2d3f7a07267961dd970d35595feaf54e6a6a7ee3fd7179337615d010e2`.
+W3 remains `UNKNOWN`. No SFM run at any point. Frozen production Normalizer (SHA-256
+`6656aa9022d458c22c2549da5dfdc14539a572d91200c3f0f459c1453dfd092e`) and canonical Master (SHA-256
+`ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`) re-verified unchanged.
+
+## 47. Exit-status hardening (governing prompt Section 4)
+
+All four RESULTS-accumulating B2C-C qualification scripts now end with:
+```python
+if not all(condition for _, condition in RESULTS):
+    sys.exit(1)
+```
+`test_b2c_c_plan_layer_equivalence.py`, `test_b2c_c_execution_layer_equivalence.py`,
+`test_b2c_c_broker_mediated_authority_sanity.py`, `test_b2c_c_fake_dme_addchild_regression.py`
+(the two new files added this Part, `test_b2c_c_tail_real_canonical_authority.py` and
+`test_b2c_c_exit_status_self_test.py`, carry the same guard from their first commit). Python 2.7
+compatibility preserved (no syntax beyond what every other file already uses).
+
+`test_b2c_c_exit_status_self_test.py` proves the guard works in BOTH directions, as real
+subprocesses under the real Python 2.7.5 interpreter: a synthetic script with every check passing
+exits 0; the SAME script with one check deliberately forced to fail exits non-zero; and the REAL,
+already-hardened `test_b2c_c_fake_dme_addchild_regression.py`, run as a subprocess in its current
+genuinely-passing state, exits 0. **4/4 PASS.**
+
+## 48. Complete per-fixture evidence (governing prompt Section 5)
+
+`R3_B2C_C_execution_layer_ledger.json` and `R3_B2C_C_plan_layer_ledger.json` now preserve, for
+every one of the 16 named fixtures (all of D1–D6, plus the original 10 core fixtures) — NOT
+replaced with only a `determinism_confirmed: true` boolean:
+
+- a deterministic `fixture_spec_hash` (the declarative spec's own identity, independent of any
+  run's output);
+- `baseline_decision_plan_hash_repeat1`/`_repeat2`, `migrated_decision_plan_hash_repeat1`/`_repeat2`
+  (execution-layer ledger) and `baseline_decision_hash_repeat1`/`_repeat2`,
+  `migrated_decision_hash_repeat1`/`_repeat2` (plan-layer ledger);
+- `baseline_native_mutation_stream_hash_repeat1`/`_repeat2`,
+  `migrated_native_mutation_stream_hash_repeat1`/`_repeat2`;
+- `baseline_final_tree_hash_repeat1`/`_repeat2`, `migrated_final_tree_hash_repeat1`/`_repeat2`;
+- `mutation_count`, `group_count`, `control_count` (D-series), `composer_result`, `initial_post_hash`;
+- `broker_mediated_sanity` flag (true only for `D5_flex_first_ordering`, per Section 49);
+- `verdict` (PASS/FAIL/INCONCLUSIVE).
+
+All 12 repeat-1/repeat-2 SHA fields the correction prompt lists are present and populated for every
+fixture; back-compat unsuffixed aliases (repeat-1 values) are also kept so no existing tooling
+referencing the older field names breaks.
+
+## 49. Broker-to-execution composition proof (governing prompt Section 6)
+
+Added to `test_b2c_c_broker_mediated_authority_sanity.py` (now **20/20 PASS**, up from 17/17), a
+narrow D5 closure that does NOT re-qualify B2C-B's own lease/generation logic (already qualified,
+Corrections 2–6):
+
+1. Acquired D5's authority through the REAL broker (`Broker.acquire_or_reuse_views` →
+   `Broker.lease_view`) — the SAME `flex_view` Part 3's flex-first broker checks already
+   established.
+2. Canonical-hashed `flex_view.payload`.
+3. Canonical-hashed the direct-provider Correction6 adapter projection (`authority_pair.
+   compute_migrated_master`) the ordinary D5 execution harness uses.
+4. **Required exact equality — confirmed** (`broker_payload_equals_direct_provider_projection`,
+   PASS): the broker-returned payload IS, byte-for-byte, the exact payload whose downstream
+   behavior B2C-C already qualified.
+5. Ran D5's migrated execution TWICE through the real `production_generic_composer` — once with
+   the direct-provider projection, once with `flex_view.payload` directly as `master` — and
+   required identical native-mutation-stream and final-tree hashes. **Both confirmed**
+   (`broker_payload_execution_stream_matches`, `broker_payload_execution_tree_matches`, PASS).
+
+## 50. What remains uncovered (honest accounting, re-updated)
+
+1. Live target/scope enumeration — still deferred to a future live-runtime gate (Section 39/11,
+   unchanged; re-confirmed this Part via a fresh grep of the eligibility-gate family: zero `master`
+   references in all 7 dependencies of `_gate_is_alh`, 3 in `_gate_is_alh` itself, matching Part 2's
+   original finding exactly, confirming the frozen file is unchanged).
+2. The native `ifm.dll` rebuild callback is still never emulated (by design).
+3. No new fake-DME contract gap was found while correcting D4/D6; the two ineffective negative-
+   control attempts on the corrected fixtures (D6 needed none; D4's NC-E-a) were, once again, found
+   to be inherent correct properties of the fixtures' own intended behavior, not gaps.
+
+No other named gap from either the original Final Expansion Fixtures prompt or this targeted audit
+correction prompt remains open.
+
+## 51. Repo state / scope discipline (Part 4)
+
+No SFM run. No production/canonical-Master file modified. No qualified Correction6 authority
+semantics modified. No B2C-D or Character Preset work begun. No staging/commit/push performed
+before local PASS was reached (per the governing prompt's own ordering). Existing 10 core fixtures,
+D1/D3/D5, the masked-mutual-failure fix, the fake-DME `AddChild` fix, and the dependency-cut/
+live-enumeration deferral were re-run as regression checks (Section 46) and NOT redesigned.
+
+## 52. Final verdict (supersedes Section 42)
+
+Both named gaps from the independent audit are closed:
+
+- **Fixture C (Tail)**: D2's false claim retracted and renamed; the real canonical Master's Tail
+  authority/path proven directly (frozen parser vs Correction6 adapter, 15/15 PASS); a corrected,
+  observable relocation fixture (D6) built and qualified with an effective negative control.
+- **Fixture E (custom-subtree preservation)**: root cause of the original design's reorder-touch
+  found and explained; a corrected fixture (redesigned D4) genuinely reaches the reorder function's
+  own early exit, proven by an exact handle/name-based zero-mutation-log-entries check, not just a
+  hash comparison; non-trivial per the correction prompt's own requirements; effective negative
+  control present (with one disclosed-ineffective first attempt, honestly documented).
+
+Plus: harness exit status hardened and self-test-proven in both directions (Section 47); complete
+per-fixture evidence (all 12 repeat-1/repeat-2 SHAs, not just a boolean) for all 16 named fixtures
+(Section 48); an explicit broker-to-execution composition proof for D5 (Section 49); all previously
+qualified evidence re-run as regression, unchanged (Section 46); semantic regression and canonical
+hash unchanged, W3 still `UNKNOWN`.
+
+**`B2C-C DOWNSTREAM MUTATION EQUIVALENCE PASS — AUTHORIZE B2C-D`**
+
+This is a LOCAL result, per this project's own governance discipline (Part 2/3's own verdicts made
+the same distinction) — it reflects that the two independently-identified gaps are now closed with
+the SAME evidentiary rigor as the rest of B2C-C, not a claim that a further independent audit is
+unnecessary or has already occurred. Do NOT self-authorize production promotion. Do NOT begin
+B2C-D work in this turn.

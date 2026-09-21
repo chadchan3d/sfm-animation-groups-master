@@ -2,8 +2,11 @@
   "scenarios": [
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "28920a212d82482d3d1a0c7fa445d1bb8f5e0013b55d37652bc25eae643883f9",
+      "baseline_decision_hash_repeat2": "28920a212d82482d3d1a0c7fa445d1bb8f5e0013b55d37652bc25eae643883f9",
       "baseline_hash": "28920a212d82482d3d1a0c7fa445d1bb8f5e0013b55d37652bc25eae643883f9",
-      "baseline_master_sha": "65e470d5e3aa00dae8a49a0fa7d8f0958ddc1b5da391d655398952c6cefbda22",
+      "baseline_master_sha": "e9a7419c332252e35ace9dc2a10150dcf156b237fd05139cc29b4232f47911a1",
+      "fixture_spec_hash": "720bc19f354c792c98bf2935a31b257d643665e44965173ac1d1a9e5aa0add2f",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -44,8 +47,10 @@
         "rig_destinations_count": 0,
         "rig_rows_count": 0
       },
+      "migrated_decision_hash_repeat1": "28920a212d82482d3d1a0c7fa445d1bb8f5e0013b55d37652bc25eae643883f9",
+      "migrated_decision_hash_repeat2": "28920a212d82482d3d1a0c7fa445d1bb8f5e0013b55d37652bc25eae643883f9",
       "migrated_hash": "28920a212d82482d3d1a0c7fa445d1bb8f5e0013b55d37652bc25eae643883f9",
-      "migrated_master_sha": "65e470d5e3aa00dae8a49a0fa7d8f0958ddc1b5da391d655398952c6cefbda22",
+      "migrated_master_sha": "e9a7419c332252e35ace9dc2a10150dcf156b237fd05139cc29b4232f47911a1",
       "note": "control already correctly placed and visible; classify_production should emit no rows for it",
       "scenario": "A1_noop_static",
       "verdict": "PASS",
@@ -55,8 +60,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "5afa71476487b89e742f8c4e7a0a4eefb0ce2e2687d9238b7ad392891c626972",
+      "baseline_decision_hash_repeat2": "5afa71476487b89e742f8c4e7a0a4eefb0ce2e2687d9238b7ad392891c626972",
       "baseline_hash": "5afa71476487b89e742f8c4e7a0a4eefb0ce2e2687d9238b7ad392891c626972",
-      "baseline_master_sha": "65e470d5e3aa00dae8a49a0fa7d8f0958ddc1b5da391d655398952c6cefbda22",
+      "baseline_master_sha": "e9a7419c332252e35ace9dc2a10150dcf156b237fd05139cc29b4232f47911a1",
+      "fixture_spec_hash": "c37345a92ff2ab60b96b59d319f6be167707ce1949bcceb5faef907b87d0ab87",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -97,8 +105,10 @@
         "rig_destinations_count": 1,
         "rig_rows_count": 1
       },
+      "migrated_decision_hash_repeat1": "5afa71476487b89e742f8c4e7a0a4eefb0ce2e2687d9238b7ad392891c626972",
+      "migrated_decision_hash_repeat2": "5afa71476487b89e742f8c4e7a0a4eefb0ce2e2687d9238b7ad392891c626972",
       "migrated_hash": "5afa71476487b89e742f8c4e7a0a4eefb0ce2e2687d9238b7ad392891c626972",
-      "migrated_master_sha": "65e470d5e3aa00dae8a49a0fa7d8f0958ddc1b5da391d655398952c6cefbda22",
+      "migrated_master_sha": "e9a7419c332252e35ace9dc2a10150dcf156b237fd05139cc29b4232f47911a1",
       "note": "RigArms visible in PRE, invisible in POST -- classic native-Rebuild rig loss",
       "scenario": "A2_rig_owned_effective_control",
       "verdict": "PASS",
@@ -108,8 +118,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "937b18cb605dc4e2b28aef4b841cfb5ad531d0e201476880bbc8164193dfae5d",
+      "baseline_decision_hash_repeat2": "937b18cb605dc4e2b28aef4b841cfb5ad531d0e201476880bbc8164193dfae5d",
       "baseline_hash": "937b18cb605dc4e2b28aef4b841cfb5ad531d0e201476880bbc8164193dfae5d",
-      "baseline_master_sha": "206f82e32f3d8fbc013ddb59568e7cbe2a0e3eca818a97af04db721e8b4724a9",
+      "baseline_master_sha": "cb089af2ca407da0a6a593dbf89aa1d97454e3a875c88e1c043c2e5786e48aa4",
+      "fixture_spec_hash": "0f46968603a757808e6c30ba8a33f49ce33b0f4913210c917a7206f88031e198",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -150,8 +163,10 @@
         "rig_destinations_count": 0,
         "rig_rows_count": 0
       },
+      "migrated_decision_hash_repeat1": "937b18cb605dc4e2b28aef4b841cfb5ad531d0e201476880bbc8164193dfae5d",
+      "migrated_decision_hash_repeat2": "937b18cb605dc4e2b28aef4b841cfb5ad531d0e201476880bbc8164193dfae5d",
       "migrated_hash": "937b18cb605dc4e2b28aef4b841cfb5ad531d0e201476880bbc8164193dfae5d",
-      "migrated_master_sha": "206f82e32f3d8fbc013ddb59568e7cbe2a0e3eca818a97af04db721e8b4724a9",
+      "migrated_master_sha": "cb089af2ca407da0a6a593dbf89aa1d97454e3a875c88e1c043c2e5786e48aa4",
       "note": "non-owned control's own group matches its Master destination exactly, but that group is hidden (plus a genuinely rig-owned, already-correctly-placed anchor control, so this fixture's rig is genuinely SUPPORTED_ACTIVE_RIG and can reach production_generic_composer)",
       "scenario": "A3_master_known_but_stranded",
       "verdict": "PASS",
@@ -162,8 +177,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "ade70742e029f03aa60d1247729908f51b90433e30b6b8e9631cc3f171af788a",
+      "baseline_decision_hash_repeat2": "ade70742e029f03aa60d1247729908f51b90433e30b6b8e9631cc3f171af788a",
       "baseline_hash": "ade70742e029f03aa60d1247729908f51b90433e30b6b8e9631cc3f171af788a",
-      "baseline_master_sha": "839253f4d025c07ce6700989c6687e559b8dfa9765702c2a65758fe21b892387",
+      "baseline_master_sha": "28f47dff6e0c8cbb907ebb344dfe3070181a5c176e193bb494e3f4d567d0aca2",
+      "fixture_spec_hash": "da70339ed467e59f5919036e8be67bb7aff487401e6db0bf1d34a9b4e038eef6",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -204,8 +222,10 @@
         "rig_destinations_count": 1,
         "rig_rows_count": 1
       },
+      "migrated_decision_hash_repeat1": "ade70742e029f03aa60d1247729908f51b90433e30b6b8e9631cc3f171af788a",
+      "migrated_decision_hash_repeat2": "ade70742e029f03aa60d1247729908f51b90433e30b6b8e9631cc3f171af788a",
       "migrated_hash": "ade70742e029f03aa60d1247729908f51b90433e30b6b8e9631cc3f171af788a",
-      "migrated_master_sha": "839253f4d025c07ce6700989c6687e559b8dfa9765702c2a65758fe21b892387",
+      "migrated_master_sha": "28f47dff6e0c8cbb907ebb344dfe3070181a5c176e193bb494e3f4d567d0aca2",
       "note": "owned+visible control collapsed from RigArms/Sub (PRE) to its immediate parent RigArms (POST)",
       "scenario": "A4_rig_owned_visible_parent_collapse",
       "verdict": "PASS",
@@ -215,8 +235,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "ff07048521350d25d357a219cccce6949a4b4a0755b935f266e7d43ad37d6cd9",
+      "baseline_decision_hash_repeat2": "ff07048521350d25d357a219cccce6949a4b4a0755b935f266e7d43ad37d6cd9",
       "baseline_hash": "ff07048521350d25d357a219cccce6949a4b4a0755b935f266e7d43ad37d6cd9",
-      "baseline_master_sha": "585f7a42b1fc9c7dc6d0a9d390b6ce9832bdaa028789c4b50084718f848577c6",
+      "baseline_master_sha": "02c25a3bc89f687292c49914b17c3086af07e83927899db6749c22594a451837",
+      "fixture_spec_hash": "239c5b6adbc613c4ed417070bb6b2299d7a542892327427b7df4e287e0ccb712",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -257,8 +280,10 @@
         "rig_destinations_count": 0,
         "rig_rows_count": 0
       },
+      "migrated_decision_hash_repeat1": "ff07048521350d25d357a219cccce6949a4b4a0755b935f266e7d43ad37d6cd9",
+      "migrated_decision_hash_repeat2": "ff07048521350d25d357a219cccce6949a4b4a0755b935f266e7d43ad37d6cd9",
       "migrated_hash": "ff07048521350d25d357a219cccce6949a4b4a0755b935f266e7d43ad37d6cd9",
-      "migrated_master_sha": "585f7a42b1fc9c7dc6d0a9d390b6ce9832bdaa028789c4b50084718f848577c6",
+      "migrated_master_sha": "02c25a3bc89f687292c49914b17c3086af07e83927899db6749c22594a451837",
       "note": "owned+visible control moved RigArms(PRE) -> RigLegs(POST), matching its own Master destination exactly",
       "scenario": "A5_rig_owned_visible_master_normalization",
       "verdict": "PASS",
@@ -268,8 +293,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "6f528339b3dad983b1c59da9dcc1da94728fc38a60db7c7336e86ba267b4de5a",
+      "baseline_decision_hash_repeat2": "6f528339b3dad983b1c59da9dcc1da94728fc38a60db7c7336e86ba267b4de5a",
       "baseline_hash": "6f528339b3dad983b1c59da9dcc1da94728fc38a60db7c7336e86ba267b4de5a",
-      "baseline_master_sha": "206f82e32f3d8fbc013ddb59568e7cbe2a0e3eca818a97af04db721e8b4724a9",
+      "baseline_master_sha": "cb089af2ca407da0a6a593dbf89aa1d97454e3a875c88e1c043c2e5786e48aa4",
+      "fixture_spec_hash": "ee03bb7d9387a04304be2afb794ba5021ec43691fa72b43183871c1a7f7fd219",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -310,8 +338,10 @@
         "rig_destinations_count": 0,
         "rig_rows_count": 0
       },
+      "migrated_decision_hash_repeat1": "6f528339b3dad983b1c59da9dcc1da94728fc38a60db7c7336e86ba267b4de5a",
+      "migrated_decision_hash_repeat2": "6f528339b3dad983b1c59da9dcc1da94728fc38a60db7c7336e86ba267b4de5a",
       "migrated_hash": "6f528339b3dad983b1c59da9dcc1da94728fc38a60db7c7336e86ba267b4de5a",
-      "migrated_master_sha": "206f82e32f3d8fbc013ddb59568e7cbe2a0e3eca818a97af04db721e8b4724a9",
+      "migrated_master_sha": "cb089af2ca407da0a6a593dbf89aa1d97454e3a875c88e1c043c2e5786e48aa4",
       "note": "control literal 'Stranded_Control' differs from the folded wanted-vocabulary entry only by ASCII case (plus a genuinely rig-owned anchor control, see A3's fixed-bug note)",
       "scenario": "B1_ascii_fold_match",
       "verdict": "PASS",
@@ -322,8 +352,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "979e0e0d1095ee7ad0e72bb2dd20f515a4406fd81fca8e44f3c51425c23d37bd",
+      "baseline_decision_hash_repeat2": "979e0e0d1095ee7ad0e72bb2dd20f515a4406fd81fca8e44f3c51425c23d37bd",
       "baseline_hash": "979e0e0d1095ee7ad0e72bb2dd20f515a4406fd81fca8e44f3c51425c23d37bd",
-      "baseline_master_sha": "83447b05ea8c9d93163a7cd6757e71f488b3b7e5a0bf4a6cb47cd8d34dddb38c",
+      "baseline_master_sha": "3d4efe4af8a8a06ea2a83c6f7e504570286b1a8f401798fa30bab5de26539ba6",
+      "fixture_spec_hash": "e96c68a1eea839eb5991302d9e2d4ed3223cb6c4fa55cab37aafce0c8f95ec7a",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -364,8 +397,10 @@
         "rig_destinations_count": 0,
         "rig_rows_count": 0
       },
+      "migrated_decision_hash_repeat1": "979e0e0d1095ee7ad0e72bb2dd20f515a4406fd81fca8e44f3c51425c23d37bd",
+      "migrated_decision_hash_repeat2": "979e0e0d1095ee7ad0e72bb2dd20f515a4406fd81fca8e44f3c51425c23d37bd",
       "migrated_hash": "979e0e0d1095ee7ad0e72bb2dd20f515a4406fd81fca8e44f3c51425c23d37bd",
-      "migrated_master_sha": "83447b05ea8c9d93163a7cd6757e71f488b3b7e5a0bf4a6cb47cd8d34dddb38c",
+      "migrated_master_sha": "3d4efe4af8a8a06ea2a83c6f7e504570286b1a8f401798fa30bab5de26539ba6",
       "note": "control absent from the wanted-fold vocabulary entirely; native POST routes it to Unknown",
       "scenario": "B2_master_unknown_unmatched",
       "verdict": "PASS",
@@ -373,8 +408,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "e1e68319ea2ab0b230c2a42d3335fcbe9b26b3382d05bfc11080891f30707e09",
+      "baseline_decision_hash_repeat2": "e1e68319ea2ab0b230c2a42d3335fcbe9b26b3382d05bfc11080891f30707e09",
       "baseline_hash": "e1e68319ea2ab0b230c2a42d3335fcbe9b26b3382d05bfc11080891f30707e09",
-      "baseline_master_sha": "40335b16d0acfa7ed527c3dd8e242a6c82965530469ed42d1c1e00ec9ac3060a",
+      "baseline_master_sha": "2a26512e0306388468a8f42c984191f8690e5de6e60d9d3977cd323f8365ce5a",
+      "fixture_spec_hash": "c05a63a5a2e832b504822e4cad756845a9cf64847f5e0f46713863f5d2238c1a",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -415,8 +453,10 @@
         "rig_destinations_count": 2,
         "rig_rows_count": 2
       },
+      "migrated_decision_hash_repeat1": "e1e68319ea2ab0b230c2a42d3335fcbe9b26b3382d05bfc11080891f30707e09",
+      "migrated_decision_hash_repeat2": "e1e68319ea2ab0b230c2a42d3335fcbe9b26b3382d05bfc11080891f30707e09",
       "migrated_hash": "e1e68319ea2ab0b230c2a42d3335fcbe9b26b3382d05bfc11080891f30707e09",
-      "migrated_master_sha": "40335b16d0acfa7ed527c3dd8e242a6c82965530469ed42d1c1e00ec9ac3060a",
+      "migrated_master_sha": "2a26512e0306388468a8f42c984191f8690e5de6e60d9d3977cd323f8365ce5a",
       "note": "two owned controls both parent-collapse into RigArms from distinct nested paths -- exercises ordering across multiple simultaneous rows",
       "scenario": "B3_nested_sibling_ordering",
       "verdict": "PASS",
@@ -427,8 +467,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "ec3120161fcd3d72d36df858233ed21e576273cfe3f85270ed7bd8ff3b55a349",
+      "baseline_decision_hash_repeat2": "ec3120161fcd3d72d36df858233ed21e576273cfe3f85270ed7bd8ff3b55a349",
       "baseline_hash": "ec3120161fcd3d72d36df858233ed21e576273cfe3f85270ed7bd8ff3b55a349",
-      "baseline_master_sha": "6ba9ad608e569a32febeedc1c858890de204a7832d9615c30c42e87d09b09f6a",
+      "baseline_master_sha": "3bc122f8630a1b70b973e3aacda1fd1d0fb48116b1cfb66ed16062335e47dcba",
+      "fixture_spec_hash": "a2d12eb929ea4a628c5abb4ca908c324376c8bdef2f4ecc5d0b4c75733e83e96",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -469,8 +512,10 @@
         "rig_destinations_count": 0,
         "rig_rows_count": 0
       },
+      "migrated_decision_hash_repeat1": "ec3120161fcd3d72d36df858233ed21e576273cfe3f85270ed7bd8ff3b55a349",
+      "migrated_decision_hash_repeat2": "ec3120161fcd3d72d36df858233ed21e576273cfe3f85270ed7bd8ff3b55a349",
       "migrated_hash": "ec3120161fcd3d72d36df858233ed21e576273cfe3f85270ed7bd8ff3b55a349",
-      "migrated_master_sha": "6ba9ad608e569a32febeedc1c858890de204a7832d9615c30c42e87d09b09f6a",
+      "migrated_master_sha": "3bc122f8630a1b70b973e3aacda1fd1d0fb48116b1cfb66ed16062335e47dcba",
       "note": "paired left/right controls, both master-known-but-stranded under the same hidden group (plus a genuinely rig-owned anchor control, see A3's fixed-bug note)",
       "scenario": "B4_left_right_side_normalization",
       "verdict": "PASS",
@@ -482,8 +527,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "e28f56f127eee1e88bf248455e516eafaaa8a6d8f9b4ac0417464826b0d1c482",
+      "baseline_decision_hash_repeat2": "e28f56f127eee1e88bf248455e516eafaaa8a6d8f9b4ac0417464826b0d1c482",
       "baseline_hash": "e28f56f127eee1e88bf248455e516eafaaa8a6d8f9b4ac0417464826b0d1c482",
-      "baseline_master_sha": "9131ba4259e3badf790814834c6b05ca76f1193ad4535522aab8a51d974144b0",
+      "baseline_master_sha": "b04ce1695f93a220ed86049575e9afcee008531734cd1cad68bc40668a637b91",
+      "fixture_spec_hash": "2937fc6b3ac1328f72ff4d58b7e5ff4a5e3bb5660bf72e9f20cb01a0a8d70b52",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -524,8 +572,10 @@
         "rig_destinations_count": 0,
         "rig_rows_count": 0
       },
+      "migrated_decision_hash_repeat1": "e28f56f127eee1e88bf248455e516eafaaa8a6d8f9b4ac0417464826b0d1c482",
+      "migrated_decision_hash_repeat2": "e28f56f127eee1e88bf248455e516eafaaa8a6d8f9b4ac0417464826b0d1c482",
       "migrated_hash": "e28f56f127eee1e88bf248455e516eafaaa8a6d8f9b4ac0417464826b0d1c482",
-      "migrated_master_sha": "9131ba4259e3badf790814834c6b05ca76f1193ad4535522aab8a51d974144b0",
+      "migrated_master_sha": "b04ce1695f93a220ed86049575e9afcee008531734cd1cad68bc40668a637b91",
       "note": "rig_status=UNRIGGED throughout -- no rig-owned controls, only a non-owned master-stranded control",
       "scenario": "C1_unrigged_target",
       "verdict": "PASS",
@@ -535,8 +585,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "99f71de8da1797a15b7606ad1b253ec58efa776f4ea0404dee47437cf0b8da7a",
+      "baseline_decision_hash_repeat2": "99f71de8da1797a15b7606ad1b253ec58efa776f4ea0404dee47437cf0b8da7a",
       "baseline_hash": "99f71de8da1797a15b7606ad1b253ec58efa776f4ea0404dee47437cf0b8da7a",
-      "baseline_master_sha": "83447b05ea8c9d93163a7cd6757e71f488b3b7e5a0bf4a6cb47cd8d34dddb38c",
+      "baseline_master_sha": "3d4efe4af8a8a06ea2a83c6f7e504570286b1a8f401798fa30bab5de26539ba6",
+      "fixture_spec_hash": "994d1d430ff542c2f882f4f76cf790c49807bc1f4c44f7e06e6d9b7fbcd250ee",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -577,8 +630,10 @@
         "rig_destinations_count": 0,
         "rig_rows_count": 0
       },
+      "migrated_decision_hash_repeat1": "99f71de8da1797a15b7606ad1b253ec58efa776f4ea0404dee47437cf0b8da7a",
+      "migrated_decision_hash_repeat2": "99f71de8da1797a15b7606ad1b253ec58efa776f4ea0404dee47437cf0b8da7a",
       "migrated_hash": "99f71de8da1797a15b7606ad1b253ec58efa776f4ea0404dee47437cf0b8da7a",
-      "migrated_master_sha": "83447b05ea8c9d93163a7cd6757e71f488b3b7e5a0bf4a6cb47cd8d34dddb38c",
+      "migrated_master_sha": "3d4efe4af8a8a06ea2a83c6f7e504570286b1a8f401798fa30bab5de26539ba6",
       "note": "canonical model-backed toe controls (Toes/LeftToes, Toes/RightToes) relocate beneath RigLegs/LeftLeg/Toes and RigLegs/RightLeg/Toes purely from an active RigLegs rig's presence, even though the rig owns no dedicated toe control itself; an unrelated rig-owned leg control must be preserved untouched",
       "scenario": "D1_active_rig_toe_relocation",
       "verdict": "PASS",
@@ -590,8 +645,11 @@
     },
     {
       "authority_dicts_match": true,
-      "baseline_hash": "492439d3d7c15725d327f93ae721d6f20678d7847193ca91ebf2be4bcc33f7ac",
-      "baseline_master_sha": "fdf1c93dd3c00fe8ba8ad8bf793b55901fde83e643f06c42d81142c3568b4962",
+      "baseline_decision_hash_repeat1": "733d25570f7c6503be700fc8a2aca48db5b12ce299163430f7d1d40eb425193e",
+      "baseline_decision_hash_repeat2": "733d25570f7c6503be700fc8a2aca48db5b12ce299163430f7d1d40eb425193e",
+      "baseline_hash": "733d25570f7c6503be700fc8a2aca48db5b12ce299163430f7d1d40eb425193e",
+      "baseline_master_sha": "90c18649c47eed32ccaafc954ec177a2b96ff0a3c3cd951ed21a63a0201f95c6",
+      "fixture_spec_hash": "ad852d42fc16c8afe5dd646790faa5cebe3ef6e3f018af98e8a2ccc581187f22",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -632,19 +690,24 @@
         "rig_destinations_count": 1,
         "rig_rows_count": 1
       },
-      "migrated_hash": "492439d3d7c15725d327f93ae721d6f20678d7847193ca91ebf2be4bcc33f7ac",
-      "migrated_master_sha": "fdf1c93dd3c00fe8ba8ad8bf793b55901fde83e643f06c42d81142c3568b4962",
-      "note": "rig-owned tail_control's rig-visible PRE path is RigBody (visible), hidden in native POST (classic rig-loss); Master destination Body/Tail is refined by _active_rig_counterpart_destination to the active RigBody root -- the same active-rig-family-counterpart mechanism as fixture A, applied to the RigBody family",
-      "scenario": "D2_tail_relocation",
+      "migrated_decision_hash_repeat1": "733d25570f7c6503be700fc8a2aca48db5b12ce299163430f7d1d40eb425193e",
+      "migrated_decision_hash_repeat2": "733d25570f7c6503be700fc8a2aca48db5b12ce299163430f7d1d40eb425193e",
+      "migrated_hash": "733d25570f7c6503be700fc8a2aca48db5b12ce299163430f7d1d40eb425193e",
+      "migrated_master_sha": "90c18649c47eed32ccaafc954ec177a2b96ff0a3c3cd951ed21a63a0201f95c6",
+      "note": "NOT a Tail fixture (renamed from D2_tail_relocation during the B2C-C targeted audit correction -- see the report). rig-owned rigbody_family_control's rig-visible PRE path is RigBody (visible), hidden in native POST (classic rig-loss); Master destination 'Body' is refined by _active_rig_counterpart_destination to the active RigBody root -- the same active-rig-family-counterpart mechanism as fixture A, applied to the RigBody family. Retained as valid evidence for this mechanism only.",
+      "scenario": "D2_rigbody_family_counterpart_refinement",
       "verdict": "PASS",
       "wanted_folds": [
-        "tail_control"
+        "rigbody_family_control"
       ]
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "1134cb077022266c0fb95df9c2d74b286e9d28cba1a0f80bdee232bcf84ea3b6",
+      "baseline_decision_hash_repeat2": "1134cb077022266c0fb95df9c2d74b286e9d28cba1a0f80bdee232bcf84ea3b6",
       "baseline_hash": "1134cb077022266c0fb95df9c2d74b286e9d28cba1a0f80bdee232bcf84ea3b6",
-      "baseline_master_sha": "206f82e32f3d8fbc013ddb59568e7cbe2a0e3eca818a97af04db721e8b4724a9",
+      "baseline_master_sha": "cb089af2ca407da0a6a593dbf89aa1d97454e3a875c88e1c043c2e5786e48aa4",
+      "fixture_spec_hash": "5ceb7ace608aefe1dd92437a93d84faf2c0f4dd0aee91429753d1eb7c12409ac",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -685,8 +748,10 @@
         "rig_destinations_count": 0,
         "rig_rows_count": 0
       },
+      "migrated_decision_hash_repeat1": "1134cb077022266c0fb95df9c2d74b286e9d28cba1a0f80bdee232bcf84ea3b6",
+      "migrated_decision_hash_repeat2": "1134cb077022266c0fb95df9c2d74b286e9d28cba1a0f80bdee232bcf84ea3b6",
       "migrated_hash": "1134cb077022266c0fb95df9c2d74b286e9d28cba1a0f80bdee232bcf84ea3b6",
-      "migrated_master_sha": "206f82e32f3d8fbc013ddb59568e7cbe2a0e3eca818a97af04db721e8b4724a9",
+      "migrated_master_sha": "cb089af2ca407da0a6a593dbf89aa1d97454e3a875c88e1c043c2e5786e48aa4",
       "note": "two DISTINCT exact-literal controls ('stranded_control', 'Stranded_Control') sharing one ASCII-folded key both legitimately exist and are independently classified/placed -- neither is dropped, collapsed, or given an extra duplicate membership (plus a genuinely rig-owned anchor control, see A3's fixed-bug note)",
       "scenario": "D3_repeated_control_preservation",
       "verdict": "PASS",
@@ -697,8 +762,11 @@
     },
     {
       "authority_dicts_match": true,
-      "baseline_hash": "7199dbd7528e28a95059cda902ff156984921b3e709d8d8c177382cda29057d5",
-      "baseline_master_sha": "65e470d5e3aa00dae8a49a0fa7d8f0958ddc1b5da391d655398952c6cefbda22",
+      "baseline_decision_hash_repeat1": "10c7b1c46ff11ce2e03828de55fa7c0f82bbc9f7306aad22baa40546b0f6ee49",
+      "baseline_decision_hash_repeat2": "10c7b1c46ff11ce2e03828de55fa7c0f82bbc9f7306aad22baa40546b0f6ee49",
+      "baseline_hash": "10c7b1c46ff11ce2e03828de55fa7c0f82bbc9f7306aad22baa40546b0f6ee49",
+      "baseline_master_sha": "e9a7419c332252e35ace9dc2a10150dcf156b237fd05139cc29b4232f47911a1",
+      "fixture_spec_hash": "51f4c2742efcbbb1932d66c90c2e2515c633f3b5263d27cbea4e112cc655e69f",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -739,9 +807,11 @@
         "rig_destinations_count": 0,
         "rig_rows_count": 0
       },
-      "migrated_hash": "7199dbd7528e28a95059cda902ff156984921b3e709d8d8c177382cda29057d5",
-      "migrated_master_sha": "65e470d5e3aa00dae8a49a0fa7d8f0958ddc1b5da391d655398952c6cefbda22",
-      "note": "a pre-existing custom/unrelated subtree (CustomUserGroup/Nested, with its own control) that no rig ownership, Master mapping, or classification touches must remain byte-identical -- only valve.l_upperarm (already correctly placed) is in scope",
+      "migrated_decision_hash_repeat1": "10c7b1c46ff11ce2e03828de55fa7c0f82bbc9f7306aad22baa40546b0f6ee49",
+      "migrated_decision_hash_repeat2": "10c7b1c46ff11ce2e03828de55fa7c0f82bbc9f7306aad22baa40546b0f6ee49",
+      "migrated_hash": "10c7b1c46ff11ce2e03828de55fa7c0f82bbc9f7306aad22baa40546b0f6ee49",
+      "migrated_master_sha": "e9a7419c332252e35ace9dc2a10150dcf156b237fd05139cc29b4232f47911a1",
+      "note": "a pre-existing custom/unrelated subtree (UserCustomGroup/{Alpha,Beta}, with two custom controls and non-default selectable/snappable/group_color/visible metadata) that no rig ownership, Master mapping, or classification touches, AND whose root-level position already matches the generic reorder function's own 'known-before-contextual' desired order (so the reorder's early-exit fires and zero RemoveChild/AddChild calls touch <ROOT> at all) -- only valve.l_upperarm (already correctly placed) is in scope. RENAMED/REDESIGNED from the original CustomUserGroup design during the B2C-C targeted audit correction, which correctly found that design's root children never reached the reorder function's early-exit -- see the report's custom-subtree-disposition section.",
       "scenario": "D4_untouched_custom_group_preservation",
       "verdict": "PASS",
       "wanted_folds": [
@@ -750,8 +820,11 @@
     },
     {
       "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "28e1515ac74d1359f05103d3c1a6e2982702cab946817b8d997f65bf2b930bc9",
+      "baseline_decision_hash_repeat2": "28e1515ac74d1359f05103d3c1a6e2982702cab946817b8d997f65bf2b930bc9",
       "baseline_hash": "28e1515ac74d1359f05103d3c1a6e2982702cab946817b8d997f65bf2b930bc9",
-      "baseline_master_sha": "ad6a12a01ca9759420d2466fe97380424e4b4d6f122d0ead34ea8c831bab8022",
+      "baseline_master_sha": "c22cd40b8e2101c8d57751be2cdd6b4fea4f14b00fccb72d7efe267fe83af29e",
+      "fixture_spec_hash": "193e373372cecf1e702a277d714bbf634bfede0eb4101e50ecec91bd11f82cf4",
       "level1_baseline": {
         "category_counts": {
           "ambiguous_losses": 0,
@@ -792,14 +865,75 @@
         "rig_destinations_count": 2,
         "rig_rows_count": 2
       },
+      "migrated_decision_hash_repeat1": "28e1515ac74d1359f05103d3c1a6e2982702cab946817b8d997f65bf2b930bc9",
+      "migrated_decision_hash_repeat2": "28e1515ac74d1359f05103d3c1a6e2982702cab946817b8d997f65bf2b930bc9",
       "migrated_hash": "28e1515ac74d1359f05103d3c1a6e2982702cab946817b8d997f65bf2b930bc9",
-      "migrated_master_sha": "ad6a12a01ca9759420d2466fe97380424e4b4d6f122d0ead34ea8c831bab8022",
+      "migrated_master_sha": "c22cd40b8e2101c8d57751be2cdd6b4fea4f14b00fccb72d7efe267fe83af29e",
       "note": "two owned controls both parent-collapse from the SAME nested RigArms/Sub path into RigArms, both Master-exact-known (flex declared before bone in the authority Master TXT) -- policy_direct_order's cohort ordering by real Master global_index/local_index determines the exact order add_control_to_group is called in",
       "scenario": "D5_flex_first_ordering",
       "verdict": "PASS",
       "wanted_folds": [
         "eye_bone_control",
         "eye_flex_control"
+      ]
+    },
+    {
+      "authority_dicts_match": true,
+      "baseline_decision_hash_repeat1": "c33899aa2c860605ef7ab1331beb721849a790a2bdcd3589ab0d3ffa89e86b4e",
+      "baseline_decision_hash_repeat2": "c33899aa2c860605ef7ab1331beb721849a790a2bdcd3589ab0d3ffa89e86b4e",
+      "baseline_hash": "c33899aa2c860605ef7ab1331beb721849a790a2bdcd3589ab0d3ffa89e86b4e",
+      "baseline_master_sha": "9b61598cfc76f206e56660c7798f469a6478a0c7bf31367ddffbf2015bb2c41d",
+      "fixture_spec_hash": "83c3ed65e43439cd947fa956807451c3103bb19a1379e004ef2e2258fdbc86e8",
+      "level1_baseline": {
+        "category_counts": {
+          "ambiguous_losses": 0,
+          "master_normalizations": 0,
+          "master_stranded": 0,
+          "master_unknown_unknown": 0,
+          "parent_collapses": 0,
+          "pre_hidden_master_active": 0,
+          "rig_losses": 2,
+          "unresolved_owned_drift": 0,
+          "weak_unknown_diagnostics": 0
+        },
+        "keep_native_count": 0,
+        "master_destinations_count": 0,
+        "master_rows_count": 0,
+        "model_translations_count": 0,
+        "plan_status": "AUTHORIZED",
+        "rig_destinations_count": 2,
+        "rig_rows_count": 2
+      },
+      "level1_migrated": {
+        "category_counts": {
+          "ambiguous_losses": 0,
+          "master_normalizations": 0,
+          "master_stranded": 0,
+          "master_unknown_unknown": 0,
+          "parent_collapses": 0,
+          "pre_hidden_master_active": 0,
+          "rig_losses": 2,
+          "unresolved_owned_drift": 0,
+          "weak_unknown_diagnostics": 0
+        },
+        "keep_native_count": 0,
+        "master_destinations_count": 0,
+        "master_rows_count": 0,
+        "model_translations_count": 0,
+        "plan_status": "AUTHORIZED",
+        "rig_destinations_count": 2,
+        "rig_rows_count": 2
+      },
+      "migrated_decision_hash_repeat1": "c33899aa2c860605ef7ab1331beb721849a790a2bdcd3589ab0d3ffa89e86b4e",
+      "migrated_decision_hash_repeat2": "c33899aa2c860605ef7ab1331beb721849a790a2bdcd3589ab0d3ffa89e86b4e",
+      "migrated_hash": "c33899aa2c860605ef7ab1331beb721849a790a2bdcd3589ab0d3ffa89e86b4e",
+      "migrated_master_sha": "9b61598cfc76f206e56660c7798f469a6478a0c7bf31367ddffbf2015bb2c41d",
+      "note": "CORRECTED Tail relocation fixture (replaces the disclaimed D2 design). Two rig-owned controls whose own group (WrongGroup) is visible in PRE, hidden in native POST (classic RIG_OWNED_EFFECTIVE_CONTROL / rig-loss, same category as fixture A2); Master destination is the REAL canonical Master's actual root-level 'Tail' group (verified structurally against sfm_defaultanimationgroups.txt) -- production_generic_composer genuinely creates 'Tail' and moves both controls into it, in Master-declared order",
+      "scenario": "D6_tail_relocation",
+      "verdict": "PASS",
+      "wanted_folds": [
+        "tail_control_a",
+        "tail_control_b"
       ]
     }
   ]

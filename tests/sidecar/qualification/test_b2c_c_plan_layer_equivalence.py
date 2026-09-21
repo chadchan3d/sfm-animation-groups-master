@@ -205,15 +205,24 @@ def compare_scenario(scenario_name, spec):
           full_hash_match, (baseline_hash1, migrated_hash1))
 
     verdict = "PASS" if (level1_match and full_hash_match) else "FAIL"
+    fixture_spec_hash = canon.sha_of({"pre": pre, "post": post, "wanted_folds": sorted(wanted)})
     LEDGER.append({
         "scenario": scenario_name,
         "note": spec["note"],
         "wanted_folds": sorted(wanted),
+        "fixture_spec_hash": fixture_spec_hash,
         "baseline_master_sha": canon.sha_of(baseline_master),
         "migrated_master_sha": canon.sha_of(migrated_master),
         "authority_dicts_match": canon.sha_of(baseline_master) == canon.sha_of(migrated_master),
         "level1_baseline": level1_baseline,
         "level1_migrated": level1_migrated,
+        # Full repeat-1/repeat-2 evidence (governing prompt Section 5) --
+        # not replaced with only a boolean determinism flag.
+        "baseline_decision_hash_repeat1": baseline_hash1,
+        "baseline_decision_hash_repeat2": baseline_hash2,
+        "migrated_decision_hash_repeat1": migrated_hash1,
+        "migrated_decision_hash_repeat2": migrated_hash2,
+        # Back-compat convenience aliases (repeat-1 values).
         "baseline_hash": baseline_hash1,
         "migrated_hash": migrated_hash1,
         "verdict": verdict,
@@ -319,3 +328,9 @@ print("\nRESULT: %d/%d %s" % (
     sum(1 for _, c in RESULTS if c), len(RESULTS),
     "ALL PASS" if all(c for _, c in RESULTS) else "SOME FAILED"
 ))
+
+# B2C-C Targeted Audit Correction, Section 4: a failed check must cause
+# a failed process -- a caller (CI, another script, a human running
+# `echo $?`) must never have to parse stdout to learn this ran clean.
+if not all(condition for _, condition in RESULTS):
+    sys.exit(1)

@@ -22,9 +22,12 @@
 }
 "Body"
 {
-	"Tail"
-	{
-		"control"		"tail_control"
-	}
+	"control"		"rigbody_family_control"
+}
+"Tail"
+{
+	"selectable"		"1"
+	"control"		"tail_control_a"
+	"control"		"tail_control_b"
 }
 }

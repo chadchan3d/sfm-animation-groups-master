@@ -86,9 +86,15 @@ def build_snapshot(label, groups_spec, control_specs, rig_status="SUPPORTED_ACTI
             "parent_path": parent,
             "visible": groups_spec[p]["visible"],
             "effective_visible": effective[p],
-            "selectable": True,
-            "snappable": True,
-            "group_color": [255, 255, 255, 255],
+            # Optional per-group metadata overrides (B2C-C Targeted Audit
+            # Correction, 2026-09-19 -- added ONLY to support a
+            # non-trivial custom-subtree preservation fixture; every
+            # PRE-EXISTING fixture omits these keys and gets the SAME
+            # defaults as before, so no existing fixture's behavior
+            # changes). See fake_dme.build_world for the live-tree side.
+            "selectable": groups_spec[p].get("selectable", True),
+            "snappable": groups_spec[p].get("snappable", True),
+            "group_color": groups_spec[p].get("group_color", [255, 255, 255, 255]),
             "child_names_in_order": children_of.get(p, []),
             "direct_control_names_in_order": direct_controls_of.get(p, []),
         }

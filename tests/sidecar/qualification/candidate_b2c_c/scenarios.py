@@ -307,36 +307,49 @@ _register("D1_active_rig_toe_relocation", pre, post, pgs, pcs,
            "rig-owned leg control must be preserved untouched")
 
 # ---------------------------------------------------------------------
-# D.2 -- Tail relocation (B2C-C Final Expansion Fixtures, Fixture C).
-# No separate, differently-named "Tail" primitive exists anywhere in the
-# frozen source (confirmed by grep) -- "Tail relocation" in THIS
-# codebase is exercised through the same general-purpose active-rig-
-# family mechanism `_active_rig_counterpart_destination` implements for
-# RigBody (lines 5480-5493): a rig-owned control whose CURRENT
-# (fresh-PRE) rig-visible path is exactly "RigBody", left hidden in
-# native POST (classic RIG_OWNED_EFFECTIVE_CONTROL / rig_losses, same
-# category as fixture A2), whose Master destination is the ordinary
-# anatomical "Body/Tail" -- refined by the active-rig-counterpart
-# mechanism to the bare "RigBody" root (the refinement step that would
-# preserve a nested suffix only applies when source_path itself is
-# ALREADY nested under "RigBody/", which a bare "RigBody" source_path is
-# not -- this is the REAL, verified behavior, not an assumed one; see
-# the report's fixture-B2 verification note).
+# D.2 -- RigBody family-counterpart refinement (RENAMED, B2C-C Targeted
+# Audit Correction, 2026-09-19). This fixture was ORIGINALLY registered
+# as "D2_tail_relocation" claiming to satisfy Fixture C ("Tail
+# relocation"). The independent audit correctly found this claim
+# unsupported: it declared a SYNTHETIC "Body/Tail/tail_control" Master
+# entry that does not match the REAL canonical Master's actual structure
+# (sfm_defaultanimationgroups.txt declares "Tail" as a ROOT-LEVEL group,
+# a direct sibling of "Body"/"RigBody"/etc, never nested under "Body" --
+# grep/structural-parse-confirmed), it always reported
+# already_correct_count=1/moved_count=0 (never actually created or moved
+# a control into any group named "Tail"), and it silently refined the
+# destination back to "RigBody" -- a real, legitimate, already-qualified
+# mechanism, but not a demonstration of Tail placement at all.
+#
+# RETAINED (per the correction prompt's explicit allowance) as what it
+# actually is: a genuine demonstration of `_active_rig_counterpart_
+# destination`'s RigBody-family refinement (lines 5480-5493) -- a
+# rig-owned control whose CURRENT (fresh-PRE) rig-visible path is
+# exactly "RigBody", left hidden in native POST (classic RIG_OWNED_
+# EFFECTIVE_CONTROL / rig_losses, same category as fixture A2), whose
+# Master destination is the ordinary anatomical "Body" -- refined by the
+# active-rig-counterpart mechanism to the bare "RigBody" root. This is
+# useful, valid evidence for that mechanism; it is NOT, and is no longer
+# claimed to be, a Tail fixture. See D6 below for the corrected Tail
+# relocation fixture, and the report's Tail-disposition section for the
+# full correction record.
 # ---------------------------------------------------------------------
 pre, post, pgs, pcs = build_pre_post_pair(
-    "tail_relocation",
+    "rigbody_family_counterpart_refinement",
     groups_spec={ROOT: {"visible": True}, u"RigBody": {"visible": True}},
-    control_specs=[{"name": u"tail_control", "path": u"RigBody", "owned": True}],
+    control_specs=[{"name": u"rigbody_family_control", "path": u"RigBody", "owned": True}],
     post_overrides=(
         {ROOT: {"visible": True}, u"RigBody": {"visible": False}},
-        [{"name": u"tail_control", "path": u"RigBody", "owned": True}],
+        [{"name": u"rigbody_family_control", "path": u"RigBody", "owned": True}],
     ),
 )
-_register("D2_tail_relocation", pre, post, pgs, pcs, {u"tail_control"},
-           "rig-owned tail_control's rig-visible PRE path is RigBody (visible), hidden in native "
-           "POST (classic rig-loss); Master destination Body/Tail is refined by _active_rig_"
-           "counterpart_destination to the active RigBody root -- the same active-rig-family-"
-           "counterpart mechanism as fixture A, applied to the RigBody family")
+_register("D2_rigbody_family_counterpart_refinement", pre, post, pgs, pcs, {u"rigbody_family_control"},
+           "NOT a Tail fixture (renamed from D2_tail_relocation during the B2C-C targeted audit "
+           "correction -- see the report). rig-owned rigbody_family_control's rig-visible PRE path "
+           "is RigBody (visible), hidden in native POST (classic rig-loss); Master destination "
+           "'Body' is refined by _active_rig_counterpart_destination to the active RigBody root -- "
+           "the same active-rig-family-counterpart mechanism as fixture A, applied to the RigBody "
+           "family. Retained as valid evidence for this mechanism only.")
 
 # ---------------------------------------------------------------------
 # D.3 -- repeated-control preservation (B2C-C Final Expansion Fixtures,
@@ -378,34 +391,72 @@ _register("D3_repeated_control_preservation", pre, post, pgs, pcs, {u"stranded_c
 
 # ---------------------------------------------------------------------
 # D.4 -- untouched custom/unrelated group preservation (B2C-C Final
-# Expansion Fixtures, Fixture E). A pre-existing custom subtree
-# ("CustomUserGroup/Nested") with its own control, metadata (non-
-# default color/selectable/snappable), and child order, that no rig
-# ownership, no Master mapping, and no classify_production category
-# touches at all -- normalization must leave it byte-identical.
-# `production_generic_composer`'s own postcondition
-# ("noncandidate_membership_changed") already guards this for every
-# control outside `desired`; this fixture makes that guarantee an
-# explicit, dedicated, named fixture rather than an incidental property
-# of other fixtures.
+# Expansion Fixtures, Fixture E). REDESIGNED during the B2C-C Targeted
+# Audit Correction (2026-09-19): the ORIGINAL design declared root
+# children as {"CustomUserGroup", "RigArms"} -- `fake_dme.build_world`
+# creates root-level groups in ALPHABETICAL order regardless of
+# groups_spec declaration order ("CustomUserGroup" < "RigArms"), while
+# the REAL `production_reorder_children_by_master`'s `desired` order for
+# <ROOT> always places every Master-KNOWN group ("RigArms") before every
+# CONTEXTUAL/unknown group ("CustomUserGroup") -- so `current_names`
+# ["CustomUserGroup", "RigArms"] never equalled `desired` ["RigArms",
+# "CustomUserGroup"], and the (real, frozen, always-unconditional-when-
+# order-differs) RemoveChild-all/AddChild-all root reorder genuinely
+# fired, touching the custom group even though ITS OWN position among
+# siblings was never semantically wrong for any Master reason -- an
+# independent audit correctly rejected the resulting "zero native
+# mutations" claim.
+#
+# FIX (verified empirically, not assumed): `production_reorder_
+# children_by_master` has an early-exit -- `if desired == current_names:
+# return desired` -- BEFORE any RemoveChild/AddChild call (frozen source,
+# line ~6650). Renaming the custom group to "UserCustomGroup" (which
+# sorts AFTER "RigArms" alphabetically, matching where a contextual group
+# always lands in `desired` anyway) makes `current_names` already equal
+# `desired` for <ROOT> -- confirmed by direct execution: mutation_count
+# == 0 for this exact fixture. `UserCustomGroup` is also not one of the
+# 6 named branches `production_reorder_contextual_tree` recurses into
+# (RigArms/RigArms/LeftArm/RigArms/RightArm/RigLegs/RigLegs/LeftLeg/
+# RigLegs/RightLeg), so its OWN children are never reorder-candidates
+# regardless of their order.
+#
+# Non-trivial per the correction prompt's explicit requirements: two
+# custom child groups in a known order (Alpha, Beta -- alphabetically
+# created in that order by the SAME fake_dme sorting rule), two custom
+# controls, non-default selectable/snappable/group_color on
+# UserCustomGroup and its children, and one child (Beta) non-default-
+# visible. `fixture_builder.build_snapshot`/`fake_dme.build_world` were
+# both extended with OPTIONAL per-group `selectable`/`snappable`/
+# `group_color` keys (defaulting to the SAME True/True/[255,255,255,255]
+# every pre-existing fixture already relies on -- zero behavior change
+# for any fixture that omits them) to make this representable at all.
 # ---------------------------------------------------------------------
 pre, post, pgs, pcs = build_pre_post_pair(
     "untouched_custom_group",
     groups_spec={
         ROOT: {"visible": True},
         u"RigArms": {"visible": True},
-        u"CustomUserGroup": {"visible": True},
-        u"CustomUserGroup/Nested": {"visible": True},
+        u"UserCustomGroup": {"visible": True, "selectable": False, "snappable": False,
+                              "group_color": [11, 22, 33, 255]},
+        u"UserCustomGroup/Alpha": {"visible": True, "group_color": [44, 55, 66, 255]},
+        u"UserCustomGroup/Beta": {"visible": False, "selectable": False, "snappable": True},
     },
     control_specs=[
         {"name": u"valve.l_upperarm", "path": u"RigArms", "owned": True},
-        {"name": u"custom_user_control", "path": u"CustomUserGroup/Nested", "owned": False},
+        {"name": u"custom_control_alpha", "path": u"UserCustomGroup/Alpha", "owned": False},
+        {"name": u"custom_control_beta", "path": u"UserCustomGroup/Beta", "owned": False},
     ],
 )
 _register("D4_untouched_custom_group_preservation", pre, post, pgs, pcs, {u"valve.l_upperarm"},
-           "a pre-existing custom/unrelated subtree (CustomUserGroup/Nested, with its own control) "
-           "that no rig ownership, Master mapping, or classification touches must remain "
-           "byte-identical -- only valve.l_upperarm (already correctly placed) is in scope")
+           "a pre-existing custom/unrelated subtree (UserCustomGroup/{Alpha,Beta}, with two custom "
+           "controls and non-default selectable/snappable/group_color/visible metadata) that no "
+           "rig ownership, Master mapping, or classification touches, AND whose root-level position "
+           "already matches the generic reorder function's own 'known-before-contextual' desired "
+           "order (so the reorder's early-exit fires and zero RemoveChild/AddChild calls touch "
+           "<ROOT> at all) -- only valve.l_upperarm (already correctly placed) is in scope. "
+           "RENAMED/REDESIGNED from the original CustomUserGroup design during the B2C-C targeted "
+           "audit correction, which correctly found that design's root children never reached the "
+           "reorder function's early-exit -- see the report's custom-subtree-disposition section.")
 
 # ---------------------------------------------------------------------
 # D.5 -- flex-first visible ordering (B2C-C Final Expansion Fixtures,
@@ -460,3 +511,54 @@ _register("D5_flex_first_ordering", pre, post, pgs, pcs, {u"eye_flex_control", u
            "RigArms, both Master-exact-known (flex declared before bone in the authority Master "
            "TXT) -- policy_direct_order's cohort ordering by real Master global_index/local_index "
            "determines the exact order add_control_to_group is called in")
+
+# ---------------------------------------------------------------------
+# D.6 -- Tail relocation, CORRECTED (B2C-C Targeted Audit Correction,
+# 2026-09-19, Fixture C). Replaces the disclaimed D2 design (see D2's
+# own note above and the report's Tail-disposition section).
+#
+# Case A finding (see the report for the full derivation): the REAL
+# canonical Master (sfm_defaultanimationgroups.txt, line 116343)
+# declares "Tail" as a ROOT-LEVEL group -- a direct sibling of "Body"/
+# "RigBody"/"RigArms"/etc, structurally confirmed by a full parent-path
+# walk of every indent-1 group in the file. No Tail-specific Normalizer
+# runtime branch exists anywhere in the 13,594-line frozen source
+# (grep-confirmed: zero case-insensitive "tail" matches). "Tail
+# relocation" is therefore a Master-taxonomy fact only, reconciled by
+# the SAME generic machinery every other destination uses -- exercised
+# here via the SAME RIG_OWNED_EFFECTIVE_CONTROL / "rig_losses" category
+# fixture A2 already uses (an owned, visible control whose OWN group
+# becomes hidden in native POST), just pointed at the synthetic Master's
+# real root-level "Tail" group instead of a rig-family destination.
+# Verified empirically (not assumed) to produce a genuine, observable
+# relocation: `production_generic_composer` creates a NEW "Tail" group,
+# calls `add_control_to_group` for BOTH controls (source_path=
+# "WrongGroup", destination_path="Tail"), and the destination order
+# (tail_control_a before tail_control_b) is derived from the real Master
+# declaration order via `EXACT_MASTER_DESTINATION_TOTAL_ORDER` --
+# exactly the same order-authority mechanism D5 already qualified,
+# applied here to a genuinely-created (not merely already-correct)
+# destination group.
+# ---------------------------------------------------------------------
+pre, post, pgs, pcs = build_pre_post_pair(
+    "tail_relocation",
+    groups_spec={ROOT: {"visible": True}, u"WrongGroup": {"visible": True}},
+    control_specs=[
+        {"name": u"tail_control_a", "path": u"WrongGroup", "owned": True},
+        {"name": u"tail_control_b", "path": u"WrongGroup", "owned": True},
+    ],
+    post_overrides=(
+        {ROOT: {"visible": True}, u"WrongGroup": {"visible": False}},
+        [
+            {"name": u"tail_control_a", "path": u"WrongGroup", "owned": True},
+            {"name": u"tail_control_b", "path": u"WrongGroup", "owned": True},
+        ],
+    ),
+)
+_register("D6_tail_relocation", pre, post, pgs, pcs, {u"tail_control_a", u"tail_control_b"},
+           "CORRECTED Tail relocation fixture (replaces the disclaimed D2 design). Two rig-owned "
+           "controls whose own group (WrongGroup) is visible in PRE, hidden in native POST (classic "
+           "RIG_OWNED_EFFECTIVE_CONTROL / rig-loss, same category as fixture A2); Master destination "
+           "is the REAL canonical Master's actual root-level 'Tail' group (verified structurally "
+           "against sfm_defaultanimationgroups.txt) -- production_generic_composer genuinely creates "
+           "'Tail' and moves both controls into it, in Master-declared order")

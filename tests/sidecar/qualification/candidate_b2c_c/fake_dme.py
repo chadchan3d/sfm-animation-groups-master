@@ -448,6 +448,20 @@ def build_world(group_spec, control_specs, rig_status="SUPPORTED_ACTIVE_RIG",
             continue
         g = ensure_group(path)
         g.visible = bool(group_spec[path]["visible"])
+        # Optional per-group metadata overrides (B2C-C Targeted Audit
+        # Correction, 2026-09-19) -- mirrors fixture_builder.build_
+        # snapshot's SAME optional keys, so the decision-layer `post`
+        # dict and this live tree never disagree about a group's
+        # metadata. Every pre-existing fixture omits these keys and
+        # keeps the prior hardcoded defaults (True/True/[255,255,255,255]).
+        spec = group_spec[path]
+        if "selectable" in spec:
+            g.selectable = bool(spec["selectable"])
+        if "snappable" in spec:
+            g.snappable = bool(spec["snappable"])
+        if "group_color" in spec:
+            r, gg, b, a = spec["group_color"]
+            g.groupColor = FakeColor(r, gg, b, a)
 
     controls_by_name = {}
     owned_controls = []
