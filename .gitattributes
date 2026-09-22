@@ -43,3 +43,9 @@ tests/sidecar/qualification/candidate_b2c_correction6/sfm_master_authority_produ
 # to CRLF on export, breaking that pinned identity even though the git
 # blob itself is correct.
 audit_external_runtime/Rebuild_Control_Groups_Normalizer.py text eol=lf
+
+# Real-SFM Qualification, Checkpoint A (2026-09-22): the same
+# archive-export CRLF corruption class as above, for the audit-trail
+# copy of the real MAINMENU-deployed Checkpoint A smoke-test script --
+# its SHA-256 is cited directly in operator instructions.
+real_sfm_qualification/checkpoint_a/Checkpoint_A_Bootstrap_Smoke_Test.py text eol=lf
