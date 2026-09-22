@@ -43,7 +43,7 @@ NORMALIZER_PROD_PATH = (
     r"E:\SteamLibrary\steamapps\common\SourceFilmmaker\game\usermod\scripts\sfm"
     r"\mainmenu\ChadChan3D\Rebuild_Control_Groups_Normalizer.py"
 )
-NORMALIZER_PINNED_SHA256 = "6656aa9022d458c22c2549da5dfdc14539a572d91200c3f0f459c1453dfd092e"
+NORMALIZER_PINNED_SHA256 = "f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d28f6676f5ef2cf0"
 REAL_MASTER_PATH = r"E:\SFM Animation Group Master\sfm_defaultanimationgroups.txt"
 REAL_MASTER_PINNED_SHA256 = "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93"
 OFFICIAL_SIDECAR = (
@@ -115,9 +115,13 @@ def extract(a, b):
     return u"\n".join(lines[a - 1: b]) + u"\n"
 
 
+# 2026-09-22 Production Normalizer Integration: relocated by NAME,
+# identical methodology/ranges to candidate_b2c_c/authority_pair.py's
+# own PROD_RANGES update -- see that module's comment for the full
+# explanation.
 PROD_RANGES = [
-    (138, 138), (604, 605), (647, 657), (659, 671),
-    (1169, 1202), (1204, 1339), (1340, 1370), (1373, 1413), (1416, 1723),
+    (138, 138), (782, 783), (825, 835), (837, 849),
+    (1347, 1379), (1382, 1516), (1518, 1548), (1551, 1591), (1594, 1901),
 ]
 prod_src = u"\n\n".join(extract(a, b) for a, b in PROD_RANGES)
 import re as _re_module  # noqa: E402
