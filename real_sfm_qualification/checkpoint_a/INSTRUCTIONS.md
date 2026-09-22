@@ -1,5 +1,16 @@
 # Checkpoint A — Bootstrap / Installed-Authority Smoke Test
 
+## RERUN NOTICE (2026-09-22)
+
+Your first run of this checkpoint correctly failed: the two required package directories
+(`sfm_master_authority_productionized\` and `sfm_master_sidecar\`) had never been deployed to your
+live SFM install at all. That failure is preserved permanently in `real_sfm_qualification/LEDGER.md`
+as row A-1 — it was not discarded. Both directories have now been deployed from the exact accepted
+source (23 + 3 files, every one independently re-hashed and confirmed to match a pre-deployment
+manifest exactly; see `DEPLOYMENT_MANIFEST.md` in this same folder for the full detail). The script
+itself, its SHA-256, and the PASS/FAIL criteria below are **unchanged** from your first run — this is
+the exact same script, just against a corrected installed layout.
+
 ## What this checkpoint proves
 
 Whether the production-integrated shared-authority package actually resolves and acquires
