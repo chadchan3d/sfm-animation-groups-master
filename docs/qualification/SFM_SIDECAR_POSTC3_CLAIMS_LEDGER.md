@@ -184,3 +184,39 @@ public compiler/publisher/bootstrap path a real installed product would use).
 4. **Production promotion remains unauthorized.** This addendum records a package-boundary
    correction, not an independent audit PASS and not production-promotion authorization. Normalizer
    production integration has not been performed. CPM has not been modified.
+
+---
+
+## Addendum 6 (2026-09-22): independent audit of the package-boundary correction — PARTIAL, targeted correction
+
+An independent audit of commit `1abe91498080dd2b7e64bbf21f8441cc2314c0ef` (Addendum 5's
+package-boundary correction) returned `PARTIAL, not FAIL`. It explicitly accepted as real and
+correct — and did **not** reopen — every design closed in Addendum 5: leased-orphan revocation,
+the generic compiler/publisher `.sfmsidecar` contract, manifest/pointer field reconciliation,
+bundled validator/provider identity, the canonical runtime module-name repair, and the
+`acquire_generation()` legacy-call repair.
+
+It found two narrow integration-base blockers in the tracked/committed state:
+
+1. Core compiler/publisher regression tests still asserted the old `.bin` suffix
+   (`test_compiler.py`'s `test_generation_basename_format`, `test_publisher.py`'s
+   `test_publishing_identical_source_twice_reuses_generation`); a broader search additionally found
+   two masked-test-weakening `.bin`-suffix directory filters in `test_publication_failures.py` that
+   would silently find zero files (and therefore test nothing) after the real extension change.
+2. `RUNTIME_BUILD_ID` was left at the pre-package-boundary identity
+   (`"b2c-correction6-parsedeferred-floor-targeted-2026-09-18"`) despite the correction adding
+   real, caller-relevant behavior — silently defeating the stale/wrong-build protection the id
+   exists to provide.
+
+Three clarifications were recorded, not silently assumed: `tools/sfm_master_sidecar/
+mutex_publisher.py`'s hardcoded rebuild-dependency paths remain machine/repository-path-bound
+(hardened custom rebuild is not yet an installed-release feature); the installed-isolation proof
+covers package operation once the installed directory is already on `sys.path`, not the real
+MAINMENU bootstrap entry seam itself (deferred to real-SFM production integration); failed-batch
+eviction remains `IMPORTANT BUT DEFERRABLE`, untouched by this correction.
+
+See `tests/sidecar/qualification/R3_Package_Boundary_Independent_Audit_1abe914_Report.md` for the
+full audit disposition and `tests/sidecar/qualification/R3_Package_Boundary_Targeted_Correction_
+Report.md` for the fixes and regression evidence that close both blockers. **Production promotion
+remains unauthorized.** Normalizer production integration has not been performed. CPM has not been
+modified.
