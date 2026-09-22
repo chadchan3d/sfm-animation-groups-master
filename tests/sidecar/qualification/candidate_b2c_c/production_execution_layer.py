@@ -82,30 +82,35 @@ EXPECTED_PRODUCTION_SHA256 = ppl.EXPECTED_PRODUCTION_SHA256
 # PLAN_LAYER_RANGES -- see that module's comment above EXPECTED_
 # PRODUCTION_SHA256 for the full explanation. No function body below
 # changed; only line position.
+#
+# 2026-09-22 correction 2 (independent-audit fail-closed native-Master-
+# protect fix): relocated a SECOND time, same name-based method, via an
+# automated script -- every range's line COUNT matches its immediately-
+# prior count EXACTLY (delta 0).
 EXECUTION_LAYER_RANGES = [
-    ("set_visible", 2075, 2098),
-    ("set_selectable", 2100, 2115),
-    ("set_snappable", 2117, 2132),
-    ("set_group_color", 2134, 2165),
-    ("apply_source_metadata", 2167, 2189),
-    ("create_independent_group", 2191, 2241),
-    ("add_control_to_group", 2243, 2254),
-    ("rename_group", 2256, 2282),
-    ("technical_group_name", 2284, 2298),
-    ("live_control_map", 2300, 2307),
-    ("production_resolve_group_path", 6339, 6358),
-    ("production_master_metadata_path", 6361, 6417),
-    ("production_source_paths_for_target", 6420, 6486),
-    ("production_source_meta_for_target", 6489, 6528),
-    ("production_raw_selectable", 6531, 6542),
-    ("production_apply_explicit_master_metadata", 6545, 6587),
-    ("production_apply_active_group_policy", 6590, 6646),
-    ("production_ensure_group_path", 6649, 6746),
-    ("production_reorder_children_by_master", 6749, 6920),
-    ("production_reorder_contextual_tree", 6923, 6982),
-    ("production_claim_destination", 6985, 7036),
-    ("production_apply_exact_master_destination_total_order", 7039, 7150),
-    ("production_generic_composer", 7153, 8100),
+    ("set_visible", 2084, 2107),
+    ("set_selectable", 2109, 2124),
+    ("set_snappable", 2126, 2141),
+    ("set_group_color", 2143, 2174),
+    ("apply_source_metadata", 2176, 2198),
+    ("create_independent_group", 2200, 2250),
+    ("add_control_to_group", 2252, 2263),
+    ("rename_group", 2265, 2291),
+    ("technical_group_name", 2293, 2307),
+    ("live_control_map", 2309, 2316),
+    ("production_resolve_group_path", 6348, 6367),
+    ("production_master_metadata_path", 6370, 6426),
+    ("production_source_paths_for_target", 6429, 6495),
+    ("production_source_meta_for_target", 6498, 6537),
+    ("production_raw_selectable", 6540, 6551),
+    ("production_apply_explicit_master_metadata", 6554, 6596),
+    ("production_apply_active_group_policy", 6599, 6655),
+    ("production_ensure_group_path", 6658, 6755),
+    ("production_reorder_children_by_master", 6758, 6929),
+    ("production_reorder_contextual_tree", 6932, 6991),
+    ("production_claim_destination", 6994, 7045),
+    ("production_apply_exact_master_destination_total_order", 7048, 7159),
+    ("production_generic_composer", 7162, 8109),
     # --- Eligibility-gate authority-sensitive island (see this module's
     # own docstring "authority-dependency cut" note below): the ENTIRE
     # rest of the eligibility gate (MDL header parsing, bone counting,
@@ -115,14 +120,14 @@ EXECUTION_LAYER_RANGES = [
     # pure(ish) function: `_gate_is_alh(aset, master)` needs only
     # `aset.controls` (already in fake_dme's FakeDmeAnimationSet), no
     # scene/shot/rig graph at all.
-    ("_gate_normalized_token", 8442, 8451),
-    ("_gate_path_segments", 8454, 8464),
-    ("_gate_has_arm_segment", 8467, 8486),
-    ("_gate_has_leg_segment", 8489, 8508),
-    ("_gate_literal_head_neck_token", 8511, 8544),
-    ("_gate_has_head_path_segment", 8547, 8557),
-    ("_gate_transform_controls", 8560, 8569),
-    ("_gate_is_alh", 8593, 8639),
+    ("_gate_normalized_token", 8451, 8460),
+    ("_gate_path_segments", 8463, 8473),
+    ("_gate_has_arm_segment", 8476, 8495),
+    ("_gate_has_leg_segment", 8498, 8517),
+    ("_gate_literal_head_neck_token", 8520, 8553),
+    ("_gate_has_head_path_segment", 8556, 8566),
+    ("_gate_transform_controls", 8569, 8578),
+    ("_gate_is_alh", 8602, 8648),
 ]
 
 

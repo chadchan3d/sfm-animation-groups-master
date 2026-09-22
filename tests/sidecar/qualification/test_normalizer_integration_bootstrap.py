@@ -49,13 +49,17 @@ FROZEN_NORMALIZER_PATH = (
     r"\mainmenu\ChadChan3D\Rebuild_Control_Groups_Normalizer.py"
 )
 EXPECTED_FROZEN_NORMALIZER_SHA256 = (
-    "f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d28f6676f5ef2cf0"
+    "88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef"
 )
 
-# 1-indexed, inclusive. Re-verify with: sed -n '176,352p' Rebuild_Control_Groups_Normalizer.py
-BOOTSTRAP_BLOCK_RANGE = (176, 352)
+# 1-indexed, inclusive. Re-verify with: sed -n '176,361p' Rebuild_Control_Groups_Normalizer.py
+# (range widened by the fail-closed native-Master-protect correction,
+# 2026-09-22 -- content through native_master_protect_release() changed,
+# see test_normalizer_integration_native_protect.py for the functional
+# proof of the new fail-closed behavior)
+BOOTSTRAP_BLOCK_RANGE = (176, 361)
 EXPECTED_BOOTSTRAP_BLOCK_SHA256 = (
-    "d6a96f5ee175669edcfecf9eb3744574eaee22fe9480c3102e77e33aca1c5cc6"
+    "7be3dae59f0c536fccf11fac0ab9eccd665a4359895c2b7bf4cee4c0714571cd"
 )
 
 RUNNER_TEMPLATE = u'''# -*- coding: utf-8 -*-

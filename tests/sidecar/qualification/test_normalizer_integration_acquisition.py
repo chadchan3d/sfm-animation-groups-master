@@ -74,13 +74,17 @@ FROZEN_NORMALIZER_PATH = (
     r"\mainmenu\ChadChan3D\Rebuild_Control_Groups_Normalizer.py"
 )
 EXPECTED_FROZEN_NORMALIZER_SHA256 = (
-    "f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d28f6676f5ef2cf0"
+    "88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef"
 )
 
 # 1-indexed, inclusive. Re-verify with: sed -n '<start>,<end>p' Rebuild_Control_Groups_Normalizer.py
-ACQUIRE_RANGE = (9587, 9663)
+# (line numbers shifted by the fail-closed native-Master-protect
+# correction, 2026-09-22 -- both method BODIES are byte-identical to
+# before, only their position moved: same SHA-256 as the original
+# checkpoint, confirming these two methods themselves were untouched)
+ACQUIRE_RANGE = (9596, 9672)
 EXPECTED_ACQUIRE_SHA256 = "ca0703b53287b59865ba7962befe88019a0bca59ed93badeb95f6473cae0360e"
-RELEASE_RANGE = (9665, 9695)
+RELEASE_RANGE = (9674, 9704)
 EXPECTED_RELEASE_SHA256 = "5d0fe1a621f8c1c4d331bab903a7487f908a9f30db801486d393d2771d9ac791"
 
 

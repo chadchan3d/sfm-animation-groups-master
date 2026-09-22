@@ -59,7 +59,7 @@ DEFAULT_PRODUCTION_PATH = (
     r"E:\SteamLibrary\steamapps\common\SourceFilmmaker\game\usermod\scripts\sfm"
     r"\mainmenu\ChadChan3D\Rebuild_Control_Groups_Normalizer.py"
 )
-EXPECTED_PRODUCTION_SHA256 = "f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d28f6676f5ef2cf0"
+EXPECTED_PRODUCTION_SHA256 = "88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef"
 # 2026-09-22 Production Normalizer Integration: the frozen file's own
 # line numbers shifted (a qualified-authority bootstrap block was
 # inserted near the top of the file, plus two new methods and a small
@@ -70,13 +70,20 @@ EXPECTED_PRODUCTION_SHA256 = "f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d2
 # the next same-indentation def/class, trailing blank lines trimmed),
 # never by a constant line-number offset. None of the DOWNSTREAM
 # function BODIES extracted below changed by even one byte -- only their
-# position in the file changed. Cross-checked: every relocated range's
-# line COUNT matches its pre-integration line count within 0-1 lines
-# (the only source of variance being trailing-blank-line trimming, never
-# missing/extra code), and every fixture hash this module's callers
-# already recorded in R3_B2C_C_plan_layer_ledger.json/R3_B2C_C_execution_
-# layer_ledger.json was re-verified to still match EXACTLY after this
-# relocation (see R3_Normalizer_Production_Integration_Report.md).
+# position in the file changed.
+#
+# 2026-09-22 correction 2 (independent-audit fail-closed native-Master-
+# protect fix): the frozen file changed AGAIN (a docstring update inside
+# native_master_protect_acquire() and a fail-closed call-site addition in
+# run_target_transaction(), both additive) -- every range below was
+# relocated a SECOND time by the SAME name-based method, via an automated
+# script (zero manual line-number entry). Every relocated range's line
+# COUNT matches its immediately-prior count EXACTLY (delta 0 for all 46
+# entries + the preflight_reconciliation_plan method range -- confirmed
+# programmatically, not merely "within 0-1 lines"), and every fixture
+# hash this module's callers already recorded in R3_B2C_C_plan_layer_
+# ledger.json/R3_B2C_C_execution_layer_ledger.json was re-verified to
+# still match EXACTLY after this second relocation.
 
 # ===========================================================================
 # Exact line ranges (1-indexed, inclusive) extracted verbatim from the
@@ -87,52 +94,52 @@ EXPECTED_PRODUCTION_SHA256 = "f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d2
 # between these functions resolve fine regardless of extraction order.
 # ===========================================================================
 PLAN_LAYER_RANGES = [
-    ("ProbeError_class", 782, 783),
-    ("NativePostFallback_class", 786, 787),
-    ("native_ptr", 793, 803),
-    ("to_unicode", 825, 835),
-    ("ascii_fold", 837, 849),
-    ("handle", 851, 852),
-    ("name_fn", 854, 858),
-    ("typ", 860, 864),
-    ("attr", 866, 870),
-    ("scalar", 872, 884),
-    ("arr", 886, 918),
-    ("attribute_name", 920, 924),
-    ("attribute_type", 926, 930),
-    ("iter_attributes", 932, 955),
-    ("element_ref_pairs", 957, 995),
-    ("reachable", 997, 1030),
-    ("is_visible", 1032, 1044),
-    ("is_selectable", 1046, 1055),
-    ("is_snappable", 1057, 1066),
-    ("_component_value", 1068, 1083),
-    ("_parse_rgba_text", 1085, 1108),
-    ("group_color_rgba", 1110, 1173),
-    ("children", 1175, 1180),
-    ("direct_controls", 1182, 1183),
-    ("path_string", 1185, 1189),
-    ("capture_tree", 1191, 1325),
-    ("master_lookup", 1945, 2002),
-    ("one_membership", 2004, 2015),
-    ("immediate_parent_path", 2017, 2032),
-    ("first_path_part", 2034, 2049),
-    ("find_direct_child", 2051, 2073),
-    ("target_tree_from_rows", 2309, 2347),
-    ("source_child_name", 2349, 2369),
-    ("pre_child_order", 2371, 2403),
-    ("policy_child_order", 2405, 2496),
-    ("policy_direct_order", 2498, 2620),
-    ("hierarchical_path_rank", 2622, 2677),
-    ("order_candidate_rows_by_policy", 2679, 2764),
-    ("discover_rig_context", 3290, 3427),
-    ("strip_reconciliation_wrapper", 3430, 3445),
-    ("canonicalize_rig_source_snapshot", 3448, 3532),
-    ("capture_snapshot_explicit", 3535, 3717),
-    ("classify_production", 3720, 4319),
-    ("_canonicalize_context_path", 5603, 5623),
-    ("_active_rig_counterpart_destination", 5626, 5755),
-    ("derive_generic_uniformity_plan", 5758, 6337),
+    ("ProbeError_class", 791, 792),
+    ("NativePostFallback_class", 795, 796),
+    ("native_ptr", 802, 812),
+    ("to_unicode", 834, 844),
+    ("ascii_fold", 846, 858),
+    ("handle", 860, 861),
+    ("name_fn", 863, 867),
+    ("typ", 869, 873),
+    ("attr", 875, 879),
+    ("scalar", 881, 893),
+    ("arr", 895, 927),
+    ("attribute_name", 929, 933),
+    ("attribute_type", 935, 939),
+    ("iter_attributes", 941, 964),
+    ("element_ref_pairs", 966, 1004),
+    ("reachable", 1006, 1039),
+    ("is_visible", 1041, 1053),
+    ("is_selectable", 1055, 1064),
+    ("is_snappable", 1066, 1075),
+    ("_component_value", 1077, 1092),
+    ("_parse_rgba_text", 1094, 1117),
+    ("group_color_rgba", 1119, 1182),
+    ("children", 1184, 1189),
+    ("direct_controls", 1191, 1192),
+    ("path_string", 1194, 1198),
+    ("capture_tree", 1200, 1334),
+    ("master_lookup", 1954, 2011),
+    ("one_membership", 2013, 2024),
+    ("immediate_parent_path", 2026, 2041),
+    ("first_path_part", 2043, 2058),
+    ("find_direct_child", 2060, 2082),
+    ("target_tree_from_rows", 2318, 2356),
+    ("source_child_name", 2358, 2378),
+    ("pre_child_order", 2380, 2412),
+    ("policy_child_order", 2414, 2505),
+    ("policy_direct_order", 2507, 2629),
+    ("hierarchical_path_rank", 2631, 2686),
+    ("order_candidate_rows_by_policy", 2688, 2773),
+    ("discover_rig_context", 3299, 3436),
+    ("strip_reconciliation_wrapper", 3439, 3454),
+    ("canonicalize_rig_source_snapshot", 3457, 3541),
+    ("capture_snapshot_explicit", 3544, 3726),
+    ("classify_production", 3729, 4328),
+    ("_canonicalize_context_path", 5612, 5632),
+    ("_active_rig_counterpart_destination", 5635, 5764),
+    ("derive_generic_uniformity_plan", 5767, 6346),
 ]
 
 # `preflight_reconciliation_plan` is a METHOD (uses `self.class_totals`,
@@ -141,7 +148,7 @@ PLAN_LAYER_RANGES = [
 # fake command object providing exactly those three attributes/methods.
 # Line range covers the method body only (RebuildControlGroupsProductionRun.
 # preflight_reconciliation_plan), verified against the class source.
-PREFLIGHT_RECONCILIATION_PLAN_RANGE = (10674, 10808)
+PREFLIGHT_RECONCILIATION_PLAN_RANGE = (10683, 10817)
 
 MODULE_CONSTANTS = {
     "RIG_RECON_ROOT": "__RIG_VISIBLE_RECON__",

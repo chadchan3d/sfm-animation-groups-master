@@ -168,4 +168,123 @@ This report does not perform that phase. It is explicitly deferred, per Section 
 
 ---
 
-**PRODUCTION NORMALIZER INTEGRATION READY FOR NARROW INDEPENDENT REVIEW**
+## Addendum (2026-09-22): independent-audit correction -- PARTIAL, two narrow issues closed
+
+The independent ChatGPT audit of commit `92029337052d31ac9ffa375b95bd391df9baaaeb` (the checkpoint
+this report originally documented) returned **PARTIAL**, real-SFM qualification explicitly withheld,
+with two narrowly bounded issues:
+
+### Issue 1: the audit ZIP did not contain the actual post-integration production Normalizer
+
+Every one of this checkpoint's three new integration harnesses reads the frozen Normalizer from its
+live, absolute, outside-the-repository install path -- meaning an auditor working only from the
+archive could verify the harnesses' own logic but never independently inspect the actual bytes of
+the one functional change this checkpoint makes.
+
+**Fix**: an exact byte-for-byte snapshot of the real installed file was added to this repository at
+`audit_external_runtime/Rebuild_Control_Groups_Normalizer.py`, with a manifest
+(`audit_external_runtime/MANIFEST.md`) recording its original installed path, byte size, line
+count, SHA-256, newline style, and encoding, and stating explicitly that it reflects the final,
+post-correction production file. This snapshot is read-only, audit-only -- it is not a second
+production copy, is never read by any test harness (which continue to read the real live path,
+unchanged), and is not a new source of authority.
+
+### Issue 2: native Master protection was fail-open, not fail-closed
+
+`native_master_protect_acquire(...) -> None` previously did not abort the command -- the target
+transaction would proceed into native Rebuild with no protection held whenever the handle could not
+be acquired, which does not close the native-Master-hash/use race this mechanism exists to guard.
+
+**Fix, in `run_target_transaction()`, immediately after the (unchanged) `native_master_protect_
+acquire()` call and immediately before the (unchanged) `self.assert_master_stable()` call**:
+
+```python
+if native_master_protect_handle is None:
+    raise ProbeError(
+        "CONTEXTUALIZER could not acquire the required native "
+        "Master protection handle (FILE_SHARE_READ only) before "
+        "entering native Rebuild -- refusing to proceed without "
+        "write/delete-denying protection held across the "
+        "protected source hash, native Rebuild, and contextual "
+        "reconciliation."
+    )
+```
+
+This raise happens strictly before native Rebuild is ever invoked (`self.rebuild(...)` remains
+further down the same method, untouched), so it is still a clean pre-mutation abort -- caught by
+`start()`'s own existing `except Exception` handler exactly like any other `ProbeError`. The
+transaction/locking architecture itself was not redesigned: `native_master_protect_acquire()`/
+`native_master_protect_release()` are unchanged (both extracted method BODIES hash identically to
+before this correction); only the CALLER now treats `None` as fatal. The existing tiny post-
+reconciliation/final-hash gap (between the release in `run_target_transaction()`'s own `finally:`
+and the method's second `assert_master_stable()` call) was left as-is -- source inspection confirms
+no native call or mutation occurs in that window, so widening the protected span there is out of
+this correction's narrow scope, per the governing correction brief's own instruction.
+
+`test_normalizer_integration_native_protect.py` was rewritten (not merely re-pinned) to prove the
+fail-closed gate directly, including a sharing-conflict case (an already-open, fully-exclusive
+simulated writer -- the race-relevant failure mode named by the audit): **20/20 PASS**, both Python
+3.10 and real Python 2.7.5. It extracts the fail-closed call-site snippet itself (not just the two
+primitive functions) verbatim, SHA-256 pinned, and proves both that a real handle lets the gate
+proceed to `self.assert_master_stable()` and that a missing/conflicting handle raises `ProbeError`
+and NEVER reaches it.
+
+### Identity changes from this correction
+
+| Stage | Frozen Normalizer SHA-256 |
+|---|---|
+| Original checkpoint (commit `9202933`) | `f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d28f6676f5ef2cf0` |
+| **This correction (current)** | **`88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef`** |
+
+Size 355,316 bytes (was 353,711), 13,937 lines (was 13,911), still pure ASCII, still pure LF.
+
+### Files changed this correction
+
+**Outside the git repository**: the frozen Normalizer itself (the fail-closed fix, Issue 2).
+
+**Inside the git repository**:
+- `audit_external_runtime/Rebuild_Control_Groups_Normalizer.py` -- new, Issue 1's snapshot.
+- `audit_external_runtime/MANIFEST.md` -- new, Issue 1's manifest.
+- `tests/sidecar/qualification/test_normalizer_integration_native_protect.py` -- rewritten for the
+  fail-closed gate + sharing-conflict case, Issue 2.
+- `tests/sidecar/qualification/test_normalizer_integration_bootstrap.py` -- SHA/range pin update
+  only (the frozen file's identity and the bootstrap block's own extent both changed).
+- `tests/sidecar/qualification/test_normalizer_integration_acquisition.py` -- SHA/range pin update
+  only (the two extracted methods' own bodies are unchanged -- same SHA-256 as before, only their
+  line position moved).
+- `tests/sidecar/qualification/candidate_b2c_c/production_plan_layer.py`,
+  `production_execution_layer.py`, `authority_pair.py`,
+  `tests/sidecar/qualification/test_b2c_c_tail_real_canonical_authority.py` -- line-range/SHA-256
+  pin relocation only (mechanical, name-based, zero assertion changes), forced a second time by the
+  frozen file's further line-number shift.
+- This report (this addendum).
+
+### Re-run evidence (Section 3's "directly affected evidence" requirement)
+
+| Check | Result |
+|---|---|
+| `py_compile` of the corrected frozen Normalizer | OK, Python 3.10 AND real Python 2.7.5 |
+| ASCII/newline-style integrity of the corrected file | pure ASCII, pure LF -- confirmed |
+| `test_normalizer_integration_bootstrap.py` | **8/8 PASS**, both interpreters (unaffected in substance -- only its SHA/range pins needed updating, since the block it extracts grew) |
+| `test_normalizer_integration_acquisition.py` | **17/17 PASS**, both interpreters (unaffected in substance -- the two extracted methods are byte-identical to before, only their line position moved) |
+| `test_normalizer_integration_native_protect.py` (rewritten) | **20/20 PASS**, both interpreters |
+| `test_b2c_c_plan_layer_equivalence.py` (re-relocated) | **55/55 PASS**, 0 ledger-hash drift |
+| `test_b2c_c_execution_layer_equivalence.py` (re-relocated) | **125/125 PASS**, 0 ledger-hash drift |
+| `test_b2c_c_broker_mediated_authority_sanity.py` | **20/20 PASS** |
+| `test_b2c_c_fake_dme_addchild_regression.py` (unaffected by relocation) | **11/11 PASS** |
+| `test_b2c_c_tail_real_canonical_authority.py` (re-relocated) | **15/15 PASS**, including its own "no case-insensitive 'tail' substring introduced anywhere in the frozen source" check |
+
+The accepted package (`cf06ba4`) and `tools/sfm_master_sidecar/` were not touched by this
+correction either (confirmed by `git diff --stat`, empty) -- the accepted package architecture was
+not reopened, and no concrete new package defect was found requiring one.
+
+### Scope preserved
+
+SFM was not launched. The real-SFM qualification matrix was not started. CPM was not touched. The
+sidecar format was not reopened. Failed-admission eviction was not addressed. The custom/local
+rebuild utility was not productionized. No prior commit was amended or rewritten -- this correction
+is a new commit, and commit `9202933` remains historical evidence exactly as it was.
+
+---
+
+**PRODUCTION NORMALIZER INTEGRATION CORRECTION READY FOR NARROW INDEPENDENT RE-AUDIT**

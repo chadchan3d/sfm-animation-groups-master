@@ -34,3 +34,12 @@ tests/sidecar/qualification/candidate_b2c_c/fixtures_authority/*_master.txt text
 # correction's own decisive clean-directory-from-archive proof.
 tests/sidecar/qualification/candidate_b2c_correction6/sfm_master_authority_productionized/candidate_packed_validator_r3a2b.py text eol=lf
 tests/sidecar/qualification/candidate_b2c_correction6/sfm_master_authority_productionized/candidate_packed_provider_r3a2b.py text eol=lf
+
+# Production Normalizer Integration correction (2026-09-22): the same
+# archive-export CRLF corruption class as above, for the audit-only,
+# SHA-256-pinned snapshot of the real installed frozen production
+# Normalizer -- its MANIFEST.md pins an exact SHA-256 for this file;
+# without this rule, git archive's zip writer would silently convert it
+# to CRLF on export, breaking that pinned identity even though the git
+# blob itself is correct.
+audit_external_runtime/Rebuild_Control_Groups_Normalizer.py text eol=lf

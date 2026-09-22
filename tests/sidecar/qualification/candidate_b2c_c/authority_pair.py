@@ -39,7 +39,7 @@ PRODUCTION_PATH = (
     r"E:\SteamLibrary\steamapps\common\SourceFilmmaker\game\usermod\scripts\sfm"
     r"\mainmenu\ChadChan3D\Rebuild_Control_Groups_Normalizer.py"
 )
-EXPECTED_PRODUCTION_SHA256 = "f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d28f6676f5ef2cf0"
+EXPECTED_PRODUCTION_SHA256 = "88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef"
 
 # Identical extraction ranges to every prior semantic-regression test in
 # this project (test_b2c_correction6_semantic_regression.py etc.) --
@@ -51,12 +51,15 @@ EXPECTED_PRODUCTION_SHA256 = "f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d2
 # methodology as production_plan_layer.py's PLAN_LAYER_RANGES) -- READ_
 # BLOCK's own line (138) is unchanged since it sits before every edit
 # this integration made; every other range shifted. No function body
-# changed, only line position -- every range's line COUNT matches its
-# pre-integration count within 0-1 lines (trailing-blank-line trimming
-# only).
+# changed, only line position.
+#
+# 2026-09-22 correction 2 (independent-audit fail-closed native-Master-
+# protect fix): relocated a SECOND time, same name-based method, via an
+# automated script -- every range's line COUNT matches its immediately-
+# prior count EXACTLY (delta 0). READ_BLOCK (138) still unchanged.
 PROD_RANGES = [
-    (138, 138), (782, 783), (825, 835), (837, 849),
-    (1347, 1379), (1382, 1516), (1518, 1548), (1551, 1591), (1594, 1901),
+    (138, 138), (791, 792), (834, 844), (846, 858),
+    (1356, 1388), (1391, 1525), (1527, 1557), (1560, 1600), (1603, 1910),
 ]
 
 # ---------------------------------------------------------------------
