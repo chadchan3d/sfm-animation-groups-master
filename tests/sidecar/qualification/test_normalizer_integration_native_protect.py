@@ -1,51 +1,77 @@
 # -*- coding: utf-8 -*-
-"""Production Normalizer Integration (2026-09-22, corrected same day per
-independent audit), Section 6/9: functional qualification for
-`native_master_protect_acquire`/`native_master_protect_release` AND the
-fail-closed call-site gate in `run_target_transaction()` that now REQUIRES
-a real protect handle before proceeding toward native Rebuild.
+"""Production Normalizer Integration (2026-09-22, corrected a second time
+per independent re-audit), Section 6/9: protection-LIFETIME qualification
+for `native_master_protect_acquire`/`native_master_protect_release` and
+their call site in `run_target_transaction()`.
 
-Correction context: the independent audit found the original checkpoint
-left protection fail-OPEN -- `native_master_protect_acquire(...) -> None`
-did not abort the command. The fix, verified here, is at the CALL SITE,
-not the primitive: `native_master_protect_acquire()` itself still never
-raises (it returns a real handle or `None`), but the call site
-immediately raises `ProbeError` on `None`, before `self.assert_master_
-stable()` or native Rebuild ever run.
+Correction context: the first fail-closed correction closed the "acquire
+returns None but the run continues anyway" defect. The independent
+re-audit then found a NARROWER remaining defect: a *successfully*
+acquired handle could still leak, because it was acquired several
+potentially-raising statements (most importantly `self.assert_master_
+stable()` itself) BEFORE the try/finally that owned its release. If any
+of those statements raised, execution never reached the `finally` that
+calls `native_master_protect_release()`.
 
-Both the primitive pair and the fail-closed call-site snippet are
-extracted VERBATIM (exact line ranges, SHA-256 pinned) from the real,
-now-corrected frozen production Normalizer.
+The fix moves acquisition to immediately before the existing transaction
+`try:`, and moves `self.assert_master_stable()` to be the FIRST statement
+INSIDE that `try:` -- so every potentially-raising operation between a
+successful acquire and the handle's release now runs strictly inside the
+one `try/finally` that owns it. `None` still correctly raises BEFORE the
+`try:` (no real handle exists yet to release in that case).
 
-Proves, against REAL files on disk (never the canonical Master):
-  - acquire() returns a real, usable handle while the file remains
-    readable by a second, independent handle (FILE_SHARE_READ preserved);
-  - a concurrent WRITE-mode open from a second handle is DENIED while the
-    protect handle is held (the actual protection this mechanism exists
-    to provide);
-  - release() frees the handle -- a subsequent write-mode open succeeds
-    again;
-  - acquire() against a nonexistent path returns None (primitive-level
-    fact, unchanged);
-  - acquire() against a path an ALREADY-OPEN, fully-exclusive writer
-    holds (the race-relevant failure mode named by the audit) also
-    returns None;
-  - THE GATE: when acquire() would return None (either failure mode
-    above), the extracted call-site snippet raises ProbeError and NEVER
-    reaches `self.assert_master_stable()` -- i.e. never proceeds toward
-    the protected native-mutation window without a real handle;
-  - THE GATE, positive case: when acquire() succeeds, the snippet does
-    NOT raise, and DOES reach `self.assert_master_stable()`.
+This file proves the correction two ways:
 
-Windows-only (uses ctypes/kernel32 CreateFileW directly, matching the
-extracted code itself). Never launches SFM. Read-only with respect to
-the frozen production Normalizer and the canonical Master.
+1. **AST/structural proof** (the audit's own preferred approach, since
+   the real `try:` body is ~1000 lines including native Rebuild and
+   dozens of dependencies this offline harness cannot execute): the
+   ENTIRE `run_target_transaction()` method is extracted verbatim
+   (exact line range, SHA-256 pinned) and parsed with Python's `ast`
+   module. It asserts, directly against the real production AST, that:
+     - the acquire assignment is immediately followed by the None-check
+       `if`, which is immediately followed by the `try:` (no other
+       statement -- and therefore no other chance to raise -- sits
+       between a successful acquire and the try that owns its release);
+     - the `try:`'s FIRST body statement is `self.assert_master_stable()`
+       (the protected hash is the first protected operation, before
+       Undo is disabled and before native Rebuild);
+     - the `try:`'s `finally:` clause's FIRST statement releases the
+       handle via `native_master_protect_release(...)`, itself wrapped
+       in its own inner try/except (so a release failure cannot skip
+       the rest of the real finally's other cleanup, unchanged from
+       before).
+
+2. **Functional, runnable proof**, using the REAL, verbatim-extracted
+   `native_master_protect_acquire`/`native_master_protect_release`
+   primitives (unchanged since the first correction -- their own
+   extracted bodies hash identically) inside a small, explicitly-labeled
+   SYNTHETIC skeleton that mirrors EXACTLY the structure the AST proof
+   above establishes (acquire -> None-check -> try: assert_master_
+   stable() ... finally: release()) -- never a hand-invented shape. This
+   proves, against real Windows handles:
+     - acquisition failure still raises ProbeError and never reaches the
+       protected hash/native path;
+     - successful acquisition + a non-raising protected hash proceeds
+       normally, and the handle is still released afterward;
+     - successful acquisition + `assert_master_stable()` RAISING still
+       releases the handle (the exact defect this correction closes);
+     - after that forced failure, an independent write-mode open of the
+       SAME test file succeeds, proving the Windows handle was actually
+       closed, not merely that Python's `finally` ran;
+     - the sharing-conflict fail-closed behavior (an already-open,
+       fully-exclusive simulated writer) remains intact.
+
+Windows-only (uses ctypes/kernel32 CreateFileW directly). Never launches
+SFM. Read-only with respect to the frozen production Normalizer and the
+canonical Master.
 """
+import ast
 import ctypes
 import hashlib
 import os
 import sys
 import tempfile
+import textwrap
 
 RESULTS = []
 
@@ -62,20 +88,24 @@ FROZEN_NORMALIZER_PATH = (
     r"\mainmenu\ChadChan3D\Rebuild_Control_Groups_Normalizer.py"
 )
 EXPECTED_FROZEN_NORMALIZER_SHA256 = (
-    "88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef"
+    "cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867"
 )
 
 # 1-indexed, inclusive. Re-verify with: sed -n '<start>,<end>p' Rebuild_Control_Groups_Normalizer.py
-# The bootstrap block (same range test_normalizer_integration_bootstrap.py
-# uses -- the native_master_protect_* functions live at its tail).
+# The bootstrap block (native_master_protect_acquire/release primitives).
 BLOCK_RANGE = (176, 361)
 EXPECTED_BLOCK_SHA256 = "7be3dae59f0c536fccf11fac0ab9eccd665a4359895c2b7bf4cee4c0714571cd"
 
-# The fail-closed gate snippet inside run_target_transaction(): acquires
-# the handle, raises ProbeError on None, otherwise calls
-# self.assert_master_stable(). Method-body indentation (8 spaces).
-GATE_RANGE = (11271, 11285)
-EXPECTED_GATE_SHA256 = "ad923039edb1e5fa46de9c79fe977f8c20058d178cca91b829fee8a5a7f64ab3"
+# The acquire + fail-closed None-check, at its NEW location (immediately
+# before the transaction try:, per this correction).
+ACQUIRE_GATE_RANGE = (11374, 11386)
+EXPECTED_ACQUIRE_GATE_SHA256 = "c344979dc47c3ce661a667336007a1315f553855027ba06e93a16d37ced1159e"
+
+# The entire run_target_transaction() method -- for AST structural
+# analysis only, never exec'd (it references shot/aset/dm/native
+# Rebuild/etc. this offline harness cannot provide).
+METHOD_RANGE = (11198, 12224)
+EXPECTED_METHOD_SHA256 = "6a2151959890230a822af1596abf4333eeb5882783ef4e6ea690df8f6db4777d"
 
 _GENERIC_WRITE = 0x40000000
 _GENERIC_READ = 0x80000000
@@ -95,8 +125,7 @@ _create_file_w.restype = ctypes.c_void_p
 def _try_open_for_write(path):
     """Independent, minimal probe (deliberately NOT reusing the extracted
     function itself) -- opens `path` for GENERIC_WRITE with only
-    FILE_SHARE_READ allowed on ITS OWN side, matching how a real editor/
-    writer would attempt to open the Master TXT. Returns True if the open
+    FILE_SHARE_READ allowed on ITS OWN side. Returns True if the open
     succeeded (and immediately closes it), False if CreateFileW failed."""
     handle = _create_file_w(
         path, _GENERIC_WRITE, _FILE_SHARE_READ, None,
@@ -110,10 +139,7 @@ def _try_open_for_write(path):
 
 def _open_fully_exclusive(path):
     """Opens `path` with dwShareMode=0 -- no sharing at all, simulating
-    an already-open conflicting writer/editor. Any subsequent
-    CreateFileW call against this path (even a pure FILE_SHARE_READ-only
-    read attempt) fails with a sharing violation while this handle is
-    held -- this is the race-relevant conflict the audit named."""
+    an already-open conflicting writer/editor."""
     handle = _create_file_w(
         path, _GENERIC_READ | _GENERIC_WRITE, 0, None,
         _OPEN_EXISTING, _FILE_ATTRIBUTE_NORMAL, None,
@@ -128,12 +154,15 @@ class ProbeError(Exception):
 
 
 class FakeSelf(object):
-    def __init__(self, master_path):
+    def __init__(self, master_path, stability_raises=False):
         self.master_path = master_path
+        self._stability_raises = stability_raises
         self.assert_master_stable_calls = 0
 
     def assert_master_stable(self):
         self.assert_master_stable_calls += 1
+        if self._stability_raises:
+            raise RuntimeError("simulated Master instability during native Rebuild window")
 
 
 def _read_and_verify_normalizer():
@@ -159,19 +188,156 @@ def _extract(lines, start, end, expected_sha256):
     return block
 
 
-def main():
-    import shutil
+# ---------------------------------------------------------------------------
+# 1. AST/structural proof.
+# ---------------------------------------------------------------------------
 
+def _is_call_to(node, name):
+    return (
+        isinstance(node, ast.Expr)
+        and isinstance(node.value, ast.Call)
+        and isinstance(node.value.func, ast.Name)
+        and node.value.func.id == name
+    )
+
+
+def _is_self_method_call(node, method_name):
+    if not (isinstance(node, ast.Expr) and isinstance(node.value, ast.Call)):
+        return False
+    func = node.value.func
+    return (
+        isinstance(func, ast.Attribute)
+        and func.attr == method_name
+        and isinstance(func.value, ast.Name)
+        and func.value.id == "self"
+    )
+
+
+def _is_assign_from_call(node, target_name, call_name):
+    return (
+        isinstance(node, ast.Assign)
+        and len(node.targets) == 1
+        and isinstance(node.targets[0], ast.Name)
+        and node.targets[0].id == target_name
+        and isinstance(node.value, ast.Call)
+        and isinstance(node.value.func, ast.Name)
+        and node.value.func.id == call_name
+    )
+
+
+def _try_shape(node):
+    """Normalizes try-statement shape across Python 2/3 AST differences.
+    Python 3 has one unified `ast.Try` (body/handlers/orelse/finalbody).
+    Python 2 splits this into `ast.TryFinally` (body/finalbody) and
+    `ast.TryExcept` (body/handlers/orelse, no finalbody). A single
+    try/except/finally (our OUTER try, which has both `except
+    ContextualCompositionSuccess`/`except NativePostFallback` AND a
+    `finally`) is represented in Python 2 as a `TryFinally` whose own
+    `body` is a list containing exactly one nested `TryExcept` -- that
+    nested node's `body` is unwrapped here to get the real first
+    statements (e.g. `self.assert_master_stable()`), not the wrapper
+    list. Returns (body, finalbody) if `node` is try-like, else None;
+    `finalbody` is `[]` for a plain try/except with no finally."""
+    try_type = getattr(ast, "Try", None)
+    if try_type is not None and isinstance(node, try_type):
+        return node.body, node.finalbody
+    try_finally_type = getattr(ast, "TryFinally", None)
+    try_except_type = getattr(ast, "TryExcept", None)
+    if try_finally_type is not None and isinstance(node, try_finally_type):
+        body = node.body
+        if len(body) == 1 and try_except_type is not None and isinstance(body[0], try_except_type):
+            body = body[0].body
+        return body, node.finalbody
+    if try_except_type is not None and isinstance(node, try_except_type):
+        return node.body, []
+    return None
+
+
+def run_ast_structural_proof(method_source):
+    tree = ast.parse(textwrap.dedent(method_source))
+    func_defs = [n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == "run_target_transaction"]
+    check("ast.method_found", len(func_defs) == 1, len(func_defs))
+    if len(func_defs) != 1:
+        return
+    body = func_defs[0].body
+
+    acquire_idx = None
+    for i, stmt in enumerate(body):
+        if _is_assign_from_call(stmt, "native_master_protect_handle", "native_master_protect_acquire"):
+            acquire_idx = i
+            break
+    check("ast.acquire_assignment_found", acquire_idx is not None)
+    if acquire_idx is None:
+        return
+
+    none_check = body[acquire_idx + 1] if acquire_idx + 1 < len(body) else None
+    is_none_check_if = (
+        isinstance(none_check, ast.If)
+        and isinstance(none_check.test, ast.Compare)
+        and isinstance(none_check.test.left, ast.Name)
+        and none_check.test.left.id == "native_master_protect_handle"
+    )
+    check("ast.none_check_immediately_follows_acquire", is_none_check_if)
+
+    try_node = body[acquire_idx + 2] if acquire_idx + 2 < len(body) else None
+    outer_shape = _try_shape(try_node) if try_node is not None else None
+    check("ast.try_immediately_follows_none_check_no_gap", outer_shape is not None)
+    if outer_shape is None:
+        return
+    outer_body, outer_finalbody = outer_shape
+
+    first_try_stmt = outer_body[0] if outer_body else None
+    check("ast.first_statement_in_try_is_assert_master_stable",
+          _is_self_method_call(first_try_stmt, "assert_master_stable"))
+
+    check("ast.try_has_finally", len(outer_finalbody) > 0)
+    if not outer_finalbody:
+        return
+
+    inner_shape = _try_shape(outer_finalbody[0])
+    check("ast.finally_first_statement_is_inner_try", inner_shape is not None)
+    if inner_shape is not None:
+        inner_body, _inner_finalbody = inner_shape
+        release_call_found = bool(inner_body) and _is_call_to(inner_body[0], "native_master_protect_release")
+        check("ast.finally_inner_try_releases_handle_first", release_call_found)
+
+
+# ---------------------------------------------------------------------------
+# 2. Functional proof, via a synthetic skeleton mirroring the AST-proven shape.
+# ---------------------------------------------------------------------------
+
+_SKELETON_SOURCE = """
+def _skeleton(self):
+    native_master_protect_handle = native_master_protect_acquire(self.master_path)
+    if native_master_protect_handle is None:
+        raise ProbeError("required native Master protection handle unavailable")
+    try:
+        self.assert_master_stable()
+    finally:
+        try:
+            native_master_protect_release(native_master_protect_handle)
+        except Exception:
+            pass
+"""
+
+
+def main():
     lines = _read_and_verify_normalizer()
     check("source.frozen_normalizer_sha256_pinned", True)
 
     block = _extract(lines, BLOCK_RANGE[0], BLOCK_RANGE[1], EXPECTED_BLOCK_SHA256)
     check("source.block_sha256_pinned", True)
 
-    gate_snippet = _extract(lines, GATE_RANGE[0], GATE_RANGE[1], EXPECTED_GATE_SHA256)
-    check("source.gate_sha256_pinned", True)
+    method_source = _extract(lines, METHOD_RANGE[0], METHOD_RANGE[1], EXPECTED_METHOD_SHA256)
+    check("source.method_sha256_pinned", True)
+
+    _extract(lines, ACQUIRE_GATE_RANGE[0], ACQUIRE_GATE_RANGE[1], EXPECTED_ACQUIRE_GATE_SHA256)
+    check("source.acquire_gate_sha256_pinned", True)
+
+    run_ast_structural_proof(method_source)
 
     ns = {"os": os, "sys": sys, "ctypes": ctypes}
+    import shutil
     fake_root = tempfile.mkdtemp(prefix="pb_normalizer_native_protect_")
     try:
         game_dir = os.path.join(fake_root, "game")
@@ -214,22 +380,13 @@ def main():
     acquire_fn = ns["native_master_protect_acquire"]
     release_fn = ns["native_master_protect_release"]
 
-    # The gate snippet is dedented (8 -> 0) and wrapped in a synthetic
-    # top-level function taking `self` -- the snippet's own body text is
-    # untouched, matching this project's established method-extraction
-    # convention (production_plan_layer.py's preflight_reconciliation_
-    # plan_pure). It needs native_master_protect_acquire and ProbeError
-    # as free names, exactly as the real file provides them at module
-    # scope.
-    # The snippet is already indented 8 spaces (method-body level in the
-    # real file) -- that is already valid, consistent indentation for a
-    # function body, so it is used AS-IS under a new `def` wrapper rather
-    # than dedented (dedenting to 0 would leave the body unindented,
-    # which is a SyntaxError under a def).
-    gate_ns = {"native_master_protect_acquire": acquire_fn, "ProbeError": ProbeError}
-    gate_src = "def _extracted_protect_gate(self):\n" + gate_snippet
-    exec(compile(gate_src, "<protect_gate_extract>", "exec"), gate_ns)
-    protect_gate = gate_ns["_extracted_protect_gate"]
+    skeleton_ns = {
+        "native_master_protect_acquire": acquire_fn,
+        "native_master_protect_release": release_fn,
+        "ProbeError": ProbeError,
+    }
+    exec(compile(_SKELETON_SOURCE, "<synthetic_skeleton_mirroring_ast_proven_shape>", "exec"), skeleton_ns)
+    skeleton = skeleton_ns["_skeleton"]
 
     test_root = tempfile.mkdtemp(prefix="pb_normalizer_native_protect_target_")
     try:
@@ -243,73 +400,62 @@ def main():
 
         handle = acquire_fn(target_path)
         check("acquire.returns_a_real_handle", handle is not None and handle != _INVALID_HANDLE_VALUE, handle)
-
         with open(target_path, "rb") as f:
             readable_while_held = f.read() == b"placeholder Master-like content\n"
         check("acquire.readers_remain_unaffected_while_held", readable_while_held)
-
         write_denied_while_held = not _try_open_for_write(target_path)
         check("acquire.write_open_denied_while_held", write_denied_while_held)
-
         release_fn(handle)
-
-        write_allowed_after_release = _try_open_for_write(target_path)
-        check("release.write_open_allowed_after_release", write_allowed_after_release)
-
-        try:
-            release_fn(None)
-            release_fn(handle)
-            check("release.never_raises_on_none_or_double_release", True)
-        except Exception as exc:
-            check("release.never_raises_on_none_or_double_release", False, exc)
+        check("release.write_open_allowed_after_release", _try_open_for_write(target_path))
 
         # --- Sharing-conflict case (the race-relevant failure mode) ---
-        conflicting_writer_path = os.path.join(test_root, "conflict_master.txt")
-        with open(conflicting_writer_path, "wb") as f:
+        conflict_path = os.path.join(test_root, "conflict_master.txt")
+        with open(conflict_path, "wb") as f:
             f.write(b"placeholder Master-like content\n")
-        conflicting_handle = _open_fully_exclusive(conflicting_writer_path)
+        conflicting_handle = _open_fully_exclusive(conflict_path)
         check("sharing_conflict.simulated_writer_opened_exclusively",
               conflicting_handle is not None and conflicting_handle != _INVALID_HANDLE_VALUE)
         check("sharing_conflict.acquire_returns_none_while_writer_holds_exclusive",
-              acquire_fn(conflicting_writer_path) is None)
+              acquire_fn(conflict_path) is None)
         ctypes.windll.kernel32.CloseHandle(conflicting_handle)
-        reacquired_handle = acquire_fn(conflicting_writer_path)
-        check("sharing_conflict.acquire_succeeds_once_writer_releases", reacquired_handle is not None)
-        release_fn(reacquired_handle)  # must not leak -- would otherwise block the next exclusive open below
+        reacquired = acquire_fn(conflict_path)
+        check("sharing_conflict.acquire_succeeds_once_writer_releases", reacquired is not None)
+        release_fn(reacquired)
 
-        # --- THE GATE: fail-closed call-site behavior ---
-        fake_ok = FakeSelf(target_path)
-        try:
-            protect_gate(fake_ok)
-            check("gate.positive_case_does_not_raise", True)
-        except ProbeError as exc:
-            check("gate.positive_case_does_not_raise", False, exc)
-        check("gate.positive_case_reaches_assert_master_stable", fake_ok.assert_master_stable_calls == 1)
+        # --- Functional lifecycle proof, via the AST-proven-shape skeleton ---
 
+        # 2a. Acquisition failure -> ProbeError, never reaches protected hash.
         fake_missing = FakeSelf(os.path.join(test_root, "does_not_exist.txt"))
-        gate_raised_for_missing = False
+        raised = False
         try:
-            protect_gate(fake_missing)
+            skeleton(fake_missing)
         except ProbeError:
-            gate_raised_for_missing = True
-        check("gate.nonexistent_path_raises_probeerror", gate_raised_for_missing)
-        check("gate.nonexistent_path_never_reaches_assert_master_stable",
+            raised = True
+        check("lifecycle.missing_path_raises_probeerror", raised)
+        check("lifecycle.missing_path_never_reaches_protected_hash",
               fake_missing.assert_master_stable_calls == 0)
 
-        conflicting_handle2 = _open_fully_exclusive(conflicting_writer_path)
-        check("sharing_conflict.second_simulated_writer_opened_exclusively",
-              conflicting_handle2 is not None and conflicting_handle2 != _INVALID_HANDLE_VALUE,
-              conflicting_handle2)
-        fake_conflict = FakeSelf(conflicting_writer_path)
-        gate_raised_for_conflict = False
+        # 2b. Successful acquisition + successful protected hash -> proceeds
+        #     normally, handle released afterward.
+        fake_ok = FakeSelf(target_path, stability_raises=False)
+        skeleton(fake_ok)  # must not raise
+        check("lifecycle.success_path_reaches_protected_hash", fake_ok.assert_master_stable_calls == 1)
+        check("lifecycle.success_path_releases_handle", _try_open_for_write(target_path))
+
+        # 2c. THE DEFECT THIS CORRECTION CLOSES: successful acquisition +
+        #     assert_master_stable() RAISING must still release the handle.
+        target_path_2 = os.path.join(test_root, "fake_master_2.txt")
+        with open(target_path_2, "wb") as f:
+            f.write(b"placeholder Master-like content\n")
+        fake_raises = FakeSelf(target_path_2, stability_raises=True)
+        stability_raised = False
         try:
-            protect_gate(fake_conflict)
-        except ProbeError:
-            gate_raised_for_conflict = True
-        check("gate.sharing_conflict_raises_probeerror", gate_raised_for_conflict)
-        check("gate.sharing_conflict_never_reaches_assert_master_stable",
-              fake_conflict.assert_master_stable_calls == 0)
-        ctypes.windll.kernel32.CloseHandle(conflicting_handle2)
+            skeleton(fake_raises)
+        except RuntimeError:
+            stability_raised = True
+        check("lifecycle.stability_check_actually_raised", stability_raised)
+        check("lifecycle.handle_released_even_though_stability_check_raised",
+              _try_open_for_write(target_path_2))
     finally:
         shutil.rmtree(test_root, ignore_errors=True)
 

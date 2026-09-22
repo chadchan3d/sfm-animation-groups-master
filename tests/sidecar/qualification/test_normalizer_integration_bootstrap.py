@@ -49,7 +49,7 @@ FROZEN_NORMALIZER_PATH = (
     r"\mainmenu\ChadChan3D\Rebuild_Control_Groups_Normalizer.py"
 )
 EXPECTED_FROZEN_NORMALIZER_SHA256 = (
-    "88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef"
+    "cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867"
 )
 
 # 1-indexed, inclusive. Re-verify with: sed -n '176,361p' Rebuild_Control_Groups_Normalizer.py

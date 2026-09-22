@@ -93,7 +93,9 @@ Release is single-attempt, via the new `_release_master_index_lease_durable()`, 
 
 ## 12. Native Master protection implementation
 
-A short Windows read handle (`native_master_protect_acquire`/`native_master_protect_release`, `CreateFileW` with `FILE_SHARE_READ` only -- never `FILE_SHARE_WRITE`/`FILE_SHARE_DELETE`) is acquired immediately before the first `assert_master_stable()` call in `run_target_transaction()` (so that stability check's own hash read happens while already protected) and released as the first statement in that method's existing `finally:` block (undo-state restoration), covering native Rebuild and the entire contextual-reconciliation/composition window for one target. Never raises; its own absence never changes run behavior (purely additive to the existing SHA-256 stability checks). This is the minimum bounded protection selected for this checkpoint, per the governing brief's own Section 6 -- not a claim of full native-SFM-Rebuild-callback compatibility, which remains a real-SFM qualification-matrix question.
+**This section describes this checkpoint's ORIGINAL design, since superseded twice by the two addenda below -- see the second addendum for the final, current behavior. It is left in place, uncorrected, as an accurate historical record of what this checkpoint originally implemented; do not treat the paragraph that follows as describing current behavior.**
+
+A short Windows read handle (`native_master_protect_acquire`/`native_master_protect_release`, `CreateFileW` with `FILE_SHARE_READ` only -- never `FILE_SHARE_WRITE`/`FILE_SHARE_DELETE`) was originally acquired immediately before the first `assert_master_stable()` call in `run_target_transaction()` and released as the first statement in that method's existing `finally:` block, covering native Rebuild and the entire contextual-reconciliation/composition window for one target. As originally implemented, the primitive never raised, and its own absence did not change run behavior. Both the fail-open acquisition behavior and the acquire-before-any-owning-try placement described in this paragraph were corrected by the two addenda below -- see those for the current, accurate behavior. This is the minimum bounded protection selected for this checkpoint, per the governing brief's own Section 6 -- not a claim of full native-SFM-Rebuild-callback compatibility, which remains a real-SFM qualification-matrix question.
 
 ## 13. All tests run, exact pass/fail counts
 
@@ -287,4 +289,100 @@ is a new commit, and commit `9202933` remains historical evidence exactly as it 
 
 ---
 
-**PRODUCTION NORMALIZER INTEGRATION CORRECTION READY FOR NARROW INDEPENDENT RE-AUDIT**
+## Addendum 2 (2026-09-22): second independent-audit correction -- protection-lifetime leak closed
+
+The independent re-audit of commit `eff7d967fa264087faec5e6617b438ffb59fe23b` (Addendum 1's
+correction) confirmed both of Addendum 1's fixes closed, and found one further, narrower defect:
+
+### Defect: a valid protection handle could leak before its release `finally` was entered
+
+Addendum 1's fix acquired the handle, checked for `None` (fail-closed), and THEN called `self.
+assert_master_stable()` -- all still several statements before the existing transaction `try:` that
+owned the handle's release. If `assert_master_stable()` itself raised (or anything else in that
+gap), a *successfully acquired* handle had no owning `try/finally` yet and leaked in the long-lived
+SFM process.
+
+### Fix
+
+Reordered `run_target_transaction()` so protection acquisition happens immediately before the
+existing transaction `try:` (PRE semantic capture and DataModel/undo-state preparation remain
+before it, unchanged), and `self.assert_master_stable()` is now the FIRST statement INSIDE that
+`try:`, before Undo is disabled and before native Rebuild. The existing `finally:` (unchanged in
+its own logic) still releases the handle first. `None` still correctly raises BEFORE the `try:` --
+no real handle exists yet to release in that case. No transaction/locking architecture redesign;
+the previously-accepted tiny post-reconciliation/final-hash gap (the file's SECOND, later
+`assert_master_stable()` call, still outside this try/finally) was left untouched -- source
+inspection confirms no native call occurs there.
+
+`test_normalizer_integration_native_protect.py` was extended (not merely re-pinned) with:
+- an **AST/source-structure proof**, parsed directly from the real, verbatim-extracted, SHA-256-pinned
+  `run_target_transaction()` method, establishing structurally that (a) the acquire assignment is
+  immediately followed by the `None`-check `if`, immediately followed by the `try:` (no gap, no
+  chance to leak between a successful acquire and its owning try), (b) the `try:`'s first body
+  statement is `self.assert_master_stable()`, and (c) the `try:`'s `finally:` releases the handle as
+  its own first statement;
+- a **functional, runnable proof**, using the real, unchanged `native_master_protect_acquire`/
+  `native_master_protect_release` primitives inside a synthetic skeleton that mirrors EXACTLY the
+  AST-proven shape (never a hand-invented one), proving against real Windows handles that a forced
+  `assert_master_stable()` exception still releases the handle -- confirmed by an independent
+  write-mode open of the same file succeeding immediately afterward.
+
+Result: **27/27 PASS**, both Python 3.10 and real Python 2.7.5.
+
+### Identity changes from this correction
+
+| Stage | Frozen Normalizer SHA-256 |
+|---|---|
+| Correction 1 (commit `eff7d96`) | `88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef` |
+| **Correction 2 (current)** | **`cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867`** |
+
+Size 355,415 bytes (was 355,316), 13,939 lines (was 13,937), still pure ASCII, still pure LF.
+
+### Files changed this correction
+
+**Outside the git repository**: the frozen Normalizer itself (the reordering fix).
+
+**Inside the git repository**:
+- `audit_external_runtime/Rebuild_Control_Groups_Normalizer.py` + `MANIFEST.md` -- updated to the
+  final post-correction bytes, same audit-only mechanism, `.gitattributes` LF rule preserved.
+- `tests/sidecar/qualification/test_normalizer_integration_native_protect.py` -- extended with the
+  AST structural proof and the release-on-exception functional proof described above.
+- `tests/sidecar/qualification/test_normalizer_integration_bootstrap.py`,
+  `test_normalizer_integration_acquisition.py` -- whole-file SHA pin update only; their own
+  extraction ranges are byte-identical and unshifted (confirmed directly -- this correction's edits
+  were entirely within `run_target_transaction()`, positioned after both harnesses' extracted
+  ranges).
+- `tests/sidecar/qualification/candidate_b2c_c/production_plan_layer.py`, `authority_pair.py`,
+  `test_b2c_c_tail_real_canonical_authority.py` -- whole-file SHA pin update only; every B2C-C
+  extraction range ends well before line 11251 (the earliest line this correction touched),
+  confirmed directly, so no range relocation was needed this time, only the identity pin.
+- This report (this addendum, and the historical-record correction to the earlier stale paragraph
+  in the main body above).
+
+### Re-run evidence
+
+| Check | Result |
+|---|---|
+| `py_compile` of the corrected frozen Normalizer | OK, Python 3.10 AND real Python 2.7.5 |
+| `test_normalizer_integration_native_protect.py` (extended) | **27/27 PASS**, both interpreters |
+| `test_normalizer_integration_bootstrap.py` (pin-only update) | **8/8 PASS**, both interpreters |
+| `test_normalizer_integration_acquisition.py` (pin-only update) | **17/17 PASS**, both interpreters |
+| `test_b2c_c_plan_layer_equivalence.py` (pin-only update) | **55/55 PASS** |
+| `test_b2c_c_execution_layer_equivalence.py` (pin-only update) | **125/125 PASS** |
+| `test_b2c_c_broker_mediated_authority_sanity.py` | **20/20 PASS** |
+| `test_b2c_c_fake_dme_addchild_regression.py` | **11/11 PASS** |
+| `test_b2c_c_tail_real_canonical_authority.py` (pin-only update) | **15/15 PASS** |
+
+The accepted package (`cf06ba4`) and `tools/sfm_master_sidecar/` remain untouched this correction
+too (confirmed by `git diff --stat`, empty).
+
+### Scope preserved
+
+SFM was not launched. The real-SFM qualification matrix was not started. CPM was not touched. The
+accepted package architecture was not modified. The sidecar format was not reopened. The accepted
+post-reconciliation/final-hash policy was not changed. No prior commit was amended or rewritten --
+commits `9202933` and `eff7d96` remain historical evidence exactly as they were.
+
+---
+
+**PRODUCTION NORMALIZER INTEGRATION CORRECTION 2 READY FOR NARROW INDEPENDENT RE-AUDIT**

@@ -39,7 +39,7 @@ PRODUCTION_PATH = (
     r"E:\SteamLibrary\steamapps\common\SourceFilmmaker\game\usermod\scripts\sfm"
     r"\mainmenu\ChadChan3D\Rebuild_Control_Groups_Normalizer.py"
 )
-EXPECTED_PRODUCTION_SHA256 = "88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef"
+EXPECTED_PRODUCTION_SHA256 = "cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867"
 
 # Identical extraction ranges to every prior semantic-regression test in
 # this project (test_b2c_correction6_semantic_regression.py etc.) --

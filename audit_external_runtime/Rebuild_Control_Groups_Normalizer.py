@@ -11254,36 +11254,6 @@ class RebuildControlGroupsProductionRun(
                 % (exact_pair,)
             )
 
-        # Production Normalizer Integration (2026-09-22, corrected same
-        # day per independent audit): acquire the short native-Master-
-        # protect handle BEFORE this stability check so the check's own
-        # hash read happens while already protected -- held through
-        # native Rebuild and contextual reconciliation below, released
-        # deterministically in this method's own finally. FAIL-CLOSED:
-        # this handle is required, not merely additive -- if it cannot be
-        # acquired (nonexistent path, or an already-open conflicting
-        # writer denying the read-only/FILE_SHARE_READ-only open), this
-        # target transaction must not proceed into native Rebuild without
-        # it. Native Rebuild has not been invoked yet at this point, so
-        # raising here is still a clean pre-mutation abort (see
-        # native_master_protect_acquire()'s own docstring for exactly
-        # what this handle does and does not claim).
-        native_master_protect_handle = native_master_protect_acquire(
-            self.master_path
-        )
-
-        if native_master_protect_handle is None:
-            raise ProbeError(
-                "CONTEXTUALIZER could not acquire the required native "
-                "Master protection handle (FILE_SHARE_READ only) before "
-                "entering native Rebuild -- refusing to proceed without "
-                "write/delete-denying protection held across the "
-                "protected source hash, native Rebuild, and contextual "
-                "reconciliation."
-            )
-
-        self.assert_master_stable()
-
         pre_capture_ok = True
         pre_capture_error = None
         pre = None
@@ -11390,7 +11360,39 @@ class RebuildControlGroupsProductionRun(
 
         undo_restored = False
 
+        # Production Normalizer Integration (2026-09-22, corrected AGAIN
+        # per independent re-audit): PRE semantic capture and DataModel/
+        # undo-state preparation above are left BEFORE protection
+        # acquisition, as before. But the handle is now acquired
+        # immediately before this try/finally, not several lines and
+        # several potentially-raising operations earlier -- previously,
+        # a successfully-acquired handle could leak if self.assert_
+        # master_stable() (or anything else between acquisition and this
+        # try) raised, because no try/finally owned it yet at that point.
+        # FAIL-CLOSED on None still correctly happens BEFORE this try:
+        # no real handle exists yet to release in that case.
+        native_master_protect_handle = native_master_protect_acquire(
+            self.master_path
+        )
+
+        if native_master_protect_handle is None:
+            raise ProbeError(
+                "CONTEXTUALIZER could not acquire the required native "
+                "Master protection handle (FILE_SHARE_READ only) before "
+                "entering native Rebuild -- refusing to proceed without "
+                "write/delete-denying protection held across the "
+                "protected source hash, native Rebuild, and contextual "
+                "reconciliation."
+            )
+
         try:
+            # First protected operation inside the release-owning try:
+            # this hash read now happens while already protected, AND if
+            # it raises, the finally below still releases the handle
+            # (previously this check ran outside any try that released
+            # it).
+            self.assert_master_stable()
+
             dm.SetUndoEnabled(
                 False
             )

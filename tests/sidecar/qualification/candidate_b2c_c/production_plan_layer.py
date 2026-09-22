@@ -59,7 +59,7 @@ DEFAULT_PRODUCTION_PATH = (
     r"E:\SteamLibrary\steamapps\common\SourceFilmmaker\game\usermod\scripts\sfm"
     r"\mainmenu\ChadChan3D\Rebuild_Control_Groups_Normalizer.py"
 )
-EXPECTED_PRODUCTION_SHA256 = "88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef"
+EXPECTED_PRODUCTION_SHA256 = "cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867"
 # 2026-09-22 Production Normalizer Integration: the frozen file's own
 # line numbers shifted (a qualified-authority bootstrap block was
 # inserted near the top of the file, plus two new methods and a small

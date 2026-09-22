@@ -24,20 +24,21 @@ before -- this snapshot changes nothing about how those harnesses work.
 | Field | Value |
 |---|---|
 | Original installed path | `E:\SteamLibrary\steamapps\common\SourceFilmmaker\game\usermod\scripts\sfm\mainmenu\ChadChan3D\Rebuild_Control_Groups_Normalizer.py` |
-| Byte size | 355,316 bytes |
-| Line count (newline-terminated lines) | 13,937 |
-| SHA-256 | `88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef` |
+| Byte size | 355,415 bytes |
+| Line count (newline-terminated lines) | 13,939 |
+| SHA-256 | `cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867` |
 | Newline style | pure LF (0 CRLF sequences found; matches the real installed file's own pre-existing convention, unchanged by this integration) |
 | Encoding | pure ASCII (the file's own `# -*- coding: ascii -*-` declaration; independently confirmed by direct byte-level decode) |
-| Reflects final post-correction production file? | **Yes.** This snapshot was taken AFTER the independent-audit-driven native-Master-protection fail-closed correction (2026-09-22) was applied to the real installed file. It is byte-for-byte identical to the file the real SFM installation currently runs. |
+| Reflects final post-correction production file? | **Yes.** This snapshot was taken AFTER the independent-audit-driven protection-lifetime correction (2026-09-22, second correction -- the handle is now acquired immediately before the release-owning try/finally, with the protected stability check as its first operation inside that try) was applied to the real installed file. It is byte-for-byte identical to the file the real SFM installation currently runs. |
 
 ## Identity history (for audit continuity)
 
 | Stage | SHA-256 |
 |---|---|
 | Pre-integration (frozen, before any of this arc's work) | `6656aa9022d458c22c2549da5dfdc14539a572d91200c3f0f459c1453dfd092e` |
-| Post-integration, commit `9202933` (before this correction) | `f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d28f6676f5ef2cf0` |
-| **Post-correction (this snapshot)** | **`88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef`** |
+| Post-integration, commit `9202933` (before any correction) | `f69a57436d46252fb78d9ae2a2155d7206e07869c74ac5f4d28f6676f5ef2cf0` |
+| Post-correction 1 (commit `eff7d96` -- fail-closed protection, first pass) | `88805dbbcebf8c813a97b5346194ff546ecd2a0ef7c6ab47192734b41e1fa2ef` |
+| **Post-correction 2 (this snapshot -- protection-lifetime/leak fix)** | **`cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867`** |
 
 ## Verification
 
