@@ -3,7 +3,10 @@
 publisher lock. Python 3 only.
 
 An "output namespace" is one directory containing:
-  - immutable generation files: `sfm_master_<fmt>_<64-hex-sidecar-sha256>.bin`
+  - immutable generation files: `sfm_master_<fmt>_<64-hex-sidecar-sha256>.sfmsidecar`
+    (Package-Boundary Correction, 2026-09-21: extension changed from
+    `.bin` -- see `compiler.generation_basename()`'s own docstring for
+    why)
   - one active manifest: `manifest.json`
   - `publisher.lock` -- an OS-backed exclusive lock file (never a
     lockfile-EXISTENCE convention; see `_ExclusiveFileLock` below)
@@ -218,7 +221,7 @@ def publish(
     snapshot = compiler.capture_source_snapshot(source_path)
     outcome = compiler.parse_and_compile(snapshot, official_policy=official_policy)
 
-    tmp_gen_path = output_dir / (".tmp-gen-%s.bin" % uuid.uuid4().hex)
+    tmp_gen_path = output_dir / (".tmp-gen-%s.sfmsidecar" % uuid.uuid4().hex)
     with open(tmp_gen_path, "wb") as f:
         f.write(outcome.blob)
         f.flush()

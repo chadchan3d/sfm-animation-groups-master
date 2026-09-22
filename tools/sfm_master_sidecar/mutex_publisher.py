@@ -50,6 +50,30 @@ MANIFEST_SCHEMA_VERSION = 1
 # already does on the reader side (R3-B2A). Kept as a literal constant here,
 # not imported from the B2A package, since this external Python 3 utility
 # is deliberately independent of the embedded-runtime broker package.
+#
+# Package-Boundary Targeted Correction (2026-09-22), Section 7 disposition
+# (deliberately NOT changed here -- see R3_Package_Boundary_Targeted_
+# Correction_Report.md for the full analysis): these three paths remain
+# hardcoded, absolute, and specific to this exact development machine/
+# checkout. The package-boundary correction bundled byte-identical,
+# hash-verified copies of the validator/provider directly inside
+# `sfm_master_authority_productionized/` (the RUNTIME package, closing
+# that package's own repository-path dependency) -- but this module is a
+# SEPARATE, offline, Python-3-only, developer-side external-rebuild
+# utility, not the runtime package itself, and no genuinely portable
+# "production" location for these two files exists yet outside a
+# qualification-tree checkout. Repointing these constants at a repo-
+# relative path would still be a repository-qualification-tree
+# dependency in substance, not a real portability fix -- so this module
+# is explicitly left as-is rather than given a false sense of portability.
+# CONSEQUENCE: hardened external (custom/local Master) rebuild support
+# via this module is NOT YET an installed-release feature. Production
+# Normalizer integration may proceed using the shipped prebuilt sidecar
+# (the generic compiler/publisher <-> runtime artifact/manifest contract
+# IS fixed and portable, per the package-boundary correction); custom/
+# local Master rebuild support through THIS module must remain
+# unadvertised/disabled in any release until this module is itself
+# productionized with a real supported dependency location.
 _FINAL_R3A2B_VALIDATOR_PATH = (
     r"E:\SFM Animation Group Master\tests\sidecar\qualification\candidate_packed_validator_r3a2b.py"
 )
@@ -329,7 +353,7 @@ def publish(source_path, output_dir, mutex_slot_identity, official_policy=False,
     snapshot = compiler.capture_source_snapshot(source_path)
     outcome = compiler.parse_and_compile(snapshot, official_policy=official_policy)
 
-    tmp_gen_path = output_dir / (".tmp-gen-%s.bin" % uuid.uuid4().hex)
+    tmp_gen_path = output_dir / (".tmp-gen-%s.sfmsidecar" % uuid.uuid4().hex)
     with open(tmp_gen_path, "wb") as f:
         f.write(outcome.blob)
         f.flush()

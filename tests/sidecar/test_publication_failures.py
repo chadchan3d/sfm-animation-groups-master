@@ -30,8 +30,10 @@ class FailurePreservationTestCase(unittest.TestCase):
         self.baseline_src = FIXTURES_ROOT / "valid" / "06_sibling_groups.txt"
         self.baseline_result = publisher.publish(self.baseline_src, self.tmp)
         self.baseline_manifest_bytes = (Path(self.tmp) / "manifest.json").read_bytes()
+        # Package-Boundary Correction (2026-09-21): immutable generation
+        # suffix changed to ".sfmsidecar" (was ".bin").
         self.baseline_gen_files = sorted(
-            p.name for p in Path(self.tmp).iterdir() if p.suffix == ".bin"
+            p.name for p in Path(self.tmp).iterdir() if p.suffix == ".sfmsidecar"
         )
 
     def tearDown(self):
@@ -40,7 +42,7 @@ class FailurePreservationTestCase(unittest.TestCase):
     def _assert_baseline_untouched(self):
         current_manifest = (Path(self.tmp) / "manifest.json").read_bytes()
         self.assertEqual(current_manifest, self.baseline_manifest_bytes, "prior manifest must survive unchanged")
-        current_gen_files = sorted(p.name for p in Path(self.tmp).iterdir() if p.suffix == ".bin")
+        current_gen_files = sorted(p.name for p in Path(self.tmp).iterdir() if p.suffix == ".sfmsidecar")
         for name in self.baseline_gen_files:
             self.assertIn(name, current_gen_files, "prior generation must never be removed")
         leftover_tmp = [p.name for p in Path(self.tmp).iterdir() if p.name.startswith(".tmp")]

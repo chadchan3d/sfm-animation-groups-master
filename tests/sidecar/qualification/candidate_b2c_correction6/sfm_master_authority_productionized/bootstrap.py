@@ -40,6 +40,23 @@ sfm_master_sidecar/publisher.py`'s job (Blocker B); actual ownership/
 readiness state is `runtime.py`'s job (already built, Astra F6) -- this
 module is the missing link between "no `__file__`/CWD available yet"
 and "the rest of the already-qualified ownership machinery."
+
+Exact scope (Package-Boundary Targeted Correction, 2026-09-22, Section
+6 -- narrowing an earlier, looser reading of what the installed-
+isolation regression already proves): `test_package_boundary_installed_
+isolation.py` proves this package can be imported and can acquire a
+generation, from ONLY its own real files, with no repository/CWD
+dependency, ONCE its installed directory has already been placed on
+`sys.path`. That test builds `sys.path` directly -- it does not call
+`bootstrap_import_path()` itself. This module supplies the deterministic,
+`sys.executable`-relative path CALCULATIONS a real MAINMENU entry point
+would use to perform that placement (i.e. "where is the package
+installed", "where is the published sidecar"); it does not perform, and
+no test here exercises, the actual MAINMENU-side `sys.path.insert(...)`
++ `import sfm_master_authority_productionized.runtime` entry seam itself
+against a real embedded SFM process. That exact entry seam remains a
+real-SFM production Normalizer integration concern, qualified when that
+integration happens -- not by this module or its tests.
 """
 import os
 import sys

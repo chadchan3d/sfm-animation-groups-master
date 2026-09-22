@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-"""sfm_master_authority.runtime -- THE canonical owner of live broker
-runtime state. ASTRA_CORRECTED.md Section 2.
+"""sfm_master_authority_productionized.runtime -- THE canonical owner of
+live broker runtime state. ASTRA_CORRECTED.md Section 2.
 
 Ownership contract enforced by this module:
   - only THIS module (imported under exactly this dotted name) owns the
     broker factory and its INITIALIZING/READY/FAILED state;
   - every caller must use the exact absolute import
-    `import sfm_master_authority.runtime` (or the equivalent
-    `from sfm_master_authority import runtime`) -- never a relative
-    import, never `execfile()`, never a differently-aliased path;
+    `import sfm_master_authority_productionized.runtime` (or the
+    equivalent `from sfm_master_authority_productionized import
+    runtime`) -- never a relative import, never `execfile()`, never a
+    differently-aliased path;
   - alternate-name execution/import is rejected HERE, at import time,
     before any broker/provider side effect is created;
   - a second, incompatible package/build fails clearly via the API-
@@ -56,7 +57,23 @@ RUNTIME_API_VERSION = "1.0.0-b2a"
 # retained+incoming transient semantics) -- a caller checking only
 # RUNTIME_API_VERSION could not tell this build apart from the second
 # correction's build, which lacks those fixes.
-RUNTIME_BUILD_ID = "b2c-correction6-parsedeferred-floor-targeted-2026-09-18"
+#
+# Package-Boundary Targeted Correction (2026-09-22): bumped again --
+# the intervening package-boundary correction commits (d039c92, 1abe914)
+# added real API-surface-adjacent behavior a caller depends on even
+# though RUNTIME_API_VERSION itself did not change: `ViewCache.
+# invalidate_generation()` now also revokes leased-orphan tokens (a
+# correctness fix a caller relying on the OLD, incomplete revocation
+# behavior would need to know about); `Broker.acquire_generation()`'s
+# call contract to `select_sidecar_candidate` was repaired (previously
+# always raised TypeError); `sidecar_contract.py` now resolves its
+# validator/provider dependency from within this package itself rather
+# than a repository-relative qualification path; this file's own
+# canonical-module-name self-check was repaired (previously this exact
+# module could not be imported under its real name at all). A caller
+# checking only RUNTIME_API_VERSION could not tell this build apart from
+# the pre-package-boundary build, which lacks all of the above.
+RUNTIME_BUILD_ID = "package-boundary-corrected-2026-09-22"
 
 STATE_UNINITIALIZED = "UNINITIALIZED"
 STATE_INITIALIZING = "INITIALIZING"
@@ -155,7 +172,7 @@ def assert_expected_origin(expected_origin_dir):
     expected_norm = os.path.normcase(os.path.normpath(expected_origin_dir))
     if actual_norm != expected_norm:
         raise errors.BrokerIdentityConflict(
-            "sfm_master_authority.runtime was loaded from %r, not the expected "
+            "sfm_master_authority_productionized.runtime was loaded from %r, not the expected "
             "origin %r -- refusing (a stale/frozen/wrong-location package copy "
             "may have been preloaded first)." % (_actual_origin_dir, expected_origin_dir)
         )
@@ -207,14 +224,14 @@ def get_broker(expected_api_version=None, expected_build_id=None, is_main_thread
 
     if expected_api_version is not None and expected_api_version != RUNTIME_API_VERSION:
         raise errors.BrokerIdentityConflict(
-            "caller expects sfm_master_authority runtime API version %r, but "
+            "caller expects sfm_master_authority_productionized runtime API version %r, but "
             "the loaded runtime is %r -- refusing to hand out a broker under "
             "mismatched API expectations (a second, incompatible package is "
             "likely on sys.path)." % (expected_api_version, RUNTIME_API_VERSION)
         )
     if expected_build_id is not None and expected_build_id != RUNTIME_BUILD_ID:
         raise errors.BrokerIdentityConflict(
-            "caller expects sfm_master_authority runtime build id %r, but "
+            "caller expects sfm_master_authority_productionized runtime build id %r, but "
             "the loaded runtime is build %r -- refusing (same API generation, "
             "different/incompatible implementation build)." % (expected_build_id, RUNTIME_BUILD_ID)
         )
@@ -222,7 +239,7 @@ def get_broker(expected_api_version=None, expected_build_id=None, is_main_thread
     if not is_canonical():
         raise errors.BrokerIdentityConflict(
             "sys.modules[%r] does not refer to this module object -- a "
-            "second, non-canonical sfm_master_authority.runtime appears to "
+            "second, non-canonical sfm_master_authority_productionized.runtime appears to "
             "be loaded in this process." % (_CANONICAL_MODULE_NAME,)
         )
 

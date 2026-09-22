@@ -102,7 +102,9 @@ class GenerationReusePartTests(TempNamespaceTestCase):
         self.assertTrue(r2.reused)
         self.assertEqual(r1.generation_basename, r2.generation_basename)
         self.assertEqual(r1.ordinary_sha256, r2.ordinary_sha256)
-        gen_files = [p for p in Path(self.output_dir).iterdir() if p.suffix == ".bin"]
+        # Package-Boundary Correction (2026-09-21): immutable generation
+        # suffix changed to ".sfmsidecar" (was ".bin").
+        gen_files = [p for p in Path(self.output_dir).iterdir() if p.suffix == ".sfmsidecar"]
         self.assertEqual(len(gen_files), 1, "no duplicate generation churn")
 
     def test_generation_collision_with_different_bytes_is_refused(self):

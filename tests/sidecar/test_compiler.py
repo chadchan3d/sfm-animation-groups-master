@@ -97,9 +97,13 @@ class SelfValidationTests(unittest.TestCase):
 class GenerationBasenameTests(unittest.TestCase):
 
     def test_generation_basename_format(self):
+        # Package-Boundary Correction (2026-09-21): extension changed to
+        # ".sfmsidecar" (was ".bin") so a real publish is visible to the
+        # runtime's shipped-root scan -- see compiler.generation_
+        # basename()'s own docstring.
         name = compiler.generation_basename("a" * 64)
         self.assertTrue(name.startswith("sfm_master_0_"))
-        self.assertTrue(name.endswith(".bin"))
+        self.assertTrue(name.endswith(".sfmsidecar"))
         self.assertIn("a" * 64, name)
 
 
