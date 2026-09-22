@@ -65,3 +65,10 @@ real_sfm_qualification/checkpoint_c1/Rebuild_Control_Groups_Normalizer_PRE_INTEG
 # regression pins the C1 script's own SHA-256 and its own function
 # extraction range -- same archive-export LF-safety reasoning.
 real_sfm_qualification/checkpoint_c1/test_c1_semantic_comparator_regression.py text eol=lf
+
+# Real-SFM Qualification, Checkpoint C2 (2026-09-22): same archive-export
+# CRLF corruption class as above -- both the C2 wrapper script and its
+# offline comparator/gate regression are SHA-256 pinned and cited
+# directly in operator instructions/the ledger.
+real_sfm_qualification/checkpoint_c2/Checkpoint_C2_Integrated_Selected_Shots.py text eol=lf
+real_sfm_qualification/checkpoint_c2/test_c2_comparator_and_gate_regression.py text eol=lf
