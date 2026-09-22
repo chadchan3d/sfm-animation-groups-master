@@ -25,3 +25,12 @@ tests/sidecar/qualification/candidate_b2c_correction*/fixtures_ab/*_master.txt t
 # itself was always correct; only `git archive`'s export lacked an
 # explicit eol=lf attribute for this path.
 tests/sidecar/qualification/candidate_b2c_c/fixtures_authority/*_master.txt text eol=lf
+
+# Package-Boundary Correction (2026-09-21): the same archive-export
+# CRLF corruption class as above, found again for the BUNDLED copies of
+# the hash-pinned validator/provider source now living inside
+# sfm_master_authority_productionized/ itself (Section 9 item 3 of
+# R3_Package_Boundary_Correction_Report.md) -- caught by that
+# correction's own decisive clean-directory-from-archive proof.
+tests/sidecar/qualification/candidate_b2c_correction6/sfm_master_authority_productionized/candidate_packed_validator_r3a2b.py text eol=lf
+tests/sidecar/qualification/candidate_b2c_correction6/sfm_master_authority_productionized/candidate_packed_provider_r3a2b.py text eol=lf
