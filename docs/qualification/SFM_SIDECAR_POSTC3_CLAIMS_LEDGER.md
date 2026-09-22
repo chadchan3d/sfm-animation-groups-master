@@ -93,3 +93,42 @@ but per the governing GitHub-checkpoint prompt's own governance clause, this loc
 treated as `B2C-C CANDIDATE PASS — INDEPENDENT AUDIT REQUIRED BEFORE B2C-D` until an independent
 audit of the pushed checkpoint confirms it. B2C-D has NOT begun. No self-authorized production
 promotion is claimed anywhere in this addendum.
+
+---
+
+## Addendum 4 (2026-09-21): independent audit, targeted correction, independent re-audit — B2C-C CLOSED
+
+This addendum preserves the full historical sequence exactly as it happened. Earlier
+PARTIAL/CANDIDATE verdicts above are NOT rewritten or deleted — they are the accurate record of
+what was true at each point in the arc.
+
+1. **Independent audit of `5cc98966d2425ca25ffcf310809fd01ae8514ff8`** (the checkpoint Addendum 3
+   above staged/pushed) found two narrow fixture-contract gaps, verdict `B2C-C PARTIAL — CORE
+   DOWNSTREAM EQUIVALENCE EVIDENCE SUPPORTED; TWO FINAL-FIXTURE CONTRACT GAPS BLOCK B2C-D`:
+   - the "Tail relocation" fixture (D2) was not actually a Tail fixture (synthetic `Body/Tail`
+     Master entry that does not match the real canonical Master's structure; always
+     `already_correct_count=1`/`moved_count=0`; silently refined back to `RigBody`);
+   - the "untouched custom group" fixture (D4) was not actually zero-touch (its root children
+     never reached the real reorder function's early exit, so the unconditional detach/re-add
+     genuinely fired against the custom group's own root position).
+2. **Commit `3b5aaa955bafa822da27603514271944b280654e` closed both gaps**: D2 renamed to
+   `D2_rigbody_family_counterpart_refinement` (retained only as valid RigBody-refinement evidence,
+   no longer claimed as Tail); a new dedicated real-canonical-Master Tail authority test added
+   (15/15 PASS); a new `D6_tail_relocation` fixture added (genuine, observable relocation into a
+   real root-level `Tail` group, effective negative control); D4 redesigned as
+   `UserCustomGroup/{Alpha,Beta}` (verified `mutation_count == 0`, with a precise handle/name-based
+   zero-mutation-log-entries assertion, non-trivial metadata, effective negative control); all four
+   RESULTS-accumulating harnesses hardened to exit non-zero on failure, self-test-proven in both
+   directions; complete per-fixture evidence (all repeat-1/repeat-2 SHAs) for all 16 named
+   fixtures; an explicit broker-to-execution D5 composition proof added. See
+   `R3_B2C_C_Downstream_Mutation_Equivalence_Report.md` Part 4 for the full derivation.
+3. **Independent re-audit of `3b5aaa9`**: `INDEPENDENT B2C-C RE-AUDIT PASS — B2C-C CLOSED —
+   AUTHORIZE B2C-D`. See `R3_B2C_C_Independent_Reaudit_3b5aaa9_Report.md` for the full record,
+   including independently-reproduced synthetic-authority and official-sidecar SHA-256 identities.
+4. **B2C-C is CLOSED.**
+5. **B2C-D is authorized to begin** (as a future phase — this addendum documents the
+   authorization, it does not itself perform any B2C-D work).
+6. **Production promotion remains unauthorized.** Nothing in this arc — Addendum 1 through this
+   entry — constitutes or implies production-promotion authorization. Live target/scope
+   enumeration, native `ifm.dll` behavior, and W3 (still `UNKNOWN`) remain separate, deferred
+   gates, unchanged by B2C-C's closure.

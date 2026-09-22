@@ -11,8 +11,11 @@ section and `check.grep_no_tail_runtime_branch` below).
 
 Real tail control literals used (verified present in the canonical
 Master's actual "Tail" group, line 116343 onward, by direct reading):
-"BaseTail", "Back_tail_01_L", "Back_tail_01_R" -- declared in that exact
-order in the file.
+"BaseTail", "Back_tail_01_L", "Back_tail_01_R". The canonical Master
+declares "Back_tail_01_L" and "Back_tail_01_R" before "BaseTail" (real
+global_index 115541/115542 vs 115559) -- this file does not depend on
+or assert that ordering; it only requires all three to resolve to
+destination "Tail".
 
 Under real Python 2.7.5 this is the full frozen-parser-vs-adapter hash
 comparison; under Python 3 it is adapter-only structural evidence
