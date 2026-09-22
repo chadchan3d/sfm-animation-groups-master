@@ -35,12 +35,12 @@ D1_SCRIPT_PATH = (
     r"\mainmenu\ChadChan3D\Checkpoint_D1_Historical_All_Shots_Baseline.py"
 )
 EXPECTED_D1_SCRIPT_SHA256 = (
-    "d8af1437c0090c62c29e2fcc3797c78c5e30f4d464703df83c2d7d769a1cf9a2"
+    "e5df3675e26280ab3ed3a6e54ae1a54d7bd6526c3df22e2bfce59d3b5a2cdf61"
 )
 # 1-indexed, inclusive. Re-verify with:
 #   sed -n '<start>,<end>p' Checkpoint_D1_Historical_All_Shots_Baseline.py
-DUMPS_SORTED_RANGE = (456, 457)
-TARGET_KEY_AND_EXCLUDED_WITNESS_ROW_RANGE = (460, 485)
+DUMPS_SORTED_RANGE = (519, 520)
+TARGET_KEY_AND_EXCLUDED_WITNESS_ROW_RANGE = (523, 548)
 
 RESULTS = []
 

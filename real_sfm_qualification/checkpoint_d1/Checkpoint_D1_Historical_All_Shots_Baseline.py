@@ -9,6 +9,41 @@ exact historical, pre-integration frozen Normalizer's own real All
 Shots behavior, unmodified, against the disposable qualification
 project. Do not save afterward.
 
+D1-3 CORRECTION (2026-09-22): D1-2 proved the writer correction itself
+worked (nonzero JSON, parseable, real exception retained, OVERALL_PASS
+correctly False) but a NEW failure surfaced one step earlier: a real
+`MemoryError()` inside `stable_hash()`'s own `joined.encode("utf-8")`
+step while hashing the 85-target POST fingerprint, in this 32-bit
+qualification-harness process. This revision:
+  (a) replaces `stable_hash()` with a byte-for-byte-equivalent
+      streaming implementation that never builds a giant joined
+      Unicode string or a giant encoded byte string -- proven
+      hash-identical to the old implementation by a dedicated offline
+      regression across empty/single/many-item/real-C1-C2-data/large
+      synthetic inputs;
+  (b) makes the JSON artifact writer genuinely streaming (`json.dump`
+      directly to the temp file, no giant in-memory serialized string,
+      compact -- no `indent`, no whole-document `sort_keys`, since
+      qualification evidence is the data, not its on-disk formatting);
+  (c) releases redundant transient structures (the full 163-target
+      witness objects, the raw production-Normalizer source text, the
+      historical baseline's executed module namespace) as soon as
+      each is no longer needed, well before the memory-heavier
+      hashing/serialization phase, instead of holding everything for
+      the whole script's lifetime;
+  (d) assigns captured PRE/POST fingerprint evidence into the report
+      immediately after capture, before any expensive derived
+      analysis (hashing) -- so a hashing failure does not also destroy
+      already-captured raw evidence, unlike D1-2's own failure mode;
+  (e) bounds the round-trip verification step so the live report and
+      a second full reparsed-from-disk copy are not both retained
+      longer than the single verification call needs them;
+  (f) adds lightweight, best-effort, stdlib-only (ctypes) process
+      memory snapshots at useful boundaries, diagnostic only.
+Historical Normalizer invocation, fingerprint semantics, fixture/
+starting-state gates, and the All-Shots operation itself are otherwise
+unchanged from D1-2.
+
 Purpose:
   Establish the historical (pre-integration) All-Shots outcome as the
   authoritative baseline Checkpoint D2 will later be compared against
@@ -76,6 +111,7 @@ Output:
 
 Do NOT save the SFM project after running this script.
 """
+import gc
 import hashlib
 import json
 import os
@@ -345,8 +381,35 @@ def b_get_root_group(aset):
 
 
 def stable_hash(values):
-    joined = u"\n".join(sorted(values))
-    return hashlib.sha256(joined.encode("utf-8")).hexdigest()
+    """Independent-audit correction, D1-3 (Section 1): streaming
+    replacement for the prior `joined = u"\\n".join(sorted(values));
+    return hashlib.sha256(joined.encode("utf-8")).hexdigest()`
+    implementation, which built ONE giant joined Unicode string and
+    THEN a second giant encoded byte string -- the exact operation a
+    real MemoryError was observed inside (D1-2, hashing the 85-target
+    POST fingerprint in this 32-bit process).
+
+    This version feeds hashlib.sha256() incrementally, one already-
+    short-lived per-item UTF-8 encoding at a time, and never holds a
+    combined joined/encoded copy of the whole input. It is proven
+    byte-for-byte digest-equivalent to the old implementation (same
+    item ordering via the same `sorted()`, same UTF-8 encoding, same
+    "\\n" separator bytes -- inserted between items exactly as
+    `"\\n".join` would, never before the first or after the last --
+    and the same empty-input behavior: `hashlib.sha256(b"").hexdigest()`)
+    by `real_sfm_qualification/checkpoint_d1/test_d1_stable_hash_streaming_regression.py`,
+    including against real captured Checkpoint C1/C2 fingerprint data
+    and large synthetic inputs the old implementation cannot safely
+    process in this process. `sorted(values)` itself only duplicates a
+    list of references to the existing item strings, not their
+    content, so it is not part of the peak-allocation pattern being
+    corrected here."""
+    hasher = hashlib.sha256()
+    for index, item in enumerate(sorted(values)):
+        if index:
+            hasher.update(b"\n")
+        hasher.update(item.encode("utf-8"))
+    return hasher.hexdigest()
 
 
 def build_independent_witness():
@@ -485,47 +548,100 @@ def excluded_witness_row(t):
     }
 
 
+def memory_snapshot():
+    """Independent-audit correction, D1-3 (Section 8): best-effort,
+    stdlib-only (ctypes) Windows process memory snapshot -- diagnostic
+    only for D1-3, never affects Normalizer behavior, and never raises
+    (degrades to {"available": False, ...} on any failure, including
+    on a non-Windows or restricted-sandbox interpreter)."""
+    try:
+        import ctypes
+        import ctypes.wintypes
+
+        class _ProcessMemoryCounters(ctypes.Structure):
+            _fields_ = [
+                ("cb", ctypes.wintypes.DWORD),
+                ("PageFaultCount", ctypes.wintypes.DWORD),
+                ("PeakWorkingSetSize", ctypes.c_size_t),
+                ("WorkingSetSize", ctypes.c_size_t),
+                ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
+                ("PagefileUsage", ctypes.c_size_t),
+                ("PeakPagefileUsage", ctypes.c_size_t),
+            ]
+
+        counters = _ProcessMemoryCounters()
+        counters.cb = ctypes.sizeof(_ProcessMemoryCounters)
+        process_handle = ctypes.windll.kernel32.GetCurrentProcess()
+        ok = ctypes.windll.psapi.GetProcessMemoryInfo(process_handle, ctypes.byref(counters), counters.cb)
+        if not ok:
+            return {"available": False, "error": "GetProcessMemoryInfo returned FALSE"}
+        return {
+            "available": True,
+            "working_set_bytes": int(counters.WorkingSetSize),
+            "peak_working_set_bytes": int(counters.PeakWorkingSetSize),
+            "pagefile_usage_bytes": int(counters.PagefileUsage),
+            "peak_pagefile_usage_bytes": int(counters.PeakPagefileUsage),
+        }
+    except Exception as exc:
+        return {"available": False, "error": repr(exc)}
+
+
 # ---------------------------------------------------------------------------
-# Safe artifact writer (independent-audit correction, D1-2, 2026-09-22).
+# Safe artifact writer (independent-audit correction, D1-2, refined D1-3).
 #
 # D1-1's own writer opened JSON_OUTPUT_PATH directly in "wb" mode --
 # which TRUNCATES any existing file immediately on open -- and only
 # THEN called json.dumps(...). If dumps()/encode()/write() raised for
 # ANY reason, the bare `except Exception: json_write_ok = False`
 # discarded the actual exception, leaving a truncated ZERO-BYTE file
-# with no diagnostic evidence of why. This is exactly what D1-1
-# produced: the real historical All-Shots run itself completed and
-# every runtime check passed, but the evidence artifact was silently
-# destroyed, and the specific exception that caused it is not
-# recoverable from the existing D1-1 artifacts because the prior
-# instrumentation never captured it -- that information loss is itself
-# a confirmed defect, corrected below by never discarding the
-# exception's repr() again.
+# with no diagnostic evidence of why.
+#
+# D1-2 fixed the truncation/exception-swallowing defect (proven working
+# by D1-2's own MemoryError run: nonzero JSON, parseable, real
+# exception retained, OVERALL_PASS correctly False) but still built one
+# complete `json.dumps(..., indent=2, sort_keys=True)` string in memory
+# before writing it. D1-3 replaces that with `json.dump()` streaming
+# directly to the temp file (never building the whole serialized
+# document as one in-memory string) and drops `indent`/whole-document
+# `sort_keys` -- qualification evidence is the data, not its on-disk
+# formatting.
 #
 # write_json_atomic() never truncates the final authoritative path
-# until serialization, encoding, the write itself, AND an independent
-# reopen+reparse of a separate temp file have all already succeeded.
+# until the streamed write itself, AND an independent reopen+reparse
+# of a separate temp file, have all already succeeded.
 # ---------------------------------------------------------------------------
 
 def write_json_atomic(final_path, data_obj):
     """Returns (ok, error_repr_or_None, reparsed_obj_or_None).
-    Python-2.7-compatible. Never truncates `final_path` before
-    serialization, encoding, and the write are known to succeed and
-    have been independently verified by reopening and reparsing a
-    separate temp file."""
+    Python-2.7-compatible. Streams the JSON encoding directly to the
+    temp file via json.dump() -- never builds one giant in-memory
+    serialized string -- compact (no indent, no whole-document
+    sort_keys). Never truncates `final_path` before the write and an
+    independent reopen+reparse of a separate temp file have both
+    already succeeded."""
     tmp_path = final_path + ".tmp"
-    try:
-        serialized_text = json.dumps(data_obj, indent=2, sort_keys=True)
-    except Exception as exc:
-        return False, "json.dumps() failed: %r" % (exc,), None
-    try:
-        encoded_bytes = serialized_text.encode("utf-8")
-    except Exception as exc:
-        return False, "utf-8 encode() failed: %r" % (exc,), None
+
+    def _cleanup_tmp():
+        # Best-effort removal of a temp file that is known NOT to hold
+        # the only surviving copy of a fully-written, fully-verified
+        # payload -- a partial/failed write (json.dump() streams
+        # chunks directly to the file, so a mid-write failure can
+        # leave a partially-written temp file behind, unlike the prior
+        # dumps()-then-write approach which never touched disk before
+        # a serialization failure) must never be left lying around.
+        try:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+        except Exception:
+            pass
+
     try:
         f = open(tmp_path, "wb")
         try:
-            f.write(encoded_bytes)
+            json.dump(data_obj, f)
             f.flush()
             try:
                 os.fsync(f.fileno())
@@ -534,30 +650,35 @@ def write_json_atomic(final_path, data_obj):
         finally:
             f.close()
     except Exception as exc:
-        return False, "temp file write (%r) failed: %r" % (tmp_path, exc), None
+        _cleanup_tmp()
+        return False, "json.dump()/write to temp file (%r) failed: %r" % (tmp_path, exc), None
 
     try:
         temp_size = os.path.getsize(tmp_path)
     except Exception as exc:
+        _cleanup_tmp()
         return False, "could not stat temp file (%r): %r" % (tmp_path, exc), None
     if temp_size <= 0:
+        _cleanup_tmp()
         return False, "temp file is zero bytes after write (size=%r)" % (temp_size,), None
 
     try:
         with open(tmp_path, "rb") as f:
-            reread_bytes = f.read()
-        reparsed_obj = json.loads(reread_bytes.decode("utf-8"))
+            reparsed_obj = json.load(f)
     except Exception as exc:
+        _cleanup_tmp()
         return False, "temp file reopen/reparse verification failed: %r" % (exc,), None
 
-    # Only now, with serialization/write/reparse independently proven,
+    # Only now, with the write and reparse independently proven,
     # replace the final authoritative path. os.rename() on Windows
     # refuses to overwrite an existing destination, so remove it first
     # -- this narrows, but (without a platform-specific atomic-replace
     # call) does not fully close, the replace-window race; the temp
-    # file itself is never left partially written, which is the
-    # concrete D1-1 failure this correction targets, and the final
-    # path is never touched at all unless every step above succeeded.
+    # file itself is never left partially written, and the final path
+    # is never touched at all unless every step above succeeded. If
+    # promotion itself fails here, the temp file is deliberately LEFT
+    # IN PLACE (not cleaned up) -- it is the only surviving copy of a
+    # fully-written, fully-verified payload at this point.
     try:
         if os.path.exists(final_path):
             os.remove(final_path)
@@ -572,6 +693,14 @@ def write_text_atomic(final_path, text_bytes):
     """Same discipline as write_json_atomic(), for the plain-text
     summary file. Returns (ok, error_repr_or_None)."""
     tmp_path = final_path + ".tmp"
+
+    def _cleanup_tmp():
+        try:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+        except Exception:
+            pass
+
     try:
         f = open(tmp_path, "wb")
         try:
@@ -584,12 +713,15 @@ def write_text_atomic(final_path, text_bytes):
         finally:
             f.close()
     except Exception as exc:
+        _cleanup_tmp()
         return False, "temp file write (%r) failed: %r" % (tmp_path, exc)
     try:
         temp_size = os.path.getsize(tmp_path)
     except Exception as exc:
+        _cleanup_tmp()
         return False, "could not stat temp file (%r): %r" % (tmp_path, exc)
     if temp_size <= 0:
+        _cleanup_tmp()
         return False, "temp file is zero bytes after write (size=%r)" % (temp_size,)
     try:
         if os.path.exists(final_path):
@@ -612,7 +744,9 @@ def verify_artifact_evidence(reparsed_obj):
     required evidence fields AND that the stored PRE/POST fingerprint
     hashes recompute correctly from the stored semantic fingerprint
     data (round-trip integrity through actual JSON serialization, not
-    merely that the file parses as valid JSON)."""
+    merely that the file parses as valid JSON). Reuses the same
+    streaming stable_hash()/dumps_sorted() as the main computation, so
+    this recompute carries the same D1-3 low-peak-memory guarantee."""
     if reparsed_obj is None:
         return False, "reparsed artifact is None"
     missing_keys = [k for k in REQUIRED_EVIDENCE_KEYS if k not in reparsed_obj]
@@ -647,6 +781,7 @@ report = {
     "anomalies": ANOMALIES,
     "target_set_diff": {},
     "excluded_target_witness": {},
+    "memory_snapshots": {},
 }
 
 
@@ -667,6 +802,8 @@ pre_witness = None
 post_witness = None
 
 try:
+    report["memory_snapshots"]["at_start"] = memory_snapshot()
+
     # --- 1. SHA verification, before anything else. ---
     with open(BASELINE_SOURCE_PATH, "rb") as f:
         baseline_source = f.read()
@@ -695,6 +832,10 @@ try:
     pre_witness, shots_by_name, witness_error = build_independent_witness()
     if witness_error is not None:
         raise CheckpointD1Error("Could not build independent witness: %s" % witness_error)
+
+    # Extracted immediately (small dict) so pre_witness itself can be
+    # released later without losing this evidence.
+    report["fixture_totals"] = pre_witness["totals"]
 
     for key, expected_value in EXPECTED_TOTALS.items():
         actual_value = pre_witness["totals"].get(key)
@@ -726,6 +867,13 @@ try:
     check("fingerprint_functions.extracted_and_exec_ok", True)
 
     capture_snapshot_explicit_fn = fp_ns["capture_snapshot_explicit"]
+
+    # Independent-audit correction, D1-3 (Section 2 audit finding): the
+    # raw production-Normalizer SOURCE TEXT is only needed to extract
+    # the fingerprint FUNCTIONS above; once fp_ns holds the executed
+    # functions, the raw text is redundant and safe to release before
+    # the memory-heavier capture/hash/write phases below.
+    del all_lines, blocks, combined_source, production_bytes
 
     def canonicalize_snapshot(snap):
         """Identical to Checkpoints C1/C2's own canonicalize_snapshot:
@@ -778,14 +926,36 @@ try:
     # directly from the witness's own eligibility classification.
     eligible_targets_of_interest = [(t["shot_name"], t["aset_name"]) for t in pre_eligible_rows]
 
+    # Independent-audit correction, D1-3 (Section 2 audit finding):
+    # extract the cheap key SETS now (used later for the target-set
+    # diff and excluded-witness lookups) so the full per-target row
+    # LISTS can be released before the historical run's own wait,
+    # rather than held across the whole script's lifetime.
+    pre_eligible_keys = set(target_key(t) for t in pre_eligible_rows)
+    del pre_eligible_rows
+
     # --- 4. Initial PRE fingerprint + excluded structural witness. ---
+    report["memory_snapshots"]["before_pre_capture"] = memory_snapshot()
     pre_fingerprint = capture_all("PRE", eligible_targets_of_interest)
     check("fingerprint.pre_capture_count_matches_expected", len(pre_fingerprint) == 85, len(pre_fingerprint))
+    report["memory_snapshots"]["after_pre_capture"] = memory_snapshot()
+
+    # Independent-audit correction, D1-3 (Section 7): assign captured
+    # evidence into `report` IMMEDIATELY, before any expensive derived
+    # analysis (hashing) -- this is exactly the operation D1-2's
+    # MemoryError occurred inside, and D1-2's own fallback artifact was
+    # missing the POST fingerprint specifically because it had not yet
+    # been assigned into `report` when the hash computation crashed.
+    report["pre_fingerprint"] = pre_fingerprint
+
     pre_hash = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in pre_fingerprint.items()])
     report["initial_pre_fingerprint_hash"] = pre_hash
+    report["pre_fingerprint_hash"] = pre_hash
 
     pre_excluded_witness = dict((target_key(t), excluded_witness_row(t)) for t in pre_excluded_rows)
     report["excluded_target_witness"]["pre"] = pre_excluded_witness
+    pre_excluded_keys = set(target_key(t) for t in pre_excluded_rows)
+    del pre_excluded_rows
 
     # --- Starting-state gate: this proves Checkpoint C2's own mutation
     #     was discarded (fresh SFM process, original disposable
@@ -807,6 +977,15 @@ try:
             "before rerunning; do not proceed on a mismatched starting state."
         )
 
+    # Independent-audit correction, D1-3 (Section 2 audit finding): the
+    # full 163-target witness list's only remaining downstream use is
+    # its KEY SET (for the target-set-diff below); its per-target
+    # values (model_name, control_count, etc.) are never read again.
+    # Extract the key set now and release the full witness before the
+    # historical run's own (potentially lengthy) wait.
+    pre_all_target_keys = set(target_key(t) for t in pre_witness["targets"])
+    del pre_witness
+
     # --- 5. Invoke the historical baseline (blocks on its own real,
     #        unmodified interactive scope dialog). ---
     main_window = sfmApp.GetMainWindow()
@@ -826,6 +1005,18 @@ try:
         anomaly(traceback.format_exc())
 
     run_lock_name = baseline_ns.get("RUN_LOCK_NAME")
+
+    # Independent-audit correction, D1-3 (Section 2 audit finding): the
+    # historical baseline's entire executed module namespace and its
+    # raw source text are not needed once the run-lock object NAME has
+    # been extracted above -- the actually-running Qt-timer-driven job
+    # holds its own internal references (Qt parent/child ownership via
+    # main_window, which is how baseline_run_is_active() below finds
+    # it), independent of this script's own baseline_ns/baseline_source
+    # names. Releasing them here frees the largest remaining harness-
+    # owned allocation for the duration of the historical run itself --
+    # the single heaviest and longest phase of this whole script.
+    del baseline_ns, baseline_source
 
     def baseline_run_is_active():
         if run_lock_name is None or main_window is None:
@@ -869,6 +1060,7 @@ try:
 
     check("baseline.run_was_started", run_started)
     check("baseline.run_completed_within_timeout", run_completed_cleanly if run_started else False)
+    report["memory_snapshots"]["after_historical_run"] = memory_snapshot()
 
     # --- 6. Rebuild the independent witness fresh, to detect any
     #        target that vanished, appeared, or was reclassified
@@ -880,15 +1072,13 @@ try:
         post_all_by_key = {}
     else:
         post_all_by_key = dict((target_key(t), t) for t in post_witness["targets"])
+    del post_witness
 
-    pre_all_by_key = dict((target_key(t), t) for t in pre_witness["targets"])
-    pre_eligible_keys = set(target_key(t) for t in pre_eligible_rows)
-    pre_excluded_keys = set(target_key(t) for t in pre_excluded_rows)
-    post_eligible_keys = set(target_key(t) for t in (post_witness["targets"] if post_witness else []) if t["category"] != "excluded")
-    post_excluded_keys = set(target_key(t) for t in (post_witness["targets"] if post_witness else []) if t["category"] == "excluded")
+    post_eligible_keys = set(k for k, t in post_all_by_key.items() if t["category"] != "excluded")
+    post_excluded_keys = set(k for k, t in post_all_by_key.items() if t["category"] == "excluded")
 
-    missing_targets_entirely = sorted(set(pre_all_by_key.keys()) - set(post_all_by_key.keys()))
-    new_targets_entirely = sorted(set(post_all_by_key.keys()) - set(pre_all_by_key.keys()))
+    missing_targets_entirely = sorted(pre_all_target_keys - set(post_all_by_key.keys()))
+    new_targets_entirely = sorted(set(post_all_by_key.keys()) - pre_all_target_keys)
     reclassified_eligible_to_excluded = sorted(pre_eligible_keys & post_excluded_keys)
     reclassified_excluded_to_eligible = sorted(pre_excluded_keys & post_eligible_keys)
 
@@ -913,10 +1103,25 @@ try:
     #        target keys, re-resolved fresh) + excluded structural
     #        witness (same 78 excluded target keys, re-resolved fresh
     #        from the rebuilt post witness where still present). ---
+    report["memory_snapshots"]["before_post_capture"] = memory_snapshot()
     post_fingerprint = capture_all("POST", eligible_targets_of_interest)
     check("fingerprint.post_capture_count_matches_expected", len(post_fingerprint) == 85, len(post_fingerprint))
+    report["memory_snapshots"]["after_post_capture"] = memory_snapshot()
+
+    # Independent-audit correction, D1-3 (Section 7): same discipline
+    # as PRE above -- assign captured evidence into `report`
+    # immediately, before computing its hash (the exact operation
+    # D1-2's MemoryError occurred inside).
+    report["post_fingerprint"] = post_fingerprint
+
+    # fp_ns/capture_snapshot_explicit_fn are not referenced again after
+    # this, the last capture_all() call -- safe to release now.
+    del fp_ns, capture_snapshot_explicit_fn
+
     post_hash = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in post_fingerprint.items()])
     report["all_shots_post_fingerprint_hash"] = post_hash
+    report["post_fingerprint_hash"] = post_hash
+    report["memory_snapshots"]["after_post_hash"] = memory_snapshot()
 
     post_excluded_witness = {}
     for key in sorted(pre_excluded_keys):
@@ -925,6 +1130,7 @@ try:
             continue
         post_excluded_witness[key] = excluded_witness_row(t)
     report["excluded_target_witness"]["post"] = post_excluded_witness
+    del post_all_by_key
 
     excluded_target_changes = []
     for key in sorted(pre_excluded_keys):
@@ -968,11 +1174,20 @@ try:
         "requiring 'targets considered' as a separate observable quantity."
     )
 
-    report["pre_fingerprint_hash"] = pre_hash
-    report["post_fingerprint_hash"] = post_hash
-    report["pre_fingerprint"] = pre_fingerprint
-    report["post_fingerprint"] = post_fingerprint
-    report["fixture_totals"] = pre_witness["totals"]
+    # Independent-audit correction, D1-3 (Section 8): bounded sizes/
+    # counts of the major evidence structures -- diagnostic only,
+    # computed via transient per-item dumps_sorted() calls inside a
+    # generator (never materializing a list of all 85 serialized
+    # strings at once).
+    report["evidence_size_diagnostics"] = {
+        "pre_fingerprint_target_count": len(pre_fingerprint),
+        "post_fingerprint_target_count": len(post_fingerprint),
+        "pre_fingerprint_approx_serialized_bytes": sum(len(dumps_sorted(v)) for v in pre_fingerprint.values()),
+        "post_fingerprint_approx_serialized_bytes": sum(len(dumps_sorted(v)) for v in post_fingerprint.values()),
+        "excluded_witness_pre_count": len(pre_excluded_witness),
+        "excluded_witness_post_count": len(post_excluded_witness),
+    }
+    report["memory_snapshots"]["after_all_comparisons"] = memory_snapshot()
 
 except CheckpointD1Error as gate_exc:
     # Orderly, expected abort (pre-flight SHA mismatch or fixture/
@@ -985,6 +1200,10 @@ except Exception as top_exc:
     anomaly("UNHANDLED TOP-LEVEL EXCEPTION: %s" % repr(top_exc))
     anomaly(traceback.format_exc())
     report["gate_failure"] = False
+    try:
+        report["memory_snapshots"]["at_unhandled_exception"] = memory_snapshot()
+    except Exception:
+        pass
 
 # ---------------------------------------------------------------------------
 # Finalize / write output.
@@ -1001,15 +1220,15 @@ completed_without_exception = not any(
 runtime_checks_passed = bool(all_checks_passed and completed_without_exception and run_started)
 report["finished_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
 
-# Independent-audit correction, D1-2: artifact writing is now part of
-# PASS. OVERALL_PASS may not be True unless the JSON evidence artifact
-# itself was written, is nonzero, reopens/reparses, contains the
-# complete required evidence, and its own stored PRE/POST hashes
-# recompute correctly from the stored semantic data. Evidence
-# completeness/hash-recompute is only REQUIRED when the run actually
-# reached the evidence-building stage -- an orderly gate abort
-# legitimately never builds pre_fingerprint/post_fingerprint/etc, and
-# already fails overall_pass via run_started=False regardless.
+# Artifact writing is part of PASS (D1-2, unchanged principle). OVERALL_
+# PASS may not be True unless the JSON evidence artifact itself was
+# written, is nonzero, reopens/reparses, contains the complete required
+# evidence, and its own stored PRE/POST hashes recompute correctly from
+# the stored semantic data. Evidence completeness/hash-recompute is
+# only REQUIRED when the run actually reached the evidence-building
+# stage -- an orderly gate abort legitimately never builds pre_
+# fingerprint/post_fingerprint/etc, and already fails overall_pass via
+# run_started=False regardless.
 evidence_expected = runtime_checks_passed
 
 report["overall_pass"] = False  # provisional/conservative; corrected below only if fully verified.
@@ -1027,6 +1246,18 @@ if evidence_expected:
 else:
     evidence_ok, evidence_detail = True, "not required (run did not reach evidence-building stage)"
 
+# Independent-audit correction, D1-3 (Section 4): release the separate
+# reparsed-from-disk copy immediately after it has served its one
+# purpose (round-trip evidence verification) -- do not carry a second
+# full in-memory copy of the fingerprint data forward into the
+# corrective final write below, where only the ORIGINAL `report`
+# object (never duplicated) is needed.
+reparsed1 = None
+try:
+    gc.collect()
+except Exception:
+    pass
+
 report["artifact_write_verified"] = bool(write1_ok and evidence_ok)
 report["artifact_evidence_detail"] = evidence_detail
 if not write1_ok:
@@ -1040,6 +1271,7 @@ report["overall_pass"] = bool(runtime_checks_passed and report["artifact_write_v
 # succeeded (if it failed, JSON_OUTPUT_PATH was never touched at all,
 # so this is the only real attempt).
 json_write_ok, write2_error, _reparsed2 = write_json_atomic(JSON_OUTPUT_PATH, report)
+_reparsed2 = None
 if not json_write_ok:
     report["json_write_error"] = (
         ("%s ; retry also failed: %s" % (write1_error, write2_error)) if not write1_ok else write2_error
@@ -1062,6 +1294,7 @@ if not json_write_ok:
         "left as a misleading zero-byte file." % (report["json_write_error"],)
     )
     fallback_ok, fallback_error, _r3 = write_json_atomic(JSON_OUTPUT_PATH, degraded_report)
+    _r3 = None
     report["degraded_fallback_written"] = fallback_ok
     if fallback_ok:
         json_write_ok = True  # SOMETHING complete and evidentiary is now on disk.
@@ -1091,6 +1324,11 @@ summary_lines.append("unchanged_eligible_target_count=%r" % report.get("unchange
 summary_lines.append("excluded_target_count=%r" % report.get("excluded_target_count"))
 summary_lines.append("excluded_targets_changed_count=%r" % (report.get("excluded_target_witness", {}) or {}).get("changed_count"))
 summary_lines.append("target_set_diff=%r" % report.get("target_set_diff"))
+summary_lines.append("evidence_size_diagnostics=%r" % report.get("evidence_size_diagnostics"))
+summary_lines.append("")
+summary_lines.append("--- MEMORY SNAPSHOTS (diagnostic only) ---")
+for k in sorted((report.get("memory_snapshots") or {}).keys()):
+    summary_lines.append("  %s: %r" % (k, report["memory_snapshots"][k]))
 summary_lines.append("")
 summary_lines.append("artifact_write_verified=%r" % report.get("artifact_write_verified"))
 summary_lines.append("artifact_evidence_detail=%r" % report.get("artifact_evidence_detail"))

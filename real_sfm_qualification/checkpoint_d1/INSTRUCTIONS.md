@@ -1,6 +1,69 @@
-# Checkpoint D1-2 — Historical (Pre-Integration) All-Shots Baseline Run (corrected)
+# Checkpoint D1-3 — Historical (Pre-Integration) All-Shots Baseline Run (corrected)
 
-## CORRECTION NOTICE (2026-09-22)
+## D1-3 CORRECTION NOTICE (2026-09-22)
+
+D1-2 proved the D1-2 writer correction itself worked correctly: its real run produced a **nonzero,
+parseable** JSON artifact with the **real exception retained** and `OVERALL_PASS` correctly `False` — no
+zero-byte replacement. Do not describe the writer correction as failed; it did exactly what it was built
+to do.
+
+But D1-2 also surfaced a NEW failure, one step earlier and now explicitly captured rather than silently
+swallowed: a real `MemoryError()` inside `stable_hash()`'s own
+
+```
+post_hash = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in post_fingerprint.items()])
+```
+
+specifically inside `hashlib.sha256(joined.encode("utf-8")).hexdigest()`, while hashing the 85-target
+POST fingerprint, in this 32-bit qualification-harness process. Every runtime/mutation check before that
+point had already passed (see "Preserved D1-2 findings" below). This proves the *immediate* defect is a
+**peak-allocation problem in the qualification harness's own aggregate hashing**, not a historical
+Normalizer failure.
+
+**What changed in D1-3:**
+
+1. `stable_hash()` replaced with a byte-for-byte-equivalent **streaming** implementation. The old
+   `joined = u"\n".join(sorted(values)); return hashlib.sha256(joined.encode("utf-8")).hexdigest()` built
+   ONE giant joined Unicode string and THEN a second giant encoded byte string — exactly the two
+   allocations the MemoryError occurred inside. The new version feeds `hashlib.sha256()` incrementally,
+   one short-lived per-item UTF-8 encoding at a time, and is proven digest-**identical** to the old
+   implementation (same sort order, same "\n" separators, same empty-input behavior) by a new offline
+   regression across an empty list, a single item, 10,000 Unicode items, representative nested-
+   fingerprint-shaped strings, the **real, already-accepted Checkpoint C1-2 PRE and POST fingerprint
+   data**, and a 200,000-item large synthetic list — 16/16 PASS.
+2. The JSON artifact writer is now genuinely **streaming**: `json.dump()` writes directly to the temp
+   file (never building one giant in-memory serialized string first) and is **compact** — no `indent`, no
+   whole-document `sort_keys` (qualification evidence is the data, not its on-disk formatting).
+3. Redundant transient structures are released as soon as each is no longer needed, well before the
+   memory-heavier hashing/serialization phase: the full 163-target witness objects (only their KEY SETS
+   are needed after the target-set-diff computation), the raw production-Normalizer source text (only
+   needed to extract the fingerprint functions), and the historical baseline's entire executed module
+   namespace (only its `RUN_LOCK_NAME` string is needed for the wait loop — the actually-running Qt-
+   timer-driven job holds its own internal references via `main_window` parent/child ownership,
+   independent of this script's own name for it).
+4. Captured PRE/POST fingerprint evidence is now assigned into the report **immediately after capture**,
+   before any expensive derived analysis (hashing) — D1-2's own fallback artifact was missing the POST
+   fingerprint specifically because the crash happened before it had been assigned; that ordering defect
+   is fixed.
+5. The round-trip verification step (write → reopen/reparse → verify) no longer retains the live report
+   and a second full reparsed-from-disk copy indefinitely: the reparsed copy is discarded (and Python 2.7
+   `gc.collect()` invoked) immediately after the one verification call that needs it, before the
+   corrective final write.
+6. Lightweight, best-effort, stdlib-only (`ctypes`) process memory snapshots are recorded at useful
+   boundaries (`report["memory_snapshots"]`) plus bounded evidence-structure size/count diagnostics
+   (`report["evidence_size_diagnostics"]`) — diagnostic only, never affecting Normalizer behavior.
+7. A real bug caught **during D1-3's own offline testing** (not at runtime): the new streaming
+   `write_json_atomic()` opens the temp file before calling `json.dump()`, so a mid-write serialization
+   failure can leave a **partially-written temp file** behind (unlike the old `json.dumps()`-first
+   approach, which never touched disk before a serialization failure). Fixed by cleaning up the temp file
+   on every write-phase failure path (never on the final promote-to-real-path failure, where the temp
+   file is deliberately preserved as the only surviving copy of an already-verified payload) — caught and
+   fixed by the new writer regression before deployment, not discovered live.
+
+**Historical Normalizer invocation, fingerprint semantics, fixture/starting-state gates, and the
+All-Shots operation itself remain completely unchanged from D1-1/D1-2** — see "Source review" below.
+
+## D1-2 CORRECTION NOTICE (2026-09-22, preserved for the record)
 
 D1-1's real historical All-Shots run itself completed cleanly and every runtime/mutation check passed
 — all the runtime findings below were established and are preserved permanently in the ledger — but the
@@ -60,9 +123,20 @@ matched `eac633c939f53ed3e7d9e81d473110147d62ee364f1acbc4d099b96fe1891fa0`; hist
 completed cleanly; 85 eligible targets captured PRE/POST; 78 excluded targets witnessed PRE/POST; no
 target vanished/appeared/was reclassified; historical POST hash
 `299cbba30634da1a4949ed7b14187b813260c533dced3d1e71149ede98c124e7`; 57 changed eligible targets, 28
-unchanged; 0 excluded targets changed; zero reported runtime anomalies. D1-2 is expected to reproduce
-these same values if the starting fixture is identical — but D1-2 measures them again independently; the
-57/28 counts and the POST hash are **not** hardcoded as a substitute for that measurement.
+unchanged; 0 excluded targets changed; zero reported runtime anomalies. These are diagnostic sanity
+checks for D1-3, **not** hardcoded as a substitute for measuring them again.
+
+## Preserved D1-2 findings (not overwritten — see LEDGER.md)
+
+D1-2 independently reconfirmed every one of the D1-1 runtime findings above, from a fresh run: exact
+historical SHA, installed production Normalizer SHA, canonical Master SHA, all fixture totals
+(15/163/85/78/22/21), PRE capture = 85, initial PRE hash matched
+`eac633c939f53ed3e7d9e81d473110147d62ee364f1acbc4d099b96fe1891fa0`, historical run started and
+completed, no target vanished, POST capture = 85. D1-2 also proved its own writer correction worked:
+the JSON artifact it produced was nonzero and parseable, the real `MemoryError()` exception text was
+retained (not swallowed), and `OVERALL_PASS` correctly evaluated to `False` — no zero-byte replacement.
+The failure was specifically inside the aggregate-hashing step for the POST fingerprint (see the D1-3
+correction notice above), a harness defect, not a historical Normalizer failure.
 
 ## THIS CHECKPOINT MUTATES THE SCENE
 
@@ -199,7 +273,11 @@ D1 does not define PASS as "all 85 targets changed." It reports, separately:
   every required evidence key, and its own stored PRE/POST fingerprint hashes recompute correctly from
   the reparsed semantic data** — `artifact_write_verified` must be `true`. A required-evidence-write
   failure makes `OVERALL_PASS=False` even if every runtime/mutation check above passed (this is exactly
-  what happened in D1-1, preserved in the ledger as "runtime PASS / evidence artifact FAIL").
+  what happened in D1-1, preserved in the ledger as "runtime PASS / evidence artifact FAIL"); an
+  unhandled exception anywhere in the evidence-building/hashing/writing path also makes `OVERALL_PASS=
+  False` (this is exactly what happened in D1-2's `MemoryError`, preserved in the ledger as "runtime PASS
+  / post-evidence hashing MemoryError" — distinct from D1-1's failure, since D1-2's own writer correctly
+  wrote a nonzero, parseable, exception-retaining artifact rather than a zero-byte one).
 
 D1 does **not** require a predetermined POST hash, changed-target count, or that every eligible target
 change — those are D1's own *outputs*, and become D2's expected values. New targets appearing, or a
@@ -211,41 +289,60 @@ If the report shows `"gate_failure": true`, that means a pre-flight or starting-
 the script correctly stopped before touching anything — re-verify the project/installed files and
 rerun, rather than treating it as a script bug.
 
-## Source review: only the writer changed; production Normalizer / canonical Master are never overwritten
+## Source review: only harness memory behavior changed; historical/production Normalizer semantics are untouched
 
-A direct line-by-line diff between the D1-1 and D1-2 script bytes shows every removed/changed line is
-confined to the final "Finalize / write output" section (the naive `open(..., "wb")` blocks and the
-`overall_pass` assignment, now renamed `runtime_checks_passed` and gated further by artifact
-verification) — historical baseline invocation, the Clip-Editor dialog wait loop, fingerprint capture,
-the excluded-witness capture, the fixture/starting-state gates, and the target-set-diff logic are
-byte-identical to D1-1. `Rebuild_Control_Groups_Normalizer.py` is still never imported (only opened once,
-`"rb"`, for its SHA-256 identity check); the canonical Master is still opened only `"rb"`, once;
-`sfm_master_authority_productionized` is still never imported or referenced anywhere in this script.
+A direct line-by-line diff between the D1-2 and D1-3 script bytes shows every removed/changed line is
+confined to: (a) `stable_hash()`'s own body (streaming replacement); (b) `write_json_atomic()`'s own body
+(streaming replacement, plus the temp-file-cleanup-on-failure fix); (c) the timing of when
+`pre_eligible_keys`/`pre_excluded_keys`/`post_eligible_keys`/`post_excluded_keys`/the "all target keys"
+set are computed (moved earlier, computed from the same source data via the same `target_key()` logic,
+so the resulting sets are identical -- only *when* they are computed changed, not *what* they contain);
+and (d) the timing of `report["pre_fingerprint"]`/`report["post_fingerprint"]`/`report["pre_fingerprint_
+hash"]`/`report["post_fingerprint_hash"]`/`report["fixture_totals"]` assignment (moved earlier, same
+values, same keys). No line inside the SHA verification, `build_independent_witness()`, the fixture/
+starting-state gate conditions, `capture_snapshot_explicit`/`capture_tree`/`discover_rig_context`
+extraction, `canonicalize_snapshot()`, `capture_all()`, the historical-baseline `exec()` call, the
+Clip-Editor dialog wait loop, or the PRE/POST semantic comparison logic was removed or altered -- only
+new `del`/memory-snapshot statements were interleaved around them, and one file-scope docstring update.
+`Rebuild_Control_Groups_Normalizer.py` is still never imported (only opened once, `"rb"`, for its SHA-256
+identity check); the canonical Master is still opened only `"rb"`, once; `sfm_master_authority_
+productionized` is still never imported or referenced anywhere in this script; the historical baseline is
+still never retrofitted with shared authority.
 
 ## Offline verification already performed
 
 Before D1-1's deployment: (1) syntax-checked under the real embedded Python 2.7.5, PASS; (2)
-`real_sfm_qualification/checkpoint_d1/test_d1_witness_and_gate_regression.py` (SHA-pin updated for D1-2,
-line ranges unchanged since the correction was appended after them) extracts `dumps_sorted`,
-`target_key`, and `excluded_witness_row` verbatim and proves the excluded-target structural witness,
-PRE/POST excluded-witness comparison, and target-set-diff logic all behave correctly — **16/16 PASS**,
-reconfirmed against the corrected D1-2 script.
+`real_sfm_qualification/checkpoint_d1/test_d1_witness_and_gate_regression.py` (SHA-pin updated for each
+correction; line ranges unchanged since every correction was appended after them) extracts
+`dumps_sorted`, `target_key`, and `excluded_witness_row` verbatim and proves the excluded-target
+structural witness, PRE/POST excluded-witness comparison, and target-set-diff logic all behave correctly
+— **16/16 PASS**, reconfirmed against the corrected D1-3 script.
 
-Before this correction's (D1-2) deployment, additionally: (3) syntax-checked under the real embedded
-Python 2.7.5, PASS; (4) a new offline regression,
-`real_sfm_qualification/checkpoint_d1/test_d1_artifact_writer_regression.py`, extracts the deployed
-script's own `stable_hash`, `dumps_sorted`, `write_json_atomic`, `write_text_atomic`,
-`REQUIRED_EVIDENCE_KEYS`, and `verify_artifact_evidence` verbatim (SHA-256 pinned) and proves, using
-**the real 85 PRE + 85 POST target fingerprints from the already-accepted Checkpoint C1-2 artifact** (not
-synthetic toy data) plus a representative 78-row excluded-target witness: a complete, D1-shaped result
-(full fingerprints + excluded witness) serializes; it reopens/reparses correctly; the stored PRE/POST
-hashes recompute correctly from the round-tripped data; a deliberately unserializable payload (a raw
-Python `set`) is correctly rejected with a real, non-swallowed error message; critically, an **existing
-valid file at the same final path is left completely byte-identical** by the failed write attempt (the
-exact defect class D1-1 hit, now proven fixed) with no leftover `.tmp` file; `write_text_atomic` exhibits
-the same non-truncating behavior on a write failure; and the exact boolean composition the real script
-uses for `OVERALL_PASS` correctly evaluates to `False` whenever the artifact write fails, even when every
-runtime check passed — **25/25 PASS under the real embedded Python 2.7.5**. Not yet run against real SFM.
+Before D1-2's deployment, additionally: (3) `real_sfm_qualification/checkpoint_d1/
+test_d1_artifact_writer_regression.py` (SHA-pin/line ranges updated for D1-3) extracts the deployed
+script's own `stable_hash`, `dumps_sorted`, `write_json_atomic`, `write_text_atomic`, `REQUIRED_EVIDENCE_
+KEYS`, and `verify_artifact_evidence` verbatim (SHA-256 pinned) and proves, using **the real 85 PRE + 85
+POST target fingerprints from the already-accepted Checkpoint C1-2 artifact** plus a representative
+78-row excluded-target witness: a complete, D1-shaped result serializes; it reopens/reparses correctly;
+the stored PRE/POST hashes recompute correctly from the round-tripped data; a deliberately unserializable
+payload (a raw Python `set`) is correctly rejected with a real, non-swallowed error message; an existing
+valid file at the same final path is left completely byte-identical by the failed write attempt, with no
+leftover `.tmp` file; `write_text_atomic` exhibits the same non-truncating behavior; and the exact
+boolean composition the real script uses for `OVERALL_PASS` correctly evaluates to `False` whenever the
+artifact write fails — **25/25 PASS**, reconfirmed against the corrected D1-3 script (this reconfirmation
+is what caught the temp-file-cleanup-on-failure gap described in the D1-3 correction notice above, before
+deployment).
+
+Before this correction's (D1-3) deployment, additionally: (4) syntax-checked under the real embedded
+Python 2.7.5, PASS; (5) a new offline regression, `real_sfm_qualification/checkpoint_d1/
+test_d1_stable_hash_streaming_regression.py`, extracts the deployed script's own `stable_hash` verbatim
+(SHA-256 pinned) and compares its digests against a literal, independently-typed reimplementation of the
+OLD two-giant-copies algorithm across an empty list, a single item, 10,000 Unicode items (including
+non-ASCII characters), representative nested-fingerprint-shaped strings, **the real, already-accepted
+Checkpoint C1-2 PRE and POST fingerprint data** (both matching C1-2's own accepted hashes exactly), and a
+200,000-item large synthetic list (new implementation only, proving it completes and returns a valid
+digest well beyond D1's own 85-item scale) — **16/16 PASS, exact digest equality in every OLD-vs-NEW
+comparison, under the real embedded Python 2.7.5**. Not yet run against real SFM.
 
 ## Identities this checkpoint is pinned against
 
@@ -255,5 +352,7 @@ runtime check passed — **25/25 PASS under the real embedded Python 2.7.5**. No
 - Canonical Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
 - Required initial PRE fingerprint hash (C1/C2's own accepted value):
   `eac633c939f53ed3e7d9e81d473110147d62ee364f1acbc4d099b96fe1891fa0`
-- D1-2 (corrected) script SHA-256: `d8af1437c0090c62c29e2fcc3797c78c5e30f4d464703df83c2d7d769a1cf9a2`
-  (D1-1's superseded script SHA-256, preserved for the record: `d3137e38c637898649fab3b26d3cdf0c1a742cface2ece991841affce15856ba`)
+- D1-3 (corrected) script SHA-256: `e5df3675e26280ab3ed3a6e54ae1a54d7bd6526c3df22e2bfce59d3b5a2cdf61`
+  (superseded script SHA-256s, preserved for the record: D1-1
+  `d3137e38c637898649fab3b26d3cdf0c1a742cface2ece991841affce15856ba`; D1-2
+  `d8af1437c0090c62c29e2fcc3797c78c5e30f4d464703df83c2d7d769a1cf9a2`)

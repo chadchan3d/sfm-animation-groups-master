@@ -54,19 +54,19 @@ D1_SCRIPT_PATH = (
     r"\mainmenu\ChadChan3D\Checkpoint_D1_Historical_All_Shots_Baseline.py"
 )
 EXPECTED_D1_SCRIPT_SHA256 = (
-    "d8af1437c0090c62c29e2fcc3797c78c5e30f4d464703df83c2d7d769a1cf9a2"
+    "e5df3675e26280ab3ed3a6e54ae1a54d7bd6526c3df22e2bfce59d3b5a2cdf61"
 )
 C1_JSON_PATH = "C:\\Users\\Public\\Documents\\sfm_checkpoint_c1_baseline_result.json"
 SCRATCH_DIR = "C:\\Users\\Public\\Documents\\d1_writer_regression_scratch"
 
 # 1-indexed, inclusive. Re-verify with:
 #   sed -n '<start>,<end>p' Checkpoint_D1_Historical_All_Shots_Baseline.py
-STABLE_HASH_RANGE = (347, 349)
-DUMPS_SORTED_RANGE = (456, 457)
-WRITE_JSON_ATOMIC_RANGE = (510, 568)
-WRITE_TEXT_ATOMIC_RANGE = (571, 600)
-REQUIRED_EVIDENCE_KEYS_RANGE = (603, 607)
-VERIFY_ARTIFACT_EVIDENCE_RANGE = (610, 636)
+STABLE_HASH_RANGE = (383, 412)
+DUMPS_SORTED_RANGE = (519, 520)
+WRITE_JSON_ATOMIC_RANGE = (617, 689)
+WRITE_TEXT_ATOMIC_RANGE = (692, 732)
+REQUIRED_EVIDENCE_KEYS_RANGE = (735, 739)
+VERIFY_ARTIFACT_EVIDENCE_RANGE = (742, 770)
 
 RESULTS = []
 
