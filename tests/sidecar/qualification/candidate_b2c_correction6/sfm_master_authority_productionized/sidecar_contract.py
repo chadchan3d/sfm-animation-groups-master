@@ -17,39 +17,36 @@ import types
 from . import descriptors
 from . import errors
 
-# Independent-re-audit BLOCKER 3.D (2026-09-18): none of the three paths
-# below are hardcoded machine/developer-specific strings any more --
-# all three are derived from THIS file's own on-disk location, so
-# offline qualification works identically from any checkout location
-# or extracted archive root. Callers that explicitly need a DIFFERENT
-# source (e.g. a real installed-SFM deployment root, a separate concern
-# left for later production packaging) may still override each value
-# after import, before calling `ensure_loaded()` -- these remain plain
-# module attributes, not baked-in constants.
+# Package-Boundary Correction (2026-09-21), Section 8 ("no repository
+# path required at runtime, no qualification-candidate directory
+# required at runtime"): the validator/provider source files are now
+# BUNDLED directly inside this package directory (byte-identical copies
+# of the qualification-root originals, same SHA-256 constants below,
+# unchanged) -- this file no longer reaches two levels up into `tests/
+# sidecar/qualification/` at all. The prior "Independent-re-audit
+# BLOCKER 3.D" comment this replaces explicitly acknowledged this exact
+# gap ("Real production installed-root resolution remains a separate,
+# later deployment concern -- not solved here"); this correction closes
+# it. `_THIS_DIR` is still derived from this file's own on-disk
+# location (a normal, expected use of `__file__` for a properly
+# imported submodule -- never the MAINMENU entry script's own
+# potentially-`__file__`-less top level).
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-# .../<candidate root>/sfm_master_authority_productionized/<this file>
-# -- the qualification/ directory containing the frozen validator/
-# provider source is two levels up.
-_QUALIFICATION_ROOT = os.path.normpath(os.path.join(_THIS_DIR, os.pardir, os.pardir))
-# qualification/ -> sidecar/ -> tests/ -> repo root (three levels up).
-_REPO_ROOT = os.path.normpath(os.path.join(_QUALIFICATION_ROOT, os.pardir, os.pardir, os.pardir))
 
-FINAL_R3A2B_VALIDATOR_PATH = os.path.join(_QUALIFICATION_ROOT, "candidate_packed_validator_r3a2b.py")
-FINAL_R3A2B_PROVIDER_PATH = os.path.join(_QUALIFICATION_ROOT, "candidate_packed_provider_r3a2b.py")
+FINAL_R3A2B_VALIDATOR_PATH = os.path.join(_THIS_DIR, "candidate_packed_validator_r3a2b.py")
+FINAL_R3A2B_PROVIDER_PATH = os.path.join(_THIS_DIR, "candidate_packed_provider_r3a2b.py")
 FINAL_R3A2B_VALIDATOR_SHA256 = "74fe8d9655018a9450d0803018d61e42ec3d17b2947b60915df6b598ffc1563f"
 FINAL_R3A2B_PROVIDER_SHA256 = "d6ef96502194c15e594b3e5754e2f5826af1d0ec01b0b358fff08598f7e6b677"
 
 # The provider's own source imports `sfm_master_sidecar.format`/`reader`
-# via `from sfm_master_sidecar import ...` -- this directory must be on
-# sys.path for that import to resolve. Independent-re-audit BLOCKER
-# 3.D: for OFFLINE QUALIFICATION this now resolves to the REPO's own
-# tools/ directory (verified byte-identical, module-source-wise, to the
-# installed-SFM gate_r2_formal_deploy/sfm_master_sidecar/ copy this
-# constant previously hardcoded) rather than any installed, developer-
-# specific SFM deployment path. Real production installed-root
-# resolution remains a separate, later deployment concern -- not solved
-# here, and not needed for offline qualification.
-_GATE_R2_DEPLOY_DIR = os.path.join(_REPO_ROOT, "tools")
+# via `from sfm_master_sidecar import ...` -- callers must ensure the
+# directory CONTAINING the real `sfm_master_sidecar` package (i.e. the
+# canonical installed package's own parent, or `tools/` for offline
+# qualification) is already on `sys.path` before `ensure_loaded()` is
+# called; this module does not itself locate or install that package
+# (a real production bootstrap derives it via `bootstrap.py`'s
+# `sys.executable`-relative mechanism, never `__file__`/CWD/a
+# repository-relative guess).
 
 _validator_module = None
 _provider_module = None
@@ -86,8 +83,6 @@ def ensure_loaded():
     global _validator_module, _provider_module
     if _validator_module is not None and _provider_module is not None:
         return
-    if _GATE_R2_DEPLOY_DIR not in sys.path:
-        sys.path.insert(0, _GATE_R2_DEPLOY_DIR)
     _validator_module = _load_module_verified(
         FINAL_R3A2B_VALIDATOR_PATH, FINAL_R3A2B_VALIDATOR_SHA256,
         "sfm_master_authority_final_r3a2b_validator",

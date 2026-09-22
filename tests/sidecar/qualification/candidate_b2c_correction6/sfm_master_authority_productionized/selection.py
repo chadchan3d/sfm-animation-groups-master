@@ -201,7 +201,7 @@ def _try_local_candidate(local_pointer_path, generated_root, h0, runtime_cap_byt
         diagnostics.append({"event": "local_pointer_corrupt", "detail": str(exc)})
         return None  # corrected B1: treated as "no usable local pointer", falls through silently
 
-    if ptr.master_sha256 != h0.sha256:
+    if ptr.source_sha256 != h0.sha256:
         return None  # stale pointer -- simply not selected, not an error
 
     artifact_path = pointer_mod.derive_artifact_path(generated_root, ptr)
@@ -222,7 +222,7 @@ def _try_local_candidate(local_pointer_path, generated_root, h0, runtime_cap_byt
         # validator independently re-derives and checks these fields
         # from the artifact's own bytes regardless of what the pointer
         # claims.
-        if identity.sidecar_artifact_sha256 != ptr.artifact_sha256:
+        if identity.sidecar_artifact_sha256 != ptr.sidecar_sha256:
             try:
                 provider.close()
             finally:
@@ -231,7 +231,7 @@ def _try_local_candidate(local_pointer_path, generated_root, h0, runtime_cap_byt
                 "event": "local_pointer_artifact_disagreement",
                 "message": "Local compiled Master is damaged (pointer/artifact SHA disagreement); "
                            "using the matching shipped copy. Rebuild to repair.",
-                "pointer_declared_artifact_sha256": ptr.artifact_sha256,
+                "pointer_declared_artifact_sha256": ptr.sidecar_sha256,
                 "actual_artifact_sha256": identity.sidecar_artifact_sha256,
             })
             return None

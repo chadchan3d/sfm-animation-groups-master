@@ -140,6 +140,18 @@ class Broker(object):
         try:
             h0 = observation.observe_master(master_path)
 
+            # Package-Boundary Correction (2026-09-21): Astra-reproduced
+            # defect C -- this call previously passed the broker's ledger
+            # OBJECT directly under a keyword named "ledger", which
+            # `select_sidecar_candidate` has never accepted (its real
+            # resource-accounting parameter is
+            # `aggregate_existing_retained_bytes`, an int, not a ledger
+            # object -- see cohort.py's `_open_provider_once`, the
+            # qualified Normalizer path's own call, which has always used
+            # the correct parameter). Every real call to the legacy
+            # `acquire_generation()` therefore raised TypeError
+            # unconditionally. Fixed to pass the same real parameter the
+            # qualified path already uses, computed the same way.
             selection_result = selection_mod.select_sidecar_candidate(
                 h0=h0,
                 allow_local_candidates=allow_local_candidates,
@@ -148,7 +160,7 @@ class Broker(object):
                 shipped_root=shipped_root,
                 runtime_cap_bytes=runtime_cap_bytes,
                 diagnostics=self._diagnostics,
-                ledger=self._ledger,
+                aggregate_existing_retained_bytes=self._ledger.total_retained_bytes(),
             )
             # R3-B2C fix: select_sidecar_candidate now returns the winning
             # candidate's ALREADY-OPEN provider (selection_result.provider),

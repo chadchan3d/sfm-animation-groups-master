@@ -236,6 +236,16 @@ def self_validate_from_path(outcome, artifact_path):
 
 
 def generation_basename(ordinary_sha256_hex, format_contract_version=None):
+    """Package-Boundary Correction (2026-09-21): extension changed from
+    `.bin` to `.sfmsidecar` -- Astra-reproduced defect B. `.sfmsidecar`
+    is the ONE extension every runtime candidate-selection path (`sfm_
+    master_authority_productionized/selection.py`'s shipped-root scan)
+    and every qualification fixture across this entire project already
+    uses; `.bin` was the compiler/publisher's own, never-reconciled,
+    parallel convention that made a real compiled+published artifact
+    invisible to the runtime's shipped-root scan (`SidecarMissing` on an
+    otherwise-successful compile). See `manifest.py`'s matching
+    naming-scheme check, kept in sync with this exact suffix."""
     if format_contract_version is None:
         format_contract_version = fmt.FORMAT_CONTRACT_VERSION_EXPERIMENTAL
-    return "sfm_master_%d_%s.bin" % (format_contract_version, ordinary_sha256_hex)
+    return "sfm_master_%d_%s.sfmsidecar" % (format_contract_version, ordinary_sha256_hex)

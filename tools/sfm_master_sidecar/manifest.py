@@ -186,7 +186,10 @@ def parse_manifest_bytes(data):
             "no drive prefix)" % (obj["generation_basename"],)
         )
     expected_prefix = "sfm_master_%d_" % obj["format_contract_version"]
-    if not obj["generation_basename"].startswith(expected_prefix) or not obj["generation_basename"].endswith(".bin"):
+    # Package-Boundary Correction (2026-09-21): required suffix changed
+    # from `.bin` to `.sfmsidecar` in lockstep with `compiler.
+    # generation_basename()` -- see that function's own docstring.
+    if not obj["generation_basename"].startswith(expected_prefix) or not obj["generation_basename"].endswith(".sfmsidecar"):
         raise ManifestError("manifest generation_basename %r does not match the expected naming scheme" % (
             obj["generation_basename"],
         ))

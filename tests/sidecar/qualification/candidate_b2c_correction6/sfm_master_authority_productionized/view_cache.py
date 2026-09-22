@@ -274,13 +274,36 @@ class ViewCache(object):
 
     def invalidate_generation(self, master_sha256):
         """Marks stale (via each view's shared LiveAuthorizationToken)
-        every cached view belonging to a now-superseded generation.
-        Does NOT evict/free them immediately -- their payload may still
-        be referenced/read for diagnosis; eviction happens lazily on the
-        next admission pressure, per corrected-B1's 'does not pretend
-        bytes are freed until references release'."""
+        every view belonging to a now-superseded generation -- BOTH
+        currently-cached entries AND leased orphans (Package-Boundary
+        Correction, 2026-09-21: Astra-reproduced defect A, "leased
+        orphan views escape generation invalidation"). Does NOT evict/
+        free/release anything; ownership/accounting for an orphan is
+        completely untouched by this call (its `_leased_orphans` entry
+        and re-keyed ledger charge remain exactly as `_remove()` left
+        them, releasable only via `release_lease()` once its last lease
+        is released) -- only its AUTHORIZATION is revoked, so `is_stale()`/
+        `require_valid()` correctly reject it as a currently-authorized
+        view/token from this point on, per corrected-B1's 'does not
+        pretend bytes are freed until references release'.
+
+        Root cause (reproduced, not assumed): this method previously
+        iterated `self._entries.values()` only. A view displaced into
+        `self._leased_orphans` by `_remove()` (Section: 'admit'/
+        '_evict_one') keeps its OWN `authorization` token unless that
+        exact token object is also visited here -- a leased view of a
+        just-superseded generation, evicted moments before this call,
+        would otherwise remain indistinguishable from a currently
+        authorized view forever (its token is never invalidated by any
+        other code path)."""
         seen_token_ids = set()
         for view in self._entries.values():
+            if view.semantic_generation.master_sha256 == master_sha256:
+                token = view.authorization
+                if id(token) not in seen_token_ids:
+                    token.invalidate()
+                    seen_token_ids.add(id(token))
+        for view, _entry_id in self._leased_orphans.values():
             if view.semantic_generation.master_sha256 == master_sha256:
                 token = view.authorization
                 if id(token) not in seen_token_ids:

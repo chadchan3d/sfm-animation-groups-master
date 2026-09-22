@@ -4,7 +4,20 @@
 Parsing/reading scope ONLY. B2A never writes/replaces a pointer -- that
 is B2E's responsibility (rebuild publication + mutex), not implemented
 here.
-"""
+
+Package-Boundary Correction (2026-09-21), Astra-reproduced defect B:
+this module's field schema (`master_sha256`/`master_byte_length`/
+`artifact_sha256`/`artifact_relative_path`) was never reconciled with
+the ONE real, supported publication format `tools/sfm_master_sidecar/
+publisher.py`/`manifest.py` actually produce (`source_sha256`/
+`source_byte_length`/`sidecar_sha256`/`generation_basename`) -- nothing
+in this project ever wrote a pointer file this module's OLD schema
+could parse; a real `manifest.json` from the real publisher raised
+`LocalPointerCorrupt: missing required field 'master_sha256'`. Fields
+below are renamed to match `manifest.py` EXACTLY -- `manifest.json`
+IS the pointer file for both the local-candidate (qualification-mode)
+and shipped-root paths now; there is no second, independent pointer
+schema."""
 import json
 import os
 import re
@@ -24,8 +37,8 @@ except NameError:
 MAX_POINTER_FILE_BYTES = 8192
 _HEX64_RE = re.compile(r"^[0-9a-fA-F]{64}$")
 _REQUIRED_FIELDS = (
-    "master_sha256", "master_byte_length", "artifact_sha256",
-    "artifact_relative_path", "format_contract_version",
+    "source_sha256", "source_byte_length", "sidecar_sha256",
+    "generation_basename", "format_contract_version",
     "authority_semantics_version",
 )
 
@@ -38,8 +51,8 @@ class PointerRecord(object):
             setattr(self, f, kwargs[f])
 
     def __repr__(self):
-        return "PointerRecord(master_sha256=%r, artifact_sha256=%r)" % (
-            self.master_sha256, self.artifact_sha256,
+        return "PointerRecord(source_sha256=%r, sidecar_sha256=%r)" % (
+            self.source_sha256, self.sidecar_sha256,
         )
 
 
@@ -94,63 +107,73 @@ def load_pointer(path):
         if field not in data:
             raise errors.LocalPointerCorrupt("pointer %r missing required field %r" % (path, field))
 
-    if not _HEX64_RE.match(str(data["master_sha256"])):
-        raise errors.LocalPointerCorrupt("pointer %r master_sha256 is not 64 hex characters" % (path,))
-    if not _HEX64_RE.match(str(data["artifact_sha256"])):
-        raise errors.LocalPointerCorrupt("pointer %r artifact_sha256 is not 64 hex characters" % (path,))
+    if not _HEX64_RE.match(str(data["source_sha256"])):
+        raise errors.LocalPointerCorrupt("pointer %r source_sha256 is not 64 hex characters" % (path,))
+    if not _HEX64_RE.match(str(data["sidecar_sha256"])):
+        raise errors.LocalPointerCorrupt("pointer %r sidecar_sha256 is not 64 hex characters" % (path,))
 
-    mbl = data["master_byte_length"]
-    if not isinstance(mbl, _INTEGER_TYPES) or isinstance(mbl, bool) or mbl < 0:
-        raise errors.LocalPointerCorrupt("pointer %r master_byte_length must be a non-negative integer" % (path,))
+    sbl = data["source_byte_length"]
+    if not isinstance(sbl, _INTEGER_TYPES) or isinstance(sbl, bool) or sbl < 0:
+        raise errors.LocalPointerCorrupt("pointer %r source_byte_length must be a non-negative integer" % (path,))
 
     for field in ("format_contract_version", "authority_semantics_version"):
         v = data[field]
         if not isinstance(v, _INTEGER_TYPES) or isinstance(v, bool):
             raise errors.LocalPointerCorrupt("pointer %r %s must be an integer" % (path, field))
 
-    rel_path = data["artifact_relative_path"]
-    _reject_unsafe_relative_path(path, rel_path)
+    basename = data["generation_basename"]
+    _reject_unsafe_generation_basename(path, basename)
 
     return PointerRecord(
-        master_sha256=str(data["master_sha256"]).lower(),
-        master_byte_length=mbl,
-        artifact_sha256=str(data["artifact_sha256"]).lower(),
-        artifact_relative_path=rel_path,
+        source_sha256=str(data["source_sha256"]).lower(),
+        source_byte_length=sbl,
+        sidecar_sha256=str(data["sidecar_sha256"]).lower(),
+        generation_basename=basename,
         format_contract_version=data["format_contract_version"],
         authority_semantics_version=data["authority_semantics_version"],
     )
 
 
-def _reject_unsafe_relative_path(pointer_path, rel_path):
-    if not isinstance(rel_path, _STRING_TYPES):
+def _reject_unsafe_generation_basename(pointer_path, basename):
+    """`generation_basename` (Package-Boundary Correction, 2026-09-21:
+    renamed from `artifact_relative_path` to match the real publisher's
+    `manifest.py` schema exactly) is a BARE basename, never a path with
+    directory components -- the real compiler's own `generation_
+    basename()` never emits one, and `manifest.py`'s own `_is_safe_
+    generation_basename` enforces the same rule on the publisher side.
+    Stricter than the old "reject '..' segments" check this replaces:
+    ANY path separator at all is rejected, not just traversal."""
+    if not isinstance(basename, _STRING_TYPES):
         raise errors.LocalPointerCorrupt(
-            "pointer %r artifact_relative_path must be a string" % (pointer_path,)
+            "pointer %r generation_basename must be a string" % (pointer_path,)
         )
-    if os.path.isabs(rel_path):
+    if not basename or basename in (".", ".."):
         raise errors.LocalPointerCorrupt(
-            "pointer %r artifact_relative_path must not be absolute" % (pointer_path,)
+            "pointer %r generation_basename must be a non-empty bare basename" % (pointer_path,)
         )
-    if ":" in rel_path:  # drive letters ("C:...") and Alternate Data Streams ("file.txt:stream")
+    if os.path.isabs(basename):
         raise errors.LocalPointerCorrupt(
-            "pointer %r artifact_relative_path must not contain ':'" % (pointer_path,)
+            "pointer %r generation_basename must not be absolute" % (pointer_path,)
         )
-    if rel_path.startswith("\\\\") or rel_path.startswith("//"):
+    if ":" in basename:  # drive letters ("C:...") and Alternate Data Streams ("file.txt:stream")
         raise errors.LocalPointerCorrupt(
-            "pointer %r artifact_relative_path must not be a UNC path" % (pointer_path,)
+            "pointer %r generation_basename must not contain ':'" % (pointer_path,)
         )
-    normalized = rel_path.replace("\\", "/")
-    parts = normalized.split("/")
-    if any(p == ".." for p in parts):
+    if "/" in basename or "\\" in basename:
         raise errors.LocalPointerCorrupt(
-            "pointer %r artifact_relative_path contains '..'" % (pointer_path,)
+            "pointer %r generation_basename must be a bare basename with no path separators" % (pointer_path,)
         )
 
 
 def derive_artifact_path(generated_root, pointer_record):
-    """Prefer deriving the path from (namespace, artifact SHA) rather
-    than trusting the pointer's own free-form relative-path text --
-    ASTRA_CORRECTED.md Section 13. B2A uses a single fixed namespace;
-    multi-namespace support is a later (B2E) concern. The pointer's own
-    `artifact_relative_path` is retained on the record for a future
-    cross-check, never used here as the sole path authority."""
-    return os.path.join(generated_root, "sfmsidecar_v1", pointer_record.artifact_sha256 + ".sfmsidecar")
+    """Package-Boundary Correction (2026-09-21): the artifact lives
+    directly alongside its manifest/pointer, in `generated_root` itself
+    -- matching exactly where the real, ONE supported publisher (`tools/
+    sfm_master_sidecar/publisher.py`) actually writes both the manifest
+    and the immutable generation artifact together (the same directory
+    `manifest.resolve_generation_path(output_dir, manifest_data)` uses
+    on the publisher side). The previous `<generated_root>/sfmsidecar_v1/
+    <artifact_sha256>.sfmsidecar` convention was never written by
+    anything -- no publisher ever created that subdirectory or that
+    naming scheme, so this path never resolved to a real file."""
+    return os.path.join(generated_root, pointer_record.generation_basename)

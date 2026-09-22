@@ -63,13 +63,26 @@ STATE_INITIALIZING = "INITIALIZING"
 STATE_READY = "READY"
 STATE_FAILED = "FAILED"
 
-_CANONICAL_MODULE_NAME = "sfm_master_authority.runtime"
+# Package-Boundary Correction (2026-09-21): this constant still said
+# "sfm_master_authority.runtime" -- the OLD, pre-productionized package
+# name -- inside the `sfm_master_authority_productionized` copy of this
+# file. Since `__name__` for a real import of this copy is always
+# "sfm_master_authority_productionized.runtime", the self-check below
+# UNCONDITIONALLY raised ImportError on every real import attempt --
+# `runtime.get_broker()` ("the one canonical broker-factory entry point
+# ... every caller must call") was completely unreachable from this
+# package the entire time, undiscovered because no B2C-B/B2C-C test
+# ever imported it (every existing test constructs `Broker()` directly
+# or uses `sidecar_contract`/`normalizer_compat_adapter` instead).
+# Found and fixed while closing Section 8's "canonical package/import
+# owner" requirement.
+_CANONICAL_MODULE_NAME = "sfm_master_authority_productionized.runtime"
 
 if __name__ != _CANONICAL_MODULE_NAME:
     raise ImportError(
-        "sfm_master_authority.runtime was imported/executed under the wrong "
+        "sfm_master_authority_productionized.runtime was imported/executed under the wrong "
         "module name (%r, expected %r). This module must only ever be "
-        "imported via `import sfm_master_authority.runtime` -- never "
+        "imported via `import sfm_master_authority_productionized.runtime` -- never "
         "execfile()'d, never aliased, never vendored under a different "
         "package name. Refusing before any broker/provider side effect is "
         "created." % (__name__, _CANONICAL_MODULE_NAME)
