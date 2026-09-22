@@ -90,3 +90,14 @@ real_sfm_qualification/checkpoint_d1/test_d1_artifact_writer_regression.py text 
 # its own function extraction range -- same archive-export LF-safety
 # reasoning.
 real_sfm_qualification/checkpoint_d1/test_d1_stable_hash_streaming_regression.py text eol=lf
+
+# Real-SFM Qualification, Checkpoint D2 (2026-09-22): same archive-
+# export CRLF corruption class as above -- the D2 wrapper script, its
+# offline regressions, the offline manifest-builder tool, and the
+# compact D1 comparison manifest itself are all SHA-256 pinned and
+# cited directly in operator instructions/the ledger.
+real_sfm_qualification/checkpoint_d2/Checkpoint_D2_Integrated_All_Shots_Equivalence.py text eol=lf
+real_sfm_qualification/checkpoint_d2/build_d1_manifest.py text eol=lf
+real_sfm_qualification/checkpoint_d2/d1_comparison_manifest.json text eol=lf
+real_sfm_qualification/checkpoint_d2/test_d2_manifest_comparator_regression.py text eol=lf
+real_sfm_qualification/checkpoint_d2/test_d2_artifact_writer_regression.py text eol=lf
