@@ -60,3 +60,8 @@ real_sfm_qualification/checkpoint_b/Checkpoint_B_Independent_Inventory.py text e
 # pinned and cited directly in operator instructions/pre-flight checks.
 real_sfm_qualification/checkpoint_c1/Checkpoint_C1_Baseline_Selected_Shots.py text eol=lf
 real_sfm_qualification/checkpoint_c1/Rebuild_Control_Groups_Normalizer_PRE_INTEGRATION_BASELINE.py.txt text eol=lf
+
+# Checkpoint C1-2 correction (2026-09-22): the offline semantic-comparator
+# regression pins the C1 script's own SHA-256 and its own function
+# extraction range -- same archive-export LF-safety reasoning.
+real_sfm_qualification/checkpoint_c1/test_c1_semantic_comparator_regression.py text eol=lf

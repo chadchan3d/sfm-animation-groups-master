@@ -511,6 +511,20 @@ try:
         actual_value = witness["totals"].get(key)
         check("fixture.totals.%s_matches_B2" % key, actual_value == expected_value, (actual_value, expected_value))
 
+    # Name-based (session-stable) selected-shot-set check. NOTE: Checkpoint B's
+    # own JSON `selected_shot_set_hash` field is computed from process-local
+    # native-pointer identities, which are reassigned fresh on every SFM
+    # launch -- by construction, a pointer-based hash from a B-2 session can
+    # never be bit-for-bit reproduced in this separate C1 session. This is a
+    # genuine, newly-discovered latent design gap in that specific B field
+    # (flagged for correction if Checkpoint B is ever revised), not something
+    # fixable from inside C1. The check below achieves the SAME fixture-
+    # identity assurance using shot NAMES, which are stable across sessions,
+    # and is the actual hard gate this checkpoint enforces.
+    selected_shot_names = sorted(set(t["shot_name"] for t in witness["targets"] if t["shot_selected"]))
+    check("fixture.selected_shot_set_is_exactly_shot3", selected_shot_names == [EXPECTED_SELECTED_SHOT_NAME], selected_shot_names)
+    report["selected_shot_set_hash_namebased"] = stable_hash(selected_shot_names) if selected_shot_names else None
+
     matching_shots = shots_by_name.get(EXPECTED_SELECTED_SHOT_NAME, [])
     check("fixture.selected_shot_name_present_exactly_once", len(matching_shots) == 1, len(matching_shots))
     selected_shot_obj = matching_shots[0] if len(matching_shots) == 1 else None
@@ -520,6 +534,10 @@ try:
         if t["shot_name"] == EXPECTED_SELECTED_SHOT_NAME and t["category"] == "expected_selected_and_all_candidate"
     ]
     check("fixture.selected_shot_has_exactly_two_expected_targets", len(selected_target_rows) == 2, len(selected_target_rows))
+
+    expected_target_names = set(EXPECTED_SELECTED_TARGETS.keys())
+    actual_selected_target_names = set(t["aset_name"] for t in selected_target_rows)
+    check("fixture.expected_selected_target_set_is_exact", actual_selected_target_names == expected_target_names, sorted(actual_selected_target_names))
 
     for t in selected_target_rows:
         expected = EXPECTED_SELECTED_TARGETS.get(t["aset_name"])
@@ -534,10 +552,25 @@ try:
     untouched_peer_rows = [t for t in witness["targets"] if t["category"] == "untouched_peer_eligible_all_only"]
     check("fixture.untouched_peer_count_matches_B2", len(untouched_peer_rows) == EXPECTED_B2_TOTALS["untouched_peer_targets"], len(untouched_peer_rows))
 
-    fixture_ok = all(c["pass"] for c in report["checks"])
-    if not fixture_ok:
-        anomaly("Fixture identity verification did not fully match the B-2 witness -- proceeding to fingerprint capture "
-                "anyway so the mismatch is fully documented, but this run cannot be trusted as equivalent to B-2's fixture.")
+    all_eligible_rows = [t for t in witness["targets"] if t["category"] != "excluded"]
+    check("fixture.all_eligible_count_is_85", len(all_eligible_rows) == 85, len(all_eligible_rows))
+
+    # --- HARD GATE: every fixture-identity check above must pass BEFORE any
+    #     baseline invocation or scene mutation. This is a hard abort, not a
+    #     documented-and-continue anomaly (independent-audit-driven
+    #     correction, 2026-09-22: a prior version of this script continued
+    #     into a mutating baseline run despite an already-detected fixture
+    #     mismatch -- see C1-1's own preserved ledger row). ---
+    fixture_gate_passed = all(c["pass"] for c in report["checks"])
+    if not fixture_gate_passed:
+        raise CheckpointC1Error(
+            "FIXTURE MISMATCH -- one or more required fixture-identity checks failed "
+            "(see the individual [FAIL] lines above/in this report for exactly which "
+            "condition(s) did not hold). Aborting BEFORE any baseline invocation or "
+            "scene mutation. The live selection/project does not match the B-2 witness "
+            "this checkpoint requires -- re-verify the selected shot and project before "
+            "rerunning; do not proceed on a mismatched fixture."
+        )
 
     # --- 3. Build the fingerprint-function namespace (extracted, SHA-pinned). ---
     all_lines = production_bytes.decode("ascii").splitlines()
@@ -554,10 +587,20 @@ try:
     capture_snapshot_explicit_fn = fp_ns["capture_snapshot_explicit"]
 
     def canonicalize_snapshot(snap):
-        """Strips process-local handle integers (nondeterministic across
-        sessions); keeps every semantic field."""
+        """Strips (a) process-local handle integers (nondeterministic across
+        sessions) and (b) the PRE/POST `label` field itself -- independent-
+        audit-driven correction, 2026-09-22: `capture_snapshot_explicit`'s
+        own return dict includes `"label": label` as its first field, so
+        passing "PRE" for one capture and "POST" for the other made EVERY
+        captured target's dict differ on that one field alone, guaranteeing
+        a false-positive "touched" result regardless of any real semantic
+        change. `label` is report METADATA (which pass produced this
+        snapshot), never part of the target's own semantic state, and must
+        never participate in equality/hash comparison. Every other field
+        (group hierarchy, membership, control inventory, presentation
+        metadata, rig status) is kept unchanged."""
         clean = dict(snap)
-        for key in ("shot_handle", "animation_set_handle", "root_handle", "rig_handle", "registry_handle"):
+        for key in ("shot_handle", "animation_set_handle", "root_handle", "rig_handle", "registry_handle", "label"):
             clean.pop(key, None)
         clean.pop("control_handles", None)
         return clean
@@ -599,8 +642,14 @@ try:
                         % (label, shot_name, aset_name, exc))
         return result
 
-    targets_of_interest = [(EXPECTED_SELECTED_SHOT_NAME, name_) for name_ in EXPECTED_SELECTED_TARGETS.keys()]
-    targets_of_interest.extend((t["shot_name"], t["aset_name"]) for t in untouched_peer_rows)
+    # Capture ALL 85 eligible targets -- both expected-Selected targets AND
+    # all untouched peers -- never just the peer subset (independent-audit-
+    # driven correction, 2026-09-22: a prior version excluded the very
+    # targets being qualified from the fingerprint). Derived directly from
+    # the witness's own eligibility classification, not from a hardcoded
+    # name list, so it is correct regardless of which specific targets turn
+    # out to be selected vs peer.
+    targets_of_interest = [(t["shot_name"], t["aset_name"]) for t in all_eligible_rows]
 
     # --- 4. PRE fingerprint. ---
     pre_fingerprint = capture_all("PRE", targets_of_interest)
@@ -707,16 +756,25 @@ try:
     report["pre_fingerprint"] = pre_fingerprint
     report["post_fingerprint"] = post_fingerprint
 
+except CheckpointC1Error as gate_exc:
+    # Orderly, expected abort (pre-flight SHA mismatch or fixture-identity
+    # gate failure) -- distinct from an unexpected crash, so the report
+    # makes clear this was a deliberate refusal to proceed, not a bug.
+    anomaly("GATE FAILURE (orderly abort, no baseline invocation attempted): %s" % gate_exc)
+    report["gate_failure"] = True
 except Exception as top_exc:
     anomaly("UNHANDLED TOP-LEVEL EXCEPTION: %s" % repr(top_exc))
     anomaly(traceback.format_exc())
+    report["gate_failure"] = False
 
 # ---------------------------------------------------------------------------
 # Finalize / write output.
 # ---------------------------------------------------------------------------
 
 all_checks_passed = all(c["pass"] for c in report["checks"]) if report["checks"] else False
-completed_without_exception = not any("UNHANDLED TOP-LEVEL EXCEPTION" in a for a in ANOMALIES)
+completed_without_exception = not any(
+    a.startswith("UNHANDLED TOP-LEVEL EXCEPTION") for a in ANOMALIES
+)
 report["overall_pass"] = bool(all_checks_passed and completed_without_exception and run_started)
 report["finished_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -730,6 +788,11 @@ except Exception:
 summary_lines = []
 summary_lines.append("SFM CHECKPOINT C1 -- BASELINE (PRE-INTEGRATION) SELECTED-SHOTS RUN")
 summary_lines.append("started_at=%s  finished_at=%s" % (report["started_at"], report["finished_at"]))
+if report.get("gate_failure"):
+    summary_lines.append("")
+    summary_lines.append("*** GATE FAILURE: aborted BEFORE any baseline invocation or scene mutation. ***")
+    summary_lines.append("*** No mutation occurred. See the FAIL line(s) below for exactly which fixture ***")
+    summary_lines.append("*** or pre-flight condition did not hold. ***")
 summary_lines.append("")
 summary_lines.append("--- CHECKS ---")
 for c in report["checks"]:

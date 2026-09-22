@@ -1,4 +1,26 @@
-# Checkpoint C1 — Baseline (Pre-Integration) Selected-Shots Run
+# Checkpoint C1-2 — Baseline (Pre-Integration) Selected-Shots Run (corrected)
+
+## CORRECTION NOTICE (2026-09-22)
+
+Your C1-1 run correctly detected a fixture mismatch (the live selected shot had changed to `shot6`,
+not `shot3`) but then continued into the mutating baseline run anyway. Independent review found three
+concrete harness defects, all now fixed in this corrected script (SHA-256 changed):
+
+1. **Fixture mismatch now hard-gates before any mutation.** If the live selection/project does not
+   exactly match the B-2 witness, the script raises and writes its report **before** ever executing a
+   byte of the historical baseline. No "continue for evidence."
+2. **The semantic comparator no longer produces a guaranteed false positive.** `capture_snapshot_
+   explicit`'s own `"label"` field (`"PRE"` vs `"POST"`) is now stripped before comparison — a prior
+   version compared it directly, so every captured target necessarily differed on that one field alone
+   regardless of any real change. (Diagnostic finding from C1-1, preserved: after excluding `label`,
+   all 82 captured peer fingerprints in that run were semantically identical before and after — C1-1
+   is not evidence the historical baseline broadly mutated 82 peers.)
+3. **All 85 eligible targets are now fingerprinted**, not just the peer subset — both expected-Selected
+   targets and all 83 untouched peers.
+
+C1-1's result is preserved permanently in the ledger as a FAIL, not overwritten. The historical
+baseline, production Normalizer, and canonical Master identities were all confirmed unchanged
+throughout C1-1 and remain unchanged now — only this harness script was wrong.
 
 ## THIS CHECKPOINT MUTATES THE SCENE
 
@@ -53,17 +75,26 @@ the integrated package to collide with in the first place.
 4. Independently re-derives the Checkpoint-B-style fixture witness fresh from the live document and
    cross-checks it against the exact B-2 totals (15 shots, 163 targets, 85 eligible, 78 excluded, 2
    expected-Selected candidates, 83 untouched peers, 22 distinct models, 21 distinct vocabulary
-   hashes) and the two named selected-shot targets' model names/control counts/vocabulary hashes.
-5. Captures a **structural PRE fingerprint** of all 85 targets (`shot3/foxmccouldwm1`,
-   `shot3/mia1`, and the 83 independently-witnessed untouched peers) using the accepted Normalizer's
-   own already-qualified, purely read-only `capture_snapshot_explicit()`/`capture_tree()`/
-   `discover_rig_context()` functions — extracted verbatim (34 function/class definitions, exact line
-   ranges, reusing the SAME already-proven range table `candidate_b2c_c/production_plan_layer.py`
-   already uses and has run 55/55 PASS against this exact file) from the **currently installed**
-   Normalizer file. These functions are byte-identical in both the historical and integrated code
-   paths (the Production Normalizer Integration work never touched them) — they are the neutral
-   structural-reading mechanism, not the scope/mutation-outcome difference this checkpoint exists to
-   observe.
+   hashes), the two named selected-shot targets' model names/control counts/vocabulary hashes, and a
+   name-based (session-stable) selected-shot-set check. **If any of these checks fails, the script
+   raises and writes its report here — it never proceeds to step 5 or beyond.** (Note: Checkpoint B's
+   own JSON `selected_shot_set_hash` field is computed from process-local native-pointer identities,
+   which are reassigned fresh on every SFM launch, so it cannot be bit-for-bit reproduced in this
+   separate session by construction — a genuine, newly-discovered latent gap in that specific B field,
+   not something fixable from inside C1. This checkpoint's own gate uses a name-based hash instead,
+   which achieves the same fixture-identity assurance and is session-stable.)
+5. Only if every fixture check passes: captures a **structural PRE fingerprint of all 85 eligible
+   targets** (both `shot3/foxmccouldwm1` and `shot3/mia1`, AND all 83 independently-witnessed
+   untouched peers — never just a subset) using the accepted Normalizer's own already-qualified,
+   purely read-only `capture_snapshot_explicit()`/`capture_tree()`/`discover_rig_context()` functions
+   — extracted verbatim (34 function/class definitions, exact line ranges, reusing the SAME
+   already-proven range table `candidate_b2c_c/production_plan_layer.py` already uses and has run
+   55/55 PASS against this exact file) from the **currently installed** Normalizer file. These
+   functions are byte-identical in both the historical and integrated code paths (the Production
+   Normalizer Integration work never touched them) — they are the neutral structural-reading
+   mechanism, not the scope/mutation-outcome difference this checkpoint exists to observe. Before
+   comparison, each captured snapshot is canonicalized: the `"label"` field (`"PRE"`/`"POST"`) and
+   process-local handle integers are stripped, so only real semantic state is ever compared.
 
 ## 4. What C1 needs from you (the interactive part)
 
@@ -117,14 +148,21 @@ mechanically detect and report the mismatch rather than silently proceeding.
 - exact historical SHA verified;
 - production Normalizer SHA still installed (unreplaced);
 - canonical Master SHA unchanged;
-- fixture identity matches the B-2 witness (totals, selected-shot targets, untouched-peer count);
-- PRE capture completes for all 85 targets;
+- fixture identity matches the B-2 witness exactly (totals, selected-shot-set name check, selected-shot
+  targets, untouched-peer count) — **a mismatch here means the script already stopped; no mutation
+  occurred, and none of the checks below apply**;
+- PRE capture completes for all 85 eligible targets;
 - the historical run was actually started (dialog was confirmed with Selected Shots, not cancelled)
   and completed within the wait timeout;
-- POST capture completes for all 85 targets;
-- the touched-target set exactly equals `{shot3/foxmccouldwm1, shot3/mia1}` — no more, no less;
-- none of the 83 untouched peers show any fingerprint change;
+- POST capture completes for all 85 eligible targets;
+- the SEMANTIC (label/handle-stripped) touched-target set exactly equals
+  `{shot3/foxmccouldwm1, shot3/mia1}` — no more, no less;
+- none of the 83 untouched peers show any semantic fingerprint change;
 - the script completes without an unhandled exception.
+
+If the report shows `"gate_failure": true`, that means the fixture check itself failed and the script
+correctly stopped before touching anything — re-verify the project/selection and rerun, rather than
+treating it as a script bug.
 
 This checkpoint does **not** decide baseline-vs-integrated equivalence — C2 has not run yet. It only
 establishes that the historical run itself behaved as the historical product always has, against the
@@ -143,15 +181,23 @@ this script.
 
 ## Offline verification already performed
 
-Before deployment: (1) all 34 extraction ranges were confirmed to each start with the exact expected
-`def`/`class` line; (2) the combined extracted source was `exec()`'d under real Python 2.7.5 and every
-expected function name (`capture_snapshot_explicit`, `discover_rig_context`, `capture_tree`,
+Before this first deployment: (1) all 34 extraction ranges were confirmed to each start with the exact
+expected `def`/`class` line; (2) the combined extracted source was `exec()`'d under real Python 2.7.5
+and every expected function name (`capture_snapshot_explicit`, `discover_rig_context`, `capture_tree`,
 `native_ptr`, `name`, `handle`, `typ`, `arr`, `attr`, `scalar`) was confirmed present and callable;
 (3) `capture_snapshot_explicit` was functionally exercised end-to-end against a synthetic fake
 shot/animation-set/two-level-group-tree/two-control fixture and correctly returned the expected
 group count (2), correct recursive group names (`<ROOT>`, `ChildGroup`), and correct control-to-group
-membership mapping — confirming the extracted, real, already-qualified capture mechanism genuinely
-works, not merely that it compiles.
+membership mapping.
+
+Before this corrected (C1-2) deployment, additionally: (4) a new offline regression,
+`real_sfm_qualification/checkpoint_c1/test_c1_semantic_comparator_regression.py`, extracts the deployed
+script's own `canonicalize_snapshot` function verbatim (SHA-256 pinned) and proves two otherwise-
+identical fingerprints tagged `PRE`/`POST` compare EQUAL after canonicalization, and a real semantic
+change (a renamed control inside the group tree) still compares UNEQUAL — **8/8 PASS, both Python 3.10
+and real Python 2.7.5**; (5) the fixture-identity hard gate was dry-run against a synthetic fixture
+reproducing the EXACT C1-1 mismatch (a different shot selected than expected) and confirmed to
+correctly compute failure in that case, and success when the correct shot is selected.
 
 ## Identities this checkpoint is pinned against
 
@@ -159,4 +205,5 @@ works, not merely that it compiles.
 - Installed production Normalizer SHA-256 (must remain unreplaced):
   `cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867`
 - Canonical Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
-- C1 script SHA-256: `bebdd1c384e292fd11c42f57a3bfd57b08a2528db2fcfe16c0eb58d6465a8aa6`
+- C1-2 (corrected) script SHA-256: `4387b03de820ae05e6647d68d22bb2bc084b1bf3ae4c78cbb060dddc412219dc`
+  (C1-1's superseded script SHA-256, preserved for the record: `bebdd1c384e292fd11c42f57a3bfd57b08a2528db2fcfe16c0eb58d6465a8aa6`)
