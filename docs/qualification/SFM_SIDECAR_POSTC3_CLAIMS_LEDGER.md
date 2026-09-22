@@ -132,3 +132,55 @@ what was true at each point in the arc.
    entry — constitutes or implies production-promotion authorization. Live target/scope
    enumeration, native `ifm.dll` behavior, and W3 (still `UNKNOWN`) remain separate, deferred
    gates, unchanged by B2C-C's closure.
+
+---
+
+## Addendum 5 (2026-09-21): Astra holistic review, package-boundary correction
+
+This addendum distinguishes two separate kinds of finding, explicitly, so neither is mistaken for
+the other:
+
+> `qualified evidence was valid for the tested surface`
+
+is NOT the same as:
+
+> `holistic review found an uncovered package/lifecycle defect`.
+
+Every B2C-B/B2C-C PASS/CLOSED verdict recorded in Addenda 1–4 above remains accurate for exactly
+what it tested (decision/execution/broker-composition equivalence between the frozen Normalizer and
+the qualified Correction6 authority, at the level those harnesses exercised). None of it is
+rewritten as false here. What follows is a DIFFERENT, WIDER surface — the package/deployment
+boundary — that B2C-B/B2C-C's own test suite never exercised, because it never needed to (it always
+imported the authority package directly from its qualification-tree location, never through the
+public compiler/publisher/bootstrap path a real installed product would use).
+
+1. **Astra's holistic review** of commit `c0122762acf11b8ccc4bb7b9d0d891434bf4eb7c` accepted the
+   shared-authority architecture in substance (compiled sidecar, packed provider, canonical broker,
+   finite acquisition cohorts, detached leased views should all remain) and found:
+   - two immediate package/integration blockers: **leased orphan revocation** (generation
+     invalidation never reached a displaced-but-still-leased view's own authorization token) and
+     **compiler/runtime deployment-contract mismatch** (the public compiler/publisher's real output
+     was invisible to/rejected by the runtime's candidate selection);
+   - one broken legacy API (`Broker.acquire_generation()`, unreachable by the qualified Normalizer
+     path) — deferrable if excluded, fixed here since it is a real, exported, one-line-fix public
+     method;
+   - eviction-on-failed-batch-admission semantics that are deferrable (real risk/debt, does not
+     publish incorrect authority, correctly not expanded into a redesign here).
+   - See `docs/qualification/SFM_CGN_ASTRA_HOLISTIC_AUDIT_c0122762_2026-09-21.md` for the full
+     disposition record, written before implementation, with every defect independently
+     re-confirmed against current source.
+2. **Package-boundary correction commit** closed both immediate blockers plus the legacy API and
+   two additionally-discovered defects in the same package boundary (an unimportable `runtime.py`
+   canonical-owner module; a `sidecar_contract.py` dependency on a repository-relative qualification
+   path for its own validator/provider) — see `tests/sidecar/qualification/R3_Package_Boundary_
+   Correction_Report.md` for the full derivation, fixes, and decisive regressions (leased-orphan
+   invalidation, clean-directory publish→broker-acquire from an empty directory under both Python
+   3.10 and real Python 2.7.5, and a full installed-package isolation proof with no repository path,
+   no `PYTHONPATH`, and an unrelated working directory).
+3. **Recommends immediate integration work** after this package-boundary correction — Astra
+   explicitly advises against another broad synthetic lifecycle campaign; the remaining gaps found
+   were package-boundary/deployment-contract defects, not evidence that the core acquisition/lease/
+   coverage model needs further offline qualification.
+4. **Production promotion remains unauthorized.** This addendum records a package-boundary
+   correction, not an independent audit PASS and not production-promotion authorization. Normalizer
+   production integration has not been performed. CPM has not been modified.
