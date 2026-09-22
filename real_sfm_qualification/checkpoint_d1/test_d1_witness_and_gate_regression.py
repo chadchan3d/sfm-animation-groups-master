@@ -35,7 +35,7 @@ D1_SCRIPT_PATH = (
     r"\mainmenu\ChadChan3D\Checkpoint_D1_Historical_All_Shots_Baseline.py"
 )
 EXPECTED_D1_SCRIPT_SHA256 = (
-    "d3137e38c637898649fab3b26d3cdf0c1a742cface2ece991841affce15856ba"
+    "d8af1437c0090c62c29e2fcc3797c78c5e30f4d464703df83c2d7d769a1cf9a2"
 )
 # 1-indexed, inclusive. Re-verify with:
 #   sed -n '<start>,<end>p' Checkpoint_D1_Historical_All_Shots_Baseline.py

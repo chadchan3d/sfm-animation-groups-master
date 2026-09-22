@@ -486,6 +486,157 @@ def excluded_witness_row(t):
 
 
 # ---------------------------------------------------------------------------
+# Safe artifact writer (independent-audit correction, D1-2, 2026-09-22).
+#
+# D1-1's own writer opened JSON_OUTPUT_PATH directly in "wb" mode --
+# which TRUNCATES any existing file immediately on open -- and only
+# THEN called json.dumps(...). If dumps()/encode()/write() raised for
+# ANY reason, the bare `except Exception: json_write_ok = False`
+# discarded the actual exception, leaving a truncated ZERO-BYTE file
+# with no diagnostic evidence of why. This is exactly what D1-1
+# produced: the real historical All-Shots run itself completed and
+# every runtime check passed, but the evidence artifact was silently
+# destroyed, and the specific exception that caused it is not
+# recoverable from the existing D1-1 artifacts because the prior
+# instrumentation never captured it -- that information loss is itself
+# a confirmed defect, corrected below by never discarding the
+# exception's repr() again.
+#
+# write_json_atomic() never truncates the final authoritative path
+# until serialization, encoding, the write itself, AND an independent
+# reopen+reparse of a separate temp file have all already succeeded.
+# ---------------------------------------------------------------------------
+
+def write_json_atomic(final_path, data_obj):
+    """Returns (ok, error_repr_or_None, reparsed_obj_or_None).
+    Python-2.7-compatible. Never truncates `final_path` before
+    serialization, encoding, and the write are known to succeed and
+    have been independently verified by reopening and reparsing a
+    separate temp file."""
+    tmp_path = final_path + ".tmp"
+    try:
+        serialized_text = json.dumps(data_obj, indent=2, sort_keys=True)
+    except Exception as exc:
+        return False, "json.dumps() failed: %r" % (exc,), None
+    try:
+        encoded_bytes = serialized_text.encode("utf-8")
+    except Exception as exc:
+        return False, "utf-8 encode() failed: %r" % (exc,), None
+    try:
+        f = open(tmp_path, "wb")
+        try:
+            f.write(encoded_bytes)
+            f.flush()
+            try:
+                os.fsync(f.fileno())
+            except Exception:
+                pass  # best-effort durability only; not fatal if unsupported.
+        finally:
+            f.close()
+    except Exception as exc:
+        return False, "temp file write (%r) failed: %r" % (tmp_path, exc), None
+
+    try:
+        temp_size = os.path.getsize(tmp_path)
+    except Exception as exc:
+        return False, "could not stat temp file (%r): %r" % (tmp_path, exc), None
+    if temp_size <= 0:
+        return False, "temp file is zero bytes after write (size=%r)" % (temp_size,), None
+
+    try:
+        with open(tmp_path, "rb") as f:
+            reread_bytes = f.read()
+        reparsed_obj = json.loads(reread_bytes.decode("utf-8"))
+    except Exception as exc:
+        return False, "temp file reopen/reparse verification failed: %r" % (exc,), None
+
+    # Only now, with serialization/write/reparse independently proven,
+    # replace the final authoritative path. os.rename() on Windows
+    # refuses to overwrite an existing destination, so remove it first
+    # -- this narrows, but (without a platform-specific atomic-replace
+    # call) does not fully close, the replace-window race; the temp
+    # file itself is never left partially written, which is the
+    # concrete D1-1 failure this correction targets, and the final
+    # path is never touched at all unless every step above succeeded.
+    try:
+        if os.path.exists(final_path):
+            os.remove(final_path)
+        os.rename(tmp_path, final_path)
+    except Exception as exc:
+        return False, "promoting temp file to final path failed: %r" % (exc,), None
+
+    return True, None, reparsed_obj
+
+
+def write_text_atomic(final_path, text_bytes):
+    """Same discipline as write_json_atomic(), for the plain-text
+    summary file. Returns (ok, error_repr_or_None)."""
+    tmp_path = final_path + ".tmp"
+    try:
+        f = open(tmp_path, "wb")
+        try:
+            f.write(text_bytes)
+            f.flush()
+            try:
+                os.fsync(f.fileno())
+            except Exception:
+                pass
+        finally:
+            f.close()
+    except Exception as exc:
+        return False, "temp file write (%r) failed: %r" % (tmp_path, exc)
+    try:
+        temp_size = os.path.getsize(tmp_path)
+    except Exception as exc:
+        return False, "could not stat temp file (%r): %r" % (tmp_path, exc)
+    if temp_size <= 0:
+        return False, "temp file is zero bytes after write (size=%r)" % (temp_size,)
+    try:
+        if os.path.exists(final_path):
+            os.remove(final_path)
+        os.rename(tmp_path, final_path)
+    except Exception as exc:
+        return False, "promoting temp file to final path failed: %r" % (exc,)
+    return True, None
+
+
+REQUIRED_EVIDENCE_KEYS = (
+    "pre_fingerprint_hash", "post_fingerprint_hash", "pre_fingerprint", "post_fingerprint",
+    "excluded_target_witness", "target_set_diff", "fixture_totals",
+    "semantically_changed_target_set", "semantically_unchanged_target_set",
+)
+
+
+def verify_artifact_evidence(reparsed_obj):
+    """Returns (ok, detail). Checks presence/completeness of the
+    required evidence fields AND that the stored PRE/POST fingerprint
+    hashes recompute correctly from the stored semantic fingerprint
+    data (round-trip integrity through actual JSON serialization, not
+    merely that the file parses as valid JSON)."""
+    if reparsed_obj is None:
+        return False, "reparsed artifact is None"
+    missing_keys = [k for k in REQUIRED_EVIDENCE_KEYS if k not in reparsed_obj]
+    if missing_keys:
+        return False, "missing required evidence keys: %r" % (missing_keys,)
+    pre_fp = reparsed_obj.get("pre_fingerprint") or {}
+    post_fp = reparsed_obj.get("post_fingerprint") or {}
+    if len(pre_fp) != 85 or len(post_fp) != 85:
+        return False, "stored fingerprint counts wrong: pre=%d post=%d" % (len(pre_fp), len(post_fp))
+    excluded_witness = reparsed_obj.get("excluded_target_witness") or {}
+    pre_excluded_count = len(excluded_witness.get("pre") or {})
+    post_excluded_count = len(excluded_witness.get("post") or {})
+    if pre_excluded_count != 78 or post_excluded_count != 78:
+        return False, "stored excluded-witness counts wrong: pre=%d post=%d" % (pre_excluded_count, post_excluded_count)
+    recomputed_pre_hash = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in pre_fp.items()])
+    recomputed_post_hash = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in post_fp.items()])
+    if recomputed_pre_hash != reparsed_obj.get("pre_fingerprint_hash"):
+        return False, "recomputed PRE hash %r != stored %r" % (recomputed_pre_hash, reparsed_obj.get("pre_fingerprint_hash"))
+    if recomputed_post_hash != reparsed_obj.get("post_fingerprint_hash"):
+        return False, "recomputed POST hash %r != stored %r" % (recomputed_post_hash, reparsed_obj.get("post_fingerprint_hash"))
+    return True, None
+
+
+# ---------------------------------------------------------------------------
 # Main.
 # ---------------------------------------------------------------------------
 
@@ -844,18 +995,79 @@ completed_without_exception = not any(
     a.startswith("UNHANDLED TOP-LEVEL EXCEPTION") for a in ANOMALIES
 )
 # D1 does not require a predetermined changed-target count or POST
-# hash (Section 8) -- overall_pass is decided purely by mechanical
-# gate/capture/completeness checks, never by what the historical run
-# actually changed.
-report["overall_pass"] = bool(all_checks_passed and completed_without_exception and run_started)
+# hash (Section 8) -- the runtime portion of overall_pass is decided
+# purely by mechanical gate/capture/completeness checks, never by what
+# the historical run actually changed.
+runtime_checks_passed = bool(all_checks_passed and completed_without_exception and run_started)
 report["finished_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
 
-json_write_ok = True
-try:
-    with open(JSON_OUTPUT_PATH, "wb") as f:
-        f.write(json.dumps(report, indent=2, sort_keys=True).encode("utf-8"))
-except Exception:
-    json_write_ok = False
+# Independent-audit correction, D1-2: artifact writing is now part of
+# PASS. OVERALL_PASS may not be True unless the JSON evidence artifact
+# itself was written, is nonzero, reopens/reparses, contains the
+# complete required evidence, and its own stored PRE/POST hashes
+# recompute correctly from the stored semantic data. Evidence
+# completeness/hash-recompute is only REQUIRED when the run actually
+# reached the evidence-building stage -- an orderly gate abort
+# legitimately never builds pre_fingerprint/post_fingerprint/etc, and
+# already fails overall_pass via run_started=False regardless.
+evidence_expected = runtime_checks_passed
+
+report["overall_pass"] = False  # provisional/conservative; corrected below only if fully verified.
+report["artifact_write_verified"] = False
+report["artifact_evidence_detail"] = None
+report["json_write_error"] = None
+
+write1_ok, write1_error, reparsed1 = write_json_atomic(JSON_OUTPUT_PATH, report)
+
+if evidence_expected:
+    if write1_ok:
+        evidence_ok, evidence_detail = verify_artifact_evidence(reparsed1)
+    else:
+        evidence_ok, evidence_detail = False, "artifact write failed: %s" % (write1_error,)
+else:
+    evidence_ok, evidence_detail = True, "not required (run did not reach evidence-building stage)"
+
+report["artifact_write_verified"] = bool(write1_ok and evidence_ok)
+report["artifact_evidence_detail"] = evidence_detail
+if not write1_ok:
+    report["json_write_error"] = write1_error
+report["overall_pass"] = bool(runtime_checks_passed and report["artifact_write_verified"])
+
+# write1, if it succeeded, already promoted a conservative
+# (overall_pass=False) version to JSON_OUTPUT_PATH. Always perform one
+# corrective final write carrying the now-accurate overall_pass/
+# artifact_write_verified fields -- whether or not write1 itself
+# succeeded (if it failed, JSON_OUTPUT_PATH was never touched at all,
+# so this is the only real attempt).
+json_write_ok, write2_error, _reparsed2 = write_json_atomic(JSON_OUTPUT_PATH, report)
+if not json_write_ok:
+    report["json_write_error"] = (
+        ("%s ; retry also failed: %s" % (write1_error, write2_error)) if not write1_ok else write2_error
+    )
+    # Last-resort degraded artifact: the full per-target fingerprint
+    # payload is dropped (it is by far the largest part of the
+    # payload, and the most likely thing implicated in a repeat
+    # failure), but every mechanical check, hash, count, and anomaly
+    # is preserved -- so evidence is never reduced to a misleading
+    # zero-byte file even in this pathological case (first write
+    # succeeded, the corrective final write did not).
+    degraded_report = dict(report)
+    degraded_report.pop("pre_fingerprint", None)
+    degraded_report.pop("post_fingerprint", None)
+    degraded_report["degraded_artifact"] = True
+    degraded_report["degraded_reason"] = (
+        "Full per-target fingerprint payload omitted because the complete "
+        "artifact write failed (%s). This degraded fallback preserves every "
+        "mechanical check, hash, count, and anomaly so evidence is never "
+        "left as a misleading zero-byte file." % (report["json_write_error"],)
+    )
+    fallback_ok, fallback_error, _r3 = write_json_atomic(JSON_OUTPUT_PATH, degraded_report)
+    report["degraded_fallback_written"] = fallback_ok
+    if fallback_ok:
+        json_write_ok = True  # SOMETHING complete and evidentiary is now on disk.
+    else:
+        report["json_write_error"] = "%s ; degraded fallback also failed: %s" % (report["json_write_error"], fallback_error)
+    report["overall_pass"] = False
 
 summary_lines = []
 summary_lines.append("SFM CHECKPOINT D1 -- HISTORICAL (PRE-INTEGRATION) ALL-SHOTS BASELINE RUN")
@@ -880,6 +1092,15 @@ summary_lines.append("excluded_target_count=%r" % report.get("excluded_target_co
 summary_lines.append("excluded_targets_changed_count=%r" % (report.get("excluded_target_witness", {}) or {}).get("changed_count"))
 summary_lines.append("target_set_diff=%r" % report.get("target_set_diff"))
 summary_lines.append("")
+summary_lines.append("artifact_write_verified=%r" % report.get("artifact_write_verified"))
+summary_lines.append("artifact_evidence_detail=%r" % report.get("artifact_evidence_detail"))
+summary_lines.append("json_write_error=%r" % report.get("json_write_error"))
+if report.get("degraded_artifact"):
+    summary_lines.append("")
+    summary_lines.append("*** DEGRADED ARTIFACT: the full per-target fingerprint payload was omitted ***")
+    summary_lines.append("*** because the complete artifact write failed. degraded_fallback_written=%r ***" % report.get("degraded_fallback_written"))
+    summary_lines.append("*** degraded_reason=%r ***" % report.get("degraded_reason"))
+summary_lines.append("")
 summary_lines.append("OVERALL_PASS=%r" % report["overall_pass"])
 summary_lines.append("")
 summary_lines.append("--- ANOMALIES (%d) ---" % len(ANOMALIES))
@@ -891,18 +1112,13 @@ summary_lines.append("")
 summary_lines.append("json_output_path=%s (write_ok=%r)" % (JSON_OUTPUT_PATH, json_write_ok))
 
 summary_text = u"\n".join(summary_lines) + u"\n"
-summary_write_ok = True
-try:
-    with open(SUMMARY_OUTPUT_PATH, "wb") as f:
-        f.write(summary_text.encode("ascii", "replace"))
-except Exception:
-    summary_write_ok = False
+summary_write_ok, summary_write_error = write_text_atomic(SUMMARY_OUTPUT_PATH, summary_text.encode("ascii", "replace"))
 
 try:
     sys.stdout.write(summary_text.encode("ascii", "replace"))
     sys.stdout.write(
-        "\nCheckpoint D1 reports written to:\n  %s (write_ok=%r)\n  %s (write_ok=%r)\n"
-        % (JSON_OUTPUT_PATH, json_write_ok, SUMMARY_OUTPUT_PATH, summary_write_ok)
+        "\nCheckpoint D1 reports written to:\n  %s (write_ok=%r)\n  %s (write_ok=%r, error=%r)\n"
+        % (JSON_OUTPUT_PATH, json_write_ok, SUMMARY_OUTPUT_PATH, summary_write_ok, summary_write_error)
     )
     sys.stdout.write("\nDO NOT SAVE. Restart SFM to discard this baseline mutation before D2.\n")
 except Exception:

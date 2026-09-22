@@ -79,3 +79,8 @@ real_sfm_qualification/checkpoint_c2/test_c2_comparator_and_gate_regression.py t
 # in operator instructions/the ledger.
 real_sfm_qualification/checkpoint_d1/Checkpoint_D1_Historical_All_Shots_Baseline.py text eol=lf
 real_sfm_qualification/checkpoint_d1/test_d1_witness_and_gate_regression.py text eol=lf
+
+# Checkpoint D1-2 correction (2026-09-22): the offline artifact-writer
+# regression pins the corrected D1 script's own SHA-256 and its own
+# function extraction ranges -- same archive-export LF-safety reasoning.
+real_sfm_qualification/checkpoint_d1/test_d1_artifact_writer_regression.py text eol=lf
