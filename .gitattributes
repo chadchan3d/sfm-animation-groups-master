@@ -168,3 +168,10 @@ real_sfm_qualification/checkpoint_o2_r1/test_o2r1_native_instance_wrap_mechanism
 real_sfm_qualification/checkpoint_f1_r2/Checkpoint_F1_R2_Phase1_Create_Normalized_Copy.py text eol=lf
 real_sfm_qualification/checkpoint_f1_r2/Checkpoint_F1_R2_Phase2_Normalized_Copy_Retest.py text eol=lf
 real_sfm_qualification/checkpoint_f1_r2/test_f1_r2_diagnostic_regression.py text eol=lf
+
+# Real-SFM Qualification, Checkpoint O3-R2 (2026-09-23): same reasoning
+# as O2/O2-R1 above -- the O3-R2 diagnostic script and its offline test
+# are SHA-256 pinned and cited directly in operator instructions/the
+# ledger.
+real_sfm_qualification/checkpoint_o3_r2/Checkpoint_O3_R2_Discovery_Cost_Split.py text eol=lf
+real_sfm_qualification/checkpoint_o3_r2/test_o3r2_phase_split_mechanism.py text eol=lf
