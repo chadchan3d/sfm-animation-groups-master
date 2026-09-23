@@ -157,24 +157,31 @@ No production code was changed based on this audit alone.
 ## Offline verification performed before deployment
 
 (1) Both scripts syntax-checked under the real embedded Python 2.7.5,
-PASS. (2) New regression `test_f1_r2_diagnostic_regression.py` (SHA-256
-`99a6f08da9955c4199f82ae0efac1fb936034de54fd8859e0b6ae1a6b21a78dd`) proves,
-using **injected fake `sfmApp`/`vs` modules** (no real SFM environment
-available offline): the core safety invariant of
-`save_normalized_diagnostic_copy()` — it calls the native `SaveToFile` API
-exactly once when the computed target path correctly differs from the
-original fixture's path (and the original file's bytes remain provably
-unchanged afterward), and **never calls it at all** when the computed
-target would equal the original path (an adversarial case constructed
-deliberately), reporting a clean refusal instead. Also proves a native
-`SaveToFile` failure is reported cleanly, not swallowed or misreported as
-success. The shared `CONTEXTUALIZER_RESOURCE_CHECKPOINT` parser exactly
-reproduces F1-2's own confirmed command-3 deltas (private `+238366720`,
-free VAS `-233242624`, largest free `-111017984`) from the real log-line
-values. The Phase 1↔Phase 2 comparison arithmetic (serialized/resident
-delta, per-run delta) is verified correct against worked examples.
-**30/30 PASS** under the real embedded Python 2.7.5. Not yet run against
-real SFM.
+PASS. (2) Regression `test_f1_r2_diagnostic_regression.py` (SHA-256
+`aa79b9e768f7c11383923334645f0b2bda3b73f39a2dbcb63c1b4cdf792c59cb`,
+**repaired 2026-09-23** after attempt 01's real-SFM failure) proves, using
+**injected fake `sfmApp`/`vs` modules** (no real SFM environment available
+offline): the core safety invariant of `save_normalized_diagnostic_copy()`
+— it calls the native `SaveToFile` API exactly once when the computed
+target path correctly differs from the original fixture's path (and the
+original file's bytes remain provably unchanged afterward), and **never
+calls it at all** when the computed target would equal the original path
+(an adversarial case constructed deliberately), reporting a clean refusal
+instead. Also proves a native `SaveToFile` failure is reported cleanly, not
+swallowed or misreported as success. The shared `CONTEXTUALIZER_RESOURCE_
+CHECKPOINT` parser exactly reproduces F1-2's own confirmed command-3 deltas
+(private `+238366720`, free VAS `-233242624`, largest free `-111017984`)
+from the real log-line values. The Phase 1↔Phase 2 comparison arithmetic
+(serialized/resident delta, per-run delta) is verified correct against
+worked examples. **New this repair**: a strict-binding regression using a
+fake `SaveToFile` that mimics the real SWIG binding's own type strictness
+(rejects `unicode`, matching the exact real `TypeError` observed) —
+independently confirmed, via direct replay of the pre-repair function body
+against this same strict fake, that it reproduces the EXACT real failure,
+and that the repaired function body passes cleanly, receiving a Python 2
+`str` (not `unicode`) at the native call. **35/35 PASS** under the real
+embedded Python 2.7.5 (30 original + 5 new strict-binding assertions).
+Not yet rerun against real SFM.
 
 ## Identities this checkpoint is pinned against
 
@@ -182,6 +189,51 @@ real SFM.
   twice, once per phase): `cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867`
 - Canonical Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
 - Required final All-Shots aggregate hash: `299cbba30634da1a4949ed7b14187b813260c533dced3d1e71149ede98c124e7`
-- Phase 1 script SHA-256: `860c2c3f0b211ec1dbbae384f8249ead5f5530b54eab3f8fbf9de083e67b9ccd`
-- Phase 2 script SHA-256: `03249bad2a7f86cfbdc6e226edeb72ea6f15f9769b135d1ad46cc6a6e4ce4f80`
-- Offline regression SHA-256: `99a6f08da9955c4199f82ae0efac1fb936034de54fd8859e0b6ae1a6b21a78dd`
+- Phase 1 script SHA-256 (**repaired 2026-09-23, attempt 02** -- see
+  "Attempt 01 disposition and repair" below; supersedes the original
+  `860c2c3f0b211ec1dbbae384f8249ead5f5530b54eab3f8fbf9de083e67b9ccd`):
+  `d938f878608b0cbd9302620265da9c47161abfbc8382308ad504bfb6fcea5d54`
+- Phase 2 script SHA-256 (unchanged, not modified by the attempt-01
+  repair): `03249bad2a7f86cfbdc6e226edeb72ea6f15f9769b135d1ad46cc6a6e4ce4f80`
+- Offline regression SHA-256 (**repaired 2026-09-23** -- adds the
+  strict-binding regression; supersedes the original
+  `99a6f08da9955c4199f82ae0efac1fb936034de54fd8859e0b6ae1a6b21a78dd`):
+  `aa79b9e768f7c11383923334645f0b2bda3b73f39a2dbcb63c1b4cdf792c59cb`
+
+## Attempt 01 disposition and repair
+
+**F1-R2 Phase 1 attempt 01 — INCOMPLETE: SAVE-AS DIAGNOSTIC BINDING FAILURE.**
+Not a production failure -- production's own All-Shots run completed cleanly
+(SHA/fixture/native-guard/native-Rebuild/`FINAL_REPORT_ENTRY`/authority
+checks all passed; `save.succeeded = False` was the only failed condition).
+Root cause (confirmed against the SWIG stub `vs/datamodel.py` and the
+proven real usage in `cleanEmptyControls.py`, not assumed): `SaveToFile`'s
+`pFileName` argument is declared `char const *`, which requires a Python 2
+`str` (byte-string); `target_path` was `unicode` (Python 2's `os.path.join`
+promotes `str`+`unicode` -> `unicode`, and `SAVE_AS_FILENAME` is an explicit
+`u"..."` literal). Repaired by encoding `target_path` to ASCII bytes
+immediately before the native call only -- the destination filename,
+production execution, memory/resource instrumentation, save timing, and
+Phase 2 are all unchanged. See `Checkpoint_F1_R2_Phase1_Create_Normalized_
+Copy.py`'s own `save_normalized_diagnostic_copy()` docstring for the full
+technical account, and `test_f1_r2_diagnostic_regression.py`'s
+"Strict-binding regression" section for the offline proof (a fake that
+mimics the real binding's own type strictness, confirmed via direct
+replay to raise the EXACT observed error against the pre-repair code, and
+to pass against the repaired code).
+
+Attempt 01's resource evidence remains valid (production ran cleanly) but
+its classification remains unresolved -- the save/reopen boundary was never
+reached, so no `SCENE_RESIDENT` / `PER_RUN_NATIVE_RETENTION` / `MIXED`
+attribution can be made yet:
+
+- CP0 private: 3,064,614,912 -> FINAL_REPORT_ENTRY private: 3,327,598,592
+- CP0 free VAS: 527,847,424 -> FINAL free VAS: 288,116,736
+- CP0 largest free block: 299,696,128 -> FINAL largest free block: 126,353,408
+- After-production `gc.collect()` pagefile usage remained ~3,328,004,096
+
+This is same-process command-interval evidence only, consistent with (but
+not proof of) F1-2's own already-established finding -- do not infer a leak
+from it. Attempt 02 (below) reruns Phase 1 with the repair in place; if it
+succeeds, Phase 2 proceeds normally and this same evidence class will be
+re-collected as part of a complete attempt.

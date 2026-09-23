@@ -2,9 +2,13 @@
 """
 Offline regression for Checkpoint F1-R2 Phase 1
 (Checkpoint_F1_R2_Phase1_Create_Normalized_Copy.py, SHA-256
-860c2c3f0b211ec1dbbae384f8249ead5f5530b54eab3f8fbf9de083e67b9ccd) and
-Phase 2 (Checkpoint_F1_R2_Phase2_Normalized_Copy_Retest.py, SHA-256
-03249bad2a7f86cfbdc6e226edeb72ea6f15f9769b135d1ad46cc6a6e4ce4f80).
+d938f878608b0cbd9302620265da9c47161abfbc8382308ad504bfb6fcea5d54 -- repaired
+2026-09-23 after a real-SFM Phase 1 attempt failed with TypeError("in
+method 'IDataModel_SaveToFile', argument 2 of type 'char const *'"); see
+the strict-binding regression below) and Phase 2
+(Checkpoint_F1_R2_Phase2_Normalized_Copy_Retest.py, SHA-256
+03249bad2a7f86cfbdc6e226edeb72ea6f15f9769b135d1ad46cc6a6e4ce4f80,
+unchanged).
 
 The centerpiece of this regression is `save_normalized_diagnostic_copy()`
 (Phase 1) -- the one function in this whole project that WRITES to a new
@@ -33,13 +37,13 @@ import tempfile
 
 PHASE1_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Checkpoint_F1_R2_Phase1_Create_Normalized_Copy.py")
 PHASE2_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Checkpoint_F1_R2_Phase2_Normalized_Copy_Retest.py")
-EXPECTED_PHASE1_SHA256 = "860c2c3f0b211ec1dbbae384f8249ead5f5530b54eab3f8fbf9de083e67b9ccd"
+EXPECTED_PHASE1_SHA256 = "d938f878608b0cbd9302620265da9c47161abfbc8382308ad504bfb6fcea5d54"
 EXPECTED_PHASE2_SHA256 = "03249bad2a7f86cfbdc6e226edeb72ea6f15f9769b135d1ad46cc6a6e4ce4f80"
 
 CHECKPOINT_PARSER_RANGE = (344, 415)
 WRITE_JSON_ATOMIC_RANGE = (418, 466)
 WRITE_TEXT_ATOMIC_RANGE = (469, 507)
-SAVE_FUNCTION_RANGE = (510, 586)
+SAVE_FUNCTION_RANGE = (510, 616)
 
 PASS_COUNT = [0]
 FAIL_COUNT = [0]
@@ -225,6 +229,68 @@ result_c = save_fn_c(u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY_2.sfm")
 expect(result_c["ok"] is False, "save.case_c_native_failure_reported_as_ok_False")
 expect(len(fake_dm_c.save_calls) == 1, "save.case_c_SaveToFile_was_attempted_once")
 expect("SaveToFile() returned False" in (result_c["error"] or ""), "save.case_c_error_message_explains_native_failure")
+
+sys.stdout.write("\n--- Strict-binding regression: SaveToFile's pFileName must be a Python 2 str ---\n")
+
+
+class _StrictTypedFakeDataModel(object):
+    """Mimics the REAL SWIG binding's own type strictness for pFileName
+    (declared 'char const *' in vs/datamodel.py) -- rejects a unicode
+    path with the EXACT TypeError a real-SFM Phase 1 attempt produced
+    (2026-09-23): TypeError("in method 'IDataModel_SaveToFile', argument
+    2 of type 'char const *'"). GetFileName() returns a plain str, per
+    the SWIG stub's own 'char const *' return typemap and per the proven
+    real usage in cleanEmptyControls.py (passes sys.argv[2], always str).
+    This fake exists specifically because the permissive _FakeDataModel
+    above (which accepts any Python type) could not have caught the real
+    bug -- this one can and does."""
+    def __init__(self, file_names, file_formats):
+        self._file_names = file_names
+        self._file_formats = file_formats
+        self.save_calls = []
+
+    def GetFileName(self, file_id):
+        return self._file_names[file_id]
+
+    def GetFileFormat(self, file_id):
+        return self._file_formats[file_id]
+
+    def SaveToFile(self, path, path_id, encoding, fmt, root):
+        if type(path) is not str:
+            raise TypeError(
+                "in method 'IDataModel_SaveToFile', argument 2 of type 'char const *'"
+            )
+        self.save_calls.append({"path": path, "path_id": path_id, "encoding": encoding, "format": fmt, "root": root})
+        with open(path, "wb") as f:
+            f.write(b"fake-dmx-bytes")
+        return True
+
+
+# GetFileName() returns str (bytes), matching the real binding -- not
+# unicode, unlike the permissive fake's own original_path construction
+# above.
+strict_original_dir = tempfile.mkdtemp(prefix="f1_r2_strict_fixture_")
+strict_original_path = os.path.join(strict_original_dir, "qualification_fixture.sfm")
+with open(strict_original_path, "wb") as f:
+    f.write(b"original-fixture-bytes")
+
+fake_dm_strict = _StrictTypedFakeDataModel({7: strict_original_path}, {7: u"session"})
+fake_vs_strict = _FakeVsModule(fake_dm_strict)
+save_fn_strict = make_save_function(fake_sfmapp, fake_vs_strict)
+# Exactly SAVE_AS_FILENAME's own real literal (Phase 1 line 107):
+# u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm" -- unicode, reproducing the
+# exact type composition that triggered the real failure.
+result_strict = save_fn_strict(u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm")
+
+expect(result_strict["ok"] is True, "save.strict_binding_save_succeeds_against_type_strict_fake (%r)" % (result_strict,))
+expect(len(fake_dm_strict.save_calls) == 1, "save.strict_binding_SaveToFile_called_exactly_once")
+if fake_dm_strict.save_calls:
+    expect(type(fake_dm_strict.save_calls[0]["path"]) is str, "save.strict_binding_native_call_receives_str_not_unicode -- the exact repair this regression proves (%r)" % (type(fake_dm_strict.save_calls[0]["path"]),))
+    expect(fake_dm_strict.save_calls[0]["path"] == os.path.join(strict_original_dir, "F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm"), "save.strict_binding_path_content_correct_after_encoding")
+# result["target_path"] itself (used for os.path.exists/getsize and the
+# refusal check) remains unicode, unchanged -- only the native call's own
+# argument was narrowed.
+expect(isinstance(result_strict["target_path"], unicode), "save.strict_binding_result_target_path_remains_unicode_unchanged")
 
 sys.stdout.write("\n--- Phase 1 <-> Phase 2 comparison arithmetic ---\n")
 

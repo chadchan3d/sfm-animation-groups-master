@@ -528,6 +528,17 @@ def save_normalized_diagnostic_copy(save_as_filename):
     `GetFileFormat(file_id)`, not hardcoded, so it matches whatever
     format this real .sfm project actually uses.
 
+    Binding contract (confirmed after a real-SFM Phase 1 attempt failed
+    with TypeError("in method 'IDataModel_SaveToFile', argument 2 of type
+    'char const *'")): the SWIG stub declares `pFileName` as `char const *`,
+    which requires a Python 2 str (byte-string), not unicode.
+    cleanEmptyControls.py's own real call site passes sys.argv[2], always a
+    plain str -- confirming the contract. This function computes its own
+    target_path as unicode (os.path.join promotes str+unicode -> unicode in
+    Python 2, and the caller's save_as_filename is an explicit u"..."
+    literal); it is explicitly re-encoded to ASCII bytes immediately before
+    the native call, scoped to that one argument only.
+
     Returns a dict describing the outcome. Never raises -- a failure is
     reported in the returned dict, not propagated."""
     result = {
@@ -570,8 +581,27 @@ def save_normalized_diagnostic_copy(save_as_filename):
 
         result["target_exists_before_save"] = os.path.exists(target_path)
 
+        # SWIG binding contract (confirmed against vs/datamodel.py's own
+        # declared signature -- "SaveToFile(IDataModel self, char const *
+        # pFileName, ...)" -- and against the real, proven working usage in
+        # sdktools/python/global/Scripts/cleanEmptyControls.py, which passes
+        # sys.argv[2], always a plain Python 2 str/byte-string, never
+        # unicode): pFileName's typemap requires a Python 2 str. target_path
+        # here is unicode (os.path.join promotes str+unicode -> unicode
+        # in Python 2, and SAVE_AS_FILENAME is an explicit u"..." literal),
+        # which the native call rejects with TypeError("in method
+        # 'IDataModel_SaveToFile', argument 2 of type 'char const *'").
+        # This encode is scoped to ONLY the native call's own argument --
+        # target_path itself (used above/below for os.path.exists/getsize
+        # and the refusal check) is left unicode, unchanged. This fixture's
+        # paths are ASCII-only by construction, so ASCII encoding is
+        # correct and lossless here; a non-ASCII path would raise loudly
+        # (UnicodeEncodeError) rather than silently mangling, which is the
+        # right failure mode for this diagnostic.
+        target_path_native = target_path.encode("ascii")
+
         save_ok = bool(
-            vs.g_pDataModel.SaveToFile(target_path, None, "binary", format_name, root)
+            vs.g_pDataModel.SaveToFile(target_path_native, None, "binary", format_name, root)
         )
         result["ok"] = save_ok
         if save_ok:
