@@ -1,0 +1,84 @@
+{
+  "status": "PREPARATION_COMPLETE_OFFLINE_EVIDENCE_COLLECTED_REAL_SFM_PENDING",
+  "prepared_at": "2026-09-23",
+  "astra_baseline_commit": "dc92623f17c6b151b7bf5f6ed4ab65cb3f1e29ea",
+  "governing_rule": "Tangible savings, demonstrated redundancy, zero functional compromise.",
+  "astra_dispositions": {
+    "self_work_aset_wrapper": "LOW_VALUE_REJECT",
+    "repeated_semantic_captures": "STRONG_MEASUREMENT_CANDIDATE",
+    "zero_repair_row_warm_early_out": "UNSAFE_DIRECTION_DO_NOT_PURSUE"
+  },
+  "deployed_script": {
+    "path": "real_sfm_qualification/checkpoint_o2/Checkpoint_O2_Bounded_Phase_Attribution.py",
+    "sha256": "4eaa8e87356e65c127a8744949e956056b0a18f5a2e65907efd3430e8dd9c4fc",
+    "wraps_module_functions": ["discover_rig_context", "capture_tree", "capture_snapshot_explicit"],
+    "wraps_class_methods": ["run_target_transaction", "prepare_native_callback"],
+    "derived_boundaries": [
+      "classification_planning_completion",
+      "contextual_writes_completion",
+      "target_isolation"
+    ]
+  },
+  "offline_evidence": {
+    "monkeypatch_mechanism_test": {
+      "path": "real_sfm_qualification/checkpoint_o2/test_monkeypatch_mechanism.py",
+      "sha256": "20144d8f4ec8aca08e9289fbfc87edc4e4d02b7810974a46b5e22979eccfd690",
+      "pass_count": 6,
+      "fail_count": 0,
+      "confirms": "module-function and class-method reassignment in an exec()'d namespace correctly affects subsequent calls from other code in the same exec()'d source; fresh re-exec is independently unpatched"
+    },
+    "capture_tree_closure_lifetime_test": {
+      "path": "real_sfm_qualification/checkpoint_o2/test_capture_tree_closure_lifetime.py",
+      "sha256": "2d1965886505bf98607985fc0c2f9e1ef37ac978ec700c3426ed1c943b796a51",
+      "pass_count": 9,
+      "fail_count": 0,
+      "mechanism_empirically_confirmed": true,
+      "test1_groups_and_memberships_survive_del_before_collect": true,
+      "test1_gc_collect_releases_them": true,
+      "test1_objects_reclaimed_by_gc_collect": 255,
+      "test2_n_captures_simulated_no_interim_collect": 25,
+      "test2_alive_count_before_final_collect": 25,
+      "test2_alive_count_after_final_collect": 0,
+      "test3_orphaned_walk_closures_accumulate_1_per_capture": true,
+      "test3_gc_collect_reclaims_all_at_once": true,
+      "materiality_at_real_scale": "UNRESOLVED_pending_real_SFM_measurement",
+      "note": "Synthetic tree (20 groups x 8 controls) showed no measurable working-set delta at this tiny scale -- mechanism confirmed, magnitude not yet measured at real Fox/Mia control counts (136/174)."
+    },
+    "analysis_logic_regression": {
+      "path": "real_sfm_qualification/checkpoint_o2/test_o2_analysis_logic_regression.py",
+      "sha256": "f39cc7facbf4174ec909829b76728c50e579723e3882245426c05e5d6e016115",
+      "pass_count": 17,
+      "fail_count": 0,
+      "extracted_from_deployed_script_lines": [792, 856],
+      "confirms": [
+        "branch classification correct for native_only_fallback, reconciled, and incomplete/unknown capture sets",
+        "composer_before_vs_outer_post_witness correct for equivalent/not-equivalent/missing-capture cases",
+        "composer_after_vs_terminal_witness correctly scoped to the reconciled branch only",
+        "field_diff correctly identifies which specific fields differ",
+        "derived timing gaps (classification_planning_gap_seconds, contextual_writes_gap_seconds) computed correctly"
+      ]
+    }
+  },
+  "corrected_branch_truth": {
+    "native_only_fallback_capture_labels": ["PRE", "NATIVE_POST"],
+    "reconciled_capture_labels": ["PRE", "NATIVE_POST", "PRODUCTION_GENERIC_COMPOSER_PRE", "PRODUCTION_GENERIC_COMPOSER_POST", "PRODUCTION_SEMANTIC_FINGERPRINT"],
+    "note": "Corrects O1's blanket '3-5 captures per target' claim -- the fallback exception (NativePostFallback) fires before the composer-before capture would ever run, so native-only-fallback targets get exactly 2 captures, not 3-5."
+  },
+  "real_sfm_evidence": null,
+  "required_conclusions": {
+    "1_discovery": "UNRESOLVED",
+    "2_tree_capture": "UNRESOLVED",
+    "3_composer_before": "UNRESOLVED",
+    "4_reconciled_terminal_overlap": "UNRESOLVED",
+    "5_closure_cycle": {
+      "mechanism": "MATERIAL_MECHANISM_CONFIRMED_OFFLINE",
+      "materiality_at_real_scale": "UNRESOLVED"
+    },
+    "6_native_rebuild": "UNRESOLVED",
+    "7_contextual_composer": "UNRESOLVED",
+    "8_fresh_vs_normalized": "UNRESOLVED"
+  },
+  "f1_r2_status": "PARKED_UNRUN",
+  "production_modified": false,
+  "sfm_run_performed": false
+}

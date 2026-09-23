@@ -147,6 +147,15 @@ real_sfm_qualification/checkpoint_f1_r1/test_allocator_highwater_retention.py te
 real_sfm_qualification/checkpoint_f1_2/Checkpoint_F1_2_Corrected_Repeated_Warm_Use_Stability.py text eol=lf
 real_sfm_qualification/checkpoint_f1_2/test_f1_2_corrected_stability_regression.py text eol=lf
 
+# Real-SFM Qualification, Checkpoint O2 (2026-09-23): same reasoning as
+# every earlier checkpoint above -- the O2 diagnostic script and its
+# offline tests are SHA-256 pinned and cited directly in operator
+# instructions/the ledger.
+real_sfm_qualification/checkpoint_o2/Checkpoint_O2_Bounded_Phase_Attribution.py text eol=lf
+real_sfm_qualification/checkpoint_o2/test_capture_tree_closure_lifetime.py text eol=lf
+real_sfm_qualification/checkpoint_o2/test_monkeypatch_mechanism.py text eol=lf
+real_sfm_qualification/checkpoint_o2/test_o2_analysis_logic_regression.py text eol=lf
+
 # Real-SFM Qualification, Checkpoint F1-R2 (2026-09-23): same reasoning as
 # F1/F1-R1/F1-2 above -- both phase scripts and the offline regression are
 # SHA-256 pinned and cited directly in operator instructions/the ledger.
