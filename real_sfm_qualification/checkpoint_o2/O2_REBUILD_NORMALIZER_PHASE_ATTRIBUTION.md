@@ -1,8 +1,36 @@
 # O2 — Bounded Rebuild + Normalizer Phase Attribution
 
-**Status: PREPARATION COMPLETE / OFFLINE EVIDENCE COLLECTED / REAL-SFM MEASUREMENT PENDING OPERATOR
-EXECUTION.** No SFM has been run for this checkpoint. No production, integration, or lifecycle code has
-been modified. Nothing here authorizes an optimization.
+**Status: O2 — BOUNDED PHASE ATTRIBUTION — PASS WITH NATIVE-INSTRUMENTATION GAP.** The real-SFM bounded
+run completed and produced real, materially useful findings (below). One instrumentation seam --
+native-Rebuild call timing -- failed (`native_rebuild_stage_summary.call_count = 0` despite the
+production log independently proving native Rebuild ran twice and returned PASS both times). Root cause
+found and corrected under Checkpoint O2-R1 (`real_sfm_qualification/checkpoint_o2_r1/`), which also adds
+two narrow static proofs the real run's equivalence witnesses motivated. No production, integration, or
+lifecycle code has been modified. Nothing here authorizes an optimization.
+
+## Real-SFM findings (preserved, from the actual completed run)
+
+| Stage | Fresh Selected | Already-normalized Selected | Disposition |
+|---|---|---|---|
+| Whole-shot/rig discovery | 10 calls, total ~1.538s, mean ~0.154s | 10 calls, total ~1.545s, mean ~0.155s | **MATERIAL** |
+| Tree construction | 10 calls, total ~0.020s | 10 calls, total ~0.023s | **IMMATERIAL** (not pursued as standalone) |
+| Composer-before witness (Fox+Mia) | `EXERCISED_PATH_EQUIVALENT_NO_INTERVENING_MUTATION`, no semantic field differences vs. outer native POST | same | **DESIGN REVIEW JUSTIFIED — VALIDATION/FRESHNESS PROOF STILL REQUIRED** |
+| Composer-after → terminal witness (Fox+Mia) | `EXERCISED_PATH_EQUIVALENT_NO_INTERVENING_MUTATION` | same | **DESIGN REVIEW JUSTIFIED FOR RECONCILED PATH ONLY** — not generalized to native-only fallback |
+| Native Rebuild timing | **instrumentation gap** — call_count recorded as 0 | same gap | Corrected under O2-R1 |
+
+**Warm second run** (already-normalized Selected) still required substantial contextual reconstruction
+after native Rebuild — Fox: desired 74 / moved 72 / already_correct 2; Mia: desired 69 / moved 67 /
+already_correct 2. This is preserved as **expected Rebuild→Normalizer behavior**, not a bug or
+redundancy by itself: native Rebuild and the Normalizer's own contextual composer are a single
+end-to-end transaction, and the Normalizer is what normalizes the state native Rebuild produces every
+time, warm or not.
+
+Both narrow static proofs motivated by these witnesses are now complete:
+- `real_sfm_qualification/checkpoint_o2_r1/O2_R1_OUTER_POST_TO_COMPOSER_BEFORE_PROOF.md` —
+  `SOURCE_EQUIVALENCE_SUPPORTED` (reconciled path).
+- `real_sfm_qualification/checkpoint_o2_r1/O2_R1_COMPOSER_AFTER_TO_TERMINAL_PROOF.md` —
+  `RECONCILED_PATH_REUSE_PLAUSIBLE` (reconciled path only; terminal retains a distinct procedural
+  purpose beyond content-equivalence — see that document).
 
 ## Governing rule
 
@@ -165,19 +193,19 @@ assumption.
 
 ## Required conclusions — current status
 
-All eight required conclusions below are **UNRESOLVED pending the real-SFM bounded run**, with one
-partial exception (Closure cycle, mechanism half, confirmed offline):
+The real-SFM bounded run resolved six of the eight; native Rebuild remains unresolved pending O2-R1's
+corrected instrumentation (script prepared, not yet run this turn):
 
 | # | Conclusion | Status |
 |---|---|---|
-| 1 | Discovery — is repeated whole-shot reachable-DME discovery materially expensive at target-command scale? | `UNRESOLVED` — pending operator execution |
-| 2 | Tree capture — is recursive target semantic-tree construction materially expensive? | `UNRESOLVED` — pending operator execution |
-| 3 | Composer-before — does O2 support further design investigation? | `UNRESOLVED` — pending operator execution (witness mechanism ready, needs real data) |
-| 4 | Reconciled terminal overlap | `UNRESOLVED` — pending operator execution |
-| 5 | Closure cycle | Mechanism: `MATERIAL_MECHANISM_CONFIRMED_OFFLINE`. Materiality at real scale: `UNRESOLVED` — pending operator execution |
-| 6 | Native Rebuild | `UNRESOLVED` — pending operator execution |
-| 7 | Contextual composer | `UNRESOLVED` — pending operator execution |
-| 8 | Fresh vs. normalized | `UNRESOLVED` — pending operator execution (observation only, no shortcut to be designed) |
+| 1 | Discovery — is repeated whole-shot reachable-DME discovery materially expensive at target-command scale? | **`MATERIAL`** — 10 calls/command, ~1.54s total, ~0.15s mean per call |
+| 2 | Tree capture — is recursive target semantic-tree construction materially expensive? | **`IMMATERIAL`** — 10 calls/command, ~0.02s total; not pursued as standalone |
+| 3 | Composer-before — does O2 support further design investigation? | **`DESIGN_REVIEW_JUSTIFIED`** for the reconciled path — empirical equivalence (real run) plus exhaustive static proof (`checkpoint_o2_r1/O2_R1_OUTER_POST_TO_COMPOSER_BEFORE_PROOF.md`, `SOURCE_EQUIVALENCE_SUPPORTED`) — validation/freshness proof for any actual reuse design still required |
+| 4 | Reconciled terminal overlap | **`DESIGN_REVIEW_JUSTIFIED`** for the reconciled path only — empirical equivalence plus static proof (`checkpoint_o2_r1/O2_R1_COMPOSER_AFTER_TO_TERMINAL_PROOF.md`, `RECONCILED_PATH_REUSE_PLAUSIBLE`) — terminal retains a distinct procedural purpose (post-cleanup capturability) not generalized to native-only fallback |
+| 5 | Closure cycle | Mechanism: `MATERIAL_MECHANISM_CONFIRMED_OFFLINE`. Materiality at real scale: `UNRESOLVED` — O2's bounded run did not isolate this separately from tree-construction cost (found `IMMATERIAL` at Fox/Mia's own control-count scale) |
+| 6 | Native Rebuild | `UNRESOLVED` — **instrumentation gap**, corrected under O2-R1; re-run pending |
+| 7 | Contextual composer | Partially resolved: warm second run still requires substantial contextual reconstruction (Fox 72/74 moved, Mia 67/69 moved) — this is expected Rebuild→Normalizer behavior, not evidence of redundancy by itself; full materiality classification deferred alongside native-Rebuild timing (conclusion 6), since composer cost must be read against native cost to judge relative weight |
+| 8 | Fresh vs. normalized | Resolved for discovery/tree/witness stages (see table above); native-Rebuild fresh-vs-warm comparison pending O2-R1 |
 
 ## Decision rule (restated, governs any future step)
 

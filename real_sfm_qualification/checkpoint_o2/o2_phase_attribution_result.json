@@ -1,6 +1,7 @@
 {
-  "status": "PREPARATION_COMPLETE_OFFLINE_EVIDENCE_COLLECTED_REAL_SFM_PENDING",
+  "status": "O2_BOUNDED_PHASE_ATTRIBUTION_PASS_WITH_NATIVE_INSTRUMENTATION_GAP",
   "prepared_at": "2026-09-23",
+  "real_sfm_run_completed_at": "2026-09-23",
   "astra_baseline_commit": "dc92623f17c6b151b7bf5f6ed4ab65cb3f1e29ea",
   "governing_rule": "Tangible savings, demonstrated redundancy, zero functional compromise.",
   "astra_dispositions": {
@@ -64,21 +65,55 @@
     "reconciled_capture_labels": ["PRE", "NATIVE_POST", "PRODUCTION_GENERIC_COMPOSER_PRE", "PRODUCTION_GENERIC_COMPOSER_POST", "PRODUCTION_SEMANTIC_FINGERPRINT"],
     "note": "Corrects O1's blanket '3-5 captures per target' claim -- the fallback exception (NativePostFallback) fires before the composer-before capture would ever run, so native-only-fallback targets get exactly 2 captures, not 3-5."
   },
-  "real_sfm_evidence": null,
+  "real_sfm_evidence": {
+    "primary_case": "shot3, Selected Shots, Fox (foxmccouldwm1) + Mia (mia1), fresh then already-normalized, one continuous SFM process",
+    "discovery_stage": {
+      "fresh": {"call_count": 10, "total_elapsed_seconds": 1.538, "mean_elapsed_seconds": 0.154},
+      "already_normalized": {"call_count": 10, "total_elapsed_seconds": 1.545, "mean_elapsed_seconds": 0.155}
+    },
+    "tree_construction_stage": {
+      "fresh": {"call_count": 10, "total_elapsed_seconds": 0.020},
+      "already_normalized": {"call_count": 10, "total_elapsed_seconds": 0.023}
+    },
+    "composer_before_witness": {
+      "fox": "EXERCISED_PATH_EQUIVALENT_NO_INTERVENING_MUTATION",
+      "mia": "EXERCISED_PATH_EQUIVALENT_NO_INTERVENING_MUTATION",
+      "field_diffs_observed": false,
+      "both_commands": true
+    },
+    "composer_after_terminal_witness": {
+      "fox": "EXERCISED_PATH_EQUIVALENT_NO_INTERVENING_MUTATION",
+      "mia": "EXERCISED_PATH_EQUIVALENT_NO_INTERVENING_MUTATION",
+      "both_commands": true,
+      "scope": "reconciled_path_only"
+    },
+    "warm_second_run_contextual_reconstruction": {
+      "fox": {"desired": 74, "moved": 72, "already_correct": 2},
+      "mia": {"desired": 69, "moved": 67, "already_correct": 2},
+      "note": "Preserved as expected Rebuild->Normalizer behavior, not a bug or redundancy by itself."
+    },
+    "native_rebuild_stage_summary": {
+      "call_count": 0,
+      "instrumentation_gap": true,
+      "note": "Production log independently proves native Rebuild executed twice and returned PASS both times. Wrapper failure root-caused and corrected under Checkpoint O2-R1."
+    }
+  },
   "required_conclusions": {
-    "1_discovery": "UNRESOLVED",
-    "2_tree_capture": "UNRESOLVED",
-    "3_composer_before": "UNRESOLVED",
-    "4_reconciled_terminal_overlap": "UNRESOLVED",
+    "1_discovery": "MATERIAL",
+    "2_tree_capture": "IMMATERIAL",
+    "3_composer_before": "DESIGN_REVIEW_JUSTIFIED",
+    "4_reconciled_terminal_overlap": "DESIGN_REVIEW_JUSTIFIED_RECONCILED_PATH_ONLY",
     "5_closure_cycle": {
       "mechanism": "MATERIAL_MECHANISM_CONFIRMED_OFFLINE",
       "materiality_at_real_scale": "UNRESOLVED"
     },
-    "6_native_rebuild": "UNRESOLVED",
-    "7_contextual_composer": "UNRESOLVED",
-    "8_fresh_vs_normalized": "UNRESOLVED"
+    "6_native_rebuild": "UNRESOLVED_INSTRUMENTATION_GAP_SEE_O2_R1",
+    "7_contextual_composer": "PARTIALLY_RESOLVED_SEE_WARM_SECOND_RUN_EVIDENCE",
+    "8_fresh_vs_normalized": "PARTIALLY_RESOLVED_NATIVE_REBUILD_COMPARISON_PENDING_O2_R1"
   },
+  "o2_r1_status": "PREPARATION_COMPLETE_NOT_YET_RUN",
   "f1_r2_status": "PARKED_UNRUN",
   "production_modified": false,
-  "sfm_run_performed": false
+  "sfm_run_performed_this_turn": false,
+  "sfm_run_performed_for_o2_itself": true
 }
