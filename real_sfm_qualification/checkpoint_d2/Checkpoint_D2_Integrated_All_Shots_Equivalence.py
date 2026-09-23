@@ -10,6 +10,47 @@ copy, never the historical baseline D1 used -- against the same
 disposable fixture, running its own real All Shots behavior. Do not
 save afterward.
 
+D2-2 CORRECTION (2026-09-22): D2-1's real run proved full runtime/
+equivalence PASS -- all 44 mechanical checks, all six comparisons, a
+clean authority lifecycle, and native-protection evidence all passed,
+with zero anomalies. But the QUALIFICATION ARTIFACT itself failed:
+`write_json_atomic()`'s own reopen/reparse verification step raised
+`MemoryError()` while the SFM process was already at ~3.43GB working
+set -- the artifact was attempting to persist a full ~9MB duplicate
+copy of D2's own 85+85 raw captured fingerprints (on top of the
+identically-sized copy already resident in memory) purely to prove
+equivalence to D1, whose own already-qualified per-target hashing
+algorithm makes that duplication unnecessary. This revision:
+  (a) NEVER persists D2's own raw 85-target PRE/POST fingerprint dicts
+      (or the 78-target excluded witness rows) into the artifact --
+      only their already-computed per-target HASHES (the same
+      qualified `per_target_hash()` D1's own compact manifest uses),
+      reducing the artifact from ~9MB to tens of KB;
+  (b) adds a `hash_of_hashes()` checksum so round-trip (serialize-then-
+      reparse) fidelity of the STORED per-target hash maps can still be
+      independently verified without ever needing the raw fingerprint
+      content present at verification time;
+  (c) if (and only if) a per-target mismatch is ever found, preserves
+      the raw semantic fingerprint for JUST the mismatching target(s)
+      as diagnostic evidence -- the common (all-match) case stays
+      compact; a genuine divergence still carries enough raw evidence
+      to diagnose;
+  (d) fixes a real semantic defect in the prior degraded-fallback path:
+      `degraded_report = dict(report)` could snapshot `report["overall_
+      pass"]` BEFORE the later `report["overall_pass"] = False`
+      correction ran, so a degraded artifact could be written to disk
+      still claiming `overall_pass: true` even though the authoritative
+      summary correctly said `False`. The degraded path now explicitly
+      forces `overall_pass`/`artifact_write_verified` to `False`,
+      independent of whatever the live `report` object held at
+      snapshot time;
+  (e) adds a `provenance` section and per-command timing, per the
+      governing brief's explicit compact-artifact field list.
+Historical Normalizer invocation, fingerprint semantics, fixture/
+starting-state gates, runtime comparison logic, and native-protection
+logic are otherwise byte-identical to D2-1 -- this is an evidence-
+persistence correction only.
+
 Purpose:
   Mechanically prove the integrated (post-Production-Normalizer-
   Integration) All-Shots outcome is semantically equivalent to
@@ -21,7 +62,9 @@ Purpose:
   compares against a compact, immutable, SHA-256-pinned manifest
   (~40KB, containing only per-target HASHES, never D1's raw captured
   fingerprint data) built offline from the real D1-3 artifact by
-  `real_sfm_qualification/checkpoint_d2/build_d1_manifest.py`.
+  `real_sfm_qualification/checkpoint_d2/build_d1_manifest.py`. D2's OWN
+  output artifact follows the identical discipline (D2-2 correction,
+  above): compact per-target hashes, never raw fingerprint duplication.
 
   This script:
     1. verifies the installed production Normalizer's own SHA-256 (the
@@ -67,11 +110,10 @@ Purpose:
    12. captures shared-authority runtime evidence and native-protection
        log evidence, the same existing-qualified-diagnostics technique
        Checkpoint C2 used;
-   13. writes a complete machine-readable result artifact containing
-       D2's OWN full integrated evidence (D1's own fingerprints are
-       never duplicated into this artifact -- only their pinned
-       identity and per-target hashes, via the embedded compact
-       manifest).
+   13. writes a complete but COMPACT machine-readable result artifact:
+       per-target hashes (never raw fingerprints, except for any
+       mismatching target), comparisons, provenance, and runtime
+       evidence.
 
 Comparisons performed (see report["comparisons"] for the machine-
 readable results of each):
@@ -98,14 +140,13 @@ readable results of each):
                                  D1 manifest's own eligible/excluded key
                                  sets)
 
-If ANY per-target mismatch occurs (Comparison D or E), this script does
-NOT attempt to build an in-process structural diff object -- it only
-records the mismatching target identities (a small list of strings).
-D2's own full integrated fingerprints are already part of this run's
-own written artifact, and D1's own artifact remains on disk at its
-pinned SHA-256 -- both are sufficient for a subsequent OFFLINE
-structural diff, without allocating anything further inside this
-32-bit process.
+If ANY per-target mismatch occurs (Comparison D or E, or the PRE-side
+starting-state gate), the raw semantic fingerprint for JUST the
+mismatching target(s) is preserved in `report["mismatch_diagnostics"]`
+as diagnostic evidence -- this script never builds a bulk in-process
+structural diff object across all targets; when every target matches
+(the expected, qualified case), this section stays empty and the
+artifact stays compact.
 
 This script never modifies the historical baseline, the production
 Normalizer, the canonical Master (other than the read-only SHA-256
@@ -115,7 +156,7 @@ source already imports.
 
 Output:
   Two files are written to C:\\Users\\Public\\Documents\\:
-    sfm_checkpoint_d2_integrated_all_shots_result.json          (machine-readable, full detail)
+    sfm_checkpoint_d2_integrated_all_shots_result.json          (machine-readable, compact)
     sfm_checkpoint_d2_integrated_all_shots_result_summary.txt   (concise human-readable)
   A short summary is also printed to SFM's own console/output.
 
@@ -550,13 +591,24 @@ def per_target_hash(value):
 
 def compute_target_hashes(fingerprint_dict):
     """Given a captured {target_key: canonicalized_value} mapping,
-    returns {target_key: per_target_hash(value)} -- the caller can
-    release the raw dicts immediately after this call if they are not
-    otherwise needed (D2 keeps its OWN captured dicts for its own
-    artifact, per the governing brief's Section 11, but never needs to
-    hold D1's raw dicts at all -- only the manifest's own precomputed
-    hashes)."""
+    returns {target_key: per_target_hash(value)} -- the caller releases
+    the raw dicts once these hashes (the D2-2-qualified compact
+    evidence) are computed; D2 never needs to hold D1's raw dicts at
+    all, only the manifest's own precomputed hashes."""
     return dict((k, per_target_hash(v)) for k, v in fingerprint_dict.items())
+
+
+def hash_of_hashes(hash_dict):
+    """Independent-audit correction, D2-2: a round-trip-verifiable
+    checksum over a {target_key: per_target_hash} MAP -- distinct from
+    the semantic aggregate hash (which is computed once, in memory,
+    from the raw target CONTENT, before that content is ever
+    discarded). This lets `verify_artifact_evidence()` confirm the
+    STORED per-target hash maps survived JSON serialization/reparse
+    intact, without ever needing D2's own raw captured fingerprint
+    dicts to be present at verification time -- exactly the design
+    that keeps the compact artifact's own write+verify step cheap."""
+    return stable_hash([u"%s=%s" % (k, v) for k, v in hash_dict.items()])
 
 
 def compare_hash_maps(actual_hashes, expected_hashes):
@@ -736,38 +788,57 @@ def write_text_atomic(final_path, text_bytes):
     return True, None
 
 
+# Independent-audit correction, D2-2: REQUIRED_EVIDENCE_KEYS and
+# verify_artifact_evidence() now operate purely on the COMPACT per-
+# target hash maps (never raw fingerprint dicts) -- see the module
+# docstring's D2-2 correction notice for the full reasoning.
 REQUIRED_EVIDENCE_KEYS = (
     "integrated_pre_fingerprint_hash", "integrated_post_fingerprint_hash",
-    "integrated_pre_fingerprint", "integrated_post_fingerprint",
-    "integrated_excluded_witness", "comparisons",
+    "eligible_pre_target_hashes", "eligible_post_target_hashes",
+    "excluded_pre_target_hashes", "excluded_post_target_hashes",
+    "changed_target_keys", "unchanged_target_keys",
+    "eligible_pre_hashes_checksum", "eligible_post_hashes_checksum",
+    "excluded_pre_hashes_checksum", "excluded_post_hashes_checksum",
+    "comparisons",
 )
 
 
 def verify_artifact_evidence(reparsed_obj):
     """Returns (ok, detail). Checks presence/completeness of the
-    required evidence fields AND that the stored PRE/POST aggregate
-    hashes recompute correctly from the stored semantic fingerprint
-    data (round-trip integrity through actual JSON serialization)."""
+    required COMPACT evidence fields AND that the stored per-target
+    hash maps recompute a matching `hash_of_hashes()` checksum after
+    JSON round-trip -- proving serialization/reparse fidelity of the
+    stored HASH data without ever needing D2's own raw captured
+    fingerprint content to be present at verification time."""
     if reparsed_obj is None:
         return False, "reparsed artifact is None"
     missing_keys = [k for k in REQUIRED_EVIDENCE_KEYS if k not in reparsed_obj]
     if missing_keys:
         return False, "missing required evidence keys: %r" % (missing_keys,)
-    pre_fp = reparsed_obj.get("integrated_pre_fingerprint") or {}
-    post_fp = reparsed_obj.get("integrated_post_fingerprint") or {}
-    if len(pre_fp) != 85 or len(post_fp) != 85:
-        return False, "stored fingerprint counts wrong: pre=%d post=%d" % (len(pre_fp), len(post_fp))
-    excluded_witness = reparsed_obj.get("integrated_excluded_witness") or {}
-    pre_excluded_count = len(excluded_witness.get("pre") or {})
-    post_excluded_count = len(excluded_witness.get("post") or {})
-    if pre_excluded_count != 78 or post_excluded_count != 78:
-        return False, "stored excluded-witness counts wrong: pre=%d post=%d" % (pre_excluded_count, post_excluded_count)
-    recomputed_pre_hash = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in pre_fp.items()])
-    recomputed_post_hash = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in post_fp.items()])
-    if recomputed_pre_hash != reparsed_obj.get("integrated_pre_fingerprint_hash"):
-        return False, "recomputed PRE hash %r != stored %r" % (recomputed_pre_hash, reparsed_obj.get("integrated_pre_fingerprint_hash"))
-    if recomputed_post_hash != reparsed_obj.get("integrated_post_fingerprint_hash"):
-        return False, "recomputed POST hash %r != stored %r" % (recomputed_post_hash, reparsed_obj.get("integrated_post_fingerprint_hash"))
+    eligible_pre = reparsed_obj.get("eligible_pre_target_hashes") or {}
+    eligible_post = reparsed_obj.get("eligible_post_target_hashes") or {}
+    excluded_pre = reparsed_obj.get("excluded_pre_target_hashes") or {}
+    excluded_post = reparsed_obj.get("excluded_post_target_hashes") or {}
+    if len(eligible_pre) != 85 or len(eligible_post) != 85:
+        return False, "stored eligible per-target hash counts wrong: pre=%d post=%d" % (len(eligible_pre), len(eligible_post))
+    if len(excluded_pre) != 78 or len(excluded_post) != 78:
+        return False, "stored excluded per-target hash counts wrong: pre=%d post=%d" % (len(excluded_pre), len(excluded_post))
+    changed = reparsed_obj.get("changed_target_keys") or []
+    unchanged = reparsed_obj.get("unchanged_target_keys") or []
+    if len(changed) != 57 or len(unchanged) != 28:
+        return False, "stored changed/unchanged target-set counts wrong: changed=%d unchanged=%d" % (len(changed), len(unchanged))
+    recomputed_eligible_pre_checksum = hash_of_hashes(eligible_pre)
+    recomputed_eligible_post_checksum = hash_of_hashes(eligible_post)
+    recomputed_excluded_pre_checksum = hash_of_hashes(excluded_pre)
+    recomputed_excluded_post_checksum = hash_of_hashes(excluded_post)
+    if recomputed_eligible_pre_checksum != reparsed_obj.get("eligible_pre_hashes_checksum"):
+        return False, "recomputed eligible PRE hashes-checksum %r != stored %r" % (recomputed_eligible_pre_checksum, reparsed_obj.get("eligible_pre_hashes_checksum"))
+    if recomputed_eligible_post_checksum != reparsed_obj.get("eligible_post_hashes_checksum"):
+        return False, "recomputed eligible POST hashes-checksum %r != stored %r" % (recomputed_eligible_post_checksum, reparsed_obj.get("eligible_post_hashes_checksum"))
+    if recomputed_excluded_pre_checksum != reparsed_obj.get("excluded_pre_hashes_checksum"):
+        return False, "recomputed excluded PRE hashes-checksum %r != stored %r" % (recomputed_excluded_pre_checksum, reparsed_obj.get("excluded_pre_hashes_checksum"))
+    if recomputed_excluded_post_checksum != reparsed_obj.get("excluded_post_hashes_checksum"):
+        return False, "recomputed excluded POST hashes-checksum %r != stored %r" % (recomputed_excluded_post_checksum, reparsed_obj.get("excluded_post_hashes_checksum"))
     return True, None
 
 
@@ -784,6 +855,8 @@ report = {
     "authority_runtime_evidence": {},
     "native_protection_evidence": {},
     "memory_snapshots": {},
+    "provenance": {},
+    "mismatch_diagnostics": {"eligible": {}, "excluded": {}},
 }
 
 
@@ -821,6 +894,11 @@ try:
     if not (production_sha == EXPECTED_PRODUCTION_NORMALIZER_SHA256
             and master_sha == EXPECTED_CANONICAL_MASTER_SHA256):
         raise CheckpointD2Error("One or more pre-flight SHA-256 checks failed -- refusing to proceed.")
+
+    report["provenance"]["production_normalizer_sha256"] = production_sha
+    report["provenance"]["canonical_master_sha256"] = master_sha
+    report["provenance"]["d1_artifact_sha256_expected"] = EXPECTED_D1_ARTIFACT_SHA256
+    report["provenance"]["d1_manifest_sha256_expected"] = EXPECTED_D1_MANIFEST_SHA256
 
     # --- 2. Load and integrity-verify the COMPACT D1 comparison
     #        manifest -- never json.load() D1's own full ~5.9MB
@@ -969,24 +1047,28 @@ try:
         return result
 
     # --- 6. Integrated PRE fingerprint (non-mutating, all 85 targets)
-    #        + excluded PRE structural witness (78 targets). ---
+    #        + excluded PRE structural witness (78 targets). D2-2:
+    #        the raw dicts stay LOCAL only, long enough to compute
+    #        their aggregate/per-target hashes (and, if a mismatch is
+    #        ever found, to populate mismatch_diagnostics for those
+    #        specific keys) -- never persisted into the artifact. ---
     report["memory_snapshots"]["before_pre_capture"] = memory_snapshot()
     integrated_pre_fingerprint = capture_all("PRE", eligible_targets_of_interest)
     check("fingerprint.pre_capture_count_matches_expected", len(integrated_pre_fingerprint) == 85, len(integrated_pre_fingerprint))
     report["memory_snapshots"]["after_pre_capture"] = memory_snapshot()
 
-    # Assign captured evidence into `report` immediately, before any
-    # expensive derived analysis (D1-3's own ordering discipline).
-    report["integrated_pre_fingerprint"] = integrated_pre_fingerprint
-
     integrated_pre_hash = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in integrated_pre_fingerprint.items()])
     report["integrated_pre_fingerprint_hash"] = integrated_pre_hash
     integrated_pre_target_hashes = compute_target_hashes(integrated_pre_fingerprint)
+    report["eligible_pre_target_hashes"] = integrated_pre_target_hashes
+    report["eligible_pre_hashes_checksum"] = hash_of_hashes(integrated_pre_target_hashes)
+    pre_approx_serialized_bytes = sum(len(dumps_sorted(v)) for v in integrated_pre_fingerprint.values())
 
     pre_excluded_witness = dict((target_key(t), excluded_witness_row(t)) for t in pre_excluded_rows)
     del pre_excluded_rows
-    report["integrated_excluded_witness"] = {"pre": pre_excluded_witness}
     integrated_excluded_pre_hashes = compute_target_hashes(pre_excluded_witness)
+    report["excluded_pre_target_hashes"] = integrated_excluded_pre_hashes
+    report["excluded_pre_hashes_checksum"] = hash_of_hashes(integrated_excluded_pre_hashes)
 
     # --- Comparison A (starting-state parity) -- also part of the hard
     #     gate: a mismatch here means the live state does not match D1,
@@ -1008,6 +1090,20 @@ try:
           len(excluded_pre_mismatching) == 0 and len(excluded_pre_missing_actual) == 0 and len(excluded_pre_missing_expected) == 0,
           {"mismatching": excluded_pre_mismatching, "missing_in_actual": excluded_pre_missing_actual, "missing_in_expected": excluded_pre_missing_expected})
 
+    # D2-2: preserve raw diagnostic evidence for any PRE-side mismatch
+    # BEFORE the raw dicts are released -- this is the one case where
+    # the starting-state gate itself is about to abort the run.
+    for _key in pre_mismatching:
+        report["mismatch_diagnostics"]["eligible"][_key] = {
+            "integrated_pre": integrated_pre_fingerprint.get(_key),
+            "note": "PRE-state mismatch detected before mutation (starting-state gate).",
+        }
+    for _key in excluded_pre_mismatching:
+        report["mismatch_diagnostics"]["excluded"][_key] = {
+            "integrated_pre": pre_excluded_witness.get(_key),
+            "note": "PRE-state mismatch detected before mutation (starting-state gate).",
+        }
+
     # --- HARD GATE: every check recorded above must pass BEFORE any
     #     invocation of the production Normalizer or scene mutation. ---
     fixture_gate_passed = all(c["pass"] for c in report["checks"])
@@ -1019,6 +1115,13 @@ try:
             "scene mutation. Restart SFM and re-open the original disposable fixture "
             "without saving any prior checkpoint's mutation before rerunning."
         )
+
+    # D2-2: the raw PRE fingerprint/excluded-witness dicts are no longer
+    # needed -- their aggregate/per-target hashes are already computed
+    # and stored, and any PRE-side mismatch diagnostics (there are none,
+    # since the gate above just passed) have already been captured.
+    # Release them now, before the memory-heavier integrated run.
+    del integrated_pre_fingerprint, pre_excluded_witness
 
     # Release the full 163-target witness now that its only remaining
     # downstream use (the key-set diff) can be served by the cheap
@@ -1037,6 +1140,7 @@ try:
         "Selected/All Shots dialog. Select 'All Shots' and confirm. <<<\n\n"
     )
 
+    command_start_time = time.time()
     prod_ns = {}
     run_started = False
     try:
@@ -1091,6 +1195,8 @@ try:
             "interaction. No mutation is believed to have occurred."
         )
 
+    report["command_duration_seconds"] = time.time() - command_start_time
+
     check("normalizer.run_was_started", run_started)
     check("normalizer.run_completed_within_timeout", run_completed_cleanly if run_started else False)
     report["memory_snapshots"]["after_integrated_run"] = memory_snapshot()
@@ -1134,13 +1240,13 @@ try:
     check("comparison.F_target_set_parity", comp_f["pass"], target_set_diff)
 
     # --- 9. Integrated POST fingerprint (85 targets) + excluded POST
-    #        structural witness (78 targets). ---
+    #        structural witness (78 targets). Same D2-2 discipline:
+    #        raw dicts stay local only long enough to compute hashes
+    #        and any mismatch diagnostics. ---
     report["memory_snapshots"]["before_post_capture"] = memory_snapshot()
     integrated_post_fingerprint = capture_all("POST", eligible_targets_of_interest)
     check("fingerprint.post_capture_count_matches_expected", len(integrated_post_fingerprint) == 85, len(integrated_post_fingerprint))
     report["memory_snapshots"]["after_post_capture"] = memory_snapshot()
-
-    report["integrated_post_fingerprint"] = integrated_post_fingerprint
 
     # fp_ns/capture_snapshot_explicit_fn are not referenced again after
     # this, the last capture_all() call -- safe to release now.
@@ -1149,6 +1255,9 @@ try:
     integrated_post_hash = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in integrated_post_fingerprint.items()])
     report["integrated_post_fingerprint_hash"] = integrated_post_hash
     integrated_post_target_hashes = compute_target_hashes(integrated_post_fingerprint)
+    report["eligible_post_target_hashes"] = integrated_post_target_hashes
+    report["eligible_post_hashes_checksum"] = hash_of_hashes(integrated_post_target_hashes)
+    post_approx_serialized_bytes = sum(len(dumps_sorted(v)) for v in integrated_post_fingerprint.values())
     report["memory_snapshots"]["after_post_hash"] = memory_snapshot()
 
     post_excluded_witness = {}
@@ -1157,9 +1266,10 @@ try:
         if t is None:
             continue
         post_excluded_witness[key] = excluded_witness_row(t)
-    report["integrated_excluded_witness"]["post"] = post_excluded_witness
     del post_all_by_key
     integrated_excluded_post_hashes = compute_target_hashes(post_excluded_witness)
+    report["excluded_post_target_hashes"] = integrated_excluded_post_hashes
+    report["excluded_post_hashes_checksum"] = hash_of_hashes(integrated_excluded_post_hashes)
 
     # ------------------------------------------------------------------
     # Comparison A: starting-state parity (recap; already gated above).
@@ -1184,6 +1294,8 @@ try:
         k for k in integrated_pre_target_hashes
         if integrated_pre_target_hashes[k] == integrated_post_target_hashes.get(k)
     )
+    report["changed_target_keys"] = integrated_changed_keys
+    report["unchanged_target_keys"] = integrated_unchanged_keys
     d1_changed_keys = sorted(manifest["changed_target_keys"])
     d1_unchanged_keys = sorted(manifest["unchanged_target_keys"])
     comp_b = {
@@ -1212,12 +1324,10 @@ try:
 
     # ------------------------------------------------------------------
     # Comparison D: per-target parity, all 85 eligible targets,
-    # individually, against the D1 manifest's own POST hashes. Never
-    # builds an in-process structural diff object on mismatch -- only
-    # records the mismatching target IDENTITIES; D2's own full
-    # integrated fingerprints (already in this report) and D1's own
-    # artifact (on disk at its pinned SHA) are sufficient for a
-    # subsequent OFFLINE diff.
+    # individually, against the D1 manifest's own POST hashes. D2-2:
+    # if ANY target mismatches, its raw PRE/POST fingerprint is
+    # preserved in mismatch_diagnostics as diagnostic evidence -- no
+    # bulk in-process structural diff object is ever built.
     # ------------------------------------------------------------------
     post_matching, post_mismatching, post_missing_actual, post_missing_expected = compare_hash_maps(
         integrated_post_target_hashes, manifest["eligible_post_target_hashes"]
@@ -1234,6 +1344,11 @@ try:
     }
     report["comparisons"]["D_per_target_parity"] = comp_d
     check("comparison.D_per_target_parity_all_85_individually_equal", comp_d["pass"], (comp_d["matching_count"], comp_d["mismatching_count"]))
+
+    for _key in post_mismatching:
+        report["mismatch_diagnostics"]["eligible"].setdefault(_key, {})
+        report["mismatch_diagnostics"]["eligible"][_key]["integrated_post"] = integrated_post_fingerprint.get(_key)
+        report["mismatch_diagnostics"]["eligible"][_key].setdefault("note", "POST-state per-target mismatch (Comparison D).")
 
     # ------------------------------------------------------------------
     # Comparison E: exclusion parity, all 78 excluded targets.
@@ -1254,14 +1369,27 @@ try:
     report["comparisons"]["E_exclusion_parity"] = comp_e
     check("comparison.E_exclusion_parity_all_78_individually_equal", comp_e["pass"], (comp_e["matching_count"], comp_e["mismatching_count"]))
 
+    for _key in excl_mismatching:
+        report["mismatch_diagnostics"]["excluded"].setdefault(_key, {})
+        report["mismatch_diagnostics"]["excluded"][_key]["integrated_post"] = post_excluded_witness.get(_key)
+        report["mismatch_diagnostics"]["excluded"][_key].setdefault("note", "POST-state excluded-witness mismatch (Comparison E).")
+
     report["evidence_size_diagnostics"] = {
-        "integrated_pre_target_count": len(integrated_pre_fingerprint),
-        "integrated_post_target_count": len(integrated_post_fingerprint),
-        "integrated_pre_approx_serialized_bytes": sum(len(dumps_sorted(v)) for v in integrated_pre_fingerprint.values()),
-        "integrated_post_approx_serialized_bytes": sum(len(dumps_sorted(v)) for v in integrated_post_fingerprint.values()),
-        "excluded_witness_pre_count": len(pre_excluded_witness),
-        "excluded_witness_post_count": len(post_excluded_witness),
+        "integrated_pre_target_count": len(integrated_pre_target_hashes),
+        "integrated_post_target_count": len(integrated_post_target_hashes),
+        "integrated_pre_approx_serialized_bytes": pre_approx_serialized_bytes,
+        "integrated_post_approx_serialized_bytes": post_approx_serialized_bytes,
+        "excluded_witness_pre_count": len(integrated_excluded_pre_hashes),
+        "excluded_witness_post_count": len(integrated_excluded_post_hashes),
+        "mismatch_diagnostics_eligible_count": len(report["mismatch_diagnostics"]["eligible"]),
+        "mismatch_diagnostics_excluded_count": len(report["mismatch_diagnostics"]["excluded"]),
     }
+
+    # D2-2: the raw POST fingerprint/excluded-witness dicts are no
+    # longer needed -- their hashes are computed, and any mismatch
+    # diagnostics have already been captured above. Release them
+    # before the (already-small) finalize/write phase.
+    del integrated_post_fingerprint, post_excluded_witness
 
     # ------------------------------------------------------------------
     # 10. Shared-authority runtime evidence -- via the exec-exposed
@@ -1334,6 +1462,9 @@ try:
     check("authority.provider_opens_closes_balanced",
           _provider_counters.get("total_provider_opens") == _provider_counters.get("total_provider_closes"),
           (_provider_counters.get("total_provider_opens"), _provider_counters.get("total_provider_closes")))
+
+    report["provenance"]["authority_api_version"] = evidence.get("runtime_api_version")
+    report["provenance"]["authority_build_id"] = evidence.get("runtime_build_id")
 
     # ------------------------------------------------------------------
     # 11. Native-protection / command-completion evidence -- via the
@@ -1440,21 +1571,44 @@ if not json_write_ok:
     report["json_write_error"] = (
         ("%s ; retry also failed: %s" % (write1_error, write2_error)) if not write1_ok else write2_error
     )
+    # Independent-audit correction, D2-2: the compact artifact no
+    # longer carries a large raw-fingerprint payload to drop, so the
+    # degraded fallback instead drops the (comparatively larger)
+    # per-target hash maps and any mismatch diagnostics, keeping
+    # aggregate hashes, counts, comparisons, checks, provenance, and
+    # runtime evidence intact. CRITICAL FIX: overall_pass and
+    # artifact_write_verified are set EXPLICITLY on degraded_report
+    # itself, never merely inherited from whatever `report` happened
+    # to hold at snapshot time -- `dict(report)` is a point-in-time
+    # copy, and D2-1's own bug was exactly this: `report["overall_
+    # pass"]` was corrected to False only AFTER this snapshot was
+    # already taken and written to disk, so a degraded artifact could
+    # falsely claim `overall_pass: true` even while the authoritative
+    # summary correctly said False. A degraded/fallback artifact must
+    # never claim qualification PASS.
     degraded_report = dict(report)
-    degraded_report.pop("integrated_pre_fingerprint", None)
-    degraded_report.pop("integrated_post_fingerprint", None)
+    degraded_report.pop("eligible_pre_target_hashes", None)
+    degraded_report.pop("eligible_post_target_hashes", None)
+    degraded_report.pop("excluded_pre_target_hashes", None)
+    degraded_report.pop("excluded_post_target_hashes", None)
+    degraded_report.pop("mismatch_diagnostics", None)
     degraded_report["degraded_artifact"] = True
+    degraded_report["overall_pass"] = False
+    degraded_report["artifact_write_verified"] = False
     degraded_report["degraded_reason"] = (
-        "Full per-target integrated fingerprint payload omitted because the "
-        "complete artifact write failed (%s). This degraded fallback preserves "
-        "every mechanical check, hash, count, and anomaly so evidence is never "
-        "left as a misleading zero-byte file." % (report["json_write_error"],)
+        "Per-target hash maps and mismatch diagnostics omitted because the "
+        "complete compact artifact write failed (%s). This degraded fallback "
+        "preserves every mechanical check, aggregate hash, count, comparison "
+        "result, provenance field, and anomaly so evidence is never left as a "
+        "misleading zero-byte file. overall_pass and artifact_write_verified "
+        "are forced False here regardless of the live report's own state at "
+        "snapshot time." % (report["json_write_error"],)
     )
     fallback_ok, fallback_error, _r3 = write_json_atomic(JSON_OUTPUT_PATH, degraded_report)
     _r3 = None
     report["degraded_fallback_written"] = fallback_ok
     if fallback_ok:
-        json_write_ok = True
+        json_write_ok = True  # SOMETHING complete and evidentiary (and correctly non-PASS) is now on disk.
     else:
         report["json_write_error"] = "%s ; degraded fallback also failed: %s" % (report["json_write_error"], fallback_error)
     report["overall_pass"] = False
@@ -1477,12 +1631,19 @@ for comp_name in ("A_starting_state_parity", "B_scope_parity", "C_final_state_pa
     comp_val = report["comparisons"].get(comp_name)
     summary_lines.append("[%s] %s" % ("PASS" if (comp_val and comp_val.get("pass")) else "FAIL/MISSING", comp_name))
 summary_lines.append("")
-summary_lines.append("run_started=%r  run_completed_cleanly=%r" % (run_started, run_completed_cleanly))
+summary_lines.append("run_started=%r  run_completed_cleanly=%r  command_duration_seconds=%r" % (run_started, run_completed_cleanly, report.get("command_duration_seconds")))
 summary_lines.append("integrated_pre_fingerprint_hash=%r" % report.get("integrated_pre_fingerprint_hash"))
 summary_lines.append("integrated_post_fingerprint_hash=%r" % report.get("integrated_post_fingerprint_hash"))
 summary_lines.append("d1_pre_hash(expected)=%r" % EXPECTED_PRE_HASH)
 summary_lines.append("d1_post_hash(expected)=%r" % EXPECTED_POST_HASH)
+summary_lines.append("changed_target_count=%r  unchanged_target_count=%r" % (len(report.get("changed_target_keys") or []), len(report.get("unchanged_target_keys") or [])))
+summary_lines.append("mismatch_diagnostics_eligible_count=%r  mismatch_diagnostics_excluded_count=%r"
+                      % (len((report.get("mismatch_diagnostics") or {}).get("eligible") or {}), len((report.get("mismatch_diagnostics") or {}).get("excluded") or {})))
 summary_lines.append("evidence_size_diagnostics=%r" % report.get("evidence_size_diagnostics"))
+summary_lines.append("")
+summary_lines.append("--- PROVENANCE ---")
+for k in sorted((report.get("provenance") or {}).keys()):
+    summary_lines.append("  %s = %r" % (k, report["provenance"][k]))
 summary_lines.append("")
 summary_lines.append("--- MEMORY SNAPSHOTS (diagnostic only) ---")
 for k in sorted((report.get("memory_snapshots") or {}).keys()):
@@ -1501,8 +1662,8 @@ summary_lines.append("artifact_evidence_detail=%r" % report.get("artifact_eviden
 summary_lines.append("json_write_error=%r" % report.get("json_write_error"))
 if report.get("degraded_artifact"):
     summary_lines.append("")
-    summary_lines.append("*** DEGRADED ARTIFACT: the full per-target fingerprint payload was omitted ***")
-    summary_lines.append("*** because the complete artifact write failed. degraded_fallback_written=%r ***" % report.get("degraded_fallback_written"))
+    summary_lines.append("*** DEGRADED ARTIFACT: per-target hash maps/mismatch diagnostics were omitted ***")
+    summary_lines.append("*** because the complete compact artifact write failed. degraded_fallback_written=%r ***" % report.get("degraded_fallback_written"))
 summary_lines.append("")
 summary_lines.append("OVERALL_PASS=%r" % report["overall_pass"])
 summary_lines.append("")

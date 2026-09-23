@@ -1,4 +1,59 @@
-# Checkpoint D2-1 — Integrated (Post-Integration) All-Shots Equivalence Run
+# Checkpoint D2-2 — Integrated (Post-Integration) All-Shots Equivalence Run (corrected)
+
+## D2-2 CORRECTION NOTICE (2026-09-22)
+
+D2-1's real run proved full **runtime/equivalence PASS**: all 44 mechanical checks, all six comparisons
+(A-F), a clean authority lifecycle, and native-protection evidence all passed, with zero anomalies. The
+Normalizer itself did not fail. **Preserve these findings permanently** — see LEDGER.md's D2-1 row.
+
+But the **qualification artifact** failed. The complete D2 artifact write reached temp-file verification,
+then: `temp file reopen/reparse verification failed: MemoryError()`. The SFM process was already around
+3.43GB working set. Root cause: D2-1's writer attempted to persist a full ~9MB duplicate copy of D2's own
+85+85 raw captured fingerprints purely to prove equivalence to D1 — unnecessary, since D2 already computes
+qualified semantic fingerprints and per-target hashes, and D1's own complete historical raw artifact
+remains separately preserved and SHA-pinned.
+
+A degraded fallback survived and was externally parseable, but a real semantic defect was also found in
+it: the authoritative summary correctly said `OVERALL_PASS=False`, but the degraded fallback JSON itself
+contained `overall_pass: true`. Root cause (confirmed by direct code review): `degraded_report =
+dict(report)` took a **snapshot** of the live `report` object at a point where `report["overall_pass"]`
+could still hold a stale `True` value from an earlier (successful) write attempt — the correction to
+`False` ran only *after* that snapshot had already been written to disk. A degraded/fallback artifact must
+never claim qualification PASS.
+
+**What changed in D2-2:**
+
+1. The artifact **no longer persists D2's own raw 85-target PRE/POST fingerprint dicts** (or the 78-target
+   excluded witness rows) — only their already-computed per-target HASHES (the same qualified
+   `per_target_hash()` D1's own compact manifest uses). The artifact shrinks from ~9MB to tens of KB.
+2. A new `hash_of_hashes()` checksum lets round-trip (serialize-then-reparse) fidelity of the STORED
+   per-target hash maps be verified independently, without ever needing the raw fingerprint content
+   present at verification time.
+3. If (and only if) a per-target mismatch is ever found, the raw semantic fingerprint for JUST the
+   mismatching target(s) is preserved in `report["mismatch_diagnostics"]` as diagnostic evidence — the
+   common (all-match) case stays compact; a genuine divergence still carries enough raw evidence to
+   diagnose.
+4. The degraded-fallback path now **explicitly forces** `degraded_report["overall_pass"] = False` and
+   `degraded_report["artifact_write_verified"] = False`, independent of whatever the live `report` object
+   held at snapshot time. A degraded/fallback artifact can never again claim PASS.
+5. A `provenance` section (production Normalizer/Master SHA, authority API/build, D1 artifact/manifest
+   SHA) and per-command timing (`command_duration_seconds`) were added, per the governing brief's explicit
+   compact-artifact field list.
+
+**Historical Normalizer invocation, fingerprint semantics, fixture/starting-state gates, runtime
+comparison logic, and native-protection logic remain completely unchanged from D2-1** — this is an
+evidence-persistence correction only. See "Source review" below.
+
+## Preserved D2-1 findings (not overwritten — see LEDGER.md)
+
+All 44 mechanical checks PASS; starting PRE exactly `eac633c939f53ed3e7d9e81d473110147d62ee364f1acbc4d099b96fe1891fa0`;
+integrated POST exactly `299cbba30634da1a4949ed7b14187b813260c533dced3d1e71149ede98c124e7`; exact D1
+changed-set parity (57) and unchanged-set parity (28); 85/85 eligible POST parity; 78/78 excluded parity;
+zero target additions/removals/reclassifications; broker READY/canonical; outstanding leases = 0; current
+providers = 0; provider opens/closes = 1/1; native guards PASS; native Rebuild returned PASS; production
+revision marker present; zero runtime anomalies. Selected-Shots and All-Shots historical-vs-integrated
+equivalence are closed on the strength of these runtime findings (Checkpoint D2's own qualification
+artifact needed the D2-2 correction below to actually publish them safely).
 
 ## THIS CHECKPOINT MUTATES THE SCENE
 
@@ -105,11 +160,11 @@ verifies this via the PRE-hash gate above and aborts before touching anything if
 | E | `exclusion_parity` | ALL 78 excluded targets' structural witness hashes compared individually against the D1 manifest's own excluded POST hashes; expected excluded-changed set: `[]` |
 | F | `target_set_parity` | no missing/new/reclassified targets (independently rebuilt witness vs. the D1 manifest's own eligible/excluded key sets) |
 
-If a per-target mismatch occurs (Comparison D or E), the script does **not** attempt to build an
-in-process structural diff object — it only records the mismatching target identities. D2's own full
-integrated fingerprints are already part of this run's own written artifact, and D1's own artifact
-remains on disk at its pinned SHA-256 — both are sufficient for a subsequent OFFLINE structural diff,
-without allocating anything further inside this 32-bit process.
+If a per-target mismatch occurs (Comparison D or E, or the PRE-side starting-state gate), the script does
+**not** attempt to build an in-process structural diff object across all targets — it preserves only the
+raw semantic fingerprint for the specific mismatching target(s) in `report["mismatch_diagnostics"]`
+(D2-2). When every target matches (the expected, qualified case), this section stays empty and the
+artifact stays compact — tens of KB, not megabytes.
 
 ## Shared-authority runtime evidence (same technique as Checkpoint C2)
 
@@ -158,14 +213,15 @@ threshold.
 
 ## Output artifact paths
 
-- `C:\Users\Public\Documents\sfm_checkpoint_d2_integrated_all_shots_result.json` (full detail — every
-  check, Comparisons A-F, D2's own full integrated fingerprints/excluded witness, authority/native/memory
-  evidence, anomalies)
+- `C:\Users\Public\Documents\sfm_checkpoint_d2_integrated_all_shots_result.json` (COMPACT — every check,
+  Comparisons A-F, per-target hash maps (never raw fingerprints, except any mismatching target),
+  provenance, authority/native/memory evidence, anomalies — tens of KB, not megabytes)
 - `C:\Users\Public\Documents\sfm_checkpoint_d2_integrated_all_shots_result_summary.txt` (concise, read
   this first)
 
-D1's own full artifact is never duplicated into D2's output — only its pinned identity and the compact
-manifest's own per-target hashes are referenced/embedded.
+D1's own full artifact is never duplicated into D2's output, and (D2-2) neither is D2's own raw
+85-target fingerprint capture — only per-target hashes, and only the raw content for any specific
+mismatching target.
 
 ## Mechanical D2 PASS criteria (decided before execution)
 
@@ -188,16 +244,20 @@ manifest's own per-target hashes are referenced/embedded.
 - authority lifecycle is clean (broker `READY`, canonical, zero outstanding leases, zero currently open
   providers, opens/closes balanced);
 - native-protection log evidence shows both guard/rebuild markers `PASS`;
-- the JSON evidence artifact itself was written, is nonzero, reopens and reparses, contains every
-  required evidence key, and its own stored PRE/POST aggregate hashes recompute correctly from the
-  reparsed semantic data (`artifact_write_verified=True`);
+- the COMPACT JSON evidence artifact itself was written, is nonzero, reopens and reparses, contains every
+  required evidence key, and its own stored per-target hash maps recompute a matching `hash_of_hashes()`
+  checksum after round-trip (`artifact_write_verified=True`);
 - the script completes without an unhandled exception (no harness `MemoryError`, no allocation failure);
 - zero unresolved anomalies.
+
+A degraded/fallback artifact (written only if the complete compact artifact write itself somehow still
+fails) can **never** report `overall_pass=True` or `artifact_write_verified=True` — both are forced
+`False` explicitly (D2-2), regardless of what the live report object held at the moment of the fallback.
 
 If the report shows `"gate_failure": true`, that means a pre-flight, manifest-integrity, fixture, or
 starting-state check failed and the script correctly stopped before touching anything.
 
-## Source review: D1's baseline / production Normalizer / canonical Master / package are never overwritten
+## Source review: only artifact-persistence changed; historical/production Normalizer semantics are untouched
 
 Direct grep of the D2 script for every file-write confirms exactly two `"wb"` (write) operations in the
 entire script — the two report files listed above — and no code path opens the production Normalizer, the
@@ -205,34 +265,44 @@ canonical Master, the D1 manifest, or the D1 artifact for writing; each is opene
 (read-only) mode. The historical baseline file is never referenced by this script at all. `sfm_master_
 authority_productionized`/`sfm_master_sidecar` are never imported directly — only read via the module
 bindings the production Normalizer's own source already imports into the isolated `exec()` namespace,
-identical to Checkpoint C2's own discipline.
+identical to Checkpoint C2's own discipline. A diff against D2-1's own bytes confines every removed/
+changed line to: `REQUIRED_EVIDENCE_KEYS`/`verify_artifact_evidence()` (compact schema), the new
+`hash_of_hashes()` helper, the report-field assignments around PRE/POST capture (compact hashes instead
+of raw dicts, plus mismatch-diagnostic capture), new `del integrated_pre_fingerprint`/`del
+integrated_post_fingerprint` statements, the `provenance`/`command_duration_seconds` additions, and the
+degraded-fallback's explicit `overall_pass`/`artifact_write_verified` force-False lines. No line inside
+SHA verification, `build_independent_witness()`, the fixture/starting-state gate CONDITIONS, fingerprint-
+function extraction, `canonicalize_snapshot()`, `capture_all()`, the production-Normalizer `exec()` call,
+the dialog wait loop, or the six comparisons' own pass/fail LOGIC was removed or altered.
 
 ## Offline verification already performed
 
-Before deployment: (1) `build_d1_manifest.py` run once, offline, against the real accepted D1-3 artifact
-— **21/21 internal checks PASS** (SHA verification, `overall_pass`/hash/count consistency, manifest
-reopen/reparse); manifest size 40,133 bytes (vs. the D1 artifact's 5,875,753 bytes — a ~146x reduction);
-(2) the D2 script syntax-checked under the real embedded Python 2.7.5, PASS; (3) every `del`-based
-memory-hygiene point verified by direct grep to confirm no deleted name is referenced afterward, and every
-`capture_all()` call site confirmed to occur before the corresponding `fp_ns`/`capture_snapshot_
-explicit_fn` deletion; (4) `real_sfm_qualification/checkpoint_d2/test_d2_manifest_comparator_regression.py`
-extracts the deployed script's own `per_target_hash`, `compute_target_hashes`, `compare_hash_maps`, and
-`stream_file_sha256` verbatim (SHA-256 pinned) and proves, using the REAL D1-3 artifact and its own real
-compact manifest: PRE and POST aggregate parity; 85/85 eligible per-target parity in both directions;
-exact 57-changed/28-unchanged set recomputation matching the manifest exactly; 78/78 excluded-witness
-parity in both directions; all target-set-diff expectations empty; a deliberate mutation of one semantic
-field in a copied eligible target is detected as exactly one mismatching target, named precisely; a
-deliberate mutation of one field in a copied excluded-witness row is detected as exactly one mismatching
-excluded target, named precisely; and the original D1 data is never itself mutated by the test —
-**23/23 PASS**; (5) `real_sfm_qualification/checkpoint_d2/test_d2_artifact_writer_regression.py` extracts
-`stable_hash`/`dumps_sorted`/`write_json_atomic`/`write_text_atomic`/`REQUIRED_EVIDENCE_KEYS`/`verify_
-artifact_evidence` verbatim (SHA-256 pinned) and proves, using the REAL 85 PRE + 85 POST target
-fingerprints and the REAL 78-row excluded witness from the accepted D1-3 artifact: a complete, D2-shaped
-result serializes; it reopens/reparses correctly; stored hashes recompute correctly from round-tripped
-data; a deliberately unserializable payload is correctly rejected with a real, non-swallowed error
-message, and an existing valid file at the same path is left completely byte-identical with no leftover
-`.tmp` file; `write_text_atomic` exhibits the same discipline — **23/23 PASS**. All under the real
-embedded Python 2.7.5. Not yet run against real SFM.
+Before D2-1's deployment: (1) `build_d1_manifest.py` run once, offline, against the real accepted D1-3
+artifact — **21/21 internal checks PASS**; manifest size 39,535 bytes (vs. the D1 artifact's 5,875,753
+bytes — a ~149x reduction); (2) the D2 script syntax-checked under the real embedded Python 2.7.5, PASS;
+(3) every `del`-based memory-hygiene point verified by direct grep.
+
+Before this correction's (D2-2) deployment, additionally: (4) syntax-checked under the real embedded
+Python 2.7.5, PASS; (5) every NEW `del`-based memory-hygiene point (`del integrated_pre_fingerprint,
+pre_excluded_witness` before the Normalizer invocation; `del integrated_post_fingerprint,
+post_excluded_witness` after comparisons D/E) reconfirmed by direct grep to occur only after each raw
+dict's last use; (6) `test_d2_manifest_comparator_regression.py` and `test_d2_artifact_writer_regression.py`
+(SHA-pin/line ranges updated for D2-2, the latter rewritten to build and verify the new COMPACT schema
+rather than the retired raw-fingerprint one) reconfirmed **23/23 PASS** and **26/26 PASS** respectively;
+(7) a new regression, `real_sfm_qualification/checkpoint_d2/test_d2_compact_artifact_regression.py`,
+extracts `per_target_hash`/`compute_target_hashes`/`hash_of_hashes`/`compare_hash_maps`/
+`write_json_atomic`/`REQUIRED_EVIDENCE_KEYS`/`verify_artifact_evidence`, and the degraded-fallback's own
+force-False code block verbatim (SHA-256 pinned) and proves, using the REAL D1-3 artifact and its own real
+compact manifest: the compact artifact contains exactly 85 PRE/POST eligible hashes, 78 PRE/POST excluded
+hashes, and exact 57-changed/28-unchanged target identities; all six D2 comparisons (A-F) can be
+mechanically reconstructed from the compact artifact's own stored hashes and match the artifact's own
+recorded results; the artifact serializes/reopens/reparses and stays under 2MB (in practice tens of KB);
+`verify_artifact_evidence()` PASSES on the unmutated artifact; a deliberate mutation of one eligible
+per-target hash, one excluded per-target hash, or the removal of one target's hash entirely each cause
+`verify_artifact_evidence()` to correctly FAIL; and — the exact D2-1 bug, now proven fixed — the degraded-
+fallback code path's own `overall_pass`/`artifact_write_verified` force-False lines produce `False` even
+when fed a synthetic source `report` that itself claims `overall_pass: True` — **37/37 PASS**, all under
+the real embedded Python 2.7.5. Not yet run against real SFM.
 
 ## Identities this checkpoint is pinned against
 
@@ -243,4 +313,5 @@ embedded Python 2.7.5. Not yet run against real SFM.
 - D1 compact comparison manifest SHA-256: `64917b46896ced079bfc68e777d7e7c250e3875230a477ece1cb9320b0d4e42f`
 - Required PRE aggregate hash (D1's own accepted value): `eac633c939f53ed3e7d9e81d473110147d62ee364f1acbc4d099b96fe1891fa0`
 - Required POST aggregate hash (D1's own accepted, historical value): `299cbba30634da1a4949ed7b14187b813260c533dced3d1e71149ede98c124e7`
-- D2-1 script SHA-256: `61e45da0526ce37d56e5c04c8f9932122a8ce88855da14fc3ad5acf92b2d35ab`
+- D2-2 (corrected) script SHA-256: `8ec19a30de8d0951563ce1a583ce2f3c71e4d9d8c77a55f31359653b709d0d34`
+  (D2-1's superseded script SHA-256, preserved for the record: `61e45da0526ce37d56e5c04c8f9932122a8ce88855da14fc3ad5acf92b2d35ab`)

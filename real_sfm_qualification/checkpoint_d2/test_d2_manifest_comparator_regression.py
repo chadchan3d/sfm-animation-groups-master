@@ -52,7 +52,7 @@ D2_SCRIPT_PATH = (
     r"\mainmenu\ChadChan3D\Checkpoint_D2_Integrated_All_Shots_Equivalence.py"
 )
 EXPECTED_D2_SCRIPT_SHA256 = (
-    "61e45da0526ce37d56e5c04c8f9932122a8ce88855da14fc3ad5acf92b2d35ab"
+    "8ec19a30de8d0951563ce1a583ce2f3c71e4d9d8c77a55f31359653b709d0d34"
 )
 D1_JSON_PATH = "C:\\Users\\Public\\Documents\\sfm_checkpoint_d1_historical_all_shots_result.json"
 D1_MANIFEST_PATH = (
@@ -68,11 +68,11 @@ EXPECTED_D1_MANIFEST_SHA256 = (
 
 # 1-indexed, inclusive. Re-verify with:
 #   sed -n '<start>,<end>p' Checkpoint_D2_Integrated_All_Shots_Equivalence.py
-DUMPS_SORTED_RANGE = (516, 517)
-PER_TARGET_HASH_RANGE = (541, 548)
-COMPUTE_TARGET_HASHES_RANGE = (551, 559)
-COMPARE_HASH_MAPS_RANGE = (562, 573)
-STREAM_FILE_SHA256_RANGE = (576, 589)
+DUMPS_SORTED_RANGE = (557, 558)
+PER_TARGET_HASH_RANGE = (582, 589)
+COMPUTE_TARGET_HASHES_RANGE = (592, 598)
+COMPARE_HASH_MAPS_RANGE = (614, 625)
+STREAM_FILE_SHA256_RANGE = (628, 641)
 
 RESULTS = []
 

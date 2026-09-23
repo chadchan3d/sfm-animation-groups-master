@@ -101,3 +101,9 @@ real_sfm_qualification/checkpoint_d2/build_d1_manifest.py text eol=lf
 real_sfm_qualification/checkpoint_d2/d1_comparison_manifest.json text eol=lf
 real_sfm_qualification/checkpoint_d2/test_d2_manifest_comparator_regression.py text eol=lf
 real_sfm_qualification/checkpoint_d2/test_d2_artifact_writer_regression.py text eol=lf
+
+# Checkpoint D2-2 correction (2026-09-22): the offline compact-artifact
+# regression pins the corrected D2 script's own SHA-256 and its own
+# function/code-block extraction ranges -- same archive-export
+# LF-safety reasoning.
+real_sfm_qualification/checkpoint_d2/test_d2_compact_artifact_regression.py text eol=lf

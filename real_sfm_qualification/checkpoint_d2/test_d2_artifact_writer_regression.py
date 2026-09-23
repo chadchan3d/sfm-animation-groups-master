@@ -1,23 +1,27 @@
 # -*- coding: utf-8 -*-
 """Offline regression for Checkpoint D2's artifact writer (the same
 streaming, atomic, exception-preserving design Checkpoint D1-3
-introduced, reused verbatim in D2 with D2's own field names).
+introduced, reused verbatim in D2, now writing the D2-2 COMPACT
+per-target-hash schema rather than raw fingerprint duplication).
 
-Extracts `stable_hash`, `dumps_sorted`, `write_json_atomic`,
+Extracts `stable_hash`, `dumps_sorted`, `per_target_hash`,
+`compute_target_hashes`, `hash_of_hashes`, `write_json_atomic`,
 `write_text_atomic`, `REQUIRED_EVIDENCE_KEYS`, and
 `verify_artifact_evidence` VERBATIM (exact line ranges, SHA-256 pinned
-against the deployed D2 script) and proves, using REPRESENTATIVE
-D2-sized data (the real 85 PRE + 85 POST target fingerprints captured
-by the already-accepted Checkpoint D1-3 run, read directly from its own
-artifact on disk, plus a real 78-row excluded-target witness from the
-same artifact):
+against the deployed D2-2 script) and proves, using REPRESENTATIVE
+D2-sized data (per-target hashes computed from the real 85 PRE + 85
+POST target fingerprints and the real 78-row excluded-target witness
+captured by the already-accepted Checkpoint D1-3 run, read directly
+from its own artifact on disk -- never the raw fingerprints
+themselves, matching D2-2's own compact-artifact discipline):
 
-  1. a complete, D2-shaped result (full integrated fingerprints +
-     excluded witness + comparisons) serializes successfully;
+  1. a complete, D2-2-shaped COMPACT result (per-target hashes +
+     comparisons, never raw fingerprints) serializes successfully and
+     stays small;
   2. the written artifact reopens and reparses back to an equivalent
      structure;
-  3. the stored PRE/POST aggregate hashes recompute correctly from the
-     round-tripped (serialized-then-reparsed) semantic data;
+  3. the stored per-target hash maps recompute a matching checksum
+     after round-trip (serialization/reparse fidelity);
   4. a deliberate, unserializable payload (containing a raw Python
      `set`) is correctly REJECTED -- `write_json_atomic` returns
      `ok=False` with a real, non-swallowed error message, and an
@@ -27,7 +31,7 @@ same artifact):
   5. `write_text_atomic` exhibits the same non-truncating behavior.
 
 Run under real Python 2.7.5. Never launches SFM. Read-only with
-respect to the deployed D2 script and the existing D1-3 artifact; all
+respect to the deployed D2-2 script and the existing D1-3 artifact; all
 newly-written files go to a dedicated scratch directory under
 `C:\Users\Public\Documents\` and are cleaned up at the end.
 """
@@ -42,19 +46,22 @@ D2_SCRIPT_PATH = (
     r"\mainmenu\ChadChan3D\Checkpoint_D2_Integrated_All_Shots_Equivalence.py"
 )
 EXPECTED_D2_SCRIPT_SHA256 = (
-    "61e45da0526ce37d56e5c04c8f9932122a8ce88855da14fc3ad5acf92b2d35ab"
+    "8ec19a30de8d0951563ce1a583ce2f3c71e4d9d8c77a55f31359653b709d0d34"
 )
 D1_JSON_PATH = "C:\\Users\\Public\\Documents\\sfm_checkpoint_d1_historical_all_shots_result.json"
 SCRATCH_DIR = "C:\\Users\\Public\\Documents\\d2_writer_regression_scratch"
 
 # 1-indexed, inclusive. Re-verify with:
 #   sed -n '<start>,<end>p' Checkpoint_D2_Integrated_All_Shots_Equivalence.py
-STABLE_HASH_RANGE = (398, 409)
-DUMPS_SORTED_RANGE = (516, 517)
-WRITE_JSON_ATOMIC_RANGE = (641, 693)
-WRITE_TEXT_ATOMIC_RANGE = (696, 736)
-REQUIRED_EVIDENCE_KEYS_RANGE = (739, 743)
-VERIFY_ARTIFACT_EVIDENCE_RANGE = (746, 771)
+STABLE_HASH_RANGE = (439, 450)
+DUMPS_SORTED_RANGE = (557, 558)
+PER_TARGET_HASH_RANGE = (582, 589)
+COMPUTE_TARGET_HASHES_RANGE = (592, 598)
+HASH_OF_HASHES_RANGE = (601, 611)
+WRITE_JSON_ATOMIC_RANGE = (693, 745)
+WRITE_TEXT_ATOMIC_RANGE = (748, 788)
+REQUIRED_EVIDENCE_KEYS_RANGE = (795, 803)
+VERIFY_ARTIFACT_EVIDENCE_RANGE = (806, 842)
 
 RESULTS = []
 
@@ -84,6 +91,9 @@ _ns = {"json": json, "hashlib": hashlib, "os": os}
 for _name, _range, _prefix in (
     ("stable_hash", STABLE_HASH_RANGE, "def stable_hash(values):"),
     ("dumps_sorted", DUMPS_SORTED_RANGE, "def dumps_sorted(value):"),
+    ("per_target_hash", PER_TARGET_HASH_RANGE, "def per_target_hash(value):"),
+    ("compute_target_hashes", COMPUTE_TARGET_HASHES_RANGE, "def compute_target_hashes(fingerprint_dict):"),
+    ("hash_of_hashes", HASH_OF_HASHES_RANGE, "def hash_of_hashes(hash_dict):"),
     ("write_json_atomic", WRITE_JSON_ATOMIC_RANGE, "def write_json_atomic(final_path, data_obj):"),
     ("write_text_atomic", WRITE_TEXT_ATOMIC_RANGE, "def write_text_atomic(final_path, text_bytes):"),
     ("REQUIRED_EVIDENCE_KEYS", REQUIRED_EVIDENCE_KEYS_RANGE, "REQUIRED_EVIDENCE_KEYS = ("),
@@ -94,11 +104,14 @@ for _name, _range, _prefix in (
     exec(compile(_src, "<%s_extract>" % _name, "exec"), _ns)
 
 check("source.all_extracted_and_exec_ok",
-      all(callable(_ns.get(n)) for n in ("stable_hash", "dumps_sorted", "write_json_atomic", "write_text_atomic", "verify_artifact_evidence"))
+      all(callable(_ns.get(n)) for n in ("stable_hash", "dumps_sorted", "per_target_hash", "compute_target_hashes",
+                                          "hash_of_hashes", "write_json_atomic", "write_text_atomic", "verify_artifact_evidence"))
       and isinstance(_ns.get("REQUIRED_EVIDENCE_KEYS"), tuple))
 
-stable_hash = _ns["stable_hash"]
 dumps_sorted = _ns["dumps_sorted"]
+per_target_hash = _ns["per_target_hash"]
+compute_target_hashes = _ns["compute_target_hashes"]
+hash_of_hashes = _ns["hash_of_hashes"]
 write_json_atomic = _ns["write_json_atomic"]
 write_text_atomic = _ns["write_text_atomic"]
 verify_artifact_evidence = _ns["verify_artifact_evidence"]
@@ -109,17 +122,23 @@ if not os.path.isdir(SCRATCH_DIR):
 with open(D1_JSON_PATH, "rb") as f:
     _d1_data = f.read()
 _d1_report = json.loads(_d1_data.decode("utf-8"))
-_real_pre_fingerprint = _d1_report["pre_fingerprint"]
-_real_post_fingerprint = _d1_report["post_fingerprint"]
-_real_excluded_pre = _d1_report["excluded_target_witness"]["pre"]
-_real_excluded_post = _d1_report["excluded_target_witness"]["post"]
-check("fixture.real_d1_pre_fingerprint_has_85_targets", len(_real_pre_fingerprint) == 85, len(_real_pre_fingerprint))
-check("fixture.real_d1_post_fingerprint_has_85_targets", len(_real_post_fingerprint) == 85, len(_real_post_fingerprint))
-check("fixture.real_d1_excluded_pre_has_78_targets", len(_real_excluded_pre) == 78, len(_real_excluded_pre))
-check("fixture.real_d1_excluded_post_has_78_targets", len(_real_excluded_post) == 78, len(_real_excluded_post))
+del _d1_data
 
-_pre_hash_real = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in _real_pre_fingerprint.items()])
-_post_hash_real = stable_hash([u"%s=%s" % (k, dumps_sorted(v)) for k, v in _real_post_fingerprint.items()])
+_eligible_pre_hashes = compute_target_hashes(_d1_report["pre_fingerprint"])
+_eligible_post_hashes = compute_target_hashes(_d1_report["post_fingerprint"])
+_excluded_pre_hashes = compute_target_hashes(_d1_report["excluded_target_witness"]["pre"])
+_excluded_post_hashes = compute_target_hashes(_d1_report["excluded_target_witness"]["post"])
+del _d1_report
+
+check("fixture.real_d1_eligible_pre_hashes_count_is_85", len(_eligible_pre_hashes) == 85, len(_eligible_pre_hashes))
+check("fixture.real_d1_eligible_post_hashes_count_is_85", len(_eligible_post_hashes) == 85, len(_eligible_post_hashes))
+check("fixture.real_d1_excluded_pre_hashes_count_is_78", len(_excluded_pre_hashes) == 78, len(_excluded_pre_hashes))
+check("fixture.real_d1_excluded_post_hashes_count_is_78", len(_excluded_post_hashes) == 78, len(_excluded_post_hashes))
+
+_changed_keys = sorted(k for k in _eligible_pre_hashes if _eligible_pre_hashes[k] != _eligible_post_hashes.get(k))
+_unchanged_keys = sorted(k for k in _eligible_pre_hashes if _eligible_pre_hashes[k] == _eligible_post_hashes.get(k))
+_pre_hash_real = "eac633c939f53ed3e7d9e81d473110147d62ee364f1acbc4d099b96fe1891fa0"
+_post_hash_real = "299cbba30634da1a4949ed7b14187b813260c533dced3d1e71149ede98c124e7"
 
 
 def _build_representative_report():
@@ -131,9 +150,17 @@ def _build_representative_report():
         "anomalies": [],
         "integrated_pre_fingerprint_hash": _pre_hash_real,
         "integrated_post_fingerprint_hash": _post_hash_real,
-        "integrated_pre_fingerprint": _real_pre_fingerprint,
-        "integrated_post_fingerprint": _real_post_fingerprint,
-        "integrated_excluded_witness": {"pre": _real_excluded_pre, "post": _real_excluded_post},
+        "eligible_pre_target_hashes": dict(_eligible_pre_hashes),
+        "eligible_post_target_hashes": dict(_eligible_post_hashes),
+        "excluded_pre_target_hashes": dict(_excluded_pre_hashes),
+        "excluded_post_target_hashes": dict(_excluded_post_hashes),
+        "changed_target_keys": list(_changed_keys),
+        "unchanged_target_keys": list(_unchanged_keys),
+        "eligible_pre_hashes_checksum": hash_of_hashes(_eligible_pre_hashes),
+        "eligible_post_hashes_checksum": hash_of_hashes(_eligible_post_hashes),
+        "excluded_pre_hashes_checksum": hash_of_hashes(_excluded_pre_hashes),
+        "excluded_post_hashes_checksum": hash_of_hashes(_excluded_post_hashes),
+        "mismatch_diagnostics": {"eligible": {}, "excluded": {}},
         "comparisons": {
             "A_starting_state_parity": {"pass": True},
             "B_scope_parity": {"pass": True},
@@ -145,6 +172,7 @@ def _build_representative_report():
         "authority_runtime_evidence": {"get_state": "READY", "is_canonical": True, "outstanding_lease_count": 0},
         "native_protection_evidence": {"contains_NATIVE_GUARDS_PASS": True, "contains_NATIVE_REBUILD_RETURNED_PASS": True},
         "memory_snapshots": {},
+        "provenance": {},
         "overall_pass": False,
         "artifact_write_verified": False,
         "artifact_evidence_detail": None,
@@ -152,24 +180,27 @@ def _build_representative_report():
     }
 
 
-# --- 1/2/3: complete result serializes, reopens/reparses, stored
-#     hashes recompute correctly from round-tripped data. ---
+# --- 1/2/3: complete COMPACT result serializes, stays small, reopens/
+#     reparses, stored per-target hashes recompute a matching checksum
+#     after round-trip. ---
 _good_path = os.path.join(SCRATCH_DIR, "good_result.json")
 if os.path.exists(_good_path):
     os.remove(_good_path)
 _good_report = _build_representative_report()
 _ok1, _err1, _reparsed1 = write_json_atomic(_good_path, _good_report)
-check("regression.complete_representative_result_serializes", _ok1, _err1)
-check("regression.written_file_exists_and_nonzero", os.path.exists(_good_path) and os.path.getsize(_good_path) > 0)
-check("regression.reparsed_result_has_85_pre_and_post_and_78_excluded",
+check("regression.complete_representative_compact_result_serializes", _ok1, _err1)
+check("regression.written_file_exists_nonzero_and_small",
+      os.path.exists(_good_path) and 0 < os.path.getsize(_good_path) < 2 * 1024 * 1024,
+      os.path.getsize(_good_path) if os.path.exists(_good_path) else None)
+check("regression.reparsed_result_has_85_pre_and_post_and_78_excluded_hashes",
       _reparsed1 is not None
-      and len(_reparsed1.get("integrated_pre_fingerprint", {})) == 85
-      and len(_reparsed1.get("integrated_post_fingerprint", {})) == 85
-      and len(_reparsed1.get("integrated_excluded_witness", {}).get("pre", {})) == 78
-      and len(_reparsed1.get("integrated_excluded_witness", {}).get("post", {})) == 78)
+      and len(_reparsed1.get("eligible_pre_target_hashes", {})) == 85
+      and len(_reparsed1.get("eligible_post_target_hashes", {})) == 85
+      and len(_reparsed1.get("excluded_pre_target_hashes", {})) == 78
+      and len(_reparsed1.get("excluded_post_target_hashes", {})) == 78)
 
 _evidence_ok, _evidence_detail = verify_artifact_evidence(_reparsed1)
-check("regression.stored_hashes_recompute_correctly_after_round_trip", _evidence_ok, _evidence_detail)
+check("regression.stored_hash_maps_recompute_matching_checksum_after_round_trip", _evidence_ok, _evidence_detail)
 
 # --- 4. Deliberate unserializable payload rejected; existing valid
 #     file at the same final path left byte-identical; no leftover
