@@ -158,30 +158,37 @@ No production code was changed based on this audit alone.
 
 (1) Both scripts syntax-checked under the real embedded Python 2.7.5,
 PASS. (2) Regression `test_f1_r2_diagnostic_regression.py` (SHA-256
-`aa79b9e768f7c11383923334645f0b2bda3b73f39a2dbcb63c1b4cdf792c59cb`,
-**repaired 2026-09-23** after attempt 01's real-SFM failure) proves, using
-**injected fake `sfmApp`/`vs` modules** (no real SFM environment available
-offline): the core safety invariant of `save_normalized_diagnostic_copy()`
-— it calls the native `SaveToFile` API exactly once when the computed
-target path correctly differs from the original fixture's path (and the
-original file's bytes remain provably unchanged afterward), and **never
-calls it at all** when the computed target would equal the original path
-(an adversarial case constructed deliberately), reporting a clean refusal
-instead. Also proves a native `SaveToFile` failure is reported cleanly, not
-swallowed or misreported as success. The shared `CONTEXTUALIZER_RESOURCE_
-CHECKPOINT` parser exactly reproduces F1-2's own confirmed command-3 deltas
-(private `+238366720`, free VAS `-233242624`, largest free `-111017984`)
-from the real log-line values. The Phase 1↔Phase 2 comparison arithmetic
-(serialized/resident delta, per-run delta) is verified correct against
-worked examples. **New this repair**: a strict-binding regression using a
-fake `SaveToFile` that mimics the real SWIG binding's own type strictness
+`f35f07fd10ba4523501c3940d68411954d1e228bab659ab8427160507c3e7531`,
+**repaired 2026-09-23, attempt 03** after attempt 02's real-SFM reopen
+failure) proves, using **injected fake `sfmApp`/`vs` modules** (no real SFM
+environment available offline): the core safety invariant of
+`save_normalized_diagnostic_copy()` — it calls the native `SaveToFile` API
+exactly once when the computed target path correctly differs from the
+original fixture's path (and the original file's bytes remain provably
+unchanged afterward), and **never calls it at all** when the computed
+target would equal the original path (an adversarial case constructed
+deliberately), reporting a clean refusal instead. Also proves a native
+`SaveToFile` failure is reported cleanly, not swallowed or misreported as
+success. The shared `CONTEXTUALIZER_RESOURCE_CHECKPOINT` parser exactly
+reproduces F1-2's own confirmed command-3 deltas (private `+238366720`,
+free VAS `-233242624`, largest free `-111017984`) from the real log-line
+values. The Phase 1↔Phase 2 comparison arithmetic (serialized/resident
+delta, per-run delta) is verified correct against worked examples. A
+strict-binding regression (attempt 01's own repair) using a fake
+`SaveToFile` that mimics the real SWIG binding's own type strictness
 (rejects `unicode`, matching the exact real `TypeError` observed) —
 independently confirmed, via direct replay of the pre-repair function body
 against this same strict fake, that it reproduces the EXACT real failure,
 and that the repaired function body passes cleanly, receiving a Python 2
-`str` (not `unicode`) at the native call. **35/35 PASS** under the real
-embedded Python 2.7.5 (30 original + 5 new strict-binding assertions).
-Not yet rerun against real SFM.
+`str` (not `unicode`) at the native call. **New this repair (attempt 03)**:
+checks confirming the real `SAVE_AS_FILENAME` literal, extracted directly
+from the Phase 1 source, ends in `.dmx` (not `.sfm`) and differs from the
+known original fixture filename `testscripts.dmx`; and a machine-verified
+confirmation that Phase 2 contains no runtime filename gate (no
+`GetFileName()` call anywhere in its source), so it correctly required no
+changes. **40/40 PASS** under the real embedded Python 2.7.5 (30 attempt-01
+baseline + 5 strict-binding + 5 new extension-repair assertions). Not yet
+rerun against real SFM.
 
 ## Identities this checkpoint is pinned against
 
@@ -189,16 +196,27 @@ Not yet rerun against real SFM.
   twice, once per phase): `cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867`
 - Canonical Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
 - Required final All-Shots aggregate hash: `299cbba30634da1a4949ed7b14187b813260c533dced3d1e71149ede98c124e7`
-- Phase 1 script SHA-256 (**repaired 2026-09-23, attempt 02** -- see
-  "Attempt 01 disposition and repair" below; supersedes the original
+- Save-As target filename (**corrected 2026-09-23, attempt 03** -- see
+  "Attempt 02 disposition and repair" below; supersedes the original
+  `F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm`, which SaveToFile wrote
+  successfully but SFM's own session loader could not reopen):
+  `F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx`
+- Phase 1 script SHA-256 (**repaired 2026-09-23, attempt 03** -- extension
+  fix only; supersedes attempt 02's own
+  `d938f878608b0cbd9302620265da9c47161abfbc8382308ad504bfb6fcea5d54`,
+  which itself superseded the original
   `860c2c3f0b211ec1dbbae384f8249ead5f5530b54eab3f8fbf9de083e67b9ccd`):
-  `d938f878608b0cbd9302620265da9c47161abfbc8382308ad504bfb6fcea5d54`
-- Phase 2 script SHA-256 (unchanged, not modified by the attempt-01
-  repair): `03249bad2a7f86cfbdc6e226edeb72ea6f15f9769b135d1ad46cc6a6e4ce4f80`
-- Offline regression SHA-256 (**repaired 2026-09-23** -- adds the
-  strict-binding regression; supersedes the original
+  `2c5daa5996b688b1d835585bf91c22f30f38386b7cdd4777862a9df679534a22`
+- Phase 2 script SHA-256 (**unchanged since original preparation** -- not
+  modified by either the attempt-01 or attempt-02 repair; it has no
+  runtime path/filename gate for either repair to update):
+  `03249bad2a7f86cfbdc6e226edeb72ea6f15f9769b135d1ad46cc6a6e4ce4f80`
+- Offline regression SHA-256 (**repaired 2026-09-23, attempt 03** -- adds
+  the extension-repair checks; supersedes attempt 02's own
+  `aa79b9e768f7c11383923334645f0b2bda3b73f39a2dbcb63c1b4cdf792c59cb`,
+  which itself superseded the original
   `99a6f08da9955c4199f82ae0efac1fb936034de54fd8859e0b6ae1a6b21a78dd`):
-  `aa79b9e768f7c11383923334645f0b2bda3b73f39a2dbcb63c1b4cdf792c59cb`
+  `f35f07fd10ba4523501c3940d68411954d1e228bab659ab8427160507c3e7531`
 
 ## Attempt 01 disposition and repair
 
@@ -234,6 +252,39 @@ attribution can be made yet:
 
 This is same-process command-interval evidence only, consistent with (but
 not proof of) F1-2's own already-established finding -- do not infer a leak
-from it. Attempt 02 (below) reruns Phase 1 with the repair in place; if it
-succeeds, Phase 2 proceeds normally and this same evidence class will be
-re-collected as part of a complete attempt.
+from it.
+
+## Attempt 02 disposition and repair
+
+**F1-R2 Phase 1 attempt 02 — PRODUCTION PASS / SAVE PASS / REOPEN BOUNDARY
+INVALID: NON-LOADABLE `.sfm` EXTENSION.** Not a production failure and not
+a `SaveToFile` failure -- production completed cleanly and the str/unicode
+repair worked: `SaveToFile` succeeded and wrote the new file. The resulting
+artifact could not be reopened, because the diagnostic saved it as
+`F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm` -- SFM's own session loader expects
+the disposable qualification session's own extension, `.dmx` (matching the
+original fixture, `testscripts.dmx`). Repaired by changing only
+`SAVE_AS_FILENAME`'s own extension from `.sfm` to `.dmx` -- same directory,
+same `SaveToFile` call, same Python-2 byte-string conversion repair from
+attempt 01, same production execution, same resource instrumentation, same
+save timing, same existence/size checks, same original-fixture protection.
+Phase 2 was inspected and confirmed to contain no runtime gate on the
+currently-open document's own path or filename (no `GetFileName()` call
+anywhere in its source) -- there was no literal for this repair to update,
+so Phase 2 is untouched, byte-for-byte identical to its original
+preparation (still SHA-256 `03249bad...`). Offline-verified: the existing
+regression suite re-run in full, plus new checks confirming (1) the real
+`SAVE_AS_FILENAME` literal, extracted directly from the Phase 1 source, now
+ends in `.dmx`; (2) it differs from the known original fixture filename
+`testscripts.dmx`; (3) the strict-binding regression (reused from attempt
+01's own repair, now exercised with the `.dmx` filename) still confirms
+`SaveToFile` receives a Python 2 `str`, not `unicode`; (4) Phase 2 contains
+no runtime filename gate, confirmed by direct source inspection rather than
+assumed. **40/40 PASS** under the real embedded Python 2.7.5. Attempt 02's
+real resource evidence remains valid same-process evidence, but Phase 2
+attribution remains unresolved -- the saved artifact could not be reopened
+through normal SFM session loading, so the save/reopen boundary was never
+reached. Attempt 03 (below) reruns Phase 1 with the extension repair in
+place; if the resulting `.dmx` file reopens normally, Phase 2 proceeds and
+this same evidence class will be re-collected as part of a complete
+attempt.

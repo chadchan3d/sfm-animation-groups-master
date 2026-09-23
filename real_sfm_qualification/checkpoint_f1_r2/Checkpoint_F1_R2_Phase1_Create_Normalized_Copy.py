@@ -12,9 +12,10 @@ scene from disk, which is only possible if such a file exists.
 
 **This script NEVER overwrites the original disposable qualification
 fixture.** It saves to a NEW, clearly-named file
-(`F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm`, see SAVE_AS_TARGET_PATH below) via
-an explicit Save-As-style call, never a plain re-save of the currently
-open document.
+(`F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx` -- corrected 2026-09-23 from an
+initial `.sfm` extension that SFM's own session loader could not reopen;
+see SAVE_AS_TARGET_PATH below) via an explicit Save-As-style call, never a
+plain re-save of the currently open document.
 
 Purpose:
   Checkpoint F1-2's own confirmed evidence showed production's All-Shots
@@ -103,8 +104,11 @@ PRODUCTION_LOG_PRESERVE_PATH = "C:\\Users\\Public\\Documents\\sfm_checkpoint_f1_
 # The new diagnostic copy's save target. Never the original fixture path.
 # A plain, unambiguous filename inside the same disposable-projects
 # directory the operator's original fixture already lives in, so Phase 2
-# can be pointed at it manually.
-SAVE_AS_FILENAME = u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm"
+# can be pointed at it manually. Extension corrected 2026-09-23: attempt 02
+# used ".sfm", which SaveToFile accepted and wrote successfully, but SFM's
+# own session loader could not reopen it -- the disposable qualification
+# session's own extension (and the one SFM's loader expects) is ".dmx".
+SAVE_AS_FILENAME = u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx"
 
 NORMALIZER_LOG_PATH = "C:\\Users\\Public\\Documents\\sfm_rebuild_control_groups.txt"
 

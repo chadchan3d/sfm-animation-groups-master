@@ -2,13 +2,21 @@
 """
 Offline regression for Checkpoint F1-R2 Phase 1
 (Checkpoint_F1_R2_Phase1_Create_Normalized_Copy.py, SHA-256
-d938f878608b0cbd9302620265da9c47161abfbc8382308ad504bfb6fcea5d54 -- repaired
-2026-09-23 after a real-SFM Phase 1 attempt failed with TypeError("in
-method 'IDataModel_SaveToFile', argument 2 of type 'char const *'"); see
-the strict-binding regression below) and Phase 2
+2c5daa5996b688b1d835585bf91c22f30f38386b7cdd4777862a9df679534a22).
+Attempt 01 (2026-09-23) failed with TypeError("in method
+'IDataModel_SaveToFile', argument 2 of type 'char const *'") -- see the
+strict-binding regression below. Attempt 02 (2026-09-23) fixed that, ran
+production and SaveToFile successfully, but saved as
+F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm, which SFM's own session loader could
+not reopen -- this repair changes the extension to .dmx only (see the
+Save-As filename/extension repair checks below). Phase 2
 (Checkpoint_F1_R2_Phase2_Normalized_Copy_Retest.py, SHA-256
 03249bad2a7f86cfbdc6e226edeb72ea6f15f9769b135d1ad46cc6a6e4ce4f80,
-unchanged).
+byte-for-byte unchanged by this repair -- it has no runtime path/filename
+gate to update; its own docstring still says ".sfm" for the copy filename,
+left as-is per explicit instruction not to modify Phase 2 beyond an actual
+literal, and superseded for operator-facing purposes by INSTRUCTIONS.md's
+own corrected text).
 
 The centerpiece of this regression is `save_normalized_diagnostic_copy()`
 (Phase 1) -- the one function in this whole project that WRITES to a new
@@ -32,18 +40,19 @@ Run under the real embedded Python 2.7.5:
 import hashlib
 import json
 import os
+import re
 import sys
 import tempfile
 
 PHASE1_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Checkpoint_F1_R2_Phase1_Create_Normalized_Copy.py")
 PHASE2_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Checkpoint_F1_R2_Phase2_Normalized_Copy_Retest.py")
-EXPECTED_PHASE1_SHA256 = "d938f878608b0cbd9302620265da9c47161abfbc8382308ad504bfb6fcea5d54"
+EXPECTED_PHASE1_SHA256 = "2c5daa5996b688b1d835585bf91c22f30f38386b7cdd4777862a9df679534a22"
 EXPECTED_PHASE2_SHA256 = "03249bad2a7f86cfbdc6e226edeb72ea6f15f9769b135d1ad46cc6a6e4ce4f80"
 
-CHECKPOINT_PARSER_RANGE = (344, 415)
-WRITE_JSON_ATOMIC_RANGE = (418, 466)
-WRITE_TEXT_ATOMIC_RANGE = (469, 507)
-SAVE_FUNCTION_RANGE = (510, 616)
+CHECKPOINT_PARSER_RANGE = (348, 419)
+WRITE_JSON_ATOMIC_RANGE = (422, 470)
+WRITE_TEXT_ATOMIC_RANGE = (473, 511)
+SAVE_FUNCTION_RANGE = (514, 620)
 
 PASS_COUNT = [0]
 FAIL_COUNT = [0]
@@ -65,7 +74,41 @@ expect(hashlib.sha256(phase1_bytes).hexdigest() == EXPECTED_PHASE1_SHA256, "phas
 
 with open(PHASE2_PATH, "rb") as f:
     phase2_bytes = f.read()
+phase2_text = phase2_bytes.decode("ascii")
 expect(hashlib.sha256(phase2_bytes).hexdigest() == EXPECTED_PHASE2_SHA256, "phase2_script.sha256_matches_pinned")
+
+sys.stdout.write("\n--- Save-As filename/extension repair (attempt 02 -> 03): .sfm -> .dmx ---\n")
+
+# Extracted directly from the real Phase 1 source -- not retyped -- so this
+# check tracks the actual deployed constant, not an assumption about it.
+save_as_filename_match = re.search(r'SAVE_AS_FILENAME\s*=\s*u"([^"]*)"', phase1_text)
+expect(save_as_filename_match is not None, "save_as_filename.literal_found_in_phase1_source")
+real_save_as_filename = save_as_filename_match.group(1) if save_as_filename_match else None
+expect(
+    real_save_as_filename is not None and real_save_as_filename.endswith(u".dmx"),
+    "save_as_filename.ends_with_dmx_not_sfm (%r)" % (real_save_as_filename,),
+)
+expect(
+    real_save_as_filename is not None and not real_save_as_filename.endswith(u".sfm"),
+    "save_as_filename.no_longer_ends_with_sfm",
+)
+# The real original disposable qualification fixture's own filename, per
+# the real attempt-01 report's own "Original:" path
+# (e:\sourcefilmmaker sessions\testscripts.dmx).
+KNOWN_ORIGINAL_FIXTURE_FILENAME = u"testscripts.dmx"
+expect(
+    real_save_as_filename != KNOWN_ORIGINAL_FIXTURE_FILENAME,
+    "save_as_filename.differs_from_known_original_fixture_filename",
+)
+# Phase 2 has no runtime gate on the currently-open document's own path or
+# filename (confirmed by direct source inspection: no GetFileName() call
+# anywhere in Phase 2) -- so there is no literal in Phase 2 for this
+# repair to update, and per explicit instruction Phase 2 is left byte-for-
+# byte unchanged (its own docstring still mentions the old ".sfm" filename
+# -- cosmetic only, superseded for operator-facing purposes by
+# INSTRUCTIONS.md's own corrected text). This check makes the "no runtime
+# gate exists" fact machine-verified rather than merely asserted.
+expect("GetFileName" not in phase2_text, "phase2.contains_no_runtime_filename_gate_to_update")
 
 phase1_lines = phase1_text.splitlines()
 
@@ -188,12 +231,12 @@ fake_dm = _FakeDataModel({7: original_path}, {7: u"session"}, save_should_succee
 fake_vs = _FakeVsModule(fake_dm)
 
 save_fn = make_save_function(fake_sfmapp, fake_vs)
-result_a = save_fn(u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm")
+result_a = save_fn(u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx")
 
 expect(result_a["ok"] is True, "save.case_a_healthy_save_succeeds (%r)" % (result_a,))
 expect(result_a["target_differs_from_original"] is True, "save.case_a_target_correctly_detected_as_different")
 expect(result_a["original_path"] == original_path, "save.case_a_original_path_recorded_correctly")
-expect(result_a["target_path"] == os.path.join(original_dir, u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm"), "save.case_a_target_path_computed_correctly")
+expect(result_a["target_path"] == os.path.join(original_dir, u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx"), "save.case_a_target_path_computed_correctly")
 expect(len(fake_dm.save_calls) == 1, "save.case_a_SaveToFile_called_exactly_once")
 expect(fake_dm.save_calls[0]["encoding"] == "binary", "save.case_a_uses_binary_encoding_matching_real_usage_example")
 expect(fake_dm.save_calls[0]["format"] == u"session", "save.case_a_format_derived_from_GetFileFormat_not_hardcoded")
@@ -224,7 +267,7 @@ expect("REFUSING TO SAVE" in (result_b["error"] or ""), "save.case_b_error_messa
 fake_dm_c = _FakeDataModel({7: original_path}, {7: u"session"}, save_should_succeed=False)
 fake_vs_c = _FakeVsModule(fake_dm_c)
 save_fn_c = make_save_function(fake_sfmapp, fake_vs_c)
-result_c = save_fn_c(u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY_2.sfm")
+result_c = save_fn_c(u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY_2.dmx")
 
 expect(result_c["ok"] is False, "save.case_c_native_failure_reported_as_ok_False")
 expect(len(fake_dm_c.save_calls) == 1, "save.case_c_SaveToFile_was_attempted_once")
@@ -277,16 +320,19 @@ with open(strict_original_path, "wb") as f:
 fake_dm_strict = _StrictTypedFakeDataModel({7: strict_original_path}, {7: u"session"})
 fake_vs_strict = _FakeVsModule(fake_dm_strict)
 save_fn_strict = make_save_function(fake_sfmapp, fake_vs_strict)
-# Exactly SAVE_AS_FILENAME's own real literal (Phase 1 line 107):
-# u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm" -- unicode, reproducing the
-# exact type composition that triggered the real failure.
-result_strict = save_fn_strict(u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm")
+# Exactly SAVE_AS_FILENAME's own real literal (Phase 1 line 111):
+# u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx" -- unicode, reproducing the
+# exact type composition (str original_dir + unicode filename -> unicode
+# target_path) that triggered the real TypeError this regression guards
+# against -- independent of the .sfm/.dmx extension itself, which is a
+# separate, already-verified repair (see the extension checks above).
+result_strict = save_fn_strict(u"F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx")
 
 expect(result_strict["ok"] is True, "save.strict_binding_save_succeeds_against_type_strict_fake (%r)" % (result_strict,))
 expect(len(fake_dm_strict.save_calls) == 1, "save.strict_binding_SaveToFile_called_exactly_once")
 if fake_dm_strict.save_calls:
     expect(type(fake_dm_strict.save_calls[0]["path"]) is str, "save.strict_binding_native_call_receives_str_not_unicode -- the exact repair this regression proves (%r)" % (type(fake_dm_strict.save_calls[0]["path"]),))
-    expect(fake_dm_strict.save_calls[0]["path"] == os.path.join(strict_original_dir, "F1_R2_NORMALIZED_DIAGNOSTIC_COPY.sfm"), "save.strict_binding_path_content_correct_after_encoding")
+    expect(fake_dm_strict.save_calls[0]["path"] == os.path.join(strict_original_dir, "F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx"), "save.strict_binding_path_content_correct_after_encoding")
 # result["target_path"] itself (used for os.path.exists/getsize and the
 # refusal check) remains unicode, unchanged -- only the native call's own
 # argument was narrowed.
