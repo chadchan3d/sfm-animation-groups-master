@@ -114,3 +114,23 @@ real_sfm_qualification/checkpoint_d2/test_d2_compact_artifact_regression.py text
 # directly in operator instructions/the ledger.
 real_sfm_qualification/checkpoint_f1/Checkpoint_F1_Repeated_Warm_Use_Stability.py text eol=lf
 real_sfm_qualification/checkpoint_f1/test_f1_compact_artifact_regression.py text eol=lf
+
+# F1-1 crash evidence (2026-09-22): a byte-identical preserved copy of the
+# real production Normalizer's own log at the moment SFM crashed. This is
+# captured evidence, not authored source -- it uses CRLF line terminators
+# exactly as the process wrote them. Marked -text (like the Silkworm
+# reference Master) so git never normalizes/converts it on any checkout,
+# clone, or archive export; the preserved copy must remain byte-identical
+# to the original crash-time log forever.
+real_sfm_qualification/checkpoint_f1/f1_1_crash_evidence/sfm_rebuild_control_groups_F1-1_command3_crash.txt -text
+
+# F1-1 static audit offline test (2026-09-22): same archive-export CRLF
+# corruption class as the other offline-verification scripts above -- this
+# test's own SHA-256 is cited in the static audit document.
+real_sfm_qualification/checkpoint_f1/test_gc_cycle_accumulation_across_exec.py text eol=lf
+
+# Real-SFM Qualification, Checkpoint F1-R1 (2026-09-22): same reasoning as
+# F1 above -- the F1-R1 wrapper script and its offline regression are
+# SHA-256 pinned and cited directly in operator instructions/the ledger.
+real_sfm_qualification/checkpoint_f1_r1/Checkpoint_F1_R1_Attribution_Diagnostic.py text eol=lf
+real_sfm_qualification/checkpoint_f1_r1/test_f1r1_attribution_diagnostic_regression.py text eol=lf
