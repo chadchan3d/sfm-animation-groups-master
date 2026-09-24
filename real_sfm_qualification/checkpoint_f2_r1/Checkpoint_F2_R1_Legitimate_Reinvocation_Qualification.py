@@ -318,8 +318,31 @@ def marker_present(main_window, marker_name):
 
 
 def set_marker(main_window, marker_name):
+    """F2-R1-R3: installs the marker using the EXACT mechanism the
+    real-SFM-proven marker persistence probe uses (QtCore.QObject(main_
+    window) + setObjectName()) -- that mechanism itself is empirically
+    validated (Checkpoint_F2_R1_Marker_Persistence_Probe.py, real-SFM
+    PASS for both A->B same-process persistence and post-restart
+    disappearance) and is deliberately NOT replaced. What differs is
+    F2-R1's own CONTEXT: the probe installs its marker immediately, with
+    no intervening work; F2-R1 installs its marker only after a long
+    (potentially many-minutes) production run and thousands of
+    processEvents() calls. This function therefore adds defensive
+    hardening around the identical core mechanism: an extra Python-side
+    keep-alive reference (belt-and-suspenders alongside Qt's own C++
+    parent-child ownership), and re-fetches nothing itself -- callers are
+    required to pass a FRESHLY-obtained main_window (see call sites)
+    rather than one captured long before this call, removing any
+    possibility of a stale reference being the cause."""
     marker = QtCore.QObject(main_window)
     marker.setObjectName(marker_name)
+    try:
+        keepalive_attr = "_f2r1_marker_keepalive_refs"
+        if not hasattr(main_window, keepalive_attr):
+            setattr(main_window, keepalive_attr, [])
+        getattr(main_window, keepalive_attr).append(marker)
+    except Exception:
+        pass
     return marker
 
 
@@ -780,7 +803,19 @@ try:
         write_rolling_evidence()
 
         # --- Persist minimal cross-invocation state + set the in-process
-        #     marker, ONLY if this command's own checks all passed so far. ---
+        #     marker, ONLY if this command's own checks all passed so far.
+        #     F2-R1-R3: main_window is re-fetched FRESH here, immediately
+        #     before marker installation, rather than reusing the reference
+        #     captured at the very start of the script (before the long
+        #     production run + thousands of processEvents() calls) -- this
+        #     removes reference staleness as a possible cause, matching the
+        #     marker-persistence probe's own proven pattern of installing
+        #     immediately after a fresh GetMainWindow() call. Same-
+        #     invocation self-verification (both immediately after install
+        #     and again after an explicit gc.collect()) is recorded as its
+        #     own check so a future failure is caught here, in THIS
+        #     invocation's own evidence, rather than only discovered later
+        #     by a different invocation unable to find the marker. ---
         stage_checks_passed = all(c["pass"] for c in report["checks"])
         if stage_checks_passed:
             current_pid = None
@@ -788,15 +823,31 @@ try:
                 current_pid = os.getpid()
             except Exception:
                 pass
+
+            fresh_main_window = sfmApp.GetMainWindow()
+            check("f2r1.fresh_main_window_available_for_marker_install", fresh_main_window is not None)
+            marker_name_to_install = STAGE1_MARKER_NAME if mode == "STAGE_1" else STAGE2_MARKER_NAME
+            set_marker(fresh_main_window, marker_name_to_install)
+
+            check(
+                "f2r1.marker_self_verified_immediately_after_install",
+                marker_present(fresh_main_window, marker_name_to_install),
+                marker_name_to_install,
+            )
+            gc.collect()
+            check(
+                "f2r1.marker_self_verified_after_same_invocation_gc_collect",
+                marker_present(fresh_main_window, marker_name_to_install),
+                marker_name_to_install,
+            )
+
             if mode == "STAGE_1":
-                set_marker(main_window, STAGE1_MARKER_NAME)
                 new_state = {
                     "stage1_complete": True, "stage2_complete": False,
                     "stage1_completed_at": time.strftime("%Y-%m-%d %H:%M:%S"),
                     "stage1_pid": current_pid,
                 }
             else:
-                set_marker(main_window, STAGE2_MARKER_NAME)
                 new_state = dict(state or {})
                 new_state["stage2_complete"] = True
                 new_state["stage2_completed_at"] = time.strftime("%Y-%m-%d %H:%M:%S")

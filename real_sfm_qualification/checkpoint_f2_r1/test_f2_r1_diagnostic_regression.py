@@ -24,19 +24,19 @@ import tempfile
 from PySide import QtCore
 
 SCRIPT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Checkpoint_F2_R1_Legitimate_Reinvocation_Qualification.py")
-EXPECTED_SCRIPT_SHA256 = "fdba8e9482ed7082ac9adc2d7099305dea0992d2e586cf05afba3bbc696f0976"
+EXPECTED_SCRIPT_SHA256 = "34cbb4b399b50fdf3318292e2326691afbed4021ec85c12525e28b155a5eb44f"
 
 B_TO_UNICODE_RANGE = (195, 204)
 WRITE_JSON_ATOMIC_RANGE = (207, 251)
 WRITE_TEXT_ATOMIC_RANGE = (254, 292)
 READ_STATE_FILE_RANGE = (295, 302)
 MARKER_PRESENT_RANGE = (305, 317)
-SET_MARKER_RANGE = (320, 323)
-CAPTURE_FORENSIC_SNAPSHOT_RANGE = (326, 387)
-ASSERT_LEGAL_CLASSIFICATION_RANGE = (390, 405)
-CLASSIFY_INVOCATION_MODE_RANGE = (408, 424)
-GET_CONTROL_MEMBERSHIP_RANGE = (433, 439)
-FIND_TARGET_ASET_RANGE = (442, 449)
+SET_MARKER_RANGE = (320, 346)
+CAPTURE_FORENSIC_SNAPSHOT_RANGE = (349, 410)
+ASSERT_LEGAL_CLASSIFICATION_RANGE = (413, 428)
+CLASSIFY_INVOCATION_MODE_RANGE = (431, 447)
+GET_CONTROL_MEMBERSHIP_RANGE = (456, 462)
+FIND_TARGET_ASET_RANGE = (465, 472)
 
 PASS_COUNT = [0]
 FAIL_COUNT = [0]
@@ -123,6 +123,21 @@ expect(marker_present(real_main_window, u"STAGE2_TEST_MARKER") is False, "marker
 
 other_window = QtCore.QObject()
 expect(marker_present(other_window, u"STAGE1_TEST_MARKER") is False, "marker_present.marker_on_one_parent_not_visible_on_another -- simulates a real SFM restart (fresh main_window)")
+
+sys.stdout.write("\n--- F2-R1-R3: set_marker() keep-alive hardening + post-GC same-invocation survival ---\n")
+expect(
+    hasattr(real_main_window, "_f2r1_marker_keepalive_refs") and len(real_main_window._f2r1_marker_keepalive_refs) == 1,
+    "set_marker.stores_a_python_side_keepalive_reference_on_main_window",
+)
+set_marker(real_main_window, u"SECOND_TEST_MARKER")
+expect(
+    len(real_main_window._f2r1_marker_keepalive_refs) == 2,
+    "set_marker.keepalive_list_accumulates_across_multiple_calls_on_the_same_window",
+)
+import gc as _gc_for_test
+_gc_for_test.collect()
+expect(marker_present(real_main_window, u"STAGE1_TEST_MARKER") is True, "set_marker.marker_survives_an_explicit_gc_collect_in_the_same_process -- direct test of the GC hypothesis")
+expect(marker_present(real_main_window, u"SECOND_TEST_MARKER") is True, "set_marker.second_marker_also_survives_gc_collect")
 
 sys.stdout.write("\n--- F2-R1-R2 forensic addition: capture_forensic_pre_classification_snapshot() ---\n")
 ns_forensic = {
@@ -417,6 +432,22 @@ expect(
     "script.forensic_snapshot_written_to_its_own_dedicated_file",
 )
 expect('"stage1_pid": current_pid' in script_text and '"stage2_pid"' in script_text, "script.state_write_now_records_pid_for_future_cross_run_comparison")
+
+sys.stdout.write("\n--- F2-R1-R3 hardening wiring checks on the actual deployed script source ---\n")
+expect("fresh_main_window = sfmApp.GetMainWindow()" in script_text, "script.refetches_a_fresh_main_window_immediately_before_marker_install")
+expect(
+    script_text.index("fresh_main_window = sfmApp.GetMainWindow()") < script_text.index("set_marker(fresh_main_window, marker_name_to_install)"),
+    "script.fresh_main_window_fetched_before_set_marker_call",
+)
+expect("set_marker(fresh_main_window, marker_name_to_install)" in script_text, "script.marker_install_uses_the_freshly_fetched_window_not_the_one_captured_at_script_start")
+expect("f2r1.marker_self_verified_immediately_after_install" in script_text, "script.self_verifies_marker_immediately_after_install")
+expect("f2r1.marker_self_verified_after_same_invocation_gc_collect" in script_text, "script.self_verifies_marker_after_an_explicit_same_invocation_gc_collect")
+expect(
+    script_text.index("set_marker(fresh_main_window, marker_name_to_install)") < script_text.index("f2r1.marker_self_verified_immediately_after_install")
+    < script_text.index("f2r1.marker_self_verified_after_same_invocation_gc_collect"),
+    "script.verification_checks_ordered_correctly_relative_to_install_and_gc",
+)
+expect("_f2r1_marker_keepalive_refs" in script_text, "script.python_side_keepalive_reference_mechanism_present")
 
 sys.stdout.write("\n=== %d PASS / %d FAIL ===\n" % (PASS_COUNT[0], FAIL_COUNT[0]))
 sys.exit(0 if FAIL_COUNT[0] == 0 else 1)

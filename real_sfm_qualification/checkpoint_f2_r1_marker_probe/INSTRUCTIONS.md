@@ -62,7 +62,20 @@ covering `read_state()` (absent/round-trip/corrupt-raise cases), `find_probe_mar
 visible-on-another case simulating a real restart), `extract_pid_from_marker_name()`, and
 `classify_probe_invocation()` across all four reachable state/marker combinations. Static checks confirm
 the probe never references production, never calls `SaveToFile`, and performs no scene traversal of any
-kind. Not yet run against real SFM.
+kind.
+
+## Real-SFM result (2026-09-24)
+
+**PASS.** Invocation A: `A_INSTALL`, PID 2140, no marker present before install, state persisted,
+`OVERALL_PASS=True`. Invocation B: `B_SAME_PROCESS_CHECK`, PID 2140 (matching A), marker
+`F2R1_MARKER_PROBE_INSTALLED_BY_PID_2140` still present and correctly encoding PID 2140,
+`OVERALL_PASS=True`. Invocation C: `C_POST_RESTART_CHECK` (established via an earlier preserved real-SFM
+run of this same probe implementation) — marker absent after a full SFM restart, persisted state remained,
+`OVERALL_PASS=True`. **The QObject/process marker mechanism is empirically validated**: it survives
+separate MAINMENU invocations within the same SFM process and correctly disappears across a true restart.
+This confirms F2-R1's own marker architecture is sound at the mechanism level; F2-R1's own real-attempt
+failures were context-specific (see F2-R1-R3 in `checkpoint_f2_r1/INSTRUCTIONS.md`), not a defect in this
+underlying mechanism, which is therefore not replaced.
 
 ## Identities
 

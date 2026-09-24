@@ -30,35 +30,44 @@ instructions**: that attempt is aborted, not qualification evidence. Before star
 `C:\Users\Public\Documents\sfm_checkpoint_f2_r1_state.json` if it exists, and restart from a fresh SFM
 process and a fresh copy of the disposable fixture, per the sequence below.
 
-## MANDATORY PREREQUISITE (added 2026-09-24, F2-R1-R2)
+## Marker mechanism status (updated 2026-09-24, F2-R1-R3)
 
 A real F2-R1 attempt showed a fresh-looking invocation misclassify as `stage1_complete` with no marker
-found. Direct evidence review showed the state file itself was genuine (its timestamp exactly matches a
-real Stage 1 completion ~35 minutes earlier) — but this project's own cross-invocation Qt-marker mechanism
-had never actually been proven to survive separate script invocations; every prior use of the similar-
-looking `RUN_LOCK_NAME` technique in this project only ever checks a marker within the SAME invocation's
-own wait loop, never across two separate ones. **Do not run F2-R1 again until
-`checkpoint_f2_r1_marker_probe/Checkpoint_F2_R1_Marker_Persistence_Probe.py` has been run for real
-(see its own `INSTRUCTIONS.md`) and returned a clear PASS across all three of its own invocations (A, B,
-C).** If that probe fails, F2-R1's own marker mechanism needs to be redesigned before any further attempt.
+found, ~35 minutes after a genuine Stage 1 completion. `checkpoint_f2_r1_marker_probe/` was built to test
+the underlying Qt-marker mechanism in isolation and **has since run for real against SFM and PASSED**:
+invocation A (fresh process, install, PID recorded) PASS; invocation B (same process, re-invoked: marker
+still present, still encoding A's own PID) PASS; invocation C (after a real restart: marker absent) PASS
+via an earlier preserved real-SFM run of this same probe implementation. **The QObject-marker mechanism
+itself is therefore empirically validated** — it survives separate MAINMENU invocations in the same SFM
+process and disappears across a true restart. The marker architecture is not replaced.
+
+Comparing the proven probe implementation against F2-R1's own line-by-line did not find a difference in
+the core mechanism (both use `QtCore.QObject(main_window)` + `setObjectName()` + `findChildren()`) — the
+difference is *context*: the probe installs its marker immediately with no intervening work, while F2-R1
+installs its marker only after a long (potentially many-minutes) production run and thousands of
+`processEvents()` calls. F2-R1-R3 hardens the identical mechanism against every plausible context-specific
+risk this comparison identified: `main_window` is now re-fetched **fresh**, immediately before marker
+installation, rather than reusing the reference captured at script start (removes reference staleness as a
+variable); the marker is now given an explicit Python-side keep-alive reference on `main_window` itself,
+alongside Qt's own C++ parent-child ownership; and each invocation now self-verifies its own marker is
+still found both immediately after installation and again after an explicit same-invocation `gc.collect()`
+(a direct, same-run test of the GC hypothesis), recorded as its own checks. Any state the classifier cannot
+unambiguously resolve still causes it to STOP before doing anything further — it never guesses — and (as of
+F2-R1-R2) every invocation captures a forensic pre-classification snapshot
+(`sfm_checkpoint_f2_r1_forensic_snapshot.json`: exact state path, absolute path, existence, raw contents,
+size, mtime, this process's own PID, and every marker/object name found) strictly before any state read
+used for classification and strictly before any state write, so any future misclassification can be
+diagnosed directly from preserved evidence rather than inferred.
 
 ## One runnable checkpoint, invoked three times
 
 The same script, `Checkpoint_F2_R1_Legitimate_Reinvocation_Qualification.py`, is run three times total —
 twice in one continuous SFM process (Stage 1, then Stage 2), and once more after a deliberate restart
 (Final Verification). It automatically classifies which mode to run from a small persisted JSON state
-file (`sfm_checkpoint_f2_r1_state.json`) plus an in-process Qt marker (a child `QObject` parented to
-`main_window`). **This marker mechanism's own cross-invocation persistence is not proven by this
-project's prior history** — see the mandatory prerequisite above. The design intent is that the marker
-survives separate script invocations within the same process but is absent after a real restart, which
-would be exactly the signal needed to detect a protocol violation (SFM restarted between Stage 1 and Stage
-2) versus a legitimate mode transition, but this must be empirically confirmed by the marker probe first.
-Any state it cannot unambiguously classify causes it to STOP before doing anything further — it never
-guesses — and (as of F2-R1-R2) every invocation now captures a forensic pre-classification snapshot
-(`sfm_checkpoint_f2_r1_forensic_snapshot.json`: exact state path, absolute path, existence, raw contents,
-size, mtime, this process's own PID, and every marker/object name found) strictly before any state read
-used for classification and strictly before any state write, so a future misclassification can be
-diagnosed directly from preserved evidence rather than inferred.
+file (`sfm_checkpoint_f2_r1_state.json`) plus the now-validated in-process Qt marker (a child `QObject`
+parented to a freshly-fetched `main_window`) — the marker survives separate script invocations within the
+same process but is absent after a real restart, which is exactly the signal needed to detect a protocol
+violation (SFM restarted between Stage 1 and Stage 2) versus a legitimate mode transition.
 
 ## Exact operator sequence
 
@@ -146,8 +155,8 @@ limit; the qualification asks whether the workflow succeeds, not whether some th
 ## Offline verification performed before deployment
 
 `test_f2_r1_diagnostic_regression.py` (SHA-256
-`ecb79c106616e63437e3e65c8e68f1407b4ad9427c1429751468477be094ce4b`) extracts the script's own pure-Python/
-Qt helper functions verbatim (by source line range) and exercises them — **72/72 PASS** under the real
+`25aba958674b2cab36156a540f20b48a118a40a9c83c0f3345d81ab33b9e23c1`) extracts the script's own pure-Python/
+Qt helper functions verbatim (by source line range) and exercises them — **83/83 PASS** under the real
 embedded Python 2.7.5 — covering: the atomic-write primitives; `read_state_file()` (absent-file,
 round-trip, and corrupt-file-raises-STOP cases); `marker_present()`/`set_marker()` against **real**
 `QtCore.QObject` instances (PySide's QtCore is importable standalone with the embedded interpreter,
@@ -156,12 +165,20 @@ a real SFM restart; `classify_invocation_mode()` across all nine reachable state
 including every stale/wrong-stage rejection path (Stage 1 completed in a different process; Stage 2
 already completed and re-invoked in the same process; corrupt/empty state); `get_control_membership()`/
 `find_target_aset()` against synthetic fake DME control-group trees, including the operator-edit
-precondition state and a `None`-root-group exception path; and static design checks confirming no
-`SaveToFile` call, no whole-session `capture_snapshot_explicit()` call, no direct `QTimer` scheduling, the
-1800-second generous-timing constant, that Final Verification mode neutralizes the real instance and never
-invokes production for real, that Undo is never referenced in any `check()` name, and that the
-precondition check is structurally placed before the wait loop's own definition (confirming no event pump
-could have occurred first). Not yet run against real SFM.
+precondition state and a `None`-root-group exception path; `capture_forensic_pre_classification_snapshot()`
+(state-file-absent and state-file-present cases, confirming it never creates or modifies the state file
+itself); `assert_legal_classification_or_raise()` (the exact harness-defect signature a real F2-R1 attempt
+exhibited, and that it never fires when state is legitimately present); `set_marker()`'s own Python-side
+keep-alive mechanism and same-invocation survival across an explicit `gc.collect()` (a direct test of the
+GC hypothesis raised during F2-R1-R2/R3 diagnosis); and static design checks confirming no `SaveToFile`
+call, no whole-session `capture_snapshot_explicit()` call, no direct `QTimer` scheduling, the 1800-second
+generous-timing constant, that Final Verification mode neutralizes the real instance and never invokes
+production for real, that Undo is never referenced in any `check()` name, that the precondition check is
+structurally placed before the wait loop's own definition, and that marker installation now re-fetches a
+fresh `main_window` and self-verifies both immediately and after an explicit same-invocation GC. **Run
+against real SFM 3 times prior to the F2-R1-R3 hardening (all 3 classified `HARNESS MODE-CLASSIFICATION
+FAILURE / INCONCLUSIVE` — see `LEDGER.md`); the marker persistence probe has since independently PASSED
+against real SFM; the F2-R1-R3 hardened script itself has not yet been run against real SFM.**
 
 ## Identities this checkpoint is pinned against
 
@@ -169,8 +186,9 @@ could have occurred first). Not yet run against real SFM.
 - Canonical Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
 - Expected Stage 1/2 fixture filename: `F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx`
 - Expected Final Verification fixture filename: `F2_R1_DISPOSABLE_REINVOCATION_RESULT.dmx`
-- F2-R1 real-SFM script SHA-256: `fdba8e9482ed7082ac9adc2d7099305dea0992d2e586cf05afba3bbc696f0976`
-- F2-R1 offline regression test SHA-256: `ecb79c106616e63437e3e65c8e68f1407b4ad9427c1429751468477be094ce4b`
+- F2-R1 real-SFM script SHA-256: `34cbb4b399b50fdf3318292e2326691afbed4021ec85c12525e28b155a5eb44f`
+- F2-R1 offline regression test SHA-256: `25aba958674b2cab36156a540f20b48a118a40a9c83c0f3345d81ab33b9e23c1`
+- Marker persistence probe SHA-256 (real-SFM validated, see `checkpoint_f2_r1_marker_probe/`): `fba33198b636330d9a88cd4733f526a59a87cff1e201bfcf0b0f589ca1471b7d`
 
 ## Explicit non-authorization
 
