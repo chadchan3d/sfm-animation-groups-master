@@ -405,20 +405,40 @@ def build_graph_cycle(create_element_fn, at_element_array_const, fileid):
 
 
 # Every tested pAttrName value and its explicit justification. No invented
-# wildcard strings. "" and None are legitimate, cheap, low-risk C-string-
-# boundary probes (not guesses at a magic sentinel) -- SWIG typically maps
-# Python None to a NULL `const char*`, a well-known, standard binding
-# behavior, not an invented API.
+# wildcard strings.
+#
+# A Python-None (NULL const char*) probe is DELIBERATELY EXCLUDED here.
+# Passing None to a SWIG `char const *` parameter is commonly mapped to a
+# NULL pointer, but nothing in the installed binding stub, any header, or
+# any other evidence in this SFM install establishes that
+# CElementTreeTraversal's own C++ implementation SAFELY handles a NULL
+# pAttrName (as opposed to, for example, dereferencing it unconditionally
+# and crashing the process). Passing "" is a genuine, safe, non-NULL
+# C-string value (an empty but valid pointer), which is not the same
+# safety question. NULL and "" are NOT assumed equivalent anywhere in this
+# checkpoint. NULL pAttrName semantics are recorded as UNKNOWN
+# (`report["null_pattrname_probe"]`) rather than tested, unless the
+# remaining named/empty-string probes fail to establish complete-forward-
+# traversal and global-dedup semantics AND a NULL probe is separately
+# judged actually necessary to qualify the API -- that would require its
+# own explicit safety review before being added back, not silent
+# reintroduction.
 TESTED_ATTR_NAMES_GRAPH1 = [
     ("attr_A", "attr_A", "the real, present scalar reference attribute name used at two different nesting levels (ROOT and A)"),
     ("attr_B", "attr_B", "the real, present scalar reference attribute name used at ROOT and B"),
     ("attr_list", "attr_list", "the real, present AT_ELEMENT_ARRAY reference attribute name on A"),
-    ("empty_string", "", "the natural 'absence of a name' probe -- a legitimate, safe C-string value, not an invented sentinel"),
-    ("python_none", None, "tests SWIG's standard None-to-NULL-const-char* mapping, a well-known, standard binding behavior"),
+    ("empty_string", "", "the natural 'absence of a name' probe -- a legitimate, safe, non-NULL C-string value, not an invented sentinel"),
 ]
 TESTED_ATTR_NAMES_DAG_AND_CYCLE = [
     ("ref", "ref", "the real, present AT_ELEMENT_ARRAY reference attribute name used at every node in this graph"),
 ]
+
+NULL_PATTRNAME_PROBE_STATUS = (
+    "NOT_TESTED_UNKNOWN -- no installed binding/source evidence establishes that "
+    "CElementTreeTraversal safely accepts a NULL pAttrName; not assumed equivalent "
+    "to the empty-string probe; would require its own explicit safety review "
+    "before being tested."
+)
 
 
 # ---------------------------------------------------------------------------
@@ -644,6 +664,7 @@ report = {
         "multiattr": [{"label": lbl, "value_repr": repr(val), "justification": just} for (lbl, val, just) in TESTED_ATTR_NAMES_GRAPH1],
         "dag_and_cycle": [{"label": lbl, "value_repr": repr(val), "justification": just} for (lbl, val, just) in TESTED_ATTR_NAMES_DAG_AND_CYCLE],
     },
+    "null_pattrname_probe_status": NULL_PATTRNAME_PROBE_STATUS,
     "detached_graph_available": None,
     "detached_graph_unavailable_reason": None,
     "legacy_control": {},
@@ -968,6 +989,7 @@ summary_lines.append("--- CHECKS ---")
 for c in report["checks"]:
     summary_lines.append("[%s] %s%s" % ("PASS" if c["pass"] else "FAIL", c["name"], "" if c["detail"] is None else " -- %s" % c["detail"]))
 summary_lines.append("")
+summary_lines.append("null_pattrname_probe_status=%r" % (report.get("null_pattrname_probe_status"),))
 summary_lines.append("detached_graph_available=%r  reason=%r" % (report.get("detached_graph_available"), report.get("detached_graph_unavailable_reason")))
 summary_lines.append("graph1_coverage=%r" % (report.get("graph1_coverage"),))
 summary_lines.append("dag_cycle_dedup_classification=%r" % (report.get("dag_cycle_dedup_classification"),))

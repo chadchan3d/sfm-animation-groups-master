@@ -76,9 +76,20 @@ there — it does not invent an alternative method, per instruction.
 
 1. **Multi-attribute forward references**: `ROOT --attr_A--> A --attr_A--> C`;
    `ROOT --attr_B--> B --attr_B--> D`; `A --attr_list(array)--> [E, F]`. Tested `pAttrName` values:
-   `"attr_A"`, `"attr_B"`, `"attr_list"` (the three real, present attribute names), `""` (the natural
-   "absence of a name" probe), and `None` (SWIG's standard None-to-NULL-`const char*` mapping) — five
-   legitimate, justified probes, no invented sentinels.
+   `"attr_A"`, `"attr_B"`, `"attr_list"` (the three real, present attribute names) and `""` (the natural
+   "absence of a name" probe, a genuine safe non-NULL C-string) — four legitimate, justified probes, no
+   invented sentinels.
+
+   **A Python-`None` (NULL `const char*`) probe is deliberately excluded.** SWIG commonly maps Python
+   `None` to a NULL pointer for `char const *` parameters, but nothing in the installed binding stub, any
+   header, or any other evidence in this SFM install establishes that `CElementTreeTraversal`'s own C++
+   implementation safely handles a NULL `pAttrName` (as opposed to, say, unconditionally dereferencing it
+   and crashing the process). `""` is a genuine, safe, non-NULL C-string value — a different safety
+   question from NULL, and the two are **not** assumed equivalent anywhere in this checkpoint. NULL
+   `pAttrName` semantics are recorded as `NOT_TESTED_UNKNOWN` (`report["null_pattrname_probe_status"]`)
+   rather than tested. If the remaining named/empty-string probes fail to establish complete-forward-
+   traversal and global-dedup semantics, NULL may be revisited only after its own explicit safety review,
+   and only if actually necessary to qualify the API — never silently reintroduced.
 2. **Shared-reference DAG**: `ROOT --ref--> [A, B]`; `A --ref--> [C]`; `B --ref--> [C]` (C shared).
    Tested `pAttrName`: `"ref"` (the one real attribute name present).
 3. **Cycle**: `ROOT --ref--> [A]`; `A --ref--> [B]`; `B --ref--> [ROOT]`. Tested `pAttrName`: `"ref"`.
@@ -110,17 +121,19 @@ prototype is authorized.
 ## Offline verification performed before deployment
 
 `test_f1_r8_diagnostic_regression.py` (SHA-256
-`ed03685291bdac8c33ca4c4e2e5f6ee2b71231ed8f625cb7bd5589782e2a9718`) extracts the script's own pure-Python
+`f3f80f5a5171c906b1acd788a7f43188ef99089fa1d6f7713f0d2697b9c271da`) extracts the script's own pure-Python
 harness functions verbatim (by source line range) and exercises them against synthetic
-`FakeElement`/`FakeAttribute` objects and deliberately-scripted fake traversal classes — **72/72 PASS**,
+`FakeElement`/`FakeAttribute` objects and deliberately-scripted fake traversal classes — **77/77 PASS**,
 covering: graph-accounting (`build_graph_*` wiring correctness), the legacy control wrapper
 (`run_legacy_reachable`, including its own exception path), the bounded watchdog (an intentionally
 infinite fake traversal is caught at `max_steps` without hanging), the dual `GetElement()`/`Next()`
 step-recording logic (including the terminal-`None`-filtering edge case), the four result-classification
 functions (`classify_dag_cycle_dedup`, `graph1_single_call_coverage_ok`,
-`compute_final_classification`) across every branch including every failure/inconclusive path, and
-static safety checks (no `SaveToFile`, no native Rebuild, no shot activation, neutralization ordering,
-scratch cleanup in a `finally` block, no 62-target/full-shot-loop in the optional real-scene check). **No
+`compute_final_classification`) across every branch including every failure/inconclusive path, that
+exactly the four justified `pAttrName` values are present with no NULL probe, and static safety checks
+(no `SaveToFile`, no native Rebuild, no shot activation, neutralization ordering, scratch cleanup in a
+`finally` block, no 62-target/full-shot-loop in the optional real-scene check, the NULL-`pAttrName`
+unknown-status record present and explicitly not inferred equivalent to `""`). **No
 fake traversal class result is treated as native qualification evidence** — these tests validate the
 harness only, exactly as required; real `CElementTreeTraversal` semantics can only be observed by
 actually running this checkpoint inside real SFM. All under the real embedded Python 2.7.5. Not yet run
@@ -131,8 +144,8 @@ against real SFM.
 - Installed, accepted, integrated production Normalizer SHA-256: `cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867`
 - Canonical Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
 - Expected normalized-copy fixture filename: `F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx`
-- F1-R8 real-SFM script SHA-256: `e28c4ef4b98329e0124a9ccebe6a8012c35d61767de233cae4ec5e3a217dd4b0`
-- F1-R8 offline regression test SHA-256: `ed03685291bdac8c33ca4c4e2e5f6ee2b71231ed8f625cb7bd5589782e2a9718`
+- F1-R8 real-SFM script SHA-256: `863213058e66103f4a03d8f95d4e07d702c0274f6f2adb9d0be94cbbac962551`
+- F1-R8 offline regression test SHA-256: `f3f80f5a5171c906b1acd788a7f43188ef99089fa1d6f7713f0d2697b9c271da`
 
 ## Explicit non-authorization
 

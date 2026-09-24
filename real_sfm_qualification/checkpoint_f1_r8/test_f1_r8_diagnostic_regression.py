@@ -26,7 +26,7 @@ import sys
 import time
 
 SCRIPT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Checkpoint_F1_R8_CElementTreeTraversal_Native_Characterization.py")
-EXPECTED_SCRIPT_SHA256 = "e28c4ef4b98329e0124a9ccebe6a8012c35d61767de233cae4ec5e3a217dd4b0"
+EXPECTED_SCRIPT_SHA256 = "863213058e66103f4a03d8f95d4e07d702c0274f6f2adb9d0be94cbbac962551"
 
 CREATE_SCRATCH_NODE_RANGE = (314, 315)
 LINK_SCALAR_RANGE = (318, 321)
@@ -34,12 +34,12 @@ LINK_ARRAY_RANGE = (324, 329)
 BUILD_GRAPH_MULTIATTR_RANGE = (332, 362)
 BUILD_GRAPH_DAG_RANGE = (365, 384)
 BUILD_GRAPH_CYCLE_RANGE = (387, 404)
-TESTED_ATTR_NAMES_RANGE = (412, 421)
-RUN_LEGACY_REACHABLE_RANGE = (428, 455)
-RUN_NATIVE_TRAVERSAL_RANGE = (458, 571)
-CLASSIFY_DAG_CYCLE_DEDUP_RANGE = (574, 597)
-GRAPH1_COVERAGE_RANGE = (600, 615)
-COMPUTE_FINAL_CLASSIFICATION_RANGE = (618, 625)
+TESTED_ATTR_NAMES_RANGE = (426, 434)
+RUN_LEGACY_REACHABLE_RANGE = (448, 475)
+RUN_NATIVE_TRAVERSAL_RANGE = (478, 591)
+CLASSIFY_DAG_CYCLE_DEDUP_RANGE = (594, 617)
+GRAPH1_COVERAGE_RANGE = (620, 635)
+COMPUTE_FINAL_CLASSIFICATION_RANGE = (638, 645)
 
 PASS_COUNT = [0]
 FAIL_COUNT = [0]
@@ -209,7 +209,8 @@ sys.stdout.write("\n--- TESTED_ATTR_NAMES_GRAPH1 sanity (no invented wildcard st
 ns_names = {}
 exec(compile(extract(TESTED_ATTR_NAMES_RANGE), "<tested_attr_names>", "exec"), ns_names)
 tested_values = [v for (_lbl, v, _just) in ns_names["TESTED_ATTR_NAMES_GRAPH1"]]
-expect(tested_values == ["attr_A", "attr_B", "attr_list", "", None], "tested_attr_names.exactly_the_5_justified_values_no_wildcards")
+expect(tested_values == ["attr_A", "attr_B", "attr_list", ""], "tested_attr_names.exactly_the_4_justified_values_no_wildcards")
+expect(None not in tested_values, "tested_attr_names.no_null_pattrname_probe -- removed pending explicit safety evidence, per instruction")
 expect(len(ns_names["TESTED_ATTR_NAMES_DAG_AND_CYCLE"]) == 1 and ns_names["TESTED_ATTR_NAMES_DAG_AND_CYCLE"][0][1] == "ref", "tested_attr_names.dag_cycle_uses_only_the_real_ref_attribute")
 
 # ---------------------------------------------------------------------------
@@ -462,6 +463,10 @@ expect(
     "script.cleanup_runs_in_a_finally_block_regardless_of_outcome",
 )
 expect("MAX_TRAVERSAL_STEPS = 2000" in script_text, "script.watchdog_bound_is_a_small_fixed_constant")
+expect("NULL_PATTRNAME_PROBE_STATUS" in script_text, "script.records_explicit_null_pattrname_unknown_status")
+expect("NOT_TESTED_UNKNOWN" in script_text, "script.null_pattrname_status_is_explicitly_unknown_not_inferred")
+expect('"null_pattrname_probe_status": NULL_PATTRNAME_PROBE_STATUS' in script_text, "script.null_pattrname_status_included_in_report")
+expect("NULL and \"\" are NOT assumed equivalent" in script_text, "script.explicitly_does_not_infer_null_and_empty_string_equivalence")
 expect("real-scene sanity check is gated behind EXACT_CANDIDATE_SUPPORTED only" in script_text, "script.real_scene_check_explicitly_gated")
 expect('"attempted": False' in script_text, "script.real_scene_check_defaults_to_not_attempted")
 expect("Do not run 62 targets" not in script_text, "script.does_not_literally_quote_the_forbidden_62_target_instruction -- sanity check runs on one shot only, never instance.work's full loop")
