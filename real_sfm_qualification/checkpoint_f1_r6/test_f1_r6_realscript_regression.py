@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 """
 Offline regression for Checkpoint F1-R6's real-SFM script
-(Checkpoint_F1_R6_Fresh_Streaming_Discovery_Parity.py).
+(Checkpoint_F1_R6_Fresh_Streaming_Discovery_Parity.py), TWO-MODE /
+SEPARATE-FRESH-PROCESS design (design correction from the prior
+single-process, alternating-arm-order version).
 
 No real SFM environment is available offline, so this test extracts the
 script's own pure-Python helper functions VERBATIM (by source line range,
-not retyped) and exercises them against synthetic fakes.
+not retyped) and exercises them against synthetic fakes, then runs static
+source checks confirming the two-mode design is actually present in the
+deployed script (mode dialog, per-mode output paths, no in-process
+cross-arm comparison, no candidate-module loading in LEGACY mode).
 
 Run under the real embedded Python 2.7.5:
   sdktools\\python\\2.7\\win32\\python.exe test_f1_r6_realscript_regression.py
@@ -17,11 +22,10 @@ import sys
 import tempfile
 
 SCRIPT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Checkpoint_F1_R6_Fresh_Streaming_Discovery_Parity.py")
-EXPECTED_SCRIPT_SHA256 = "1f4096e98a37bd0fd9d328692cf638e24b00e4aae6e6bc9dfeda38b817f5c975"
+EXPECTED_SCRIPT_SHA256 = "1de63943f6fd670a91f110f94d2b6e16f56473b95a7e40c6d41ad83df4c02eeb"
 
-WRITE_JSON_ATOMIC_RANGE = (168, 212)
-WRITE_TEXT_ATOMIC_RANGE = (215, 253)
-COMPARE_DISCOVERY_RESULTS_RANGE = (256, 302)
+WRITE_JSON_ATOMIC_RANGE = (236, 280)
+WRITE_TEXT_ATOMIC_RANGE = (283, 321)
 
 PASS_COUNT = [0]
 FAIL_COUNT = [0]
@@ -69,62 +73,6 @@ text_target = os.path.join(tmp_dir, "result.txt")
 ok2, err2 = write_text_atomic(text_target, b"hello world")
 expect(ok2 is True, "write_text_atomic.simple_write_ok")
 
-sys.stdout.write("\n--- compare_discovery_results(): compact parity comparison ---\n")
-
-ns3 = {}
-exec(compile(extract(COMPARE_DISCOVERY_RESULTS_RANGE), "<compare_discovery_results>", "exec"), ns3)
-compare_discovery_results = ns3["compare_discovery_results"]
-
-
-class FakeHandleObj(object):
-    def __init__(self, h):
-        self._h = h
-
-    def GetHandle(self):
-        return self._h
-
-
-baseline = {
-    "status": "SUPPORTED_ACTIVE_RIG",
-    "reachable_rig_count": 1,
-    "matching_rig_count": 1,
-    "rig_handle": 42,
-    "registry_handle": 99,
-    "owned_handles": set([1, 2, 3]),
-    "owned_names_in_order": [u"a", u"b"],
-    "hidden_groups": [u"GroupA"],
-    "rig": FakeHandleObj(42),
-    "registry": FakeHandleObj(99),
-}
-
-identical = dict(baseline)
-identical["rig"] = FakeHandleObj(42)
-identical["registry"] = FakeHandleObj(99)
-is_match, mismatches = compare_discovery_results(baseline, identical)
-expect(is_match is True and mismatches == [], "compare.identical_results_match_exactly")
-
-status_diff = dict(baseline)
-status_diff["status"] = "UNRIGGED"
-is_match2, mismatches2 = compare_discovery_results(baseline, status_diff)
-expect(is_match2 is False and "status" in mismatches2, "compare.status_mismatch_detected")
-
-rig_identity_diff = dict(baseline)
-rig_identity_diff["rig"] = FakeHandleObj(43)  # different underlying handle
-is_match3, mismatches3 = compare_discovery_results(baseline, rig_identity_diff)
-expect(is_match3 is False and "selected_rig_identity" in mismatches3, "compare.rig_identity_mismatch_detected")
-
-owned_names_diff = dict(baseline)
-owned_names_diff["owned_names_in_order"] = [u"a", u"c"]
-is_match4, mismatches4 = compare_discovery_results(baseline, owned_names_diff)
-expect(is_match4 is False and "owned_names_in_order" in mismatches4, "compare.owned_names_mismatch_detected")
-
-both_rig_none = dict(baseline)
-both_rig_none["rig"] = None
-both_rig_none["registry"] = None
-identical_both_none = dict(both_rig_none)
-is_match5, mismatches5 = compare_discovery_results(both_rig_none, identical_both_none)
-expect(is_match5 is True, "compare.both_rig_and_registry_none_matches_cleanly -- the AMBIGUOUS_MULTIPLE_RIGS case")
-
 sys.stdout.write("\n--- Static safety checks on the actual deployed script source ---\n")
 
 
@@ -152,7 +100,81 @@ expect(
     script_text.index("instance.finished = True") < script_text.index("work = instance.work"),
     "script.neutralization_happens_before_reading_instance_work",
 )
-expect("target_index % 2 == 0" in script_text, "script.alternates_arm_order_per_target -- ordering-bias control")
+
+sys.stdout.write("\n--- Two-mode / separate-fresh-process design checks (F1-R6 design correction) ---\n")
+
+expect("def select_mode_via_dialog" in script_text, "script.defines_mode_selection_dialog_function")
+expect("QtGui.QMessageBox()" in script_text, "script.mode_dialog_uses_a_real_qt_messagebox")
+expect('u"LEGACY"' in script_text and 'u"STREAMING_CANDIDATE"' in script_text, "script.mode_dialog_offers_exactly_legacy_and_streaming_candidate_labels")
+expect("MODE_LEGACY = u\"LEGACY\"" in script_text, "script.defines_mode_legacy_constant")
+expect('MODE_STREAMING_CANDIDATE = u"STREAMING_CANDIDATE"' in script_text, "script.defines_mode_streaming_candidate_constant")
+
+expect(
+    "sfm_checkpoint_f1_r6_legacy_result.json" in script_text and "sfm_checkpoint_f1_r6_streaming_candidate_result.json" in script_text,
+    "script.legacy_and_streaming_modes_write_to_distinct_output_filenames -- prevents one arm's own fresh-process run from overwriting the other's evidence",
+)
+
+expect(
+    "def compare_discovery_results" not in script_text,
+    "script.no_in_process_cross_arm_comparison_function -- comparison moved fully offline, per design correction",
+)
+expect(
+    "candidate_result " not in script_text and "candidate_result=" not in script_text
+    and "legacy_result " not in script_text and "legacy_result=" not in script_text
+    and "legacy_result," not in script_text and "candidate_result," not in script_text,
+    "script.no_dual_arm_result_variables -- confirms only ONE arm's discover_rig_context is ever called per run",
+)
+expect(
+    "= discovery_fn(shot, aset)" in script_text,
+    "script.uses_a_single_selected_discovery_fn_per_run",
+)
+expect(
+    "target_index % 2 == 0" not in script_text,
+    "script.no_arm_order_alternation -- the rejected single-process alternating-order design is gone",
+)
+
+expect(
+    "if mode == MODE_LEGACY:" in script_text,
+    "script.branches_on_selected_mode_before_choosing_discovery_fn",
+)
+expect(
+    "exec(compile(prototype_bytes," in script_text,
+    "script.still_loads_prototype_bytes_somewhere",
+)
+prototype_exec_idx = script_text.index("exec(compile(prototype_bytes,")
+legacy_branch_idx = script_text.index("if mode == MODE_LEGACY:")
+else_branch_idx = script_text.index("else:", legacy_branch_idx)
+expect(
+    prototype_exec_idx > else_branch_idx,
+    "script.prototype_exec_only_happens_in_the_streaming_candidate_else_branch -- never in a LEGACY run",
+)
+
+expect(
+    "prototype_bytes = None" in script_text,
+    "script.prototype_bytes_defaults_to_none_and_is_only_populated_for_streaming_candidate_mode",
+)
+expect(
+    "if mode == MODE_STREAMING_CANDIDATE:\n        with open(PROTOTYPE_PATH" in script_text,
+    "script.prototype_file_only_opened_in_streaming_candidate_mode",
+)
+
+expect(
+    "workload_design_note" in script_text,
+    "script.records_explicit_62_call_vs_250_site_workload_justification",
+)
+expect(
+    "62 total)" in script_text or "(62 total)" in script_text,
+    "script.explicitly_states_62_calls_per_arm_not_250",
+)
+
+expect(
+    "This is ONE arm only (mode=%s)" in script_text,
+    "script.own_summary_text_states_this_is_one_arm_only",
+)
+expect(
+    "F1_R6_Compare_Legacy_vs_Streaming_Results.py" in script_text,
+    "script.own_summary_text_points_to_the_separate_offline_comparator",
+)
 
 sys.stdout.write("\n=== %d PASS / %d FAIL ===\n" % (PASS_COUNT[0], FAIL_COUNT[0]))
 sys.exit(0 if FAIL_COUNT[0] == 0 else 1)
