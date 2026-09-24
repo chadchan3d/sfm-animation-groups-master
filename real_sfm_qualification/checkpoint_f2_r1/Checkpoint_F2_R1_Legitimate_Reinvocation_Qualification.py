@@ -323,6 +323,88 @@ def set_marker(main_window, marker_name):
     return marker
 
 
+def capture_forensic_pre_classification_snapshot(main_window):
+    """F2-R1-R2 forensic addition: captures the exact pre-classification
+    disk/process state, BEFORE any state write and BEFORE classify_
+    invocation_mode() is even called. Read-only; never writes STATE_FILE_
+    PATH or anything else. This is the evidence needed to distinguish a
+    genuine same-process marker-persistence defect from an operator-side
+    "SFM was actually restarted" misunderstanding, after a real run showed
+    a fresh-looking invocation unexpectedly classify as stage1_complete
+    with no marker present."""
+    snapshot = {
+        "state_path": STATE_FILE_PATH,
+        "state_path_abspath": os.path.abspath(STATE_FILE_PATH),
+        "state_file_exists": False,
+        "state_file_raw_contents": None,
+        "state_file_size_bytes": None,
+        "state_file_mtime": None,
+        "current_pid": None,
+        "stage1_marker_name": STAGE1_MARKER_NAME,
+        "stage2_marker_name": STAGE2_MARKER_NAME,
+        "stage1_marker_present": None,
+        "stage2_marker_present": None,
+        "all_marker_like_child_object_names": [],
+    }
+    try:
+        snapshot["current_pid"] = os.getpid()
+    except Exception as exc:
+        snapshot["current_pid_error"] = repr(exc)
+
+    try:
+        snapshot["state_file_exists"] = os.path.exists(STATE_FILE_PATH)
+        if snapshot["state_file_exists"]:
+            st = os.stat(STATE_FILE_PATH)
+            snapshot["state_file_size_bytes"] = st.st_size
+            snapshot["state_file_mtime"] = st.st_mtime
+            with open(STATE_FILE_PATH, "rb") as f:
+                raw = f.read()
+            try:
+                snapshot["state_file_raw_contents"] = raw.decode("ascii", "replace")
+            except Exception:
+                snapshot["state_file_raw_contents"] = repr(raw)
+    except Exception as exc:
+        snapshot["state_file_read_error"] = repr(exc)
+
+    try:
+        snapshot["stage1_marker_present"] = marker_present(main_window, STAGE1_MARKER_NAME)
+        snapshot["stage2_marker_present"] = marker_present(main_window, STAGE2_MARKER_NAME)
+    except Exception as exc:
+        snapshot["marker_check_error"] = repr(exc)
+
+    try:
+        if main_window is not None:
+            for child in main_window.findChildren(QtCore.QObject):
+                try:
+                    child_name = b_to_unicode(child.objectName())
+                except Exception:
+                    continue
+                if child_name and (u"MARKER" in child_name.upper() or u"F2_R1" in child_name.upper() or u"RUN_LOCK" in child_name.upper()):
+                    snapshot["all_marker_like_child_object_names"].append(child_name)
+    except Exception as exc:
+        snapshot["child_enumeration_error"] = repr(exc)
+
+    return snapshot
+
+
+def assert_legal_classification_or_raise(state, stage1_marker, stage2_marker, mode):
+    """F2-R1-R2 forensic addition: an explicit, redundant safety net,
+    independent of classify_invocation_mode()'s own internal logic. If the
+    invocation enters with state file absent AND both markers absent, the
+    ONLY legal classification is STAGE_1 -- anything else observed here is
+    itself a harness defect, not a normal protocol-violation STOP, and must
+    be reported as such rather than silently passing through."""
+    entered_with_no_state_and_no_markers = (state is None) and (not stage1_marker) and (not stage2_marker)
+    if entered_with_no_state_and_no_markers and mode != "STAGE_1":
+        raise CheckpointF2R1Error(
+            "HARNESS DEFECT (not a normal protocol violation): entered with state file "
+            "absent and both markers absent, which can only legally classify as STAGE_1, "
+            "but classify_invocation_mode() returned %r instead. STOP -- this indicates a "
+            "bug in classify_invocation_mode() itself, not a legitimate stale-state "
+            "rejection." % (mode,)
+        )
+
+
 def classify_invocation_mode(state, stage1_marker, stage2_marker):
     """Pure decision function (offline-testable): returns (mode, reason)
     where mode is one of 'STAGE_1'/'STAGE_2'/'FINAL_VERIFICATION'/None
@@ -397,11 +479,24 @@ instance = None
 mode = None
 
 try:
-    state = read_state_file()
+    # F2-R1-R2 forensic addition: capture the EXACT pre-classification
+    # disk/process state FIRST, before read_state_file() is even called
+    # for classification purposes and strictly before any state write.
     main_window = sfmApp.GetMainWindow()
-    stage1_marker = marker_present(main_window, STAGE1_MARKER_NAME)
-    stage2_marker = marker_present(main_window, STAGE2_MARKER_NAME)
+    forensic_snapshot = capture_forensic_pre_classification_snapshot(main_window)
+    report["forensic_pre_classification_snapshot"] = forensic_snapshot
+    ok, err, _r = write_json_atomic(
+        "C:\\Users\\Public\\Documents\\sfm_checkpoint_f2_r1_forensic_snapshot.json", forensic_snapshot
+    )
+    if not ok:
+        anomaly("Forensic snapshot write failed (run continues): %s" % (err,))
+    sys.stdout.write("F2-R1 forensic pre-classification snapshot: %r\n" % (forensic_snapshot,))
+
+    state = read_state_file()
+    stage1_marker = forensic_snapshot.get("stage1_marker_present")
+    stage2_marker = forensic_snapshot.get("stage2_marker_present")
     mode, mode_reason = classify_invocation_mode(state, stage1_marker, stage2_marker)
+    assert_legal_classification_or_raise(state, stage1_marker, stage2_marker, mode)
     if mode is None:
         raise CheckpointF2R1Error("Mode classification failed: %s" % mode_reason)
     report["mode"] = mode
@@ -688,14 +783,24 @@ try:
         #     marker, ONLY if this command's own checks all passed so far. ---
         stage_checks_passed = all(c["pass"] for c in report["checks"])
         if stage_checks_passed:
+            current_pid = None
+            try:
+                current_pid = os.getpid()
+            except Exception:
+                pass
             if mode == "STAGE_1":
                 set_marker(main_window, STAGE1_MARKER_NAME)
-                new_state = {"stage1_complete": True, "stage2_complete": False, "stage1_completed_at": time.strftime("%Y-%m-%d %H:%M:%S")}
+                new_state = {
+                    "stage1_complete": True, "stage2_complete": False,
+                    "stage1_completed_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+                    "stage1_pid": current_pid,
+                }
             else:
                 set_marker(main_window, STAGE2_MARKER_NAME)
                 new_state = dict(state or {})
                 new_state["stage2_complete"] = True
                 new_state["stage2_completed_at"] = time.strftime("%Y-%m-%d %H:%M:%S")
+                new_state["stage2_pid"] = current_pid
             state_write_ok, state_write_err, _r = write_json_atomic(STATE_FILE_PATH, new_state)
             check("f2r1.state_persisted", state_write_ok, state_write_err)
         else:

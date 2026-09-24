@@ -218,3 +218,10 @@ real_sfm_qualification/checkpoint_f1_r8/test_f1_r8_diagnostic_regression.py text
 # cited directly in operator instructions/the ledger.
 real_sfm_qualification/checkpoint_f2_r1/Checkpoint_F2_R1_Legitimate_Reinvocation_Qualification.py text eol=lf
 real_sfm_qualification/checkpoint_f2_r1/test_f2_r1_diagnostic_regression.py text eol=lf
+
+# F2-R1 Marker Persistence Probe (2026-09-24, F2-R1-R2): a tiny, isolated
+# diagnostic proving/disproving whether F2-R1's own cross-invocation Qt
+# marker mechanism actually works -- SHA-256 pinned and cited directly in
+# operator instructions/the ledger.
+real_sfm_qualification/checkpoint_f2_r1_marker_probe/Checkpoint_F2_R1_Marker_Persistence_Probe.py text eol=lf
+real_sfm_qualification/checkpoint_f2_r1_marker_probe/test_marker_persistence_probe_regression.py text eol=lf

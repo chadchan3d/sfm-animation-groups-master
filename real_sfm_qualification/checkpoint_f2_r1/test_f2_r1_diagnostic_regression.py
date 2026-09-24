@@ -24,7 +24,7 @@ import tempfile
 from PySide import QtCore
 
 SCRIPT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Checkpoint_F2_R1_Legitimate_Reinvocation_Qualification.py")
-EXPECTED_SCRIPT_SHA256 = "8cfeb4f40611bfba0aed3b67ded2bd6e6f7c8841bb023a4f7fb9d52e26d41a37"
+EXPECTED_SCRIPT_SHA256 = "fdba8e9482ed7082ac9adc2d7099305dea0992d2e586cf05afba3bbc696f0976"
 
 B_TO_UNICODE_RANGE = (195, 204)
 WRITE_JSON_ATOMIC_RANGE = (207, 251)
@@ -32,9 +32,11 @@ WRITE_TEXT_ATOMIC_RANGE = (254, 292)
 READ_STATE_FILE_RANGE = (295, 302)
 MARKER_PRESENT_RANGE = (305, 317)
 SET_MARKER_RANGE = (320, 323)
-CLASSIFY_INVOCATION_MODE_RANGE = (326, 342)
-GET_CONTROL_MEMBERSHIP_RANGE = (351, 357)
-FIND_TARGET_ASET_RANGE = (360, 367)
+CAPTURE_FORENSIC_SNAPSHOT_RANGE = (326, 387)
+ASSERT_LEGAL_CLASSIFICATION_RANGE = (390, 405)
+CLASSIFY_INVOCATION_MODE_RANGE = (408, 424)
+GET_CONTROL_MEMBERSHIP_RANGE = (433, 439)
+FIND_TARGET_ASET_RANGE = (442, 449)
 
 PASS_COUNT = [0]
 FAIL_COUNT = [0]
@@ -121,6 +123,76 @@ expect(marker_present(real_main_window, u"STAGE2_TEST_MARKER") is False, "marker
 
 other_window = QtCore.QObject()
 expect(marker_present(other_window, u"STAGE1_TEST_MARKER") is False, "marker_present.marker_on_one_parent_not_visible_on_another -- simulates a real SFM restart (fresh main_window)")
+
+sys.stdout.write("\n--- F2-R1-R2 forensic addition: capture_forensic_pre_classification_snapshot() ---\n")
+ns_forensic = {
+    "os": os, "b_to_unicode": b_to_unicode, "marker_present": marker_present, "QtCore": QtCore,
+    "STATE_FILE_PATH": os.path.join(tmp_dir, "forensic_state.json"),
+    "STAGE1_MARKER_NAME": u"STAGE1_TEST_MARKER", "STAGE2_MARKER_NAME": u"STAGE2_TEST_MARKER",
+}
+exec(compile(extract(CAPTURE_FORENSIC_SNAPSHOT_RANGE), "<capture_forensic_pre_classification_snapshot>", "exec"), ns_forensic)
+capture_forensic_pre_classification_snapshot = ns_forensic["capture_forensic_pre_classification_snapshot"]
+
+fresh_window = QtCore.QObject()
+snap_absent = capture_forensic_pre_classification_snapshot(fresh_window)
+expect(snap_absent["state_file_exists"] is False, "forensic.state_file_exists_false_when_absent")
+expect(snap_absent["state_file_raw_contents"] is None, "forensic.raw_contents_none_when_absent")
+expect(isinstance(snap_absent["current_pid"], int), "forensic.captures_a_real_integer_pid")
+expect(snap_absent["stage1_marker_present"] is False and snap_absent["stage2_marker_present"] is False, "forensic.no_markers_present_on_fresh_window")
+expect(not os.path.exists(ns_forensic["STATE_FILE_PATH"]), "forensic.snapshot_never_creates_the_state_file -- strictly read-only")
+
+with open(ns_forensic["STATE_FILE_PATH"], "wb") as f:
+    f.write(b'{"stage1_complete": true, "stage2_complete": false}')
+mtime_before = os.stat(ns_forensic["STATE_FILE_PATH"]).st_mtime
+snap_present = capture_forensic_pre_classification_snapshot(fresh_window)
+expect(snap_present["state_file_exists"] is True, "forensic.state_file_exists_true_when_present")
+expect(snap_present["state_file_raw_contents"] == u'{"stage1_complete": true, "stage2_complete": false}', "forensic.raw_contents_captured_exactly")
+expect(snap_present["state_file_size_bytes"] == len(b'{"stage1_complete": true, "stage2_complete": false}'), "forensic.size_captured_correctly")
+expect(os.stat(ns_forensic["STATE_FILE_PATH"]).st_mtime == mtime_before, "forensic.reading_the_snapshot_never_modifies_the_state_file")
+
+set_marker(fresh_window, u"STAGE1_TEST_MARKER")
+snap_with_marker = capture_forensic_pre_classification_snapshot(fresh_window)
+expect(snap_with_marker["stage1_marker_present"] is True, "forensic.detects_stage1_marker_when_present")
+expect(u"STAGE1_TEST_MARKER" in snap_with_marker["all_marker_like_child_object_names"], "forensic.marker_like_name_scan_finds_it")
+os.remove(ns_forensic["STATE_FILE_PATH"])
+
+sys.stdout.write("\n--- F2-R1-R2 forensic addition: assert_legal_classification_or_raise() ---\n")
+ns_assert = {"CheckpointF2R1Error": CheckpointF2R1Error}
+exec(compile(extract(ASSERT_LEGAL_CLASSIFICATION_RANGE), "<assert_legal_classification_or_raise>", "exec"), ns_assert)
+assert_legal_classification_or_raise = ns_assert["assert_legal_classification_or_raise"]
+
+# Legal: no state, no markers, classified as STAGE_1 -- must NOT raise.
+try:
+    assert_legal_classification_or_raise(None, False, False, "STAGE_1")
+    expect(True, "assert_legal.no_state_no_markers_stage1_does_not_raise")
+except CheckpointF2R1Error:
+    expect(False, "assert_legal.no_state_no_markers_stage1_does_not_raise")
+
+# Illegal: no state, no markers, but classified as anything other than
+# STAGE_1 -- this is the EXACT harness-defect signature the real F2-R1 run
+# exhibited (mode=None with a "different process" reason despite what
+# should have been a truly fresh invocation) and must raise loudly.
+raised_defect = False
+try:
+    assert_legal_classification_or_raise(None, False, False, None)
+except CheckpointF2R1Error:
+    raised_defect = True
+expect(raised_defect, "assert_legal.no_state_no_markers_non_stage1_mode_raises_HARNESS_DEFECT")
+
+raised_defect2 = False
+try:
+    assert_legal_classification_or_raise(None, False, False, "STAGE_2")
+except CheckpointF2R1Error:
+    raised_defect2 = True
+expect(raised_defect2, "assert_legal.no_state_no_markers_wrong_stage_also_raises")
+
+# Legal: state present -- the assertion is scoped ONLY to the no-state/
+# no-marker case, so any mode is accepted when state is present.
+try:
+    assert_legal_classification_or_raise({"stage1_complete": True}, True, False, "STAGE_2")
+    expect(True, "assert_legal.state_present_any_mode_does_not_raise")
+except CheckpointF2R1Error:
+    expect(False, "assert_legal.state_present_any_mode_does_not_raise")
 
 sys.stdout.write("\n--- classify_invocation_mode(): staged-state transition + stale/wrong-stage rejection tests ---\n")
 ns_classify = {}
@@ -323,6 +395,28 @@ expect(
     and script_text.index("pre_path, pre_tree = get_control_membership") < script_text.index("def normalizer_run_is_active"),
     "script.precondition_check_happens_before_the_wait_loop_is_even_defined -- confirms no processEvents() call could have occurred first",
 )
+
+sys.stdout.write("\n--- F2-R1-R2 forensic wiring checks on the actual deployed script source ---\n")
+expect("forensic_snapshot = capture_forensic_pre_classification_snapshot(main_window)" in script_text, "script.forensic_snapshot_captured_in_main_flow")
+expect(
+    script_text.index("forensic_snapshot = capture_forensic_pre_classification_snapshot(main_window)") < script_text.index("state = read_state_file()"),
+    "script.forensic_snapshot_captured_before_read_state_file_call",
+)
+expect(
+    script_text.index("state = read_state_file()") < script_text.index("mode, mode_reason = classify_invocation_mode("),
+    "script.state_read_before_classification_as_expected",
+)
+expect("assert_legal_classification_or_raise(state, stage1_marker, stage2_marker, mode)" in script_text, "script.assertion_gate_called_in_main_flow")
+expect(
+    script_text.index("assert_legal_classification_or_raise(") < script_text.index('if mode is None:\n        raise CheckpointF2R1Error("Mode classification failed'),
+    "script.assertion_gate_runs_before_the_ordinary_mode_none_check",
+)
+expect(
+    "write_json_atomic(\n        \"C:\\\\Users\\\\Public\\\\Documents\\\\sfm_checkpoint_f2_r1_forensic_snapshot.json\", forensic_snapshot\n    )" in script_text
+    or "sfm_checkpoint_f2_r1_forensic_snapshot.json" in script_text,
+    "script.forensic_snapshot_written_to_its_own_dedicated_file",
+)
+expect('"stage1_pid": current_pid' in script_text and '"stage2_pid"' in script_text, "script.state_write_now_records_pid_for_future_cross_run_comparison")
 
 sys.stdout.write("\n=== %d PASS / %d FAIL ===\n" % (PASS_COUNT[0], FAIL_COUNT[0]))
 sys.exit(0 if FAIL_COUNT[0] == 0 else 1)
