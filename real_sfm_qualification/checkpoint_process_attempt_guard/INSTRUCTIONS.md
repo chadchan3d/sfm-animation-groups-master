@@ -85,21 +85,23 @@ name).
   mutation pipeline's own defining names are unchanged, and the classifier's own extracted source no longer
   contains any shot-name-based equality check).
 - `test_checkpoint_process_attempt_guard_dryrun.py` (SHA-256
-  `70eda6991d2f2f8337db61a37de4af6b0cc6e46b170831d9f4d12d6cc3d16ca6`) — **33/33 PASS** — offline-verifies
+  `ab45cce04235d951e72f21a7543d98a9f76df789c7828836c7299cb61e91cf1c`) — **47/47 PASS** — offline-verifies
   this checkpoint script itself never references `StartRebuildControlGroups()`/scope-dialog machinery/
   substantial-traversal identifiers; `load_production_definitions()` extracts exactly the pinned scope-aware
   definitions by exact line range without importing the real SFM-only modules; the revised
-  **evidence-file discipline** (2026-09-24): `write_evidence_json_once()`/`write_evidence_text_once()`
-  refuse to overwrite an existing path (raise, verified original content stays byte-identical after a
-  refused overwrite); three sequential `main()` invocations each write a NEW, uniquely-numbered,
-  immutable snapshot file pair using the fixed 13-entry operation-label schedule, never overwriting a
-  prior one (independently re-read and confirmed byte-identical after later invocations); the first
-  invocation correctly captures the current production log as a uniquely-labeled, immutable run-evidence
-  file (`..._run_01_selected_shot3.txt`) from the fixed 8-entry label schedule; a second invocation with
-  an unchanged log captures no new run; the freely-overwritten rollup files
-  (`final_result.json`/`final_summary.txt`) correctly reflect the cumulative index after each call; and
-  checkpoint numbering (via the small, explicitly non-evidentiary continuation-state pointer file)
-  continues correctly across a simulated restart (a fresh namespace reusing the same evidence directory).
+  **evidence-file discipline** (2026-09-24, independent-review-corrected same day): a fully controllable
+  fake production-log fingerprint (redirecting only the internal read primitive, never touching the real
+  `sfm_rebuild_control_groups.txt` on this machine) drives the WHOLE 15-snapshot/8-run schedule end to end
+  offline: a nonempty pre-existing log observed at snapshot 01 is fingerprinted and seeds the "last known
+  log" pointer, but is never captured as a run and never advances the run counter; the first genuinely new
+  log content at snapshot 03 correctly becomes run 01; all 15 snapshot operation labels and expected states
+  match the exact specified schedule in order; a snapshot taken immediately after a refused invocation
+  (snapshots 07, 12, 13) captures no run and its own recorded log sha256 exactly matches the immediately
+  preceding successful snapshot's; run indices stay exactly contiguous 1 through 8 despite the three
+  interleaved refusals; numbering survives two simulated restarts (fresh namespaces reusing the same
+  evidence directory and the same persisted fake-log state); `write_evidence_json_once()` still refuses to
+  overwrite an existing path; and the final rollup indexes all 15 snapshots, all 8 runs, and all three
+  mechanically-computed refusal fingerprint-equality proofs, each correctly `equal: true`.
 
 ## Proof no execution semantics changed
 
@@ -120,14 +122,19 @@ for both changes.
 
 ## Real-SFM operator sequence
 
-Uses lightweight resource samples only (private bytes, free VAS, largest free region, and their deltas) —
-**no pass/fail threshold is invented from memory or VAS**; report the numbers and whether accumulation
-looks modest/stable or materially continuing, for the record, not as an automatic gate. Do **not** execute a
-second All Shots in one process and do **not** deliberately try to recreate the known crash.
+The production log's own `CONTEXTUALIZER_RESOURCE_CHECKPOINT` telemetry already records private bytes, free
+VAS, and largest free region throughout each command. **The operator does not manually record or transcribe
+any resource numbers.** After the run, independent review extracts command-start/command-end private bytes,
+free VAS, largest free region, per-command deltas, and the cumulative trend directly from the 8 preserved
+run-evidence logs (see below) — **no pass/fail threshold is invented from memory or VAS**; this is reported
+for the record, not applied as an automatic gate. If a command crashes before the next checkpoint
+invocation, preserve and return whatever production log exists; do not attempt to reconstruct telemetry by
+hand. Do **not** execute a second All Shots in one process and do **not** deliberately try to recreate the
+known crash.
 
-### Evidence-file discipline (2026-09-24 revision)
+### Evidence-file discipline (2026-09-24 revision, independent-review-corrected same day)
 
-**The operator must never manually rename, copy, or move any evidence file.** Every one of the 13 numbered
+**The operator must never manually rename, copy, or move any evidence file.** Every one of the 15 numbered
 **[SNAPSHOT]** points below means: run `Checkpoint_Process_Attempt_Guard_Qualification`. It is a pure
 read-only observer — it never calls the real Normalizer itself, never opens a dialog, and performs zero
 scene/provider/native work. Each invocation:
@@ -135,22 +142,46 @@ scene/provider/native work. Each invocation:
 - Writes a **new, uniquely numbered, immutable** snapshot file pair —
   `sfm_scope_guard_snapshot_NN_<operation>.json` / `.txt` — using a fixed, predetermined operation label for
   step `NN` (`baseline`, `after_cancel`, `after_shot3`, `after_5shots`, `after_3shots`, `after_edit_repair`,
-  `after_post_refusal_selected`, `after_reopen_selected`, `fresh_after_restart`, `after_all_shots`,
-  `after_refusals`, `reset_after_restart`, `final_after_restart_selected`, in that order). It refuses (raises
-  loudly) rather than silently overwriting if that exact filename already exists.
-- If the real production log's own content has changed since the checkpoint's own last observation (i.e. a
-  real Normalizer command completed since the previous invocation), automatically copies the log's exact
-  byte content itself into a new, uniquely labeled, immutable file —
+  `after_all_refusal`, `after_post_refusal_selected`, `after_reopen_selected`, `fresh_after_restart`,
+  `after_all_shots`, `after_refused_selected`, `after_refused_all`, `reset_after_restart`,
+  `final_after_restart_selected`, in that order). It refuses (raises loudly) rather than silently
+  overwriting if that exact filename already exists.
+- **Snapshot 01 (baseline) only**: whatever production log already exists on disk (e.g. left over from
+  earlier qualification work) is observed and fingerprinted, but is **never** copied into a run-evidence
+  file and never advances the run counter — it only seeds the checkpoint's own "last known log" pointer.
+  The first genuinely NEW log content, observed at a later snapshot, becomes run 01.
+- On every later snapshot, if the real production log's own content has changed since the checkpoint's own
+  last observation (i.e. a real Normalizer command completed since the previous invocation), automatically
+  copies the log's exact byte content itself into a new, uniquely labeled, immutable file —
   `sfm_scope_guard_run_NN_<label>.txt` — from the fixed 8-entry label schedule below. **The operator never
-  manually copies or renames `sfm_rebuild_control_groups.txt`.**
-- Writes an immutable `sfm_scope_guard_history_through_NN.json` cumulative index, and refreshes (freely
-  overwrites — these are index/bookkeeping, not evidence themselves) `sfm_scope_guard_final_result.json`,
-  `sfm_scope_guard_final_summary.txt`, and a small continuation-state pointer file that carries the
-  numbering across the Phase A → Phase B restarts.
+  manually copies or renames `sfm_rebuild_control_groups.txt`.** A dedicated snapshot immediately follows
+  every refused invocation, before any later successful command can replace the log, so each refusal's own
+  "log unchanged" proof is never contaminated by a later command.
+- Writes an immutable `sfm_scope_guard_history_through_NN.json` cumulative index — including three
+  mechanically-computed refusal fingerprint-equality proofs once their referenced snapshots exist — and
+  refreshes (freely overwrites — these are index/bookkeeping, not evidence themselves)
+  `sfm_scope_guard_final_result.json`, `sfm_scope_guard_final_summary.txt`, and a small continuation-state
+  pointer file that carries the numbering across the Phase A → Phase B restarts.
 
 The 8-entry run-log label schedule, in the fixed order the real commands below produce them:
 `selected_shot3`, `selected_5shots`, `selected_3shots`, `selected_edit_repair`, `selected_after_all_refusal`,
 `selected_after_reopen`, `all_shots`, `selected_after_restart`.
+
+### Deterministic operator selections
+
+These exact shot/target/control names come from the established qualification fixture
+(`F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx`). **If any named shot, animation set, or control is unexpectedly
+missing, STOP and report it — do not substitute another fixture element.**
+
+| Step | Selection |
+|---|---|
+| Initial Selected command | `shot3` alone |
+| Five-shot Selected proper subset | `shot11`, `shot8`, `shot1`, `shot2`, `shot6` |
+| Three-shot Selected proper subset | `shot12`, `shot10`, `shot7` |
+| Controlled edit | shot `shot3`, animation set `foxmccouldwm1`, control `rig_hand_L` — use the qualified SFM DAG "move to hidden group" command; expected repair: restored to `RigArms/LeftArm`, direct order `rig_collar_L, rig_elbow_L, rig_hand_L` |
+| Selected after refused All | `shot5` |
+| Selected after document reopen | `shot9` |
+| Selected after final restart | `shot4` |
 
 ### Phase A — Selected Shot(s) normal workflow
 
@@ -158,79 +189,77 @@ The 8-entry run-log label schedule, in the fixed order the real commands below p
 2. Open **only** `F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx` (the accepted normalized qualification fixture) —
    never `testscripts.dmx`.
 3. **[SNAPSHOT 01 — baseline.]** Expect `expected_state = observed_state = UNUSED`, `run_lock_present =
-   False`, `production_sha256_matches_expected = True`, no run captured.
+   False`, `production_sha256_matches_expected = True`. Any pre-existing production log is fingerprinted and
+   seeded but `run_captured` must be `none`/`baseline_seeded = true`.
 4. Invoke the real **Rebuild Control Groups** command. When the scope dialog appears, click **Cancel**.
 5. **[SNAPSHOT 02 — after_cancel; proves cancel leaves state unused.]** Expect `UNUSED` still, no run
-   captured (production log unchanged).
+   captured (production log unchanged from snapshot 01).
 6. Invoke **Rebuild Control Groups** again. Choose **Selected Shot(s)**, selecting `shot3` alone. Let it run
-   to completion. Record command-start/command-end resource samples (private bytes, free VAS, largest free
-   region).
+   to completion.
 7. **[SNAPSHOT 03 — after_shot3; proves SELECTED_USED.]** Expect `SELECTED_USED`, `run_lock_present =
    False`, and a new run captured as `sfm_scope_guard_run_01_selected_shot3.txt`.
-8. Invoke **Rebuild Control Groups** again. Choose **Selected Shot(s)**, this time selecting a representative
-   multi-shot subset of approximately **five** shots, using a deterministic fixture subset that includes
-   meaningfully denser shots such as `shot8` and/or `shot11` (this must remain a **proper subset** of the
-   project — do not select every shot). Let it complete normally. Record resource samples before/after.
+8. Invoke **Rebuild Control Groups** again. Choose **Selected Shot(s)**, selecting exactly `shot11`, `shot8`,
+   `shot1`, `shot2`, `shot6` (a proper subset). Let it complete normally.
 9. **[SNAPSHOT 04 — after_5shots.]** Expect `SELECTED_USED`, new run captured as
    `sfm_scope_guard_run_02_selected_5shots.txt`.
-10. Run another, **different** Selected proper-subset selection of about three shots (any shots not yet
-    exercised, still a proper subset). Let it complete. Record resource samples before/after.
+10. Invoke **Rebuild Control Groups** again. Choose **Selected Shot(s)**, selecting exactly `shot12`,
+    `shot10`, `shot7`. Let it complete normally.
 11. **[SNAPSHOT 05 — after_3shots.]** Expect `SELECTED_USED`, new run captured as
     `sfm_scope_guard_run_03_selected_3shots.txt`.
-12. Make one documented, legitimate presentation/group edit in one previously-processed shot (any real,
-    predetermined control-group change that genuinely warrants renormalization — do not invent an
-    arbitrary edit; reuse the same kind of qualified edit this project has used before, e.g. moving a
-    control to/from the `Hidden` group per `checkpoint_f2_r1/F2_R1_CONTROLLED_EDIT_JUSTIFICATION.md`, if a
-    fresh qualified edit target is not otherwise available — STOP and report if none can be identified
-    safely rather than inventing one).
-13. Re-run a Selected proper-subset scope containing the edited shot and verify the expected correction is
-    applied. Record resource samples before/after.
+12. Make the controlled edit: on `shot3`, animation set `foxmccouldwm1`, select control `rig_hand_L` in the
+    DAG view and run the qualified SFM "move to hidden group" command.
+13. Invoke **Rebuild Control Groups** again. Choose **Selected Shot(s)**, selecting `shot3` (the edited
+    shot), and verify `rig_hand_L` is restored to `RigArms/LeftArm` with direct order `rig_collar_L,
+    rig_elbow_L, rig_hand_L`.
 14. **[SNAPSHOT 06 — after_edit_repair.]** Expect `SELECTED_USED`, new run captured as
     `sfm_scope_guard_run_04_selected_edit_repair.txt`.
 15. Request **All Shots**. **REQUIRE refusal before any expensive work begins** (no scope-collection delay,
     immediate message).
-16. Immediately afterward, invoke **Rebuild Control Groups** again and run another Selected proper-subset
-    request. **REQUIRE it is still permitted** and completes normally.
-17. **[SNAPSHOT 07 — after_post_refusal_selected; proves the refused All left state unchanged.]** Expect
-    `SELECTED_USED` still (never became `FULL_SCOPE_STARTED`), new run captured as
-    `sfm_scope_guard_run_05_selected_after_all_refusal.txt` — this run's own byte content, compared against
-    the immediately-preceding snapshot 06's own log fingerprint, must show the refused All-Shots attempt in
-    step 15 never touched the log at all (only step 16's own real command is reflected in the delta).
-18. Reopen or switch to a **different** document in the same SFM process (no restart).
-19. Run another Selected proper-subset request after the session change. **REQUIRE it is still permitted**
-    and completes normally.
-20. **[SNAPSHOT 08 — after_reopen_selected; proves the guard is process-scoped, not session-scoped.]** Expect
-    `SELECTED_USED` still, new run captured as `sfm_scope_guard_run_06_selected_after_reopen.txt`.
-
-**Resource reporting for Phase A (every real command in steps 6/8/10/13/16/19):** for each command, report
-exact private bytes, free VAS, largest free region, and the deltas from the immediately preceding command —
-in bytes and MiB. **If realistic multi-shot Selected use itself shows substantial cumulative depletion
-comparable to the known large-run failure pattern (F1-1/F2-R1-R3), STOP and report the evidence rather than
-silently treating Phase A as passed** — this checkpoint's purpose is to observe and report, not to assume
-Selected use is unconditionally safe at any command count.
+16. **[SNAPSHOT 07 — after_all_refusal; proves the refused All left the log untouched.]** Expect
+    `SELECTED_USED` still (never became `FULL_SCOPE_STARTED`), `run_captured = none`, and this snapshot's own
+    `production_log_fingerprint.sha256` exactly equal to snapshot 06's own recorded sha256 — this is the
+    direct, uncontaminated proof that step 15's refusal alone never touched the log (no later successful
+    command has run yet at this point).
+17. Invoke **Rebuild Control Groups** again. Choose **Selected Shot(s)**, selecting `shot5`. Let it complete
+    normally.
+18. **[SNAPSHOT 08 — after_post_refusal_selected.]** Expect `SELECTED_USED`, new run captured as
+    `sfm_scope_guard_run_05_selected_after_all_refusal.txt`.
+19. Reopen `F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx` **from disk** in the same SFM process (do **not** restart).
+    If prompted to save the currently modified fixture, choose **Don't Save**.
+20. Invoke **Rebuild Control Groups** again. Choose **Selected Shot(s)**, selecting `shot9`. Let it complete
+    normally.
+21. **[SNAPSHOT 09 — after_reopen_selected; proves the guard is process-scoped, not session-scoped.]** Expect
+    `SELECTED_USED` still, the **same PID** as every earlier Phase A snapshot, new run captured as
+    `sfm_scope_guard_run_06_selected_after_reopen.txt`.
 
 ### Phase B — full-scope behavior
 
-21. **Fully restart SFM.**
-22. Reopen `F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx`.
-23. **[SNAPSHOT 09 — fresh_after_restart; proves a fresh process starts UNUSED.]** Expect `UNUSED`, and
+22. **Fully restart SFM.**
+23. Reopen `F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx`.
+24. **[SNAPSHOT 10 — fresh_after_restart; proves a fresh process starts UNUSED.]** Expect `UNUSED`, and
     `current_pid` different from every Phase A snapshot's own PID; no new run captured (the log's own content
     from Phase A's last command is still on disk, unchanged, until a new command actually runs).
-24. Run **one** standalone **All Shots** operation. Let it complete. Record resource samples before/after.
-25. **[SNAPSHOT 10 — after_all_shots; proves FULL_SCOPE_STARTED.]** Expect `FULL_SCOPE_STARTED`, new run
+25. Run **one** standalone **All Shots** operation. Let it complete.
+26. **[SNAPSHOT 11 — after_all_shots; proves FULL_SCOPE_STARTED.]** Expect `FULL_SCOPE_STARTED`, new run
     captured as `sfm_scope_guard_run_07_all_shots.txt`.
-26. Attempt **Selected Shot(s)** (any proper subset). **REQUIRE immediate refusal before any expensive work
+27. Attempt **Selected Shot(s)** (any proper subset). **REQUIRE immediate refusal before any expensive work
     begins.**
-27. Attempt **All Shots** again. **REQUIRE immediate refusal before any expensive work begins.**
-28. **[SNAPSHOT 11 — after_refusals; proves both later attempts left state unchanged and the log was not
-    touched.]** Expect `FULL_SCOPE_STARTED` still, no new run captured (log unchanged from snapshot 10).
-29. **Fully restart SFM.**
-30. Reopen the fixture. **[SNAPSHOT 12 — reset_after_restart; proves the state resets.]** Expect `UNUSED`,
+28. **[SNAPSHOT 12 — after_refused_selected; proves this refusal left the log untouched.]** Expect
+    `FULL_SCOPE_STARTED` still, `run_captured = none`, and this snapshot's own log sha256 exactly equal to
+    snapshot 11's own recorded sha256.
+29. Attempt **All Shots** again. **REQUIRE immediate refusal before any expensive work begins.**
+30. **[SNAPSHOT 13 — after_refused_all; proves this second refusal also left the log untouched.]** Expect
+    `FULL_SCOPE_STARTED` still, `run_captured = none`, and this snapshot's own log sha256 exactly equal to
+    **both** snapshot 11's and snapshot 12's own recorded sha256.
+31. **Fully restart SFM.**
+32. Reopen the fixture. **[SNAPSHOT 14 — reset_after_restart; proves the state resets.]** Expect `UNUSED`,
     new `current_pid`; no new run captured yet.
-31. Run a Selected Shot(s) request (any proper subset). **REQUIRE it is permitted** and completes normally.
-32. **[SNAPSHOT 13 — final_after_restart_selected.]** Expect `SELECTED_USED`, new run captured as
+33. Invoke **Rebuild Control Groups** again. Choose **Selected Shot(s)**, selecting `shot4`. **REQUIRE it is
+    permitted** and completes normally.
+34. **[SNAPSHOT 15 — final_after_restart_selected.]** Expect `SELECTED_USED`, new run captured as
     `sfm_scope_guard_run_08_selected_after_restart.txt`. This is the last invocation; the rollup files
-    (`sfm_scope_guard_final_result.json` / `_final_summary.txt`) now hold the complete, final index.
+    (`sfm_scope_guard_final_result.json` / `_final_summary.txt`) now hold the complete, final index,
+    including all three refusal fingerprint-equality proofs, each `equal: true`.
 
 **Do NOT execute a second All Shots command in one process. Do NOT deliberately recreate the known crash.**
 
@@ -253,36 +282,39 @@ Every file below is a uniquely-named, immutable evidence file except the three e
 freely-overwritten rollup/bookkeeping — the operator returns the whole `C:\Users\Public\Documents\` set
 matching the `sfm_scope_guard_*` prefix and never renames or copies any of them by hand:
 
-- 13 snapshot file pairs: `sfm_scope_guard_snapshot_01_baseline.{json,txt}` through
-  `sfm_scope_guard_snapshot_13_final_after_restart_selected.{json,txt}`.
+- 15 snapshot file pairs: `sfm_scope_guard_snapshot_01_baseline.{json,txt}` through
+  `sfm_scope_guard_snapshot_15_final_after_restart_selected.{json,txt}`.
 - 8 preserved production-log runs: `sfm_scope_guard_run_01_selected_shot3.txt` through
   `sfm_scope_guard_run_08_selected_after_restart.txt` — the checkpoint's own copy of
   `sfm_rebuild_control_groups.txt`'s exact byte content at the moment each was captured; the operator never
-  manually copies that file themselves.
-- 13 cumulative-index files: `sfm_scope_guard_history_through_01.json` through `..._through_13.json`.
+  manually copies that file themselves. Independent review extracts all resource telemetry from these 8
+  files directly.
+- 15 cumulative-index files: `sfm_scope_guard_history_through_01.json` through `..._through_15.json`.
 - `sfm_scope_guard_final_result.json` and `sfm_scope_guard_final_summary.txt` (freely overwritten rollup —
-  by the final invocation, the complete and correct final index).
+  by the final invocation, the complete and correct final index, including the three refusal
+  fingerprint-equality proofs).
 - `sfm_scope_guard_continuation_state.json` (freely overwritten, non-evidentiary bookkeeping only).
-- The resource samples recorded at each step in Phase A and Phase B (reported alongside, not written by the
-  checkpoint script itself).
 
 ## PASS / FAIL contract
 
 **PASS** requires all of: Phase A's cancel/Selected/refused-All/session-change sequence behaves exactly per
-the state matrix at every snapshot; no realistic multi-shot Selected sequence shows substantial cumulative
-depletion comparable to the known failure pattern (reported, not silently assumed); Phase B's All Shots →
-refused Selected → refused All → restart → reset sequence behaves exactly per the state matrix; the
-Selected-equals-all-shots equivalence is confirmed; every refused request's production-log fingerprint is
-byte-for-byte unchanged from immediately before the refusal.
+the state matrix at every snapshot; both Phase A's refusal (snapshot 07) and Phase B's two refusals
+(snapshots 12/13) show `run_captured = none` with log sha256 exactly matching the immediately-preceding
+successful snapshot; Phase B's All Shots → refused Selected → refused All → restart → reset sequence behaves
+exactly per the state matrix; the Selected-equals-all-shots equivalence is confirmed; the final rollup's
+three refusal fingerprint-equality proofs are all `equal: true`; run indices remain exactly contiguous 1
+through 8 despite three interleaved refusals.
 
 **FAIL** includes: a dialog appearing on any refused invocation; `SELECTED_USED` not reached after a
 completed Selected command; `FULL_SCOPE_STARTED` not reached after a completed All-Shots command; any
-refused request's log fingerprint changing; state resetting on a document/session change without a restart
-(guard would be session-scoped, contradicting the design); state surviving a real restart; a fresh
-post-restart process being refused; any snapshot's own `production_sha256_matches_expected` being `False`;
-the checkpoint script itself raising a "refusing to overwrite" error at any point (would indicate a
-numbering/schedule mismatch, not evidence of a guard defect, but requires investigation before continuing);
-fewer than 13 snapshot file pairs or fewer than 8 preserved run-log files present at completion.
+refused-invocation snapshot's log sha256 differing from the immediately-preceding snapshot's; any of the
+three refusal fingerprint-equality proofs reporting `equal: false`; a pre-existing log being captured as run
+01 instead of seeding the baseline; state resetting on a document/session change without a restart (guard
+would be session-scoped, contradicting the design); state surviving a real restart; a fresh post-restart
+process being refused; any snapshot's own `production_sha256_matches_expected` being `False`; the checkpoint
+script itself raising a "refusing to overwrite" error at any point (would indicate a numbering/schedule
+mismatch, not evidence of a guard defect, but requires investigation before continuing); fewer than 15
+snapshot file pairs or fewer than 8 preserved run-log files present at completion.
 
 ## Identities this checkpoint is pinned against
 
@@ -291,9 +323,9 @@ fewer than 13 snapshot file pairs or fewer than 8 preserved run-log files presen
 - Production Normalizer SHA-256 (broad-guard, superseded; received PARTIAL real-SFM qualification through snapshot #5, see `../LEDGER.md`'s F3-Guard row): `6170d2a248845281b5f5d38dfea4b9f2decf908b8e3b79e80f4ada18d2f54625`
 - Production Normalizer SHA-256 (pre-guard baseline): `cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867`
 - Canonical Master SHA-256 (unchanged, not touched by this work): `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
-- Checkpoint script SHA-256: `8c347db86a84d7f293cb4872d19fd8fe4e31350f5d26ee9337e71d954b4eb11e`
+- Checkpoint script SHA-256: `1c004bdaefba48e61b21339a2c5bbea348034d1201f8b29940208173bc287a58`
 - Guard offline regression test SHA-256: `bfd1c197fe16e0f460957445af2e85a694e8aba73c2729f458eaa092c1492c84`
-- Checkpoint dry-run test SHA-256: `70eda6991d2f2f8337db61a37de4af6b0cc6e46b170831d9f4d12d6cc3d16ca6`
+- Checkpoint dry-run test SHA-256: `ab45cce04235d951e72f21a7543d98a9f76df789c7828836c7299cb61e91cf1c`
 
 ## Explicit non-authorization
 

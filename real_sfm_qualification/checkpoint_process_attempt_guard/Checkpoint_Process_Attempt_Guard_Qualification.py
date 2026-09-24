@@ -24,9 +24,10 @@ performed manually by the operator through the real SFM menu -- this
 script only observes and records state before/after each of those real
 invocations.
 
-EVIDENCE-FILE DISCIPLINE (2026-09-24 revision): the operator must NEVER
-manually rename/copy files between steps, and no evidence file may ever be
-overwritten. Every invocation of this script:
+EVIDENCE-FILE DISCIPLINE (2026-09-24 revision; independent-review-corrected
+same day): the operator must NEVER manually rename/copy files between
+steps, and no evidence file may ever be overwritten. Every invocation of
+this script:
   1. Reads the CURRENTLY DEPLOYED production Normalizer script and
      extracts ONLY a small, pinned set of pure-Python/Qt definitions
      verbatim, by exact source line range (never a whole-file exec():
@@ -45,24 +46,35 @@ overwritten. Every invocation of this script:
      already exists -- this should never happen given the auto-
      incrementing counter, but is checked explicitly as well as relying
      on Windows' own os.rename() refusing an existing destination.
-  4. If the production log's own sha256 differs from the last one this
-     checkpoint itself observed (i.e. a new real Normalizer command
-     completed since the previous invocation), copies the CURRENT log's
-     exact byte content into a NEW, UNIQUELY NAMED, IMMUTABLE preserved-
-     log file from a FIXED, PREDETERMINED 8-entry label schedule matching
-     INSTRUCTIONS.md's own operator sequence
-     (`sfm_scope_guard_run_NN_<label>.txt`) -- the operator never
-     manually copies sfm_rebuild_control_groups.txt themselves.
-  5. Also writes an immutable, uniquely-numbered cumulative-history
+  4. On the very FIRST invocation (snapshot 01, baseline) ONLY: whatever
+     production log already exists on disk is observed and its
+     fingerprint recorded, seeding the "last known log" pointer -- but it
+     is NEVER copied into a run-evidence file and the run counter is NOT
+     advanced. Only a genuinely NEW log (observed at some LATER snapshot)
+     becomes run 01. This prevents a pre-existing log from earlier
+     qualification work corrupting the fixed 8-run schedule.
+  5. On every later invocation, if the production log's own sha256 now
+     differs from the last one this checkpoint itself observed (i.e. a
+     new real Normalizer command completed since the previous
+     invocation), copies the CURRENT log's exact byte content into a NEW,
+     UNIQUELY NAMED, IMMUTABLE preserved-log file from a FIXED,
+     PREDETERMINED 8-entry label schedule matching INSTRUCTIONS.md's own
+     operator sequence (`sfm_scope_guard_run_NN_<label>.txt`) -- the
+     operator never manually copies sfm_rebuild_control_groups.txt
+     themselves. A REFUSED invocation never advances this pointer, so a
+     dedicated snapshot taken immediately after a refusal mechanically
+     proves the log is unchanged (see build_refusal_proofs()).
+  6. Also writes an immutable, uniquely-numbered cumulative-history
      snapshot (`sfm_scope_guard_history_through_NN.json`) indexing every
-     evidence file captured so far.
-  6. Updates a small, explicitly non-evidentiary CONTINUATION-STATE
+     evidence file captured so far, plus the mechanically-computed
+     refusal fingerprint-equality proofs.
+  7. Updates a small, explicitly non-evidentiary CONTINUATION-STATE
      pointer file (freely overwritten every invocation -- this is
      bookkeeping, not evidence) that carries the next snapshot/run
      ordinal and the last-observed log sha256 across real SFM restarts
      (evidence files themselves already live in a persistent location and
      need no special restart handling).
-  7. Rewrites `sfm_scope_guard_final_result.json` / `_final_summary.txt`
+  8. Rewrites `sfm_scope_guard_final_result.json` / `_final_summary.txt`
      -- a freely-overwritten ROLLUP/INDEX (not itself evidence; the
      individual snapshot/run files are the evidence) of every unique
      snapshot and preserved log captured so far, each with filename,
@@ -137,7 +149,11 @@ RUN_LOG_LABELS = [
 ]
 
 # Fixed, predetermined operation label and expected process_scope_state
-# for each of INSTRUCTIONS.md's own 13 snapshot points, in order. Purely
+# for each of INSTRUCTIONS.md's own 15 snapshot points, in order (revised
+# 2026-09-24 per independent review: a dedicated snapshot now follows
+# EVERY refused invocation immediately, before any later successful
+# command can replace the production log, so each refusal's own log-
+# unchanged proof is never contaminated by a later command). Purely
 # descriptive/expectation metadata for the rollup index -- never used to
 # alter what is actually observed and recorded.
 SNAPSHOT_SCHEDULE = [
@@ -147,13 +163,26 @@ SNAPSHOT_SCHEDULE = [
     (u"after_5shots", u"SELECTED_USED"),
     (u"after_3shots", u"SELECTED_USED"),
     (u"after_edit_repair", u"SELECTED_USED"),
+    (u"after_all_refusal", u"SELECTED_USED"),
     (u"after_post_refusal_selected", u"SELECTED_USED"),
     (u"after_reopen_selected", u"SELECTED_USED"),
     (u"fresh_after_restart", u"UNUSED"),
     (u"after_all_shots", u"FULL_SCOPE_STARTED"),
-    (u"after_refusals", u"FULL_SCOPE_STARTED"),
+    (u"after_refused_selected", u"FULL_SCOPE_STARTED"),
+    (u"after_refused_all", u"FULL_SCOPE_STARTED"),
     (u"reset_after_restart", u"UNUSED"),
     (u"final_after_restart_selected", u"SELECTED_USED"),
+]
+
+# Snapshot-index pairs whose production-log SHA-256 must be mechanically
+# proven identical -- each entry names the snapshot ordinals to compare
+# and a human-readable proof id. Computed automatically into the rollup
+# (see build_refusal_proofs()) rather than left to later human
+# interpretation of two separately-read files.
+REFUSAL_PROOF_PAIRS = [
+    (u"snapshot_07_log_unchanged_from_snapshot_06", 6, 7),
+    (u"snapshot_12_log_unchanged_from_snapshot_11", 11, 12),
+    (u"snapshot_13_log_unchanged_from_snapshot_11", 11, 13),
 ]
 
 
@@ -515,6 +544,41 @@ def capture_current_state():
     return state, log_fingerprint
 
 
+def _log_sha256_for_snapshot(captured_snapshots, step_ordinal):
+    for s in captured_snapshots:
+        if s["step_ordinal"] == step_ordinal:
+            return s.get("log_sha256")
+    return None
+
+
+def build_refusal_proofs(captured_snapshots):
+    # Mechanically verifies, from the snapshots' own recorded production-
+    # log fingerprints, that each refused invocation left the log
+    # byte-for-byte unchanged -- computed automatically into the rollup
+    # rather than left to later human interpretation of two separately-
+    # read files. Only included once both referenced snapshots exist.
+    proofs = []
+    present_ordinals = set(s["step_ordinal"] for s in captured_snapshots)
+
+    for proof_id, ordinal_a, ordinal_b in REFUSAL_PROOF_PAIRS:
+        if ordinal_a not in present_ordinals or ordinal_b not in present_ordinals:
+            continue
+        sha_a = _log_sha256_for_snapshot(captured_snapshots, ordinal_a)
+        sha_b = _log_sha256_for_snapshot(captured_snapshots, ordinal_b)
+        proofs.append(
+            {
+                "proof": proof_id,
+                "snapshot_a": ordinal_a,
+                "snapshot_a_log_sha256": sha_a,
+                "snapshot_b": ordinal_b,
+                "snapshot_b_log_sha256": sha_b,
+                "equal": sha_a is not None and sha_a == sha_b,
+            }
+        )
+
+    return proofs
+
+
 def main():
     cont = read_continuation_state()
     current, log_fingerprint = capture_current_state()
@@ -526,8 +590,24 @@ def main():
         operation_label, expected_state = u"unscheduled_extra_snapshot", None
 
     run_capture_record = None
+    current_log_sha256 = (
+        log_fingerprint["sha256"]
+        if (log_fingerprint is not None and log_fingerprint["exists"])
+        else None
+    )
+    baseline_seeded = False
 
-    if (
+    if snapshot_index == 1:
+        # Snapshot 01 is a BASELINE OBSERVATION, never evidence of a new
+        # Normalizer run. Whatever production log already exists on disk
+        # (e.g. left over from earlier qualification work) is observed
+        # and its fingerprint recorded, but it must never be copied into
+        # a run-evidence file, and next_run_index must stay at 1 -- the
+        # first REAL captured run is the first genuinely NEW log content
+        # observed at a LATER snapshot.
+        cont["last_known_log_sha256"] = current_log_sha256
+        baseline_seeded = True
+    elif (
         log_fingerprint is not None
         and log_fingerprint["exists"]
         and log_fingerprint["sha256"] != cont["last_known_log_sha256"]
@@ -567,6 +647,9 @@ def main():
     snapshot_record["expected_state"] = expected_state
     snapshot_record["observed_state"] = current.get("process_scope_state")
     snapshot_record["run_captured"] = run_capture_record
+    snapshot_record["baseline_seeded"] = baseline_seeded
+    if baseline_seeded:
+        snapshot_record["baseline_seeded_log_sha256"] = current_log_sha256
 
     snapshot_json_filename = "sfm_scope_guard_snapshot_%02d_%s.json" % (
         snapshot_index,
@@ -600,7 +683,12 @@ def main():
             u"production_log: exists=%s size_bytes=%s sha256=%s"
             % (fp_info.get("exists"), fp_info.get("size_bytes"), fp_info.get("sha256"))
         )
-    if run_capture_record:
+    if baseline_seeded:
+        snapshot_txt_lines.append(
+            u"run_captured: none (baseline-seeded; last_known_log_sha256 = %s)"
+            % current_log_sha256
+        )
+    elif run_capture_record:
         snapshot_txt_lines.append(
             u"run_captured: %s (sha256=%s)"
             % (run_capture_record["filename"], run_capture_record["sha256"])
@@ -622,6 +710,8 @@ def main():
             "operation": operation_label,
             "expected_state": expected_state,
             "observed_state": snapshot_record["observed_state"],
+            "log_sha256": current_log_sha256,
+            "baseline_seeded": baseline_seeded,
         }
     )
     cont["next_snapshot_index"] = snapshot_index + 1
@@ -632,9 +722,12 @@ def main():
             "Failed to persist continuation-state atomically: %s" % err_cont
         )
 
+    refusal_proofs = build_refusal_proofs(cont["captured_snapshots"])
+
     history_index = {
         "captured_snapshots": cont["captured_snapshots"],
         "captured_runs": cont["captured_runs"],
+        "refusal_proofs": refusal_proofs,
     }
     history_path = EVIDENCE_DIR + (
         "sfm_scope_guard_history_through_%02d.json" % snapshot_index
@@ -671,6 +764,20 @@ def main():
         summary_lines.append(
             u"  #%02d [%s] sha256=%s -> %s"
             % (r["step_ordinal"], r["label"], r["sha256"], r["filename"])
+        )
+    summary_lines.append(u"")
+    summary_lines.append(u"Refusal fingerprint-equality proofs (%d total):" % len(refusal_proofs))
+    for p in refusal_proofs:
+        summary_lines.append(
+            u"  %s: snapshot %02d sha256=%s == snapshot %02d sha256=%s -> equal=%s"
+            % (
+                p["proof"],
+                p["snapshot_a"],
+                p["snapshot_a_log_sha256"],
+                p["snapshot_b"],
+                p["snapshot_b_log_sha256"],
+                p["equal"],
+            )
         )
 
     summary_text = u"\n".join(summary_lines) + u"\n"

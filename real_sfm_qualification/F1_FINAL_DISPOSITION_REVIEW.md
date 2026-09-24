@@ -179,6 +179,25 @@ qualification: `test_checkpoint_process_attempt_guard_dryrun.py` (SHA-256
 SHA-256: `8c347db86a84d7f293cb4872d19fd8fe4e31350f5d26ee9337e71d954b4eb11e`, deployed and hash-verified. The
 real-SFM checkpoint was not run. `F` remains **OPEN**; `G` has not begun.
 
+## Update (2026-09-24): two evidence-integrity defects in the above correction fixed
+
+Independent review of the evidence-file-discipline correction found two defects, fixed before the real-SFM
+run: (a) snapshot 01 (baseline) could incorrectly capture a PRE-EXISTING production log (left over from
+earlier qualification work) as run 01, corrupting the fixed 8-run schedule — fixed so snapshot 01 only
+fingerprints and seeds the checkpoint's own "last known log" pointer, never advancing the run counter; the
+first genuinely NEW log content at a later snapshot becomes the real run 01. (b) The prior 13-snapshot
+schedule combined a refused invocation with the next successful command before the next observation, so it
+could not actually prove the refusal alone left the log unchanged — the schedule is expanded to 15 snapshots
+so a dedicated snapshot immediately follows every refusal, and the checkpoint now mechanically computes and
+records three refusal fingerprint-equality proofs directly into the rollup. Manual operator resource-sample
+recording was also removed (extracted after the fact from the 8 preserved run logs instead) and the
+operator's shot/target/control selections were made fully deterministic. Offline: `test_process_attempt_
+guard_regression.py` re-run unchanged at **81/81 PASS** (production untouched);
+`test_checkpoint_process_attempt_guard_dryrun.py` (SHA-256
+`ab45cce04235d951e72f21a7543d98a9f76df789c7828836c7299cb61e91cf1c`) — **47/47 PASS**. Checkpoint script
+SHA-256: `1c004bdaefba48e61b21339a2c5bbea348034d1201f8b29940208173bc287a58`, deployed and hash-verified. The
+real-SFM checkpoint was not run. `F` remains **OPEN**; `G` has not begun.
+
 ## 1. What repeated-use behavior has actually failed?
 
 The one real, observed failure in this entire investigation is **`F1-1`**: an actual SFM process crash
