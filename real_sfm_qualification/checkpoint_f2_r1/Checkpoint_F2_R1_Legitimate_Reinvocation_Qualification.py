@@ -21,19 +21,43 @@ NOT an optimization benchmark. Undo is NOT a requirement anywhere in this
 checkpoint.
 
 THE CONTROLLED EDIT (already-qualified, not invented -- see
-F2_R1_CONTROLLED_EDIT_JUSTIFICATION.md for the full evidence trail):
+F2_R1_CONTROLLED_EDIT_JUSTIFICATION.md for the full evidence trail,
+CORRECTED 2026-09-24: the operator cannot freely drag a control into an
+arbitrary existing group in SFM; the actual supported relocation
+mechanism is the real, first-party SFM DAG-view right-click command
+"move_to_hidden group" (platform/scripts/sfm/dag/exact/count1/move_to_
+hidden group .py -> Hide_SelectedDag()), which moves the selected
+control into a group literally named "Hidden" -- created via
+rootGroup.CreateControlGroup("Hidden") with SetVisible(False) if it does
+not already exist):
   shot=shot3, target=foxmccouldwm1, control=rig_hand_L.
   Qualified state (confirmed directly from the real, preserved F1-2
   command-1 production log, PRODUCTION_DESTINATION_DIRECT_ORDER_
   AUTHORITIES row for RigArms/LeftArm, authority=EXACT_MASTER_
   DESTINATION_TOTAL_ORDER): rig_hand_L is a direct member of
   "RigArms/LeftArm", ordered (rig_collar_L, rig_elbow_L, rig_hand_L).
-  Operator mutation (ordinary SFM Animation Set Editor use, ONE control,
-  no inventory change, same existing model/vocabulary): move rig_hand_L
-  out of "RigArms/LeftArm" into the existing "RigHelpers" group.
+  Operator mutation (the real SFM DAG "move to hidden group" command, ONE
+  control, no inventory change, same existing model/vocabulary): move
+  rig_hand_L out of "RigArms/LeftArm" into the (real, invisible-by-design)
+  "Hidden" group.
   Expected post-command-2 state: rig_hand_L back in "RigArms/LeftArm",
   with RigArms/LeftArm's own direct-control order restored to exactly
   (rig_collar_L, rig_elbow_L, rig_hand_L).
+
+  Verified directly against production source (see
+  F2_R1_CONTROLLED_EDIT_JUSTIFICATION.md for exact line citations) that a
+  hidden rig-owned control is NOT excluded from Master-driven
+  reconciliation: composer's own destination computation
+  (_active_rig_counterpart_destination) is IDENTICAL whether the control
+  is currently hidden or visible. A hidden rig-owned DmeTransformControl
+  is additionally gated by a "PRE-hidden Master-active repair" safety
+  rule (its own destination's active root, e.g. RigArms, must be visible,
+  and at least 2 OTHER visible rig-owned peers must independently map to
+  the exact same destination) -- rig_hand_L's own real siblings
+  (rig_collar_L, rig_elbow_L), untouched by this edit, satisfy that gate.
+  This changes the LOGGED authority label for this one control
+  (PRE_HIDDEN_MASTER_ACTIVE+... instead of MASTER_PLUS_ACTIVE_RIG_
+  COUNTERPART) but not the computed destination itself.
 
 STAGED DESIGN (why ONE script, invoked multiple times, is sufficient):
 Ordinary SFM editing must happen BETWEEN the two production commands, so
@@ -118,7 +142,7 @@ TARGET_SHOT_NAME = u"shot3"
 TARGET_ANIMSET_NAME = u"foxmccouldwm1"
 CONTROLLED_CONTROL_NAME = u"rig_hand_L"
 QUALIFIED_GROUP_PATH = u"RigArms/LeftArm"
-OPERATOR_EDIT_DESTINATION_GROUP_PATH = u"RigHelpers"
+OPERATOR_EDIT_DESTINATION_GROUP_PATH = u"Hidden"
 EXPECTED_RIGARMS_LEFTARM_ORDER = [u"rig_collar_L", u"rig_elbow_L", u"rig_hand_L"]
 
 STAGE1_MARKER_NAME = u"SFM_F2_R1_STAGE1_COMPLETE_MARKER"

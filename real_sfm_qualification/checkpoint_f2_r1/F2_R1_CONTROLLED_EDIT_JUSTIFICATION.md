@@ -1,10 +1,44 @@
-# F2-R1 Controlled Edit — Justification
+# F2-R1 Controlled Edit — Justification (CORRECTED 2026-09-24)
 
-The controlled edit is derived from an already-qualified target, not invented. Every fact below is
-cited directly from a real, preserved production artifact already accepted into this project's own
-evidence trail — never guessed or assumed.
+**Correction record:** the original design assumed the operator could freely drag `rig_hand_L` into an
+arbitrary existing group (`RigHelpers`) via the Animation Set Editor. That assumption was wrong — SFM does
+not support unilateral relocation into an arbitrary group that way. The actual, real, supported relocation
+mechanism available to the operator is a first-party SFM DAG-view right-click command that moves the
+selected control into a group literally named `Hidden`. This document replaces the original justification;
+the prior attempt (which used the incorrect `RigHelpers` assumption) is treated as aborted, not
+qualification evidence.
 
-## Exact edit
+## The real mechanism (verified from the actual shipped script, not assumed)
+
+`E:\SteamLibrary\steamapps\common\SourceFilmmaker\game\platform\scripts\sfm\dag\exact\count1\move_to_hidden group .py`:
+
+```python
+def Hide_SelectedDag():
+    animSet = sfm.GetCurrentAnimationSet()
+    rootGroup = animSet.GetRootControlGroup()
+    targetDag = sfm.FirstSelectedDag()
+
+    HiddenGroup = rootGroup.FindControlByName("Hidden", False)
+    if not HiddenGroup:
+        HiddenGroup = rootGroup.CreateControlGroup("Hidden")
+        HiddenGroup.SetGroupColor(vs.Color(0, 128, 255, 255), False)
+        HiddenGroup.SetSelectable(False)
+        HiddenGroup.SetVisible(False)
+
+    sfmUtils.AddDagControlsToGroup(HiddenGroup, targetDag)
+
+Hide_SelectedDag()
+```
+
+This is a real, first-party, already-shipped SFM DAG-view command (appears as a right-click context-menu
+entry when a control is selected in the DAG/Animation Set Editor view). It operates on `rootGroup =
+animSet.GetRootControlGroup()` — the exact same root object this checkpoint's own
+`capture_tree(aset.GetRootControlGroup())` call already walks — confirming `Hidden` is a real, literal
+`DmeControlGroup`, a direct child of the target's own root group, not a separate SFM-native concept outside
+the tree production manages. If it does not already exist, it is created with `SetVisible(False)` and
+`SetSelectable(False)`.
+
+## Corrected exact edit
 
 | Field | Value |
 |---|---|
@@ -12,57 +46,98 @@ evidence trail — never guessed or assumed.
 | Animation set / target | `foxmccouldwm1` |
 | Control affected | `rig_hand_L` |
 | Initial qualified state | Direct member of group `RigArms/LeftArm` |
-| Operator mutation | Move `rig_hand_L`, using SFM's own ordinary Animation Set Editor UI, out of `RigArms/LeftArm` and into the existing `RigHelpers` group |
-| Expected normalized state after command 2 | `rig_hand_L` back in `RigArms/LeftArm`; `RigArms/LeftArm`'s own direct-control order restored to exactly `(rig_collar_L, rig_elbow_L, rig_hand_L)` |
+| Operator mutation | Select `rig_hand_L` in the DAG view; run the real SFM DAG right-click command "move to hidden group" (`Hide_SelectedDag()`), moving it into the group literally named `Hidden` |
+| Pre-Stage-2 required state | `rig_hand_L` present under `Hidden`; absent from `RigArms/LeftArm` |
+| Expected post-Stage-2 normalized state | `rig_hand_L` restored to `RigArms/LeftArm`, in the already-qualified Master-defined order `(rig_collar_L, rig_elbow_L, rig_hand_L)` |
 
-## Why this is already qualified, not invented
+## Verification that Hidden is a valid perturbation (source-cited, not assumed)
 
-Cited directly from `C:\Users\Public\Documents\sfm_checkpoint_f1_2_production_log_command1.txt` (the
-real, preserved production log from F1-2's own command 1 — a Selected-Shots run against exactly
-`shot3`), line 111:
+### Q1: Is a control currently under Hidden still eligible for normal Master-driven destination reconciliation?
 
+**Yes.** Traced directly in `audit_external_runtime/Rebuild_Control_Groups_Normalizer.py`. Composer's own
+candidate-destination computation for every rig row (line ~5920-5932):
+
+```python
+lookup = master_lookup(master, control_name)
+if lookup["known"]:
+    target_path = _active_rig_counterpart_destination(
+        lookup["destination"], source_path, has_rigarms, has_riglegs,
+    )
+    authority = u"MASTER_PLUS_ACTIVE_RIG_COUNTERPART"
+    if control_name in pre_hidden_master_active_names:
+        authority = u"PRE_HIDDEN_MASTER_ACTIVE+MASTER_DESTINATION+VISIBLE_SAME_DESTINATION_PEERS"
 ```
-PRODUCTION_DESTINATION_DIRECT_ORDER_AUTHORITIES target=(u'shot3', u'foxmccouldwm1') rows={
-  u'RigArms/LeftArm': {'order': (u'rig_collar_L', u'rig_elbow_L', u'rig_hand_L'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'},
-  ...
-}
+
+`target_path` — the actual computed destination — is derived from the **same** `_active_rig_counterpart_
+destination()` call regardless of whether the control is in `pre_hidden_master_active_names`. Only the
+**logged authority label** changes. `rig_hand_L`'s own real, already-established destination
+(`RigArms/LeftArm`, `EXACT_MASTER_DESTINATION_TOTAL_ORDER`) is untouched by this distinction.
+
+### Q2: Is Hidden treated specially anywhere — skipped, preserved, excluded, or a semantic change beyond presentation grouping?
+
+**Partially — there is a real, deliberate special case, but it does not exclude the control; it is an
+additional safety gate, and `rig_hand_L`'s own real siblings satisfy it.** The module's own docstring
+(lines 59-64) names this explicitly as "PRE-hidden Master-active repair." Traced directly (lines
+~3889-4034):
+
+```python
+# Production: fresh-PRE hidden active-rig completion.  This is deliberately
+# stricter than ordinary rig-loss classification.  A hidden rig-owned
+# transform is eligible only when current Master explicitly names an
+# active RigBody/RigArms/RigLegs destination, that active root is
+# already effectively visible in fresh PRE, and at least two other
+# visible rig-owned transforms independently resolve to the exact same
+# Master destination.
+if not bool(pre_group["effective_visible"]):
+    ...
+    if (len(corroborating_peers) >= 2
+            and not (row["post_matches_master"] and row["post_visible"])):
+        row["category"] = "RIG_OWNED_PRE_HIDDEN_MASTER_ACTIVE"
+        pre_hidden_master_active.append(row)
 ```
 
-`authority: 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'` means the canonical Master itself defines the
-complete, deterministic ordering of `RigArms/LeftArm`'s own direct controls for this target — production
-enforces this order every time it runs, regardless of the controls' prior positions. This is why the
-expected post-command-2 state is not a guess: it is the same deterministic destination production has
-already been observed, in this exact real log, to produce for this exact target.
+A control found in an **invisible** group (which `Hidden` is, by the DAG command's own
+`SetVisible(False)`) before native Rebuild runs is classified this way, requiring: (a) its Master
+destination resolves to an active `RigBody`/`RigArms`/`RigLegs` root that is itself visible; (b) **at least
+two other** visible, rig-owned `DmeTransformControl` peers independently resolve to the exact same Master
+destination. `rig_hand_L`'s own real destination root is `RigArms` (visible, untouched by this edit); its
+own real siblings at the same destination, `rig_collar_L` and `rig_elbow_L`, remain visible and correctly
+placed (this edit touches only `rig_hand_L`) — **exactly two** corroborating peers, satisfying the `>= 2`
+requirement. This gate exists to prevent over-eager relocation of controls hidden for unrelated, legitimate
+reasons with no independent corroborating evidence; it is not a general exclusion, and it does not skip
+`rig_hand_L`, preserve its Hidden membership, or exclude it from discovery/composer. Discovery
+(`discover_rig_context()`/`capture_tree()`) does not filter by visibility at all — it walks the full group
+tree regardless of any group's own visible state, confirmed by direct reading of `capture_tree()` itself
+(no `is_visible` check gates whether a group or its controls are walked/recorded).
 
-The same log's own root order line (line 110) confirms `RigHelpers` is a real, already-existing group in
-this exact target's own tree (`order=[..., u'RigBody', u'RigArms', u'RigLegs', u'RigHelpers', u'Attachments']`),
-so the operator's mutation moves the control into a real, pre-existing group — never a newly-invented one.
+### Q3: For shot3/foxmccouldwm1/rig_hand_L, is the authoritative normalized destination still unequivocally RigArms/LeftArm with the established exact order?
 
-`foxmccouldwm1` is one of the two targets (with `mia1`) that this entire project's own qualification
-history has exercised more than any other real target — `C1-1`/`C1-2`/`C2-1` (Selected-Shots baseline and
-integrated equivalence), `F1-1`/`F1-R1`/`F1-2` (repeated-use stability), all specifically selected `shot3`
-and normalized exactly these two targets, repeatedly, with hash-level verification. `rig_hand_L` is part
-of the real, already-eligible, already-model-backed control inventory for this target (confirmed by its
-own `PRE rig status=SUPPORTED_ACTIVE_RIG controls=208...` capture in the same log) — moving it is not an
-inventory change, does not introduce a new model, and does not raise any new model-support question.
+**Yes.** Both the ordinary path (`MASTER_PLUS_ACTIVE_RIG_COUNTERPART`) and the special hidden-control path
+(`PRE_HIDDEN_MASTER_ACTIVE+...`) compute `target_path` via the identical
+`_active_rig_counterpart_destination()` call. The final exact-order convergence step (module docstring
+point 2: "once final contextual destinations are resolved... order that cohort by current Master
+direct-control order") applies uniformly afterward, regardless of which authority label a given control
+carried. The real, preserved evidence already cited from F1-2's own command-1 production log
+(`PRODUCTION_DESTINATION_DIRECT_ORDER_AUTHORITIES` for `RigArms/LeftArm`,
+`authority=EXACT_MASTER_DESTINATION_TOTAL_ORDER`, order `(rig_collar_L, rig_elbow_L, rig_hand_L)`) remains
+the correct expected post-Stage-2 state.
 
-## Why this edit satisfies every stated requirement
+## Why this edit still satisfies every stated requirement
 
-- **Same existing model/vocabulary**: `rig_hand_L` is an existing, already-classified control on an
-  already-qualified target; nothing about the model or its control vocabulary changes.
-- **No inventory change**: the control is not added or removed, only its group membership changes.
-- **No new model-support question**: `foxmccouldwm1`'s own model-backed/eligible status is unaffected.
-- **Deterministic**: `EXACT_MASTER_DESTINATION_TOTAL_ORDER` authority means the corrected destination and
-  order are fixed facts, not probabilistic outcomes.
-- **Small**: exactly one control, one group membership change.
-- **Visibly/semantically meaningful**: a hand control sitting in `RigHelpers` instead of `RigArms/LeftArm`
-  is a real, recognizable authoring mistake of the exact kind this tool exists to correct — not an
-  artificial/contrived perturbation.
-- **Creates a state the existing Normalizer is expected to repair**: production's own composer logic
-  (`PRODUCTION_GENERIC_RIG_DESTINATION_AUTHORITIES`, `MASTER_PLUS_ACTIVE_RIG_COUNTERPART` authority for
-  `rig_hand_L`) is specifically designed to detect and relocate misplaced rig-authority controls back to
-  their Master-defined destination.
-- **Expected post-command-2 state is mechanically testable**: `capture_tree(aset.GetRootControlGroup())`
-  (production's own function, reused verbatim, applied only to this one target's own tree) plus
-  `one_membership()` (also reused verbatim) gives an exact, single-value group path for `rig_hand_L`, and
-  the exact expected `RigArms/LeftArm` order is already known from the citation above.
+- **Same existing model/vocabulary; no inventory change; no new model-support question**: unchanged from
+  the original justification — only the relocation *mechanism* changed, not the control, target, or model.
+- **Deterministic**: the destination computation is identical regardless of the hidden-control safety gate;
+  the gate's own preconditions are satisfied by real, already-established facts about this exact target.
+- **Small**: exactly one control, one real, supported SFM operation (the DAG "move to hidden group"
+  command).
+- **Visibly/semantically meaningful, and a real supported operation**: hiding a control via SFM's own
+  first-party mechanism, then expecting the Normalizer to restore it to its Master-defined location on
+  next use, is a genuine, real workflow — arguably more representative of actual product usage than an
+  arbitrary drag-and-drop, since "move to hidden group" is a real, shipped, commonly-used SFM utility.
+- **Creates a state the existing Normalizer is expected to repair**: confirmed directly above, not assumed
+  — the Normalizer's own "PRE-hidden Master-active repair" logic exists specifically for this case.
+  **This is used because it is the actual supported SFM relocation mechanism available to the operator, not
+  an arbitrary or invented perturbation.**
+- **Expected post-Stage-2 state is mechanically testable**: unchanged — `capture_tree()` +
+  `one_membership()`, applied to exactly this one target's own root control group, gives an exact,
+  single-value group path for `rig_hand_L`.

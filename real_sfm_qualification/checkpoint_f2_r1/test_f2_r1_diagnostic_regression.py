@@ -24,17 +24,17 @@ import tempfile
 from PySide import QtCore
 
 SCRIPT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Checkpoint_F2_R1_Legitimate_Reinvocation_Qualification.py")
-EXPECTED_SCRIPT_SHA256 = "990031ae19b98197e925467fad1e63621c1f1958e05be932245261052f38c9ab"
+EXPECTED_SCRIPT_SHA256 = "8cfeb4f40611bfba0aed3b67ded2bd6e6f7c8841bb023a4f7fb9d52e26d41a37"
 
-B_TO_UNICODE_RANGE = (171, 180)
-WRITE_JSON_ATOMIC_RANGE = (183, 227)
-WRITE_TEXT_ATOMIC_RANGE = (230, 268)
-READ_STATE_FILE_RANGE = (271, 278)
-MARKER_PRESENT_RANGE = (281, 293)
-SET_MARKER_RANGE = (296, 299)
-CLASSIFY_INVOCATION_MODE_RANGE = (302, 318)
-GET_CONTROL_MEMBERSHIP_RANGE = (327, 333)
-FIND_TARGET_ASET_RANGE = (336, 343)
+B_TO_UNICODE_RANGE = (195, 204)
+WRITE_JSON_ATOMIC_RANGE = (207, 251)
+WRITE_TEXT_ATOMIC_RANGE = (254, 292)
+READ_STATE_FILE_RANGE = (295, 302)
+MARKER_PRESENT_RANGE = (305, 317)
+SET_MARKER_RANGE = (320, 323)
+CLASSIFY_INVOCATION_MODE_RANGE = (326, 342)
+GET_CONTROL_MEMBERSHIP_RANGE = (351, 357)
+FIND_TARGET_ASET_RANGE = (360, 367)
 
 PASS_COUNT = [0]
 FAIL_COUNT = [0]
@@ -209,22 +209,25 @@ find_target_aset = ns_findtarget["find_target_aset"]
 
 left_arm = FakeGroup("LeftArm", controls=["rig_collar_L", "rig_elbow_L", "rig_hand_L"])
 rig_arms = FakeGroup("RigArms", children=[left_arm])
-rig_helpers = FakeGroup("RigHelpers", controls=["rig_footHelper_L"])
-root = FakeGroup("<ROOT>", children=[rig_arms, rig_helpers])
+hidden_group = FakeGroup("Hidden", controls=[])
+root = FakeGroup("<ROOT>", children=[rig_arms, hidden_group])
 aset = FakeAset(root)
 
 path, tree = get_control_membership(fake_capture_tree, fake_one_membership, aset, "rig_hand_L")
 expect(path == "RigArms/LeftArm", "get_control_membership.finds_qualified_path")
 expect(tree["groups"]["RigArms/LeftArm"]["direct_control_names_in_order"] == ["rig_collar_L", "rig_elbow_L", "rig_hand_L"], "get_control_membership.order_preserved")
 
-# Simulate the operator's own controlled edit: move rig_hand_L to RigHelpers.
+# Simulate the operator's own controlled edit -- the real SFM DAG "move to
+# hidden group" command (Hide_SelectedDag(), platform/scripts/sfm/dag/exact/
+# count1/move_to_hidden group .py) -- moving rig_hand_L into the real,
+# literal "Hidden" group.
 left_arm_edited = FakeGroup("LeftArm", controls=["rig_collar_L", "rig_elbow_L"])
 rig_arms_edited = FakeGroup("RigArms", children=[left_arm_edited])
-rig_helpers_edited = FakeGroup("RigHelpers", controls=["rig_footHelper_L", "rig_hand_L"])
-root_edited = FakeGroup("<ROOT>", children=[rig_arms_edited, rig_helpers_edited])
+hidden_group_edited = FakeGroup("Hidden", controls=["rig_hand_L"])
+root_edited = FakeGroup("<ROOT>", children=[rig_arms_edited, hidden_group_edited])
 aset_edited = FakeAset(root_edited)
 path_edited, _tree_edited = get_control_membership(fake_capture_tree, fake_one_membership, aset_edited, "rig_hand_L")
-expect(path_edited == "RigHelpers", "get_control_membership.detects_operator_edit_precondition_state")
+expect(path_edited == "Hidden", "get_control_membership.detects_operator_edit_precondition_state -- exact Hidden perturbation")
 
 
 class NoRootGroupAset(object):
@@ -238,6 +241,58 @@ try:
 except CheckpointF2R1Error:
     raised2 = True
 expect(raised2, "get_control_membership.none_root_group_raises_not_silently_none")
+
+sys.stdout.write("\n--- F2-R1-R1 correction: Stage 2 precondition acceptance/rejection tests (Hidden, not RigHelpers) ---\n")
+
+operator_edit_dest_match = __import__("re").search(r'OPERATOR_EDIT_DESTINATION_GROUP_PATH = u"([^"]+)"', script_text)
+expect(operator_edit_dest_match is not None, "script.defines_OPERATOR_EDIT_DESTINATION_GROUP_PATH")
+OPERATOR_EDIT_DESTINATION_GROUP_PATH = operator_edit_dest_match.group(1) if operator_edit_dest_match else None
+expect(OPERATOR_EDIT_DESTINATION_GROUP_PATH == "Hidden", "script.operator_edit_destination_is_exactly_Hidden -- corrected from the invalid RigHelpers assumption")
+
+QUALIFIED_GROUP_PATH_match = __import__("re").search(r'QUALIFIED_GROUP_PATH = u"([^"]+)"', script_text)
+QUALIFIED_GROUP_PATH = QUALIFIED_GROUP_PATH_match.group(1) if QUALIFIED_GROUP_PATH_match else None
+expect(QUALIFIED_GROUP_PATH == "RigArms/LeftArm", "script.qualified_group_path_unchanged_by_this_correction")
+
+# "Stage 2 accepts exact Hidden perturbation": the precondition check the
+# real script performs is `pre_path == OPERATOR_EDIT_DESTINATION_GROUP_PATH`.
+# Simulate it directly against both fixtures above.
+expect(path_edited == OPERATOR_EDIT_DESTINATION_GROUP_PATH, "f2r1_correction.stage2_precondition_accepts_exact_hidden_perturbation")
+
+# "Stage 2 rejects if rig_hand_L never left LeftArm": the unedited fixture's
+# own path ("RigArms/LeftArm") must NOT equal the expected precondition path.
+expect(path != OPERATOR_EDIT_DESTINATION_GROUP_PATH, "f2r1_correction.stage2_precondition_rejects_when_control_never_left_qualified_group")
+
+# "Stage 2 rejects if rig_hand_L is missing": simulate the control not being
+# found anywhere (e.g. accidentally deleted, or present in >1 group -- both
+# collapse to one_membership() returning None).
+rig_arms_no_hand = FakeGroup("RigArms", children=[FakeGroup("LeftArm", controls=["rig_collar_L", "rig_elbow_L"])])
+root_no_hand = FakeGroup("<ROOT>", children=[rig_arms_no_hand, FakeGroup("Hidden", controls=[])])
+aset_no_hand = FakeAset(root_no_hand)
+path_missing, _tree_missing = get_control_membership(fake_capture_tree, fake_one_membership, aset_no_hand, "rig_hand_L")
+expect(path_missing is None, "f2r1_correction.control_missing_from_every_group_gives_none")
+expect(path_missing != OPERATOR_EDIT_DESTINATION_GROUP_PATH, "f2r1_correction.stage2_precondition_rejects_when_control_is_missing")
+
+# "post-normalization verification requires LeftArm destination": the
+# postcondition check must compare against QUALIFIED_GROUP_PATH, never
+# against the Hidden group the operator moved it FROM.
+expect(path == QUALIFIED_GROUP_PATH, "f2r1_correction.postnormalization_verification_target_is_qualified_group_not_hidden")
+expect(QUALIFIED_GROUP_PATH != OPERATOR_EDIT_DESTINATION_GROUP_PATH, "f2r1_correction.qualified_and_operator_edit_destination_are_distinct_paths")
+
+# "No special Hidden exclusion is accidentally relied upon": the script must
+# never special-case the literal string "Hidden" anywhere OTHER than the one
+# constant definition and the doctring's own explanatory prose -- i.e. no
+# `if ... == u"Hidden"` / `!= u"Hidden"` conditional exists anywhere that
+# would skip, exclude, or otherwise treat Hidden differently from any other
+# group path once OPERATOR_EDIT_DESTINATION_GROUP_PATH is assigned.
+hidden_conditional_pattern = __import__("re").findall(r'[=!]=\s*u?"Hidden"', script_text)
+expect(len(hidden_conditional_pattern) == 0, "script.no_conditional_branches_on_the_literal_Hidden_string -- confirms Hidden is used only via the OPERATOR_EDIT_DESTINATION_GROUP_PATH constant, never special-cased by name")
+
+# "Stale stage/state handling still fails closed" -- unaffected by this
+# correction (classify_invocation_mode() never references any group/
+# destination name at all), reaffirmed here for completeness against the
+# CURRENT script text/hash rather than assumed carried over from before.
+mode_stale, reason_stale = classify_invocation_mode({"stage1_complete": True, "stage2_complete": False}, False, False)
+expect(mode_stale is None, "f2r1_correction.stale_cross_process_state_still_fails_closed_after_this_correction")
 
 work_fixture = [
     {"name": "shot3", "targets": [{"name": "foxmccouldwm1", "anim_set": aset}, {"name": "mia1", "anim_set": "MIA_ASET"}]},

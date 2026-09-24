@@ -13,11 +13,22 @@ process — actually work? This is explicitly **not** an immediate unchanged All
 repetition-count test, and not an optimization benchmark. **Undo is not a requirement anywhere in this
 checkpoint.**
 
-## The controlled edit
+## The controlled edit (CORRECTED 2026-09-24)
 
-See `F2_R1_CONTROLLED_EDIT_JUSTIFICATION.md` for the full evidence trail. In short: move control
-`rig_hand_L` on target `shot3/foxmccouldwm1`, using SFM's own ordinary Animation Set Editor UI, out of its
-qualified group `RigArms/LeftArm` and into the existing `RigHelpers` group.
+See `F2_R1_CONTROLLED_EDIT_JUSTIFICATION.md` for the full evidence trail. **Correction**: the operator
+cannot freely drag a control into an arbitrary existing group in SFM. The real, supported relocation
+mechanism is the first-party SFM DAG-view right-click command "move to hidden group"
+(`Hide_SelectedDag()`), which moves the selected control into a group literally named `Hidden` (created
+with `SetVisible(False)` if it does not already exist). In short: select control `rig_hand_L` on target
+`shot3/foxmccouldwm1` in the DAG view, run that real command, moving it out of its qualified group
+`RigArms/LeftArm` and into `Hidden`. Verified directly against production source that a hidden rig-owned
+control is not excluded from Master-driven reconciliation — see the justification document for the full
+citation trail.
+
+**If Stage 1 was already run once under the prior (incorrect `RigHelpers`-based) version of these
+instructions**: that attempt is aborted, not qualification evidence. Before starting fresh, delete
+`C:\Users\Public\Documents\sfm_checkpoint_f2_r1_state.json` if it exists, and restart from a fresh SFM
+process and a fresh copy of the disposable fixture, per the sequence below.
 
 ## One runnable checkpoint, invoked three times
 
@@ -43,8 +54,10 @@ cannot unambiguously classify causes it to STOP before doing anything further �
    minutes.
 5. Confirm Stage 1's own summary reports `OVERALL_PASS=True`. Wait for complete return to normal SFM
    editing (the script exits fully; no further script activity should be running).
-6. Perform **only** the specified controlled edit: in the Animation Set Editor, move `rig_hand_L` (target
-   `foxmccouldwm1`, shot `shot3`) from `RigArms/LeftArm` into `RigHelpers`. Do not make any other edit.
+6. Perform **only** the specified controlled edit: in the DAG view, select control `rig_hand_L` (target
+   `foxmccouldwm1`, shot `shot3`) and run the real SFM DAG right-click command **"move to hidden group"**
+   (moves it into the group literally named `Hidden`, creating it with `SetVisible(False)` if it does not
+   already exist). Do not make any other edit.
 7. Run `Checkpoint_F2_R1_Legitimate_Reinvocation_Qualification` again, in the **same** SFM process (do
    **not** restart). This is Stage 2 (the script detects this automatically). Choose **All Shots** again
    in the real production dialog. Wait for the script's own summary output.
@@ -113,8 +126,8 @@ limit; the qualification asks whether the workflow succeeds, not whether some th
 ## Offline verification performed before deployment
 
 `test_f2_r1_diagnostic_regression.py` (SHA-256
-`6b852e47060ca71126d573e0cf463824bb46d734050dc19150cd35ebb3a9333e`) extracts the script's own pure-Python/
-Qt helper functions verbatim (by source line range) and exercises them — **39/39 PASS** under the real
+`e046dd1c493831d303d550ddd2c03f7538567ad651fe8f1f9adb76bf23179ab4`) extracts the script's own pure-Python/
+Qt helper functions verbatim (by source line range) and exercises them — **50/50 PASS** under the real
 embedded Python 2.7.5 — covering: the atomic-write primitives; `read_state_file()` (absent-file,
 round-trip, and corrupt-file-raises-STOP cases); `marker_present()`/`set_marker()` against **real**
 `QtCore.QObject` instances (PySide's QtCore is importable standalone with the embedded interpreter,
@@ -136,8 +149,8 @@ could have occurred first). Not yet run against real SFM.
 - Canonical Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
 - Expected Stage 1/2 fixture filename: `F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx`
 - Expected Final Verification fixture filename: `F2_R1_DISPOSABLE_REINVOCATION_RESULT.dmx`
-- F2-R1 real-SFM script SHA-256: `990031ae19b98197e925467fad1e63621c1f1958e05be932245261052f38c9ab`
-- F2-R1 offline regression test SHA-256: `6b852e47060ca71126d573e0cf463824bb46d734050dc19150cd35ebb3a9333e`
+- F2-R1 real-SFM script SHA-256: `8cfeb4f40611bfba0aed3b67ded2bd6e6f7c8841bb023a4f7fb9d52e26d41a37`
+- F2-R1 offline regression test SHA-256: `e046dd1c493831d303d550ddd2c03f7538567ad651fe8f1f9adb76bf23179ab4`
 
 ## Explicit non-authorization
 
