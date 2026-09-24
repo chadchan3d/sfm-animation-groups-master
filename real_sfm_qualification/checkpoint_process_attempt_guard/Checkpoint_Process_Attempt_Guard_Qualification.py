@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
 """
-Checkpoint: Process-Lifetime Attempt Guard Qualification (real-SFM).
+Checkpoint: Process-Lifetime SCOPE-AWARE Admission Guard Qualification
+(real-SFM).
 
-Prepared, per the Astra-authorized implementation contract (2026-09-24),
-following F2-R1-R3's real-SFM FAIL result ("LEGITIMATE SAME-PROCESS
-REINVOCATION IS NOT RELIABLY SUSTAINABLE"). This script has NOT been run
-against real SFM -- it is prepared for the operator to run.
+Prepared, per the Astra-authorized, subsequently CORRECTED implementation
+contract (2026-09-24), following F2-R1-R3's real-SFM FAIL result
+("LEGITIMATE SAME-PROCESS REINVOCATION IS NOT RELIABLY SUSTAINABLE"). The
+original broad one-attempt-per-process guard (commit
+f3efd132ad5456a583df5917ef85576db0690c60) has been SUPERSEDED by a scope-
+aware guard: Selected Shot(s) over any proper subset of project shots (1,
+2, 5, 10, any number) remains normal, repeatedly-usable functionality
+within one process; only a full-scope request (All Shots, or a Selected
+Shot(s) request whose resolved shot set exactly equals the complete
+project shot set) is gated. **This script has NOT been run against real
+SFM** -- it is prepared for the operator to run.
 
 This is a pure READ-ONLY SNAPSHOT UTILITY, not a Normalizer invocation.
 It never calls StartRebuildControlGroups(), never opens a scope dialog,
@@ -26,14 +34,16 @@ Each run:
      checkpoint never references production's own trailing
      StartRebuildControlGroups() invocation at all, so it can never
      trigger a real run) -- reusing the exact SAME
-     _find_process_attempt_marker / _find_existing_run / marker-name /
-     OUTPUT_PATH the real, deployed production script uses, so this
-     checkpoint's own read is guaranteed to observe production's actual
-     marker semantics, never a hand-copied approximation that could
-     drift.
+     _read_process_scope_state / _find_named_process_marker /
+     _find_existing_run / marker names / OUTPUT_PATH the real, deployed
+     production script uses, so this checkpoint's own read is guaranteed
+     to observe production's actual state semantics, never a hand-copied
+     approximation that could drift.
   2. Uses those extracted, real functions against the REAL live
-     main_window to record whether the process-attempt marker and the
-     temporary run-lock are currently present.
+     main_window to record the process's own current scope-state
+     classification (UNUSED / SELECTED_USED / FULL_SCOPE_STARTED, or an
+     explicit unreadable/legacy/conflicting error) and whether the
+     temporary run-lock is currently present.
   3. Fingerprints the real production log file (existence/size/mtime/
      sha256) to later prove a refused invocation never truncates it.
   4. Appends one snapshot record (auto-numbered) to a small persisted
@@ -57,7 +67,7 @@ PRODUCTION_INSTALLED_PATH = (
     "\\scripts\\sfm\\mainmenu\\ChadChan3D\\Rebuild_Control_Groups_Normalizer.py"
 )
 EXPECTED_PRODUCTION_SHA256 = (
-    "6170d2a248845281b5f5d38dfea4b9f2decf908b8e3b79e80f4ada18d2f54625"
+    "1f2b87f2954d1944c06497a8adcda4de1e1663a148d655bf7cd6f3ace4f757dc"
 )
 
 # Exact source line ranges (1-indexed, inclusive) for the small handful
@@ -69,14 +79,16 @@ EXPECTED_PRODUCTION_SHA256 = (
 # merely referencing pre-seeded globals), which only succeed inside a
 # real running SFM process -- exec'ing the whole file would make this
 # checkpoint's own logic untestable offline and would needlessly exec
-# thousands of unrelated lines just to reach seven small definitions.
+# thousands of unrelated lines just to reach a handful of definitions.
 RUN_LOCK_NAME_RANGE = (158, 160)
-NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME_RANGE = (170, 172)
-OUTPUT_PATH_RANGE = (174, 177)
-MARKER_ERROR_CLASS_RANGE = (807, 812)
-TO_UNICODE_RANGE = (854, 864)
-FIND_EXISTING_RUN_RANGE = (5609, 5628)
-FIND_PROCESS_ATTEMPT_MARKER_RANGE = (5631, 5662)
+CONSTANTS_MARKER_NAMES_RANGE = (196, 212)
+OUTPUT_PATH_RANGE = (214, 217)
+MARKER_ERROR_CLASS_RANGE = (847, 857)
+TO_UNICODE_RANGE = (899, 909)
+FIND_EXISTING_RUN_RANGE = (5654, 5673)
+FIND_NAMED_MARKER_RANGE = (5676, 5718)
+PROCESS_STATE_CONSTANTS_RANGE = (5775, 5780)
+READ_PROCESS_SCOPE_STATE_RANGE = (5783, 5825)
 
 STATE_PATH = (
     "C:\\Users\\Public\\Documents\\"
@@ -208,12 +220,14 @@ def load_production_definitions():
     ns = {"QtCore": QtCore}
     for range_tuple in (
         RUN_LOCK_NAME_RANGE,
-        NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME_RANGE,
+        CONSTANTS_MARKER_NAMES_RANGE,
         OUTPUT_PATH_RANGE,
         MARKER_ERROR_CLASS_RANGE,
         TO_UNICODE_RANGE,
         FIND_EXISTING_RUN_RANGE,
-        FIND_PROCESS_ATTEMPT_MARKER_RANGE,
+        FIND_NAMED_MARKER_RANGE,
+        PROCESS_STATE_CONSTANTS_RANGE,
+        READ_PROCESS_SCOPE_STATE_RANGE,
     ):
         exec(
             compile(
@@ -226,12 +240,18 @@ def load_production_definitions():
 
     for required_name in (
         "RUN_LOCK_NAME",
-        "NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME",
+        "NORMALIZER_PROCESS_STATE_SELECTED_USED_MARKER_NAME",
+        "NORMALIZER_PROCESS_STATE_FULL_SCOPE_STARTED_MARKER_NAME",
+        "NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME_LEGACY",
         "OUTPUT_PATH",
         "NormalizerProcessAttemptMarkerError",
         "to_unicode",
         "_find_existing_run",
-        "_find_process_attempt_marker",
+        "_find_named_process_marker",
+        "PROCESS_SCOPE_STATE_UNUSED",
+        "PROCESS_SCOPE_STATE_SELECTED_USED",
+        "PROCESS_SCOPE_STATE_FULL_SCOPE_STARTED",
+        "_read_process_scope_state",
     ):
         if required_name not in ns:
             raise CheckpointProcessAttemptGuardError(
@@ -295,15 +315,22 @@ def take_snapshot():
         ns = None
 
     if ns is not None and main_window is not None:
+        NormalizerProcessAttemptMarkerError = ns[
+            "NormalizerProcessAttemptMarkerError"
+        ]
         try:
-            found_marker = ns["_find_process_attempt_marker"](main_window)
-            snapshot["process_attempt_marker_present"] = (
-                found_marker is not None
-            )
-            snapshot["process_attempt_marker_lookup_error"] = None
+            snapshot["process_scope_state"] = ns[
+                "_read_process_scope_state"
+            ](main_window)
+            snapshot["process_scope_state_error"] = None
+        except NormalizerProcessAttemptMarkerError as exc:
+            snapshot["process_scope_state"] = None
+            snapshot["process_scope_state_error"] = u"%r" % (exc,)
         except Exception as exc:
-            snapshot["process_attempt_marker_present"] = None
-            snapshot["process_attempt_marker_lookup_error"] = u"%r" % (exc,)
+            snapshot["process_scope_state"] = None
+            snapshot["process_scope_state_error"] = (
+                u"UNEXPECTED: %r" % (exc,)
+            )
 
         try:
             found_run_lock = ns["_find_existing_run"](main_window)
@@ -312,8 +339,14 @@ def take_snapshot():
             snapshot["run_lock_present"] = None
             snapshot["run_lock_lookup_error"] = u"%r" % (exc,)
 
-        snapshot["marker_name_observed"] = ns.get(
-            "NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME"
+        snapshot["selected_used_marker_name_observed"] = ns.get(
+            "NORMALIZER_PROCESS_STATE_SELECTED_USED_MARKER_NAME"
+        )
+        snapshot["full_scope_started_marker_name_observed"] = ns.get(
+            "NORMALIZER_PROCESS_STATE_FULL_SCOPE_STARTED_MARKER_NAME"
+        )
+        snapshot["legacy_marker_name_observed"] = ns.get(
+            "NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME_LEGACY"
         )
         snapshot["run_lock_name_observed"] = ns.get("RUN_LOCK_NAME")
 
@@ -326,7 +359,7 @@ def take_snapshot():
         except Exception as exc:
             snapshot["production_log_fingerprint_error"] = u"%r" % (exc,)
     else:
-        snapshot["process_attempt_marker_present"] = None
+        snapshot["process_scope_state"] = None
         snapshot["run_lock_present"] = None
 
     return snapshot
@@ -354,7 +387,7 @@ def main():
 
     lines = []
     lines.append(
-        "PROCESS ATTEMPT GUARD CHECKPOINT -- SNAPSHOT #%d"
+        "PROCESS SCOPE-STATE GUARD CHECKPOINT -- SNAPSHOT #%d"
         % snapshot["snapshot_index"]
     )
     lines.append("wall_time = %s" % snapshot["wall_time"])
@@ -364,8 +397,12 @@ def main():
         % snapshot.get("production_sha256_matches_expected")
     )
     lines.append(
-        "process_attempt_marker_present = %s"
-        % snapshot.get("process_attempt_marker_present")
+        "process_scope_state = %s"
+        % snapshot.get("process_scope_state")
+    )
+    lines.append(
+        "process_scope_state_error = %s"
+        % snapshot.get("process_scope_state_error")
     )
     lines.append("run_lock_present = %s" % snapshot.get("run_lock_present"))
     fp_info = snapshot.get("production_log_fingerprint")
@@ -384,12 +421,13 @@ def main():
     )
     for s in state["snapshots"]:
         lines.append(
-            "  #%d pid=%s marker_present=%s run_lock_present=%s "
-            "log_sha256=%s"
+            "  #%d pid=%s scope_state=%s state_error=%s "
+            "run_lock_present=%s log_sha256=%s"
             % (
                 s.get("snapshot_index"),
                 s.get("current_pid"),
-                s.get("process_attempt_marker_present"),
+                s.get("process_scope_state"),
+                s.get("process_scope_state_error"),
                 s.get("run_lock_present"),
                 (s.get("production_log_fingerprint") or {}).get("sha256"),
             )

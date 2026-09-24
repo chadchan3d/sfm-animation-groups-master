@@ -159,15 +159,55 @@ RUN_LOCK_NAME = (
     "__SFM_REBUILD_CONTROL_GROUPS_CONTEXTUALIZER_RUNNING__"
 )
 
-# Process-lifetime one-resource-consuming-attempt guard (2026-09-24).
+# Process-lifetime scope-aware admission guard (2026-09-24, revised).
 # Independent of RUN_LOCK_NAME: RUN_LOCK_NAME marks a run as CURRENTLY
-# ACTIVE and is released when that run finishes; this marker means THIS
-# SFM PROCESS HAS ARMED A RESOURCE-CONSUMING NORMALIZER ATTEMPT and is
-# never cleared once installed -- only process exit removes it. See
-# StartRebuildControlGroups() (refusal boundary, before _choose_scope())
-# and RebuildControlGroupsProductionRun.start() (arming boundary,
-# immediately before collect_scope_master_wanted_folds()).
-NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME = (
+# ACTIVE and is released when that run finishes; these markers instead
+# record THIS SFM PROCESS'S OWN CUMULATIVE NORMALIZER USAGE CLASS and are
+# never cleared once installed -- only process exit removes them. See
+# StartRebuildControlGroups() (refusal boundary, before _choose_scope(),
+# and again immediately after scope resolution -- the scope dialog runs
+# its own nested Qt event loop, so state must be reread rather than
+# trusted from before it opened) and RebuildControlGroupsProductionRun
+# .start() (arming boundary, immediately before
+# collect_scope_master_wanted_folds()).
+#
+# Three logical process states, tracked by which (if any) of the two
+# markers below is present on main_window:
+#   UNUSED               -- neither marker present.
+#   SELECTED_USED         -- SELECTED_USED marker present. A Selected
+#                            Shot(s) request whose canonically resolved
+#                            shot set is a PROPER SUBSET of the project
+#                            has completed arming in this process.
+#   FULL_SCOPE_STARTED    -- FULL_SCOPE_STARTED marker present. Either an
+#                            All Shots request, or a Selected Shot(s)
+#                            request whose resolved shot set exactly
+#                            equals the complete project shot set (exact
+#                            workload equivalence, not a size threshold),
+#                            has completed arming in this process.
+# Selected Shot(s) over any proper subset of project shots -- 1, 2, 5, 10,
+# any number -- remains normal, repeatedly-usable functionality within
+# one process (UNUSED/SELECTED_USED -> SELECTED_USED). Only a full-scope
+# request is gated: FULL_SCOPE_STARTED refuses every later request
+# (Selected or All) until SFM restarts, and SELECTED_USED refuses a LATER
+# full-scope request (but not a later Selected proper-subset request).
+# No numeric shot/target/model/control/memory threshold is used anywhere
+# in this classification -- only exact set-equality full-scope
+# equivalence and the state matrix above.
+NORMALIZER_PROCESS_STATE_SELECTED_USED_MARKER_NAME = (
+    "__SFM_REBUILD_CONTROL_GROUPS_PROCESS_STATE_V2_SELECTED_USED__"
+)
+NORMALIZER_PROCESS_STATE_FULL_SCOPE_STARTED_MARKER_NAME = (
+    "__SFM_REBUILD_CONTROL_GROUPS_PROCESS_STATE_V2_FULL_SCOPE_STARTED__"
+)
+
+# Legacy marker from the prior, superseded broad one-attempt guard
+# (commit f3efd132ad5456a583df5917ef85576db0690c60). That marker could
+# not distinguish Selected use from All-Shots use, so if it is found
+# without valid new-scheme state present, this process's own history
+# cannot be safely reconstructed -- treat it as unreadable/ambiguous
+# state and require a restart. Never assume UNUSED and never reinterpret
+# it as SELECTED_USED.
+NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME_LEGACY = (
     "__SFM_REBUILD_CONTROL_GROUPS_PROCESS_ATTEMPT_CONSUMED__"
 )
 
@@ -805,10 +845,15 @@ class ProbeError(Exception):
 
 
 class NormalizerProcessAttemptMarkerError(Exception):
-    # Raised when the process-lifetime attempt marker (see
-    # NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME) cannot be reliably read,
-    # installed, or verified. Every caller must treat this as a refusal
-    # -- never as marker-absent. Fail closed.
+    # Raised when a process-lifetime scope-state marker (see
+    # NORMALIZER_PROCESS_STATE_SELECTED_USED_MARKER_NAME /
+    # NORMALIZER_PROCESS_STATE_FULL_SCOPE_STARTED_MARKER_NAME) cannot be
+    # reliably read, installed, or verified, or when the legacy marker
+    # (NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME_LEGACY) is found without
+    # valid new-scheme state, or when both state markers are present at
+    # once (conflicting/malformed state). Every caller must treat this as
+    # a refusal requiring restart -- never as UNUSED, never a guess. Fail
+    # closed.
     pass
 
 
@@ -5628,21 +5673,24 @@ def _find_existing_run(main_window):
     return None
 
 
-def _find_process_attempt_marker(main_window):
-    # Returns the marker QObject if present, or None if confirmed
-    # absent. Raises NormalizerProcessAttemptMarkerError if the lookup
-    # itself cannot be trusted -- callers must never treat that as
-    # "absent" (fail closed; do not repeat _find_existing_run's
-    # own swallow-and-return-None behavior for THIS marker).
+def _find_named_process_marker(main_window, marker_name):
+    # Returns the marker QObject named marker_name if present, or None
+    # if confirmed absent. Raises NormalizerProcessAttemptMarkerError if
+    # the lookup itself cannot be trusted -- callers must never treat
+    # that as "absent" (fail closed; do not repeat _find_existing_run's
+    # own swallow-and-return-None behavior for these markers).
     try:
         objects = main_window.findChildren(
             QtCore.QObject
         )
     except Exception as exc:
         raise NormalizerProcessAttemptMarkerError(
-            "process-attempt marker lookup failed: %s"
+            "process-state marker lookup failed: %s"
             % to_unicode(exc)
         )
+
+    found = None
+    found_count = 0
 
     for obj in objects:
         try:
@@ -5651,34 +5699,42 @@ def _find_process_attempt_marker(main_window):
             )
         except Exception as exc:
             raise NormalizerProcessAttemptMarkerError(
-                "process-attempt marker lookup failed reading an "
+                "process-state marker lookup failed reading an "
                 "objectName: %s"
                 % to_unicode(exc)
             )
 
-        if object_name == NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME:
-            return obj
+        if object_name == marker_name:
+            found = obj
+            found_count += 1
 
-    return None
+    if found_count > 1:
+        raise NormalizerProcessAttemptMarkerError(
+            "found %d markers named %r -- conflicting/malformed state "
+            "(exactly one or zero is expected)."
+            % (found_count, marker_name)
+        )
+
+    return found
 
 
-def _install_process_attempt_marker(main_window):
-    # Installs and verifies the process-lifetime attempt marker. Raises
-    # NormalizerProcessAttemptMarkerError on any installation or
-    # verification failure (fail closed). Never call this from a
-    # refusal path -- only from the single arming site immediately
-    # before substantial scope traversal, so repeated refusals never
-    # accumulate markers or keepalive references.
+def _install_named_process_marker(main_window, marker_name):
+    # Installs and verifies a process-lifetime scope-state marker named
+    # marker_name. Raises NormalizerProcessAttemptMarkerError on any
+    # installation or verification failure (fail closed). Never call
+    # this from a refusal path -- only from the single arming site
+    # immediately before substantial scope traversal, so repeated
+    # refusals never accumulate markers or keepalive references.
     try:
         marker = QtCore.QObject(
             main_window
         )
         marker.setObjectName(
-            NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME
+            marker_name
         )
     except Exception as exc:
         raise NormalizerProcessAttemptMarkerError(
-            "process-attempt marker installation failed: %s"
+            "process-state marker installation failed: %s"
             % to_unicode(exc)
         )
 
@@ -5698,21 +5754,121 @@ def _install_process_attempt_marker(main_window):
         )
     except Exception as exc:
         raise NormalizerProcessAttemptMarkerError(
-            "process-attempt marker keepalive registration failed: %s"
+            "process-state marker keepalive registration failed: %s"
             % to_unicode(exc)
         )
 
-    verify = _find_process_attempt_marker(
-        main_window
+    verify = _find_named_process_marker(
+        main_window,
+        marker_name
     )
 
     if verify is None:
         raise NormalizerProcessAttemptMarkerError(
-            "process-attempt marker installation could not be verified "
+            "process-state marker installation could not be verified "
             "immediately after install."
         )
 
     return marker
+
+
+PROCESS_SCOPE_STATE_UNUSED = u"UNUSED"
+PROCESS_SCOPE_STATE_SELECTED_USED = u"SELECTED_USED"
+PROCESS_SCOPE_STATE_FULL_SCOPE_STARTED = u"FULL_SCOPE_STARTED"
+
+SCOPE_REQUEST_CLASS_SELECTED_SCOPE = u"SELECTED_SCOPE"
+SCOPE_REQUEST_CLASS_FULL_SCOPE = u"FULL_SCOPE"
+
+
+def _read_process_scope_state(main_window):
+    # Returns one of PROCESS_SCOPE_STATE_UNUSED /
+    # PROCESS_SCOPE_STATE_SELECTED_USED /
+    # PROCESS_SCOPE_STATE_FULL_SCOPE_STARTED. Raises
+    # NormalizerProcessAttemptMarkerError (fail closed -- always means
+    # "require restart", never a guessed state) if: the legacy marker
+    # from the superseded broad guard is present (its boolean semantics
+    # cannot distinguish Selected use from All-Shots use); both new-
+    # scheme state markers are present at once (conflicting/malformed);
+    # or any underlying lookup cannot be trusted.
+    legacy_found = _find_named_process_marker(
+        main_window,
+        NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME_LEGACY
+    )
+    if legacy_found is not None:
+        raise NormalizerProcessAttemptMarkerError(
+            "legacy process-attempt marker found without valid "
+            "new-scheme scope state -- this process's own Normalizer "
+            "usage history cannot be safely reconstructed."
+        )
+
+    selected_used_found = _find_named_process_marker(
+        main_window,
+        NORMALIZER_PROCESS_STATE_SELECTED_USED_MARKER_NAME
+    )
+    full_scope_found = _find_named_process_marker(
+        main_window,
+        NORMALIZER_PROCESS_STATE_FULL_SCOPE_STARTED_MARKER_NAME
+    )
+
+    if selected_used_found is not None and full_scope_found is not None:
+        raise NormalizerProcessAttemptMarkerError(
+            "both SELECTED_USED and FULL_SCOPE_STARTED process-state "
+            "markers are present at once -- conflicting state."
+        )
+
+    if full_scope_found is not None:
+        return PROCESS_SCOPE_STATE_FULL_SCOPE_STARTED
+
+    if selected_used_found is not None:
+        return PROCESS_SCOPE_STATE_SELECTED_USED
+
+    return PROCESS_SCOPE_STATE_UNUSED
+
+
+def _classify_scope_request(scope_mode, scope_shots):
+    # Returns SCOPE_REQUEST_CLASS_FULL_SCOPE or
+    # SCOPE_REQUEST_CLASS_SELECTED_SCOPE. All-Shots is unconditionally
+    # full-scope. A Selected Shot(s) request is full-scope ONLY when its
+    # canonically resolved shot set is EXACTLY the complete current
+    # project shot set (exact workload equivalence, never a numeric
+    # threshold) -- any proper subset, of any size, remains
+    # SELECTED_SCOPE. Re-fetches the project shot set fresh rather than
+    # reusing a value captured before the scope dialog's own nested Qt
+    # event loop ran.
+    if scope_mode == SCOPE_ALL:
+        return SCOPE_REQUEST_CLASS_FULL_SCOPE
+
+    try:
+        all_shots_now = list(
+            sfmApp.GetShots()
+        )
+    except Exception as exc:
+        raise NormalizerProcessAttemptMarkerError(
+            "could not resolve the complete project shot set for "
+            "full-scope-equivalence classification: %s"
+            % to_unicode(exc)
+        )
+
+    try:
+        selected_names = set(
+            to_unicode(shot.GetName())
+            for shot in scope_shots
+        )
+        all_names = set(
+            to_unicode(shot.GetName())
+            for shot in all_shots_now
+        )
+    except Exception as exc:
+        raise NormalizerProcessAttemptMarkerError(
+            "could not canonically resolve shot identities for "
+            "full-scope-equivalence classification: %s"
+            % to_unicode(exc)
+        )
+
+    if len(all_names) > 0 and selected_names == all_names:
+        return SCOPE_REQUEST_CLASS_FULL_SCOPE
+
+    return SCOPE_REQUEST_CLASS_SELECTED_SCOPE
 
 
 
@@ -9113,6 +9269,70 @@ def _show_scope_error(message):
         pass
 
 
+def _show_process_guard_message(title, body):
+    # Concise, actionable, restart-instructing message for the process-
+    # lifetime scope-aware admission guard. Deliberately never mentions
+    # "unsafe", "may crash", or internal marker/state/VAS terminology --
+    # just what happened and what to do.
+    title_text = to_unicode(title)
+    body_text = to_unicode(body)
+
+    try:
+        QtGui.QMessageBox.warning(
+            _scope_dialog_parent(),
+            title_text,
+            body_text,
+        )
+        return
+    except Exception:
+        pass
+
+    try:
+        sys.stdout.write(
+            "%s: %s\n"
+            % (title_text, body_text)
+        )
+    except Exception:
+        pass
+
+
+PROCESS_GUARD_MESSAGE_STATE_UNVERIFIABLE = (
+    u"Restart SFM to Continue",
+    u"The Normalizer couldn't verify its run history.\n\n"
+    u"Save your project, restart SFM, reopen it, then try again.",
+)
+
+PROCESS_GUARD_MESSAGE_FULL_SCOPE_ALREADY_STARTED = (
+    u"Restart SFM Before Running Again",
+    u"All Shots has already started since SFM launched.\n\n"
+    u"Save your project, restart SFM, reopen it, then use the "
+    u"Normalizer again.",
+)
+
+PROCESS_GUARD_MESSAGE_RESTART_FOR_ALL_SHOTS = (
+    u"Restart SFM for All Shots",
+    u"The Normalizer has already been used since SFM started.\n"
+    u"Restart SFM before running All Shots.\n\n"
+    u"Save your project, restart SFM, reopen it, then run All Shots.",
+)
+
+PROCESS_GUARD_MESSAGE_RESTART_FOR_FULL_PROJECT_SELECTED = (
+    u"Restart SFM Before Normalizing All Shots",
+    u"The Normalizer has already been used since SFM started.\n"
+    u"Restart SFM before normalizing the entire project.\n\n"
+    u"Save your project, restart SFM, reopen it, then try again.",
+)
+
+
+def _process_guard_full_scope_refusal_message(scope_mode):
+    # scope_mode is only meaningfully known at the post-dialog refusal
+    # point; the pre-dialog FULL_SCOPE_STARTED refusal always uses the
+    # generic "already started" wording since no request has been made
+    # yet.
+    if scope_mode == SCOPE_ALL:
+        return PROCESS_GUARD_MESSAGE_RESTART_FOR_ALL_SHOTS
+    return PROCESS_GUARD_MESSAGE_RESTART_FOR_FULL_PROJECT_SELECTED
+
 
 class RebuildControlGroupsProductionRun(
         QtCore.QObject):
@@ -9121,7 +9341,8 @@ class RebuildControlGroupsProductionRun(
             self,
             main_window,
             scope_mode,
-            scope_shots):
+            scope_shots,
+            requested_scope_class):
         QtCore.QObject.__init__(
             self,
             main_window
@@ -9134,6 +9355,17 @@ class RebuildControlGroupsProductionRun(
         )
         self.scope_shots = list(
             scope_shots
+        )
+        # SCOPE_REQUEST_CLASS_SELECTED_SCOPE or
+        # SCOPE_REQUEST_CLASS_FULL_SCOPE -- classified once by
+        # StartRebuildControlGroups() immediately after scope
+        # resolution and passed through unchanged; the arming boundary
+        # in start() uses this to decide which process-state marker (if
+        # any) to install.
+        self.requested_scope_class = (
+            to_unicode(
+                requested_scope_class
+            )
         )
 
         self.setObjectName(
@@ -13623,67 +13855,113 @@ class RebuildControlGroupsProductionRun(
             )
 
             self.section(
-                "CONTEXTUALIZER PROCESS-LIFETIME ATTEMPT GUARD"
+                "CONTEXTUALIZER PROCESS-LIFETIME SCOPE-STATE GUARD"
             )
 
-            # Arming boundary: final recheck + install + verification,
-            # immediately before substantial scope traversal begins,
-            # with no intervening Qt event-loop yield (this is a plain
-            # sequence of function calls -- no processEvents()/exec_()
-            # between here and collect_scope_master_wanted_folds()
-            # below). _choose_scope()'s own nested Qt event loop already
-            # completed before this run object was even constructed, so
-            # the public-entry check in StartRebuildControlGroups() is
-            # not durable authorization by itself -- this recheck is.
+            # Arming boundary: final recheck + admission revalidation +
+            # install (if needed) + verification, immediately before
+            # substantial scope traversal begins, with no intervening Qt
+            # event-loop yield (this is a plain sequence of function
+            # calls -- no processEvents()/exec_() between here and
+            # collect_scope_master_wanted_folds() below). _choose_scope()
+            # 's own nested Qt event loop already completed before this
+            # run object was even constructed, so the public-entry checks
+            # in StartRebuildControlGroups() are not durable authorization
+            # by themselves -- this recheck is.
             guard_main_window = (
                 sfmApp.GetMainWindow()
             )
 
             if guard_main_window is None:
                 raise ProbeError(
-                    "Process-lifetime attempt guard: SFM main window "
-                    "unavailable immediately before scope traversal."
+                    "Process-lifetime scope-state guard: SFM main "
+                    "window unavailable immediately before scope "
+                    "traversal."
                 )
 
             try:
-                guard_existing_marker = (
-                    _find_process_attempt_marker(
+                guard_state = (
+                    _read_process_scope_state(
                         guard_main_window
                     )
                 )
             except NormalizerProcessAttemptMarkerError as exc:
                 raise ProbeError(
-                    "Process-lifetime attempt guard could not verify "
-                    "marker state immediately before scope traversal "
-                    "(failing closed): %s"
-                    % to_unicode(exc)
-                )
-
-            if guard_existing_marker is not None:
-                raise ProbeError(
-                    "Process-lifetime attempt guard: a process-attempt "
-                    "marker is already present in this SFM process; "
-                    "refusing to begin substantial scope traversal."
-                )
-
-            try:
-                _install_process_attempt_marker(
-                    guard_main_window
-                )
-            except NormalizerProcessAttemptMarkerError as exc:
-                raise ProbeError(
-                    "Process-lifetime attempt guard could not install "
-                    "or verify its marker immediately before scope "
+                    "Process-lifetime scope-state guard could not "
+                    "verify process state immediately before scope "
                     "traversal (failing closed): %s"
                     % to_unicode(exc)
                 )
 
+            if guard_state == PROCESS_SCOPE_STATE_FULL_SCOPE_STARTED:
+                raise ProbeError(
+                    "Process-lifetime scope-state guard: full-scope "
+                    "work already started in this SFM process; "
+                    "refusing to begin further scope traversal."
+                )
+
+            if (
+                guard_state == PROCESS_SCOPE_STATE_SELECTED_USED
+                and self.requested_scope_class
+                == SCOPE_REQUEST_CLASS_FULL_SCOPE
+            ):
+                raise ProbeError(
+                    "Process-lifetime scope-state guard: this process "
+                    "has already used the Normalizer for a Selected "
+                    "Shot(s) request; refusing this full-scope request "
+                    "(restart is required before full-scope use)."
+                )
+
+            if guard_state == PROCESS_SCOPE_STATE_UNUSED:
+                target_marker_name = (
+                    NORMALIZER_PROCESS_STATE_FULL_SCOPE_STARTED_MARKER_NAME
+                    if self.requested_scope_class
+                    == SCOPE_REQUEST_CLASS_FULL_SCOPE
+                    else NORMALIZER_PROCESS_STATE_SELECTED_USED_MARKER_NAME
+                )
+
+                try:
+                    _install_named_process_marker(
+                        guard_main_window,
+                        target_marker_name
+                    )
+                except NormalizerProcessAttemptMarkerError as exc:
+                    raise ProbeError(
+                        "Process-lifetime scope-state guard could not "
+                        "install or verify its marker immediately "
+                        "before scope traversal (failing closed): %s"
+                        % to_unicode(exc)
+                    )
+
+                self.log(
+                    "CONTEXTUALIZER_PROCESS_SCOPE_STATE_TRANSITION = "
+                    "%s -> %s"
+                    % (
+                        guard_state,
+                        self.requested_scope_class,
+                    )
+                )
+            else:
+                # guard_state == PROCESS_SCOPE_STATE_SELECTED_USED and
+                # this request is itself SELECTED_SCOPE -- the marker is
+                # already installed from an earlier request in this
+                # process; state never rolls backward and is never
+                # reinstalled/updated for an unchanged transition.
+                self.log(
+                    "CONTEXTUALIZER_PROCESS_SCOPE_STATE_TRANSITION = "
+                    "%s -> %s (unchanged)"
+                    % (
+                        guard_state,
+                        guard_state,
+                    )
+                )
+
             self.log(
-                "CONTEXTUALIZER_PROCESS_ATTEMPT_MARKER_ARMED = True"
+                "CONTEXTUALIZER_PROCESS_SCOPE_STATE_ARMED = True"
             )
             self.log(
-                "CONTEXTUALIZER_PROCESS_ATTEMPT_MARKER_NAME = %s"
-                % NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME
+                "CONTEXTUALIZER_REQUESTED_SCOPE_CLASS = %s"
+                % self.requested_scope_class
             )
 
             self.section(
@@ -14080,36 +14358,36 @@ def StartRebuildControlGroups():
             pass
         return
 
-    # Process-lifetime one-resource-consuming-attempt guard: refusal
-    # boundary. Checked BEFORE _choose_scope() so a refused invocation
-    # performs zero scope-control collection, work inventory, fresh
-    # scene discovery, broker/provider acquisition, native Rebuild,
-    # production-run construction/start, or production-log truncation
-    # (the log file is not opened until RebuildControlGroupsProductionRun
-    # .start(), which is never reached from this path).
+    # Process-lifetime scope-aware admission guard: refusal boundary,
+    # checked BEFORE _choose_scope() so a refused invocation performs
+    # zero scope-control collection, work inventory, fresh scene
+    # discovery, broker/provider acquisition, native Rebuild, production-
+    # run construction/start, or production-log truncation (the log file
+    # is not opened until RebuildControlGroupsProductionRun.start(),
+    # which is never reached from either refusal path below). Selected
+    # Shot(s) over any proper subset of project shots is NOT gated here
+    # -- only a process that already started full-scope work is refused
+    # at this point; a SELECTED_USED process is still allowed to open
+    # the scope dialog (a later full-scope REQUEST from a SELECTED_USED
+    # process is instead caught after scope resolution, below, since
+    # only then is the request's own scope class known).
     try:
-        process_attempt_marker_present = (
-            _find_process_attempt_marker(
-                main_window
-            )
-            is not None
+        pre_dialog_state = _read_process_scope_state(
+            main_window
         )
-    except NormalizerProcessAttemptMarkerError as exc:
-        _show_scope_error(
-            "Control Group Normalizer could not verify this SFM "
-            "process's run eligibility (%s). For safety, no rebuild "
-            "will start.\nSave your session, fully exit and restart "
-            "SFM, reopen the session, then run the Normalizer again."
-            % to_unicode(exc)
+    except NormalizerProcessAttemptMarkerError:
+        title, body = PROCESS_GUARD_MESSAGE_STATE_UNVERIFIABLE
+        _show_process_guard_message(
+            title,
+            body
         )
         return
 
-    if process_attempt_marker_present:
-        _show_scope_error(
-            "Control Group Normalizer has already started a run in "
-            "this SFM process.\nSave your session, fully exit and "
-            "restart SFM, reopen the session, then run the Normalizer "
-            "again."
+    if pre_dialog_state == PROCESS_SCOPE_STATE_FULL_SCOPE_STARTED:
+        title, body = PROCESS_GUARD_MESSAGE_FULL_SCOPE_ALREADY_STARTED
+        _show_process_guard_message(
+            title,
+            body
         )
         return
 
@@ -14130,11 +14408,61 @@ def StartRebuildControlGroups():
     if scope_mode is None:
         return
 
+    try:
+        requested_scope_class = _classify_scope_request(
+            scope_mode,
+            scope_shots
+        )
+    except NormalizerProcessAttemptMarkerError:
+        title, body = PROCESS_GUARD_MESSAGE_STATE_UNVERIFIABLE
+        _show_process_guard_message(
+            title,
+            body
+        )
+        return
+
+    # Reread process state: _choose_scope() ran its own nested Qt event
+    # loop while the dialog was open, so state captured before it opened
+    # cannot be trusted as still current.
+    try:
+        post_dialog_state = _read_process_scope_state(
+            main_window
+        )
+    except NormalizerProcessAttemptMarkerError:
+        title, body = PROCESS_GUARD_MESSAGE_STATE_UNVERIFIABLE
+        _show_process_guard_message(
+            title,
+            body
+        )
+        return
+
+    if post_dialog_state == PROCESS_SCOPE_STATE_FULL_SCOPE_STARTED:
+        title, body = PROCESS_GUARD_MESSAGE_FULL_SCOPE_ALREADY_STARTED
+        _show_process_guard_message(
+            title,
+            body
+        )
+        return
+
+    if (
+        post_dialog_state == PROCESS_SCOPE_STATE_SELECTED_USED
+        and requested_scope_class == SCOPE_REQUEST_CLASS_FULL_SCOPE
+    ):
+        title, body = _process_guard_full_scope_refusal_message(
+            scope_mode
+        )
+        _show_process_guard_message(
+            title,
+            body
+        )
+        return
+
     run = (
         RebuildControlGroupsProductionRun(
             main_window,
             scope_mode,
             scope_shots,
+            requested_scope_class,
         )
     )
     run.start()

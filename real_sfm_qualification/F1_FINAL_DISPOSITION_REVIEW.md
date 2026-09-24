@@ -97,6 +97,45 @@ at the pre-guard, already-accepted baseline until that qualification passes, con
 other unqualified production candidate has been treated in this project. This implementation does not
 reopen the F1 optimization search (still concluded/exhausted) and does not begin `G`.
 
+## Update (2026-09-24): scope-aware correction — the ">1 Selected shot = batch" proposal was rejected
+
+The guard implementation above used Astra's original classification, under which any Selected Shot(s)
+request over a single shot was treated as "batch" and gated identically to All Shots. **That classification
+was reviewed and REJECTED as unsupported by the empirical evidence and harmful to the intended Selected
+Shot(s) feature.** Nothing in this project's evidence (`F1-1`, `F2-R1-R3`, or any other checkpoint) shows
+that selecting 2, 5, or 10 shots is unsafe — the only demonstrated failure mode involves large/cumulative
+full-project workloads (All Shots, or repeated commands whose combined discovery cost approaches the same
+scale). Selected Shot(s) is intended to support normal artist use across multiple selected shots, and the
+guard must not cripple that.
+
+The guard has been corrected accordingly. It now uses exactly two workload classes, never a numeric
+threshold: **SELECTED_SCOPE** (Selected Shot(s) whose canonically resolved shot set is a proper subset of
+the project, any size) and **FULL_SCOPE** (All Shots, or a Selected Shot(s) request whose resolved shot set
+exactly equals the complete project shot set — exact workload equivalence, not a size threshold). Three
+process states — `UNUSED`, `SELECTED_USED`, `FULL_SCOPE_STARTED` — replace the original single boolean:
+Selected proper-subset use remains freely repeatable within one process (`UNUSED`/`SELECTED_USED` →
+`SELECTED_USED`); only a full-scope request is gated, and only after either full-scope work has already
+started in this process, or Selected-scope work has already been used and a *later* request is itself
+full-scope. No numeric shot/target/model/control/memory threshold is used anywhere in this classification.
+Full detail is recorded in `LEDGER.md`'s revised `F3-Guard` row and in
+`checkpoint_process_attempt_guard/INSTRUCTIONS.md`.
+
+The original broad-guard candidate (SHA-256 `6170d2a248845281b5f5d38dfea4b9f2decf908b8e3b79e80f4ada18d2f54625`)
+was implemented, offline-qualified, and deployed, but **never run against real SFM** before this correction
+superseded it — there is no real-SFM evidence for that design to preserve or contradict; it is a design
+correction, not a reversal of a real result.
+
+Offline qualification of the corrected, scope-aware guard: **64/64 PASS**
+(`test_process_attempt_guard_regression.py`, all 24 revised-contract items — the full state-transition
+matrix, exact-set-equality classification including a large-but-proper-subset case proving there is no size
+threshold, fail-closed handling of malformed/conflicting/legacy state, and static source-position proofs)
+plus **17/17 PASS** for the companion real-SFM checkpoint script's own dry run. The scope-aware candidate
+(SHA-256 `1f2b87f2954d1944c06497a8adcda4de1e1663a148d655bf7cd6f3ace4f757dc`) and the revised checkpoint
+script have both been deployed to the live SFM install and hash-verified matching the repo exactly.
+
+**This candidate has NOT yet been qualified against real SFM.** `F` remains **OPEN**; the F1 optimization
+search remains CLOSED/exhausted (not reopened); `G` has not begun.
+
 ## 1. What repeated-use behavior has actually failed?
 
 The one real, observed failure in this entire investigation is **`F1-1`**: an actual SFM process crash

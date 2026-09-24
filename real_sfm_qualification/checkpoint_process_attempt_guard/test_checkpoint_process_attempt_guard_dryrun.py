@@ -12,11 +12,11 @@ real QtCore.QObject main_window, that this checkpoint script:
     own source (the one thing this script must never do, since it is
     meant to be pure read-only observation);
   - correctly extracts, by exact pinned line range, and calls the real,
-    guard-added _find_process_attempt_marker / _find_existing_run from
-    the pinned production candidate's own source, without exec'ing
-    production's own module body (which performs real `import sfmApp` /
-    `import sfmClipEditor` / `import vs` statements that only succeed
-    inside a real running SFM process);
+    scope-aware _read_process_scope_state / _find_named_process_marker /
+    _find_existing_run from the pinned production candidate's own
+    source, without exec'ing production's own module body (which
+    performs real `import sfmApp` / `import sfmClipEditor` / `import vs`
+    statements that only succeed inside a real running SFM process);
   - produces a snapshot whose fields match what a truly fresh process
     (no marker, no run lock) should report;
   - persists and re-reads state via its own atomic-write helpers.
@@ -45,7 +45,7 @@ PRODUCTION_CANDIDATE_PATH = os.path.normpath(
         "Rebuild_Control_Groups_Normalizer.py",
     )
 )
-EXPECTED_PRODUCTION_SHA256 = "6170d2a248845281b5f5d38dfea4b9f2decf908b8e3b79e80f4ada18d2f54625"
+EXPECTED_PRODUCTION_SHA256 = "1f2b87f2954d1944c06497a8adcda4de1e1663a148d655bf7cd6f3ace4f757dc"
 
 PASS_COUNT = [0]
 FAIL_COUNT = [0]
@@ -131,14 +131,18 @@ try:
         "load_production_definitions.reads_and_hashes_the_pinned_candidate_correctly",
     )
     expect(
-        "_find_process_attempt_marker" in prod_ns
+        "_read_process_scope_state" in prod_ns
+        and "_find_named_process_marker" in prod_ns
         and "_find_existing_run" in prod_ns
         and "OUTPUT_PATH" in prod_ns
         and "RUN_LOCK_NAME" in prod_ns
-        and "NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME" in prod_ns
+        and "NORMALIZER_PROCESS_STATE_SELECTED_USED_MARKER_NAME" in prod_ns
+        and "NORMALIZER_PROCESS_STATE_FULL_SCOPE_STARTED_MARKER_NAME" in prod_ns
+        and "NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME_LEGACY" in prod_ns
+        and "PROCESS_SCOPE_STATE_UNUSED" in prod_ns
         and "NormalizerProcessAttemptMarkerError" in prod_ns
         and "to_unicode" in prod_ns,
-        "load_production_definitions.extracts_all_seven_expected_real_definitions",
+        "load_production_definitions.extracts_all_expected_real_definitions",
     )
     expect(
         "sfmApp" not in prod_ns
@@ -157,17 +161,28 @@ try:
         "take_snapshot.confirms_pinned_production_sha256",
     )
     expect(
-        snapshot["process_attempt_marker_present"] is False,
-        "take_snapshot.fresh_QObject_main_window_has_no_marker",
+        snapshot["process_scope_state"] == u"UNUSED"
+        and snapshot["process_scope_state_error"] is None,
+        "take_snapshot.fresh_QObject_main_window_reports_UNUSED",
     )
     expect(
         snapshot["run_lock_present"] is False,
         "take_snapshot.fresh_QObject_main_window_has_no_run_lock",
     )
     expect(
-        snapshot["marker_name_observed"]
+        snapshot["selected_used_marker_name_observed"]
+        == u"__SFM_REBUILD_CONTROL_GROUPS_PROCESS_STATE_V2_SELECTED_USED__",
+        "take_snapshot.observes_the_real_selected_used_marker_name_from_production",
+    )
+    expect(
+        snapshot["full_scope_started_marker_name_observed"]
+        == u"__SFM_REBUILD_CONTROL_GROUPS_PROCESS_STATE_V2_FULL_SCOPE_STARTED__",
+        "take_snapshot.observes_the_real_full_scope_started_marker_name_from_production",
+    )
+    expect(
+        snapshot["legacy_marker_name_observed"]
         == u"__SFM_REBUILD_CONTROL_GROUPS_PROCESS_ATTEMPT_CONSUMED__",
-        "take_snapshot.observes_the_real_marker_name_from_production",
+        "take_snapshot.observes_the_real_legacy_marker_name_from_production",
     )
 
     main_fn = ns["main"]
