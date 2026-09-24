@@ -120,18 +120,43 @@ full-scope. No numeric shot/target/model/control/memory threshold is used anywhe
 Full detail is recorded in `LEDGER.md`'s revised `F3-Guard` row and in
 `checkpoint_process_attempt_guard/INSTRUCTIONS.md`.
 
-The original broad-guard candidate (SHA-256 `6170d2a248845281b5f5d38dfea4b9f2decf908b8e3b79e80f4ada18d2f54625`)
-was implemented, offline-qualified, and deployed, but **never run against real SFM** before this correction
-superseded it — there is no real-SFM evidence for that design to preserve or contradict; it is a design
-correction, not a reversal of a real result.
+**Historical-record correction (2026-09-24, independent review)**: an earlier version of this section
+incorrectly stated the original broad-guard candidate (SHA-256
+`6170d2a248845281b5f5d38dfea4b9f2decf908b8e3b79e80f4ada18d2f54625`) was never run against real SFM. That was
+false. The operator DID begin its real-SFM guard qualification and intentionally stopped after snapshot #5
+when the one-attempt-per-process product-policy problem was recognized — this has been independently
+re-verified directly against the actual preserved artifacts on disk (`sfm_checkpoint_process_attempt_guard_
+{state,result,summary}.{json,txt}` and `sfm_rebuild_control_groups.txt`), not merely recorded from a relayed
+claim: fresh process (PID `15736`), marker absent; after opening/cancelling the scope dialog, marker still
+absent and the production log unchanged; one real Selected-Shots command on `shot3` completed for real
+(independently confirmed in the production log: `scope_mode=SELECTED_SHOTS scope_shots=1`,
+`CONTEXTUALIZER_SCOPE_SHOT_NAMES = [u'shot3']`, `PRODUCTION_REBUILD_CONTROL_GROUPS = PASS`); the broad
+process-attempt marker then present, run lock absent; a later Normalizer invocation was refused with the
+production log byte-for-byte unchanged; the document/session was changed in the same SFM process; a later
+invocation remained refused, again with the log unchanged. Full exact evidence is recorded in `LEDGER.md`'s
+F3-Guard row. **Correct wording: the broad guard received PARTIAL real-SFM qualification through snapshot
+#5. Its guard mechanics observed through that point behaved as designed. The qualification was intentionally
+stopped before the restart/reset portion because the one-attempt-per-process product policy itself was
+rejected as too restrictive** — not because of any guard-mechanics failure. This remains a design/policy
+correction, not a reversal of a real result; no preserved evidence is rewritten or discarded.
 
-Offline qualification of the corrected, scope-aware guard: **64/64 PASS**
-(`test_process_attempt_guard_regression.py`, all 24 revised-contract items — the full state-transition
-matrix, exact-set-equality classification including a large-but-proper-subset case proving there is no size
-threshold, fail-closed handling of malformed/conflicting/legacy state, and static source-position proofs)
-plus **17/17 PASS** for the companion real-SFM checkpoint script's own dry run. The scope-aware candidate
-(SHA-256 `1f2b87f2954d1944c06497a8adcda4de1e1663a148d655bf7cd6f3ace4f757dc`) and the revised checkpoint
-script have both been deployed to the live SFM install and hash-verified matching the repo exactly.
+A second, independent-review-driven correction (2026-09-24) found the scope-aware guard's own full-scope-
+equivalence classifier used shot NAMES for identity (weaker than the contract, since duplicate shot names
+could collapse distinct shots into a false match) instead of the canonical HANDLE/NATIVE-POINTER identity
+`_resolve_selected_scope()` already uses for its own scope resolution. `_classify_scope_request()` has been
+corrected to re-resolve every selected shot's canonical identity against a FRESH `sfmApp.GetShots()`
+snapshot (never a stale pre-dialog one) via a new, self-contained helper —
+`_resolve_selected_scope()` itself, part of the core mutation pipeline, was left completely untouched (`git
+diff` confined to one contiguous 140-insertion/19-deletion region).
+
+Offline qualification of the corrected, canonical-identity guard: **81/81 PASS**
+(`test_process_attempt_guard_regression.py`, all 24 revised-contract items plus adversarial canonical-
+identity coverage — duplicate-shot-name cases proving names cannot collapse or fabricate identity, a
+reordered-selection case proving order-independence, and unresolved/ambiguous-identity cases failing closed)
+plus **17/17 PASS** for the companion real-SFM checkpoint script's own dry run (unchanged functionally,
+since it never calls the classifier itself). The canonical-identity candidate (SHA-256
+`2c0edbb8a95f96147e6310fe1c039da7ee053f5e985f11bb3535dda8aa5ec23d`) and the checkpoint script have both been
+deployed to the live SFM install and hash-verified matching the repo exactly.
 
 **This candidate has NOT yet been qualified against real SFM.** `F` remains **OPEN**; the F1 optimization
 search remains CLOSED/exhausted (not reopened); `G` has not begun.

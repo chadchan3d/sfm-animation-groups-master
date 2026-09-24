@@ -5825,16 +5825,105 @@ def _read_process_scope_state(main_window):
     return PROCESS_SCOPE_STATE_UNUSED
 
 
+def _resolve_shot_canonical_identity_for_classification(
+        shot,
+        all_shots_now):
+    # Re-resolves a single shot object (which may have been matched
+    # against a PRE-dialog sfmApp.GetShots() snapshot inside
+    # _resolve_selected_scope(), now stale since the scope dialog ran
+    # its own nested Qt event loop) against a FRESH all_shots_now list,
+    # using the exact same handle-OR-native-pointer matching
+    # _resolve_selected_scope() itself uses -- deliberately duplicated
+    # here rather than sharing code with _resolve_selected_scope(),
+    # which is part of the core mutation pipeline and is left
+    # completely untouched. Requires exactly one canonical match; fails
+    # closed (raises) on zero or more-than-one matches -- never guesses,
+    # never falls back to name identity.
+    shot_handle = None
+    try:
+        shot_handle = int(
+            shot.GetHandle()
+        )
+    except Exception:
+        pass
+    shot_ptr = native_ptr(
+        shot
+    )
+
+    matches = []
+
+    for candidate in all_shots_now:
+        matched = False
+
+        try:
+            candidate_handle = int(
+                candidate.GetHandle()
+            )
+        except Exception:
+            candidate_handle = None
+
+        candidate_ptr = native_ptr(
+            candidate
+        )
+
+        if (
+            shot_handle is not None
+            and candidate_handle is not None
+            and shot_handle
+            == candidate_handle
+        ):
+            matched = True
+
+        if (
+            shot_ptr is not None
+            and candidate_ptr is not None
+            and shot_ptr
+            == candidate_ptr
+        ):
+            matched = True
+
+        if matched:
+            matches.append(
+                candidate
+            )
+
+    unique_matches = {}
+
+    for candidate in matches:
+        unique_matches[
+            native_ptr(
+                candidate
+            )
+        ] = candidate
+
+    if len(unique_matches) != 1:
+        raise NormalizerProcessAttemptMarkerError(
+            "could not uniquely re-resolve a selected shot's canonical "
+            "identity against the current project shot list for "
+            "full-scope-equivalence classification; matches=%d."
+            % len(unique_matches)
+        )
+
+    return list(
+        unique_matches.keys()
+    )[0]
+
+
 def _classify_scope_request(scope_mode, scope_shots):
     # Returns SCOPE_REQUEST_CLASS_FULL_SCOPE or
     # SCOPE_REQUEST_CLASS_SELECTED_SCOPE. All-Shots is unconditionally
     # full-scope. A Selected Shot(s) request is full-scope ONLY when its
-    # canonically resolved shot set is EXACTLY the complete current
-    # project shot set (exact workload equivalence, never a numeric
-    # threshold) -- any proper subset, of any size, remains
-    # SELECTED_SCOPE. Re-fetches the project shot set fresh rather than
-    # reusing a value captured before the scope dialog's own nested Qt
-    # event loop ran.
+    # canonically resolved shot IDENTITY set is EXACTLY the complete
+    # current project shot IDENTITY set (exact workload equivalence,
+    # never a numeric threshold, never shot-NAME equality -- shot names
+    # are not a reliable identity and can be duplicated in a project) --
+    # any proper subset, of any size, remains SELECTED_SCOPE. Re-fetches
+    # the project shot set fresh and re-resolves every selected shot's
+    # own canonical identity against that fresh set, rather than
+    # trusting either a pre-dialog project snapshot or the pointer
+    # identity scope_shots already carries from _resolve_selected_scope()
+    # -- the scope dialog's own nested Qt event loop ran since either of
+    # those was captured.
     if scope_mode == SCOPE_ALL:
         return SCOPE_REQUEST_CLASS_FULL_SCOPE
 
@@ -5849,23 +5938,55 @@ def _classify_scope_request(scope_mode, scope_shots):
             % to_unicode(exc)
         )
 
-    try:
-        selected_names = set(
-            to_unicode(shot.GetName())
-            for shot in scope_shots
-        )
-        all_names = set(
-            to_unicode(shot.GetName())
-            for shot in all_shots_now
-        )
-    except Exception as exc:
-        raise NormalizerProcessAttemptMarkerError(
-            "could not canonically resolve shot identities for "
-            "full-scope-equivalence classification: %s"
-            % to_unicode(exc)
+    selected_identities = set()
+
+    for shot in scope_shots:
+        selected_identities.add(
+            _resolve_shot_canonical_identity_for_classification(
+                shot,
+                all_shots_now
+            )
         )
 
-    if len(all_names) > 0 and selected_names == all_names:
+    if len(selected_identities) != len(scope_shots):
+        # scope_shots was already deduplicated by
+        # _resolve_selected_scope(); if re-resolution against a fresh
+        # snapshot collapses to fewer unique identities than the count
+        # originally passed in, the canonical mapping changed between
+        # dialog-open and this point -- fail closed rather than
+        # silently accept a narrower set.
+        raise NormalizerProcessAttemptMarkerError(
+            "canonical identity re-resolution produced %d unique "
+            "identities for %d originally-resolved selected shots -- "
+            "refusing to classify against a changed mapping."
+            % (
+                len(selected_identities),
+                len(scope_shots),
+            )
+        )
+
+    all_identities_now = set()
+
+    for shot in all_shots_now:
+        shot_ptr = native_ptr(
+            shot
+        )
+
+        if shot_ptr is None:
+            raise NormalizerProcessAttemptMarkerError(
+                "could not establish a canonical identity for a "
+                "current project shot during full-scope-equivalence "
+                "classification."
+            )
+
+        all_identities_now.add(
+            shot_ptr
+        )
+
+    if (
+        len(all_identities_now) > 0
+        and selected_identities == all_identities_now
+    ):
         return SCOPE_REQUEST_CLASS_FULL_SCOPE
 
     return SCOPE_REQUEST_CLASS_SELECTED_SCOPE

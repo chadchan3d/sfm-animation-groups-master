@@ -11,8 +11,14 @@ classification was reviewed and rejected as unsupported by the evidence and harm
 Selected Shot(s) feature** — nothing in this project's evidence shows selecting 2, 5, or 10 shots is
 unsafe; the only demonstrated failure mode involves large/cumulative full-project workloads.
 
-The guard has been revised and reimplemented accordingly. **This checkpoint has NOT been run against real
-SFM.** It is prepared for the operator to run.
+The guard has been revised and reimplemented accordingly. A subsequent independent review also found the
+guard's original full-scope-equivalence check used shot NAMES for identity (weaker than the contract, since
+duplicate shot names could collapse distinct shots) instead of the canonical handle/native-pointer identity
+`_resolve_selected_scope()` already uses; this has been corrected too (see "Proof no execution semantics
+changed" below). **This checkpoint has NOT been run against real SFM.** (The original, now-superseded broad
+one-attempt-per-process guard DID receive partial real-SFM qualification through snapshot #5 before being
+superseded — see `../LEDGER.md`'s F3-Guard row for the corrected historical record; that partial evidence
+is for the superseded design, not this one.) It is prepared for the operator to run.
 
 ## What the revised guard does (for context — do not re-derive this while running the checkpoint)
 
@@ -62,25 +68,32 @@ name).
 ## Offline qualification already performed (before this checkpoint was prepared)
 
 - `test_process_attempt_guard_regression.py` (SHA-256
-  `8afd7bf11437c9e789e9e0b2cc52d94351a57efec1d37730f3a8265f7e164dbc`) — **64/64 PASS** under the real
-  embedded Python 2.7.5. Covers all 24 items from the revised contract: the full state-transition matrix
-  (behavioral, real `QtCore.QObject` instances) including that a refused full-scope request after
-  `SELECTED_USED` leaves state unchanged and a later Selected request is still allowed; full-scope-
-  equivalence classification (exact-set-equality, including a 40-of-50-shot large-but-proper-subset case
-  proving there is no size threshold); malformed/conflicting/unreadable state and the legacy marker all fail
-  closed; no scene/authority payload retained; survives `gc.collect()`; and static source-position proofs
-  against the actual deployed production script text (cancel/bounded-rejection leave state unused, the
-  dialog's nested event loop is accounted for by a reread, no cleanup path ever references either marker,
-  refused requests reference zero substantial-work identifiers, exactly one log-truncating `open()` call
-  exists and it is unreachable from refusal, the core mutation pipeline's own defining names are unchanged).
+  `bfd1c197fe16e0f460957445af2e85a694e8aba73c2729f458eaa092c1492c84`) — **81/81 PASS** under the real
+  embedded Python 2.7.5. Covers all 24 items from the revised contract plus the independent-review canonical-
+  identity correction's own adversarial coverage: the full state-transition matrix (behavioral, real
+  `QtCore.QObject` instances) including that a refused full-scope request after `SELECTED_USED` leaves state
+  unchanged and a later Selected request is still allowed; full-scope-equivalence classification using
+  canonical shot HANDLE/NATIVE-POINTER identity (never shot names), including a 40-of-50-shot large-but-
+  proper-subset case proving there is no size threshold, duplicate-shot-name cases proving names cannot
+  collapse or fabricate distinct identity, a reordered-selection case proving identity-set comparison is
+  order-independent, and unresolved/ambiguous-identity cases failing closed; malformed/conflicting/
+  unreadable state and the legacy marker all fail closed; no scene/authority payload retained; survives
+  `gc.collect()`; and static source-position proofs against the actual deployed production script text
+  (cancel/bounded-rejection leave state unused, the dialog's nested event loop is accounted for by a reread,
+  no cleanup path ever references either marker, refused requests reference zero substantial-work
+  identifiers, exactly one log-truncating `open()` call exists and it is unreachable from refusal, the core
+  mutation pipeline's own defining names are unchanged, and the classifier's own extracted source no longer
+  contains any shot-name-based equality check).
 - `test_checkpoint_process_attempt_guard_dryrun.py` (SHA-256
-  `c72b0ced5a52d223ec41c4378b3ca9eef3258811c005980737f514c114e60bc3`) — **17/17 PASS** — offline-verifies
+  `ec729e253ef366a451c22dfd752f33e3a5cad2f0b0dc184393912be7e07e210a`) — **17/17 PASS** — offline-verifies
   this checkpoint script itself never references `StartRebuildControlGroups()`/scope-dialog machinery/
   substantial-traversal identifiers; `load_production_definitions()` extracts exactly the pinned scope-aware
   definitions by exact line range without importing the real SFM-only modules; `take_snapshot()` against a
   fresh real `QtCore.QObject` main window correctly reports `UNUSED` and the exact real marker names
   (`SELECTED_USED`, `FULL_SCOPE_STARTED`, and the legacy marker name); `main()` persists auto-numbered
-  snapshots without ever overwriting prior history.
+  snapshots without ever overwriting prior history. (This checkpoint script never calls the classifier
+  itself, so it needed no functional change for the canonical-identity correction — only the pinned
+  production SHA-256 was updated.)
 
 ## Proof no execution semantics changed
 
@@ -90,7 +103,14 @@ functions, the refusal boundary in `StartRebuildControlGroups()`, and the arming
 `RebuildControlGroupsProductionRun.start()`/`__init__`. The offline regression test's own item-24 static
 checks confirm the core mutation pipeline's defining names (`class RebuildControlGroupsProductionRun`,
 `collect_scope_master_wanted_folds`, `acquire_master_index_via_qualified_authority`,
-`_resolve_selected_scope`) are unchanged and present. `git diff --check` passes with zero whitespace errors.
+`_resolve_selected_scope`) are unchanged and present. The subsequent canonical-identity correction (also
+independent-review-driven) is confirmed by `git diff --stat` against the prior scope-aware commit as a
+single contiguous, narrowly-scoped change (140 insertions, 19 deletions, both hunks confined entirely to
+`_classify_scope_request` and its new `_resolve_shot_canonical_identity_for_classification` helper — nothing
+elsewhere in the file touched). `_resolve_selected_scope()` itself, part of the core mutation pipeline, was
+deliberately left completely untouched; the new classifier helper duplicates its handle/native-pointer
+matching technique rather than sharing code with it. `git diff --check` passes with zero whitespace errors
+for both changes.
 
 ## Real-SFM operator sequence
 
@@ -214,13 +234,14 @@ post-restart process being refused; any snapshot's own `production_sha256_matche
 
 ## Identities this checkpoint is pinned against
 
-- Production Normalizer SHA-256 (scope-aware candidate): `1f2b87f2954d1944c06497a8adcda4de1e1663a148d655bf7cd6f3ace4f757dc`
-- Production Normalizer SHA-256 (broad-guard, superseded): `6170d2a248845281b5f5d38dfea4b9f2decf908b8e3b79e80f4ada18d2f54625`
+- Production Normalizer SHA-256 (canonical-identity candidate, current): `2c0edbb8a95f96147e6310fe1c039da7ee053f5e985f11bb3535dda8aa5ec23d`
+- Production Normalizer SHA-256 (scope-aware, name-based identity, superseded): `1f2b87f2954d1944c06497a8adcda4de1e1663a148d655bf7cd6f3ace4f757dc`
+- Production Normalizer SHA-256 (broad-guard, superseded; received PARTIAL real-SFM qualification through snapshot #5, see `../LEDGER.md`'s F3-Guard row): `6170d2a248845281b5f5d38dfea4b9f2decf908b8e3b79e80f4ada18d2f54625`
 - Production Normalizer SHA-256 (pre-guard baseline): `cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867`
 - Canonical Master SHA-256 (unchanged, not touched by this work): `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
-- Checkpoint script SHA-256: `1e12a4f693489504602133957d776a968f290af96fa9cd40b9a434c7003d7208`
-- Guard offline regression test SHA-256: `8afd7bf11437c9e789e9e0b2cc52d94351a57efec1d37730f3a8265f7e164dbc`
-- Checkpoint dry-run test SHA-256: `c72b0ced5a52d223ec41c4378b3ca9eef3258811c005980737f514c114e60bc3`
+- Checkpoint script SHA-256: `7be08aa277cea7b8b8deb7892637ab75c0462d318e3d411033039ff145266f38`
+- Guard offline regression test SHA-256: `bfd1c197fe16e0f460957445af2e85a694e8aba73c2729f458eaa092c1492c84`
+- Checkpoint dry-run test SHA-256: `ec729e253ef366a451c22dfd752f33e3a5cad2f0b0dc184393912be7e07e210a`
 
 ## Explicit non-authorization
 
