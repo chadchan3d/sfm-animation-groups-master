@@ -225,3 +225,12 @@ real_sfm_qualification/checkpoint_f2_r1/test_f2_r1_diagnostic_regression.py text
 # operator instructions/the ledger.
 real_sfm_qualification/checkpoint_f2_r1_marker_probe/Checkpoint_F2_R1_Marker_Persistence_Probe.py text eol=lf
 real_sfm_qualification/checkpoint_f2_r1_marker_probe/test_marker_persistence_probe_regression.py text eol=lf
+
+# Process-Lifetime Attempt Guard checkpoint (2026-09-24): Astra-authorized
+# one-resource-consuming-attempt-per-SFM-process guard, implemented
+# directly in production and prepared (not run) as a real-SFM checkpoint
+# following F2-R1-R3's FAIL result -- SHA-256 pinned and cited directly
+# in operator instructions/the ledger.
+real_sfm_qualification/checkpoint_process_attempt_guard/Checkpoint_Process_Attempt_Guard_Qualification.py text eol=lf
+real_sfm_qualification/checkpoint_process_attempt_guard/test_process_attempt_guard_regression.py text eol=lf
+real_sfm_qualification/checkpoint_process_attempt_guard/test_checkpoint_process_attempt_guard_dryrun.py text eol=lf

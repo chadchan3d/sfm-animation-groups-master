@@ -159,6 +159,18 @@ RUN_LOCK_NAME = (
     "__SFM_REBUILD_CONTROL_GROUPS_CONTEXTUALIZER_RUNNING__"
 )
 
+# Process-lifetime one-resource-consuming-attempt guard (2026-09-24).
+# Independent of RUN_LOCK_NAME: RUN_LOCK_NAME marks a run as CURRENTLY
+# ACTIVE and is released when that run finishes; this marker means THIS
+# SFM PROCESS HAS ARMED A RESOURCE-CONSUMING NORMALIZER ATTEMPT and is
+# never cleared once installed -- only process exit removes it. See
+# StartRebuildControlGroups() (refusal boundary, before _choose_scope())
+# and RebuildControlGroupsProductionRun.start() (arming boundary,
+# immediately before collect_scope_master_wanted_folds()).
+NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME = (
+    "__SFM_REBUILD_CONTROL_GROUPS_PROCESS_ATTEMPT_CONSUMED__"
+)
+
 OUTPUT_PATH = (
     "C:\\Users\\Public\\Documents\\"
     "sfm_rebuild_control_groups.txt"
@@ -789,6 +801,14 @@ def contextualizer_virtual_address_sample():
 
 
 class ProbeError(Exception):
+    pass
+
+
+class NormalizerProcessAttemptMarkerError(Exception):
+    # Raised when the process-lifetime attempt marker (see
+    # NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME) cannot be reliably read,
+    # installed, or verified. Every caller must treat this as a refusal
+    # -- never as marker-absent. Fail closed.
     pass
 
 
@@ -5606,6 +5626,93 @@ def _find_existing_run(main_window):
             return obj
 
     return None
+
+
+def _find_process_attempt_marker(main_window):
+    # Returns the marker QObject if present, or None if confirmed
+    # absent. Raises NormalizerProcessAttemptMarkerError if the lookup
+    # itself cannot be trusted -- callers must never treat that as
+    # "absent" (fail closed; do not repeat _find_existing_run's
+    # own swallow-and-return-None behavior for THIS marker).
+    try:
+        objects = main_window.findChildren(
+            QtCore.QObject
+        )
+    except Exception as exc:
+        raise NormalizerProcessAttemptMarkerError(
+            "process-attempt marker lookup failed: %s"
+            % to_unicode(exc)
+        )
+
+    for obj in objects:
+        try:
+            object_name = unicode(
+                obj.objectName()
+            )
+        except Exception as exc:
+            raise NormalizerProcessAttemptMarkerError(
+                "process-attempt marker lookup failed reading an "
+                "objectName: %s"
+                % to_unicode(exc)
+            )
+
+        if object_name == NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME:
+            return obj
+
+    return None
+
+
+def _install_process_attempt_marker(main_window):
+    # Installs and verifies the process-lifetime attempt marker. Raises
+    # NormalizerProcessAttemptMarkerError on any installation or
+    # verification failure (fail closed). Never call this from a
+    # refusal path -- only from the single arming site immediately
+    # before substantial scope traversal, so repeated refusals never
+    # accumulate markers or keepalive references.
+    try:
+        marker = QtCore.QObject(
+            main_window
+        )
+        marker.setObjectName(
+            NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME
+        )
+    except Exception as exc:
+        raise NormalizerProcessAttemptMarkerError(
+            "process-attempt marker installation failed: %s"
+            % to_unicode(exc)
+        )
+
+    try:
+        keepalive = getattr(
+            main_window,
+            "_sfm_rebuild_control_groups_process_attempt_marker_keepalive",
+            None
+        )
+        if keepalive is None:
+            keepalive = []
+            main_window._sfm_rebuild_control_groups_process_attempt_marker_keepalive = (
+                keepalive
+            )
+        keepalive.append(
+            marker
+        )
+    except Exception as exc:
+        raise NormalizerProcessAttemptMarkerError(
+            "process-attempt marker keepalive registration failed: %s"
+            % to_unicode(exc)
+        )
+
+    verify = _find_process_attempt_marker(
+        main_window
+    )
+
+    if verify is None:
+        raise NormalizerProcessAttemptMarkerError(
+            "process-attempt marker installation could not be verified "
+            "immediately after install."
+        )
+
+    return marker
 
 
 
@@ -13516,6 +13623,70 @@ class RebuildControlGroupsProductionRun(
             )
 
             self.section(
+                "CONTEXTUALIZER PROCESS-LIFETIME ATTEMPT GUARD"
+            )
+
+            # Arming boundary: final recheck + install + verification,
+            # immediately before substantial scope traversal begins,
+            # with no intervening Qt event-loop yield (this is a plain
+            # sequence of function calls -- no processEvents()/exec_()
+            # between here and collect_scope_master_wanted_folds()
+            # below). _choose_scope()'s own nested Qt event loop already
+            # completed before this run object was even constructed, so
+            # the public-entry check in StartRebuildControlGroups() is
+            # not durable authorization by itself -- this recheck is.
+            guard_main_window = (
+                sfmApp.GetMainWindow()
+            )
+
+            if guard_main_window is None:
+                raise ProbeError(
+                    "Process-lifetime attempt guard: SFM main window "
+                    "unavailable immediately before scope traversal."
+                )
+
+            try:
+                guard_existing_marker = (
+                    _find_process_attempt_marker(
+                        guard_main_window
+                    )
+                )
+            except NormalizerProcessAttemptMarkerError as exc:
+                raise ProbeError(
+                    "Process-lifetime attempt guard could not verify "
+                    "marker state immediately before scope traversal "
+                    "(failing closed): %s"
+                    % to_unicode(exc)
+                )
+
+            if guard_existing_marker is not None:
+                raise ProbeError(
+                    "Process-lifetime attempt guard: a process-attempt "
+                    "marker is already present in this SFM process; "
+                    "refusing to begin substantial scope traversal."
+                )
+
+            try:
+                _install_process_attempt_marker(
+                    guard_main_window
+                )
+            except NormalizerProcessAttemptMarkerError as exc:
+                raise ProbeError(
+                    "Process-lifetime attempt guard could not install "
+                    "or verify its marker immediately before scope "
+                    "traversal (failing closed): %s"
+                    % to_unicode(exc)
+                )
+
+            self.log(
+                "CONTEXTUALIZER_PROCESS_ATTEMPT_MARKER_ARMED = True"
+            )
+            self.log(
+                "CONTEXTUALIZER_PROCESS_ATTEMPT_MARKER_NAME = %s"
+                % NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME
+            )
+
+            self.section(
                 "CONTEXTUALIZER BUILD ONE SCOPED CANONICAL MASTER INDEX"
             )
 
@@ -13907,6 +14078,39 @@ def StartRebuildControlGroups():
             )
         except Exception:
             pass
+        return
+
+    # Process-lifetime one-resource-consuming-attempt guard: refusal
+    # boundary. Checked BEFORE _choose_scope() so a refused invocation
+    # performs zero scope-control collection, work inventory, fresh
+    # scene discovery, broker/provider acquisition, native Rebuild,
+    # production-run construction/start, or production-log truncation
+    # (the log file is not opened until RebuildControlGroupsProductionRun
+    # .start(), which is never reached from this path).
+    try:
+        process_attempt_marker_present = (
+            _find_process_attempt_marker(
+                main_window
+            )
+            is not None
+        )
+    except NormalizerProcessAttemptMarkerError as exc:
+        _show_scope_error(
+            "Control Group Normalizer could not verify this SFM "
+            "process's run eligibility (%s). For safety, no rebuild "
+            "will start.\nSave your session, fully exit and restart "
+            "SFM, reopen the session, then run the Normalizer again."
+            % to_unicode(exc)
+        )
+        return
+
+    if process_attempt_marker_present:
+        _show_scope_error(
+            "Control Group Normalizer has already started a run in "
+            "this SFM process.\nSave your session, fully exit and "
+            "restart SFM, reopen the session, then run the Normalizer "
+            "again."
+        )
         return
 
     try:

@@ -62,8 +62,40 @@ invocation in that process — not only a second All-Shots command — because:
 - A simple one-command-per-process rule avoids guessing at a threshold this evidence base cannot support,
   while not removing any capability — normalization remains fully available immediately after a restart.
 
-This is recorded here as a recommendation for independent review, exactly as the evidence supports it. It
-is **explicitly not implemented** as part of this task.
+This was recorded above as a recommendation for independent review, exactly as the evidence supports it.
+**Update (2026-09-24): Astra's independent F release-disposition review authorized implementing it** — see
+the section immediately below. The recommendation as originally written, and the evidence supporting it, is
+preserved unchanged above; only its implementation status has changed.
+
+## Update (2026-09-24): Astra-authorized guard implementation
+
+Astra's independent review of this document (and the full F2-R1-R3 evidence chain) returned:
+**AUTHORIZE GUARD IMPLEMENTATION**, with a detailed implementation contract (arm before scope-control
+collection; refuse used processes before scope selection; recheck atomically at arming; fail closed on
+marker lookup/installation errors; retain the marker after every post-arming outcome until process exit;
+complete the narrow qualification before closing F).
+
+The one-resource-consuming-Normalizer-attempt-per-SFM-process guard recommended above has been implemented
+directly in production (`audit_external_runtime/Rebuild_Control_Groups_Normalizer.py`) as a gate-only
+change — a pure 204-line addition with zero deletions against the prior committed script (`git diff
+--stat`), touching no existing Normalizer semantics, Selected/All semantics, authority rules, discovery
+freshness, provider/broker semantics, native Rebuild behavior, validation coverage, failure safety, model
+support, or target-transaction mechanics. Full implementation detail, the exact refusal/arming boundaries,
+and the fail-closed semantics are recorded in `LEDGER.md`'s new `F3-Guard` row and in
+`checkpoint_process_attempt_guard/INSTRUCTIONS.md`.
+
+Offline qualification: **52/52 PASS** (`test_process_attempt_guard_regression.py`, all 16 contract items)
+plus **15/15 PASS** for the companion real-SFM checkpoint script's own dry run
+(`test_checkpoint_process_attempt_guard_dryrun.py`). The guarded candidate and the new checkpoint script
+have both been deployed to the live SFM install and hash-verified matching the repo exactly.
+
+**This candidate has NOT yet been qualified against real SFM.** A real-SFM checkpoint
+(`checkpoint_process_attempt_guard/`) has been prepared, per instruction, but not run. `F` remains **OPEN**
+— per Astra's own review, the narrow real-SFM qualification of this guard must complete before `F` can
+close. The governing "Production Normalizer SHA-256" identity in `LEDGER.md` is deliberately left pointing
+at the pre-guard, already-accepted baseline until that qualification passes, consistent with how every
+other unqualified production candidate has been treated in this project. This implementation does not
+reopen the F1 optimization search (still concluded/exhausted) and does not begin `G`.
 
 ## 1. What repeated-use behavior has actually failed?
 
