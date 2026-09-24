@@ -1,5 +1,22 @@
 # Checkpoint F2-R1 — Legitimate Same-Process Reinvocation Qualification
 
+## RESULT (2026-09-24): FAIL — DO NOT RUN F2-R1 AGAIN
+
+The F2-R1-R3 hardened script was run for real against real SFM and reached a decisive result. Mode
+classification worked correctly (Stage 2 was validly reached, not a harness artifact: same-process marker
+present, current PID exactly matched Stage 1's own recorded PID). **Stage 2's own real production All-Shots
+command crashed** at target 54 of 62 (`shot8`/`vortex1`), immediately after `PRE_NATIVE` telemetry, with no
+subsequent `NATIVE_REBUILD_RETURNED` line and no further log content — an unambiguous terminal trace.
+
+**Formal classification: F2-R1 FAIL — LEGITIMATE SAME-PROCESS REINVOCATION IS NOT RELIABLY SUSTAINABLE.**
+Full evidence (exact resource deltas across Stage-2-start / `AFTER_SHOT_13` / the final `PRE_NATIVE` point,
+independently verified against the primary artifacts on disk) is recorded in `LEDGER.md`'s F2-R1 row and in
+`F1_FINAL_DISPOSITION_REVIEW.md`'s 2026-09-24 update. **This checkpoint is closed. Do not run it again** —
+the question it was built to answer has been answered. This FAIL does not reopen the F1 optimization search
+(still concluded/exhausted) and does not itself block release; it establishes that a product-level
+admission/recovery policy question must be resolved before `F` can close (recorded, not yet implemented, in
+`F1_FINAL_DISPOSITION_REVIEW.md`).
+
 ## Purpose
 
 `F1_REPEAT_HISTORY_AUDIT.md` established that this project has never preserved a determinate outcome for
@@ -178,7 +195,8 @@ structurally placed before the wait loop's own definition, and that marker insta
 fresh `main_window` and self-verifies both immediately and after an explicit same-invocation GC. **Run
 against real SFM 3 times prior to the F2-R1-R3 hardening (all 3 classified `HARNESS MODE-CLASSIFICATION
 FAILURE / INCONCLUSIVE` — see `LEDGER.md`); the marker persistence probe has since independently PASSED
-against real SFM; the F2-R1-R3 hardened script itself has not yet been run against real SFM.**
+against real SFM; **the F2-R1-R3 hardened script has since been run against real SFM for real and reached a
+decisive FAIL — see the RESULT section at the top of this document and the `LEDGER.md` F2-R1 row.**
 
 ## Identities this checkpoint is pinned against
 
@@ -193,5 +211,7 @@ against real SFM; the F2-R1-R3 hardened script itself has not yet been run again
 ## Explicit non-authorization
 
 This checkpoint does not modify production, does not reopen the F1 optimization search, and does not
-begin G. `F` remains `OPEN`; a PASS or FAIL result here returns to independent review as one more piece of
-evidence for the F final disposition, per `F1_FINAL_DISPOSITION_REVIEW.md` — it does not itself close F.
+begin G. `F` remains `OPEN`; the FAIL result recorded above returns to independent review as evidence for
+the F final disposition, per `F1_FINAL_DISPOSITION_REVIEW.md`'s 2026-09-24 update — it does not itself
+close F, and it does not itself authorize implementing the recommended admission policy that update
+records.

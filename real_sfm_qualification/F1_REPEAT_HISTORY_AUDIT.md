@@ -86,8 +86,21 @@ begins immediately after command 3's own fully-clean completion.
 
 ## Implications for Astra's proposed final same-process All→edit→All test
 
-Astra's proposed test (a final same-process All Shots → [edit] → All Shots confirmation) is **genuinely
-missing, not redundant and not contradicted**:
+**Update (2026-09-24): this test has since been run for real (`F2-R1`/`F2-R1-R3`) and the question below is
+now resolved.** Result: **FAIL — LEGITIMATE SAME-PROCESS REINVOCATION IS NOT RELIABLY SUSTAINABLE.** Stage 1
+(All Shots) completed cleanly; the controlled edit was correctly applied and confirmed; Stage 2 (All Shots
+again, same unrestarted process) was validly reached — mode classification was correct, not a harness
+artifact — and Stage 2's own real production run crashed at target 54 of 62, immediately after `PRE_NATIVE`
+telemetry, with no subsequent `NATIVE_REBUILD_RETURNED` line and no further log content of any kind. Full
+evidence is recorded in `LEDGER.md`'s F2-R1 row and in `F1_FINAL_DISPOSITION_REVIEW.md`'s 2026-09-24 update.
+This does not reopen the F1 optimization search (still concluded/exhausted); it establishes that the
+question below — whether this specific missing test was needed — is now answered, and it resolves in favor
+of a product-level admission/recovery policy rather than a further diagnostic. The paragraphs immediately
+below are preserved as the original, still-accurate reasoning for why the test was needed at the time it
+was proposed:
+
+Astra's proposed test (a final same-process All Shots → [edit] → All Shots confirmation) was, at the time
+this audit was written, **genuinely missing, not redundant and not contradicted**:
 
 - It is **not redundant**: no preserved run in this project's history reached a determinate outcome for a
   second consecutive All-Shots command in one unrestarted process. F1-2 attempted the closest analogue and

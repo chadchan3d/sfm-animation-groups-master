@@ -5,6 +5,66 @@ established in `LEDGER.md` and `F1_OPTIMIZATION_INVESTIGATION_SUMMARY.md`. It do
 not begin `G`, and does not propose or run any new experiment. The disposition itself — whether the
 answers below are sufficient to close `F` — is for independent review, not decided here.
 
+## Update (2026-09-24): F2-R1-R3 real-SFM result resolves the open question raised in Q6
+
+`F2-R1` (see `checkpoint_f2_r1/INSTRUCTIONS.md`, `LEDGER.md` F2-R1 row) was the one narrow real-SFM
+confirmation `F1_REPEAT_HISTORY_AUDIT.md` identified as still missing: does a legitimate workflow — All
+Shots completes, ordinary editing, one real predetermined control-group edit that genuinely warrants
+renormalization, All Shots again — succeed in one unrestarted SFM process. The F2-R1-R3 hardened script
+validly reached Stage 2 for real (mode classification correct: same-process marker present, current PID
+matched Stage 1's own recorded PID exactly) and **Stage 2's own real production All-Shots command crashed**
+at target 54 of 62, immediately after `PRE_NATIVE` telemetry, with no subsequent `NATIVE_REBUILD_RETURNED`
+line and no further log content — an unambiguous terminal trace. Formal classification:
+
+**F2-R1 FAIL — LEGITIMATE SAME-PROCESS REINVOCATION IS NOT RELIABLY SUSTAINABLE.** A legitimate,
+product-intended workflow (one completed All-Shots command, an intervening real edit that genuinely
+warrants renormalization, one further All-Shots command, all within a single unrestarted SFM process) was
+qualified for real and did not complete. Stage 2 was validly reached — this is not a harness artifact —
+and Stage 2 itself crashed mid-command, carrying forward retained memory/VAS pressure from Stage 1's own
+already-completed command in the same process. Full evidence, exact byte-level deltas across three
+checkpoints (Stage-2-start / `AFTER_SHOT_13` / final `PRE_NATIVE`), and independent verification against
+the primary artifacts are recorded in the `LEDGER.md` F2-R1 row.
+
+This result:
+
+- Resolves the open question this document's own Q6 named ("whether a single standalone command's
+  resource behavior holds..." was already answered; the genuinely open question was whether **repeated**
+  legitimate use in one process is safe) — it is now **RESOLVED UNSAFE** on the qualified workload.
+- Does **not** reopen the F1 optimization search. That search's own conclusion —
+  **OPTIMIZATION SEARCH SUFFICIENTLY EXHAUSTED** — is unchanged; F2-R1 is not an F1 optimization
+  experiment and its failure says nothing about whether a fix exists, only that repeated use without a
+  restart is not currently safe.
+- Means no further F runtime experiments are warranted to establish repeated-command safety. The
+  question F2-R1 was designed to answer has been answered.
+- Leaves `F` **OPEN** only for a final product-policy/admission disposition (see the recommended policy
+  below); `G` has **not** begun.
+- Does not retroactively reclassify F2-R1's own three prior real attempts, which remain
+  `HARNESS MODE-CLASSIFICATION FAILURE / INCONCLUSIVE` — those were harness defects with no production
+  command ever run; F2-R1-R3 is a new, distinct, decisive result from a hardened script that reached
+  Stage 2 for real.
+
+### Recommended admission/recovery policy (recorded for independent review — not implemented in this task)
+
+After one successful Normalizer command completes in an SFM process, the product should **block any
+further Normalizer invocation in that same process** before allowing production work to continue, with an
+explicit operator-facing instruction to save, restart SFM, reopen the file, and re-run the Normalizer if
+another normalization is genuinely needed. This guard should apply to **any** subsequent Normalizer
+invocation in that process — not only a second All-Shots command — because:
+
+- The safe repeat count is workload-dependent, not a fixed number: `F1-1` already showed cumulative
+  pressure building across a **Selected → Selected → All** sequence (crashing on the 3rd command, not the
+  2nd), while `F2-R1` now shows a **legitimate All → [edit] → All** sequence failing on its 2nd command.
+  Two different workloads failed at two different command counts.
+- No evidence in this project supports a universal safe threshold (e.g., "exactly one repeat is always
+  safe" or "exactly two commands is always safe") — the observed failures depend on scope (Selected vs.
+  All), target count, and how much retained pressure the specific commands already run happened to
+  accumulate.
+- A simple one-command-per-process rule avoids guessing at a threshold this evidence base cannot support,
+  while not removing any capability — normalization remains fully available immediately after a restart.
+
+This is recorded here as a recommendation for independent review, exactly as the evidence supports it. It
+is **explicitly not implemented** as part of this task.
+
 ## 1. What repeated-use behavior has actually failed?
 
 The one real, observed failure in this entire investigation is **`F1-1`**: an actual SFM process crash
