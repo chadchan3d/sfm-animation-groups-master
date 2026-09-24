@@ -211,3 +211,10 @@ real_sfm_qualification/checkpoint_f1_r6/test_f1_r6_offline_comparator.py text eo
 # instructions/the ledger.
 real_sfm_qualification/checkpoint_f1_r8/Checkpoint_F1_R8_CElementTreeTraversal_Native_Characterization.py text eol=lf
 real_sfm_qualification/checkpoint_f1_r8/test_f1_r8_diagnostic_regression.py text eol=lf
+
+# Real-SFM Qualification, Checkpoint F2-R1 (2026-09-24): the F FINAL
+# same-process legitimate-reinvocation qualification -- NOT part of the
+# F1 optimization search. Same reasoning as above -- SHA-256 pinned and
+# cited directly in operator instructions/the ledger.
+real_sfm_qualification/checkpoint_f2_r1/Checkpoint_F2_R1_Legitimate_Reinvocation_Qualification.py text eol=lf
+real_sfm_qualification/checkpoint_f2_r1/test_f2_r1_diagnostic_regression.py text eol=lf
