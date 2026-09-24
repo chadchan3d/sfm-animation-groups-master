@@ -204,3 +204,10 @@ real_sfm_qualification/checkpoint_f1_r6/F1_R6_Compare_Legacy_vs_Streaming_Result
 real_sfm_qualification/checkpoint_f1_r6/test_f1_r6_adversarial_parity.py text eol=lf
 real_sfm_qualification/checkpoint_f1_r6/test_f1_r6_realscript_regression.py text eol=lf
 real_sfm_qualification/checkpoint_f1_r6/test_f1_r6_offline_comparator.py text eol=lf
+
+# Real-SFM Qualification, Checkpoint F1-R8 (2026-09-24): same reasoning as
+# F1-R6/F1-R7 above -- the F1-R8 real-SFM script and its offline
+# regression test are SHA-256 pinned and cited directly in operator
+# instructions/the ledger.
+real_sfm_qualification/checkpoint_f1_r8/Checkpoint_F1_R8_CElementTreeTraversal_Native_Characterization.py text eol=lf
+real_sfm_qualification/checkpoint_f1_r8/test_f1_r8_diagnostic_regression.py text eol=lf
