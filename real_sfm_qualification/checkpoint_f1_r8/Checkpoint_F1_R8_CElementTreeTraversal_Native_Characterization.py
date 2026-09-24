@@ -312,6 +312,23 @@ def resolve_datamodel_symbol(name):
 # ---------------------------------------------------------------------------
 
 def create_scratch_node(create_element_fn, fileid, elem_name):
+    # F1-R8-R1 repair: elem_name MUST be a plain Python 2 `str`, never
+    # `unicode`. The installed SWIG overload set for the module-level
+    # `CreateElement` free function includes
+    # `CreateElement<CDmElement>(char const*, char const*, DmFileId_t)`
+    # (confirmed via the real, working first-party call
+    # `vs.CreateElement("DmeProjectedLight", lightName, parent.GetFileId())`
+    # in `platform/scripts/sfm/dag/exact/count1/create_lights.py`, where
+    # every literal passed as the object-name argument is a plain `str`,
+    # e.g. "keyLight" -- never `u"keyLight"`). Passing `unicode` for this
+    # parameter does not match any registered overload's typemap and
+    # raises `NotImplementedError: Wrong number or type of arguments for
+    # overloaded function 'CreateElement'` -- the exact class of bug
+    # already diagnosed and fixed once in this project for SaveToFile's
+    # own `pFileName` parameter (F1-R2). Every caller of this function
+    # passes a plain `str` literal (never `u"..."`); this assertion exists
+    # so a future edit cannot silently reintroduce a `unicode` literal.
+    assert isinstance(elem_name, str), "elem_name must be a plain Python 2 str, not unicode: %r" % (elem_name,)
     return create_element_fn(SCRATCH_ELEMENT_TYPE, elem_name, fileid)
 
 
@@ -345,13 +362,13 @@ def build_graph_multiattr(create_element_fn, at_element_const, at_element_array_
     graph also answers "are array-typed reference attributes followed at
     all" for at least one tested pAttrName value.
     """
-    root = create_scratch_node(create_element_fn, fileid, u"F1R8_MA_ROOT")
-    a = create_scratch_node(create_element_fn, fileid, u"F1R8_MA_A")
-    b = create_scratch_node(create_element_fn, fileid, u"F1R8_MA_B")
-    c = create_scratch_node(create_element_fn, fileid, u"F1R8_MA_C")
-    d = create_scratch_node(create_element_fn, fileid, u"F1R8_MA_D")
-    e = create_scratch_node(create_element_fn, fileid, u"F1R8_MA_E")
-    f = create_scratch_node(create_element_fn, fileid, u"F1R8_MA_F")
+    root = create_scratch_node(create_element_fn, fileid, "F1R8_MA_ROOT")
+    a = create_scratch_node(create_element_fn, fileid, "F1R8_MA_A")
+    b = create_scratch_node(create_element_fn, fileid, "F1R8_MA_B")
+    c = create_scratch_node(create_element_fn, fileid, "F1R8_MA_C")
+    d = create_scratch_node(create_element_fn, fileid, "F1R8_MA_D")
+    e = create_scratch_node(create_element_fn, fileid, "F1R8_MA_E")
+    f = create_scratch_node(create_element_fn, fileid, "F1R8_MA_F")
 
     link_scalar(at_element_const, root, "attr_A", a)
     link_scalar(at_element_const, root, "attr_B", b)
@@ -372,10 +389,10 @@ def build_graph_dag(create_element_fn, at_element_array_const, fileid):
     (matching legacy's handle-keyed `seen` dedup) or once per incoming
     path (or some other way)?
     """
-    root = create_scratch_node(create_element_fn, fileid, u"F1R8_DAG_ROOT")
-    a = create_scratch_node(create_element_fn, fileid, u"F1R8_DAG_A")
-    b = create_scratch_node(create_element_fn, fileid, u"F1R8_DAG_B")
-    c = create_scratch_node(create_element_fn, fileid, u"F1R8_DAG_C")
+    root = create_scratch_node(create_element_fn, fileid, "F1R8_DAG_ROOT")
+    a = create_scratch_node(create_element_fn, fileid, "F1R8_DAG_A")
+    b = create_scratch_node(create_element_fn, fileid, "F1R8_DAG_B")
+    c = create_scratch_node(create_element_fn, fileid, "F1R8_DAG_C")
 
     link_array(at_element_array_const, root, "ref", [a, b])
     link_array(at_element_array_const, a, "ref", [c])
@@ -393,9 +410,9 @@ def build_graph_cycle(create_element_fn, at_element_array_const, fileid):
     Purpose: does traversal terminate? Are already-visited nodes emitted
     again? Does cycle handling match legacy's global-handle dedup?
     """
-    root = create_scratch_node(create_element_fn, fileid, u"F1R8_CYC_ROOT")
-    a = create_scratch_node(create_element_fn, fileid, u"F1R8_CYC_A")
-    b = create_scratch_node(create_element_fn, fileid, u"F1R8_CYC_B")
+    root = create_scratch_node(create_element_fn, fileid, "F1R8_CYC_ROOT")
+    a = create_scratch_node(create_element_fn, fileid, "F1R8_CYC_A")
+    b = create_scratch_node(create_element_fn, fileid, "F1R8_CYC_B")
 
     link_array(at_element_array_const, root, "ref", [a])
     link_array(at_element_array_const, a, "ref", [b])
@@ -803,7 +820,8 @@ try:
     else:
         try:
             scratch_fileid = vs.g_pDataModel.FindOrCreateFileId(SCRATCH_FILEID_NAME)
-            probe_node = create_element_fn(SCRATCH_ELEMENT_TYPE, u"F1R8_PROBE_NODE", scratch_fileid)
+            # Plain str, not unicode -- see create_scratch_node()'s own F1-R8-R1 comment.
+            probe_node = create_element_fn(SCRATCH_ELEMENT_TYPE, "F1R8_PROBE_NODE", scratch_fileid)
             if probe_node is None:
                 unavailable_reason = "vs.CreateElement('DmElement', ..., scratch_fileid) returned None on the minimal probe."
             else:

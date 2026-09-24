@@ -37,6 +37,21 @@ If the required creation APIs cannot be resolved, or a minimal creation probe fa
 `detached_graph_available: False` with an explicit reason and stops the native-characterization work
 there — it does not invent an alternative method, per instruction.
 
+**Repair history (F1-R8-R1, 2026-09-24):** the first real-SFM run reported
+`detached_graph_available: False` with `NotImplementedError: Wrong number or type of arguments for
+overloaded function 'CreateElement'` at the minimal creation probe — before any native traversal probe
+ran. Root cause: every scratch element name literal was a Python `unicode` string (`u"F1R8_MA_ROOT"`,
+etc.), while `vs.CreateElement`'s own SWIG overload set requires a plain `str` for its `char const *`
+object-name parameter — confirmed against the real, working first-party call
+`vs.CreateElement("DmeProjectedLight", lightName, parent.GetFileId())` in
+`platform/scripts/sfm/dag/exact/count1/create_lights.py`, where every literal name passed is a plain
+`str` (e.g. `"keyLight"`, never `u"keyLight"`). This is the exact same bug class already diagnosed and
+fixed once in this project for `SaveToFile`'s own `pFileName` parameter (F1-R2). Fix: every scratch
+element name literal was changed from `u"..."` to plain `"..."` (14 occurrences); `create_scratch_node()`
+now also asserts `isinstance(elem_name, str)` as a fail-fast guard against silently reintroducing the
+bug. No graph topology, tested `pAttrName` values, watchdog, classification logic, or production code
+was touched by this repair.
+
 ## Sequence
 
 1. **RESTART SFM FIRST.**
@@ -121,9 +136,9 @@ prototype is authorized.
 ## Offline verification performed before deployment
 
 `test_f1_r8_diagnostic_regression.py` (SHA-256
-`f3f80f5a5171c906b1acd788a7f43188ef99089fa1d6f7713f0d2697b9c271da`) extracts the script's own pure-Python
+`242a4a79116b534471416c0b14cb1860818c1c02452cbd9588c3a06de056e7a1`) extracts the script's own pure-Python
 harness functions verbatim (by source line range) and exercises them against synthetic
-`FakeElement`/`FakeAttribute` objects and deliberately-scripted fake traversal classes — **77/77 PASS**,
+`FakeElement`/`FakeAttribute` objects and deliberately-scripted fake traversal classes — **82/82 PASS**,
 covering: graph-accounting (`build_graph_*` wiring correctness), the legacy control wrapper
 (`run_legacy_reachable`, including its own exception path), the bounded watchdog (an intentionally
 infinite fake traversal is caught at `max_steps` without hanging), the dual `GetElement()`/`Next()`
@@ -144,8 +159,8 @@ against real SFM.
 - Installed, accepted, integrated production Normalizer SHA-256: `cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867`
 - Canonical Master SHA-256: `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
 - Expected normalized-copy fixture filename: `F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx`
-- F1-R8 real-SFM script SHA-256: `863213058e66103f4a03d8f95d4e07d702c0274f6f2adb9d0be94cbbac962551`
-- F1-R8 offline regression test SHA-256: `f3f80f5a5171c906b1acd788a7f43188ef99089fa1d6f7713f0d2697b9c271da`
+- F1-R8 real-SFM script SHA-256: `211b96240b214afa0d93a2dd2440c71882cf5343ed21c7e4ada7575b7e1ee0f5`
+- F1-R8 offline regression test SHA-256: `242a4a79116b534471416c0b14cb1860818c1c02452cbd9588c3a06de056e7a1`
 
 ## Explicit non-authorization
 

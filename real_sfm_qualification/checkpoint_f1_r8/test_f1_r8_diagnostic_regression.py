@@ -26,20 +26,20 @@ import sys
 import time
 
 SCRIPT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "Checkpoint_F1_R8_CElementTreeTraversal_Native_Characterization.py")
-EXPECTED_SCRIPT_SHA256 = "863213058e66103f4a03d8f95d4e07d702c0274f6f2adb9d0be94cbbac962551"
+EXPECTED_SCRIPT_SHA256 = "211b96240b214afa0d93a2dd2440c71882cf5343ed21c7e4ada7575b7e1ee0f5"
 
-CREATE_SCRATCH_NODE_RANGE = (314, 315)
-LINK_SCALAR_RANGE = (318, 321)
-LINK_ARRAY_RANGE = (324, 329)
-BUILD_GRAPH_MULTIATTR_RANGE = (332, 362)
-BUILD_GRAPH_DAG_RANGE = (365, 384)
-BUILD_GRAPH_CYCLE_RANGE = (387, 404)
-TESTED_ATTR_NAMES_RANGE = (426, 434)
-RUN_LEGACY_REACHABLE_RANGE = (448, 475)
-RUN_NATIVE_TRAVERSAL_RANGE = (478, 591)
-CLASSIFY_DAG_CYCLE_DEDUP_RANGE = (594, 617)
-GRAPH1_COVERAGE_RANGE = (620, 635)
-COMPUTE_FINAL_CLASSIFICATION_RANGE = (638, 645)
+CREATE_SCRATCH_NODE_RANGE = (314, 332)
+LINK_SCALAR_RANGE = (335, 338)
+LINK_ARRAY_RANGE = (341, 346)
+BUILD_GRAPH_MULTIATTR_RANGE = (349, 379)
+BUILD_GRAPH_DAG_RANGE = (382, 401)
+BUILD_GRAPH_CYCLE_RANGE = (404, 421)
+TESTED_ATTR_NAMES_RANGE = (443, 451)
+RUN_LEGACY_REACHABLE_RANGE = (465, 492)
+RUN_NATIVE_TRAVERSAL_RANGE = (495, 608)
+CLASSIFY_DAG_CYCLE_DEDUP_RANGE = (611, 634)
+GRAPH1_COVERAGE_RANGE = (637, 652)
+COMPUTE_FINAL_CLASSIFICATION_RANGE = (655, 662)
 
 PASS_COUNT = [0]
 FAIL_COUNT = [0]
@@ -463,6 +463,25 @@ expect(
     "script.cleanup_runs_in_a_finally_block_regardless_of_outcome",
 )
 expect("MAX_TRAVERSAL_STEPS = 2000" in script_text, "script.watchdog_bound_is_a_small_fixed_constant")
+
+sys.stdout.write("\n--- F1-R8-R1 repair: str-vs-unicode CreateElement fix verification ---\n")
+expect(
+    'u"F1R8' not in script_text,
+    "script.no_unicode_element_name_literals_remain -- F1-R8-R1 repair: every scratch element name must be a plain str, never u'...'",
+)
+expect(
+    "assert isinstance(elem_name, str)" in script_text,
+    "script.create_scratch_node_asserts_plain_str_not_unicode -- fail-fast guard against reintroducing the bug",
+)
+expect(
+    "return create_element_fn(SCRATCH_ELEMENT_TYPE, elem_name, fileid)" in script_text,
+    "script.create_scratch_node_uses_the_verified_3_arg_call_form -- matches the real, working first-party vs.CreateElement(type_str, name_str, fileid) pattern",
+)
+expect(
+    'create_element_fn(SCRATCH_ELEMENT_TYPE, "F1R8_PROBE_NODE", scratch_fileid)' in script_text,
+    "script.minimal_probe_also_uses_a_plain_str_literal",
+)
+expect("SCRATCH_ELEMENT_TYPE = \"DmElement\"" in script_text, "script.scratch_element_type_is_plain_str -- was already correct, confirmed still unchanged")
 expect("NULL_PATTRNAME_PROBE_STATUS" in script_text, "script.records_explicit_null_pattrname_unknown_status")
 expect("NOT_TESTED_UNKNOWN" in script_text, "script.null_pattrname_status_is_explicitly_unknown_not_inferred")
 expect('"null_pattrname_probe_status": NULL_PATTRNAME_PROBE_STATUS' in script_text, "script.null_pattrname_status_included_in_report")
