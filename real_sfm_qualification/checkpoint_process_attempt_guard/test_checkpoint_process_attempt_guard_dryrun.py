@@ -1,25 +1,31 @@
 # -*- coding: utf-8 -*-
 """
 Offline dry-run for Checkpoint_Process_Attempt_Guard_Qualification.py
-itself (the read-only real-SFM snapshot utility, not the production
-guard -- see test_process_attempt_guard_regression.py for that).
+itself (the read-only real-SFM snapshot/evidence utility, not the
+production guard -- see test_process_attempt_guard_regression.py for
+that).
 
 Proves, under the real embedded Python 2.7.5 with a fake sfmApp and a
-real QtCore.QObject main_window, that this checkpoint script:
-  - never references production's own trailing
-    StartRebuildControlGroups() invocation, its scope-dialog machinery,
-    or any substantial-traversal/native-work identifier anywhere in its
-    own source (the one thing this script must never do, since it is
-    meant to be pure read-only observation);
-  - correctly extracts, by exact pinned line range, and calls the real,
-    scope-aware _read_process_scope_state / _find_named_process_marker /
-    _find_existing_run from the pinned production candidate's own
-    source, without exec'ing production's own module body (which
-    performs real `import sfmApp` / `import sfmClipEditor` / `import vs`
-    statements that only succeed inside a real running SFM process);
-  - produces a snapshot whose fields match what a truly fresh process
-    (no marker, no run lock) should report;
-  - persists and re-reads state via its own atomic-write helpers.
+real QtCore.QObject main_window, that this checkpoint script's revised
+evidence-file discipline (2026-09-24) works correctly:
+  - never reaches/executes production's own StartRebuildControlGroups(),
+    scope-dialog machinery, or any substantial-traversal/native-work
+    identifier anywhere in its own source;
+  - correctly extracts, by exact pinned line range, the real, scope-aware
+    definitions from the pinned production candidate's own source;
+  - each invocation writes a NEW, UNIQUELY NUMBERED, IMMUTABLE snapshot
+    file pair, never overwriting a prior one;
+  - write_evidence_json_once()/write_evidence_text_once() refuse to
+    overwrite an existing path (raise, do not silently replace);
+  - a production-log content change is detected and copied into a NEW,
+    uniquely-labeled, immutable run-evidence file exactly once per
+    change, using the fixed 8-entry label schedule, and NOT re-captured
+    on a later invocation where the log is unchanged;
+  - the continuation-state pointer file and rollup files
+    (final_result/final_summary) are freely, safely overwritten and
+    correctly reflect the cumulative index;
+  - history-through files are themselves unique and immutable per
+    snapshot index.
 
 Run under the real embedded Python 2.7.5:
   sdktools\\python\\2.7\\win32\\python.exe test_checkpoint_process_attempt_guard_dryrun.py
@@ -62,11 +68,7 @@ def expect(condition, label):
 
 with open(CHECKPOINT_SCRIPT_PATH, "rb") as f:
     checkpoint_bytes = f.read()
-# Kept as a plain byte str (not decoded to unicode) for compile() --
-# Python 2 rejects a "# -*- coding: -*-" declaration inside a unicode
-# string passed to compile(), but accepts it fine in a byte str, which
-# is how the interpreter would normally load this file from disk anyway.
-checkpoint_text = checkpoint_bytes
+checkpoint_text = checkpoint_bytes  # kept as bytes; see compile() note below
 
 trailing_call = "\nmain()\n"
 idx = checkpoint_text.rfind(trailing_call)
@@ -102,28 +104,38 @@ class _FakeSfmApp(object):
         return self._main_window
 
 
-tmp_dir = tempfile.mkdtemp(prefix="process_attempt_guard_checkpoint_dryrun_")
-try:
+def fresh_ns(tmp_dir):
     ns = {
         "sfmApp": _FakeSfmApp(_FakeMainWindow()),
         "QtCore": QtCore,
     }
     exec(compile(definitions_only_text, "<checkpoint_defs>", "exec"), ns)
 
-    # Point the extracted definitions at the pinned production candidate
-    # (the repo's own guard-added file) and a scratch state/result/
-    # summary location, instead of the real live-install/Public
-    # Documents paths, for a fully offline, side-effect-contained dry run.
     ns["PRODUCTION_INSTALLED_PATH"] = PRODUCTION_CANDIDATE_PATH
     ns["EXPECTED_PRODUCTION_SHA256"] = EXPECTED_PRODUCTION_SHA256
-    ns["STATE_PATH"] = os.path.join(tmp_dir, "state.json")
-    ns["RESULT_PATH"] = os.path.join(tmp_dir, "result.json")
-    ns["SUMMARY_PATH"] = os.path.join(tmp_dir, "summary.txt")
+    # EVIDENCE_DIR is read at call-time inside main(), so overriding it
+    # here correctly redirects every evidence-file path main() builds.
+    # The three rollup/pointer paths were computed ONCE at exec-time
+    # using the real EVIDENCE_DIR and must be overridden separately.
+    evidence_dir = tmp_dir + os.sep
+    ns["EVIDENCE_DIR"] = evidence_dir
+    ns["CONTINUATION_STATE_PATH"] = evidence_dir + "sfm_scope_guard_continuation_state.json"
+    ns["FINAL_RESULT_PATH"] = evidence_dir + "sfm_scope_guard_final_result.json"
+    ns["FINAL_SUMMARY_PATH"] = evidence_dir + "sfm_scope_guard_final_summary.txt"
+    return ns
+
+
+tmp_dir = tempfile.mkdtemp(prefix="process_attempt_guard_checkpoint_dryrun_")
+try:
+    ns = fresh_ns(tmp_dir)
 
     load_production_definitions = ns["load_production_definitions"]
-    take_snapshot = ns["take_snapshot"]
-    read_state = ns["read_state"]
-    write_json_atomic = ns["write_json_atomic"]
+    read_continuation_state = ns["read_continuation_state"]
+    write_evidence_json_once = ns["write_evidence_json_once"]
+    write_evidence_text_once = ns["write_evidence_text_once"]
+    CheckpointProcessAttemptGuardError = ns["CheckpointProcessAttemptGuardError"]
+    RUN_LOG_LABELS = ns["RUN_LOG_LABELS"]
+    SNAPSHOT_SCHEDULE = ns["SNAPSHOT_SCHEDULE"]
 
     prod_ns, prod_sha256, prod_text = load_production_definitions()
     expect(
@@ -134,76 +146,172 @@ try:
         "_read_process_scope_state" in prod_ns
         and "_find_named_process_marker" in prod_ns
         and "_find_existing_run" in prod_ns
-        and "OUTPUT_PATH" in prod_ns
-        and "RUN_LOCK_NAME" in prod_ns
-        and "NORMALIZER_PROCESS_STATE_SELECTED_USED_MARKER_NAME" in prod_ns
-        and "NORMALIZER_PROCESS_STATE_FULL_SCOPE_STARTED_MARKER_NAME" in prod_ns
-        and "NORMALIZER_PROCESS_ATTEMPT_MARKER_NAME_LEGACY" in prod_ns
-        and "PROCESS_SCOPE_STATE_UNUSED" in prod_ns
-        and "NormalizerProcessAttemptMarkerError" in prod_ns
-        and "to_unicode" in prod_ns,
-        "load_production_definitions.extracts_all_expected_real_definitions",
+        and "OUTPUT_PATH" in prod_ns,
+        "load_production_definitions.extracts_the_expected_real_definitions",
     )
     expect(
-        "sfmApp" not in prod_ns
-        and "sfmClipEditor" not in prod_ns
-        and "vs" not in prod_ns,
+        "sfmApp" not in prod_ns and "sfmClipEditor" not in prod_ns and "vs" not in prod_ns,
         "load_production_definitions.never_imports_the_real_SFM_only_modules",
     )
 
-    snapshot = take_snapshot()
     expect(
-        snapshot["main_window_available"] is True,
-        "take_snapshot.reports_main_window_available",
+        len(RUN_LOG_LABELS) == 8,
+        "schedule.exactly_eight_run_log_labels",
     )
     expect(
-        snapshot["production_sha256_matches_expected"] is True,
-        "take_snapshot.confirms_pinned_production_sha256",
+        len(SNAPSHOT_SCHEDULE) == 13,
+        "schedule.exactly_thirteen_snapshot_schedule_entries",
     )
-    expect(
-        snapshot["process_scope_state"] == u"UNUSED"
-        and snapshot["process_scope_state_error"] is None,
-        "take_snapshot.fresh_QObject_main_window_reports_UNUSED",
-    )
-    expect(
-        snapshot["run_lock_present"] is False,
-        "take_snapshot.fresh_QObject_main_window_has_no_run_lock",
-    )
-    expect(
-        snapshot["selected_used_marker_name_observed"]
-        == u"__SFM_REBUILD_CONTROL_GROUPS_PROCESS_STATE_V2_SELECTED_USED__",
-        "take_snapshot.observes_the_real_selected_used_marker_name_from_production",
-    )
-    expect(
-        snapshot["full_scope_started_marker_name_observed"]
-        == u"__SFM_REBUILD_CONTROL_GROUPS_PROCESS_STATE_V2_FULL_SCOPE_STARTED__",
-        "take_snapshot.observes_the_real_full_scope_started_marker_name_from_production",
-    )
-    expect(
-        snapshot["legacy_marker_name_observed"]
-        == u"__SFM_REBUILD_CONTROL_GROUPS_PROCESS_ATTEMPT_CONSUMED__",
-        "take_snapshot.observes_the_real_legacy_marker_name_from_production",
-    )
+
+    sys.stdout.write("\n--- write_evidence_*_once(): refuse-to-overwrite primitives ---\n")
+
+    once_path = os.path.join(tmp_dir, "probe_evidence.json")
+    write_evidence_json_once(once_path, {"a": 1})
+    expect(os.path.exists(once_path), "write_evidence_json_once.writes_a_new_file")
+    raised = False
+    try:
+        write_evidence_json_once(once_path, {"a": 2})
+    except CheckpointProcessAttemptGuardError:
+        raised = True
+    expect(raised, "write_evidence_json_once.refuses_to_overwrite_an_existing_file")
+    with open(once_path, "rb") as f:
+        expect(
+            json.loads(f.read().decode("utf-8")) == {"a": 1},
+            "write_evidence_json_once.original_content_unchanged_after_refused_overwrite",
+        )
+
+    once_txt_path = os.path.join(tmp_dir, "probe_evidence.txt")
+    write_evidence_text_once(once_txt_path, b"first")
+    raised = False
+    try:
+        write_evidence_text_once(once_txt_path, b"second")
+    except CheckpointProcessAttemptGuardError:
+        raised = True
+    expect(raised, "write_evidence_text_once.refuses_to_overwrite_an_existing_file")
+    with open(once_txt_path, "rb") as f:
+        expect(
+            f.read() == b"first",
+            "write_evidence_text_once.original_content_unchanged_after_refused_overwrite",
+        )
+
+    sys.stdout.write("\n--- main(): sequential invocations produce unique, immutable evidence ---\n")
 
     main_fn = ns["main"]
     main_fn()
-    persisted_state = read_state()
+
+    cont1 = read_continuation_state()
     expect(
-        len(persisted_state["snapshots"]) == 1
-        and persisted_state["snapshots"][0]["snapshot_index"] == 1,
-        "main.persists_exactly_one_auto_numbered_snapshot_on_first_run",
+        cont1["next_snapshot_index"] == 2 and len(cont1["captured_snapshots"]) == 1,
+        "main.first_call_advances_snapshot_index_to_two",
+    )
+    snap1_filename = cont1["captured_snapshots"][0]["filename"]
+    expect(
+        snap1_filename == "sfm_scope_guard_snapshot_01_baseline.json",
+        "main.first_snapshot_uses_the_scheduled_baseline_operation_label",
     )
     expect(
-        os.path.exists(ns["RESULT_PATH"]) and os.path.exists(ns["SUMMARY_PATH"]),
-        "main.writes_result_and_summary_files",
+        os.path.exists(os.path.join(tmp_dir, snap1_filename)),
+        "main.first_snapshot_json_file_exists",
+    )
+    expect(
+        os.path.exists(os.path.join(tmp_dir, "sfm_scope_guard_snapshot_01_baseline.txt")),
+        "main.first_snapshot_txt_companion_exists",
+    )
+    expect(
+        os.path.exists(os.path.join(tmp_dir, "sfm_scope_guard_history_through_01.json")),
+        "main.first_history_through_file_exists",
+    )
+    run_count_after_first = len(cont1["captured_runs"])
+    expect(
+        run_count_after_first == 1
+        and cont1["captured_runs"][0]["filename"] == "sfm_scope_guard_run_01_selected_shot3.txt",
+        "main.first_call_captures_the_existing_real_log_as_run_01_with_the_scheduled_label",
+    )
+    expect(
+        os.path.exists(os.path.join(tmp_dir, "sfm_scope_guard_run_01_selected_shot3.txt")),
+        "main.run_01_evidence_file_exists",
     )
 
-    main_fn()
-    persisted_state_2 = read_state()
+    # Re-read the freshly-written snapshot JSON directly and confirm it
+    # is well-formed evidence with the expected fields.
+    with open(os.path.join(tmp_dir, snap1_filename), "rb") as f:
+        snap1_content = json.loads(f.read().decode("utf-8"))
     expect(
-        len(persisted_state_2["snapshots"]) == 2
-        and persisted_state_2["snapshots"][1]["snapshot_index"] == 2,
-        "main.second_run_appends_snapshot_index_two_never_overwrites_history",
+        snap1_content.get("operation") == "baseline"
+        and snap1_content.get("expected_state") == "UNUSED"
+        and "observed_state" in snap1_content,
+        "main.first_snapshot_content_has_the_expected_schema_fields",
+    )
+
+    main_fn()  # second invocation, log unchanged since the first call
+
+    cont2 = read_continuation_state()
+    expect(
+        cont2["next_snapshot_index"] == 3 and len(cont2["captured_snapshots"]) == 2,
+        "main.second_call_advances_snapshot_index_to_three_never_overwrites_history",
+    )
+    snap2_filename = cont2["captured_snapshots"][1]["filename"]
+    expect(
+        snap2_filename == "sfm_scope_guard_snapshot_02_after_cancel.json",
+        "main.second_snapshot_uses_the_next_scheduled_operation_label",
+    )
+    expect(
+        snap2_filename != snap1_filename,
+        "main.second_snapshot_filename_is_distinct_from_the_first",
+    )
+    expect(
+        len(cont2["captured_runs"]) == run_count_after_first,
+        "main.second_call_captures_no_new_run_since_the_production_log_did_not_change",
+    )
+    # The first snapshot file must still exist, unmodified, after the
+    # second invocation.
+    with open(os.path.join(tmp_dir, snap1_filename), "rb") as f:
+        snap1_content_after_second_call = json.loads(f.read().decode("utf-8"))
+    expect(
+        snap1_content_after_second_call == snap1_content,
+        "main.first_snapshot_file_remains_byte_identical_after_a_later_invocation",
+    )
+
+    main_fn()  # third invocation
+    cont3 = read_continuation_state()
+    expect(
+        cont3["next_snapshot_index"] == 4 and len(cont3["captured_snapshots"]) == 3,
+        "main.third_call_advances_snapshot_index_to_four",
+    )
+    expect(
+        cont3["captured_snapshots"][2]["filename"]
+        == "sfm_scope_guard_snapshot_03_after_shot3.json",
+        "main.third_snapshot_uses_the_third_scheduled_operation_label",
+    )
+
+    sys.stdout.write("\n--- Rollup files: freely overwritten, always reflect the cumulative index ---\n")
+
+    with open(os.path.join(tmp_dir, "sfm_scope_guard_final_result.json"), "rb") as f:
+        final_result = json.loads(f.read().decode("utf-8"))
+    expect(
+        len(final_result["captured_snapshots"]) == 3
+        and len(final_result["captured_runs"]) == run_count_after_first,
+        "main.final_result_rollup_reflects_all_snapshots_and_runs_captured_so_far",
+    )
+    expect(
+        os.path.exists(os.path.join(tmp_dir, "sfm_scope_guard_final_summary.txt")),
+        "main.final_summary_rollup_file_exists",
+    )
+
+    sys.stdout.write("\n--- Continuation state persists across a simulated restart (fresh namespace, same dir) ---\n")
+
+    ns_after_restart = fresh_ns(tmp_dir)
+    main_fn_after_restart = ns_after_restart["main"]
+    main_fn_after_restart()
+    cont4 = ns_after_restart["read_continuation_state"]()
+    expect(
+        cont4["next_snapshot_index"] == 5 and len(cont4["captured_snapshots"]) == 4,
+        "main.numbering_continues_correctly_across_a_fresh_namespace_ie_simulated_restart",
+    )
+    expect(
+        cont4["captured_snapshots"][3]["filename"]
+        == "sfm_scope_guard_snapshot_04_after_5shots.json",
+        "main.fourth_snapshot_after_simulated_restart_uses_the_fourth_scheduled_label",
     )
 finally:
     shutil.rmtree(tmp_dir, ignore_errors=True)

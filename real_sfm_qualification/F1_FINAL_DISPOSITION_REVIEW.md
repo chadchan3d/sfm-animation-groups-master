@@ -161,6 +161,24 @@ deployed to the live SFM install and hash-verified matching the repo exactly.
 **This candidate has NOT yet been qualified against real SFM.** `F` remains **OPEN**; the F1 optimization
 search remains CLOSED/exhausted (not reopened); `G` has not begun.
 
+## Update (2026-09-24): checkpoint evidence-file discipline corrected
+
+Before the real-SFM run, the checkpoint script's own evidence-file handling was corrected: the operator must
+never manually rename or copy files between steps, and no evidence file may ever be overwritten. Each of the
+13 fixed-schedule snapshots now writes a new, uniquely-numbered, immutable file pair
+(`sfm_scope_guard_snapshot_NN_<operation>.{json,txt}`); the checkpoint itself detects a changed production
+log and copies it into a new, uniquely-labeled, immutable file from a fixed 8-entry schedule
+(`sfm_scope_guard_run_NN_<label>.txt`), so the operator never manually preserves
+`sfm_rebuild_control_groups.txt`; immutable per-step cumulative-history indexes are also written; and only a
+small, explicitly non-evidentiary continuation-state pointer file plus the freely-overwritten final rollup
+(`sfm_scope_guard_final_result.json`/`_final_summary.txt`) are ever replaced. The write primitives refuse
+(raise) rather than silently overwrite an existing evidence filename. This is a checkpoint-tooling
+correction only — the guard implementation and its qualification semantics are unchanged. Offline
+qualification: `test_checkpoint_process_attempt_guard_dryrun.py` (SHA-256
+`70eda6991d2f2f8337db61a37de4af6b0cc6e46b170831d9f4d12d6cc3d16ca6`) — **33/33 PASS**. Checkpoint script
+SHA-256: `8c347db86a84d7f293cb4872d19fd8fe4e31350f5d26ee9337e71d954b4eb11e`, deployed and hash-verified. The
+real-SFM checkpoint was not run. `F` remains **OPEN**; `G` has not begun.
+
 ## 1. What repeated-use behavior has actually failed?
 
 The one real, observed failure in this entire investigation is **`F1-1`**: an actual SFM process crash
