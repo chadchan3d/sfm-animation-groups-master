@@ -19,9 +19,15 @@ driver is fresh `discover_rig_context()` calls performed during native Rebuild's
 (up to 250 discovery calls across 62 eligible targets per command, per the real, source-derived branch
 schedule established in `F1-R4`), whose retained cost is dominated by scene traversal/materialization
 (`F1-R5`: ~92% of private growth / ~96% of free-VAS loss survives even after removing 126 of 250 full
-discovery sites) and does **not** get released by garbage collection (consistent across `F1-R3` through
-`F1-R6`). This retained cost **accumulates** across multiple such commands run back-to-back in one
-unbroken process, which is what a 32-bit address space eventually cannot absorb.
+discovery sites). The failure is associated with **cumulative process-retained memory/VAS pressure
+dominated by fresh discovery's scene traversal** — this attribution is established, and is not weakened
+here. Across `F1-R3` through `F1-R6`, **ordinary garbage collection was repeatedly observed not to
+materially return that pressure**. **The exact lower-level allocator/SWIG/native retention mechanism
+responsible remains unproven** — `F1-R5`'s own audit classified candidate mechanisms such as CPython
+`pymalloc` arena non-release and SWIG wrapper pooling as `UNKNOWN`/`MEASUREMENT_CANDIDATE`, never
+confirmed as the sole or proven cause from source evidence alone. This retained pressure **accumulates**
+across multiple such commands run back-to-back in one unbroken process, which is what a 32-bit address
+space eventually cannot absorb.
 
 **The failed behavior is specifically: multiple Rebuild Control Groups commands, each triggering its own
 full discovery pass, executed consecutively within a single SFM process that is never restarted between
@@ -29,7 +35,7 @@ them.**
 
 ## 2. What single-command behavior has already passed?
 
-Every single-command execution in this project's entire history has passed:
+Every standalone, fresh-process qualification of a single command in this project's history has passed:
 
 - `C1-2` — PASS: baseline (pre-integration) Selected-Shots command against a real project; exactly the
   expected 2 targets touched, 83 untouched peers verified unchanged.
@@ -42,61 +48,76 @@ Every single-command execution in this project's entire history has passed:
   `D1-3`'s own baseline; authority lifecycle clean.
 - `F1-R1` through `F1-R8` — every individual real command run in this whole optimization search (native-
   only, discovery-isolated, streaming-candidate, or legacy) completed correctly and produced the expected,
-  semantically-verified result. **No single command has ever failed or crashed anywhere in this project's
-  history.** Every observed failure (`F1-1`/`F1-2`) was specific to multiple consecutive commands in one
-  unbroken process.
+  semantically-verified result.
+
+**Every standalone/fresh-process qualification of a single Selected or All command has completed
+successfully. The only observed production crash occurred during the third consecutive command in one
+unrestarted SFM process** (`F1-1`); `F1-2`'s corrected harness still did not reach a clean, fully-verified
+4th command. This is not a claim that every invocation under every process-lifetime condition has passed
+— only that no standalone, freshly-started qualification of a single command has ever failed; the one
+observed failure occurred specifically as the third of several consecutive commands within one unbroken
+process.
 
 ## 3. What practical user workflow does the product require?
 
-The Rebuild Control Groups Normalizer is a maintenance/setup utility invoked from SFM's MAINMENU to
-(re)build control-group structure for a project — run occasionally (e.g., after adding models/rigs or
-restructuring animation sets), not as a continuously or repeatedly invoked per-frame or per-edit
-operation. Ordinary SFM work (posing, animating, rendering) never invokes it at all. A realistic session
-looks like: open SFM, work on a project, run the Normalizer once (Selected or All Shots) when control-
-group maintenance is actually needed, continue other work, and eventually close or restart SFM through
-ordinary session boundaries — not "run this specific tool repeatedly back-to-back in one unbroken process"
-(the exact pattern `F1-1`/`F1-2` deliberately engineered to stress-test).
+The Rebuild Control Groups Normalizer is an **occasional maintenance operation used when control-group
+structure needs normalization** — e.g., after adding models/rigs or restructuring animation sets — not a
+continuously or repeatedly invoked per-frame or per-edit operation. Ordinary SFM work (posing, animating,
+rendering) never invokes it at all. **Immediate repeated whole-session normalization of an
+already-normalized session is not an intended workflow.** This does not rule out a later, legitimate
+invocation after meaningful scene/control-group changes, within the same or a later session — only that
+reflexively re-running the Normalizer against a session it has already just normalized, with no
+intervening change, is not how the product is meant to be used. This is a description of intended use, not
+a claim that the product formally prohibits more than one invocation per SFM process — the one observed
+failure (`F1-1`/`F1-2`) occurred under a specific, deliberately-engineered repeated-command stress pattern
+(4 consecutive commands, no restart, no intervening change), not the workflow described here.
 
 ## 4. Release blocker, documented limitation, or stress behavior outside normal usage?
 
 This is presented as the evidence-supported reading, not a unilateral verdict — the classification itself
 is for independent review:
 
-- Every actual unit of user-facing work — one command — has passed cleanly, with memory staying bounded
-  (up to ~3.42GB on the tested fixture, never exceeding the 32-bit ceiling) and zero crashes, across every
-  single-command run in this project's history (`C1`/`C2`/`D1`/`D2`/every `F1-R` checkpoint).
+- Every standalone/fresh-process qualification of a single command — Selected or All Shots, baseline or
+  integrated — has completed successfully, with memory staying bounded (up to ~3.42GB on the tested
+  fixture, never exceeding the 32-bit ceiling) (`C1`/`C2`/`D1`/`D2`/every `F1-R` checkpoint). The only
+  observed production crash occurred during the third consecutive command in one unrestarted SFM process
+  (`F1-1`); this is not a claim that every invocation under every process-lifetime condition has passed.
 - The only real failure occurred under a specific, deliberately-engineered repeated-command stress
-  pattern (4 consecutive commands, no restart) — not literally how the tool is normally invoked per
-  Q3.
+  pattern (4 consecutive commands, no restart) — not the intended occasional-maintenance workflow
+  described in Q3.
 - An exhaustive, real-SFM-verified search (`F1-R2` through `F1-R8`) found no material, semantics-
   preserving fix available anywhere in this SFM install's own Python/datamodel surface.
 
 Given those three facts together, the evidence points toward this being either a **documented practical
 limitation** (e.g., "restart SFM between Rebuild Control Groups runs, especially in a 32-bit process") or
-a **stress behavior outside normal product usage**, rather than a release blocker for the tool's actual,
-ordinary single-command-per-session use. Whether that classification is acceptable for release is the
-reviewer's call, not asserted here as final.
+a **stress behavior outside normal product usage**, rather than a release blocker for the tool's intended,
+occasional-maintenance use. Whether that classification is acceptable for release is the reviewer's call,
+not asserted here as final.
 
 ## 5. Is one successful Selected/All command per ordinary editing workflow sufficient?
 
-Based on the pattern established across every single-command run in this project (`C1`/`C2`/`D1`/`D2`,
-and every native-only/discovery-isolated/streaming-candidate/legacy run in `F1-R1` through `F1-R8`):
-**yes** — one successful Selected or All Shots command per ordinary editing session accomplishes the
-tool's actual purpose (rebuilding control groups) and has been repeatedly, independently verified as
-semantically correct and resource-bounded.
+Based on the pattern established across every standalone, fresh-process single-command run in this
+project (`C1`/`C2`/`D1`/`D2`, and every native-only/discovery-isolated/streaming-candidate/legacy run in
+`F1-R1` through `F1-R8`): **yes** — one successful Selected or All Shots command accomplishes the tool's
+actual purpose (rebuilding control groups) and has been repeatedly, independently verified as
+semantically correct and resource-bounded. This describes what a single, standalone invocation achieves;
+it does not itself establish that repeated invocations within one unrestarted process are safe, and it
+does not assert that the product formally requires exactly one invocation per session — the Normalizer
+remains available for legitimate re-invocation after real control-group-affecting changes (see Q3).
 
 ## 6. What minimum practical real-SFM confirmation, if any, is still needed before F can be closed and G can begin?
 
 Already covered by existing, real-SFM-verified evidence: single-command correctness for both scopes
 (Selected/All Shots), both pre- and post-integration, on the real qualification project; single-command
-resource behavior staying within the 32-bit ceiling on the tested fixture; the exact mechanism and
-magnitude of repeated-command retained growth; and an exhaustive, concluded search for a fix.
+resource behavior staying within the 32-bit ceiling on the tested fixture; the established attribution and
+magnitude of repeated-command retained growth (dominant cause identified; exact lower-level retention
+mechanism not proven); and an exhaustive, concluded search for a fix.
 
 Open questions worth the reviewer's own judgment (named here, not proposed as new experiments to run):
 
 1. Every single-command resource measurement in this project was taken against the same qualification
-   fixture (a bounded, ~62-eligible-target project). Whether "one command per session is sufficient" holds
-   on substantially larger real production scenes has not been separately measured.
+   fixture (a bounded, ~62-eligible-target project). Whether a single standalone command's resource
+   behavior holds on substantially larger real production scenes has not been separately measured.
 2. Whether the practical guidance should be an unconditional "restart SFM between Rebuild Control Groups
    runs" or a more specific safe-repeat-count — this is a documentation/product decision, not a further
    diagnostic.
