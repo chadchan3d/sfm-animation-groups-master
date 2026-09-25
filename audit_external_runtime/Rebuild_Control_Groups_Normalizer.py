@@ -9424,24 +9424,27 @@ PROCESS_GUARD_MESSAGE_STATE_UNVERIFIABLE = (
 )
 
 PROCESS_GUARD_MESSAGE_FULL_SCOPE_ALREADY_STARTED = (
-    u"Restart SFM Before Running Again",
-    u"All Shots has already started since SFM launched.\n\n"
-    u"Save your project, restart SFM, reopen it, then use the "
-    u"Normalizer again.",
+    u"Restart SFM Before Using the Normalizer Again",
+    u"SFM may not have enough memory left for another Normalizer run "
+    u"after processing the entire project.\n\n"
+    u"Save your project, restart SFM, then try again.",
 )
 
 PROCESS_GUARD_MESSAGE_RESTART_FOR_ALL_SHOTS = (
-    u"Restart SFM for All Shots",
-    u"The Normalizer has already been used since SFM started.\n"
-    u"Restart SFM before running All Shots.\n\n"
-    u"Save your project, restart SFM, reopen it, then run All Shots.",
+    u"Restart SFM Before All Shots",
+    u"All Shots can use a lot of memory. Because you've already "
+    u"used the Normalizer in this SFM session, there may not be "
+    u"enough memory left for All Shots to finish.\n\n"
+    u"Save your project, restart SFM, then run All Shots.",
 )
 
 PROCESS_GUARD_MESSAGE_RESTART_FOR_FULL_PROJECT_SELECTED = (
-    u"Restart SFM Before Normalizing All Shots",
-    u"The Normalizer has already been used since SFM started.\n"
-    u"Restart SFM before normalizing the entire project.\n\n"
-    u"Save your project, restart SFM, reopen it, then try again.",
+    u"Restart SFM Before Continuing",
+    u"This selection covers everything in the project, which can use "
+    u"a lot of memory. Because you've already used the Normalizer "
+    u"in this SFM session, there may not be enough memory left to "
+    u"finish.\n\n"
+    u"Save your project, restart SFM, then try again.",
 )
 
 

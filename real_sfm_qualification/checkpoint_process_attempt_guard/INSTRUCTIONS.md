@@ -1,5 +1,22 @@
 # Process-Lifetime Scope-Aware Admission Guard Checkpoint — Instructions
 
+## RESULT (2026-09-24): PASS. F IS NOW CLOSED (2026-09-25).
+
+This checkpoint was run for real against real SFM on 2026-09-24 and **PASSED**: all 15 snapshots' observed
+state exactly matched the expected state in order; the baseline-seeding fix correctly seeded a genuine
+pre-existing log without misattributing it as a run; all 8 runs were captured contiguously despite 3
+interleaved refusals; all three refusal fingerprint-equality proofs reported `equal: true`; 3 correct
+process-restart transitions were observed; the controlled edit was independently confirmed repaired exactly
+as specified; the standalone All-Shots command completed cleanly. Full evidence: `LEDGER.md`'s F3-Guard row.
+
+An independent fresh-eyes review of the complete F campaign then concluded **CLOSE F AFTER NARROW
+NON-ARCHITECTURAL CORRECTIONS**. The one narrow correction was copy-only: the three user-facing restart-
+warning messages were reworded (see `Rebuild_Control_Groups_Normalizer.py`'s `PROCESS_GUARD_MESSAGE_*`
+constants) with zero guard-behavior change, confirmed by `git diff` and by both offline test suites
+re-passing unchanged. **This checkpoint is closed. Do not run it again** — the question it was built to
+answer has been answered and F is closed. See `../F1_FINAL_DISPOSITION_REVIEW.md`'s FINAL CLOSEOUT section
+for the complete disposition. **F CLOSED. G NOT YET BEGUN.**
+
 ## Why this exists, and why it was revised
 
 F2-R1-R3 established, with real-SFM evidence, that legitimate same-process reinvocation of the Rebuild
@@ -318,17 +335,19 @@ snapshot file pairs or fewer than 8 preserved run-log files present at completio
 
 ## Identities this checkpoint is pinned against
 
-- Production Normalizer SHA-256 (canonical-identity candidate, current): `2c0edbb8a95f96147e6310fe1c039da7ee053f5e985f11bb3535dda8aa5ec23d`
+- Production Normalizer SHA-256 (F-closeout accepted state, final, now the governing pin): `1f4ec5a26605aa90380eb0532fec3915d2cc24a3a20473ed70d57198bd995db7`
+- Production Normalizer SHA-256 (pre-copy-closeout, real-SFM-qualified 2026-09-24): `2c0edbb8a95f96147e6310fe1c039da7ee053f5e985f11bb3535dda8aa5ec23d`
 - Production Normalizer SHA-256 (scope-aware, name-based identity, superseded): `1f2b87f2954d1944c06497a8adcda4de1e1663a148d655bf7cd6f3ace4f757dc`
 - Production Normalizer SHA-256 (broad-guard, superseded; received PARTIAL real-SFM qualification through snapshot #5, see `../LEDGER.md`'s F3-Guard row): `6170d2a248845281b5f5d38dfea4b9f2decf908b8e3b79e80f4ada18d2f54625`
 - Production Normalizer SHA-256 (pre-guard baseline): `cdc909a6da9d64c01e8cacf25769e9063a2c25198d4c2e0c2068417a6020e867`
 - Canonical Master SHA-256 (unchanged, not touched by this work): `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
-- Checkpoint script SHA-256: `1c004bdaefba48e61b21339a2c5bbea348034d1201f8b29940208173bc287a58`
-- Guard offline regression test SHA-256: `bfd1c197fe16e0f460957445af2e85a694e8aba73c2729f458eaa092c1492c84`
-- Checkpoint dry-run test SHA-256: `ab45cce04235d951e72f21a7543d98a9f76df789c7828836c7299cb61e91cf1c`
+- Checkpoint script SHA-256 (final, deployed): `403c235aec5408c29f99e3c1c649ea225bb4f7023af12146713f620f40d30c50`
+- Guard offline regression test SHA-256 (final): `c2b185ff464719304c6410f07c8023d279b7a70dbe126dbef3edc3bcd04cad38` — 81/81 PASS
+- Checkpoint dry-run test SHA-256 (final): `76ff4a931446d29d51d1f78dff2a2fe4441a1363014befe52bc9467357bef9d3` — 47/47 PASS
 
 ## Explicit non-authorization
 
-This checkpoint does not modify production beyond the already-implemented guard, does not reopen the F1
-optimization search, and does not begin G. `F` remains `OPEN` pending this checkpoint's own real-SFM result
-and independent review of the recommended admission policy recorded in `../F1_FINAL_DISPOSITION_REVIEW.md`.
+This checkpoint's own real-SFM result and the subsequent copy-only closeout correction did not reopen the
+F1 optimization search and did not begin G. `F` is now **CLOSED** — see
+`../F1_FINAL_DISPOSITION_REVIEW.md`'s FINAL CLOSEOUT section for the complete disposition. `G` has **NOT YET
+BEGUN**.

@@ -98,7 +98,7 @@ PRODUCTION_INSTALLED_PATH = (
     "\\scripts\\sfm\\mainmenu\\ChadChan3D\\Rebuild_Control_Groups_Normalizer.py"
 )
 EXPECTED_PRODUCTION_SHA256 = (
-    "2c0edbb8a95f96147e6310fe1c039da7ee053f5e985f11bb3535dda8aa5ec23d"
+    "1f4ec5a26605aa90380eb0532fec3915d2cc24a3a20473ed70d57198bd995db7"
 )
 
 # Exact source line ranges (1-indexed, inclusive) for the small handful

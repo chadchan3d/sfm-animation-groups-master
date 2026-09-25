@@ -1,9 +1,70 @@
-# F Final Disposition Review (prepared for independent review — not acted on)
+# F Final Disposition Review
 
-**Status: prepared only.** This document answers the six requested questions from the evidence already
-established in `LEDGER.md` and `F1_OPTIMIZATION_INVESTIGATION_SUMMARY.md`. It does not close `F`, does
-not begin `G`, and does not propose or run any new experiment. The disposition itself — whether the
-answers below are sufficient to close `F` — is for independent review, not decided here.
+**Status: CLOSED (2026-09-25).** This document originally answered six requested questions from evidence
+established in `LEDGER.md` and `F1_OPTIMIZATION_INVESTIGATION_SUMMARY.md`, prepared for independent review
+only. Following the real-SFM PASS of the scope-aware process-lifetime admission guard and a subsequent
+independent fresh-eyes review of the complete F campaign, **F is now CLOSED** — see the final closeout
+section immediately below. The original six-question analysis, and every intermediate update, is preserved
+unchanged beneath it as the evidentiary record the closeout decision rests on.
+
+## FINAL CLOSEOUT (2026-09-25)
+
+An independent fresh-eyes review of the complete F campaign — F1 optimization search, F2-R1 same-process
+reinvocation qualification, F2-R1-R3's real-SFM FAIL, the Astra-authorized admission guard, its two
+independent-review corrections (scope-aware classification, canonical shot identity), its evidence-file-
+discipline correction and that correction's own two evidence-integrity fixes, and the guard's real-SFM
+qualification — returned:
+
+**CLOSE F AFTER NARROW NON-ARCHITECTURAL CORRECTIONS.**
+
+No further F runtime experiment, optimization search, crash reproduction, or architecture work is
+authorized. The one narrow correction implemented was **copy-only**: the three user-facing restart-warning
+message strings were reworded to state the actual reason (memory pressure from prior Normalizer use in the
+same SFM session) and the recovery action (save, restart, try again) without exposing internal terms
+(`FULL_SCOPE`, process state, admission guard, canonical identity) or overstated/understated claims ("has
+already started since SFM launched", "may crash SFM", "safe to use"). `git diff` confirms this change is
+confined to exactly three literal string-tuple constants — zero control-flow, classifier, marker/state, or
+arming/refusal-boundary changes. Full detail: `LEDGER.md`'s F3-Guard row.
+
+### Final conclusions of record
+
+- The F1 optimization investigation is **closed**; no additional F runtime campaign is required.
+- The scope-aware process-lifetime admission guard's mechanics **passed real-SFM qualification** (2026-09-24
+  — all 15 snapshots matched expected state exactly, baseline correctly seeded without misattributing a
+  pre-existing log as a run, all 3 refusal fingerprint-equality proofs `equal: true`, 8 runs captured
+  contiguously despite 3 interleaved refusals, 3 correct process-restart transitions).
+- Selected Shot(s) over any proper subset of project shots remains supported, repeatedly, within one
+  process.
+- Selected workloads can still be individually substantial; **the guard is a process-admission control, not
+  a universal memory-safety guarantee** — no claim is made that any given Selected command, of any size,
+  cannot itself consume significant resources.
+- Full-project work (All Shots, or an exact whole-project selection made through Selected Shot(s)) receives
+  restart-based admission control.
+- **No numeric shot/target/memory/VAS threshold was ever established or is required** anywhere in this
+  guard's classification.
+- The original broad one-attempt-per-process policy (commit `f3efd132`) is **superseded**.
+- The rejected ">1-selected-shot = batch" policy is **superseded** (reviewed and rejected as unsupported by
+  the evidence, before implementation reached real-SFM qualification).
+- Exact project-wide selection made through Selected Shot(s) is treated identically to All Shots (canonical
+  shot-identity equivalence, not a size heuristic).
+- All research/qualification scaffolding (`real_sfm_qualification/checkpoint_*` directories, offline test
+  suites) remains outside production's own runtime behavior — production only contains the guard itself and
+  its now-corrected user-facing copy.
+- **G may begin after this closeout commit.**
+
+### Final identities
+
+- Production Normalizer SHA-256 (F-closeout accepted state, now the governing pin in `LEDGER.md`):
+  `1f4ec5a26605aa90380eb0532fec3915d2cc24a3a20473ed70d57198bd995db7`
+- Production Normalizer SHA-256 (pre-copy-closeout, real-SFM-qualified 2026-09-24):
+  `2c0edbb8a95f96147e6310fe1c039da7ee053f5e985f11bb3535dda8aa5ec23d`
+- Canonical Master SHA-256 (unchanged throughout the entire F campaign):
+  `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93`
+- Checkpoint script SHA-256 (final, deployed): `403c235aec5408c29f99e3c1c649ea225bb4f7023af12146713f620f40d30c50`
+- Guard offline regression test SHA-256 (final): `c2b185ff464719304c6410f07c8023d279b7a70dbe126dbef3edc3bcd04cad38` — **81/81 PASS**
+- Checkpoint dry-run test SHA-256 (final): `76ff4a931446d29d51d1f78dff2a2fe4441a1363014befe52bc9467357bef9d3` — **47/47 PASS**
+
+**F CLOSED. G NOT YET BEGUN.**
 
 ## Update (2026-09-24): F2-R1-R3 real-SFM result resolves the open question raised in Q6
 
