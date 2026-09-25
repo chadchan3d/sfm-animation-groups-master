@@ -1,0 +1,6398 @@
+{
+  "baseline_seeded": false, 
+  "canonical_master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+  "canonical_master_sha256_matches_expected": true, 
+  "classification": "G_PASS", 
+  "current_pid": 12816, 
+  "diagnostics_delta_continuity_established": true, 
+  "diagnostics_delta_since_v1_stage_event_names": [
+    "cohort_acquired"
+  ], 
+  "epoch": 1790362017.773, 
+  "expected_state": "SELECTED_USED", 
+  "failed_gates": [], 
+  "gate_checks": [
+    {
+      "detail": [
+        12816, 
+        12816
+      ], 
+      "name": "continuity.same_pid_as_baseline_and_v1_stage", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "identity.production_sha256_matches_expected", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "identity.canonical_master_sha256_matches_expected", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "identity.runtime_api_version_matches_expected", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "identity.runtime_build_id_matches_expected", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "identity.runtime_is_canonical", 
+      "passed": true
+    }, 
+    {
+      "detail": "SELECTED_USED", 
+      "name": "state.guard_state_remains_selected_used", 
+      "passed": true
+    }, 
+    {
+      "detail": [
+        "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+        "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93"
+      ], 
+      "name": "generation.master_unchanged_from_baseline", 
+      "passed": true
+    }, 
+    {
+      "detail": 2, 
+      "name": "run.exactly_one_new_run02_log_captured", 
+      "passed": true
+    }, 
+    {
+      "detail": {
+        "all_checks_pass": true, 
+        "exact_single_shot_present": true, 
+        "expected_unique_scope_folds": 302, 
+        "final_report_entry_present": true, 
+        "logged_matched_folds": 273, 
+        "logged_unique_scope_folds": 302, 
+        "production_fail_present": false, 
+        "production_pass_present": true, 
+        "scope_selected_present": true, 
+        "unique_scope_folds_matches": true
+      }, 
+      "name": "run.run02_verifier_all_checks_pass", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "run.exact_single_selected_shot9", 
+      "passed": true
+    }, 
+    {
+      "detail": 302, 
+      "name": "run.logged_unique_scope_folds_equals_v2_count", 
+      "passed": true
+    }, 
+    {
+      "detail": 1, 
+      "name": "provider.exactly_one_open_since_v1_stage", 
+      "passed": true
+    }, 
+    {
+      "detail": 1, 
+      "name": "provider.exactly_one_close_since_v1_stage", 
+      "passed": true
+    }, 
+    {
+      "detail": 0, 
+      "name": "provider.current_open_provider_count_is_zero", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "view.v2_cached_view_present", 
+      "passed": true
+    }, 
+    {
+      "detail": false, 
+      "name": "view.v2_view_is_fresh", 
+      "passed": true
+    }, 
+    {
+      "detail": "normalizer_compat", 
+      "name": "view.v2_consumer_kind_is_normalizer_compat", 
+      "passed": true
+    }, 
+    {
+      "detail": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+      "name": "view.v2_semantic_generation_matches_governing_master", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "view.v2_covered_keys_equal_v2", 
+      "passed": true
+    }, 
+    {
+      "detail": 0, 
+      "name": "view.v2_zero_uncovered", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "view.v2_payload_known_keys_match_coverage_known_keys", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "view.v2_payload_key_count_matches_known_count", 
+      "passed": true
+    }, 
+    {
+      "detail": 0, 
+      "name": "lease.outstanding_zero", 
+      "passed": true
+    }, 
+    {
+      "detail": 0, 
+      "name": "lease.unreleased_zero", 
+      "passed": true
+    }, 
+    {
+      "detail": null, 
+      "name": "diagnostics.delta_continuity_established", 
+      "passed": true
+    }, 
+    {
+      "detail": [
+        "cohort_acquired"
+      ], 
+      "name": "diagnostics.delta_contains_cohort_acquired", 
+      "passed": true
+    }, 
+    {
+      "detail": [
+        "cohort_acquired"
+      ], 
+      "name": "diagnostics.delta_excludes_fully_reused_no_provider_open", 
+      "passed": true
+    }, 
+    {
+      "detail": {
+        "known_count": 273, 
+        "logged_matched_folds": 273, 
+        "payload_folded_key_count": 273
+      }, 
+      "name": "consistency.logged_matched_folds_equals_known_count_equals_payload_count", 
+      "passed": true
+    }, 
+    {
+      "detail": {
+        "coverage": {
+          "destination": "Face/Expressions", 
+          "occurrences": [
+            {
+              "full_path": "groupFile/Face/Expressions", 
+              "global_rank": 3001, 
+              "literal": "amused", 
+              "local_rank": 29
+            }
+          ], 
+          "status": "Known"
+        }, 
+        "folded_key": "amused"
+      }, 
+      "name": "witness.v2_only_known_witness_found_and_payload_consistent", 
+      "passed": true
+    }
+  ], 
+  "guard_state": "SELECTED_USED", 
+  "guard_state_error": null, 
+  "lease_counters": {
+    "outstanding_lease_count": 0, 
+    "unreleased_lease_count": 0, 
+    "view_cache_entry_count": 2
+  }, 
+  "main_window_available": true, 
+  "matched_folds_consistency_check": {
+    "known_count": 273, 
+    "logged_matched_folds": 273, 
+    "payload_folded_key_count": 273
+  }, 
+  "observed_master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+  "operation": "after_v2", 
+  "production_log_fingerprint": {
+    "exists": true, 
+    "sha256": "06028c702cce371239cf8e56b907885bc29e48a87e20a3c1f4d724798425d955", 
+    "size_bytes": 26352
+  }, 
+  "production_sha256": "1f4ec5a26605aa90380eb0532fec3915d2cc24a3a20473ed70d57198bd995db7", 
+  "production_sha256_matches_expected": true, 
+  "provider_closes_delta_since_v1_stage": 1, 
+  "provider_counters": {
+    "active_cohort_id": null, 
+    "current_open_provider_count": 0, 
+    "peak_open_provider_count": 1, 
+    "total_provider_closes": 2, 
+    "total_provider_opens": 2
+  }, 
+  "provider_opens_delta_since_v1_stage": 1, 
+  "recent_diagnostics": [
+    {
+      "detail": {
+        "cohort_id": 1, 
+        "master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+        "views": [
+          "normalizer_compat"
+        ]
+      }, 
+      "event": "cohort_acquired", 
+      "t": 1790361942.178
+    }, 
+    {
+      "detail": {
+        "cohort_id": 2, 
+        "master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+        "views": [
+          "normalizer_compat"
+        ]
+      }, 
+      "event": "cohort_acquired", 
+      "t": 1790362006.444
+    }
+  ], 
+  "run_captured": {
+    "captured_at_snapshot_index": 3, 
+    "filename": "sfm_checkpoint_g_run_02_v2_shot9.txt", 
+    "label": "v2_shot9", 
+    "log_verification": {
+      "all_checks_pass": true, 
+      "exact_single_shot_present": true, 
+      "expected_unique_scope_folds": 302, 
+      "final_report_entry_present": true, 
+      "logged_matched_folds": 273, 
+      "logged_unique_scope_folds": 302, 
+      "production_fail_present": false, 
+      "production_pass_present": true, 
+      "scope_selected_present": true, 
+      "unique_scope_folds_matches": true
+    }, 
+    "pid": 12816, 
+    "sha256": "06028c702cce371239cf8e56b907885bc29e48a87e20a3c1f4d724798425d955", 
+    "size_bytes": 26352, 
+    "step_ordinal": 2, 
+    "wall_time": "2026-09-25 14:46:57"
+  }, 
+  "run_lock_present": false, 
+  "runtime_api_version": "1.0.0-b2a", 
+  "runtime_api_version_matches_expected": true, 
+  "runtime_build_id": "package-boundary-corrected-2026-09-22", 
+  "runtime_build_id_matches_expected": true, 
+  "runtime_is_canonical": true, 
+  "snapshot_index": 3, 
+  "v2_cache_key_repr": "('ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93', None, frozenset([u'bip_index_2_l', u'bip_upperarm_r_twist2', u'vaginalopen2', u'bip_tail013', u'mo3', u'boxybelly', u'mo1', u'bip_index_0_r', u'rig_foothelper3', u'ear_r.2', u'bip_index_0_l', u'ear_r.1', u'pantsfit', u'bip_index_2_r', u'bip_ring_2_l', u'muzzle', u'lipbite', u'tongue07', u'bip_pinky_0_l', u'viewtarget', u'bigtoe_2_r', u'jaw', u'ringtoe_3_l', u'spine_2', u'legsize', u'pointconstraint_bip_neck - neck weight', u'bigtoe_2_l', u'mo2', u'puckerer', u'cheekraiser1', u'bip_pinky_0_r', u'bip_ring_2_r', u'hip', u'ringtoe_1_l', u'jawdroop', u'localviewtargetfactor', u'bip_thumb_0_l', u'orientconstraint_bip_spine_2 - spine_3 weight', u'widehips', u'bip_pinky_2_r', u'bip_pelvis', u'bip_upperarm_l_twist2', u'breastnnippleperk', u'midtoe_2_l', u'bip_pinky_2_l', u'midtoe_3_l', u'pointconstraint_bip_head - head weight', u'kiss', u'cornerpuller', u'sideleft1', u'genitals', u'orientconstraint_bip_pelvis - hip weight', u'spine_4', u'toraxwide', u'midtoe_3_r', u'pregnant', u'bulge', u'spine_3', u'thoathbulge2', u'midtoe_1_l', u'bip_tail022', u'tongue04', u'roottransform', u'tongue06', u'midtoe_1_r', u'mofunnel', u'breastsmall', u'tongue02', u'tongue03', u'collarup', u'bigtoe_1_r', u'bip_tail020', u'orientconstraint_bip_foot_l - foot_l weight', u'eyes_rightleft', u'bip_foot_r', u'bip_head_hair_back_r', u'orientconstraint_bip_head - head weight', u'lowerlidlower', u'bip_hip_twist2_l', u'bip_head_hairfront_2_l', u'bip_hip_l', u'bip_head_hairfront_2_r', u'bip_hip_r', u'bip_hip_twist2_r', u'bip_ponytail2', u'bip_ponytail1', u'sshapelips', u'worried', u'bip_head_hair_back_l', u'bip_foot_l', u'bigtoe_1_l', u'ringtoe_1_r', u'voluptuous', u'tongue05', u'bip_spine_3', u'bip_spine_2', u'bip_spine_1', u'bip_spine_0', u'ear_l', u'pointconstraint_bip_spine_2 - spine_3 weight', u'eballraiser', u'orientconstraint_roottransform - rig_root weight', u'ear_r', u'bulge2', u'upeerlidraiser', u'uppelipraiser', u'sideleft3', u'sideleft2', u'bip_tail025', u'bip_tail024', u'bip_tail023', u'bip_lowerarm_l_twist2', u'bip_tail021', u'bigtoe_3_l', u'bip_head_hair_back_1', u'bip_pinky_1_r', u'orientconstraint_bip_spine_0 - spine_1 weight', u'paizury', u'indextoe_2_l', u'indextoe_1_l', u'rcarpal4', u'vagclose', u'rcarpal1', u'bip_toe_r', u'rcarpal3', u'orientconstraint_bip_foot_r - foot_r weight', u'thoathbulge1', u'indextoe_2_r', u'collarr', u'orientconstraint_bip_neck - neck weight', u'rcarpal2', u'bip_pinky_1_l', u'lidubberopen', u'sideright2', u'bip_upperarm_l', u'ikconstraint_hand_r - hand_r weight', u'bip_lowerarm_r_twist2', u'ikconstraint_hand_l - hand_l weight', u'orientconstraint_bip_spine_1 - spine_2 weight', u'bip_thumb_1_l', u'ikconstraint_foot_r - foot_r weight', u'orientconstraint_bip_hand_r - hand_r weight', u'o', u'lipswide', u'buttsize', u'lowerblink', u'orientconstraint_bip_collar_l - collarl weight', u'bip_tail018', u'bip_thumb_1_r', u'lipsin', u'pointconstraint_bip_collar_l - collarl weight', u'bip_thumb_0_r', u'head', u'sideleft4', u'hand_r', u'bip_upperarm_r', u'bip_breast_01_l', u'bip_head_hairfront_3_l', u'bip_ring_1_r', u'bip_hand_r', u'bip_index_1_r', u'bip_head_hairfront_1_r', u'ikconstraint_foot_l - foot_l weight', u'bip_head_hairfront_1_l', u'bip_hand_l', u'eyes_updown', u'bip_ring_1_l', u'bip_head_hairfront_3_r', u'bip_breast_01_r', u'slim', u'lcarpal1', u'ebinnerupper', u'bip_tail04', u'bip_tail05', u'bip_tail06', u'bip_tail07', u'bip_tail00', u'bip_tail01', u'bip_tail02', u'bip_tail03', u'bip_knee_r', u'upperblink', u'angry', u'neck', u'bip_tail08', u'bip_tail09', u'orientconstraint_bip_spine_3 - spine_4 weight', u'bip_knee_l', u'blow', u'hand_l', u'bip_toe_l', u'bite1', u'indextoe_1_r', u'earshape1', u'bip_neck', u'ebouterlowerer', u'muscles', u'ebouterupper', u'sideright4', u'ear_l.1', u'ear_l.2', u'bip_collar_r', u'strecher', u'indextoe_3_l', u'indextoe_3_r', u'bip_collar_l', u'bip_head_hair_back', u'ringtoe_3_r', u'bip_ring_0_l', u'e', u'lippresser', u'collarl', u'bip_middle_0_l', u'bip_ring_0_r', u'bip_breast_02_l', u'vaginalopen', u'genitalhide', u'bip_head_hairfront_l', u'eyes_convergence', u'bip_tail016', u'bip_tail017', u'bip_tail014', u'bip_tail015', u'bip_tail012', u'bip_head_hairfront_r', u'bip_tail010', u'bip_tail011', u'lowerliplower', u'bip_breast_02_r', u'analopen', u'bip_tail019', u'bip_middle_1_r', u'tongue00', u'earshape2', u'anus', u'midtoe_2_r', u'rig_root', u'bip_butt_l', u'funnel', u'tongue01', u'bip_butt_r', u'lowerlidraiser', u'vaggrip', u'pointconstraint_bip_pelvis - hip weight', u'waist1', u'breastflatten', u'shortsfit', u'bip_middle_1_l', u'legfix90sw ', u'lipsout', u'bip_index_1_l', u'bip_head_scale', u'knee_l', u'shocked', u'rig_foothelper0', u'vagpush', u'pointconstraint_roottransform - rig_root weight', u'ebinnerlowerer', u'upeerlidlower', u'eballlower', u'spine_1', u'pointconstraint_bip_collar_r - collarr weight', u'ringtoe_2_l', u'bip_head_hair_back_1_r', u'bigtoe_3_r', u'foot_l', u'pointconstraint_bip_spine_3 - spine_4 weight', u'elbow_r', u'pointconstraint_bip_spine_0 - spine_1 weight', u'bip_thumb_2_l', u'bip_thumb_2_r', u'elbow_l', u'foot_r', u'bip_head', u'orientconstraint_bip_collar_r - collarr weight', u'lcarpal3', u'lcarpal2', u'bip_head_hair_back_1_l', u'pointconstraint_bip_spine_1 - spine_2 weight', u'ringtoe_2_r', u'lcarpal4', u'a', u'rig_foothelper1', u'rig_foothelper2', u'bip_middle_2_l', u'bip_lowerarm_l', u'bip_middle_2_r', u'sideright3', u'orientconstraint_bip_hand_l - hand_l weight', u'i', u'smirk', u'knee_r', u'sideright1', u'amused', u'bip_head_hairfront', u'breastsize', u'u', u'blink1', u'bip_lowerarm_r', u'bip_middle_0_r', u'mouthopen', u'cornerlower']), u'normalizer_compat')", 
+  "v2_only_known_witness": {
+    "coverage": {
+      "destination": "Face/Expressions", 
+      "occurrences": [
+        {
+          "full_path": "groupFile/Face/Expressions", 
+          "global_rank": 3001, 
+          "literal": "amused", 
+          "local_rank": 29
+        }
+      ], 
+      "status": "Known"
+    }, 
+    "folded_key": "amused"
+  }, 
+  "v2_only_known_witness_payload_check": {
+    "coverage_destination": "Face/Expressions", 
+    "coverage_occurrences": [
+      {
+        "full_path": "groupFile/Face/Expressions", 
+        "global_rank": 3001, 
+        "literal": "amused", 
+        "local_rank": 29
+      }
+    ], 
+    "coverage_status": "Known", 
+    "destinations_consistent_with_coverage": true, 
+    "internally_consistent": true, 
+    "payload_row_count": 1, 
+    "payload_row_destinations_sorted": [
+      "Face/Expressions"
+    ], 
+    "present_in_payload": true, 
+    "row_count_matches_occurrences": true
+  }, 
+  "v2_only_known_witness_provenance": [
+    {
+      "animation_set": "krystalv21", 
+      "literal": "amused"
+    }
+  ], 
+  "v2_view": {
+    "consumer_kind": "normalizer_compat", 
+    "covered_keys_equals_requested": true, 
+    "covered_keys_sorted": [
+      "a", 
+      "amused", 
+      "analopen", 
+      "angry", 
+      "anus", 
+      "bigtoe_1_l", 
+      "bigtoe_1_r", 
+      "bigtoe_2_l", 
+      "bigtoe_2_r", 
+      "bigtoe_3_l", 
+      "bigtoe_3_r", 
+      "bip_breast_01_l", 
+      "bip_breast_01_r", 
+      "bip_breast_02_l", 
+      "bip_breast_02_r", 
+      "bip_butt_l", 
+      "bip_butt_r", 
+      "bip_collar_l", 
+      "bip_collar_r", 
+      "bip_foot_l", 
+      "bip_foot_r", 
+      "bip_hand_l", 
+      "bip_hand_r", 
+      "bip_head", 
+      "bip_head_hair_back", 
+      "bip_head_hair_back_1", 
+      "bip_head_hair_back_1_l", 
+      "bip_head_hair_back_1_r", 
+      "bip_head_hair_back_l", 
+      "bip_head_hair_back_r", 
+      "bip_head_hairfront", 
+      "bip_head_hairfront_1_l", 
+      "bip_head_hairfront_1_r", 
+      "bip_head_hairfront_2_l", 
+      "bip_head_hairfront_2_r", 
+      "bip_head_hairfront_3_l", 
+      "bip_head_hairfront_3_r", 
+      "bip_head_hairfront_l", 
+      "bip_head_hairfront_r", 
+      "bip_head_scale", 
+      "bip_hip_l", 
+      "bip_hip_r", 
+      "bip_hip_twist2_l", 
+      "bip_hip_twist2_r", 
+      "bip_index_0_l", 
+      "bip_index_0_r", 
+      "bip_index_1_l", 
+      "bip_index_1_r", 
+      "bip_index_2_l", 
+      "bip_index_2_r", 
+      "bip_knee_l", 
+      "bip_knee_r", 
+      "bip_lowerarm_l", 
+      "bip_lowerarm_l_twist2", 
+      "bip_lowerarm_r", 
+      "bip_lowerarm_r_twist2", 
+      "bip_middle_0_l", 
+      "bip_middle_0_r", 
+      "bip_middle_1_l", 
+      "bip_middle_1_r", 
+      "bip_middle_2_l", 
+      "bip_middle_2_r", 
+      "bip_neck", 
+      "bip_pelvis", 
+      "bip_pinky_0_l", 
+      "bip_pinky_0_r", 
+      "bip_pinky_1_l", 
+      "bip_pinky_1_r", 
+      "bip_pinky_2_l", 
+      "bip_pinky_2_r", 
+      "bip_ponytail1", 
+      "bip_ponytail2", 
+      "bip_ring_0_l", 
+      "bip_ring_0_r", 
+      "bip_ring_1_l", 
+      "bip_ring_1_r", 
+      "bip_ring_2_l", 
+      "bip_ring_2_r", 
+      "bip_spine_0", 
+      "bip_spine_1", 
+      "bip_spine_2", 
+      "bip_spine_3", 
+      "bip_tail00", 
+      "bip_tail01", 
+      "bip_tail010", 
+      "bip_tail011", 
+      "bip_tail012", 
+      "bip_tail013", 
+      "bip_tail014", 
+      "bip_tail015", 
+      "bip_tail016", 
+      "bip_tail017", 
+      "bip_tail018", 
+      "bip_tail019", 
+      "bip_tail02", 
+      "bip_tail020", 
+      "bip_tail021", 
+      "bip_tail022", 
+      "bip_tail023", 
+      "bip_tail024", 
+      "bip_tail025", 
+      "bip_tail03", 
+      "bip_tail04", 
+      "bip_tail05", 
+      "bip_tail06", 
+      "bip_tail07", 
+      "bip_tail08", 
+      "bip_tail09", 
+      "bip_thumb_0_l", 
+      "bip_thumb_0_r", 
+      "bip_thumb_1_l", 
+      "bip_thumb_1_r", 
+      "bip_thumb_2_l", 
+      "bip_thumb_2_r", 
+      "bip_toe_l", 
+      "bip_toe_r", 
+      "bip_upperarm_l", 
+      "bip_upperarm_l_twist2", 
+      "bip_upperarm_r", 
+      "bip_upperarm_r_twist2", 
+      "bite1", 
+      "blink1", 
+      "blow", 
+      "boxybelly", 
+      "breastflatten", 
+      "breastnnippleperk", 
+      "breastsize", 
+      "breastsmall", 
+      "bulge", 
+      "bulge2", 
+      "buttsize", 
+      "cheekraiser1", 
+      "collarl", 
+      "collarr", 
+      "collarup", 
+      "cornerlower", 
+      "cornerpuller", 
+      "e", 
+      "ear_l", 
+      "ear_l.1", 
+      "ear_l.2", 
+      "ear_r", 
+      "ear_r.1", 
+      "ear_r.2", 
+      "earshape1", 
+      "earshape2", 
+      "eballlower", 
+      "eballraiser", 
+      "ebinnerlowerer", 
+      "ebinnerupper", 
+      "ebouterlowerer", 
+      "ebouterupper", 
+      "elbow_l", 
+      "elbow_r", 
+      "eyes_convergence", 
+      "eyes_rightleft", 
+      "eyes_updown", 
+      "foot_l", 
+      "foot_r", 
+      "funnel", 
+      "genitalhide", 
+      "genitals", 
+      "hand_l", 
+      "hand_r", 
+      "head", 
+      "hip", 
+      "i", 
+      "ikconstraint_foot_l - foot_l weight", 
+      "ikconstraint_foot_r - foot_r weight", 
+      "ikconstraint_hand_l - hand_l weight", 
+      "ikconstraint_hand_r - hand_r weight", 
+      "indextoe_1_l", 
+      "indextoe_1_r", 
+      "indextoe_2_l", 
+      "indextoe_2_r", 
+      "indextoe_3_l", 
+      "indextoe_3_r", 
+      "jaw", 
+      "jawdroop", 
+      "kiss", 
+      "knee_l", 
+      "knee_r", 
+      "lcarpal1", 
+      "lcarpal2", 
+      "lcarpal3", 
+      "lcarpal4", 
+      "legfix90sw ", 
+      "legsize", 
+      "lidubberopen", 
+      "lipbite", 
+      "lippresser", 
+      "lipsin", 
+      "lipsout", 
+      "lipswide", 
+      "localviewtargetfactor", 
+      "lowerblink", 
+      "lowerlidlower", 
+      "lowerlidraiser", 
+      "lowerliplower", 
+      "midtoe_1_l", 
+      "midtoe_1_r", 
+      "midtoe_2_l", 
+      "midtoe_2_r", 
+      "midtoe_3_l", 
+      "midtoe_3_r", 
+      "mo1", 
+      "mo2", 
+      "mo3", 
+      "mofunnel", 
+      "mouthopen", 
+      "muscles", 
+      "muzzle", 
+      "neck", 
+      "o", 
+      "orientconstraint_bip_collar_l - collarl weight", 
+      "orientconstraint_bip_collar_r - collarr weight", 
+      "orientconstraint_bip_foot_l - foot_l weight", 
+      "orientconstraint_bip_foot_r - foot_r weight", 
+      "orientconstraint_bip_hand_l - hand_l weight", 
+      "orientconstraint_bip_hand_r - hand_r weight", 
+      "orientconstraint_bip_head - head weight", 
+      "orientconstraint_bip_neck - neck weight", 
+      "orientconstraint_bip_pelvis - hip weight", 
+      "orientconstraint_bip_spine_0 - spine_1 weight", 
+      "orientconstraint_bip_spine_1 - spine_2 weight", 
+      "orientconstraint_bip_spine_2 - spine_3 weight", 
+      "orientconstraint_bip_spine_3 - spine_4 weight", 
+      "orientconstraint_roottransform - rig_root weight", 
+      "paizury", 
+      "pantsfit", 
+      "pointconstraint_bip_collar_l - collarl weight", 
+      "pointconstraint_bip_collar_r - collarr weight", 
+      "pointconstraint_bip_head - head weight", 
+      "pointconstraint_bip_neck - neck weight", 
+      "pointconstraint_bip_pelvis - hip weight", 
+      "pointconstraint_bip_spine_0 - spine_1 weight", 
+      "pointconstraint_bip_spine_1 - spine_2 weight", 
+      "pointconstraint_bip_spine_2 - spine_3 weight", 
+      "pointconstraint_bip_spine_3 - spine_4 weight", 
+      "pointconstraint_roottransform - rig_root weight", 
+      "pregnant", 
+      "puckerer", 
+      "rcarpal1", 
+      "rcarpal2", 
+      "rcarpal3", 
+      "rcarpal4", 
+      "rig_foothelper0", 
+      "rig_foothelper1", 
+      "rig_foothelper2", 
+      "rig_foothelper3", 
+      "rig_root", 
+      "ringtoe_1_l", 
+      "ringtoe_1_r", 
+      "ringtoe_2_l", 
+      "ringtoe_2_r", 
+      "ringtoe_3_l", 
+      "ringtoe_3_r", 
+      "roottransform", 
+      "shocked", 
+      "shortsfit", 
+      "sideleft1", 
+      "sideleft2", 
+      "sideleft3", 
+      "sideleft4", 
+      "sideright1", 
+      "sideright2", 
+      "sideright3", 
+      "sideright4", 
+      "slim", 
+      "smirk", 
+      "spine_1", 
+      "spine_2", 
+      "spine_3", 
+      "spine_4", 
+      "sshapelips", 
+      "strecher", 
+      "thoathbulge1", 
+      "thoathbulge2", 
+      "tongue00", 
+      "tongue01", 
+      "tongue02", 
+      "tongue03", 
+      "tongue04", 
+      "tongue05", 
+      "tongue06", 
+      "tongue07", 
+      "toraxwide", 
+      "u", 
+      "upeerlidlower", 
+      "upeerlidraiser", 
+      "uppelipraiser", 
+      "upperblink", 
+      "vagclose", 
+      "vaggrip", 
+      "vaginalopen", 
+      "vaginalopen2", 
+      "vagpush", 
+      "viewtarget", 
+      "voluptuous", 
+      "waist1", 
+      "widehips", 
+      "worried"
+    ], 
+    "is_stale": false, 
+    "known_count": 273, 
+    "known_folds_sorted": [
+      "a", 
+      "amused", 
+      "analopen", 
+      "angry", 
+      "anus", 
+      "bigtoe_1_l", 
+      "bigtoe_1_r", 
+      "bigtoe_2_l", 
+      "bigtoe_2_r", 
+      "bigtoe_3_l", 
+      "bigtoe_3_r", 
+      "bip_breast_01_l", 
+      "bip_breast_01_r", 
+      "bip_breast_02_l", 
+      "bip_breast_02_r", 
+      "bip_butt_l", 
+      "bip_butt_r", 
+      "bip_collar_l", 
+      "bip_collar_r", 
+      "bip_foot_l", 
+      "bip_foot_r", 
+      "bip_hand_l", 
+      "bip_hand_r", 
+      "bip_head", 
+      "bip_head_hair_back", 
+      "bip_head_hair_back_1", 
+      "bip_head_hair_back_1_l", 
+      "bip_head_hair_back_1_r", 
+      "bip_head_hair_back_l", 
+      "bip_head_hair_back_r", 
+      "bip_head_hairfront", 
+      "bip_head_hairfront_1_l", 
+      "bip_head_hairfront_1_r", 
+      "bip_head_hairfront_2_l", 
+      "bip_head_hairfront_2_r", 
+      "bip_head_hairfront_3_l", 
+      "bip_head_hairfront_3_r", 
+      "bip_head_hairfront_l", 
+      "bip_head_hairfront_r", 
+      "bip_hip_l", 
+      "bip_hip_r", 
+      "bip_hip_twist2_l", 
+      "bip_hip_twist2_r", 
+      "bip_index_0_l", 
+      "bip_index_0_r", 
+      "bip_index_1_l", 
+      "bip_index_1_r", 
+      "bip_index_2_l", 
+      "bip_index_2_r", 
+      "bip_knee_l", 
+      "bip_knee_r", 
+      "bip_lowerarm_l", 
+      "bip_lowerarm_l_twist2", 
+      "bip_lowerarm_r", 
+      "bip_lowerarm_r_twist2", 
+      "bip_middle_0_l", 
+      "bip_middle_0_r", 
+      "bip_middle_1_l", 
+      "bip_middle_1_r", 
+      "bip_middle_2_l", 
+      "bip_middle_2_r", 
+      "bip_neck", 
+      "bip_pelvis", 
+      "bip_pinky_0_l", 
+      "bip_pinky_0_r", 
+      "bip_pinky_1_l", 
+      "bip_pinky_1_r", 
+      "bip_pinky_2_l", 
+      "bip_pinky_2_r", 
+      "bip_ponytail1", 
+      "bip_ponytail2", 
+      "bip_ring_0_l", 
+      "bip_ring_0_r", 
+      "bip_ring_1_l", 
+      "bip_ring_1_r", 
+      "bip_ring_2_l", 
+      "bip_ring_2_r", 
+      "bip_spine_0", 
+      "bip_spine_1", 
+      "bip_spine_2", 
+      "bip_spine_3", 
+      "bip_tail00", 
+      "bip_tail01", 
+      "bip_tail010", 
+      "bip_tail011", 
+      "bip_tail012", 
+      "bip_tail013", 
+      "bip_tail014", 
+      "bip_tail015", 
+      "bip_tail016", 
+      "bip_tail017", 
+      "bip_tail018", 
+      "bip_tail019", 
+      "bip_tail02", 
+      "bip_tail020", 
+      "bip_tail021", 
+      "bip_tail022", 
+      "bip_tail023", 
+      "bip_tail024", 
+      "bip_tail025", 
+      "bip_tail03", 
+      "bip_tail04", 
+      "bip_tail05", 
+      "bip_tail06", 
+      "bip_tail07", 
+      "bip_tail08", 
+      "bip_tail09", 
+      "bip_thumb_0_l", 
+      "bip_thumb_0_r", 
+      "bip_thumb_1_l", 
+      "bip_thumb_1_r", 
+      "bip_thumb_2_l", 
+      "bip_thumb_2_r", 
+      "bip_toe_l", 
+      "bip_toe_r", 
+      "bip_upperarm_l", 
+      "bip_upperarm_l_twist2", 
+      "bip_upperarm_r", 
+      "bip_upperarm_r_twist2", 
+      "bite1", 
+      "blink1", 
+      "blow", 
+      "boxybelly", 
+      "breastflatten", 
+      "breastnnippleperk", 
+      "breastsize", 
+      "breastsmall", 
+      "bulge", 
+      "bulge2", 
+      "buttsize", 
+      "cheekraiser1", 
+      "collarl", 
+      "collarr", 
+      "collarup", 
+      "cornerlower", 
+      "cornerpuller", 
+      "e", 
+      "ear_l", 
+      "ear_l.1", 
+      "ear_l.2", 
+      "ear_r", 
+      "ear_r.1", 
+      "ear_r.2", 
+      "earshape1", 
+      "earshape2", 
+      "eballlower", 
+      "eballraiser", 
+      "ebinnerlowerer", 
+      "ebinnerupper", 
+      "ebouterlowerer", 
+      "ebouterupper", 
+      "elbow_l", 
+      "elbow_r", 
+      "eyes_convergence", 
+      "eyes_rightleft", 
+      "eyes_updown", 
+      "foot_l", 
+      "foot_r", 
+      "funnel", 
+      "genitalhide", 
+      "genitals", 
+      "hand_l", 
+      "hand_r", 
+      "head", 
+      "hip", 
+      "i", 
+      "indextoe_1_l", 
+      "indextoe_1_r", 
+      "indextoe_2_l", 
+      "indextoe_2_r", 
+      "indextoe_3_l", 
+      "indextoe_3_r", 
+      "jaw", 
+      "jawdroop", 
+      "kiss", 
+      "knee_l", 
+      "knee_r", 
+      "lcarpal1", 
+      "lcarpal2", 
+      "lcarpal3", 
+      "lcarpal4", 
+      "legfix90sw ", 
+      "legsize", 
+      "lidubberopen", 
+      "lipbite", 
+      "lippresser", 
+      "lipsin", 
+      "lipsout", 
+      "lipswide", 
+      "localviewtargetfactor", 
+      "lowerblink", 
+      "lowerlidlower", 
+      "lowerlidraiser", 
+      "lowerliplower", 
+      "midtoe_1_l", 
+      "midtoe_1_r", 
+      "midtoe_2_l", 
+      "midtoe_2_r", 
+      "midtoe_3_l", 
+      "midtoe_3_r", 
+      "mo1", 
+      "mo2", 
+      "mo3", 
+      "mofunnel", 
+      "mouthopen", 
+      "muscles", 
+      "muzzle", 
+      "neck", 
+      "o", 
+      "paizury", 
+      "pantsfit", 
+      "pregnant", 
+      "puckerer", 
+      "rcarpal1", 
+      "rcarpal2", 
+      "rcarpal3", 
+      "rcarpal4", 
+      "rig_foothelper0", 
+      "rig_foothelper1", 
+      "rig_foothelper2", 
+      "rig_foothelper3", 
+      "rig_root", 
+      "ringtoe_1_l", 
+      "ringtoe_1_r", 
+      "ringtoe_2_l", 
+      "ringtoe_2_r", 
+      "ringtoe_3_l", 
+      "ringtoe_3_r", 
+      "roottransform", 
+      "shocked", 
+      "shortsfit", 
+      "sideleft1", 
+      "sideleft2", 
+      "sideleft3", 
+      "sideleft4", 
+      "sideright1", 
+      "sideright2", 
+      "sideright3", 
+      "sideright4", 
+      "slim", 
+      "smirk", 
+      "spine_1", 
+      "spine_2", 
+      "spine_3", 
+      "spine_4", 
+      "sshapelips", 
+      "strecher", 
+      "thoathbulge1", 
+      "thoathbulge2", 
+      "tongue00", 
+      "tongue01", 
+      "tongue02", 
+      "tongue03", 
+      "tongue04", 
+      "tongue05", 
+      "tongue06", 
+      "tongue07", 
+      "toraxwide", 
+      "u", 
+      "upeerlidlower", 
+      "upeerlidraiser", 
+      "uppelipraiser", 
+      "upperblink", 
+      "vagclose", 
+      "vaggrip", 
+      "vaginalopen", 
+      "vaginalopen2", 
+      "vagpush", 
+      "viewtarget", 
+      "voluptuous", 
+      "waist1", 
+      "widehips", 
+      "worried"
+    ], 
+    "master_unknown_count": 29, 
+    "payload_folded_key_count": 273, 
+    "payload_folded_key_count_matches_known_count": true, 
+    "payload_folded_keys_sorted": [
+      "a", 
+      "amused", 
+      "analopen", 
+      "angry", 
+      "anus", 
+      "bigtoe_1_l", 
+      "bigtoe_1_r", 
+      "bigtoe_2_l", 
+      "bigtoe_2_r", 
+      "bigtoe_3_l", 
+      "bigtoe_3_r", 
+      "bip_breast_01_l", 
+      "bip_breast_01_r", 
+      "bip_breast_02_l", 
+      "bip_breast_02_r", 
+      "bip_butt_l", 
+      "bip_butt_r", 
+      "bip_collar_l", 
+      "bip_collar_r", 
+      "bip_foot_l", 
+      "bip_foot_r", 
+      "bip_hand_l", 
+      "bip_hand_r", 
+      "bip_head", 
+      "bip_head_hair_back", 
+      "bip_head_hair_back_1", 
+      "bip_head_hair_back_1_l", 
+      "bip_head_hair_back_1_r", 
+      "bip_head_hair_back_l", 
+      "bip_head_hair_back_r", 
+      "bip_head_hairfront", 
+      "bip_head_hairfront_1_l", 
+      "bip_head_hairfront_1_r", 
+      "bip_head_hairfront_2_l", 
+      "bip_head_hairfront_2_r", 
+      "bip_head_hairfront_3_l", 
+      "bip_head_hairfront_3_r", 
+      "bip_head_hairfront_l", 
+      "bip_head_hairfront_r", 
+      "bip_hip_l", 
+      "bip_hip_r", 
+      "bip_hip_twist2_l", 
+      "bip_hip_twist2_r", 
+      "bip_index_0_l", 
+      "bip_index_0_r", 
+      "bip_index_1_l", 
+      "bip_index_1_r", 
+      "bip_index_2_l", 
+      "bip_index_2_r", 
+      "bip_knee_l", 
+      "bip_knee_r", 
+      "bip_lowerarm_l", 
+      "bip_lowerarm_l_twist2", 
+      "bip_lowerarm_r", 
+      "bip_lowerarm_r_twist2", 
+      "bip_middle_0_l", 
+      "bip_middle_0_r", 
+      "bip_middle_1_l", 
+      "bip_middle_1_r", 
+      "bip_middle_2_l", 
+      "bip_middle_2_r", 
+      "bip_neck", 
+      "bip_pelvis", 
+      "bip_pinky_0_l", 
+      "bip_pinky_0_r", 
+      "bip_pinky_1_l", 
+      "bip_pinky_1_r", 
+      "bip_pinky_2_l", 
+      "bip_pinky_2_r", 
+      "bip_ponytail1", 
+      "bip_ponytail2", 
+      "bip_ring_0_l", 
+      "bip_ring_0_r", 
+      "bip_ring_1_l", 
+      "bip_ring_1_r", 
+      "bip_ring_2_l", 
+      "bip_ring_2_r", 
+      "bip_spine_0", 
+      "bip_spine_1", 
+      "bip_spine_2", 
+      "bip_spine_3", 
+      "bip_tail00", 
+      "bip_tail01", 
+      "bip_tail010", 
+      "bip_tail011", 
+      "bip_tail012", 
+      "bip_tail013", 
+      "bip_tail014", 
+      "bip_tail015", 
+      "bip_tail016", 
+      "bip_tail017", 
+      "bip_tail018", 
+      "bip_tail019", 
+      "bip_tail02", 
+      "bip_tail020", 
+      "bip_tail021", 
+      "bip_tail022", 
+      "bip_tail023", 
+      "bip_tail024", 
+      "bip_tail025", 
+      "bip_tail03", 
+      "bip_tail04", 
+      "bip_tail05", 
+      "bip_tail06", 
+      "bip_tail07", 
+      "bip_tail08", 
+      "bip_tail09", 
+      "bip_thumb_0_l", 
+      "bip_thumb_0_r", 
+      "bip_thumb_1_l", 
+      "bip_thumb_1_r", 
+      "bip_thumb_2_l", 
+      "bip_thumb_2_r", 
+      "bip_toe_l", 
+      "bip_toe_r", 
+      "bip_upperarm_l", 
+      "bip_upperarm_l_twist2", 
+      "bip_upperarm_r", 
+      "bip_upperarm_r_twist2", 
+      "bite1", 
+      "blink1", 
+      "blow", 
+      "boxybelly", 
+      "breastflatten", 
+      "breastnnippleperk", 
+      "breastsize", 
+      "breastsmall", 
+      "bulge", 
+      "bulge2", 
+      "buttsize", 
+      "cheekraiser1", 
+      "collarl", 
+      "collarr", 
+      "collarup", 
+      "cornerlower", 
+      "cornerpuller", 
+      "e", 
+      "ear_l", 
+      "ear_l.1", 
+      "ear_l.2", 
+      "ear_r", 
+      "ear_r.1", 
+      "ear_r.2", 
+      "earshape1", 
+      "earshape2", 
+      "eballlower", 
+      "eballraiser", 
+      "ebinnerlowerer", 
+      "ebinnerupper", 
+      "ebouterlowerer", 
+      "ebouterupper", 
+      "elbow_l", 
+      "elbow_r", 
+      "eyes_convergence", 
+      "eyes_rightleft", 
+      "eyes_updown", 
+      "foot_l", 
+      "foot_r", 
+      "funnel", 
+      "genitalhide", 
+      "genitals", 
+      "hand_l", 
+      "hand_r", 
+      "head", 
+      "hip", 
+      "i", 
+      "indextoe_1_l", 
+      "indextoe_1_r", 
+      "indextoe_2_l", 
+      "indextoe_2_r", 
+      "indextoe_3_l", 
+      "indextoe_3_r", 
+      "jaw", 
+      "jawdroop", 
+      "kiss", 
+      "knee_l", 
+      "knee_r", 
+      "lcarpal1", 
+      "lcarpal2", 
+      "lcarpal3", 
+      "lcarpal4", 
+      "legfix90sw ", 
+      "legsize", 
+      "lidubberopen", 
+      "lipbite", 
+      "lippresser", 
+      "lipsin", 
+      "lipsout", 
+      "lipswide", 
+      "localviewtargetfactor", 
+      "lowerblink", 
+      "lowerlidlower", 
+      "lowerlidraiser", 
+      "lowerliplower", 
+      "midtoe_1_l", 
+      "midtoe_1_r", 
+      "midtoe_2_l", 
+      "midtoe_2_r", 
+      "midtoe_3_l", 
+      "midtoe_3_r", 
+      "mo1", 
+      "mo2", 
+      "mo3", 
+      "mofunnel", 
+      "mouthopen", 
+      "muscles", 
+      "muzzle", 
+      "neck", 
+      "o", 
+      "paizury", 
+      "pantsfit", 
+      "pregnant", 
+      "puckerer", 
+      "rcarpal1", 
+      "rcarpal2", 
+      "rcarpal3", 
+      "rcarpal4", 
+      "rig_foothelper0", 
+      "rig_foothelper1", 
+      "rig_foothelper2", 
+      "rig_foothelper3", 
+      "rig_root", 
+      "ringtoe_1_l", 
+      "ringtoe_1_r", 
+      "ringtoe_2_l", 
+      "ringtoe_2_r", 
+      "ringtoe_3_l", 
+      "ringtoe_3_r", 
+      "roottransform", 
+      "shocked", 
+      "shortsfit", 
+      "sideleft1", 
+      "sideleft2", 
+      "sideleft3", 
+      "sideleft4", 
+      "sideright1", 
+      "sideright2", 
+      "sideright3", 
+      "sideright4", 
+      "slim", 
+      "smirk", 
+      "spine_1", 
+      "spine_2", 
+      "spine_3", 
+      "spine_4", 
+      "sshapelips", 
+      "strecher", 
+      "thoathbulge1", 
+      "thoathbulge2", 
+      "tongue00", 
+      "tongue01", 
+      "tongue02", 
+      "tongue03", 
+      "tongue04", 
+      "tongue05", 
+      "tongue06", 
+      "tongue07", 
+      "toraxwide", 
+      "u", 
+      "upeerlidlower", 
+      "upeerlidraiser", 
+      "uppelipraiser", 
+      "upperblink", 
+      "vagclose", 
+      "vaggrip", 
+      "vaginalopen", 
+      "vaginalopen2", 
+      "vagpush", 
+      "viewtarget", 
+      "voluptuous", 
+      "waist1", 
+      "widehips", 
+      "worried"
+    ], 
+    "payload_keys_match_known_folds": true, 
+    "per_requested_fold": {
+      "a": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15168, 
+            "literal": "A", 
+            "local_rank": 0
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15169, 
+            "literal": "a", 
+            "local_rank": 1
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "amused": {
+        "destination": "Face/Expressions", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Expressions", 
+            "global_rank": 3001, 
+            "literal": "amused", 
+            "local_rank": 29
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "analopen": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 28847, 
+            "literal": "AnalOpen", 
+            "local_rank": 155
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "angry": {
+        "destination": "Face/Expressions", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Expressions", 
+            "global_rank": 3009, 
+            "literal": "Angry", 
+            "local_rank": 37
+          }, 
+          {
+            "full_path": "groupFile/Face/Expressions", 
+            "global_rank": 3010, 
+            "literal": "angry", 
+            "local_rank": 38
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "anus": {
+        "destination": "Sexual Bones", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 37264, 
+            "literal": "Anus", 
+            "local_rank": 51
+          }, 
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 37265, 
+            "literal": "anus", 
+            "local_rank": 52
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bigtoe_1_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 109762, 
+            "literal": "bigToe_1_L", 
+            "local_rank": 25
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 109763, 
+            "literal": "bigToe_1_l", 
+            "local_rank": 26
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bigtoe_1_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111132, 
+            "literal": "bigToe_1_r", 
+            "local_rank": 25
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111133, 
+            "literal": "bigToe_1_R", 
+            "local_rank": 26
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bigtoe_2_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 109765, 
+            "literal": "BigToe_2_L", 
+            "local_rank": 28
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 109766, 
+            "literal": "bigToe_2_L", 
+            "local_rank": 29
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 109767, 
+            "literal": "bigToe_2_l", 
+            "local_rank": 30
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bigtoe_2_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111135, 
+            "literal": "BigToe_2_R", 
+            "local_rank": 28
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111136, 
+            "literal": "bigToe_2_r", 
+            "local_rank": 29
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111137, 
+            "literal": "bigToe_2_R", 
+            "local_rank": 30
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bigtoe_3_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 109769, 
+            "literal": "bigToe_3_l", 
+            "local_rank": 32
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bigtoe_3_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111139, 
+            "literal": "bigToe_3_r", 
+            "local_rank": 32
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111140, 
+            "literal": "bigToe_3_R", 
+            "local_rank": 33
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_breast_01_l": {
+        "destination": "Sexual Bones", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38020, 
+            "literal": "Bip_Breast_01_L", 
+            "local_rank": 807
+          }, 
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38024, 
+            "literal": "bip_breast_01_l", 
+            "local_rank": 811
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_breast_01_r": {
+        "destination": "Sexual Bones", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38021, 
+            "literal": "Bip_Breast_01_R", 
+            "local_rank": 808
+          }, 
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38025, 
+            "literal": "bip_breast_01_r", 
+            "local_rank": 812
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_breast_02_l": {
+        "destination": "Sexual Bones", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38026, 
+            "literal": "Bip_Breast_02_L", 
+            "local_rank": 813
+          }, 
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38030, 
+            "literal": "bip_breast_02_l", 
+            "local_rank": 817
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_breast_02_r": {
+        "destination": "Sexual Bones", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38027, 
+            "literal": "Bip_Breast_02_R", 
+            "local_rank": 814
+          }, 
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38031, 
+            "literal": "bip_breast_02_r", 
+            "local_rank": 818
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_butt_l": {
+        "destination": "Sexual Bones", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38174, 
+            "literal": "Bip_Butt_l", 
+            "local_rank": 961
+          }, 
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38176, 
+            "literal": "bip_butt_l", 
+            "local_rank": 963
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_butt_r": {
+        "destination": "Sexual Bones", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38175, 
+            "literal": "Bip_Butt_r", 
+            "local_rank": 962
+          }, 
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 38177, 
+            "literal": "bip_butt_r", 
+            "local_rank": 964
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_collar_l": {
+        "destination": "Arms/LeftArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104235, 
+            "literal": "bip_collar_l", 
+            "local_rank": 262
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104236, 
+            "literal": "bip_collar_L", 
+            "local_rank": 263
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104237, 
+            "literal": "Bip_Collar_L", 
+            "local_rank": 264
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104238, 
+            "literal": "bip_Collar_l", 
+            "local_rank": 265
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_collar_r": {
+        "destination": "Arms/RightArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107352, 
+            "literal": "bip_collar_r", 
+            "local_rank": 280
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107353, 
+            "literal": "bip_collar_R", 
+            "local_rank": 281
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107354, 
+            "literal": "Bip_Collar_R", 
+            "local_rank": 282
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_foot_l": {
+        "destination": "Legs/LeftLeg", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108311, 
+            "literal": "bip_foot_L", 
+            "local_rank": 85
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108312, 
+            "literal": "bip_foot_l", 
+            "local_rank": 86
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108313, 
+            "literal": "Bip_Foot_L", 
+            "local_rank": 87
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108314, 
+            "literal": "bip_Foot_L", 
+            "local_rank": 88
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_foot_r": {
+        "destination": "Legs/RightLeg", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109022, 
+            "literal": "bip_foot_R", 
+            "local_rank": 83
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109023, 
+            "literal": "bip_foot_r", 
+            "local_rank": 84
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109024, 
+            "literal": "Bip_Foot_R", 
+            "local_rank": 85
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109025, 
+            "literal": "bip_Foot_R", 
+            "local_rank": 86
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_hand_l": {
+        "destination": "Arms/LeftArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104256, 
+            "literal": "bip_hand_L", 
+            "local_rank": 283
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104257, 
+            "literal": "bip_hand_l", 
+            "local_rank": 284
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104258, 
+            "literal": "Bip_Hand_L", 
+            "local_rank": 285
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_hand_r": {
+        "destination": "Arms/RightArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107372, 
+            "literal": "bip_hand_R", 
+            "local_rank": 300
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107373, 
+            "literal": "bip_hand_r", 
+            "local_rank": 301
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107374, 
+            "literal": "Bip_Hand_R", 
+            "local_rank": 302
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100020, 
+            "literal": "bip_head", 
+            "local_rank": 225
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100021, 
+            "literal": "Bip_Head", 
+            "local_rank": 226
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100022, 
+            "literal": "Bip_head", 
+            "local_rank": 227
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100023, 
+            "literal": "bip_Head", 
+            "local_rank": 228
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hair_back": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49147, 
+            "literal": "bip_head_hair_back", 
+            "local_rank": 4738
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hair_back_1": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49150, 
+            "literal": "bip_head_hair_back_1", 
+            "local_rank": 4741
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hair_back_1_l": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49148, 
+            "literal": "bip_head_hair_back_1_l", 
+            "local_rank": 4739
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hair_back_1_r": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49149, 
+            "literal": "bip_head_hair_back_1_r", 
+            "local_rank": 4740
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hair_back_l": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49145, 
+            "literal": "bip_head_hair_back_l", 
+            "local_rank": 4736
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hair_back_r": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49146, 
+            "literal": "bip_head_hair_back_r", 
+            "local_rank": 4737
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hairfront": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49153, 
+            "literal": "bip_head_hairFront", 
+            "local_rank": 4744
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hairfront_1_l": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49154, 
+            "literal": "bip_head_hairFront_1_l", 
+            "local_rank": 4745
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hairfront_1_r": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49155, 
+            "literal": "bip_head_hairFront_1_r", 
+            "local_rank": 4746
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hairfront_2_l": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49156, 
+            "literal": "bip_head_hairFront_2_l", 
+            "local_rank": 4747
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hairfront_2_r": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49157, 
+            "literal": "bip_head_hairFront_2_r", 
+            "local_rank": 4748
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hairfront_3_l": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49158, 
+            "literal": "bip_head_hairFront_3_l", 
+            "local_rank": 4749
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hairfront_3_r": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49159, 
+            "literal": "bip_head_hairFront_3_r", 
+            "local_rank": 4750
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hairfront_l": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49151, 
+            "literal": "bip_head_hairFront_l", 
+            "local_rank": 4742
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_hairfront_r": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49152, 
+            "literal": "bip_head_hairFront_r", 
+            "local_rank": 4743
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_head_scale": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "bip_hip_l": {
+        "destination": "Legs/LeftLeg", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108323, 
+            "literal": "bip_hip_l", 
+            "local_rank": 97
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108324, 
+            "literal": "bip_hip_L", 
+            "local_rank": 98
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108325, 
+            "literal": "Bip_Hip_L", 
+            "local_rank": 99
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_hip_r": {
+        "destination": "Legs/RightLeg", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109034, 
+            "literal": "bip_hip_r", 
+            "local_rank": 95
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109035, 
+            "literal": "bip_hip_R", 
+            "local_rank": 96
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109036, 
+            "literal": "Bip_Hip_R", 
+            "local_rank": 97
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_hip_twist2_l": {
+        "destination": "Helpers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 96866, 
+            "literal": "bip_hip_twist2_l", 
+            "local_rank": 655
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_hip_twist2_r": {
+        "destination": "Helpers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 96867, 
+            "literal": "bip_hip_twist2_r", 
+            "local_rank": 656
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_index_0_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102175, 
+            "literal": "bip_index_0_l", 
+            "local_rank": 254
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102176, 
+            "literal": "bip_index_0_L", 
+            "local_rank": 255
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102177, 
+            "literal": "Bip_Index_0_L", 
+            "local_rank": 256
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_index_0_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105115, 
+            "literal": "bip_index_0_r", 
+            "local_rank": 248
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105116, 
+            "literal": "bip_index_0_R", 
+            "local_rank": 249
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105117, 
+            "literal": "Bip_Index_0_R", 
+            "local_rank": 250
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_index_1_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102178, 
+            "literal": "bip_index_1_l", 
+            "local_rank": 257
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102179, 
+            "literal": "bip_index_1_L", 
+            "local_rank": 258
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102180, 
+            "literal": "Bip_Index_1_L", 
+            "local_rank": 259
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_index_1_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105118, 
+            "literal": "bip_index_1_r", 
+            "local_rank": 251
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105119, 
+            "literal": "bip_index_1_R", 
+            "local_rank": 252
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105120, 
+            "literal": "Bip_Index_1_R", 
+            "local_rank": 253
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_index_2_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102181, 
+            "literal": "bip_index_2_l", 
+            "local_rank": 260
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102182, 
+            "literal": "bip_index_2_L", 
+            "local_rank": 261
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102183, 
+            "literal": "Bip_Index_2_L", 
+            "local_rank": 262
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102184, 
+            "literal": "Bip_index_2_L", 
+            "local_rank": 263
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_index_2_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105121, 
+            "literal": "bip_index_2_r", 
+            "local_rank": 254
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105122, 
+            "literal": "bip_index_2_R", 
+            "local_rank": 255
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105123, 
+            "literal": "Bip_Index_2_R", 
+            "local_rank": 256
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_knee_l": {
+        "destination": "Legs/LeftLeg", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108332, 
+            "literal": "bip_knee_l", 
+            "local_rank": 106
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108333, 
+            "literal": "bip_knee_L", 
+            "local_rank": 107
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108334, 
+            "literal": "Bip_Knee_L", 
+            "local_rank": 108
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108335, 
+            "literal": "bip_Knee_L", 
+            "local_rank": 109
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_knee_r": {
+        "destination": "Legs/RightLeg", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109045, 
+            "literal": "bip_knee_r", 
+            "local_rank": 106
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109046, 
+            "literal": "bip_knee_R", 
+            "local_rank": 107
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109047, 
+            "literal": "Bip_Knee_R", 
+            "local_rank": 108
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109048, 
+            "literal": "bip_Knee_R", 
+            "local_rank": 109
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_lowerarm_l": {
+        "destination": "Arms/LeftArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104273, 
+            "literal": "bip_lowerArm_l", 
+            "local_rank": 300
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104274, 
+            "literal": "bip_lowerarm_l", 
+            "local_rank": 301
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104275, 
+            "literal": "bip_lowerArm_L", 
+            "local_rank": 302
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104276, 
+            "literal": "Bip_LowerArm_L", 
+            "local_rank": 303
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104277, 
+            "literal": "bip_lowerarm_L", 
+            "local_rank": 304
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_lowerarm_l_twist2": {
+        "destination": "Helpers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 97071, 
+            "literal": "bip_lowerArm_l_twist2", 
+            "local_rank": 860
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_lowerarm_r": {
+        "destination": "Arms/RightArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107380, 
+            "literal": "bip_lowerArm_r", 
+            "local_rank": 308
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107381, 
+            "literal": "bip_lowerarm_r", 
+            "local_rank": 309
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107382, 
+            "literal": "bip_lowerArm_R", 
+            "local_rank": 310
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107383, 
+            "literal": "Bip_LowerArm_R", 
+            "local_rank": 311
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107384, 
+            "literal": "bip_LowerArm_R", 
+            "local_rank": 312
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107385, 
+            "literal": "bip_lowerarm_R", 
+            "local_rank": 313
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_lowerarm_r_twist2": {
+        "destination": "Helpers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 97084, 
+            "literal": "bip_lowerArm_r_twist2", 
+            "local_rank": 873
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_middle_0_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102240, 
+            "literal": "bip_middle_0_l", 
+            "local_rank": 319
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102241, 
+            "literal": "bip_middle_0_L", 
+            "local_rank": 320
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102242, 
+            "literal": "Bip_Middle_0_L", 
+            "local_rank": 321
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_middle_0_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105147, 
+            "literal": "bip_middle_0_r", 
+            "local_rank": 280
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105148, 
+            "literal": "bip_middle_0_R", 
+            "local_rank": 281
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105149, 
+            "literal": "Bip_Middle_0_R", 
+            "local_rank": 282
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_middle_1_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102243, 
+            "literal": "bip_middle_1_l", 
+            "local_rank": 322
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102244, 
+            "literal": "bip_middle_1_L", 
+            "local_rank": 323
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102245, 
+            "literal": "Bip_Middle_1_L", 
+            "local_rank": 324
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_middle_1_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105150, 
+            "literal": "bip_middle_1_r", 
+            "local_rank": 283
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105151, 
+            "literal": "bip_middle_1_R", 
+            "local_rank": 284
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105152, 
+            "literal": "Bip_Middle_1_R", 
+            "local_rank": 285
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_middle_2_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102246, 
+            "literal": "bip_middle_2_l", 
+            "local_rank": 325
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102247, 
+            "literal": "bip_middle_2_L", 
+            "local_rank": 326
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102248, 
+            "literal": "Bip_Middle_2_L", 
+            "local_rank": 327
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_middle_2_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105153, 
+            "literal": "bip_middle_2_r", 
+            "local_rank": 286
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105154, 
+            "literal": "bip_middle_2_R", 
+            "local_rank": 287
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105155, 
+            "literal": "Bip_Middle_2_R", 
+            "local_rank": 288
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_neck": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100149, 
+            "literal": "bip_neck", 
+            "local_rank": 354
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100150, 
+            "literal": "BIp_neck", 
+            "local_rank": 355
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100151, 
+            "literal": "Bip_Neck", 
+            "local_rank": 356
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_pelvis": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100196, 
+            "literal": "bip_pelvis", 
+            "local_rank": 401
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100197, 
+            "literal": "Bip_Pelvis", 
+            "local_rank": 402
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_pinky_0_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102306, 
+            "literal": "bip_pinky_0_l", 
+            "local_rank": 385
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102307, 
+            "literal": "bip_pinky_0_L", 
+            "local_rank": 386
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102308, 
+            "literal": "Bip_Pinky_0_L", 
+            "local_rank": 387
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_pinky_0_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105207, 
+            "literal": "bip_pinky_0_r", 
+            "local_rank": 340
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105208, 
+            "literal": "bip_pinky_0_R", 
+            "local_rank": 341
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105209, 
+            "literal": "Bip_Pinky_0_R", 
+            "local_rank": 342
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_pinky_1_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102309, 
+            "literal": "bip_pinky_1_l", 
+            "local_rank": 388
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102310, 
+            "literal": "bip_pinky_1_L", 
+            "local_rank": 389
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102311, 
+            "literal": "Bip_Pinky_1_L", 
+            "local_rank": 390
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_pinky_1_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105210, 
+            "literal": "bip_pinky_1_r", 
+            "local_rank": 343
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105211, 
+            "literal": "bip_pinky_1_R", 
+            "local_rank": 344
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105212, 
+            "literal": "Bip_Pinky_1_R", 
+            "local_rank": 345
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_pinky_2_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102312, 
+            "literal": "bip_pinky_2_l", 
+            "local_rank": 391
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102313, 
+            "literal": "bip_pinky_2_L", 
+            "local_rank": 392
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102314, 
+            "literal": "Bip_Pinky_2_L", 
+            "local_rank": 393
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102315, 
+            "literal": "Bip_pinky_2_L", 
+            "local_rank": 394
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_pinky_2_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105213, 
+            "literal": "bip_pinky_2_r", 
+            "local_rank": 346
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105214, 
+            "literal": "bip_pinky_2_R", 
+            "local_rank": 347
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105215, 
+            "literal": "Bip_Pinky_2_R", 
+            "local_rank": 348
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_ponytail1": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49506, 
+            "literal": "bip_Ponytail1", 
+            "local_rank": 5097
+          }, 
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49507, 
+            "literal": "bip_ponytail1", 
+            "local_rank": 5098
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_ponytail2": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49509, 
+            "literal": "bip_Ponytail2", 
+            "local_rank": 5100
+          }, 
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 49510, 
+            "literal": "bip_ponytail2", 
+            "local_rank": 5101
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_ring_0_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102337, 
+            "literal": "bip_ring_0_l", 
+            "local_rank": 416
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102338, 
+            "literal": "bip_ring_0_L", 
+            "local_rank": 417
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102339, 
+            "literal": "Bip_Ring_0_L", 
+            "local_rank": 418
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_ring_0_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105265, 
+            "literal": "bip_ring_0_r", 
+            "local_rank": 398
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105266, 
+            "literal": "bip_ring_0_R", 
+            "local_rank": 399
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105267, 
+            "literal": "Bip_Ring_0_R", 
+            "local_rank": 400
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_ring_1_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102341, 
+            "literal": "bip_ring_1_l", 
+            "local_rank": 420
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102342, 
+            "literal": "bip_ring_1_L", 
+            "local_rank": 421
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102343, 
+            "literal": "Bip_Ring_1_L", 
+            "local_rank": 422
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_ring_1_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105268, 
+            "literal": "bip_ring_1_r", 
+            "local_rank": 401
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105269, 
+            "literal": "bip_ring_1_R", 
+            "local_rank": 402
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105270, 
+            "literal": "Bip_Ring_1_R", 
+            "local_rank": 403
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_ring_2_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102345, 
+            "literal": "bip_ring_2_l", 
+            "local_rank": 424
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102346, 
+            "literal": "bip_ring_2_L", 
+            "local_rank": 425
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102347, 
+            "literal": "Bip_Ring_2_L", 
+            "local_rank": 426
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_ring_2_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105271, 
+            "literal": "bip_ring_2_r", 
+            "local_rank": 404
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105272, 
+            "literal": "bip_ring_2_R", 
+            "local_rank": 405
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105273, 
+            "literal": "Bip_Ring_2_R", 
+            "local_rank": 406
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_spine_0": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100349, 
+            "literal": "bip_spine_0", 
+            "local_rank": 554
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100351, 
+            "literal": "Bip_Spine_0", 
+            "local_rank": 556
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_spine_1": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100356, 
+            "literal": "bip_spine_1", 
+            "local_rank": 561
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100357, 
+            "literal": "Bip_Spine_1", 
+            "local_rank": 562
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_spine_2": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100373, 
+            "literal": "bip_spine_2", 
+            "local_rank": 578
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_spine_3": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100396, 
+            "literal": "bip_spine_3", 
+            "local_rank": 601
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail00": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115630, 
+            "literal": "Bip_tail00", 
+            "local_rank": 89
+          }, 
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115631, 
+            "literal": "bip_tail00", 
+            "local_rank": 90
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail01": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115636, 
+            "literal": "Bip_tail01", 
+            "local_rank": 95
+          }, 
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115637, 
+            "literal": "bip_tail01", 
+            "local_rank": 96
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail010": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115791, 
+            "literal": "bip_tail010", 
+            "local_rank": 250
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail011": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115798, 
+            "literal": "bip_tail011", 
+            "local_rank": 257
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail012": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115804, 
+            "literal": "bip_tail012", 
+            "local_rank": 263
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail013": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115810, 
+            "literal": "bip_tail013", 
+            "local_rank": 269
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail014": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115816, 
+            "literal": "bip_tail014", 
+            "local_rank": 275
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail015": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115820, 
+            "literal": "bip_tail015", 
+            "local_rank": 279
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail016": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115824, 
+            "literal": "bip_tail016", 
+            "local_rank": 283
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail017": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115828, 
+            "literal": "bip_tail017", 
+            "local_rank": 287
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail018": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115832, 
+            "literal": "bip_tail018", 
+            "local_rank": 291
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail019": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115836, 
+            "literal": "bip_tail019", 
+            "local_rank": 295
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail02": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115695, 
+            "literal": "Bip_tail02", 
+            "local_rank": 154
+          }, 
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115696, 
+            "literal": "bip_tail02", 
+            "local_rank": 155
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail020": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115840, 
+            "literal": "bip_tail020", 
+            "local_rank": 299
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail021": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115842, 
+            "literal": "bip_tail021", 
+            "local_rank": 301
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail022": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115844, 
+            "literal": "bip_tail022", 
+            "local_rank": 303
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail023": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115846, 
+            "literal": "bip_tail023", 
+            "local_rank": 305
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail024": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115848, 
+            "literal": "bip_tail024", 
+            "local_rank": 307
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail025": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115850, 
+            "literal": "bip_tail025", 
+            "local_rank": 309
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail03": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115752, 
+            "literal": "Bip_tail03", 
+            "local_rank": 211
+          }, 
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115753, 
+            "literal": "bip_tail03", 
+            "local_rank": 212
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail04": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115757, 
+            "literal": "Bip_tail04", 
+            "local_rank": 216
+          }, 
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115758, 
+            "literal": "bip_tail04", 
+            "local_rank": 217
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail05": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115762, 
+            "literal": "Bip_tail05", 
+            "local_rank": 221
+          }, 
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115763, 
+            "literal": "bip_tail05", 
+            "local_rank": 222
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail06": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115767, 
+            "literal": "Bip_tail06", 
+            "local_rank": 226
+          }, 
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115768, 
+            "literal": "bip_tail06", 
+            "local_rank": 227
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail07": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115772, 
+            "literal": "Bip_tail07", 
+            "local_rank": 231
+          }, 
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115773, 
+            "literal": "bip_tail07", 
+            "local_rank": 232
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail08": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115777, 
+            "literal": "Bip_tail08", 
+            "local_rank": 236
+          }, 
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115778, 
+            "literal": "bip_tail08", 
+            "local_rank": 237
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_tail09": {
+        "destination": "Tail", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115784, 
+            "literal": "Bip_tail09", 
+            "local_rank": 243
+          }, 
+          {
+            "full_path": "groupFile/Tail", 
+            "global_rank": 115785, 
+            "literal": "bip_tail09", 
+            "local_rank": 244
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_thumb_0_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102375, 
+            "literal": "bip_thumb_0_l", 
+            "local_rank": 454
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102376, 
+            "literal": "bip_thumb_0_L", 
+            "local_rank": 455
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102377, 
+            "literal": "Bip_Thumb_0_L", 
+            "local_rank": 456
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102378, 
+            "literal": "bip_Thumb_0_L", 
+            "local_rank": 457
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_thumb_0_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105297, 
+            "literal": "bip_thumb_0_r", 
+            "local_rank": 430
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105298, 
+            "literal": "bip_thumb_0_R", 
+            "local_rank": 431
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105299, 
+            "literal": "Bip_Thumb_0_R", 
+            "local_rank": 432
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105300, 
+            "literal": "bip_Thumb_0_R", 
+            "local_rank": 433
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_thumb_1_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102379, 
+            "literal": "bip_thumb_1_l", 
+            "local_rank": 458
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102380, 
+            "literal": "bip_thumb_1_L", 
+            "local_rank": 459
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102381, 
+            "literal": "Bip_Thumb_1_L", 
+            "local_rank": 460
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102382, 
+            "literal": "bip_Thumb_1_L", 
+            "local_rank": 461
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_thumb_1_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105301, 
+            "literal": "bip_thumb_1_r", 
+            "local_rank": 434
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105302, 
+            "literal": "bip_thumb_1_R", 
+            "local_rank": 435
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105303, 
+            "literal": "Bip_Thumb_1_R", 
+            "local_rank": 436
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105304, 
+            "literal": "bip_Thumb_1_R", 
+            "local_rank": 437
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_thumb_2_l": {
+        "destination": "Arms/LeftArm/LeftFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102384, 
+            "literal": "bip_thumb_2_l", 
+            "local_rank": 463
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102385, 
+            "literal": "bip_thumb_2_L", 
+            "local_rank": 464
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102386, 
+            "literal": "Bip_Thumb_2_L", 
+            "local_rank": 465
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftFingers", 
+            "global_rank": 102387, 
+            "literal": "bip_Thumb_2_L", 
+            "local_rank": 466
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_thumb_2_r": {
+        "destination": "Arms/RightArm/RightFingers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105306, 
+            "literal": "bip_thumb_2_r", 
+            "local_rank": 439
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105307, 
+            "literal": "bip_thumb_2_R", 
+            "local_rank": 440
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105308, 
+            "literal": "Bip_Thumb_2_R", 
+            "local_rank": 441
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightFingers", 
+            "global_rank": 105309, 
+            "literal": "bip_Thumb_2_R", 
+            "local_rank": 442
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_toe_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 109737, 
+            "literal": "bip_toe_l", 
+            "local_rank": 0
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 109973, 
+            "literal": "bip_toe_L", 
+            "local_rank": 236
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 109974, 
+            "literal": "Bip_Toe_L", 
+            "local_rank": 237
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 109975, 
+            "literal": "bip_Toe_L", 
+            "local_rank": 238
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_toe_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111107, 
+            "literal": "bip_toe_r", 
+            "local_rank": 0
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111354, 
+            "literal": "bip_toe_R", 
+            "local_rank": 247
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111355, 
+            "literal": "Bip_Toe_R", 
+            "local_rank": 248
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111356, 
+            "literal": "bip_Toe_R", 
+            "local_rank": 249
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_upperarm_l": {
+        "destination": "Arms/LeftArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104302, 
+            "literal": "bip_UpperArm_l", 
+            "local_rank": 329
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104303, 
+            "literal": "bip_upperArm_l", 
+            "local_rank": 330
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104304, 
+            "literal": "bip_upperarm_l", 
+            "local_rank": 331
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104305, 
+            "literal": "bip_upperArm_L", 
+            "local_rank": 332
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104306, 
+            "literal": "Bip_UpperArm_L", 
+            "local_rank": 333
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104307, 
+            "literal": "bip_UpperArm_L", 
+            "local_rank": 334
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104308, 
+            "literal": "bip_upperarm_L", 
+            "local_rank": 335
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_upperarm_l_twist2": {
+        "destination": "Helpers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 97355, 
+            "literal": "bip_UpperArm_l_twist2", 
+            "local_rank": 1144
+          }, 
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 97356, 
+            "literal": "bip_upperArm_l_twist2", 
+            "local_rank": 1145
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_upperarm_r": {
+        "destination": "Arms/RightArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107420, 
+            "literal": "bip_UpperArm_r", 
+            "local_rank": 348
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107421, 
+            "literal": "bip_upperArm_r", 
+            "local_rank": 349
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107422, 
+            "literal": "bip_upperarm_r", 
+            "local_rank": 350
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107423, 
+            "literal": "bip_upperArm_R", 
+            "local_rank": 351
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107424, 
+            "literal": "Bip_UpperArm_R", 
+            "local_rank": 352
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107425, 
+            "literal": "bip_UpperArm_R", 
+            "local_rank": 353
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107426, 
+            "literal": "bip_upperarm_R", 
+            "local_rank": 354
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bip_upperarm_r_twist2": {
+        "destination": "Helpers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 97369, 
+            "literal": "bip_UpperArm_r_twist2", 
+            "local_rank": 1158
+          }, 
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 97370, 
+            "literal": "bip_upperArm_r_twist2", 
+            "local_rank": 1159
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bite1": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15469, 
+            "literal": "Bite1", 
+            "local_rank": 301
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15470, 
+            "literal": "bite1", 
+            "local_rank": 302
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "blink1": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 56, 
+            "literal": "blink1", 
+            "local_rank": 56
+          }, 
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 57, 
+            "literal": "Blink1", 
+            "local_rank": 57
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "blow": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15479, 
+            "literal": "Blow", 
+            "local_rank": 311
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15480, 
+            "literal": "BLOW", 
+            "local_rank": 312
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15481, 
+            "literal": "blow", 
+            "local_rank": 313
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "boxybelly": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30251, 
+            "literal": "BoxyBelly", 
+            "local_rank": 1559
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30252, 
+            "literal": "boxybelly", 
+            "local_rank": 1560
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "breastflatten": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30351, 
+            "literal": "BreastFlatten", 
+            "local_rank": 1659
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30352, 
+            "literal": "Breastflatten", 
+            "local_rank": 1660
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30353, 
+            "literal": "breastflatten", 
+            "local_rank": 1661
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "breastnnippleperk": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30385, 
+            "literal": "BreastNnipplePerk", 
+            "local_rank": 1693
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30386, 
+            "literal": "breastnnippleperk", 
+            "local_rank": 1694
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "breastsize": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30650, 
+            "literal": "BreastSize", 
+            "local_rank": 1958
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30651, 
+            "literal": "Breastsize", 
+            "local_rank": 1959
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30652, 
+            "literal": "breastsize", 
+            "local_rank": 1960
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "breastsmall": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30670, 
+            "literal": "BreastSmall", 
+            "local_rank": 1978
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30671, 
+            "literal": "breastsmall", 
+            "local_rank": 1979
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bulge": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30800, 
+            "literal": "Bulge", 
+            "local_rank": 2108
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 30801, 
+            "literal": "bulge", 
+            "local_rank": 2109
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "bulge2": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36833, 
+            "literal": "Bulge2", 
+            "local_rank": 8141
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36834, 
+            "literal": "bulge2", 
+            "local_rank": 8142
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "buttsize": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 31519, 
+            "literal": "ButtSize", 
+            "local_rank": 2827
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 31520, 
+            "literal": "Buttsize", 
+            "local_rank": 2828
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 31521, 
+            "literal": "buttsize", 
+            "local_rank": 2829
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "cheekraiser1": {
+        "destination": "Face/Mid Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Mid Face", 
+            "global_rank": 13059, 
+            "literal": "CheekRaiser1", 
+            "local_rank": 216
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "collarl": {
+        "destination": "Arms/LeftArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104369, 
+            "literal": "CollarL", 
+            "local_rank": 396
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104370, 
+            "literal": "collarL", 
+            "local_rank": 397
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "collarr": {
+        "destination": "Arms/RightArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107488, 
+            "literal": "CollarR", 
+            "local_rank": 416
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107489, 
+            "literal": "collarR", 
+            "local_rank": 417
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "collarup": {
+        "destination": "Clothing", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Clothing", 
+            "global_rank": 69818, 
+            "literal": "CollarUp", 
+            "local_rank": 937
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "cornerlower": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15678, 
+            "literal": "CornerLower", 
+            "local_rank": 510
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "cornerpuller": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15688, 
+            "literal": "CornerPuller", 
+            "local_rank": 520
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15689, 
+            "literal": "cornerpuller", 
+            "local_rank": 521
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "e": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15184, 
+            "literal": "E", 
+            "local_rank": 16
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15185, 
+            "literal": "e", 
+            "local_rank": 17
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ear_l": {
+        "destination": "Face/Ears", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28000, 
+            "literal": "Ear_L", 
+            "local_rank": 1223
+          }, 
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28001, 
+            "literal": "Ear_l", 
+            "local_rank": 1224
+          }, 
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28002, 
+            "literal": "ear_L", 
+            "local_rank": 1225
+          }, 
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28003, 
+            "literal": "ear_l", 
+            "local_rank": 1226
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ear_l.1": {
+        "destination": "Face/Ears", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28019, 
+            "literal": "Ear_l.1", 
+            "local_rank": 1242
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ear_l.2": {
+        "destination": "Face/Ears", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28022, 
+            "literal": "Ear_l.2", 
+            "local_rank": 1245
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ear_r": {
+        "destination": "Face/Ears", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28086, 
+            "literal": "Ear_R", 
+            "local_rank": 1309
+          }, 
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28087, 
+            "literal": "Ear_r", 
+            "local_rank": 1310
+          }, 
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28088, 
+            "literal": "ear_R", 
+            "local_rank": 1311
+          }, 
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28089, 
+            "literal": "ear_r", 
+            "local_rank": 1312
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ear_r.1": {
+        "destination": "Face/Ears", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28105, 
+            "literal": "Ear_r.1", 
+            "local_rank": 1328
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ear_r.2": {
+        "destination": "Face/Ears", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28108, 
+            "literal": "Ear_r.2", 
+            "local_rank": 1331
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "earshape1": {
+        "destination": "Face/Ears", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28308, 
+            "literal": "EarShape1", 
+            "local_rank": 1531
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "earshape2": {
+        "destination": "Face/Ears", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Ears", 
+            "global_rank": 28309, 
+            "literal": "EarShape2", 
+            "local_rank": 1532
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "eballlower": {
+        "destination": "Face/Upper Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Upper Face", 
+            "global_rank": 5103, 
+            "literal": "EBAllLower", 
+            "local_rank": 1102
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "eballraiser": {
+        "destination": "Face/Upper Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Upper Face", 
+            "global_rank": 5106, 
+            "literal": "EBAllRaiser", 
+            "local_rank": 1105
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ebinnerlowerer": {
+        "destination": "Face/Upper Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Upper Face", 
+            "global_rank": 5109, 
+            "literal": "EBInnerLowerer", 
+            "local_rank": 1108
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ebinnerupper": {
+        "destination": "Face/Upper Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Upper Face", 
+            "global_rank": 5112, 
+            "literal": "EBInnerUpper", 
+            "local_rank": 1111
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ebouterlowerer": {
+        "destination": "Face/Upper Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Upper Face", 
+            "global_rank": 5115, 
+            "literal": "EBOuterLowerer", 
+            "local_rank": 1114
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ebouterupper": {
+        "destination": "Face/Upper Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Upper Face", 
+            "global_rank": 5118, 
+            "literal": "EBOuterUpper", 
+            "local_rank": 1117
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "elbow_l": {
+        "destination": "Arms/LeftArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104394, 
+            "literal": "Elbow_l", 
+            "local_rank": 421
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104395, 
+            "literal": "Elbow_L", 
+            "local_rank": 422
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104396, 
+            "literal": "elbow_L", 
+            "local_rank": 423
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "elbow_r": {
+        "destination": "Arms/RightArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107515, 
+            "literal": "Elbow_r", 
+            "local_rank": 443
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107516, 
+            "literal": "Elbow_R", 
+            "local_rank": 444
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107517, 
+            "literal": "elbow_R", 
+            "local_rank": 445
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "eyes_convergence": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 710, 
+            "literal": "eyes_convergence", 
+            "local_rank": 710
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "eyes_rightleft": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 731, 
+            "literal": "eyes_rightleft", 
+            "local_rank": 731
+          }, 
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 732, 
+            "literal": "Eyes_RightLeft", 
+            "local_rank": 732
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "eyes_updown": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 750, 
+            "literal": "eyes_updown", 
+            "local_rank": 750
+          }, 
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 751, 
+            "literal": "Eyes_UpDown", 
+            "local_rank": 751
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "foot_l": {
+        "destination": "Legs/LeftLeg", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108487, 
+            "literal": "foot_l", 
+            "local_rank": 261
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108488, 
+            "literal": "Foot_l", 
+            "local_rank": 262
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108489, 
+            "literal": "foot_L", 
+            "local_rank": 263
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108490, 
+            "literal": "Foot_L", 
+            "local_rank": 264
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "foot_r": {
+        "destination": "Legs/RightLeg", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109199, 
+            "literal": "foot_r", 
+            "local_rank": 260
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109200, 
+            "literal": "Foot_r", 
+            "local_rank": 261
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109201, 
+            "literal": "foot_R", 
+            "local_rank": 262
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109202, 
+            "literal": "Foot_R", 
+            "local_rank": 263
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "funnel": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16086, 
+            "literal": "Funnel", 
+            "local_rank": 918
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16087, 
+            "literal": "funnel", 
+            "local_rank": 919
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "genitalhide": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 32629, 
+            "literal": "GenitalHide", 
+            "local_rank": 3937
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "genitals": {
+        "destination": "Sexual Bones", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Sexual Bones", 
+            "global_rank": 41821, 
+            "literal": "Genitals", 
+            "local_rank": 4608
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "hand_l": {
+        "destination": "Arms/LeftArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104438, 
+            "literal": "hand_l", 
+            "local_rank": 465
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104439, 
+            "literal": "Hand_L", 
+            "local_rank": 466
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104440, 
+            "literal": "hand_L", 
+            "local_rank": 467
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm", 
+            "global_rank": 104441, 
+            "literal": "Hand_l", 
+            "local_rank": 468
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "hand_r": {
+        "destination": "Arms/RightArm", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107558, 
+            "literal": "hand_r", 
+            "local_rank": 486
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107559, 
+            "literal": "Hand_R", 
+            "local_rank": 487
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107560, 
+            "literal": "hand_R", 
+            "local_rank": 488
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm", 
+            "global_rank": 107561, 
+            "literal": "Hand_r", 
+            "local_rank": 489
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "head": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100775, 
+            "literal": "Head", 
+            "local_rank": 980
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100776, 
+            "literal": "head", 
+            "local_rank": 981
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "hip": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100865, 
+            "literal": "hip", 
+            "local_rank": 1070
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 100866, 
+            "literal": "Hip", 
+            "local_rank": 1071
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "i": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15189, 
+            "literal": "I", 
+            "local_rank": 21
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15190, 
+            "literal": "i", 
+            "local_rank": 22
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ikconstraint_foot_l - foot_l weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "ikconstraint_foot_r - foot_r weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "ikconstraint_hand_l - hand_l weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "ikconstraint_hand_r - hand_r weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "indextoe_1_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110352, 
+            "literal": "indexToe_1_l", 
+            "local_rank": 615
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110353, 
+            "literal": "IndexToe_1_l", 
+            "local_rank": 616
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110354, 
+            "literal": "indexToe_1_L", 
+            "local_rank": 617
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "indextoe_1_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111708, 
+            "literal": "indexToe_1_r", 
+            "local_rank": 601
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111709, 
+            "literal": "IndexToe_1_R", 
+            "local_rank": 602
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111710, 
+            "literal": "indexToe_1_R", 
+            "local_rank": 603
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "indextoe_2_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110355, 
+            "literal": "indexToe_2_l", 
+            "local_rank": 618
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110356, 
+            "literal": "IndexToe_2_l", 
+            "local_rank": 619
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110357, 
+            "literal": "indexToe_2_L", 
+            "local_rank": 620
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "indextoe_2_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111711, 
+            "literal": "indexToe_2_r", 
+            "local_rank": 604
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111712, 
+            "literal": "IndexToe_2_R", 
+            "local_rank": 605
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111713, 
+            "literal": "indexToe_2_R", 
+            "local_rank": 606
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "indextoe_3_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110358, 
+            "literal": "IndexToe_3_l", 
+            "local_rank": 621
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110359, 
+            "literal": "indexToe_3_l", 
+            "local_rank": 622
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "indextoe_3_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111714, 
+            "literal": "IndexToe_3_R", 
+            "local_rank": 607
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111715, 
+            "literal": "indexToe_3_r", 
+            "local_rank": 608
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "jaw": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 20636, 
+            "literal": "Jaw", 
+            "local_rank": 5468
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 20637, 
+            "literal": "jaw", 
+            "local_rank": 5469
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 20638, 
+            "literal": "JAW", 
+            "local_rank": 5470
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "jawdroop": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16376, 
+            "literal": "JawDroop", 
+            "local_rank": 1208
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16377, 
+            "literal": "jawdroop", 
+            "local_rank": 1209
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "kiss": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16448, 
+            "literal": "Kiss", 
+            "local_rank": 1280
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16449, 
+            "literal": "kiss", 
+            "local_rank": 1281
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "knee_l": {
+        "destination": "Legs/LeftLeg", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108544, 
+            "literal": "knee_L", 
+            "local_rank": 318
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108545, 
+            "literal": "Knee_l", 
+            "local_rank": 319
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108546, 
+            "literal": "Knee_L", 
+            "local_rank": 320
+          }, 
+          {
+            "full_path": "groupFile/Legs/LeftLeg", 
+            "global_rank": 108547, 
+            "literal": "knee_l", 
+            "local_rank": 321
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "knee_r": {
+        "destination": "Legs/RightLeg", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109256, 
+            "literal": "knee_R", 
+            "local_rank": 317
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109257, 
+            "literal": "Knee_r", 
+            "local_rank": 318
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109258, 
+            "literal": "Knee_R", 
+            "local_rank": 319
+          }, 
+          {
+            "full_path": "groupFile/Legs/RightLeg", 
+            "global_rank": 109259, 
+            "literal": "knee_r", 
+            "local_rank": 320
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lcarpal1": {
+        "destination": "Arms/LeftArm/LeftCarpals", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftCarpals", 
+            "global_rank": 103916, 
+            "literal": "lCarpal1", 
+            "local_rank": 55
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftCarpals", 
+            "global_rank": 103917, 
+            "literal": "lcarpal1", 
+            "local_rank": 56
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lcarpal2": {
+        "destination": "Arms/LeftArm/LeftCarpals", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftCarpals", 
+            "global_rank": 103918, 
+            "literal": "lCarpal2", 
+            "local_rank": 57
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftCarpals", 
+            "global_rank": 103919, 
+            "literal": "lcarpal2", 
+            "local_rank": 58
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lcarpal3": {
+        "destination": "Arms/LeftArm/LeftCarpals", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftCarpals", 
+            "global_rank": 103920, 
+            "literal": "lCarpal3", 
+            "local_rank": 59
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftCarpals", 
+            "global_rank": 103921, 
+            "literal": "lcarpal3", 
+            "local_rank": 60
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lcarpal4": {
+        "destination": "Arms/LeftArm/LeftCarpals", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftCarpals", 
+            "global_rank": 103922, 
+            "literal": "lCarpal4", 
+            "local_rank": 61
+          }, 
+          {
+            "full_path": "groupFile/Arms/LeftArm/LeftCarpals", 
+            "global_rank": 103923, 
+            "literal": "lcarpal4", 
+            "local_rank": 62
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "legfix90sw ": {
+        "destination": "Correctives", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Correctives", 
+            "global_rank": 96039, 
+            "literal": "LegFix90SW ", 
+            "local_rank": 126
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "legsize": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 33461, 
+            "literal": "Legsize", 
+            "local_rank": 4769
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 33462, 
+            "literal": "LegSize", 
+            "local_rank": 4770
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 33463, 
+            "literal": "legsize", 
+            "local_rank": 4771
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lidubberopen": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 955, 
+            "literal": "LidUbberOpen", 
+            "local_rank": 955
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lipbite": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16861, 
+            "literal": "lipBite", 
+            "local_rank": 1693
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16862, 
+            "literal": "lipbite", 
+            "local_rank": 1694
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16863, 
+            "literal": "LipBite", 
+            "local_rank": 1695
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lippresser": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16970, 
+            "literal": "LipPresser", 
+            "local_rank": 1802
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 16971, 
+            "literal": "lippresser", 
+            "local_rank": 1803
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lipsin": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17314, 
+            "literal": "LipsIn", 
+            "local_rank": 2146
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17315, 
+            "literal": "lipsin", 
+            "local_rank": 2147
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lipsout": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17339, 
+            "literal": "LipsOut", 
+            "local_rank": 2171
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17340, 
+            "literal": "lipsout", 
+            "local_rank": 2172
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lipswide": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17425, 
+            "literal": "LipsWide", 
+            "local_rank": 2257
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17426, 
+            "literal": "lipswide", 
+            "local_rank": 2258
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "localviewtargetfactor": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 2755, 
+            "literal": "localViewTargetFactor", 
+            "local_rank": 2755
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lowerblink": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 1017, 
+            "literal": "lowerBlink", 
+            "local_rank": 1017
+          }, 
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 1018, 
+            "literal": "LowerBlink", 
+            "local_rank": 1018
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lowerlidlower": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 1031, 
+            "literal": "LowerLidLower", 
+            "local_rank": 1031
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lowerlidraiser": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 1033, 
+            "literal": "LowerLidRaiser", 
+            "local_rank": 1033
+          }, 
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 1034, 
+            "literal": "LowerLidraiser", 
+            "local_rank": 1034
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "lowerliplower": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17582, 
+            "literal": "LowerLipLower", 
+            "local_rank": 2414
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "midtoe_1_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110641, 
+            "literal": "midToe_1_l", 
+            "local_rank": 904
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110642, 
+            "literal": "MidToe_1_l", 
+            "local_rank": 905
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110643, 
+            "literal": "midToe_1_L", 
+            "local_rank": 906
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "midtoe_1_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111812, 
+            "literal": "midToe_1_r", 
+            "local_rank": 705
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111813, 
+            "literal": "MidToe_1_R", 
+            "local_rank": 706
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111814, 
+            "literal": "midToe_1_R", 
+            "local_rank": 707
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "midtoe_2_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110644, 
+            "literal": "midToe_2_l", 
+            "local_rank": 907
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110645, 
+            "literal": "MidToe_2_l", 
+            "local_rank": 908
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110646, 
+            "literal": "midToe_2_L", 
+            "local_rank": 909
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "midtoe_2_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111815, 
+            "literal": "midToe_2_r", 
+            "local_rank": 708
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111816, 
+            "literal": "MidToe_2_R", 
+            "local_rank": 709
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111817, 
+            "literal": "midToe_2_R", 
+            "local_rank": 710
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "midtoe_3_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110647, 
+            "literal": "MidToe_3_l", 
+            "local_rank": 910
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110648, 
+            "literal": "midToe_3_l", 
+            "local_rank": 911
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "midtoe_3_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111818, 
+            "literal": "MidToe_3_R", 
+            "local_rank": 711
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 111819, 
+            "literal": "midToe_3_r", 
+            "local_rank": 712
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "mo1": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17758, 
+            "literal": "MO1", 
+            "local_rank": 2590
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "mo2": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17759, 
+            "literal": "MO2", 
+            "local_rank": 2591
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "mo3": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17760, 
+            "literal": "MO3", 
+            "local_rank": 2592
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17761, 
+            "literal": "mo3", 
+            "local_rank": 2593
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "mofunnel": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 17766, 
+            "literal": "MOFunnel", 
+            "local_rank": 2598
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "mouthopen": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 18984, 
+            "literal": "MouthOpen", 
+            "local_rank": 3816
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 18985, 
+            "literal": "Mouthopen", 
+            "local_rank": 3817
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 18986, 
+            "literal": "mouthOpen", 
+            "local_rank": 3818
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 18987, 
+            "literal": "mouthopen", 
+            "local_rank": 3819
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "muscles": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 33684, 
+            "literal": "Muscles", 
+            "local_rank": 4992
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 33685, 
+            "literal": "muscles", 
+            "local_rank": 4993
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "muzzle": {
+        "destination": "Face/Mid Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Mid Face", 
+            "global_rank": 14860, 
+            "literal": "Muzzle", 
+            "local_rank": 2017
+          }, 
+          {
+            "full_path": "groupFile/Face/Mid Face", 
+            "global_rank": 14861, 
+            "literal": "muzzle", 
+            "local_rank": 2018
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "neck": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 101011, 
+            "literal": "Neck", 
+            "local_rank": 1216
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 101012, 
+            "literal": "neck", 
+            "local_rank": 1217
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "o": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15197, 
+            "literal": "O", 
+            "local_rank": 29
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15198, 
+            "literal": "o", 
+            "local_rank": 30
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "orientconstraint_bip_collar_l - collarl weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_collar_r - collarr weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_foot_l - foot_l weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_foot_r - foot_r weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_hand_l - hand_l weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_hand_r - hand_r weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_head - head weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_neck - neck weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_pelvis - hip weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_spine_0 - spine_1 weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_spine_1 - spine_2 weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_spine_2 - spine_3 weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_bip_spine_3 - spine_4 weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "orientconstraint_roottransform - rig_root weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "paizury": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 34180, 
+            "literal": "Paizury", 
+            "local_rank": 5488
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "pantsfit": {
+        "destination": "Clothing", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Clothing", 
+            "global_rank": 71095, 
+            "literal": "PantsFIT", 
+            "local_rank": 2214
+          }, 
+          {
+            "full_path": "groupFile/Clothing", 
+            "global_rank": 71096, 
+            "literal": "PantsFit", 
+            "local_rank": 2215
+          }, 
+          {
+            "full_path": "groupFile/Clothing", 
+            "global_rank": 71097, 
+            "literal": "Pantsfit", 
+            "local_rank": 2216
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "pointconstraint_bip_collar_l - collarl weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "pointconstraint_bip_collar_r - collarr weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "pointconstraint_bip_head - head weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "pointconstraint_bip_neck - neck weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "pointconstraint_bip_pelvis - hip weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "pointconstraint_bip_spine_0 - spine_1 weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "pointconstraint_bip_spine_1 - spine_2 weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "pointconstraint_bip_spine_2 - spine_3 weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "pointconstraint_bip_spine_3 - spine_4 weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "pointconstraint_roottransform - rig_root weight": {
+        "destination": null, 
+        "occurrences": null, 
+        "status": "MasterUnknown"
+      }, 
+      "pregnant": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 34612, 
+            "literal": "Pregnant", 
+            "local_rank": 5920
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 34613, 
+            "literal": "pregnant", 
+            "local_rank": 5921
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "puckerer": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 19539, 
+            "literal": "puckerer", 
+            "local_rank": 4371
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 19540, 
+            "literal": "Puckerer", 
+            "local_rank": 4372
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "rcarpal1": {
+        "destination": "Arms/RightArm/RightCarpals", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightCarpals", 
+            "global_rank": 107025, 
+            "literal": "rCarpal1", 
+            "local_rank": 64
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightCarpals", 
+            "global_rank": 107026, 
+            "literal": "rcarpal1", 
+            "local_rank": 65
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "rcarpal2": {
+        "destination": "Arms/RightArm/RightCarpals", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightCarpals", 
+            "global_rank": 107027, 
+            "literal": "rCarpal2", 
+            "local_rank": 66
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightCarpals", 
+            "global_rank": 107028, 
+            "literal": "rcarpal2", 
+            "local_rank": 67
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "rcarpal3": {
+        "destination": "Arms/RightArm/RightCarpals", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightCarpals", 
+            "global_rank": 107029, 
+            "literal": "rCarpal3", 
+            "local_rank": 68
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightCarpals", 
+            "global_rank": 107030, 
+            "literal": "rcarpal3", 
+            "local_rank": 69
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "rcarpal4": {
+        "destination": "Arms/RightArm/RightCarpals", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Arms/RightArm/RightCarpals", 
+            "global_rank": 107031, 
+            "literal": "rCarpal4", 
+            "local_rank": 70
+          }, 
+          {
+            "full_path": "groupFile/Arms/RightArm/RightCarpals", 
+            "global_rank": 107032, 
+            "literal": "rcarpal4", 
+            "local_rank": 71
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "rig_foothelper0": {
+        "destination": "Helpers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 98919, 
+            "literal": "Rig_FootHelper0", 
+            "local_rank": 2708
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "rig_foothelper1": {
+        "destination": "Helpers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 98920, 
+            "literal": "Rig_FootHelper1", 
+            "local_rank": 2709
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "rig_foothelper2": {
+        "destination": "Helpers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 98921, 
+            "literal": "Rig_FootHelper2", 
+            "local_rank": 2710
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "rig_foothelper3": {
+        "destination": "Helpers", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Helpers", 
+            "global_rank": 98922, 
+            "literal": "Rig_FootHelper3", 
+            "local_rank": 2711
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "rig_root": {
+        "destination": "RigBody", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/RigBody", 
+            "global_rank": 115467, 
+            "literal": "rig_root", 
+            "local_rank": 0
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ringtoe_1_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110711, 
+            "literal": "ringToe_1_l", 
+            "local_rank": 974
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110712, 
+            "literal": "RingToe_1_l", 
+            "local_rank": 975
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110713, 
+            "literal": "ringToe_1_L", 
+            "local_rank": 976
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ringtoe_1_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 112017, 
+            "literal": "ringToe_1_r", 
+            "local_rank": 910
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 112018, 
+            "literal": "RingToe_1_R", 
+            "local_rank": 911
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 112019, 
+            "literal": "ringToe_1_R", 
+            "local_rank": 912
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ringtoe_2_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110714, 
+            "literal": "ringToe_2_l", 
+            "local_rank": 977
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110715, 
+            "literal": "RingToe_2_l", 
+            "local_rank": 978
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110716, 
+            "literal": "ringToe_2_L", 
+            "local_rank": 979
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ringtoe_2_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 112020, 
+            "literal": "ringToe_2_r", 
+            "local_rank": 913
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 112021, 
+            "literal": "RingToe_2_R", 
+            "local_rank": 914
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 112022, 
+            "literal": "ringToe_2_R", 
+            "local_rank": 915
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ringtoe_3_l": {
+        "destination": "Toes/LeftToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110717, 
+            "literal": "RingToe_3_l", 
+            "local_rank": 980
+          }, 
+          {
+            "full_path": "groupFile/Toes/LeftToes", 
+            "global_rank": 110718, 
+            "literal": "ringToe_3_l", 
+            "local_rank": 981
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "ringtoe_3_r": {
+        "destination": "Toes/RightToes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 112023, 
+            "literal": "RingToe_3_R", 
+            "local_rank": 916
+          }, 
+          {
+            "full_path": "groupFile/Toes/RightToes", 
+            "global_rank": 112024, 
+            "literal": "ringToe_3_r", 
+            "local_rank": 917
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "roottransform": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 101235, 
+            "literal": "rootTransform", 
+            "local_rank": 1440
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 101236, 
+            "literal": "RootTransform", 
+            "local_rank": 1441
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "shocked": {
+        "destination": "Face/Expressions", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Expressions", 
+            "global_rank": 3648, 
+            "literal": "Shocked", 
+            "local_rank": 676
+          }, 
+          {
+            "full_path": "groupFile/Face/Expressions", 
+            "global_rank": 3649, 
+            "literal": "shocked", 
+            "local_rank": 677
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "shortsfit": {
+        "destination": "Clothing", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Clothing", 
+            "global_rank": 71525, 
+            "literal": "ShortsFit", 
+            "local_rank": 2644
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "sideleft1": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 67195, 
+            "literal": "SideLeft1", 
+            "local_rank": 22786
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "sideleft2": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 67196, 
+            "literal": "SideLeft2", 
+            "local_rank": 22787
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "sideleft3": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 67197, 
+            "literal": "SideLeft3", 
+            "local_rank": 22788
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "sideleft4": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 67198, 
+            "literal": "SideLeft4", 
+            "local_rank": 22789
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "sideright1": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 67220, 
+            "literal": "SideRight1", 
+            "local_rank": 22811
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "sideright2": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 67221, 
+            "literal": "SideRight2", 
+            "local_rank": 22812
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "sideright3": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 67222, 
+            "literal": "SideRight3", 
+            "local_rank": 22813
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "sideright4": {
+        "destination": "Hair", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Hair", 
+            "global_rank": 67223, 
+            "literal": "SideRight4", 
+            "local_rank": 22814
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "slim": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 35481, 
+            "literal": "slim", 
+            "local_rank": 6789
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 35482, 
+            "literal": "Slim", 
+            "local_rank": 6790
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "smirk": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 19960, 
+            "literal": "Smirk", 
+            "local_rank": 4792
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 19961, 
+            "literal": "smirk", 
+            "local_rank": 4793
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "spine_1": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 101440, 
+            "literal": "spine_1", 
+            "local_rank": 1645
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 101441, 
+            "literal": "Spine_1", 
+            "local_rank": 1646
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "spine_2": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 101443, 
+            "literal": "spine_2", 
+            "local_rank": 1648
+          }, 
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 101444, 
+            "literal": "Spine_2", 
+            "local_rank": 1649
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "spine_3": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 101446, 
+            "literal": "spine_3", 
+            "local_rank": 1651
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "spine_4": {
+        "destination": "Body", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body", 
+            "global_rank": 101448, 
+            "literal": "spine_4", 
+            "local_rank": 1653
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "sshapelips": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 20025, 
+            "literal": "SShapeLips", 
+            "local_rank": 4857
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 20026, 
+            "literal": "Sshapelips", 
+            "local_rank": 4858
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "strecher": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 20038, 
+            "literal": "Strecher", 
+            "local_rank": 4870
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 20039, 
+            "literal": "strecher", 
+            "local_rank": 4871
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "thoathbulge1": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 35889, 
+            "literal": "thoathbulge1", 
+            "local_rank": 7197
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "thoathbulge2": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 35890, 
+            "literal": "thoathbulge2", 
+            "local_rank": 7198
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "tongue00": {
+        "destination": "Face/Tongue", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25908, 
+            "literal": "tongue00", 
+            "local_rank": 771
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "tongue01": {
+        "destination": "Face/Tongue", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25911, 
+            "literal": "tongue01", 
+            "local_rank": 774
+          }, 
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25913, 
+            "literal": "Tongue01", 
+            "local_rank": 776
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "tongue02": {
+        "destination": "Face/Tongue", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25946, 
+            "literal": "tongue02", 
+            "local_rank": 809
+          }, 
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25948, 
+            "literal": "Tongue02", 
+            "local_rank": 811
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "tongue03": {
+        "destination": "Face/Tongue", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25955, 
+            "literal": "tongue03", 
+            "local_rank": 818
+          }, 
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25957, 
+            "literal": "Tongue03", 
+            "local_rank": 820
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "tongue04": {
+        "destination": "Face/Tongue", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25964, 
+            "literal": "tongue04", 
+            "local_rank": 827
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "tongue05": {
+        "destination": "Face/Tongue", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25971, 
+            "literal": "tongue05", 
+            "local_rank": 834
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "tongue06": {
+        "destination": "Face/Tongue", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25977, 
+            "literal": "tongue06", 
+            "local_rank": 840
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "tongue07": {
+        "destination": "Face/Tongue", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Tongue", 
+            "global_rank": 25983, 
+            "literal": "tongue07", 
+            "local_rank": 846
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "toraxwide": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36036, 
+            "literal": "toraxwide", 
+            "local_rank": 7344
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "u": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15205, 
+            "literal": "U", 
+            "local_rank": 37
+          }, 
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 15206, 
+            "literal": "u", 
+            "local_rank": 38
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "upeerlidlower": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 1399, 
+            "literal": "UpeerLidLower", 
+            "local_rank": 1399
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "upeerlidraiser": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 1402, 
+            "literal": "UpeerLidRaiser", 
+            "local_rank": 1402
+          }, 
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 1403, 
+            "literal": "UpeerLidraiser", 
+            "local_rank": 1403
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "uppelipraiser": {
+        "destination": "Face/Lower Face", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Lower Face", 
+            "global_rank": 20328, 
+            "literal": "UppeLipRaiser", 
+            "local_rank": 5160
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "upperblink": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 1412, 
+            "literal": "UpperBlink", 
+            "local_rank": 1412
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "vagclose": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36338, 
+            "literal": "VagClose", 
+            "local_rank": 7646
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36339, 
+            "literal": "vagclose", 
+            "local_rank": 7647
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "vaggrip": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36356, 
+            "literal": "VagGrip", 
+            "local_rank": 7664
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "vaginalopen": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36491, 
+            "literal": "VaginalOpen", 
+            "local_rank": 7799
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36492, 
+            "literal": "vaginalopen", 
+            "local_rank": 7800
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "vaginalopen2": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36495, 
+            "literal": "VaginalOpen2", 
+            "local_rank": 7803
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36496, 
+            "literal": "vaginalopen2", 
+            "local_rank": 7804
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "vagpush": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36579, 
+            "literal": "VagPush", 
+            "local_rank": 7887
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36580, 
+            "literal": "vagpush", 
+            "local_rank": 7888
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "viewtarget": {
+        "destination": "Face/Eyes", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Eyes", 
+            "global_rank": 2969, 
+            "literal": "viewTarget", 
+            "local_rank": 2969
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "voluptuous": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36610, 
+            "literal": "Voluptuous", 
+            "local_rank": 7918
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36611, 
+            "literal": "voluptuous", 
+            "local_rank": 7919
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "waist1": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36708, 
+            "literal": "waist1", 
+            "local_rank": 8016
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "widehips": {
+        "destination": "Body Morphs", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36762, 
+            "literal": "WideHips", 
+            "local_rank": 8070
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36763, 
+            "literal": "widehips", 
+            "local_rank": 8071
+          }, 
+          {
+            "full_path": "groupFile/Body Morphs", 
+            "global_rank": 36764, 
+            "literal": "Widehips", 
+            "local_rank": 8072
+          }
+        ], 
+        "status": "Known"
+      }, 
+      "worried": {
+        "destination": "Face/Expressions", 
+        "occurrences": [
+          {
+            "full_path": "groupFile/Face/Expressions", 
+            "global_rank": 3742, 
+            "literal": "Worried", 
+            "local_rank": 770
+          }, 
+          {
+            "full_path": "groupFile/Face/Expressions", 
+            "global_rank": 3743, 
+            "literal": "worried", 
+            "local_rank": 771
+          }
+        ], 
+        "status": "Known"
+      }
+    }, 
+    "present": true, 
+    "semantic_generation_master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+    "uncovered_count": 0
+  }, 
+  "wall_time": "2026-09-25 14:46:57"
+}

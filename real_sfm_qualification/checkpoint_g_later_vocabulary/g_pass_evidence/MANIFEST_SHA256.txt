@@ -1,0 +1,27 @@
+G PASS -- real-SFM evidence manifest
+Preserved 2026-09-25 from C:\Users\Public\Documents\ (verbatim, byte-identical copies -- SHA-256 confirmed
+matching the originals at copy time, listed below).
+
+PID 12816. HARD_GATES_PASSED -> V1_STAGE_PASSED -> G_PASS.
+
+1c254e1c07f2d58041a6b6374db53789d2c1f8febac604f81e5e9c8ed4d40b85  sfm_checkpoint_g_continuation_state.json
+9be4f6a2378098af1534d4d80df509be20c2cddc4cb304fba9a9911bd9785cf1  sfm_checkpoint_g_final_result.json
+ff067df9ee355f185eef2527e2ef9410082df09e686721a7464d343ad6b95a95  sfm_checkpoint_g_final_summary.txt
+7db0b27df04b2f2292bbc2e4102f73621a32612e1351ee9e8a3af56c113012e3  sfm_checkpoint_g_run_01_v1_shot3.txt
+06028c702cce371239cf8e56b907885bc29e48a87e20a3c1f4d724798425d955  sfm_checkpoint_g_run_02_v2_shot9.txt
+8bfaeadf5d86c45d7865f5e688df41742d1851f141629f923135849a661ff668  sfm_checkpoint_g_snapshot_01_baseline.json
+1c9c8aed4b92d40ca5de0669b72ce5abb2ea8cd6f0e7d71f58fd7a4085e28b3e  sfm_checkpoint_g_snapshot_01_baseline.txt
+9b9c901e96c4cc48d0f02b6eb9912e869e1ebe84b535b56ce93099fc6cdfaaa7  sfm_checkpoint_g_snapshot_02_after_v1.json
+2005e764d19e16a435ba002359de3b7891cb84ab96ebc52492e7090235987e16  sfm_checkpoint_g_snapshot_02_after_v1.txt
+51182c813b2390db2e9ddc13a357c2c26e95ee1b058172de11977c1242dec85c  sfm_checkpoint_g_snapshot_03_after_v2.json
+ff067df9ee355f185eef2527e2ef9410082df09e686721a7464d343ad6b95a95  sfm_checkpoint_g_snapshot_03_after_v2.txt
+
+Note: sfm_checkpoint_g_final_summary.txt and sfm_checkpoint_g_snapshot_03_after_v2.txt share the same
+SHA-256 -- this is expected (the checkpoint's own main() writes the final rollup summary from the same
+txt_lines as the last snapshot's own text file), not a duplication error. No additional/duplicate evidence
+file was introduced beyond these 11.
+
+Independently re-verified against the live artifacts at C:\Users\Public\Documents\ before copying (not
+merely recorded from a relayed claim): all snapshot JSON classifications, provider/lease counters, coverage
+consistency, diagnostics deltas, and the V2-only Known witness ("amused" -> "Face/Expressions") were read
+directly from these files and matched the reported result exactly.

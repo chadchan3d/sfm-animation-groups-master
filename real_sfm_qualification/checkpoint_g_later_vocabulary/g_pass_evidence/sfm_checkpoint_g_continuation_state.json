@@ -1,0 +1,5953 @@
+{
+  "baseline_diagnostics": [], 
+  "baseline_master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+  "baseline_pid": 12816, 
+  "baseline_provider_counters": {
+    "active_cohort_id": null, 
+    "current_open_provider_count": 0, 
+    "peak_open_provider_count": 0, 
+    "total_provider_closes": 0, 
+    "total_provider_opens": 0
+  }, 
+  "captured_runs": [
+    {
+      "captured_at_snapshot_index": 2, 
+      "filename": "sfm_checkpoint_g_run_01_v1_shot3.txt", 
+      "label": "v1_shot3", 
+      "log_verification": {
+        "all_checks_pass": true, 
+        "exact_single_shot_present": true, 
+        "expected_unique_scope_folds": 482, 
+        "final_report_entry_present": true, 
+        "logged_matched_folds": 426, 
+        "logged_unique_scope_folds": 482, 
+        "production_fail_present": false, 
+        "production_pass_present": true, 
+        "scope_selected_present": true, 
+        "unique_scope_folds_matches": true
+      }, 
+      "pid": 12816, 
+      "sha256": "7db0b27df04b2f2292bbc2e4102f73621a32612e1351ee9e8a3af56c113012e3", 
+      "size_bytes": 39331, 
+      "step_ordinal": 1, 
+      "wall_time": "2026-09-25 14:45:59"
+    }, 
+    {
+      "captured_at_snapshot_index": 3, 
+      "filename": "sfm_checkpoint_g_run_02_v2_shot9.txt", 
+      "label": "v2_shot9", 
+      "log_verification": {
+        "all_checks_pass": true, 
+        "exact_single_shot_present": true, 
+        "expected_unique_scope_folds": 302, 
+        "final_report_entry_present": true, 
+        "logged_matched_folds": 273, 
+        "logged_unique_scope_folds": 302, 
+        "production_fail_present": false, 
+        "production_pass_present": true, 
+        "scope_selected_present": true, 
+        "unique_scope_folds_matches": true
+      }, 
+      "pid": 12816, 
+      "sha256": "06028c702cce371239cf8e56b907885bc29e48a87e20a3c1f4d724798425d955", 
+      "size_bytes": 26352, 
+      "step_ordinal": 2, 
+      "wall_time": "2026-09-25 14:46:57"
+    }
+  ], 
+  "captured_snapshots": [
+    {
+      "classification": "HARD_GATES_PASSED", 
+      "expected_state": "UNUSED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_g_snapshot_01_baseline.json", 
+      "observed_guard_state": "UNUSED", 
+      "operation": "baseline", 
+      "pid": 12816, 
+      "step_ordinal": 1, 
+      "wall_time": "2026-09-25 14:44:39"
+    }, 
+    {
+      "classification": "V1_STAGE_PASSED", 
+      "expected_state": "SELECTED_USED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_g_snapshot_02_after_v1.json", 
+      "observed_guard_state": "SELECTED_USED", 
+      "operation": "after_v1", 
+      "pid": 12816, 
+      "step_ordinal": 2, 
+      "wall_time": "2026-09-25 14:45:59"
+    }, 
+    {
+      "classification": "G_PASS", 
+      "expected_state": "SELECTED_USED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_g_snapshot_03_after_v2.json", 
+      "observed_guard_state": "SELECTED_USED", 
+      "operation": "after_v2", 
+      "pid": 12816, 
+      "step_ordinal": 3, 
+      "wall_time": "2026-09-25 14:46:57"
+    }
+  ], 
+  "last_known_log_sha256": "06028c702cce371239cf8e56b907885bc29e48a87e20a3c1f4d724798425d955", 
+  "next_run_index": 3, 
+  "next_snapshot_index": 4, 
+  "v1_stage_diagnostics": [
+    {
+      "detail": {
+        "cohort_id": 1, 
+        "master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+        "views": [
+          "normalizer_compat"
+        ]
+      }, 
+      "event": "cohort_acquired", 
+      "t": 1790361942.178
+    }
+  ], 
+  "v1_stage_provider_counters": {
+    "active_cohort_id": null, 
+    "current_open_provider_count": 0, 
+    "peak_open_provider_count": 1, 
+    "total_provider_closes": 1, 
+    "total_provider_opens": 1
+  }, 
+  "witness": {
+    "v1_folds_sorted": [
+      "a", 
+      "abs", 
+      "analgrip", 
+      "analopen", 
+      "analopen2", 
+      "anus", 
+      "armsize", 
+      "armslim", 
+      "bigbite", 
+      "bigtoe1_l", 
+      "bigtoe1_r", 
+      "bigtoe2_l", 
+      "bigtoe2_r", 
+      "bip_breast_01_l", 
+      "bip_breast_01_r", 
+      "bip_breast_02_l", 
+      "bip_breast_02_r", 
+      "bip_breast_nipple_l", 
+      "bip_breast_nipple_r", 
+      "bip_breast_piercing_l", 
+      "bip_breast_piercing_r", 
+      "bip_butt_l", 
+      "bip_butt_r", 
+      "bip_collar_l", 
+      "bip_collar_r", 
+      "bip_earup1_l", 
+      "bip_earup1_r", 
+      "bip_earup2_l", 
+      "bip_eyebrow_base_l", 
+      "bip_eyebrow_base_r", 
+      "bip_eyebrow_inner_l", 
+      "bip_eyebrow_inner_r", 
+      "bip_eyebrow_mid_l", 
+      "bip_eyebrow_mid_r", 
+      "bip_eyebrow_outer_l", 
+      "bip_eyebrow_outer_r", 
+      "bip_eyebrow_tweak_inner_l", 
+      "bip_eyebrow_tweak_inner_r", 
+      "bip_eyebrow_tweak_mid_l", 
+      "bip_eyebrow_tweak_mid_r", 
+      "bip_eyebrow_tweak_outer_l", 
+      "bip_eyebrow_tweak_outer_r", 
+      "bip_eyelid_lower_l", 
+      "bip_eyelid_lower_r", 
+      "bip_eyelid_upper_l", 
+      "bip_eyelid_upper_r", 
+      "bip_foot_l", 
+      "bip_foot_r", 
+      "bip_hand_l", 
+      "bip_hand_r", 
+      "bip_head", 
+      "bip_hip_l", 
+      "bip_hip_r", 
+      "bip_hip_twist1_l", 
+      "bip_hip_twist1_r", 
+      "bip_hip_twist2_l", 
+      "bip_hip_twist2_r", 
+      "bip_index_0_l", 
+      "bip_index_0_r", 
+      "bip_index_1_l", 
+      "bip_index_1_r", 
+      "bip_index_2_l", 
+      "bip_index_2_r", 
+      "bip_knee_l", 
+      "bip_knee_r", 
+      "bip_lowerarm_l", 
+      "bip_lowerarm_r", 
+      "bip_lowerarm_twist1_l", 
+      "bip_lowerarm_twist1_r", 
+      "bip_lowerarm_twist2_l", 
+      "bip_lowerarm_twist2_r", 
+      "bip_middle_0_l", 
+      "bip_middle_0_r", 
+      "bip_middle_1_l", 
+      "bip_middle_1_r", 
+      "bip_middle_2_l", 
+      "bip_middle_2_r", 
+      "bip_neck", 
+      "bip_pelvis", 
+      "bip_pinky_0_l", 
+      "bip_pinky_0_r", 
+      "bip_pinky_1_l", 
+      "bip_pinky_1_r", 
+      "bip_pinky_2_l", 
+      "bip_pinky_2_r", 
+      "bip_ring_0_l", 
+      "bip_ring_0_r", 
+      "bip_ring_1_l", 
+      "bip_ring_1_r", 
+      "bip_ring_2_l", 
+      "bip_ring_2_r", 
+      "bip_spine_0", 
+      "bip_spine_1", 
+      "bip_spine_2", 
+      "bip_spine_3", 
+      "bip_tail00", 
+      "bip_tail01", 
+      "bip_tail02", 
+      "bip_tail03", 
+      "bip_tail04", 
+      "bip_tail05", 
+      "bip_tail06", 
+      "bip_tail07", 
+      "bip_tail08", 
+      "bip_thumb_0_l", 
+      "bip_thumb_0_r", 
+      "bip_thumb_1_l", 
+      "bip_thumb_1_r", 
+      "bip_thumb_2_l", 
+      "bip_thumb_2_r", 
+      "bip_toe_l", 
+      "bip_toe_r", 
+      "bip_upperarm_l", 
+      "bip_upperarm_r", 
+      "bip_upperarm_twist1_l", 
+      "bip_upperarm_twist1_r", 
+      "bip_upperarm_twist2_l", 
+      "bip_upperarm_twist2_r", 
+      "bite", 
+      "blink", 
+      "blinkjoy", 
+      "blinklow", 
+      "blow", 
+      "blowin", 
+      "blowout", 
+      "breastnippleperk", 
+      "breastnipplesize", 
+      "breastsgone", 
+      "breastsize", 
+      "breastslowerl", 
+      "breastslowerr", 
+      "breastsnatural", 
+      "breastspulll", 
+      "breastspullr", 
+      "breastsraisel", 
+      "breastsraiser", 
+      "breastssmaller", 
+      "breaststogetherl", 
+      "breaststogetherr", 
+      "browdrop", 
+      "browinnerdrop", 
+      "browinnerraise", 
+      "browouterdrop", 
+      "browouterraise", 
+      "browraise", 
+      "buff", 
+      "bulgehigh", 
+      "bulgelow", 
+      "buttdecrease", 
+      "buttincrease", 
+      "buttspread", 
+      "carpal1_l", 
+      "carpal1_r", 
+      "carpal2_l", 
+      "carpal2_r", 
+      "carpal3_l", 
+      "carpal3_r", 
+      "carpal4_l", 
+      "carpal4_r", 
+      "cheek", 
+      "cheeksfull", 
+      "cheeksup", 
+      "chinraiser", 
+      "collarfixarmsup80", 
+      "cornerpuller", 
+      "depressor", 
+      "e", 
+      "exuberopen", 
+      "eye_l", 
+      "eye_r", 
+      "eyebrowall", 
+      "eyebrowinner", 
+      "eyebrowlower", 
+      "eyebrowouter", 
+      "eyebrowraise", 
+      "eyes_convergence", 
+      "eyes_rightleft", 
+      "eyes_updown", 
+      "eyesrelax", 
+      "eyessuprise", 
+      "fat", 
+      "fit", 
+      "funnel", 
+      "genitals", 
+      "glutes leg 90fix", 
+      "i", 
+      "ikconstraint_rig_foot_l - rig_foot_l weight", 
+      "ikconstraint_rig_foot_r - rig_foot_r weight", 
+      "ikconstraint_rig_hand_l - rig_hand_l weight", 
+      "ikconstraint_rig_hand_r - rig_hand_r weight", 
+      "indextoe1_l", 
+      "indextoe1_r", 
+      "indextoe2_l", 
+      "indextoe2_r", 
+      "irisbigger", 
+      "irissmaller", 
+      "jaw", 
+      "jawdroop", 
+      "jawdrop1", 
+      "jawdrop2", 
+      "l lid", 
+      "lbigtoe", 
+      "lbigtoe_2", 
+      "lcarpal1", 
+      "lcarpal2", 
+      "lcarpal3", 
+      "lcarpal4", 
+      "legfixforward90", 
+      "legfixside90lower", 
+      "legfixside90uppper", 
+      "legsize", 
+      "legslim", 
+      "lforearmtwist", 
+      "lheel", 
+      "lid lower", 
+      "lid open", 
+      "lipbitel", 
+      "lipbiter", 
+      "liplowerdrop", 
+      "liplowerraise", 
+      "lipraiser", 
+      "lipsin", 
+      "lipsout", 
+      "lipupperdrop", 
+      "lipupperraise", 
+      "localviewtargetfactor", 
+      "lowerer", 
+      "lowerliddrop", 
+      "lowerlidraise", 
+      "lowerlip", 
+      "lpectoral", 
+      "lshldrtwist", 
+      "lsmalltoe1", 
+      "lsmalltoe1_2", 
+      "lsmalltoe2", 
+      "lsmalltoe2_2", 
+      "lsmalltoe3", 
+      "lsmalltoe3_2", 
+      "lsmalltoe4", 
+      "lsmalltoe4_2", 
+      "lthightwist", 
+      "midtoe1_l", 
+      "midtoe1_r", 
+      "midtoe2_l", 
+      "midtoe2_r", 
+      "mo2", 
+      "mo3", 
+      "mouthbackbite", 
+      "mouthcornercurve", 
+      "mouthcornersup", 
+      "mouthfrown", 
+      "mouthnarrow", 
+      "mouthopen1", 
+      "mouthopen3", 
+      "mouthpucker", 
+      "mouthpuckersmall", 
+      "mouthpull", 
+      "mouthwavyl", 
+      "mouthwavyr", 
+      "mouthwiden", 
+      "muscles", 
+      "muzzle", 
+      "neckupper", 
+      "nose expand", 
+      "nosepress", 
+      "o", 
+      "orientconstraint_bip_collar_l - rig_collar_l weight", 
+      "orientconstraint_bip_collar_r - rig_collar_r weight", 
+      "orientconstraint_bip_foot_l - rig_foot_l weight", 
+      "orientconstraint_bip_foot_r - rig_foot_r weight", 
+      "orientconstraint_bip_hand_l - rig_hand_l weight", 
+      "orientconstraint_bip_hand_r - rig_hand_r weight", 
+      "orientconstraint_bip_head - rig_head weight", 
+      "orientconstraint_bip_neck - rig_neck weight", 
+      "orientconstraint_bip_pelvis - rig_hips weight", 
+      "orientconstraint_bip_spine_0 - rig_spine_0 weight", 
+      "orientconstraint_bip_spine_1 - rig_spine_1 weight", 
+      "orientconstraint_bip_spine_2 - rig_spine_2 weight", 
+      "orientconstraint_bip_spine_3 - rig_chest weight", 
+      "orientconstraint_bip_toe_l - rig_toe_l weight", 
+      "orientconstraint_bip_toe_r - rig_toe_r weight", 
+      "orientconstraint_roottransform - rig_root weight", 
+      "orientconstraint_valvebiped.bip01_head1 - rig_head weight", 
+      "orientconstraint_valvebiped.bip01_l_clavicle - rig_collar_l weight", 
+      "orientconstraint_valvebiped.bip01_l_foot - rig_foot_l weight", 
+      "orientconstraint_valvebiped.bip01_l_hand - rig_hand_l weight", 
+      "orientconstraint_valvebiped.bip01_l_toe0 - rig_toe_l weight", 
+      "orientconstraint_valvebiped.bip01_neck1 - rig_neck weight", 
+      "orientconstraint_valvebiped.bip01_pelvis - rig_hips weight", 
+      "orientconstraint_valvebiped.bip01_r_clavicle - rig_collar_r weight", 
+      "orientconstraint_valvebiped.bip01_r_foot - rig_foot_r weight", 
+      "orientconstraint_valvebiped.bip01_r_hand - rig_hand_r weight", 
+      "orientconstraint_valvebiped.bip01_r_toe0 - rig_toe_r weight", 
+      "orientconstraint_valvebiped.bip01_spine - rig_spine_0 weight", 
+      "orientconstraint_valvebiped.bip01_spine1 - rig_spine_1 weight", 
+      "orientconstraint_valvebiped.bip01_spine2 - rig_spine_2 weight", 
+      "please!", 
+      "pointconstraint_bip_collar_l - rig_collar_l weight", 
+      "pointconstraint_bip_collar_r - rig_collar_r weight", 
+      "pointconstraint_bip_head - rig_head weight", 
+      "pointconstraint_bip_neck - rig_neck weight", 
+      "pointconstraint_bip_pelvis - rig_hips weight", 
+      "pointconstraint_bip_spine_0 - rig_spine_0 weight", 
+      "pointconstraint_bip_spine_1 - rig_spine_1 weight", 
+      "pointconstraint_bip_spine_2 - rig_spine_2 weight", 
+      "pointconstraint_bip_spine_3 - rig_chest weight", 
+      "pointconstraint_bip_toe_l - rig_toe_l weight", 
+      "pointconstraint_bip_toe_r - rig_toe_r weight", 
+      "pointconstraint_roottransform - rig_root weight", 
+      "pointconstraint_valvebiped.bip01_head1 - rig_head weight", 
+      "pointconstraint_valvebiped.bip01_l_clavicle - rig_collar_l weight", 
+      "pointconstraint_valvebiped.bip01_l_toe0 - rig_toe_l weight", 
+      "pointconstraint_valvebiped.bip01_neck1 - rig_neck weight", 
+      "pointconstraint_valvebiped.bip01_pelvis - rig_hips weight", 
+      "pointconstraint_valvebiped.bip01_r_clavicle - rig_collar_r weight", 
+      "pointconstraint_valvebiped.bip01_r_toe0 - rig_toe_r weight", 
+      "pointconstraint_valvebiped.bip01_spine - rig_spine_0 weight", 
+      "pointconstraint_valvebiped.bip01_spine1 - rig_spine_1 weight", 
+      "pointconstraint_valvebiped.bip01_spine2 - rig_spine_2 weight", 
+      "pregnant", 
+      "presser", 
+      "puckerer", 
+      "pupilbigger", 
+      "pupilsmaller", 
+      "r lid", 
+      "rbigtoe", 
+      "rbigtoe_2", 
+      "rcarpal1", 
+      "rcarpal2", 
+      "rcarpal3", 
+      "rcarpal4", 
+      "rforearmtwist", 
+      "rheel", 
+      "rig_chest", 
+      "rig_collar_l", 
+      "rig_collar_r", 
+      "rig_elbow_l", 
+      "rig_elbow_r", 
+      "rig_foot_l", 
+      "rig_foot_r", 
+      "rig_foothelper_l", 
+      "rig_foothelper_r", 
+      "rig_hand_l", 
+      "rig_hand_r", 
+      "rig_head", 
+      "rig_hips", 
+      "rig_knee_l", 
+      "rig_knee_r", 
+      "rig_neck", 
+      "rig_pelvis", 
+      "rig_root", 
+      "rig_spine_0", 
+      "rig_spine_1", 
+      "rig_spine_2", 
+      "rig_toe_l", 
+      "rig_toe_r", 
+      "ringtoe1_l", 
+      "ringtoe1_r", 
+      "ringtoe2_l", 
+      "ringtoe2_r", 
+      "roottransform", 
+      "rpectoral", 
+      "rshldrtwist", 
+      "rsmalltoe1", 
+      "rsmalltoe1_2", 
+      "rsmalltoe2", 
+      "rsmalltoe2_2", 
+      "rsmalltoe3", 
+      "rsmalltoe3_2", 
+      "rsmalltoe4", 
+      "rsmalltoe4_2", 
+      "rthightwist", 
+      "shallowback", 
+      "shallowstomach", 
+      "shoulderl", 
+      "shoulderr", 
+      "slim", 
+      "smile", 
+      "smileclosed", 
+      "smileopen1", 
+      "smileopen3", 
+      "smirk", 
+      "strech", 
+      "teeth_lower", 
+      "teeth_upper", 
+      "thick", 
+      "tonge", 
+      "tonge1", 
+      "tonge2", 
+      "tonge3", 
+      "tonge4", 
+      "tongue00", 
+      "tongue01", 
+      "tongue02", 
+      "tongue03", 
+      "tongue04", 
+      "tongue05", 
+      "tongue06", 
+      "tongue07", 
+      "tongue08", 
+      "tongue09", 
+      "tongue10", 
+      "tongue11", 
+      "u", 
+      "upperliddrop", 
+      "upperlidraise", 
+      "vagclose", 
+      "vaggrip", 
+      "vaginalopen", 
+      "vaginalopen2", 
+      "vaginalopen3", 
+      "vagpuff", 
+      "vagpush", 
+      "valvebiped.anim_attachment_lh", 
+      "valvebiped.anim_attachment_rh", 
+      "valvebiped.bip01_head1", 
+      "valvebiped.bip01_head1.004", 
+      "valvebiped.bip01_head1.005", 
+      "valvebiped.bip01_l_calf", 
+      "valvebiped.bip01_l_clavicle", 
+      "valvebiped.bip01_l_finger0", 
+      "valvebiped.bip01_l_finger01", 
+      "valvebiped.bip01_l_finger02", 
+      "valvebiped.bip01_l_finger1", 
+      "valvebiped.bip01_l_finger11", 
+      "valvebiped.bip01_l_finger12", 
+      "valvebiped.bip01_l_finger2", 
+      "valvebiped.bip01_l_finger21", 
+      "valvebiped.bip01_l_finger22", 
+      "valvebiped.bip01_l_finger3", 
+      "valvebiped.bip01_l_finger31", 
+      "valvebiped.bip01_l_finger32", 
+      "valvebiped.bip01_l_finger4", 
+      "valvebiped.bip01_l_finger41", 
+      "valvebiped.bip01_l_finger42", 
+      "valvebiped.bip01_l_foot", 
+      "valvebiped.bip01_l_forearm", 
+      "valvebiped.bip01_l_hand", 
+      "valvebiped.bip01_l_thigh", 
+      "valvebiped.bip01_l_toe0", 
+      "valvebiped.bip01_l_upperarm", 
+      "valvebiped.bip01_neck1", 
+      "valvebiped.bip01_pelvis", 
+      "valvebiped.bip01_pelvis.002", 
+      "valvebiped.bip01_pelvis.003", 
+      "valvebiped.bip01_pelvis.004", 
+      "valvebiped.bip01_pelvis.005", 
+      "valvebiped.bip01_pelvis.006", 
+      "valvebiped.bip01_pelvis.007", 
+      "valvebiped.bip01_pelvis.008", 
+      "valvebiped.bip01_pelvis.009", 
+      "valvebiped.bip01_r_calf", 
+      "valvebiped.bip01_r_clavicle", 
+      "valvebiped.bip01_r_finger0", 
+      "valvebiped.bip01_r_finger01", 
+      "valvebiped.bip01_r_finger02", 
+      "valvebiped.bip01_r_finger1", 
+      "valvebiped.bip01_r_finger11", 
+      "valvebiped.bip01_r_finger12", 
+      "valvebiped.bip01_r_finger2", 
+      "valvebiped.bip01_r_finger21", 
+      "valvebiped.bip01_r_finger22", 
+      "valvebiped.bip01_r_finger3", 
+      "valvebiped.bip01_r_finger31", 
+      "valvebiped.bip01_r_finger32", 
+      "valvebiped.bip01_r_finger4", 
+      "valvebiped.bip01_r_finger41", 
+      "valvebiped.bip01_r_finger42", 
+      "valvebiped.bip01_r_foot", 
+      "valvebiped.bip01_r_forearm", 
+      "valvebiped.bip01_r_hand", 
+      "valvebiped.bip01_r_thigh", 
+      "valvebiped.bip01_r_toe0", 
+      "valvebiped.bip01_r_upperarm", 
+      "valvebiped.bip01_spine", 
+      "valvebiped.bip01_spine1", 
+      "valvebiped.bip01_spine2", 
+      "valvebiped.bip01_spine4", 
+      "viewtarget", 
+      "voluptuous", 
+      "waistthinner", 
+      "widehips"
+    ], 
+    "v1_provenance": {
+      "a": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "A"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "A"
+        }
+      ], 
+      "abs": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Abs"
+        }
+      ], 
+      "analgrip": [
+        {
+          "animation_set": "mia1", 
+          "literal": "AnalGrip"
+        }
+      ], 
+      "analopen": [
+        {
+          "animation_set": "mia1", 
+          "literal": "AnalOpen"
+        }
+      ], 
+      "analopen2": [
+        {
+          "animation_set": "mia1", 
+          "literal": "AnalOpen2"
+        }
+      ], 
+      "anus": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Anus"
+        }
+      ], 
+      "armsize": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ArmSize"
+        }
+      ], 
+      "armslim": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ArmSlim"
+        }
+      ], 
+      "bigbite": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BigBite"
+        }
+      ], 
+      "bigtoe1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bigToe1_l"
+        }
+      ], 
+      "bigtoe1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bigToe1_r"
+        }
+      ], 
+      "bigtoe2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bigToe2_l"
+        }
+      ], 
+      "bigtoe2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bigToe2_r"
+        }
+      ], 
+      "bip_breast_01_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_breast_01_l"
+        }
+      ], 
+      "bip_breast_01_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_breast_01_r"
+        }
+      ], 
+      "bip_breast_02_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_breast_02_l"
+        }
+      ], 
+      "bip_breast_02_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_breast_02_r"
+        }
+      ], 
+      "bip_breast_nipple_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_breast_nipple_l"
+        }
+      ], 
+      "bip_breast_nipple_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_breast_nipple_r"
+        }
+      ], 
+      "bip_breast_piercing_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_breast_piercing_l"
+        }
+      ], 
+      "bip_breast_piercing_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_breast_piercing_r"
+        }
+      ], 
+      "bip_butt_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_butt_l"
+        }
+      ], 
+      "bip_butt_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_butt_r"
+        }
+      ], 
+      "bip_collar_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_collar_l"
+        }
+      ], 
+      "bip_collar_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_collar_r"
+        }
+      ], 
+      "bip_earup1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_earUp1_l"
+        }
+      ], 
+      "bip_earup1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_earUp1_r"
+        }
+      ], 
+      "bip_earup2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_earUp2_l"
+        }
+      ], 
+      "bip_eyebrow_base_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_base_L"
+        }
+      ], 
+      "bip_eyebrow_base_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_base_R"
+        }
+      ], 
+      "bip_eyebrow_inner_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_inner_L"
+        }
+      ], 
+      "bip_eyebrow_inner_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_inner_R"
+        }
+      ], 
+      "bip_eyebrow_mid_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_mid_L"
+        }
+      ], 
+      "bip_eyebrow_mid_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_mid_R"
+        }
+      ], 
+      "bip_eyebrow_outer_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_outer_L"
+        }
+      ], 
+      "bip_eyebrow_outer_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_outer_R"
+        }
+      ], 
+      "bip_eyebrow_tweak_inner_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_tweak_inner_L"
+        }
+      ], 
+      "bip_eyebrow_tweak_inner_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_tweak_inner_R"
+        }
+      ], 
+      "bip_eyebrow_tweak_mid_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_tweak_mid_L"
+        }
+      ], 
+      "bip_eyebrow_tweak_mid_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_tweak_mid_R"
+        }
+      ], 
+      "bip_eyebrow_tweak_outer_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_tweak_outer_L"
+        }
+      ], 
+      "bip_eyebrow_tweak_outer_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyebrow_tweak_outer_R"
+        }
+      ], 
+      "bip_eyelid_lower_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyelid_lower_L"
+        }
+      ], 
+      "bip_eyelid_lower_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyelid_lower_R"
+        }
+      ], 
+      "bip_eyelid_upper_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyelid_upper_L"
+        }
+      ], 
+      "bip_eyelid_upper_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_eyelid_upper_R"
+        }
+      ], 
+      "bip_foot_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_foot_l"
+        }
+      ], 
+      "bip_foot_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_foot_r"
+        }
+      ], 
+      "bip_hand_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_hand_L"
+        }
+      ], 
+      "bip_hand_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_hand_R"
+        }
+      ], 
+      "bip_head": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_head"
+        }
+      ], 
+      "bip_hip_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_hip_l"
+        }
+      ], 
+      "bip_hip_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_hip_r"
+        }
+      ], 
+      "bip_hip_twist1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_hip_twist1_l"
+        }
+      ], 
+      "bip_hip_twist1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_hip_twist1_r"
+        }
+      ], 
+      "bip_hip_twist2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_hip_twist2_l"
+        }
+      ], 
+      "bip_hip_twist2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_hip_twist2_r"
+        }
+      ], 
+      "bip_index_0_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_index_0_l"
+        }
+      ], 
+      "bip_index_0_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_index_0_r"
+        }
+      ], 
+      "bip_index_1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_index_1_l"
+        }
+      ], 
+      "bip_index_1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_index_1_r"
+        }
+      ], 
+      "bip_index_2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_index_2_l"
+        }
+      ], 
+      "bip_index_2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_index_2_r"
+        }
+      ], 
+      "bip_knee_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_knee_l"
+        }
+      ], 
+      "bip_knee_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_knee_r"
+        }
+      ], 
+      "bip_lowerarm_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_lowerArm_l"
+        }
+      ], 
+      "bip_lowerarm_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_lowerArm_r"
+        }
+      ], 
+      "bip_lowerarm_twist1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_lowerArm_twist1_l"
+        }
+      ], 
+      "bip_lowerarm_twist1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_lowerArm_twist1_r"
+        }
+      ], 
+      "bip_lowerarm_twist2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_lowerArm_twist2_l"
+        }
+      ], 
+      "bip_lowerarm_twist2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_lowerArm_twist2_r"
+        }
+      ], 
+      "bip_middle_0_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_middle_0_l"
+        }
+      ], 
+      "bip_middle_0_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_middle_0_r"
+        }
+      ], 
+      "bip_middle_1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_middle_1_l"
+        }
+      ], 
+      "bip_middle_1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_middle_1_r"
+        }
+      ], 
+      "bip_middle_2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_middle_2_l"
+        }
+      ], 
+      "bip_middle_2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_middle_2_r"
+        }
+      ], 
+      "bip_neck": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_neck"
+        }
+      ], 
+      "bip_pelvis": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_pelvis"
+        }
+      ], 
+      "bip_pinky_0_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_pinky_0_l"
+        }
+      ], 
+      "bip_pinky_0_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_pinky_0_r"
+        }
+      ], 
+      "bip_pinky_1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_pinky_1_l"
+        }
+      ], 
+      "bip_pinky_1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_pinky_1_r"
+        }
+      ], 
+      "bip_pinky_2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_pinky_2_l"
+        }
+      ], 
+      "bip_pinky_2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_pinky_2_r"
+        }
+      ], 
+      "bip_ring_0_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_ring_0_l"
+        }
+      ], 
+      "bip_ring_0_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_ring_0_r"
+        }
+      ], 
+      "bip_ring_1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_ring_1_l"
+        }
+      ], 
+      "bip_ring_1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_ring_1_r"
+        }
+      ], 
+      "bip_ring_2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_ring_2_l"
+        }
+      ], 
+      "bip_ring_2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_ring_2_r"
+        }
+      ], 
+      "bip_spine_0": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_spine_0"
+        }
+      ], 
+      "bip_spine_1": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_spine_1"
+        }
+      ], 
+      "bip_spine_2": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_spine_2"
+        }
+      ], 
+      "bip_spine_3": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_spine_3"
+        }
+      ], 
+      "bip_tail00": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_tail00"
+        }
+      ], 
+      "bip_tail01": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_tail01"
+        }
+      ], 
+      "bip_tail02": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_tail02"
+        }
+      ], 
+      "bip_tail03": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_tail03"
+        }
+      ], 
+      "bip_tail04": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_tail04"
+        }
+      ], 
+      "bip_tail05": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_tail05"
+        }
+      ], 
+      "bip_tail06": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_tail06"
+        }
+      ], 
+      "bip_tail07": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_tail07"
+        }
+      ], 
+      "bip_tail08": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_tail08"
+        }
+      ], 
+      "bip_thumb_0_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_thumb_0_l"
+        }
+      ], 
+      "bip_thumb_0_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_thumb_0_r"
+        }
+      ], 
+      "bip_thumb_1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_thumb_1_l"
+        }
+      ], 
+      "bip_thumb_1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_thumb_1_r"
+        }
+      ], 
+      "bip_thumb_2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_thumb_2_l"
+        }
+      ], 
+      "bip_thumb_2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_thumb_2_r"
+        }
+      ], 
+      "bip_toe_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_toe_l"
+        }
+      ], 
+      "bip_toe_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_toe_r"
+        }
+      ], 
+      "bip_upperarm_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_upperArm_l"
+        }
+      ], 
+      "bip_upperarm_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_upperArm_r"
+        }
+      ], 
+      "bip_upperarm_twist1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_UpperArm_twist1_l"
+        }
+      ], 
+      "bip_upperarm_twist1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_UpperArm_twist1_r"
+        }
+      ], 
+      "bip_upperarm_twist2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_UpperArm_twist2_l"
+        }
+      ], 
+      "bip_upperarm_twist2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "bip_UpperArm_twist2_r"
+        }
+      ], 
+      "bite": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "bite"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "Bite"
+        }
+      ], 
+      "blink": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "blink"
+        }
+      ], 
+      "blinkjoy": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BlinkJoy"
+        }
+      ], 
+      "blinklow": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BlinkLow"
+        }
+      ], 
+      "blow": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "BLOW"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "Blow"
+        }
+      ], 
+      "blowin": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BlowIn"
+        }
+      ], 
+      "blowout": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BlowOut"
+        }
+      ], 
+      "breastnippleperk": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastNipplePerk"
+        }
+      ], 
+      "breastnipplesize": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastNippleSize"
+        }
+      ], 
+      "breastsgone": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsGone"
+        }
+      ], 
+      "breastsize": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Breastsize"
+        }
+      ], 
+      "breastslowerl": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsLowerL"
+        }
+      ], 
+      "breastslowerr": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsLowerR"
+        }
+      ], 
+      "breastsnatural": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsNatural"
+        }
+      ], 
+      "breastspulll": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsPullL"
+        }
+      ], 
+      "breastspullr": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsPullR"
+        }
+      ], 
+      "breastsraisel": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsRaiseL"
+        }
+      ], 
+      "breastsraiser": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsRaiseR"
+        }
+      ], 
+      "breastssmaller": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsSmaller"
+        }
+      ], 
+      "breaststogetherl": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsTogetherL"
+        }
+      ], 
+      "breaststogetherr": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BreastsTogetherR"
+        }
+      ], 
+      "browdrop": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BrowDrop"
+        }
+      ], 
+      "browinnerdrop": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BrowInnerDrop"
+        }
+      ], 
+      "browinnerraise": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BrowInnerRaise"
+        }
+      ], 
+      "browouterdrop": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BrowOuterDrop"
+        }
+      ], 
+      "browouterraise": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BrowOuterRaise"
+        }
+      ], 
+      "browraise": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BrowRaise"
+        }
+      ], 
+      "buff": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Buff"
+        }
+      ], 
+      "bulgehigh": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BulgeHigh"
+        }
+      ], 
+      "bulgelow": [
+        {
+          "animation_set": "mia1", 
+          "literal": "BulgeLow"
+        }
+      ], 
+      "buttdecrease": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ButtDecrease"
+        }
+      ], 
+      "buttincrease": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ButtIncrease"
+        }
+      ], 
+      "buttspread": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ButtSpread"
+        }
+      ], 
+      "carpal1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Carpal1_l"
+        }
+      ], 
+      "carpal1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Carpal1_r"
+        }
+      ], 
+      "carpal2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Carpal2_l"
+        }
+      ], 
+      "carpal2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Carpal2_r"
+        }
+      ], 
+      "carpal3_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Carpal3_l"
+        }
+      ], 
+      "carpal3_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Carpal3_r"
+        }
+      ], 
+      "carpal4_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Carpal4_l"
+        }
+      ], 
+      "carpal4_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Carpal4_r"
+        }
+      ], 
+      "cheek": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "cheek"
+        }
+      ], 
+      "cheeksfull": [
+        {
+          "animation_set": "mia1", 
+          "literal": "CheeksFull"
+        }
+      ], 
+      "cheeksup": [
+        {
+          "animation_set": "mia1", 
+          "literal": "CheeksUp"
+        }
+      ], 
+      "chinraiser": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "chinraiser"
+        }
+      ], 
+      "collarfixarmsup80": [
+        {
+          "animation_set": "mia1", 
+          "literal": "CollarFixArmsUp80"
+        }
+      ], 
+      "cornerpuller": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "cornerpuller"
+        }
+      ], 
+      "depressor": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "depressor"
+        }
+      ], 
+      "e": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "E"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "E"
+        }
+      ], 
+      "exuberopen": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "EXuberopen"
+        }
+      ], 
+      "eye_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "eye_L"
+        }
+      ], 
+      "eye_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "eye_R"
+        }
+      ], 
+      "eyebrowall": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "eyebrowALL"
+        }
+      ], 
+      "eyebrowinner": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "eyebrowINNER"
+        }
+      ], 
+      "eyebrowlower": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "eyebrowlower"
+        }
+      ], 
+      "eyebrowouter": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "eyebrowOUTER"
+        }
+      ], 
+      "eyebrowraise": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "eyebrowraise"
+        }
+      ], 
+      "eyes_convergence": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "eyes_convergence"
+        }
+      ], 
+      "eyes_rightleft": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "eyes_rightleft"
+        }
+      ], 
+      "eyes_updown": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "eyes_updown"
+        }
+      ], 
+      "eyesrelax": [
+        {
+          "animation_set": "mia1", 
+          "literal": "EyesRelax"
+        }
+      ], 
+      "eyessuprise": [
+        {
+          "animation_set": "mia1", 
+          "literal": "EyesSuprise"
+        }
+      ], 
+      "fat": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Fat"
+        }
+      ], 
+      "fit": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Fit"
+        }
+      ], 
+      "funnel": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "funnel"
+        }
+      ], 
+      "genitals": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Genitals"
+        }
+      ], 
+      "glutes leg 90fix": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "glutes leg 90fix"
+        }
+      ], 
+      "i": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "I"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "I"
+        }
+      ], 
+      "ikconstraint_rig_foot_l - rig_foot_l weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ikConstraint_rig_foot_L - rig_foot_L weight"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "ikConstraint_rig_foot_L - rig_foot_L weight"
+        }
+      ], 
+      "ikconstraint_rig_foot_r - rig_foot_r weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ikConstraint_rig_foot_R - rig_foot_R weight"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "ikConstraint_rig_foot_R - rig_foot_R weight"
+        }
+      ], 
+      "ikconstraint_rig_hand_l - rig_hand_l weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ikConstraint_rig_hand_L - rig_hand_L weight"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "ikConstraint_rig_hand_L - rig_hand_L weight"
+        }
+      ], 
+      "ikconstraint_rig_hand_r - rig_hand_r weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ikConstraint_rig_hand_R - rig_hand_R weight"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "ikConstraint_rig_hand_R - rig_hand_R weight"
+        }
+      ], 
+      "indextoe1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "indexToe1_l"
+        }
+      ], 
+      "indextoe1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "indexToe1_r"
+        }
+      ], 
+      "indextoe2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "indexToe2_l"
+        }
+      ], 
+      "indextoe2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "indexToe2_r"
+        }
+      ], 
+      "irisbigger": [
+        {
+          "animation_set": "mia1", 
+          "literal": "IrisBigger"
+        }
+      ], 
+      "irissmaller": [
+        {
+          "animation_set": "mia1", 
+          "literal": "IrisSmaller"
+        }
+      ], 
+      "jaw": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "JAW"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "jaw"
+        }
+      ], 
+      "jawdroop": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "jawdroop"
+        }
+      ], 
+      "jawdrop1": [
+        {
+          "animation_set": "mia1", 
+          "literal": "JawDrop1"
+        }
+      ], 
+      "jawdrop2": [
+        {
+          "animation_set": "mia1", 
+          "literal": "JawDrop2"
+        }
+      ], 
+      "l lid": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "L LID"
+        }
+      ], 
+      "lbigtoe": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lBigToe"
+        }
+      ], 
+      "lbigtoe_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lBigToe_2"
+        }
+      ], 
+      "lcarpal1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lCarpal1"
+        }
+      ], 
+      "lcarpal2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lCarpal2"
+        }
+      ], 
+      "lcarpal3": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lCarpal3"
+        }
+      ], 
+      "lcarpal4": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lCarpal4"
+        }
+      ], 
+      "legfixforward90": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LegFixForward90"
+        }
+      ], 
+      "legfixside90lower": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LegFixSide90Lower"
+        }
+      ], 
+      "legfixside90uppper": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LegFixSide90Uppper"
+        }
+      ], 
+      "legsize": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LegSize"
+        }
+      ], 
+      "legslim": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LegSlim"
+        }
+      ], 
+      "lforearmtwist": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lForearmTwist"
+        }
+      ], 
+      "lheel": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lHeel"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "lHeel"
+        }
+      ], 
+      "lid lower": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "LID LOWER"
+        }
+      ], 
+      "lid open": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "LID OPEN"
+        }
+      ], 
+      "lipbitel": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LipBiteL"
+        }
+      ], 
+      "lipbiter": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LipBiteR"
+        }
+      ], 
+      "liplowerdrop": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LipLowerDrop"
+        }
+      ], 
+      "liplowerraise": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LipLowerRaise"
+        }
+      ], 
+      "lipraiser": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lipraiser"
+        }
+      ], 
+      "lipsin": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LipsIn"
+        }
+      ], 
+      "lipsout": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LipsOut"
+        }
+      ], 
+      "lipupperdrop": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LipUpperDrop"
+        }
+      ], 
+      "lipupperraise": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LipUpperRaise"
+        }
+      ], 
+      "localviewtargetfactor": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "localViewTargetFactor"
+        }
+      ], 
+      "lowerer": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lowerer"
+        }
+      ], 
+      "lowerliddrop": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LowerLidDrop"
+        }
+      ], 
+      "lowerlidraise": [
+        {
+          "animation_set": "mia1", 
+          "literal": "LowerLidRaise"
+        }
+      ], 
+      "lowerlip": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lowerlip"
+        }
+      ], 
+      "lpectoral": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lPectoral"
+        }
+      ], 
+      "lshldrtwist": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lShldrTwist"
+        }
+      ], 
+      "lsmalltoe1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lSmallToe1"
+        }
+      ], 
+      "lsmalltoe1_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lSmallToe1_2"
+        }
+      ], 
+      "lsmalltoe2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lSmallToe2"
+        }
+      ], 
+      "lsmalltoe2_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lSmallToe2_2"
+        }
+      ], 
+      "lsmalltoe3": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lSmallToe3"
+        }
+      ], 
+      "lsmalltoe3_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lSmallToe3_2"
+        }
+      ], 
+      "lsmalltoe4": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lSmallToe4"
+        }
+      ], 
+      "lsmalltoe4_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lSmallToe4_2"
+        }
+      ], 
+      "lthightwist": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "lThighTwist"
+        }
+      ], 
+      "midtoe1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "midToe1_l"
+        }
+      ], 
+      "midtoe1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "midToe1_r"
+        }
+      ], 
+      "midtoe2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "midToe2_l"
+        }
+      ], 
+      "midtoe2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "midToe2_r"
+        }
+      ], 
+      "mo2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "MO2"
+        }
+      ], 
+      "mo3": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "mo3"
+        }
+      ], 
+      "mouthbackbite": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthBackBite"
+        }
+      ], 
+      "mouthcornercurve": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthCornerCurve"
+        }
+      ], 
+      "mouthcornersup": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthCornersUp"
+        }
+      ], 
+      "mouthfrown": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthFrown"
+        }
+      ], 
+      "mouthnarrow": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthNarrow"
+        }
+      ], 
+      "mouthopen1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "mouthopen1"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthOpen1"
+        }
+      ], 
+      "mouthopen3": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthOpen3"
+        }
+      ], 
+      "mouthpucker": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthPucker"
+        }
+      ], 
+      "mouthpuckersmall": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthPuckerSmall"
+        }
+      ], 
+      "mouthpull": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthPull"
+        }
+      ], 
+      "mouthwavyl": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthWavyL"
+        }
+      ], 
+      "mouthwavyr": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthWavyR"
+        }
+      ], 
+      "mouthwiden": [
+        {
+          "animation_set": "mia1", 
+          "literal": "MouthWiden"
+        }
+      ], 
+      "muscles": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Muscles"
+        }
+      ], 
+      "muzzle": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "muzzle"
+        }
+      ], 
+      "neckupper": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "neckUpper"
+        }
+      ], 
+      "nose expand": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "nose expand"
+        }
+      ], 
+      "nosepress": [
+        {
+          "animation_set": "mia1", 
+          "literal": "NosePress"
+        }
+      ], 
+      "o": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "O"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "O"
+        }
+      ], 
+      "orientconstraint_bip_collar_l - rig_collar_l weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_collar_l - rig_collar_L weight"
+        }
+      ], 
+      "orientconstraint_bip_collar_r - rig_collar_r weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_collar_r - rig_collar_R weight"
+        }
+      ], 
+      "orientconstraint_bip_foot_l - rig_foot_l weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_foot_l - rig_foot_L weight"
+        }
+      ], 
+      "orientconstraint_bip_foot_r - rig_foot_r weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_foot_r - rig_foot_R weight"
+        }
+      ], 
+      "orientconstraint_bip_hand_l - rig_hand_l weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_hand_L - rig_hand_L weight"
+        }
+      ], 
+      "orientconstraint_bip_hand_r - rig_hand_r weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_hand_R - rig_hand_R weight"
+        }
+      ], 
+      "orientconstraint_bip_head - rig_head weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_head - rig_head weight"
+        }
+      ], 
+      "orientconstraint_bip_neck - rig_neck weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_neck - rig_neck weight"
+        }
+      ], 
+      "orientconstraint_bip_pelvis - rig_hips weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_pelvis - rig_hips weight"
+        }
+      ], 
+      "orientconstraint_bip_spine_0 - rig_spine_0 weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_spine_0 - rig_spine_0 weight"
+        }
+      ], 
+      "orientconstraint_bip_spine_1 - rig_spine_1 weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_spine_1 - rig_spine_1 weight"
+        }
+      ], 
+      "orientconstraint_bip_spine_2 - rig_spine_2 weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_spine_2 - rig_spine_2 weight"
+        }
+      ], 
+      "orientconstraint_bip_spine_3 - rig_chest weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_spine_3 - rig_chest weight"
+        }
+      ], 
+      "orientconstraint_bip_toe_l - rig_toe_l weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_toe_l - rig_toe_L weight"
+        }
+      ], 
+      "orientconstraint_bip_toe_r - rig_toe_r weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_bip_toe_r - rig_toe_R weight"
+        }
+      ], 
+      "orientconstraint_roottransform - rig_root weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_rootTransform - rig_root weight"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "orientConstraint_rootTransform - rig_root weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_head1 - rig_head weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_Head1 - rig_head weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_l_clavicle - rig_collar_l weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_L_Clavicle - rig_collar_L weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_l_foot - rig_foot_l weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_L_Foot - rig_foot_L weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_l_hand - rig_hand_l weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_L_Hand - rig_hand_L weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_l_toe0 - rig_toe_l weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_L_Toe0 - rig_toe_L weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_neck1 - rig_neck weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_Neck1 - rig_neck weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_pelvis - rig_hips weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_Pelvis - rig_hips weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_r_clavicle - rig_collar_r weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_R_Clavicle - rig_collar_R weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_r_foot - rig_foot_r weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_R_Foot - rig_foot_R weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_r_hand - rig_hand_r weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_R_Hand - rig_hand_R weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_r_toe0 - rig_toe_r weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_R_Toe0 - rig_toe_R weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_spine - rig_spine_0 weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_Spine - rig_spine_0 weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_spine1 - rig_spine_1 weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_Spine1 - rig_spine_1 weight"
+        }
+      ], 
+      "orientconstraint_valvebiped.bip01_spine2 - rig_spine_2 weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "orientConstraint_ValveBiped.Bip01_Spine2 - rig_spine_2 weight"
+        }
+      ], 
+      "please!": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "please!"
+        }
+      ], 
+      "pointconstraint_bip_collar_l - rig_collar_l weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_collar_l - rig_collar_L weight"
+        }
+      ], 
+      "pointconstraint_bip_collar_r - rig_collar_r weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_collar_r - rig_collar_R weight"
+        }
+      ], 
+      "pointconstraint_bip_head - rig_head weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_head - rig_head weight"
+        }
+      ], 
+      "pointconstraint_bip_neck - rig_neck weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_neck - rig_neck weight"
+        }
+      ], 
+      "pointconstraint_bip_pelvis - rig_hips weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_pelvis - rig_hips weight"
+        }
+      ], 
+      "pointconstraint_bip_spine_0 - rig_spine_0 weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_spine_0 - rig_spine_0 weight"
+        }
+      ], 
+      "pointconstraint_bip_spine_1 - rig_spine_1 weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_spine_1 - rig_spine_1 weight"
+        }
+      ], 
+      "pointconstraint_bip_spine_2 - rig_spine_2 weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_spine_2 - rig_spine_2 weight"
+        }
+      ], 
+      "pointconstraint_bip_spine_3 - rig_chest weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_spine_3 - rig_chest weight"
+        }
+      ], 
+      "pointconstraint_bip_toe_l - rig_toe_l weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_toe_l - rig_toe_L weight"
+        }
+      ], 
+      "pointconstraint_bip_toe_r - rig_toe_r weight": [
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_bip_toe_r - rig_toe_R weight"
+        }
+      ], 
+      "pointconstraint_roottransform - rig_root weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_rootTransform - rig_root weight"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "pointConstraint_rootTransform - rig_root weight"
+        }
+      ], 
+      "pointconstraint_valvebiped.bip01_head1 - rig_head weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_ValveBiped.Bip01_Head1 - rig_head weight"
+        }
+      ], 
+      "pointconstraint_valvebiped.bip01_l_clavicle - rig_collar_l weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_ValveBiped.Bip01_L_Clavicle - rig_collar_L weight"
+        }
+      ], 
+      "pointconstraint_valvebiped.bip01_l_toe0 - rig_toe_l weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_ValveBiped.Bip01_L_Toe0 - rig_toe_L weight"
+        }
+      ], 
+      "pointconstraint_valvebiped.bip01_neck1 - rig_neck weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_ValveBiped.Bip01_Neck1 - rig_neck weight"
+        }
+      ], 
+      "pointconstraint_valvebiped.bip01_pelvis - rig_hips weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_ValveBiped.Bip01_Pelvis - rig_hips weight"
+        }
+      ], 
+      "pointconstraint_valvebiped.bip01_r_clavicle - rig_collar_r weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_ValveBiped.Bip01_R_Clavicle - rig_collar_R weight"
+        }
+      ], 
+      "pointconstraint_valvebiped.bip01_r_toe0 - rig_toe_r weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_ValveBiped.Bip01_R_Toe0 - rig_toe_R weight"
+        }
+      ], 
+      "pointconstraint_valvebiped.bip01_spine - rig_spine_0 weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_ValveBiped.Bip01_Spine - rig_spine_0 weight"
+        }
+      ], 
+      "pointconstraint_valvebiped.bip01_spine1 - rig_spine_1 weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_ValveBiped.Bip01_Spine1 - rig_spine_1 weight"
+        }
+      ], 
+      "pointconstraint_valvebiped.bip01_spine2 - rig_spine_2 weight": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "pointConstraint_ValveBiped.Bip01_Spine2 - rig_spine_2 weight"
+        }
+      ], 
+      "pregnant": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Pregnant"
+        }
+      ], 
+      "presser": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "presser"
+        }
+      ], 
+      "puckerer": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "puckerer"
+        }
+      ], 
+      "pupilbigger": [
+        {
+          "animation_set": "mia1", 
+          "literal": "PupilBigger"
+        }
+      ], 
+      "pupilsmaller": [
+        {
+          "animation_set": "mia1", 
+          "literal": "PupilSmaller"
+        }
+      ], 
+      "r lid": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "R LID"
+        }
+      ], 
+      "rbigtoe": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rBigToe"
+        }
+      ], 
+      "rbigtoe_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rBigToe_2"
+        }
+      ], 
+      "rcarpal1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rCarpal1"
+        }
+      ], 
+      "rcarpal2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rCarpal2"
+        }
+      ], 
+      "rcarpal3": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rCarpal3"
+        }
+      ], 
+      "rcarpal4": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rCarpal4"
+        }
+      ], 
+      "rforearmtwist": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rForearmTwist"
+        }
+      ], 
+      "rheel": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rHeel"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rHeel"
+        }
+      ], 
+      "rig_chest": [
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_chest"
+        }
+      ], 
+      "rig_collar_l": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_collar_L"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_collar_L"
+        }
+      ], 
+      "rig_collar_r": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_collar_R"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_collar_R"
+        }
+      ], 
+      "rig_elbow_l": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_elbow_L"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_elbow_L"
+        }
+      ], 
+      "rig_elbow_r": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_elbow_R"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_elbow_R"
+        }
+      ], 
+      "rig_foot_l": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_foot_L"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_foot_L"
+        }
+      ], 
+      "rig_foot_r": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_foot_R"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_foot_R"
+        }
+      ], 
+      "rig_foothelper_l": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_footHelper_L"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_footHelper_L"
+        }
+      ], 
+      "rig_foothelper_r": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_footHelper_R"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_footHelper_R"
+        }
+      ], 
+      "rig_hand_l": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_hand_L"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_hand_L"
+        }
+      ], 
+      "rig_hand_r": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_hand_R"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_hand_R"
+        }
+      ], 
+      "rig_head": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_head"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_head"
+        }
+      ], 
+      "rig_hips": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_hips"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_hips"
+        }
+      ], 
+      "rig_knee_l": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_knee_L"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_knee_L"
+        }
+      ], 
+      "rig_knee_r": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_knee_R"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_knee_R"
+        }
+      ], 
+      "rig_neck": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_neck"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_neck"
+        }
+      ], 
+      "rig_pelvis": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_pelvis"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_pelvis"
+        }
+      ], 
+      "rig_root": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_root"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_root"
+        }
+      ], 
+      "rig_spine_0": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_spine_0"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_spine_0"
+        }
+      ], 
+      "rig_spine_1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_spine_1"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_spine_1"
+        }
+      ], 
+      "rig_spine_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_spine_2"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_spine_2"
+        }
+      ], 
+      "rig_toe_l": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_toe_L"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_toe_L"
+        }
+      ], 
+      "rig_toe_r": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rig_toe_R"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rig_toe_R"
+        }
+      ], 
+      "ringtoe1_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ringToe1_l"
+        }
+      ], 
+      "ringtoe1_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ringToe1_r"
+        }
+      ], 
+      "ringtoe2_l": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ringToe2_l"
+        }
+      ], 
+      "ringtoe2_r": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ringToe2_r"
+        }
+      ], 
+      "roottransform": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rootTransform"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "rootTransform"
+        }
+      ], 
+      "rpectoral": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rPectoral"
+        }
+      ], 
+      "rshldrtwist": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rShldrTwist"
+        }
+      ], 
+      "rsmalltoe1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rSmallToe1"
+        }
+      ], 
+      "rsmalltoe1_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rSmallToe1_2"
+        }
+      ], 
+      "rsmalltoe2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rSmallToe2"
+        }
+      ], 
+      "rsmalltoe2_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rSmallToe2_2"
+        }
+      ], 
+      "rsmalltoe3": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rSmallToe3"
+        }
+      ], 
+      "rsmalltoe3_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rSmallToe3_2"
+        }
+      ], 
+      "rsmalltoe4": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rSmallToe4"
+        }
+      ], 
+      "rsmalltoe4_2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rSmallToe4_2"
+        }
+      ], 
+      "rthightwist": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "rThighTwist"
+        }
+      ], 
+      "shallowback": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ShallowBack"
+        }
+      ], 
+      "shallowstomach": [
+        {
+          "animation_set": "mia1", 
+          "literal": "ShallowStomach"
+        }
+      ], 
+      "shoulderl": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "shoulderL"
+        }
+      ], 
+      "shoulderr": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "shoulderR"
+        }
+      ], 
+      "slim": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Slim"
+        }
+      ], 
+      "smile": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "smile"
+        }
+      ], 
+      "smileclosed": [
+        {
+          "animation_set": "mia1", 
+          "literal": "SmileClosed"
+        }
+      ], 
+      "smileopen1": [
+        {
+          "animation_set": "mia1", 
+          "literal": "SmileOpen1"
+        }
+      ], 
+      "smileopen3": [
+        {
+          "animation_set": "mia1", 
+          "literal": "SmileOpen3"
+        }
+      ], 
+      "smirk": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Smirk"
+        }
+      ], 
+      "strech": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "strech"
+        }
+      ], 
+      "teeth_lower": [
+        {
+          "animation_set": "mia1", 
+          "literal": "teeth_lower"
+        }
+      ], 
+      "teeth_upper": [
+        {
+          "animation_set": "mia1", 
+          "literal": "teeth_upper"
+        }
+      ], 
+      "thick": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Thick"
+        }
+      ], 
+      "tonge": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "tonge"
+        }
+      ], 
+      "tonge1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "tonge1"
+        }
+      ], 
+      "tonge2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "tonge2"
+        }
+      ], 
+      "tonge3": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "tonge3"
+        }
+      ], 
+      "tonge4": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "tonge4"
+        }
+      ], 
+      "tongue00": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue00"
+        }
+      ], 
+      "tongue01": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue01"
+        }
+      ], 
+      "tongue02": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue02"
+        }
+      ], 
+      "tongue03": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue03"
+        }
+      ], 
+      "tongue04": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue04"
+        }
+      ], 
+      "tongue05": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue05"
+        }
+      ], 
+      "tongue06": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue06"
+        }
+      ], 
+      "tongue07": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue07"
+        }
+      ], 
+      "tongue08": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue08"
+        }
+      ], 
+      "tongue09": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue09"
+        }
+      ], 
+      "tongue10": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue10"
+        }
+      ], 
+      "tongue11": [
+        {
+          "animation_set": "mia1", 
+          "literal": "tongue11"
+        }
+      ], 
+      "u": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "U"
+        }, 
+        {
+          "animation_set": "mia1", 
+          "literal": "U"
+        }
+      ], 
+      "upperliddrop": [
+        {
+          "animation_set": "mia1", 
+          "literal": "UpperLidDrop"
+        }
+      ], 
+      "upperlidraise": [
+        {
+          "animation_set": "mia1", 
+          "literal": "UpperLidRaise"
+        }
+      ], 
+      "vagclose": [
+        {
+          "animation_set": "mia1", 
+          "literal": "VagClose"
+        }
+      ], 
+      "vaggrip": [
+        {
+          "animation_set": "mia1", 
+          "literal": "VagGrip"
+        }
+      ], 
+      "vaginalopen": [
+        {
+          "animation_set": "mia1", 
+          "literal": "VaginalOpen"
+        }
+      ], 
+      "vaginalopen2": [
+        {
+          "animation_set": "mia1", 
+          "literal": "VaginalOpen2"
+        }
+      ], 
+      "vaginalopen3": [
+        {
+          "animation_set": "mia1", 
+          "literal": "VaginalOpen3"
+        }
+      ], 
+      "vagpuff": [
+        {
+          "animation_set": "mia1", 
+          "literal": "VagPuff"
+        }
+      ], 
+      "vagpush": [
+        {
+          "animation_set": "mia1", 
+          "literal": "VagPush"
+        }
+      ], 
+      "valvebiped.anim_attachment_lh": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Anim_Attachment_LH"
+        }
+      ], 
+      "valvebiped.anim_attachment_rh": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Anim_Attachment_RH"
+        }
+      ], 
+      "valvebiped.bip01_head1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Head1"
+        }
+      ], 
+      "valvebiped.bip01_head1.004": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Head1.004"
+        }
+      ], 
+      "valvebiped.bip01_head1.005": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Head1.005"
+        }
+      ], 
+      "valvebiped.bip01_l_calf": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Calf"
+        }
+      ], 
+      "valvebiped.bip01_l_clavicle": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Clavicle"
+        }
+      ], 
+      "valvebiped.bip01_l_finger0": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger0"
+        }
+      ], 
+      "valvebiped.bip01_l_finger01": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger01"
+        }
+      ], 
+      "valvebiped.bip01_l_finger02": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger02"
+        }
+      ], 
+      "valvebiped.bip01_l_finger1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger1"
+        }
+      ], 
+      "valvebiped.bip01_l_finger11": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger11"
+        }
+      ], 
+      "valvebiped.bip01_l_finger12": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger12"
+        }
+      ], 
+      "valvebiped.bip01_l_finger2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger2"
+        }
+      ], 
+      "valvebiped.bip01_l_finger21": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger21"
+        }
+      ], 
+      "valvebiped.bip01_l_finger22": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger22"
+        }
+      ], 
+      "valvebiped.bip01_l_finger3": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger3"
+        }
+      ], 
+      "valvebiped.bip01_l_finger31": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger31"
+        }
+      ], 
+      "valvebiped.bip01_l_finger32": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger32"
+        }
+      ], 
+      "valvebiped.bip01_l_finger4": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger4"
+        }
+      ], 
+      "valvebiped.bip01_l_finger41": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger41"
+        }
+      ], 
+      "valvebiped.bip01_l_finger42": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Finger42"
+        }
+      ], 
+      "valvebiped.bip01_l_foot": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Foot"
+        }
+      ], 
+      "valvebiped.bip01_l_forearm": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Forearm"
+        }
+      ], 
+      "valvebiped.bip01_l_hand": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Hand"
+        }
+      ], 
+      "valvebiped.bip01_l_thigh": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Thigh"
+        }
+      ], 
+      "valvebiped.bip01_l_toe0": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_Toe0"
+        }
+      ], 
+      "valvebiped.bip01_l_upperarm": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_L_UpperArm"
+        }
+      ], 
+      "valvebiped.bip01_neck1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Neck1"
+        }
+      ], 
+      "valvebiped.bip01_pelvis": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Pelvis"
+        }
+      ], 
+      "valvebiped.bip01_pelvis.002": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Pelvis.002"
+        }
+      ], 
+      "valvebiped.bip01_pelvis.003": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Pelvis.003"
+        }
+      ], 
+      "valvebiped.bip01_pelvis.004": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Pelvis.004"
+        }
+      ], 
+      "valvebiped.bip01_pelvis.005": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Pelvis.005"
+        }
+      ], 
+      "valvebiped.bip01_pelvis.006": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Pelvis.006"
+        }
+      ], 
+      "valvebiped.bip01_pelvis.007": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Pelvis.007"
+        }
+      ], 
+      "valvebiped.bip01_pelvis.008": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Pelvis.008"
+        }
+      ], 
+      "valvebiped.bip01_pelvis.009": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Pelvis.009"
+        }
+      ], 
+      "valvebiped.bip01_r_calf": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Calf"
+        }
+      ], 
+      "valvebiped.bip01_r_clavicle": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Clavicle"
+        }
+      ], 
+      "valvebiped.bip01_r_finger0": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger0"
+        }
+      ], 
+      "valvebiped.bip01_r_finger01": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger01"
+        }
+      ], 
+      "valvebiped.bip01_r_finger02": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger02"
+        }
+      ], 
+      "valvebiped.bip01_r_finger1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger1"
+        }
+      ], 
+      "valvebiped.bip01_r_finger11": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger11"
+        }
+      ], 
+      "valvebiped.bip01_r_finger12": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger12"
+        }
+      ], 
+      "valvebiped.bip01_r_finger2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger2"
+        }
+      ], 
+      "valvebiped.bip01_r_finger21": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger21"
+        }
+      ], 
+      "valvebiped.bip01_r_finger22": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger22"
+        }
+      ], 
+      "valvebiped.bip01_r_finger3": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger3"
+        }
+      ], 
+      "valvebiped.bip01_r_finger31": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger31"
+        }
+      ], 
+      "valvebiped.bip01_r_finger32": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger32"
+        }
+      ], 
+      "valvebiped.bip01_r_finger4": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger4"
+        }
+      ], 
+      "valvebiped.bip01_r_finger41": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger41"
+        }
+      ], 
+      "valvebiped.bip01_r_finger42": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Finger42"
+        }
+      ], 
+      "valvebiped.bip01_r_foot": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Foot"
+        }
+      ], 
+      "valvebiped.bip01_r_forearm": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Forearm"
+        }
+      ], 
+      "valvebiped.bip01_r_hand": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Hand"
+        }
+      ], 
+      "valvebiped.bip01_r_thigh": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Thigh"
+        }
+      ], 
+      "valvebiped.bip01_r_toe0": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_Toe0"
+        }
+      ], 
+      "valvebiped.bip01_r_upperarm": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_R_UpperArm"
+        }
+      ], 
+      "valvebiped.bip01_spine": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Spine"
+        }
+      ], 
+      "valvebiped.bip01_spine1": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Spine1"
+        }
+      ], 
+      "valvebiped.bip01_spine2": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Spine2"
+        }
+      ], 
+      "valvebiped.bip01_spine4": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "ValveBiped.Bip01_Spine4"
+        }
+      ], 
+      "viewtarget": [
+        {
+          "animation_set": "foxmccouldwm1", 
+          "literal": "viewTarget"
+        }
+      ], 
+      "voluptuous": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Voluptuous"
+        }
+      ], 
+      "waistthinner": [
+        {
+          "animation_set": "mia1", 
+          "literal": "WaistThinner"
+        }
+      ], 
+      "widehips": [
+        {
+          "animation_set": "mia1", 
+          "literal": "Widehips"
+        }
+      ]
+    }, 
+    "v1_shot_name": "shot3", 
+    "v2_folds_sorted": [
+      "a", 
+      "amused", 
+      "analopen", 
+      "angry", 
+      "anus", 
+      "bigtoe_1_l", 
+      "bigtoe_1_r", 
+      "bigtoe_2_l", 
+      "bigtoe_2_r", 
+      "bigtoe_3_l", 
+      "bigtoe_3_r", 
+      "bip_breast_01_l", 
+      "bip_breast_01_r", 
+      "bip_breast_02_l", 
+      "bip_breast_02_r", 
+      "bip_butt_l", 
+      "bip_butt_r", 
+      "bip_collar_l", 
+      "bip_collar_r", 
+      "bip_foot_l", 
+      "bip_foot_r", 
+      "bip_hand_l", 
+      "bip_hand_r", 
+      "bip_head", 
+      "bip_head_hair_back", 
+      "bip_head_hair_back_1", 
+      "bip_head_hair_back_1_l", 
+      "bip_head_hair_back_1_r", 
+      "bip_head_hair_back_l", 
+      "bip_head_hair_back_r", 
+      "bip_head_hairfront", 
+      "bip_head_hairfront_1_l", 
+      "bip_head_hairfront_1_r", 
+      "bip_head_hairfront_2_l", 
+      "bip_head_hairfront_2_r", 
+      "bip_head_hairfront_3_l", 
+      "bip_head_hairfront_3_r", 
+      "bip_head_hairfront_l", 
+      "bip_head_hairfront_r", 
+      "bip_head_scale", 
+      "bip_hip_l", 
+      "bip_hip_r", 
+      "bip_hip_twist2_l", 
+      "bip_hip_twist2_r", 
+      "bip_index_0_l", 
+      "bip_index_0_r", 
+      "bip_index_1_l", 
+      "bip_index_1_r", 
+      "bip_index_2_l", 
+      "bip_index_2_r", 
+      "bip_knee_l", 
+      "bip_knee_r", 
+      "bip_lowerarm_l", 
+      "bip_lowerarm_l_twist2", 
+      "bip_lowerarm_r", 
+      "bip_lowerarm_r_twist2", 
+      "bip_middle_0_l", 
+      "bip_middle_0_r", 
+      "bip_middle_1_l", 
+      "bip_middle_1_r", 
+      "bip_middle_2_l", 
+      "bip_middle_2_r", 
+      "bip_neck", 
+      "bip_pelvis", 
+      "bip_pinky_0_l", 
+      "bip_pinky_0_r", 
+      "bip_pinky_1_l", 
+      "bip_pinky_1_r", 
+      "bip_pinky_2_l", 
+      "bip_pinky_2_r", 
+      "bip_ponytail1", 
+      "bip_ponytail2", 
+      "bip_ring_0_l", 
+      "bip_ring_0_r", 
+      "bip_ring_1_l", 
+      "bip_ring_1_r", 
+      "bip_ring_2_l", 
+      "bip_ring_2_r", 
+      "bip_spine_0", 
+      "bip_spine_1", 
+      "bip_spine_2", 
+      "bip_spine_3", 
+      "bip_tail00", 
+      "bip_tail01", 
+      "bip_tail010", 
+      "bip_tail011", 
+      "bip_tail012", 
+      "bip_tail013", 
+      "bip_tail014", 
+      "bip_tail015", 
+      "bip_tail016", 
+      "bip_tail017", 
+      "bip_tail018", 
+      "bip_tail019", 
+      "bip_tail02", 
+      "bip_tail020", 
+      "bip_tail021", 
+      "bip_tail022", 
+      "bip_tail023", 
+      "bip_tail024", 
+      "bip_tail025", 
+      "bip_tail03", 
+      "bip_tail04", 
+      "bip_tail05", 
+      "bip_tail06", 
+      "bip_tail07", 
+      "bip_tail08", 
+      "bip_tail09", 
+      "bip_thumb_0_l", 
+      "bip_thumb_0_r", 
+      "bip_thumb_1_l", 
+      "bip_thumb_1_r", 
+      "bip_thumb_2_l", 
+      "bip_thumb_2_r", 
+      "bip_toe_l", 
+      "bip_toe_r", 
+      "bip_upperarm_l", 
+      "bip_upperarm_l_twist2", 
+      "bip_upperarm_r", 
+      "bip_upperarm_r_twist2", 
+      "bite1", 
+      "blink1", 
+      "blow", 
+      "boxybelly", 
+      "breastflatten", 
+      "breastnnippleperk", 
+      "breastsize", 
+      "breastsmall", 
+      "bulge", 
+      "bulge2", 
+      "buttsize", 
+      "cheekraiser1", 
+      "collarl", 
+      "collarr", 
+      "collarup", 
+      "cornerlower", 
+      "cornerpuller", 
+      "e", 
+      "ear_l", 
+      "ear_l.1", 
+      "ear_l.2", 
+      "ear_r", 
+      "ear_r.1", 
+      "ear_r.2", 
+      "earshape1", 
+      "earshape2", 
+      "eballlower", 
+      "eballraiser", 
+      "ebinnerlowerer", 
+      "ebinnerupper", 
+      "ebouterlowerer", 
+      "ebouterupper", 
+      "elbow_l", 
+      "elbow_r", 
+      "eyes_convergence", 
+      "eyes_rightleft", 
+      "eyes_updown", 
+      "foot_l", 
+      "foot_r", 
+      "funnel", 
+      "genitalhide", 
+      "genitals", 
+      "hand_l", 
+      "hand_r", 
+      "head", 
+      "hip", 
+      "i", 
+      "ikconstraint_foot_l - foot_l weight", 
+      "ikconstraint_foot_r - foot_r weight", 
+      "ikconstraint_hand_l - hand_l weight", 
+      "ikconstraint_hand_r - hand_r weight", 
+      "indextoe_1_l", 
+      "indextoe_1_r", 
+      "indextoe_2_l", 
+      "indextoe_2_r", 
+      "indextoe_3_l", 
+      "indextoe_3_r", 
+      "jaw", 
+      "jawdroop", 
+      "kiss", 
+      "knee_l", 
+      "knee_r", 
+      "lcarpal1", 
+      "lcarpal2", 
+      "lcarpal3", 
+      "lcarpal4", 
+      "legfix90sw ", 
+      "legsize", 
+      "lidubberopen", 
+      "lipbite", 
+      "lippresser", 
+      "lipsin", 
+      "lipsout", 
+      "lipswide", 
+      "localviewtargetfactor", 
+      "lowerblink", 
+      "lowerlidlower", 
+      "lowerlidraiser", 
+      "lowerliplower", 
+      "midtoe_1_l", 
+      "midtoe_1_r", 
+      "midtoe_2_l", 
+      "midtoe_2_r", 
+      "midtoe_3_l", 
+      "midtoe_3_r", 
+      "mo1", 
+      "mo2", 
+      "mo3", 
+      "mofunnel", 
+      "mouthopen", 
+      "muscles", 
+      "muzzle", 
+      "neck", 
+      "o", 
+      "orientconstraint_bip_collar_l - collarl weight", 
+      "orientconstraint_bip_collar_r - collarr weight", 
+      "orientconstraint_bip_foot_l - foot_l weight", 
+      "orientconstraint_bip_foot_r - foot_r weight", 
+      "orientconstraint_bip_hand_l - hand_l weight", 
+      "orientconstraint_bip_hand_r - hand_r weight", 
+      "orientconstraint_bip_head - head weight", 
+      "orientconstraint_bip_neck - neck weight", 
+      "orientconstraint_bip_pelvis - hip weight", 
+      "orientconstraint_bip_spine_0 - spine_1 weight", 
+      "orientconstraint_bip_spine_1 - spine_2 weight", 
+      "orientconstraint_bip_spine_2 - spine_3 weight", 
+      "orientconstraint_bip_spine_3 - spine_4 weight", 
+      "orientconstraint_roottransform - rig_root weight", 
+      "paizury", 
+      "pantsfit", 
+      "pointconstraint_bip_collar_l - collarl weight", 
+      "pointconstraint_bip_collar_r - collarr weight", 
+      "pointconstraint_bip_head - head weight", 
+      "pointconstraint_bip_neck - neck weight", 
+      "pointconstraint_bip_pelvis - hip weight", 
+      "pointconstraint_bip_spine_0 - spine_1 weight", 
+      "pointconstraint_bip_spine_1 - spine_2 weight", 
+      "pointconstraint_bip_spine_2 - spine_3 weight", 
+      "pointconstraint_bip_spine_3 - spine_4 weight", 
+      "pointconstraint_roottransform - rig_root weight", 
+      "pregnant", 
+      "puckerer", 
+      "rcarpal1", 
+      "rcarpal2", 
+      "rcarpal3", 
+      "rcarpal4", 
+      "rig_foothelper0", 
+      "rig_foothelper1", 
+      "rig_foothelper2", 
+      "rig_foothelper3", 
+      "rig_root", 
+      "ringtoe_1_l", 
+      "ringtoe_1_r", 
+      "ringtoe_2_l", 
+      "ringtoe_2_r", 
+      "ringtoe_3_l", 
+      "ringtoe_3_r", 
+      "roottransform", 
+      "shocked", 
+      "shortsfit", 
+      "sideleft1", 
+      "sideleft2", 
+      "sideleft3", 
+      "sideleft4", 
+      "sideright1", 
+      "sideright2", 
+      "sideright3", 
+      "sideright4", 
+      "slim", 
+      "smirk", 
+      "spine_1", 
+      "spine_2", 
+      "spine_3", 
+      "spine_4", 
+      "sshapelips", 
+      "strecher", 
+      "thoathbulge1", 
+      "thoathbulge2", 
+      "tongue00", 
+      "tongue01", 
+      "tongue02", 
+      "tongue03", 
+      "tongue04", 
+      "tongue05", 
+      "tongue06", 
+      "tongue07", 
+      "toraxwide", 
+      "u", 
+      "upeerlidlower", 
+      "upeerlidraiser", 
+      "uppelipraiser", 
+      "upperblink", 
+      "vagclose", 
+      "vaggrip", 
+      "vaginalopen", 
+      "vaginalopen2", 
+      "vagpush", 
+      "viewtarget", 
+      "voluptuous", 
+      "waist1", 
+      "widehips", 
+      "worried"
+    ], 
+    "v2_only_folds_sorted": [
+      "amused", 
+      "angry", 
+      "bigtoe_1_l", 
+      "bigtoe_1_r", 
+      "bigtoe_2_l", 
+      "bigtoe_2_r", 
+      "bigtoe_3_l", 
+      "bigtoe_3_r", 
+      "bip_head_hair_back", 
+      "bip_head_hair_back_1", 
+      "bip_head_hair_back_1_l", 
+      "bip_head_hair_back_1_r", 
+      "bip_head_hair_back_l", 
+      "bip_head_hair_back_r", 
+      "bip_head_hairfront", 
+      "bip_head_hairfront_1_l", 
+      "bip_head_hairfront_1_r", 
+      "bip_head_hairfront_2_l", 
+      "bip_head_hairfront_2_r", 
+      "bip_head_hairfront_3_l", 
+      "bip_head_hairfront_3_r", 
+      "bip_head_hairfront_l", 
+      "bip_head_hairfront_r", 
+      "bip_head_scale", 
+      "bip_lowerarm_l_twist2", 
+      "bip_lowerarm_r_twist2", 
+      "bip_ponytail1", 
+      "bip_ponytail2", 
+      "bip_tail010", 
+      "bip_tail011", 
+      "bip_tail012", 
+      "bip_tail013", 
+      "bip_tail014", 
+      "bip_tail015", 
+      "bip_tail016", 
+      "bip_tail017", 
+      "bip_tail018", 
+      "bip_tail019", 
+      "bip_tail020", 
+      "bip_tail021", 
+      "bip_tail022", 
+      "bip_tail023", 
+      "bip_tail024", 
+      "bip_tail025", 
+      "bip_tail09", 
+      "bip_upperarm_l_twist2", 
+      "bip_upperarm_r_twist2", 
+      "bite1", 
+      "blink1", 
+      "boxybelly", 
+      "breastflatten", 
+      "breastnnippleperk", 
+      "breastsmall", 
+      "bulge", 
+      "bulge2", 
+      "buttsize", 
+      "cheekraiser1", 
+      "collarl", 
+      "collarr", 
+      "collarup", 
+      "cornerlower", 
+      "ear_l", 
+      "ear_l.1", 
+      "ear_l.2", 
+      "ear_r", 
+      "ear_r.1", 
+      "ear_r.2", 
+      "earshape1", 
+      "earshape2", 
+      "eballlower", 
+      "eballraiser", 
+      "ebinnerlowerer", 
+      "ebinnerupper", 
+      "ebouterlowerer", 
+      "ebouterupper", 
+      "elbow_l", 
+      "elbow_r", 
+      "foot_l", 
+      "foot_r", 
+      "genitalhide", 
+      "hand_l", 
+      "hand_r", 
+      "head", 
+      "hip", 
+      "ikconstraint_foot_l - foot_l weight", 
+      "ikconstraint_foot_r - foot_r weight", 
+      "ikconstraint_hand_l - hand_l weight", 
+      "ikconstraint_hand_r - hand_r weight", 
+      "indextoe_1_l", 
+      "indextoe_1_r", 
+      "indextoe_2_l", 
+      "indextoe_2_r", 
+      "indextoe_3_l", 
+      "indextoe_3_r", 
+      "kiss", 
+      "knee_l", 
+      "knee_r", 
+      "legfix90sw ", 
+      "lidubberopen", 
+      "lipbite", 
+      "lippresser", 
+      "lipswide", 
+      "lowerblink", 
+      "lowerlidlower", 
+      "lowerlidraiser", 
+      "lowerliplower", 
+      "midtoe_1_l", 
+      "midtoe_1_r", 
+      "midtoe_2_l", 
+      "midtoe_2_r", 
+      "midtoe_3_l", 
+      "midtoe_3_r", 
+      "mo1", 
+      "mofunnel", 
+      "mouthopen", 
+      "neck", 
+      "orientconstraint_bip_collar_l - collarl weight", 
+      "orientconstraint_bip_collar_r - collarr weight", 
+      "orientconstraint_bip_foot_l - foot_l weight", 
+      "orientconstraint_bip_foot_r - foot_r weight", 
+      "orientconstraint_bip_hand_l - hand_l weight", 
+      "orientconstraint_bip_hand_r - hand_r weight", 
+      "orientconstraint_bip_head - head weight", 
+      "orientconstraint_bip_neck - neck weight", 
+      "orientconstraint_bip_pelvis - hip weight", 
+      "orientconstraint_bip_spine_0 - spine_1 weight", 
+      "orientconstraint_bip_spine_1 - spine_2 weight", 
+      "orientconstraint_bip_spine_2 - spine_3 weight", 
+      "orientconstraint_bip_spine_3 - spine_4 weight", 
+      "paizury", 
+      "pantsfit", 
+      "pointconstraint_bip_collar_l - collarl weight", 
+      "pointconstraint_bip_collar_r - collarr weight", 
+      "pointconstraint_bip_head - head weight", 
+      "pointconstraint_bip_neck - neck weight", 
+      "pointconstraint_bip_pelvis - hip weight", 
+      "pointconstraint_bip_spine_0 - spine_1 weight", 
+      "pointconstraint_bip_spine_1 - spine_2 weight", 
+      "pointconstraint_bip_spine_2 - spine_3 weight", 
+      "pointconstraint_bip_spine_3 - spine_4 weight", 
+      "rig_foothelper0", 
+      "rig_foothelper1", 
+      "rig_foothelper2", 
+      "rig_foothelper3", 
+      "ringtoe_1_l", 
+      "ringtoe_1_r", 
+      "ringtoe_2_l", 
+      "ringtoe_2_r", 
+      "ringtoe_3_l", 
+      "ringtoe_3_r", 
+      "shocked", 
+      "shortsfit", 
+      "sideleft1", 
+      "sideleft2", 
+      "sideleft3", 
+      "sideleft4", 
+      "sideright1", 
+      "sideright2", 
+      "sideright3", 
+      "sideright4", 
+      "spine_1", 
+      "spine_2", 
+      "spine_3", 
+      "spine_4", 
+      "sshapelips", 
+      "strecher", 
+      "thoathbulge1", 
+      "thoathbulge2", 
+      "toraxwide", 
+      "upeerlidlower", 
+      "upeerlidraiser", 
+      "uppelipraiser", 
+      "upperblink", 
+      "waist1", 
+      "worried"
+    ], 
+    "v2_provenance": {
+      "a": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "A"
+        }
+      ], 
+      "amused": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "amused"
+        }
+      ], 
+      "analopen": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "AnalOpen"
+        }
+      ], 
+      "angry": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Angry"
+        }
+      ], 
+      "anus": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Anus"
+        }
+      ], 
+      "bigtoe_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bigToe_1_l"
+        }
+      ], 
+      "bigtoe_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bigToe_1_r"
+        }
+      ], 
+      "bigtoe_2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bigToe_2_l"
+        }
+      ], 
+      "bigtoe_2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bigToe_2_r"
+        }
+      ], 
+      "bigtoe_3_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bigToe_3_l"
+        }
+      ], 
+      "bigtoe_3_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bigToe_3_r"
+        }
+      ], 
+      "bip_breast_01_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_breast_01_l"
+        }
+      ], 
+      "bip_breast_01_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_breast_01_r"
+        }
+      ], 
+      "bip_breast_02_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_breast_02_l"
+        }
+      ], 
+      "bip_breast_02_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_breast_02_r"
+        }
+      ], 
+      "bip_butt_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_butt_l"
+        }
+      ], 
+      "bip_butt_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_butt_r"
+        }
+      ], 
+      "bip_collar_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_collar_l"
+        }
+      ], 
+      "bip_collar_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_collar_r"
+        }
+      ], 
+      "bip_foot_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_foot_l"
+        }
+      ], 
+      "bip_foot_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_foot_r"
+        }
+      ], 
+      "bip_hand_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_hand_l"
+        }
+      ], 
+      "bip_hand_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_hand_r"
+        }
+      ], 
+      "bip_head": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head"
+        }
+      ], 
+      "bip_head_hair_back": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hair_back"
+        }
+      ], 
+      "bip_head_hair_back_1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hair_back_1"
+        }
+      ], 
+      "bip_head_hair_back_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hair_back_1_l"
+        }
+      ], 
+      "bip_head_hair_back_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hair_back_1_r"
+        }
+      ], 
+      "bip_head_hair_back_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hair_back_l"
+        }
+      ], 
+      "bip_head_hair_back_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hair_back_r"
+        }
+      ], 
+      "bip_head_hairfront": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hairFront"
+        }
+      ], 
+      "bip_head_hairfront_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hairFront_1_l"
+        }
+      ], 
+      "bip_head_hairfront_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hairFront_1_r"
+        }
+      ], 
+      "bip_head_hairfront_2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hairFront_2_l"
+        }
+      ], 
+      "bip_head_hairfront_2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hairFront_2_r"
+        }
+      ], 
+      "bip_head_hairfront_3_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hairFront_3_l"
+        }
+      ], 
+      "bip_head_hairfront_3_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hairFront_3_r"
+        }
+      ], 
+      "bip_head_hairfront_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hairFront_l"
+        }
+      ], 
+      "bip_head_hairfront_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_hairFront_r"
+        }
+      ], 
+      "bip_head_scale": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_head_scale"
+        }
+      ], 
+      "bip_hip_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_hip_l"
+        }
+      ], 
+      "bip_hip_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_hip_r"
+        }
+      ], 
+      "bip_hip_twist2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_hip_twist2_l"
+        }
+      ], 
+      "bip_hip_twist2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_hip_twist2_r"
+        }
+      ], 
+      "bip_index_0_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_index_0_l"
+        }
+      ], 
+      "bip_index_0_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_index_0_r"
+        }
+      ], 
+      "bip_index_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_index_1_l"
+        }
+      ], 
+      "bip_index_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_index_1_r"
+        }
+      ], 
+      "bip_index_2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_index_2_l"
+        }
+      ], 
+      "bip_index_2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_index_2_r"
+        }
+      ], 
+      "bip_knee_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_knee_l"
+        }
+      ], 
+      "bip_knee_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_knee_r"
+        }
+      ], 
+      "bip_lowerarm_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_lowerArm_l"
+        }
+      ], 
+      "bip_lowerarm_l_twist2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_lowerArm_l_twist2"
+        }
+      ], 
+      "bip_lowerarm_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_lowerArm_r"
+        }
+      ], 
+      "bip_lowerarm_r_twist2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_lowerArm_r_twist2"
+        }
+      ], 
+      "bip_middle_0_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_middle_0_l"
+        }
+      ], 
+      "bip_middle_0_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_middle_0_r"
+        }
+      ], 
+      "bip_middle_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_middle_1_l"
+        }
+      ], 
+      "bip_middle_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_middle_1_r"
+        }
+      ], 
+      "bip_middle_2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_middle_2_l"
+        }
+      ], 
+      "bip_middle_2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_middle_2_r"
+        }
+      ], 
+      "bip_neck": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_neck"
+        }
+      ], 
+      "bip_pelvis": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_pelvis"
+        }
+      ], 
+      "bip_pinky_0_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_pinky_0_l"
+        }
+      ], 
+      "bip_pinky_0_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_pinky_0_r"
+        }
+      ], 
+      "bip_pinky_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_pinky_1_l"
+        }
+      ], 
+      "bip_pinky_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_pinky_1_r"
+        }
+      ], 
+      "bip_pinky_2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_pinky_2_l"
+        }
+      ], 
+      "bip_pinky_2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_pinky_2_r"
+        }
+      ], 
+      "bip_ponytail1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_ponytail1"
+        }
+      ], 
+      "bip_ponytail2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_ponytail2"
+        }
+      ], 
+      "bip_ring_0_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_ring_0_l"
+        }
+      ], 
+      "bip_ring_0_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_ring_0_r"
+        }
+      ], 
+      "bip_ring_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_ring_1_l"
+        }
+      ], 
+      "bip_ring_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_ring_1_r"
+        }
+      ], 
+      "bip_ring_2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_ring_2_l"
+        }
+      ], 
+      "bip_ring_2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_ring_2_r"
+        }
+      ], 
+      "bip_spine_0": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_spine_0"
+        }
+      ], 
+      "bip_spine_1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_spine_1"
+        }
+      ], 
+      "bip_spine_2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_spine_2"
+        }
+      ], 
+      "bip_spine_3": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_spine_3"
+        }
+      ], 
+      "bip_tail00": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail00"
+        }
+      ], 
+      "bip_tail01": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail01"
+        }
+      ], 
+      "bip_tail010": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail010"
+        }
+      ], 
+      "bip_tail011": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail011"
+        }
+      ], 
+      "bip_tail012": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail012"
+        }
+      ], 
+      "bip_tail013": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail013"
+        }
+      ], 
+      "bip_tail014": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail014"
+        }
+      ], 
+      "bip_tail015": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail015"
+        }
+      ], 
+      "bip_tail016": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail016"
+        }
+      ], 
+      "bip_tail017": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail017"
+        }
+      ], 
+      "bip_tail018": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail018"
+        }
+      ], 
+      "bip_tail019": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail019"
+        }
+      ], 
+      "bip_tail02": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail02"
+        }
+      ], 
+      "bip_tail020": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail020"
+        }
+      ], 
+      "bip_tail021": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail021"
+        }
+      ], 
+      "bip_tail022": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail022"
+        }
+      ], 
+      "bip_tail023": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail023"
+        }
+      ], 
+      "bip_tail024": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail024"
+        }
+      ], 
+      "bip_tail025": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail025"
+        }
+      ], 
+      "bip_tail03": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail03"
+        }
+      ], 
+      "bip_tail04": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail04"
+        }
+      ], 
+      "bip_tail05": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail05"
+        }
+      ], 
+      "bip_tail06": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail06"
+        }
+      ], 
+      "bip_tail07": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail07"
+        }
+      ], 
+      "bip_tail08": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail08"
+        }
+      ], 
+      "bip_tail09": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_tail09"
+        }
+      ], 
+      "bip_thumb_0_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_thumb_0_l"
+        }
+      ], 
+      "bip_thumb_0_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_thumb_0_r"
+        }
+      ], 
+      "bip_thumb_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_thumb_1_l"
+        }
+      ], 
+      "bip_thumb_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_thumb_1_r"
+        }
+      ], 
+      "bip_thumb_2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_thumb_2_l"
+        }
+      ], 
+      "bip_thumb_2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_thumb_2_r"
+        }
+      ], 
+      "bip_toe_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_toe_l"
+        }
+      ], 
+      "bip_toe_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_toe_r"
+        }
+      ], 
+      "bip_upperarm_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_UpperArm_l"
+        }
+      ], 
+      "bip_upperarm_l_twist2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_UpperArm_l_twist2"
+        }
+      ], 
+      "bip_upperarm_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_UpperArm_r"
+        }
+      ], 
+      "bip_upperarm_r_twist2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bip_UpperArm_r_twist2"
+        }
+      ], 
+      "bite1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bite1"
+        }
+      ], 
+      "blink1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Blink1"
+        }
+      ], 
+      "blow": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Blow"
+        }
+      ], 
+      "boxybelly": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "boxybelly"
+        }
+      ], 
+      "breastflatten": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Breastflatten"
+        }
+      ], 
+      "breastnnippleperk": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "BreastNnipplePerk"
+        }
+      ], 
+      "breastsize": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Breastsize"
+        }
+      ], 
+      "breastsmall": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "BreastSmall"
+        }
+      ], 
+      "bulge": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "bulge"
+        }
+      ], 
+      "bulge2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Bulge2"
+        }
+      ], 
+      "buttsize": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Buttsize"
+        }
+      ], 
+      "cheekraiser1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "CheekRaiser1"
+        }
+      ], 
+      "collarl": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "CollarL"
+        }
+      ], 
+      "collarr": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "CollarR"
+        }
+      ], 
+      "collarup": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "CollarUp"
+        }
+      ], 
+      "cornerlower": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "CornerLower"
+        }
+      ], 
+      "cornerpuller": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "CornerPuller"
+        }
+      ], 
+      "e": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "E"
+        }
+      ], 
+      "ear_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Ear_l"
+        }
+      ], 
+      "ear_l.1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Ear_l.1"
+        }
+      ], 
+      "ear_l.2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Ear_l.2"
+        }
+      ], 
+      "ear_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Ear_r"
+        }
+      ], 
+      "ear_r.1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Ear_r.1"
+        }
+      ], 
+      "ear_r.2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Ear_r.2"
+        }
+      ], 
+      "earshape1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "EarShape1"
+        }
+      ], 
+      "earshape2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "EarShape2"
+        }
+      ], 
+      "eballlower": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "EBAllLower"
+        }
+      ], 
+      "eballraiser": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "EBAllRaiser"
+        }
+      ], 
+      "ebinnerlowerer": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "EBInnerLowerer"
+        }
+      ], 
+      "ebinnerupper": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "EBInnerUpper"
+        }
+      ], 
+      "ebouterlowerer": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "EBOuterLowerer"
+        }
+      ], 
+      "ebouterupper": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "EBOuterUpper"
+        }
+      ], 
+      "elbow_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Elbow_l"
+        }
+      ], 
+      "elbow_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Elbow_r"
+        }
+      ], 
+      "eyes_convergence": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "eyes_convergence"
+        }
+      ], 
+      "eyes_rightleft": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "eyes_rightleft"
+        }
+      ], 
+      "eyes_updown": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "eyes_updown"
+        }
+      ], 
+      "foot_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Foot_l"
+        }
+      ], 
+      "foot_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Foot_r"
+        }
+      ], 
+      "funnel": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Funnel"
+        }
+      ], 
+      "genitalhide": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "GenitalHide"
+        }
+      ], 
+      "genitals": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Genitals"
+        }
+      ], 
+      "hand_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Hand_l"
+        }
+      ], 
+      "hand_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Hand_r"
+        }
+      ], 
+      "head": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Head"
+        }
+      ], 
+      "hip": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Hip"
+        }
+      ], 
+      "i": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "I"
+        }
+      ], 
+      "ikconstraint_foot_l - foot_l weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ikConstraint_Foot_l - Foot_l weight"
+        }
+      ], 
+      "ikconstraint_foot_r - foot_r weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ikConstraint_Foot_r - Foot_r weight"
+        }
+      ], 
+      "ikconstraint_hand_l - hand_l weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ikConstraint_Hand_l - Hand_l weight"
+        }
+      ], 
+      "ikconstraint_hand_r - hand_r weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ikConstraint_Hand_r - Hand_r weight"
+        }
+      ], 
+      "indextoe_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "indexToe_1_l"
+        }
+      ], 
+      "indextoe_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "indexToe_1_r"
+        }
+      ], 
+      "indextoe_2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "indexToe_2_l"
+        }
+      ], 
+      "indextoe_2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "indexToe_2_r"
+        }
+      ], 
+      "indextoe_3_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "indexToe_3_l"
+        }
+      ], 
+      "indextoe_3_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "indexToe_3_r"
+        }
+      ], 
+      "jaw": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "jaw"
+        }
+      ], 
+      "jawdroop": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "JawDroop"
+        }
+      ], 
+      "kiss": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Kiss"
+        }
+      ], 
+      "knee_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Knee_l"
+        }
+      ], 
+      "knee_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Knee_r"
+        }
+      ], 
+      "lcarpal1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "lCarpal1"
+        }
+      ], 
+      "lcarpal2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "lCarpal2"
+        }
+      ], 
+      "lcarpal3": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "lCarpal3"
+        }
+      ], 
+      "lcarpal4": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "lCarpal4"
+        }
+      ], 
+      "legfix90sw ": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "LegFix90SW "
+        }
+      ], 
+      "legsize": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Legsize"
+        }
+      ], 
+      "lidubberopen": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "LidUbberOpen"
+        }
+      ], 
+      "lipbite": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "lipBite"
+        }
+      ], 
+      "lippresser": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "LipPresser"
+        }
+      ], 
+      "lipsin": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "lipsin"
+        }
+      ], 
+      "lipsout": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "lipsout"
+        }
+      ], 
+      "lipswide": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "lipswide"
+        }
+      ], 
+      "localviewtargetfactor": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "localViewTargetFactor"
+        }
+      ], 
+      "lowerblink": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "lowerBlink"
+        }
+      ], 
+      "lowerlidlower": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "LowerLidLower"
+        }
+      ], 
+      "lowerlidraiser": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "LowerLidRaiser"
+        }
+      ], 
+      "lowerliplower": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "LowerLipLower"
+        }
+      ], 
+      "midtoe_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "midToe_1_l"
+        }
+      ], 
+      "midtoe_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "midToe_1_r"
+        }
+      ], 
+      "midtoe_2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "midToe_2_l"
+        }
+      ], 
+      "midtoe_2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "midToe_2_r"
+        }
+      ], 
+      "midtoe_3_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "midToe_3_l"
+        }
+      ], 
+      "midtoe_3_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "midToe_3_r"
+        }
+      ], 
+      "mo1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "MO1"
+        }
+      ], 
+      "mo2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "MO2"
+        }
+      ], 
+      "mo3": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "MO3"
+        }
+      ], 
+      "mofunnel": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "MOFunnel"
+        }
+      ], 
+      "mouthopen": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "MouthOpen"
+        }
+      ], 
+      "muscles": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Muscles"
+        }
+      ], 
+      "muzzle": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Muzzle"
+        }
+      ], 
+      "neck": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Neck"
+        }
+      ], 
+      "o": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "O"
+        }
+      ], 
+      "orientconstraint_bip_collar_l - collarl weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_collar_l - CollarL weight"
+        }
+      ], 
+      "orientconstraint_bip_collar_r - collarr weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_collar_r - CollarR weight"
+        }
+      ], 
+      "orientconstraint_bip_foot_l - foot_l weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_foot_l - Foot_l weight"
+        }
+      ], 
+      "orientconstraint_bip_foot_r - foot_r weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_foot_r - Foot_r weight"
+        }
+      ], 
+      "orientconstraint_bip_hand_l - hand_l weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_hand_l - Hand_l weight"
+        }
+      ], 
+      "orientconstraint_bip_hand_r - hand_r weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_hand_r - Hand_r weight"
+        }
+      ], 
+      "orientconstraint_bip_head - head weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_head - Head weight"
+        }
+      ], 
+      "orientconstraint_bip_neck - neck weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_neck - Neck weight"
+        }
+      ], 
+      "orientconstraint_bip_pelvis - hip weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_pelvis - Hip weight"
+        }
+      ], 
+      "orientconstraint_bip_spine_0 - spine_1 weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_spine_0 - spine_1 weight"
+        }
+      ], 
+      "orientconstraint_bip_spine_1 - spine_2 weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_spine_1 - spine_2 weight"
+        }
+      ], 
+      "orientconstraint_bip_spine_2 - spine_3 weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_spine_2 - spine_3 weight"
+        }
+      ], 
+      "orientconstraint_bip_spine_3 - spine_4 weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_bip_spine_3 - spine_4 weight"
+        }
+      ], 
+      "orientconstraint_roottransform - rig_root weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "orientConstraint_rootTransform - rig_root weight"
+        }
+      ], 
+      "paizury": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Paizury"
+        }
+      ], 
+      "pantsfit": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "PantsFit"
+        }
+      ], 
+      "pointconstraint_bip_collar_l - collarl weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "pointConstraint_bip_collar_l - CollarL weight"
+        }
+      ], 
+      "pointconstraint_bip_collar_r - collarr weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "pointConstraint_bip_collar_r - CollarR weight"
+        }
+      ], 
+      "pointconstraint_bip_head - head weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "pointConstraint_bip_head - Head weight"
+        }
+      ], 
+      "pointconstraint_bip_neck - neck weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "pointConstraint_bip_neck - Neck weight"
+        }
+      ], 
+      "pointconstraint_bip_pelvis - hip weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "pointConstraint_bip_pelvis - Hip weight"
+        }
+      ], 
+      "pointconstraint_bip_spine_0 - spine_1 weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "pointConstraint_bip_spine_0 - spine_1 weight"
+        }
+      ], 
+      "pointconstraint_bip_spine_1 - spine_2 weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "pointConstraint_bip_spine_1 - spine_2 weight"
+        }
+      ], 
+      "pointconstraint_bip_spine_2 - spine_3 weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "pointConstraint_bip_spine_2 - spine_3 weight"
+        }
+      ], 
+      "pointconstraint_bip_spine_3 - spine_4 weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "pointConstraint_bip_spine_3 - spine_4 weight"
+        }
+      ], 
+      "pointconstraint_roottransform - rig_root weight": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "pointConstraint_rootTransform - rig_root weight"
+        }
+      ], 
+      "pregnant": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Pregnant"
+        }
+      ], 
+      "puckerer": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "puckerer"
+        }
+      ], 
+      "rcarpal1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "rCarpal1"
+        }
+      ], 
+      "rcarpal2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "rCarpal2"
+        }
+      ], 
+      "rcarpal3": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "rCarpal3"
+        }
+      ], 
+      "rcarpal4": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "rCarpal4"
+        }
+      ], 
+      "rig_foothelper0": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "rig_footHelper0"
+        }
+      ], 
+      "rig_foothelper1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "rig_footHelper1"
+        }
+      ], 
+      "rig_foothelper2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "rig_footHelper2"
+        }
+      ], 
+      "rig_foothelper3": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "rig_footHelper3"
+        }
+      ], 
+      "rig_root": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "rig_root"
+        }
+      ], 
+      "ringtoe_1_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ringToe_1_l"
+        }
+      ], 
+      "ringtoe_1_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ringToe_1_r"
+        }
+      ], 
+      "ringtoe_2_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ringToe_2_l"
+        }
+      ], 
+      "ringtoe_2_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ringToe_2_r"
+        }
+      ], 
+      "ringtoe_3_l": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ringToe_3_l"
+        }
+      ], 
+      "ringtoe_3_r": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ringToe_3_r"
+        }
+      ], 
+      "roottransform": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "rootTransform"
+        }
+      ], 
+      "shocked": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Shocked"
+        }
+      ], 
+      "shortsfit": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "ShortsFit"
+        }
+      ], 
+      "sideleft1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "SideLeft1"
+        }
+      ], 
+      "sideleft2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "SideLeft2"
+        }
+      ], 
+      "sideleft3": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "SideLeft3"
+        }
+      ], 
+      "sideleft4": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "SideLeft4"
+        }
+      ], 
+      "sideright1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "SideRight1"
+        }
+      ], 
+      "sideright2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "SideRight2"
+        }
+      ], 
+      "sideright3": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "SideRight3"
+        }
+      ], 
+      "sideright4": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "SideRight4"
+        }
+      ], 
+      "slim": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "slim"
+        }
+      ], 
+      "smirk": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Smirk"
+        }
+      ], 
+      "spine_1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "spine_1"
+        }
+      ], 
+      "spine_2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "spine_2"
+        }
+      ], 
+      "spine_3": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "spine_3"
+        }
+      ], 
+      "spine_4": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "spine_4"
+        }
+      ], 
+      "sshapelips": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Sshapelips"
+        }
+      ], 
+      "strecher": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "Strecher"
+        }
+      ], 
+      "thoathbulge1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "thoathbulge1"
+        }
+      ], 
+      "thoathbulge2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "thoathbulge2"
+        }
+      ], 
+      "tongue00": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "tongue00"
+        }
+      ], 
+      "tongue01": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "tongue01"
+        }
+      ], 
+      "tongue02": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "tongue02"
+        }
+      ], 
+      "tongue03": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "tongue03"
+        }
+      ], 
+      "tongue04": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "tongue04"
+        }
+      ], 
+      "tongue05": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "tongue05"
+        }
+      ], 
+      "tongue06": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "tongue06"
+        }
+      ], 
+      "tongue07": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "tongue07"
+        }
+      ], 
+      "toraxwide": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "toraxwide"
+        }
+      ], 
+      "u": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "U"
+        }
+      ], 
+      "upeerlidlower": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "UpeerLidLower"
+        }
+      ], 
+      "upeerlidraiser": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "UpeerLidRaiser"
+        }
+      ], 
+      "uppelipraiser": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "UppeLipRaiser"
+        }
+      ], 
+      "upperblink": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "UpperBlink"
+        }
+      ], 
+      "vagclose": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "VagClose"
+        }
+      ], 
+      "vaggrip": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "VagGrip"
+        }
+      ], 
+      "vaginalopen": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "vaginalopen"
+        }
+      ], 
+      "vaginalopen2": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "vaginalopen2"
+        }
+      ], 
+      "vagpush": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "VagPush"
+        }
+      ], 
+      "viewtarget": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "viewTarget"
+        }
+      ], 
+      "voluptuous": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "voluptuous"
+        }
+      ], 
+      "waist1": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "waist1"
+        }
+      ], 
+      "widehips": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "widehips"
+        }
+      ], 
+      "worried": [
+        {
+          "animation_set": "krystalv21", 
+          "literal": "worried"
+        }
+      ]
+    }, 
+    "v2_shot_name": "shot9"
+  }
+}

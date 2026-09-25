@@ -1,0 +1,241 @@
+
+============================================================================================================
+SFM REBUILD CONTROL GROUPS - PRODUCTION CANDIDATE
+============================================================================================================
+PRODUCTION_REVISION = SFM_REBUILD_CONTROL_GROUPS_CONTEXTUALIZER_PRODUCTION_2026_09_22_QUALIFIED_AUTHORITY
+MUTATION STATUS: MUTATING PRODUCTION CANDIDATE
+ROOT-DIRECT FIX: SYNTHETIC <ROOT> EXCLUDED FROM CHILD TREE; MASTER-KNOWN ROOT-DIRECT RIG CONTROLS MAY USE PROVEN HIDDEN-FAMILY ACTIVE-RIG COUNTERPART
+MIXED DIRECT-ORDER POLICY: WHEN ONE CONTEXTUAL DIRECT-CONTROL COHORT MIXES MASTER-KNOWN AND MASTER-UNKNOWN CONTROLS, CURRENT MASTER CANNOT EXPRESS A COMPLETE TOTAL ORDER; PRESERVE THE FRESH PRE TOTAL DIRECT-CONTROL ORDER FOR THAT COHORT
+PRODUCTION MODE: USER-SELECTED SCOPE; PRE-REBUILD ELIGIBILITY GATE; FROZEN NATIVE/CONTEXTUAL PIPELINE UNCHANGED FOR ELIGIBLE TARGETS
+MASTER SELECTABILITY VALIDATION: EXPLICIT Master selectable READS STORED DmeControlGroup selectable ATTRIBUTE; IsSelectable() REMAINS DIAGNOSTIC
+CONTEXTUALIZER LAYERED ISOLATION: ELIGIBLE TARGET MUTATION SEMANTICS ARE UNCHANGED
+CONTEXTUALIZER LAYER 1: DIRECT PROCESSED-TARGET FINGERPRINT + DEEP CHECK OF ALL OTHER CURRENT-SHOT ANIMATION SETS AFTER EVERY TARGET
+CONTEXTUALIZER LAYER 2: COMPACT WHOLE-SESSION SHOT/ANIMATION-SET IDENTITY CENSUS AFTER EVERY COMPLETED SHOT
+CONTEXTUALIZER LAYER 3: EXHAUSTIVE WHOLE-SESSION DEEP VERIFICATION EVERY 12 NON-FINAL SHOTS + AT SUCCESSFUL END
+CONTEXTUALIZER PEER POLICY: FOLLOWER/OVERLAP HEURISTICS DO NOT DEFINE ISOLATION PEERS
+PRODUCTION RESPONSIVENESS: ONE ELIGIBLE TARGET PER QT CALLBACK; RETURN TO QT BETWEEN SUCCESSFUL SAME-SHOT TARGETS; SHOT-LEVEL 100ms DEFER RETAINED
+CONTEXTUALIZER RESOURCE POLICY: COMPACT DIGEST BASELINE, TERMINAL-SEMANTIC NON-RETENTION, AND STREAMING GLOBAL VERIFIER RETAINED; ONE PERFORMANCE CHANGE ONLY - ONE IMMUTABLE SCOPED MASTER INDEX REPLACES REPEATED MASTER PARSING
+CONTEXTUALIZER_MASTER_INDEX_POLICY = PURE-PYTHON STATIC MASTER DATA ONLY; PER-USE SHA256 STABILITY; PER-BOUNDARY SUBSET+CONFLICT VALIDATION
+CONTEXTUALIZER_RUNTIME_DME_CACHE_POLICY = NONE
+CONTEXTUALIZER_DIRECT_DME_TO_HASH_STREAMING = NO
+CONTEXTUALIZER VIRTUALQUERY POLICY: LOW-CADENCE ONLY; NEVER CALLED PER TARGET OR IMMEDIATELY BEFORE NATIVE REBUILD
+scope_mode=SELECTED_SHOTS scope_shots=1
+CONTEXTUALIZER_SCOPE_SHOT_NAMES = [u'shot3']
+MASTER METADATA PARSER: PROVEN ENRICHED PARSER WITH group_metadata = ENABLED
+BASE ARCHITECTURE: SFM Rebuild Control Groups Contextualizer
+UNDO POLICY: entire per-target transaction is non-undoable
+CONTEXTUALIZER_PROCESS_ARCHITECTURE ok=True pointer_bits=32 exe=u'E:\\SteamLibrary\\steamapps\\common\\SourceFilmmaker\\game\\sfm.exe' machine=332 characteristics=290 large_address_aware=True image_file_32bit_machine=True error=None
+CONTEXTUALIZER_RESOURCE_CHECKPOINT label=CP0_COMMAND_START run_elapsed=0.060 mem_ok=True working_set=3007791104L peak_working_set=3032223744L pagefile=3056304128L peak_pagefile=3079495680L private=3056304128L vas_requested=True vas_ok=True min_address=65536 max_address=4294901759L mem_free=534560768 mem_reserve=378216448 mem_commit=3382059008L largest_free=299401216 free_regions=1219 virtual_query_count=8460 vas_elapsed=0.0590 vas_error=None
+ifm.dll path=u'e:\\steamlibrary\\steamapps\\common\\sourcefilmmaker\\game\\bin\\tools\\ifm.dll'
+ifm.dll SHA256=12504c248047e181d31a8500fb6693d1a2d3c805e841fc2227e41aa4e2d2b47e
+callback=0x6183c820
+NATIVE_GUARDS = PASS
+eligibility content directories=32
+game directory=u'e:\\steamlibrary\\steamapps\\common\\sourcefilmmaker\\game'
+usermod directory=u'e:\\steamlibrary\\steamapps\\common\\sourcefilmmaker\\game\\usermod'
+live Master=u'e:\\steamlibrary\\steamapps\\common\\sourcefilmmaker\\game\\usermod\\cfg\\sfm_defaultanimationgroups.txt'
+live Master SHA256=ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93
+
+============================================================================================================
+CONTEXTUALIZER PROCESS-LIFETIME SCOPE-STATE GUARD
+============================================================================================================
+CONTEXTUALIZER_PROCESS_SCOPE_STATE_TRANSITION = UNUSED -> SELECTED_SCOPE
+CONTEXTUALIZER_PROCESS_SCOPE_STATE_ARMED = True
+CONTEXTUALIZER_REQUESTED_SCOPE_CLASS = SELECTED_SCOPE
+
+============================================================================================================
+CONTEXTUALIZER BUILD ONE SCOPED CANONICAL MASTER INDEX
+============================================================================================================
+CONTEXTUALIZER_SCOPE_MASTER_VOCABULARY animation_sets=2 controls=522 unique_folds=482
+CONTEXTUALIZER_SCOPED_MASTER_INDEX_BUILD = PASS unique_scope_folds=482 matched_folds=426 exact_literals=883 groups=42 mapping_count=128555 destination_count=42 build_seconds=1.444 private_delta=544768L working_set_delta=397312L
+CONTEXTUALIZER_MASTER_INDEX_CONFLICT_POLICY = ORIGINAL PER-GATE-SHOT AND PER-TARGET WANTED_FOLDS BOUNDARIES
+CONTEXTUALIZER_MASTER_INDEX_RUNTIME_STATE_CACHE = NONE
+CONTEXTUALIZER_RESOURCE_CHECKPOINT label=CP_INDEX_READY run_elapsed=1.711 mem_ok=True working_set=3008253952L peak_working_set=3032223744L pagefile=3056848896L peak_pagefile=3079495680L private=3056848896L vas_requested=True vas_ok=True min_address=65536 max_address=4294901759L mem_free=534560768 mem_reserve=377671680 mem_commit=3382603776L largest_free=299401216 free_regions=1219 virtual_query_count=8468 vas_elapsed=0.0470 vas_error=None
+original head=0.0 shot='shot3' ptr=4264624644L
+
+============================================================================================================
+BUILDING SCOPED MODEL TARGET INVENTORY
+============================================================================================================
+CONTEXTUALIZER_RESOURCE_CHECKPOINT label=CP1_BEFORE_INVENTORY_GATE run_elapsed=1.761 mem_ok=True working_set=3008253952L peak_working_set=3032223744L pagefile=3056848896L peak_pagefile=3079495680L private=3056848896L vas_requested=True vas_ok=True min_address=65536 max_address=4294901759L mem_free=534560768 mem_reserve=377671680 mem_commit=3382603776L largest_free=299401216 free_regions=1219 virtual_query_count=8468 vas_elapsed=0.0500 vas_error=None
+
+============================================================================================================
+PRE-REBUILD ELIGIBILITY GATE
+============================================================================================================
+scope_mode=SELECTED_SHOTS scoped_shots=1
+gate thresholds low_bone<=30 shared>=4 child_coverage>=0.200
+gate skips static=0 follower=0 lowbone_no_alh=0 failclosed_process=0
+CONTEXTUALIZER_RESOURCE_CHECKPOINT label=CP2_AFTER_INVENTORY_GATE run_elapsed=1.836 mem_ok=True working_set=3008356352L peak_working_set=3032223744L pagefile=3056857088L peak_pagefile=3079495680L private=3056857088L vas_requested=True vas_ok=True min_address=65536 max_address=4294901759L mem_free=534560768 mem_reserve=377663488 mem_commit=3382611968L largest_free=299401216 free_regions=1219 virtual_query_count=8466 vas_elapsed=0.0520 vas_error=None
+target-containing shots=1 animation-sets-seen=2 model-backed=2 eligible-model-targets=2 non-model=0 root-skips=0
+PRODUCTION_DYNAMIC_TARGET_INVENTORY = PASS
+
+============================================================================================================
+CONTEXTUALIZER COMPACT DIGEST WHOLE-SESSION ISOLATION BASELINE
+============================================================================================================
+CONTEXTUALIZER_RESOURCE_CHECKPOINT label=CP3_BEFORE_SESSION_BASELINE run_elapsed=1.879 mem_ok=True working_set=3008356352L peak_working_set=3032223744L pagefile=3056857088L peak_pagefile=3079495680L private=3056857088L vas_requested=True vas_ok=True min_address=65536 max_address=4294901759L mem_free=534560768 mem_reserve=377663488 mem_commit=3382611968L largest_free=299401216 free_regions=1219 virtual_query_count=8466 vas_elapsed=0.0430 vas_error=None
+CONTEXTUALIZER_RESOURCE_CHECKPOINT label=CP4_AFTER_SESSION_DIGEST_BASELINE run_elapsed=2.358 mem_ok=True working_set=3008389120L peak_working_set=3032223744L pagefile=3057364992L peak_pagefile=3079495680L private=3057364992L vas_requested=True vas_ok=True min_address=65536 max_address=4294901759L mem_free=534560768 mem_reserve=377155584 mem_commit=3383119872L largest_free=299401216 free_regions=1219 virtual_query_count=8464 vas_elapsed=0.0370 vas_error=None
+CONTEXTUALIZER_SESSION_BASELINE_SHAPE fingerprints=163 controls=18280 groups=2293 child_refs=2130 direct_refs=18280 elapsed_seconds=0.442
+CONTEXTUALIZER_SESSION_EXPECTED_DIGEST_BASELINE values=163 digest_bytes_each=32 raw_digest_payload_bytes=5216
+animation-set fingerprint digests captured=163
+WHOLE_SESSION_ISOLATION_BASELINE = PASS
+ISOLATION_FINGERPRINT_INCLUDES_GROUPCOLOR = PASS
+CONTEXTUALIZER_COMPACT_SESSION_IDENTITY_BASELINE = PASS shots=15
+Starting proven deferred playhead traversal.
+
+============================================================================================================
+ACTIVATE SHOT 1/1: shot3
+============================================================================================================
+shot ptr=4264624644L midpoint=0.02084999904036522 targets=2
+SHOT_ACTIVATION_IMMEDIATE_GATE = PASS
+Returning to SFM before target transactions.
+DEFERRED_SHOT_CONTEXT_GATE = PASS
+PRODUCTION_TARGET_RESUME_GUARDS = PASS shot=u'shot3' target=u'foxmccouldwm1' target_index=1/2
+
+============================================================================================================
+TARGET 1/2 IN shot3: foxmccouldwm1
+============================================================================================================
+PRE rig status=SUPPORTED_ACTIVE_RIG controls=208 groups=40 owned=52
+PRODUCTION_PRE_CAPTURE_GATE = PASS target=(u'shot3', u'foxmccouldwm1') signature=(208, 40, 52)
+UNDO_ENABLED_BEFORE=True count=0L desc=''
+TARGET_UNDO_DISABLE_GATE = PASS
+CONTEXTUALIZER_TELEMETRY phase=PRE_NATIVE target_seq=1 native_attempt=1 shot=u'shot3' target=u'foxmccouldwm1' run_elapsed=2.682 target_elapsed=0.194 mem_ok=True working_set=3011842048L peak_working_set=3032223744L pagefile=3060404224L peak_pagefile=3079495680L private=3060404224L
+NATIVE_REBUILD_RETURNED = PASS
+PRODUCTION_MIXED_DIRECT_ORDER_PATHS target=(u'shot3', u'foxmccouldwm1') paths=[]
+CLASS_COUNTS pre_hidden_master_active=0 rig_losses=14 master_stranded=38 parent_collapses=0 master_normalizations=0 strong_unknown=0 weak_unknown=0 ambiguous_losses=0 unresolved=0
+PRODUCTION_CLASS_SIGNATURE target=(u'shot3', u'foxmccouldwm1') signature=(0, 14, 38, 0, 0, 0, 0, 0, 0)
+PRODUCTION_GENERIC_POLICY has_RigArms=True has_RigLegs=True authorized_rig=14 authorized_master=38 strong_unknown=0
+PRODUCTION_GENERIC_MODEL_TRANSLATIONS=[(u'RigArms/LeftArm/LeftCarpals', 4, [u'lCarpal1', u'lCarpal2', u'lCarpal3', u'lCarpal4']), (u'RigArms/LeftArm/LeftFingers', 15, [u'ValveBiped.Bip01_L_Finger0', u'ValveBiped.Bip01_L_Finger01', u'ValveBiped.Bip01_L_Finger1', u'ValveBiped.Bip01_L_Finger02', u'ValveBiped.Bip01_L_Finger2', u'ValveBiped.Bip01_L_Finger3', u'ValveBiped.Bip01_L_Finger4', u'ValveBiped.Bip01_L_Finger11', u'ValveBiped.Bip01_L_Finger12', u'ValveBiped.Bip01_L_Finger21', u'ValveBiped.Bip01_L_Finger22', u'ValveBiped.Bip01_L_Finger31', u'ValveBiped.Bip01_L_Finger32', u'ValveBiped.Bip01_L_Finger41', u'ValveBiped.Bip01_L_Finger42']), (u'RigArms/RightArm/RightCarpals', 4, [u'rCarpal1', u'rCarpal2', u'rCarpal3', u'rCarpal4']), (u'RigArms/RightArm/RightFingers', 15, [u'ValveBiped.Bip01_R_Finger0', u'ValveBiped.Bip01_R_Finger01', u'ValveBiped.Bip01_R_Finger1', u'ValveBiped.Bip01_R_Finger02', u'ValveBiped.Bip01_R_Finger2', u'ValveBiped.Bip01_R_Finger3', u'ValveBiped.Bip01_R_Finger4', u'ValveBiped.Bip01_R_Finger11', u'ValveBiped.Bip01_R_Finger12', u'ValveBiped.Bip01_R_Finger21', u'ValveBiped.Bip01_R_Finger22', u'ValveBiped.Bip01_R_Finger31', u'ValveBiped.Bip01_R_Finger32', u'ValveBiped.Bip01_R_Finger41', u'ValveBiped.Bip01_R_Finger42']), (u'RigLegs/LeftLeg/LeftToes', 11, [u'lBigToe', u'lBigToe_2', u'lSmallToe1', u'lSmallToe1_2', u'lSmallToe2', u'lSmallToe2_2', u'lSmallToe3', u'lSmallToe3_2', u'lSmallToe4', u'lSmallToe4_2', u'ValveBiped.Bip01_L_Toe0']), (u'RigLegs/RightLeg/RightToes', 11, [u'rBigToe', u'rBigToe_2', u'rSmallToe1', u'rSmallToe1_2', u'rSmallToe2', u'rSmallToe2_2', u'rSmallToe3', u'rSmallToe3_2', u'rSmallToe4', u'rSmallToe4_2', u'ValveBiped.Bip01_R_Toe0'])]
+PRODUCTION_GENERIC_RIG_DESTINATIONS=[(u'rig_collar_L', u'RigArms/LeftArm'), (u'rig_collar_R', u'RigArms/RightArm'), (u'rig_elbow_L', u'RigArms/LeftArm'), (u'rig_elbow_R', u'RigArms/RightArm'), (u'rig_footHelper_L', u'RigHelpers'), (u'rig_footHelper_R', u'RigHelpers'), (u'rig_foot_L', u'RigLegs/LeftLeg'), (u'rig_foot_R', u'RigLegs/RightLeg'), (u'rig_hand_L', u'RigArms/LeftArm'), (u'rig_hand_R', u'RigArms/RightArm'), (u'rig_knee_L', u'RigLegs/LeftLeg'), (u'rig_knee_R', u'RigLegs/RightLeg'), (u'rig_toe_L', u'RigLegs/LeftLeg/LeftToes'), (u'rig_toe_R', u'RigLegs/RightLeg/RightToes')]
+PRODUCTION_GENERIC_RIG_DESTINATION_AUTHORITIES=[(u'rig_collar_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_collar_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_elbow_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_elbow_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_footHelper_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_footHelper_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_foot_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_foot_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_hand_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_hand_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_knee_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_knee_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_toe_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART+TOE_CONSTRAINT_EVIDENCE'), (u'rig_toe_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART+TOE_CONSTRAINT_EVIDENCE')]
+PRODUCTION_GENERIC_UNDERSPECIFIED_DESTINATIONS=[]
+PRODUCTION_GENERIC_MASTER_STRANDED_DESTINATIONS=[(u'ValveBiped.Bip01_L_Finger0', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger01', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger02', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger1', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger11', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger12', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger2', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger21', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger22', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger3', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger31', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger32', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger4', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger41', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_L_Finger42', u'RigArms/LeftArm/LeftFingers'), (u'ValveBiped.Bip01_R_Finger0', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger01', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger02', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger1', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger11', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger12', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger2', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger21', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger22', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger3', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger31', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger32', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger4', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger41', u'RigArms/RightArm/RightFingers'), (u'ValveBiped.Bip01_R_Finger42', u'RigArms/RightArm/RightFingers'), (u'lCarpal1', u'RigArms/LeftArm/LeftCarpals'), (u'lCarpal2', u'RigArms/LeftArm/LeftCarpals'), (u'lCarpal3', u'RigArms/LeftArm/LeftCarpals'), (u'lCarpal4', u'RigArms/LeftArm/LeftCarpals'), (u'rCarpal1', u'RigArms/RightArm/RightCarpals'), (u'rCarpal2', u'RigArms/RightArm/RightCarpals'), (u'rCarpal3', u'RigArms/RightArm/RightCarpals'), (u'rCarpal4', u'RigArms/RightArm/RightCarpals')]
+PRODUCTION_GENERIC_MASTER_STRANDED_AUTHORITIES=[(u'ValveBiped.Bip01_L_Finger0', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger01', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger02', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger1', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger11', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger12', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger2', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger21', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger22', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger3', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger31', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger32', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger4', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger41', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_L_Finger42', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger0', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger01', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger02', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger1', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger11', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger12', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger2', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger21', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger22', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger3', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger31', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger32', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger4', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger41', u'MODEL_TRANSLATION'), (u'ValveBiped.Bip01_R_Finger42', u'MODEL_TRANSLATION'), (u'lCarpal1', u'MODEL_TRANSLATION'), (u'lCarpal2', u'MODEL_TRANSLATION'), (u'lCarpal3', u'MODEL_TRANSLATION'), (u'lCarpal4', u'MODEL_TRANSLATION'), (u'rCarpal1', u'MODEL_TRANSLATION'), (u'rCarpal2', u'MODEL_TRANSLATION'), (u'rCarpal3', u'MODEL_TRANSLATION'), (u'rCarpal4', u'MODEL_TRANSLATION')]
+PRODUCTION_GENERIC_UNACCOUNTED_MASTER_ROWS=[]
+PRODUCTION_GENERIC_RIG_TOE_PROMOTIONS=[(u'rig_toe_L', u'RigLegs/LeftLeg/LeftToes'), (u'rig_toe_R', u'RigLegs/RightLeg/RightToes')]
+PRODUCTION_GENERIC_KEEP_NATIVE=[]
+PRODUCTION_GENERIC_POLICY_PLAN_FOR_TARGET = PASS
+PRODUCTION_GENERIC_COMPOSER_RESULT target=(u'shot3', u'foxmccouldwm1') desired=74 moved=72 already_correct=2 created_paths=[u'RigArms', u'RigArms/LeftArm', u'RigArms/RightArm', u'RigLegs', u'RigLegs/LeftLeg', u'RigLegs/RightLeg', u'RigArms/LeftArm/LeftCarpals', u'RigArms/LeftArm/LeftFingers', u'RigArms/RightArm/RightCarpals', u'RigArms/RightArm/RightFingers', u'RigLegs/LeftLeg/LeftToes', u'RigLegs/RightLeg/RightToes'] toe_translation=True
+PRODUCTION_GENERIC_COMPOSER_ROOT_ORDER target=(u'shot3', u'foxmccouldwm1') order=[u'Face', u'Sexual Bones', u'Correctives', u'Helpers', u'Body', u'Arms', u'Legs', u'Toes', u'RigBody', u'RigArms', u'RigLegs', u'RigHelpers', u'Attachments']
+PRODUCTION_DESTINATION_DIRECT_ORDER_AUTHORITIES target=(u'shot3', u'foxmccouldwm1') rows={u'RigArms/LeftArm': {'order': (u'rig_collar_L', u'rig_elbow_L', u'rig_hand_L'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'}, u'RigHelpers': {'order': (u'rig_footHelper_L', u'rig_footHelper_R'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'}, u'RigLegs/RightLeg': {'order': (u'rig_foot_R', u'rig_knee_R'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'}, u'RigLegs/LeftLeg': {'order': (u'rig_foot_L', u'rig_knee_L'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'}, u'RigArms/RightArm': {'order': (u'rig_collar_R', u'rig_elbow_R', u'rig_hand_R'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'}}
+MASTER_SELECTABLE_RAW_VS_API=[(u'RigHelpers', False, False, False), (u'RigArms/LeftArm', True, True, True), (u'RigArms/RightArm', True, True, True), (u'RigLegs/LeftLeg', True, True, True), (u'RigLegs/RightLeg', True, True, True), (u'RigArms/LeftArm/LeftCarpals', False, False, False), (u'RigArms/LeftArm/LeftFingers', True, True, True), (u'RigArms/RightArm/RightCarpals', False, False, False), (u'RigArms/RightArm/RightFingers', True, True, True), (u'RigLegs/LeftLeg/LeftToes', False, False, False), (u'RigLegs/RightLeg/RightToes', False, False, False)]
+RAW_MASTER_SELECTABILITY_VALIDATION_FOR_TARGET = PASS
+PRODUCTION_GENERIC_COMPOSER_FOR_TARGET = PASS
+TARGET_CONTEXTUAL_RESULT = RECONCILED
+TARGET_UNDO_RESTORE_GATE = PASS
+TARGET_UNDO_ITEM_DELTA=0L
+TARGET_ZERO_UNDO_LEDGER_DELTA = PASS
+PRODUCTION_TARGET_TERMINAL_STATE = PASS target=(u'shot3', u'foxmccouldwm1') state=RECONCILED
+TARGET_TRANSACTION_COMPLETE_WITH_UNDO_RESTORED = PASS
+PRODUCTION_FINAL_SEMANTIC_FINGERPRINT_CAPTURE = PASS target=(u'shot3', u'foxmccouldwm1') retained_payload=False
+CONTEXTUALIZER_DIRECT_TARGET_ISOLATION_FINGERPRINT = PASS target=(u'shot3', u'foxmccouldwm1') retained_expected=digest32
+CONTEXTUALIZER_CURRENT_SHOT_PEER_ISOLATION = PASS shot=u'shot3' target=u'foxmccouldwm1' peers=1 elapsed_seconds=0.007
+CONTEXTUALIZER_TELEMETRY phase=TARGET_END target_seq=1 native_attempt=1 shot=u'shot3' target=u'foxmccouldwm1' run_elapsed=4.477 target_elapsed=1.989 completed_targets=1 mem_ok=True working_set=3031171072L peak_working_set=3034804224L pagefile=3075616768L peak_pagefile=3080294400L private=3075616768L
+PRODUCTION_TARGET_CALLBACK_DEFER_SCHEDULED = PASS completed_target_index=1/2 next_target=u'mia1' delay_ms=0
+PRODUCTION_TARGET_RESUME_GUARDS = PASS shot=u'shot3' target=u'mia1' target_index=2/2
+
+============================================================================================================
+TARGET 2/2 IN shot3: mia1
+============================================================================================================
+PRE rig status=SUPPORTED_ACTIVE_RIG controls=314 groups=42 owned=55
+PRODUCTION_PRE_CAPTURE_GATE = PASS target=(u'shot3', u'mia1') signature=(314, 42, 55)
+UNDO_ENABLED_BEFORE=True count=0L desc=''
+TARGET_UNDO_DISABLE_GATE = PASS
+CONTEXTUALIZER_TELEMETRY phase=PRE_NATIVE target_seq=2 native_attempt=2 shot=u'shot3' target=u'mia1' run_elapsed=4.699 target_elapsed=0.172 mem_ok=True working_set=3031437312L peak_working_set=3034804224L pagefile=3075686400L peak_pagefile=3080294400L private=3075686400L
+NATIVE_REBUILD_RETURNED = PASS
+PRODUCTION_MIXED_DIRECT_ORDER_PATHS target=(u'shot3', u'mia1') paths=[]
+CLASS_COUNTS pre_hidden_master_active=0 rig_losses=14 master_stranded=38 parent_collapses=0 master_normalizations=0 strong_unknown=0 weak_unknown=0 ambiguous_losses=0 unresolved=0
+PRODUCTION_CLASS_SIGNATURE target=(u'shot3', u'mia1') signature=(0, 14, 38, 0, 0, 0, 0, 0, 0)
+PRODUCTION_GENERIC_POLICY has_RigArms=True has_RigLegs=True authorized_rig=14 authorized_master=38 strong_unknown=0
+PRODUCTION_GENERIC_MODEL_TRANSLATIONS=[(u'RigArms/LeftArm/LeftCarpals', 4, [u'Carpal1_l', u'Carpal2_l', u'Carpal3_l', u'Carpal4_l']), (u'RigArms/LeftArm/LeftFingers', 15, [u'bip_index_0_l', u'bip_index_1_l', u'bip_index_2_l', u'bip_middle_0_l', u'bip_middle_1_l', u'bip_middle_2_l', u'bip_pinky_0_l', u'bip_pinky_1_l', u'bip_pinky_2_l', u'bip_ring_0_l', u'bip_ring_1_l', u'bip_ring_2_l', u'bip_thumb_0_l', u'bip_thumb_1_l', u'bip_thumb_2_l']), (u'RigArms/RightArm/RightCarpals', 4, [u'Carpal1_r', u'Carpal2_r', u'Carpal3_r', u'Carpal4_r']), (u'RigArms/RightArm/RightFingers', 15, [u'bip_index_0_r', u'bip_index_1_r', u'bip_index_2_r', u'bip_middle_0_r', u'bip_middle_1_r', u'bip_middle_2_r', u'bip_pinky_0_r', u'bip_pinky_1_r', u'bip_pinky_2_r', u'bip_ring_0_r', u'bip_ring_1_r', u'bip_ring_2_r', u'bip_thumb_0_r', u'bip_thumb_1_r', u'bip_thumb_2_r']), (u'RigLegs/LeftLeg/LeftToes', 9, [u'bigToe1_l', u'bigToe2_l', u'bip_toe_l', u'indexToe1_l', u'indexToe2_l', u'midToe1_l', u'midToe2_l', u'ringToe1_l', u'ringToe2_l']), (u'RigLegs/RightLeg/RightToes', 8, [u'bigToe2_r', u'bip_toe_r', u'indexToe1_r', u'indexToe2_r', u'midToe1_r', u'midToe2_r', u'ringToe1_r', u'ringToe2_r'])]
+PRODUCTION_GENERIC_RIG_DESTINATIONS=[(u'rig_collar_L', u'RigArms/LeftArm'), (u'rig_collar_R', u'RigArms/RightArm'), (u'rig_elbow_L', u'RigArms/LeftArm'), (u'rig_elbow_R', u'RigArms/RightArm'), (u'rig_footHelper_L', u'RigHelpers'), (u'rig_footHelper_R', u'RigHelpers'), (u'rig_foot_L', u'RigLegs/LeftLeg'), (u'rig_foot_R', u'RigLegs/RightLeg'), (u'rig_hand_L', u'RigArms/LeftArm'), (u'rig_hand_R', u'RigArms/RightArm'), (u'rig_knee_L', u'RigLegs/LeftLeg'), (u'rig_knee_R', u'RigLegs/RightLeg'), (u'rig_toe_L', u'RigLegs/LeftLeg/LeftToes'), (u'rig_toe_R', u'RigLegs/RightLeg/RightToes')]
+PRODUCTION_GENERIC_RIG_DESTINATION_AUTHORITIES=[(u'rig_collar_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_collar_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_elbow_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_elbow_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_footHelper_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_footHelper_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_foot_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_foot_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_hand_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_hand_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_knee_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_knee_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART'), (u'rig_toe_L', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART+TOE_CONSTRAINT_EVIDENCE'), (u'rig_toe_R', u'MASTER_PLUS_ACTIVE_RIG_COUNTERPART+TOE_CONSTRAINT_EVIDENCE')]
+PRODUCTION_GENERIC_UNDERSPECIFIED_DESTINATIONS=[]
+PRODUCTION_GENERIC_MASTER_STRANDED_DESTINATIONS=[(u'Carpal1_l', u'RigArms/LeftArm/LeftCarpals'), (u'Carpal1_r', u'RigArms/RightArm/RightCarpals'), (u'Carpal2_l', u'RigArms/LeftArm/LeftCarpals'), (u'Carpal2_r', u'RigArms/RightArm/RightCarpals'), (u'Carpal3_l', u'RigArms/LeftArm/LeftCarpals'), (u'Carpal3_r', u'RigArms/RightArm/RightCarpals'), (u'Carpal4_l', u'RigArms/LeftArm/LeftCarpals'), (u'Carpal4_r', u'RigArms/RightArm/RightCarpals'), (u'bip_index_0_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_index_0_r', u'RigArms/RightArm/RightFingers'), (u'bip_index_1_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_index_1_r', u'RigArms/RightArm/RightFingers'), (u'bip_index_2_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_index_2_r', u'RigArms/RightArm/RightFingers'), (u'bip_middle_0_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_middle_0_r', u'RigArms/RightArm/RightFingers'), (u'bip_middle_1_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_middle_1_r', u'RigArms/RightArm/RightFingers'), (u'bip_middle_2_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_middle_2_r', u'RigArms/RightArm/RightFingers'), (u'bip_pinky_0_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_pinky_0_r', u'RigArms/RightArm/RightFingers'), (u'bip_pinky_1_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_pinky_1_r', u'RigArms/RightArm/RightFingers'), (u'bip_pinky_2_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_pinky_2_r', u'RigArms/RightArm/RightFingers'), (u'bip_ring_0_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_ring_0_r', u'RigArms/RightArm/RightFingers'), (u'bip_ring_1_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_ring_1_r', u'RigArms/RightArm/RightFingers'), (u'bip_ring_2_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_ring_2_r', u'RigArms/RightArm/RightFingers'), (u'bip_thumb_0_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_thumb_0_r', u'RigArms/RightArm/RightFingers'), (u'bip_thumb_1_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_thumb_1_r', u'RigArms/RightArm/RightFingers'), (u'bip_thumb_2_l', u'RigArms/LeftArm/LeftFingers'), (u'bip_thumb_2_r', u'RigArms/RightArm/RightFingers')]
+PRODUCTION_GENERIC_MASTER_STRANDED_AUTHORITIES=[(u'Carpal1_l', u'MODEL_TRANSLATION'), (u'Carpal1_r', u'MODEL_TRANSLATION'), (u'Carpal2_l', u'MODEL_TRANSLATION'), (u'Carpal2_r', u'MODEL_TRANSLATION'), (u'Carpal3_l', u'MODEL_TRANSLATION'), (u'Carpal3_r', u'MODEL_TRANSLATION'), (u'Carpal4_l', u'MODEL_TRANSLATION'), (u'Carpal4_r', u'MODEL_TRANSLATION'), (u'bip_index_0_l', u'MODEL_TRANSLATION'), (u'bip_index_0_r', u'MODEL_TRANSLATION'), (u'bip_index_1_l', u'MODEL_TRANSLATION'), (u'bip_index_1_r', u'MODEL_TRANSLATION'), (u'bip_index_2_l', u'MODEL_TRANSLATION'), (u'bip_index_2_r', u'MODEL_TRANSLATION'), (u'bip_middle_0_l', u'MODEL_TRANSLATION'), (u'bip_middle_0_r', u'MODEL_TRANSLATION'), (u'bip_middle_1_l', u'MODEL_TRANSLATION'), (u'bip_middle_1_r', u'MODEL_TRANSLATION'), (u'bip_middle_2_l', u'MODEL_TRANSLATION'), (u'bip_middle_2_r', u'MODEL_TRANSLATION'), (u'bip_pinky_0_l', u'MODEL_TRANSLATION'), (u'bip_pinky_0_r', u'MODEL_TRANSLATION'), (u'bip_pinky_1_l', u'MODEL_TRANSLATION'), (u'bip_pinky_1_r', u'MODEL_TRANSLATION'), (u'bip_pinky_2_l', u'MODEL_TRANSLATION'), (u'bip_pinky_2_r', u'MODEL_TRANSLATION'), (u'bip_ring_0_l', u'MODEL_TRANSLATION'), (u'bip_ring_0_r', u'MODEL_TRANSLATION'), (u'bip_ring_1_l', u'MODEL_TRANSLATION'), (u'bip_ring_1_r', u'MODEL_TRANSLATION'), (u'bip_ring_2_l', u'MODEL_TRANSLATION'), (u'bip_ring_2_r', u'MODEL_TRANSLATION'), (u'bip_thumb_0_l', u'MODEL_TRANSLATION'), (u'bip_thumb_0_r', u'MODEL_TRANSLATION'), (u'bip_thumb_1_l', u'MODEL_TRANSLATION'), (u'bip_thumb_1_r', u'MODEL_TRANSLATION'), (u'bip_thumb_2_l', u'MODEL_TRANSLATION'), (u'bip_thumb_2_r', u'MODEL_TRANSLATION')]
+PRODUCTION_GENERIC_UNACCOUNTED_MASTER_ROWS=[]
+PRODUCTION_GENERIC_RIG_TOE_PROMOTIONS=[(u'rig_toe_L', u'RigLegs/LeftLeg/LeftToes'), (u'rig_toe_R', u'RigLegs/RightLeg/RightToes')]
+PRODUCTION_GENERIC_KEEP_NATIVE=[]
+PRODUCTION_GENERIC_POLICY_PLAN_FOR_TARGET = PASS
+PRODUCTION_GENERIC_COMPOSER_RESULT target=(u'shot3', u'mia1') desired=69 moved=67 already_correct=2 created_paths=[u'RigArms', u'RigArms/LeftArm', u'RigArms/RightArm', u'RigLegs', u'RigLegs/LeftLeg', u'RigLegs/RightLeg', u'RigArms/LeftArm/LeftCarpals', u'RigArms/LeftArm/LeftFingers', u'RigArms/RightArm/RightCarpals', u'RigArms/RightArm/RightFingers', u'RigLegs/LeftLeg/LeftToes', u'RigLegs/RightLeg/RightToes'] toe_translation=True
+PRODUCTION_GENERIC_COMPOSER_ROOT_ORDER target=(u'shot3', u'mia1') order=[u'Face', u'Body Morphs', u'Sexual Bones', u'Clothing', u'Correctives', u'Helpers', u'Body', u'Arms', u'Legs', u'Toes', u'RigBody', u'RigArms', u'RigLegs', u'RigHelpers', u'Tail']
+PRODUCTION_DESTINATION_DIRECT_ORDER_AUTHORITIES target=(u'shot3', u'mia1') rows={u'RigArms/LeftArm': {'order': (u'rig_collar_L', u'rig_elbow_L', u'rig_hand_L'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'}, u'RigHelpers': {'order': (u'rig_footHelper_L', u'rig_footHelper_R'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'}, u'RigLegs/RightLeg': {'order': (u'rig_foot_R', u'rig_knee_R'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'}, u'RigLegs/LeftLeg': {'order': (u'rig_foot_L', u'rig_knee_L'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'}, u'RigArms/RightArm': {'order': (u'rig_collar_R', u'rig_elbow_R', u'rig_hand_R'), 'authority': 'EXACT_MASTER_DESTINATION_TOTAL_ORDER'}}
+MASTER_SELECTABLE_RAW_VS_API=[(u'RigHelpers', False, False, False), (u'RigArms/LeftArm', True, True, True), (u'RigArms/RightArm', True, True, True), (u'RigLegs/LeftLeg', True, True, True), (u'RigLegs/RightLeg', True, True, True), (u'RigArms/LeftArm/LeftCarpals', False, False, False), (u'RigArms/LeftArm/LeftFingers', True, True, True), (u'RigArms/RightArm/RightCarpals', False, False, False), (u'RigArms/RightArm/RightFingers', True, True, True), (u'RigLegs/LeftLeg/LeftToes', False, False, False), (u'RigLegs/RightLeg/RightToes', False, False, False)]
+RAW_MASTER_SELECTABILITY_VALIDATION_FOR_TARGET = PASS
+PRODUCTION_GENERIC_COMPOSER_FOR_TARGET = PASS
+TARGET_CONTEXTUAL_RESULT = RECONCILED
+TARGET_UNDO_RESTORE_GATE = PASS
+TARGET_UNDO_ITEM_DELTA=0L
+TARGET_ZERO_UNDO_LEDGER_DELTA = PASS
+PRODUCTION_TARGET_TERMINAL_STATE = PASS target=(u'shot3', u'mia1') state=RECONCILED
+TARGET_TRANSACTION_COMPLETE_WITH_UNDO_RESTORED = PASS
+PRODUCTION_FINAL_SEMANTIC_FINGERPRINT_CAPTURE = PASS target=(u'shot3', u'mia1') retained_payload=False
+CONTEXTUALIZER_DIRECT_TARGET_ISOLATION_FINGERPRINT = PASS target=(u'shot3', u'mia1') retained_expected=digest32
+CONTEXTUALIZER_CURRENT_SHOT_PEER_ISOLATION = PASS shot=u'shot3' target=u'mia1' peers=1 elapsed_seconds=0.005
+CONTEXTUALIZER_TELEMETRY phase=TARGET_END target_seq=2 native_attempt=2 shot=u'shot3' target=u'mia1' run_elapsed=6.482 target_elapsed=1.955 completed_targets=2 mem_ok=True working_set=3034112000L peak_working_set=3037970432L pagefile=3078422528L peak_pagefile=3084349440L private=3078422528L
+SHOT_COMPLETE = PASS
+CONTEXTUALIZER_SHOT_ELAPSED shot=u'shot3' elapsed_seconds=4.124
+CONTEXTUALIZER_COMPACT_SESSION_IDENTITY = PASS completed_shots=1 shots=15 elapsed_seconds=0.001
+CONTEXTUALIZER_RESOURCE_CHECKPOINT label=AFTER_SHOT_1 run_elapsed=6.524 mem_ok=True working_set=3034112000L peak_working_set=3037970432L pagefile=3078422528L peak_pagefile=3084349440L private=3078422528L vas_requested=True vas_ok=True min_address=65536 max_address=4294901759L mem_free=533118976 mem_reserve=357564416 mem_commit=3404152832L largest_free=299401216 free_regions=1219 virtual_query_count=8466 vas_elapsed=0.0400 vas_error=None
+
+============================================================================================================
+CONTEXTUALIZER END-OF-RUN WHOLE-SESSION DEEP ISOLATION
+============================================================================================================
+CONTEXTUALIZER_RESOURCE_CHECKPOINT label=BEFORE_END_GLOBAL run_elapsed=6.569 mem_ok=True working_set=3034112000L peak_working_set=3037970432L pagefile=3078422528L peak_pagefile=3084349440L private=3078422528L vas_requested=True vas_ok=True min_address=65536 max_address=4294901759L mem_free=533118976 mem_reserve=357564416 mem_commit=3404152832L largest_free=299401216 free_regions=1219 virtual_query_count=8466 vas_elapsed=0.0450 vas_error=None
+CONTEXTUALIZER_STREAMING_GLOBAL_DEEP_VERIFY label=END_OF_RUN fingerprints=163 elapsed_seconds=0.414 before_private=3078422528L after_private=3078688768L delta_private=266240L before_working=3034112000L after_working=3034292224L
+CONTEXTUALIZER_RESOURCE_CHECKPOINT label=AFTER_END_GLOBAL run_elapsed=7.019 mem_ok=True working_set=3034292224L peak_working_set=3037970432L pagefile=3078688768L peak_pagefile=3084349440L private=3078688768L vas_requested=True vas_ok=True min_address=65536 max_address=4294901759L mem_free=533118976 mem_reserve=357298176 mem_commit=3404419072L largest_free=299401216 free_regions=1219 virtual_query_count=8466 vas_elapsed=0.0350 vas_error=None
+CONTEXTUALIZER_END_OF_RUN_WHOLE_SESSION_ISOLATION = PASS elapsed_seconds=0.414
+
+============================================================================================================
+RESTORING ORIGINAL PLAYHEAD
+============================================================================================================
+requested original head=0.0
+restored head=0.0 shot='shot3'
+ORIGINAL_PLAYHEAD_RESTORE = PASS
+
+============================================================================================================
+FINAL RESULT
+============================================================================================================
+CONTEXTUALIZER_RESOURCE_CHECKPOINT label=FINAL_REPORT_ENTRY run_elapsed=7.169 mem_ok=True working_set=3036389376L peak_working_set=3037970432L pagefile=3080785920L peak_pagefile=3084349440L private=3080785920L vas_requested=True vas_ok=True min_address=65536 max_address=4294901759L mem_free=533118976 mem_reserve=355201024 mem_commit=3406516224L largest_free=299401216 free_regions=1219 virtual_query_count=8466 vas_elapsed=0.0400 vas_error=None
+shots seen=1 processed=1
+animation sets seen=2 model-backed=2 targets=2
+native rebuilt=2 reconciled=2 native-only=0 policy-fallback=0
+supported-active-rig=2 unrigged=0 ambiguous/stale-rig=0
+CLASS_TOTAL ambiguous_losses=0
+CLASS_TOTAL master_normalizations=0
+CLASS_TOTAL master_stranded=76
+CLASS_TOTAL master_unknown_unknown=0
+CLASS_TOTAL parent_collapses=0
+CLASS_TOTAL pre_hidden_master_active=0
+CLASS_TOTAL rig_losses=28
+CLASS_TOTAL unresolved_owned_drift=0
+CLASS_TOTAL weak_unknown_diagnostics=0
+CONTEXTUALIZER_SESSION_EXPECTED_DIGEST_ACCOUNTING values=163 digest_bytes_each=32 result=PASS
+CONTEXTUALIZER_TERMINAL_SEMANTIC_CAPTURE_ACCOUNTING captures=2 terminal_targets=2 retained_rich_payloads=0
+CONTEXTUALIZER_TERMINAL_SEMANTIC_CAPTURE_ACCOUNTING = PASS
+ELIGIBILITY_ACCOUNTING model_backed=2 root_skips=0 duplicate_aset_skips=0 static_skips=0 follower_skips=0 lowbone_skips=0 processed_targets=2
+CONTEXTUALIZER_TELEMETRY_SUMMARY native_attempts=2 completed_targets=2 run_elapsed=7.169 mem_ok=True working_set=3036389376L peak_working_set=3037970432L pagefile=3080785920L peak_pagefile=3084349440L private=3080785920L
+PRODUCTION_TARGET_CALLBACK_COUNTS schedules=1 resume_callbacks=1 resume_guard_passes=2 target_reresolve_passes=2
+CONTEXTUALIZER_LAYERED_ISOLATION_COUNTS peer_checks=2 peer_fingerprints=2 identity_checks=1 periodic_global_checks=0 expected_periodic=0 end_global_checks=1
+CONTEXTUALIZER_SCOPED_MASTER_INDEX_COUNTS builds=1 scope_folds=482 gate_opportunities=1 gate_validations=1 target_opportunities=2 target_validations=2 sha_checks=4 build_seconds=1.444 sha_seconds=0.066 build_private_delta=544768L build_working_delta=397312L
+CONTEXTUALIZER_ADDRESS_SPACE_TELEMETRY_SUMMARY vas_samples=10 vas_successes=10 vas_failures=0 global_capture_count=1 global_capture_max_private_delta=266240L
+PRODUCTION_TARGET_CALLBACK_ACCOUNTING expected_same_shot_defers=1 schedules=1 resumes=1 guards=2 reresolves=2 targets=2 result=PASS
+CONTEXTUALIZER_TELEMETRY_ACCOUNTING = PASS
+CONTEXTUALIZER_SCOPED_MASTER_INDEX_ACCOUNTING = PASS
+CONTEXTUALIZER_MASTER_INDEX_OPPORTUNITY_ACCOUNTING gate=1/1 target=2/2 sha=4 expected_sha=4 result=PASS
+PRODUCTION_TERMINAL_RESULTS=[((u'shot3', u'foxmccouldwm1'), 'RECONCILED'), ((u'shot3', u'mia1'), 'RECONCILED')]
+PRODUCTION_GENERIC_POLICY_PLAN_PASS_COUNT=2
+PRODUCTION_GENERIC_COMPOSER_PASS_COUNT=2
+PRODUCTION_MIXED_DIRECT_BY_TARGET=[]
+PRODUCTION_DESTINATION_DIRECT_ORDER_COHORT_COUNT=10
+PRODUCTION_ALL_INVENTORIED_TARGETS_TERMINAL = PASS
+PRODUCTION_DYNAMIC_ACCOUNTING = PASS
+PRODUCTION_ELIGIBILITY_ACCOUNTING = PASS
+PRODUCTION_COMPOSER_ACCOUNTING = PASS
+CONTEXTUALIZER_LAYERED_ISOLATION_ACCOUNTING = PASS
+PRODUCTION_TARGET_CALLBACK_ACCOUNTING = PASS
+CONTEXTUALIZER_TELEMETRY_ACCOUNTING = PASS
+CONTEXTUALIZER_SCOPED_MASTER_INDEX_ACCOUNTING = PASS
+CONTEXTUALIZER_TERMINAL_SEMANTIC_CAPTURE_ACCOUNTING = PASS
+CONTEXTUALIZER_SESSION_EXPECTED_DIGEST_ACCOUNTING = PASS
+PRODUCTION_REBUILD_CONTROL_GROUPS = PASS
+PRODUCTION_CONTEXTUALIZER = PASS
+PASS means the production candidate completed the requested shot scope, every eligible target reached a terminal state, responsive Qt callback resumption remained guarded, and all semantic, isolation, undo, Master-index, eligibility, playhead, and accounting guarantees passed.
