@@ -1,0 +1,43 @@
+{
+  "baseline_authority_dir": "E:\\SteamLibrary\\steamapps\\common\\SourceFilmmaker\\game\\usermod\\cfg\\sfm_shared_authority",
+  "baseline_master_path": "E:\\SteamLibrary\\steamapps\\common\\SourceFilmmaker\\game\\usermod\\cfg\\sfm_defaultanimationgroups.txt",
+  "check_only_g1_result": {
+    "counts": {
+      "folds": 124728,
+      "groups": 43,
+      "occurrences": 128555
+    },
+    "ordinary_sha256": "bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b",
+    "semantic_digest": "5aa930932e217566595d84a3c66e15424b6b7ac8c9045cabce5fb9611a1fa369",
+    "source_byte_length": 3972355,
+    "source_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93"
+  },
+  "check_only_g2_result": {
+    "counts": {
+      "folds": 124728,
+      "groups": 43,
+      "occurrences": 128555
+    },
+    "ordinary_sha256": "cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3",
+    "semantic_digest": "5aa930932e217566595d84a3c66e15424b6b7ac8c9045cabce5fb9611a1fa369",
+    "source_byte_length": 3972356,
+    "source_sha256": "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7"
+  },
+  "epoch": 1790431517.1896265,
+  "expected_g2_source_byte_length": 3972356,
+  "expected_g2_source_sha256": "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7",
+  "expected_generation_basename": "sfm_master_0_cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3.sfmsidecar",
+  "expected_semantic_parity": {
+    "all_parity_checks_pass": true,
+    "folds_equal": true,
+    "groups_equal": true,
+    "occurrences_equal": true,
+    "semantic_digest_equal": true,
+    "source_sha256_differs": true
+  },
+  "expected_sidecar_ordinary_sha256": "cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3",
+  "g1_source_path": "C:/Users/Public/Documents/sfm_checkpoint_i_g1_source_bytes.dat",
+  "g1_source_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93",
+  "g2_source_path": "C:/Users/Public/Documents/sfm_checkpoint_i_generated_g2_source.txt",
+  "wall_time": "2026-09-26 10:05:17"
+}

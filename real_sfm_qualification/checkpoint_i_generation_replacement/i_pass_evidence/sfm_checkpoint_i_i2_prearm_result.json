@@ -1,0 +1,22 @@
+{
+  "elapsed_ms": 7600, 
+  "outcome": "ARMED", 
+  "pid": 25408, 
+  "validation": {
+    "checks": {
+      "master_hash_matches_g2": true, 
+      "no_target_completed_yet": true, 
+      "scope_is_exactly_one_shot": true, 
+      "scope_mode_is_selected": true, 
+      "scope_shot_matches_expected": true, 
+      "wrapper_not_already_installed": true, 
+      "zero_native_attempts_so_far": true, 
+      "zero_native_rebuilt_so_far": true
+    }, 
+    "observed_shot_names": [
+      "shot3"
+    ], 
+    "valid": true
+  }, 
+  "wall_time": "2026-09-26 10:20:45"
+}

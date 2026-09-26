@@ -1,0 +1,91 @@
+{
+  "authority_dir": "E:/SteamLibrary/steamapps/common/SourceFilmmaker/game/usermod/cfg/sfm_shared_authority",
+  "comparison_to_pre_i_baseline": {
+    "exact_match": true,
+    "manifest_matches": true,
+    "master_matches": true,
+    "sidecars_added": [],
+    "sidecars_changed": [],
+    "sidecars_removed": []
+  },
+  "derived_g2_sha256": "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7",
+  "epoch": 1790432568.7551963,
+  "exact_match": true,
+  "final_inventory": {
+    "authority_dir": "E:/SteamLibrary/steamapps/common/SourceFilmmaker/game/usermod/cfg/sfm_shared_authority",
+    "captured_at": "2026-09-26 10:22:56",
+    "captured_epoch": 1790432576.8852654,
+    "manifest_exists": true,
+    "manifest_sha256": "d810d6486305a098d4855eea15f6feea3dc7fe7f7aaf97a08415fcac8e7701d6",
+    "manifest_size_bytes": 530,
+    "master_path": "E:/SteamLibrary/steamapps/common/SourceFilmmaker/game/usermod/cfg/sfm_defaultanimationgroups.txt",
+    "master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93",
+    "master_size_bytes": 3972355,
+    "sidecars": [
+      {
+        "filename": "sfm_master_0_bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b.sfmsidecar",
+        "sha256": "bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b",
+        "size_bytes": 9506244
+      }
+    ]
+  },
+  "g1_republish_result": {
+    "generation_basename": "sfm_master_0_bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b.sfmsidecar",
+    "generation_path": "E:\\SteamLibrary\\steamapps\\common\\SourceFilmmaker\\game\\usermod\\cfg\\sfm_shared_authority\\sfm_master_0_bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b.sfmsidecar",
+    "manifest_path": "E:\\SteamLibrary\\steamapps\\common\\SourceFilmmaker\\game\\usermod\\cfg\\sfm_shared_authority\\manifest.json",
+    "ordinary_sha256": "bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b",
+    "reused": true,
+    "source_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93"
+  },
+  "g2_identity_corroboration": {
+    "plan_g2_sha_matches_derived": true,
+    "publication_g2_sha_matches_derived": true
+  },
+  "g2_sidecar_removal_record": {
+    "actual_sha256_before_removal": "cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3",
+    "authority_dir": "E:/SteamLibrary/steamapps/common/SourceFilmmaker/game/usermod/cfg/sfm_shared_authority",
+    "basename": "sfm_master_0_cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3.sfmsidecar",
+    "epoch": 1790432576.867747,
+    "expected_sha256": "cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3",
+    "operation_type": "REMOVE_EXACT_SIDECAR",
+    "success": true,
+    "wall_time": "2026-09-26 10:22:56"
+  },
+  "g2_sidecar_removed": true,
+  "master_path": "E:/SteamLibrary/steamapps/common/SourceFilmmaker/game/usermod/cfg/sfm_defaultanimationgroups.txt",
+  "master_restore_performed": false,
+  "master_restore_reason": "already exact G1",
+  "observed_master_sha256_at_start": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93",
+  "path_binding_checks": {
+    "authority_dir_matches_baseline": true,
+    "master_path_matches_baseline": true
+  },
+  "sidecar_removal_plan": {
+    "action": "remove",
+    "basename": "sfm_master_0_cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3.sfmsidecar",
+    "checks": {
+      "plan_record_revalidation": {
+        "all_checks_pass": true,
+        "exact_current_sidecar_sha_matches_plan": true,
+        "exact_named_current_sidecar_exists": true,
+        "plan_basename_is_safe": true,
+        "plan_g1_sha_matches_canonical": true,
+        "plan_g2_sha_matches_derived": true,
+        "plan_semantic_parity_is_pass": true
+      },
+      "publication_record_revalidation": {
+        "all_checks_pass": true,
+        "basename_is_safe": true,
+        "exact_current_sidecar_sha_matches_record": true,
+        "exact_named_current_sidecar_exists": true,
+        "record_g1_sha_equals_canonical_g1": true,
+        "recorded_semantic_parity_is_pass": true,
+        "rederived_g1_plus_lf_matches_record_g2_sha": true
+      }
+    },
+    "expected_sha": "cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3",
+    "reason": null,
+    "source": "publication_and_plan"
+  },
+  "wall_time": "2026-09-26 10:22:48"
+}

@@ -1,0 +1,181 @@
+{
+  "captured_runs": [
+    {
+      "captured_at_snapshot_index": 2, 
+      "filename": "sfm_checkpoint_i_run_01_i1_g1_shot9.txt", 
+      "label": "i1_g1_shot9", 
+      "log_verification": {
+        "all_checks_pass": true, 
+        "exact_single_shot_present": true, 
+        "expected_unique_scope_folds": 302, 
+        "final_report_entry_present": true, 
+        "logged_master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+        "logged_matched_folds": 273, 
+        "logged_unique_scope_folds": 302, 
+        "master_changed_message_present": false, 
+        "native_rebuild_returned_count": 1, 
+        "pre_native_count": 1, 
+        "production_fail_present": false, 
+        "production_pass_present": true, 
+        "scope_selected_present": true, 
+        "target_callback_abort_present": false, 
+        "unique_scope_folds_matches": true
+      }, 
+      "pid": 13404, 
+      "sha256": "a4f8843ede08db4ae4dac5ee8863582dbfa179bdae2627d312a83f68d071f906", 
+      "size_bytes": 26386, 
+      "step_ordinal": 1, 
+      "wall_time": "2026-09-26 10:00:35"
+    }, 
+    {
+      "captured_at_snapshot_index": 4, 
+      "filename": "sfm_checkpoint_i_run_02_i1_g2_shot9.txt", 
+      "label": "i1_g2_shot9", 
+      "log_verification": {
+        "all_checks_pass": true, 
+        "exact_single_shot_present": true, 
+        "expected_unique_scope_folds": 302, 
+        "final_report_entry_present": true, 
+        "logged_master_sha256": "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7", 
+        "logged_matched_folds": 273, 
+        "logged_unique_scope_folds": 302, 
+        "master_changed_message_present": false, 
+        "native_rebuild_returned_count": 1, 
+        "pre_native_count": 1, 
+        "production_fail_present": false, 
+        "production_pass_present": true, 
+        "scope_selected_present": true, 
+        "target_callback_abort_present": false, 
+        "unique_scope_folds_matches": true
+      }, 
+      "pid": 13404, 
+      "sha256": "6a5bf239ed554c9de0d08f90d67aee5bc3075ab8590d67675ddd3fb4d7331048", 
+      "size_bytes": 26408, 
+      "step_ordinal": 2, 
+      "wall_time": "2026-09-26 10:15:59"
+    }, 
+    {
+      "captured_at_snapshot_index": 7, 
+      "filename": "sfm_checkpoint_i_run_03_i2_g2_shot3.txt", 
+      "label": "i2_g2_shot3", 
+      "log_verification": {
+        "all_checks_pass": true, 
+        "exact_single_shot_present": true, 
+        "expected_unique_scope_folds": null, 
+        "final_report_entry_present": true, 
+        "logged_master_sha256": "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7", 
+        "logged_matched_folds": 426, 
+        "logged_unique_scope_folds": 482, 
+        "master_changed_message_present": true, 
+        "native_rebuild_returned_count": 1, 
+        "pre_native_count": 1, 
+        "production_fail_present": true, 
+        "production_pass_present": false, 
+        "scope_selected_present": true, 
+        "target_callback_abort_present": true, 
+        "unique_scope_folds_matches": true
+      }, 
+      "pid": 25408, 
+      "sha256": "bd35263777304dccd58a56fe3ec3f2fdfce6bd5ca308dcb0a3320f25b5836570", 
+      "size_bytes": 27198, 
+      "step_ordinal": 3, 
+      "wall_time": "2026-09-26 10:21:01"
+    }
+  ], 
+  "captured_snapshots": [
+    {
+      "classification": "I1_BASELINE_PASSED", 
+      "expected_state": "UNUSED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_i_snapshot_01_i1_01_baseline_g1.json", 
+      "observed_guard_state": "UNUSED", 
+      "operation": "i1_01_baseline_g1", 
+      "pid": 13404, 
+      "step_ordinal": 1, 
+      "wall_time": "2026-09-26 10:00:06"
+    }, 
+    {
+      "classification": "I1_G1_STAGE_PASSED", 
+      "expected_state": "SELECTED_USED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_i_snapshot_02_i1_02_after_g1_command.json", 
+      "observed_guard_state": "SELECTED_USED", 
+      "operation": "i1_02_after_g1_command", 
+      "pid": 13404, 
+      "step_ordinal": 2, 
+      "wall_time": "2026-09-26 10:00:35"
+    }, 
+    {
+      "classification": "I1_G2_READY", 
+      "expected_state": "SELECTED_USED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_i_snapshot_03_i1_03_g2_ready.json", 
+      "observed_guard_state": "SELECTED_USED", 
+      "operation": "i1_03_g2_ready", 
+      "pid": 13404, 
+      "step_ordinal": 3, 
+      "wall_time": "2026-09-26 10:14:41"
+    }, 
+    {
+      "classification": "I1_PASS", 
+      "expected_state": "SELECTED_USED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_i_snapshot_04_i1_04_after_g2_command.json", 
+      "observed_guard_state": "SELECTED_USED", 
+      "operation": "i1_04_after_g2_command", 
+      "pid": 13404, 
+      "step_ordinal": 4, 
+      "wall_time": "2026-09-26 10:15:59"
+    }, 
+    {
+      "classification": "I2_BASELINE_PASSED", 
+      "expected_state": "UNUSED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_i_snapshot_05_i2_00_baseline_g2.json", 
+      "observed_guard_state": "UNUSED", 
+      "operation": "i2_00_baseline_g2", 
+      "pid": 25408, 
+      "step_ordinal": 5, 
+      "wall_time": "2026-09-26 10:18:33"
+    }, 
+    {
+      "classification": "PREARM_INSTALLED", 
+      "expected_state": "UNUSED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_i_snapshot_06_i2_01_prearm.json", 
+      "observed_guard_state": "UNUSED", 
+      "operation": "i2_01_prearm", 
+      "pid": 25408, 
+      "step_ordinal": 6, 
+      "wall_time": "2026-09-26 10:20:32"
+    }, 
+    {
+      "classification": "I2_FAIL_CLOSED_PASS", 
+      "expected_state": "SELECTED_USED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_i_snapshot_07_i2_02_verify.json", 
+      "observed_guard_state": "SELECTED_USED", 
+      "operation": "i2_02_verify", 
+      "pid": 25408, 
+      "step_ordinal": 7, 
+      "wall_time": "2026-09-26 10:21:01"
+    }, 
+    {
+      "classification": "RESTORATION_CONFIRMED", 
+      "expected_state": "UNUSED", 
+      "failed_gates": [], 
+      "filename": "sfm_checkpoint_i_snapshot_08_i_08_finalize_verify.json", 
+      "observed_guard_state": "UNUSED", 
+      "operation": "i_08_finalize_verify", 
+      "pid": 16028, 
+      "step_ordinal": 8, 
+      "wall_time": "2026-09-26 10:25:13"
+    }
+  ], 
+  "final_i_verdict": "I_PASS", 
+  "finalize_verdict": "RESTORATION_CONFIRMED", 
+  "i1_verdict": "I1_PASS", 
+  "i2_verdict": "I2_FAIL_CLOSED_PASS", 
+  "mechanical_last_snapshot_failed_checks": [], 
+  "mechanical_last_snapshot_verdict": "RESTORATION_CONFIRMED"
+}

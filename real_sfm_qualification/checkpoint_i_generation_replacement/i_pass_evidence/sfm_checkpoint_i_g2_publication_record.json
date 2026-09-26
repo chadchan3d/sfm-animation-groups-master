@@ -1,0 +1,52 @@
+{
+  "check_only_g1_result": {
+    "counts": {
+      "folds": 124728,
+      "groups": 43,
+      "occurrences": 128555
+    },
+    "ordinary_sha256": "bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b",
+    "semantic_digest": "5aa930932e217566595d84a3c66e15424b6b7ac8c9045cabce5fb9611a1fa369",
+    "source_byte_length": 3972355,
+    "source_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93"
+  },
+  "check_only_g2_result": {
+    "counts": {
+      "folds": 124728,
+      "groups": 43,
+      "occurrences": 128555
+    },
+    "ordinary_sha256": "cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3",
+    "semantic_digest": "5aa930932e217566595d84a3c66e15424b6b7ac8c9045cabce5fb9611a1fa369",
+    "source_byte_length": 3972356,
+    "source_sha256": "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7"
+  },
+  "epoch": 1790431540.8585002,
+  "g1_source_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93",
+  "g2_generation_basename": "sfm_master_0_cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3.sfmsidecar",
+  "g2_sidecar_sha256": "cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3",
+  "g2_source_byte_length": 3972356,
+  "g2_source_sha256": "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7",
+  "manifest_generation_basename": "sfm_master_0_cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3.sfmsidecar",
+  "manifest_sha256_after_publication": "9da5057f810e530d363a016289301fb3c8c1b2fe21f69d8fe10bfd86620bfda1",
+  "manifest_source_sha256": "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7",
+  "plan_record_path": "C:/Users/Public/Documents/sfm_checkpoint_i_g2_plan_record.json",
+  "plan_record_sha256": "22b7222927ba5ff5fd6219af453377d47ee6ad15297e2f204f9114c5a21129a1",
+  "publish_result": {
+    "generation_basename": "sfm_master_0_cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3.sfmsidecar",
+    "generation_path": "E:\\SteamLibrary\\steamapps\\common\\SourceFilmmaker\\game\\usermod\\cfg\\sfm_shared_authority\\sfm_master_0_cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3.sfmsidecar",
+    "manifest_path": "E:\\SteamLibrary\\steamapps\\common\\SourceFilmmaker\\game\\usermod\\cfg\\sfm_shared_authority\\manifest.json",
+    "ordinary_sha256": "cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3",
+    "reused": false,
+    "source_sha256": "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7"
+  },
+  "semantic_parity": {
+    "all_parity_checks_pass": true,
+    "folds_equal": true,
+    "groups_equal": true,
+    "occurrences_equal": true,
+    "semantic_digest_equal": true,
+    "source_sha256_differs": true
+  },
+  "wall_time": "2026-09-26 10:05:40"
+}
