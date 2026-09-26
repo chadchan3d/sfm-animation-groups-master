@@ -1,0 +1,59 @@
+SFM CHECKPOINT J -- NATIVE PROTECTED-HANDLE QUALIFICATION
+started_at=2026-09-26 16:16:24  finished_at=2026-09-26 16:16:34
+failure_phase=POST_EXEC_INSTRUMENTATION
+
+--- CHECKS ---
+[PASS] production_normalizer.sha256_matches_accepted -- '1f4ec5a26605aa90380eb0532fec3915d2cc24a3a20473ed70d57198bd995db7'
+[PASS] canonical_master.sha256_matches_baseline -- 'ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93'
+[PASS] fixture.matches_expected_normalized_copy -- u'f1_r2_normalized_diagnostic_copy.dmx'
+[PASS] fixture.is_not_forbidden_original -- u'f1_r2_normalized_diagnostic_copy.dmx'
+[PASS] fixture.project_shot_count_matches_established_size -- 15
+[PASS] fixture.shot9_resolves_uniquely -- 1
+[PASS] fixture.shot9_single_animation_set -- [u'krystalv21']
+[PASS] fixture.shot9_target_identity -- [u'krystalv21']
+[PASS] fixture.clip_editor_selection_is_exactly_shot9 -- [u'shot9']
+[PASS] j1.baseline_read_succeeds -- {'win_error': None, 'close_error': None, 'close_attempted': True, 'success': True, 'close_succeeded': True}
+[PASS] j1.baseline_write_succeeds -- {'win_error': None, 'close_error': None, 'close_attempted': True, 'success': True, 'close_succeeded': True}
+[PASS] j1.baseline_delete_succeeds -- {'win_error': None, 'close_error': None, 'close_attempted': True, 'success': True, 'close_succeeded': True}
+[PASS] j1.baseline_handles_all_closed -- {'read': {'win_error': None, 'close_error': None, 'close_attempted': True, 'success': True, 'close_succeeded': True}, 'write': {'win_error': None, 'close_error': None, 'close_attempted': True, 'success': True, 'close_succeeded': True}, 'delete': {'win_error': None, 'close_error': None, 'close_attempted': True, 'success': True, 'close_succeeded': True}}
+[PASS] j.main_window_available
+[PASS] j.run_target_transaction_guard_installed
+[PASS] j.native_rebuild_instance_wrap_installed -- <RebuildControlGroupsProductionRun object at 0x32B7C878>
+[PASS] j.run_instance_master_path_matches_canonical -- u'e:\\steamlibrary\\steamapps\\common\\sourcefilmmaker\\game\\usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[PASS] j.run_instance_master_hash_matches_canonical -- 'ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93'
+[PASS] j.run_instance_scope_mode_is_selected_shots -- u'SELECTED_SHOTS'
+[PASS] j.run_instance_scope_shots_is_exactly_shot9 -- [u'shot9']
+[PASS] j.run_instance_work_inventory_is_exactly_one_target -- [{'shot': <vs.movieobjects.CDmeFilmClip; proxy of <Swig Object of type 'CDmeFilmClip *' at 0x32A13560> >, 'name': 'shot9', 'midpoint': 0.22914999350905418, 'targets': [{'anim_set': <vs.movieobjects.CDmeAnimationSet; proxy of <Swig Object of type 'CDmeAnimationSet *' at 0x32C1FCE0> >, 'name': u'krystalv21', 'ptr': 401614900L}], 'start': 0.20829999446868896, 'duration': 0.04169999808073044, 'ptr': 4279372684L}]
+[PASS] j.workload_identity_confirmed
+[PASS] j.instrumentation_installed -- []
+[PASS] j.instrumentation_ready
+[PASS] j.run_was_started
+[PASS] j.run_completed_within_timeout
+[PASS] j.fail_closed_guard_never_blocked_a_call -- 0
+[PASS] j4.master_sha_unchanged -- 'ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93'
+[PASS] j4.master_size_unchanged -- 3972355
+[PASS] j.native_guards_pass -- True
+[PASS] j.native_rebuild_returned_pass -- True
+[PASS] j.production_command_pass -- {'contains_NATIVE_REBUILD_RETURNED_PASS': True, 'contains_PRODUCTION_REBUILD_CONTROL_GROUPS_PASS': True, 'contains_production_fail': False, 'contains_NATIVE_GUARDS_PASS': True}
+[PASS] j.production_log_scope_confirmed
+[PASS] j.production_log_single_target_transaction_confirmed
+[PASS] j.production_log_single_native_rebuild_confirmed
+[PASS] j4.actual_runtime_api_version_matches -- '1.0.0-b2a'
+[PASS] j4.actual_runtime_build_id_matches -- 'package-boundary-corrected-2026-09-22'
+[PASS] j4.authority_canonical -- True
+[PASS] j4.authority_state_ready -- 'READY'
+[PASS] j4.zero_outstanding_leases -- 0
+[PASS] j4.production_expected_api_version_corroborates -- '1.0.0-b2a'
+[PASS] j4.production_expected_build_id_corroborates -- 'package-boundary-corrected-2026-09-22'
+[PASS] j.acquire_event_path_matches_canonical_master -- u'e:\\steamlibrary\\steamapps\\common\\sourcefilmmaker\\game\\usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[PASS] j.protected_path_state_matches_canonical_master -- u'e:\\steamlibrary\\steamapps\\common\\sourcefilmmaker\\game\\usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[PASS] j.final_verdict_pass -- []
+
+J_VERDICT=J_PASS
+J_FAILED_CHECKS=[]
+OVERALL_PASS=True
+
+--- ANOMALIES (0) ---
+(none)
+
+json_output_path=C:\Users\Public\Documents\sfm_checkpoint_j_result.json (write_ok=True)

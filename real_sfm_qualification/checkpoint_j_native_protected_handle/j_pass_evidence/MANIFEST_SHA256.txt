@@ -1,0 +1,32 @@
+J PASS -- real-SFM evidence manifest
+Preserved 2026-09-26 from C:\Users\Public\Documents\ (verbatim, byte-identical copies -- SHA-256
+confirmed matching the originals at copy time, listed below).
+
+Fixture: F1_R2_NORMALIZED_DIAGNOSTIC_COPY.dmx. Scope: Selected Shot(s), exactly shot9. Target: exactly
+krystalv21. J1 baseline probes (READ/WRITE/DELETE) all succeeded, all successful probe handles closed.
+Production acquired exactly one real restrictive Master handle (GENERIC_READ / FILE_SHARE_READ), bound to
+the canonical Master by both path and hash. While held: READ succeeded, WRITE/DELETE failed with exact
+Win32 ERROR_SHARING_VIOLATION (32), observed identically at both the native-Rebuild and contextual-composer
+boundaries. Protected Master SHA verification occurred after acquisition and before native Rebuild. Native
+Rebuild returned PASS; the contextual composer returned successfully. Production released the protection
+handle exactly once; after release, READ/WRITE/DELETE all succeeded again. Canonical Master SHA-256 and
+size unchanged before/after. Actual authority runtime API/build/canonical/READY checks all passed. Zero
+outstanding leases. Exactly one target transaction, exactly one native Rebuild,
+PRODUCTION_REBUILD_CONTROL_GROUPS = PASS.
+
+final_i... n/a (this is Checkpoint J, not I). j_verdict: J_PASS. j_failed_checks: []. overall_pass: True.
+Zero anomalies. All 44 individual checks PASS.
+
+2cdab92cecbdb36cd42340f91e58744198352e5577794abdd26238245a2759a9  sfm_checkpoint_j_production_log.txt
+9e4102780662d68a4ffdd1b19d76e0606426fa846cb8b4bfb3ca1cdca5988374  sfm_checkpoint_j_result.json
+a3e05b27261c1f288fd03e1036a66ec001e7c383c79b5a873c00defda76edb58  sfm_checkpoint_j_result_summary.txt
+
+Note: the JSON artifact's own top-level "failure_phase" field reads "POST_EXEC_INSTRUMENTATION" even
+though overall_pass=true, j_verdict=J_PASS, every check passed, and anomalies are empty -- this is a
+harmless phase-label/naming artifact of the field being set once execution passes the pre-production gates
+and never reset on the successful path, not a defect in the qualification result. See LEDGER.md's own J-1
+row for the full interpretation.
+
+An earlier attempt where shot3 (not shot9) was selected in the Clip Editor stopped at PRE_PRODUCTION_GATE
+before any production invocation and produced no qualification evidence of any kind -- it is not
+represented by any file in this directory and is not qualification evidence.
