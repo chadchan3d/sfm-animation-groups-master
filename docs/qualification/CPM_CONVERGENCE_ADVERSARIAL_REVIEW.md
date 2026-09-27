@@ -4,7 +4,7 @@
 >
 > "Shared authority remains unchanged" means the `sfm_master_authority_productionized` package in this repository stays byte-stable at its already-qualified build; CPM code is not added to that package.
 >
-> References below to CPM-repo paths map to their imported locations here: `README.md` is not imported and remains only in the closed CPM source archive; `docs/ENGINEERING_NOTES.md` -> `docs/qualification/CPM_ENGINEERING_NOTES.md`; `docs/DEVELOPMENT_HISTORY.md` -> `docs/qualification/CPM_DEVELOPMENT_HISTORY.md`; `docs/reviews/CPM_CONVERGENCE_ADVERSARIAL_REVIEW.md` -> `docs/qualification/CPM_CONVERGENCE_ADVERSARIAL_REVIEW.md`; `docs/SFM_CHARACTER_TOOLS_INTEGRATION_HANDOFF.md` -> `docs/qualification/CPM_CONVERGENCE_INTEGRATION_HANDOFF.md`; `src/SFM_CSP_G18AN_SaveNewCopy.py` is not imported and remains only in the closed CPM source archive.
+> References below to CPM-repo paths map to their imported locations here: `README.md` is not imported and remains only in the closed CPM source archive; `docs/ENGINEERING_NOTES.md` -> `docs/qualification/CPM_ENGINEERING_NOTES.md`; `docs/DEVELOPMENT_HISTORY.md` -> `docs/qualification/CPM_DEVELOPMENT_HISTORY.md`; `docs/reviews/CPM_CONVERGENCE_ADVERSARIAL_REVIEW.md` -> `docs/qualification/CPM_CONVERGENCE_ADVERSARIAL_REVIEW.md`; `docs/SFM_CHARACTER_TOOLS_INTEGRATION_HANDOFF.md` -> `docs/qualification/CPM_CONVERGENCE_INTEGRATION_HANDOFF.md`; `src/SFM_CSP_G18AN_SaveNewCopy.py` -> `cpm/baseline/SFM_CSP_G18AN_SaveNewCopy.py`.
 >
 > Everything below this line is exact imported content.
 

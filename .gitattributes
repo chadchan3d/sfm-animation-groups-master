@@ -234,3 +234,8 @@ real_sfm_qualification/checkpoint_f2_r1_marker_probe/test_marker_persistence_pro
 real_sfm_qualification/checkpoint_process_attempt_guard/Checkpoint_Process_Attempt_Guard_Qualification.py text eol=lf
 real_sfm_qualification/checkpoint_process_attempt_guard/test_process_attempt_guard_regression.py text eol=lf
 real_sfm_qualification/checkpoint_process_attempt_guard/test_checkpoint_process_attempt_guard_dryrun.py text eol=lf
+
+# CPM G18AN migration baseline (2026-09-26): SHA-256-pinned migration
+# baseline, same archive-export CRLF protection as the other pinned
+# sources above.
+cpm/baseline/SFM_CSP_G18AN_SaveNewCopy.py text eol=lf

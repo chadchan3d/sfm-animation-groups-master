@@ -40,6 +40,10 @@ full TXT file on every query.
   above since it documents Master *content* decisions, not sidecar
   behavior. See `audit/master-content/README.md` and
   `docs/qualification/README.md` for what's in each.
+- **`cpm/baseline/`** — a frozen, SHA-256-pinned migration baseline
+  (`SFM_CSP_G18AN_SaveNewCopy.py`) imported verbatim from the now-closed
+  `sfm-character-preset-manager` source archive, serving as the parity
+  oracle for CPM shared-authority convergence; see `cpm/baseline/MANIFEST.md`.
 
 ## Editing the Master
 
