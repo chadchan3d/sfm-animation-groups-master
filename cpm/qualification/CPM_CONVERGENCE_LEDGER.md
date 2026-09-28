@@ -84,7 +84,8 @@ Unchanged: the baseline, the shared package, the Normalizer snapshot, and `cpm/c
 
 ## Next
 Milestone complete. Awaiting review. The Blueprint's next step is Step 3 (CPM Operation Authority
-Context), which lifts the R6 fail-closed refusals for Save, Update, Apply and Review. It is not started.
+Context). It lifts the R6 fail-closed refusals for Save and Review, and moves Update/Apply late
+verification (R9) and post-prompt authorization onto the operation context. It is not started.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
