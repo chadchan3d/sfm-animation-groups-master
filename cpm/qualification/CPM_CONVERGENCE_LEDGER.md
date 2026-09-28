@@ -2,53 +2,54 @@
 
 ## Current milestone
 
-CPM Convergence Step 1 (handoff §22 step 1): CPM-owned `cpm_compat_v1` family projection builder,
-exact-answer interpreter, compatibility identity (§11), strict coverage validation, complete
-retained-size estimation, Suite 1 foundation tests. Nothing beyond Step 1. Status: implemented and
-tested; Suite 1 recorded **PARTIAL** (not PASS).
+CPM Convergence Step 2 investigation (handoff §22 step 2, discovery only): map the current CPM
+semantic acquisition path and identify the minimum safe bootstrap seam for `cpm_compat_v1`. Done
+means: `cpm/qualification/CPM_BOOTSTRAP_INTEGRATION_INVESTIGATION.md` committed, with no code
+changes. Status: document written; awaiting review before any bootstrap code.
 
 ## Current state
 
-Base `e080daa` on `master`. Step 1 adds `cpm/convergence/cpm_compat_v1_projection.py` (module) and
-`cpm/convergence/tests/test_cpm_compat_v1_projection.py` (Suite 1 foundation). Canonical package
-(operator APPROVED): `tests/sidecar/qualification/candidate_b2c_correction6/sfm_master_authority_productionized/`,
-imported read-only (`views`, `errors`, `resource_estimator`; `broker`/`sidecar_contract` in tests).
-Frozen G18AN, the shared package, `tools/` and the canonical Master are unchanged. No bootstrap
-wiring, UI, Stage M, Stage F or K work started.
+Base `a52098e` on `master` (Step 1: `cpm/convergence/cpm_compat_v1_projection.py` plus Suite 1
+foundation tests, 196/196 on Python 3.10 and 2.7.5, identical digests; Suite 1 PARTIAL). This
+checkpoint adds only the investigation document and this ledger update. Frozen G18AN, the shared
+package, `tools/` and the canonical Master are unchanged.
 
 ## Verified
 
-- Suite 1 foundation: 196/196 PASS under Python 3.10 (`--phase=publish`) and 196/196 PASS under
-  embedded Python 2.7.5 (`--phase=suite`, separate process, same published directory). The two
-  result digests are byte-identical (`--phase=compare` 3/3 on both interpreters).
-- Mutation controls: uncovered-as-absent, occurrence-carrying coverage, and accepting unknown result
-  types are each detected by the suite.
-- G18AN oracle extracted verbatim from pinned ranges (SHA-256 `3326024d…66b3e` checked at runtime).
-  Hit/MasterUnknown answers match `_answer_from_result` exactly. That function is confirmed to raise
-  on FoldConflict, so conflict families are checked against hand-audited fixtures.
-- Fold parity with G18AN `p01_ascii_fold`, the adapter's `_ascii_fold_to_bytes` and
-  `format.ascii_fold_bytes` (ASCII, non-ASCII, whitespace, boundary characters).
-- Real broker: cache key uses text folds; the payload holds only fold-family facts (no
-  query literal, match kind or Master SHA); coverage is compact; builder errors publish nothing and
-  close the provider; same-fold/different-literal reuse (§20) reuses the same view with no provider
-  open; `cpm_compat_v2` does not reuse v1; the compatibility identity and the stable descriptor
-  fields are equal across brokers.
-- G18AN blob `e8c1bce…` unchanged; no diff under `tools/`, `tests/` or `cpm/baseline/`.
+- Earliest safe seam: `prod_scope(identity, provider=...)` (G18AN @20136) uses the provider only
+  through `generation_descriptor()` and `query_many()`. It keeps only a descriptor dict, so the
+  published scope stays pure.
+- The seam is not sufficient alone. `prod_scope_matches_identity` (@19527) compares against the
+  global `get_semantic_provider()` descriptor. Six production-route helpers reach the global
+  directly, and Fit threads a provider object into `p03_unmapped_relevant_controls` (target
+  vocabulary).
+- `provider_generation` is always 1 per script execution: the singleton is never invalidated
+  (`invalidate_semantic_provider` has no callers). G18AN has no in-process Master-change detection.
+  Persisted `capture_provider` / `last_validated_provider` values are never read back. The Step 1
+  constant (1) is value-compatible.
+- Save/Update identity checks run before their modal prompts (@31999/@32018, @32221/@32294).
+- The parity shortcut in `ProdWindow` (@28601 → @28841) constructs TXT and development-sidecar
+  providers directly.
 
 ## Unresolved
 
-- Suite 1 deferred items: live-snapshot parity, final-signature parity and mutation parity against
-  G18AN on real presets. These need Stage M / Stage F wiring, so they are out of Step 1 scope.
-- `tests/sidecar/qualification/verify_py27_equivalence.py` is not runnable as-is: its hardcoded
-  scratch fixture directories no longer exist, and it pins a pre-integration Normalizer SHA. It was
-  left unmodified. Py2.7.5 equivalence was instead shown with the established two-interpreter
-  publish/acquire technique plus a digest comparison.
-- `CPM_DESCRIPTOR_PROVIDER_GENERATION` is a fixed constant (1). Whether G18AN's
-  `prod_scope_matches_identity()` inputs need any further mapping is a bootstrap-wiring decision.
+- Suite 1 deferred items: live-snapshot, final-signature and mutation parity. The snapshot/signature
+  part can be done offline in Step 2a.
+- `verify_py27_equivalence.py` is not runnable as-is (stale scratch fixtures, pinned
+  pre-integration Normalizer SHA). It was left unmodified; the two-interpreter digest technique is
+  used instead.
+- R3: the G18AN health gate needs whole-Master `occurrence_count` / `fold_family_count` and a
+  qualified `provider_kind`. How the adapter supplies these is undecided.
+- R6: behavior of late helpers that still reach the global provider before Step 3 (fail closed vs
+  adapter-backed global) is undecided.
+- R13: location and form of a G18AN-derived runnable CPM candidate needs a reviewer decision.
+- UI reaction to a stale scope once freshness is real (R1) is unspecified.
 
 ## Next
 
-Stop at this checkpoint and await operator review of Step 1. Rerun the suite (Python 3:
-`--phase=publish`; Python 2.7.5: `--phase=suite`, then `--phase=compare`) before building on it.
+Await review of the investigation. If approved, Step 2a: an offline CPM authority adapter under
+`cpm/convergence/` (bootstrap checks, provider-shaped facade, descriptor/health mapping, freshness
+check) plus offline snapshot/signature parity against extracted G18AN functions. No CPM runtime
+edits until 2a and R13 are reviewed.
 
 Maintenance: Update at checkpoints. Replace stale entries; keep about one screen. Preserve unresolved issues. Verify relevant claims when resuming. Keep history in Git or an archive.
