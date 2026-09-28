@@ -239,3 +239,8 @@ real_sfm_qualification/checkpoint_process_attempt_guard/test_checkpoint_process_
 # baseline, same archive-export CRLF protection as the other pinned
 # sources above.
 cpm/baseline/SFM_CSP_G18AN_SaveNewCopy.py text eol=lf
+
+# CPM convergence Step 2b (2026-09-28): canonical evolving CPM application
+# source (R13). Derived byte-for-byte from the frozen G18AN baseline; keep LF
+# so its identity and diffs against the baseline stay exact.
+cpm/app/SFM_Character_Preset_Manager.py text eol=lf
