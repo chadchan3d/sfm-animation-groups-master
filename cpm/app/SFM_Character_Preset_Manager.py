@@ -18609,45 +18609,188 @@ def prod_semantic_provider_health_from_descriptor(
     }
 
 
-def prod_probe_semantic_provider():
+# ---------------------------------------------------------------------------
+# CPM convergence Step 2b: canonical authority route.
+#
+# Production semantic authority comes only from the canonical shared broker
+# through the CPM-owned authority adapter (cpm_authority_adapter, above the
+# cpm_compat_v1 projection). The historical G18AN provider machinery
+# (get_semantic_provider, SidecarSemanticProvider, MasterTxtSemanticProvider,
+# AUTO/TXT modes, the development parity route) is retained but is not
+# reachable from this production route. Late helpers not yet migrated to a
+# CPM Operation Authority Context (Step 3/4) fail closed via
+# ProdCpmUnmigratedProvider instead of reaching any provider.
+# ---------------------------------------------------------------------------
+
+PROD_CPM_MAINMENU_RELATIVE_PARTS = ("usermod", "scripts", "sfm", "mainmenu", "ChadChan3D")
+PROD_CPM_ADAPTER_MODULES = ("cpm_authority_adapter", "cpm_compat_v1_projection")
+
+
+class ProdCpmAuthorityBootstrapError(RuntimeError):
+    pass
+
+
+class ProdCpmAuthorityNotMigrated(RuntimeError):
+    pass
+
+
+def prod_cpm_mainmenu_dir():
+    """Same sys.executable-derived MAINMENU formula as the qualified
+    Normalizer and the CPM adapter (duplicated intentionally: it must run
+    before either can be imported; handoff section 16)."""
+    game_root = os.path.dirname(os.path.abspath(sys.executable))
+    return os.path.join(game_root, *PROD_CPM_MAINMENU_RELATIVE_PARTS)
+
+
+def prod_cpm_import_adapter():
+    """Import the CPM authority adapter from the canonical MAINMENU directory
+    and refuse any same-named module loaded from anywhere else."""
+    mainmenu_dir = prod_cpm_mainmenu_dir()
+    if mainmenu_dir not in sys.path:
+        sys.path.insert(0, mainmenu_dir)
+    import cpm_authority_adapter as adapter_module
+    expected = os.path.normcase(os.path.normpath(mainmenu_dir))
+    for name in PROD_CPM_ADAPTER_MODULES:
+        module = sys.modules.get(name)
+        origin = os.path.dirname(os.path.abspath(getattr(module, "__file__", "") or ""))
+        if module is None or os.path.normcase(os.path.normpath(origin)) != expected:
+            raise ProdCpmAuthorityBootstrapError(
+                "CPM authority module %r was not loaded from the canonical MAINMENU directory." % name
+            )
+    if adapter_module.locate_mainmenu_dir() != mainmenu_dir:
+        raise ProdCpmAuthorityBootstrapError(
+            "CPM authority adapter MAINMENU formula diverged from the application's."
+        )
+    return adapter_module
+
+
+def prod_cpm_is_main_thread():
+    app = QtCore.QCoreApplication.instance()
+    return bool(
+        app is not None
+        and QtCore.QThread.currentThread() is app.thread()
+    )
+
+
+def prod_cpm_open_adapter():
+    """A fresh canonical authority adapter for one bounded use. It holds no
+    lease, view or provider; its generation is pinned on first descriptor
+    or query. Raises on any bootstrap/identity failure."""
+    adapter_module = prod_cpm_import_adapter()
+    return adapter_module.open_canonical_authority(
+        p01_master_path(),
+        is_main_thread_fn=prod_cpm_is_main_thread,
+    )
+
+
+def prod_cpm_scope_generation_stale(scope):
+    """True if the scope's authority generation is not the current one (or
+    the current one cannot be established)."""
     try:
-        provider = get_semantic_provider()
-        descriptor = provider.generation_descriptor()
+        current = prod_cpm_open_adapter().generation_descriptor()
     except Exception as exc:
-        health = prod_semantic_provider_health_from_descriptor(
-            None,
-            error=exc,
+        log_line("PROD_CPM_GENERATION_CHECK_FAILED error=%r" % (exc,))
+        return True
+    authority = (scope or {}).get("authority") or {}
+    return u(authority.get("provider_sha256")) != u(current.get("source_sha256"))
+
+
+def prod_cpm_unmigrated_authority(helper):
+    log_line("PROD_CPM_UNMIGRATED_AUTHORITY_REFUSED helper=%r" % (helper,))
+    raise ProdCpmAuthorityNotMigrated(
+        "Semantic authority for %s is not available until its operation "
+        "authority context is migrated." % helper
+    )
+
+
+class ProdCpmUnmigratedProvider(object):
+    """Fail-closed stand-in for late helpers that still expect a provider
+    (R6). Never falls back to the historical provider."""
+
+    def __init__(self, helper):
+        self.helper = helper
+
+    def generation_descriptor(self):
+        prod_cpm_unmigrated_authority(self.helper)
+
+    def query_many(self, literals):
+        prod_cpm_unmigrated_authority(self.helper)
+
+
+def prod_cpm_health(status, reason, message=None, descriptor=None):
+    return {
+        "status": status,
+        "reason": reason,
+        "message": message,
+        "descriptor": descriptor,
+    }
+
+
+def prod_probe_semantic_provider(identity):
+    """Migrated authority health (R3): healthy only after canonical
+    bootstrap, admission, authorization, cpm_compat_v1 contract, complete
+    requested coverage and exact interpretation succeed for the selected
+    model's live vocabulary. No whole-Master count thresholds. Returns
+    (adapter or None, health)."""
+    try:
+        adapter = prod_cpm_open_adapter()
+    except Exception as exc:
+        health = prod_cpm_health(
+            u"unavailable",
+            u"cpm-authority-bootstrap-failed",
+            u(exc),
         )
         log_line(
             "PROD_PROVIDER_HEALTH status=%r reason=%r error=%r"
-            % (
-                health["status"],
-                health["reason"],
-                health["message"],
-            )
+            % (health["status"], health["reason"], health["message"])
         )
         return None, health
 
-    health = prod_semantic_provider_health_from_descriptor(
-        descriptor
+    row = prod_resolve(
+        identity
     )
+    literals = sorted(
+        set(
+            item["literal"]
+            for item in p01_all_supported_flex_bindings(row["animset"])
+        )
+    )
+    assessed = adapter.assess_health(
+        literals
+    )
+    if assessed.get("status") != u"healthy":
+        health = prod_cpm_health(
+            u"unavailable",
+            u(assessed.get("reason")),
+            u(assessed.get("message")),
+        )
+        log_line(
+            "PROD_PROVIDER_HEALTH status=%r reason=%r error=%r"
+            % (health["status"], health["reason"], health["message"])
+        )
+        return None, health
 
+    descriptor = dict(assessed.get("descriptor") or {})
+    health = prod_cpm_health(
+        u"healthy",
+        u(assessed.get("reason")),
+        None,
+        descriptor,
+    )
+    advisory = assessed.get("advisory") or {}
     log_line(
         "PROD_PROVIDER_HEALTH status=%r reason=%r kind=%r sha256=%r "
-        "occurrences=%r fold_families=%r min_occurrences=%d min_fold_families=%d"
+        "requested_literals=%r master_unknown_literals=%r"
         % (
             health["status"],
             health["reason"],
             descriptor.get("provider_kind"),
             descriptor.get("source_sha256"),
-            descriptor.get("occurrence_count"),
-            descriptor.get("fold_family_count"),
-            PROD_MASTER_HEALTH_MIN_OCCURRENCES,
-            PROD_MASTER_HEALTH_MIN_FOLD_FAMILIES,
+            advisory.get("requested_literal_count"),
+            advisory.get("master_unknown_literal_count"),
         )
     )
-
-    return provider, health
+    return adapter, health
 
 
 def prod_provider_health_selftest():
@@ -19107,7 +19250,8 @@ def prod_override_revision(profile):
 
 
 def prod_current_provider_descriptor():
-    return get_semantic_provider().generation_descriptor()
+    # CPM Step 2b: fresh canonical observation of the current generation.
+    return prod_cpm_open_adapter().generation_descriptor()
 
 
 def prod_pure_semantic_row(row):
@@ -19773,7 +19917,9 @@ def prod_live_bindings_for_cached_scope(
     return {
         "row": row,
         "accepted": accepted,
-        "provider": get_semantic_provider(),
+        "provider": ProdCpmUnmigratedProvider(
+            "prod_live_bindings_for_cached_scope"
+        ),
         "live_signature": signatures,
     }
 
@@ -20097,7 +20243,7 @@ def prod_character_record(identity):
         "updated_at": p03_now_stamp(),
         "semantic_policy": PROD_SEMANTIC_POLICY,
         "last_validated_provider": prod_provider_capture(
-            get_semantic_provider()
+            ProdCpmUnmigratedProvider("prod_character_record")
         ),
     }
 
@@ -20128,7 +20274,7 @@ def prod_ensure_character(identity):
         r.setdefault("semantic_override_revision", 0)
         r["structural_capabilities"] = {}
         r["updated_at"] = p03_now_stamp()
-        r["last_validated_provider"] = prod_provider_capture(get_semantic_provider())
+        r["last_validated_provider"] = prod_provider_capture(ProdCpmUnmigratedProvider("prod_ensure_character"))
     p02_safe_write_json(prod_paths(identity)["profile"], r)
     return p02_read_json(prod_paths(identity)["profile"])
 
@@ -20141,7 +20287,7 @@ def prod_scope(
         identity
     )
     if provider is None:
-        provider = get_semantic_provider()
+        provider = prod_cpm_open_adapter()
     provider_descriptor = provider.generation_descriptor()
     snap = semantic_snapshot_for_model_row(
         row,
@@ -28596,15 +28742,10 @@ class ProdWindow(QtGui.QDialog):
                 False
             )
 
-        self.g18an_parity_shortcut = QtGui.QShortcut(
-            QtGui.QKeySequence(
-                G18AN_PARITY_SHORTCUT
-            ),
-            self,
-        )
-        self.g18an_parity_shortcut.activated.connect(
-            self.g18an_run_decision_parity
-        )
+        # CPM Step 2b: the development decision-parity shortcut (historical
+        # TXT + development-sidecar providers) is not bound in the migrated
+        # production window. The handler is retained, unreachable.
+        self.g18an_parity_shortcut = None
 
         self.populate()
 
@@ -29546,10 +29687,60 @@ class ProdWindow(QtGui.QDialog):
         return bool(opened)
 
 
+    def prod_cpm_request_stale_rebuild_if_needed(
+        self,
+    ):
+        """CPM Step 2b plumbing for handoff section 13. If the selected scope's
+        generation is no longer current, schedule one rebuild of the current
+        selection through the existing select-model path. Neutral: no status
+        text or UI state of its own. Never replays an action."""
+        if getattr(self, "_cpm_stale_rebuild_pending", False):
+            return False
+        if self.scope is None or self.identity is None:
+            return False
+        if not prod_cpm_scope_generation_stale(self.scope):
+            return False
+        self._cpm_stale_rebuild_pending = True
+        log_line(
+            "PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED identity=%r"
+            % (self.identity,)
+        )
+        QtCore.QTimer.singleShot(
+            0,
+            self.prod_cpm_run_stale_rebuild,
+        )
+        return True
+
+    def prod_cpm_run_stale_rebuild(
+        self,
+    ):
+        if self.operation is not None or self.fit_active:
+            QtCore.QTimer.singleShot(
+                250,
+                self.prod_cpm_run_stale_rebuild,
+            )
+            return False
+        self._cpm_stale_rebuild_pending = False
+        if self.identity is None:
+            return False
+        if self.scope is not None and not prod_cpm_scope_generation_stale(self.scope):
+            return False
+        # Discard the stale scope, then acquire current authority and rebuild
+        # and republish through the existing selection path.
+        self.scope = None
+        log_line(
+            "PROD_CPM_STALE_GENERATION_REBUILD identity=%r"
+            % (self.identity,)
+        )
+        self.select_model(
+            self.combo.currentIndex()
+        )
+        return True
+
     def semantic_provider_ready(
         self,
     ):
-        return bool(
+        ready = bool(
             isinstance(
                 self.provider_health,
                 dict,
@@ -29562,6 +29753,13 @@ class ProdWindow(QtGui.QDialog):
                 self.identity,
             )
         )
+        if (
+            not ready
+            and self.scope is not None
+            and self.identity is not None
+        ):
+            self.prod_cpm_request_stale_rebuild_if_needed()
+        return ready
 
 
     def set_master_warning_visible(
@@ -29855,6 +30053,11 @@ class ProdWindow(QtGui.QDialog):
                 )
             except Exception:
                 pass
+
+            # CPM Step 2b (handoff section 13): a rejected action under a stale
+            # generation discards the scope and schedules a current-generation
+            # rebuild. The rejected action is never replayed.
+            self.prod_cpm_request_stale_rebuild_if_needed()
 
         finally:
             try:
@@ -30525,15 +30728,19 @@ class ProdWindow(QtGui.QDialog):
         )
         t_phase = time.time()
 
-        provider, provider_health = prod_probe_semantic_provider()
+        provider, provider_health = prod_probe_semantic_provider(
+            ident
+        )
         scope = None
 
         if provider_health.get(
             "status"
         ) == u"healthy":
             scope = prod_scope(
-                ident
+                ident,
+                provider,
             )
+        provider = None
 
         astra_perf_timing(
             u"model-render",
