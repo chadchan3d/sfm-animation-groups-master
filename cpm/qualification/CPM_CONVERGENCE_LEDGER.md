@@ -24,8 +24,9 @@ Done =
 `master`, Step 2b = two commits on top of `f351dc8`:
 - `bcfa036`: byte-identical derivation of `cpm/app/SFM_Character_Preset_Manager.py` from G18AN
   (SHA `3326024d…`), with LF pinned.
-- The wiring commit: `cpm/app/SFM_Character_Preset_Manager.py`,
-  `cpm/convergence/tests/test_cpm_app_canonical_route.py`, and this Ledger.
+- `7dea7d2`: the wiring commit: `cpm/app/SFM_Character_Preset_Manager.py`,
+  `cpm/convergence/tests/test_cpm_app_canonical_route.py`, and this Ledger. A Ledger-only
+  follow-up records this SHA.
 
 Unchanged: the baseline, the shared package, the Normalizer snapshot, and `cpm/convergence/*.py`.
 
