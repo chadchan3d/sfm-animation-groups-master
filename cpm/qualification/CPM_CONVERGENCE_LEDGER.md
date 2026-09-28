@@ -15,7 +15,8 @@ snapshot/signature parity, proven under Python 3 and 2.7.5 with no runnable CPM 
 **Status: complete and checked; awaiting review.**
 
 ## Current state
-`master` at `bc09e95` (Step 2a), on top of `2a5285e` (Step 2 investigation) and `a52098e` (Step 1).
+`master` at `6fcdfe1` (Ledger-format checkpoint), with the Step 2a implementation at `bc09e95`,
+on top of `2a5285e` (Step 2 investigation) and `a52098e` (Step 1).
 Step 2a code: `cpm/convergence/cpm_authority_adapter.py` and `tests/test_cpm_authority_adapter.py`.
 There is no uncommitted work in `cpm/`. Frozen G18AN (`3326024d…`), the shared package, the
 Normalizer snapshot (`1f4ec5a2…`), `tools/` and the canonical Master are unchanged.
@@ -42,7 +43,10 @@ Normalizer snapshot (`1f4ec5a2…`), `tools/` and the canonical Master are uncha
 - **R13 (owner decision needed):** location and form of the G18AN-derived runnable CPM candidate.
   This blocks Step 2b.
 - R6: behavior of late helpers that still reach the global provider. Open until a runtime route exists.
-- R1: UI behavior for a stale scope is unspecified (Step 2b).
+- R1: the stale-scope process is already specified by handoff §13: reject before mutation →
+  discard the stale scope → acquire current authority → rebuild under the new generation →
+  republish semantic state → require a new user action. Only the Step 2b UI presentation is
+  undecided (status copy, disabled state, refresh indication).
 - Negative fixtures surface as `SidecarMissing`, not a more specific class. This is fail-closed;
   the messaging is still to be decided.
 - `verify_py27_equivalence.py` is not runnable as-is. It was left unmodified; the two-interpreter
