@@ -8,79 +8,104 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-Real-SFM Qualification Session 1:
-- normal CPM operation;
-- native Apply + Undo;
-- one ordinary Fit target + Undo;
-- the C10 same-process broker check;
-- minimal Normalizer coexistence;
-- resources and latency.
-
-**Status: prepared and deployed; BLOCKED on operator execution in SFM.** No Session 1 result
-exists yet.
+Real-SFM Session 1: reconcile the first run, fix the test-only probe, prepare a minimal
+completion pass. **Status: reconciliation complete; Session 1 PARTIAL; completion pass awaits
+the operator.**
 
 ## Current state
-`master` at the Ledger commit that follows `1b78eac` (Session 1 probe + runbook). No product code
-changed since `cefa882`.
+`master` at the Ledger commit that follows `c7bccaa`. That commit holds the reconciliation, probe
+v2, the completion runbook and the corrected runbook, all in `real_sfm_qualification/cpm_session1/`.
+No product code changed since `cefa882`.
 
-The qualification deployment is placed in `<game>\usermod\scripts\sfm\mainmenu\ChadChan3D\` (the
-interim layout, qualification only). It consists of four new files; nothing was overwritten, and
-it is reversible by deleting them.
+Qualification deployment in `ChadChan3D`:
 
-| Deployed file | SHA-256 | Source |
-|---|---|---|
-| `SFM_Character_Preset_Manager.py` | `945eab6c…af8a` | blob `56286dd9` |
-| `cpm_authority_adapter.py` | `e96e21b5…6607` | blob `f2ea7588` |
-| `cpm_compat_v1_projection.py` | `9b077a1b…ffc1` | blob `50caf702` |
-| `CPM_Session1_Probe.py` (test-only) | `d7f16fac…3cd6` | — |
+| File | SHA-256 |
+|---|---|
+| App | `945eab6c…` |
+| Adapter | `e96e21b5…` |
+| Projection | `9b077a1b…` |
+| Probe v2 (replaced v1) | `0722610a…1fe` |
+| Normalizer (unchanged) | `1f4ec5a2…` |
 
-Verified already present in the deployment folder:
-- **Normalizer:** `1f4ec5a2…` (matches the audit snapshot).
-- **Shared package:** 23 files identical to the canonical correction6 copy (`projections.py`
-  correctly absent); API `1.0.0-b2a`, build `package-boundary-corrected-2026-09-22`.
-- **Master:** `ac45e5c1…904d93`, the same as the repo Master.
-- **Sidecar:** `bcd97641…`, source-matched to that Master.
-- **Interpreter:** SDK Python 2.7.5 (MSC v.1600, 32-bit). The probe records SFM's own runtime
-  version.
+Master `ac45e5c1…`; package API `1.0.0-b2a`, build `package-boundary-corrected-2026-09-22`.
 
-## Verified
-- Probe dry run under 2.7.5, offline:
-  - with no broker it constructs nothing and reports none;
-  - once the singleton exists it reports that same object id, 0 leases and 0 open providers;
-  - the JSONL record is written.
+## Verified (real SFM, 2026-09-28, one process pid 25896; see `SESSION1_RUN1_RECONCILIATION.md`)
+Models: `foxmccouldwm1` (40 literals) and `mia1` (108 literals; face 58, body 46, other 4; miss 0,
+conflict 0).
 
-  Its CPM-window path can only run inside SFM.
-- The runbook (`real_sfm_qualification/cpm_session1/INSTRUCTIONS.md`) maps each Session 1
-  requirement (A–I) to probe checkpoints P0–P12 and to log evidence.
-- Offline evidence from earlier milestones is unchanged: Suites 1–4, C7–C9 PASS offline, and C10
-  PASS offline except the same-process item.
+| Item | Status |
+|---|---|
+| Startup / canonical scope / historical route unused | PASS |
+| Idle lease/provider: 11 probes, leases 0, open 0, opens = closes | PASS |
+| Body Save (×2), Expression Save, Expression Update: authorized before the durable write | PASS |
+| Native Body Apply: 6 committed; 1 authorization each, before preflight; pinned postcommit verification ok; no authority access inside the transaction | PASS |
+| Body Apply Undo: Undo depth back to 59; the next Apply re-changed the same 4 sides (log-evidenced) | PASS |
+| No-op Apply: Undo count unchanged; "Already matches this preset." | PASS |
+| Expression Apply: committed, verified | PASS |
+| **C10 same-process broker:** one broker `0x30fd2a50` served `cpm_compat_v1` and `normalizer_compat` via the production paths | **PASS** |
+| Normalizer coexistence (sequential, same process): Normalizer PASS; CPM reopened afterwards and Applied | PASS |
+
+Measured latency and retention:
+- **Scope build:** 1.539 s (40 literals, cold) and 1.173 s (108 literals, new vocabulary); 0.073 s
+  when reopened from cache.
+- **Action authorization:** 0.019–0.024 s (cache hit).
+- **Stage open + release:** 0.017–0.024 s warm; 1.224 s cold.
+- **Apply total:** 0.12–0.16 s committed; 0.06 s no-op. Save 0.06–0.11 s; Update 0.056 s.
+- **Retention:**
+  - CPM pure scope 165,633 B (deep size, 108 literals);
+  - CPM views 47,303 B (40 literals) and 123,230 B (108 literals);
+  - probe view 53,002 B;
+  - Normalizer view 664,507 B;
+  - broker ledger retained 888,042 B.
+- **Process memory:** pre-CPM working set 3.01 GB, private 3.06 GB. It could not be read after CPM
+  loaded (the probe defect).
 
 ## Unresolved
-- **Session 1 verdicts: all PENDING (not run):**
-  - normal CPM operation;
-  - native Apply + Undo;
-  - ordinary native Fit + Undo;
-  - C10 same-process broker;
-  - Normalizer coexistence;
-  - resource/latency measurement.
-- **Observations for the owner (not defects; unchanged G18AN behavior):**
-  - The converged app keeps G18AN's window slot (`_sfm_character_slider_preset_tool_window`), its
-    log file name and `PROD_VERSION`. Many older CPM builds in the mainmenu root share that slot,
-    so the runbook requires a fresh SFM process opening only the converged app. Product identity
-    strings are a K/L decision.
-  - In the interim layout the two CPM modules sit beside the app, so they may appear as extra
-    Scripts-menu entries (L).
-- **Reserved for Sessions 2–3 and the failure gates:**
-  - G1→G2 with CPM open, and during a Save/Update prompt;
-  - the queued Fit target-1 G1 → target-2 G2 transition, and target 1's Undo after it;
-  - the forced Apply and forced Fit rollback-verification failures.
+- **Remaining Session 1 obligations** (see `COMPLETION_RUNBOOK.md`):
+  1. Body **Update**. PENDING, operator action not performed: the second Body operation was a
+     Save.
+  2. **Review/Reclassify.** PENDING, fixture unavailable: no model had a Needs-review item (0
+     Master-unknown).
+  3. Ordinary **Clothing Fit + Undo.** PENDING, fixture unavailable: no target had flexes absent
+     from the source.
+  4. **Simultaneous coexistence** (CPM open while the Normalizer runs, then still usable).
+     PENDING, operator action not performed: CPM was closed first.
+  5. **Process-memory measurement.** PENDING, probe defect. It is fixed in probe v2 and needs a
+     rerun.
+- **Session 1 roll-up:**
+
+  | Area | Status |
+  |---|---|
+  | Normal operation | PARTIAL |
+  | Native Apply + Undo | PASS |
+  | Ordinary Fit + Undo | PENDING (fixture) |
+  | C10 | PASS |
+  | Coexistence | PARTIAL |
+  | Resource/latency | PARTIAL |
+- **R14 (new; owner decision needed): process-global ctypes prototype.** CPM sets `argtypes` on
+  the shared `ctypes.windll.psapi.GetProcessMemoryInfo`. This is present in the G18AN baseline, so
+  it is not a convergence regression.
+  - After CPM runs, the production Normalizer's memory telemetry fails: `mem_ok=False` at 15/15
+    checkpoints, against `True` without CPM.
+  - It is telemetry only (VAS gating OK; Normalizer PASS).
+  - The fix is a small CPM product change (a private `WinDLL`); not done here.
+- **Product identity strings** (window slot, log name, `PROD_VERSION`) are unchanged from G18AN
+  and shared by old builds (K/L).
+- **Probe's own cache view:** the probe's timing leaves one extra cached view (53 KB, no lease).
+  It is test-only.
+- **Reserved for later:**
+  - Session 2 (G1→G2 with CPM open, and during a prompt);
+  - Session 3 (queued Fit G1→G2);
+  - the forced Apply and Fit rollback-verification failures.
 - Stale-scope UI presentation and `SidecarMissing` messaging: undecided. Cleanup, K, L: not
   started.
+- R3, R6, R9, R13: CLOSED. Offline: Suites 1–4 PASS; C7–C9 PASS; C10 now fully PASS (its offline
+  part and the real-SFM same-process check).
 
 ## Next
-Operator: run Session 1 per `real_sfm_qualification/cpm_session1/INSTRUCTIONS.md` in a fresh SFM
-process. Return the probe JSONL, the CPM log, the Normalizer log and the run sheet. I then
-evaluate the evidence and record the verdicts. No Session 2 work.
+Operator: run `real_sfm_qualification/cpm_session1/COMPLETION_RUNBOOK.md`. Items 1–2 are always
+possible; items 3–4 only with valid fixtures, otherwise record them as skipped. Owner: decide
+R14. No Session 2 work.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
