@@ -1,5 +1,8 @@
 # CPM Convergence — Real-SFM Qualification Session 1 (operator runbook)
 
+> **Status (2026-09-28):** the first run is reconciled in `SESSION1_RUN1_RECONCILIATION.md`. The
+> remaining items are in `COMPLETION_RUNBOOK.md`; use that, not this full runbook.
+
 Normal CPM operation through the converged authority seam, the native Apply transaction and
 Undo, one ordinary Clothing Fit target, the C10 same-process broker check, minimal Normalizer
 coexistence, and resource/latency measurement.
@@ -19,7 +22,7 @@ qualification only; L owns the final layout.
 | `SFM_Character_Preset_Manager.py` | `945eab6c9323ad35c238921f2a6654603d4510e61f68f45f72dabdbcdebbaf8a` |
 | `cpm_authority_adapter.py` | `e96e21b537b5892fc5c1139b2396bbf5e3ce48a521b45876035d78789f126607` |
 | `cpm_compat_v1_projection.py` | `9b077a1baf491262901812620c380a45eeb9cb2bf75ddc28a08ab18612faffc1` |
-| `CPM_Session1_Probe.py` (test-only) | `d7f16fac085b7e0711fba5e0dfea75c102f6cdd73a2b5086e703af27f8e83cd6` |
+| `CPM_Session1_Probe.py` (test-only) | v2 `0722610aa274bd9db2f355c4f85e61c51c07d810f3cd4d762255f085dffba1fe` (v1 `d7f16fac…` had a memory-read defect) |
 | `Rebuild_Control_Groups_Normalizer.py` (unchanged) | `1f4ec5a26605aa90380eb0532fec3915d2cc24a3a20473ed70d57198bd995db7` |
 
 - **Shared package:** `sfm_master_authority_productionized` (unchanged, 23 files), API
@@ -115,9 +118,12 @@ Change an Expression slider, then Apply the saved Expression preset. Verify the 
 - **P8.**
 
 ### H. C10 same-process broker + Normalizer coexistence
-Without restarting SFM:
-1. Run the production Normalizer (`ChadChan3D > Rebuild_Control_Groups_Normalizer`) on one
-   representative model/shot, as it is normally used. Wait for its completion report.
+Without restarting SFM, and **keeping CPM open**:
+1. Run `ChadChan3D > Rebuild_Control_Groups_Normalizer` from the Scripts menu. That script *is*
+   the production Normalizer operation: complete its own normal prompts and choices. There is no
+   separate "normalize one model" command, and SFM's built-in Rebuild Control Groups is not a
+   substitute. Wait for its completion report (its log is
+   `%PUBLIC%\Documents\sfm_rebuild_control_groups.txt`).
 2. **P9:** expect **the same `broker_id` as P1–P8**, and `consumers_served` (and usually
    the cached consumer kinds) including both `cpm_compat_v1` and `normalizer_compat`.
 3. Return to CPM. Confirm the window still works: select the character again. **P10.**

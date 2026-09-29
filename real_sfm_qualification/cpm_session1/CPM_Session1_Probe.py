@@ -28,7 +28,7 @@ import sys
 import tempfile
 import time
 
-PROBE_VERSION = u"cpm-session1-probe-1"
+PROBE_VERSION = u"cpm-session1-probe-2"  # 2: private-WinDLL process-memory read
 CPM_WINDOW_ATTR = "_sfm_character_slider_preset_tool_window"
 RUNTIME_MODULE = "sfm_master_authority_productionized.runtime"
 
@@ -81,10 +81,20 @@ def _process_memory():
                 ("PagefileUsage", ctypes.c_size_t), ("PeakPagefileUsage", ctypes.c_size_t),
                 ("PrivateUsage", ctypes.c_size_t),
             ]
+        # Private library instances: ctypes.windll.* function objects are
+        # process-shared, and another in-process consumer (the CPM app) sets
+        # its own argtypes on GetProcessMemoryInfo. A private WinDLL has its
+        # own prototypes, so this neither depends on nor alters theirs.
+        kernel32 = ctypes.WinDLL("kernel32")
+        psapi = ctypes.WinDLL("psapi")
+        kernel32.GetCurrentProcess.argtypes = []
+        kernel32.GetCurrentProcess.restype = ctypes.c_void_p
+        psapi.GetProcessMemoryInfo.argtypes = [ctypes.c_void_p, ctypes.POINTER(PMC), wintypes.DWORD]
+        psapi.GetProcessMemoryInfo.restype = wintypes.BOOL
         counters = PMC()
         counters.cb = ctypes.sizeof(PMC)
-        handle = ctypes.windll.kernel32.GetCurrentProcess()
-        ok = ctypes.windll.psapi.GetProcessMemoryInfo(handle, ctypes.byref(counters), counters.cb)
+        handle = kernel32.GetCurrentProcess()
+        ok = psapi.GetProcessMemoryInfo(handle, ctypes.byref(counters), counters.cb)
         if not ok:
             return {"error": u"GetProcessMemoryInfo failed"}
         return {
