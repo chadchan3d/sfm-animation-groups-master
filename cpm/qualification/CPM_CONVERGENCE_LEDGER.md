@@ -8,90 +8,89 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-CPM Convergence Step 3: CPM Operation Authority Context (§14). Save, Update, Apply and
-Review/Reclassify authorize post-prompt and consume a detached context; Fit is untouched.
+CPM Convergence Step 4: Clothing Fit per-target authority (§15), with `Gfit` and a per-target
+stage lease held through post-stage verification, plus the approved Reclassify copy correction.
 **Status: complete and checked (offline); awaiting review.**
 
 ## Current state
-`master` at the Ledger commit that follows `1bb2e51` (Step 3 code), on top of `b4da338`.
+`master` at the Ledger commit that follows `f47f83c` (Step 4 code), on top of `40a2e9b`.
 
-Files changed in `1bb2e51`:
+Files changed in `f47f83c`:
 - `cpm/app/SFM_Character_Preset_Manager.py`;
-- `cpm/convergence/tests/test_cpm_app_operation_context.py` (new);
-- `cpm/convergence/tests/test_cpm_app_canonical_route.py` (bounded-derivation expectations made
-  cumulative for Step 3).
+- `cpm/convergence/cpm_authority_adapter.py`: new `open_stage()` / `CpmStageAuthority`;
+  `cpm_compat_v1` is unchanged;
+- `cpm/convergence/tests/test_cpm_app_clothing_fit.py` (new);
+- `test_cpm_app_canonical_route.py`: cumulative bounded-edit expectations, and the module-dir
+  override is now honored;
+- `test_cpm_app_operation_context.py`: approved copy.
 
-Unchanged: the baseline, the shared package, the Normalizer, and `cpm/convergence/*.py`.
+Unchanged: the baseline, the shared package and the Normalizer.
 
 ## Verified (offline only)
 Test results (Python 3.10 = embedded 2.7.5; digests identical):
 
 | Suite | Checks | Digest |
 |---|---|---|
-| Step 3 | 108/108 | `4391bf76…` |
-| Step 2b | 83/83 | `5ec417c9…` |
+| Step 4 | 95/95 | `d065ae69…` |
+| Step 3 | 108/108 | `a2d6d0d3…` |
+| Step 2b | 83/83 | `b043eefb…` |
 | Step 2a | 205/205 | `02cf2200…` |
 | Step 1 | 196/196 | `e72e3c84…` |
 
-- **Context:** `prod_cpm_authorize_operation` checks the scope's SHA with
-  `verify_current_generation`, using the scope's own vocabulary. It returns plain data only:
-  - SHA and compatibility identity;
-  - provider capture and runtime API/build;
-  - contract/consumer/policy identity;
-  - membership;
-  - the persistence capture (G18AN 4-field shape).
-
-  Objects, generators, closures and adapters are refused. Leases and providers are back at
-  baseline after every path.
-- **Save (Body/Expression):** authorizes after the prompt returns, once, before any write. No
-  authority access after the first write. The character capture comes from the context; the
-  preset capture is unchanged. **R6 refusal lifted.**
-- **Update:** same ordering; still succeeds (not fail-closed).
-- **G1→G2 during a Save/Update prompt:** stale rejection with no durable write; one rebuild
-  under G2; no replay.
-- **Apply (R9):**
-  - Under G2, the pinned postcommit readback and `prod_abort_apply_and_verify` run with 0 authority
-    opens and verify against the pinned membership.
-  - Membership drift is rejected.
-  - Statically: one authorization before `StartUndo`; all 3 late checks pinned; no reacquisition.
-- **Review:**
-  - Authorizes while the scope is still selected; writes only after authorization; resolved and
-    conflict literals are refused. **R6 refusal lifted.**
-  - The rebuild is a separate fresh acquisition.
-  - Stale generation keeps the §13 rebuild.
-- **Reclassify:** the durable clear succeeds under G1. When G2 then resolves the literal, it
-  reports the edit and the new classification separately (no raise, not forced back to Review).
-  The returns-to-Review flow is unchanged.
-- No historical provider call on any path. 8 Step 3 perturbations were all detected.
+- **Gfit:** set at Fit start from the Step 3 authorization as the Master SHA, stored as
+  `fit_semantic_generation`. It is separate from the integer `fit_generation`; a stale callback
+  generation is ignored without any authority access.
+- **Per target:** the real `fit_selected` / `fit_stage` run one Qt turn at a time.
+  - Each target is proven with `expected_generation=Gfit` over source Body membership plus the
+    target's vocabulary; target-only folds are present.
+  - Planning and verification use the same stage (lease count 1 during planning, mutation and
+    verification).
+  - The stage is released before each next target is queued (0 leases whenever a target is
+    scheduled).
+- **Warnings:** results through the real `p03_unmapped_relevant_controls` rule are identical via
+  the stage and via the bounded adapter query, and match the hand audit: exact Body Morphs and
+  Clothing only.
+- **G1→G2 between targets:**
+  - target 1 stays committed; target 2 has zero writes;
+  - targets 2–3 are unattempted, not failed; the Fit terminates with the existing status copy;
+  - the scope is rebuilt under G2; the old Fit is not resumed;
+  - a new Fit runs under G2.
+- **Post-stage Uncovered:** fails closed after commit (committed, verification "uncertain"), with no
+  second acquisition. Foreign-modal deferral takes no authority; the proof runs at resume.
+- **Rollback:** Fit's abort verification is native-only (`p03_target_matches_baseline`), so no
+  semantic facts needed binding.
+- No historical provider call. 8 Step 4 perturbations were all detected (app + adapter).
 
 ## Unresolved
-- **Suite 3: PASS (offline).** All six §20 proofs hold. Apply is covered by running its exact
-  postcommit and abort helpers plus static routing of `prod_apply`. `prod_apply`'s native Undo
-  transaction itself was **not executed** offline, so it needs real SFM.
-- **R6:** the Save and Review refusals are lifted. The Clothing Fit unmatched-target query
-  intentionally stays fail-closed (Step 4). Any caller without a context still refuses.
-- **R9:** CLOSED offline. Apply late verification uses the pinned context.
-- **Operation baselines:** Apply's native baselines (`built`, `scale_plan`) stay in the existing
-  Apply-owned structures, not in the context. They hold live-verification data by design; the
-  context carries the authority facts.
-- **Provisional copy (owner review):** Reclassify's new status "Classification cleared.", used
-  when newer authority now classifies the flex.
-- **Stale-scope UI presentation:** undecided (unchanged from 2b).
-- **Step 4 (Fit):** not started. **K, L:** not started.
-- **Real-SFM (§21), Suites 2 and 4, C7–C10:** not run. Nothing deployed.
-- **Latency:** unmeasured. Each semantic action now adds one expected-generation acquisition,
-  normally a full cache hit.
-- Interim runtime layout (untested; L owns the final layout): CPM modules in the MAINMENU
-  `ChadChan3D` directory.
+- **Suite 4: PASS (offline).** All five §20 proofs, plus review §9's Uncovered and
+  callback-cancellation items. Native Fit mapping and mutation (`g11a_safe_plan` native parts,
+  `prod_apply_match`) were stubbed.
+- **Real-SFM-only Fit obligations:**
+  - the real native Fit transaction/Undo per target;
+  - target 1's Undo validity after a G2 stop;
+  - real foreign-modal timing;
+  - the outstanding forced Fit rollback-verification failure gate (not exercised; still open).
+- **R6:** fully lifted on product paths. The fail-closed stand-in remains only for callers without
+  a stage or context.
+- **Reclassify copy:** corrected as approved to "Saved classification cleared. Current authority
+  now classifies this flex."
+- **Stale-scope UI presentation:** undecided.
+- **Real-SFM (§21), Suite 2, C7–C10:** not run. The Apply native transaction has not run offline.
+  Nothing deployed.
+- **Latency:** unmeasured. One stage acquisition per Fit target.
+- **Cleanup:** historical authority machinery is still present (cleanup not started, by
+  instruction). **K, L:** not started.
+- Interim runtime layout: CPM modules in the MAINMENU `ChadChan3D` directory (untested; L owns
+  the final layout).
 - G18AN signatures are interpreter-specific; the 2.7.5 value is authoritative.
 - Negative fixtures surface as `SidecarMissing`; messaging is undecided.
 - `verify_py27_equivalence.py` was left unmodified.
-- Inherited log path and repository URL are unchanged.
-- R3: CLOSED. R13: CLOSED (`cpm/app/SFM_Character_Preset_Manager.py`).
+- R3, R9, R13: CLOSED.
 
 ## Next
-Milestone complete. Awaiting review. Per the Blueprint the next step is Step 4 (Clothing Fit per
-target: target vocabulary, `Gfit`, stage lease through verification). It is not started.
+Milestone complete. Awaiting review. The Blueprint sequence next calls for its focused
+qualification: Suite 2, gates C7–C10, the forced Apply/Fit rollback-verification failures, and
+real-SFM §21. Then cleanup, then K. Not started.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
