@@ -154,18 +154,31 @@ class AppSource(object):
 # Section 1 -- bounded derivation from the frozen baseline
 # ---------------------------------------------------------------------------
 
-EXPECTED_CHANGED_TOP = set([
+# Cumulative bounded edit set against the frozen baseline: Step 2b, then
+# Step 3 (Operation Authority Context).
+STEP2B_CHANGED_TOP = set([
     "prod_probe_semantic_provider", "prod_current_provider_descriptor",
     "prod_live_bindings_for_cached_scope", "prod_character_record", "prod_ensure_character",
     "prod_scope", "ProdWindow",
 ])
+STEP3_CHANGED_TOP = set([
+    "prod_scope_matches_identity", "prod_save", "prod_update_preset", "prod_apply",
+    "prod_verify_apply_abort_baseline", "prod_abort_apply_and_verify", "prod_set_override",
+    "prod_clear_override",
+])
+EXPECTED_CHANGED_TOP = STEP2B_CHANGED_TOP | STEP3_CHANGED_TOP
 EXPECTED_NEW_TOP = set([
     "PROD_CPM_MAINMENU_RELATIVE_PARTS", "PROD_CPM_ADAPTER_MODULES", "ProdCpmAuthorityBootstrapError",
     "ProdCpmAuthorityNotMigrated", "prod_cpm_mainmenu_dir", "prod_cpm_import_adapter", "prod_cpm_is_main_thread",
     "prod_cpm_open_adapter", "prod_cpm_scope_generation_stale", "prod_cpm_unmigrated_authority",
     "ProdCpmUnmigratedProvider", "prod_cpm_health",
+    # Step 3
+    "PROD_CPM_OPERATION_CONTEXT_SCHEMA", "PROD_CPM_STALE_SCOPE_MESSAGE", "ProdCpmOperationAuthorityError",
+    "prod_cpm_pure_scalar_types", "PROD_CPM_PURE_SCALARS", "prod_cpm_detached",
+    "prod_cpm_context_matches_identity", "prod_cpm_reclassify_outcome", "prod_cpm_authorize_operation",
 ])
-EXPECTED_CHANGED_METHODS = set(["guard", "render", "semantic_provider_ready"])
+EXPECTED_CHANGED_METHODS = set(["guard", "render", "semantic_provider_ready",
+                                "review_decision", "review_reclassify"])  # last two: Step 3
 EXPECTED_NEW_METHODS = set(["prod_cpm_request_stale_rebuild_if_needed", "prod_cpm_run_stale_rebuild"])
 
 
@@ -289,7 +302,8 @@ EXTRACT_TOP = [
     "prod_override_revision", "prod_scope_pure_assert", "prod_scope_matches_identity",
     "prod_live_bindings_for_cached_scope", "prod_current_provider_descriptor", "prod_character_record",
     "prod_ensure_character", "prod_scope", "p03_unmapped_relevant_controls",
-] + sorted(EXPECTED_NEW_TOP) + ["prod_probe_semantic_provider"]
+] + [n for n in sorted(EXPECTED_NEW_TOP) if n != "PROD_CPM_PURE_SCALARS"] + [
+    "PROD_CPM_PURE_SCALARS", "prod_probe_semantic_provider"]
 
 
 class _Forbidden(Exception):
@@ -343,6 +357,9 @@ def _shim_adapter_module():
     published root instead of an SFM installation."""
     class Shim(object):
         CpmAuthorityUnavailable = adapter_mod.CpmAuthorityUnavailable
+        CpmGenerationMismatch = adapter_mod.CpmGenerationMismatch
+        EXPECTED_API_VERSION = adapter_mod.EXPECTED_API_VERSION
+        EXPECTED_BUILD_ID = adapter_mod.EXPECTED_BUILD_ID
 
         @staticmethod
         def locate_mainmenu_dir():

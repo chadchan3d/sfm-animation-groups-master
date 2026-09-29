@@ -18726,6 +18726,168 @@ def prod_cpm_health(status, reason, message=None, descriptor=None):
     }
 
 
+# ---------------------------------------------------------------------------
+# CPM convergence Step 3: CPM Operation Authority Context (handoff section 14).
+#
+# A semantic-dependent operation proves its scope's generation current once,
+# at its post-prompt entry, and captures the result as detached plain data.
+# Late helpers (persistence, postcommit readback, abort verification) consume
+# that context; they never reopen or re-authorize semantic authority, and never
+# reinterpret membership under a newer generation.
+# ---------------------------------------------------------------------------
+
+PROD_CPM_OPERATION_CONTEXT_SCHEMA = u"cpm-operation-authority-context-v1"
+PROD_CPM_STALE_SCOPE_MESSAGE = "The selected model's semantic scope is stale. Reselect the model."
+
+
+class ProdCpmOperationAuthorityError(RuntimeError):
+    pass
+
+
+def prod_cpm_pure_scalar_types():
+    try:
+        return (type(None), bool, int, long, float, unicode, str)  # noqa: F821 -- Python 2
+    except NameError:
+        return (type(None), bool, int, float, str, bytes)
+
+
+PROD_CPM_PURE_SCALARS = prod_cpm_pure_scalar_types()
+
+
+def prod_cpm_detached(value):
+    """Deep copy of plain data; refuses anything else (views, leases,
+    providers, adapters, iterators, closures, DME/Qt objects)."""
+    if isinstance(value, dict):
+        return dict(
+            (prod_cpm_detached(k), prod_cpm_detached(v))
+            for k, v in value.items()
+        )
+    if isinstance(value, list):
+        return [prod_cpm_detached(v) for v in value]
+    if isinstance(value, tuple):
+        return tuple(prod_cpm_detached(v) for v in value)
+    if isinstance(value, PROD_CPM_PURE_SCALARS):
+        return value
+    raise ProdCpmOperationAuthorityError(
+        "Operation authority context refused a non-plain value of type %r."
+        % type(value).__name__
+    )
+
+
+def prod_cpm_context_matches_identity(context, identity):
+    try:
+        ctx_identity = context["identity"]
+        return (
+            prod_norm(ctx_identity.get("model")) == prod_norm(identity.get("model"))
+            and int(ctx_identity.get("checksum")) == int(identity.get("checksum"))
+            and u(ctx_identity.get("animset_name")) == u(identity.get("animset_name"))
+        )
+    except Exception:
+        return False
+
+
+def prod_cpm_reclassify_outcome(literal, new_scope):
+    """Separate the durable Reclassify edit from the classification the
+    rebuilt current-authority scope now gives the literal."""
+    row = None
+    for item in (new_scope.get("semantic") or {}).get("rows") or []:
+        if u(item.get("literal")) == u(literal):
+            row = item
+            break
+    return {
+        "durable_edit": True,
+        "returned_to_review": literal in (new_scope.get("unresolved") or []),
+        "current_semantic_class": None if row is None else row.get("semantic_class"),
+        "current_semantic_status": None if row is None else row.get("semantic_status"),
+    }
+
+
+def prod_cpm_authorize_operation(identity, scope, kind, label):
+    """Fresh post-prompt authorization for one semantic-dependent operation.
+    Proves the scope's generation current through the canonical
+    expected-generation route (same requested vocabulary as the scope), then
+    returns the detached Operation Authority Context. A changed generation
+    raises the existing stale-scope error before any write or mutation."""
+    if not isinstance(scope, dict) or not isinstance(scope.get("authority"), dict):
+        raise RuntimeError(PROD_CPM_STALE_SCOPE_MESSAGE)
+    expected = u(scope["authority"].get("provider_sha256"))
+    literals = sorted(
+        set(
+            u(row.get("literal"))
+            for row in ((scope.get("semantic") or {}).get("rows") or [])
+        )
+    )
+    adapter_module = prod_cpm_import_adapter()
+    adapter = prod_cpm_open_adapter()
+    failure = None
+    provenance = None
+    try:
+        provenance = adapter.verify_current_generation(expected, literals)
+    except adapter_module.CpmGenerationMismatch as exc:
+        failure = (RuntimeError, PROD_CPM_STALE_SCOPE_MESSAGE, u(exc.reason))
+    except adapter_module.CpmAuthorityUnavailable as exc:
+        failure = (
+            ProdCpmOperationAuthorityError,
+            "Semantic authority is unavailable for this action (%s)." % exc.reason,
+            u(exc.reason),
+        )
+    adapter = None
+    if failure is not None:
+        log_line(
+            "PROD_CPM_OPERATION_AUTHORIZATION_REFUSED operation=%r reason=%r"
+            % (label, failure[2])
+        )
+        raise failure[0](failure[1])
+
+    capture = prod_cpm_detached(provenance["provider_capture"])
+    if u(capture.get("source_sha256")) != expected:
+        raise RuntimeError(PROD_CPM_STALE_SCOPE_MESSAGE)
+    membership = None
+    if kind is not None:
+        key = u"body" if kind == P03_KIND_BODY else u"expression"
+        membership = {
+            "kind": u(kind),
+            "descriptors": prod_cpm_detached(scope[key]),
+        }
+    context = prod_cpm_detached({
+        "schema": PROD_CPM_OPERATION_CONTEXT_SCHEMA,
+        "operation": u(label),
+        "identity": {
+            "model": u(identity.get("model")),
+            "checksum": int(identity.get("checksum")),
+            "animset_name": u(identity.get("animset_name")),
+        },
+        "master_sha256": expected,
+        "compatibility_identity": [u(item) for item in provenance["compatibility_identity"]],
+        "provider_capture": capture,
+        "runtime": {
+            "api_version": u(adapter_module.EXPECTED_API_VERSION),
+            "build_id": u(adapter_module.EXPECTED_BUILD_ID),
+        },
+        "consumer_kind": u(provenance["compatibility_identity"][2]),
+        "projection_contract": u(capture.get("projection_contract")),
+        "semantic_policy_revision": u(PROD_SEMANTIC_POLICY),
+        "scope_authority": scope["authority"],
+        "live_signature": scope.get("live_signature") or {},
+        "membership": membership,
+        "persistence": {
+            "last_validated_provider": prod_provider_capture(capture),
+            "semantic_policy": u(PROD_SEMANTIC_POLICY),
+        },
+    })
+    provenance = None
+    log_line(
+        "PROD_CPM_OPERATION_AUTHORIZED operation=%r sha256=%s kind=%r membership=%r"
+        % (
+            label,
+            expected,
+            kind,
+            None if membership is None else len(membership["descriptors"]),
+        )
+    )
+    return context
+
+
 def prod_probe_semantic_provider(identity):
     """Migrated authority health (R3): healthy only after canonical
     bootstrap, admission, authorization, cpm_compat_v1 contract, complete
@@ -19671,6 +19833,7 @@ def prod_outcome(
 def prod_scope_matches_identity(
     scope,
     identity,
+    authority_context=None,
 ):
     if not isinstance(
         scope,
@@ -19728,7 +19891,24 @@ def prod_scope_matches_identity(
         authority = scope.get(
             "authority"
         ) or {}
-        provider = prod_current_provider_descriptor()
+        if authority_context is not None:
+            # CPM Step 3: verify against the operation's pinned authority;
+            # never reopen or re-authorize it.
+            if not prod_cpm_context_matches_identity(
+                authority_context,
+                identity,
+            ):
+                return False
+            provider = {
+                "provider_generation": authority_context[
+                    "provider_capture"
+                ].get("provider_generation"),
+                "source_sha256": authority_context.get(
+                    "master_sha256"
+                ),
+            }
+        else:
+            provider = prod_current_provider_descriptor()
 
         if (
             int(
@@ -19789,11 +19969,15 @@ def prod_live_bindings_for_cached_scope(
     identity,
     scope,
     kind,
+    authority_context=None,
 ):
-    """Fresh live FLEX bindings using pure cached semantic membership."""
+    """Fresh live FLEX bindings using pure cached semantic membership. With an
+    Operation Authority Context, the check is pinned to that operation's
+    authorized generation and membership (CPM Step 3)."""
     if not prod_scope_matches_identity(
         scope,
         identity,
+        authority_context=authority_context,
     ):
         raise RuntimeError(
             "The selected model's semantic scope is stale. Reselect the model."
@@ -19869,6 +20053,16 @@ def prod_live_bindings_for_cached_scope(
         if kind == P03_KIND_BODY
         else "expression"
     ]
+    if authority_context is not None:
+        membership = authority_context.get("membership") or {}
+        if (
+            u(membership.get("kind")) != u(kind)
+            or set((membership.get("descriptors") or {}).keys()) != expected_names
+        ):
+            raise RuntimeError(
+                PROD_CPM_STALE_SCOPE_MESSAGE
+            )
+        descriptor_map = membership["descriptors"]
 
     for literal in sorted(
         expected_names
@@ -20208,7 +20402,7 @@ def prod_is_scale_model(identity):
     )
 
 
-def prod_character_record(identity):
+def prod_character_record(identity, authority_context=None):
     return {
         "schema_version": PROD_SCHEMA_VERSION,
         "record_kind": u"character",
@@ -20244,6 +20438,8 @@ def prod_character_record(identity):
         "semantic_policy": PROD_SEMANTIC_POLICY,
         "last_validated_provider": prod_provider_capture(
             ProdCpmUnmigratedProvider("prod_character_record")
+            if authority_context is None
+            else authority_context["persistence"]["last_validated_provider"]
         ),
     }
 
@@ -20263,10 +20459,10 @@ def prod_load_character(identity):
     return r
 
 
-def prod_ensure_character(identity):
+def prod_ensure_character(identity, authority_context=None):
     r = prod_load_character(identity)
     if r is None:
-        r = prod_character_record(identity)
+        r = prod_character_record(identity, authority_context=authority_context)
     else:
         r["display_name"] = u(identity["animset_name"])
         r.setdefault("model_ref", {})["last_validated_checksum"] = int(identity["checksum"])
@@ -20274,7 +20470,11 @@ def prod_ensure_character(identity):
         r.setdefault("semantic_override_revision", 0)
         r["structural_capabilities"] = {}
         r["updated_at"] = p03_now_stamp()
-        r["last_validated_provider"] = prod_provider_capture(ProdCpmUnmigratedProvider("prod_ensure_character"))
+        r["last_validated_provider"] = prod_provider_capture(
+            ProdCpmUnmigratedProvider("prod_ensure_character")
+            if authority_context is None
+            else authority_context["persistence"]["last_validated_provider"]
+        )
     p02_safe_write_json(prod_paths(identity)["profile"], r)
     return p02_read_json(prod_paths(identity)["profile"])
 
@@ -20533,15 +20733,27 @@ def prod_set_override(
     decision,
     scope=None,
     phase_callback=None,
+    authority_context=None,
 ):
     if scope is None:
         scope = prod_scope(
             identity
         )
 
+    # CPM Step 3: the durable Review edit consumes a fresh operation
+    # authorization of the scope's generation.
+    if authority_context is None:
+        authority_context = prod_cpm_authorize_operation(
+            identity,
+            scope,
+            None,
+            u"Review Flex",
+        )
+
     if not prod_scope_matches_identity(
         scope,
         identity,
+        authority_context=authority_context,
     ):
         raise RuntimeError(
             "The selected model's semantic scope is stale. Reselect the model."
@@ -20564,7 +20776,8 @@ def prod_set_override(
         )
 
     record = prod_ensure_character(
-        identity
+        identity,
+        authority_context=authority_context,
     )
     overrides = record.setdefault(
         "semantic_overrides",
@@ -20660,15 +20873,27 @@ def prod_clear_override(
     literal,
     scope=None,
     phase_callback=None,
+    authority_context=None,
 ):
     if scope is None:
         scope = prod_scope(
             identity
         )
 
+    # CPM Step 3: the durable Review edit consumes a fresh operation
+    # authorization of the scope's generation.
+    if authority_context is None:
+        authority_context = prod_cpm_authorize_operation(
+            identity,
+            scope,
+            None,
+            u"Reclassify Flex",
+        )
+
     if not prod_scope_matches_identity(
         scope,
         identity,
+        authority_context=authority_context,
     ):
         raise RuntimeError(
             "The selected model's semantic scope is stale. Reselect the model."
@@ -20682,7 +20907,8 @@ def prod_clear_override(
         )
 
     record = prod_ensure_character(
-        identity
+        identity,
+        authority_context=authority_context,
     )
     overrides = record.setdefault(
         "semantic_overrides",
@@ -26414,11 +26640,20 @@ def prod_save(
             identity
         )
 
+    # CPM Step 3: post-prompt authorization; everything later consumes it.
+    authority_context = prod_cpm_authorize_operation(
+        identity,
+        scope,
+        kind,
+        u"Save Preset",
+    )
+
     t_phase = time.time()
     live = prod_live_bindings_for_cached_scope(
         identity,
         scope,
         kind,
+        authority_context=authority_context,
     )
     prod_action_timing(
         u"Save Preset",
@@ -26565,7 +26800,8 @@ def prod_save(
 
     t_phase = time.time()
     prod_ensure_character(
-        identity
+        identity,
+        authority_context=authority_context,
     )
     prod_action_timing(
         u"Save Preset",
@@ -26783,11 +27019,20 @@ def prod_update_preset(
             identity
         )
 
+    # CPM Step 3: post-prompt authorization before durable replacement.
+    authority_context = prod_cpm_authorize_operation(
+        identity,
+        scope,
+        kind,
+        u"Update Preset",
+    )
+
     t_phase = time.time()
     live = prod_live_bindings_for_cached_scope(
         identity,
         scope,
         kind,
+        authority_context=authority_context,
     )
     prod_action_timing(
         u"Update Preset",
@@ -27194,12 +27439,15 @@ def prod_verify_apply_abort_baseline(
     scope,
     built,
     scale_plan,
+    authority_context=None,
 ):
-    """Freshly verify only the state owned by the failed Apply transaction."""
+    """Freshly verify only the state owned by the failed Apply transaction,
+    against the operation's pinned authorized membership (CPM Step 3)."""
     live = prod_live_bindings_for_cached_scope(
         identity,
         scope,
         kind,
+        authority_context=authority_context,
     )
 
     if not p03_verify_baselines(
@@ -27304,6 +27552,7 @@ def prod_abort_apply_and_verify(
     built,
     scale_plan,
     original_error,
+    authority_context=None,
 ):
     abort_error = None
     restored = False
@@ -27325,6 +27574,7 @@ def prod_abort_apply_and_verify(
                 scope,
                 built,
                 scale_plan,
+                authority_context=authority_context,
             )
         )
 
@@ -27416,10 +27666,19 @@ def prod_apply(
             identity
         )
 
+    # CPM Step 3: authorize once, before any mutation; postcommit and abort
+    # verification consume this pinned context and never reacquire authority.
+    authority_context = prod_cpm_authorize_operation(
+        identity,
+        scope,
+        kind,
+        u"Apply Preset",
+    )
     live = prod_live_bindings_for_cached_scope(
         identity,
         scope,
         kind,
+        authority_context=authority_context,
     )
     accepted = live[
         "accepted"
@@ -27712,6 +27971,7 @@ def prod_apply(
                 built,
                 scale_plan,
                 exc,
+                authority_context=authority_context,
             )
             opened = False
 
@@ -27745,6 +28005,7 @@ def prod_apply(
         identity,
         scope,
         kind,
+        authority_context=authority_context,
     )
     fresh_accepted = fresh_live[
         "accepted"
@@ -31996,6 +32257,15 @@ class ProdWindow(QtGui.QDialog):
                     "The selected model's semantic scope is stale. Reselect the model."
                 )
 
+            # CPM Step 3: authorize while the scope is still selected, so a
+            # stale generation keeps the existing section 13 rebuild path.
+            authority_context = prod_cpm_authorize_operation(
+                ident,
+                old_scope,
+                None,
+                u"Reclassify Flex",
+            )
+
             self.scope = None
             self.disable_semantic_scene_actions()
 
@@ -32004,7 +32274,9 @@ class ProdWindow(QtGui.QDialog):
                 literal,
                 old_scope,
                 phase_callback=self.operation_mark_phase,
+                authority_context=authority_context,
             )
+            authority_context = None
 
             self.operation_revalidate()
 
@@ -32020,38 +32292,49 @@ class ProdWindow(QtGui.QDialog):
                 "RECLASSIFY_AFTER_SCOPE_REBUILD"
             )
 
-            if (
-                literal
-                not in new_scope[
-                    "unresolved"
-                ]
-                or literal
-                in new_scope[
-                    "overrides"
-                ]
-            ):
+            if literal in new_scope[
+                "overrides"
+            ]:
                 raise RuntimeError(
                     "The flex did not return to Needs review after clearing its classification."
                 )
+
+            # CPM Step 3: the durable clear succeeded; the rebuilt scope is a
+            # separate current-authority classification, which may no longer
+            # be a miss if newer authority resolves or conflicts on it.
+            outcome = prod_cpm_reclassify_outcome(
+                literal,
+                new_scope,
+            )
 
             self.scope = new_scope
             self.apply_scope_to_ui(
                 new_scope
             )
-            self.review_select_literal(
-                literal,
-                u"miss",
-            )
 
             log_line(
                 "PROD_RECLASSIFY_REFRESH=PASS literal=%r semantic_scope_rebuilds=1 "
-                "returned_to_review=True old_scope_reused=False"
-                % literal
+                "durable_edit=True returned_to_review=%r current_class=%r old_scope_reused=False"
+                % (
+                    literal,
+                    outcome["returned_to_review"],
+                    outcome["current_semantic_class"],
+                )
             )
-            self.set_status(
-                "Choose a new classification for this flex.",
-                u"success",
-            )
+            if outcome["returned_to_review"]:
+                self.review_select_literal(
+                    literal,
+                    u"miss",
+                )
+                self.set_status(
+                    "Choose a new classification for this flex.",
+                    u"success",
+                )
+            else:
+                self.set_status(
+                    "Classification cleared.",
+                    u"success",
+                )
 
         return self.guard(
             "Reclassify Flex",
@@ -32093,6 +32376,15 @@ class ProdWindow(QtGui.QDialog):
 
             # Invalidate semantic state before persistence. The prior scope is
             # never left active after a saved classification choice.
+            # CPM Step 3: authorize while the scope is still selected, so a
+            # stale generation keeps the existing section 13 rebuild path.
+            authority_context = prod_cpm_authorize_operation(
+                ident,
+                old_scope,
+                None,
+                u"Review Flex",
+            )
+
             self.scope = None
             self.disable_semantic_scene_actions()
 
@@ -32102,7 +32394,9 @@ class ProdWindow(QtGui.QDialog):
                 decision,
                 old_scope,
                 phase_callback=self.operation_mark_phase,
+                authority_context=authority_context,
             )
+            authority_context = None
 
             self.operation_revalidate()
 
