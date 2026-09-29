@@ -244,3 +244,7 @@ cpm/baseline/SFM_CSP_G18AN_SaveNewCopy.py text eol=lf
 # source (R13). Derived byte-for-byte from the frozen G18AN baseline; keep LF
 # so its identity and diffs against the baseline stay exact.
 cpm/app/SFM_Character_Preset_Manager.py text eol=lf
+
+# CPM real-SFM qualification Session 1 (2026-09-28): the test-only probe's
+# SHA-256 is cited in the operator runbook; keep LF on every checkout/export.
+real_sfm_qualification/cpm_session1/CPM_Session1_Probe.py text eol=lf

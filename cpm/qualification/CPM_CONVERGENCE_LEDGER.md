@@ -8,106 +8,79 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-Offline consolidation of Blueprint §20: Suite 2 and gates C7–C10, with no product changes unless a
-defect appears. **Status: complete and checked (offline); awaiting review. No product defect
-found; no product code changed.**
+Real-SFM Qualification Session 1:
+- normal CPM operation;
+- native Apply + Undo;
+- one ordinary Fit target + Undo;
+- the C10 same-process broker check;
+- minimal Normalizer coexistence;
+- resources and latency.
+
+**Status: prepared and deployed; BLOCKED on operator execution in SFM.** No Session 1 result
+exists yet.
 
 ## Current state
-`master` at the Ledger commit that follows `69bbc55`. That commit adds
-`cpm/convergence/tests/test_cpm_convergence_gates.py` (new, test-only) on top of `cea4d41`.
-The app, the adapter/projection, the baseline, the shared package and the Normalizer are all
-unchanged.
+`master` at the Ledger commit that follows `1b78eac` (Session 1 probe + runbook). No product code
+changed since `cefa882`.
 
-## Verified (offline only)
-Gates suite: 152/152 on Python 3.10 = embedded 2.7.5, digest `a9a3ef5f…`. Check counts: Suite 2
-29, C7 59, C8 29, C9 15, C10 12, plus 8 section/suite checks.
+The qualification deployment is placed in `<game>\usermod\scripts\sfm\mainmenu\ChadChan3D\` (the
+interim layout, qualification only). It consists of four new files; nothing was overwritten, and
+it is reversible by deleting them.
 
-Regression (both interpreters, digests unchanged from their last records):
-
-| Suite | Checks | Digest |
+| Deployed file | SHA-256 | Source |
 |---|---|---|
-| Step 1 | 196 | `e72e3c84…` |
-| Step 2a | 205 | `02cf2200…` |
-| Step 2b | 83 | `b043eefb…` |
-| Step 3 | 108 | `a2d6d0d3…` |
-| Step 4 | 95 | `d065ae69…` |
+| `SFM_Character_Preset_Manager.py` | `945eab6c…af8a` | blob `56286dd9` |
+| `cpm_authority_adapter.py` | `e96e21b5…6607` | blob `f2ea7588` |
+| `cpm_compat_v1_projection.py` | `9b077a1b…ffc1` | blob `50caf702` |
+| `CPM_Session1_Probe.py` (test-only) | `d7f16fac…3cd6` | — |
 
-Three gate-suite perturbations were all detected: bounded read keeps its lease; unavailable
-reported as healthy; Uncovered treated as absent.
+Verified already present in the deployment folder:
+- **Normalizer:** `1f4ec5a2…` (matches the audit snapshot).
+- **Shared package:** 23 files identical to the canonical correction6 copy (`projections.py`
+  correctly absent); API `1.0.0-b2a`, build `package-boundary-corrected-2026-09-22`.
+- **Master:** `ac45e5c1…904d93`, the same as the repo Master.
+- **Sidecar:** `bcd97641…`, source-matched to that Master.
+- **Interpreter:** SDK Python 2.7.5 (MSC v.1600, 32-bit). The probe records SFM's own runtime
+  version.
 
-- **Suite 2 — PASS (offline).**
-  - The real broker invokes the CPM builder through the seam; the provider is open only during the
-    callback (opens == closes).
-  - Declared = requested = covered = admission folds. Admission is observed at `Cohort`
-    construction.
-  - Scale is exact.
-  - An unsupported result fails closed and nothing is published. An omitted-coverage view is
-    rejected by CPM validation.
-  - Uncovered is never absent.
-  - Payload and coverage are plain data. `estimated_bytes` exceeds payload + coverage (it includes
-    the envelope).
-  - Bounded reads retain nothing. `open_stage` holds exactly one lease and clears it on release;
-    an uncovered stage query makes no acquisition.
-  - The CPM modules import no provider/selection path, and app reachability excludes historical
-    authority.
-- **C7 — PASS (offline)** for five failures: no valid authority, stale sidecar, expected-generation
-  rejection, runtime build rejection, and adapter contract failure. Paths covered:
-  - health / scope build;
-  - operation authorization;
-  - Save, Update and Review;
-  - the Fit held-stage path.
+## Verified
+- Probe dry run under 2.7.5, offline:
+  - with no broker it constructs nothing and reports none;
+  - once the singleton exists it reports that same object id, 0 leases and 0 open providers;
+  - the JSONL record is written.
 
-  Each gives no scope/absent rows, no Review write, no durable or native write, no historical
-  fallback, and a lease baseline of 0. The Apply entry is covered through its authorization step
-  (Step 3 static routing); the native Apply transaction was not executed.
-- **C8 — PASS (offline).**
-  - Scope build and reauthorization each use short lease/release pairs; the pure scope survives
-    release.
-  - Idle holds 0 leases; every durable write happens with 0 leases; Apply late verification holds
-    0.
-  - Fit holds exactly 1 per target and 0 when the next target is queued.
-  - Stale and stage-Uncovered failures return to baseline.
-  - Release failure is durably registered for both bounded reads and the stage (the Fit stops),
-    then reconciled.
-- **C9 — PASS (offline)**, all 10 steps. After G2, the G1 Review overrides do not override G2's
-  positive resolution (Thigh → Body Morphs) or its conflict (Ghost).
-- **C10 — PASS (offline) except one item.** Verified:
-  - package resolution, origin, API and build;
-  - canonical module identity;
-  - `get_broker` singleton;
-  - wrong-origin and same-name shadow refusals;
-  - bootstrap formula equal to the Normalizer's;
-  - the pinned Normalizer and CPM both reach the broker only via canonical `get_broker`
-    (static).
-
-  **Pending real-SFM coexistence proof:** CPM and the running production Normalizer obtaining the
-  same process broker. That code path cannot run offline without substituting the decisive
-  path, so it is not asserted.
+  Its CPM-window path can only run inside SFM.
+- The runbook (`real_sfm_qualification/cpm_session1/INSTRUCTIONS.md`) maps each Session 1
+  requirement (A–I) to probe checkpoints P0–P12 and to log evidence.
+- Offline evidence from earlier milestones is unchanged: Suites 1–4, C7–C9 PASS offline, and C10
+  PASS offline except the same-process item.
 
 ## Unresolved
-- **Real-SFM obligations (none converted to PASS):**
-  - the §21 sessions;
-  - the C10 same-process broker check;
-  - the native Apply transaction/Undo;
-  - the native Fit transaction/Undo per target, and target 1's Undo validity after a G2 stop;
-  - real foreign-modal timing;
-  - the **forced Apply** and **forced Fit** rollback-verification failure gates;
-  - latency and retained-memory measurement.
-
-  Nothing is deployed.
-- Stale-scope UI presentation: undecided. `SidecarMissing` negative-fixture messaging: undecided.
-- Cleanup of historical authority machinery and diagnostics: not started (by instruction).
-  **K, L:** not started.
-- Interim runtime layout: CPM modules in the MAINMENU `ChadChan3D` directory (untested; L owns
-  the final layout).
-- G18AN signatures are interpreter-specific; the 2.7.5 value is authoritative.
-- `verify_py27_equivalence.py` was left unmodified.
-- R3, R6, R9, R13: CLOSED. Suites 1, 3 and 4: PASS offline.
+- **Session 1 verdicts: all PENDING (not run):**
+  - normal CPM operation;
+  - native Apply + Undo;
+  - ordinary native Fit + Undo;
+  - C10 same-process broker;
+  - Normalizer coexistence;
+  - resource/latency measurement.
+- **Observations for the owner (not defects; unchanged G18AN behavior):**
+  - The converged app keeps G18AN's window slot (`_sfm_character_slider_preset_tool_window`), its
+    log file name and `PROD_VERSION`. Many older CPM builds in the mainmenu root share that slot,
+    so the runbook requires a fresh SFM process opening only the converged app. Product identity
+    strings are a K/L decision.
+  - In the interim layout the two CPM modules sit beside the app, so they may appear as extra
+    Scripts-menu entries (L).
+- **Reserved for Sessions 2–3 and the failure gates:**
+  - G1→G2 with CPM open, and during a Save/Update prompt;
+  - the queued Fit target-1 G1 → target-2 G2 transition, and target 1's Undo after it;
+  - the forced Apply and forced Fit rollback-verification failures.
+- Stale-scope UI presentation and `SidecarMissing` messaging: undecided. Cleanup, K, L: not
+  started.
 
 ## Next
-Milestone complete. Awaiting review. The remaining pre-K work is controlled real-SFM
-qualification: §21, the C10 coexistence proof, and the forced Apply/Fit rollback failures. Then
-cleanup and a focused post-cleanup regression. Not started.
+Operator: run Session 1 per `real_sfm_qualification/cpm_session1/INSTRUCTIONS.md` in a fresh SFM
+process. Return the probe JSONL, the CPM log, the Normalizer log and the run sheet. I then
+evaluate the evidence and record the verdicts. No Session 2 work.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
