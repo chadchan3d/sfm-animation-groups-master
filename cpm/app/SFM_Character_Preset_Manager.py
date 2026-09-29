@@ -19263,6 +19263,22 @@ class PROD_PROCESS_MEMORY_COUNTERS_EX(ctypes.Structure):
     ]
 
 
+_PROD_PRIVATE_WINDLL = {}
+
+
+def prod_private_windll(name):
+    """CPM-private Windows DLL handle for diagnostics (R14). Function objects
+    reached through ctypes.windll.<dll> are shared by every consumer in the
+    SFM process, so argtypes/restype set on them leak into, e.g., the
+    production Normalizer's own telemetry. A private handle keeps CPM's
+    prototypes local."""
+    dll = _PROD_PRIVATE_WINDLL.get(name)
+    if dll is None:
+        dll = ctypes.WinDLL(name)
+        _PROD_PRIVATE_WINDLL[name] = dll
+    return dll
+
+
 def prod_resource_snapshot(label):
     """Best-effort diagnostics only. Never changes scene state or forces GC."""
     ws_mb = None
@@ -19275,9 +19291,10 @@ def prod_resource_snapshot(label):
     dialogs = None
 
     try:
-        kernel32 = ctypes.windll.kernel32
-        psapi = ctypes.windll.psapi
-        user32 = ctypes.windll.user32
+        # R14: private handles, never the process-shared ctypes.windll ones.
+        kernel32 = prod_private_windll("kernel32")
+        psapi = prod_private_windll("psapi")
+        user32 = prod_private_windll("user32")
 
         kernel32.GetCurrentProcess.argtypes = []
         kernel32.GetCurrentProcess.restype = ctypes.c_void_p

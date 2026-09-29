@@ -168,7 +168,8 @@ STEP3_CHANGED_TOP = set([
     "prod_clear_override",
 ])
 STEP4_CHANGED_TOP = set(["prod_body_source", "prod_body_source_live_from_baseline"])
-EXPECTED_CHANGED_TOP = STEP2B_CHANGED_TOP | STEP3_CHANGED_TOP | STEP4_CHANGED_TOP
+R14_CHANGED_TOP = set(["prod_resource_snapshot"])  # diagnostic ctypes isolation
+EXPECTED_CHANGED_TOP = STEP2B_CHANGED_TOP | STEP3_CHANGED_TOP | STEP4_CHANGED_TOP | R14_CHANGED_TOP
 EXPECTED_NEW_TOP = set([
     "PROD_CPM_MAINMENU_RELATIVE_PARTS", "PROD_CPM_ADAPTER_MODULES", "ProdCpmAuthorityBootstrapError",
     "ProdCpmAuthorityNotMigrated", "prod_cpm_mainmenu_dir", "prod_cpm_import_adapter", "prod_cpm_is_main_thread",
@@ -180,6 +181,8 @@ EXPECTED_NEW_TOP = set([
     "prod_cpm_context_matches_identity", "prod_cpm_reclassify_outcome", "prod_cpm_authorize_operation",
     # Step 4
     "ProdCpmFitStop", "prod_cpm_fit_stage_vocabulary", "prod_cpm_open_fit_stage", "prod_cpm_release_fit_stage",
+    # R14
+    "_PROD_PRIVATE_WINDLL", "prod_private_windll",
 ])
 EXPECTED_CHANGED_METHODS = set(["guard", "render", "semantic_provider_ready",
                                 "review_decision", "review_reclassify",  # Step 3
