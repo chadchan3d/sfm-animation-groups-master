@@ -536,7 +536,7 @@ def section_review(ns, app):
         check("reclassify.outcome_separates_facts", outcome == {"durable_edit": True, "returned_to_review": False,
                                                                  "current_semantic_class": u"body-morphs",
                                                                  "current_semantic_status": u"resolved"}, _canon(outcome))
-        check("reclassify.not_forced_back_to_review", win_re.selected_review == [] and win_re.status == ["Classification cleared."],
+        check("reclassify.not_forced_back_to_review", win_re.selected_review == [] and win_re.status == ["Saved classification cleared. Current authority now classifies this flex."],
               win_re.status)
         check("reclassify.rebuild_after_write", _last_index("authority-open") > _first_index("durable-write"))
     finally:

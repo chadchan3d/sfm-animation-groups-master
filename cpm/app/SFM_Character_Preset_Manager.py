@@ -18888,6 +18888,94 @@ def prod_cpm_authorize_operation(identity, scope, kind, label):
     return context
 
 
+
+# ---------------------------------------------------------------------------
+# CPM convergence Step 4: Clothing Fit per-target authority (handoff section 15).
+#
+# One user Fit owns one semantic generation, Gfit (the Master SHA; distinct
+# from the integer fit_generation callback-cancellation counter). Each target
+# stage proves Gfit with expected_generation over source + target vocabulary
+# and holds that one stage lease through planning, native mutation and
+# post-stage verification; it is released before the next target is queued.
+# ---------------------------------------------------------------------------
+
+
+class ProdCpmFitStop(RuntimeError):
+    """Stops the current Fit without recording the current target as failed.
+    ``unattempted_from`` is the first selected index left unattempted."""
+
+    def __init__(self, message, unattempted_from):
+        RuntimeError.__init__(self, message)
+        self.unattempted_from = unattempted_from
+
+
+def prod_cpm_fit_stage_vocabulary(fit_context, target_row):
+    """Source requirements (the authorized Body membership) plus every
+    target FLEX literal, which covers any unmatched subset queried by the
+    existing warning logic during planning and post-stage verification."""
+    source = set(
+        ((fit_context.get("membership") or {}).get("descriptors") or {}).keys()
+    )
+    target = set(
+        u(binding.get("literal"))
+        for binding in p03_target_bindings(target_row["animset"])
+    )
+    return sorted(source | target)
+
+
+def prod_cpm_open_fit_stage(fit_context, target_row, index):
+    """Per-target Gfit proof. Returns a held stage authority, or raises
+    ProdCpmFitStop (generation changed: the target does not begin) or
+    ProdCpmOperationAuthorityError (authority unavailable)."""
+    literals = prod_cpm_fit_stage_vocabulary(fit_context, target_row)
+    adapter_module = prod_cpm_import_adapter()
+    adapter = prod_cpm_open_adapter()
+    failure = None
+    stage = None
+    try:
+        stage = adapter.open_stage(fit_context["master_sha256"], literals)
+    except adapter_module.CpmGenerationMismatch as exc:
+        failure = (u"generation-mismatch", u(exc.reason))
+    except adapter_module.CpmAuthorityUnavailable as exc:
+        failure = (u"unavailable", u(exc.reason))
+    adapter = None
+    if failure is not None:
+        log_line(
+            "PROD_CPM_FIT_STAGE_REFUSED index=%d gfit=%s kind=%r reason=%r"
+            % (index, fit_context["master_sha256"], failure[0], failure[1])
+        )
+        if failure[0] == u"generation-mismatch":
+            raise ProdCpmFitStop(
+                PROD_CPM_STALE_SCOPE_MESSAGE,
+                index,
+            )
+        raise ProdCpmOperationAuthorityError(
+            "Semantic authority is unavailable for this Clothing Fit target (%s)." % failure[1]
+        )
+    log_line(
+        "PROD_CPM_FIT_STAGE_OPEN index=%d gfit=%s literals=%d"
+        % (index, stage.generation, len(literals))
+    )
+    return stage
+
+
+def prod_cpm_release_fit_stage(stage, index):
+    """Release one stage lease; a release failure was already handed to the
+    broker's durable registry, and stops the Fit before the next target."""
+    if stage is None:
+        return None
+    failure = stage.release()
+    log_line(
+        "PROD_CPM_FIT_STAGE_RELEASED index=%d ok=%r"
+        % (index, failure is None)
+    )
+    if failure is not None:
+        raise ProdCpmFitStop(
+            "The Clothing Fit authority stage could not be released.",
+            index + 1,
+        )
+    return None
+
 def prod_probe_semantic_provider(identity):
     """Migrated authority health (R3): healthy only after canonical
     bootstrap, admission, authorization, cpm_compat_v1 contract, complete
@@ -28140,6 +28228,7 @@ def prod_apply(
 def prod_body_source(
     identity,
     scope=None,
+    authority_context=None,
 ):
     if scope is None:
         scope = prod_scope(
@@ -28150,6 +28239,7 @@ def prod_body_source(
         identity,
         scope,
         P03_KIND_BODY,
+        authority_context=authority_context,
     )
     accepted = live[
         "accepted"
@@ -28216,6 +28306,8 @@ def prod_body_source(
 def prod_body_source_live_from_baseline(
     baseline,
     scope,
+    authority_context=None,
+    stage_authority=None,
 ):
     identity = baseline[
         "identity"
@@ -28224,6 +28316,7 @@ def prod_body_source_live_from_baseline(
         identity,
         scope,
         P03_KIND_BODY,
+        authority_context=authority_context,
     )
     accepted = live[
         "accepted"
@@ -28260,9 +28353,15 @@ def prod_body_source_live_from_baseline(
         "identity": dict(
             identity
         ),
-        "provider": live[
-            "provider"
-        ],
+        # CPM Step 4: the target stage's held Gfit authority; without one,
+        # the Step 2b fail-closed stand-in (no historical fallback).
+        "provider": (
+            stage_authority
+            if stage_authority is not None
+            else live[
+                "provider"
+            ]
+        ),
         "accepted": accepted,
         "source_list": [
             accepted[
@@ -32332,7 +32431,7 @@ class ProdWindow(QtGui.QDialog):
                 )
             else:
                 self.set_status(
-                    "Classification cleared.",
+                    "Saved classification cleared. Current authority now classifies this flex.",
                     u"success",
                 )
 
@@ -33612,14 +33711,27 @@ class ProdWindow(QtGui.QDialog):
                 "ACTION_BEGIN:Clothing Fit"
             )
             ident = self.current()
+            # CPM Step 4: one user Fit owns one semantic generation, Gfit.
+            fit_context = prod_cpm_authorize_operation(
+                ident,
+                self.scope,
+                P03_KIND_BODY,
+                u"Clothing Fit",
+            )
             source = prod_body_source(
                 ident,
                 self.scope,
+                authority_context=fit_context,
             )
 
             self.fit_active = True
             self.fit_generation += 1
             generation = self.fit_generation
+            self.fit_authority_context = fit_context
+            self.fit_semantic_generation = fit_context[
+                "master_sha256"
+            ]
+            fit_context = None
             self.fit_source_baseline = source
             self.fit_selected_identities = [
                 dict(
@@ -33671,6 +33783,8 @@ class ProdWindow(QtGui.QDialog):
             )
             self.fit_active = False
             self.fit_source_baseline = None
+            self.fit_authority_context = None
+            self.fit_semantic_generation = None
             self.set_status(
                 "Clothing Fit could not start. Nothing changed.",
                 u"error",
@@ -33678,6 +33792,7 @@ class ProdWindow(QtGui.QDialog):
             self.operation_end(
                 "Clothing Fit"
             )
+            self.prod_cpm_request_stale_rebuild_if_needed()
 
 
     def fit_stage(
@@ -33715,6 +33830,8 @@ class ProdWindow(QtGui.QDialog):
             self.fit_finish(
                 generation
             )
+            self.fit_authority_context = None
+            self.fit_semantic_generation = None
             return
 
         identity = dict(
@@ -33728,6 +33845,7 @@ class ProdWindow(QtGui.QDialog):
         source_live = None
         target_row = None
         plan = None
+        stage_authority = None
         self.fit_stage_running = True
 
         def stage_phase(
@@ -33757,12 +33875,22 @@ class ProdWindow(QtGui.QDialog):
         try:
             self.operation_revalidate()
 
+            target_row = g11a_resolve_target(
+                identity
+            )
+            # CPM Step 4: prove Gfit for this target at the stage boundary
+            # (after any foreign-modal deferral above) and hold the stage
+            # lease through planning, mutation and post-stage verification.
+            stage_authority = prod_cpm_open_fit_stage(
+                self.fit_authority_context,
+                target_row,
+                index,
+            )
             source_live = prod_body_source_live_from_baseline(
                 self.fit_source_baseline,
                 self.scope,
-            )
-            target_row = g11a_resolve_target(
-                identity
+                authority_context=self.fit_authority_context,
+                stage_authority=stage_authority,
             )
 
             try:
@@ -33799,6 +33927,10 @@ class ProdWindow(QtGui.QDialog):
                 source_live = None
                 target_row = None
                 plan = None
+                stage_authority = prod_cpm_release_fit_stage(
+                    stage_authority,
+                    index,
+                )
 
                 QtCore.QTimer.singleShot(
                     0,
@@ -33853,6 +33985,8 @@ class ProdWindow(QtGui.QDialog):
             source_verify = prod_body_source_live_from_baseline(
                 self.fit_source_baseline,
                 self.scope,
+                authority_context=self.fit_authority_context,
+                stage_authority=stage_authority,
             )
             verify = g11a_safe_plan(
                 source_verify,
@@ -33943,6 +34077,10 @@ class ProdWindow(QtGui.QDialog):
             plan = None
             source_verify = None
             verify = None
+            stage_authority = prod_cpm_release_fit_stage(
+                stage_authority,
+                index,
+            )
 
             QtCore.QTimer.singleShot(
                 0,
@@ -33953,10 +34091,21 @@ class ProdWindow(QtGui.QDialog):
             )
 
         except Exception as exc:
+            if stage_authority is not None:
+                try:
+                    stage_authority.release()
+                except Exception:
+                    pass
+                stage_authority = None
             committed_current = bool(
                 stage_state[
                     "committed"
                 ]
+            )
+            unattempted_from = getattr(
+                exc,
+                "unattempted_from",
+                None,
             )
 
             abort_unverified = isinstance(
@@ -33971,25 +34120,29 @@ class ProdWindow(QtGui.QDialog):
             else:
                 verification = u"not-committed"
 
-            self.fit_failed.append(
-                {
-                    "identity": dict(
-                        identity
-                    ),
-                    "reason": u(
-                        exc
-                    ),
-                    "committed": committed_current,
-                    "verification": verification,
-                }
-            )
+            if unattempted_from is None:
+                self.fit_failed.append(
+                    {
+                        "identity": dict(
+                            identity
+                        ),
+                        "reason": u(
+                            exc
+                        ),
+                        "committed": committed_current,
+                        "verification": verification,
+                    }
+                )
+                unattempted_from = index + 1
 
+            # CPM Step 4: a Gfit change (or stage-release failure) stops the
+            # Fit; the current target is only unattempted, never failed.
             self.fit_unattempted = [
                 dict(
                     item
                 )
                 for item in self.fit_selected_identities[
-                    index + 1:
+                    unattempted_from:
                 ]
             ]
 
@@ -34064,8 +34217,17 @@ class ProdWindow(QtGui.QDialog):
             self.operation_end(
                 "Clothing Fit"
             )
+            self.fit_authority_context = None
+            self.fit_semantic_generation = None
+            self.prod_cpm_request_stale_rebuild_if_needed()
 
         finally:
+            if stage_authority is not None:
+                try:
+                    stage_authority.release()
+                except Exception:
+                    pass
+            stage_authority = None
             source_live = None
             target_row = None
             plan = None

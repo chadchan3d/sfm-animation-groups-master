@@ -28,7 +28,8 @@ import textwrap
 
 _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_THIS_DIR, os.pardir, os.pardir, os.pardir))
-MODULE_DIR = os.path.join(_REPO_ROOT, "cpm", "convergence")
+# Test-only override so sensitivity runs can point at perturbed scratch copies.
+MODULE_DIR = os.environ.get("CPM_TEST_MODULE_DIR") or os.path.join(_REPO_ROOT, "cpm", "convergence")
 TOOLS_DIR = os.path.join(_REPO_ROOT, "tools")
 PACKAGE_PARENT = os.path.join(_REPO_ROOT, "tests", "sidecar", "qualification", "candidate_b2c_correction6")
 APP_PATH = os.environ.get("CPM_TEST_APP_PATH") or os.path.join(_REPO_ROOT, "cpm", "app", "SFM_Character_Preset_Manager.py")
@@ -166,7 +167,8 @@ STEP3_CHANGED_TOP = set([
     "prod_verify_apply_abort_baseline", "prod_abort_apply_and_verify", "prod_set_override",
     "prod_clear_override",
 ])
-EXPECTED_CHANGED_TOP = STEP2B_CHANGED_TOP | STEP3_CHANGED_TOP
+STEP4_CHANGED_TOP = set(["prod_body_source", "prod_body_source_live_from_baseline"])
+EXPECTED_CHANGED_TOP = STEP2B_CHANGED_TOP | STEP3_CHANGED_TOP | STEP4_CHANGED_TOP
 EXPECTED_NEW_TOP = set([
     "PROD_CPM_MAINMENU_RELATIVE_PARTS", "PROD_CPM_ADAPTER_MODULES", "ProdCpmAuthorityBootstrapError",
     "ProdCpmAuthorityNotMigrated", "prod_cpm_mainmenu_dir", "prod_cpm_import_adapter", "prod_cpm_is_main_thread",
@@ -176,9 +178,12 @@ EXPECTED_NEW_TOP = set([
     "PROD_CPM_OPERATION_CONTEXT_SCHEMA", "PROD_CPM_STALE_SCOPE_MESSAGE", "ProdCpmOperationAuthorityError",
     "prod_cpm_pure_scalar_types", "PROD_CPM_PURE_SCALARS", "prod_cpm_detached",
     "prod_cpm_context_matches_identity", "prod_cpm_reclassify_outcome", "prod_cpm_authorize_operation",
+    # Step 4
+    "ProdCpmFitStop", "prod_cpm_fit_stage_vocabulary", "prod_cpm_open_fit_stage", "prod_cpm_release_fit_stage",
 ])
 EXPECTED_CHANGED_METHODS = set(["guard", "render", "semantic_provider_ready",
-                                "review_decision", "review_reclassify"])  # last two: Step 3
+                                "review_decision", "review_reclassify",  # Step 3
+                                "fit_selected", "fit_stage"])  # Step 4
 EXPECTED_NEW_METHODS = set(["prod_cpm_request_stale_rebuild_if_needed", "prod_cpm_run_stale_rebuild"])
 
 

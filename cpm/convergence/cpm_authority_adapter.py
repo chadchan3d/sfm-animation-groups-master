@@ -386,7 +386,118 @@ class CpmAuthorityAdapter(object):
         _, provenance = self._bounded_read(literals, expected)
         return provenance
 
+    # -- bounded stage with an explicitly held lease (Clothing Fit, Step 4) --
+
+    def open_stage(self, expected_master_sha256, literals):
+        """Acquire/reuse the cpm_compat_v1 view for ``literals`` under
+        ``expected_generation`` and keep its lease until the returned stage
+        is released. Validates authorization, generation and complete
+        coverage before returning. Used where the Blueprint deliberately
+        holds one stage lease through planning, mutation and post-stage
+        verification (handoff section 15)."""
+        expected = _TEXT(expected_master_sha256).lower()
+        cpm.compatibility_identity(expected, self._policy)  # validates the SHA shape
+        literal_list = [cpm._to_text(item, "literal") for item in literals]
+        folds = cpm.request_folds_for_literals(literal_list)
+        specs = cpm.make_request_specs(folds)
+        self._operation_count += 1
+        failure = None
+        view = None
+        try:
+            views = self._broker.acquire_or_reuse_views(
+                self._master_path, specs, shipped_root=self._shipped_root,
+                expected_generation=expected,
+            )
+            view = views.get(cpm.CONSUMER_KIND) if isinstance(views, dict) else None
+            views = None
+        except Exception as exc:
+            failure = _detach(_classify_broker_error(exc))
+        if failure is None and view is None:
+            failure = (CpmAuthorityUnavailable, u"view-missing", "broker returned no cpm_compat_v1 view")
+        if failure is not None:
+            view = None
+            raise failure[0](failure[1], failure[2])
+
+        lease = None
+        try:
+            lease = self._broker.lease_view(view)
+        except Exception as exc:
+            failure = (CpmAuthorityUnavailable, u"lease-refused", "view lease refused: %r" % (exc,))
+        if failure is not None:
+            view = None
+            raise failure[0](failure[1], failure[2])
+
+        try:
+            self._materialize(view, folds, [], expected)
+        except CpmAuthorityUnavailable as exc:
+            failure = _detach(exc)
+        except Exception as exc:
+            failure = (CpmAuthorityUnavailable, u"projection-invalid", "cpm_compat_v1 validation failed: %s" % (exc,))
+        if failure is not None:
+            # The validation failure is reported; a release failure is already
+            # durably registered with the broker by _release().
+            self._release(lease)
+            lease = None
+            view = None
+            raise failure[0](failure[1], failure[2])
+        stage = CpmStageAuthority(self._broker, lease, view, folds, expected, self._release)
+        lease = None
+        view = None
+        return stage
+
     # -- diagnostics ---------------------------------------------------------
 
     def diagnostics(self):
         return {"operation_count": self._operation_count, "pinned_generation": self._pinned_sha}
+
+
+class CpmStageAuthority(object):
+    """One bounded authority stage: a held lease on one validated
+    cpm_compat_v1 view for one generation and one covered vocabulary.
+    Provider-shaped for ``query_many`` only. Answers only covered literals
+    (Uncovered fails closed; it never triggers another acquisition) and
+    only while the lease is held and its authorization is valid. After
+    ``release()`` it holds no lease or view."""
+
+    def __init__(self, broker, lease, view, folds, generation, release_fn):
+        self._broker = broker
+        self._lease = lease
+        self._view = view
+        self._folds = frozenset(folds)
+        self._release_fn = release_fn
+        self.generation = generation
+
+    def is_released(self):
+        return self._lease is None
+
+    def covered_folds(self):
+        return self._folds
+
+    def query_many(self, literals):
+        if self._lease is None or self._view is None:
+            raise CpmAuthorityUnavailable(u"stage-released", "the authority stage was already released")
+        literal_list = [cpm._to_text(item, "literal") for item in literals]
+        folds = cpm.request_folds_for_literals(literal_list)
+        if not folds <= self._folds:
+            raise CpmAuthorityUnavailable(
+                u"stage-uncovered", "%d requested literals are outside this stage's covered vocabulary"
+                % len(folds - self._folds))
+        token = getattr(self._view, "authorization", None)
+        if token is None or not token.is_valid():
+            raise CpmAuthorityUnavailable(u"authorization-invalid", "stage authorization is no longer valid")
+        return cpm.interpret_exact_answers(literal_list, self._view.payload)
+
+    def release(self):
+        """Release the lease and clear every reference. Returns None on
+        success, or the (class, reason, message) failure triple after the
+        lease was handed to the broker's durable unreleased-lease registry."""
+        lease = self._lease
+        self._lease = None
+        self._view = None
+        if lease is None:
+            return None
+        result = self._release_fn(lease)
+        lease = None
+        self._release_fn = None
+        self._broker = None
+        return result
