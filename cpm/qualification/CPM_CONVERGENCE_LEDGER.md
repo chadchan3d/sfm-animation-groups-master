@@ -8,92 +8,89 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-R14: isolate CPM's diagnostic ctypes prototypes (owner-approved), then deploy for the Session 1
-completion pass. **Status: corrected and checked offline; deployed. R14 is PENDING real-SFM
-confirmation (not CLOSED).**
+Real-SFM Qualification Session 1 closeout. **Status: Session 1 COMPLETE — PASS. R14 CLOSED. One
+new finding, R15, needs an owner decision.**
 
 ## Current state
-`master` at the Ledger commit that follows `2b8222a` (the R14 product fix), on top of `a033bd8`.
+`master` at the closeout Ledger commit. The closeout adds
+`real_sfm_qualification/cpm_session1/SESSION1_COMPLETION_EVIDENCE.md` and this Ledger. No product
+code changed; the product is still at `2b8222a` (app `664a660c…`, deployed).
 
-Files changed in `2b8222a`:
-- `cpm/app/SFM_Character_Preset_Manager.py`: in `prod_resource_snapshot`, kernel32/psapi/user32
-  now come from new, cached CPM-private `WinDLL` handles (`prod_private_windll`), never from the
-  shared `ctypes.windll`;
-- `cpm/convergence/tests/test_cpm_app_r14_ctypes_isolation.py` (new);
-- `test_cpm_app_canonical_route.py`: adds `R14_CHANGED_TOP` to the cumulative bounded-edit set.
+Also unchanged: the baseline (`3326024d…`), the shared package, the adapter/projection, the
+Normalizer and the Master.
 
-**App hashes:** old `945eab6c…af8a`, new `664a660c7b896d62ba6cab4c27427a0c6a12de9e29912e7b88526ccc2d8b178b`.
-The new app is deployed to the Session 1 location, replacing only the app copy. The deployed
-adapter, projection, probe v2 (`0722610a…`) and Normalizer (`1f4ec5a2…`) are unchanged.
+## Verified (real SFM)
+Evidence: `SESSION1_RUN1_RECONCILIATION.md` (2026-09-28) and `SESSION1_COMPLETION_EVIDENCE.md`
+(2026-09-29).
 
-Also unchanged: the baseline (`3326024d…`), the shared package, the adapter/projection and the
-Master.
+| Session 1 item | Status |
+|---|---|
+| Normal CPM operation | PASS |
+| Native Apply + Undo (incl. no-op) | PASS |
+| Body Save / Update | PASS |
+| Expression Save / Update / Apply | PASS |
+| Review / Reclassify (Ayane, genuine miss; durable edit and rebuilt classification reported) | PASS |
+| Ordinary Clothing Fit + Undo | PASS |
+| C10 same-process broker | PASS |
+| Simultaneous Normalizer coexistence | PASS, as run (CPM window open; no scope selected when the Normalizer ran) |
+| Resource / latency | PASS (complete) |
+| R14 ctypes isolation | CLOSED |
 
-## Verified
-- **R14 offline:**
-  - **Embedded Python 2.7.5 (32-bit, SFM's architecture): 18/18.**
-    - The pre-fix baseline `prod_resource_snapshot` mutates the shared prototypes and makes the
-      verbatim Normalizer `contextualizer_process_memory_sample` return `ok=False`. This
-      reproduces the field evidence.
-    - The corrected app leaves every shared prototype untouched, and the Normalizer sample stays
-      `ok=True`, even while the shared prototypes are polluted.
-    - The logged fields are identical and numeric.
-    - No authority, lease, scene or persistence names are touched.
-    - Only `prod_resource_snapshot` changed beyond the convergence edits.
-  - **Python 3.10 (64-bit): 15/15.** The second-consumer checks are not applicable there, because
-    the Normalizer's un-prototyped calls only work in a 32-bit process.
-  - No cross-interpreter digest applies, since the check sets differ by design.
-  - The suite fails 15/18 against the app with the fix reverted.
-  - **Process-global ctypes mutation: eliminated offline.**
-- **Regression (Python 3.10 = 2.7.5, digests identical):**
-
-  | Suite | Checks | Digest |
-  |---|---|---|
-  | Step 1 | 196 | `e72e3c84…` |
-  | Step 2a | 205 | `02cf2200…` |
-  | Step 2b | 83 | `f969a89b…` (new: the bounded set now includes R14) |
-  | Step 3 | 108 | `a2d6d0d3…` |
-  | Step 4 | 95 | `d065ae69…` |
-  | Gates | 152 | `a9a3ef5f…` |
-
-- **Session 1 first-run evidence is preserved** (R14 changes only diagnostic DLL handles):
-  - PASS: startup, canonical path, historical route unused;
-  - PASS: idle lease/provider;
-  - PASS: Body Save; Expression Save/Update;
-  - PASS: native Apply + Undo; no-op Apply; Expression Apply;
-  - PASS: C10 same-process broker; sequential coexistence;
-  - measured: latency and retention.
+- **Clothing Fit detail:**
+  - `Gfit` was authorized.
+  - The stage requested 34 literals, more than the 26 source literals, so target-only vocabulary
+    was included.
+  - The planner produced 26 valid mappings (7 unmatched-target warnings).
+  - The stage committed and verified, and its lease was released.
+  - Undo visually restored the target.
+- **R14:** CPM's resource snapshot ran first, then the Normalizer logged `mem_ok=True` at 13/13
+  checkpoints (the first run logged `False` at 15/15).
+- **Measurements:**
+  - process working set +36 MB across the session;
+  - CPM scope 107–166 KB;
+  - broker retained 666–888 KB;
+  - authorization about 0.02 s; warm stage about 0.02 s; one Fit target 0.146 s; scope build
+    1.2–1.5 s.
 
 ## Unresolved
-- **R14:** PENDING real-SFM confirmation. Completion runbook §1 requires Normalizer `mem_ok=True`
-  with CPM open.
-- **Session 1 completion still needs** (`COMPLETION_RUNBOOK.md`):
-  1. simultaneous coexistence + R14 telemetry + process memory (§1);
-  2. Body Update (§2);
-  3. Review/Reclassify, which needs a healthy-miss model and otherwise stays PENDING, fixture
-     unavailable (§3);
-  4. Clothing Fit + Undo, which needs a target with extra flexes and otherwise stays PENDING,
-     fixture unavailable (§4).
-- **Session 1 roll-up:**
+- **R15 (new; owner decision needed):** SFM runs Scripts-menu scripts in a **shared global
+  namespace**.
+  - The Normalizer rebinds CPM's `OUTPUT_PATH`, so CPM logs landed in the Normalizer's file.
+  - The app and the Normalizer share 4 differing helpers (`arr`, `handle`, `name`, `typ`), so each
+    can run the other's versions.
+  - It is latent: no misbehavior was observed. It is pre-existing script structure, not a
+    convergence regression. Not fixed here; relevant before K.
+- **Deferred UI findings (product/UI work; none are Session 1 blockers):**
+  1. **Legacy preset.** Apply of an old `body.scale.head` preset is refused. Future message: "This
+     preset uses an outdated scale format. Delete this preset and save a new Body preset." This
+     is a legacy edge case only; generic bone-scale persistence works.
+  2. **Update Preset confirmation.** Use "The preset's current values will be overwritten." and
+     remove the question-mark icon.
+  3. **Window.** Widen the CPM window, and keep all tabs visible without horizontal tab scrolling.
+  4. **Buttons.** Clearer active/disabled contrast:
+     - primary accent for Apply Preset;
+     - restrained gold for Favorite;
+     - restrained red for Delete.
+  5. **Review.** Try a 2×2 Review action-button grid.
+  6. **Reclassify wording.**
+     - Rename the button to "Clear Classification".
+     - Status: "Classified as Body. Click Clear Classification, then choose a new classification
+       under Needs review."
+     - Keep the clear → rebuild → reclassify behavior unchanged.
+- **Stale-scope UI presentation** and **`SidecarMissing` messaging:** undecided.
+- **Product identity strings** (window slot, log name, `PROD_VERSION`) are unchanged from G18AN
+  (K/L).
+- **Remaining pre-K qualification:**
+  - Session 2: G1→G2 with CPM open, and during a Save/Update prompt;
+  - Session 3: queued Fit target-1 G1 → target-2 G2, and target 1's Undo after it;
+  - the forced Apply and forced Fit rollback-verification failure gates;
+  - then cleanup of historical authority and diagnostics, plus a focused regression.
 
-  | Area | Status |
-  |---|---|
-  | Normal operation | PARTIAL |
-  | Native Apply + Undo | PASS |
-  | Fit + Undo | PENDING (fixture) |
-  | C10 | PASS |
-  | Coexistence | PARTIAL |
-  | Resource/latency | PARTIAL |
-- **Product identity strings** are unchanged from G18AN (K/L). The probe's timing leaves one
-  test-only cached view.
-- **Reserved for later:** Sessions 2–3 and the forced Apply/Fit rollback failures.
-- Stale-scope UI and `SidecarMissing` messaging: undecided. Cleanup, K, L: not started.
-- R3, R6, R9, R13: CLOSED. Offline: Suites 1–4 PASS; C7–C10 PASS.
+  **K, L:** not started.
+- R3, R6, R9, R13, R14: CLOSED. Offline: Suites 1–4 PASS; C7–C10 PASS (C10 also real-SFM).
 
 ## Next
-Operator: run `real_sfm_qualification/cpm_session1/COMPLETION_RUNBOOK.md` with the redeployed
-app. Its §1 closes coexistence and confirms R14 in one pass. Return the probe JSONL, the CPM log
-and the Normalizer log. No Session 2 work.
+Milestone complete. Awaiting review and the R15 decision. Session 2 is not started or prepared.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
