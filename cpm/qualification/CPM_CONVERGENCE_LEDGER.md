@@ -8,84 +8,90 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-CPM Convergence Step 2b: first runnable converged CPM source.
-Done =
-- canonical adapter wired into `render → prod_scope`;
-- migrated health;
-- `prod_current_provider_descriptor` / `prod_probe_semantic_provider` rerouted;
-- historical route unreachable from production;
-- §13 stale-generation rule plumbed;
-- R6 late helpers fail closed;
-- all offline-qualified.
-
+CPM Convergence Step 3: CPM Operation Authority Context (§14). Save, Update, Apply and
+Review/Reclassify authorize post-prompt and consume a detached context; Fit is untouched.
 **Status: complete and checked (offline); awaiting review.**
 
 ## Current state
-`master`, Step 2b = two commits on top of `f351dc8`:
-- `bcfa036`: byte-identical derivation of `cpm/app/SFM_Character_Preset_Manager.py` from G18AN
-  (SHA `3326024d…`), with LF pinned.
-- `7dea7d2`: the wiring commit: `cpm/app/SFM_Character_Preset_Manager.py`,
-  `cpm/convergence/tests/test_cpm_app_canonical_route.py`, and this Ledger. A Ledger-only
-  follow-up records this SHA.
+`master` at the Ledger commit that follows `1bb2e51` (Step 3 code), on top of `b4da338`.
 
-Unchanged: the baseline, the shared package, the Normalizer snapshot, and `cpm/convergence/*.py`.
+Files changed in `1bb2e51`:
+- `cpm/app/SFM_Character_Preset_Manager.py`;
+- `cpm/convergence/tests/test_cpm_app_operation_context.py` (new);
+- `cpm/convergence/tests/test_cpm_app_canonical_route.py` (bounded-derivation expectations made
+  cumulative for Step 3).
+
+Unchanged: the baseline, the shared package, the Normalizer, and `cpm/convergence/*.py`.
 
 ## Verified (offline only)
-- Step 2b suite: 83/83 on Python 3.10 and on embedded 2.7.5; digests identical (`4faa7dc6…`).
-  Step 1: 196/196; Step 2a: 205/205, both interpreters.
-- Bounded derivation: vs the baseline, only 7 top-level definitions changed:
-  - `prod_probe_semantic_provider`, `prod_current_provider_descriptor`;
-  - `prod_live_bindings_for_cached_scope`, `prod_character_record`, `prod_ensure_character`;
-  - `prod_scope`;
-  - `ProdWindow`, in which only `guard`, `render`, `semantic_provider_ready` and the
-    shortcut-binding method changed, plus 2 new methods.
+Test results (Python 3.10 = embedded 2.7.5; digests identical):
 
-  12 `prod_cpm_*`/`ProdCpm*` names were added; nothing was removed.
-- Static reachability from `StartProdTool` + `ProdWindow`: none of the historical provider, TXT/AUTO,
-  development-sidecar or parity-route names are reachable. The one exempt edge is
-  `semantic_snapshot_for_model_row`'s `provider=None` default, which `prod_scope` never uses.
-  The parity shortcut is unbound; its handler is retained.
-- Route: health comes from canonical admission and the requested view. A small Master is healthy.
-  Bootstrap, import, API, build and corrupt-sidecar failures give `unavailable`, as does Uncovered.
-  Absence, conflict and unavailable stay distinct. Scope rows and signature equal the baseline
-  pipeline, and the persisted capture fields are unchanged.
-- §13: stale generation rejects before mutation. The scope is discarded, and one rebuild is
-  scheduled through `select_model` (deferred while busy). The rebuilt scope is current. The rejected
-  action is never replayed, and a new user action is required.
-- No lease or open provider after any step; `render` drops the probe adapter.
-- `prod_cpm_import_adapter` (child interpreter) loads only from the `sys.executable` MAINMENU and
-  refuses a same-named module from elsewhere.
-- 8 app perturbations on scratch copies were all detected.
+| Suite | Checks | Digest |
+|---|---|---|
+| Step 3 | 108/108 | `4391bf76…` |
+| Step 2b | 83/83 | `5ec417c9…` |
+| Step 2a | 205/205 | `02cf2200…` |
+| Step 1 | 196/196 | `e72e3c84…` |
+
+- **Context:** `prod_cpm_authorize_operation` checks the scope's SHA with
+  `verify_current_generation`, using the scope's own vocabulary. It returns plain data only:
+  - SHA and compatibility identity;
+  - provider capture and runtime API/build;
+  - contract/consumer/policy identity;
+  - membership;
+  - the persistence capture (G18AN 4-field shape).
+
+  Objects, generators, closures and adapters are refused. Leases and providers are back at
+  baseline after every path.
+- **Save (Body/Expression):** authorizes after the prompt returns, once, before any write. No
+  authority access after the first write. The character capture comes from the context; the
+  preset capture is unchanged. **R6 refusal lifted.**
+- **Update:** same ordering; still succeeds (not fail-closed).
+- **G1→G2 during a Save/Update prompt:** stale rejection with no durable write; one rebuild
+  under G2; no replay.
+- **Apply (R9):**
+  - Under G2, the pinned postcommit readback and `prod_abort_apply_and_verify` run with 0 authority
+    opens and verify against the pinned membership.
+  - Membership drift is rejected.
+  - Statically: one authorization before `StartUndo`; all 3 late checks pinned; no reacquisition.
+- **Review:**
+  - Authorizes while the scope is still selected; writes only after authorization; resolved and
+    conflict literals are refused. **R6 refusal lifted.**
+  - The rebuild is a separate fresh acquisition.
+  - Stale generation keeps the §13 rebuild.
+- **Reclassify:** the durable clear succeeds under G1. When G2 then resolves the literal, it
+  reports the edit and the new classification separately (no raise, not forced back to Review).
+  The returns-to-Review flow is unchanged.
+- No historical provider call on any path. 8 Step 3 perturbations were all detected.
 
 ## Unresolved
-- **Real-SFM qualification not run** (§21). Nothing is deployed. Runtime latency is unmeasured:
-  - live vocabulary is enumerated twice per selection;
-  - a full Master hash runs on each readiness check.
-- **R6 consequence (by design, blocks product use until Steps 3–4):** these fail closed with
-  `ProdCpmAuthorityNotMigrated`, before any durable write:
-  - Body/Expression **Save** (`prod_ensure_character`);
-  - **Review/Reclassify** (`prod_set_override` / `prod_clear_override`);
-  - the **Clothing Fit** unmatched-target warning query.
-
-  Update and Apply reach no fail-closed helper. Note R9: their postcommit/abort identity checks now
-  observe the Master fresh; this is a Step 3 item.
-- **Interim runtime layout (untested, L owns final):** the app imports `cpm_authority_adapter` +
-  `cpm_compat_v1_projection` from `<game>/usermod/scripts/sfm/mainmenu/ChadChan3D`.
-- Stale-scope **UI presentation** is undecided. The rebuild reuses the existing `select_model`
-  status behavior, so the rejection notice may be replaced by the rebuild's own status; the copy and
-  disabled/refresh indication are not chosen.
-- Suite 1: PASS offline. Suites 2–4 and C7–C10 are not run.
-- G18AN signatures are interpreter-specific (`repr()`); the 2.7.5 value is authoritative.
+- **Suite 3: PASS (offline).** All six §20 proofs hold. Apply is covered by running its exact
+  postcommit and abort helpers plus static routing of `prod_apply`. `prod_apply`'s native Undo
+  transaction itself was **not executed** offline, so it needs real SFM.
+- **R6:** the Save and Review refusals are lifted. The Clothing Fit unmatched-target query
+  intentionally stays fail-closed (Step 4). Any caller without a context still refuses.
+- **R9:** CLOSED offline. Apply late verification uses the pinned context.
+- **Operation baselines:** Apply's native baselines (`built`, `scale_plan`) stay in the existing
+  Apply-owned structures, not in the context. They hold live-verification data by design; the
+  context carries the authority facts.
+- **Provisional copy (owner review):** Reclassify's new status "Classification cleared.", used
+  when newer authority now classifies the flex.
+- **Stale-scope UI presentation:** undecided (unchanged from 2b).
+- **Step 4 (Fit):** not started. **K, L:** not started.
+- **Real-SFM (§21), Suites 2 and 4, C7–C10:** not run. Nothing deployed.
+- **Latency:** unmeasured. Each semantic action now adds one expected-generation acquisition,
+  normally a full cache hit.
+- Interim runtime layout (untested; L owns the final layout): CPM modules in the MAINMENU
+  `ChadChan3D` directory.
+- G18AN signatures are interpreter-specific; the 2.7.5 value is authoritative.
 - Negative fixtures surface as `SidecarMissing`; messaging is undecided.
-- `verify_py27_equivalence.py` was left unmodified; the two-interpreter technique is used instead.
-- The app inherits the baseline's hardcoded Public Documents log path and repository URL unchanged.
-- R3: CLOSED. **R13: CLOSED:** canonical source `cpm/app/SFM_Character_Preset_Manager.py`, oracle
-  `cpm/baseline/`, infrastructure `cpm/convergence/`, no disposable app copies, layout deferred to L.
+- `verify_py27_equivalence.py` was left unmodified.
+- Inherited log path and repository URL are unchanged.
+- R3: CLOSED. R13: CLOSED (`cpm/app/SFM_Character_Preset_Manager.py`).
 
 ## Next
-Milestone complete. Awaiting review. The Blueprint's next step is Step 3 (CPM Operation Authority
-Context). It lifts the R6 fail-closed refusals for Save and Review, and moves Update/Apply late
-verification (R9) and post-prompt authorization onto the operation context. It is not started.
+Milestone complete. Awaiting review. Per the Blueprint the next step is Step 4 (Clothing Fit per
+target: target vocabulary, `Gfit`, stage lease through verification). It is not started.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
