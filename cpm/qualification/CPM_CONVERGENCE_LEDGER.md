@@ -8,89 +8,106 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-CPM Convergence Step 4: Clothing Fit per-target authority (§15), with `Gfit` and a per-target
-stage lease held through post-stage verification, plus the approved Reclassify copy correction.
-**Status: complete and checked (offline); awaiting review.**
+Offline consolidation of Blueprint §20: Suite 2 and gates C7–C10, with no product changes unless a
+defect appears. **Status: complete and checked (offline); awaiting review. No product defect
+found; no product code changed.**
 
 ## Current state
-`master` at the Ledger commit that follows `f47f83c` (Step 4 code), on top of `40a2e9b`.
-
-Files changed in `f47f83c`:
-- `cpm/app/SFM_Character_Preset_Manager.py`;
-- `cpm/convergence/cpm_authority_adapter.py`: new `open_stage()` / `CpmStageAuthority`;
-  `cpm_compat_v1` is unchanged;
-- `cpm/convergence/tests/test_cpm_app_clothing_fit.py` (new);
-- `test_cpm_app_canonical_route.py`: cumulative bounded-edit expectations, and the module-dir
-  override is now honored;
-- `test_cpm_app_operation_context.py`: approved copy.
-
-Unchanged: the baseline, the shared package and the Normalizer.
+`master` at the Ledger commit that follows `69bbc55`. That commit adds
+`cpm/convergence/tests/test_cpm_convergence_gates.py` (new, test-only) on top of `cea4d41`.
+The app, the adapter/projection, the baseline, the shared package and the Normalizer are all
+unchanged.
 
 ## Verified (offline only)
-Test results (Python 3.10 = embedded 2.7.5; digests identical):
+Gates suite: 152/152 on Python 3.10 = embedded 2.7.5, digest `a9a3ef5f…`. Check counts: Suite 2
+29, C7 59, C8 29, C9 15, C10 12, plus 8 section/suite checks.
+
+Regression (both interpreters, digests unchanged from their last records):
 
 | Suite | Checks | Digest |
 |---|---|---|
-| Step 4 | 95/95 | `d065ae69…` |
-| Step 3 | 108/108 | `a2d6d0d3…` |
-| Step 2b | 83/83 | `b043eefb…` |
-| Step 2a | 205/205 | `02cf2200…` |
-| Step 1 | 196/196 | `e72e3c84…` |
+| Step 1 | 196 | `e72e3c84…` |
+| Step 2a | 205 | `02cf2200…` |
+| Step 2b | 83 | `b043eefb…` |
+| Step 3 | 108 | `a2d6d0d3…` |
+| Step 4 | 95 | `d065ae69…` |
 
-- **Gfit:** set at Fit start from the Step 3 authorization as the Master SHA, stored as
-  `fit_semantic_generation`. It is separate from the integer `fit_generation`; a stale callback
-  generation is ignored without any authority access.
-- **Per target:** the real `fit_selected` / `fit_stage` run one Qt turn at a time.
-  - Each target is proven with `expected_generation=Gfit` over source Body membership plus the
-    target's vocabulary; target-only folds are present.
-  - Planning and verification use the same stage (lease count 1 during planning, mutation and
-    verification).
-  - The stage is released before each next target is queued (0 leases whenever a target is
-    scheduled).
-- **Warnings:** results through the real `p03_unmapped_relevant_controls` rule are identical via
-  the stage and via the bounded adapter query, and match the hand audit: exact Body Morphs and
-  Clothing only.
-- **G1→G2 between targets:**
-  - target 1 stays committed; target 2 has zero writes;
-  - targets 2–3 are unattempted, not failed; the Fit terminates with the existing status copy;
-  - the scope is rebuilt under G2; the old Fit is not resumed;
-  - a new Fit runs under G2.
-- **Post-stage Uncovered:** fails closed after commit (committed, verification "uncertain"), with no
-  second acquisition. Foreign-modal deferral takes no authority; the proof runs at resume.
-- **Rollback:** Fit's abort verification is native-only (`p03_target_matches_baseline`), so no
-  semantic facts needed binding.
-- No historical provider call. 8 Step 4 perturbations were all detected (app + adapter).
+Three gate-suite perturbations were all detected: bounded read keeps its lease; unavailable
+reported as healthy; Uncovered treated as absent.
+
+- **Suite 2 — PASS (offline).**
+  - The real broker invokes the CPM builder through the seam; the provider is open only during the
+    callback (opens == closes).
+  - Declared = requested = covered = admission folds. Admission is observed at `Cohort`
+    construction.
+  - Scale is exact.
+  - An unsupported result fails closed and nothing is published. An omitted-coverage view is
+    rejected by CPM validation.
+  - Uncovered is never absent.
+  - Payload and coverage are plain data. `estimated_bytes` exceeds payload + coverage (it includes
+    the envelope).
+  - Bounded reads retain nothing. `open_stage` holds exactly one lease and clears it on release;
+    an uncovered stage query makes no acquisition.
+  - The CPM modules import no provider/selection path, and app reachability excludes historical
+    authority.
+- **C7 — PASS (offline)** for five failures: no valid authority, stale sidecar, expected-generation
+  rejection, runtime build rejection, and adapter contract failure. Paths covered:
+  - health / scope build;
+  - operation authorization;
+  - Save, Update and Review;
+  - the Fit held-stage path.
+
+  Each gives no scope/absent rows, no Review write, no durable or native write, no historical
+  fallback, and a lease baseline of 0. The Apply entry is covered through its authorization step
+  (Step 3 static routing); the native Apply transaction was not executed.
+- **C8 — PASS (offline).**
+  - Scope build and reauthorization each use short lease/release pairs; the pure scope survives
+    release.
+  - Idle holds 0 leases; every durable write happens with 0 leases; Apply late verification holds
+    0.
+  - Fit holds exactly 1 per target and 0 when the next target is queued.
+  - Stale and stage-Uncovered failures return to baseline.
+  - Release failure is durably registered for both bounded reads and the stage (the Fit stops),
+    then reconciled.
+- **C9 — PASS (offline)**, all 10 steps. After G2, the G1 Review overrides do not override G2's
+  positive resolution (Thigh → Body Morphs) or its conflict (Ghost).
+- **C10 — PASS (offline) except one item.** Verified:
+  - package resolution, origin, API and build;
+  - canonical module identity;
+  - `get_broker` singleton;
+  - wrong-origin and same-name shadow refusals;
+  - bootstrap formula equal to the Normalizer's;
+  - the pinned Normalizer and CPM both reach the broker only via canonical `get_broker`
+    (static).
+
+  **Pending real-SFM coexistence proof:** CPM and the running production Normalizer obtaining the
+  same process broker. That code path cannot run offline without substituting the decisive
+  path, so it is not asserted.
 
 ## Unresolved
-- **Suite 4: PASS (offline).** All five §20 proofs, plus review §9's Uncovered and
-  callback-cancellation items. Native Fit mapping and mutation (`g11a_safe_plan` native parts,
-  `prod_apply_match`) were stubbed.
-- **Real-SFM-only Fit obligations:**
-  - the real native Fit transaction/Undo per target;
-  - target 1's Undo validity after a G2 stop;
+- **Real-SFM obligations (none converted to PASS):**
+  - the §21 sessions;
+  - the C10 same-process broker check;
+  - the native Apply transaction/Undo;
+  - the native Fit transaction/Undo per target, and target 1's Undo validity after a G2 stop;
   - real foreign-modal timing;
-  - the outstanding forced Fit rollback-verification failure gate (not exercised; still open).
-- **R6:** fully lifted on product paths. The fail-closed stand-in remains only for callers without
-  a stage or context.
-- **Reclassify copy:** corrected as approved to "Saved classification cleared. Current authority
-  now classifies this flex."
-- **Stale-scope UI presentation:** undecided.
-- **Real-SFM (§21), Suite 2, C7–C10:** not run. The Apply native transaction has not run offline.
-  Nothing deployed.
-- **Latency:** unmeasured. One stage acquisition per Fit target.
-- **Cleanup:** historical authority machinery is still present (cleanup not started, by
-  instruction). **K, L:** not started.
+  - the **forced Apply** and **forced Fit** rollback-verification failure gates;
+  - latency and retained-memory measurement.
+
+  Nothing is deployed.
+- Stale-scope UI presentation: undecided. `SidecarMissing` negative-fixture messaging: undecided.
+- Cleanup of historical authority machinery and diagnostics: not started (by instruction).
+  **K, L:** not started.
 - Interim runtime layout: CPM modules in the MAINMENU `ChadChan3D` directory (untested; L owns
   the final layout).
 - G18AN signatures are interpreter-specific; the 2.7.5 value is authoritative.
-- Negative fixtures surface as `SidecarMissing`; messaging is undecided.
 - `verify_py27_equivalence.py` was left unmodified.
-- R3, R9, R13: CLOSED.
+- R3, R6, R9, R13: CLOSED. Suites 1, 3 and 4: PASS offline.
 
 ## Next
-Milestone complete. Awaiting review. The Blueprint sequence next calls for its focused
-qualification: Suite 2, gates C7–C10, the forced Apply/Fit rollback-verification failures, and
-real-SFM §21. Then cleanup, then K. Not started.
+Milestone complete. Awaiting review. The remaining pre-K work is controlled real-SFM
+qualification: §21, the C10 coexistence proof, and the forced Apply/Fit rollback failures. Then
+cleanup and a focused post-cleanup regression. Not started.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
