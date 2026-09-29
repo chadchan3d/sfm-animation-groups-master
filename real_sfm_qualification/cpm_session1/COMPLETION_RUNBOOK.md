@@ -7,7 +7,7 @@ repeat Save, Apply, Expression or C10 work.
 
 | Script | Role | SHA-256 |
 |---|---|---|
-| `SFM_Character_Preset_Manager.py` | converged CPM | `945eab6c…af8a` |
+| `SFM_Character_Preset_Manager.py` | converged CPM, with the R14 fix | `664a660c7b896d62ba6cab4c27427a0c6a12de9e29912e7b88526ccc2d8b178b` |
 | `CPM_Session1_Probe.py` | test-only probe, v2 | `0722610aa274bd9db2f355c4f85e61c51c07d810f3cd4d762255f085dffba1fe` |
 | `Rebuild_Control_Groups_Normalizer.py` | production Normalizer | `1f4ec5a2…7db7` |
 
@@ -33,32 +33,41 @@ Control Groups command in its place.
   - `%PUBLIC%\Documents\sfm_rebuild_control_groups.txt`;
   - a short note per item: done / skipped (why) / problem.
 
-## 1. Simultaneous coexistence and memory (always possible)
+## 1. Simultaneous coexistence + R14 telemetry + memory (always possible)
 
-**CPM must stay open from step 1.2 through step 1.6.**
+This one pass closes simultaneous coexistence, confirms R14, and measures process memory.
+**CPM must stay open from step 1.2 through step 1.7.**
 
 1.1 Fresh SFM with a representative character loaded.
 - **C1:** probe before opening CPM.
 
-1.2 Open SFM Character Preset Manager and select the character. Wait for the Body / Expression /
-Review counts.
-- **C2.**
+1.2 Open SFM Character Preset Manager (**keep it open**). Select the character. Wait until the
+Body / Expression / Review counts appear and no action is in progress (idle).
 
-1.3 **Leave CPM open.** Run `Rebuild_Control_Groups_Normalizer` normally. Wait for its completion
-report.
+1.3 **C2:** probe v2. Expect:
+- converged `true`;
+- leases 0, open providers 0;
+- valid `memory_*` values (no `error`).
 
-1.4 **C3:** expect:
+1.4 **With CPM still open**, run `Rebuild_Control_Groups_Normalizer` from the Scripts menu and
+complete its normal prompts. Wait for its completion report.
+
+1.5 The Normalizer must complete normally. Its log
+(`%PUBLIC%\Documents\sfm_rebuild_control_groups.txt`) must show `mem_ok=True` on its
+`CONTEXTUALIZER_RESOURCE_CHECKPOINT` lines. `mem_ok=False` means R14 is not fixed; report it.
+
+1.6 **C3:** probe v2. Expect:
 - the same `broker_id` as C2;
 - `consumers_served` containing `cpm_compat_v1` and `normalizer_compat`;
 - `cpm.window true`;
-- leases 0;
+- **leases 0, open providers 0**;
 - valid `memory_*` values.
 
-1.5 In the still-open CPM, re-select the character (or switch model and back), then Apply an
-existing Body preset. Confirm it works.
+1.7 Return to the **still-open** CPM. Re-select the character (or switch model and back), then
+Apply an existing Body preset. Confirm it works.
 - **C4.**
 
-1.6 Only now may CPM be closed.
+1.8 Only now may CPM be closed.
 - **C5:** leases 0, open providers 0.
 
 ## 2. Body Update (always possible)
