@@ -8,13 +8,14 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-Real-SFM Qualification Session 1 closeout. **Status: Session 1 COMPLETE — PASS. R14 CLOSED. One
-new finding, R15, needs an owner decision.**
+R15 investigation and fix proposal (no implementation). **Status: proposal complete
+(`cpm/qualification/R15_NAMESPACE_ISOLATION_PROPOSAL.md`); awaiting owner approval to
+implement.** Session 1 remains COMPLETE — PASS; R14 CLOSED.
 
 ## Current state
-`master` at the closeout Ledger commit. The closeout adds
-`real_sfm_qualification/cpm_session1/SESSION1_COMPLETION_EVIDENCE.md` and this Ledger. No product
-code changed; the product is still at `2b8222a` (app `664a660c…`, deployed).
+`master` at the R15 proposal commit, on top of `be5122e`. It adds only the proposal document and
+this Ledger. No product code changed; the product is still at `2b8222a` (app `664a660c…`,
+deployed).
 
 Also unchanged: the baseline (`3326024d…`), the shared package, the adapter/projection, the
 Normalizer and the Master.
@@ -53,13 +54,26 @@ Evidence: `SESSION1_RUN1_RECONCILIATION.md` (2026-09-28) and `SESSION1_COMPLETIO
     1.2–1.5 s.
 
 ## Unresolved
-- **R15 (new; owner decision needed):** SFM runs Scripts-menu scripts in a **shared global
-  namespace**.
-  - The Normalizer rebinds CPM's `OUTPUT_PATH`, so CPM logs landed in the Normalizer's file.
-  - The app and the Normalizer share 4 differing helpers (`arr`, `handle`, `name`, `typ`), so each
-    can run the other's versions.
-  - It is latent: no misbehavior was observed. It is pre-existing script structure, not a
-    convergence regression. Not fixed here; relevant before K.
+- **R15: investigated; fix proposed; AWAITING OWNER APPROVAL.**
+  - **Mechanism:** SFM's native `ScriptController` (`ifm.dll`: `PyRun_FileExFlags`, `__main__`)
+    runs every Scripts-menu script in one shared process-lifetime `__main__` dict. This is backed
+    by binary strings and the observed `OUTPUT_PATH` rebinding; the probe confirms it directly in
+    the addendum.
+  - **CPM vs Normalizer:** 18 shared names. 11 are identical modules and 2 are Py3-only fallbacks;
+    `OUTPUT_PATH` is shared mutable configuration; `arr`, `handle`, `name` and `typ` differ.
+  - **Larger surface:** old CPM builds share 470–600 names with the converged app, so running one
+    could route the converged window back to the historical provider.
+  - **Proposed fix:** a CPM-only private-namespace launcher that runs the implementation in a
+    fresh private module each invocation, plus a one-line direct-execution guard in the app. The
+    Normalizer, package and baseline are untouched.
+  - **Required afterwards:** the offline R15 suite plus a real-SFM Session 1 addendum:
+    active-scope simultaneous coexistence, no cross-script logging, `mem_ok=True`, the same
+    broker, 0 leases/providers, CPM usable.
+  - **Session 2 is gated on it.**
+  - **Residuals for K/L:** Normalizer namespace isolation; the shared window slot and identity
+    strings.
+- **Preserved nuance:** Session 1's simultaneous-coexistence PASS ran with no CPM scope selected.
+  Active-scope coexistence is still unproven and is covered by the R15 addendum.
 - **Deferred UI findings (product/UI work; none are Session 1 blockers):**
   1. **Legacy preset.** Apply of an old `body.scale.head` preset is refused. Future message: "This
      preset uses an outdated scale format. Delete this preset and save a new Body preset." This
@@ -90,7 +104,8 @@ Evidence: `SESSION1_RUN1_RECONCILIATION.md` (2026-09-28) and `SESSION1_COMPLETIO
 - R3, R6, R9, R13, R14: CLOSED. Offline: Suites 1–4 PASS; C7–C10 PASS (C10 also real-SFM).
 
 ## Next
-Milestone complete. Awaiting review and the R15 decision. Session 2 is not started or prepared.
+Owner: approve or amend the R15 proposal. On approval: implement (launcher + guard), run offline
+qualification, deploy, then the real-SFM Session 1 addendum. Session 2 is not started or prepared.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
