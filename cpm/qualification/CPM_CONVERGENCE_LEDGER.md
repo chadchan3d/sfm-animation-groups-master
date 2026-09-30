@@ -15,7 +15,8 @@ authoritative design. The fresh-module-per-click proposal
 Session 1 historical PASS intact; R14 CLOSED.
 
 ## Current state
-`master` at the R15 documentation-synchronization commit, on top of `bd16940`. It adds the
+`master` at the Blueprint §14 starting-point correction, on top of the approved R15
+documentation-synchronization commit `5d94dbf` (itself on `bd16940`). The synchronization adds the
 Blueprint and updates the superseded proposal (notice only), this Ledger and the handoff
 (status + §16 entrypoint/deployment amendment). No product or test code changed; the product is
 still at `2b8222a` (app `664a660c…`, deployed).
@@ -112,8 +113,9 @@ Evidence: `SESSION1_RUN1_RECONCILIATION.md` (2026-09-28) and `SESSION1_COMPLETIO
 - R3, R6, R9, R13, R14: CLOSED. Offline: Suites 1–4 PASS; C7–C10 PASS (C10 also real-SFM).
 
 ## Next
-Implement the authoritative R15 Blueprint from this synchronization commit (allowlisted files
-only), run the offline gates, report before deployment, then the real-SFM Session 1 addendum.
+Implement the authoritative R15 Blueprint from starting point
+`5d94dbfd41c9187170ee8a926d59f21317c1e19c` (Blueprint §14; allowlisted files only), run the
+offline gates, report before deployment, then the real-SFM Session 1 addendum.
 Session 2 is NOT STARTED and not prepared.
 
 ## Checkpoints

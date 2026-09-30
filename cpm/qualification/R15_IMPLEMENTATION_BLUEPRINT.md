@@ -354,7 +354,7 @@ Correct these overstatements:
 
 ### 14. One bounded implementation assignment for Claude
 
-> Implement this R15 blueprint at checkpoint `bd169401fba1c04bf24a148cd8e65748ae757912`, using only the allowlisted files and deployment destinations.
+> Implement this R15 blueprint at checkpoint `5d94dbfd41c9187170ee8a926d59f21317c1e19c`, using only the allowlisted files and deployment destinations.
 >
 > Add the thin launcher and stable private application module lifecycle; enforce exact-byte compilation, module identity, no reload, compatible-window reuse and explicit notification ownership. Separate pre-ready load cleanup from post-ready UI failure. Repair Escape/reject teardown through the non-recursive finalization path specified above, recording its separate provenance.
 >
