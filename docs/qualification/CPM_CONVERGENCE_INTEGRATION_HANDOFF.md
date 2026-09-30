@@ -6,7 +6,9 @@
 >
 > References below to CPM-repo paths map to their imported locations here: `README.md` is not imported and remains only in the closed CPM source archive; `docs/ENGINEERING_NOTES.md` -> `docs/qualification/CPM_ENGINEERING_NOTES.md`; `docs/DEVELOPMENT_HISTORY.md` -> `docs/qualification/CPM_DEVELOPMENT_HISTORY.md`; `docs/reviews/CPM_CONVERGENCE_ADVERSARIAL_REVIEW.md` -> `docs/qualification/CPM_CONVERGENCE_ADVERSARIAL_REVIEW.md`; `docs/SFM_CHARACTER_TOOLS_INTEGRATION_HANDOFF.md` -> `docs/qualification/CPM_CONVERGENCE_INTEGRATION_HANDOFF.md`; `src/SFM_CSP_G18AN_SaveNewCopy.py` -> `cpm/baseline/SFM_CSP_G18AN_SaveNewCopy.py`.
 >
-> Everything below this line is exact imported content.
+> **Repository status and R15 entrypoint/deployment (added 2026-09-30, not part of the original CPM document):** CPM convergence integration code now exists in this repository (Steps 1–4 and gates; real-SFM Session 1 PASS; R14 CLOSED), so the imported "Implementation status" line below is historical. R15 is OPEN: the authoritative design is `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, which amends only the entrypoint/deployment of §16 — see the marked amendment at the end of §16. Session 2 is NOT STARTED and blocked on R15. Status of record: `cpm/qualification/CPM_CONVERGENCE_LEDGER.md`.
+>
+> Everything below this line is exact imported content, except the one marked repository amendment at the end of §16.
 
 ---
 
@@ -778,6 +780,16 @@ Do not:
 - introduce a second provider-discovery system.
 
 The tiny pre-import locator formula may be duplicated intentionally because the package path must be established before its bootstrap module can itself be imported. Add an offline equivalence check against the Normalizer formula rather than redesigning bootstrap merely to remove those few lines.
+
+> **Repository amendment — R15 entrypoint/deployment (2026-09-30; not part of the imported document).** Authoritative design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`. Status: R15 OPEN — implementation, offline qualification and the real-SFM Session 1 addendum are pending.
+>
+> - The canonical mutable source remains `cpm/app/SFM_Character_Preset_Manager.py`.
+> - The deployed Scripts-menu entry (`SFM_Character_Preset_Manager.py` in the `ChadChan3D` menu folder) becomes a thin launcher, built from `cpm/app/launcher/SFM_Character_Preset_Manager.py`.
+> - The private implementation is deployed outside the entire `scripts/sfm` discovery tree (`<SFM game>/usermod/scripts/ChadChan3D_CPM/`), with no `__init__.py`, and is not added to `sys.path` by the launcher. Its location derives from the same `sys.executable`-based resolution.
+> - One stable private CPM application module (`chadchan3d_cpm_app`) is loaded per SFM process; repeated menu clicks reuse that module and a compatible existing window. There is no fresh module per click and no reload; a changed installed build requires an SFM restart.
+> - The canonical bootstrap/import above is unchanged, including its established MAINMENU `sys.path` insertion; the launcher's `sys.path` prohibition does not authorize modifying it.
+> - Adapter, broker, authority and Normalizer semantics are unchanged.
+> - Final installation layout remains owned by L.
 
 ## 17. Saved presets across authority generations
 

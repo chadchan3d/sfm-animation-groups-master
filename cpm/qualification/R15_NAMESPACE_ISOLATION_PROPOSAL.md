@@ -1,5 +1,12 @@
 # R15 — shared Scripts-menu namespace: investigation and fix proposal
 
+> **SUPERSEDED — historical record only (2026-09-30).** This proposal is superseded by
+> `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, the single authoritative R15 design (one
+> thin SFM menu launcher → one stable private CPM application module per SFM process → explicit
+> compatible-window reuse). The fresh-module-per-click launcher described below (§3, §5) is **no
+> longer authoritative** and must not be implemented. The investigation evidence (§1–§2) remains
+> valid history. The contents below are preserved unchanged.
+
 Written against `master` `be5122e`. **Proposal only; nothing is implemented.**
 
 Verified identities:

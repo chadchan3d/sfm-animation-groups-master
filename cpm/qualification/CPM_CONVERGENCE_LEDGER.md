@@ -8,14 +8,17 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-R15 investigation and fix proposal (no implementation). **Status: proposal complete
-(`cpm/qualification/R15_NAMESPACE_ISOLATION_PROPOSAL.md`); awaiting owner approval to
-implement.** Session 1 remains COMPLETE — PASS; R14 CLOSED.
+R15 documentation synchronization (docs only). **Status: complete.** R15 design is FROZEN on
+the stable private module: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md` is the single
+authoritative design. The fresh-module-per-click proposal
+(`R15_NAMESPACE_ISOLATION_PROPOSAL.md`) is SUPERSEDED (historical only). R15 remains OPEN.
+Session 1 historical PASS intact; R14 CLOSED.
 
 ## Current state
-`master` at the R15 proposal commit, on top of `be5122e`. It adds only the proposal document and
-this Ledger. No product code changed; the product is still at `2b8222a` (app `664a660c…`,
-deployed).
+`master` at the R15 documentation-synchronization commit, on top of `bd16940`. It adds the
+Blueprint and updates the superseded proposal (notice only), this Ledger and the handoff
+(status + §16 entrypoint/deployment amendment). No product or test code changed; the product is
+still at `2b8222a` (app `664a660c…`, deployed).
 
 Also unchanged: the baseline (`3326024d…`), the shared package, the adapter/projection, the
 Normalizer and the Master.
@@ -54,26 +57,31 @@ Evidence: `SESSION1_RUN1_RECONCILIATION.md` (2026-09-28) and `SESSION1_COMPLETIO
     1.2–1.5 s.
 
 ## Unresolved
-- **R15: investigated; fix proposed; AWAITING OWNER APPROVAL.**
-  - **Mechanism:** SFM's native `ScriptController` (`ifm.dll`: `PyRun_FileExFlags`, `__main__`)
-    runs every Scripts-menu script in one shared process-lifetime `__main__` dict. This is backed
-    by binary strings and the observed `OUTPUT_PATH` rebinding; the probe confirms it directly in
-    the addendum.
-  - **CPM vs Normalizer:** 18 shared names. 11 are identical modules and 2 are Py3-only fallbacks;
-    `OUTPUT_PATH` is shared mutable configuration; `arr`, `handle`, `name` and `typ` differ.
-  - **Larger surface:** old CPM builds share 470–600 names with the converged app, so running one
-    could route the converged window back to the historical provider.
-  - **Proposed fix:** a CPM-only private-namespace launcher that runs the implementation in a
-    fresh private module each invocation, plus a one-line direct-execution guard in the app. The
-    Normalizer, package and baseline are untouched.
-  - **Required afterwards:** the offline R15 suite plus a real-SFM Session 1 addendum:
-    active-scope simultaneous coexistence, no cross-script logging, `mem_ok=True`, the same
-    broker, 0 leases/providers, CPM usable.
-  - **Session 2 is gated on it.**
-  - **Residuals for K/L:** Normalizer namespace isolation; the shared window slot and identity
-    strings.
+- **R15: OPEN — design FROZEN, not implemented.** Pending: implementation, offline
+  qualification (Python 2.7.5 + 3.10, Blueprint §11) and the real-SFM Session 1 addendum (§12).
+  - **Frozen design:** one thin SFM menu launcher → one stable private CPM application module
+    (`chadchan3d_cpm_app`) per SFM process → explicit compatible-window reuse. ABSENT → LOADING →
+    READY (permanent); exact-byte compile; no reload (a changed build requires restart);
+    allow-guard at the top of the app; bottom `StartProdTool()` removed. Private implementation
+    deployed outside the `scripts/sfm` tree. Fresh module per click is superseded.
+  - **Clarifications:** (A) the no-`sys.path` rule covers the new launcher/loader only; the
+    existing adapter/bootstrap MAINMENU insertion is unchanged and not authorized for change.
+    (B) the addendum records settled working set/private commit and handle/GDI/User counts at
+    initial open, the second click, each of three close/reopen cycles and the final state, to
+    detect accumulation (no MB threshold).
+  - **Session 2 is gated on it.** Residuals for K/L: Normalizer namespace isolation; the shared
+    window slot and identity strings.
+- **Three separate findings (preserved distinct):**
+  1. **R15 shared-namespace defect:** SFM's native `ScriptController` runs every Scripts-menu
+     script in one shared `__main__` dict; long-lived CPM global resolution is corrupted (observed
+     `OUTPUT_PATH` rebinding; 18 CPM/Normalizer shared names, dangerous: `OUTPUT_PATH`, `arr`,
+     `handle`, `name`, `typ`; old CPM builds share 470–600 names).
+  2. **Repeated-click initialization defect:** inferred reset/logging behavior of the old
+     re-execute-per-click model (`OUTPUT_PATH`, provider counters, `PROD_RUN_ID`).
+  3. **Pre-existing Escape/reject teardown defect,** discovered during R15; not the cause of
+     namespace corruption. Repair frozen in Blueprint §8.
 - **Preserved nuance:** Session 1's simultaneous-coexistence PASS ran with no CPM scope selected.
-  Active-scope coexistence is still unproven and is covered by the R15 addendum.
+  Active-scope coexistence is still pending the R15 addendum.
 - **Deferred UI findings (product/UI work; none are Session 1 blockers):**
   1. **Legacy preset.** Apply of an old `body.scale.head` preset is refused. Future message: "This
      preset uses an outdated scale format. Delete this preset and save a new Body preset." This
@@ -104,8 +112,9 @@ Evidence: `SESSION1_RUN1_RECONCILIATION.md` (2026-09-28) and `SESSION1_COMPLETIO
 - R3, R6, R9, R13, R14: CLOSED. Offline: Suites 1–4 PASS; C7–C10 PASS (C10 also real-SFM).
 
 ## Next
-Owner: approve or amend the R15 proposal. On approval: implement (launcher + guard), run offline
-qualification, deploy, then the real-SFM Session 1 addendum. Session 2 is not started or prepared.
+Implement the authoritative R15 Blueprint from this synchronization commit (allowlisted files
+only), run the offline gates, report before deployment, then the real-SFM Session 1 addendum.
+Session 2 is NOT STARTED and not prepared.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
