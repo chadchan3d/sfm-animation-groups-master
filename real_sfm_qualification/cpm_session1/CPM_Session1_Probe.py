@@ -19,6 +19,21 @@ with lease release) 3 times, and opens and releases one adapter stage over
 the scope's Body vocabulary 3 times. These are the same read-only
 authority calls the product makes; they write nothing.
 
+Probe v3 (CPM R15 Session 1 addendum) adds observation only: the menu
+execution dictionary, the private chadchan3d_cpm_app module identity, window
+ownership and function-global ownership, a CPM window / watcher / launch-
+notice census, the deployed launcher and implementation SHA-256, and process
+handle / GDI / USER counts. The v2 timing block is disabled in v3: its
+authority calls would confound the addendum's "no authority acquisition
+caused merely by reuse" evidence.
+
+One opt-in harness action exists for addendum step 8 (controlled launcher
+refusal). Only while the file <PUBLIC>/Documents/CPM_R15_NOTICE_HARNESS.txt
+exists, each probe run toggles a hidden, parentless placeholder QDialog in
+the CPM window slot: it installs one when the slot is empty and removes its
+own placeholder when present. It never touches a CPM window, the broker,
+authority or the scene.
+
 Python 2.7 (SFM). Not product code; not part of the shipping layout.
 """
 import datetime
@@ -28,9 +43,16 @@ import sys
 import tempfile
 import time
 
-PROBE_VERSION = u"cpm-session1-probe-2"  # 2: private-WinDLL process-memory read
+PROBE_VERSION = u"cpm-session1-probe-3"  # 3: R15 observation; timing disabled
 CPM_WINDOW_ATTR = "_sfm_character_slider_preset_tool_window"
 RUNTIME_MODULE = "sfm_master_authority_productionized.runtime"
+R15_MODULE_KEY = "chadchan3d_cpm_app"
+R15_NOTICE_ATTR = "_chadchan3d_cpm_launch_notice_v1"
+R15_NOTICE_NAME = "chadchan3d_cpm_launch_notice_v1"
+R15_HARNESS_NAME = "cpm_r15_notice_harness_placeholder"
+R15_MAIN_SENTINELS = ("StartProdTool", "ProdWindow", "prod_cpm_open_adapter", "prod_scope", "log_line",
+                      "PROD_RUN_ID", "PROD_OUTPUT_PATH", "_chadchan3d_cpm_launcher_v1")
+TIMING_ENABLED = False  # v3: observation only (see module docstring)
 
 
 def _report_path():
@@ -97,12 +119,26 @@ def _process_memory():
         ok = psapi.GetProcessMemoryInfo(handle, ctypes.byref(counters), counters.cb)
         if not ok:
             return {"error": u"GetProcessMemoryInfo failed"}
-        return {
+        out = {
             "working_set": int(counters.WorkingSetSize),
             "peak_working_set": int(counters.PeakWorkingSetSize),
             "private_usage": int(counters.PrivateUsage),
             "peak_pagefile_usage": int(counters.PeakPagefileUsage),
         }
+        try:
+            user32 = ctypes.WinDLL("user32")
+            kernel32.GetProcessHandleCount.argtypes = [ctypes.c_void_p, ctypes.POINTER(wintypes.DWORD)]
+            kernel32.GetProcessHandleCount.restype = wintypes.BOOL
+            user32.GetGuiResources.argtypes = [ctypes.c_void_p, wintypes.DWORD]
+            user32.GetGuiResources.restype = wintypes.DWORD
+            count = wintypes.DWORD(0)
+            if kernel32.GetProcessHandleCount(handle, ctypes.byref(count)):
+                out["handles"] = int(count.value)
+            out["gdi_objects"] = int(user32.GetGuiResources(handle, 0))
+            out["user_objects"] = int(user32.GetGuiResources(handle, 1))
+        except Exception as exc:
+            out["os_counters_error"] = _text(exc)
+        return out
     except Exception as exc:
         return {"error": _text(exc)}
 
@@ -215,7 +251,153 @@ def _cpm_state(window):
     return out, g
 
 
+def _file_sha256(path):
+    try:
+        import hashlib
+        with open(path, "rb") as f:
+            return hashlib.sha256(f.read()).hexdigest()
+    except Exception as exc:
+        return u"unreadable: " + _text(exc)
+
+
+def _qt_alive(obj):
+    try:
+        from PySide import shiboken
+        return bool(shiboken.isValid(obj))
+    except Exception:
+        return None
+
+
+def _r15_state(window):
+    """Observation only: host dictionary, private module, window ownership,
+    CPM object census, deployed hashes."""
+    main = sys.modules.get("__main__")
+    main_dict = getattr(main, "__dict__", {})
+    out = {
+        "probe_globals_is_main_dict": globals() is main_dict,
+        "probe_name": _text(globals().get("__name__")),
+        "main_dict_id": u"0x%x" % id(main_dict),
+        "main_dict_size": len(main_dict),
+        "cpm_names_in_main": sorted(n for n in R15_MAIN_SENTINELS if n in main_dict),
+    }
+    game_root = os.path.dirname(os.path.abspath(sys.executable))
+    launcher_path = os.path.join(game_root, "usermod", "scripts", "sfm", "mainmenu", "ChadChan3D",
+                                 "SFM_Character_Preset_Manager.py")
+    impl_path = os.path.normpath(os.path.abspath(os.path.join(game_root, "usermod", "scripts", "ChadChan3D_CPM",
+                                                              "SFM_Character_Preset_Manager.py")))
+    out["deployed_launcher_sha256"] = _file_sha256(launcher_path)
+    out["deployed_impl_sha256"] = _file_sha256(impl_path)
+    module = sys.modules.get(R15_MODULE_KEY)
+    ns = getattr(module, "__dict__", {}) if module is not None else {}
+    out["module"] = {
+        "present": module is not None,
+        "type": _text(type(module).__name__),
+        "id": (u"0x%x" % id(module)) if module is not None else None,
+        "name": _text(ns.get("__name__")),
+        "file": _text(ns.get("__file__")),
+        "file_is_deterministic_impl_path": ns.get("__file__") == impl_path,
+        "loader": _text(ns.get("__chadchan3d_cpm_loader__")),
+        "build_sha256": _text(ns.get("__chadchan3d_cpm_build_sha256__")),
+        "state": _text(ns.get("__chadchan3d_cpm_state__")),
+        "run_id": _text(ns.get("PROD_RUN_ID")),
+        "output_path": _text(ns.get("OUTPUT_PATH")),
+        "startup_state": _text((ns.get("PROD_R15_STARTUP") or {}).get("state")),
+        "prodwindow_class_id": (u"0x%x" % id(ns["ProdWindow"])) if "ProdWindow" in ns else None,
+        "startprodtool_id": (u"0x%x" % id(ns["StartProdTool"])) if "StartProdTool" in ns else None,
+        "historical_provider_open_count": ns.get("_SEMANTIC_PROVIDER_OPEN_COUNT"),
+    }
+    cls = ns.get("ProdWindow")
+    win = {"slot_occupied": window is not None}
+    if window is not None:
+        try:
+            g = window.render.__func__.__globals__
+        except Exception:
+            g = None
+        try:
+            object_name = _text(window.objectName())
+        except Exception:
+            object_name = None
+        win.update({
+            "id": u"0x%x" % id(window),
+            "class_module": _text(type(window).__module__),
+            "owned_by_private_module": bool(cls is not None and isinstance(window, cls)),
+            "alive": _qt_alive(window),
+            "harness_placeholder": object_name == R15_HARNESS_NAME,
+            "function_globals_is_private_module": bool(g is not None and g is ns),
+            "function_globals_is_main_dict": bool(g is not None and g is main_dict),
+            "function_globals_name": _text((g or {}).get("__name__")),
+        })
+        for attr in ("closing_requested", "modal_yield_active"):
+            win[attr] = getattr(window, attr, None)
+        try:
+            win["visible"] = bool(window.isVisible())
+            timer = getattr(window, "modal_watch_timer", None)
+            win["watcher_active"] = bool(timer.isActive()) if timer is not None else None
+        except Exception as exc:
+            win["qt_error"] = _text(exc)
+    out["window"] = win
+    census = {}
+    try:
+        from PySide import QtGui
+        app = QtGui.QApplication.instance()
+        tops = list(app.topLevelWidgets()) if app is not None else []
+        prod = [w for w in tops if type(w).__name__ == "ProdWindow"]
+        census["prodwindow_toplevel_total"] = len(prod)
+        census["prodwindow_toplevel_owned"] = len([w for w in prod if cls is not None and isinstance(w, cls)])
+        census["prodwindow_toplevel_visible"] = len([w for w in prod if w.isVisible()])
+        census["active_watchers"] = len([w for w in prod if getattr(w, "modal_watch_timer", None) is not None
+                                         and w.modal_watch_timer.isActive()])
+        notices = [w for w in tops if isinstance(w, QtGui.QMessageBox) and w.objectName() == R15_NOTICE_NAME]
+        census["launch_notices"] = len(notices)
+        census["launch_notices_visible"] = len([w for w in notices if w.isVisible()])
+        slot = getattr(app, R15_NOTICE_ATTR, None) if app is not None else None
+        if slot is None:
+            census["notice_slot"] = None
+        else:
+            census["notice_slot"] = {"type": _text(type(slot).__name__)}
+            try:
+                census["notice_slot"].update({"object_name": _text(slot.objectName()), "modal": bool(slot.isModal()),
+                                              "visible": bool(slot.isVisible())})
+            except Exception as exc:
+                census["notice_slot"]["error"] = _text(exc)
+        modal = app.activeModalWidget() if app is not None else None
+        census["active_modal"] = _text(type(modal).__name__) if modal is not None else None
+    except Exception as exc:
+        census["error"] = _text(exc)
+    out["census"] = census
+    return out
+
+
+def _harness_flag_path():
+    return os.path.join(os.path.dirname(_report_path()), "CPM_R15_NOTICE_HARNESS.txt")
+
+
+def _notice_harness():
+    """Addendum step 8 only (opt-in by flag file). Toggles a hidden, parentless
+    placeholder in the CPM window slot; never touches a CPM window."""
+    if not os.path.isfile(_harness_flag_path()):
+        return {"enabled": False}
+    try:
+        from PySide import QtGui
+        app = QtGui.QApplication.instance()
+        current = getattr(app, CPM_WINDOW_ATTR, None)
+        if current is None:
+            placeholder = QtGui.QDialog()
+            placeholder.setObjectName(R15_HARNESS_NAME)
+            setattr(app, CPM_WINDOW_ATTR, placeholder)
+            return {"enabled": True, "action": u"installed-placeholder"}
+        if isinstance(current, QtGui.QDialog) and current.objectName() == R15_HARNESS_NAME:
+            setattr(app, CPM_WINDOW_ATTR, None)
+            current.deleteLater()
+            return {"enabled": True, "action": u"removed-placeholder"}
+        return {"enabled": True, "action": u"none: CPM window slot occupied; close CPM first"}
+    except Exception as exc:
+        return {"enabled": True, "action": u"error", "error": _text(exc)}
+
+
 def _timing(window, g):
+    if not TIMING_ENABLED:
+        return {"skipped": u"disabled in probe v3 (R15 addendum: observation only)"}
     scope = getattr(window, "scope", None)
     if (window is None or not isinstance(scope, dict) or getattr(window, "operation", None) is not None
             or getattr(window, "fit_active", False) or "prod_cpm_authorize_operation" not in g):
@@ -256,6 +438,11 @@ def run():
     except Exception as exc:
         record["timing"] = {"error": _text(exc)}
     record["broker_after_timing"] = _broker_state()
+    try:
+        record["r15"] = _r15_state(window)
+    except Exception as exc:
+        record["r15"] = {"error": _text(exc)}
+    record["r15_harness"] = _notice_harness()
     record["memory_after"] = _process_memory()
     path = _report_path()
     try:
@@ -276,6 +463,14 @@ def run():
              (b.get("provider_counters") or {}).get("current_open_provider_count"), b.get("view_cache_entries"),
              b.get("consumer_kinds"), c.get("window"), c.get("converged_app"), c.get("scope_present"),
              c.get("historical_provider_open"), path))
+    r = record.get("r15") or {}
+    rm, rw, rc = r.get("module") or {}, r.get("window") or {}, r.get("census") or {}
+    print("CPM_R15_PROBE module_state=%s module_id=%s window_owned=%s globals_private=%s cpm_names_in_main=%s "
+          "prodwindows=%s watchers=%s notices=%s harness=%s"
+          % (rm.get("state"), rm.get("id"), rw.get("owned_by_private_module"),
+             rw.get("function_globals_is_private_module"), r.get("cpm_names_in_main"),
+             rc.get("prodwindow_toplevel_total"), rc.get("active_watchers"), rc.get("launch_notices"),
+             (record.get("r15_harness") or {}).get("action")))
     return record
 
 

@@ -8,21 +8,28 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-R15 documentation synchronization (docs only). **Status: complete.** R15 design is FROZEN on
-the stable private module: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md` is the single
-authoritative design. The fresh-module-per-click proposal
-(`R15_NAMESPACE_ISOLATION_PROPOSAL.md`) is SUPERSEDED (historical only). R15 remains OPEN.
-Session 1 historical PASS intact; R14 CLOSED.
+R15 implementation + offline qualification (Blueprint §14). **Status: implementation complete;
+offline gates PASS (Python 2.7.5 and 3.10); real-SFM Session 1 addendum PENDING (prepared, not
+deployed, not run).** R15 remains OPEN. Session 1 historical PASS intact; R14 CLOSED.
 
 ## Current state
-`master` at the Blueprint §14 starting-point correction, on top of the approved R15
-documentation-synchronization commit `5d94dbf` (itself on `bd16940`). The synchronization adds the
-Blueprint and updates the superseded proposal (notice only), this Ledger and the handoff
-(status + §16 entrypoint/deployment amendment). No product or test code changed; the product is
-still at `2b8222a` (app `664a660c…`, deployed).
+`master` at the R15 implementation commit, on `382c79b` (design baseline `5d94dbf`).
 
-Also unchanged: the baseline (`3326024d…`), the shared package, the adapter/projection, the
-Normalizer and the Master.
+**Repository (not deployed):**
+- app `9a78fc96…`;
+- launcher `cpm/app/launcher/SFM_Character_Preset_Manager.py` `996ca483…`;
+- probe v3 `ce4ace98…`.
+
+SFM still runs the pre-R15 app `664a660c…` and probe v2. Deployment mapping:
+`real_sfm_qualification/cpm_session1/R15_SESSION1_ADDENDUM_RUNBOOK.md` §0.
+
+Unchanged (byte-pinned by the R15 suite):
+- the baseline `3326024d…`;
+- the Normalizer `1f4ec5a2…`;
+- the adapter `e96e21b5…` and projection `9b077a1b…`;
+- the shared package;
+- the Master `ac45e5c1…`;
+- R14 private ctypes.
 
 ## Verified (real SFM)
 Evidence: `SESSION1_RUN1_RECONCILIATION.md` (2026-09-28) and `SESSION1_COMPLETION_EVIDENCE.md`
@@ -58,13 +65,26 @@ Evidence: `SESSION1_RUN1_RECONCILIATION.md` (2026-09-28) and `SESSION1_COMPLETIO
     1.2–1.5 s.
 
 ## Unresolved
-- **R15: OPEN — design FROZEN, not implemented.** Pending: implementation, offline
-  qualification (Python 2.7.5 + 3.10, Blueprint §11) and the real-SFM Session 1 addendum (§12).
-  - **Frozen design:** one thin SFM menu launcher → one stable private CPM application module
-    (`chadchan3d_cpm_app`) per SFM process → explicit compatible-window reuse. ABSENT → LOADING →
-    READY (permanent); exact-byte compile; no reload (a changed build requires restart);
-    allow-guard at the top of the app; bottom `StartProdTool()` removed. Private implementation
-    deployed outside the `scripts/sfm` tree. Fresh module per click is superseded.
+- **R15: OPEN — implemented; offline PASS; real-SFM addendum PENDING.**
+  - **Design (frozen, now implemented):**
+    - one thin SFM menu launcher → one stable private CPM application module
+      (`chadchan3d_cpm_app`) per SFM process → explicit compatible-window reuse;
+    - ABSENT → LOADING → READY (permanent); exact-byte compile; no reload (a changed build
+      requires restart);
+    - allow-guard at the top of the app; bottom `StartProdTool()` removed;
+    - private implementation deployed outside the `scripts/sfm` tree.
+  - **Implemented pieces:**
+    - `StartProdTool()` is now the never-raising startup: the window decision table, the
+      IDLE/STARTING/FAILED_RESTART_REQUIRED latch, and a result the launcher turns into the one
+      retained non-modal notice;
+    - the Escape repair: `reject()` → `close()`, and finalization via base `QDialog.reject`.
+  - **Offline (not real-SFM evidence):** R15 suite
+    `cpm/convergence/tests/test_cpm_app_r15_namespace_isolation.py` runs the actual launcher and
+    app bytes in a fake game root:
+    - 345/345 on 2.7.5 (real PySide 1.2 / Qt 4.8 plus a behavioural Qt 4.8 model);
+    - 188/188 on 3.10 (model).
+
+    All Step 1–4, gate and R14 suites pass on both interpreters. Mutation checks were caught.
   - **Clarifications:** (A) the no-`sys.path` rule covers the new launcher/loader only; the
     existing adapter/bootstrap MAINMENU insertion is unchanged and not authorized for change.
     (B) the addendum records settled working set/private commit and handle/GDI/User counts at
@@ -113,10 +133,9 @@ Evidence: `SESSION1_RUN1_RECONCILIATION.md` (2026-09-28) and `SESSION1_COMPLETIO
 - R3, R6, R9, R13, R14: CLOSED. Offline: Suites 1–4 PASS; C7–C10 PASS (C10 also real-SFM).
 
 ## Next
-Implement the authoritative R15 Blueprint from starting point
-`5d94dbfd41c9187170ee8a926d59f21317c1e19c` (Blueprint §14; allowlisted files only), run the
-offline gates, report before deployment, then the real-SFM Session 1 addendum.
-Session 2 is NOT STARTED and not prepared.
+Owner: review the implementation report and approve deployment. Then deploy per the addendum
+runbook §0 and run the real-SFM Session 1 addendum (runbook §1–9), recording actual results only.
+Close R15 only if the addendum passes. Session 2 is NOT STARTED and not prepared.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

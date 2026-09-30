@@ -248,3 +248,7 @@ cpm/app/SFM_Character_Preset_Manager.py text eol=lf
 # CPM real-SFM qualification Session 1 (2026-09-28): the test-only probe's
 # SHA-256 is cited in the operator runbook; keep LF on every checkout/export.
 real_sfm_qualification/cpm_session1/CPM_Session1_Probe.py text eol=lf
+
+# CPM R15 (2026-09-30): the Scripts-menu launcher's SHA-256 is cited in the
+# R15 Session 1 addendum runbook; keep LF on every checkout/export.
+cpm/app/launcher/SFM_Character_Preset_Manager.py text eol=lf

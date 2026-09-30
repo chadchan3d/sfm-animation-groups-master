@@ -13,6 +13,22 @@ Dormant qualification helpers remain in-source for RC1 and may be removed during
 release hardening after integrated acceptance.
 """
 
+# CPM R15 allow-guard. This file is the private CPM implementation module
+# (chadchan3d_cpm_app). Only the ChadChan3D Scripts-menu launcher may execute
+# it, inside the launcher's loading context. Refuse every other execution
+# (for example, running this file directly from a menu) before any import or
+# application definition. Accident protection only; not a security boundary.
+if not (
+    __name__ == "chadchan3d_cpm_app"
+    and globals().get("__chadchan3d_cpm_loader__") == "cpm-private-loader-v1"
+    and globals().get("__chadchan3d_cpm_state__") == "loading"
+):
+    raise RuntimeError(
+        "SFM Character Preset Manager: this file is the private implementation "
+        "module. Launch it through the ChadChan3D > SFM_Character_Preset_Manager "
+        "Scripts menu entry."
+    )
+
 import datetime
 import os
 import re
@@ -29402,6 +29418,15 @@ class ProdWindow(QtGui.QDialog):
             event,
         )
 
+    def reject(
+        self,
+    ):
+        # R15 -- pre-existing Escape/reject teardown defect, discovered during
+        # R15 (not the shared-namespace defect). Base rejection hid the window
+        # without closeEvent teardown; route it through close() so the
+        # operation-unwind/deferred-close branches below stay authoritative.
+        self.close()
+
     def set_status(
         self,
         text,
@@ -35541,38 +35566,341 @@ class ProdWindow(QtGui.QDialog):
             "PROD_CLOSE_FINALIZED=True"
         )
 
-        QtGui.QDialog.closeEvent(
-            self,
-            event,
+        # R15: finalize through the base rejection path. The base closeEvent
+        # would call the reject() override (close()) while this close is in
+        # progress, leaving the window visible and the close ignored. Do not
+        # access window state after this terminal call.
+        event.accept()
+        QtGui.QDialog.reject(
+            self
         )
 
 
 
-def StartProdTool():
-    global OUTPUT_PATH
-    app=QtGui.QApplication.instance()
-    if app is None:return
-    existing=getattr(app,PROD_APP_ATTR,None)
-    if existing is not None:
-        try: existing.show(); existing.raise_(); existing.activateWindow(); return
-        except Exception: pass
-    OUTPUT_PATH=PROD_OUTPUT_PATH;
-    if not os.path.isfile(OUTPUT_PATH): reset_log()
-    log_line("="*120); log_line("%s %s"%(TOOL_NAME,PROD_VERSION)); log_line("ARCHITECTURE=\'generic selected-model context + Master scopes + v3 storage + readable legacy v2 + indexed Body Presets + reusable Clothing Fit\'"); log_line("G18AN_ANIMSET_RENAME_RESILIENCE=\'Model path + checksum durable; Animation Set name mutable display metadata; ambiguity fails closed\'"); log_line("G18AN_FOREIGN_MODAL_YIELD=\'Any foreign active Qt modal hides CPM after scene suspension; restores without focus steal\'"); log_line("SIDECAR_STATUS=\'required generated SIDECAR; active Master SHA must match sidecar source generation; no TXT fallback\'"); log_line("G18AN_WINDOW_POLICY=\'Qt.Dialog + WindowStaysOnTopHint; nonmodal; foreign-modal priority watcher=100ms\'"); log_line("G18AN_RUN run_id=%r pid=%d parity_oracle=%r" % (PROD_RUN_ID, PROD_PID, PROD_Q1_INDEXED_CAPTURE_PARITY))
+# CPM R15: startup state of the one stable private application module.
+# The launcher owns module loading (ABSENT -> LOADING -> READY) and the launch
+# notice; this module owns window decisions. READY is permanent; windows come
+# and go. STARTING refuses re-entry; FAILED_RESTART_REQUIRED latches after an
+# unexpected failure once window construction has begun.
+PROD_R15_STARTUP_IDLE = u"idle"
+PROD_R15_STARTUP_STARTING = u"starting"
+PROD_R15_STARTUP_FAILED = u"failed-restart-required"
+PROD_R15_STARTUP = {
+    "state": PROD_R15_STARTUP_IDLE,
+    "failure": None,
+}
+PROD_R15_NOTICE_COPY = {
+    u"refuse-closing": u"Character Preset Manager is still closing. Wait a moment, then open it again.",
+    u"refuse-modal-yield": u"Character Preset Manager is waiting for another dialog to close.",
+    u"refuse-foreign-modal": u"Close the open dialog, then open Character Preset Manager again.",
+    u"refuse-owned-modal": u"Finish the open Character Preset Manager dialog first.",
+    u"refuse-foreign-window": (
+        u"Another Character Preset Manager window (a different build) is open. "
+        u"Close it, then open Character Preset Manager again."
+    ),
+    u"refuse-malformed": u"Character Preset Manager could not start in this SFM session. Restart SFM to use it.",
+    u"refuse-uncertain": (
+        u"Character Preset Manager could not confirm the state of its existing window. "
+        u"Restart SFM to use it again."
+    ),
+    u"refuse-starting": u"Character Preset Manager is already starting.",
+    u"refuse-failed-restart-required": (
+        u"Character Preset Manager could not open earlier in this SFM session. "
+        u"Restart SFM to use it again."
+    ),
+    u"refuse-reuse-failed": u"Character Preset Manager could not show its window. Try again.",
+    u"open-failed": u"Character Preset Manager could not open. Try again.",
+    u"failed-restart-required": u"Character Preset Manager could not open. Restart SFM to use it again.",
+}
+
+
+def prod_r15_qt_alive(
+    obj,
+):
+    """True if the Qt object is alive, False only if it is definitively
+    deleted, None if liveness cannot be established. Exceptions from other
+    calls are never treated as proof of deletion."""
     try:
+        from PySide import shiboken
+    except Exception:
+        return None
+
+    try:
+        return bool(
+            shiboken.isValid(
+                obj
+            )
+        )
+    except Exception:
+        return None
+
+
+def prod_r15_result(
+    outcome,
+    code,
+    detail=None,
+):
+    notice = PROD_R15_NOTICE_COPY.get(
+        code
+    )
+
+    if outcome != u"created" and outcome != u"reused":
+        log_line(
+            "PROD_R15_LAUNCH_REFUSED outcome=%r code=%r detail=%r run_id=%r"
+            % (
+                outcome,
+                code,
+                detail,
+                PROD_RUN_ID,
+            )
+        )
+
+    return {
+        "outcome": outcome,
+        "code": code,
+        "notice": notice,
+    }
+
+
+def prod_r15_launcher_refusal(
+    code,
+    detail=None,
+):
+    """Logs a refusal decided by the launcher while this READY module is
+    loaded (for example, changed installed bytes). The module, its window
+    and its lifecycle state are left untouched."""
+    global OUTPUT_PATH
+    OUTPUT_PATH = PROD_OUTPUT_PATH
+    return prod_r15_result(
+        u"refused",
+        code,
+        detail,
+    )
+
+
+def prod_r15_window_decision(
+    app,
+):
+    """(decision, window, detail) for the application window slot. Only a
+    ProdWindow of this module is owned; foreign occupants are never closed,
+    adopted or replaced; uncertainty is never read as an empty slot."""
+    try:
+        modal = app.activeModalWidget()
+    except Exception as exc:
+        return (u"refuse-uncertain", None, u"active-modal-unreadable %r" % (exc,))
+
+    try:
+        existing = getattr(
+            app,
+            PROD_APP_ATTR,
+            None,
+        )
+    except Exception as exc:
+        return (u"refuse-uncertain", None, u"slot-unreadable %r" % (exc,))
+
+    if existing is not None:
+        if not isinstance(
+            existing,
+            QtGui.QWidget,
+        ):
+            return (u"refuse-malformed", None, u"slot-type %r" % (type(existing).__name__,))
+
+        owned = isinstance(
+            existing,
+            ProdWindow,
+        )
+        alive = prod_r15_qt_alive(
+            existing
+        )
+
+        if alive is None:
+            return (u"refuse-uncertain", None, u"liveness-unknown owned=%r" % (owned,))
+
+        if alive is False:
+            try:
+                if getattr(
+                    app,
+                    PROD_APP_ATTR,
+                    None,
+                ) is existing:
+                    setattr(
+                        app,
+                        PROD_APP_ATTR,
+                        None,
+                    )
+            except Exception as exc:
+                return (u"refuse-uncertain", None, u"slot-clear-failed %r" % (exc,))
+
+            log_line(
+                "PROD_R15_SLOT_CLEARED reason='deleted-qt-object' owned=%r"
+                % owned
+            )
+            existing = None
+
+        elif not owned:
+            return (u"refuse-foreign-window", None, u"class=%r" % (type(existing).__name__,))
+
+    if existing is None:
+        if modal is not None:
+            return (u"refuse-foreign-modal", None, u"class=%r" % (type(modal).__name__,))
+
+        return (u"create", None, None)
+
+    if getattr(
+        existing,
+        "closing_requested",
+        True,
+    ):
+        return (u"refuse-closing", None, None)
+
+    if getattr(
+        existing,
+        "modal_yield_active",
+        True,
+    ):
+        return (u"refuse-modal-yield", None, None)
+
+    if modal is not None:
+        if existing.modal_is_owned_by_manager(
+            modal
+        ):
+            return (u"refuse-owned-modal", None, u"class=%r" % (type(modal).__name__,))
+
+        return (u"refuse-foreign-modal", None, u"class=%r" % (type(modal).__name__,))
+
+    return (u"reuse", existing, None)
+
+
+def prod_r15_close_partial_window(
+    app,
+    window,
+):
+    """Best-effort close of the known, owned window from a failed startup.
+    Arbitrary Qt widgets are never swept."""
+    if window is None:
+        return False
+
+    try:
+        if getattr(
+            app,
+            PROD_APP_ATTR,
+            None,
+        ) is window:
+            setattr(
+                app,
+                PROD_APP_ATTR,
+                None,
+            )
+    except Exception:
+        pass
+
+    try:
+        window.modal_watch_timer.stop()
+    except Exception:
+        pass
+
+    try:
+        window.close()
+        return True
+    except Exception:
+        pass
+
+    try:
+        window.hide()
+        window.deleteLater()
+        return True
+    except Exception:
+        return False
+
+
+def StartProdTool():
+    """CPM R15 startup. Called by the launcher only after the private module
+    is READY. Returns {"outcome", "code", "notice"}; the launcher presents
+    any notice. Never reloads or resets module state."""
+    global OUTPUT_PATH
+    OUTPUT_PATH = PROD_OUTPUT_PATH
+
+    app = QtGui.QApplication.instance()
+
+    if app is None:
+        return prod_r15_result(u"refused", u"no-qapplication")
+
+    state = PROD_R15_STARTUP.get(
+        "state"
+    )
+
+    if state == PROD_R15_STARTUP_FAILED:
+        return prod_r15_result(u"refused", u"refuse-failed-restart-required")
+
+    if state != PROD_R15_STARTUP_IDLE:
+        return prod_r15_result(u"refused", u"refuse-starting", state)
+
+    decision, window, detail = prod_r15_window_decision(
+        app
+    )
+
+    if decision == u"reuse":
+        try:
+            window.show(); window.raise_(); window.activateWindow()
+        except Exception as exc:
+            return prod_r15_result(u"refused", u"refuse-reuse-failed", u"%r" % (exc,))
+
+        log_line("PROD_R15_WINDOW_REUSED run_id=%r" % (PROD_RUN_ID,))
+        return prod_r15_result(u"reused", u"reuse")
+
+    if decision != u"create":
+        return prod_r15_result(u"refused", decision, detail)
+
+    PROD_R15_STARTUP["state"] = PROD_R15_STARTUP_STARTING
+    window = None
+    constructing = False
+
+    try:
+        if not os.path.isfile(OUTPUT_PATH): reset_log()
+        log_line("="*120); log_line("%s %s"%(TOOL_NAME,PROD_VERSION)); log_line("ARCHITECTURE=\'generic selected-model context + Master scopes + v3 storage + readable legacy v2 + indexed Body Presets + reusable Clothing Fit\'"); log_line("G18AN_ANIMSET_RENAME_RESILIENCE=\'Model path + checksum durable; Animation Set name mutable display metadata; ambiguity fails closed\'"); log_line("G18AN_FOREIGN_MODAL_YIELD=\'Any foreign active Qt modal hides CPM after scene suspension; restores without focus steal\'"); log_line("SIDECAR_STATUS=\'required generated SIDECAR; active Master SHA must match sidecar source generation; no TXT fallback\'"); log_line("G18AN_WINDOW_POLICY=\'Qt.Dialog + WindowStaysOnTopHint; nonmodal; foreign-modal priority watcher=100ms\'"); log_line("G18AN_RUN run_id=%r pid=%d parity_oracle=%r" % (PROD_RUN_ID, PROD_PID, PROD_Q1_INDEXED_CAPTURE_PARITY))
+        log_line("PROD_R15_MODULE name=%r loader=%r state=%r build_sha256=%r file=%r" % (__name__, globals().get("__chadchan3d_cpm_loader__"), globals().get("__chadchan3d_cpm_state__"), globals().get("__chadchan3d_cpm_build_sha256__"), globals().get("__file__")))
         log_line("G18AN_PROVIDER_FORCE_MODE=%r parity_shortcut=%r" % (SEMANTIC_PROVIDER_FORCE_MODE, G18AN_PARITY_SHORTCUT))
         prod_prepare_library_root()
-        w=ProdWindow(qt_parent()); setattr(app,PROD_APP_ATTR,w); w.show(); w.raise_(); w.activateWindow(); log_line("PROD_WINDOW_SHOWN=True initial_index=%d"%w.combo.currentIndex()); log_line("MAINMENU_CALLBACK_RETURNING=True"); log_line("="*120)
-    except Exception as exc:
-        log_line("PROD_OPEN_FAIL=%r"%exc); log_line(traceback.format_exc())
-        try:
-            tool_warning_message(
-                qt_parent(),
-                "Character Preset Manager could not open",
-                "Character Preset Manager could not open. Try again.",
+        constructing = True
+        window=ProdWindow(qt_parent()); setattr(app,PROD_APP_ATTR,window); window.show(); window.raise_(); window.activateWindow(); log_line("PROD_WINDOW_SHOWN=True initial_index=%d"%window.combo.currentIndex()); log_line("MAINMENU_CALLBACK_RETURNING=True"); log_line("="*120)
+    except BaseException as exc:
+        diagnostics = traceback.format_exc()
+        log_line("PROD_OPEN_FAIL=%r"%exc); log_line(diagnostics)
+
+        if constructing:
+            PROD_R15_STARTUP["state"] = PROD_R15_STARTUP_FAILED
+            PROD_R15_STARTUP["failure"] = diagnostics
+            closed = prod_r15_close_partial_window(
+                app,
+                window,
             )
-        except Exception:
+            log_line(
+                "PROD_R15_STARTUP_FAILED_RESTART_REQUIRED=True partial_window=%r closed=%r"
+                % (
+                    window is not None,
+                    closed,
+                )
+            )
+            result = prod_r15_result(u"failed", u"failed-restart-required", u"%r" % (exc,))
+        else:
+            PROD_R15_STARTUP["state"] = PROD_R15_STARTUP_IDLE
+            result = prod_r15_result(u"failed", u"open-failed", u"%r" % (exc,))
+
+        if not isinstance(
+            exc,
+            Exception,
+        ):
+            raise
+
+        window = None
+        exc = None
+
+        try:
+            sys.exc_clear()
+        except AttributeError:
             pass
 
+        return result
 
-StartProdTool()
+    PROD_R15_STARTUP["state"] = PROD_R15_STARTUP_IDLE
+    return prod_r15_result(u"created", u"create")

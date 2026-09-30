@@ -169,7 +169,9 @@ STEP3_CHANGED_TOP = set([
 ])
 STEP4_CHANGED_TOP = set(["prod_body_source", "prod_body_source_live_from_baseline"])
 R14_CHANGED_TOP = set(["prod_resource_snapshot"])  # diagnostic ctypes isolation
-EXPECTED_CHANGED_TOP = STEP2B_CHANGED_TOP | STEP3_CHANGED_TOP | STEP4_CHANGED_TOP | R14_CHANGED_TOP
+R15_CHANGED_TOP = set(["StartProdTool"])  # stable private-module startup (ProdWindow already listed)
+EXPECTED_CHANGED_TOP = (STEP2B_CHANGED_TOP | STEP3_CHANGED_TOP | STEP4_CHANGED_TOP | R14_CHANGED_TOP
+                        | R15_CHANGED_TOP)
 EXPECTED_NEW_TOP = set([
     "PROD_CPM_MAINMENU_RELATIVE_PARTS", "PROD_CPM_ADAPTER_MODULES", "ProdCpmAuthorityBootstrapError",
     "ProdCpmAuthorityNotMigrated", "prod_cpm_mainmenu_dir", "prod_cpm_import_adapter", "prod_cpm_is_main_thread",
@@ -184,10 +186,33 @@ EXPECTED_NEW_TOP = set([
     # R14
     "_PROD_PRIVATE_WINDLL", "prod_private_windll",
 ])
+# R15 startup/lifecycle additions: bounded here, exercised by the R15 suite
+# (not extracted into this suite's namespace).
+R15_NEW_TOP = set([
+    "PROD_R15_STARTUP_IDLE", "PROD_R15_STARTUP_STARTING", "PROD_R15_STARTUP_FAILED", "PROD_R15_STARTUP",
+    "PROD_R15_NOTICE_COPY", "prod_r15_qt_alive", "prod_r15_result", "prod_r15_launcher_refusal",
+    "prod_r15_window_decision", "prod_r15_close_partial_window",
+])
 EXPECTED_CHANGED_METHODS = set(["guard", "render", "semantic_provider_ready",
                                 "review_decision", "review_reclassify",  # Step 3
                                 "fit_selected", "fit_stage"])  # Step 4
 EXPECTED_NEW_METHODS = set(["prod_cpm_request_stale_rebuild_if_needed", "prod_cpm_run_stale_rebuild"])
+# R15: Escape/reject teardown repair (pre-existing defect, discovered during R15).
+R15_CHANGED_METHODS = set(["closeEvent"])
+R15_NEW_METHODS = set(["reject"])
+
+
+def _unnamed_top_level(source):
+    """Source text of every top-level statement that binds no name (docstring,
+    imports, guards, bare calls); imports are listed by what they import."""
+    out = []
+    for node in source.tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
+            continue
+        if isinstance(node, ast.Assign) and all(isinstance(t, ast.Name) for t in node.targets):
+            continue
+        out.append(source.lines[node.lineno - 1].strip())
+    return out
 
 
 def section_derivation(app):
@@ -198,16 +223,23 @@ def section_derivation(app):
     added = set(app.top) - set(baseline.top)
     removed = set(baseline.top) - set(app.top)
     check("derivation.changed_top_level_is_bounded", changed == EXPECTED_CHANGED_TOP, sorted(changed))
-    check("derivation.added_top_level_is_bounded", added == EXPECTED_NEW_TOP, sorted(added))
+    check("derivation.added_top_level_is_bounded", added == EXPECTED_NEW_TOP | R15_NEW_TOP, sorted(added))
     check("derivation.nothing_removed", not removed, sorted(removed))
     bm, am = baseline.methods("ProdWindow"), app.methods("ProdWindow")
     m_changed = set(n for n in am if n in bm and app.method_text("ProdWindow", n) != baseline.method_text("ProdWindow", n))
     # The shortcut binding lives in the constructor-side builder method.
     shortcut_owner = [n for n in bm if "g18an_parity_shortcut = QtGui.QShortcut" in baseline.method_text("ProdWindow", n)]
     check("derivation.shortcut_owner_found", len(shortcut_owner) == 1, shortcut_owner)
-    expected_methods = EXPECTED_CHANGED_METHODS | set(shortcut_owner)
+    expected_methods = EXPECTED_CHANGED_METHODS | R15_CHANGED_METHODS | set(shortcut_owner)
     check("derivation.changed_methods_are_bounded", m_changed == expected_methods, sorted(m_changed))
-    check("derivation.added_methods_are_bounded", set(am) - set(bm) == EXPECTED_NEW_METHODS, sorted(set(am) - set(bm)))
+    check("derivation.added_methods_are_bounded", set(am) - set(bm) == EXPECTED_NEW_METHODS | R15_NEW_METHODS,
+          sorted(set(am) - set(bm)))
+    # R15: the only unnamed top-level changes are the allow-guard (added right
+    # after the docstring) and the removed bottom-of-file StartProdTool() call.
+    b_un, a_un = _unnamed_top_level(baseline), _unnamed_top_level(app)
+    check("derivation.r15_unnamed_top_level_bounded",
+          b_un[-1] == u"StartProdTool()" and a_un[:1] == b_un[:1] and a_un[1] == u"if not ("
+          and a_un[2:] == b_un[1:-1], [a_un[1], b_un[-1], len(a_un), len(b_un)])
     check("derivation.historical_machinery_retained", all(n in app.top for n in (
         "get_semantic_provider", "SidecarSemanticProvider", "MasterTxtSemanticProvider",
         "acquire_semantic_provider_for_mode", "g18an_decision_parity_for_row", "prod_semantic_provider_health_from_descriptor")))
