@@ -1,9 +1,13 @@
 # CPM R15 — real-SFM Session 1 addendum runbook
 
 Authoritative design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md` (§12, with Clarification B).
-This addendum is required before R15 can close; Session 2 stays blocked until it passes. It is
-**prepared, not run**. Record actual results only, in `R15_SESSION1_ADDENDUM_EVIDENCE.md`; put raw
-outputs under `real_sfm_qualification/cpm_session1/r15_addendum/`.
+This addendum is required before R15 can close; Session 2 stays blocked until it passes.
+
+> **Status (2026-09-30): executed — PASS.** Results: `R15_SESSION1_ADDENDUM_EVIDENCE.md`; raw outputs:
+> `real_sfm_qualification/cpm_session1/r15_addendum/`. The procedure below is unchanged.
+
+Record actual results only, in `R15_SESSION1_ADDENDUM_EVIDENCE.md`; put raw outputs under
+`real_sfm_qualification/cpm_session1/r15_addendum/`.
 
 ## 0. Deployment mapping
 

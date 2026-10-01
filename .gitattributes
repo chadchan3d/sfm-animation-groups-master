@@ -252,3 +252,10 @@ real_sfm_qualification/cpm_session1/CPM_Session1_Probe.py text eol=lf
 # CPM R15 (2026-09-30): the Scripts-menu launcher's SHA-256 is cited in the
 # R15 Session 1 addendum runbook; keep LF on every checkout/export.
 cpm/app/launcher/SFM_Character_Preset_Manager.py text eol=lf
+
+# CPM R15 Session 1 addendum raw outputs (2026-09-30): captured evidence,
+# SHA-256-pinned in r15_addendum/MANIFEST.md, mixed CRLF/LF exactly as SFM
+# wrote it. Never normalize on checkout, commit or archive export.
+real_sfm_qualification/cpm_session1/r15_addendum/*.jsonl -text
+real_sfm_qualification/cpm_session1/r15_addendum/*.log -text
+real_sfm_qualification/cpm_session1/r15_addendum/*.txt -text
