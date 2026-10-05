@@ -8,14 +8,24 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-R15 closeout (evidence reconciliation). **Status: R15 CLOSED — PASS.** Implementation/offline
-qualification PASS, plus the real-SFM Session 1 addendum PASS
-(`real_sfm_qualification/cpm_session1/R15_SESSION1_ADDENDUM_EVIDENCE.md`).
+Real-SFM Session 2 (controlled G1→G2; runbook
+`real_sfm_qualification/cpm_session2/SESSION2_RUNBOOK.md` at `3b22b8b`).
 
-Session 1 remains complete. R14 remains CLOSED. Session 2 is NOT STARTED.
+**Status: S2-A_R2 (open-window generation replacement) PASS. S2-B (generation change during a Save
+prompt) is the next authorized bounded step and has not been run.**
+
+R15 CLOSED — PASS. Session 1 remains complete. R14 remains CLOSED.
 
 ## Current state
-`master` at the R15 closeout commit (evidence only). The product is unchanged since `00d0d83`.
+`master` at the S2-A_R2 adjudication commit (Ledger only). The product is unchanged since
+`00d0d83`.
+
+Session 2 campaign evidence is held outside the repository at
+`%PUBLIC%\Documents\CPM_Session2\` (`S2A` invalid attempt; `S2A_R2`). It is copied in, redacted,
+at Session 2 closeout (`SESSION2_EVIDENCE.md`).
+
+The live authority is exact production G1 after S2-A_R2: Master `ac45e5c1…`, manifest
+`d810d648…`, one sidecar `bcd97641…`.
 
 **Deployed and verified** (runbook §0):
 - launcher `996ca483…` as the Scripts-menu entry;
@@ -53,6 +63,7 @@ Evidence:
 | Resource / latency | PASS (complete) |
 | R14 ctypes isolation | CLOSED |
 | R15 namespace isolation (Session 1 addendum, P1–P15) | **CLOSED — PASS** |
+| Session 2 S2-A_R2: open-window G1→G2 replacement (2026-10-05) | **PASS** |
 
 - **Clothing Fit detail:**
   - `Gfit` was authorized.
@@ -91,6 +102,27 @@ Evidence:
     1. the shared Scripts-menu namespace defect;
     2. the repeated-click re-initialization defect;
     3. the pre-existing Escape/reject teardown defect (discovered during R15).
+- **Session 2 S2-A_R2 (2026-10-05, pid 25844, broker `0x32def250`, window `0x3210f580`):**
+  - **Generation switch:** G1 `ac45e5c1…` → exact G2 `54413b6c…`, using the frozen Checkpoint I
+    functions (complete write-once record set).
+  - **No-interaction window held:** no CPM activity between G2 activation (17:55:09) and the
+    stale Apply (17:56:10).
+  - **A8 stale Apply refused before mutation:** `PROD_CPM_OPERATION_AUTHORIZATION_REFUSED …
+    reason=u'generation-mismatch'`; no Undo, mutation, native-commit or Apply outcome;
+    `native_commit=None`.
+  - **Rebuild only after the refusal:** `…REBUILD_SCHEDULED` at 17:57:17, after the dialog was
+    dismissed; one automatic Select Model to G2 `54413b6c…`; the same window; no replay.
+  - **A10 deliberate Apply:** authorized under G2 and committed (`BodyTest`, `changed_sides=1`).
+  - **Idle authority:** P2–P5 leases 0, providers 0, one window / one watcher.
+  - **Restoration:** exact G1 (`exact_match: true` in both the finalization record and the
+    independent comparison).
+  - **First S2-A attempt (folder `S2A`, 2026-10-01):** procedurally invalid (runbook design
+    error). Selecting a preset after G2 activation re-evaluated readiness and rebuilt the scope
+    under G2 before Apply. That path behaved correctly but does not qualify the stale-action
+    boundary. The folder is preserved; its restoration was exact.
+  - **Observation:** the refusal dialog shows the guard's generic copy ("Preset could not be
+    applied safely. This preset was not applied."), not the stale-scope message, which is logged
+    only. See the stale-scope UI presentation item.
 - **Measurements (Session 1):**
   - process working set +36 MB across the session;
   - CPM scope 107–166 KB;
@@ -120,10 +152,19 @@ Evidence:
        under Needs review."
      - Keep the clear → rebuild → reclassify behavior unchanged.
 - **Stale-scope UI presentation** and **`SidecarMissing` messaging:** undecided.
+  - Real SFM shows that a stale-generation refusal is presented through the guard's generic copy.
+    For Apply this is "Preset could not be applied safely…"; for Save it would be "Can't save
+    preset — Nothing was saved."
+  - The stale-scope reason is logged only, and CPM then rebuilds automatically.
 - **Product identity strings** (window slot, log name, `PROD_VERSION`) are unchanged from G18AN
   (K/L).
 - **Remaining pre-K qualification:**
-  - Session 2: G1→G2 with CPM open, and during a Save/Update prompt;
+  - Session 2:
+    - S2-A_R2 (G1→G2 with CPM open): **PASS**.
+    - **S2-B (G1→G2 during a Save prompt): next, not run.** Precondition: the frozen runbook's
+      B6 visible expectation ("a warning says the semantic scope is stale") is inaccurate; the
+      dialog will be the generic "Can't save preset" copy. Correct that wording in the runbook,
+      with approval, before S2-B so the operator is not sent to STOP.
   - Session 3: queued Fit target-1 G1 → target-2 G2, and target 1's Undo after it;
   - the forced Apply and forced Fit rollback-verification failure gates;
   - then cleanup of historical authority and diagnostics, plus a focused regression.
@@ -133,9 +174,13 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-After designer/owner review of the R15 closeout: one bounded Session 2 assignment (G1→G2 with CPM
-open, and during a Save/Update prompt), issued by the designer. Do not prepare or run Session 2
-before that assignment.
+S2-B is the next authorized bounded qualification step.
+1. Approve the one-step correction of the runbook's B6 visible-dialog expectation (the generic
+   "Can't save preset" copy).
+2. Then run S2-B per the runbook (`$EB`, a fresh write-once path), restore exact G1, and
+   adjudicate.
+
+Session 3 is not started.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
