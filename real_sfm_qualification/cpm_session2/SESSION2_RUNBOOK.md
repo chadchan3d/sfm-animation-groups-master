@@ -1,8 +1,22 @@
 # CPM real-SFM Session 2 — controlled G1→G2 generation qualification (runbook)
 
-**Status: prepared, not run.** Session 2 proves exactly the two handoff §21 cases:
+**Status: S2-A_R2 prepared, not run; S2-B blocked until S2-A_R2 passes.** Session 2 proves exactly
+the two handoff §21 cases:
 - **S2-A:** open-window generation replacement;
 - **S2-B:** a generation change during a Save prompt.
+
+**First S2-A attempt (folder `S2A`, 2026-10-01): procedurally invalid.**
+- **What happened:** selecting `BodyTest` after G2 activation re-evaluated CPM's semantic readiness.
+  That detected the stale scope and rebuilt it under G2 before Apply was clicked. The Apply then
+  ran under valid G2 authority.
+- **Why it was not a product failure:** this was a runbook design error. The early stale-detection
+  and rebuild path behaved correctly (§13): no stale mutation, the stale scope discarded, the G2
+  scope rebuilt, no replay.
+- **Why it does not count:** it did not qualify the stale-action rejection boundary.
+- **Status of that folder:** restored to exact G1. It is preserved unchanged as evidence and must
+  never be reused.
+
+S2-A is rerun as **S2-A_R2** (§3).
 
 It changes no CPM, launcher, Normalizer, adapter/projection, shared authority package, sidecar
 reader/generator or preset format. Record actual results only, in `SESSION2_EVIDENCE.md`, at
@@ -48,9 +62,14 @@ this qualified tooling.
 
 ## 1. Global rules (fail-closed)
 
-1. **Two campaigns, in order, each in a fresh SFM process:** S2-A, then S2-B. Each starts from, and
-   must end restored to, exact production G1.
-2. **Do not begin S2-B** unless S2-A's `S2-Finalize` printed `S2 RESTORED EXACT G1`.
+1. **Two campaigns, in order, each in a fresh SFM process:** S2-A_R2, then S2-B. Each starts from,
+   and must end restored to, exact production G1.
+2. **S2-B is blocked until S2-A_R2 passes.** That requires both:
+   - S2-A_R2's `S2-Finalize` printed `S2 RESTORED EXACT G1`;
+   - S2-A_R2 was adjudicated PASS (§6).
+
+   The original `S2A` folder is preserved evidence of the invalid first attempt; never pass it to
+   any function.
 3. **Never end Session 2 with anything other than exact G1.** If any restoration is not exact, STOP:
    do not start SFM again and report.
 4. **Write-once evidence:** every record and output has its own path per campaign (§2.2). The helper
@@ -64,7 +83,13 @@ this qualified tooling.
 6. **Phase A and Phase B run back to back**, with no SFM interaction between them. After Phase A
    the manifest already names G2 while the Master is still G1, so a CPM action in that window
    would be an authority-unavailable refusal, not a generation change.
-7. **Operator role:** follow the visible steps only. Probe JSON and the CPM log are adjudicated after
+7. **Use the frozen functions verbatim.** Preparation, Phase A, Phase B and finalization must run
+   only through `S2-Prepare`, `S2-PhaseA`, `S2-PhaseB` and `S2-Finalize` exactly as defined in §2.1
+   (and `S2-VerifyUntouched` for R1). Do not substitute shortened or manual command blocks. Each
+   campaign must produce its full record set (§2.2), including `post_switch_inventory.json`,
+   `restored_inventory.json` and `restore_compare.json`. A campaign missing any of them is
+   incomplete.
+8. **Operator role:** follow the visible steps only. Probe JSON and the CPM log are adjudicated after
    each campaign, never while SFM is being manipulated (§6). The shell functions print one
    `S2 … OK` or `STOP: …` line per step. On any `STOP` line, follow the text it prints and §5.
 
@@ -84,7 +109,7 @@ $M    = Join-Path $CFG "sfm_defaultanimationgroups.txt"
 $AUTH = Join-Path $CFG "sfm_shared_authority"
 $I    = Join-Path $R "real_sfm_qualification\checkpoint_i_generation_replacement"
 $LIB  = Join-Path ([Environment]::GetFolderPath('MyDocuments')) "SFM Character Preset Manager\Characters\mia--2e6533ed1490"
-$EA   = Join-Path $env:PUBLIC "Documents\CPM_Session2\S2A"
+$EA2  = Join-Path $env:PUBLIC "Documents\CPM_Session2\S2A_R2"   # S2-A rerun (the original S2A folder is preserved; never reused)
 $EB   = Join-Path $env:PUBLIC "Documents\CPM_Session2\S2B"
 $G1_MASTER   = "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93"
 $G2_MASTER   = "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7"
@@ -238,28 +263,31 @@ function Compare-LibInventory([string]$A, [string]$B) {
 
 `python` must be Python 3: `python --version` should print 3.x.
 
-### 2.2 Campaign paths (write-once; no path shared between S2-A and S2-B)
+### 2.2 Campaign paths (write-once; no path shared between campaigns)
 
-| Record / output | S2-A (`$EA`) | S2-B (`$EB`) |
+`%PUBLIC%\Documents\CPM_Session2\S2A\` holds the invalid first S2-A attempt. It is preserved
+unchanged as evidence and is never written to again.
+
+| Record / output | S2-A_R2 (`$EA2`) | S2-B (`$EB`) |
 |---|---|---|
-| Campaign folder | `%PUBLIC%\Documents\CPM_Session2\S2A\` | `%PUBLIC%\Documents\CPM_Session2\S2B\` |
-| G1 byte copy | `S2A\g1_source.txt` | `S2B\g1_source.txt` |
-| Baseline inventory | `S2A\baseline_inventory.json` | `S2B\baseline_inventory.json` |
-| G2 source (Phase A) | `S2A\g2_source.txt` | `S2B\g2_source.txt` |
-| Plan record (Phase A) | `S2A\g2_plan_record.json` | `S2B\g2_plan_record.json` |
-| Publication record (Phase A) | `S2A\g2_publication_record.json` | `S2B\g2_publication_record.json` |
-| Phase A output | `S2A\phase_a_stdout.json` | `S2B\phase_a_stdout.json` |
-| Activation record (Phase B) | `S2A\g2_activation_record.json` | `S2B\g2_activation_record.json` |
-| Phase B output | `S2A\phase_b_stdout.json` | `S2B\phase_b_stdout.json` |
-| Post-switch inventory | `S2A\post_switch_inventory.json` | `S2B\post_switch_inventory.json` |
-| Finalization record | `S2A\finalization_record.json` | `S2B\finalization_record.json` |
-| Finalize output | `S2A\finalize_stdout.json` | `S2B\finalize_stdout.json` |
-| Restored inventory | `S2A\restored_inventory.json` | `S2B\restored_inventory.json` |
-| Restoration comparison | `S2A\restore_compare.json` | `S2B\restore_compare.json` |
-| Only if Phase A fails before its plan record | `S2A\untouched_inventory.json`, `S2A\untouched_compare.json` | `S2B\untouched_inventory.json`, `S2B\untouched_compare.json` |
+| Campaign folder | `%PUBLIC%\Documents\CPM_Session2\S2A_R2\` | `%PUBLIC%\Documents\CPM_Session2\S2B\` |
+| G1 byte copy | `S2A_R2\g1_source.txt` | `S2B\g1_source.txt` |
+| Baseline inventory | `S2A_R2\baseline_inventory.json` | `S2B\baseline_inventory.json` |
+| G2 source (Phase A) | `S2A_R2\g2_source.txt` | `S2B\g2_source.txt` |
+| Plan record (Phase A) | `S2A_R2\g2_plan_record.json` | `S2B\g2_plan_record.json` |
+| Publication record (Phase A) | `S2A_R2\g2_publication_record.json` | `S2B\g2_publication_record.json` |
+| Phase A output | `S2A_R2\phase_a_stdout.json` | `S2B\phase_a_stdout.json` |
+| Activation record (Phase B) | `S2A_R2\g2_activation_record.json` | `S2B\g2_activation_record.json` |
+| Phase B output | `S2A_R2\phase_b_stdout.json` | `S2B\phase_b_stdout.json` |
+| Post-switch inventory | `S2A_R2\post_switch_inventory.json` | `S2B\post_switch_inventory.json` |
+| Finalization record | `S2A_R2\finalization_record.json` | `S2B\finalization_record.json` |
+| Finalize output | `S2A_R2\finalize_stdout.json` | `S2B\finalize_stdout.json` |
+| Restored inventory | `S2A_R2\restored_inventory.json` | `S2B\restored_inventory.json` |
+| Restoration comparison | `S2A_R2\restore_compare.json` | `S2B\restore_compare.json` |
+| Only if Phase A fails before its plan record | `S2A_R2\untouched_inventory.json`, `S2A_R2\untouched_compare.json` | `S2B\untouched_inventory.json`, `S2B\untouched_compare.json` |
 | Library inventories | — | `S2B\library_1_before_prompt.txt`, `S2B\library_2_g2_active_prompt_open.txt`, `S2B\library_3_after_refusal.txt`, `S2B\library_4_after_g2_save.txt` |
 
-**Deployment check** (SFM closed, before S2-A). These SHA-256 values must match:
+**Deployment check** (SFM closed, before S2-A_R2). These SHA-256 values must match:
 
 | File | SHA-256 |
 |---|---|
@@ -270,32 +298,43 @@ function Compare-LibInventory([string]$A, [string]$B) {
 | `cpm_compat_v1_projection.py` | `9b077a1b…` |
 | `Rebuild_Control_Groups_Normalizer.py` | `1f4ec5a2…` |
 
-## 3. S2-A — open-window generation replacement
+## 3. S2-A_R2 — open-window generation replacement (corrected rerun)
 
 A **P#** means: SFM Scripts menu → ChadChan3D → `CPM_Session1_Probe`. Write down the clock time.
-Run a probe only when no CPM action or dialog is open.
+Run a probe only when no CPM action or dialog is open. Running the probe does not touch the CPM
+window.
+
+**No-interaction window.** From G2 activation (A6) until the stale Apply click (A8), **do not
+interact with the CPM window at all.** In CPM, any of the following re-evaluates semantic
+readiness, which detects the stale scope and rebuilds it before Apply, invalidating the run:
+- list clicks, tab switches, search, sort, Favorites;
+- the model list, Refresh, Model Info, the Fit tree, Review.
+
+`BodyTest` is therefore selected under G1 (A4), and A8 clicks only the already-enabled
+**Apply Preset** button.
 
 | Step | Where | Do | Visible expectation / STOP |
 |---|---|---|---|
-| A0 | Shell (SFM closed) | `S2-Prepare $EA` | `S2 BASELINE OK`. Otherwise STOP (nothing changed; report). |
+| A0 | Shell (SFM closed) | `S2-Prepare $EA2` | `S2 BASELINE OK`. Otherwise STOP (nothing changed; report). |
 | A1 | SFM | Start SFM fresh; open the qualified fixture (the R15 addendum scene: Mia on `shot3`). **P1.** | — |
-| A2 | CPM | Scripts → ChadChan3D → SFM_Character_Preset_Manager. Choose **Mia** in the model list; wait for the Body / Expression / Review counts. | Counts appear. |
+| A2 | CPM | Scripts → ChadChan3D → SFM_Character_Preset_Manager. Choose **Mia** in the model list; wait for the Body / Expression / Review counts (Mia under G1). | Counts appear. |
 | A3 | CPM | Body tab: select preset **`Body`**, click **Apply Preset**. | A success status. |
-| A4 | SFM | **P2.** | — |
-| A5 | Shell | `S2-PhaseA $EA`, then at once `S2-PhaseB $EA`. Do not touch SFM in between. | `S2 PHASE A OK`, then `S2 G2 ACTIVE OK`. On any `STOP` line: §5 R1/R2/R3. |
-| A6 | SFM | **P3.** | — |
-| A7 | CPM | Same window, no reselection: select **`BodyTest`**, click **Apply Preset**. | A warning says the semantic scope is stale. Click **OK**. Do not reselect. Wait (up to 60 s) until the counts are shown again. **STOP → §5 R4** if no stale warning appears, if Apply reports success, if any other error appears, or if the counts do not return. |
-| A8 | SFM | **P4.** | — |
-| A9 | CPM | With `BodyTest` still selected, click **Apply Preset** again. | A success status, with no warning. **STOP → §5 R4** on any warning or error. |
-| A10 | SFM | **P5.** | — |
-| A11 | CPM/SFM | Close CPM with ✕. Close SFM **without saving**. | — |
-| A12 | Shell | `S2-Finalize $EA` | `S2 RESTORED EXACT G1`. Otherwise STOP (§5 R6). Do not begin S2-B without this line. |
+| A4 | CPM | Still under G1: select preset **`BodyTest`** in the Body list. **Do not apply it.** | The status reads "Ready to apply "BodyTest"." |
+| A5 | SFM | **P2.** | — |
+| A6 | Shell | `S2-PhaseA $EA2`, then at once `S2-PhaseB $EA2`. Do not touch SFM in between. **The no-interaction window starts now.** | `S2 PHASE A OK`, then `S2 G2 ACTIVE OK`. On any `STOP` line: §5 R1/R2/R3. |
+| A7 | SFM | **P3** (Scripts menu only; do not touch the CPM window). | — |
+| A8 | CPM | Click only the already-enabled **Apply Preset** button (`BodyTest` is still selected). Click nothing else first. | A warning says the semantic scope is stale. Click **OK**. Do not reselect. Let CPM rebuild on its own; wait (up to 60 s) until the counts are shown again. **STOP → §5 R4** if no stale warning appears, if Apply reports success, if any other error appears, or if the counts do not return. **STOP → §5 R7** if CPM visibly refreshed or reloaded at any point between A6 and this click. |
+| A9 | SFM | **P4.** | — |
+| A10 | CPM | Click **Apply Preset** again (the rebuild keeps `BodyTest` selected). | A successful G2 Apply: success status, no warning. **STOP → §5 R4** on any warning or error. |
+| A11 | SFM | **P5.** | — |
+| A12 | CPM/SFM | Close CPM with ✕. Close SFM **without saving**. | — |
+| A13 | Shell | `S2-Finalize $EA2` | `S2 RESTORED EXACT G1`. Otherwise STOP (§5 R6). S2-B stays blocked until S2-A_R2 is also adjudicated PASS (§6). |
 
 ## 4. S2-B — generation change during the Save prompt
 
 | Step | Where | Do | Visible expectation / STOP |
 |---|---|---|---|
-| B0 | Shell (SFM closed) | `S2-Prepare $EB` | `S2 BASELINE OK`. |
+| B0 | Shell (SFM closed) | Only after S2-A_R2 has passed (§1 rule 2): `S2-Prepare $EB` | `S2 BASELINE OK`. |
 | B1 | SFM | Start SFM fresh; open the same fixture. **P1.** | — |
 | B2 | CPM | Open CPM; choose **Mia**; wait for the counts. **P2.** | Counts appear. |
 | B3 | Shell | `Write-LibInventory (Join-Path $EB "library_1_before_prompt.txt")` | `LIBRARY INVENTORY WRITTEN …` |
@@ -315,9 +354,10 @@ Run a probe only when no CPM action or dialog is open.
 | R1 | Phase A fails **before** its plan record (`STOP: PHASE A FAILED BEFORE ANY AUTHORITY WRITE`) | Do not proceed. Do not touch or confirm CPM. Close SFM without saving. Run `S2-VerifyUntouched <campaign folder>`. It must print `S2 UNTOUCHED`; the plan record is written before any authority write, so none occurred. Stop Session 2 and report. If it prints a STOP, report and do not start SFM. |
 | R2 | Phase A fails **after** its plan record (`STOP: PHASE A FAILED AFTER ITS PLAN RECORD`) | Do not proceed. Do not touch or confirm CPM. Close SFM without saving. Run `S2-Finalize <campaign folder>`. It uses the plan record, plus the publication record if one was written. Require `S2 RESTORED EXACT G1`. Stop and report. |
 | R3 | Phase B fails, or activation does not prove the exact G2 SHA (`STOP: EXACT G2 ACTIVATION NOT PROVEN`) | Do not proceed. Do not touch or confirm CPM. Close SFM without saving. Run `S2-Finalize <campaign folder>`. Require `S2 RESTORED EXACT G1`. Stop and report. |
-| R4 | Any visible acceptance condition fails while G2 is active (A7, A9, B6, B7, B8) | Change nothing else. Close any CPM dialog with Cancel (B4/B6 prompts) or OK (warnings). Close CPM and SFM without saving. Run `S2-Finalize <campaign folder>`. Require `S2 RESTORED EXACT G1`. Preserve all evidence. Stop Session 2 and report. |
+| R4 | Any visible acceptance condition fails while G2 is active (A8, A10, B6, B7, B8) | Change nothing else. Close any CPM dialog with Cancel (B4/B6 prompts) or OK (warnings). Close CPM and SFM without saving. Run `S2-Finalize <campaign folder>`. Require `S2 RESTORED EXACT G1`. Preserve all evidence. Stop Session 2 and report. |
 | R5 | SFM crashes or hangs after Phase A | End the SFM process. Run `S2-Finalize <campaign folder>`. Require `S2 RESTORED EXACT G1`. Preserve evidence. Stop and report. |
 | R6 | `S2-Finalize` prints `STOP: RESTORATION IS NOT EXACT G1` | Do not start SFM. Do not begin or continue any campaign. Do not edit the authority folder or the Master by hand. Preserve the campaign folder and report. |
+| R7 | **Invalid S2-A run:** CPM visibly refreshes or reloads before the A8 stale Apply click (live), **or** adjudication finds `PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED` before the A8 `PROD_CPM_OPERATION_AUTHORIZATION_REFUSED` | Live: stop and click nothing further in CPM. Close CPM and SFM without saving. Run `S2-Finalize <campaign folder>`. Require `S2 RESTORED EXACT G1`. Classify the run as procedurally invalid (not PASS, not a product failure). Preserve the folder. A further attempt needs a new write-once campaign path; that campaign path is never reused. |
 
 ## 6. Post-campaign adjudication (reviewer; never during SFM manipulation)
 
@@ -328,8 +368,14 @@ Run a probe only when no CPM action or dialog is open.
 
 CPM log times are local `HH:MM:SS`; the tool records carry `wall_time` and `epoch`.
 
-### S2-A PASS — all of:
+### S2-A_R2 PASS — all of:
 
+0. **Valid run:**
+   - no `PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED`, `PROD_CPM_STALE_GENERATION_REBUILD` or
+     automatic `Select Model` occurs between G2 activation and the A8
+     `PROD_CPM_OPERATION_AUTHORIZATION_REFUSED`; otherwise the run is procedurally invalid (§5 R7);
+   - the campaign folder holds the full record set, including `post_switch_inventory.json`,
+     `restored_inventory.json` and `restore_compare.json`.
 1. **G1 scope:**
    - P2 `cpm.scope_generation_prefix` = `ac45e5c1cd45`;
    - the selection's `PROD_PROVIDER_HEALTH … sha256=u'ac45e5c1…'`.
@@ -338,31 +384,31 @@ CPM log times are local `HH:MM:SS`; the tool records carry `wall_time` and `epoc
    - the post-switch inventory shows Master G2 with both sidecars;
    - P3 still shows the G1 scope.
 3. **Stale G1 action rejected before mutation:**
-   - the A7 Apply logs
+   - the A8 Apply logs
      `PROD_CPM_OPERATION_AUTHORIZATION_REFUSED operation=u'Apply Preset' reason=u'generation-mismatch'`;
    - that operation has no `PROD_APPLY_UNDO_BEFORE`, no `apply.mutation_transaction`, no
      `PROD_APPLY outcome=` and no `phase=u'native-commit'`;
    - its `PROD_OPERATION_END` has `native_commit=None`.
 4. **Stale scope discarded, G2 authority acquired, G2 scope rebuilt and published:**
-   - the log has `PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED`, then
+   - **after** that refusal, the log has `PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED`, then
      `PROD_CPM_STALE_GENERATION_REBUILD`;
    - then exactly one automatic `Select Model` operation, with no operator reselection, carrying
      `PROD_PROVIDER_HEALTH status=u'healthy' … sha256=u'54413b6c…'` and
      `PROD_MODEL_SWITCH_STAGE stage='scope-ready'`;
    - P4 shows `scope_generation_prefix` `54413b6ca618`, the same `window.id`, broker
      `total_provider_opens` greater than at P2, and a G2 `cpm_compat_v1` view.
-5. **No replay:** between the A7 refusal and the A9 click there is no other `PROD_OPERATION_BEGIN …
+5. **No replay:** between the A8 refusal and the A10 click there is no other `PROD_OPERATION_BEGIN …
    'Apply Body Preset'` and no `PROD_APPLY` line.
 6. **Later deliberate G2 action succeeds:**
-   - the A9 Apply logs `PROD_CPM_OPERATION_AUTHORIZED … sha256=54413b6c…` and
+   - the A10 Apply logs `PROD_CPM_OPERATION_AUTHORIZED … sha256=54413b6c…` and
      `PROD_APPLY outcome='committed' … changed_sides≥1`;
    - the later committed G2 Apply is corroborating evidence only: it shows the intended `BodyTest`
-     state had not already been fully applied. The authoritative no-mutation evidence for A7 is
+     state had not already been fully applied. The authoritative no-mutation evidence for A8 is
      criterion 3: no Undo entry, mutation transaction, Apply outcome or native-commit phase, and
      `native_commit=None`.
 7. **Idle authority:** P2–P5 have leases 0 and open providers 0; one ProdWindow and one watcher.
 8. **Restoration:** `finalization_record.json` and `restore_compare.json` both report
-   `exact_match: true`.
+   `exact_match: true`, and `restored_inventory.json` shows Master `ac45e5c1…`.
 
 ### S2-B PASS — all of:
 
@@ -386,7 +432,7 @@ CPM log times are local `HH:MM:SS`; the tool records carry `wall_time` and `epoc
      `library_3_after_refusal.txt` are **byte-identical** (equal SHA-256);
    - no inventory line contains `S2 STALE SAVE`.
 4. **G2 scope rebuild without replay:**
-   - the same rebuild evidence as S2-A criterion 4 (P3 `54413b6ca618`, same `window.id`);
+   - the same rebuild evidence as S2-A_R2 criterion 4 (P3 `54413b6ca618`, same `window.id`);
    - no further `Save Current Body` operation before B8.
 5. **Later deliberate G2 Save succeeds:**
    - the B8 Save logs `PROD_CPM_OPERATION_AUTHORIZED operation=u'Save Preset' sha256=54413b6c…` and
@@ -421,7 +467,8 @@ CPM log times are local `HH:MM:SS`; the tool records carry `wall_time` and `epoc
 Return the following:
 - the probe JSONL;
 - the CPM log;
-- both campaign folders (`%PUBLIC%\Documents\CPM_Session2\S2A` and `…\S2B`);
+- the campaign folders (`%PUBLIC%\Documents\CPM_Session2\S2A_R2`, then `…\S2B`), plus the
+  preserved invalid `…\S2A` folder;
 - the shell output (copy the PowerShell window text);
 - one note per step: done / problem.
 
