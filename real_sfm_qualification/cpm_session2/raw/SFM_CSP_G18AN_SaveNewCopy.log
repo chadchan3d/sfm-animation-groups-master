@@ -1,0 +1,958 @@
+[04:03:52.803000] ========================================================================================================================
+[04:03:52.803000] SFM Character Preset Manager 0.2.0-rc7-g18an-save-new-copy
+[04:03:52.803000] ARCHITECTURE='generic selected-model context + Master scopes + v3 storage + readable legacy v2 + indexed Body Presets + reusable Clothing Fit'
+[04:03:52.803000] G18AN_ANIMSET_RENAME_RESILIENCE='Model path + checksum durable; Animation Set name mutable display metadata; ambiguity fails closed'
+[04:03:52.803000] G18AN_FOREIGN_MODAL_YIELD='Any foreign active Qt modal hides CPM after scene suspension; restores without focus steal'
+[04:03:52.804000] SIDECAR_STATUS='required generated SIDECAR; active Master SHA must match sidecar source generation; no TXT fallback'
+[04:03:52.804000] G18AN_WINDOW_POLICY='Qt.Dialog + WindowStaysOnTopHint; nonmodal; foreign-modal priority watcher=100ms'
+[04:03:52.804000] G18AN_RUN run_id=u'20261001-040352-pid19016' pid=19016 parity_oracle=False
+[04:03:52.805000] PROD_R15_MODULE name='chadchan3d_cpm_app' loader='cpm-private-loader-v1' state='ready' build_sha256='9a78fc9692cfa3cae5f3d8443a6c95537248c348d0cd4230c7ba744d99e77900' file='<SFM_GAME>\\usermod\\scripts\\ChadChan3D_CPM\\SFM_Character_Preset_Manager.py'
+[04:03:52.805000] G18AN_PROVIDER_FORCE_MODE=u'SIDECAR' parity_shortcut=u'Ctrl+Shift+P'
+[04:03:52.807000] PROD_WINDOW_ICON status='embedded-loaded' bytes=6218
+[04:03:52.838000] PROD_OPERATION_BEGIN id=1 kind=u'Refresh Models' context=None
+[04:03:52.838000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:03:52.842000] PROD_RESOURCE label=u'ACTION_BEGIN:Refresh Models' working_set_mb=2877.3671875 private_commit_mb=2924.22265625 pagefile_commit_mb=2924.22265625 handles=1153 gdi=1122 user=100 top_widgets=57 dialogs=2
+[04:03:52.853000] ASTRA_PERF area=u'manager' phase=u'enumerate-models' seconds=0.011000 candidates=2
+[04:03:52.858000] PROD_MODELS count=2 initial_index=0 candidates=[(u'models/fursonas/foxmccouldwm.mdl', -612190634, u'foxmccouldwm1', 40), (u'models/annoad/foxbase/mia/mia.mdl', 1153028609, u'mia1', 108)]
+[04:03:52.859000] ASTRA_PERF area=u'manager' phase=u'refresh-models-total' seconds=0.017000 candidates=2
+[04:03:52.860000] PROD_RESOURCE label=u'ACTION_END:Refresh Models' working_set_mb=2878.0234375 private_commit_mb=2924.8515625 pagefile_commit_mb=2924.8515625 handles=1153 gdi=1122 user=100 top_widgets=57 dialogs=2
+[04:03:52.860000] PROD_OPERATION_END id=1 kind=u'Refresh Models' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[04:03:52.860000] G18AN_OPERATION_PROVIDER_STATE event='end' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:03:52.860000] G18AN_MODAL_WATCHER_STARTED interval_ms=100 scene_pollers=0
+[04:03:52.895000] PROD_WINDOW_SHOWN=True initial_index=0
+[04:03:52.896000] MAINMENU_CALLBACK_RETURNING=True
+[04:03:52.896000] ========================================================================================================================
+[04:03:52.901000] PROD_OPERATION_EVENT_TURN id=1 kind=u'Refresh Models' run_id=u'20261001-040352-pid19016' pid=19016
+[04:03:52.902000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Refresh Models' working_set_mb=2878.42578125 private_commit_mb=2925.234375 pagefile_commit_mb=2925.234375 handles=1154 gdi=1129 user=107 top_widgets=57 dialogs=2
+[04:03:57.881000] PROD_OPERATION_BEGIN id=2 kind=u'Select Model' context=None
+[04:03:57.881000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:03:57.882000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2880.59765625 private_commit_mb=2927.15625 pagefile_commit_mb=2927.15625 handles=1154 gdi=1139 user=109 top_widgets=57 dialogs=2
+[04:03:57.883000] ASTRA_PERF area=u'model-select' phase=u'resolve-target' seconds=0.001000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[04:03:57.883000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} previous=None
+[04:03:57.884000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2880.59765625 private_commit_mb=2927.15625 pagefile_commit_mb=2927.15625 handles=1154 gdi=1139 user=109 top_widgets=57 dialogs=2
+[04:03:58.127000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:03:59.431000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93' requested_literals=108 master_unknown_literals=0
+[04:03:59.473000] ASTRA_PERF area=u'model-render' phase=u'semantic-scope' seconds=1.589000 model=u'models/annoad/foxbase/mia/mia.mdl' provider_health=u'healthy'
+[04:03:59.474000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2881.59765625 private_commit_mb=2928.15625 pagefile_commit_mb=2928.15625 handles=1154 gdi=1139 user=109 top_widgets=57 dialogs=2
+[04:03:59.474000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health=u'healthy' scope_ready=True
+[04:03:59.475000] PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:03:59.506000] ASTRA_PERF area=u'model-render' phase=u'discover-body-library' seconds=0.031000 items=4
+[04:03:59.507000] PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=4
+[04:03:59.507000] PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:03:59.516000] ASTRA_PERF area=u'model-render' phase=u'discover-expression-library' seconds=0.008000 items=1
+[04:03:59.516000] PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=1
+[04:03:59.516000] PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:03:59.517000] ASTRA_PERF area=u'model-render' phase=u'load-library-meta' seconds=0.001000 favorites=0
+[04:03:59.517000] PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} favorites=0
+[04:03:59.517000] ASTRA_PERF area=u'model-render' phase=u'validate-library-ids' seconds=0.000000
+[04:03:59.517000] PROD_MODEL_SWITCH_STAGE stage='library-validated' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:03:59.518000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:03:59.518000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=4
+[04:03:59.518000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=None
+[04:03:59.518000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=4 favorites=0
+[04:03:59.519000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[04:03:59.519000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[04:03:59.519000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d' source=u'v3' favorite=False
+[04:03:59.519000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d'
+[04:03:59.520000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83' source=u'v3' favorite=False
+[04:03:59.520000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83'
+[04:03:59.520000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837' source=u'v3' favorite=False
+[04:03:59.520000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837'
+[04:03:59.521000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0' source=u'v3' favorite=False
+[04:03:59.521000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0'
+[04:03:59.521000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=-1
+[04:03:59.521000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[04:03:59.522000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:03:59.539000] PROD_PRESET_UI stage='ready' kind=u'body'
+[04:03:59.540000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.021000 kind=u'body' source=4 rows=4
+[04:03:59.540000] ASTRA_PERF area=u'model-render' phase=u'publish-body-preset-ui' seconds=0.022000 items=4
+[04:03:59.540000] PROD_PRESET_UI stage='begin' kind=u'expression' source_count=1
+[04:03:59.540000] PROD_PRESET_UI stage='selection-captured' kind=u'expression' select_id=None
+[04:03:59.540000] PROD_PRESET_UI stage='rows-ready' kind=u'expression' row_count=1 favorites=0
+[04:03:59.541000] PROD_PRESET_UI stage='signals-blocked' kind=u'expression'
+[04:03:59.541000] PROD_PRESET_UI stage='cleared' kind=u'expression'
+[04:03:59.541000] PROD_PRESET_UI stage='item-begin' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b' source=u'v3' favorite=False
+[04:03:59.541000] PROD_PRESET_UI stage='item-ready' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b'
+[04:03:59.542000] PROD_PRESET_UI stage='selection-restored' kind=u'expression' selected_row=-1
+[04:03:59.542000] PROD_PRESET_UI stage='signals-restored' kind=u'expression'
+[04:03:59.542000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:03:59.561000] PROD_PRESET_UI stage='ready' kind=u'expression'
+[04:03:59.562000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.021000 kind=u'expression' source=1 rows=1
+[04:03:59.562000] ASTRA_PERF area=u'model-render' phase=u'publish-expression-preset-ui' seconds=0.022000 items=1
+[04:03:59.562000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} body=4 expression=1
+[04:03:59.563000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:03:59.581000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:03:59.598000] ASTRA_PERF area=u'model-render' phase=u'publish-semantic-ui' seconds=0.036000 unresolved=0 overrides=0 provider_health='healthy'
+[04:03:59.598000] PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health='healthy'
+[04:03:59.599000] CLOTHING_FIT_CANDIDATES source={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} same_folder=[] nearby=[] other=[{'checksum': -612190634, 'model': u'models/fursonas/foxmccouldwm.mdl', 'name': u'foxmccouldwm1'}]
+[04:03:59.600000] ASTRA_PERF area=u'clothing-fit' phase=u'discover-and-publish' seconds=0.002000 same=0 nearby=0 other=1
+[04:03:59.600000] ASTRA_PERF area=u'model-render' phase=u'publish-clothing-fit-ui' seconds=0.002000
+[04:03:59.600000] PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:03:59.601000] PROD_SELECTION model=u'models/annoad/foxbase/mia/mia.mdl' checksum=1153028609 animset=u'mia1' library_key=u'modelpath-sha256-v1:2e6533ed1490a151062789e6b14c12de451d06b050c317c64b7421b9aba545b6' expression=58 body=46 other=4 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[04:03:59.601000] ASTRA_PERF area=u'model-render' phase=u'render-total' seconds=1.718000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[04:03:59.601000] G18AN_LIVE_SELECTION_PROVIDER_STATE model=u'models/annoad/foxbase/mia/mia.mdl' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:03:59.601000] ASTRA_PERF area=u'model-select' phase=u'select-total' seconds=1.719000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[04:03:59.602000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2881.71875 private_commit_mb=2928.40625 pagefile_commit_mb=2928.40625 handles=1154 gdi=1139 user=109 top_widgets=57 dialogs=2
+[04:03:59.602000] PROD_OPERATION_END id=2 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[04:03:59.602000] G18AN_OPERATION_PROVIDER_STATE event='end' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:03:59.613000] PROD_OPERATION_EVENT_TURN id=2 kind=u'Select Model' run_id=u'20261001-040352-pid19016' pid=19016
+[04:03:59.614000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2881.71875 private_commit_mb=2928.40625 pagefile_commit_mb=2928.40625 handles=1154 gdi=1139 user=110 top_widgets=57 dialogs=2
+[04:04:12.652000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:04:12.671000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:04:13.089000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:04:13.109000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:04:16.160000] PROD_OPERATION_BEGIN id=3 kind=u'Apply Body Preset' context={'animset_id': (u'DmeAnimationSet', u'mia1', 2610, 399103848L), 'model_instance_id': (u'DmeGameModel', u'mia_GameModel', 2611, 4264689992L), 'document_file_id': 0, 'library_identity': {'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}, 'shot_id': (u'DmeFilmClip', u'shot3', 800, 4270588420L)}
+[04:04:16.160000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=3 kind=u'Apply Body Preset' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:04:16.161000] PROD_RESOURCE label=u'ACTION_BEGIN:Apply Body Preset' working_set_mb=2881.75390625 private_commit_mb=2928.40625 pagefile_commit_mb=2928.40625 handles=1154 gdi=1139 user=107 top_widgets=57 dialogs=2
+[04:04:16.165000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:04:16.185000] PROD_CPM_OPERATION_AUTHORIZED operation=u'Apply Preset' sha256=ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93 kind=u'body' membership=46
+[04:04:16.195000] PROD_PERF phase=u'apply.preflight.cached_scope_live_bindings' seconds=0.030000 count=46
+[04:04:16.197000] PROD_PERF phase=u'apply.preflight.flex_plan' seconds=0.002000 changed_sides=3
+[04:04:16.209000] PROD_PERF phase=u'bone_index.enumerate' seconds=0.011000 controls=314 animset_controls=314 channels=499 groups=42 operators=36
+[04:04:16.233000] PROD_PERF phase=u'bone_index.build_native_bones' seconds=0.005000 bones=150
+[04:04:16.234000] PROD_PERF phase=u'bone_index.total' seconds=0.037000 bones=150
+[04:04:16.234000] PROD_PERF phase=u'apply.preflight.index_snapshot' seconds=0.037000
+[04:04:16.235000] PROD_PERF phase=u'apply.preflight.indexed_bone_plan' seconds=0.001000 existing=0 create=0
+[04:04:16.235000] PROD_PERF phase=u'apply.preflight.total' seconds=0.071000 changed_flex=3 changed_existing=0 create_missing=0
+[04:04:16.235000] PROD_APPLY_UNDO_BEFORE={'count': 0, 'enabled': True, 'desc': ''}
+[04:04:16.238000] PROD_OPERATION_PHASE id=3 phase=u'native-commit' detail={'kind': u'body', 'model': u'models/annoad/foxbase/mia/mia.mdl', 'preset_id': u'preset-a14f8f79d05246269d0b711bf61ab88d'}
+[04:04:16.238000] PROD_PERF phase=u'apply.mutation_transaction' seconds=0.003000
+[04:04:16.259000] PROD_APPLY_REFRESH requested=0.0 before=0.0 after_set=0.0 after_process=0.0
+[04:04:16.260000] PROD_PERF phase=u'apply.postcommit.refresh' seconds=0.022000
+[04:04:16.271000] PROD_PERF phase=u'apply.postcommit.cached_scope_live_bindings' seconds=0.011000 count=46
+[04:04:16.273000] PROD_PERF phase=u'apply.postcommit.flex_verify' seconds=0.002000 ok=True
+[04:04:16.284000] PROD_PERF phase=u'bone_index.enumerate' seconds=0.010000 controls=314 animset_controls=314 channels=499 groups=42 operators=36
+[04:04:16.308000] PROD_PERF phase=u'bone_index.build_native_bones' seconds=0.005000 bones=150
+[04:04:16.309000] PROD_PERF phase=u'bone_index.total' seconds=0.034000 bones=150
+[04:04:16.309000] PROD_PERF phase=u'apply.postcommit.index_snapshot' seconds=0.035000
+[04:04:16.310000] PROD_PERF phase=u'apply.postcommit.indexed_bone_verify' seconds=0.001000 ok=True
+[04:04:16.310000] PROD_APPLY outcome='committed' model=u'models/annoad/foxbase/mia/mia.mdl' kind=u'body' preset=u'Body' changed_sides=3 changed_existing_scales=0 created_missing_scales=0
+[04:04:16.311000] PROD_PERF phase=u'apply.total' seconds=0.146000 outcome=committed
+[04:04:16.313000] ASTRA_PERF area=u'apply-ui' phase=u'production-apply-total' seconds=0.149000 kind=u'body' phase=u'committed-verified'
+[04:04:16.314000] PROD_RESOURCE label=u'ACTION_END:Apply Body Preset' working_set_mb=2884.15234375 private_commit_mb=2931.18359375 pagefile_commit_mb=2931.18359375 handles=1154 gdi=1139 user=108 top_widgets=57 dialogs=2
+[04:04:16.315000] PROD_OPERATION_END id=3 kind=u'Apply Body Preset' phase=u'UI_PUBLISH' native_commit={'kind': u'body', 'model': u'models/annoad/foxbase/mia/mia.mdl', 'preset_id': u'preset-a14f8f79d05246269d0b711bf61ab88d'} durable_commit=None
+[04:04:16.315000] G18AN_OPERATION_PROVIDER_STATE event='end' id=3 kind=u'Apply Body Preset' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:04:16.321000] PROD_OPERATION_EVENT_TURN id=3 kind=u'Apply Body Preset' run_id=u'20261001-040352-pid19016' pid=19016
+[04:04:16.322000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Apply Body Preset' working_set_mb=2884.15234375 private_commit_mb=2931.18359375 pagefile_commit_mb=2931.18359375 handles=1154 gdi=1139 user=108 top_widgets=57 dialogs=2
+[04:09:36.629000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:09:36.647000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:09:36.665000] PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED identity={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:09:36.666000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:09:36.687000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:09:36.705000] PROD_CPM_STALE_GENERATION_REBUILD identity={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:09:36.705000] PROD_OPERATION_BEGIN id=4 kind=u'Select Model' context=None
+[04:09:36.705000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=4 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:09:36.706000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2886.51171875 private_commit_mb=2933.12890625 pagefile_commit_mb=2933.12890625 handles=1155 gdi=1139 user=111 top_widgets=57 dialogs=2
+[04:09:36.707000] ASTRA_PERF area=u'model-select' phase=u'resolve-target' seconds=0.001000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[04:09:36.707000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} previous={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:09:36.708000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2886.51171875 private_commit_mb=2933.12890625 pagefile_commit_mb=2933.12890625 handles=1155 gdi=1139 user=111 top_widgets=57 dialogs=2
+[04:09:36.708000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:09:39.028000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7' requested_literals=108 master_unknown_literals=0
+[04:09:39.063000] ASTRA_PERF area=u'model-render' phase=u'semantic-scope' seconds=2.354000 model=u'models/annoad/foxbase/mia/mia.mdl' provider_health=u'healthy'
+[04:09:39.063000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2886.91015625 private_commit_mb=2934.57421875 pagefile_commit_mb=2934.57421875 handles=1155 gdi=1139 user=111 top_widgets=57 dialogs=2
+[04:09:39.064000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health=u'healthy' scope_ready=True
+[04:09:39.064000] PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:09:39.078000] ASTRA_PERF area=u'model-render' phase=u'discover-body-library' seconds=0.014000 items=4
+[04:09:39.078000] PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=4
+[04:09:39.079000] PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:09:39.080000] ASTRA_PERF area=u'model-render' phase=u'discover-expression-library' seconds=0.001000 items=1
+[04:09:39.080000] PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=1
+[04:09:39.080000] PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:09:39.081000] ASTRA_PERF area=u'model-render' phase=u'load-library-meta' seconds=0.000000 favorites=0
+[04:09:39.081000] PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} favorites=0
+[04:09:39.081000] ASTRA_PERF area=u'model-render' phase=u'validate-library-ids' seconds=0.000000
+[04:09:39.081000] PROD_MODEL_SWITCH_STAGE stage='library-validated' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:09:39.082000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:09:39.082000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=4
+[04:09:39.082000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=u'preset-806d1624e37f47b481125ff9255fac83'
+[04:09:39.082000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=4 favorites=0
+[04:09:39.082000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[04:09:39.083000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[04:09:39.083000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d' source=u'v3' favorite=False
+[04:09:39.083000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d'
+[04:09:39.083000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83' source=u'v3' favorite=False
+[04:09:39.084000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83'
+[04:09:39.084000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837' source=u'v3' favorite=False
+[04:09:39.084000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837'
+[04:09:39.084000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0' source=u'v3' favorite=False
+[04:09:39.085000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0'
+[04:09:39.086000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=1
+[04:09:39.086000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[04:09:39.087000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:09:39.107000] PROD_PRESET_UI stage='ready' kind=u'body'
+[04:09:39.107000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.025000 kind=u'body' source=4 rows=4
+[04:09:39.107000] ASTRA_PERF area=u'model-render' phase=u'publish-body-preset-ui' seconds=0.025000 items=4
+[04:09:39.108000] PROD_PRESET_UI stage='begin' kind=u'expression' source_count=1
+[04:09:39.108000] PROD_PRESET_UI stage='selection-captured' kind=u'expression' select_id=None
+[04:09:39.108000] PROD_PRESET_UI stage='rows-ready' kind=u'expression' row_count=1 favorites=0
+[04:09:39.109000] PROD_PRESET_UI stage='signals-blocked' kind=u'expression'
+[04:09:39.109000] PROD_PRESET_UI stage='cleared' kind=u'expression'
+[04:09:39.110000] PROD_PRESET_UI stage='item-begin' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b' source=u'v3' favorite=False
+[04:09:39.110000] PROD_PRESET_UI stage='item-ready' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b'
+[04:09:39.111000] PROD_PRESET_UI stage='selection-restored' kind=u'expression' selected_row=-1
+[04:09:39.111000] PROD_PRESET_UI stage='signals-restored' kind=u'expression'
+[04:09:39.112000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:09:39.132000] PROD_PRESET_UI stage='ready' kind=u'expression'
+[04:09:39.132000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.025000 kind=u'expression' source=1 rows=1
+[04:09:39.132000] ASTRA_PERF area=u'model-render' phase=u'publish-expression-preset-ui' seconds=0.025000 items=1
+[04:09:39.133000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} body=4 expression=1
+[04:09:39.133000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:09:39.152000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:09:39.169000] ASTRA_PERF area=u'model-render' phase=u'publish-semantic-ui' seconds=0.036000 unresolved=0 overrides=0 provider_health='healthy'
+[04:09:39.170000] PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health='healthy'
+[04:09:39.170000] CLOTHING_FIT_CANDIDATES source={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} same_folder=[] nearby=[] other=[{'checksum': -612190634, 'model': u'models/fursonas/foxmccouldwm.mdl', 'name': u'foxmccouldwm1'}]
+[04:09:39.171000] ASTRA_PERF area=u'clothing-fit' phase=u'discover-and-publish' seconds=0.001000 same=0 nearby=0 other=1
+[04:09:39.171000] ASTRA_PERF area=u'model-render' phase=u'publish-clothing-fit-ui' seconds=0.001000
+[04:09:39.171000] PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[04:09:39.172000] PROD_SELECTION model=u'models/annoad/foxbase/mia/mia.mdl' checksum=1153028609 animset=u'mia1' library_key=u'modelpath-sha256-v1:2e6533ed1490a151062789e6b14c12de451d06b050c317c64b7421b9aba545b6' expression=58 body=46 other=4 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[04:09:39.172000] ASTRA_PERF area=u'model-render' phase=u'render-total' seconds=2.465000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[04:09:39.172000] G18AN_LIVE_SELECTION_PROVIDER_STATE model=u'models/annoad/foxbase/mia/mia.mdl' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:09:39.173000] ASTRA_PERF area=u'model-select' phase=u'select-total' seconds=2.467000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[04:09:39.173000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2886.9296875 private_commit_mb=2934.57421875 pagefile_commit_mb=2934.57421875 handles=1155 gdi=1139 user=111 top_widgets=57 dialogs=2
+[04:09:39.174000] PROD_OPERATION_END id=4 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[04:09:39.174000] G18AN_OPERATION_PROVIDER_STATE event='end' id=4 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:09:39.187000] PROD_OPERATION_EVENT_TURN id=4 kind=u'Select Model' run_id=u'20261001-040352-pid19016' pid=19016
+[04:09:39.187000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2886.9296875 private_commit_mb=2934.57421875 pagefile_commit_mb=2934.57421875 handles=1155 gdi=1139 user=112 top_widgets=57 dialogs=2
+[04:09:41.618000] PROD_OPERATION_BEGIN id=5 kind=u'Apply Body Preset' context={'animset_id': (u'DmeAnimationSet', u'mia1', 2610, 399103848L), 'model_instance_id': (u'DmeGameModel', u'mia_GameModel', 2611, 4264689992L), 'document_file_id': 0, 'library_identity': {'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}, 'shot_id': (u'DmeFilmClip', u'shot3', 800, 4270588420L)}
+[04:09:41.619000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=5 kind=u'Apply Body Preset' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:09:41.620000] PROD_RESOURCE label=u'ACTION_BEGIN:Apply Body Preset' working_set_mb=2886.9296875 private_commit_mb=2934.57421875 pagefile_commit_mb=2934.57421875 handles=1155 gdi=1139 user=110 top_widgets=57 dialogs=2
+[04:09:41.624000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[04:09:41.643000] PROD_CPM_OPERATION_AUTHORIZED operation=u'Apply Preset' sha256=54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7 kind=u'body' membership=46
+[04:09:41.650000] PROD_PERF phase=u'apply.preflight.cached_scope_live_bindings' seconds=0.027000 count=46
+[04:09:41.653000] PROD_PERF phase=u'apply.preflight.flex_plan' seconds=0.002000 changed_sides=1
+[04:09:41.661000] PROD_PERF phase=u'bone_index.enumerate' seconds=0.008000 controls=314 animset_controls=314 channels=499 groups=42 operators=36
+[04:09:41.683000] PROD_PERF phase=u'bone_index.build_native_bones' seconds=0.006000 bones=150
+[04:09:41.684000] PROD_PERF phase=u'bone_index.total' seconds=0.030000 bones=150
+[04:09:41.684000] PROD_PERF phase=u'apply.preflight.index_snapshot' seconds=0.031000
+[04:09:41.685000] PROD_PERF phase=u'apply.preflight.indexed_bone_plan' seconds=0.001000 existing=0 create=0
+[04:09:41.685000] PROD_PERF phase=u'apply.preflight.total' seconds=0.062000 changed_flex=1 changed_existing=0 create_missing=0
+[04:09:41.685000] PROD_APPLY_UNDO_BEFORE={'count': 30, 'enabled': True, 'desc': 'Apply Body Preset'}
+[04:09:41.687000] PROD_OPERATION_PHASE id=5 phase=u'native-commit' detail={'kind': u'body', 'model': u'models/annoad/foxbase/mia/mia.mdl', 'preset_id': u'preset-806d1624e37f47b481125ff9255fac83'}
+[04:09:41.688000] PROD_PERF phase=u'apply.mutation_transaction' seconds=0.003000
+[04:09:41.708000] PROD_APPLY_REFRESH requested=0.0 before=0.0 after_set=0.0 after_process=0.0
+[04:09:41.709000] PROD_PERF phase=u'apply.postcommit.refresh' seconds=0.020000
+[04:09:41.719000] PROD_PERF phase=u'apply.postcommit.cached_scope_live_bindings' seconds=0.010000 count=46
+[04:09:41.722000] PROD_PERF phase=u'apply.postcommit.flex_verify' seconds=0.003000 ok=True
+[04:09:41.732000] PROD_PERF phase=u'bone_index.enumerate' seconds=0.010000 controls=314 animset_controls=314 channels=499 groups=42 operators=36
+[04:09:41.754000] PROD_PERF phase=u'bone_index.build_native_bones' seconds=0.004000 bones=150
+[04:09:41.754000] PROD_PERF phase=u'bone_index.total' seconds=0.032000 bones=150
+[04:09:41.754000] PROD_PERF phase=u'apply.postcommit.index_snapshot' seconds=0.032000
+[04:09:41.755000] PROD_PERF phase=u'apply.postcommit.indexed_bone_verify' seconds=0.001000 ok=True
+[04:09:41.756000] PROD_APPLY outcome='committed' model=u'models/annoad/foxbase/mia/mia.mdl' kind=u'body' preset=u'BodyTest' changed_sides=1 changed_existing_scales=0 created_missing_scales=0
+[04:09:41.756000] PROD_PERF phase=u'apply.total' seconds=0.133000 outcome=committed
+[04:09:41.759000] ASTRA_PERF area=u'apply-ui' phase=u'production-apply-total' seconds=0.136000 kind=u'body' phase=u'committed-verified'
+[04:09:41.760000] PROD_RESOURCE label=u'ACTION_END:Apply Body Preset' working_set_mb=2887.640625 private_commit_mb=2934.82421875 pagefile_commit_mb=2934.82421875 handles=1155 gdi=1139 user=111 top_widgets=57 dialogs=2
+[04:09:41.760000] PROD_OPERATION_END id=5 kind=u'Apply Body Preset' phase=u'UI_PUBLISH' native_commit={'kind': u'body', 'model': u'models/annoad/foxbase/mia/mia.mdl', 'preset_id': u'preset-806d1624e37f47b481125ff9255fac83'} durable_commit=None
+[04:09:41.761000] G18AN_OPERATION_PROVIDER_STATE event='end' id=5 kind=u'Apply Body Preset' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:09:41.767000] PROD_OPERATION_EVENT_TURN id=5 kind=u'Apply Body Preset' run_id=u'20261001-040352-pid19016' pid=19016
+[04:09:41.768000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Apply Body Preset' working_set_mb=2887.640625 private_commit_mb=2934.82421875 pagefile_commit_mb=2934.82421875 handles=1155 gdi=1139 user=112 top_widgets=57 dialogs=2
+[04:11:06.602000] G18AN_CLOSE_PROVIDER_STATE stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[04:11:06.602000] PROD_CLOSE_REQUEST operation=None fit_active=False fit_stage_running=False
+[04:11:06.602000] PROD_CLOSE_FINALIZED=True
+[17:49:55.318000] ========================================================================================================================
+[17:49:55.318000] SFM Character Preset Manager 0.2.0-rc7-g18an-save-new-copy
+[17:49:55.319000] ARCHITECTURE='generic selected-model context + Master scopes + v3 storage + readable legacy v2 + indexed Body Presets + reusable Clothing Fit'
+[17:49:55.319000] G18AN_ANIMSET_RENAME_RESILIENCE='Model path + checksum durable; Animation Set name mutable display metadata; ambiguity fails closed'
+[17:49:55.319000] G18AN_FOREIGN_MODAL_YIELD='Any foreign active Qt modal hides CPM after scene suspension; restores without focus steal'
+[17:49:55.320000] SIDECAR_STATUS='required generated SIDECAR; active Master SHA must match sidecar source generation; no TXT fallback'
+[17:49:55.320000] G18AN_WINDOW_POLICY='Qt.Dialog + WindowStaysOnTopHint; nonmodal; foreign-modal priority watcher=100ms'
+[17:49:55.320000] G18AN_RUN run_id=u'20261005-174955-pid25844' pid=25844 parity_oracle=False
+[17:49:55.320000] PROD_R15_MODULE name='chadchan3d_cpm_app' loader='cpm-private-loader-v1' state='ready' build_sha256='9a78fc9692cfa3cae5f3d8443a6c95537248c348d0cd4230c7ba744d99e77900' file='<SFM_GAME>\\usermod\\scripts\\ChadChan3D_CPM\\SFM_Character_Preset_Manager.py'
+[17:49:55.321000] G18AN_PROVIDER_FORCE_MODE=u'SIDECAR' parity_shortcut=u'Ctrl+Shift+P'
+[17:49:55.324000] PROD_WINDOW_ICON status='embedded-loaded' bytes=6218
+[17:49:55.354000] PROD_OPERATION_BEGIN id=1 kind=u'Refresh Models' context=None
+[17:49:55.354000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:49:55.357000] PROD_RESOURCE label=u'ACTION_BEGIN:Refresh Models' working_set_mb=2871.57421875 private_commit_mb=2918.421875 pagefile_commit_mb=2918.421875 handles=1155 gdi=1111 user=98 top_widgets=57 dialogs=2
+[17:49:55.371000] ASTRA_PERF area=u'manager' phase=u'enumerate-models' seconds=0.014000 candidates=2
+[17:49:55.377000] PROD_MODELS count=2 initial_index=0 candidates=[(u'models/fursonas/foxmccouldwm.mdl', -612190634, u'foxmccouldwm1', 40), (u'models/annoad/foxbase/mia/mia.mdl', 1153028609, u'mia1', 108)]
+[17:49:55.377000] ASTRA_PERF area=u'manager' phase=u'refresh-models-total' seconds=0.020000 candidates=2
+[17:49:55.377000] PROD_RESOURCE label=u'ACTION_END:Refresh Models' working_set_mb=2872.2421875 private_commit_mb=2919.0546875 pagefile_commit_mb=2919.0546875 handles=1155 gdi=1111 user=98 top_widgets=57 dialogs=2
+[17:49:55.378000] PROD_OPERATION_END id=1 kind=u'Refresh Models' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[17:49:55.378000] G18AN_OPERATION_PROVIDER_STATE event='end' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:49:55.378000] G18AN_MODAL_WATCHER_STARTED interval_ms=100 scene_pollers=0
+[17:49:55.405000] PROD_WINDOW_SHOWN=True initial_index=0
+[17:49:55.405000] MAINMENU_CALLBACK_RETURNING=True
+[17:49:55.405000] ========================================================================================================================
+[17:49:55.412000] PROD_OPERATION_EVENT_TURN id=1 kind=u'Refresh Models' run_id=u'20261005-174955-pid25844' pid=25844
+[17:49:55.413000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Refresh Models' working_set_mb=2872.65234375 private_commit_mb=2919.453125 pagefile_commit_mb=2919.453125 handles=1156 gdi=1118 user=105 top_widgets=57 dialogs=2
+[17:50:03.171000] PROD_OPERATION_BEGIN id=2 kind=u'Select Model' context=None
+[17:50:03.171000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:50:03.172000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2874.91796875 private_commit_mb=2921.49609375 pagefile_commit_mb=2921.49609375 handles=1156 gdi=1130 user=109 top_widgets=57 dialogs=2
+[17:50:03.172000] ASTRA_PERF area=u'model-select' phase=u'resolve-target' seconds=0.000000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[17:50:03.172000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} previous=None
+[17:50:03.173000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2874.91796875 private_commit_mb=2921.49609375 pagefile_commit_mb=2921.49609375 handles=1156 gdi=1130 user=109 top_widgets=57 dialogs=2
+[17:50:03.443000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:50:04.965000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93' requested_literals=108 master_unknown_literals=0
+[17:50:05.002000] ASTRA_PERF area=u'model-render' phase=u'semantic-scope' seconds=1.829000 model=u'models/annoad/foxbase/mia/mia.mdl' provider_health=u'healthy'
+[17:50:05.002000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2875.17578125 private_commit_mb=2922.671875 pagefile_commit_mb=2922.671875 handles=1156 gdi=1130 user=109 top_widgets=57 dialogs=2
+[17:50:05.003000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health=u'healthy' scope_ready=True
+[17:50:05.003000] PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:50:05.037000] ASTRA_PERF area=u'model-render' phase=u'discover-body-library' seconds=0.034000 items=4
+[17:50:05.037000] PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=4
+[17:50:05.037000] PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:50:05.045000] ASTRA_PERF area=u'model-render' phase=u'discover-expression-library' seconds=0.006000 items=1
+[17:50:05.045000] PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=1
+[17:50:05.045000] PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:50:05.045000] ASTRA_PERF area=u'model-render' phase=u'load-library-meta' seconds=0.000000 favorites=0
+[17:50:05.046000] PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} favorites=0
+[17:50:05.046000] ASTRA_PERF area=u'model-render' phase=u'validate-library-ids' seconds=0.000000
+[17:50:05.046000] PROD_MODEL_SWITCH_STAGE stage='library-validated' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:50:05.046000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:50:05.046000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=4
+[17:50:05.047000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=None
+[17:50:05.047000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=4 favorites=0
+[17:50:05.047000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[17:50:05.047000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[17:50:05.047000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d' source=u'v3' favorite=False
+[17:50:05.048000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d'
+[17:50:05.048000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83' source=u'v3' favorite=False
+[17:50:05.048000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83'
+[17:50:05.048000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837' source=u'v3' favorite=False
+[17:50:05.049000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837'
+[17:50:05.049000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0' source=u'v3' favorite=False
+[17:50:05.049000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0'
+[17:50:05.049000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=-1
+[17:50:05.050000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[17:50:05.050000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:50:05.067000] PROD_PRESET_UI stage='ready' kind=u'body'
+[17:50:05.067000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.021000 kind=u'body' source=4 rows=4
+[17:50:05.068000] ASTRA_PERF area=u'model-render' phase=u'publish-body-preset-ui' seconds=0.021000 items=4
+[17:50:05.068000] PROD_PRESET_UI stage='begin' kind=u'expression' source_count=1
+[17:50:05.068000] PROD_PRESET_UI stage='selection-captured' kind=u'expression' select_id=None
+[17:50:05.069000] PROD_PRESET_UI stage='rows-ready' kind=u'expression' row_count=1 favorites=0
+[17:50:05.069000] PROD_PRESET_UI stage='signals-blocked' kind=u'expression'
+[17:50:05.069000] PROD_PRESET_UI stage='cleared' kind=u'expression'
+[17:50:05.069000] PROD_PRESET_UI stage='item-begin' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b' source=u'v3' favorite=False
+[17:50:05.069000] PROD_PRESET_UI stage='item-ready' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b'
+[17:50:05.070000] PROD_PRESET_UI stage='selection-restored' kind=u'expression' selected_row=-1
+[17:50:05.070000] PROD_PRESET_UI stage='signals-restored' kind=u'expression'
+[17:50:05.071000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:50:05.090000] PROD_PRESET_UI stage='ready' kind=u'expression'
+[17:50:05.090000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.022000 kind=u'expression' source=1 rows=1
+[17:50:05.090000] ASTRA_PERF area=u'model-render' phase=u'publish-expression-preset-ui' seconds=0.022000 items=1
+[17:50:05.090000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} body=4 expression=1
+[17:50:05.091000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:50:05.109000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:50:05.126000] ASTRA_PERF area=u'model-render' phase=u'publish-semantic-ui' seconds=0.036000 unresolved=0 overrides=0 provider_health='healthy'
+[17:50:05.127000] PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health='healthy'
+[17:50:05.128000] CLOTHING_FIT_CANDIDATES source={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} same_folder=[] nearby=[] other=[{'checksum': -612190634, 'model': u'models/fursonas/foxmccouldwm.mdl', 'name': u'foxmccouldwm1'}]
+[17:50:05.128000] ASTRA_PERF area=u'clothing-fit' phase=u'discover-and-publish' seconds=0.001000 same=0 nearby=0 other=1
+[17:50:05.129000] ASTRA_PERF area=u'model-render' phase=u'publish-clothing-fit-ui' seconds=0.001000
+[17:50:05.129000] PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:50:05.130000] PROD_SELECTION model=u'models/annoad/foxbase/mia/mia.mdl' checksum=1153028609 animset=u'mia1' library_key=u'modelpath-sha256-v1:2e6533ed1490a151062789e6b14c12de451d06b050c317c64b7421b9aba545b6' expression=58 body=46 other=4 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[17:50:05.130000] ASTRA_PERF area=u'model-render' phase=u'render-total' seconds=1.958000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[17:50:05.130000] G18AN_LIVE_SELECTION_PROVIDER_STATE model=u'models/annoad/foxbase/mia/mia.mdl' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:50:05.130000] ASTRA_PERF area=u'model-select' phase=u'select-total' seconds=1.958000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[17:50:05.131000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2875.26953125 private_commit_mb=2922.671875 pagefile_commit_mb=2922.671875 handles=1156 gdi=1130 user=109 top_widgets=57 dialogs=2
+[17:50:05.131000] PROD_OPERATION_END id=2 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[17:50:05.132000] G18AN_OPERATION_PROVIDER_STATE event='end' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:50:05.144000] PROD_OPERATION_EVENT_TURN id=2 kind=u'Select Model' run_id=u'20261005-174955-pid25844' pid=25844
+[17:50:05.145000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2875.26953125 private_commit_mb=2922.671875 pagefile_commit_mb=2922.671875 handles=1156 gdi=1130 user=110 top_widgets=57 dialogs=2
+[17:50:14.701000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:50:14.719000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:50:16.166000] PROD_OPERATION_BEGIN id=3 kind=u'Apply Body Preset' context={'animset_id': (u'DmeAnimationSet', u'mia1', 2610, 391419416L), 'model_instance_id': (u'DmeGameModel', u'mia_GameModel', 2611, 4257546568L), 'document_file_id': 0, 'library_identity': {'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}, 'shot_id': (u'DmeFilmClip', u'shot3', 800, 4263444996L)}
+[17:50:16.166000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=3 kind=u'Apply Body Preset' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:50:16.167000] PROD_RESOURCE label=u'ACTION_BEGIN:Apply Body Preset' working_set_mb=2875.29296875 private_commit_mb=2922.671875 pagefile_commit_mb=2922.671875 handles=1156 gdi=1130 user=107 top_widgets=57 dialogs=2
+[17:50:16.171000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:50:16.191000] PROD_CPM_OPERATION_AUTHORIZED operation=u'Apply Preset' sha256=ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93 kind=u'body' membership=46
+[17:50:16.199000] PROD_PERF phase=u'apply.preflight.cached_scope_live_bindings' seconds=0.029000 count=46
+[17:50:16.203000] PROD_PERF phase=u'apply.preflight.flex_plan' seconds=0.004000 changed_sides=3
+[17:50:16.215000] PROD_PERF phase=u'bone_index.enumerate' seconds=0.010000 controls=314 animset_controls=314 channels=499 groups=42 operators=36
+[17:50:16.238000] PROD_PERF phase=u'bone_index.build_native_bones' seconds=0.006000 bones=150
+[17:50:16.238000] PROD_PERF phase=u'bone_index.total' seconds=0.035000 bones=150
+[17:50:16.238000] PROD_PERF phase=u'apply.preflight.index_snapshot' seconds=0.035000
+[17:50:16.240000] PROD_PERF phase=u'apply.preflight.indexed_bone_plan' seconds=0.000000 existing=0 create=0
+[17:50:16.240000] PROD_PERF phase=u'apply.preflight.total' seconds=0.070000 changed_flex=3 changed_existing=0 create_missing=0
+[17:50:16.241000] PROD_APPLY_UNDO_BEFORE={'count': 0, 'enabled': True, 'desc': ''}
+[17:50:16.245000] PROD_OPERATION_PHASE id=3 phase=u'native-commit' detail={'kind': u'body', 'model': u'models/annoad/foxbase/mia/mia.mdl', 'preset_id': u'preset-a14f8f79d05246269d0b711bf61ab88d'}
+[17:50:16.245000] PROD_PERF phase=u'apply.mutation_transaction' seconds=0.004000
+[17:50:16.267000] PROD_APPLY_REFRESH requested=0.0 before=0.0 after_set=0.0 after_process=0.0
+[17:50:16.267000] PROD_PERF phase=u'apply.postcommit.refresh' seconds=0.022000
+[17:50:16.277000] PROD_PERF phase=u'apply.postcommit.cached_scope_live_bindings' seconds=0.009000 count=46
+[17:50:16.278000] PROD_PERF phase=u'apply.postcommit.flex_verify' seconds=0.001000 ok=True
+[17:50:16.289000] PROD_PERF phase=u'bone_index.enumerate' seconds=0.010000 controls=314 animset_controls=314 channels=499 groups=42 operators=36
+[17:50:16.313000] PROD_PERF phase=u'bone_index.build_native_bones' seconds=0.004000 bones=150
+[17:50:16.313000] PROD_PERF phase=u'bone_index.total' seconds=0.035000 bones=150
+[17:50:16.313000] PROD_PERF phase=u'apply.postcommit.index_snapshot' seconds=0.035000
+[17:50:16.314000] PROD_PERF phase=u'apply.postcommit.indexed_bone_verify' seconds=0.001000 ok=True
+[17:50:16.315000] PROD_APPLY outcome='committed' model=u'models/annoad/foxbase/mia/mia.mdl' kind=u'body' preset=u'Body' changed_sides=3 changed_existing_scales=0 created_missing_scales=0
+[17:50:16.315000] PROD_PERF phase=u'apply.total' seconds=0.145000 outcome=committed
+[17:50:16.317000] ASTRA_PERF area=u'apply-ui' phase=u'production-apply-total' seconds=0.147000 kind=u'body' phase=u'committed-verified'
+[17:50:16.318000] PROD_RESOURCE label=u'ACTION_END:Apply Body Preset' working_set_mb=2878.07421875 private_commit_mb=2925.6875 pagefile_commit_mb=2925.6875 handles=1156 gdi=1130 user=107 top_widgets=57 dialogs=2
+[17:50:16.318000] PROD_OPERATION_END id=3 kind=u'Apply Body Preset' phase=u'UI_PUBLISH' native_commit={'kind': u'body', 'model': u'models/annoad/foxbase/mia/mia.mdl', 'preset_id': u'preset-a14f8f79d05246269d0b711bf61ab88d'} durable_commit=None
+[17:50:16.318000] G18AN_OPERATION_PROVIDER_STATE event='end' id=3 kind=u'Apply Body Preset' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:50:16.325000] PROD_OPERATION_EVENT_TURN id=3 kind=u'Apply Body Preset' run_id=u'20261005-174955-pid25844' pid=25844
+[17:50:16.325000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Apply Body Preset' working_set_mb=2878.07421875 private_commit_mb=2925.6875 pagefile_commit_mb=2925.6875 handles=1156 gdi=1130 user=107 top_widgets=57 dialogs=2
+[17:51:46.564000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:51:46.588000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:56:10.858000] PROD_OPERATION_BEGIN id=4 kind=u'Apply Body Preset' context={'animset_id': (u'DmeAnimationSet', u'mia1', 2610, 391419416L), 'model_instance_id': (u'DmeGameModel', u'mia_GameModel', 2611, 4257546568L), 'document_file_id': 0, 'library_identity': {'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}, 'shot_id': (u'DmeFilmClip', u'shot3', 800, 4263444996L)}
+[17:56:10.858000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=4 kind=u'Apply Body Preset' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:56:10.859000] PROD_RESOURCE label=u'ACTION_BEGIN:Apply Body Preset' working_set_mb=2883.16015625 private_commit_mb=2930.78125 pagefile_commit_mb=2930.78125 handles=1158 gdi=1133 user=112 top_widgets=57 dialogs=2
+[17:56:10.865000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:56:15.356000] PROD_CPM_OPERATION_AUTHORIZATION_REFUSED operation=u'Apply Preset' reason=u'generation-mismatch'
+[17:56:15.356000] PROD_ACTION_ERROR label='Apply Body Preset' error=RuntimeError("The selected model's semantic scope is stale. Reselect the model.",)
+[17:56:15.360000] Traceback (most recent call last):
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 30370, in guard
+    result = fn()
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 33389, in work
+    else None
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 27796, in prod_apply
+    u"Apply Preset",
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 18856, in prod_cpm_authorize_operation
+    raise failure[0](failure[1])
+RuntimeError: The selected model's semantic scope is stale. Reselect the model.
+
+[17:57:17.461000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:57:17.484000] PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED identity={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:57:17.485000] PROD_RESOURCE label=u'ACTION_END:Apply Body Preset' working_set_mb=2884.10546875 private_commit_mb=2932.20703125 pagefile_commit_mb=2932.20703125 handles=1166 gdi=1145 user=122 top_widgets=58 dialogs=3
+[17:57:17.485000] PROD_OPERATION_END id=4 kind=u'Apply Body Preset' phase=u'BEGIN' native_commit=None durable_commit=None
+[17:57:17.485000] G18AN_OPERATION_PROVIDER_STATE event='end' id=4 kind=u'Apply Body Preset' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:57:17.495000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:57:17.517000] PROD_CPM_STALE_GENERATION_REBUILD identity={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:57:17.518000] PROD_OPERATION_BEGIN id=5 kind=u'Select Model' context=None
+[17:57:17.518000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=5 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:57:17.519000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2883.94921875 private_commit_mb=2932.046875 pagefile_commit_mb=2932.046875 handles=1166 gdi=1137 user=118 top_widgets=57 dialogs=2
+[17:57:17.519000] ASTRA_PERF area=u'model-select' phase=u'resolve-target' seconds=0.000000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[17:57:17.519000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} previous={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:57:17.520000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2883.94921875 private_commit_mb=2932.046875 pagefile_commit_mb=2932.046875 handles=1166 gdi=1137 user=118 top_widgets=57 dialogs=2
+[17:57:17.520000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:57:19.862000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7' requested_literals=108 master_unknown_literals=0
+[17:57:19.899000] ASTRA_PERF area=u'model-render' phase=u'semantic-scope' seconds=2.378000 model=u'models/annoad/foxbase/mia/mia.mdl' provider_health=u'healthy'
+[17:57:19.899000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2884.0 private_commit_mb=2932.3203125 pagefile_commit_mb=2932.3203125 handles=1166 gdi=1137 user=118 top_widgets=57 dialogs=2
+[17:57:19.900000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health=u'healthy' scope_ready=True
+[17:57:19.900000] PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:57:19.912000] ASTRA_PERF area=u'model-render' phase=u'discover-body-library' seconds=0.012000 items=4
+[17:57:19.913000] PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=4
+[17:57:19.913000] PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:57:19.914000] ASTRA_PERF area=u'model-render' phase=u'discover-expression-library' seconds=0.001000 items=1
+[17:57:19.915000] PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=1
+[17:57:19.915000] PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:57:19.915000] ASTRA_PERF area=u'model-render' phase=u'load-library-meta' seconds=0.000000 favorites=0
+[17:57:19.915000] PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} favorites=0
+[17:57:19.916000] ASTRA_PERF area=u'model-render' phase=u'validate-library-ids' seconds=0.000000
+[17:57:19.916000] PROD_MODEL_SWITCH_STAGE stage='library-validated' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:57:19.916000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:57:19.916000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=4
+[17:57:19.917000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=u'preset-806d1624e37f47b481125ff9255fac83'
+[17:57:19.917000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=4 favorites=0
+[17:57:19.917000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[17:57:19.918000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[17:57:19.918000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d' source=u'v3' favorite=False
+[17:57:19.918000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d'
+[17:57:19.918000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83' source=u'v3' favorite=False
+[17:57:19.918000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83'
+[17:57:19.919000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837' source=u'v3' favorite=False
+[17:57:19.919000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837'
+[17:57:19.919000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0' source=u'v3' favorite=False
+[17:57:19.919000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0'
+[17:57:19.920000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=1
+[17:57:19.921000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[17:57:19.921000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:57:19.938000] PROD_PRESET_UI stage='ready' kind=u'body'
+[17:57:19.938000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.022000 kind=u'body' source=4 rows=4
+[17:57:19.938000] ASTRA_PERF area=u'model-render' phase=u'publish-body-preset-ui' seconds=0.022000 items=4
+[17:57:19.939000] PROD_PRESET_UI stage='begin' kind=u'expression' source_count=1
+[17:57:19.939000] PROD_PRESET_UI stage='selection-captured' kind=u'expression' select_id=None
+[17:57:19.939000] PROD_PRESET_UI stage='rows-ready' kind=u'expression' row_count=1 favorites=0
+[17:57:19.939000] PROD_PRESET_UI stage='signals-blocked' kind=u'expression'
+[17:57:19.940000] PROD_PRESET_UI stage='cleared' kind=u'expression'
+[17:57:19.940000] PROD_PRESET_UI stage='item-begin' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b' source=u'v3' favorite=False
+[17:57:19.940000] PROD_PRESET_UI stage='item-ready' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b'
+[17:57:19.940000] PROD_PRESET_UI stage='selection-restored' kind=u'expression' selected_row=-1
+[17:57:19.941000] PROD_PRESET_UI stage='signals-restored' kind=u'expression'
+[17:57:19.942000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:57:19.959000] PROD_PRESET_UI stage='ready' kind=u'expression'
+[17:57:19.959000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.020000 kind=u'expression' source=1 rows=1
+[17:57:19.959000] ASTRA_PERF area=u'model-render' phase=u'publish-expression-preset-ui' seconds=0.020000 items=1
+[17:57:19.960000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} body=4 expression=1
+[17:57:19.961000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:57:19.979000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:57:19.999000] ASTRA_PERF area=u'model-render' phase=u'publish-semantic-ui' seconds=0.039000 unresolved=0 overrides=0 provider_health='healthy'
+[17:57:20.000000] PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health='healthy'
+[17:57:20.000000] CLOTHING_FIT_CANDIDATES source={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} same_folder=[] nearby=[] other=[{'checksum': -612190634, 'model': u'models/fursonas/foxmccouldwm.mdl', 'name': u'foxmccouldwm1'}]
+[17:57:20.001000] ASTRA_PERF area=u'clothing-fit' phase=u'discover-and-publish' seconds=0.001000 same=0 nearby=0 other=1
+[17:57:20.001000] ASTRA_PERF area=u'model-render' phase=u'publish-clothing-fit-ui' seconds=0.001000
+[17:57:20.001000] PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[17:57:20.002000] PROD_SELECTION model=u'models/annoad/foxbase/mia/mia.mdl' checksum=1153028609 animset=u'mia1' library_key=u'modelpath-sha256-v1:2e6533ed1490a151062789e6b14c12de451d06b050c317c64b7421b9aba545b6' expression=58 body=46 other=4 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[17:57:20.002000] ASTRA_PERF area=u'model-render' phase=u'render-total' seconds=2.483000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[17:57:20.002000] G18AN_LIVE_SELECTION_PROVIDER_STATE model=u'models/annoad/foxbase/mia/mia.mdl' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:57:20.003000] ASTRA_PERF area=u'model-select' phase=u'select-total' seconds=2.484000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[17:57:20.004000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2884.203125 private_commit_mb=2932.3203125 pagefile_commit_mb=2932.3203125 handles=1166 gdi=1137 user=118 top_widgets=57 dialogs=2
+[17:57:20.004000] PROD_OPERATION_END id=5 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[17:57:20.005000] G18AN_OPERATION_PROVIDER_STATE event='end' id=5 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:57:20.005000] PROD_OPERATION_EVENT_TURN id=4 kind=u'Apply Body Preset' run_id=u'20261005-174955-pid25844' pid=25844
+[17:57:20.006000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Apply Body Preset' working_set_mb=2884.203125 private_commit_mb=2932.3203125 pagefile_commit_mb=2932.3203125 handles=1166 gdi=1137 user=118 top_widgets=57 dialogs=2
+[17:57:20.025000] PROD_OPERATION_EVENT_TURN id=5 kind=u'Select Model' run_id=u'20261005-174955-pid25844' pid=25844
+[17:57:20.025000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2884.203125 private_commit_mb=2932.3203125 pagefile_commit_mb=2932.3203125 handles=1166 gdi=1137 user=119 top_widgets=57 dialogs=2
+[17:57:48.459000] PROD_OPERATION_BEGIN id=6 kind=u'Apply Body Preset' context={'animset_id': (u'DmeAnimationSet', u'mia1', 2610, 391419416L), 'model_instance_id': (u'DmeGameModel', u'mia_GameModel', 2611, 4257546568L), 'document_file_id': 0, 'library_identity': {'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}, 'shot_id': (u'DmeFilmClip', u'shot3', 800, 4263444996L)}
+[17:57:48.460000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=6 kind=u'Apply Body Preset' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:57:48.461000] PROD_RESOURCE label=u'ACTION_BEGIN:Apply Body Preset' working_set_mb=2884.2890625 private_commit_mb=2932.3359375 pagefile_commit_mb=2932.3359375 handles=1166 gdi=1137 user=117 top_widgets=57 dialogs=2
+[17:57:48.467000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[17:57:48.487000] PROD_CPM_OPERATION_AUTHORIZED operation=u'Apply Preset' sha256=54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7 kind=u'body' membership=46
+[17:57:48.497000] PROD_PERF phase=u'apply.preflight.cached_scope_live_bindings' seconds=0.031000 count=46
+[17:57:48.500000] PROD_PERF phase=u'apply.preflight.flex_plan' seconds=0.003000 changed_sides=1
+[17:57:48.511000] PROD_PERF phase=u'bone_index.enumerate' seconds=0.011000 controls=314 animset_controls=314 channels=499 groups=42 operators=36
+[17:57:48.537000] PROD_PERF phase=u'bone_index.build_native_bones' seconds=0.005000 bones=150
+[17:57:48.537000] PROD_PERF phase=u'bone_index.total' seconds=0.037000 bones=150
+[17:57:48.537000] PROD_PERF phase=u'apply.preflight.index_snapshot' seconds=0.037000
+[17:57:48.538000] PROD_PERF phase=u'apply.preflight.indexed_bone_plan' seconds=0.001000 existing=0 create=0
+[17:57:48.538000] PROD_PERF phase=u'apply.preflight.total' seconds=0.072000 changed_flex=1 changed_existing=0 create_missing=0
+[17:57:48.538000] PROD_APPLY_UNDO_BEFORE={'count': 30, 'enabled': True, 'desc': 'Apply Body Preset'}
+[17:57:48.540000] PROD_OPERATION_PHASE id=6 phase=u'native-commit' detail={'kind': u'body', 'model': u'models/annoad/foxbase/mia/mia.mdl', 'preset_id': u'preset-806d1624e37f47b481125ff9255fac83'}
+[17:57:48.541000] PROD_PERF phase=u'apply.mutation_transaction' seconds=0.002000
+[17:57:48.561000] PROD_APPLY_REFRESH requested=0.0 before=0.0 after_set=0.0 after_process=0.0
+[17:57:48.562000] PROD_PERF phase=u'apply.postcommit.refresh' seconds=0.021000
+[17:57:48.571000] PROD_PERF phase=u'apply.postcommit.cached_scope_live_bindings' seconds=0.009000 count=46
+[17:57:48.573000] PROD_PERF phase=u'apply.postcommit.flex_verify' seconds=0.001000 ok=True
+[17:57:48.582000] PROD_PERF phase=u'bone_index.enumerate' seconds=0.009000 controls=314 animset_controls=314 channels=499 groups=42 operators=36
+[17:57:48.611000] PROD_PERF phase=u'bone_index.build_native_bones' seconds=0.009000 bones=150
+[17:57:48.612000] PROD_PERF phase=u'bone_index.total' seconds=0.038000 bones=150
+[17:57:48.612000] PROD_PERF phase=u'apply.postcommit.index_snapshot' seconds=0.039000
+[17:57:48.613000] PROD_PERF phase=u'apply.postcommit.indexed_bone_verify' seconds=0.001000 ok=True
+[17:57:48.613000] PROD_APPLY outcome='committed' model=u'models/annoad/foxbase/mia/mia.mdl' kind=u'body' preset=u'BodyTest' changed_sides=1 changed_existing_scales=0 created_missing_scales=0
+[17:57:48.613000] PROD_PERF phase=u'apply.total' seconds=0.147000 outcome=committed
+[17:57:48.617000] ASTRA_PERF area=u'apply-ui' phase=u'production-apply-total' seconds=0.150000 kind=u'body' phase=u'committed-verified'
+[17:57:48.618000] PROD_RESOURCE label=u'ACTION_END:Apply Body Preset' working_set_mb=2885.82421875 private_commit_mb=2932.58984375 pagefile_commit_mb=2932.58984375 handles=1166 gdi=1137 user=117 top_widgets=57 dialogs=2
+[17:57:48.618000] PROD_OPERATION_END id=6 kind=u'Apply Body Preset' phase=u'UI_PUBLISH' native_commit={'kind': u'body', 'model': u'models/annoad/foxbase/mia/mia.mdl', 'preset_id': u'preset-806d1624e37f47b481125ff9255fac83'} durable_commit=None
+[17:57:48.619000] G18AN_OPERATION_PROVIDER_STATE event='end' id=6 kind=u'Apply Body Preset' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[17:57:48.625000] PROD_OPERATION_EVENT_TURN id=6 kind=u'Apply Body Preset' run_id=u'20261005-174955-pid25844' pid=25844
+[17:57:48.626000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Apply Body Preset' working_set_mb=2886.82421875 private_commit_mb=2933.58984375 pagefile_commit_mb=2933.58984375 handles=1166 gdi=1137 user=118 top_widgets=57 dialogs=2
+[18:01:17.648000] G18AN_CLOSE_PROVIDER_STATE stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:01:17.649000] PROD_CLOSE_REQUEST operation=None fit_active=False fit_stage_running=False
+[18:01:17.649000] PROD_CLOSE_FINALIZED=True
+[18:24:42.850000] ========================================================================================================================
+[18:24:42.850000] SFM Character Preset Manager 0.2.0-rc7-g18an-save-new-copy
+[18:24:42.850000] ARCHITECTURE='generic selected-model context + Master scopes + v3 storage + readable legacy v2 + indexed Body Presets + reusable Clothing Fit'
+[18:24:42.851000] G18AN_ANIMSET_RENAME_RESILIENCE='Model path + checksum durable; Animation Set name mutable display metadata; ambiguity fails closed'
+[18:24:42.851000] G18AN_FOREIGN_MODAL_YIELD='Any foreign active Qt modal hides CPM after scene suspension; restores without focus steal'
+[18:24:42.851000] SIDECAR_STATUS='required generated SIDECAR; active Master SHA must match sidecar source generation; no TXT fallback'
+[18:24:42.852000] G18AN_WINDOW_POLICY='Qt.Dialog + WindowStaysOnTopHint; nonmodal; foreign-modal priority watcher=100ms'
+[18:24:42.852000] G18AN_RUN run_id=u'20261005-182442-pid17996' pid=17996 parity_oracle=False
+[18:24:42.852000] PROD_R15_MODULE name='chadchan3d_cpm_app' loader='cpm-private-loader-v1' state='ready' build_sha256='9a78fc9692cfa3cae5f3d8443a6c95537248c348d0cd4230c7ba744d99e77900' file='<SFM_GAME>\\usermod\\scripts\\ChadChan3D_CPM\\SFM_Character_Preset_Manager.py'
+[18:24:42.853000] G18AN_PROVIDER_FORCE_MODE=u'SIDECAR' parity_shortcut=u'Ctrl+Shift+P'
+[18:24:42.856000] PROD_WINDOW_ICON status='embedded-loaded' bytes=6218
+[18:24:42.885000] PROD_OPERATION_BEGIN id=1 kind=u'Refresh Models' context=None
+[18:24:42.886000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:24:42.889000] PROD_RESOURCE label=u'ACTION_BEGIN:Refresh Models' working_set_mb=2871.4453125 private_commit_mb=2918.35546875 pagefile_commit_mb=2918.35546875 handles=1158 gdi=1109 user=93 top_widgets=57 dialogs=2
+[18:24:42.900000] ASTRA_PERF area=u'manager' phase=u'enumerate-models' seconds=0.011000 candidates=2
+[18:24:42.905000] PROD_MODELS count=2 initial_index=0 candidates=[(u'models/fursonas/foxmccouldwm.mdl', -612190634, u'foxmccouldwm1', 40), (u'models/annoad/foxbase/mia/mia.mdl', 1153028609, u'mia1', 108)]
+[18:24:42.905000] ASTRA_PERF area=u'manager' phase=u'refresh-models-total' seconds=0.016000 candidates=2
+[18:24:42.906000] PROD_RESOURCE label=u'ACTION_END:Refresh Models' working_set_mb=2872.1640625 private_commit_mb=2918.83984375 pagefile_commit_mb=2918.83984375 handles=1158 gdi=1109 user=93 top_widgets=57 dialogs=2
+[18:24:42.906000] PROD_OPERATION_END id=1 kind=u'Refresh Models' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[18:24:42.906000] G18AN_OPERATION_PROVIDER_STATE event='end' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:24:42.907000] G18AN_MODAL_WATCHER_STARTED interval_ms=100 scene_pollers=0
+[18:24:42.940000] PROD_WINDOW_SHOWN=True initial_index=0
+[18:24:42.941000] MAINMENU_CALLBACK_RETURNING=True
+[18:24:42.941000] ========================================================================================================================
+[18:24:42.948000] PROD_OPERATION_EVENT_TURN id=1 kind=u'Refresh Models' run_id=u'20261005-182442-pid17996' pid=17996
+[18:24:42.949000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Refresh Models' working_set_mb=2872.640625 private_commit_mb=2919.2890625 pagefile_commit_mb=2919.2890625 handles=1159 gdi=1116 user=100 top_widgets=57 dialogs=2
+[18:24:46.850000] PROD_OPERATION_BEGIN id=2 kind=u'Select Model' context=None
+[18:24:46.850000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:24:46.851000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2874.84765625 private_commit_mb=2921.21484375 pagefile_commit_mb=2921.21484375 handles=1159 gdi=1126 user=102 top_widgets=57 dialogs=2
+[18:24:46.851000] ASTRA_PERF area=u'model-select' phase=u'resolve-target' seconds=0.000000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[18:24:46.852000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} previous=None
+[18:24:46.852000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2874.73828125 private_commit_mb=2921.21484375 pagefile_commit_mb=2921.21484375 handles=1159 gdi=1126 user=102 top_widgets=57 dialogs=2
+[18:24:46.878000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:24:48.114000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93' requested_literals=108 master_unknown_literals=0
+[18:24:48.148000] ASTRA_PERF area=u'model-render' phase=u'semantic-scope' seconds=1.296000 model=u'models/annoad/foxbase/mia/mia.mdl' provider_health=u'healthy'
+[18:24:48.149000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2876.05078125 private_commit_mb=2923.90625 pagefile_commit_mb=2923.90625 handles=1159 gdi=1126 user=102 top_widgets=57 dialogs=2
+[18:24:48.149000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health=u'healthy' scope_ready=True
+[18:24:48.149000] PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:24:48.161000] ASTRA_PERF area=u'model-render' phase=u'discover-body-library' seconds=0.011000 items=4
+[18:24:48.162000] PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=4
+[18:24:48.162000] PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:24:48.163000] ASTRA_PERF area=u'model-render' phase=u'discover-expression-library' seconds=0.001000 items=1
+[18:24:48.164000] PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=1
+[18:24:48.164000] PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:24:48.164000] ASTRA_PERF area=u'model-render' phase=u'load-library-meta' seconds=0.000000 favorites=0
+[18:24:48.164000] PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} favorites=0
+[18:24:48.164000] ASTRA_PERF area=u'model-render' phase=u'validate-library-ids' seconds=0.000000
+[18:24:48.165000] PROD_MODEL_SWITCH_STAGE stage='library-validated' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:24:48.165000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:24:48.165000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=4
+[18:24:48.165000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=None
+[18:24:48.165000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=4 favorites=0
+[18:24:48.166000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[18:24:48.166000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[18:24:48.166000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d' source=u'v3' favorite=False
+[18:24:48.166000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d'
+[18:24:48.167000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83' source=u'v3' favorite=False
+[18:24:48.167000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83'
+[18:24:48.167000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837' source=u'v3' favorite=False
+[18:24:48.167000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837'
+[18:24:48.168000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0' source=u'v3' favorite=False
+[18:24:48.168000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0'
+[18:24:48.168000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=-1
+[18:24:48.168000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[18:24:48.169000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:24:48.186000] PROD_PRESET_UI stage='ready' kind=u'body'
+[18:24:48.186000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.021000 kind=u'body' source=4 rows=4
+[18:24:48.187000] ASTRA_PERF area=u'model-render' phase=u'publish-body-preset-ui' seconds=0.021000 items=4
+[18:24:48.187000] PROD_PRESET_UI stage='begin' kind=u'expression' source_count=1
+[18:24:48.187000] PROD_PRESET_UI stage='selection-captured' kind=u'expression' select_id=None
+[18:24:48.187000] PROD_PRESET_UI stage='rows-ready' kind=u'expression' row_count=1 favorites=0
+[18:24:48.188000] PROD_PRESET_UI stage='signals-blocked' kind=u'expression'
+[18:24:48.188000] PROD_PRESET_UI stage='cleared' kind=u'expression'
+[18:24:48.188000] PROD_PRESET_UI stage='item-begin' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b' source=u'v3' favorite=False
+[18:24:48.188000] PROD_PRESET_UI stage='item-ready' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b'
+[18:24:48.189000] PROD_PRESET_UI stage='selection-restored' kind=u'expression' selected_row=-1
+[18:24:48.189000] PROD_PRESET_UI stage='signals-restored' kind=u'expression'
+[18:24:48.190000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:24:48.207000] PROD_PRESET_UI stage='ready' kind=u'expression'
+[18:24:48.207000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.020000 kind=u'expression' source=1 rows=1
+[18:24:48.207000] ASTRA_PERF area=u'model-render' phase=u'publish-expression-preset-ui' seconds=0.020000 items=1
+[18:24:48.207000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} body=4 expression=1
+[18:24:48.208000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:24:48.227000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:24:48.245000] ASTRA_PERF area=u'model-render' phase=u'publish-semantic-ui' seconds=0.037000 unresolved=0 overrides=0 provider_health='healthy'
+[18:24:48.245000] PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health='healthy'
+[18:24:48.247000] CLOTHING_FIT_CANDIDATES source={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} same_folder=[] nearby=[] other=[{'checksum': -612190634, 'model': u'models/fursonas/foxmccouldwm.mdl', 'name': u'foxmccouldwm1'}]
+[18:24:48.247000] ASTRA_PERF area=u'clothing-fit' phase=u'discover-and-publish' seconds=0.002000 same=0 nearby=0 other=1
+[18:24:48.247000] ASTRA_PERF area=u'model-render' phase=u'publish-clothing-fit-ui' seconds=0.002000
+[18:24:48.247000] PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:24:48.248000] PROD_SELECTION model=u'models/annoad/foxbase/mia/mia.mdl' checksum=1153028609 animset=u'mia1' library_key=u'modelpath-sha256-v1:2e6533ed1490a151062789e6b14c12de451d06b050c317c64b7421b9aba545b6' expression=58 body=46 other=4 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[18:24:48.248000] ASTRA_PERF area=u'model-render' phase=u'render-total' seconds=1.396000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[18:24:48.248000] G18AN_LIVE_SELECTION_PROVIDER_STATE model=u'models/annoad/foxbase/mia/mia.mdl' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:24:48.248000] ASTRA_PERF area=u'model-select' phase=u'select-total' seconds=1.397000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[18:24:48.249000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2876.14453125 private_commit_mb=2923.90625 pagefile_commit_mb=2923.90625 handles=1159 gdi=1126 user=102 top_widgets=57 dialogs=2
+[18:24:48.249000] PROD_OPERATION_END id=2 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[18:24:48.249000] G18AN_OPERATION_PROVIDER_STATE event='end' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:24:48.259000] PROD_OPERATION_EVENT_TURN id=2 kind=u'Select Model' run_id=u'20261005-182442-pid17996' pid=17996
+[18:24:48.260000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2876.14453125 private_commit_mb=2923.90625 pagefile_commit_mb=2923.90625 handles=1159 gdi=1126 user=103 top_widgets=57 dialogs=2
+[18:26:38.578000] PROD_OPERATION_BEGIN id=3 kind=u'Save Current Body' context={'animset_id': (u'DmeAnimationSet', u'mia1', 2610, 397699096L), 'model_instance_id': (u'DmeGameModel', u'mia_GameModel', 2611, 4260364616L), 'document_file_id': 0, 'library_identity': {'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}, 'shot_id': (u'DmeFilmClip', u'shot3', 800, 4266263044L)}
+[18:26:38.578000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=3 kind=u'Save Current Body' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:26:38.580000] PROD_RESOURCE label=u'ACTION_BEGIN:Save Current Body' working_set_mb=2876.34375 private_commit_mb=2924.03515625 pagefile_commit_mb=2924.03515625 handles=1160 gdi=1126 user=104 top_widgets=57 dialogs=2
+[18:26:38.581000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:26:39.763000] PROD_RESOURCE label=u'Q2_SAVE_POST_CONFIRM' working_set_mb=2876.69921875 private_commit_mb=2924.265625 pagefile_commit_mb=2924.265625 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.775000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'disk-inventory' seconds=0.012000 items=4
+[18:26:39.776000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:26:39.797000] PROD_CPM_OPERATION_AUTHORIZED operation=u'Save Preset' sha256=ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93 kind=u'body' membership=46
+[18:26:39.805000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'live-bindings' seconds=0.008000
+[18:26:39.807000] PROD_ACTION_TIMING action=u'Body Indexed Capture' phase=u'capture-flex-values' seconds=0.002000 controls=46
+[18:26:39.819000] PROD_PERF phase=u'bone_index.enumerate' seconds=0.011000 controls=314 animset_controls=314 channels=499 groups=42 operators=36
+[18:26:39.840000] PROD_PERF phase=u'bone_index.build_native_bones' seconds=0.005000 bones=150
+[18:26:39.840000] PROD_PERF phase=u'bone_index.total' seconds=0.032000 bones=150
+[18:26:39.840000] PROD_ACTION_TIMING action=u'Body Indexed Capture' phase=u'index-snapshot' seconds=0.032000 bones=150 channels=499
+[18:26:39.841000] PROD_RESOURCE label=u'Q2_INDEX_ACQUIRED' working_set_mb=2877.9453125 private_commit_mb=2925.37890625 pagefile_commit_mb=2925.37890625 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.841000] PROD_ACTION_TIMING action=u'Body Indexed Capture' phase=u'project-pure-bone-map' seconds=0.000000 records=150 existing_scaled=0
+[18:26:39.842000] PROD_RESOURCE label=u'Q2_INDEX_PROJECTED_LIVE' working_set_mb=2877.9609375 private_commit_mb=2925.37890625 pagefile_commit_mb=2925.37890625 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.843000] PROD_RESOURCE label=u'Q2_INDEX_RELEASED' working_set_mb=2877.96484375 private_commit_mb=2925.37890625 pagefile_commit_mb=2925.37890625 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.843000] PROD_ACTION_TIMING action=u'Body Indexed Capture' phase=u'total' seconds=0.035000
+[18:26:39.843000] PROD_RESOURCE label=u'Q2_BODY_CAPTURE_PURE_ONLY' working_set_mb=2877.96484375 private_commit_mb=2925.37890625 pagefile_commit_mb=2925.37890625 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.844000] PROD_ACTION_TIMING action=u'Body Indexed Capture' phase=u'snapshot-total' seconds=0.039000 controls=46 bones=150
+[18:26:39.844000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'capture-body-snapshot' seconds=0.039000 controls=46 records=150 existing_scaled=0
+[18:26:39.845000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'validate-captured-record' seconds=0.000000
+[18:26:39.846000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_PURE_VALIDATION' working_set_mb=2877.96484375 private_commit_mb=2925.37890625 pagefile_commit_mb=2925.37890625 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.859000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'ensure-library' seconds=0.012000
+[18:26:39.868000] PROD_OPERATION_PHASE id=3 phase=u'durable-commit' detail={'path': u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\mia--2e6533ed1490\\Body Presets\\S2 STALE SAVE--preset-afeef.json', 'kind': u'body', 'preset_id': u'preset-afeef964c750437cbd5866737ca61678'}
+[18:26:39.868000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'safe-write' seconds=0.008000
+[18:26:39.869000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_DURABLE_COMMIT' working_set_mb=2878.08984375 private_commit_mb=2925.68359375 pagefile_commit_mb=2925.68359375 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.876000] PROD_OPERATION_PHASE id=3 phase=u'durable-verified' detail={'path': u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\mia--2e6533ed1490\\Body Presets\\S2 STALE SAVE--preset-afeef.json', 'kind': u'body', 'preset_id': u'preset-afeef964c750437cbd5866737ca61678'}
+[18:26:39.876000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'readback-verify' seconds=0.006000
+[18:26:39.877000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_READBACK' working_set_mb=2878.09765625 private_commit_mb=2925.68359375 pagefile_commit_mb=2925.68359375 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.878000] PROD_SAVE=PASS model=u'models/annoad/foxbase/mia/mia.mdl' kind=u'body' name=u'S2 STALE SAVE' controls=46 bone_records=150 existing_scale_controls=0 path=u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\mia--2e6533ed1490\\Body Presets\\S2 STALE SAVE--preset-afeef.json' cached_semantic_scope=True indexed_body_capture=True q1_parity=False
+[18:26:39.878000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'total' seconds=0.116000
+[18:26:39.879000] PROD_ACTION_TIMING action=u'Save Preset UI' phase=u'production-save' seconds=0.116000
+[18:26:39.879000] PROD_RESOURCE label=u'SAVE_AFTER_PASS' working_set_mb=2878.09765625 private_commit_mb=2925.68359375 pagefile_commit_mb=2925.68359375 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.881000] ASTRA_PERF area=u'save-ui' phase=u'postwrite-read-validate' seconds=0.001000 kind=u'body'
+[18:26:39.883000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=5
+[18:26:39.884000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=u'preset-afeef964c750437cbd5866737ca61678'
+[18:26:39.884000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=5 favorites=0
+[18:26:39.884000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[18:26:39.885000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[18:26:39.885000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d' source=u'v3' favorite=False
+[18:26:39.885000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d'
+[18:26:39.885000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83' source=u'v3' favorite=False
+[18:26:39.885000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83'
+[18:26:39.886000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837' source=u'v3' favorite=False
+[18:26:39.886000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837'
+[18:26:39.886000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0' source=u'v3' favorite=False
+[18:26:39.886000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0'
+[18:26:39.886000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=4 preset=u'preset-afeef964c750437cbd5866737ca61678' source=u'v3' favorite=False
+[18:26:39.887000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=4 preset=u'preset-afeef964c750437cbd5866737ca61678'
+[18:26:39.888000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=4
+[18:26:39.888000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[18:26:39.888000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:26:39.906000] PROD_PRESET_UI stage='ready' kind=u'body'
+[18:26:39.907000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.024000 kind=u'body' source=5 rows=5
+[18:26:39.907000] ASTRA_PERF area=u'save-ui' phase=u'publish-updated-preset-list' seconds=0.024000 kind=u'body'
+[18:26:39.908000] ASTRA_PERF area=u'save-ui' phase=u'post-confirm-total' seconds=0.146000 kind=u'body'
+[18:26:39.908000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_UI_PUBLISH' working_set_mb=2878.1015625 private_commit_mb=2925.68359375 pagefile_commit_mb=2925.68359375 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.909000] PROD_SAVE_POSTWRITE_REFRESH=PASS kind=u'body' preset=u'preset-afeef964c750437cbd5866737ca61678' full_library_rediscovery=False semantic_scope_rebuild=False
+[18:26:39.910000] PROD_RESOURCE label=u'ACTION_END:Save Current Body' working_set_mb=2878.1015625 private_commit_mb=2925.68359375 pagefile_commit_mb=2925.68359375 handles=1166 gdi=1140 user=111 top_widgets=58 dialogs=3
+[18:26:39.910000] PROD_OPERATION_END id=3 kind=u'Save Current Body' phase=u'UI_PUBLISH' native_commit=None durable_commit={'path': u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\mia--2e6533ed1490\\Body Presets\\S2 STALE SAVE--preset-afeef.json', 'kind': u'body', 'preset_id': u'preset-afeef964c750437cbd5866737ca61678'}
+[18:26:39.910000] G18AN_OPERATION_PROVIDER_STATE event='end' id=3 kind=u'Save Current Body' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:26:39.920000] PROD_OPERATION_EVENT_TURN id=3 kind=u'Save Current Body' run_id=u'20261005-182442-pid17996' pid=17996
+[18:26:39.921000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Save Current Body' working_set_mb=2878.0234375 private_commit_mb=2925.60546875 pagefile_commit_mb=2925.60546875 handles=1166 gdi=1132 user=108 top_widgets=57 dialogs=2
+[18:27:37.786000] G18AN_CLOSE_PROVIDER_STATE stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:27:37.786000] PROD_CLOSE_REQUEST operation=None fit_active=False fit_stage_running=False
+[18:27:37.786000] PROD_CLOSE_FINALIZED=True
+[18:36:12.161000] ========================================================================================================================
+[18:36:12.162000] SFM Character Preset Manager 0.2.0-rc7-g18an-save-new-copy
+[18:36:12.162000] ARCHITECTURE='generic selected-model context + Master scopes + v3 storage + readable legacy v2 + indexed Body Presets + reusable Clothing Fit'
+[18:36:12.162000] G18AN_ANIMSET_RENAME_RESILIENCE='Model path + checksum durable; Animation Set name mutable display metadata; ambiguity fails closed'
+[18:36:12.162000] G18AN_FOREIGN_MODAL_YIELD='Any foreign active Qt modal hides CPM after scene suspension; restores without focus steal'
+[18:36:12.162000] SIDECAR_STATUS='required generated SIDECAR; active Master SHA must match sidecar source generation; no TXT fallback'
+[18:36:12.163000] G18AN_WINDOW_POLICY='Qt.Dialog + WindowStaysOnTopHint; nonmodal; foreign-modal priority watcher=100ms'
+[18:36:12.163000] G18AN_RUN run_id=u'20261005-183612-pid23944' pid=23944 parity_oracle=False
+[18:36:12.163000] PROD_R15_MODULE name='chadchan3d_cpm_app' loader='cpm-private-loader-v1' state='ready' build_sha256='9a78fc9692cfa3cae5f3d8443a6c95537248c348d0cd4230c7ba744d99e77900' file='<SFM_GAME>\\usermod\\scripts\\ChadChan3D_CPM\\SFM_Character_Preset_Manager.py'
+[18:36:12.163000] G18AN_PROVIDER_FORCE_MODE=u'SIDECAR' parity_shortcut=u'Ctrl+Shift+P'
+[18:36:12.166000] PROD_WINDOW_ICON status='embedded-loaded' bytes=6218
+[18:36:12.198000] PROD_OPERATION_BEGIN id=1 kind=u'Refresh Models' context=None
+[18:36:12.198000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:36:12.201000] PROD_RESOURCE label=u'ACTION_BEGIN:Refresh Models' working_set_mb=2870.0546875 private_commit_mb=2914.90234375 pagefile_commit_mb=2914.90234375 handles=1153 gdi=1109 user=94 top_widgets=57 dialogs=2
+[18:36:12.216000] ASTRA_PERF area=u'manager' phase=u'enumerate-models' seconds=0.014000 candidates=2
+[18:36:12.221000] PROD_MODELS count=2 initial_index=0 candidates=[(u'models/fursonas/foxmccouldwm.mdl', -612190634, u'foxmccouldwm1', 40), (u'models/annoad/foxbase/mia/mia.mdl', 1153028609, u'mia1', 108)]
+[18:36:12.221000] ASTRA_PERF area=u'manager' phase=u'refresh-models-total' seconds=0.019000 candidates=2
+[18:36:12.222000] PROD_RESOURCE label=u'ACTION_END:Refresh Models' working_set_mb=2870.75390625 private_commit_mb=2915.5703125 pagefile_commit_mb=2915.5703125 handles=1153 gdi=1109 user=94 top_widgets=57 dialogs=2
+[18:36:12.222000] PROD_OPERATION_END id=1 kind=u'Refresh Models' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[18:36:12.222000] G18AN_OPERATION_PROVIDER_STATE event='end' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:36:12.223000] G18AN_MODAL_WATCHER_STARTED interval_ms=100 scene_pollers=0
+[18:36:12.337000] PROD_WINDOW_SHOWN=True initial_index=0
+[18:36:12.337000] MAINMENU_CALLBACK_RETURNING=True
+[18:36:12.337000] ========================================================================================================================
+[18:36:12.347000] PROD_OPERATION_EVENT_TURN id=1 kind=u'Refresh Models' run_id=u'20261005-183612-pid23944' pid=23944
+[18:36:12.348000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Refresh Models' working_set_mb=2871.1171875 private_commit_mb=2915.91796875 pagefile_commit_mb=2915.91796875 handles=1154 gdi=1116 user=101 top_widgets=57 dialogs=2
+[18:36:14.404000] PROD_OPERATION_BEGIN id=2 kind=u'Select Model' context=None
+[18:36:14.404000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:36:14.405000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2873.265625 private_commit_mb=2917.84375 pagefile_commit_mb=2917.84375 handles=1154 gdi=1126 user=104 top_widgets=57 dialogs=2
+[18:36:14.405000] ASTRA_PERF area=u'model-select' phase=u'resolve-target' seconds=0.000000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[18:36:14.406000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} previous=None
+[18:36:14.406000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2873.265625 private_commit_mb=2917.84375 pagefile_commit_mb=2917.84375 handles=1154 gdi=1126 user=104 top_widgets=57 dialogs=2
+[18:36:14.431000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:36:15.631000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93' requested_literals=108 master_unknown_literals=0
+[18:36:15.663000] ASTRA_PERF area=u'model-render' phase=u'semantic-scope' seconds=1.257000 model=u'models/annoad/foxbase/mia/mia.mdl' provider_health=u'healthy'
+[18:36:15.664000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2874.67578125 private_commit_mb=2920.828125 pagefile_commit_mb=2920.828125 handles=1154 gdi=1126 user=104 top_widgets=57 dialogs=2
+[18:36:15.664000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health=u'healthy' scope_ready=True
+[18:36:15.664000] PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:36:15.676000] ASTRA_PERF area=u'model-render' phase=u'discover-body-library' seconds=0.011000 items=4
+[18:36:15.677000] PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=4
+[18:36:15.677000] PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:36:15.679000] ASTRA_PERF area=u'model-render' phase=u'discover-expression-library' seconds=0.002000 items=1
+[18:36:15.679000] PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=1
+[18:36:15.679000] PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:36:15.680000] ASTRA_PERF area=u'model-render' phase=u'load-library-meta' seconds=0.000000 favorites=0
+[18:36:15.680000] PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} favorites=0
+[18:36:15.680000] ASTRA_PERF area=u'model-render' phase=u'validate-library-ids' seconds=0.000000
+[18:36:15.680000] PROD_MODEL_SWITCH_STAGE stage='library-validated' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:36:15.681000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:36:15.681000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=4
+[18:36:15.681000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=None
+[18:36:15.681000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=4 favorites=0
+[18:36:15.681000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[18:36:15.682000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[18:36:15.682000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d' source=u'v3' favorite=False
+[18:36:15.682000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d'
+[18:36:15.682000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83' source=u'v3' favorite=False
+[18:36:15.683000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83'
+[18:36:15.683000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837' source=u'v3' favorite=False
+[18:36:15.683000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837'
+[18:36:15.683000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0' source=u'v3' favorite=False
+[18:36:15.684000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0'
+[18:36:15.684000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=-1
+[18:36:15.684000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[18:36:15.685000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:36:15.703000] PROD_PRESET_UI stage='ready' kind=u'body'
+[18:36:15.703000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.022000 kind=u'body' source=4 rows=4
+[18:36:15.703000] ASTRA_PERF area=u'model-render' phase=u'publish-body-preset-ui' seconds=0.022000 items=4
+[18:36:15.704000] PROD_PRESET_UI stage='begin' kind=u'expression' source_count=1
+[18:36:15.704000] PROD_PRESET_UI stage='selection-captured' kind=u'expression' select_id=None
+[18:36:15.704000] PROD_PRESET_UI stage='rows-ready' kind=u'expression' row_count=1 favorites=0
+[18:36:15.704000] PROD_PRESET_UI stage='signals-blocked' kind=u'expression'
+[18:36:15.705000] PROD_PRESET_UI stage='cleared' kind=u'expression'
+[18:36:15.705000] PROD_PRESET_UI stage='item-begin' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b' source=u'v3' favorite=False
+[18:36:15.705000] PROD_PRESET_UI stage='item-ready' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b'
+[18:36:15.705000] PROD_PRESET_UI stage='selection-restored' kind=u'expression' selected_row=-1
+[18:36:15.705000] PROD_PRESET_UI stage='signals-restored' kind=u'expression'
+[18:36:15.706000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:36:15.725000] PROD_PRESET_UI stage='ready' kind=u'expression'
+[18:36:15.725000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.022000 kind=u'expression' source=1 rows=1
+[18:36:15.725000] ASTRA_PERF area=u'model-render' phase=u'publish-expression-preset-ui' seconds=0.022000 items=1
+[18:36:15.726000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} body=4 expression=1
+[18:36:15.726000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:36:15.745000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:36:15.764000] ASTRA_PERF area=u'model-render' phase=u'publish-semantic-ui' seconds=0.038000 unresolved=0 overrides=0 provider_health='healthy'
+[18:36:15.765000] PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health='healthy'
+[18:36:15.766000] CLOTHING_FIT_CANDIDATES source={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} same_folder=[] nearby=[] other=[{'checksum': -612190634, 'model': u'models/fursonas/foxmccouldwm.mdl', 'name': u'foxmccouldwm1'}]
+[18:36:15.766000] ASTRA_PERF area=u'clothing-fit' phase=u'discover-and-publish' seconds=0.001000 same=0 nearby=0 other=1
+[18:36:15.766000] ASTRA_PERF area=u'model-render' phase=u'publish-clothing-fit-ui' seconds=0.001000
+[18:36:15.767000] PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:36:15.767000] PROD_SELECTION model=u'models/annoad/foxbase/mia/mia.mdl' checksum=1153028609 animset=u'mia1' library_key=u'modelpath-sha256-v1:2e6533ed1490a151062789e6b14c12de451d06b050c317c64b7421b9aba545b6' expression=58 body=46 other=4 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[18:36:15.767000] ASTRA_PERF area=u'model-render' phase=u'render-total' seconds=1.362000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[18:36:15.767000] G18AN_LIVE_SELECTION_PROVIDER_STATE model=u'models/annoad/foxbase/mia/mia.mdl' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:36:15.768000] ASTRA_PERF area=u'model-select' phase=u'select-total' seconds=1.363000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[18:36:15.768000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2874.76953125 private_commit_mb=2920.828125 pagefile_commit_mb=2920.828125 handles=1154 gdi=1126 user=104 top_widgets=57 dialogs=2
+[18:36:15.769000] PROD_OPERATION_END id=2 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[18:36:15.769000] G18AN_OPERATION_PROVIDER_STATE event='end' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:36:15.778000] PROD_OPERATION_EVENT_TURN id=2 kind=u'Select Model' run_id=u'20261005-183612-pid23944' pid=23944
+[18:36:15.779000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2874.76953125 private_commit_mb=2920.828125 pagefile_commit_mb=2920.828125 handles=1154 gdi=1126 user=104 top_widgets=57 dialogs=2
+[18:36:40.113000] PROD_OPERATION_BEGIN id=3 kind=u'Save Current Body' context={'animset_id': (u'DmeAnimationSet', u'mia1', 2610, 394168312L), 'model_instance_id': (u'DmeGameModel', u'mia_GameModel', 2611, 4268163400L), 'document_file_id': 0, 'library_identity': {'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}, 'shot_id': (u'DmeFilmClip', u'shot3', 800, 4274061828L)}
+[18:36:40.114000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=3 kind=u'Save Current Body' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:36:40.115000] PROD_RESOURCE label=u'ACTION_BEGIN:Save Current Body' working_set_mb=2875.05078125 private_commit_mb=2922.67578125 pagefile_commit_mb=2922.67578125 handles=1156 gdi=1130 user=109 top_widgets=57 dialogs=2
+[18:36:40.116000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:41:04.623000] PROD_RESOURCE label=u'Q2_SAVE_POST_CONFIRM' working_set_mb=2875.328125 private_commit_mb=2922.6328125 pagefile_commit_mb=2922.6328125 handles=1158 gdi=1144 user=117 top_widgets=58 dialogs=3
+[18:41:04.635000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'disk-inventory' seconds=0.012000 items=4
+[18:41:04.636000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:41:09.109000] PROD_CPM_OPERATION_AUTHORIZATION_REFUSED operation=u'Save Preset' reason=u'generation-mismatch'
+[18:41:09.109000] PROD_ACTION_ERROR label='Save Current Body' error=RuntimeError("The selected model's semantic scope is stale. Reselect the model.",)
+[18:41:09.113000] Traceback (most recent call last):
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 30370, in guard
+    result = fn()
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 32684, in work
+    else None
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 26769, in prod_save
+    u"Save Preset",
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 18856, in prod_cpm_authorize_operation
+    raise failure[0](failure[1])
+RuntimeError: The selected model's semantic scope is stale. Reselect the model.
+
+[18:41:19.651000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:41:19.673000] PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED identity={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:41:19.674000] PROD_RESOURCE label=u'ACTION_END:Save Current Body' working_set_mb=2877.9765625 private_commit_mb=2925.41796875 pagefile_commit_mb=2925.41796875 handles=1165 gdi=1156 user=125 top_widgets=59 dialogs=4
+[18:41:19.674000] PROD_OPERATION_END id=3 kind=u'Save Current Body' phase=u'BEGIN' native_commit=None durable_commit=None
+[18:41:19.675000] G18AN_OPERATION_PROVIDER_STATE event='end' id=3 kind=u'Save Current Body' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:41:19.689000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:41:19.709000] PROD_CPM_STALE_GENERATION_REBUILD identity={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:41:19.709000] PROD_OPERATION_BEGIN id=4 kind=u'Select Model' context=None
+[18:41:19.709000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=4 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:41:19.710000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2877.7734375 private_commit_mb=2925.2109375 pagefile_commit_mb=2925.2109375 handles=1165 gdi=1140 user=118 top_widgets=57 dialogs=2
+[18:41:19.710000] ASTRA_PERF area=u'model-select' phase=u'resolve-target' seconds=0.000000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[18:41:19.711000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} previous={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:41:19.711000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2877.7734375 private_commit_mb=2925.2109375 pagefile_commit_mb=2925.2109375 handles=1165 gdi=1140 user=118 top_widgets=57 dialogs=2
+[18:41:19.712000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:41:22.125000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7' requested_literals=108 master_unknown_literals=0
+[18:41:22.159000] ASTRA_PERF area=u'model-render' phase=u'semantic-scope' seconds=2.448000 model=u'models/annoad/foxbase/mia/mia.mdl' provider_health=u'healthy'
+[18:41:22.160000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2878.046875 private_commit_mb=2925.4375 pagefile_commit_mb=2925.4375 handles=1165 gdi=1140 user=118 top_widgets=57 dialogs=2
+[18:41:22.160000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health=u'healthy' scope_ready=True
+[18:41:22.160000] PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:41:22.176000] ASTRA_PERF area=u'model-render' phase=u'discover-body-library' seconds=0.016000 items=4
+[18:41:22.176000] PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=4
+[18:41:22.176000] PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:41:22.178000] ASTRA_PERF area=u'model-render' phase=u'discover-expression-library' seconds=0.001000 items=1
+[18:41:22.179000] PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} count=1
+[18:41:22.179000] PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:41:22.179000] ASTRA_PERF area=u'model-render' phase=u'load-library-meta' seconds=0.000000 favorites=0
+[18:41:22.180000] PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} favorites=0
+[18:41:22.180000] ASTRA_PERF area=u'model-render' phase=u'validate-library-ids' seconds=0.000000
+[18:41:22.180000] PROD_MODEL_SWITCH_STAGE stage='library-validated' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:41:22.181000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:41:22.181000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=4
+[18:41:22.181000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=None
+[18:41:22.182000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=4 favorites=0
+[18:41:22.182000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[18:41:22.182000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[18:41:22.183000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d' source=u'v3' favorite=False
+[18:41:22.183000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d'
+[18:41:22.183000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83' source=u'v3' favorite=False
+[18:41:22.183000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83'
+[18:41:22.184000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837' source=u'v3' favorite=False
+[18:41:22.184000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837'
+[18:41:22.184000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0' source=u'v3' favorite=False
+[18:41:22.184000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0'
+[18:41:22.185000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=-1
+[18:41:22.185000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[18:41:22.186000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:41:22.206000] PROD_PRESET_UI stage='ready' kind=u'body'
+[18:41:22.206000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.025000 kind=u'body' source=4 rows=4
+[18:41:22.206000] ASTRA_PERF area=u'model-render' phase=u'publish-body-preset-ui' seconds=0.025000 items=4
+[18:41:22.207000] PROD_PRESET_UI stage='begin' kind=u'expression' source_count=1
+[18:41:22.207000] PROD_PRESET_UI stage='selection-captured' kind=u'expression' select_id=None
+[18:41:22.207000] PROD_PRESET_UI stage='rows-ready' kind=u'expression' row_count=1 favorites=0
+[18:41:22.207000] PROD_PRESET_UI stage='signals-blocked' kind=u'expression'
+[18:41:22.207000] PROD_PRESET_UI stage='cleared' kind=u'expression'
+[18:41:22.208000] PROD_PRESET_UI stage='item-begin' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b' source=u'v3' favorite=False
+[18:41:22.208000] PROD_PRESET_UI stage='item-ready' kind=u'expression' index=0 preset=u'preset-9af50778719148db9a2a51abef01b65b'
+[18:41:22.208000] PROD_PRESET_UI stage='selection-restored' kind=u'expression' selected_row=-1
+[18:41:22.209000] PROD_PRESET_UI stage='signals-restored' kind=u'expression'
+[18:41:22.209000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:41:22.226000] PROD_PRESET_UI stage='ready' kind=u'expression'
+[18:41:22.227000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.021000 kind=u'expression' source=1 rows=1
+[18:41:22.227000] ASTRA_PERF area=u'model-render' phase=u'publish-expression-preset-ui' seconds=0.021000 items=1
+[18:41:22.227000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} body=4 expression=1
+[18:41:22.228000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:41:22.246000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:41:22.266000] ASTRA_PERF area=u'model-render' phase=u'publish-semantic-ui' seconds=0.038000 unresolved=0 overrides=0 provider_health='healthy'
+[18:41:22.266000] PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} provider_health='healthy'
+[18:41:22.267000] CLOTHING_FIT_CANDIDATES source={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'} same_folder=[] nearby=[] other=[{'checksum': -612190634, 'model': u'models/fursonas/foxmccouldwm.mdl', 'name': u'foxmccouldwm1'}]
+[18:41:22.268000] ASTRA_PERF area=u'clothing-fit' phase=u'discover-and-publish' seconds=0.001000 same=0 nearby=0 other=1
+[18:41:22.268000] ASTRA_PERF area=u'model-render' phase=u'publish-clothing-fit-ui' seconds=0.001000
+[18:41:22.268000] PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target={'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}
+[18:41:22.269000] PROD_SELECTION model=u'models/annoad/foxbase/mia/mia.mdl' checksum=1153028609 animset=u'mia1' library_key=u'modelpath-sha256-v1:2e6533ed1490a151062789e6b14c12de451d06b050c317c64b7421b9aba545b6' expression=58 body=46 other=4 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[18:41:22.269000] ASTRA_PERF area=u'model-render' phase=u'render-total' seconds=2.559000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[18:41:22.269000] G18AN_LIVE_SELECTION_PROVIDER_STATE model=u'models/annoad/foxbase/mia/mia.mdl' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:41:22.269000] ASTRA_PERF area=u'model-select' phase=u'select-total' seconds=2.559000 model=u'models/annoad/foxbase/mia/mia.mdl'
+[18:41:22.270000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2878.20703125 private_commit_mb=2925.4375 pagefile_commit_mb=2925.4375 handles=1165 gdi=1140 user=118 top_widgets=57 dialogs=2
+[18:41:22.271000] PROD_OPERATION_END id=4 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[18:41:22.271000] G18AN_OPERATION_PROVIDER_STATE event='end' id=4 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:41:22.271000] PROD_OPERATION_EVENT_TURN id=3 kind=u'Save Current Body' run_id=u'20261005-183612-pid23944' pid=23944
+[18:41:22.272000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Save Current Body' working_set_mb=2878.20703125 private_commit_mb=2925.4375 pagefile_commit_mb=2925.4375 handles=1165 gdi=1140 user=118 top_widgets=57 dialogs=2
+[18:41:22.294000] PROD_OPERATION_EVENT_TURN id=4 kind=u'Select Model' run_id=u'20261005-183612-pid23944' pid=23944
+[18:41:22.295000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2878.2109375 private_commit_mb=2925.4375 pagefile_commit_mb=2925.4375 handles=1165 gdi=1140 user=118 top_widgets=57 dialogs=2
+[18:44:30.916000] PROD_OPERATION_BEGIN id=5 kind=u'Save Current Body' context={'animset_id': (u'DmeAnimationSet', u'mia1', 2610, 394168312L), 'model_instance_id': (u'DmeGameModel', u'mia_GameModel', 2611, 4268163400L), 'document_file_id': 0, 'library_identity': {'checksum': 1153028609, 'model': u'models/annoad/foxbase/mia/mia.mdl', 'animset_name': u'mia1'}, 'shot_id': (u'DmeFilmClip', u'shot3', 800, 4274061828L)}
+[18:44:30.917000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=5 kind=u'Save Current Body' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:44:30.917000] PROD_RESOURCE label=u'ACTION_BEGIN:Save Current Body' working_set_mb=2878.47265625 private_commit_mb=2925.71875 pagefile_commit_mb=2925.71875 handles=1169 gdi=1140 user=115 top_widgets=57 dialogs=2
+[18:44:30.918000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:44:36.889000] PROD_RESOURCE label=u'Q2_SAVE_POST_CONFIRM' working_set_mb=2878.5625 private_commit_mb=2925.796875 pagefile_commit_mb=2925.796875 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:36.904000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'disk-inventory' seconds=0.014000 items=4
+[18:44:36.905000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:44:36.923000] PROD_CPM_OPERATION_AUTHORIZED operation=u'Save Preset' sha256=54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7 kind=u'body' membership=46
+[18:44:36.932000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'live-bindings' seconds=0.007000
+[18:44:36.933000] PROD_ACTION_TIMING action=u'Body Indexed Capture' phase=u'capture-flex-values' seconds=0.001000 controls=46
+[18:44:36.944000] PROD_PERF phase=u'bone_index.enumerate' seconds=0.010000 controls=314 animset_controls=314 channels=499 groups=42 operators=36
+[18:44:36.969000] PROD_PERF phase=u'bone_index.build_native_bones' seconds=0.006000 bones=150
+[18:44:36.969000] PROD_PERF phase=u'bone_index.total' seconds=0.035000 bones=150
+[18:44:36.970000] PROD_ACTION_TIMING action=u'Body Indexed Capture' phase=u'index-snapshot' seconds=0.036000 bones=150 channels=499
+[18:44:36.970000] PROD_RESOURCE label=u'Q2_INDEX_ACQUIRED' working_set_mb=2879.56640625 private_commit_mb=2926.203125 pagefile_commit_mb=2926.203125 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:36.971000] PROD_ACTION_TIMING action=u'Body Indexed Capture' phase=u'project-pure-bone-map' seconds=0.001000 records=150 existing_scaled=0
+[18:44:36.971000] PROD_RESOURCE label=u'Q2_INDEX_PROJECTED_LIVE' working_set_mb=2879.5859375 private_commit_mb=2926.203125 pagefile_commit_mb=2926.203125 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:36.973000] PROD_RESOURCE label=u'Q2_INDEX_RELEASED' working_set_mb=2879.58984375 private_commit_mb=2926.203125 pagefile_commit_mb=2926.203125 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:36.973000] PROD_ACTION_TIMING action=u'Body Indexed Capture' phase=u'total' seconds=0.039000
+[18:44:36.973000] PROD_RESOURCE label=u'Q2_BODY_CAPTURE_PURE_ONLY' working_set_mb=2879.58984375 private_commit_mb=2926.203125 pagefile_commit_mb=2926.203125 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:36.974000] PROD_ACTION_TIMING action=u'Body Indexed Capture' phase=u'snapshot-total' seconds=0.042000 controls=46 bones=150
+[18:44:36.974000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'capture-body-snapshot' seconds=0.042000 controls=46 records=150 existing_scaled=0
+[18:44:36.975000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'validate-captured-record' seconds=0.000000
+[18:44:36.975000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_PURE_VALIDATION' working_set_mb=2879.58984375 private_commit_mb=2926.203125 pagefile_commit_mb=2926.203125 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:36.987000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'ensure-library' seconds=0.012000
+[18:44:36.999000] PROD_OPERATION_PHASE id=5 phase=u'durable-commit' detail={'path': u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\mia--2e6533ed1490\\Body Presets\\S2 G2 SAVE--preset-1914a.json', 'kind': u'body', 'preset_id': u'preset-1914ae71c58044dc939948816bf22888'}
+[18:44:37.000000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'safe-write' seconds=0.012000
+[18:44:37.001000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_DURABLE_COMMIT' working_set_mb=2879.70703125 private_commit_mb=2926.21875 pagefile_commit_mb=2926.21875 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:37.007000] PROD_OPERATION_PHASE id=5 phase=u'durable-verified' detail={'path': u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\mia--2e6533ed1490\\Body Presets\\S2 G2 SAVE--preset-1914a.json', 'kind': u'body', 'preset_id': u'preset-1914ae71c58044dc939948816bf22888'}
+[18:44:37.007000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'readback-verify' seconds=0.006000
+[18:44:37.008000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_READBACK' working_set_mb=2879.70703125 private_commit_mb=2926.21875 pagefile_commit_mb=2926.21875 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:37.008000] PROD_SAVE=PASS model=u'models/annoad/foxbase/mia/mia.mdl' kind=u'body' name=u'S2 G2 SAVE' controls=46 bone_records=150 existing_scale_controls=0 path=u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\mia--2e6533ed1490\\Body Presets\\S2 G2 SAVE--preset-1914a.json' cached_semantic_scope=True indexed_body_capture=True q1_parity=False
+[18:44:37.008000] PROD_ACTION_TIMING action=u'Save Preset' phase=u'total' seconds=0.119000
+[18:44:37.009000] PROD_ACTION_TIMING action=u'Save Preset UI' phase=u'production-save' seconds=0.120000
+[18:44:37.010000] PROD_RESOURCE label=u'SAVE_AFTER_PASS' working_set_mb=2879.70703125 private_commit_mb=2926.21875 pagefile_commit_mb=2926.21875 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:37.011000] ASTRA_PERF area=u'save-ui' phase=u'postwrite-read-validate' seconds=0.001000 kind=u'body'
+[18:44:37.014000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=5
+[18:44:37.014000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=u'preset-1914ae71c58044dc939948816bf22888'
+[18:44:37.014000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=5 favorites=0
+[18:44:37.014000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[18:44:37.015000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[18:44:37.015000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d' source=u'v3' favorite=False
+[18:44:37.015000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-a14f8f79d05246269d0b711bf61ab88d'
+[18:44:37.015000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83' source=u'v3' favorite=False
+[18:44:37.016000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-806d1624e37f47b481125ff9255fac83'
+[18:44:37.016000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837' source=u'v3' favorite=False
+[18:44:37.016000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-6cfa382e2a374f4285cca496f4005837'
+[18:44:37.016000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0' source=u'v3' favorite=False
+[18:44:37.016000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-2f7bb5ed931d41dc9213ac1340f77cd0'
+[18:44:37.017000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=4 preset=u'preset-1914ae71c58044dc939948816bf22888' source=u'v3' favorite=False
+[18:44:37.017000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=4 preset=u'preset-1914ae71c58044dc939948816bf22888'
+[18:44:37.018000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=4
+[18:44:37.018000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[18:44:37.019000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[18:44:37.037000] PROD_PRESET_UI stage='ready' kind=u'body'
+[18:44:37.038000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.023000 kind=u'body' source=5 rows=5
+[18:44:37.038000] ASTRA_PERF area=u'save-ui' phase=u'publish-updated-preset-list' seconds=0.024000 kind=u'body'
+[18:44:37.038000] ASTRA_PERF area=u'save-ui' phase=u'post-confirm-total' seconds=0.149000 kind=u'body'
+[18:44:37.039000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_UI_PUBLISH' working_set_mb=2879.7109375 private_commit_mb=2926.21875 pagefile_commit_mb=2926.21875 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:37.039000] PROD_SAVE_POSTWRITE_REFRESH=PASS kind=u'body' preset=u'preset-1914ae71c58044dc939948816bf22888' full_library_rediscovery=False semantic_scope_rebuild=False
+[18:44:37.040000] PROD_RESOURCE label=u'ACTION_END:Save Current Body' working_set_mb=2879.7109375 private_commit_mb=2926.21875 pagefile_commit_mb=2926.21875 handles=1171 gdi=1148 user=121 top_widgets=58 dialogs=3
+[18:44:37.040000] PROD_OPERATION_END id=5 kind=u'Save Current Body' phase=u'UI_PUBLISH' native_commit=None durable_commit={'path': u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\mia--2e6533ed1490\\Body Presets\\S2 G2 SAVE--preset-1914a.json', 'kind': u'body', 'preset_id': u'preset-1914ae71c58044dc939948816bf22888'}
+[18:44:37.040000] G18AN_OPERATION_PROVIDER_STATE event='end' id=5 kind=u'Save Current Body' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:44:37.053000] PROD_OPERATION_EVENT_TURN id=5 kind=u'Save Current Body' run_id=u'20261005-183612-pid23944' pid=23944
+[18:44:37.053000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Save Current Body' working_set_mb=2879.6328125 private_commit_mb=2926.140625 pagefile_commit_mb=2926.140625 handles=1169 gdi=1140 user=118 top_widgets=57 dialogs=2
+[18:45:04.485000] G18AN_CLOSE_PROVIDER_STATE stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[18:45:04.485000] PROD_CLOSE_REQUEST operation=None fit_active=False fit_stage_running=False
+[18:45:04.485000] PROD_CLOSE_FINALIZED=True

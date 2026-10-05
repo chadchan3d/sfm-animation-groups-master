@@ -8,23 +8,23 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-Real-SFM Session 2 (controlled G1→G2; runbook
-`real_sfm_qualification/cpm_session2/SESSION2_RUNBOOK.md` at `3b22b8b`).
+Real-SFM Session 2 (controlled G1→G2). **Status: COMPLETE — PASS.**
+- S2-A_R2 (open-window generation replacement): PASS.
+- S2-B_R2 (generation change during a Save prompt): PASS.
 
-**Status: S2-A_R2 (open-window generation replacement) PASS. S2-B (generation change during a Save
-prompt) is the next authorized bounded step and has not been run.**
+Evidence: `real_sfm_qualification/cpm_session2/SESSION2_EVIDENCE.md`, raw outputs in `raw/`.
+Runbook: `SESSION2_RUNBOOK.md` at `0597927`.
 
-R15 CLOSED — PASS. Session 1 remains complete. R14 remains CLOSED.
+R15 CLOSED — PASS. Session 1 remains complete. R14 remains CLOSED. Session 3 is NOT STARTED.
 
 ## Current state
-`master` at the S2-A_R2 adjudication commit (Ledger only). The product is unchanged since
-`00d0d83`.
+`master` at the Session 2 closeout commit (evidence and Ledger only). The product is unchanged
+since `00d0d83`.
 
-Session 2 campaign evidence is held outside the repository at
-`%PUBLIC%\Documents\CPM_Session2\` (`S2A` invalid attempt; `S2A_R2`). It is copied in, redacted,
-at Session 2 closeout (`SESSION2_EVIDENCE.md`).
+All four Session 2 campaign folders (`S2A`, `S2A_R2`, `S2B`, `S2B_R2`), the probe JSONL and the
+CPM log are copied, redacted, into `real_sfm_qualification/cpm_session2/raw/`.
 
-The live authority is exact production G1 after S2-A_R2: Master `ac45e5c1…`, manifest
+The live authority is exact production G1 after Session 2: Master `ac45e5c1…`, manifest
 `d810d648…`, one sidecar `bcd97641…`.
 
 **Deployed and verified** (runbook §0):
@@ -64,6 +64,7 @@ Evidence:
 | R14 ctypes isolation | CLOSED |
 | R15 namespace isolation (Session 1 addendum, P1–P15) | **CLOSED — PASS** |
 | Session 2 S2-A_R2: open-window G1→G2 replacement (2026-10-05) | **PASS** |
+| Session 2 S2-B_R2: G1→G2 during a Save prompt (2026-10-05) | **PASS** |
 
 - **Clothing Fit detail:**
   - `Gfit` was authorized.
@@ -123,6 +124,21 @@ Evidence:
   - **Observation:** the refusal dialog shows the guard's generic copy ("Preset could not be
     applied safely. This preset was not applied."), not the stale-scope message, which is logged
     only. See the stale-scope UI presentation item.
+- **Session 2 S2-B_R2 (2026-10-05, pid 23944, broker `0x31141250`, window `0x30466580`):**
+  - **Save opened under G1:** Save and its prompt opened at 18:36:40, under G1.
+  - **Exact G2 while the prompt was open:** activated 18:40:42; no CPM activity until the prompt
+    returned (`Q2_SAVE_POST_CONFIRM` 18:41:04).
+  - **Stale Save refused:** the stale G1 Save authorization was refused with
+    `generation-mismatch` (18:41:09); no `PROD_SAVE`, no durable phase, `durable_commit=None`;
+    library inventories 1 = 2 = 3 byte-identical.
+  - **Rebuild without replay:** one automatic rebuild to G2 after the refusal; the same window;
+    no replay.
+  - **Deliberate G2 Save:** passed, with the library diff exactly the three allowed entries.
+  - **Idle authority and restoration:** P2–P4 leases and providers 0; exact G1 restoration.
+  - **Aborted `S2B` attempt:** confirmed a normal G1 Save before any switch; the authority was
+    untouched and the preset was removed. Its residual `character.json` metadata (`updated_at`,
+    `last_validated_provider`) is never read for a decision and `semantic_overrides` is empty, so
+    it cannot confound the tested boundary (adjudicated in `SESSION2_EVIDENCE.md`).
 - **Measurements (Session 1):**
   - process working set +36 MB across the session;
   - CPM scope 107–166 KB;
@@ -153,18 +169,13 @@ Evidence:
      - Keep the clear → rebuild → reclassify behavior unchanged.
 - **Stale-scope UI presentation** and **`SidecarMissing` messaging:** undecided.
   - Real SFM shows that a stale-generation refusal is presented through the guard's generic copy.
-    For Apply this is "Preset could not be applied safely…"; for Save it would be "Can't save
-    preset — Nothing was saved."
+    For Apply this is "Preset could not be applied safely…"; for Save it is "Can't save preset —
+    Preset could not be saved. Nothing was saved."
   - The stale-scope reason is logged only, and CPM then rebuilds automatically.
 - **Product identity strings** (window slot, log name, `PROD_VERSION`) are unchanged from G18AN
   (K/L).
 - **Remaining pre-K qualification:**
-  - Session 2:
-    - S2-A_R2 (G1→G2 with CPM open): **PASS**.
-    - **S2-B (G1→G2 during a Save prompt): next, not run.** Precondition: the frozen runbook's
-      B6 visible expectation ("a warning says the semantic scope is stale") is inaccurate; the
-      dialog will be the generic "Can't save preset" copy. Correct that wording in the runbook,
-      with approval, before S2-B so the operator is not sent to STOP.
+  - Session 2: **COMPLETE — PASS** (S2-A_R2 and S2-B_R2).
   - Session 3: queued Fit target-1 G1 → target-2 G2, and target 1's Undo after it;
   - the forced Apply and forced Fit rollback-verification failure gates;
   - then cleanup of historical authority and diagnostics, plus a focused regression.
@@ -174,13 +185,17 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-S2-B is the next authorized bounded qualification step.
-1. Approve the one-step correction of the runbook's B6 visible-dialog expectation (the generic
-   "Can't save preset" copy).
-2. Then run S2-B per the runbook (`$EB`, a fresh write-once path), restore exact G1, and
-   adjudicate.
+After designer/owner review of the Session 2 closeout, the next Blueprint-bounded milestone is
+**Session 3 preparation** (handoff §21, Clothing Fit generation transition). The case to cover:
+- start a Fit under G1 and commit target 1;
+- change to G2 before target 2;
+- target 2 is refused and does not mutate, and Fit stops;
+- target 1's Undo stays valid;
+- a later new Fit may use G2.
 
-Session 3 is not started.
+It is to be prepared (not run) under a bounded designer assignment, reusing the qualified
+Checkpoint I generation mechanism. The forced Apply and Fit rollback-verification failure gates,
+then cleanup and a focused regression, follow before K.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

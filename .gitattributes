@@ -259,3 +259,8 @@ cpm/app/launcher/SFM_Character_Preset_Manager.py text eol=lf
 real_sfm_qualification/cpm_session1/r15_addendum/*.jsonl -text
 real_sfm_qualification/cpm_session1/r15_addendum/*.log -text
 real_sfm_qualification/cpm_session1/r15_addendum/*.txt -text
+
+# CPM Session 2 raw outputs (2026-10-05): captured evidence, SHA-256-pinned
+# in cpm_session2/raw/MANIFEST.md, mixed CRLF/LF/BOM exactly as written.
+# Never normalize on checkout, commit or archive export.
+real_sfm_qualification/cpm_session2/raw/** -text whitespace=cr-at-eol
