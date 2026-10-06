@@ -8,6 +8,14 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
+Real-SFM Session 4 (forced rollback-verification qualification, handoff §22 blockers 4–5).
+**Status: PREPARED — NOT STARTED.** Runbook `real_sfm_qualification/cpm_session4/SESSION4_RUNBOOK.md`;
+qualification-only harness `CPM_S4_Rollback_Harness.py` (`45c44f3d…`); offline suite PASS
+(2.7.5 real + model 308/308; 3.10 model 166/166). No live campaign has run.
+- S4A (Body Apply): CONTROL (authentic Abort, rollback verified) + GATE (authentic verifier True,
+  harness substitutes False → production recovery-unverified) + ordinary Apply.
+- S4F (Clothing Fit): CONTROL (`not-committed`) + GATE (`abort-unverified`) + ordinary Fit and Undo.
+
 Real-SFM Session 3 (Clothing Fit generation transition). **Status: COMPLETE — PASS.**
 - S3 (queued Fit, G1 → G2 between targets): CORE PASS.
 - S3_ADD (fresh Fit committing under G2, idle probes, Undo): PASS.
@@ -19,7 +27,7 @@ wording corrected at closeout).
 Sessions 1 and 2 remain complete. R15 and R14 remain CLOSED.
 
 ## Current state
-`master` at the Session 3 closeout commit (evidence, runbook wording and Ledger only). The
+`master` at the Session 4 preparation commit (qualification material and Ledger only). The
 product is unchanged since `00d0d83`.
 
 The Session 3 campaign folders (`S3`, `S3_ADD`), the probe JSONL and the CPM log are copied,
@@ -200,7 +208,8 @@ Evidence:
 - **Remaining pre-K qualification:**
   - Session 2: **COMPLETE — PASS** (S2-A_R2 and S2-B_R2).
   - Session 3: **COMPLETE — PASS** (S3 CORE PASS and S3_ADD).
-  - the forced Apply and forced Fit rollback-verification failure gates;
+  - the forced Apply and forced Fit rollback-verification failure gates: **Session 4 prepared,
+    not run** (S4A, S4F);
   - then cleanup of historical authority and diagnostics, plus a focused regression.
 
   **K, L:** not started.
@@ -208,9 +217,14 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-After designer/owner review of the Session 3 closeout, the next Blueprint-bounded milestone is
-the **forced Apply and forced Fit rollback-verification failure gates**. They are to be prepared
-(not run) under a bounded designer assignment.
+Run Session 4 live per `SESSION4_RUNBOOK.md`: S4A (Body Apply), then S4F (Clothing Fit), each
+in a fresh SFM process under exact G1, then adjudicate. Out of scope: the postcommit/post-stage
+committed-unverified branch and a live Expression campaign (covered offline).
+
+Recorded, not fixed: in `fit_stage`'s exception path the stage is released by a bare
+`release()` (unlogged, result discarded), and a raising success-path release could in theory be
+followed by a second `release()`. S4F counts the actual release calls; no product change unless
+live evidence shows a defect.
 
 Cleanup of historical authority and diagnostics, and a focused regression, follow before K.
 Not started.
