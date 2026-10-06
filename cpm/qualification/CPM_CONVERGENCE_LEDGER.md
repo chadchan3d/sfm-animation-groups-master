@@ -21,8 +21,18 @@ Runbook: `SESSION4_RUNBOOK.md` at `b65c085`; harness `45c44f3d…`.
 Sessions 1, 2 and 3 remain complete. R15 and R14 remain CLOSED.
 
 ## Current state
-`master` at the Session 4 closeout commit (evidence and Ledger only). The product is unchanged
-since `00d0d83`.
+`master`; last milestone commit `ef84e2d` (Session 4 closeout, evidence and Ledger only). The
+product is unchanged since `00d0d83` (last commit touching `cpm/app`, `cpm/baseline` or the
+adapter/projection); every later commit touches only `real_sfm_qualification/`,
+`cpm/qualification/` or `.gitattributes`.
+
+**References for transfer:**
+- Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
+  checkpoint `bd169401fba1c04bf24a148cd8e65748ae757912` (unchanged since `382c79b`). Its header
+  status banner ("R15 remains OPEN…") predates R15 closure; this Ledger is authoritative for status.
+- `cpm/qualification/R15_NAMESPACE_ISOLATION_PROPOSAL.md`: superseded, historical only.
+- Convergence requirements and the §22 sequence:
+  `docs/qualification/CPM_CONVERGENCE_INTEGRATION_HANDOFF.md`.
 
 The Session 4 campaign folders (`S4A`, `S4F`), the probe JSONL and the CPM log are copied,
 redacted, into `real_sfm_qualification/cpm_session4/raw/`. The qualification-only rollback harness
@@ -32,7 +42,9 @@ was removed after each campaign; the Scripts deployment equals its pre-harness b
 The live authority is exact production G1 after Session 4: Master `ac45e5c1…`, manifest
 `d810d648…`, one sidecar `bcd97641…`.
 
-**Deployed and verified** (runbook §0):
+**Deployed and verified** (runbook §0; re-verified against the workstation at the 2026-10-06
+transfer checkpoint, including the shared package, whose qualification-only `projections.py` is
+intentionally not deployed):
 - launcher `996ca483…` as the Scripts-menu entry;
 - private app `9a78fc96…` in `usermod/scripts/ChadChan3D_CPM/` (outside `scripts/sfm`, no
   `__init__.py`);
