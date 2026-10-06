@@ -1,0 +1,470 @@
+{
+  "broker": {
+    "broker_id": "0x314d92b0", 
+    "open_providers": 0, 
+    "outstanding_leases": 0, 
+    "unreleased_leases": 0
+  }, 
+  "epoch": 1791259802.868, 
+  "failures": [], 
+  "fit_after": {
+    "closing_requested": false, 
+    "committed": [
+      {
+        "checksum": -791536511, 
+        "model": "models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl", 
+        "name": "assaultsuitbody1"
+      }
+    ], 
+    "fit_active": true, 
+    "fit_generation": 2, 
+    "fit_stage_running": false, 
+    "gfit": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+    "modal_deferred_fit_stage": [
+      2, 
+      1
+    ], 
+    "modal_yield_active": true, 
+    "operation_kind": "Clothing Fit", 
+    "scene_activity_suspended": true, 
+    "selected": [
+      {
+        "checksum": -791536511, 
+        "model": "models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl", 
+        "name": "assaultsuitbody1"
+      }, 
+      {
+        "checksum": 480892851, 
+        "model": "models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl", 
+        "name": "loinclothbra_chadfix_071"
+      }
+    ]
+  }, 
+  "fit_before": {
+    "closing_requested": false, 
+    "committed": [
+      {
+        "checksum": -791536511, 
+        "model": "models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl", 
+        "name": "assaultsuitbody1"
+      }
+    ], 
+    "fit_active": true, 
+    "fit_generation": 2, 
+    "fit_stage_running": false, 
+    "gfit": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+    "modal_deferred_fit_stage": null, 
+    "modal_yield_active": false, 
+    "operation_kind": "Clothing Fit", 
+    "scene_activity_suspended": false, 
+    "selected": [
+      {
+        "checksum": -791536511, 
+        "model": "models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl", 
+        "name": "assaultsuitbody1"
+      }, 
+      {
+        "checksum": 480892851, 
+        "model": "models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl", 
+        "name": "loinclothbra_chadfix_071"
+      }
+    ]
+  }, 
+  "generation": 2, 
+  "index": 1, 
+  "live_master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+  "modal": {
+    "dialog_is_active_modal": true, 
+    "modal_yield_active": true, 
+    "scene_activity_suspended": true
+  }, 
+  "modal_deferred_fit_stage": [
+    2, 
+    1
+  ], 
+  "original_invoked": true, 
+  "schema": "cpm-s3-pause-v1", 
+  "status": "PAUSED_VALID", 
+  "target1_changed_literals": [
+    "Breastsize", 
+    "Muscles", 
+    "slim"
+  ], 
+  "target1_post_commit": {
+    "AnalOpen": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "Arms": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "Belly": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "BreastHid": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "BreastNnipplePerk": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "BreastSmall": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "Breastflatten": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "Breastsize": {
+      "mono": {
+        "destination": 0.467980295419693, 
+        "evaluated": 0.467980295419693, 
+        "is_empty": false, 
+        "key0_time": 0.0, 
+        "key0_value": 0.467980295419693, 
+        "key_count": 1, 
+        "source": 0.467980295419693
+      }
+    }, 
+    "Bulge2": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "Buttsize": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "CollarUp": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "GenitalHide": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "LegFix90SW ": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "Legsize": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "Muscles": {
+      "mono": {
+        "destination": 0.35467979311943054, 
+        "evaluated": 0.35467979311943054, 
+        "is_empty": false, 
+        "key0_time": 0.0, 
+        "key0_value": 0.35467979311943054, 
+        "key_count": 1, 
+        "source": 0.35467979311943054
+      }
+    }, 
+    "Paizury": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "Pregnant": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "VagClose": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "VagExposure": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "VagGrip": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "VagPush": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "boxybelly": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "bulge": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "buttExposure": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "slim": {
+      "mono": {
+        "destination": 0.4729064106941223, 
+        "evaluated": 0.4729064106941223, 
+        "is_empty": false, 
+        "key0_time": 0.0, 
+        "key0_value": 0.4729064106941223, 
+        "key_count": 1, 
+        "source": 0.4729064106941223
+      }
+    }, 
+    "thoathbulge1": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "thoathbulge2": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "toraxwide": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "torso": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "vaginalopen": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "vaginalopen2": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "voluptuous": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "waist1": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }, 
+    "widehips": {
+      "mono": {
+        "destination": 0.0, 
+        "evaluated": 0.0, 
+        "is_empty": true, 
+        "key0_time": null, 
+        "key0_value": null, 
+        "key_count": 0, 
+        "source": 0.0
+      }
+    }
+  }, 
+  "wall_time": "2026-10-06 00:10:02.868000"
+}

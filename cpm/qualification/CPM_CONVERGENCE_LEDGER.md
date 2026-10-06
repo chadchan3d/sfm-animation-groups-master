@@ -8,23 +8,25 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-Real-SFM Session 2 (controlled G1→G2). **Status: COMPLETE — PASS.**
-- S2-A_R2 (open-window generation replacement): PASS.
-- S2-B_R2 (generation change during a Save prompt): PASS.
+Real-SFM Session 3 (Clothing Fit generation transition). **Status: COMPLETE — PASS.**
+- S3 (queued Fit, G1 → G2 between targets): CORE PASS.
+- S3_ADD (fresh Fit committing under G2, idle probes, Undo): PASS.
 
-Evidence: `real_sfm_qualification/cpm_session2/SESSION2_EVIDENCE.md`, raw outputs in `raw/`.
-Runbook: `SESSION2_RUNBOOK.md` at `0597927`.
+Evidence: `real_sfm_qualification/cpm_session3/SESSION3_EVIDENCE.md`, raw outputs in `raw/`.
+Runbook: `SESSION3_RUNBOOK.md` (§10 S3_ADD at `bcfa9b6`; criterion-9, criterion-12 and C13
+wording corrected at closeout).
 
-R15 CLOSED — PASS. Session 1 remains complete. R14 remains CLOSED. Session 3 is NOT STARTED.
+Sessions 1 and 2 remain complete. R15 and R14 remain CLOSED.
 
 ## Current state
-`master` at the Session 2 closeout commit (evidence and Ledger only). The product is unchanged
-since `00d0d83`.
+`master` at the Session 3 closeout commit (evidence, runbook wording and Ledger only). The
+product is unchanged since `00d0d83`.
 
-All four Session 2 campaign folders (`S2A`, `S2A_R2`, `S2B`, `S2B_R2`), the probe JSONL and the
-CPM log are copied, redacted, into `real_sfm_qualification/cpm_session2/raw/`.
+The Session 3 campaign folders (`S3`, `S3_ADD`), the probe JSONL and the CPM log are copied,
+redacted, into `real_sfm_qualification/cpm_session3/raw/`. The qualification-only Fit pause harness
+was removed after `S3`; the Scripts deployment equals its pre-harness baseline exactly.
 
-The live authority is exact production G1 after Session 2: Master `ac45e5c1…`, manifest
+The live authority is exact production G1 after Session 3: Master `ac45e5c1…`, manifest
 `d810d648…`, one sidecar `bcd97641…`.
 
 **Deployed and verified** (runbook §0):
@@ -65,6 +67,8 @@ Evidence:
 | R15 namespace isolation (Session 1 addendum, P1–P15) | **CLOSED — PASS** |
 | Session 2 S2-A_R2: open-window G1→G2 replacement (2026-10-05) | **PASS** |
 | Session 2 S2-B_R2: G1→G2 during a Save prompt (2026-10-05) | **PASS** |
+| Session 3 S3: queued Fit, G1→G2 between targets (2026-10-06) | **CORE PASS** |
+| Session 3 S3_ADD: fresh Fit committing under G2 (2026-10-06) | **PASS** |
 
 - **Clothing Fit detail:**
   - `Gfit` was authorized.
@@ -139,6 +143,25 @@ Evidence:
     untouched and the preset was removed. Its residual `character.json` metadata (`updated_at`,
     `last_validated_provider`) is never read for a decision and `semantic_overrides` is empty, so
     it cannot confound the tested boundary (adjudicated in `SESSION2_EVIDENCE.md`).
+- **Session 3 S3 (2026-10-06, pid 26156, broker `0x314d92b0`, window `0x30ee7698`):**
+  - **Target 1 under G1:** authorized and staged under G1, committed, released ok before target 2.
+  - **G2 between targets:** the Fit was deferred at index 1 behind a modal; exact G2 was activated
+    and proven live before resume.
+  - **Refused, not mutated:** at resume, the target-2 stage proof was refused
+    (`generation-mismatch`); no index-1 stage or commit; no continuation under G2.
+  - **Truthful stop:** "Clothing Fit stopped" reported 1 committed target and Undo 1 time
+    (`verified_changed=[assaultsuitbody1]`, target 2 unattempted). The target was committed with
+    plan warnings, so it is accounted as partial rather than in `changed`.
+  - **Undo, rebuild and idle state:** one Undo restored target 1 to pre-Fit (snapshot and visual).
+    CPM rebuilt to G2 in the same window. P2–P4 were 0/0/0.
+  - **Later G2 Fit:** authorized and staged under G2, then an expected structural skip
+    (`loinclothbra_chadfix_071` has no compatible Body mappings). The G2 commit is carried by
+    S3_ADD.
+- **Session 3 S3_ADD (2026-10-06, pid 2324, broker `0x31419270`, window `0xb92d1c60`):** exact G2
+  active before SFM started;
+  `assaultsuitbody1` authorized, staged, committed and verified under G2 (`committed-verified`,
+  26 mappings, 7 warnings), released ok; result PASS `partial_changed=1 failed=0 unattempted=0`;
+  P2–P4 0/0/0; one Undo; exact G1 restoration.
 - **Measurements (Session 1):**
   - process working set +36 MB across the session;
   - CPM scope 107–166 KB;
@@ -176,7 +199,7 @@ Evidence:
   (K/L).
 - **Remaining pre-K qualification:**
   - Session 2: **COMPLETE — PASS** (S2-A_R2 and S2-B_R2).
-  - Session 3: queued Fit target-1 G1 → target-2 G2, and target 1's Undo after it;
+  - Session 3: **COMPLETE — PASS** (S3 CORE PASS and S3_ADD).
   - the forced Apply and forced Fit rollback-verification failure gates;
   - then cleanup of historical authority and diagnostics, plus a focused regression.
 
@@ -185,17 +208,12 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-After designer/owner review of the Session 2 closeout, the next Blueprint-bounded milestone is
-**Session 3 preparation** (handoff §21, Clothing Fit generation transition). The case to cover:
-- start a Fit under G1 and commit target 1;
-- change to G2 before target 2;
-- target 2 is refused and does not mutate, and Fit stops;
-- target 1's Undo stays valid;
-- a later new Fit may use G2.
+After designer/owner review of the Session 3 closeout, the next Blueprint-bounded milestone is
+the **forced Apply and forced Fit rollback-verification failure gates**. They are to be prepared
+(not run) under a bounded designer assignment.
 
-It is to be prepared (not run) under a bounded designer assignment, reusing the qualified
-Checkpoint I generation mechanism. The forced Apply and Fit rollback-verification failure gates,
-then cleanup and a focused regression, follow before K.
+Cleanup of historical authority and diagnostics, and a focused regression, follow before K.
+Not started.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

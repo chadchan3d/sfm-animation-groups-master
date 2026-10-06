@@ -269,3 +269,11 @@ real_sfm_qualification/cpm_session2/raw/** -text whitespace=cr-at-eol
 # harness's SHA-256 is pinned in SESSION3_RUNBOOK.md; keep LF on every
 # checkout/export.
 real_sfm_qualification/cpm_session3/S3_Fit_Pause_Harness.py text eol=lf
+
+# CPM Session 3 raw outputs: captured evidence, SHA-256-pinned in
+# cpm_session3/raw/MANIFEST.md, mixed CRLF/LF/BOM exactly as written.
+# Never normalize on checkout, commit or archive export.
+real_sfm_qualification/cpm_session3/raw/** -text whitespace=cr-at-eol
+# The Session 3 harness records were written by Python 2.7 json.dump(indent=...),
+# whose ", " item separator leaves a trailing space on each line. Kept byte-exact.
+real_sfm_qualification/cpm_session3/raw/S3/harness_*.json -text -whitespace

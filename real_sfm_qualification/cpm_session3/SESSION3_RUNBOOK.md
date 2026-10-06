@@ -262,7 +262,7 @@ action or dialog is open.
 | C10 | SFM | **Edit → Undo** once (one Undo only). Confirm visually that `assaultsuitbody1` returned to its pre-Fit state. | — |
 | C11 | SFM | Scripts → ChadChan3D → `S3_Fit_Pause_Harness`. | `S3 UNDO SNAPSHOT WRITTEN: target 1 RESTORED to its pre-Fit values.` "does NOT match": continue, but report (adjudicated). |
 | C12 | SFM | **P4.** | — |
-| C13 | CPM | Clothing Fit tab: check only **loinclothbra_chadfix_071** → **Fit Selected to Model**. | The Fit completes with no stop dialog and no warning. Any warning or error: R3. |
+| C13 | CPM | Clothing Fit tab: check only **loinclothbra_chadfix_071** → **Fit Selected to Model**. | The Fit completes with no stop dialog and no error. A "skipped" status from production's expected structural skip (for example "has no established compatible Body mappings") is not a product failure; continue. A stop dialog, an error, or a failed / not-attempted status: R3. |
 | C14 | SFM | **P5.** Close CPM with ✕; close SFM **without saving**. | — |
 | C15 | Shell | `S2-Finalize $E3`, then `S3-RemoveHarness $E3`. | `S2 RESTORED EXACT G1`, then `S3 DEPLOYMENT RESTORED EXACT`. Otherwise R5. |
 
@@ -311,8 +311,12 @@ is restored and repeated in a new folder.
    - `CLOTHING_FIT_FAIL … index=1 … committed_current=False`.
 8. **No continuation under G2:** no further stage events for generation N.
 9. **Truthful accounting:**
-   - `CLOTHING_FIT_FAIL` shows `changed` = [assaultsuitbody1], `failed=[]` and
-     `unattempted` = [loinclothbra_chadfix_071];
+   - `CLOTHING_FIT_FAIL` shows `failed=[]` and `unattempted` = [loinclothbra_chadfix_071]. Target 1
+     is in `changed` **or**, when it committed with plan warnings, in the partial set (it is then
+     absent from `changed`);
+   - `G18AN_FIT_FAILURE_DIALOG` shows `verified_changed=[u'assaultsuitbody1']`, empty
+     `committed_uncertain` and `recovery_unverified`, `unattempted=[u'loinclothbra_chadfix_071']`
+     and `undo_count=1`;
    - the "Clothing Fit stopped" dialog and the status say 1 target committed.
 10. **Target-1 Undo valid:**
     - `harness_undo_snapshot.json` shows `undo_restored_pre_fit: true`: after-Undo equals pre-Fit,
@@ -327,7 +331,9 @@ is restored and repeated in a new folder.
     - `…AUTHORIZED operation=u'Clothing Fit' sha256=54413b6c…`;
     - `PROD_CPM_FIT_STAGE_OPEN index=0 gfit=54413b6c…`;
     - `PROD_CPM_FIT_STAGE_RELEASED index=0 ok=True`;
-    - `CLOTHING_FIT_RESULT=PASS … failed=0 unattempted=0`.
+    - `CLOTHING_FIT_RESULT=PASS … failed=0 unattempted=0`. An expected structural skip
+      (`CLOTHING_FIT_STAGE=SKIP`, counted in `skipped`) is not a product failure. It does not prove
+      a G2 commit; that is proven by addendum S3_ADD (§10).
 13. **No lease across queued stages:**
     - every `FIT_STAGE_OPEN` is followed by `RELEASED ok=True` before any later stage event;
     - P2–P5 and the pause record show 0 leases, 0 unreleased and 0 open providers.

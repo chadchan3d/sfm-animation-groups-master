@@ -1,0 +1,389 @@
+[00:06:00.583000] ========================================================================================================================
+[00:06:00.583000] SFM Character Preset Manager 0.2.0-rc7-g18an-save-new-copy
+[00:06:00.583000] ARCHITECTURE='generic selected-model context + Master scopes + v3 storage + readable legacy v2 + indexed Body Presets + reusable Clothing Fit'
+[00:06:00.584000] G18AN_ANIMSET_RENAME_RESILIENCE='Model path + checksum durable; Animation Set name mutable display metadata; ambiguity fails closed'
+[00:06:00.584000] G18AN_FOREIGN_MODAL_YIELD='Any foreign active Qt modal hides CPM after scene suspension; restores without focus steal'
+[00:06:00.585000] SIDECAR_STATUS='required generated SIDECAR; active Master SHA must match sidecar source generation; no TXT fallback'
+[00:06:00.585000] G18AN_WINDOW_POLICY='Qt.Dialog + WindowStaysOnTopHint; nonmodal; foreign-modal priority watcher=100ms'
+[00:06:00.585000] G18AN_RUN run_id=u'20261006-000600-pid26156' pid=26156 parity_oracle=False
+[00:06:00.586000] PROD_R15_MODULE name='chadchan3d_cpm_app' loader='cpm-private-loader-v1' state='ready' build_sha256='9a78fc9692cfa3cae5f3d8443a6c95537248c348d0cd4230c7ba744d99e77900' file='<SFM_GAME>\\usermod\\scripts\\ChadChan3D_CPM\\SFM_Character_Preset_Manager.py'
+[00:06:00.586000] G18AN_PROVIDER_FORCE_MODE=u'SIDECAR' parity_shortcut=u'Ctrl+Shift+P'
+[00:06:00.589000] PROD_WINDOW_ICON status='embedded-loaded' bytes=6218
+[00:06:00.622000] PROD_OPERATION_BEGIN id=1 kind=u'Refresh Models' context=None
+[00:06:00.623000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:06:00.627000] PROD_RESOURCE label=u'ACTION_BEGIN:Refresh Models' working_set_mb=2608.94140625 private_commit_mb=2652.01953125 pagefile_commit_mb=2652.01953125 handles=1072 gdi=1136 user=105 top_widgets=58 dialogs=2
+[00:06:00.637000] ASTRA_PERF area=u'manager' phase=u'enumerate-models' seconds=0.010000 candidates=3
+[00:06:00.642000] PROD_MODELS count=3 initial_index=0 candidates=[(u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', -791536511, u'assaultsuitbody1', 34), (u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', -1441261258, u'krystal20201', 80), (u'models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl', 480892851, u'loinclothbra_chadfix_071', 12)]
+[00:06:00.642000] ASTRA_PERF area=u'manager' phase=u'refresh-models-total' seconds=0.015000 candidates=3
+[00:06:00.643000] PROD_RESOURCE label=u'ACTION_END:Refresh Models' working_set_mb=2609.5625 private_commit_mb=2652.5078125 pagefile_commit_mb=2652.5078125 handles=1072 gdi=1136 user=105 top_widgets=58 dialogs=2
+[00:06:00.643000] PROD_OPERATION_END id=1 kind=u'Refresh Models' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[00:06:00.644000] G18AN_OPERATION_PROVIDER_STATE event='end' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:06:00.644000] G18AN_MODAL_WATCHER_STARTED interval_ms=100 scene_pollers=0
+[00:06:00.675000] PROD_WINDOW_SHOWN=True initial_index=0
+[00:06:00.676000] MAINMENU_CALLBACK_RETURNING=True
+[00:06:00.677000] ========================================================================================================================
+[00:06:00.683000] PROD_OPERATION_EVENT_TURN id=1 kind=u'Refresh Models' run_id=u'20261006-000600-pid26156' pid=26156
+[00:06:00.684000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Refresh Models' working_set_mb=2609.94140625 private_commit_mb=2652.87109375 pagefile_commit_mb=2652.87109375 handles=1073 gdi=1143 user=112 top_widgets=58 dialogs=2
+[00:06:08.589000] PROD_OPERATION_BEGIN id=2 kind=u'Select Model' context=None
+[00:06:08.590000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:06:08.590000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2609.06640625 private_commit_mb=2651.72265625 pagefile_commit_mb=2651.72265625 handles=1073 gdi=1153 user=114 top_widgets=58 dialogs=2
+[00:06:08.591000] ASTRA_PERF area=u'model-select' phase=u'resolve-target' seconds=0.000000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl'
+[00:06:08.591000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} previous=None
+[00:06:08.591000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2609.06640625 private_commit_mb=2651.72265625 pagefile_commit_mb=2651.72265625 handles=1073 gdi=1153 user=114 top_widgets=58 dialogs=2
+[00:06:08.821000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:06:10.077000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93' requested_literals=80 master_unknown_literals=0
+[00:06:10.106000] ASTRA_PERF area=u'model-render' phase=u'semantic-scope' seconds=1.514000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' provider_health=u'healthy'
+[00:06:10.107000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2610.28515625 private_commit_mb=2654.421875 pagefile_commit_mb=2654.421875 handles=1073 gdi=1153 user=114 top_widgets=58 dialogs=2
+[00:06:10.107000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} provider_health=u'healthy' scope_ready=True
+[00:06:10.108000] PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:06:10.115000] ASTRA_PERF area=u'model-render' phase=u'discover-body-library' seconds=0.007000 items=5
+[00:06:10.116000] PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} count=5
+[00:06:10.116000] PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:06:10.117000] ASTRA_PERF area=u'model-render' phase=u'discover-expression-library' seconds=0.001000 items=0
+[00:06:10.117000] PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} count=0
+[00:06:10.117000] PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:06:10.118000] ASTRA_PERF area=u'model-render' phase=u'load-library-meta' seconds=0.000000 favorites=1
+[00:06:10.119000] PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} favorites=1
+[00:06:10.119000] ASTRA_PERF area=u'model-render' phase=u'validate-library-ids' seconds=0.000000
+[00:06:10.119000] PROD_MODEL_SWITCH_STAGE stage='library-validated' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:06:10.119000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:06:10.120000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=5
+[00:06:10.120000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=None
+[00:06:10.120000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=5 favorites=1
+[00:06:10.120000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[00:06:10.121000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[00:06:10.121000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-bbec0bddf2ec47c3b11a3b3d5a11f087' source=u'v3' favorite=True
+[00:06:10.122000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-bbec0bddf2ec47c3b11a3b3d5a11f087'
+[00:06:10.123000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-68a9daeea9e04c43a3e1ed0c46e6a47d' source=u'v3' favorite=False
+[00:06:10.123000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-68a9daeea9e04c43a3e1ed0c46e6a47d'
+[00:06:10.123000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-ed5b859b456f483bb2be8cd96f5cb8e9' source=u'v3' favorite=False
+[00:06:10.123000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-ed5b859b456f483bb2be8cd96f5cb8e9'
+[00:06:10.123000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-55ac307b2d974ccca36e54b45a76a8a5' source=u'v3' favorite=False
+[00:06:10.124000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-55ac307b2d974ccca36e54b45a76a8a5'
+[00:06:10.124000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=4 preset=u'preset-98001ce97aa346f39bceb9c9ef0dbee8' source=u'v3' favorite=False
+[00:06:10.124000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=4 preset=u'preset-98001ce97aa346f39bceb9c9ef0dbee8'
+[00:06:10.124000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=-1
+[00:06:10.125000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[00:06:10.125000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:06:10.146000] PROD_PRESET_UI stage='ready' kind=u'body'
+[00:06:10.146000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.026000 kind=u'body' source=5 rows=5
+[00:06:10.146000] ASTRA_PERF area=u'model-render' phase=u'publish-body-preset-ui' seconds=0.026000 items=5
+[00:06:10.146000] PROD_PRESET_UI stage='begin' kind=u'expression' source_count=0
+[00:06:10.147000] PROD_PRESET_UI stage='selection-captured' kind=u'expression' select_id=None
+[00:06:10.147000] PROD_PRESET_UI stage='rows-ready' kind=u'expression' row_count=0 favorites=0
+[00:06:10.148000] PROD_PRESET_UI stage='signals-blocked' kind=u'expression'
+[00:06:10.148000] PROD_PRESET_UI stage='cleared' kind=u'expression'
+[00:06:10.148000] PROD_PRESET_UI stage='selection-restored' kind=u'expression' selected_row=-1
+[00:06:10.148000] PROD_PRESET_UI stage='signals-restored' kind=u'expression'
+[00:06:10.149000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:06:10.167000] PROD_PRESET_UI stage='ready' kind=u'expression'
+[00:06:10.168000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.021000 kind=u'expression' source=0 rows=0
+[00:06:10.168000] ASTRA_PERF area=u'model-render' phase=u'publish-expression-preset-ui' seconds=0.022000 items=0
+[00:06:10.168000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} body=5 expression=0
+[00:06:10.169000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:06:10.187000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:06:10.204000] ASTRA_PERF area=u'model-render' phase=u'publish-semantic-ui' seconds=0.036000 unresolved=0 overrides=0 provider_health='healthy'
+[00:06:10.204000] PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} provider_health='healthy'
+[00:06:10.205000] CLOTHING_FIT_CANDIDATES source={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} same_folder=[] nearby=[{'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'}, {'checksum': 480892851, 'model': u'models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl', 'name': u'loinclothbra_chadfix_071'}] other=[]
+[00:06:10.206000] ASTRA_PERF area=u'clothing-fit' phase=u'discover-and-publish' seconds=0.001000 same=0 nearby=2 other=0
+[00:06:10.206000] ASTRA_PERF area=u'model-render' phase=u'publish-clothing-fit-ui' seconds=0.002000
+[00:06:10.206000] PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:06:10.206000] PROD_SELECTION model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' checksum=-1441261258 animset=u'krystal20201' library_key=u'modelpath-sha256-v1:7d2aee52ef3adaa25b252d840b175811ca78893de4fc39b41f8d459f283107a0' expression=52 body=26 other=2 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[00:06:10.207000] ASTRA_PERF area=u'model-render' phase=u'render-total' seconds=1.616000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl'
+[00:06:10.207000] G18AN_LIVE_SELECTION_PROVIDER_STATE model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:06:10.207000] ASTRA_PERF area=u'model-select' phase=u'select-total' seconds=1.616000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl'
+[00:06:10.208000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2610.3828125 private_commit_mb=2654.6796875 pagefile_commit_mb=2654.6796875 handles=1073 gdi=1153 user=114 top_widgets=58 dialogs=2
+[00:06:10.208000] PROD_OPERATION_END id=2 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[00:06:10.209000] G18AN_OPERATION_PROVIDER_STATE event='end' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:06:10.218000] PROD_OPERATION_EVENT_TURN id=2 kind=u'Select Model' run_id=u'20261006-000600-pid26156' pid=26156
+[00:06:10.219000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2610.3828125 private_commit_mb=2654.6796875 pagefile_commit_mb=2654.6796875 handles=1073 gdi=1153 user=115 top_widgets=58 dialogs=2
+[00:06:14.991000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:09:52.500000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:09:53.022000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:10:01.445000] PROD_OPERATION_BEGIN id=3 kind=u'Clothing Fit' context={'animset_id': (u'DmeAnimationSet', u'krystal20201', 21694, 439640400L), 'model_instance_id': (u'DmeGameModel', u'krystal2020_GameModel', 21695, 4268822360L), 'document_file_id': 0, 'library_identity': {'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}, 'shot_id': (u'DmeFilmClip', u'shot10', 21692, 4274719140L)}
+[00:10:01.446000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=3 kind=u'Clothing Fit' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:10:01.447000] PROD_RESOURCE label=u'ACTION_BEGIN:Clothing Fit' working_set_mb=2610.23828125 private_commit_mb=2654.6640625 pagefile_commit_mb=2654.6640625 handles=1076 gdi=1164 user=119 top_widgets=59 dialogs=3
+[00:10:01.448000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:10:01.469000] PROD_CPM_OPERATION_AUTHORIZED operation=u'Clothing Fit' sha256=ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93 kind=u'body' membership=26
+[00:10:01.479000] CLOTHING_FIT_START generation=2 operation_id=3 source={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} selected=[{'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'}, {'checksum': 480892851, 'model': u'models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl', 'name': u'loinclothbra_chadfix_071'}] pure_source_baseline=True
+[00:10:01.484000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:10:02.677000] PROD_CPM_FIT_STAGE_OPEN index=0 gfit=ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93 literals=34
+[00:10:02.690000] PROD_OPERATION_PHASE id=3 phase=u'native-commit' detail={'kind': u'clothing-fit', 'target_identity': {'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'}}
+[00:10:02.719000] Clothing Fit: assaultsuitbody1_REFRESH requested=0.16669999063014984 before=0.16669999063014984 after_set=0.16669999063014984 after_process=0.16669999063014984
+[00:10:02.731000] CLOTHING_FIT_STAGE=PASS generation=2 index=0 target={'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'} phase=u'committed-verified' mappings=26 warnings=7 committed=True
+[00:10:02.731000] PROD_CPM_FIT_STAGE_RELEASED index=0 ok=True
+[00:10:02.929000] G18AN_MODAL_YIELD_ENTER class=u'QDialog' title=u'CPM Session 3 -- Fit paused' was_visible=True operation=u'Clothing Fit' fit_active=True
+[00:10:02.934000] G18AN_MODAL_DEFER_FIT generation=2 index=1
+[00:13:37.693000] G18AN_MODAL_YIELD_EXIT restored=True deferred_fit=(2, 1)
+[00:13:37.696000] G18AN_MODAL_RESUME_FIT generation=2 index=1
+[00:13:37.702000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:13:42.170000] PROD_CPM_FIT_STAGE_REFUSED index=1 gfit=ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93 kind=u'generation-mismatch' reason=u'generation-mismatch'
+[00:13:42.170000] CLOTHING_FIT_FAIL generation=2 index=1 target={'checksum': 480892851, 'model': u'models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl', 'name': u'loinclothbra_chadfix_071'} error=ProdCpmFitStop("The selected model's semantic scope is stale. Reselect the model.",) committed_current=False changed=[] failed=[] unattempted=[{'checksum': 480892851, 'model': u'models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl', 'name': u'loinclothbra_chadfix_071'}]
+[00:13:42.174000] Traceback (most recent call last):
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 33929, in fit_stage
+    index,
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 18966, in prod_cpm_open_fit_stage
+    index,
+ProdCpmFitStop: The selected model's semantic scope is stale. Reselect the model.
+
+[00:13:42.176000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:13:42.193000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:13:42.211000] PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED identity={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:13:42.212000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:13:42.235000] G18AN_FIT_FAILURE_DIALOG verified_changed=[u'assaultsuitbody1'] committed_uncertain=[] recovery_unverified=[] unattempted=[u'loinclothbra_chadfix_071'] undo_count=1
+[00:14:05.360000] PROD_OPERATION_END id=3 kind=u'Clothing Fit' phase=u'native-commit' native_commit={'kind': u'clothing-fit', 'target_identity': {'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'}} durable_commit=None
+[00:14:05.361000] G18AN_OPERATION_PROVIDER_STATE event='end' id=3 kind=u'Clothing Fit' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:14:05.372000] PROD_OPERATION_EVENT_TURN id=3 kind=u'Clothing Fit' run_id=u'20261006-000600-pid26156' pid=26156
+[00:14:05.373000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Clothing Fit' working_set_mb=2614.75390625 private_commit_mb=2658.44140625 pagefile_commit_mb=2658.44140625 handles=1082 gdi=1172 user=127 top_widgets=60 dialogs=4
+[00:14:05.380000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:14:05.399000] PROD_CPM_STALE_GENERATION_REBUILD identity={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:14:05.399000] PROD_OPERATION_BEGIN id=4 kind=u'Select Model' context=None
+[00:14:05.399000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=4 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:14:05.400000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2614.75390625 private_commit_mb=2658.44140625 pagefile_commit_mb=2658.44140625 handles=1082 gdi=1172 user=125 top_widgets=60 dialogs=4
+[00:14:05.400000] ASTRA_PERF area=u'model-select' phase=u'resolve-target' seconds=0.000000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl'
+[00:14:05.400000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} previous={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:14:05.401000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2614.75390625 private_commit_mb=2658.44140625 pagefile_commit_mb=2658.44140625 handles=1082 gdi=1172 user=125 top_widgets=60 dialogs=4
+[00:14:05.401000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:14:07.779000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7' requested_literals=80 master_unknown_literals=0
+[00:14:07.807000] ASTRA_PERF area=u'model-render' phase=u'semantic-scope' seconds=2.406000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' provider_health=u'healthy'
+[00:14:07.808000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2614.3671875 private_commit_mb=2657.3203125 pagefile_commit_mb=2657.3203125 handles=1082 gdi=1172 user=125 top_widgets=60 dialogs=4
+[00:14:07.808000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} provider_health=u'healthy' scope_ready=True
+[00:14:07.809000] PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:14:07.817000] ASTRA_PERF area=u'model-render' phase=u'discover-body-library' seconds=0.008000 items=5
+[00:14:07.817000] PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} count=5
+[00:14:07.818000] PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:14:07.818000] ASTRA_PERF area=u'model-render' phase=u'discover-expression-library' seconds=0.000000 items=0
+[00:14:07.819000] PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} count=0
+[00:14:07.819000] PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:14:07.820000] ASTRA_PERF area=u'model-render' phase=u'load-library-meta' seconds=0.001000 favorites=1
+[00:14:07.820000] PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} favorites=1
+[00:14:07.821000] ASTRA_PERF area=u'model-render' phase=u'validate-library-ids' seconds=0.000000
+[00:14:07.821000] PROD_MODEL_SWITCH_STAGE stage='library-validated' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:14:07.821000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:14:07.821000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=5
+[00:14:07.822000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=None
+[00:14:07.822000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=5 favorites=1
+[00:14:07.822000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[00:14:07.823000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[00:14:07.823000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-bbec0bddf2ec47c3b11a3b3d5a11f087' source=u'v3' favorite=True
+[00:14:07.824000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-bbec0bddf2ec47c3b11a3b3d5a11f087'
+[00:14:07.824000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-68a9daeea9e04c43a3e1ed0c46e6a47d' source=u'v3' favorite=False
+[00:14:07.824000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-68a9daeea9e04c43a3e1ed0c46e6a47d'
+[00:14:07.824000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-ed5b859b456f483bb2be8cd96f5cb8e9' source=u'v3' favorite=False
+[00:14:07.825000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-ed5b859b456f483bb2be8cd96f5cb8e9'
+[00:14:07.825000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-55ac307b2d974ccca36e54b45a76a8a5' source=u'v3' favorite=False
+[00:14:07.825000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-55ac307b2d974ccca36e54b45a76a8a5'
+[00:14:07.825000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=4 preset=u'preset-98001ce97aa346f39bceb9c9ef0dbee8' source=u'v3' favorite=False
+[00:14:07.826000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=4 preset=u'preset-98001ce97aa346f39bceb9c9ef0dbee8'
+[00:14:07.826000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=-1
+[00:14:07.826000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[00:14:07.827000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:14:07.845000] PROD_PRESET_UI stage='ready' kind=u'body'
+[00:14:07.846000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.025000 kind=u'body' source=5 rows=5
+[00:14:07.846000] ASTRA_PERF area=u'model-render' phase=u'publish-body-preset-ui' seconds=0.025000 items=5
+[00:14:07.846000] PROD_PRESET_UI stage='begin' kind=u'expression' source_count=0
+[00:14:07.846000] PROD_PRESET_UI stage='selection-captured' kind=u'expression' select_id=None
+[00:14:07.847000] PROD_PRESET_UI stage='rows-ready' kind=u'expression' row_count=0 favorites=0
+[00:14:07.847000] PROD_PRESET_UI stage='signals-blocked' kind=u'expression'
+[00:14:07.847000] PROD_PRESET_UI stage='cleared' kind=u'expression'
+[00:14:07.847000] PROD_PRESET_UI stage='selection-restored' kind=u'expression' selected_row=-1
+[00:14:07.848000] PROD_PRESET_UI stage='signals-restored' kind=u'expression'
+[00:14:07.848000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:14:07.866000] PROD_PRESET_UI stage='ready' kind=u'expression'
+[00:14:07.866000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.020000 kind=u'expression' source=0 rows=0
+[00:14:07.866000] ASTRA_PERF area=u'model-render' phase=u'publish-expression-preset-ui' seconds=0.020000 items=0
+[00:14:07.867000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} body=5 expression=0
+[00:14:07.868000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:14:07.887000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:14:07.904000] ASTRA_PERF area=u'model-render' phase=u'publish-semantic-ui' seconds=0.037000 unresolved=0 overrides=0 provider_health='healthy'
+[00:14:07.904000] PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} provider_health='healthy'
+[00:14:07.905000] CLOTHING_FIT_CANDIDATES source={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} same_folder=[] nearby=[{'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'}, {'checksum': 480892851, 'model': u'models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl', 'name': u'loinclothbra_chadfix_071'}] other=[]
+[00:14:07.905000] ASTRA_PERF area=u'clothing-fit' phase=u'discover-and-publish' seconds=0.001000 same=0 nearby=2 other=0
+[00:14:07.906000] ASTRA_PERF area=u'model-render' phase=u'publish-clothing-fit-ui' seconds=0.001000
+[00:14:07.906000] PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[00:14:07.906000] PROD_SELECTION model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' checksum=-1441261258 animset=u'krystal20201' library_key=u'modelpath-sha256-v1:7d2aee52ef3adaa25b252d840b175811ca78893de4fc39b41f8d459f283107a0' expression=52 body=26 other=2 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[00:14:07.906000] ASTRA_PERF area=u'model-render' phase=u'render-total' seconds=2.506000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl'
+[00:14:07.907000] G18AN_LIVE_SELECTION_PROVIDER_STATE model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:14:07.907000] ASTRA_PERF area=u'model-select' phase=u'select-total' seconds=2.507000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl'
+[00:14:07.908000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2614.609375 private_commit_mb=2657.5 pagefile_commit_mb=2657.5 handles=1082 gdi=1172 user=125 top_widgets=60 dialogs=4
+[00:14:07.909000] PROD_OPERATION_END id=4 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[00:14:07.909000] G18AN_OPERATION_PROVIDER_STATE event='end' id=4 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:14:07.919000] PROD_OPERATION_EVENT_TURN id=4 kind=u'Select Model' run_id=u'20261006-000600-pid26156' pid=26156
+[00:14:07.920000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2614.609375 private_commit_mb=2657.5 pagefile_commit_mb=2657.5 handles=1082 gdi=1172 user=126 top_widgets=60 dialogs=4
+[00:25:04.185000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:25:10.275000] PROD_OPERATION_BEGIN id=5 kind=u'Clothing Fit' context={'animset_id': (u'DmeAnimationSet', u'krystal20201', 21694, 439640400L), 'model_instance_id': (u'DmeGameModel', u'krystal2020_GameModel', 21695, 4268822360L), 'document_file_id': 0, 'library_identity': {'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}, 'shot_id': (u'DmeFilmClip', u'shot10', 21692, 4274719140L)}
+[00:25:10.276000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=5 kind=u'Clothing Fit' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:25:10.276000] PROD_RESOURCE label=u'ACTION_BEGIN:Clothing Fit' working_set_mb=2614.9609375 private_commit_mb=2658.046875 pagefile_commit_mb=2658.046875 handles=1082 gdi=1180 user=126 top_widgets=60 dialogs=4
+[00:25:10.277000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:25:10.297000] PROD_CPM_OPERATION_AUTHORIZED operation=u'Clothing Fit' sha256=54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7 kind=u'body' membership=26
+[00:25:10.306000] CLOTHING_FIT_START generation=3 operation_id=5 source={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} selected=[{'checksum': 480892851, 'model': u'models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl', 'name': u'loinclothbra_chadfix_071'}] pure_source_baseline=True
+[00:25:10.310000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:25:12.569000] PROD_CPM_FIT_STAGE_OPEN index=0 gfit=54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7 literals=34
+[00:25:12.578000] CLOTHING_FIT_STAGE=SKIP generation=3 index=0 target={'checksum': 480892851, 'model': u'models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl', 'name': u'loinclothbra_chadfix_071'} reason=RuntimeError("Target u'loinclothbra_chadfix_071' has no established compatible Body mappings.",)
+[00:25:12.578000] PROD_CPM_FIT_STAGE_RELEASED index=0 ok=True
+[00:25:12.597000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:25:12.616000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:25:12.634000] CLOTHING_FIT_RESULT=PASS generation=3 selected=1 changed=0 already_matched=0 partial=0 partial_changed=0 partial_already_matched=0 skipped=1 failed=0 unattempted=0 committed_order=[] reusable=True pure_source_baseline=True
+[00:25:12.634000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:25:12.655000] G18AN_POST_FIT_ACTION_STATE save_body=True save_expr=True semantic_ready=True
+[00:25:12.655000] PROD_OPERATION_END id=5 kind=u'Clothing Fit' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[00:25:12.656000] G18AN_OPERATION_PROVIDER_STATE event='end' id=5 kind=u'Clothing Fit' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:25:12.659000] PROD_OPERATION_EVENT_TURN id=5 kind=u'Clothing Fit' run_id=u'20261006-000600-pid26156' pid=26156
+[00:25:12.660000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Clothing Fit' working_set_mb=2616.203125 private_commit_mb=2660.96875 pagefile_commit_mb=2660.96875 handles=1082 gdi=1180 user=127 top_widgets=60 dialogs=4
+[00:26:07.435000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[00:26:29.459000] G18AN_CLOSE_PROVIDER_STATE stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[00:26:29.459000] PROD_CLOSE_REQUEST operation=None fit_active=False fit_stage_running=False
+[00:26:29.459000] PROD_CLOSE_FINALIZED=True
+[01:08:20.285000] ========================================================================================================================
+[01:08:20.285000] SFM Character Preset Manager 0.2.0-rc7-g18an-save-new-copy
+[01:08:20.285000] ARCHITECTURE='generic selected-model context + Master scopes + v3 storage + readable legacy v2 + indexed Body Presets + reusable Clothing Fit'
+[01:08:20.286000] G18AN_ANIMSET_RENAME_RESILIENCE='Model path + checksum durable; Animation Set name mutable display metadata; ambiguity fails closed'
+[01:08:20.286000] G18AN_FOREIGN_MODAL_YIELD='Any foreign active Qt modal hides CPM after scene suspension; restores without focus steal'
+[01:08:20.286000] SIDECAR_STATUS='required generated SIDECAR; active Master SHA must match sidecar source generation; no TXT fallback'
+[01:08:20.286000] G18AN_WINDOW_POLICY='Qt.Dialog + WindowStaysOnTopHint; nonmodal; foreign-modal priority watcher=100ms'
+[01:08:20.287000] G18AN_RUN run_id=u'20261006-010820-pid2324' pid=2324 parity_oracle=False
+[01:08:20.287000] PROD_R15_MODULE name='chadchan3d_cpm_app' loader='cpm-private-loader-v1' state='ready' build_sha256='9a78fc9692cfa3cae5f3d8443a6c95537248c348d0cd4230c7ba744d99e77900' file='<SFM_GAME>\\usermod\\scripts\\ChadChan3D_CPM\\SFM_Character_Preset_Manager.py'
+[01:08:20.287000] G18AN_PROVIDER_FORCE_MODE=u'SIDECAR' parity_shortcut=u'Ctrl+Shift+P'
+[01:08:20.290000] PROD_WINDOW_ICON status='embedded-loaded' bytes=6218
+[01:08:20.320000] PROD_OPERATION_BEGIN id=1 kind=u'Refresh Models' context=None
+[01:08:20.320000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:08:20.324000] PROD_RESOURCE label=u'ACTION_BEGIN:Refresh Models' working_set_mb=2594.0546875 private_commit_mb=2636.51171875 pagefile_commit_mb=2636.51171875 handles=1157 gdi=1109 user=93 top_widgets=57 dialogs=2
+[01:08:20.336000] ASTRA_PERF area=u'manager' phase=u'enumerate-models' seconds=0.011000 candidates=2
+[01:08:20.342000] PROD_MODELS count=2 initial_index=0 candidates=[(u'models/fursonas/foxmccouldwm.mdl', -612190634, u'foxmccouldwm1', 40), (u'models/annoad/foxbase/mia/mia.mdl', 1153028609, u'mia1', 108)]
+[01:08:20.342000] ASTRA_PERF area=u'manager' phase=u'refresh-models-total' seconds=0.018000 candidates=2
+[01:08:20.343000] PROD_RESOURCE label=u'ACTION_END:Refresh Models' working_set_mb=2594.74609375 private_commit_mb=2637.09375 pagefile_commit_mb=2637.09375 handles=1157 gdi=1109 user=93 top_widgets=57 dialogs=2
+[01:08:20.343000] PROD_OPERATION_END id=1 kind=u'Refresh Models' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[01:08:20.343000] G18AN_OPERATION_PROVIDER_STATE event='end' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:08:20.344000] G18AN_MODAL_WATCHER_STARTED interval_ms=100 scene_pollers=0
+[01:08:20.371000] PROD_WINDOW_SHOWN=True initial_index=0
+[01:08:20.372000] MAINMENU_CALLBACK_RETURNING=True
+[01:08:20.372000] ========================================================================================================================
+[01:08:20.378000] PROD_OPERATION_EVENT_TURN id=1 kind=u'Refresh Models' run_id=u'20261006-010820-pid2324' pid=2324
+[01:08:20.379000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Refresh Models' working_set_mb=2595.16015625 private_commit_mb=2637.48046875 pagefile_commit_mb=2637.48046875 handles=1158 gdi=1116 user=100 top_widgets=57 dialogs=2
+[01:08:35.296000] G18AN_CLOSE_PROVIDER_STATE stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:08:35.296000] PROD_CLOSE_REQUEST operation=None fit_active=False fit_stage_running=False
+[01:08:35.297000] PROD_CLOSE_FINALIZED=True
+[01:08:38.469000] ========================================================================================================================
+[01:08:38.470000] SFM Character Preset Manager 0.2.0-rc7-g18an-save-new-copy
+[01:08:38.470000] ARCHITECTURE='generic selected-model context + Master scopes + v3 storage + readable legacy v2 + indexed Body Presets + reusable Clothing Fit'
+[01:08:38.470000] G18AN_ANIMSET_RENAME_RESILIENCE='Model path + checksum durable; Animation Set name mutable display metadata; ambiguity fails closed'
+[01:08:38.470000] G18AN_FOREIGN_MODAL_YIELD='Any foreign active Qt modal hides CPM after scene suspension; restores without focus steal'
+[01:08:38.471000] SIDECAR_STATUS='required generated SIDECAR; active Master SHA must match sidecar source generation; no TXT fallback'
+[01:08:38.471000] G18AN_WINDOW_POLICY='Qt.Dialog + WindowStaysOnTopHint; nonmodal; foreign-modal priority watcher=100ms'
+[01:08:38.471000] G18AN_RUN run_id=u'20261006-010820-pid2324' pid=2324 parity_oracle=False
+[01:08:38.471000] PROD_R15_MODULE name='chadchan3d_cpm_app' loader='cpm-private-loader-v1' state='ready' build_sha256='9a78fc9692cfa3cae5f3d8443a6c95537248c348d0cd4230c7ba744d99e77900' file='<SFM_GAME>\\usermod\\scripts\\ChadChan3D_CPM\\SFM_Character_Preset_Manager.py'
+[01:08:38.472000] G18AN_PROVIDER_FORCE_MODE=u'SIDECAR' parity_shortcut=u'Ctrl+Shift+P'
+[01:08:38.499000] PROD_OPERATION_BEGIN id=1 kind=u'Refresh Models' context=None
+[01:08:38.499000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:08:38.500000] PROD_RESOURCE label=u'ACTION_BEGIN:Refresh Models' working_set_mb=2602.21875 private_commit_mb=2645.703125 pagefile_commit_mb=2645.703125 handles=1167 gdi=1123 user=100 top_widgets=57 dialogs=2
+[01:08:38.508000] ASTRA_PERF area=u'manager' phase=u'enumerate-models' seconds=0.008000 candidates=3
+[01:08:38.509000] PROD_MODELS count=3 initial_index=0 candidates=[(u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', -791536511, u'assaultsuitbody1', 34), (u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', -1441261258, u'krystal20201', 80), (u'models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl', 480892851, u'loinclothbra_chadfix_071', 12)]
+[01:08:38.510000] ASTRA_PERF area=u'manager' phase=u'refresh-models-total' seconds=0.009000 candidates=3
+[01:08:38.510000] PROD_RESOURCE label=u'ACTION_END:Refresh Models' working_set_mb=2602.21875 private_commit_mb=2645.703125 pagefile_commit_mb=2645.703125 handles=1167 gdi=1123 user=100 top_widgets=57 dialogs=2
+[01:08:38.511000] PROD_OPERATION_END id=1 kind=u'Refresh Models' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[01:08:38.511000] G18AN_OPERATION_PROVIDER_STATE event='end' id=1 kind=u'Refresh Models' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:08:38.511000] G18AN_MODAL_WATCHER_STARTED interval_ms=100 scene_pollers=0
+[01:08:38.533000] PROD_WINDOW_SHOWN=True initial_index=0
+[01:08:38.534000] MAINMENU_CALLBACK_RETURNING=True
+[01:08:38.534000] ========================================================================================================================
+[01:08:38.539000] PROD_OPERATION_EVENT_TURN id=1 kind=u'Refresh Models' run_id=u'20261006-010820-pid2324' pid=2324
+[01:08:38.540000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Refresh Models' working_set_mb=2602.22265625 private_commit_mb=2645.703125 pagefile_commit_mb=2645.703125 handles=1168 gdi=1129 user=107 top_widgets=57 dialogs=2
+[01:08:40.592000] PROD_OPERATION_BEGIN id=2 kind=u'Select Model' context=None
+[01:08:40.593000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:08:40.593000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2603.47265625 private_commit_mb=2646.796875 pagefile_commit_mb=2646.796875 handles=1168 gdi=1139 user=109 top_widgets=57 dialogs=2
+[01:08:40.594000] ASTRA_PERF area=u'model-select' phase=u'resolve-target' seconds=0.001000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl'
+[01:08:40.594000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} previous=None
+[01:08:40.594000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2603.47265625 private_commit_mb=2646.796875 pagefile_commit_mb=2646.796875 handles=1168 gdi=1139 user=109 top_widgets=57 dialogs=2
+[01:08:40.620000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:08:43.292000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7' requested_literals=80 master_unknown_literals=0
+[01:08:43.330000] ASTRA_PERF area=u'model-render' phase=u'semantic-scope' seconds=2.734000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' provider_health=u'healthy'
+[01:08:43.330000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2603.6015625 private_commit_mb=2648.71484375 pagefile_commit_mb=2648.71484375 handles=1168 gdi=1139 user=109 top_widgets=57 dialogs=2
+[01:08:43.331000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} provider_health=u'healthy' scope_ready=True
+[01:08:43.331000] PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[01:08:43.340000] ASTRA_PERF area=u'model-render' phase=u'discover-body-library' seconds=0.009000 items=5
+[01:08:43.340000] PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} count=5
+[01:08:43.341000] PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[01:08:43.341000] ASTRA_PERF area=u'model-render' phase=u'discover-expression-library' seconds=0.000000 items=0
+[01:08:43.342000] PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} count=0
+[01:08:43.342000] PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[01:08:43.343000] ASTRA_PERF area=u'model-render' phase=u'load-library-meta' seconds=0.001000 favorites=1
+[01:08:43.343000] PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} favorites=1
+[01:08:43.344000] ASTRA_PERF area=u'model-render' phase=u'validate-library-ids' seconds=0.000000
+[01:08:43.344000] PROD_MODEL_SWITCH_STAGE stage='library-validated' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[01:08:43.344000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[01:08:43.345000] PROD_PRESET_UI stage='begin' kind=u'body' source_count=5
+[01:08:43.345000] PROD_PRESET_UI stage='selection-captured' kind=u'body' select_id=None
+[01:08:43.345000] PROD_PRESET_UI stage='rows-ready' kind=u'body' row_count=5 favorites=1
+[01:08:43.345000] PROD_PRESET_UI stage='signals-blocked' kind=u'body'
+[01:08:43.346000] PROD_PRESET_UI stage='cleared' kind=u'body'
+[01:08:43.346000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=0 preset=u'preset-bbec0bddf2ec47c3b11a3b3d5a11f087' source=u'v3' favorite=True
+[01:08:43.346000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=0 preset=u'preset-bbec0bddf2ec47c3b11a3b3d5a11f087'
+[01:08:43.347000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=1 preset=u'preset-68a9daeea9e04c43a3e1ed0c46e6a47d' source=u'v3' favorite=False
+[01:08:43.347000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=1 preset=u'preset-68a9daeea9e04c43a3e1ed0c46e6a47d'
+[01:08:43.347000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=2 preset=u'preset-ed5b859b456f483bb2be8cd96f5cb8e9' source=u'v3' favorite=False
+[01:08:43.347000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=2 preset=u'preset-ed5b859b456f483bb2be8cd96f5cb8e9'
+[01:08:43.348000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=3 preset=u'preset-55ac307b2d974ccca36e54b45a76a8a5' source=u'v3' favorite=False
+[01:08:43.348000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=3 preset=u'preset-55ac307b2d974ccca36e54b45a76a8a5'
+[01:08:43.348000] PROD_PRESET_UI stage='item-begin' kind=u'body' index=4 preset=u'preset-98001ce97aa346f39bceb9c9ef0dbee8' source=u'v3' favorite=False
+[01:08:43.349000] PROD_PRESET_UI stage='item-ready' kind=u'body' index=4 preset=u'preset-98001ce97aa346f39bceb9c9ef0dbee8'
+[01:08:43.349000] PROD_PRESET_UI stage='selection-restored' kind=u'body' selected_row=-1
+[01:08:43.349000] PROD_PRESET_UI stage='signals-restored' kind=u'body'
+[01:08:43.349000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:08:43.366000] PROD_PRESET_UI stage='ready' kind=u'body'
+[01:08:43.367000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.021000 kind=u'body' source=5 rows=5
+[01:08:43.367000] ASTRA_PERF area=u'model-render' phase=u'publish-body-preset-ui' seconds=0.022000 items=5
+[01:08:43.367000] PROD_PRESET_UI stage='begin' kind=u'expression' source_count=0
+[01:08:43.367000] PROD_PRESET_UI stage='selection-captured' kind=u'expression' select_id=None
+[01:08:43.367000] PROD_PRESET_UI stage='rows-ready' kind=u'expression' row_count=0 favorites=0
+[01:08:43.368000] PROD_PRESET_UI stage='signals-blocked' kind=u'expression'
+[01:08:43.368000] PROD_PRESET_UI stage='cleared' kind=u'expression'
+[01:08:43.368000] PROD_PRESET_UI stage='selection-restored' kind=u'expression' selected_row=-1
+[01:08:43.368000] PROD_PRESET_UI stage='signals-restored' kind=u'expression'
+[01:08:43.369000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:08:43.386000] PROD_PRESET_UI stage='ready' kind=u'expression'
+[01:08:43.387000] ASTRA_PERF area=u'preset-ui' phase=u'refresh' seconds=0.019000 kind=u'expression' source=0 rows=0
+[01:08:43.387000] ASTRA_PERF area=u'model-render' phase=u'publish-expression-preset-ui' seconds=0.020000 items=0
+[01:08:43.387000] PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} body=5 expression=0
+[01:08:43.388000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:08:43.405000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:08:43.422000] ASTRA_PERF area=u'model-render' phase=u'publish-semantic-ui' seconds=0.035000 unresolved=0 overrides=0 provider_health='healthy'
+[01:08:43.422000] PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} provider_health='healthy'
+[01:08:43.424000] CLOTHING_FIT_CANDIDATES source={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} same_folder=[] nearby=[{'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'}, {'checksum': 480892851, 'model': u'models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl', 'name': u'loinclothbra_chadfix_071'}] other=[]
+[01:08:43.424000] ASTRA_PERF area=u'clothing-fit' phase=u'discover-and-publish' seconds=0.002000 same=0 nearby=2 other=0
+[01:08:43.424000] ASTRA_PERF area=u'model-render' phase=u'publish-clothing-fit-ui' seconds=0.002000
+[01:08:43.425000] PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[01:08:43.425000] PROD_SELECTION model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' checksum=-1441261258 animset=u'krystal20201' library_key=u'modelpath-sha256-v1:7d2aee52ef3adaa25b252d840b175811ca78893de4fc39b41f8d459f283107a0' expression=52 body=26 other=2 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[01:08:43.425000] ASTRA_PERF area=u'model-render' phase=u'render-total' seconds=2.831000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl'
+[01:08:43.426000] G18AN_LIVE_SELECTION_PROVIDER_STATE model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:08:43.426000] ASTRA_PERF area=u'model-select' phase=u'select-total' seconds=2.833000 model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl'
+[01:08:43.427000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2603.6875 private_commit_mb=2648.96875 pagefile_commit_mb=2648.96875 handles=1168 gdi=1139 user=109 top_widgets=57 dialogs=2
+[01:08:43.427000] PROD_OPERATION_END id=2 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[01:08:43.427000] G18AN_OPERATION_PROVIDER_STATE event='end' id=2 kind=u'Select Model' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:08:43.435000] PROD_OPERATION_EVENT_TURN id=2 kind=u'Select Model' run_id=u'20261006-010820-pid2324' pid=2324
+[01:08:43.436000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2603.6875 private_commit_mb=2648.96875 pagefile_commit_mb=2648.96875 handles=1168 gdi=1139 user=110 top_widgets=57 dialogs=2
+[01:10:07.679000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:10:09.477000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:10:14.504000] PROD_OPERATION_BEGIN id=3 kind=u'Clothing Fit' context={'animset_id': (u'DmeAnimationSet', u'krystal20201', 21694, 397161936L), 'model_instance_id': (u'DmeGameModel', u'krystal2020_GameModel', 21695, 4261416792L), 'document_file_id': 0, 'library_identity': {'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}, 'shot_id': (u'DmeFilmClip', u'shot10', 21692, 4267313572L)}
+[01:10:14.504000] G18AN_OPERATION_PROVIDER_STATE event='begin' id=3 kind=u'Clothing Fit' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:10:14.505000] PROD_RESOURCE label=u'ACTION_BEGIN:Clothing Fit' working_set_mb=2603.5625 private_commit_mb=2646.265625 pagefile_commit_mb=2646.265625 handles=1172 gdi=1147 user=112 top_widgets=57 dialogs=2
+[01:10:14.506000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:10:14.526000] PROD_CPM_OPERATION_AUTHORIZED operation=u'Clothing Fit' sha256=54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7 kind=u'body' membership=26
+[01:10:14.538000] CLOTHING_FIT_START generation=2 operation_id=3 source={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} selected=[{'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'}] pure_source_baseline=True
+[01:10:14.543000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:10:16.735000] PROD_CPM_FIT_STAGE_OPEN index=0 gfit=54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7 literals=34
+[01:10:16.750000] PROD_OPERATION_PHASE id=3 phase=u'native-commit' detail={'kind': u'clothing-fit', 'target_identity': {'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'}}
+[01:10:16.777000] Clothing Fit: assaultsuitbody1_REFRESH requested=0.16669999063014984 before=0.16669999063014984 after_set=0.16669999063014984 after_process=0.16669999063014984
+[01:10:16.789000] CLOTHING_FIT_STAGE=PASS generation=2 index=0 target={'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'} phase=u'committed-verified' mappings=26 warnings=7 committed=True
+[01:10:16.789000] PROD_CPM_FIT_STAGE_RELEASED index=0 ok=True
+[01:10:16.808000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:10:16.829000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:10:16.848000] CLOTHING_FIT_RESULT=PASS generation=2 selected=1 changed=1 already_matched=0 partial=1 partial_changed=1 partial_already_matched=0 skipped=0 failed=0 unattempted=0 committed_order=[{'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'}] reusable=True pure_source_baseline=True
+[01:10:16.848000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[01:10:16.865000] G18AN_POST_FIT_ACTION_STATE save_body=True save_expr=True semantic_ready=True
+[01:10:16.865000] PROD_OPERATION_END id=3 kind=u'Clothing Fit' phase=u'UI_PUBLISH' native_commit={'kind': u'clothing-fit', 'target_identity': {'checksum': -791536511, 'model': u'models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl', 'name': u'assaultsuitbody1'}} durable_commit=None
+[01:10:16.866000] G18AN_OPERATION_PROVIDER_STATE event='end' id=3 kind=u'Clothing Fit' stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:10:16.874000] PROD_OPERATION_EVENT_TURN id=3 kind=u'Clothing Fit' run_id=u'20261006-010820-pid2324' pid=2324
+[01:10:16.874000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Clothing Fit' working_set_mb=2606.09375 private_commit_mb=2649.7421875 pagefile_commit_mb=2649.7421875 handles=1173 gdi=1147 user=114 top_widgets=57 dialogs=2
+[01:11:34.069000] G18AN_CLOSE_PROVIDER_STATE stats={'descriptor': None, 'invalidation_count': 0, 'open_count': 0, 'production_parse_count': 0, 'provider_runtime': {'query_batch_count': 0, 'query_literal_count': 0}, 'query_literal_count': 0, 'query_batch_count': 0, 'reuse_count': 0}
+[01:11:34.069000] PROD_CLOSE_REQUEST operation=None fit_active=False fit_stage_running=False
+[01:11:34.070000] PROD_CLOSE_FINALIZED=True
