@@ -1,0 +1,62 @@
+{
+  "adapter_calls_during_verification": 0, 
+  "bindings_after_fire_are_originals": true, 
+  "entry_counters": {
+    "broker_id": "0x30fab290", 
+    "open_providers": 0, 
+    "outstanding_leases": 0, 
+    "total_provider_closes": 1, 
+    "total_provider_opens": 1, 
+    "unreleased_leases": 0
+  }, 
+  "entry_releases": 0, 
+  "entry_undo": {
+    "count": 30, 
+    "desc": "Apply Body Preset", 
+    "enabled": true
+  }, 
+  "entry_wall_time": "2026-10-06 11:32:49.646000", 
+  "exit_counters": {
+    "broker_id": "0x30fab290", 
+    "open_providers": 0, 
+    "outstanding_leases": 0, 
+    "total_provider_closes": 1, 
+    "total_provider_opens": 1, 
+    "unreleased_leases": 0
+  }, 
+  "exit_wall_time": "2026-10-06 11:32:49.688000", 
+  "gate": "A", 
+  "injection": {
+    "adapter_calls": 1, 
+    "authority_master_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+    "authority_operation": "Apply Preset", 
+    "caller": "prod_apply", 
+    "caller_opened": true, 
+    "changed_sides": 1, 
+    "counters": {
+      "broker_id": "0x30fab290", 
+      "open_providers": 0, 
+      "outstanding_leases": 0, 
+      "total_provider_closes": 1, 
+      "total_provider_opens": 1, 
+      "unreleased_leases": 0
+    }, 
+    "kind": "body", 
+    "preset": "BodyTest", 
+    "real_result": true, 
+    "releases_so_far": 0, 
+    "wall_time": "2026-10-06 11:32:49.623000"
+  }, 
+  "real_exception": null, 
+  "real_result": true, 
+  "restored_on_fire": [
+    "prod_cpm_open_adapter"
+  ], 
+  "returned": true, 
+  "scenario": 1, 
+  "scenario_kind": "CONTROL", 
+  "schema": "cpm-s4-fire-v1", 
+  "substituted": false, 
+  "verifier": "prod_verify_apply_abort_baseline", 
+  "verifier_caller": "prod_abort_apply_and_verify"
+}

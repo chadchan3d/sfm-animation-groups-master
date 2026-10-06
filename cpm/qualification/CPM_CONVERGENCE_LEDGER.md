@@ -9,32 +9,27 @@ Otherwise proceed with the assigned milestone.
 
 ## Current milestone
 Real-SFM Session 4 (forced rollback-verification qualification, handoff §22 blockers 4–5).
-**Status: PREPARED — NOT STARTED.** Runbook `real_sfm_qualification/cpm_session4/SESSION4_RUNBOOK.md`;
-qualification-only harness `CPM_S4_Rollback_Harness.py` (`45c44f3d…`); offline suite PASS
-(2.7.5 real + model 308/308; 3.10 model 166/166). No live campaign has run.
-- S4A (Body Apply): CONTROL (authentic Abort, rollback verified) + GATE (authentic verifier True,
-  harness substitutes False → production recovery-unverified) + ordinary Apply.
-- S4F (Clothing Fit): CONTROL (`not-committed`) + GATE (`abort-unverified`) + ordinary Fit and Undo.
+**Status: COMPLETE — PASS.**
+- S4A (Body Apply): PASS — CONTROL (authentic Abort, rollback verified), GATE (authentic verifier
+  True, harness substitutes False → production recovery-unverified), ordinary Apply.
+- S4F (Clothing Fit): PASS — CONTROL (`not-committed`), GATE (`abort-unverified`), ordinary Fit and
+  Undo.
 
-Real-SFM Session 3 (Clothing Fit generation transition). **Status: COMPLETE — PASS.**
-- S3 (queued Fit, G1 → G2 between targets): CORE PASS.
-- S3_ADD (fresh Fit committing under G2, idle probes, Undo): PASS.
+Evidence: `real_sfm_qualification/cpm_session4/SESSION4_EVIDENCE.md`, raw outputs in `raw/`.
+Runbook: `SESSION4_RUNBOOK.md` at `b65c085`; harness `45c44f3d…`.
 
-Evidence: `real_sfm_qualification/cpm_session3/SESSION3_EVIDENCE.md`, raw outputs in `raw/`.
-Runbook: `SESSION3_RUNBOOK.md` (§10 S3_ADD at `bcfa9b6`; criterion-9, criterion-12 and C13
-wording corrected at closeout).
-
-Sessions 1 and 2 remain complete. R15 and R14 remain CLOSED.
+Sessions 1, 2 and 3 remain complete. R15 and R14 remain CLOSED.
 
 ## Current state
-`master` at the Session 4 preparation commit (qualification material and Ledger only). The
-product is unchanged since `00d0d83`.
+`master` at the Session 4 closeout commit (evidence and Ledger only). The product is unchanged
+since `00d0d83`.
 
-The Session 3 campaign folders (`S3`, `S3_ADD`), the probe JSONL and the CPM log are copied,
-redacted, into `real_sfm_qualification/cpm_session3/raw/`. The qualification-only Fit pause harness
-was removed after `S3`; the Scripts deployment equals its pre-harness baseline exactly.
+The Session 4 campaign folders (`S4A`, `S4F`), the probe JSONL and the CPM log are copied,
+redacted, into `real_sfm_qualification/cpm_session4/raw/`. The qualification-only rollback harness
+was removed after each campaign; the Scripts deployment equals its pre-harness baseline exactly
+(`cefc2b88…`), and no `ACTIVE_CAMPAIGN.txt` remains.
 
-The live authority is exact production G1 after Session 3: Master `ac45e5c1…`, manifest
+The live authority is exact production G1 after Session 4: Master `ac45e5c1…`, manifest
 `d810d648…`, one sidecar `bcd97641…`.
 
 **Deployed and verified** (runbook §0):
@@ -77,6 +72,8 @@ Evidence:
 | Session 2 S2-B_R2: G1→G2 during a Save prompt (2026-10-05) | **PASS** |
 | Session 3 S3: queued Fit, G1→G2 between targets (2026-10-06) | **CORE PASS** |
 | Session 3 S3_ADD: fresh Fit committing under G2 (2026-10-06) | **PASS** |
+| Session 4 S4A: forced Body Apply rollback-verification control + gate (2026-10-06) | **PASS** |
+| Session 4 S4F: forced Clothing Fit rollback-verification control + gate (2026-10-06) | **PASS** |
 
 - **Clothing Fit detail:**
   - `Gfit` was authorized.
@@ -170,6 +167,23 @@ Evidence:
   `assaultsuitbody1` authorized, staged, committed and verified under G2 (`committed-verified`,
   26 mappings, 7 warnings), released ok; result PASS `partial_changed=1 failed=0 unattempted=0`;
   P2–P4 0/0/0; one Undo; exact G1 restoration.
+- **Session 4 S4A (2026-10-06, pid 2540, broker `0x30fab290`, window `0x309ae698`):**
+  - both injected `BodyTest` Applies authorized under G1, writes inside the open Undo
+    (`changed_sides=1`, real precommit predicate True);
+  - CONTROL: `PROD_APPLY_ABORT_VERIFY restored=True`, "Can't apply preset";
+  - GATE: real verifier True, harness substituted False → `restored=False`,
+    `ProdRecoveryUnverifiedError`, "Recovery could not be verified";
+  - no `native-commit` or committed outcome; Undo state and `mia1` values equal ARM; 0 adapter
+    calls during rollback verification; P2–P5 0/0/0; ordinary `BodyTest` Apply committed.
+- **Session 4 S4F (2026-10-06, pid 17544, broker `0x311d72b0`, window `0x30bea698`):**
+  - both injected Fits authorized under G1, stage `index=0 gfit=ac45e5c1… literals=34`, writes
+    inside the open Undo (`changed_sides=3`, real predicate True);
+  - CONTROL: `PROD_CLOTHING_FIT_ABORT_VERIFY … restored=True`, `not-committed`, "Nothing changed";
+  - GATE: real verifier True, substituted False → `restored=False`, `abort-unverified`, dialog
+    `recovery_unverified=[assaultsuitbody1] unattempted=[loinclothbra_chadfix_071] undo_count=0`;
+  - stage lease outstanding (1) during rollback verification, 0 adapter calls, exactly one
+    successful `release()`; target 2 never staged; nothing committed; P2–P6 0/0/0;
+  - ordinary Fit committed-verified and released ok; one Undo restored it visually.
 - **Measurements (Session 1):**
   - process working set +36 MB across the session;
   - CPM scope 107–166 KB;
@@ -208,25 +222,27 @@ Evidence:
 - **Remaining pre-K qualification:**
   - Session 2: **COMPLETE — PASS** (S2-A_R2 and S2-B_R2).
   - Session 3: **COMPLETE — PASS** (S3 CORE PASS and S3_ADD).
-  - the forced Apply and forced Fit rollback-verification failure gates: **Session 4 prepared,
-    not run** (S4A, S4F);
+  - the forced Apply and forced Fit rollback-verification failure gates: **Session 4 COMPLETE —
+    PASS** (S4A, S4F);
   - then cleanup of historical authority and diagnostics, plus a focused regression.
 
   **K, L:** not started.
+- **Session 4 notes (not failures; carried to cleanup/K):**
+  - Fit's exception path releases the stage with a bare `release()` (no
+    `PROD_CPM_FIT_STAGE_RELEASED` line; result discarded); a raising success-path release could in
+    theory be followed by a second `release()`. Live S4F shows exactly one successful release per
+    injected stage.
+  - The Body bone-scale branch of rollback verification is covered offline only (`BodyTest` changes
+    no bone scales); Expression Apply shares `prod_apply` and is covered offline.
 - R3, R6, R9, R13, R14, R15: CLOSED. Offline: Suites 1–4 PASS; C7–C10 PASS (C10 also real-SFM);
   R15 suite PASS.
 
 ## Next
-Run Session 4 live per `SESSION4_RUNBOOK.md`: S4A (Body Apply), then S4F (Clothing Fit), each
-in a fresh SFM process under exact G1, then adjudicate. Out of scope: the postcommit/post-stage
-committed-unverified branch and a live Expression campaign (covered offline).
-
-Recorded, not fixed: in `fit_stage`'s exception path the stage is released by a bare
-`release()` (unlogged, result discarded), and a raising success-path release could in theory be
-followed by a second `release()`. S4F counts the actual release calls; no product change unless
-live evidence shows a defect.
-
-Cleanup of historical authority and diagnostics, and a focused regression, follow before K.
+After designer/owner review of the Session 4 closeout, the next Blueprint-bounded milestone is
+handoff §22 item 6: **remove or isolate historical development authority machinery**, now that the
+new seam has passed Suites 1–4, C7–C10, the Fit generation-interruption test and both forced
+rollback-verification gates. It is to be prepared under a bounded designer assignment. Diagnostic
+logging reduction (item 7) and the focused post-cleanup regression (item 8) follow; then K.
 Not started.
 
 ## Checkpoints

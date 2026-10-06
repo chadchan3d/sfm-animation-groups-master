@@ -283,3 +283,11 @@ real_sfm_qualification/cpm_session3/raw/S3/harness_*.json -text -whitespace
 # reported with it; keep LF on every checkout/export.
 real_sfm_qualification/cpm_session4/CPM_S4_Rollback_Harness.py text eol=lf
 real_sfm_qualification/cpm_session4/test_cpm_s4_rollback_harness.py text eol=lf
+
+# CPM Session 4 raw outputs: captured evidence, SHA-256-pinned in
+# cpm_session4/raw/MANIFEST.md, mixed CRLF/LF/BOM exactly as written.
+# Never normalize on checkout, commit or archive export.
+real_sfm_qualification/cpm_session4/raw/** -text whitespace=cr-at-eol
+# The Session 4 harness records were written by Python 2.7 json.dump(indent=...),
+# whose ", " item separator leaves a trailing space on each line. Kept byte-exact.
+real_sfm_qualification/cpm_session4/raw/*/s[12]_*.json -text -whitespace

@@ -1,0 +1,292 @@
+{
+  "adapter_calls_total": 5, 
+  "campaign": "S4F", 
+  "checks": [
+    {
+      "check": "injection_fired_inside_open_undo", 
+      "ok": true
+    }, 
+    {
+      "check": "real_precommit_predicate_true", 
+      "ok": true
+    }, 
+    {
+      "check": "rollback_verifier_fired", 
+      "ok": true
+    }, 
+    {
+      "check": "real_rollback_verification_true", 
+      "ok": true
+    }, 
+    {
+      "check": "substitution_matches_scenario", 
+      "ok": true
+    }, 
+    {
+      "check": "no_adapter_calls_during_rollback_verification", 
+      "ok": true
+    }, 
+    {
+      "check": "wrappers_absent", 
+      "ok": true
+    }, 
+    {
+      "check": "undo_count_and_desc_unchanged", 
+      "ok": true
+    }, 
+    {
+      "check": "scene_values_equal_pre_arm", 
+      "ok": true
+    }, 
+    {
+      "check": "idle_counters_zero", 
+      "ok": true
+    }, 
+    {
+      "check": "cpm_idle", 
+      "ok": true
+    }, 
+    {
+      "check": "production_status_copy", 
+      "ok": true
+    }, 
+    {
+      "check": "stage_opened_under_g1", 
+      "ok": true
+    }, 
+    {
+      "check": "stage_lease_held_during_rollback_verification", 
+      "ok": true
+    }, 
+    {
+      "check": "no_release_before_rollback_verification", 
+      "ok": true
+    }, 
+    {
+      "check": "stage_released_exactly_once", 
+      "ok": true
+    }, 
+    {
+      "check": "release_returned_ok", 
+      "ok": true
+    }, 
+    {
+      "check": "target2_never_skipped_or_failed", 
+      "ok": true
+    }, 
+    {
+      "check": "target1_failed_as_not_committed", 
+      "ok": true
+    }, 
+    {
+      "check": "nothing_committed", 
+      "ok": true
+    }, 
+    {
+      "check": "target2_unattempted", 
+      "ok": true
+    }
+  ], 
+  "counters": {
+    "broker_id": "0x311d72b0", 
+    "open_providers": 0, 
+    "outstanding_leases": 0, 
+    "total_provider_closes": 2, 
+    "total_provider_opens": 2, 
+    "unreleased_leases": 0
+  }, 
+  "epoch": 1791301690.036, 
+  "fire": {
+    "adapter_calls_during_verification": 0, 
+    "bindings_after_fire_are_originals": true, 
+    "entry_counters": {
+      "broker_id": "0x311d72b0", 
+      "open_providers": 0, 
+      "outstanding_leases": 1, 
+      "total_provider_closes": 2, 
+      "total_provider_opens": 2, 
+      "unreleased_leases": 0
+    }, 
+    "entry_releases": 0, 
+    "entry_undo": {
+      "count": 0, 
+      "desc": "", 
+      "enabled": true
+    }, 
+    "entry_wall_time": "2026-10-06 11:47:53.658000", 
+    "exit_counters": {
+      "broker_id": "0x311d72b0", 
+      "open_providers": 0, 
+      "outstanding_leases": 1, 
+      "total_provider_closes": 2, 
+      "total_provider_opens": 2, 
+      "unreleased_leases": 0
+    }, 
+    "exit_wall_time": "2026-10-06 11:47:53.662000", 
+    "gate": "F", 
+    "injection": {
+      "adapter_calls": 5, 
+      "caller": "prod_apply_match", 
+      "caller_opened": true, 
+      "changed_sides": 3, 
+      "counters": {
+        "broker_id": "0x311d72b0", 
+        "open_providers": 0, 
+        "outstanding_leases": 1, 
+        "total_provider_closes": 2, 
+        "total_provider_opens": 2, 
+        "unreleased_leases": 0
+      }, 
+      "gfit": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+      "real_result": true, 
+      "releases_so_far": 0, 
+      "target": {
+        "checksum": -791536511, 
+        "model": "models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl", 
+        "name": "assaultsuitbody1"
+      }, 
+      "wall_time": "2026-10-06 11:47:53.628000"
+    }, 
+    "real_exception": null, 
+    "real_result": true, 
+    "restored_on_fire": [
+      "prod_cpm_open_adapter", 
+      "prod_cpm_open_fit_stage"
+    ], 
+    "returned": true, 
+    "scenario": 1, 
+    "scenario_kind": "CONTROL", 
+    "schema": "cpm-s4-fire-v1", 
+    "substituted": false, 
+    "verifier": "p03_target_matches_baseline", 
+    "verifier_caller": "prod_abort_fit_and_verify"
+  }, 
+  "gate": "F", 
+  "harness_errors": [], 
+  "injection": {
+    "adapter_calls": 5, 
+    "caller": "prod_apply_match", 
+    "caller_opened": true, 
+    "changed_sides": 3, 
+    "counters": {
+      "broker_id": "0x311d72b0", 
+      "open_providers": 0, 
+      "outstanding_leases": 1, 
+      "total_provider_closes": 2, 
+      "total_provider_opens": 2, 
+      "unreleased_leases": 0
+    }, 
+    "gfit": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+    "real_result": true, 
+    "releases_so_far": 0, 
+    "target": {
+      "checksum": -791536511, 
+      "model": "models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl", 
+      "name": "assaultsuitbody1"
+    }, 
+    "wall_time": "2026-10-06 11:47:53.628000"
+  }, 
+  "passthrough_calls": 0, 
+  "releases": [
+    {
+      "counters_after": {
+        "broker_id": "0x311d72b0", 
+        "open_providers": 0, 
+        "outstanding_leases": 0, 
+        "total_provider_closes": 2, 
+        "total_provider_opens": 2, 
+        "unreleased_leases": 0
+      }, 
+      "counters_before": {
+        "broker_id": "0x311d72b0", 
+        "open_providers": 0, 
+        "outstanding_leases": 1, 
+        "total_provider_closes": 2, 
+        "total_provider_opens": 2, 
+        "unreleased_leases": 0
+      }, 
+      "result": null, 
+      "wall_time": "2026-10-06 11:47:53.663000"
+    }
+  ], 
+  "restored_at_state": [], 
+  "scenario": 1, 
+  "scenario_kind": "CONTROL", 
+  "scene_diff": {
+    "target1": [], 
+    "target2": []
+  }, 
+  "schema": "cpm-s4-state-v1", 
+  "stage_id": "0x2af9a6f0", 
+  "stage_opened": {
+    "counters": {
+      "broker_id": "0x311d72b0", 
+      "open_providers": 0, 
+      "outstanding_leases": 1, 
+      "total_provider_closes": 2, 
+      "total_provider_opens": 2, 
+      "unreleased_leases": 0
+    }, 
+    "generation": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93", 
+    "index": 0, 
+    "wall_time": "2026-10-06 11:47:53.615000"
+  }, 
+  "status": "RECORDED_OK", 
+  "undo": {
+    "count": 0, 
+    "desc": "", 
+    "enabled": true
+  }, 
+  "undo_at_arm": {
+    "count": 0, 
+    "desc": "", 
+    "enabled": true
+  }, 
+  "wall_time": "2026-10-06 11:48:10.036000", 
+  "window": {
+    "closing_requested": false, 
+    "fit_active": false, 
+    "fit_changed": [], 
+    "fit_committed_order": [], 
+    "fit_failed": [
+      {
+        "committed": false, 
+        "identity": {
+          "checksum": -791536511, 
+          "model": "models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl", 
+          "name": "assaultsuitbody1"
+        }, 
+        "reason": "Clothing Fit write failed for u'assaultsuitbody1'.", 
+        "verification": "not-committed"
+      }
+    ], 
+    "fit_partial": [], 
+    "fit_selected_identities": [
+      {
+        "checksum": -791536511, 
+        "model": "models/fursonas/starfox/krystal/cosmetics/assaultsuitbody.mdl", 
+        "name": "assaultsuitbody1"
+      }, 
+      {
+        "checksum": 480892851, 
+        "model": "models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl", 
+        "name": "loinclothbra_chadfix_071"
+      }
+    ], 
+    "fit_skipped": [], 
+    "fit_stage_running": false, 
+    "fit_unattempted": [
+      {
+        "checksum": 480892851, 
+        "model": "models/fursonas/starfox/krystal/cosmetics/loinclothbra_chadfix_07.mdl", 
+        "name": "loinclothbra_chadfix_071"
+      }
+    ], 
+    "gfit": "None", 
+    "modal_yield_active": false, 
+    "operation": null, 
+    "scene_activity_suspended": false, 
+    "status_text": "Clothing Fit could not finish. Nothing changed."
+  }, 
+  "wrappers_absent": true
+}
