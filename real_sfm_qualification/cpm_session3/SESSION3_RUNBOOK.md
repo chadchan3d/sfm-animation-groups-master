@@ -376,3 +376,96 @@ CPM application (a real `ProdWindow`). It uses real PySide/Qt 4.8 on 2.7.5, plus
 
 A mutation check (disabling the modal gate, the lease gate, the Continue G2 check, or ARM's
 plan-record check) makes the suite fail.
+
+## 10. Addendum S3_ADD — fresh Clothing Fit committing under G2
+
+**Status: prepared, not run.**
+- **Why:** the main campaign (`S3`, 2026-10-06) is accepted as **CORE PASS**. The G1→G2
+  interruption and target-1 Undo are proven.
+- **What C13 showed:** its later G2 Fit on `loinclothbra_chadfix_071` began under G2 (authorization
+  and stage proof) but ended in production's expected structural skip ("has no established
+  compatible Body mappings"). The P5 idle check was not taken.
+- **What S3_ADD adds:** one fresh, user-initiated Fit that genuinely commits under G2, using the
+  already-qualified target `assaultsuitbody1` (Session 1, and S3 target 1). Then the idle probes,
+  one Undo, and exact G1 restoration.
+
+**Scope:**
+- no harness and no Scripts-menu deployment change;
+- no interruption;
+- the frozen Session 2 functions run unchanged, with SFM closed, **before** SFM starts.
+
+### 10.1 Shell
+
+Paste the frozen Session 2 §2.1 block (`SESSION2_RUNBOOK.md` at `0597927`) and this runbook's §2.2
+block, then:
+
+```powershell
+$EAD = Join-Path $S3ROOT "S3_ADD"                      # write-once; a retry uses S3_ADD_R2, ...
+if (Test-Path -LiteralPath $HARNESS_DST) { throw "STOP: the Session 3 harness is installed; S3_ADD runs without it. Report." }
+"S3_ADD SHELL READY"
+```
+
+Records in `%PUBLIC%\Documents\CPM_Session3\S3_ADD\` (write-once): the Session 2 record set.
+
+| Producer | Records |
+|---|---|
+| `S2-Prepare` | `g1_source.txt`, `baseline_inventory.json` |
+| `S2-PhaseA` | `g2_source.txt`, `g2_plan_record.json`, `g2_publication_record.json`, `phase_a_stdout.json` |
+| `S2-PhaseB` | `g2_activation_record.json`, `phase_b_stdout.json`, `post_switch_inventory.json` |
+| `S2-Finalize` | `finalization_record.json`, `finalize_stdout.json`, `restored_inventory.json`, `restore_compare.json` |
+
+### 10.2 Operator procedure
+
+A **P#** means: Scripts → ChadChan3D → `CPM_Session1_Probe`, run only when no CPM action or dialog is
+open.
+
+| Step | Where | Do | Visible expectation / STOP |
+|---|---|---|---|
+| D0 | Shell (SFM closed) | `S2-Prepare $EAD`, then `S2-PhaseA $EAD`, then `S2-PhaseB $EAD` | `S2 BASELINE OK`, `S2 PHASE A OK`, `S2 G2 ACTIVE OK`. Start SFM **only** after `S2 G2 ACTIVE OK`. Any STOP: §10.3. |
+| D1 | SFM | Start SFM fresh; open the Krystal scene (§3). **P1.** | — |
+| D2 | CPM | Open CPM (Scripts → ChadChan3D → SFM_Character_Preset_Manager); choose **krystal20201**; wait for the Body / Expression / Review counts. | Counts appear. |
+| D3 | SFM | **P2** (expected: G2 scope, idle authority). | — |
+| D4 | CPM | Clothing Fit tab: check **only assaultsuitbody1** → **Fit Selected to Model**. | The Fit completes. Status: **"1 item updated."** No "Clothing Fit stopped" dialog, no warning dialog, no error. **STOP → §10.3 R-ADD-2** on a stop dialog, an error, or a status reporting failed / not attempted. A "skipped" status is not a product failure: stop and report for adjudication (R-ADD-2), and do not continue. |
+| D5 | SFM | **P3.** | — |
+| D6 | SFM | **Edit → Undo** exactly once. Confirm visually that `assaultsuitbody1` returned to its pre-Fit state. | — |
+| D7 | SFM | **P4.** | — |
+| D8 | CPM/SFM | Close CPM with ✕. Close SFM **without saving**. | — |
+| D9 | Shell | `S2-Finalize $EAD` | `S2 RESTORED EXACT G1`. Otherwise §10.3 R-ADD-3. |
+
+### 10.3 Recovery (fail-closed)
+
+| Case | Signal | Action |
+|---|---|---|
+| R-ADD-1 | `S2-Prepare` STOP | Nothing changed. Report. |
+| R-ADD-1b | `S2-PhaseA` / `S2-PhaseB` STOP | Do not start SFM. Run the recovery the shell printed (`S2-VerifyUntouched $EAD` if Phase A failed before its plan record; otherwise `S2-Finalize $EAD`). Require exact G1. Report. |
+| R-ADD-2 | Any D2–D7 failure (no counts, stop dialog, error, unexpected skip) | Click nothing further in CPM. Close or terminate SFM without saving. `S2-Finalize $EAD`; require exact G1. Preserve evidence; report. |
+| R-ADD-3 | `S2-Finalize` not exact | Do not start SFM. Do not edit the Master or authority folder by hand. Preserve evidence; report. |
+
+### 10.4 Adjudication (from the CPM log, probes and `S3_ADD` records)
+
+**PASS requires all of:**
+1. **Exact G2 before SFM:** the activation record shows `success`, G1 → `54413b6c…`; the
+   post-switch inventory is exact G2; the SFM process's first CPM log line comes after the
+   activation `wall_time`.
+2. **G2 scope at P2:** `PROD_PROVIDER_HEALTH … sha256=u'54413b6c…'` for `krystal20201`. P2 shows
+   scope `54413b6ca618`, and 0 leases, 0 unreleased and 0 open providers.
+3. **G2 authorization:** `PROD_CPM_OPERATION_AUTHORIZED operation=u'Clothing Fit' sha256=54413b6c…`,
+   then `CLOTHING_FIT_START` selecting exactly `assaultsuitbody1`.
+4. **G2 stage:** `PROD_CPM_FIT_STAGE_OPEN index=0 gfit=54413b6c…`.
+5. **Native commit:** `PROD_OPERATION_PHASE … phase=u'native-commit'` for `assaultsuitbody1`.
+6. **Committed-verified:** `CLOTHING_FIT_STAGE=PASS … index=0 … phase=u'committed-verified'
+   mappings=26 warnings=7 committed=True`.
+7. **Released:** `PROD_CPM_FIT_STAGE_RELEASED index=0 ok=True`.
+8. **Result:** `CLOTHING_FIT_RESULT=PASS … changed=1 … partial=1 partial_changed=1 … skipped=0
+   failed=0 unattempted=0`. The status is "1 item updated."
+9. **Idle authority:** P2, P3 and P4 all show 0 leases, 0 unreleased and 0 open providers; one
+   window and one watcher.
+10. **Undo:** D6 visual confirmation (one Undo).
+11. **Exact G1 restoration:** `finalization_record` and `restore_compare` both report
+    `exact_match: true`; `restored_inventory` shows Master `ac45e5c1…`.
+
+**FAIL (product finding):** any G1 authorization or stage; no native commit; a verification other
+than `committed-verified`; a release not ok; a result with failed or unattempted targets; a non-zero
+lease or provider at P2–P4; non-exact restoration.
+
+**Session 3 is a full PASS** when S3 (CORE PASS) and S3_ADD (PASS) both hold.
