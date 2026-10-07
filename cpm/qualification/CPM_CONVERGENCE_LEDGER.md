@@ -8,43 +8,35 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**Handoff §22 item 7 — diagnostic/development logging reduction.**
-**Status: APPROVED DESIGN — IMPLEMENTATION NOT STARTED.**
+**§22 item 7 — COMPLETE: diagnostic/development logging reduction; offline qualification PASS.**
+Candidate app SHA-256: `bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5`.
+The approved timing/log removals, two payload corrections and bounded diagnostic-failure handling
+are complete. Product-coupled post-Fit readiness and `p02_safe_write_json` were preserved. Startup
+preserves the original non-`Exception` failure after contained diagnostic errors.
+Historical item-6 qualification was confirmed using checkpoint-compatible dependencies. Item-7
+preservation was independently proven against the pinned item-6 source.
+Sessions 1–4 qualify only app `9a78fc96…`. The new candidate does not inherit their exact-build
+real-SFM PASS.
+Candidate not deployed. Item 8 is next; K/L remain not started.
 
-Design: `cpm/qualification/ITEM7_DIAGNOSTIC_LOGGING_REDUCTION_DESIGN.md` (Astra initial design →
-Claude adversarial review → Astra reconciliation; owner-approved). It supersedes Astra's initial
-item-7 design and the earlier uncommitted item-7 design investigation.
-- Governing starting checkpoint `7b69b520a2472d3700ce347a1d2a59bc98e926f2`; starting app
-  `1e8668717f9a4a1def0900c6b51e20cb9a7676cc365244eab5c31233f133eeeb` (the item-6 candidate).
-- Item 7 implementation has not begun: no item-7 manifest, test, evidence or app change exists.
-- The candidate remains undeployed. Item 8 remains the post-item-7 real-SFM qualification
-  milestone; K and L remain not started.
+- **Supersessions/decisions recorded:** the reporting constants `SEMANTIC_PROVIDER_MODE_SIDECAR`,
+  `SEMANTIC_PROVIDER_FORCE_MODE` and `G18AN_PARITY_SHORTCUT`, retained by item 6, are now removed
+  (item-7 design D3), superseding item 6's retention; `self.g18an_parity_shortcut = None` remains.
+  The Q1 indexed-capture parity oracle is retained **disabled** (`PROD_Q1_INDEXED_CAPTURE_PARITY =
+  False`, design D2).
+- **Offline:** the eight existing suites under 2.7.5 and 3.10 with counts unchanged from item 6
+  (R15 2.7.5 345/345 real PySide/Qt 4.8 + model; 3.10 188/188 model); the new
+  `test_cpm_app_logging_cleanup.py` 2.7.5 144/144 (window gates real + model), 3.10 117/117 (model);
+  historical item-6 test 46/46 under both, from a detached `7b69b52` worktree.
+- Design: `cpm/qualification/ITEM7_DIAGNOSTIC_LOGGING_REDUCTION_DESIGN.md`. Evidence:
+  `cpm/qualification/ITEM7_DIAGNOSTIC_LOGGING_REDUCTION_EVIDENCE.md` (identities, manifest
+  `cbb3010b…`, dispositions, commands, results, limitations); outputs in
+  `cpm/qualification/item7_offline_outputs/`.
 - Stale-scope UI presentation and `SidecarMissing` messaging remain undecided and out of scope.
 
-Previous milestone:
-**§22 item 6 — COMPLETE: historical authority cleanup; offline qualification PASS.**
-
-Candidate app SHA-256: `1e8668717f9a4a1def0900c6b51e20cb9a7676cc365244eab5c31233f133eeeb`.
-
-The approved historical provider/discovery/fallback/parity machinery has been removed from the
-mutable app. Historical acquisition is refusal-only; semantic snapshot construction requires an
-explicitly supplied provider. The canonical authority seam and non-allowlisted production
-implementations are preserved.
-
-The eight existing offline suites and targeted item-6 checks passed under Python 2.7.5 and Python
-3.10, with Qt-mode coverage recorded explicitly (R15 under 2.7.5: real PySide/Qt 4.8 and the Qt
-model; 3.10: model only).
-
-Sessions 1–4 remain valid qualification evidence for pre-cleanup app
-`9a78fc9692cfa3cae5f3d8443a6c95537248c348d0cd4230c7ba744d99e77900`. The new app bytes have not
-yet received post-cleanup real-SFM qualification. This remains pending item 8 after item 7.
-
-R14/R15 remain closed. Item 7 is next; item 8, K and L have not begun.
-
-Design: `cpm/qualification/ITEM6_HISTORICAL_AUTHORITY_CLEANUP_DESIGN.md`. Evidence:
-`cpm/qualification/ITEM6_HISTORICAL_AUTHORITY_CLEANUP_EVIDENCE.md` (identities, dispositions,
-preservation manifest `a9264794…`, test commands and results). Stale-scope UI presentation and
-`SidecarMissing` messaging remain undecided and out of scope.
+Previous milestone: **§22 item 6 — COMPLETE: historical authority cleanup; offline qualification
+PASS** (candidate `1e866871…`; design and evidence `ITEM6_HISTORICAL_AUTHORITY_CLEANUP_*.md`;
+manifest `a9264794…`). Its qualification is unchanged.
 
 Previous milestone: Real-SFM Session 4 (forced rollback-verification qualification, handoff §22
 blockers 4–5). **Status: COMPLETE — PASS.**
@@ -60,9 +52,9 @@ Sessions 1–4 remain complete (evidence for app `9a78fc96…`). R15 and R14 rem
 
 ## Current state
 `master`. Before item 6 the product was unchanged since `00d0d83` (last commit touching `cpm/app`,
-`cpm/baseline` or the adapter/projection). Item 6 changed only the mutable app
-(`9a78fc96…` → `1e866871…`); the launcher, baseline, adapter/projection, shared package,
-Normalizer, Master and sidecars are unchanged.
+`cpm/baseline` or the adapter/projection). Items 6 and 7 changed only the mutable app
+(`9a78fc96…` → `1e866871…` → `bfba4d3a…`); the launcher, baseline, adapter/projection, shared
+package, Normalizer, Master and sidecars are unchanged.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -88,7 +80,7 @@ intentionally not deployed):
   `__init__.py`);
 - probe v3 `ce4ace98…`.
 
-The item-6 cleanup candidate `1e866871…` is **not deployed**; the deployed app remains the
+Neither cleanup candidate (`1e866871…`, `bfba4d3a…`) is deployed; the deployed app remains the
 pre-cleanup `9a78fc96…`. Any later deployment follows the R15 restart rule.
 
 The step-9 G18AN menu copy has been removed. The pre-R15 app `664a660c…` and probe v2 are archived
@@ -279,13 +271,13 @@ Evidence:
     PASS** (S4A, S4F);
   - §22 item 6 (historical authority cleanup): **COMPLETE — offline qualification PASS**
     (candidate `1e866871…`; not real-SFM qualified);
-  - §22 item 7 (diagnostic/development logging reduction): **design APPROVED; implementation
-    NOT STARTED**;
+  - §22 item 7 (diagnostic/development logging reduction): **COMPLETE — offline qualification
+    PASS** (candidate `bfba4d3a…`; not real-SFM qualified);
   - then item 8 (focused post-cleanup regression, including post-cleanup real-SFM
     qualification): not started.
 
   **K, L:** not started.
-- **Session 4 notes (not failures; carried to cleanup/K):**
+- **Session 4 notes (not failures; carried to cleanup/K; unchanged by item 7):**
   - Fit's exception path releases the stage with a bare `release()` (no
     `PROD_CPM_FIT_STAGE_RELEASED` line; result discarded); a raising success-path release could in
     theory be followed by a second `release()`. Live S4F shows exactly one successful release per
@@ -296,13 +288,10 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Implement handoff §22 item 7 exactly as bounded by
-`cpm/qualification/ITEM7_DIAGNOSTIC_LOGGING_REDUCTION_DESIGN.md` (its §16 coder assignment and §14
-stop conditions), starting from `7b69b52` with app `1e866871…`. Use the design's §13 exact-build
-Ledger wording at implementation start and completion. Not started.
-
-Item 8 (focused post-cleanup regression, including post-cleanup real-SFM qualification of the
-cleaned bytes) follows; then K and L. None has begun.
+After designer/owner review of the item-7 checkpoint: handoff §22 item 8 — focused post-cleanup
+regression, including post-cleanup real-SFM qualification of the exact candidate `bfba4d3a…`, using
+the item-7 design's §12 observability contract. It is to be prepared under a bounded designer
+assignment. Not started. K and L follow; neither has begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

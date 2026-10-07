@@ -1,0 +1,51 @@
+Interpreter: 2.7.5
+Candidate app sha256: 1e8668717f9a4a1def0900c6b51e20cb9a7676cc365244eab5c31233f133eeeb
+[PASS] manifest.sha256_pinned
+[PASS] manifest.generated_from_precleanup_app
+[PASS] manifest.approved_sets_match_design
+[PASS] manifest.every_removal_present_before_cleanup
+[PASS] manifest.parity_method_present_before_cleanup
+[PASS] candidate.is_not_precleanup_bytes
+[PASS] removal.exact_count
+[PASS] preserve.top_level_sequence_exact
+[PASS] preserve.surviving_top_level_content_unchanged
+[PASS] preserve.prodwindow_header_unchanged
+[PASS] preserve.prodwindow_only_parity_method_removed
+[PASS] preserve.snapshot_replacement_applied_once
+[PASS] preserve.snapshot_reverses_to_precleanup
+[PASS] struct.exception_is_direct_runtimeerror_subclass
+[PASS] struct.exception_has_no_custom_behavior
+[PASS] struct.exception_defined_immediately_before_stub
+[PASS] struct.stub_zero_argument_signature
+[PASS] struct.stub_is_single_unconditional_raise
+[PASS] struct.stub_no_globals_dispatch_or_io
+[PASS] stub.raises_dedicated_exception
+[PASS] stub.fixed_message
+[PASS] stub.no_io_import_log_or_acquisition
+[PASS] stub.historical_state_untouched
+[PASS] stub.not_a_current_authority_failure
+[PASS] snapshot.fixture_face_path_found
+[PASS] snapshot.missing_provider_explicit_refusal
+[PASS] snapshot.missing_provider_never_reaches_stub_or_opener
+[PASS] snapshot.none_row_precedes_provider_check_as_before
+[PASS] snapshot.no_animset_precedes_provider_check_as_before
+[PASS] snapshot.supplied_provider_identical_to_precleanup_valid
+[PASS] snapshot.supplied_provider_identical_to_precleanup_invalid
+[PASS] snapshot.supplied_provider_path_opens_nothing
+[PASS] closure.no_reference_to_removed_names
+[PASS] closure.no_string_reference_to_removed_names
+[PASS] closure.no_comment_reference_to_removed_names
+[PASS] closure.no_top_level_binding_of_removed_names
+[PASS] closure.retained_constants_present
+[PASS] closure.retained_definitions_present
+[PASS] closure.parity_method_absent
+[PASS] closure.parity_shortcut_attribute_retained
+[PASS] closure.module_compiles
+[PASS] reach.refusal_stub_unreachable_from_production
+[PASS] reach.legacy_entrypoints_unreachable
+[PASS] reach.canonical_route_reachable
+[PASS] reach.only_legacy_callers_reference_stub
+      (legacy, unreachable callers ending at the refusal stub: G09AGenericWindowRoute, G11AProductionWindow, g11a_source, p02_complete_scope)
+[PASS] closure.no_production_import_of_reference_machinery
+
+RESULT: 46/46 ALL PASS

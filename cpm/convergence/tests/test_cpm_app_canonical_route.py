@@ -174,8 +174,18 @@ R15_CHANGED_TOP = set(["StartProdTool"])  # stable private-module startup (ProdW
 # historical getter becomes an unconditional refusal and the snapshot helper
 # requires a supplied provider (ProdWindow already listed: parity method removed).
 ITEM6_CHANGED_TOP = set(["get_semantic_provider", "semantic_snapshot_for_model_row"])
+# Handoff section 22 item 7 (ITEM7_DIAGNOSTIC_LOGGING_REDUCTION_DESIGN.md section 7):
+# timing/log removals and bounded diagnostic wrappers (StartProdTool already listed).
+ITEM7_CHANGED_TOP = set([
+    "p01_master_path", "prod_abort_fit_and_verify", "prod_bs_index_capture_map", "prod_bs_index_snapshot",
+    "prod_build_bone_scale_plan", "prod_capture_body_snapshot", "prod_capture_bone_scale_map", "prod_discover",
+    "prod_move_current_preset_to_trash", "prod_operation_event_turn_sample", "prod_prepare_library_root",
+    "prod_q1_compare_body_capture", "prod_resolve", "prod_set_favorite", "prod_validate_bone_scale_map",
+    "prod_verify_bone_scale_map", "same_time_refresh", "tool_apply_window_icon", "tool_window_icon",
+    "undo_state",
+])
 EXPECTED_CHANGED_TOP = (STEP2B_CHANGED_TOP | STEP3_CHANGED_TOP | STEP4_CHANGED_TOP | R14_CHANGED_TOP
-                        | R15_CHANGED_TOP | ITEM6_CHANGED_TOP)
+                        | R15_CHANGED_TOP | ITEM6_CHANGED_TOP | ITEM7_CHANGED_TOP)
 EXPECTED_NEW_TOP = set([
     "PROD_CPM_MAINMENU_RELATIVE_PARTS", "PROD_CPM_ADAPTER_MODULES", "ProdCpmAuthorityBootstrapError",
     "ProdCpmAuthorityNotMigrated", "prod_cpm_mainmenu_dir", "prod_cpm_import_adapter", "prod_cpm_is_main_thread",
@@ -224,6 +234,20 @@ ITEM6_REMOVED_TOP = set([
     "P01SemanticProvider", "P01MasterTxtProvider",
 ])
 ITEM6_REMOVED_METHODS = set(["g18an_run_decision_parity"])
+# Item 7: exact top-level removals and changed ProdWindow methods (design section 7).
+ITEM7_REMOVED_TOP = set([
+    "prod_perf_seconds", "prod_perf_log", "astra_perf_timing", "prod_action_timing", "PROD_PERF_LOGGING",
+    "SEMANTIC_PROVIDER_MODE_SIDECAR", "SEMANTIC_PROVIDER_FORCE_MODE", "G18AN_PARITY_SHORTCUT",
+])
+ITEM7_CHANGED_METHODS = set([
+    "apply_kind", "apply_provider_unavailable_to_ui", "clear_model_selection", "delete_kind", "fit_finish",
+    "fit_show_partial_failure", "open_details", "open_help", "open_master_page", "open_preset_info",
+    "operation_begin", "operation_end", "operation_mark_phase", "poll_foreign_modal", "populate",
+    "refresh_animset_display_metadata", "refresh_fit_candidates", "refresh_preset_view", "reload_library_cache",
+    "resume_scene_activity_after_foreign_modal", "save_kind", "select_model", "toggle_favorite", "update_kind",
+])
+# Item 7 removes exactly one unnamed top-level statement: the timing-only import.
+ITEM7_REMOVED_UNNAMED = u"import time"
 
 
 def _unnamed_top_level(source):
@@ -249,25 +273,31 @@ def section_derivation(app):
     check("derivation.changed_top_level_is_bounded", changed == EXPECTED_CHANGED_TOP, sorted(changed))
     check("derivation.added_top_level_is_bounded", added == EXPECTED_NEW_TOP | R15_NEW_TOP | ITEM6_NEW_TOP,
           sorted(added))
-    check("derivation.removed_is_exactly_item6", removed == ITEM6_REMOVED_TOP,
-          sorted(removed ^ ITEM6_REMOVED_TOP))
+    check("derivation.removed_is_exactly_item6_and_item7", removed == ITEM6_REMOVED_TOP | ITEM7_REMOVED_TOP,
+          sorted(removed ^ (ITEM6_REMOVED_TOP | ITEM7_REMOVED_TOP)))
     bm, am = baseline.methods("ProdWindow"), app.methods("ProdWindow")
     m_changed = set(n for n in am if n in bm and app.method_text("ProdWindow", n) != baseline.method_text("ProdWindow", n))
     # The shortcut binding lives in the constructor-side builder method.
     shortcut_owner = [n for n in bm if "g18an_parity_shortcut = QtGui.QShortcut" in baseline.method_text("ProdWindow", n)]
     check("derivation.shortcut_owner_found", len(shortcut_owner) == 1, shortcut_owner)
-    expected_methods = EXPECTED_CHANGED_METHODS | R15_CHANGED_METHODS | set(shortcut_owner)
+    expected_methods = EXPECTED_CHANGED_METHODS | R15_CHANGED_METHODS | set(shortcut_owner) | ITEM7_CHANGED_METHODS
     check("derivation.changed_methods_are_bounded", m_changed == expected_methods, sorted(m_changed))
     check("derivation.added_methods_are_bounded", set(am) - set(bm) == EXPECTED_NEW_METHODS | R15_NEW_METHODS,
           sorted(set(am) - set(bm)))
     check("derivation.removed_methods_are_exactly_item6", set(bm) - set(am) == ITEM6_REMOVED_METHODS,
           sorted(set(bm) - set(am)))
     # R15: the only unnamed top-level changes are the allow-guard (added right
-    # after the docstring) and the removed bottom-of-file StartProdTool() call.
+    # after the docstring) and the removed bottom-of-file StartProdTool() call;
+    # item 7 additionally removes exactly one `import time`.
     b_un, a_un = _unnamed_top_level(baseline), _unnamed_top_level(app)
+    b_mid = list(b_un[1:-1])
+    item7_import_once = b_mid.count(ITEM7_REMOVED_UNNAMED) == 1
+    if item7_import_once:
+        b_mid.remove(ITEM7_REMOVED_UNNAMED)
     check("derivation.r15_unnamed_top_level_bounded",
           b_un[-1] == u"StartProdTool()" and a_un[:1] == b_un[:1] and a_un[1] == u"if not ("
-          and a_un[2:] == b_un[1:-1], [a_un[1], b_un[-1], len(a_un), len(b_un)])
+          and item7_import_once and ITEM7_REMOVED_UNNAMED not in a_un
+          and a_un[2:] == b_mid, [a_un[1], b_un[-1], len(a_un), len(b_un), item7_import_once])
     check("derivation.item6_historical_machinery_absent", not ITEM6_REMOVED_TOP & set(app.top)
           and "get_semantic_provider" in app.top and "ProdHistoricalAuthorityDisabled" in app.top,
           sorted(ITEM6_REMOVED_TOP & set(app.top)))

@@ -1,0 +1,246 @@
+{
+ "label": "candidate1",
+ "app_sha256": "bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5",
+ "steps": [
+  {
+   "suite": "test_cpm_compat_v1_projection.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=publish",
+   "exit": 0,
+   "result": "RESULT: 196/196 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.2
+  },
+  {
+   "suite": "test_cpm_compat_v1_projection.py",
+   "interpreter": "py2.7.5",
+   "phase": "--phase=suite",
+   "exit": 0,
+   "result": "RESULT: 196/196 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.1
+  },
+  {
+   "suite": "test_cpm_compat_v1_projection.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=compare",
+   "exit": 0,
+   "result": "RESULT: 3/3 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.1
+  },
+  {
+   "suite": "test_cpm_authority_adapter.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=publish",
+   "exit": 0,
+   "result": "RESULT: 205/205 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.3
+  },
+  {
+   "suite": "test_cpm_authority_adapter.py",
+   "interpreter": "py2.7.5",
+   "phase": "--phase=suite",
+   "exit": 0,
+   "result": "RESULT: 205/205 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.2
+  },
+  {
+   "suite": "test_cpm_authority_adapter.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=compare",
+   "exit": 0,
+   "result": "RESULT: 3/3 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.1
+  },
+  {
+   "suite": "test_cpm_app_canonical_route.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=publish",
+   "exit": 0,
+   "result": "RESULT: 85/85 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.8
+  },
+  {
+   "suite": "test_cpm_app_canonical_route.py",
+   "interpreter": "py2.7.5",
+   "phase": "--phase=suite",
+   "exit": 0,
+   "result": "RESULT: 85/85 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.8
+  },
+  {
+   "suite": "test_cpm_app_canonical_route.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=compare",
+   "exit": 0,
+   "result": "RESULT: 3/3 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.1
+  },
+  {
+   "suite": "test_cpm_app_operation_context.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=publish",
+   "exit": 0,
+   "result": "RESULT: 108/108 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.4
+  },
+  {
+   "suite": "test_cpm_app_operation_context.py",
+   "interpreter": "py2.7.5",
+   "phase": "--phase=suite",
+   "exit": 0,
+   "result": "RESULT: 108/108 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.4
+  },
+  {
+   "suite": "test_cpm_app_operation_context.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=compare",
+   "exit": 0,
+   "result": "RESULT: 3/3 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.1
+  },
+  {
+   "suite": "test_cpm_app_clothing_fit.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=publish",
+   "exit": 0,
+   "result": "RESULT: 95/95 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.4
+  },
+  {
+   "suite": "test_cpm_app_clothing_fit.py",
+   "interpreter": "py2.7.5",
+   "phase": "--phase=suite",
+   "exit": 0,
+   "result": "RESULT: 95/95 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.4
+  },
+  {
+   "suite": "test_cpm_app_clothing_fit.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=compare",
+   "exit": 0,
+   "result": "RESULT: 3/3 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.1
+  },
+  {
+   "suite": "test_cpm_convergence_gates.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=publish",
+   "exit": 0,
+   "result": "RESULT: 152/152 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.8
+  },
+  {
+   "suite": "test_cpm_convergence_gates.py",
+   "interpreter": "py2.7.5",
+   "phase": "--phase=suite",
+   "exit": 0,
+   "result": "RESULT: 152/152 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.9
+  },
+  {
+   "suite": "test_cpm_convergence_gates.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=compare",
+   "exit": 0,
+   "result": "RESULT: 3/3 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.1
+  },
+  {
+   "suite": "test_cpm_app_r14_ctypes_isolation.py",
+   "interpreter": "py2.7.5",
+   "phase": "--phase=run",
+   "exit": 0,
+   "result": "RESULT: 18/18 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.5
+  },
+  {
+   "suite": "test_cpm_app_r14_ctypes_isolation.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=run",
+   "exit": 0,
+   "result": "RESULT: 15/15 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": null,
+   "seconds": 0.4
+  },
+  {
+   "suite": "test_cpm_app_r15_namespace_isolation.py",
+   "interpreter": "py2.7.5",
+   "phase": "--phase=run",
+   "exit": 0,
+   "result": "RESULT: 345/345 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": "Qt modes: real, model\r",
+   "seconds": 12.8
+  },
+  {
+   "suite": "test_cpm_app_r15_namespace_isolation.py",
+   "interpreter": "py3.10",
+   "phase": "--phase=run",
+   "exit": 0,
+   "result": "RESULT: 188/188 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": "Qt modes: model\r",
+   "seconds": 4.6
+  },
+  {
+   "suite": "test_cpm_app_logging_cleanup.py",
+   "interpreter": "py2.7.5",
+   "phase": "run",
+   "exit": 0,
+   "result": "RESULT: 144/144 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": "Qt modes for window gates: real, model\r",
+   "seconds": 26.8
+  },
+  {
+   "suite": "test_cpm_app_logging_cleanup.py",
+   "interpreter": "py3.10",
+   "phase": "run",
+   "exit": 0,
+   "result": "RESULT: 117/117 ALL PASS\r",
+   "fail_lines": 0,
+   "qt": "Qt modes for window gates: model\r",
+   "seconds": 18.7
+  }
+ ]
+}

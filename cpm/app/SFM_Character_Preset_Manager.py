@@ -33,7 +33,6 @@ import datetime
 import os
 import re
 import traceback
-import time
 import math
 import sys
 import base64
@@ -1026,13 +1025,16 @@ def undo_state(label):
         except Exception:
             result[key] = None
 
-    log_line(
-        "%s=%r"
-        % (
-            label,
-            result,
+    try:
+        log_line(
+            "%s=%r"
+            % (
+                label,
+                result,
+            )
         )
-    )
+    except Exception:
+        pass
 
     return result
 
@@ -1056,16 +1058,19 @@ def same_time_refresh(head_time, label):
         sfmApp.GetHeadTimeInSeconds()
     )
 
-    log_line(
-        "%s_REFRESH requested=%r before=%r after_set=%r after_process=%r"
-        % (
-            label,
-            head_time,
-            before,
-            after_set,
-            after_process,
+    try:
+        log_line(
+            "%s_REFRESH requested=%r before=%r after_set=%r after_process=%r"
+            % (
+                label,
+                head_time,
+                before,
+                after_set,
+                after_process,
+            )
         )
-    )
+    except Exception:
+        pass
 
 
 def qt_parent():
@@ -1132,14 +1137,6 @@ SEMANTIC_PROVIDER_KIND_MASTER_SIDECAR = u"compiled_master_sidecar_r1d"
 SEMANTIC_PROVIDER_FOLD_POLICY = u"ascii-a-z-v1"
 SEMANTIC_PROVIDER_MASTER_FILENAME = u"sfm_defaultanimationgroups.txt"
 
-# Historical provider-mode names retained for startup/diagnostic compatibility.
-# Semantic authority is acquired only through the canonical CPM adapter route;
-# the historical TXT/AUTO modes and their provider implementations were removed
-# in handoff section 22 item 6.
-SEMANTIC_PROVIDER_MODE_SIDECAR = u"SIDECAR"
-SEMANTIC_PROVIDER_FORCE_MODE = SEMANTIC_PROVIDER_MODE_SIDECAR
-G18AN_PARITY_SHORTCUT = u"Ctrl+Shift+P"
-
 SEMANTIC_STATUS_RESOLVED = u"resolved"
 SEMANTIC_STATUS_CONFLICT = u"conflict"
 SEMANTIC_STATUS_ABSENT = u"absent"
@@ -1175,10 +1172,13 @@ def p01_master_path():
         raise RuntimeError("SFM returned an empty active mod directory.")
 
     path = os.path.join(mod_path, "cfg", P01_MASTER_FILENAME)
-    log_line(
-        "P01_MASTER_PATH source='filesystem.valve.mod' mod_path=%r path=%r"
-        % (mod_path, path)
-    )
+    try:
+        log_line(
+            "P01_MASTER_PATH source='filesystem.valve.mod' mod_path=%r path=%r"
+            % (mod_path, path)
+        )
+    except Exception:
+        pass
     return path
 
 
@@ -10096,19 +10096,16 @@ def tool_window_icon():
             return None
 
         _PROD_WINDOW_ICON_CACHE = icon
-        log_line(
-            "PROD_WINDOW_ICON status='embedded-loaded' bytes=%d"
-            % len(
-                raw
-            )
-        )
         return _PROD_WINDOW_ICON_CACHE
 
     except Exception as exc:
-        log_line(
-            "PROD_WINDOW_ICON status='embedded-exception' error=%r"
-            % exc
-        )
+        try:
+            log_line(
+                "PROD_WINDOW_ICON status='embedded-exception' error=%r"
+                % exc
+            )
+        except Exception:
+            pass
         return None
 
 
@@ -10131,10 +10128,13 @@ def tool_apply_window_icon(
         return True
 
     except Exception as exc:
-        log_line(
-            "PROD_WINDOW_ICON status='apply-failed' error=%r"
-            % exc
-        )
+        try:
+            log_line(
+                "PROD_WINDOW_ICON status='apply-failed' error=%r"
+                % exc
+            )
+        except Exception:
+            pass
         return False
 
 
@@ -16200,14 +16200,20 @@ def prod_cpm_scope_generation_stale(scope):
     try:
         current = prod_cpm_open_adapter().generation_descriptor()
     except Exception as exc:
-        log_line("PROD_CPM_GENERATION_CHECK_FAILED error=%r" % (exc,))
+        try:
+            log_line("PROD_CPM_GENERATION_CHECK_FAILED error=%r" % (exc,))
+        except Exception:
+            pass
         return True
     authority = (scope or {}).get("authority") or {}
     return u(authority.get("provider_sha256")) != u(current.get("source_sha256"))
 
 
 def prod_cpm_unmigrated_authority(helper):
-    log_line("PROD_CPM_UNMIGRATED_AUTHORITY_REFUSED helper=%r" % (helper,))
+    try:
+        log_line("PROD_CPM_UNMIGRATED_AUTHORITY_REFUSED helper=%r" % (helper,))
+    except Exception:
+        pass
     raise ProdCpmAuthorityNotMigrated(
         "Semantic authority for %s is not available until its operation "
         "authority context is migrated." % helper
@@ -16344,10 +16350,13 @@ def prod_cpm_authorize_operation(identity, scope, kind, label):
         )
     adapter = None
     if failure is not None:
-        log_line(
-            "PROD_CPM_OPERATION_AUTHORIZATION_REFUSED operation=%r reason=%r"
-            % (label, failure[2])
-        )
+        try:
+            log_line(
+                "PROD_CPM_OPERATION_AUTHORIZATION_REFUSED operation=%r reason=%r"
+                % (label, failure[2])
+            )
+        except Exception:
+            pass
         raise failure[0](failure[1])
 
     capture = prod_cpm_detached(provenance["provider_capture"])
@@ -16387,15 +16396,18 @@ def prod_cpm_authorize_operation(identity, scope, kind, label):
         },
     })
     provenance = None
-    log_line(
-        "PROD_CPM_OPERATION_AUTHORIZED operation=%r sha256=%s kind=%r membership=%r"
-        % (
-            label,
-            expected,
-            kind,
-            None if membership is None else len(membership["descriptors"]),
+    try:
+        log_line(
+            "PROD_CPM_OPERATION_AUTHORIZED operation=%r sha256=%s kind=%r membership=%r"
+            % (
+                label,
+                expected,
+                kind,
+                None if membership is None else len(membership["descriptors"]),
+            )
         )
-    )
+    except Exception:
+        pass
     return context
 
 
@@ -16451,10 +16463,13 @@ def prod_cpm_open_fit_stage(fit_context, target_row, index):
         failure = (u"unavailable", u(exc.reason))
     adapter = None
     if failure is not None:
-        log_line(
-            "PROD_CPM_FIT_STAGE_REFUSED index=%d gfit=%s kind=%r reason=%r"
-            % (index, fit_context["master_sha256"], failure[0], failure[1])
-        )
+        try:
+            log_line(
+                "PROD_CPM_FIT_STAGE_REFUSED index=%d gfit=%s kind=%r reason=%r"
+                % (index, fit_context["master_sha256"], failure[0], failure[1])
+            )
+        except Exception:
+            pass
         if failure[0] == u"generation-mismatch":
             raise ProdCpmFitStop(
                 PROD_CPM_STALE_SCOPE_MESSAGE,
@@ -16463,10 +16478,13 @@ def prod_cpm_open_fit_stage(fit_context, target_row, index):
         raise ProdCpmOperationAuthorityError(
             "Semantic authority is unavailable for this Clothing Fit target (%s)." % failure[1]
         )
-    log_line(
-        "PROD_CPM_FIT_STAGE_OPEN index=%d gfit=%s literals=%d"
-        % (index, stage.generation, len(literals))
-    )
+    try:
+        log_line(
+            "PROD_CPM_FIT_STAGE_OPEN index=%d gfit=%s literals=%d"
+            % (index, stage.generation, len(literals))
+        )
+    except Exception:
+        pass
     return stage
 
 
@@ -16476,10 +16494,13 @@ def prod_cpm_release_fit_stage(stage, index):
     if stage is None:
         return None
     failure = stage.release()
-    log_line(
-        "PROD_CPM_FIT_STAGE_RELEASED index=%d ok=%r"
-        % (index, failure is None)
-    )
+    try:
+        log_line(
+            "PROD_CPM_FIT_STAGE_RELEASED index=%d ok=%r"
+            % (index, failure is None)
+        )
+    except Exception:
+        pass
     if failure is not None:
         raise ProdCpmFitStop(
             "The Clothing Fit authority stage could not be released.",
@@ -16501,10 +16522,13 @@ def prod_probe_semantic_provider(identity):
             u"cpm-authority-bootstrap-failed",
             u(exc),
         )
-        log_line(
-            "PROD_PROVIDER_HEALTH status=%r reason=%r error=%r"
-            % (health["status"], health["reason"], health["message"])
-        )
+        try:
+            log_line(
+                "PROD_PROVIDER_HEALTH status=%r reason=%r error=%r"
+                % (health["status"], health["reason"], health["message"])
+            )
+        except Exception:
+            pass
         return None, health
 
     row = prod_resolve(
@@ -16525,10 +16549,13 @@ def prod_probe_semantic_provider(identity):
             u(assessed.get("reason")),
             u(assessed.get("message")),
         )
-        log_line(
-            "PROD_PROVIDER_HEALTH status=%r reason=%r error=%r"
-            % (health["status"], health["reason"], health["message"])
-        )
+        try:
+            log_line(
+                "PROD_PROVIDER_HEALTH status=%r reason=%r error=%r"
+                % (health["status"], health["reason"], health["message"])
+            )
+        except Exception:
+            pass
         return None, health
 
     descriptor = dict(assessed.get("descriptor") or {})
@@ -16539,18 +16566,21 @@ def prod_probe_semantic_provider(identity):
         descriptor,
     )
     advisory = assessed.get("advisory") or {}
-    log_line(
-        "PROD_PROVIDER_HEALTH status=%r reason=%r kind=%r sha256=%r "
-        "requested_literals=%r master_unknown_literals=%r"
-        % (
-            health["status"],
-            health["reason"],
-            descriptor.get("provider_kind"),
-            descriptor.get("source_sha256"),
-            advisory.get("requested_literal_count"),
-            advisory.get("master_unknown_literal_count"),
+    try:
+        log_line(
+            "PROD_PROVIDER_HEALTH status=%r reason=%r kind=%r sha256=%r "
+            "requested_literals=%r master_unknown_literals=%r"
+            % (
+                health["status"],
+                health["reason"],
+                descriptor.get("provider_kind"),
+                descriptor.get("source_sha256"),
+                advisory.get("requested_literal_count"),
+                advisory.get("master_unknown_literal_count"),
+            )
         )
-    )
+    except Exception:
+        pass
     return adapter, health
 
 
@@ -16695,19 +16725,22 @@ def prod_resolve(
     )
 
     if old_name != new_name:
-        log_line(
-            "G18AN_ANIMSET_RENAME_RESOLVED model=%r checksum=%r old=%r new=%r"
-            % (
-                identity.get(
-                    "model"
-                ),
-                identity.get(
-                    "checksum"
-                ),
-                old_name,
-                new_name,
+        try:
+            log_line(
+                "G18AN_ANIMSET_RENAME_RESOLVED model=%r checksum=%r old=%r new=%r"
+                % (
+                    identity.get(
+                        "model"
+                    ),
+                    identity.get(
+                        "checksum"
+                    ),
+                    old_name,
+                    new_name,
+                )
             )
-        )
+        except Exception:
+            pass
 
     return row
 
@@ -17750,9 +17783,15 @@ def prod_prepare_library_root():
         os.rename(old_root, new_root)
         if os.path.exists(old_root) or not os.path.isdir(new_root):
             raise RuntimeError("Preset library folder rename could not be verified.")
-        log_line("PROD_LIBRARY_ROOT_MIGRATION=PASS old=%r new=%r" % (old_root, new_root))
+        try:
+            log_line("PROD_LIBRARY_ROOT_MIGRATION=PASS old=%r new=%r" % (old_root, new_root))
+        except Exception:
+            pass
     elif os.path.isdir(old_root) and os.path.isdir(new_root):
-        log_line("PROD_LIBRARY_ROOT_MIGRATION=SKIP reason='both-exist' old=%r new=%r" % (old_root, new_root))
+        try:
+            log_line("PROD_LIBRARY_ROOT_MIGRATION=SKIP reason='both-exist' old=%r new=%r" % (old_root, new_root))
+        except Exception:
+            pass
 
     p02_ensure_dir(new_root)
     return new_root
@@ -17901,18 +17940,21 @@ def prod_set_favorite(
         phase_callback=phase_callback,
     )
 
-    log_line(
-        "PROD_FAVORITE_SET model=%r preset=%r enabled=%r"
-        % (
-            identity[
-                "model"
-            ],
-            key,
-            bool(
-                enabled
-            ),
+    try:
+        log_line(
+            "PROD_FAVORITE_SET model=%r preset=%r enabled=%r"
+            % (
+                identity[
+                    "model"
+                ],
+                key,
+                bool(
+                    enabled
+                ),
+            )
         )
-    )
+    except Exception:
+        pass
 
     return {
         "enabled": bool(
@@ -18420,19 +18462,22 @@ def prod_set_override(
             },
         )
 
-    log_line(
-        "PROD_OVERRIDE_SET model=%r literal=%r decision=%r override_revision=%r"
-        % (
-            identity[
-                "model"
-            ],
-            literal,
-            decision,
-            loaded.get(
-                "semantic_override_revision"
-            ),
+    try:
+        log_line(
+            "PROD_OVERRIDE_SET model=%r literal=%r decision=%r override_revision=%r"
+            % (
+                identity[
+                    "model"
+                ],
+                literal,
+                decision,
+                loaded.get(
+                    "semantic_override_revision"
+                ),
+            )
         )
-    )
+    except Exception:
+        pass
 
     return loaded
 
@@ -18576,18 +18621,21 @@ def prod_clear_override(
             },
         )
 
-    log_line(
-        "PROD_OVERRIDE_CLEAR model=%r literal=%r override_revision=%r"
-        % (
-            identity[
-                "model"
-            ],
-            literal,
-            loaded.get(
-                "semantic_override_revision"
-            ),
+    try:
+        log_line(
+            "PROD_OVERRIDE_CLEAR model=%r literal=%r override_revision=%r"
+            % (
+                identity[
+                    "model"
+                ],
+                literal,
+                loaded.get(
+                    "semantic_override_revision"
+                ),
+            )
         )
-    )
+    except Exception:
+        pass
 
     return loaded
 
@@ -18919,13 +18967,16 @@ def prod_discover(
                 kind,
             )
         except Exception as exc:
-            log_line(
-                "PROD_LIBRARY_MALFORMED path=%r error=%r"
-                % (
-                    path,
-                    exc,
+            try:
+                log_line(
+                    "PROD_LIBRARY_MALFORMED path=%r error=%r"
+                    % (
+                        path,
+                        exc,
+                    )
                 )
-            )
+            except Exception:
+                pass
             continue
 
         preset_id = u(
@@ -19026,13 +19077,16 @@ def prod_discover(
                 )
 
             except Exception as exc:
-                log_line(
-                    "PROD_LEGACY_SKIP path=%r error=%r"
-                    % (
-                        path,
-                        exc,
+                try:
+                    log_line(
+                        "PROD_LEGACY_SKIP path=%r error=%r"
+                        % (
+                            path,
+                            exc,
+                        )
                     )
-                )
+                except Exception:
+                    pass
                 continue
 
             out.append(
@@ -19292,15 +19346,18 @@ def prod_move_current_preset_to_trash(
             False,
         )
     except Exception as exc:
-        log_line(
-            "PROD_FAVORITE_CLEANUP_WARNING preset=%r error=%r"
-            % (
-                record.get(
-                    "preset_id"
-                ),
-                exc,
+        try:
+            log_line(
+                "PROD_FAVORITE_CLEANUP_WARNING preset=%r error=%r"
+                % (
+                    record.get(
+                        "preset_id"
+                    ),
+                    exc,
+                )
             )
-        )
+        except Exception:
+            pass
 
     try:
         profile = prod_load_character(
@@ -19336,32 +19393,38 @@ def prod_move_current_preset_to_trash(
             )
 
     except Exception as exc:
+        try:
+            log_line(
+                "PROD_DELETE_PROFILE_CLEANUP_WARNING preset=%r error=%r"
+                % (
+                    record.get(
+                        "preset_id"
+                    ),
+                    exc,
+                )
+            )
+        except Exception:
+            pass
+
+    try:
         log_line(
-            "PROD_DELETE_PROFILE_CLEANUP_WARNING preset=%r error=%r"
+            "PROD_DELETE=PASS model=%r kind=%r name=%r source=%r trash=%r"
             % (
+                identity[
+                    "model"
+                ],
                 record.get(
-                    "preset_id"
+                    "kind"
                 ),
-                exc,
+                record.get(
+                    "name"
+                ),
+                path,
+                target,
             )
         )
-
-    log_line(
-        "PROD_DELETE=PASS model=%r kind=%r name=%r source=%r trash=%r"
-        % (
-            identity[
-                "model"
-            ],
-            record.get(
-                "kind"
-            ),
-            record.get(
-                "name"
-            ),
-            path,
-            target,
-        )
-    )
+    except Exception:
+        pass
 
     return target
 
@@ -21742,81 +21805,16 @@ def prod_bs_build_mixed_plan(identity, record):
 
 
 
-PROD_PERF_LOGGING = True
 PROD_Q1_INDEXED_CAPTURE_PARITY = False
 
 
-def prod_perf_seconds(started):
-    return max(0.0, float(time.time() - started))
-
-
-def prod_perf_log(phase, started, extra=u""):
-    elapsed = prod_perf_seconds(started)
-
-    if PROD_PERF_LOGGING:
-        log_line(
-            "PROD_PERF phase=%r seconds=%.6f%s"
-            % (
-                phase,
-                elapsed,
-                (
-                    " " + b(extra)
-                    if extra
-                    else ""
-                ),
-            )
-        )
-
-    return elapsed
-
-
-def astra_perf_timing(
-    area,
-    phase,
-    started,
-    extra=u"",
-):
-    elapsed = prod_perf_seconds(started)
-    log_line(
-        "ASTRA_PERF area=%r phase=%r seconds=%.6f%s"
-        % (
-            area,
-            phase,
-            elapsed,
-            (" " + b(extra) if extra else ""),
-        )
-    )
-    return elapsed
-
-
-def prod_action_timing(action, phase, started, extra=u""):
-    elapsed = prod_perf_seconds(started)
-    log_line(
-        "PROD_ACTION_TIMING action=%r phase=%r seconds=%.6f%s"
-        % (
-            action,
-            phase,
-            elapsed,
-            (
-                " " + b(extra)
-                if extra
-                else ""
-            ),
-        )
-    )
-    return elapsed
-
-
-
 def prod_bs_index_snapshot(identity):
-    t_total = time.time()
 
     model_row = prod_bs_find_model_row(identity)
     animset = model_row["animset"]
     shot = model_row["shot"]
     clip = get_channels_clip(animset, shot)
 
-    t_enum = time.time()
     all_controls = prod_bs_animset_controls(animset)
     animset_controls = r26_animset_controls(animset)
     channels = [
@@ -21827,18 +21825,6 @@ def prod_bs_index_snapshot(identity):
     groups = group_inventory(animset)
     operators = r26_animset_operators(animset)
 
-    prod_perf_log(
-        u"bone_index.enumerate",
-        t_enum,
-        u"controls=%d animset_controls=%d channels=%d groups=%d operators=%d"
-        % (
-            len(all_controls),
-            len(animset_controls),
-            len(channels),
-            len(groups),
-            len(operators),
-        ),
-    )
 
     # Stable object indexes.
     control_by_id = {}
@@ -21930,7 +21916,6 @@ def prod_bs_index_snapshot(identity):
         ).append(operator)
 
     # Build native-bone rows once.
-    t_bones = time.time()
     raw = []
     by_identity = {}
     transform_owners = {}
@@ -22138,13 +22123,6 @@ def prod_bs_index_snapshot(identity):
             identity_key
         ] = row
 
-    prod_perf_log(
-        u"bone_index.build_native_bones",
-        t_bones,
-        u"bones=%d" % len(
-            bone_index_map
-        ),
-    )
 
     snapshot = {
         "identity": dict(identity),
@@ -22180,13 +22158,6 @@ def prod_bs_index_snapshot(identity):
         },
     }
 
-    prod_perf_log(
-        u"bone_index.total",
-        t_total,
-        u"bones=%d" % len(
-            bone_index_map
-        ),
-    )
 
     return snapshot
 
@@ -23174,7 +23145,6 @@ def prod_validate_bone_scale_map(
     identity,
     bone_scales,
 ):
-    t_total = time.time()
 
     if not isinstance(
         bone_scales,
@@ -23184,7 +23154,6 @@ def prod_validate_bone_scale_map(
             "This older Body Preset does not include bone scaling. Delete it and save a new Body Preset."
         )
 
-    t_parse = time.time()
     seen = set()
 
     for row in bone_scales:
@@ -23255,26 +23224,9 @@ def prod_validate_bone_scale_map(
             key
         )
 
-    prod_perf_log(
-        u"bone_validate.saved_map_parse",
-        t_parse,
-        u"records=%d"
-        % len(
-            seen
-        ),
-    )
 
-    t_current = time.time()
     model_row, current = prod_bs_current_bone_index(
         identity
-    )
-    prod_perf_log(
-        u"bone_validate.current_bone_index",
-        t_current,
-        u"bones=%d"
-        % len(
-            current
-        ),
     )
 
     if set(
@@ -23286,10 +23238,6 @@ def prod_validate_bone_scale_map(
             "This Body Preset does not match the selected model's current bone layout."
         )
 
-    prod_perf_log(
-        u"bone_validate.total",
-        t_total,
-    )
 
     return True
 
@@ -23602,37 +23550,13 @@ def prod_bs_index_capture_map(
     One fresh indexed native acquisition projected immediately to pure data.
     No live DME/native object is returned from this function.
     """
-    t_total = time.time()
     snapshot = None
     trace = None
     row = None
 
     try:
-        t_phase = time.time()
         snapshot = prod_bs_index_snapshot(
             identity
-        )
-        prod_action_timing(
-            u"Body Indexed Capture",
-            u"index-snapshot",
-            t_phase,
-            u"bones=%d channels=%d"
-            % (
-                len(
-                    snapshot[
-                        "bone_index"
-                    ]
-                ),
-                int(
-                    snapshot.get(
-                        "counts",
-                        {},
-                    ).get(
-                        "channels"
-                    )
-                    or 0
-                ),
-            ),
         )
         prod_resource_snapshot(
             u"Q2_INDEX_ACQUIRED"
@@ -23652,7 +23576,6 @@ def prod_bs_index_capture_map(
         result = []
         existing_scaled = []
 
-        t_phase = time.time()
 
         for key in expected_keys:
             row = snapshot[
@@ -23677,18 +23600,21 @@ def prod_bs_index_capture_map(
                 if not prod_bs_index_capture_static_trace(
                     trace
                 ):
-                    diagnostic = prod_bs_capture_trace_diagnostic(
-                        trace
-                    )
-                    log_line(
-                        "Q3_SCALE_CAPTURE_REJECT bone=%r diagnostic=%r"
-                        % (
-                            row[
-                                "bone_name"
-                            ],
-                            diagnostic,
+                    try:
+                        diagnostic = prod_bs_capture_trace_diagnostic(
+                            trace
                         )
-                    )
+                        log_line(
+                            "Q3_SCALE_CAPTURE_REJECT bone=%r diagnostic=%r"
+                            % (
+                                row[
+                                    "bone_name"
+                                ],
+                                diagnostic,
+                            )
+                        )
+                    except Exception:
+                        pass
                     diagnostic = None
                     raise RuntimeError(
                         "Bone %s has scale state outside the qualified static contract."
@@ -23697,19 +23623,6 @@ def prod_bs_index_capture_map(
                         ]
                     )
 
-                diagnostic = prod_bs_capture_trace_diagnostic(
-                    trace
-                )
-                log_line(
-                    "Q3_SCALE_CAPTURE_ACCEPT bone=%r diagnostic=%r"
-                    % (
-                        row[
-                            "bone_name"
-                        ],
-                        diagnostic,
-                    )
-                )
-                diagnostic = None
 
                 multiplier = as_float(
                     trace.get(
@@ -23780,20 +23693,6 @@ def prod_bs_index_capture_map(
 
             row = None
 
-        prod_action_timing(
-            u"Body Indexed Capture",
-            u"project-pure-bone-map",
-            t_phase,
-            u"records=%d existing_scaled=%d"
-            % (
-                len(
-                    result
-                ),
-                len(
-                    existing_scaled
-                ),
-            ),
-        )
         prod_resource_snapshot(
             u"Q2_INDEX_PROJECTED_LIVE"
         )
@@ -23885,11 +23784,6 @@ def prod_bs_index_capture_map(
             u"Q2_INDEX_RELEASED"
         )
 
-        prod_action_timing(
-            u"Body Indexed Capture",
-            u"total",
-            t_total,
-        )
 
 
 def prod_q1_compare_body_capture(
@@ -23903,23 +23797,8 @@ def prod_q1_compare_body_capture(
     PROD_Q1_INDEXED_CAPTURE_PARITY is True. It must never become a production
     fallback.
     """
-    t_phase = time.time()
     old_bone_scales, old_existing_scaled = prod_capture_bone_scale_map(
         identity
-    )
-    prod_action_timing(
-        u"Q1 Capture Parity",
-        u"historical-oracle",
-        t_phase,
-        u"records=%d existing_scaled=%d"
-        % (
-            len(
-                old_bone_scales
-            ),
-            len(
-                old_existing_scaled
-            ),
-        ),
     )
 
     new_bone_scales = indexed_capture[
@@ -23953,20 +23832,23 @@ def prod_q1_compare_body_capture(
             "Q1 indexed Body expected bone coverage does not match the historical capture."
         )
 
-    log_line(
-        "Q1_CAPTURE_PARITY=PASS model=%r records=%d existing_scaled=%d"
-        % (
-            identity[
-                "model"
-            ],
-            len(
-                new_bone_scales
-            ),
-            len(
-                new_existing_scaled
-            ),
+    try:
+        log_line(
+            "Q1_CAPTURE_PARITY=PASS model=%r records=%d existing_scaled=%d"
+            % (
+                identity[
+                    "model"
+                ],
+                len(
+                    new_bone_scales
+                ),
+                len(
+                    new_existing_scaled
+                ),
+            )
         )
-    )
+    except Exception:
+        pass
 
     return True
 
@@ -23982,25 +23864,14 @@ def prod_capture_body_snapshot(
     Returns pure Python data only. No event pumping or modal work occurs inside
     this capture frame.
     """
-    t_total = time.time()
 
     if operation_context is not None:
         prod_validate_context_token(
             operation_context
         )
 
-    t_phase = time.time()
     values, _ = p03_capture_values(
         accepted
-    )
-    prod_action_timing(
-        u"Body Indexed Capture",
-        u"capture-flex-values",
-        t_phase,
-        u"controls=%d"
-        % len(
-            accepted
-        ),
     )
 
     indexed = prod_bs_index_capture_map(
@@ -24044,126 +23915,51 @@ def prod_capture_body_snapshot(
 
     indexed = None
 
-    prod_action_timing(
-        u"Body Indexed Capture",
-        u"snapshot-total",
-        t_total,
-        u"controls=%d bones=%d"
-        % (
-            len(
-                accepted
-            ),
-            len(
-                result[
-                    "expected_bone_keys"
-                ]
-            ),
-        ),
-    )
 
     return result
 
 
 def prod_capture_bone_scale_map(identity):
-    t_total = time.time()
 
-    t_phase = time.time()
     model_row = prod_bs_find_model_row(identity)
-    prod_action_timing(
-        u"Body Capture",
-        u"find-model-row",
-        t_phase,
-    )
 
-    t_phase = time.time()
     bone_map, existing_scaled = prod_bs_full_bone_scale_map(model_row)
-    prod_action_timing(
-        u"Body Capture",
-        u"full-bone-scale-map",
-        t_phase,
-        u"records=%d existing_scaled=%d"
-        % (
-            len(bone_map),
-            len(existing_scaled),
-        ),
-    )
 
     if not bone_map:
         raise RuntimeError("No native model bones could be captured safely.")
 
-    prod_action_timing(
-        u"Body Capture",
-        u"total",
-        t_total,
-    )
 
     return bone_map, existing_scaled
 
 
 def prod_build_bone_scale_plan(identity, record):
-    t_total = time.time()
 
-    t_validate = time.time()
     prod_validate_bone_scale_map(
         identity,
         record.get("bone_scales"),
     )
-    prod_perf_log(
-        u"bone_plan.validate",
-        t_validate,
-    )
 
-    t_plan = time.time()
     result = prod_bs_build_mixed_plan(
         identity,
         record,
     )
-    prod_perf_log(
-        u"bone_plan.build_mixed_plan",
-        t_plan,
-        u"existing=%d create=%d"
-        % (
-            len(result["existing"]),
-            len(result["create"]),
-        ),
-    )
 
-    prod_perf_log(
-        u"bone_plan.total",
-        t_total,
-    )
 
     return result
 
 
 def prod_verify_bone_scale_map(identity, record):
-    t_total = time.time()
 
-    t_validate = time.time()
     prod_validate_bone_scale_map(
         identity,
         record.get("bone_scales"),
     )
-    prod_perf_log(
-        u"bone_verify.validate",
-        t_validate,
-    )
 
-    t_verify = time.time()
     result = prod_bs_verify_saved_scales(
         identity,
         record,
     )
-    prod_perf_log(
-        u"bone_verify.saved_scales",
-        t_verify,
-        u"ok=%r" % result,
-    )
 
-    prod_perf_log(
-        u"bone_verify.total",
-        t_total,
-    )
 
     return result
 
@@ -24181,23 +23977,15 @@ def prod_save(
     phase_callback=None,
     operation_context=None,
 ):
-    t_total = time.time()
     prod_resource_snapshot(
         u"Q2_SAVE_POST_CONFIRM"
     )
 
     # Name uniqueness is checked against a fresh disk inventory. This is
     # intentionally library-only and does not traverse scene/DME state.
-    t_phase = time.time()
     fresh_items = prod_discover(
         identity,
         kind,
-    )
-    prod_action_timing(
-        u"Save Preset",
-        u"disk-inventory",
-        t_phase,
-        u"items=%d" % len(fresh_items),
     )
     prod_assert_unique_preset_name_items(
         fresh_items,
@@ -24218,17 +24006,11 @@ def prod_save(
         u"Save Preset",
     )
 
-    t_phase = time.time()
     live = prod_live_bindings_for_cached_scope(
         identity,
         scope,
         kind,
         authority_context=authority_context,
-    )
-    prod_action_timing(
-        u"Save Preset",
-        u"live-bindings",
-        t_phase,
     )
     accepted = live[
         "accepted"
@@ -24244,7 +24026,6 @@ def prod_save(
     expected_bone_keys = None
 
     if kind == P03_KIND_BODY:
-        t_phase = time.time()
         body_capture = prod_capture_body_snapshot(
             identity,
             accepted,
@@ -24262,35 +24043,11 @@ def prod_save(
         expected_bone_keys = body_capture[
             "expected_bone_keys"
         ]
-        prod_action_timing(
-            u"Save Preset",
-            u"capture-body-snapshot",
-            t_phase,
-            u"controls=%d records=%d existing_scaled=%d"
-            % (
-                len(
-                    accepted
-                ),
-                len(
-                    bone_scales
-                ),
-                len(
-                    existing_scaled
-                ),
-            ),
-        )
         body_capture = None
 
     else:
-        t_phase = time.time()
         values, _ = p03_capture_values(
             accepted
-        )
-        prod_action_timing(
-            u"Save Preset",
-            u"capture-flex-values",
-            t_phase,
-            u"controls=%d" % len(accepted),
         )
 
     pid = u"preset-" + unicode(
@@ -24341,7 +24098,6 @@ def prod_save(
         ] = u"complete-native-bone-map-physical-uniform-v1"
 
     # Reject malformed/non-finite mutation-bearing values before durable write.
-    t_phase = time.time()
     prod_validate_preset(
         identity,
         record,
@@ -24354,11 +24110,6 @@ def prod_save(
             expected_bone_keys,
         )
 
-    prod_action_timing(
-        u"Save Preset",
-        u"validate-captured-record",
-        t_phase,
-    )
     prod_resource_snapshot(
         u"Q2_SAVE_AFTER_PURE_VALIDATION"
     )
@@ -24368,15 +24119,9 @@ def prod_save(
             operation_context
         )
 
-    t_phase = time.time()
     prod_ensure_character(
         identity,
         authority_context=authority_context,
-    )
-    prod_action_timing(
-        u"Save Preset",
-        u"ensure-library",
-        t_phase,
     )
 
     path = prod_unique_path(
@@ -24391,7 +24136,6 @@ def prod_save(
             operation_context
         )
 
-    t_phase = time.time()
     p02_safe_write_json(
         path,
         record,
@@ -24407,16 +24151,10 @@ def prod_save(
             },
         )
 
-    prod_action_timing(
-        u"Save Preset",
-        u"safe-write",
-        t_phase,
-    )
     prod_resource_snapshot(
         u"Q2_SAVE_AFTER_DURABLE_COMMIT"
     )
 
-    t_phase = time.time()
     loaded = p02_read_json(
         path
     )
@@ -24449,54 +24187,47 @@ def prod_save(
             },
         )
 
-    prod_action_timing(
-        u"Save Preset",
-        u"readback-verify",
-        t_phase,
-    )
     prod_resource_snapshot(
         u"Q2_SAVE_AFTER_READBACK"
     )
 
-    log_line(
-        "PROD_SAVE=PASS model=%r kind=%r name=%r controls=%d "
-        "bone_records=%d existing_scale_controls=%d path=%r "
-        "cached_semantic_scope=True indexed_body_capture=%r q1_parity=%r"
-        % (
-            identity[
-                "model"
-            ],
-            kind,
-            name_value,
-            len(
-                accepted
-            ),
-            len(
-                bone_scales
+    try:
+        log_line(
+            "PROD_SAVE=PASS model=%r kind=%r name=%r controls=%d "
+            "bone_records=%d existing_scale_controls=%d path=%r "
+            "cached_semantic_scope=True indexed_body_capture=%r q1_parity=%r"
+            % (
+                identity[
+                    "model"
+                ],
+                kind,
+                name_value,
+                len(
+                    accepted
+                ),
+                len(
+                    bone_scales
+                )
+                if bone_scales is not None
+                else 0,
+                len(
+                    existing_scaled
+                ),
+                path,
+                (
+                    kind
+                    == P03_KIND_BODY
+                ),
+                (
+                    PROD_Q1_INDEXED_CAPTURE_PARITY
+                    if kind == P03_KIND_BODY
+                    else False
+                ),
             )
-            if bone_scales is not None
-            else 0,
-            len(
-                existing_scaled
-            ),
-            path,
-            (
-                kind
-                == P03_KIND_BODY
-            ),
-            (
-                PROD_Q1_INDEXED_CAPTURE_PARITY
-                if kind == P03_KIND_BODY
-                else False
-            ),
         )
-    )
+    except Exception:
+        pass
 
-    prod_action_timing(
-        u"Save Preset",
-        u"total",
-        t_total,
-    )
 
     return path
 
@@ -24510,7 +24241,6 @@ def prod_update_preset(
     phase_callback=None,
     operation_context=None,
 ):
-    t_total = time.time()
     prod_resource_snapshot(
         u"Q2_UPDATE_POST_CONFIRM"
     )
@@ -24597,17 +24327,11 @@ def prod_update_preset(
         u"Update Preset",
     )
 
-    t_phase = time.time()
     live = prod_live_bindings_for_cached_scope(
         identity,
         scope,
         kind,
         authority_context=authority_context,
-    )
-    prod_action_timing(
-        u"Update Preset",
-        u"live-bindings",
-        t_phase,
     )
     accepted = live[
         "accepted"
@@ -24652,7 +24376,6 @@ def prod_update_preset(
     expected_bone_keys = None
 
     if kind == P03_KIND_BODY:
-        t_phase = time.time()
         body_capture = prod_capture_body_snapshot(
             identity,
             accepted,
@@ -24670,23 +24393,6 @@ def prod_update_preset(
         expected_bone_keys = body_capture[
             "expected_bone_keys"
         ]
-        prod_action_timing(
-            u"Update Preset",
-            u"capture-body-snapshot",
-            t_phase,
-            u"controls=%d records=%d existing_scaled=%d"
-            % (
-                len(
-                    accepted
-                ),
-                len(
-                    bone_scales
-                ),
-                len(
-                    existing_scaled
-                ),
-            ),
-        )
         body_capture = None
 
         updated[
@@ -24700,15 +24406,8 @@ def prod_update_preset(
         ] = u"complete-native-bone-map-physical-uniform-v1"
 
     else:
-        t_phase = time.time()
         values, _ = p03_capture_values(
             accepted
-        )
-        prod_action_timing(
-            u"Update Preset",
-            u"capture-flex-values",
-            t_phase,
-            u"controls=%d" % len(accepted),
         )
         updated[
             "values"
@@ -24738,7 +24437,6 @@ def prod_update_preset(
             operation_context
         )
 
-    t_phase = time.time()
     p02_safe_write_json(
         path,
         updated,
@@ -24756,16 +24454,10 @@ def prod_update_preset(
             },
         )
 
-    prod_action_timing(
-        u"Update Preset",
-        u"safe-write",
-        t_phase,
-    )
     prod_resource_snapshot(
         u"Q2_UPDATE_AFTER_DURABLE_COMMIT"
     )
 
-    t_phase = time.time()
     loaded = p02_read_json(
         path
     )
@@ -24800,57 +24492,50 @@ def prod_update_preset(
             },
         )
 
-    prod_action_timing(
-        u"Update Preset",
-        u"readback-verify",
-        t_phase,
-    )
     prod_resource_snapshot(
         u"Q2_UPDATE_AFTER_READBACK"
     )
 
-    log_line(
-        "PROD_UPDATE=PASS model=%r kind=%r preset=%r controls=%d "
-        "bone_records=%d existing_scale_controls=%d path=%r "
-        "cached_semantic_scope=True indexed_body_capture=%r q1_parity=%r"
-        % (
-            identity[
-                "model"
-            ],
-            kind,
-            updated.get(
-                "preset_id"
-            ),
-            len(
-                accepted
-            ),
-            len(
+    try:
+        log_line(
+            "PROD_UPDATE=PASS model=%r kind=%r preset=%r controls=%d "
+            "bone_records=%d existing_scale_controls=%d path=%r "
+            "cached_semantic_scope=True indexed_body_capture=%r q1_parity=%r"
+            % (
+                identity[
+                    "model"
+                ],
+                kind,
                 updated.get(
-                    "bone_scales"
-                )
-                or []
-            ),
-            len(
-                existing_scaled
-            ),
-            path,
-            (
-                kind
-                == P03_KIND_BODY
-            ),
-            (
-                PROD_Q1_INDEXED_CAPTURE_PARITY
-                if kind == P03_KIND_BODY
-                else False
-            ),
+                    "preset_id"
+                ),
+                len(
+                    accepted
+                ),
+                len(
+                    updated.get(
+                        "bone_scales"
+                    )
+                    or []
+                ),
+                len(
+                    existing_scaled
+                ),
+                path,
+                (
+                    kind
+                    == P03_KIND_BODY
+                ),
+                (
+                    PROD_Q1_INDEXED_CAPTURE_PARITY
+                    if kind == P03_KIND_BODY
+                    else False
+                ),
+            )
         )
-    )
+    except Exception:
+        pass
 
-    prod_action_timing(
-        u"Update Preset",
-        u"total",
-        t_total,
-    )
 
     return path
 
@@ -25152,14 +24837,17 @@ def prod_abort_apply_and_verify(
         abort_error = exc
         restored = False
 
-    log_line(
-        "PROD_APPLY_ABORT_VERIFY restored=%r original_error=%r abort_or_verify_error=%r"
-        % (
-            restored,
-            original_error,
-            abort_error,
+    try:
+        log_line(
+            "PROD_APPLY_ABORT_VERIFY restored=%r original_error=%r abort_or_verify_error=%r"
+            % (
+                restored,
+                original_error,
+                abort_error,
+            )
         )
-    )
+    except Exception:
+        pass
 
     if not restored:
         raise ProdRecoveryUnverifiedError(
@@ -25198,17 +24886,20 @@ def prod_abort_fit_and_verify(
         abort_error = exc
         restored = False
 
-    log_line(
-        "PROD_CLOTHING_FIT_ABORT_VERIFY target=%r restored=%r original_error=%r abort_or_verify_error=%r"
-        % (
-            plan.get(
-                "identity"
-            ),
-            restored,
-            original_error,
-            abort_error,
+    try:
+        log_line(
+            "PROD_CLOTHING_FIT_ABORT_VERIFY target=%r restored=%r original_error=%r abort_or_verify_error=%r"
+            % (
+                plan.get(
+                    "identity"
+                ),
+                restored,
+                original_error,
+                abort_error,
+            )
         )
-    )
+    except Exception:
+        pass
 
     if not restored:
         raise ProdRecoveryUnverifiedError(
@@ -25227,10 +24918,8 @@ def prod_apply(
     phase_callback=None,
     operation_context=None,
 ):
-    t_apply = time.time()
     kind = u(record["kind"])
 
-    t_scope = time.time()
     if scope is None:
         scope = prod_scope(
             identity
@@ -25253,16 +24942,7 @@ def prod_apply(
     accepted = live[
         "accepted"
     ]
-    prod_perf_log(
-        u"apply.preflight.cached_scope_live_bindings",
-        t_scope,
-        u"count=%d"
-        % len(
-            accepted
-        ),
-    )
 
-    t_flex_prepare = time.time()
     flex = prod_flex_record(record)
     expected = set(
         u"flex." + x
@@ -25291,14 +24971,6 @@ def prod_apply(
         accepted,
         flex,
     )
-    prod_perf_log(
-        u"apply.preflight.flex_plan",
-        t_flex_prepare,
-        u"changed_sides=%d"
-        % built[
-            "changed_sides"
-        ],
-    )
 
     scale_plan = {
         "existing": [],
@@ -25308,16 +24980,10 @@ def prod_apply(
     pre_snapshot = None
 
     if kind == P03_KIND_BODY:
-        t_snapshot = time.time()
         pre_snapshot = prod_bs_index_snapshot(
             identity
         )
-        prod_perf_log(
-            u"apply.preflight.index_snapshot",
-            t_snapshot,
-        )
 
-        t_bone_plan = time.time()
         scale_plan = prod_bs_index_build_plan(
             identity,
             record,
@@ -25325,23 +24991,6 @@ def prod_apply(
         )
         prod_validate_scale_plan_finite(
             scale_plan
-        )
-        prod_perf_log(
-            u"apply.preflight.indexed_bone_plan",
-            t_bone_plan,
-            u"existing=%d create=%d"
-            % (
-                len(
-                    scale_plan[
-                        "existing"
-                    ]
-                ),
-                len(
-                    scale_plan[
-                        "create"
-                    ]
-                ),
-            ),
         )
 
     changed_existing_scales = [
@@ -25371,22 +25020,6 @@ def prod_apply(
         )
     )
 
-    prod_perf_log(
-        u"apply.preflight.total",
-        t_apply,
-        u"changed_flex=%d changed_existing=%d create_missing=%d"
-        % (
-            built[
-                "changed_sides"
-            ],
-            len(
-                changed_existing_scales
-            ),
-            len(
-                created_missing_scales
-            ),
-        ),
-    )
 
     before = undo_state(
         "PROD_APPLY_UNDO_BEFORE"
@@ -25403,23 +25036,21 @@ def prod_apply(
                 "True no-op changed Undo state."
             )
 
-        log_line(
-            "PROD_APPLY outcome='no-op' model=%r kind=%r preset=%r"
-            % (
-                identity[
-                    "model"
-                ],
-                kind,
-                record.get(
-                    "name"
-                ),
+        try:
+            log_line(
+                "PROD_APPLY outcome='no-op' model=%r kind=%r preset=%r"
+                % (
+                    identity[
+                        "model"
+                    ],
+                    kind,
+                    record.get(
+                        "name"
+                    ),
+                )
             )
-        )
-        prod_perf_log(
-            u"apply.total",
-            t_apply,
-            u"outcome=no-op",
-        )
+        except Exception:
+            pass
         return prod_outcome(
             "no-op",
             native_committed=False,
@@ -25435,7 +25066,6 @@ def prod_apply(
         else u"Apply Expression"
     )
 
-    t_mutation = time.time()
 
     try:
         dm_obj.StartUndo(
@@ -25547,12 +25177,7 @@ def prod_apply(
 
         raise
 
-    prod_perf_log(
-        u"apply.mutation_transaction",
-        t_mutation,
-    )
 
-    t_refresh = time.time()
     same_time_refresh(
         float(
             sfmApp.GetHeadTimeInSeconds()
@@ -25565,12 +25190,7 @@ def prod_apply(
             operation_context
         )
 
-    prod_perf_log(
-        u"apply.postcommit.refresh",
-        t_refresh,
-    )
 
-    t_fresh_scope = time.time()
     fresh_live = prod_live_bindings_for_cached_scope(
         identity,
         scope,
@@ -25580,43 +25200,26 @@ def prod_apply(
     fresh_accepted = fresh_live[
         "accepted"
     ]
-    prod_perf_log(
-        u"apply.postcommit.cached_scope_live_bindings",
-        t_fresh_scope,
-        u"count=%d"
-        % len(
-            fresh_accepted
-        ),
-    )
 
-    t_flex_verify = time.time()
     flex_ok = p03_verify_saved_values(
         fresh_accepted,
         flex,
     )
-    prod_perf_log(
-        u"apply.postcommit.flex_verify",
-        t_flex_verify,
-        u"ok=%r"
-        % flex_ok,
-    )
 
     if not flex_ok:
-        log_line(
-            "PROD_APPLY outcome='committed-unverified' reason='flex' "
-            "model=%r kind=%r"
-            % (
-                identity[
-                    "model"
-                ],
-                kind,
+        try:
+            log_line(
+                "PROD_APPLY outcome='committed-unverified' reason='flex' "
+                "model=%r kind=%r"
+                % (
+                    identity[
+                        "model"
+                    ],
+                    kind,
+                )
             )
-        )
-        prod_perf_log(
-            u"apply.total",
-            t_apply,
-            u"outcome=committed-unverified-flex",
-        )
+        except Exception:
+            pass
         return prod_outcome(
             "committed-unverified",
             native_committed=True,
@@ -25628,40 +25231,26 @@ def prod_apply(
     scales_ok = True
 
     if kind == P03_KIND_BODY:
-        t_post_snapshot = time.time()
         post_snapshot = prod_bs_index_snapshot(
             identity
         )
-        prod_perf_log(
-            u"apply.postcommit.index_snapshot",
-            t_post_snapshot,
-        )
 
-        t_bone_verify = time.time()
         scales_ok = prod_bs_index_verify_saved(
             record,
             post_snapshot,
         )
-        prod_perf_log(
-            u"apply.postcommit.indexed_bone_verify",
-            t_bone_verify,
-            u"ok=%r"
-            % scales_ok,
-        )
 
     if not scales_ok:
-        log_line(
-            "PROD_APPLY outcome='committed-unverified' reason='bone-scales' "
-            "model=%r"
-            % identity[
-                "model"
-            ]
-        )
-        prod_perf_log(
-            u"apply.total",
-            t_apply,
-            u"outcome=committed-unverified-bones",
-        )
+        try:
+            log_line(
+                "PROD_APPLY outcome='committed-unverified' reason='bone-scales' "
+                "model=%r"
+                % identity[
+                    "model"
+                ]
+            )
+        except Exception:
+            pass
         return prod_outcome(
             "committed-unverified",
             native_committed=True,
@@ -25670,34 +25259,32 @@ def prod_apply(
             recovery=u"Use SFM Undo or inspect the result before retrying.",
         )
 
-    log_line(
-        "PROD_APPLY outcome='committed' model=%r kind=%r preset=%r "
-        "changed_sides=%d changed_existing_scales=%d created_missing_scales=%d"
-        % (
-            identity[
-                "model"
-            ],
-            kind,
-            record.get(
-                "name"
-            ),
-            built[
-                "changed_sides"
-            ],
-            len(
-                changed_existing_scales
-            ),
-            len(
-                created_missing_scales
-            ),
+    try:
+        log_line(
+            "PROD_APPLY outcome='committed' model=%r kind=%r preset=%r "
+            "changed_sides=%d changed_existing_scales=%d created_missing_scales=%d"
+            % (
+                identity[
+                    "model"
+                ],
+                kind,
+                record.get(
+                    "name"
+                ),
+                built[
+                    "changed_sides"
+                ],
+                len(
+                    changed_existing_scales
+                ),
+                len(
+                    created_missing_scales
+                ),
+            )
         )
-    )
+    except Exception:
+        pass
 
-    prod_perf_log(
-        u"apply.total",
-        t_apply,
-        u"outcome=committed",
-    )
 
     return prod_outcome(
         "committed-verified",
@@ -26067,15 +25654,18 @@ def prod_operation_event_turn_sample(
     operation_id,
     label,
 ):
-    log_line(
-        "PROD_OPERATION_EVENT_TURN id=%d kind=%r run_id=%r pid=%d"
-        % (
-            int(operation_id),
-            u(label),
-            PROD_RUN_ID,
-            PROD_PID,
+    try:
+        log_line(
+            "PROD_OPERATION_EVENT_TURN id=%d kind=%r run_id=%r pid=%d"
+            % (
+                int(operation_id),
+                u(label),
+                PROD_RUN_ID,
+                PROD_PID,
+            )
         )
-    )
+    except Exception:
+        pass
     prod_resource_snapshot(
         u"Q2_SETTLED_EVENT_TURN:%s"
         % u(label)
@@ -26594,10 +26184,13 @@ class ProdWindow(QtGui.QDialog):
         # Start last, after construction/population is complete.  While a
         # foreign modal is present this remains the only persistent CPM timer.
         self.modal_watch_timer.start()
-        log_line(
-            "G18AN_MODAL_WATCHER_STARTED interval_ms=%d scene_pollers=0"
-            % self.modal_watch_timer.interval()
-        )
+        try:
+            log_line(
+                "G18AN_MODAL_WATCHER_STARTED interval_ms=%d scene_pollers=0"
+                % self.modal_watch_timer.interval()
+            )
+        except Exception:
+            pass
 
     def modal_is_owned_by_manager(
         self,
@@ -26668,13 +26261,16 @@ class ProdWindow(QtGui.QDialog):
         ):
             return
 
-        log_line(
-            "G18AN_MODAL_RESUME_FIT generation=%d index=%d"
-            % (
-                generation,
-                index,
+        try:
+            log_line(
+                "G18AN_MODAL_RESUME_FIT generation=%d index=%d"
+                % (
+                    generation,
+                    index,
+                )
             )
-        )
+        except Exception:
+            pass
 
         QtCore.QTimer.singleShot(
             0,
@@ -26742,23 +26338,26 @@ class ProdWindow(QtGui.QDialog):
                 except Exception:
                     modal_title = u""
 
-                log_line(
-                    "G18AN_MODAL_YIELD_ENTER class=%r title=%r "
-                    "was_visible=%r operation=%r fit_active=%r"
-                    % (
-                        modal_class,
-                        modal_title,
-                        self.modal_yield_was_visible,
-                        (
-                            None
-                            if self.operation is None
-                            else self.operation.get(
-                                "kind"
-                            )
-                        ),
-                        self.fit_active,
+                try:
+                    log_line(
+                        "G18AN_MODAL_YIELD_ENTER class=%r title=%r "
+                        "was_visible=%r operation=%r fit_active=%r"
+                        % (
+                            modal_class,
+                            modal_title,
+                            self.modal_yield_was_visible,
+                            (
+                                None
+                                if self.operation is None
+                                else self.operation.get(
+                                    "kind"
+                                )
+                            ),
+                            self.fit_active,
+                        )
                     )
-                )
+                except Exception:
+                    pass
 
                 if self.modal_yield_was_visible:
                     try:
@@ -26789,13 +26388,16 @@ class ProdWindow(QtGui.QDialog):
             except Exception:
                 pass
 
-        log_line(
-            "G18AN_MODAL_YIELD_EXIT restored=%r deferred_fit=%r"
-            % (
-                restore_visible,
-                self.modal_deferred_fit_stage,
+        try:
+            log_line(
+                "G18AN_MODAL_YIELD_EXIT restored=%r deferred_fit=%r"
+                % (
+                    restore_visible,
+                    self.modal_deferred_fit_stage,
+                )
             )
-        )
+        except Exception:
+            pass
 
         # Resume scene-facing work only after the palette has been restored.
         self.resume_scene_activity_after_foreign_modal()
@@ -26957,12 +26559,15 @@ class ProdWindow(QtGui.QDialog):
         pin_context=True,
     ):
         if self.scene_activity_suspended:
-            log_line(
-                "G18AN_OPERATION_BLOCKED_MODAL kind=%r"
-                % u(
-                    label
+            try:
+                log_line(
+                    "G18AN_OPERATION_BLOCKED_MODAL kind=%r"
+                    % u(
+                        label
+                    )
                 )
-            )
+            except Exception:
+                pass
             return False
 
         if self.operation is not None:
@@ -26998,22 +26603,9 @@ class ProdWindow(QtGui.QDialog):
         }
         self.busy = True
 
-        log_line(
-            "PROD_OPERATION_BEGIN id=%d kind=%r context=%r"
-            % (
-                self.operation[
-                    "operation_id"
-                ],
-                self.operation[
-                    "kind"
-                ],
-                context,
-            )
-        )
-
         try:
             log_line(
-                "G18AN_OPERATION_PROVIDER_STATE event='begin' id=%d kind=%r stats=%r"
+                "PROD_OPERATION_BEGIN id=%d kind=%r context=%r"
                 % (
                     self.operation[
                         "operation_id"
@@ -27021,14 +26613,12 @@ class ProdWindow(QtGui.QDialog):
                     self.operation[
                         "kind"
                     ],
-                    semantic_provider_runtime_stats(),
+                    context,
                 )
             )
-        except Exception as exc:
-            log_line(
-                "G18AN_OPERATION_PROVIDER_STATE_ERROR event='begin' error=%r"
-                % exc
-            )
+        except Exception:
+            pass
+
 
         return True
 
@@ -27070,16 +26660,19 @@ class ProdWindow(QtGui.QDialog):
                 or {}
             )
 
-        log_line(
-            "PROD_OPERATION_PHASE id=%d phase=%r detail=%r"
-            % (
-                self.operation[
-                    "operation_id"
-                ],
-                phase,
-                detail,
+        try:
+            log_line(
+                "PROD_OPERATION_PHASE id=%d phase=%r detail=%r"
+                % (
+                    self.operation[
+                        "operation_id"
+                    ],
+                    phase,
+                    detail,
+                )
             )
-        )
+        except Exception:
+            pass
 
 
     def operation_revalidate(
@@ -27174,35 +26767,22 @@ class ProdWindow(QtGui.QDialog):
         self.operation = None
         self.busy = False
 
-        log_line(
-            "PROD_OPERATION_END id=%d kind=%r phase=%r native_commit=%r durable_commit=%r"
-            % (
-                operation_id,
-                u(
-                    label
-                ),
-                final_phase,
-                native_commit,
-                durable_commit,
-            )
-        )
-
         try:
             log_line(
-                "G18AN_OPERATION_PROVIDER_STATE event='end' id=%d kind=%r stats=%r"
+                "PROD_OPERATION_END id=%d kind=%r phase=%r native_commit=%r durable_commit=%r"
                 % (
                     operation_id,
                     u(
                         label
                     ),
-                    semantic_provider_runtime_stats(),
+                    final_phase,
+                    native_commit,
+                    durable_commit,
                 )
             )
-        except Exception as exc:
-            log_line(
-                "G18AN_OPERATION_PROVIDER_STATE_ERROR event='end' error=%r"
-                % exc
-            )
+        except Exception:
+            pass
+
 
         try:
             QtCore.QTimer.singleShot(
@@ -27471,13 +27051,16 @@ class ProdWindow(QtGui.QDialog):
                 PROD_MASTER_GITHUB_URL
             )
         )
-        log_line(
-            "PROD_HELP_MASTER_LINK result=%r url=%r"
-            % (
-                bool(opened),
-                PROD_MASTER_GITHUB_URL,
+        try:
+            log_line(
+                "PROD_HELP_MASTER_LINK result=%r url=%r"
+                % (
+                    bool(opened),
+                    PROD_MASTER_GITHUB_URL,
+                )
             )
-        )
+        except Exception:
+            pass
         if not opened:
             tool_warning_message(
                 self,
@@ -27501,10 +27084,13 @@ class ProdWindow(QtGui.QDialog):
         if not prod_cpm_scope_generation_stale(self.scope):
             return False
         self._cpm_stale_rebuild_pending = True
-        log_line(
-            "PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED identity=%r"
-            % (self.identity,)
-        )
+        try:
+            log_line(
+                "PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED identity=%r"
+                % (self.identity,)
+            )
+        except Exception:
+            pass
         QtCore.QTimer.singleShot(
             0,
             self.prod_cpm_run_stale_rebuild,
@@ -27528,10 +27114,13 @@ class ProdWindow(QtGui.QDialog):
         # Discard the stale scope, then acquire current authority and rebuild
         # and republish through the existing selection path.
         self.scope = None
-        log_line(
-            "PROD_CPM_STALE_GENERATION_REBUILD identity=%r"
-            % (self.identity,)
-        )
+        try:
+            log_line(
+                "PROD_CPM_STALE_GENERATION_REBUILD identity=%r"
+                % (self.identity,)
+            )
+        except Exception:
+            pass
         self.select_model(
             self.combo.currentIndex()
         )
@@ -27624,14 +27213,17 @@ class ProdWindow(QtGui.QDialog):
             u"warning",
         )
 
-        log_line(
-            "PROD_PROVIDER_GATE state=%r reason=%r review_rows=0 "
-            "semantic_actions=False library_actions_preserved=True"
-            % (
-                self.provider_health.get("status"),
-                self.provider_health.get("reason"),
+        try:
+            log_line(
+                "PROD_PROVIDER_GATE state=%r reason=%r review_rows=0 "
+                "semantic_actions=False library_actions_preserved=True"
+                % (
+                    self.provider_health.get("status"),
+                    self.provider_health.get("reason"),
+                )
             )
-        )
+        except Exception:
+            pass
 
 
     def disable_semantic_scene_actions(
@@ -27735,16 +27327,22 @@ class ProdWindow(QtGui.QDialog):
                 pin_context=pin_context,
             )
         except Exception as exc:
-            log_line(
-                "PROD_OPERATION_BEGIN_FAIL label=%r error=%r"
-                % (
-                    label,
-                    exc,
+            try:
+                log_line(
+                    "PROD_OPERATION_BEGIN_FAIL label=%r error=%r"
+                    % (
+                        label,
+                        exc,
+                    )
                 )
-            )
-            log_line(
-                traceback.format_exc()
-            )
+            except Exception:
+                pass
+            try:
+                log_line(
+                    traceback.format_exc()
+                )
+            except Exception:
+                pass
             self.set_status(
                 "The current model context could not be verified. Reselect the model and try again.",
                 u"error",
@@ -27775,16 +27373,22 @@ class ProdWindow(QtGui.QDialog):
             return result
 
         except Exception as exc:
-            log_line(
-                "PROD_ACTION_ERROR label=%r error=%r"
-                % (
-                    label,
-                    exc,
+            try:
+                log_line(
+                    "PROD_ACTION_ERROR label=%r error=%r"
+                    % (
+                        label,
+                        exc,
+                    )
                 )
-            )
-            log_line(
-                traceback.format_exc()
-            )
+            except Exception:
+                pass
+            try:
+                log_line(
+                    traceback.format_exc()
+                )
+            except Exception:
+                pass
 
             raw = u(
                 exc
@@ -28001,19 +27605,22 @@ class ProdWindow(QtGui.QDialog):
                     )
                 )
 
-        log_line(
-            "G18AN_ANIMSET_METADATA_REFRESH model=%r checksum=%r old=%r new=%r"
-            % (
-                row.get(
-                    "model"
-                ),
-                row.get(
-                    "checksum"
-                ),
-                old_name,
-                new_name,
+        try:
+            log_line(
+                "G18AN_ANIMSET_METADATA_REFRESH model=%r checksum=%r old=%r new=%r"
+                % (
+                    row.get(
+                        "model"
+                    ),
+                    row.get(
+                        "checksum"
+                    ),
+                    old_name,
+                    new_name,
+                )
             )
-        )
+        except Exception:
+            pass
 
         return True
 
@@ -28067,15 +27674,7 @@ class ProdWindow(QtGui.QDialog):
         self,
     ):
         def work():
-            t_total = time.time()
-            t_phase = time.time()
             self.candidates = g09a_candidates()
-            astra_perf_timing(
-                u"manager",
-                u"enumerate-models",
-                t_phase,
-                u"candidates=%d" % len(self.candidates),
-            )
 
             self.combo.blockSignals(
                 True
@@ -28203,38 +27802,18 @@ class ProdWindow(QtGui.QDialog):
                 )
             )
 
-            log_line(
-                "PROD_MODELS count=%d initial_index=%d candidates=%r"
-                % (
-                    len(
-                        self.candidates
-                    ),
-                    self.combo.currentIndex(),
-                    [
-                        (
-                            x[
-                                "model"
-                            ],
-                            x[
-                                "checksum"
-                            ],
-                            x[
-                                "animset_name"
-                            ],
-                            x[
-                                "binding_count"
-                            ],
-                        )
-                        for x in self.candidates
-                    ],
+            try:
+                log_line(
+                    "PROD_MODELS count=%d initial_index=%d"
+                    % (
+                        len(
+                            self.candidates
+                        ),
+                        self.combo.currentIndex(),
+                    )
                 )
-            )
-            astra_perf_timing(
-                u"manager",
-                u"refresh-models-total",
-                t_total,
-                u"candidates=%d" % len(self.candidates),
-            )
+            except Exception:
+                pass
 
         return self.guard(
             "Refresh Models",
@@ -28244,10 +27823,13 @@ class ProdWindow(QtGui.QDialog):
     def clear_model_selection(
         self,
     ):
-        log_line(
-            "PROD_MODEL_CLEAR_BEGIN previous_identity=%r"
-            % self.identity
-        )
+        try:
+            log_line(
+                "PROD_MODEL_CLEAR_BEGIN previous_identity=%r"
+                % self.identity
+            )
+        except Exception:
+            pass
 
         self.fit_active = False
         self.fit_generation += 1
@@ -28383,9 +27965,6 @@ class ProdWindow(QtGui.QDialog):
                     False
                 )
 
-        log_line(
-            "PROD_MODEL_CLEAR=PASS identity=None stale_library_items=0 fit_targets=0"
-        )
 
 
     def select_model(
@@ -28419,22 +27998,14 @@ class ProdWindow(QtGui.QDialog):
         }
 
         def work():
-            t_total = time.time()
             # Resolve and build all non-UI state before publishing the new
             # selected identity. A failed transition leaves the prior model
             # selection intact rather than exposing a half-built context.
-            t_phase = time.time()
             resolved_row = prod_resolve(
                 candidate
             )
             resolved_candidate = prod_identity_from_row(
                 resolved_row
-            )
-            astra_perf_timing(
-                u"model-select",
-                u"resolve-target",
-                t_phase,
-                u"model=%r" % resolved_candidate["model"],
             )
             self.render(
                 resolved_candidate
@@ -28480,23 +28051,20 @@ class ProdWindow(QtGui.QDialog):
                         ),
                     )
                 )
-                log_line(
-                    "G18AN_STALE_COMBO_NAME_REFRESH index=%d old=%r new=%r"
-                    % (
-                        index,
-                        old_name,
-                        resolved_candidate.get(
-                            "animset_name"
-                        ),
+                try:
+                    log_line(
+                        "G18AN_STALE_COMBO_NAME_REFRESH index=%d old=%r new=%r"
+                        % (
+                            index,
+                            old_name,
+                            resolved_candidate.get(
+                                "animset_name"
+                            ),
+                        )
                     )
-                )
+                except Exception:
+                    pass
 
-            astra_perf_timing(
-                u"model-select",
-                u"select-total",
-                t_total,
-                u"model=%r" % resolved_candidate["model"],
-            )
 
         return self.guard(
             "Select Model",
@@ -28507,7 +28075,6 @@ class ProdWindow(QtGui.QDialog):
         self,
         identity=None,
     ):
-        t_render_total = time.time()
         ident = (
             dict(
                 identity
@@ -28516,17 +28083,19 @@ class ProdWindow(QtGui.QDialog):
             else self.current()
         )
 
-        log_line(
-            "PROD_MODEL_SWITCH_STAGE stage='scope-begin' target=%r previous=%r"
-            % (
-                ident,
-                self.identity,
+        try:
+            log_line(
+                "PROD_MODEL_SWITCH_STAGE stage='scope-begin' target=%r previous=%r"
+                % (
+                    ident,
+                    self.identity,
+                )
             )
-        )
+        except Exception:
+            pass
         prod_resource_snapshot(
             "MODEL_RENDER_BEFORE_SCOPE"
         )
-        t_phase = time.time()
 
         provider, provider_health = prod_probe_semantic_provider(
             ident
@@ -28542,109 +28111,38 @@ class ProdWindow(QtGui.QDialog):
             )
         provider = None
 
-        astra_perf_timing(
-            u"model-render",
-            u"semantic-scope",
-            t_phase,
-            u"model=%r provider_health=%r"
-            % (
-                ident["model"],
-                provider_health.get("status"),
-            ),
-        )
         prod_resource_snapshot(
             "MODEL_RENDER_AFTER_SCOPE"
         )
-        log_line(
-            "PROD_MODEL_SWITCH_STAGE stage='scope-ready' target=%r provider_health=%r scope_ready=%r"
-            % (
-                ident,
-                provider_health.get("status"),
-                bool(scope is not None),
+        try:
+            log_line(
+                "PROD_MODEL_SWITCH_STAGE stage='scope-ready' target=%r provider_health=%r scope_ready=%r"
+                % (
+                    ident,
+                    provider_health.get("status"),
+                    bool(scope is not None),
+                )
             )
-        )
+        except Exception:
+            pass
 
-        log_line(
-            "PROD_MODEL_SWITCH_STAGE stage='body-library-begin' target=%r"
-            % ident
-        )
-        t_phase = time.time()
         body_items = prod_discover(
             ident,
             P03_KIND_BODY,
         )
-        astra_perf_timing(
-            u"model-render",
-            u"discover-body-library",
-            t_phase,
-            u"items=%d" % len(body_items),
-        )
-        log_line(
-            "PROD_MODEL_SWITCH_STAGE stage='body-library-ready' target=%r count=%d"
-            % (
-                ident,
-                len(body_items),
-            )
-        )
 
-        log_line(
-            "PROD_MODEL_SWITCH_STAGE stage='expression-library-begin' target=%r"
-            % ident
-        )
-        t_phase = time.time()
         expr_items = prod_discover(
             ident,
             P03_KIND_EXPRESSION,
         )
-        astra_perf_timing(
-            u"model-render",
-            u"discover-expression-library",
-            t_phase,
-            u"items=%d" % len(expr_items),
-        )
-        log_line(
-            "PROD_MODEL_SWITCH_STAGE stage='expression-library-ready' target=%r count=%d"
-            % (
-                ident,
-                len(expr_items),
-            )
-        )
 
-        log_line(
-            "PROD_MODEL_SWITCH_STAGE stage='library-meta-begin' target=%r"
-            % ident
-        )
-        t_phase = time.time()
         library_meta = prod_load_library_meta(
             ident
         )
-        astra_perf_timing(
-            u"model-render",
-            u"load-library-meta",
-            t_phase,
-            u"favorites=%d" % len(library_meta.get("favorites") or []),
-        )
-        log_line(
-            "PROD_MODEL_SWITCH_STAGE stage='library-meta-ready' target=%r favorites=%d"
-            % (
-                ident,
-                len(library_meta.get("favorites") or []),
-            )
-        )
 
-        t_phase = time.time()
         prod_assert_unique_library_ids(
             body_items,
             expr_items,
-        )
-        astra_perf_timing(
-            u"model-render",
-            u"validate-library-ids",
-            t_phase,
-        )
-        log_line(
-            "PROD_MODEL_SWITCH_STAGE stage='library-validated' target=%r"
-            % ident
         )
 
         old_identity = self.identity
@@ -28666,91 +28164,36 @@ class ProdWindow(QtGui.QDialog):
             self.expr_items = expr_items
             self.library_meta = library_meta
 
-            log_line(
-                "PROD_MODEL_SWITCH_STAGE stage='preset-ui-begin' target=%r"
-                % ident
-            )
-            t_phase = time.time()
             self.refresh_preset_view(
                 P03_KIND_BODY
             )
-            astra_perf_timing(
-                u"model-render",
-                u"publish-body-preset-ui",
-                t_phase,
-                u"items=%d" % len(self.body_items),
-            )
-            t_phase = time.time()
             self.refresh_preset_view(
                 P03_KIND_EXPRESSION
             )
-            astra_perf_timing(
-                u"model-render",
-                u"publish-expression-preset-ui",
-                t_phase,
-                u"items=%d" % len(self.expr_items),
-            )
-            log_line(
-                "PROD_MODEL_SWITCH_STAGE stage='preset-ui-ready' target=%r body=%d expression=%d"
-                % (
-                    ident,
-                    len(self.body_items),
-                    len(self.expr_items),
-                )
-            )
 
-            t_phase = time.time()
 
             if scope is not None:
                 self.apply_scope_to_ui(
                     scope
                 )
-                astra_perf_timing(
-                    u"model-render",
-                    u"publish-semantic-ui",
-                    t_phase,
-                    u"unresolved=%d overrides=%d provider_health='healthy'"
-                    % (
-                        len(scope["unresolved"]),
-                        len(scope["overrides"]),
-                    ),
-                )
-                log_line(
-                    "PROD_MODEL_SWITCH_STAGE stage='scope-ui-ready' target=%r provider_health='healthy'"
-                    % ident
-                )
 
-                t_phase = time.time()
                 self.refresh_fit_candidates()
-                astra_perf_timing(
-                    u"model-render",
-                    u"publish-clothing-fit-ui",
-                    t_phase,
-                )
-                log_line(
-                    "PROD_MODEL_SWITCH_STAGE stage='fit-ui-ready' target=%r"
-                    % ident
-                )
 
             else:
                 self.apply_provider_unavailable_to_ui(
                     provider_health
                 )
-                astra_perf_timing(
-                    u"model-render",
-                    u"publish-semantic-ui",
-                    t_phase,
-                    u"provider_health=%r review_rows=0"
-                    % provider_health.get("status"),
-                )
-                log_line(
-                    "PROD_MODEL_SWITCH_STAGE stage='scope-ui-unavailable' target=%r provider_health=%r reason=%r"
-                    % (
-                        ident,
-                        provider_health.get("status"),
-                        provider_health.get("reason"),
+                try:
+                    log_line(
+                        "PROD_MODEL_SWITCH_STAGE stage='scope-ui-unavailable' target=%r provider_health=%r reason=%r"
+                        % (
+                            ident,
+                            provider_health.get("status"),
+                            provider_health.get("reason"),
+                        )
                     )
-                )
+                except Exception:
+                    pass
 
         except Exception:
             self.identity = old_identity
@@ -28766,18 +28209,21 @@ class ProdWindow(QtGui.QDialog):
                 PROD_MASTER_PROVIDER_WARNING_COPY,
                 u"warning",
             )
-            log_line(
-                "PROD_SELECTION_PROVIDER_GATED model=%r checksum=%r animset=%r library_key=%r "
-                "provider_health=%r reason=%r review_rows=0 semantic_actions=False"
-                % (
-                    ident["model"],
-                    ident["checksum"],
-                    ident["animset_name"],
-                    prod_key(ident["model"]),
-                    provider_health.get("status"),
-                    provider_health.get("reason"),
+            try:
+                log_line(
+                    "PROD_SELECTION_PROVIDER_GATED model=%r checksum=%r animset=%r library_key=%r "
+                    "provider_health=%r reason=%r review_rows=0 semantic_actions=False"
+                    % (
+                        ident["model"],
+                        ident["checksum"],
+                        ident["animset_name"],
+                        prod_key(ident["model"]),
+                        provider_health.get("status"),
+                        provider_health.get("reason"),
+                    )
                 )
-            )
+            except Exception:
+                pass
 
         else:
             review_count = len(
@@ -28788,14 +28234,17 @@ class ProdWindow(QtGui.QDialog):
                 review_count
                 >= PROD_MASTER_REVIEW_WARNING_THRESHOLD
             ):
-                log_line(
-                    "PROD_PROVIDER_REVIEW_WARNING model=%r unresolved=%d threshold=%d location='review-pane'"
-                    % (
-                        ident["model"],
-                        review_count,
-                        PROD_MASTER_REVIEW_WARNING_THRESHOLD,
+                try:
+                    log_line(
+                        "PROD_PROVIDER_REVIEW_WARNING model=%r unresolved=%d threshold=%d location='review-pane'"
+                        % (
+                            ident["model"],
+                            review_count,
+                            PROD_MASTER_REVIEW_WARNING_THRESHOLD,
+                        )
                     )
-                )
+                except Exception:
+                    pass
 
             self.set_status(
                 "Select a preset, then choose an action above."
@@ -28803,46 +28252,30 @@ class ProdWindow(QtGui.QDialog):
 
             counts = scope["semantic"]["counts"]
 
-            log_line(
-                "PROD_SELECTION model=%r checksum=%r animset=%r library_key=%r "
-                "expression=%d body=%d other=%d unresolved=%d conflict=%d overrides=%d "
-                "bone_scale_production=True "
-                "bone_scale_policy=complete-native-bone-map-physical-uniform-v1 "
-                "semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'"
-                % (
-                    ident["model"],
-                    ident["checksum"],
-                    ident["animset_name"],
-                    prod_key(ident["model"]),
-                    len(scope["expression"]),
-                    len(scope["body"]),
-                    counts.get("resolved_other", 0),
-                    len(scope["unresolved"]),
-                    len(scope["conflicts"]),
-                    len(scope["overrides"]),
+            try:
+                log_line(
+                    "PROD_SELECTION model=%r checksum=%r animset=%r library_key=%r "
+                    "expression=%d body=%d other=%d unresolved=%d conflict=%d overrides=%d "
+                    "bone_scale_production=True "
+                    "bone_scale_policy=complete-native-bone-map-physical-uniform-v1 "
+                    "semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'"
+                    % (
+                        ident["model"],
+                        ident["checksum"],
+                        ident["animset_name"],
+                        prod_key(ident["model"]),
+                        len(scope["expression"]),
+                        len(scope["body"]),
+                        counts.get("resolved_other", 0),
+                        len(scope["unresolved"]),
+                        len(scope["conflicts"]),
+                        len(scope["overrides"]),
+                    )
                 )
-            )
+            except Exception:
+                pass
 
-        astra_perf_timing(
-            u"model-render",
-            u"render-total",
-            t_render_total,
-            u"model=%r" % ident["model"],
-        )
 
-        try:
-            log_line(
-                "G18AN_LIVE_SELECTION_PROVIDER_STATE model=%r stats=%r"
-                % (
-                    ident["model"],
-                    semantic_provider_runtime_stats(),
-                )
-            )
-        except Exception as exc:
-            log_line(
-                "G18AN_LIVE_SELECTION_PROVIDER_STATE_ERROR=%r"
-                % exc
-            )
 
 
 
@@ -29375,15 +28808,9 @@ class ProdWindow(QtGui.QDialog):
         kind,
         select_id=None,
     ):
-        t_total = time.time()
         if self.identity is None:
             return
 
-        kind_label = (
-            u"body"
-            if kind == P03_KIND_BODY
-            else u"expression"
-        )
         widget = (
             self.body_list
             if kind == P03_KIND_BODY
@@ -29395,15 +28822,6 @@ class ProdWindow(QtGui.QDialog):
             else self.expr_items
         )
 
-        log_line(
-            "PROD_PRESET_UI stage='begin' kind=%r source_count=%d"
-            % (
-                kind_label,
-                len(
-                    source
-                ),
-            )
-        )
 
         if select_id is None:
             current = self.selected_or_none(
@@ -29419,13 +28837,6 @@ class ProdWindow(QtGui.QDialog):
                     or u""
                 )
 
-        log_line(
-            "PROD_PRESET_UI stage='selection-captured' kind=%r select_id=%r"
-            % (
-                kind_label,
-                select_id,
-            )
-        )
 
         state = self.preset_filter_state(
             kind
@@ -29476,37 +28887,11 @@ class ProdWindow(QtGui.QDialog):
             ],
         )
 
-        log_line(
-            "PROD_PRESET_UI stage='rows-ready' kind=%r row_count=%d favorites=%d"
-            % (
-                kind_label,
-                len(
-                    rows
-                ),
-                len(
-                    [
-                        row
-                        for row in rows
-                        if row.get(
-                            "_favorite"
-                        )
-                    ]
-                ),
-            )
-        )
 
         widget.blockSignals(
             True
         )
-        log_line(
-            "PROD_PRESET_UI stage='signals-blocked' kind=%r"
-            % kind_label
-        )
         widget.clear()
-        log_line(
-            "PROD_PRESET_UI stage='cleared' kind=%r"
-            % kind_label
-        )
         selected_row = -1
 
         for index, item in enumerate(
@@ -29542,22 +28927,6 @@ class ProdWindow(QtGui.QDialog):
             ):
                 title += u" [Read-only]"
 
-            log_line(
-                "PROD_PRESET_UI stage='item-begin' kind=%r index=%d preset=%r source=%r favorite=%r"
-                % (
-                    kind_label,
-                    index,
-                    preset_id,
-                    item.get(
-                        "source"
-                    ),
-                    bool(
-                        item.get(
-                            "_favorite"
-                        )
-                    ),
-                )
-            )
 
             list_item = QtGui.QListWidgetItem(
                 title
@@ -29579,14 +28948,6 @@ class ProdWindow(QtGui.QDialog):
                 list_item
             )
 
-            log_line(
-                "PROD_PRESET_UI stage='item-ready' kind=%r index=%d preset=%r"
-                % (
-                    kind_label,
-                    index,
-                    preset_id,
-                )
-            )
 
             if (
                 select_id
@@ -29602,32 +28963,10 @@ class ProdWindow(QtGui.QDialog):
                 selected_row
             )
 
-        log_line(
-            "PROD_PRESET_UI stage='selection-restored' kind=%r selected_row=%d"
-            % (
-                kind_label,
-                selected_row,
-            )
-        )
         widget.blockSignals(
             False
         )
-        log_line(
-            "PROD_PRESET_UI stage='signals-restored' kind=%r"
-            % kind_label
-        )
         self.update_action_buttons()
-        log_line(
-            "PROD_PRESET_UI stage='ready' kind=%r"
-            % kind_label
-        )
-        astra_perf_timing(
-            u"preset-ui",
-            u"refresh",
-            t_total,
-            u"kind=%r source=%d rows=%d"
-            % (kind_label, len(source), len(rows)),
-        )
 
 
     def reload_library_cache(
@@ -29670,27 +29009,30 @@ class ProdWindow(QtGui.QDialog):
             select_expr_id,
         )
 
-        log_line(
-            "PROD_LIBRARY model=%r body_v3=%d expression_v3=%d favorites=%d "
-            "semantic_scope_rebuild=False scene_traversal=False"
-            % (
-                ident[
-                    "model"
-                ],
-                len(
-                    self.body_items
-                ),
-                len(
-                    self.expr_items
-                ),
-                len(
-                    self.library_meta.get(
-                        "favorites"
-                    )
-                    or []
-                ),
+        try:
+            log_line(
+                "PROD_LIBRARY model=%r body_v3=%d expression_v3=%d favorites=%d "
+                "semantic_scope_rebuild=False scene_traversal=False"
+                % (
+                    ident[
+                        "model"
+                    ],
+                    len(
+                        self.body_items
+                    ),
+                    len(
+                        self.expr_items
+                    ),
+                    len(
+                        self.library_meta.get(
+                            "favorites"
+                        )
+                        or []
+                    ),
+                )
             )
-        )
+        except Exception:
+            pass
 
 
     def preset_selection_changed(self, kind):
@@ -29851,15 +29193,18 @@ class ProdWindow(QtGui.QDialog):
                 new_scope
             )
 
-            log_line(
-                "PROD_RECLASSIFY_REFRESH=PASS literal=%r semantic_scope_rebuilds=1 "
-                "durable_edit=True returned_to_review=%r current_class=%r old_scope_reused=False"
-                % (
-                    literal,
-                    outcome["returned_to_review"],
-                    outcome["current_semantic_class"],
+            try:
+                log_line(
+                    "PROD_RECLASSIFY_REFRESH=PASS literal=%r semantic_scope_rebuilds=1 "
+                    "durable_edit=True returned_to_review=%r current_class=%r old_scope_reused=False"
+                    % (
+                        literal,
+                        outcome["returned_to_review"],
+                        outcome["current_semantic_class"],
+                    )
                 )
-            )
+            except Exception:
+                pass
             if outcome["returned_to_review"]:
                 self.review_select_literal(
                     literal,
@@ -29956,13 +29301,16 @@ class ProdWindow(QtGui.QDialog):
                 new_scope
             )
 
-            log_line(
-                "PROD_REVIEW_REFRESH=PASS literal=%r decision=%r semantic_scope_rebuilds=1 library_rediscovery=False old_scope_reused=False"
-                % (
-                    literal,
-                    decision,
+            try:
+                log_line(
+                    "PROD_REVIEW_REFRESH=PASS literal=%r decision=%r semantic_scope_rebuilds=1 library_rediscovery=False old_scope_reused=False"
+                    % (
+                        literal,
+                        decision,
+                    )
                 )
-            )
+            except Exception:
+                pass
             self.set_status(
                 "Flex choice saved.",
                 u"success",
@@ -30066,8 +29414,6 @@ class ProdWindow(QtGui.QDialog):
             # Modal return is an operation boundary.
             self.operation_revalidate()
 
-            t_ui_total = time.time()
-            t_prod = time.time()
             path = prod_save(
                 ident,
                 kind,
@@ -30082,16 +29428,10 @@ class ProdWindow(QtGui.QDialog):
                     else None
                 ),
             )
-            prod_action_timing(
-                u"Save Preset UI",
-                u"production-save",
-                t_prod,
-            )
             prod_resource_snapshot(
                 "SAVE_AFTER_PASS"
             )
 
-            t_phase = time.time()
             record = p02_read_json(
                 path
             )
@@ -30099,12 +29439,6 @@ class ProdWindow(QtGui.QDialog):
                 ident,
                 record,
                 kind,
-            )
-            astra_perf_timing(
-                u"save-ui",
-                u"postwrite-read-validate",
-                t_phase,
-                u"kind=%r" % kind,
             )
             preset_id = u(
                 record.get(
@@ -30129,34 +29463,14 @@ class ProdWindow(QtGui.QDialog):
                 new_item
             )
 
-            t_phase = time.time()
             self.refresh_preset_view(
                 kind,
                 preset_id,
-            )
-            astra_perf_timing(
-                u"save-ui",
-                u"publish-updated-preset-list",
-                t_phase,
-                u"kind=%r" % kind,
-            )
-            astra_perf_timing(
-                u"save-ui",
-                u"post-confirm-total",
-                t_ui_total,
-                u"kind=%r" % kind,
             )
             prod_resource_snapshot(
                 u"Q2_SAVE_AFTER_UI_PUBLISH"
             )
 
-            log_line(
-                "PROD_SAVE_POSTWRITE_REFRESH=PASS kind=%r preset=%r full_library_rediscovery=False semantic_scope_rebuild=False"
-                % (
-                    kind,
-                    preset_id,
-                )
-            )
 
             if kind == P03_KIND_BODY:
                 self.set_status(
@@ -30229,13 +29543,6 @@ class ProdWindow(QtGui.QDialog):
                 preset_id,
             )
 
-            log_line(
-                "PROD_FAVORITE_UI_REFRESH=PASS kind=%r preset=%r verified_meta_published=True semantic_scope_rebuild=False"
-                % (
-                    kind,
-                    preset_id,
-                )
-            )
             self.set_status(
                 (
                     "Added to Favorites."
@@ -30345,8 +29652,6 @@ class ProdWindow(QtGui.QDialog):
 
             self.operation_revalidate()
 
-            t_ui_total = time.time()
-            t_prod = time.time()
             prod_update_preset(
                 ident,
                 item,
@@ -30359,11 +29664,6 @@ class ProdWindow(QtGui.QDialog):
                     if self.operation is not None
                     else None
                 ),
-            )
-            prod_action_timing(
-                u"Update Preset UI",
-                u"production-update",
-                t_prod,
             )
             prod_resource_snapshot(
                 "UPDATE_AFTER_PASS"
@@ -30378,7 +29678,6 @@ class ProdWindow(QtGui.QDialog):
                 "path"
             )
 
-            t_phase = time.time()
             fresh_record = p02_read_json(
                 preset_path
             )
@@ -30386,12 +29685,6 @@ class ProdWindow(QtGui.QDialog):
                 ident,
                 fresh_record,
                 kind,
-            )
-            astra_perf_timing(
-                u"update-ui",
-                u"postwrite-read-validate",
-                t_phase,
-                u"kind=%r" % kind,
             )
 
             source_items = (
@@ -30432,34 +29725,14 @@ class ProdWindow(QtGui.QDialog):
                     "Updated preset could not be refreshed in the library view."
                 )
 
-            t_phase = time.time()
             self.refresh_preset_view(
                 kind,
                 preset_id,
-            )
-            astra_perf_timing(
-                u"update-ui",
-                u"publish-updated-preset-list",
-                t_phase,
-                u"kind=%r" % kind,
-            )
-            astra_perf_timing(
-                u"update-ui",
-                u"post-confirm-total",
-                t_ui_total,
-                u"kind=%r" % kind,
             )
             prod_resource_snapshot(
                 u"Q2_UPDATE_AFTER_UI_PUBLISH"
             )
 
-            log_line(
-                "PROD_UPDATE_POSTWRITE_REFRESH=PASS kind=%r preset=%r full_live_rescan=False full_library_rediscovery=False revision_published=True"
-                % (
-                    kind,
-                    preset_id,
-                )
-            )
             self.set_status(
                 u'"%s" updated.'
                 % display_name,
@@ -30723,15 +29996,6 @@ class ProdWindow(QtGui.QDialog):
                 kind
             )
 
-            log_line(
-                "PROD_DELETE_POSTMOVE_REFRESH=PASS kind=%r full_live_rescan=False full_library_rediscovery=False remaining=%d verified_meta_published=True"
-                % (
-                    kind,
-                    len(
-                        remaining
-                    ),
-                )
-            )
             self.set_status(
                 "Preset moved to Trash.",
                 u"success",
@@ -30773,7 +30037,6 @@ class ProdWindow(QtGui.QDialog):
 
             self.operation_revalidate()
 
-            t_apply_ui = time.time()
             result = prod_apply(
                 ident,
                 record,
@@ -30788,13 +30051,6 @@ class ProdWindow(QtGui.QDialog):
                 ),
             )
 
-            astra_perf_timing(
-                u"apply-ui",
-                u"production-apply-total",
-                t_apply_ui,
-                u"kind=%r phase=%r"
-                % (kind, result["phase"]),
-            )
 
             if result[
                 "phase"
@@ -30975,7 +30231,6 @@ class ProdWindow(QtGui.QDialog):
 
 
     def refresh_fit_candidates(self):
-        t_total = time.time()
         if self.identity is None:
             self.fit_tree.clear()
             self.fit_button.setEnabled(False)
@@ -30990,18 +30245,6 @@ class ProdWindow(QtGui.QDialog):
         self.fit_tree.blockSignals(False)
         self.fit_tree.setEnabled(True)
         self.fit_button.setEnabled(False)
-        log_line("CLOTHING_FIT_CANDIDATES source=%r same_folder=%r nearby=%r other=%r" % (
-            self.identity,
-            [row["identity"] for row in same_folder],
-            [row["identity"] for row in nearby],
-            [row["identity"] for row in other]))
-        astra_perf_timing(
-            u"clothing-fit",
-            u"discover-and-publish",
-            t_total,
-            u"same=%d nearby=%d other=%d"
-            % (len(same_folder), len(nearby), len(other)),
-        )
 
 
     def fit_checked_identities(self):
@@ -31193,17 +30436,20 @@ class ProdWindow(QtGui.QDialog):
                 "Fitting selected models to this model..."
             )
 
-            log_line(
-                "CLOTHING_FIT_START generation=%d operation_id=%d source=%r selected=%r pure_source_baseline=True"
-                % (
-                    generation,
-                    self.operation[
-                        "operation_id"
-                    ],
-                    ident,
-                    selected,
+            try:
+                log_line(
+                    "CLOTHING_FIT_START generation=%d operation_id=%d source=%r selected=%r pure_source_baseline=True"
+                    % (
+                        generation,
+                        self.operation[
+                            "operation_id"
+                        ],
+                        ident,
+                        selected,
+                    )
                 )
-            )
+            except Exception:
+                pass
 
             QtCore.QTimer.singleShot(
                 0,
@@ -31214,13 +30460,19 @@ class ProdWindow(QtGui.QDialog):
             )
 
         except Exception as exc:
-            log_line(
-                "CLOTHING_FIT_START_FAIL error=%r"
-                % exc
-            )
-            log_line(
-                traceback.format_exc()
-            )
+            try:
+                log_line(
+                    "CLOTHING_FIT_START_FAIL error=%r"
+                    % exc
+                )
+            except Exception:
+                pass
+            try:
+                log_line(
+                    traceback.format_exc()
+                )
+            except Exception:
+                pass
             self.fit_active = False
             self.fit_source_baseline = None
             self.fit_authority_context = None
@@ -31255,13 +30507,16 @@ class ProdWindow(QtGui.QDialog):
                 generation,
                 index,
             )
-            log_line(
-                "G18AN_MODAL_DEFER_FIT generation=%d index=%d"
-                % (
-                    generation,
-                    index,
+            try:
+                log_line(
+                    "G18AN_MODAL_DEFER_FIT generation=%d index=%d"
+                    % (
+                        generation,
+                        index,
+                    )
                 )
-            )
+            except Exception:
+                pass
             return
 
         if index >= len(
@@ -31354,15 +30609,18 @@ class ProdWindow(QtGui.QDialog):
                         ),
                     }
                 )
-                log_line(
-                    "CLOTHING_FIT_STAGE=SKIP generation=%d index=%d target=%r reason=%r"
-                    % (
-                        generation,
-                        index,
-                        identity,
-                        exc,
+                try:
+                    log_line(
+                        "CLOTHING_FIT_STAGE=SKIP generation=%d index=%d target=%r reason=%r"
+                        % (
+                            generation,
+                            index,
+                            identity,
+                            exc,
+                        )
                     )
-                )
+                except Exception:
+                    pass
 
                 source_live = None
                 target_row = None
@@ -31404,18 +30662,21 @@ class ProdWindow(QtGui.QDialog):
                 ]
                 self.fit_active = False
                 self.fit_source_baseline = None
-                log_line(
-                    "CLOTHING_FIT_STAGE_CANCEL_AFTER_COMMIT generation=%d index=%d target=%r committed=%r unattempted=%r"
-                    % (
-                        generation,
-                        index,
-                        identity,
-                        stage_state[
-                            "committed"
-                        ],
-                        self.fit_unattempted,
+                try:
+                    log_line(
+                        "CLOTHING_FIT_STAGE_CANCEL_AFTER_COMMIT generation=%d index=%d target=%r committed=%r unattempted=%r"
+                        % (
+                            generation,
+                            index,
+                            identity,
+                            stage_state[
+                                "committed"
+                            ],
+                            self.fit_unattempted,
+                        )
                     )
-                )
+                except Exception:
+                    pass
                 self.operation_end(
                     "Clothing Fit"
                 )
@@ -31485,32 +30746,35 @@ class ProdWindow(QtGui.QDialog):
                     )
                 )
 
-            log_line(
-                "CLOTHING_FIT_STAGE=PASS generation=%d index=%d target=%r phase=%r mappings=%d warnings=%d committed=%r"
-                % (
-                    generation,
-                    index,
-                    identity,
-                    outcome[
-                        "phase"
-                    ],
-                    len(
-                        plan[
-                            "mapping"
-                        ][
-                            "mappings"
-                        ]
-                    ),
-                    len(
-                        plan[
-                            "warnings"
-                        ]
-                    ),
-                    stage_state[
-                        "committed"
-                    ],
+            try:
+                log_line(
+                    "CLOTHING_FIT_STAGE=PASS generation=%d index=%d target=%r phase=%r mappings=%d warnings=%d committed=%r"
+                    % (
+                        generation,
+                        index,
+                        identity,
+                        outcome[
+                            "phase"
+                        ],
+                        len(
+                            plan[
+                                "mapping"
+                            ][
+                                "mappings"
+                            ]
+                        ),
+                        len(
+                            plan[
+                                "warnings"
+                            ]
+                        ),
+                        stage_state[
+                            "committed"
+                        ],
+                    )
                 )
-            )
+            except Exception:
+                pass
 
             source_live = None
             target_row = None
@@ -31586,22 +30850,28 @@ class ProdWindow(QtGui.QDialog):
                 ]
             ]
 
-            log_line(
-                "CLOTHING_FIT_FAIL generation=%d index=%d target=%r error=%r committed_current=%r changed=%r failed=%r unattempted=%r"
-                % (
-                    generation,
-                    index,
-                    identity,
-                    exc,
-                    committed_current,
-                    self.fit_changed,
-                    self.fit_failed,
-                    self.fit_unattempted,
+            try:
+                log_line(
+                    "CLOTHING_FIT_FAIL generation=%d index=%d target=%r error=%r committed_current=%r changed=%r failed=%r unattempted=%r"
+                    % (
+                        generation,
+                        index,
+                        identity,
+                        exc,
+                        committed_current,
+                        self.fit_changed,
+                        self.fit_failed,
+                        self.fit_unattempted,
+                    )
                 )
-            )
-            log_line(
-                traceback.format_exc()
-            )
+            except Exception:
+                pass
+            try:
+                log_line(
+                    traceback.format_exc()
+                )
+            except Exception:
+                pass
 
             self.fit_active = False
             self.fit_source_baseline = None
@@ -31984,19 +31254,22 @@ class ProdWindow(QtGui.QDialog):
                 dialog
             )
 
-            log_line(
-                "G18AN_FIT_FAILURE_DIALOG verified_changed=%r committed_uncertain=%r "
-                "recovery_unverified=%r unattempted=%r undo_count=%d"
-                % (
-                    changed_names,
-                    uncertain_names,
-                    recovery_names,
-                    unattempted_names,
-                    len(
-                        committed
-                    ),
+            try:
+                log_line(
+                    "G18AN_FIT_FAILURE_DIALOG verified_changed=%r committed_uncertain=%r "
+                    "recovery_unverified=%r unattempted=%r undo_count=%d"
+                    % (
+                        changed_names,
+                        uncertain_names,
+                        recovery_names,
+                        unattempted_names,
+                        len(
+                            committed
+                        ),
+                    )
                 )
-            )
+            except Exception:
+                pass
 
             dialog.exec_()
 
@@ -32175,26 +31448,29 @@ class ProdWindow(QtGui.QDialog):
                 level,
             )
 
-        log_line(
-            "CLOTHING_FIT_RESULT=PASS generation=%d selected=%d changed=%d already_matched=%d "
-            "partial=%d partial_changed=%d partial_already_matched=%d skipped=%d failed=%d "
-            "unattempted=%d committed_order=%r reusable=True pure_source_baseline=True"
-            % (
-                generation,
-                len(
-                    self.fit_selected_identities
-                ),
-                changed,
-                unchanged,
-                partial,
-                partial_changed,
-                partial_unchanged,
-                skipped,
-                failed,
-                unattempted,
-                self.fit_committed_order,
+        try:
+            log_line(
+                "CLOTHING_FIT_RESULT generation=%d selected=%d changed=%d already_matched=%d "
+                "partial=%d partial_changed=%d partial_already_matched=%d skipped=%d failed=%d "
+                "unattempted=%d committed_order=%r reusable=True pure_source_baseline=True"
+                % (
+                    generation,
+                    len(
+                        self.fit_selected_identities
+                    ),
+                    changed,
+                    unchanged,
+                    partial,
+                    partial_changed,
+                    partial_unchanged,
+                    skipped,
+                    failed,
+                    unattempted,
+                    self.fit_committed_order,
+                )
             )
-        )
+        except Exception:
+            pass
 
         if not self.closing_requested:
             log_line(
@@ -32442,16 +31718,6 @@ class ProdWindow(QtGui.QDialog):
             tool_apply_visual_theme(dialog)
             tool_apply_dialog_font(dialog)
 
-            log_line(
-                "PROD_DETAILS=PASS model=%r body=%d expression=%d unresolved=%d model_file=%r"
-                % (
-                    ident["model"],
-                    len(scope["body"]),
-                    len(scope["expression"]),
-                    len(scope["unresolved"]),
-                    model_file_path,
-                )
-            )
 
             try:
                 dialog.exec_()
@@ -32733,14 +31999,6 @@ class ProdWindow(QtGui.QDialog):
             tool_apply_visual_theme(dialog)
             tool_apply_dialog_font(dialog)
 
-            log_line(
-                "PROD_PRESET_INFO=PASS model=%r kind=%r name=%r"
-                % (
-                    ident["model"],
-                    kind,
-                    name_value,
-                )
-            )
 
             try:
                 dialog.exec_()
@@ -32851,7 +32109,6 @@ class ProdWindow(QtGui.QDialog):
             tool_apply_visual_theme(dialog)
             tool_apply_dialog_font(dialog)
 
-            log_line("PROD_HELP_OPEN=PASS")
             try:
                 dialog.exec_()
             finally:
@@ -32880,31 +32137,24 @@ class ProdWindow(QtGui.QDialog):
             )
         ) + 1
 
+
         try:
             log_line(
-                "G18AN_CLOSE_PROVIDER_STATE stats=%r"
-                % semantic_provider_runtime_stats()
+                "PROD_CLOSE_REQUEST operation=%r fit_active=%r fit_stage_running=%r"
+                % (
+                    (
+                        None
+                        if self.operation is None
+                        else self.operation.get(
+                            "kind"
+                        )
+                    ),
+                    self.fit_active,
+                    self.fit_stage_running,
+                )
             )
-        except Exception as exc:
-            log_line(
-                "G18AN_CLOSE_PROVIDER_STATE_ERROR=%r"
-                % exc
-            )
-
-        log_line(
-            "PROD_CLOSE_REQUEST operation=%r fit_active=%r fit_stage_running=%r"
-            % (
-                (
-                    None
-                    if self.operation is None
-                    else self.operation.get(
-                        "kind"
-                    )
-                ),
-                self.fit_active,
-                self.fit_stage_running,
-            )
-        )
+        except Exception:
+            pass
 
         if self.fit_active:
             self.fit_generation += 1
@@ -33043,15 +32293,18 @@ def prod_r15_result(
     )
 
     if outcome != u"created" and outcome != u"reused":
-        log_line(
-            "PROD_R15_LAUNCH_REFUSED outcome=%r code=%r detail=%r run_id=%r"
-            % (
-                outcome,
-                code,
-                detail,
-                PROD_RUN_ID,
+        try:
+            log_line(
+                "PROD_R15_LAUNCH_REFUSED outcome=%r code=%r detail=%r run_id=%r"
+                % (
+                    outcome,
+                    code,
+                    detail,
+                    PROD_RUN_ID,
+                )
             )
-        )
+        except Exception:
+            pass
 
     return {
         "outcome": outcome,
@@ -33129,10 +32382,13 @@ def prod_r15_window_decision(
             except Exception as exc:
                 return (u"refuse-uncertain", None, u"slot-clear-failed %r" % (exc,))
 
-            log_line(
-                "PROD_R15_SLOT_CLEARED reason='deleted-qt-object' owned=%r"
-                % owned
-            )
+            try:
+                log_line(
+                    "PROD_R15_SLOT_CLEARED reason='deleted-qt-object' owned=%r"
+                    % owned
+                )
+            except Exception:
+                pass
             existing = None
 
         elif not owned:
@@ -33243,7 +32499,10 @@ def StartProdTool():
         except Exception as exc:
             return prod_r15_result(u"refused", u"refuse-reuse-failed", u"%r" % (exc,))
 
-        log_line("PROD_R15_WINDOW_REUSED run_id=%r" % (PROD_RUN_ID,))
+        try:
+            log_line("PROD_R15_WINDOW_REUSED run_id=%r" % (PROD_RUN_ID,))
+        except Exception:
+            pass
         return prod_r15_result(u"reused", u"reuse")
 
     if decision != u"create":
@@ -33255,15 +32514,42 @@ def StartProdTool():
 
     try:
         if not os.path.isfile(OUTPUT_PATH): reset_log()
-        log_line("="*120); log_line("%s %s"%(TOOL_NAME,PROD_VERSION)); log_line("ARCHITECTURE=\'generic selected-model context + Master scopes + v3 storage + readable legacy v2 + indexed Body Presets + reusable Clothing Fit\'"); log_line("G18AN_ANIMSET_RENAME_RESILIENCE=\'Model path + checksum durable; Animation Set name mutable display metadata; ambiguity fails closed\'"); log_line("G18AN_FOREIGN_MODAL_YIELD=\'Any foreign active Qt modal hides CPM after scene suspension; restores without focus steal\'"); log_line("SIDECAR_STATUS=\'required generated SIDECAR; active Master SHA must match sidecar source generation; no TXT fallback\'"); log_line("G18AN_WINDOW_POLICY=\'Qt.Dialog + WindowStaysOnTopHint; nonmodal; foreign-modal priority watcher=100ms\'"); log_line("G18AN_RUN run_id=%r pid=%d parity_oracle=%r" % (PROD_RUN_ID, PROD_PID, PROD_Q1_INDEXED_CAPTURE_PARITY))
-        log_line("PROD_R15_MODULE name=%r loader=%r state=%r build_sha256=%r file=%r" % (__name__, globals().get("__chadchan3d_cpm_loader__"), globals().get("__chadchan3d_cpm_state__"), globals().get("__chadchan3d_cpm_build_sha256__"), globals().get("__file__")))
-        log_line("G18AN_PROVIDER_FORCE_MODE=%r parity_shortcut=%r" % (SEMANTIC_PROVIDER_FORCE_MODE, G18AN_PARITY_SHORTCUT))
+        log_line("="*120)
+        try:
+            log_line("%s %s"%(TOOL_NAME,PROD_VERSION))
+        except Exception:
+            pass
+        try:
+            log_line("G18AN_RUN run_id=%r pid=%d parity_oracle=%r" % (PROD_RUN_ID, PROD_PID, PROD_Q1_INDEXED_CAPTURE_PARITY))
+        except Exception:
+            pass
+        try:
+            log_line("PROD_R15_MODULE name=%r loader=%r state=%r build_sha256=%r file=%r" % (__name__, globals().get("__chadchan3d_cpm_loader__"), globals().get("__chadchan3d_cpm_state__"), globals().get("__chadchan3d_cpm_build_sha256__"), globals().get("__file__")))
+        except Exception:
+            pass
         prod_prepare_library_root()
         constructing = True
-        window=ProdWindow(qt_parent()); setattr(app,PROD_APP_ATTR,window); window.show(); window.raise_(); window.activateWindow(); log_line("PROD_WINDOW_SHOWN=True initial_index=%d"%window.combo.currentIndex()); log_line("MAINMENU_CALLBACK_RETURNING=True"); log_line("="*120)
+        window=ProdWindow(qt_parent())
+        setattr(app,PROD_APP_ATTR,window)
+        window.show()
+        window.raise_()
+        window.activateWindow()
+        try:
+            log_line("PROD_WINDOW_SHOWN=True initial_index=%d"%window.combo.currentIndex())
+        except Exception:
+            pass
+        log_line("MAINMENU_CALLBACK_RETURNING=True")
+        log_line("="*120)
     except BaseException as exc:
         diagnostics = traceback.format_exc()
-        log_line("PROD_OPEN_FAIL=%r"%exc); log_line(diagnostics)
+        try:
+            log_line("PROD_OPEN_FAIL=%r"%exc)
+        except Exception:
+            pass
+        try:
+            log_line(diagnostics)
+        except Exception:
+            pass
 
         if constructing:
             PROD_R15_STARTUP["state"] = PROD_R15_STARTUP_FAILED
@@ -33272,13 +32558,16 @@ def StartProdTool():
                 app,
                 window,
             )
-            log_line(
-                "PROD_R15_STARTUP_FAILED_RESTART_REQUIRED=True partial_window=%r closed=%r"
-                % (
-                    window is not None,
-                    closed,
+            try:
+                log_line(
+                    "PROD_R15_STARTUP_FAILED_RESTART_REQUIRED=True partial_window=%r closed=%r"
+                    % (
+                        window is not None,
+                        closed,
+                    )
                 )
-            )
+            except Exception:
+                pass
             result = prod_r15_result(u"failed", u"failed-restart-required", u"%r" % (exc,))
         else:
             PROD_R15_STARTUP["state"] = PROD_R15_STARTUP_IDLE
@@ -33288,7 +32577,7 @@ def StartProdTool():
             exc,
             Exception,
         ):
-            raise
+            raise exc
 
         window = None
         exc = None

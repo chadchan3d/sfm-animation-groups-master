@@ -1,0 +1,131 @@
+Interpreter: 3.10.6
+[PASS] identity.reference_is_pinned_item6_app
+[PASS] identity.manifest_sha256_pinned
+[PASS] identity.manifest_generated_from_reference
+[PASS] identity.candidate_is_not_reference
+[PASS] protected.audit_external_runtime/Rebuild_Control_Groups_Normalizer.py
+[PASS] protected.cpm/app/launcher/SFM_Character_Preset_Manager.py
+[PASS] protected.cpm/baseline/SFM_CSP_G18AN_SaveNewCopy.py
+[PASS] protected.cpm/convergence/cpm_authority_adapter.py
+[PASS] protected.cpm/convergence/cpm_compat_v1_projection.py
+[PASS] protected.cpm/convergence/tests/item6_precleanup_source_manifest.json
+[PASS] protected.cpm/convergence/tests/test_cpm_app_authority_cleanup.py
+[PASS] protected.cpm/convergence/tests/test_cpm_app_clothing_fit.py
+[PASS] protected.cpm/convergence/tests/test_cpm_app_operation_context.py
+[PASS] protected.cpm/convergence/tests/test_cpm_app_r14_ctypes_isolation.py
+[PASS] protected.cpm/convergence/tests/test_cpm_app_r15_namespace_isolation.py
+[PASS] protected.cpm/convergence/tests/test_cpm_authority_adapter.py
+[PASS] protected.cpm/convergence/tests/test_cpm_compat_v1_projection.py
+[PASS] protected.cpm/convergence/tests/test_cpm_convergence_gates.py
+[PASS] protected.cpm/qualification/ITEM6_HISTORICAL_AUTHORITY_CLEANUP_DESIGN.md
+[PASS] protected.cpm/qualification/ITEM6_HISTORICAL_AUTHORITY_CLEANUP_EVIDENCE.md
+[PASS] protected.real_sfm_qualification/cpm_session1/CPM_Session1_Probe.py
+[PASS] protected.sfm_defaultanimationgroups.txt
+[PASS] protected.shared_authority_package
+Candidate app sha256: bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5
+[PASS] counts.timing_calls_77
+[PASS] counts.timer_assignments_72
+[PASS] counts.direct_log_removals_46
+[PASS] counts.top_level_removals_8_plus_import
+[PASS] counts.wrappers_88_across_53_owners
+[PASS] counts.payload_substitutions_2
+[PASS] counts.startup_raise_exc_1
+[PASS] preserve.reconstruction_and_byte_identity
+[PASS] structure.preexisting_wrapper_shapes_are_r14_only
+[PASS] structure.exactly_88_minimal_wrappers_in_the_53_owners
+[PASS] structure.no_unwrapped_nonconstant_log_in_owners
+[PASS] closure.no_reference_to_removed_symbols
+[PASS] closure.no_import_time
+[PASS] closure.no_timer_assignment
+[PASS] closure.module_compiles
+[PASS] closure.retained_symbols_present
+[PASS] closure.fit_result_new_format
+[PASS] closure.prod_models_compact
+[PASS] coverage.post_baseline_helper_in_reconstruction.prod_r15_window_decision
+[PASS] coverage.post_baseline_helper_in_reconstruction.prod_cpm_authorize_operation
+[PASS] coverage.post_baseline_helper_in_reconstruction.prod_cpm_open_fit_stage
+[PASS] coverage.post_baseline_helper_in_reconstruction.prod_cpm_release_fit_stage
+[PASS] coverage.post_baseline_helper_in_reconstruction.prod_r15_result
+[PASS] item6.removals_still_absent
+[PASS] item6.refusal_stub_unchanged
+[PASS] sensitivity.changed_product_predicate.rejected
+[PASS] sensitivity.omitted_release.rejected
+[PASS] sensitivity.widened_handler.rejected
+[PASS] sensitivity.changed_retained_event.rejected
+[PASS] sensitivity.deleted_post_fit_readiness.rejected
+[PASS] sensitivity.altered_p02_safe_write_json.rejected
+[PASS] sensitivity.missing_raise_exc.rejected
+[PASS] sensitivity.edited_post_baseline_helper.rejected
+[PASS] sensitivity.wrapped_post_fit_readiness.rejected
+[PASS] sensitivity.unexpected_removal.rejected
+[PASS] sink.log_line_contains_open_failure
+[PASS] sink.reset_log_contains_open_failure
+[PASS] sink.log_line_contains_write_failure
+[PASS] sink.reset_log_contains_write_failure
+[PASS] sink.log_line_contains_flush_failure
+[PASS] sink.reset_log_contains_flush_failure
+[PASS] sink.log_line_contains_close_failure
+[PASS] sink.reset_log_contains_close_failure
+[PASS] inject.broker_idle_before
+[PASS] inject.probe_health.event_emitted
+[PASS] inject.probe_health.outcome_unchanged_under_failing_emitter
+[PASS] inject.probe_health.idle_after
+[PASS] inject.authorize.event_emitted
+[PASS] inject.authorize.outcome_unchanged_under_failing_emitter
+[PASS] inject.authorize.idle_after
+[PASS] inject.stage_open_release.event_emitted
+[PASS] inject.stage_open_release.outcome_unchanged_under_failing_emitter
+[PASS] inject.stage_open_release.idle_after
+[PASS] inject.stage_release.event_emitted
+[PASS] inject.stage_release.outcome_unchanged_under_failing_emitter
+[PASS] inject.stage_release.idle_after
+[PASS] inject.stale_refusal.event_emitted
+[PASS] inject.stale_refusal.outcome_unchanged_under_failing_emitter
+[PASS] inject.stale_refusal.idle_after
+[PASS] inject.unmigrated_refusal.event_emitted
+[PASS] inject.unmigrated_refusal.outcome_unchanged_under_failing_emitter
+[PASS] inject.unmigrated_refusal.idle_after
+[PASS] inject.generation_check_failed.event_emitted
+[PASS] inject.generation_check_failed.outcome_unchanged_under_failing_emitter
+[PASS] inject.generation_check_failed.idle_after
+[PASS] inject.failing_repr_argument_contained
+[PASS] inject.failing_repr.idle_after
+      (reference, probe_health under the same injection: raised; broker leases/providers after: (0, 0))
+      (reference, authorize under the same injection: raised; broker leases/providers after: (0, 0))
+      (reference, stage_open_release under the same injection: raised; broker leases/providers after: (1, 0))
+      (reference, stage_release under the same injection: raised; broker leases/providers after: (1, 0))
+      (reference, stale_refusal under the same injection: raised; broker leases/providers after: (1, 0))
+      (reference, unmigrated_refusal under the same injection: raised; broker leases/providers after: (1, 0))
+      (reference, generation_check_failed under the same injection: raised; broker leases/providers after: (1, 0))
+      (reference with the failing repr: raised)
+Qt modes for window gates: model
+[PASS] model.handlers.candidate.child_completed
+[PASS] model.handlers.reference.child_completed
+[PASS] model.fit_finish.candidate.child_completed
+[PASS] model.fit_finish.reference.child_completed
+[PASS] model.startup.candidate.child_completed
+[PASS] model.startup.reference.child_completed
+[PASS] model.handlers.action_error.continues_like_baseline
+[PASS] model.handlers.begin_fail.continues_like_baseline
+[PASS] model.handlers.fit_start_fail.continues_like_baseline
+[PASS] model.handlers.fit_stage_fail.continues_like_baseline
+[PASS] model.handlers.fit_stage_fail.not_committed_and_ended
+[PASS] model.fit_finish.readiness_runs_once
+[PASS] model.fit_finish.stale_rebuild_requested
+[PASS] model.fit_finish.stale_behaviour_equals_reference
+[PASS] model.fit_finish.no_replay_and_operation_ended
+[PASS] model.fit_finish.new_result_format
+[PASS] model.fit_finish.result_event_failure_contained
+[PASS] model.fit_finish.readiness_isolated_to_post_fit_statement
+[PASS] model.fit_finish.schedule_failure_propagates_like_item6
+[PASS] model.startup.create_baseline
+[PASS] model.startup.create_g18an_run
+[PASS] model.startup.create_r15_module
+[PASS] model.startup.create_window_shown
+[PASS] model.startup.open_fail_baseline_not_stuck
+[PASS] model.startup.open_fail_injected_not_stuck
+[PASS] model.startup.interrupt_without_log_failure_original_escapes
+[PASS] model.startup.interrupt_with_log_failure_original_escapes
+      (model reference, interrupt with log failure: escaped original=False type=InjectedLogFailure)
+
+RESULT: 117/117 ALL PASS
