@@ -8,8 +8,24 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-Real-SFM Session 4 (forced rollback-verification qualification, handoff §22 blockers 4–5).
-**Status: COMPLETE — PASS.**
+Handoff §22 item 6 — historical development authority cleanup.
+**Status: APPROVED DESIGN — IMPLEMENTATION NOT STARTED.**
+
+Design: `cpm/qualification/ITEM6_HISTORICAL_AUTHORITY_CLEANUP_DESIGN.md` (Astra primary audit →
+Claude adversarial review → Astra reconciliation; design review complete). Implementing it is the
+next bounded assignment, from `823730f` and pre-cleanup app `9a78fc96…`.
+- No product code has changed since `00d0d83c72fbbaa9a59816f607c1536033262efb`; the current app is
+  `9a78fc96…`. No item-6 implementation, source manifest, cleanup test or evidence exists yet.
+- Required exact-build distinction (design §8–§9; not yet achieved): Sessions 1–4 remain valid
+  evidence for the exact pre-cleanup app `9a78fc96…`. Item-6 bytes must not inherit an exact-build
+  real-SFM PASS merely because surviving behavior is preserved; successful item 6 yields an
+  **offline-qualified cleanup candidate**. Post-cleanup real-SFM qualification remains later, in
+  item 8, after item 7.
+- Item 7, item 8, K and L have not begun. Stale-scope UI presentation and `SidecarMissing`
+  messaging remain undecided and out of scope.
+
+Previous milestone: Real-SFM Session 4 (forced rollback-verification qualification, handoff §22
+blockers 4–5). **Status: COMPLETE — PASS.**
 - S4A (Body Apply): PASS — CONTROL (authentic Abort, rollback verified), GATE (authentic verifier
   True, harness substitutes False → production recovery-unverified), ordinary Apply.
 - S4F (Clothing Fit): PASS — CONTROL (`not-committed`), GATE (`abort-unverified`), ordinary Fit and
@@ -18,7 +34,7 @@ Real-SFM Session 4 (forced rollback-verification qualification, handoff §22 blo
 Evidence: `real_sfm_qualification/cpm_session4/SESSION4_EVIDENCE.md`, raw outputs in `raw/`.
 Runbook: `SESSION4_RUNBOOK.md` at `b65c085`; harness `45c44f3d…`.
 
-Sessions 1, 2 and 3 remain complete. R15 and R14 remain CLOSED.
+Sessions 1–4 remain complete. R15 and R14 remain CLOSED.
 
 ## Current state
 `master`; last milestone commit `ef84e2d` (Session 4 closeout, evidence and Ledger only). The
@@ -236,7 +252,9 @@ Evidence:
   - Session 3: **COMPLETE — PASS** (S3 CORE PASS and S3_ADD).
   - the forced Apply and forced Fit rollback-verification failure gates: **Session 4 COMPLETE —
     PASS** (S4A, S4F);
-  - then cleanup of historical authority and diagnostics, plus a focused regression.
+  - §22 item 6 (historical authority cleanup): **design APPROVED; implementation NOT STARTED**;
+  - then item 7 (diagnostic logging reduction) and item 8 (focused post-cleanup regression,
+    including post-cleanup real-SFM qualification): not started.
 
   **K, L:** not started.
 - **Session 4 notes (not failures; carried to cleanup/K):**
@@ -250,12 +268,13 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-After designer/owner review of the Session 4 closeout, the next Blueprint-bounded milestone is
-handoff §22 item 6: **remove or isolate historical development authority machinery**, now that the
-new seam has passed Suites 1–4, C7–C10, the Fit generation-interruption test and both forced
-rollback-verification gates. It is to be prepared under a bounded designer assignment. Diagnostic
-logging reduction (item 7) and the focused post-cleanup regression (item 8) follow; then K.
-Not started.
+Implement handoff §22 item 6 exactly as bounded by
+`cpm/qualification/ITEM6_HISTORICAL_AUTHORITY_CLEANUP_DESIGN.md` (its §11 coder assignment and §10
+stop conditions), starting from `823730f` with pre-cleanup app `9a78fc96…`. Stop after item 6 with a
+Ledger checkpoint using the design's §9 wording. Not started.
+
+Item 7 (diagnostic logging reduction) and item 8 (focused post-cleanup regression and post-cleanup
+real-SFM qualification) follow; then K and L. None has begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
