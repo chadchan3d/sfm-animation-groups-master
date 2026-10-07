@@ -8,6 +8,20 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
+**Handoff §22 item 7 — diagnostic/development logging reduction.**
+**Status: APPROVED DESIGN — IMPLEMENTATION NOT STARTED.**
+
+Design: `cpm/qualification/ITEM7_DIAGNOSTIC_LOGGING_REDUCTION_DESIGN.md` (Astra initial design →
+Claude adversarial review → Astra reconciliation; owner-approved). It supersedes Astra's initial
+item-7 design and the earlier uncommitted item-7 design investigation.
+- Governing starting checkpoint `7b69b520a2472d3700ce347a1d2a59bc98e926f2`; starting app
+  `1e8668717f9a4a1def0900c6b51e20cb9a7676cc365244eab5c31233f133eeeb` (the item-6 candidate).
+- Item 7 implementation has not begun: no item-7 manifest, test, evidence or app change exists.
+- The candidate remains undeployed. Item 8 remains the post-item-7 real-SFM qualification
+  milestone; K and L remain not started.
+- Stale-scope UI presentation and `SidecarMissing` messaging remain undecided and out of scope.
+
+Previous milestone:
 **§22 item 6 — COMPLETE: historical authority cleanup; offline qualification PASS.**
 
 Candidate app SHA-256: `1e8668717f9a4a1def0900c6b51e20cb9a7676cc365244eab5c31233f133eeeb`.
@@ -265,8 +279,10 @@ Evidence:
     PASS** (S4A, S4F);
   - §22 item 6 (historical authority cleanup): **COMPLETE — offline qualification PASS**
     (candidate `1e866871…`; not real-SFM qualified);
-  - then item 7 (diagnostic logging reduction) and item 8 (focused post-cleanup regression,
-    including post-cleanup real-SFM qualification): not started.
+  - §22 item 7 (diagnostic/development logging reduction): **design APPROVED; implementation
+    NOT STARTED**;
+  - then item 8 (focused post-cleanup regression, including post-cleanup real-SFM
+    qualification): not started.
 
   **K, L:** not started.
 - **Session 4 notes (not failures; carried to cleanup/K):**
@@ -280,10 +296,10 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-After designer/owner review of the item-6 checkpoint, the next Blueprint-bounded milestone is
-handoff §22 item 7: **remove unnecessary diagnostic/development logging**, starting from the
-offline-qualified cleanup candidate `1e866871…`. It is to be prepared under a bounded designer
-assignment. Not started.
+Implement handoff §22 item 7 exactly as bounded by
+`cpm/qualification/ITEM7_DIAGNOSTIC_LOGGING_REDUCTION_DESIGN.md` (its §16 coder assignment and §14
+stop conditions), starting from `7b69b52` with app `1e866871…`. Use the design's §13 exact-build
+Ledger wording at implementation start and completion. Not started.
 
 Item 8 (focused post-cleanup regression, including post-cleanup real-SFM qualification of the
 cleaned bytes) follows; then K and L. None has begun.
