@@ -170,8 +170,12 @@ STEP3_CHANGED_TOP = set([
 STEP4_CHANGED_TOP = set(["prod_body_source", "prod_body_source_live_from_baseline"])
 R14_CHANGED_TOP = set(["prod_resource_snapshot"])  # diagnostic ctypes isolation
 R15_CHANGED_TOP = set(["StartProdTool"])  # stable private-module startup (ProdWindow already listed)
+# Handoff section 22 item 6 (ITEM6_HISTORICAL_AUTHORITY_CLEANUP_DESIGN.md): the
+# historical getter becomes an unconditional refusal and the snapshot helper
+# requires a supplied provider (ProdWindow already listed: parity method removed).
+ITEM6_CHANGED_TOP = set(["get_semantic_provider", "semantic_snapshot_for_model_row"])
 EXPECTED_CHANGED_TOP = (STEP2B_CHANGED_TOP | STEP3_CHANGED_TOP | STEP4_CHANGED_TOP | R14_CHANGED_TOP
-                        | R15_CHANGED_TOP)
+                        | R15_CHANGED_TOP | ITEM6_CHANGED_TOP)
 EXPECTED_NEW_TOP = set([
     "PROD_CPM_MAINMENU_RELATIVE_PARTS", "PROD_CPM_ADAPTER_MODULES", "ProdCpmAuthorityBootstrapError",
     "ProdCpmAuthorityNotMigrated", "prod_cpm_mainmenu_dir", "prod_cpm_import_adapter", "prod_cpm_is_main_thread",
@@ -200,6 +204,26 @@ EXPECTED_NEW_METHODS = set(["prod_cpm_request_stale_rebuild_if_needed", "prod_cp
 # R15: Escape/reject teardown repair (pre-existing defect, discovered during R15).
 R15_CHANGED_METHODS = set(["closeEvent"])
 R15_NEW_METHODS = set(["reject"])
+# Item 6: exact removals and the one addition (design sections 5 and 7).
+ITEM6_NEW_TOP = set(["ProdHistoricalAuthorityDisabled"])
+ITEM6_REMOVED_TOP = set([
+    "p01_ascii_fold", "p01_tokenize_master", "p01_parse_occurrences", "SemanticProvider",
+    "MasterTxtSemanticProvider", "g18p_sha256_file", "g18p_sidecar_deploy_dir", "g18p_find_sidecar_artifact",
+    "g18p_sidecar_dependency_discovery", "g18an_find_file_by_sha", "g18an_verified_sidecar_paths",
+    "g18an_import_frozen_sidecar_provider", "g18an_normalize_sidecar_path", "SidecarSemanticProvider",
+    "g18an_ascii_case_variant", "g18an_semantic_parity_for_row", "g18an_scope_decision_view",
+    "g18an_scope_signature", "g18an_accepted_from_scope", "g18an_flex_plan_signature", "g18an_preset_decisions",
+    "g18an_clothing_plan_signature", "g18an_clothing_decisions", "g18an_decision_parity_for_row",
+    "acquire_semantic_provider_for_mode", "invalidate_semantic_provider", "p01_provider_answer_signature",
+    "p01_synthetic_provider_contract", "semantic_snapshots_for_current_shot",
+    "prod_semantic_provider_health_from_descriptor", "prod_provider_health_selftest",
+    # constants / class aliases
+    "SEMANTIC_PROVIDER_MODE_TXT", "SEMANTIC_PROVIDER_MODE_AUTO", "G18P_MASTER_SHA256",
+    "G18P_SIDECAR_ARTIFACT_SHA256", "G18P_SIDECAR_FORMAT_SHA256", "G18P_R1D_VALIDATOR_SHA256",
+    "G18P_R1D_PROVIDER_SHA256", "PROD_MASTER_HEALTH_MIN_OCCURRENCES", "PROD_MASTER_HEALTH_MIN_FOLD_FAMILIES",
+    "P01SemanticProvider", "P01MasterTxtProvider",
+])
+ITEM6_REMOVED_METHODS = set(["g18an_run_decision_parity"])
 
 
 def _unnamed_top_level(source):
@@ -223,8 +247,10 @@ def section_derivation(app):
     added = set(app.top) - set(baseline.top)
     removed = set(baseline.top) - set(app.top)
     check("derivation.changed_top_level_is_bounded", changed == EXPECTED_CHANGED_TOP, sorted(changed))
-    check("derivation.added_top_level_is_bounded", added == EXPECTED_NEW_TOP | R15_NEW_TOP, sorted(added))
-    check("derivation.nothing_removed", not removed, sorted(removed))
+    check("derivation.added_top_level_is_bounded", added == EXPECTED_NEW_TOP | R15_NEW_TOP | ITEM6_NEW_TOP,
+          sorted(added))
+    check("derivation.removed_is_exactly_item6", removed == ITEM6_REMOVED_TOP,
+          sorted(removed ^ ITEM6_REMOVED_TOP))
     bm, am = baseline.methods("ProdWindow"), app.methods("ProdWindow")
     m_changed = set(n for n in am if n in bm and app.method_text("ProdWindow", n) != baseline.method_text("ProdWindow", n))
     # The shortcut binding lives in the constructor-side builder method.
@@ -234,16 +260,18 @@ def section_derivation(app):
     check("derivation.changed_methods_are_bounded", m_changed == expected_methods, sorted(m_changed))
     check("derivation.added_methods_are_bounded", set(am) - set(bm) == EXPECTED_NEW_METHODS | R15_NEW_METHODS,
           sorted(set(am) - set(bm)))
+    check("derivation.removed_methods_are_exactly_item6", set(bm) - set(am) == ITEM6_REMOVED_METHODS,
+          sorted(set(bm) - set(am)))
     # R15: the only unnamed top-level changes are the allow-guard (added right
     # after the docstring) and the removed bottom-of-file StartProdTool() call.
     b_un, a_un = _unnamed_top_level(baseline), _unnamed_top_level(app)
     check("derivation.r15_unnamed_top_level_bounded",
           b_un[-1] == u"StartProdTool()" and a_un[:1] == b_un[:1] and a_un[1] == u"if not ("
           and a_un[2:] == b_un[1:-1], [a_un[1], b_un[-1], len(a_un), len(b_un)])
-    check("derivation.historical_machinery_retained", all(n in app.top for n in (
-        "get_semantic_provider", "SidecarSemanticProvider", "MasterTxtSemanticProvider",
-        "acquire_semantic_provider_for_mode", "g18an_decision_parity_for_row", "prod_semantic_provider_health_from_descriptor")))
-    check("derivation.parity_handler_retained", "g18an_run_decision_parity" in am)
+    check("derivation.item6_historical_machinery_absent", not ITEM6_REMOVED_TOP & set(app.top)
+          and "get_semantic_provider" in app.top and "ProdHistoricalAuthorityDisabled" in app.top,
+          sorted(ITEM6_REMOVED_TOP & set(app.top)))
+    check("derivation.item6_parity_handler_absent", not ITEM6_REMOVED_METHODS & set(am))
     return baseline
 
 
@@ -258,10 +286,10 @@ FORBIDDEN = set([
     "p02_complete_scope", "g11a_source", "prod_semantic_provider_health_from_descriptor",
     "prod_provider_health_selftest", "RunG09AGenericWindowRoute",
 ])
-# The only permitted edge: semantic_snapshot_for_model_row's provider=None
-# default. prod_scope always supplies a provider (checked statically and at
-# runtime below).
-EXEMPT_EDGES = set([("semantic_snapshot_for_model_row", "get_semantic_provider")])
+# Item 6: no exemption. semantic_snapshot_for_model_row no longer reaches the
+# historical getter (its provider=None branch refuses), and prod_scope always
+# supplies a provider (checked statically and at runtime below).
+EXEMPT_EDGES = set()
 
 
 def _names_in(node):

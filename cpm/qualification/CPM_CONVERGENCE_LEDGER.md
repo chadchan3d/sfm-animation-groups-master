@@ -8,21 +8,29 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-Handoff §22 item 6 — historical development authority cleanup.
-**Status: APPROVED DESIGN — IMPLEMENTATION NOT STARTED.**
+**§22 item 6 — COMPLETE: historical authority cleanup; offline qualification PASS.**
 
-Design: `cpm/qualification/ITEM6_HISTORICAL_AUTHORITY_CLEANUP_DESIGN.md` (Astra primary audit →
-Claude adversarial review → Astra reconciliation; design review complete). Implementing it is the
-next bounded assignment, from `823730f` and pre-cleanup app `9a78fc96…`.
-- No product code has changed since `00d0d83c72fbbaa9a59816f607c1536033262efb`; the current app is
-  `9a78fc96…`. No item-6 implementation, source manifest, cleanup test or evidence exists yet.
-- Required exact-build distinction (design §8–§9; not yet achieved): Sessions 1–4 remain valid
-  evidence for the exact pre-cleanup app `9a78fc96…`. Item-6 bytes must not inherit an exact-build
-  real-SFM PASS merely because surviving behavior is preserved; successful item 6 yields an
-  **offline-qualified cleanup candidate**. Post-cleanup real-SFM qualification remains later, in
-  item 8, after item 7.
-- Item 7, item 8, K and L have not begun. Stale-scope UI presentation and `SidecarMissing`
-  messaging remain undecided and out of scope.
+Candidate app SHA-256: `1e8668717f9a4a1def0900c6b51e20cb9a7676cc365244eab5c31233f133eeeb`.
+
+The approved historical provider/discovery/fallback/parity machinery has been removed from the
+mutable app. Historical acquisition is refusal-only; semantic snapshot construction requires an
+explicitly supplied provider. The canonical authority seam and non-allowlisted production
+implementations are preserved.
+
+The eight existing offline suites and targeted item-6 checks passed under Python 2.7.5 and Python
+3.10, with Qt-mode coverage recorded explicitly (R15 under 2.7.5: real PySide/Qt 4.8 and the Qt
+model; 3.10: model only).
+
+Sessions 1–4 remain valid qualification evidence for pre-cleanup app
+`9a78fc9692cfa3cae5f3d8443a6c95537248c348d0cd4230c7ba744d99e77900`. The new app bytes have not
+yet received post-cleanup real-SFM qualification. This remains pending item 8 after item 7.
+
+R14/R15 remain closed. Item 7 is next; item 8, K and L have not begun.
+
+Design: `cpm/qualification/ITEM6_HISTORICAL_AUTHORITY_CLEANUP_DESIGN.md`. Evidence:
+`cpm/qualification/ITEM6_HISTORICAL_AUTHORITY_CLEANUP_EVIDENCE.md` (identities, dispositions,
+preservation manifest `a9264794…`, test commands and results). Stale-scope UI presentation and
+`SidecarMissing` messaging remain undecided and out of scope.
 
 Previous milestone: Real-SFM Session 4 (forced rollback-verification qualification, handoff §22
 blockers 4–5). **Status: COMPLETE — PASS.**
@@ -34,13 +42,13 @@ blockers 4–5). **Status: COMPLETE — PASS.**
 Evidence: `real_sfm_qualification/cpm_session4/SESSION4_EVIDENCE.md`, raw outputs in `raw/`.
 Runbook: `SESSION4_RUNBOOK.md` at `b65c085`; harness `45c44f3d…`.
 
-Sessions 1–4 remain complete. R15 and R14 remain CLOSED.
+Sessions 1–4 remain complete (evidence for app `9a78fc96…`). R15 and R14 remain CLOSED.
 
 ## Current state
-`master`; last milestone commit `ef84e2d` (Session 4 closeout, evidence and Ledger only). The
-product is unchanged since `00d0d83` (last commit touching `cpm/app`, `cpm/baseline` or the
-adapter/projection); every later commit touches only `real_sfm_qualification/`,
-`cpm/qualification/` or `.gitattributes`.
+`master`. Before item 6 the product was unchanged since `00d0d83` (last commit touching `cpm/app`,
+`cpm/baseline` or the adapter/projection). Item 6 changed only the mutable app
+(`9a78fc96…` → `1e866871…`); the launcher, baseline, adapter/projection, shared package,
+Normalizer, Master and sidecars are unchanged.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -65,6 +73,9 @@ intentionally not deployed):
 - private app `9a78fc96…` in `usermod/scripts/ChadChan3D_CPM/` (outside `scripts/sfm`, no
   `__init__.py`);
 - probe v3 `ce4ace98…`.
+
+The item-6 cleanup candidate `1e866871…` is **not deployed**; the deployed app remains the
+pre-cleanup `9a78fc96…`. Any later deployment follows the R15 restart rule.
 
 The step-9 G18AN menu copy has been removed. The pre-R15 app `664a660c…` and probe v2 are archived
 outside `usermod/scripts`.
@@ -252,7 +263,8 @@ Evidence:
   - Session 3: **COMPLETE — PASS** (S3 CORE PASS and S3_ADD).
   - the forced Apply and forced Fit rollback-verification failure gates: **Session 4 COMPLETE —
     PASS** (S4A, S4F);
-  - §22 item 6 (historical authority cleanup): **design APPROVED; implementation NOT STARTED**;
+  - §22 item 6 (historical authority cleanup): **COMPLETE — offline qualification PASS**
+    (candidate `1e866871…`; not real-SFM qualified);
   - then item 7 (diagnostic logging reduction) and item 8 (focused post-cleanup regression,
     including post-cleanup real-SFM qualification): not started.
 
@@ -268,13 +280,13 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Implement handoff §22 item 6 exactly as bounded by
-`cpm/qualification/ITEM6_HISTORICAL_AUTHORITY_CLEANUP_DESIGN.md` (its §11 coder assignment and §10
-stop conditions), starting from `823730f` with pre-cleanup app `9a78fc96…`. Stop after item 6 with a
-Ledger checkpoint using the design's §9 wording. Not started.
+After designer/owner review of the item-6 checkpoint, the next Blueprint-bounded milestone is
+handoff §22 item 7: **remove unnecessary diagnostic/development logging**, starting from the
+offline-qualified cleanup candidate `1e866871…`. It is to be prepared under a bounded designer
+assignment. Not started.
 
-Item 7 (diagnostic logging reduction) and item 8 (focused post-cleanup regression and post-cleanup
-real-SFM qualification) follow; then K and L. None has begun.
+Item 8 (focused post-cleanup regression, including post-cleanup real-SFM qualification of the
+cleaned bytes) follows; then K and L. None has begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
