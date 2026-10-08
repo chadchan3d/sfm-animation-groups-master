@@ -8,31 +8,37 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**§22 item 7 — COMPLETE: diagnostic/development logging reduction; offline qualification PASS.**
-Candidate app SHA-256: `bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5`.
-The approved timing/log removals, two payload corrections and bounded diagnostic-failure handling
-are complete. Product-coupled post-Fit readiness and `p02_safe_write_json` were preserved. Startup
-preserves the original non-`Exception` failure after contained diagnostic errors.
-Historical item-6 qualification was confirmed using checkpoint-compatible dependencies. Item-7
-preservation was independently proven against the pinned item-6 source.
-Sessions 1–4 qualify only app `9a78fc96…`. The new candidate does not inherit their exact-build
-real-SFM PASS.
-Candidate not deployed. Item 8 is next; K/L remain not started.
+**§22 item 8 — PREPARED, NOT RUN.** Exact candidate `bfba4d3a…` remains pending real-SFM
+qualification. New item-8 observation tools qualified offline. Historical Sessions 1–4 unchanged.
+K/L not started.
 
-- **Supersessions/decisions recorded:** the reporting constants `SEMANTIC_PROVIDER_MODE_SIDECAR`,
-  `SEMANTIC_PROVIDER_FORCE_MODE` and `G18AN_PARITY_SHORTCUT`, retained by item 6, are now removed
-  (item-7 design D3), superseding item 6's retention; `self.g18an_parity_shortcut = None` remains.
-  The Q1 indexed-capture parity oracle is retained **disabled** (`PROD_Q1_INDEXED_CAPTURE_PARITY =
-  False`, design D2).
-- **Offline:** the eight existing suites under 2.7.5 and 3.10 with counts unchanged from item 6
-  (R15 2.7.5 345/345 real PySide/Qt 4.8 + model; 3.10 188/188 model); the new
-  `test_cpm_app_logging_cleanup.py` 2.7.5 144/144 (window gates real + model), 3.10 117/117 (model);
-  historical item-6 test 46/46 under both, from a detached `7b69b52` worktree.
-- Design: `cpm/qualification/ITEM7_DIAGNOSTIC_LOGGING_REDUCTION_DESIGN.md`. Evidence:
-  `cpm/qualification/ITEM7_DIAGNOSTIC_LOGGING_REDUCTION_EVIDENCE.md` (identities, manifest
-  `cbb3010b…`, dispositions, commands, results, limitations); outputs in
-  `cpm/qualification/item7_offline_outputs/`.
+- Exact candidate: `bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5` (unchanged).
+  **Not deployed**; no live item-8 phase (A–F) has been executed, no SFM process was started for
+  item 8, no G2 was published, and the live Master, sidecars and installed deployment are untouched.
+- Design (owner-approved): `cpm/qualification/ITEM8_POST_CLEANUP_REAL_SFM_QUALIFICATION_DESIGN.md`
+  (`fe605188…`; workstation paths normalized to repository-relative, content unchanged).
+- Preparation (`real_sfm_qualification/cpm_item8_post_cleanup/`): `ITEM8_RUNBOOK.md`;
+  observation-only `CPM_Item8_Probe.py` `f503c0ab…`; `test_cpm_item8_probe.py` `859b75d1…`;
+  `ITEM8_GENERATION_DRIVER.ps1` `3545ac72…` (frozen Session 2 §2.1 block verbatim + item-8
+  deployment/evidence functions); `test_item8_generation_driver.py` `3f4aa26a…`;
+  `ITEM8_FIXTURE_MANIFEST.json` `2b78f182…`; `item8_evidence_reader.py` `a3d3bd90…`; operator
+  template; `ITEM8_EVIDENCE.md` (PREPARED, NOT RUN).
+- **Offline preparation qualification:** probe test 2.7.5 **225/225** (real PySide/Qt 4.8 + model),
+  3.10 **161/161** (model); driver test 3.10 + Windows PowerShell 5.1 **75/75** (sandbox: real
+  G1 → exact G2 → exact G1 with the frozen tooling; both disposition paths).
+- **Operator-preflight items (open):** **OWNER-1** — historical full CPM builds and package copies in
+  the accepted Scripts inventory need an owner disposition before any attempt (the tooling supports
+  acceptance as in Sessions 1–4); the two fixture session files; Mia document shot scope; Mia
+  library; live inventory/installed app/authority (checked by `I8-Preflight`).
+- Fixture identities recovered from Sessions 3–4; qualifying controls derived offline from the
+  candidate's own scope over real G1: Body `Fat`, Expression `SmileClosed` (Mia).
+- The Session 4 Fit release-path observation is carried forward unchanged (not repaired).
 - Stale-scope UI presentation and `SidecarMissing` messaging remain undecided and out of scope.
+
+Previous milestone: **§22 item 7 — COMPLETE: diagnostic/development logging reduction; offline
+qualification PASS** (candidate `bfba4d3a…`; design and evidence
+`ITEM7_DIAGNOSTIC_LOGGING_REDUCTION_*.md`; manifest `cbb3010b…`; reporting constants removed,
+superseding item 6's retention; Q1 parity oracle retained disabled). Its qualification is unchanged.
 
 Previous milestone: **§22 item 6 — COMPLETE: historical authority cleanup; offline qualification
 PASS** (candidate `1e866871…`; design and evidence `ITEM6_HISTORICAL_AUTHORITY_CLEANUP_*.md`;
@@ -81,7 +87,9 @@ intentionally not deployed):
 - probe v3 `ce4ace98…`.
 
 Neither cleanup candidate (`1e866871…`, `bfba4d3a…`) is deployed; the deployed app remains the
-pre-cleanup `9a78fc96…`. Any later deployment follows the R15 restart rule.
+pre-cleanup `9a78fc96…`. Any later deployment follows the R15 restart rule; item 8 deploys only
+through `ITEM8_GENERATION_DRIVER.ps1` (`I8-Deploy`, SFM closed, verified backup, temporary sibling +
+replacement) and applies the design's PASS / FAIL-INCONCLUSIVE policy through `I8-Disposition`.
 
 The step-9 G18AN menu copy has been removed. The pre-R15 app `664a660c…` and probe v2 are archived
 outside `usermod/scripts`.
@@ -273,8 +281,8 @@ Evidence:
     (candidate `1e866871…`; not real-SFM qualified);
   - §22 item 7 (diagnostic/development logging reduction): **COMPLETE — offline qualification
     PASS** (candidate `bfba4d3a…`; not real-SFM qualified);
-  - then item 8 (focused post-cleanup regression, including post-cleanup real-SFM
-    qualification): not started.
+  - §22 item 8 (focused post-cleanup regression, including post-cleanup real-SFM qualification):
+    **PREPARED, NOT RUN** (owner decision OWNER-1 and operator preflight open).
 
   **K, L:** not started.
 - **Session 4 notes (not failures; carried to cleanup/K; unchanged by item 7):**
@@ -288,10 +296,10 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-After designer/owner review of the item-7 checkpoint: handoff §22 item 8 — focused post-cleanup
-regression, including post-cleanup real-SFM qualification of the exact candidate `bfba4d3a…`, using
-the item-7 design's §12 observability contract. It is to be prepared under a bounded designer
-assignment. Not started. K and L follow; neither has begun.
+After designer/owner review of this checkpoint and the OWNER-1 disposition: execute item 8 exactly
+per `real_sfm_qualification/cpm_item8_post_cleanup/ITEM8_RUNBOOK.md` (one fresh SFM process, Phases
+A–F), only under an explicit execution authorization; then adjudicate and apply the deployment
+policy. K and L follow only after item-8 adjudication; neither has begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
