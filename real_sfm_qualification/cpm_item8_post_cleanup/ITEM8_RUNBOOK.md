@@ -39,11 +39,12 @@ Normalizer command, All Shots or alternation; benchmarking or stress loops.
 | G1 Master / sidecar / manifest | `ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93` / `bcd97641…` / `d810d648…` |
 | G2 Master / sidecar | `54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7` / `cd370f67…` |
 | `CPM_Item8_Probe.py` (qualification-only; deployed for one attempt) | `f503c0abaf63f891c108fd81c726b1101288a2dcf1091bf6a386388be1571257` |
-| `ITEM8_GENERATION_DRIVER.ps1` | `3545ac72d87654602877844d91725a165a5e6c4b2e9254d52073fc8fb8bdf0d0` |
-| `ITEM8_FIXTURE_MANIFEST.json` | `2b78f182c154fdcc5acc169169b35bb6120080dea0a81fa9db1e264cdd69703e` |
+| `ITEM8_GENERATION_DRIVER.ps1` | `8526c6b18464e691ca269f4d0cdefb2d8c4e52d527620e9d32ae369fe9074ec1` |
+| `ITEM8_FIXTURE_MANIFEST.json` | `40b51416fb8e742b2512dd973ade07ccd0e618a58ebd6c96e9dd62efc1afeb2b` |
 | `item8_evidence_reader.py` | `a3d3bd90e34eb0691e5290a94e599bfab1425afcc11d8312f16c448089444a10` |
-| `test_cpm_item8_probe.py` / `test_item8_generation_driver.py` | `859b75d12848cf5fe353b5f0a6c0fae41f8ebe141af9e910102c01d35cc1945d` / `3f4aa26a98fe4cd384fdb4a3dddd703a3982b2f0b3df1b3311cb28af5ed94da9` |
-| `templates/ITEM8_OPERATOR_STEPS_TEMPLATE.md` | `be5354faf9a3e8d3a8f7818aac1b5c49e4c34dee09c6c96b8156a0db7c708879` |
+| `test_cpm_item8_probe.py` / `test_item8_generation_driver.py` | `c5e6c627f2acbc23cfac7fba5f2edca3ef7f65ec19dbf5f5dd7bc6cf84367f32` / `73a5229658d6535e27252a1152a2e3b64c3806aae23e1ef0ad5e593eade76b3e` |
+| `templates/ITEM8_OPERATOR_STEPS_TEMPLATE.md` | `416d4d255b01923b8b73f72dc54b92814ecdb8c5003d7c6f281ce1b7b2bddfb2` |
+| Fixture document `testscripts.dmx` (one document, two contexts: Krystal `shot10`, Mia `shot3`; never saved) | `197e6011faae2da539d0a06ae4924288104b956348cd1c4e0ef80618f9e4e16f` (14,245,089 bytes) |
 | Frozen generation tooling | Session 2 §2.1 block at `0597927` (verbatim inside the driver); `I_Generation_Publisher.py` / `I_Generation_Helper.py` and `tools/sfm_master_sidecar`, pinned (LF) in the driver and manifest |
 
 All values are LF-normalized SHA-256 (this directory is `eol=lf`). The driver re-checks every pin it
@@ -79,8 +80,10 @@ an independent semantic oracle** (§6).
    driver refuses to overwrite any record.
 3. **Closing the CPM window is not a restart.** Never reload the module, delete `sys.modules`
    entries, or reuse a process that was running before deployment.
-4. **Fixtures:** do not save either fixture document (answer **No** to save prompts). Changing
-   between the two documents is allowed only at C1, after the B8 closed-idle probe.
+4. **Fixture document:** one document, `testscripts.dmx`, serves both fixture contexts: Krystal on
+   `shot10`, Mia on `shot3`. It is opened once at A1 and never reopened or saved (answer **No** to
+   any save prompt). The only fixture navigation is switching the already-open document from
+   `shot10` to `shot3` at C1, with CPM closed, after the B8 closed-idle probe.
 5. **No other tools:** no Normalizer except D3; no other authority tool; never open an older CPM build
    (`SFM_CSP_*`, `SFM_Character_Slider_Preset_Tool_*`) — they share the CPM window slot; never run
    `CPM_Session1_Probe`.
@@ -103,14 +106,14 @@ These facts cannot be established offline; each must be resolved and written int
 | Item | Requirement |
 |---|---|
 | **OWNER-1** (owner decision) | The accepted Scripts inventory under which Sessions 1–4 ran contains historical full CPM builds in the menu tree (`sfm/mainmenu/SFM_CSP_G*.py`, `sfm/mainmenu/SFM_Character_Slider_Preset_Tool_*.py`) and historical authority/sidecar package copies (`sfm/gate_r*_deploy/`), listed in `ITEM8_FIXTURE_MANIFEST.json`. Item 8 never invokes them and must not delete them. `I8-Preflight` lists them and STOPs unless `-Owner1Recorded` is passed, which records the owner's written acceptance that they remain present and uninvoked exactly as in Sessions 1–4. Any other disposition (for example relocating them) changes the accepted inventory and needs a revised preparation before any attempt. |
-| PRE-2 Krystal document | The Session 1/3/4 Krystal session file. At open, the current shot holds `krystal20201`, `assaultsuitbody1` and `loinclothbra_chadfix_071` with the manifest's model paths and checksums (the A2 probe verifies; mismatch → STOP). |
-| PRE-3 Mia document | The R15-addendum/Session 2 Mia session file: `mia1` on `shot3`, plus at least one other shot, so the Selected shot is a proper subset of the Normalizer's project scope. |
+| PRE-2 Fixture document (resolved) | Owner decision: the original qualification document `testscripts.dmx` (in the local SFM sessions folder; SHA-256 `197e6011faae2da539d0a06ae4924288104b956348cd1c4e0ef80618f9e4e16f`, 14,245,089 bytes) serves **both** fixture contexts; derivative/variant documents are not used. Its real path is passed to `I8-New` for both parameters, which re-hashes it (must equal the pin). |
+| PRE-3 Fixture shots (resolved) | Krystal context = **`shot10`** (holds `krystal20201`, `assaultsuitbody1`, `loinclothbra_chadfix_071`; `shot12` also holds them and is not used). Mia context = **`shot3`** (exactly `foxmccouldwm1` and `mia1`), among 16 film clips, so a sole Selected `shot3` is a proper subset of the Normalizer's project scope. Verified offline read-only; model checksums are confirmed live by the probe (A5, C4). |
 | PRE-4 Mia library | `Documents\SFM Character Preset Manager\Characters\mia--2e6533ed1490` exists (`I8-Preflight` checks). No existing preset uses a campaign name (`I8 <attempt> …`). |
 | PRE-5 Shells | Windows PowerShell 5.1; `python --version` prints Python 3.x (the frozen generation tooling). |
 | PRE-6 Repository | At the item-8 preparation commit or a later commit that leaves every pinned file unchanged; tracked tree clean. |
 | PRE-7 Process | No SFM process running. |
 
-Recovered fixture identities (manifest): source `krystal20201` (`models/fursonas/starfox/krystal/bodies/krystal2020.mdl`, −1441261258); Fit target `assaultsuitbody1` (…`/cosmetics/assaultsuitbody.mdl`, −791536511); unselected peer `loinclothbra_chadfix_071` (…`/cosmetics/loinclothbra_chadfix_07.mdl`, 480892851); `mia1` (`models/annoad/foxbase/mia/mia.mdl`, 1153028609) on `shot3`. Qualifying controls (offline-derived from the candidate's own `prod_scope` over the real G1 Master and Mia's 108 recorded literals: 46 Body, 58 Expression, 4 other): **Body `Fat`** (mono), **Expression `SmileClosed`** (mono).
+Recovered fixture identities (manifest; all in `testscripts.dmx`): on `shot10`, source `krystal20201` (`models/fursonas/starfox/krystal/bodies/krystal2020.mdl`, −1441261258); Fit target `assaultsuitbody1` (…`/cosmetics/assaultsuitbody.mdl`, −791536511); unselected peer `loinclothbra_chadfix_071` (…`/cosmetics/loinclothbra_chadfix_07.mdl`, 480892851); and on `shot3`, `mia1` (`models/annoad/foxbase/mia/mia.mdl`, 1153028609). Qualifying controls (offline-derived from the candidate's own `prod_scope` over the real G1 Master and Mia's 108 recorded literals: 46 Body, 58 Expression, 4 other): **Body `Fat`** (mono), **Expression `SmileClosed`** (mono).
 
 ## 3. Shell set-up and attempt creation (S0; SFM closed)
 
@@ -126,7 +129,7 @@ Expect `S2 SHELL READY` and `I8 SHELL READY`. Each function prints its `… OK` 
 
 | Step | Do | Expect |
 |---|---|---|
-| S0.2 | `I8-New $A -KrystalDocument "<Krystal session file>" -MiaDocument "<Mia session file>"` | `I8 ATTEMPT CREATED`: `authority_pins.json`, `fixture_manifest.json` (static manifest + both documents' paths and SHA-256), `operator_steps.md`. |
+| S0.2 | `$D = "<local SFM sessions folder>\testscripts.dmx"`; `I8-New $A -KrystalDocument $D -MiaDocument $D` | `I8 ATTEMPT CREATED`: `authority_pins.json`, `fixture_manifest.json` (static manifest + the document's path and SHA-256 under both context names), `operator_steps.md`. Both recorded SHA-256 values must equal `197e6011…`; otherwise STOP (wrong document). |
 | S0.3 | Only after OWNER-1 is recorded: `I8-Preflight $A -Owner1Recorded` | `S2 BASELINE OK` (exact production G1 Master/manifest/single sidecar), `LIBRARY INVENTORY WRITTEN`, `I8 PREFLIGHT OK`. Read-only gates first: Python 3; frozen tooling pins; repository candidate, probe and manifest pins; **installed app exactly `9a78fc96…`**; no harness/pointer/flag residue (Session 3/4 harnesses and `ACTIVE_CAMPAIGN.txt`, `CPM_R15_NOTICE_HARNESS.txt`, an item-8 pointer, the G18AN menu copy); private folder holds only the implementation; **Scripts inventory equals the accepted Session 4 closeout inventory**; launcher/adapter/projection/Normalizer and the 23 + 3 package files equal the accepted installed manifest; historical-content scan (OWNER-1); Mia library present. A read-only STOP writes nothing; resolve and rerun. |
 | S0.4 | `I8-Deploy $A` | Backs up the installed `9a78fc96…` into `restoration/installed_app_backup.py`; stages the candidate in a temporary sibling, verifies it, replaces the private implementation file only, verifies `bfba4d3a…`; installs only the pinned probe; requires the Scripts inventory to differ from the pre-deployment one by exactly those two lines; re-verifies the dependencies; writes `deployment_after.json` and the pointer `%PUBLIC%\Documents\CPM_Item8\ACTIVE_ATTEMPT.txt`. `I8 DEPLOYED … Start a FRESH SFM process.` |
 
@@ -138,7 +141,7 @@ as `real_sfm_qualification/cpm_item8_post_cleanup/raw/<attempt>/` (§11).
 | Path | Producer | Content |
 |---|---|---|
 | `authority_pins.json` | `I8-New` | G1/G2 pins, candidate/previous app, probe, manifest, driver, tooling pins |
-| `fixture_manifest.json` | `I8-New` | static manifest + the two fixture documents (path, bytes, SHA-256) |
+| `fixture_manifest.json` | `I8-New` | static manifest + the fixture document (path, bytes, SHA-256) recorded under both context names |
 | `operator_steps.md` | `I8-New` (template), operator | step, time, action, visible result, evidence filename |
 | `deployment_before.json` | `I8-Preflight` | repository HEAD and tracked changes, installed identities, dependencies, inventory equality, historical content, OWNER-1 flag, log states |
 | `deployment_after.json` | `I8-Deploy` | installed candidate/probe, backup, dependencies, inventory |
@@ -161,11 +164,11 @@ is truncated, or the attempt is sealed.
 row. `REFUSED`, `impl_is_candidate=False`, or a non-empty `errors=[…]` → STOP (observability).
 Launcher console lines read `[ChadChan3D CPM launcher] outcome=… code=…`.
 
-### Phase A — fresh-process verification (Krystal document)
+### Phase A — fresh-process verification (`testscripts.dmx`, `shot10`)
 
 | Step | Do | Visible expectation / STOP |
 |---|---|---|
-| A1 | Start SFM fresh. Open the Krystal fixture document. | Document open. |
+| A1 | Start SFM fresh. Open `testscripts.dmx` (**File > Open**). Make **`shot10`** the current shot (in the Clip Editor, move the playhead into `shot10`), before any probe or CPM action. | `testscripts.dmx` open; `shot10` current; `krystal20201`, `assaultsuitbody1`, `loinclothbra_chadfix_071` listed in the Animation Set Editor. Otherwise STOP. |
 | A2 | **P** (before CPM). | Probe line with `module=None` (no private module yet) and `impl_is_candidate=True`. |
 | A3 | Scripts > ChadChan3D > SFM_Character_Preset_Manager. | One CPM window; console `outcome=created code=create`. |
 | A4 | Select `krystal20201`; wait for the Body/Expression/Review counts. | Counts appear; no warning. |
@@ -190,8 +193,8 @@ Launcher console lines read `[ChadChan3D CPM launcher] outcome=… code=…`.
 
 | Step | Do | Visible expectation / STOP |
 |---|---|---|
-| C1 | Open the Mia fixture document in the **same** SFM process (answer **No** to saving the Krystal document). | Document open. |
-| C2 | **P** (closed, Mia document). | — |
+| C1 | With CPM still closed, make **`shot3`** the current shot of the already-open `testscripts.dmx` (in the Clip Editor, move the playhead into `shot3`). Do **not** reopen or save the document. | `shot3` current; `foxmccouldwm1` and `mia1` listed in the Animation Set Editor. Otherwise STOP. |
+| C2 | **P** (closed, `shot3`). | — |
 | C3 | Launcher; select `mia1`; wait for the counts. | `outcome=created code=create`; counts appear. |
 | C4 | **P** (reopened). | — |
 | C5 | Set **Fat** to **0.50** (ordinary SFM slider entry). | — |
@@ -224,7 +227,7 @@ Launcher console lines read `[ChadChan3D CPM launcher] outcome=… code=…`.
 |---|---|---|
 | D1 | Leave CPM open on Mia's existing scope. **P**. | — |
 | D2 | Shell: `I8-Library $A library_D01_before_normalizer`. | — |
-| D3 | Scripts > ChadChan3D > `Rebuild_Control_Groups_Normalizer`: **Rebuild Selected Shots** with `shot3` selected. Complete its normal prompts; respect its admission guard. Wait for its final completion report. Run it **once**. | Completion report. A refusal by its admission guard → STOP (adjudicate). |
+| D3 | In the Clip Editor, select **only `shot3`** (it must be the **sole** Selected shot). Then Scripts > ChadChan3D > `Rebuild_Control_Groups_Normalizer`: **Rebuild Selected Shots**. Complete its normal prompts; respect its admission guard. Wait for its final completion report. Run it **once**. | Completion report for one shot (`shot3`). Any other shot selected, or a refusal by its admission guard → STOP (adjudicate). |
 | D4 | Shell: `I8-CollectLogs $A D_after_normalizer`. | `I8 LOGS COLLECTED`. |
 | D5 | **P**. | — |
 | D6 | Return to the **same** CPM window and scope, **without reselecting**. Set **Fat** to **0.30**. | — |
@@ -297,9 +300,9 @@ slot). Detached bounded views may remain cached — idle does not mean an empty 
 
 | Phase | PASS requires (all) |
 |---|---|
-| **A** | A2: no private module; the canonical runtime state recorded as found (not constructed by the probe). A5: one owned window, one watcher; `PROD_R15_MODULE … build_sha256=bfba4d3a…`, `G18AN_RUN`; healthy scope with `PROD_PROVIDER_HEALTH … sha256=u'ac45e5c1…'`; canonical runtime origin = the deployed menu package. A7 vs A5: same PID, module, class, `StartProdTool`, run ID, window id and scope generation; `PROD_R15_WINDOW_REUSED` once; broker provider opens/closes unchanged between A5 `broker_after` and A7 `broker_before` (the second click acquired nothing). |
+| **A** | Operator record: `testscripts.dmx` (SHA-256 `197e6011…` in `fixture_manifest.json` under both names), `shot10` current. A5 snapshot: `krystal20201`, `assaultsuitbody1`, `loinclothbra_chadfix_071` present with matching model and checksum. A2: no private module; the canonical runtime state recorded as found (not constructed by the probe). A5: one owned window, one watcher; `PROD_R15_MODULE … build_sha256=bfba4d3a…`, `G18AN_RUN`; healthy scope with `PROD_PROVIDER_HEALTH … sha256=u'ac45e5c1…'`; canonical runtime origin = the deployed menu package. A7 vs A5: same PID, module, class, `StartProdTool`, run ID, window id and scope generation; `PROD_R15_WINDOW_REUSED` once; broker provider opens/closes unchanged between A5 `broker_after` and A7 `broker_before` (the second click acquired nothing). |
 | **B** | Snapshot diff B2→B4: `assaultsuitbody1` changed (≥ 1 literal); `krystal20201` and `loinclothbra_chadfix_071` unchanged; Undo count +1. Log: `PROD_CPM_OPERATION_AUTHORIZED operation=u'Clothing Fit' sha256=ac45e5c1…`; `PROD_CPM_FIT_STAGE_OPEN index=0 gfit=ac45e5c1… literals=<n>`; `CLOTHING_FIT_STAGE=PASS … committed=True`; exactly one `PROD_CPM_FIT_STAGE_RELEASED index=0 ok=True`; `CLOTHING_FIT_RESULT generation=… selected=1 … failed=0 unattempted=0` with one changed or partial-changed target; mappings/warnings explained against the pinned fixture (historically 34 literals, 26 mappings, 7 unmatched-target warnings — explanatory, not demanded). B6 snapshot equals B2 for all three sets and Undo is back to the B2 state. B4/B6 idle (stage released). B8: empty slot, census 0/0, `PROD_CLOSE_REQUEST` then `PROD_CLOSE_FINALIZED=True`. |
-| **C** | C4: same PID/module/class/run ID as Phase A, **new** window id, 1/1. Readbacks: `C_body_save` Fat = C6 snapshot value; `C_body_update` Fat = C9 snapshot value; `C_expr_save` SmileClosed = C19 value (reader `readback`, tolerance 1e-5). Library diffs: C01→C02 = one new `Body Presets/I8 <attempt> C BODY--preset-*.json` (+ allowed `character.json`/`.bak`); C02→C03 = that preset (+ its `.bak`, `character.json`/`.bak` allowed); C04→C05 = one new `Expressions/I8 <attempt> C EXPR--preset-*.json` (+ profile files). Apply: C13→C15 diff on `mia1` = exactly `Fat`, value = the update readback; Undo: C17 equals C13 (all literals) and the Undo count returns. Expression: C23→C25 diff = exactly `SmileClosed` = save readback; C27 equals C23. Log: `PROD_SAVE=PASS`, `PROD_UPDATE=PASS`, two `PROD_APPLY outcome='committed'` (`changed_sides`≥1), every authorization `sha256=ac45e5c1…`. C17/C27 idle. Each deliberate change exceeds 0.1 (no no-op). |
+| **C** | C1/C2: `shot3` current in the same open document (no reopen, no save); C4 snapshot: `mia1` present with matching model and checksum. C4: same PID/module/class/run ID as Phase A, **new** window id, 1/1. Readbacks: `C_body_save` Fat = C6 snapshot value; `C_body_update` Fat = C9 snapshot value; `C_expr_save` SmileClosed = C19 value (reader `readback`, tolerance 1e-5). Library diffs: C01→C02 = one new `Body Presets/I8 <attempt> C BODY--preset-*.json` (+ allowed `character.json`/`.bak`); C02→C03 = that preset (+ its `.bak`, `character.json`/`.bak` allowed); C04→C05 = one new `Expressions/I8 <attempt> C EXPR--preset-*.json` (+ profile files). Apply: C13→C15 diff on `mia1` = exactly `Fat`, value = the update readback; Undo: C17 equals C13 (all literals) and the Undo count returns. Expression: C23→C25 diff = exactly `SmileClosed` = save readback; C27 equals C23. Log: `PROD_SAVE=PASS`, `PROD_UPDATE=PASS`, two `PROD_APPLY outcome='committed'` (`changed_sides`≥1), every authorization `sha256=ac45e5c1…`. C17/C27 idle. Each deliberate change exceeds 0.1 (no no-op). |
 | **D** | Normalizer log: `scope_mode=SELECTED_SHOTS scope_shots=1`, `CONTEXTUALIZER_SCOPE_SHOT_NAMES = [u'shot3']`, `PRODUCTION_REBUILD_CONTROL_GROUPS = PASS`, `PRODUCTION_CONTEXTUALIZER = PASS`, `mem_ok=True` at every checkpoint, live Master G1, no CPM `PROD_` lines. D5 vs D1: same broker id (one canonical broker serves both), `consumers_served` includes `cpm_compat_v1` and `normalizer_compat`, same module/window/run ID/scope generation, idle. Between D1 and D13 the CPM log has no `PROD_CPM_OPERATION_AUTHORIZATION_REFUSED`, no `PROD_CPM_STALE_GENERATION_REBUILD*`, no new `scope-begin` (no reselection). D7→D9 diff = exactly `Fat`, value = the Phase C update readback; `D_body_save` Fat = D9 value; D01→D02 = one new `I8 <attempt> D BODY` preset (+ profile files); D13 equals D7. |
 | **E** | Valid run: E1 scope G1; between E4's activation and the E5 refusal there is no `PROD_CPM_STALE_GENERATION_REBUILD*` and no scope rebuild (otherwise INCONCLUSIVE). `g2_activation_record.json` proves `ac45e5c1…`→`54413b6c…`; `post_switch_inventory.json` is exact G2. The Save operation was open before the switch (`PROD_OPERATION_BEGIN … 'Save Current Body'` before E4); the prompt returned (`PROD_RESOURCE label=u'Q2_SAVE_POST_CONFIRM'`); then `PROD_CPM_OPERATION_AUTHORIZATION_REFUSED operation=u'Save Preset' reason=u'generation-mismatch'`; no `PROD_SAVE=` and no durable phase for it; its `PROD_OPERATION_END … durable_commit=None`. `library_E1`, `library_E2` and `library_E3` byte-identical; no `E STALE` file. E1→E6 snapshot diff empty and Undo count unchanged (no scene mutation, no Undo item). After the refusal: `PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED`, `PROD_CPM_STALE_GENERATION_REBUILD`, exactly one automatic scope publication with `PROD_PROVIDER_HEALTH … sha256=u'54413b6c…'` and `scope-ready`; E6 scope G2, same window; no further `Save Current Body` before E8 (no replay). E8: `PROD_CPM_OPERATION_AUTHORIZED operation=u'Save Preset' sha256=54413b6c…`, `PROD_SAVE=PASS … name=u'I8 <attempt> E G2'`; E3→E4 = exactly one new `I8 <attempt> E G2` preset + allowed `character.json`/`.bak`, nothing else; E10 readback valid. E6/E9 idle. |
 | **F** | F2: Escape teardown complete (empty slot, 0/0, `PROD_CLOSE_FINALIZED=True`), idle. F4: same PID/module/class/run ID, **new** window id, 1 ProdWindow / 1 watcher, healthy G2 scope. F5/F6 idle; F6 closed 0/0. `restore_compare.json` and `finalization_record.json` `exact_match: true` (`S2 RESTORED EXACT G1`). Qualification-only deployment removed with the exact expected Scripts difference. |
@@ -411,9 +414,9 @@ Commands (from this directory, `PYTHONDONTWRITEBYTECODE=1`):
 
 | Suite | Interpreter | Qt | Result |
 |---|---|---|---|
-| `test_cpm_item8_probe.py --phase=run` | Python 3.10.6 | model | **161/161 ALL PASS** |
-| `test_cpm_item8_probe.py --phase=run` | embedded Python 2.7.5 | real PySide/Qt 4.8 + model | **225/225 ALL PASS** |
-| `test_item8_generation_driver.py` | Python 3.10.6 + Windows PowerShell 5.1 | — | **75/75 ALL PASS** |
+| `test_cpm_item8_probe.py --phase=run` | Python 3.10.6 | model | **172/172 ALL PASS** (with the live fixture-document check) |
+| `test_cpm_item8_probe.py --phase=run` | embedded Python 2.7.5 | real PySide/Qt 4.8 + model | **231/231 ALL PASS** |
+| `test_item8_generation_driver.py` | Python 3.10.6 + Windows PowerShell 5.1 | — | **76/76 ALL PASS** |
 
 Coverage (check groups; 2.7.5 adds the real-Qt children):
 - **pins (18):** candidate `bfba4d3a…`; launcher; previous app restorable from git (`9d405c8`); design,
@@ -421,6 +424,12 @@ Coverage (check groups; 2.7.5 adds the real-Qt children):
   pins equal the actual files; accepted inventory pin; manifest dependencies equal both the accepted
   installed inventory and their repository sources; generation tooling pins equal the repository and
   the driver and are unchanged since `0597927`.
+- **fixture document (6 static; 5 live under 3.10):** one physical document serves both named contexts
+  with distinct shots (Krystal `shot10`, Mia `shot3`), the Normalizer's sole Selected shot is the Mia
+  shot, the manifest pins the document without a workstation path, and the driver accepts one path for
+  both; live (`--fixture-document=… --dmxconvert=…`, temporary copy only): pinned SHA-256 and size,
+  `shot10` holds the Krystal triple, `shot3` is exactly `foxmccouldwm1` + `mia1`, 16 film clips, source
+  unchanged.
 - **fixtures (8) and classification (6):** fixture identities equal the Session 4 harness constants,
   the probe's fixture table and `SESSION3_RUNBOOK.md`; Mia's 108 literals partition into 46/58/4;
   `Fat`/`SmileClosed` are mono and correctly classified; planned changes exceed 0.1; the
@@ -454,7 +463,7 @@ Coverage (check groups; 2.7.5 adds the real-Qt children):
   installed build (item-6 `1e866871…`) reported and rejected by the reader; the **real**
   shared-package broker unchanged by the probe (counters, diagnostics, ledger), idle and canonical
   origin recorded.
-- **driver (75):** frozen block byte-identical to `SESSION2_RUNBOOK.md` at `0597927` except the two
+- **driver (76):** frozen block byte-identical to `SESSION2_RUNBOOK.md` at `0597927` except the two
   placeholders, not redefined, no generation-tool calls outside it; ASCII/LF; parses in Windows
   PowerShell 5.1. Sandbox end to end with the real previous app, launcher, adapter, projection,
   Normalizer, shared package and sidecar-reader bytes and real G1 published by the real publisher:
@@ -466,7 +475,7 @@ Coverage (check groups; 2.7.5 adds the real-Qt children):
   frozen exact-G1 finalization with the G2 sidecar removed; ordering gates; an unexpected Scripts
   change refusing qualification removal without spoiling the retry; live-evidence seal;
   INCONCLUSIVE disposition restoring `9a78fc96…` with the inventory equal to the accepted one; PASS
-  disposition in a second attempt keeping `bfba4d3a…` (only the implementation line differs) with the
+  disposition in a second attempt (one document passed for both fixture contexts) keeping `bfba4d3a…` (only the implementation line differs) with the
   untouched-authority proof; sealed attempts verified by the reader; a later preflight refusing while
   the candidate remains installed.
 

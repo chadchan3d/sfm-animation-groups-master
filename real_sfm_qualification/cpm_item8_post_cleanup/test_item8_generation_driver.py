@@ -363,7 +363,9 @@ Step disposition { I8-Disposition T1 -Verdict INCONCLUSIVE }
     check("disposition.record", disp["verdict"] == "INCONCLUSIVE" and disp["installed_app_sha256"] == PREVIOUS
           and disp["authority_restoration"] == "restore_compare.json")
     # PASS path in a new attempt: candidate retained; untouched authority proven.
-    docs2 = docs.replace("T1", "T2")
+    # One physical document serves both fixture contexts (owner decision): pass the same path twice.
+    same = os.path.join(SANDBOX, "docs", "mia_fixture.dmx")
+    docs2 = 'I8-New T2 -KrystalDocument "%s" -MiaDocument "%s"' % (same, same)
     steps, out = run_ps(p, """
 Step new { %(docs)s }
 Step preflight { I8-Preflight T2 -Owner1Recorded }
@@ -375,6 +377,9 @@ Step disposition_again { I8-Disposition T2 -Verdict FAIL }
 """ % {"docs": docs2})
     check("pass.flow", all(steps.get(s, ("",))[0] == "OK" for s in ("new", "preflight", "deploy", "finalize", "remove", "disposition")),
           dict((k, v[0]) for k, v in steps.items()))
+    fm2 = json.loads(_read(os.path.join(attempt("T2"), "fixture_manifest.json")).decode("utf-8"))
+    check("new.one_document_for_both_contexts", fm2["documents"]["krystal"]["sha256"] == fm2["documents"]["mia"]["sha256"]
+          == _sha(b"<mia>") and fm2["documents"]["krystal"]["path"] == fm2["documents"]["mia"]["path"])
     check("pass.authority_untouched_proof", "S2 UNTOUCHED" in out and json.loads(_read(os.path.join(
         attempt("T2"), "generation", "untouched_compare.json")).decode("utf-8-sig"))["exact_match"] is True)
     check("pass.candidate_retained", _sha(_read(app)) == CANDIDATE)

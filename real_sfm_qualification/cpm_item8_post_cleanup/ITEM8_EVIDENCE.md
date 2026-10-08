@@ -24,12 +24,12 @@ Runbook: `ITEM8_RUNBOOK.md`.
 | `cpm/qualification/ITEM8_POST_CLEANUP_REAL_SFM_QUALIFICATION_DESIGN.md` | `fe6051880a039fc18ca2606d3fe29105ad56b02a4afb11fa9d83eac3b35156f1` | approved design (paths normalized to repository-relative) |
 | `ITEM8_RUNBOOK.md` | (this commit) | operator runbook |
 | `CPM_Item8_Probe.py` | `f503c0abaf63f891c108fd81c726b1101288a2dcf1091bf6a386388be1571257` | observation-only probe (qualification-only; deployed per attempt) |
-| `test_cpm_item8_probe.py` | `859b75d12848cf5fe353b5f0a6c0fae41f8ebe141af9e910102c01d35cc1945d` | probe/reader/pin/fixture qualification |
-| `ITEM8_GENERATION_DRIVER.ps1` | `3545ac72d87654602877844d91725a165a5e6c4b2e9254d52073fc8fb8bdf0d0` | Windows PowerShell driver: frozen Session 2 block + item-8 deployment/evidence functions |
-| `test_item8_generation_driver.py` | `3f4aa26a98fe4cd384fdb4a3dddd703a3982b2f0b3df1b3311cb28af5ed94da9` | driver qualification (sandbox end to end) |
-| `ITEM8_FIXTURE_MANIFEST.json` | `2b78f182c154fdcc5acc169169b35bb6120080dea0a81fa9db1e264cdd69703e` | static fixture/pin manifest |
+| `test_cpm_item8_probe.py` | `c5e6c627f2acbc23cfac7fba5f2edca3ef7f65ec19dbf5f5dd7bc6cf84367f32` | probe/reader/pin/fixture qualification |
+| `ITEM8_GENERATION_DRIVER.ps1` | `8526c6b18464e691ca269f4d0cdefb2d8c4e52d527620e9d32ae369fe9074ec1` | Windows PowerShell driver: frozen Session 2 block + item-8 deployment/evidence functions |
+| `test_item8_generation_driver.py` | `73a5229658d6535e27252a1152a2e3b64c3806aae23e1ef0ad5e593eade76b3e` | driver qualification (sandbox end to end) |
+| `ITEM8_FIXTURE_MANIFEST.json` | `40b51416fb8e742b2512dd973ade07ccd0e618a58ebd6c96e9dd62efc1afeb2b` | static fixture/pin manifest |
 | `item8_evidence_reader.py` | `a3d3bd90e34eb0691e5290a94e599bfab1425afcc11d8312f16c448089444a10` | offline evidence reader/helper |
-| `templates/ITEM8_OPERATOR_STEPS_TEMPLATE.md` | `be5354faf9a3e8d3a8f7818aac1b5c49e4c34dee09c6c96b8156a0db7c708879` | operator record template |
+| `templates/ITEM8_OPERATOR_STEPS_TEMPLATE.md` | `416d4d255b01923b8b73f72dc54b92814ecdb8c5003d7c6f281ce1b7b2bddfb2` | operator record template |
 | `ITEM8_EVIDENCE.md` | (this commit) | this file |
 
 `.gitattributes` gained one narrow `eol=lf` block for this directory's `*.py`, `*.json`, `*.ps1`
@@ -37,6 +37,15 @@ and `*.md` files (the Session 3/4 precedent), so the pinned probe/manifest/drive
 checkout or archive export.
 
 ## 3. Facts established offline
+
+- **Fixture document (pre-execution correction, 2026-10-08):** a read-only search of every `.dmx` on
+  the local drives found no qualifying fixture in SFM's own sessions folder. Eight documents in the
+  local SFM sessions folder satisfied both identities: `testscripts.dmx` and seven derivatives (the
+  `testscripts_*` variants and the Normalizer-mutated `f1_r2_normalized_diagnostic_copy.dmx`). The owner
+  selected the original `testscripts.dmx` (`197e6011faae2da539d0a06ae4924288104b956348cd1c4e0ef80618f9e4e16f`), which the real-SFM ledger names as "the known
+  original fixture filename", for both contexts (Krystal `shot10`, Mia `shot3`). Contents were read
+  from a temporary copy converted by SFM's `dmxconvert`; the source's SHA-256 and modification time
+  were unchanged throughout, and it was never opened by SFM or saved.
 
 - **Fixture identities** recovered from Sessions 3–4 (harness constants, ARM records,
   `SESSION3_RUNBOOK.md` §3): `krystal20201`, `assaultsuitbody1`, `loinclothbra_chadfix_071` (the
@@ -64,8 +73,8 @@ checkout or archive export.
 | Item | Status |
 |---|---|
 | **OWNER-1** — historical full CPM builds (`sfm/mainmenu/SFM_CSP_G*`, `SFM_Character_Slider_Preset_Tool_*`) and historical package copies (`sfm/gate_r*_deploy/`) present in the accepted inventory | Open: owner disposition required before an attempt (runbook §2). The prepared tooling supports acceptance as in Sessions 1–4 (`-Owner1Recorded`); any other disposition needs a revised preparation. |
-| Krystal and Mia fixture **session files** (names, SHA-256, current contents) | Open: recorded by `I8-New`; contents verified by the A2/C2 probes. |
-| Mia document has a shot besides `shot3` (Selected scope is a proper subset) | Open: operator check; Normalizer log confirms `SELECTED_SHOTS`, 1 shot. |
+| Fixture document | **Resolved (owner decision, 2026-10-08):** the original qualification document `testscripts.dmx` (local SFM sessions folder), SHA-256 `197e6011faae2da539d0a06ae4924288104b956348cd1c4e0ef80618f9e4e16f`, 14,245,089 bytes, serves both contexts — Krystal `shot10`, Mia `shot3`. Derivative/variant documents are not used. Recorded again live by `I8-New`. |
+| Fixture shot contents | **Resolved offline (read-only):** `shot10` holds `krystal20201`, `assaultsuitbody1`, `loinclothbra_chadfix_071` with the manifest models; `shot3` holds exactly `foxmccouldwm1` and `mia1`; 16 film clips, so a sole Selected `shot3` is a proper subset. Model checksums (not stored in session files) are confirmed live by the probe. |
 | Mia preset library folder `mia--2e6533ed1490` present; no campaign-named presets | Open: `I8-Preflight` / first inventory. |
 | Live Scripts tree still equals the accepted inventory; installed app `9a78fc96…`; live authority exact G1 | Open: `I8-Preflight` (read-only gates). |
 | Actual Fit result on the fixture (changed state; mappings/warnings) | Open: observed in Phase B (historical 34/26/7 is explanatory only). |
@@ -74,9 +83,9 @@ checkout or archive export.
 
 | Suite | Interpreter | Qt | Result |
 |---|---|---|---|
-| `test_cpm_item8_probe.py --phase=run` | Python 3.10.6 | model | **161/161 ALL PASS** |
-| `test_cpm_item8_probe.py --phase=run` | embedded Python 2.7.5 | real PySide/Qt 4.8 + model | **225/225 ALL PASS** |
-| `test_item8_generation_driver.py` | Python 3.10.6 + Windows PowerShell 5.1 | — | **75/75 ALL PASS** |
+| `test_cpm_item8_probe.py --phase=run` | Python 3.10.6 | model | **172/172 ALL PASS** (with the live fixture-document check) |
+| `test_cpm_item8_probe.py --phase=run` | embedded Python 2.7.5 | real PySide/Qt 4.8 + model | **231/231 ALL PASS** |
+| `test_item8_generation_driver.py` | Python 3.10.6 + Windows PowerShell 5.1 | — | **76/76 ALL PASS** |
 
 Coverage (check groups; 2.7.5 adds the real-Qt children):
 - **pins (18):** candidate `bfba4d3a…`; launcher; previous app restorable from git (`9d405c8`); design,
@@ -84,6 +93,12 @@ Coverage (check groups; 2.7.5 adds the real-Qt children):
   pins equal the actual files; accepted inventory pin; manifest dependencies equal both the accepted
   installed inventory and their repository sources; generation tooling pins equal the repository and
   the driver and are unchanged since `0597927`.
+- **fixture document (6 static; 5 live under 3.10):** one physical document serves both named contexts
+  with distinct shots (Krystal `shot10`, Mia `shot3`), the Normalizer's sole Selected shot is the Mia
+  shot, the manifest pins the document without a workstation path, and the driver accepts one path for
+  both; live (`--fixture-document=… --dmxconvert=…`, temporary copy only): pinned SHA-256 and size,
+  `shot10` holds the Krystal triple, `shot3` is exactly `foxmccouldwm1` + `mia1`, 16 film clips, source
+  unchanged.
 - **fixtures (8) and classification (6):** fixture identities equal the Session 4 harness constants,
   the probe's fixture table and `SESSION3_RUNBOOK.md`; Mia's 108 literals partition into 46/58/4;
   `Fat`/`SmileClosed` are mono and correctly classified; planned changes exceed 0.1; the
@@ -117,7 +132,7 @@ Coverage (check groups; 2.7.5 adds the real-Qt children):
   installed build (item-6 `1e866871…`) reported and rejected by the reader; the **real**
   shared-package broker unchanged by the probe (counters, diagnostics, ledger), idle and canonical
   origin recorded.
-- **driver (75):** frozen block byte-identical to `SESSION2_RUNBOOK.md` at `0597927` except the two
+- **driver (76):** frozen block byte-identical to `SESSION2_RUNBOOK.md` at `0597927` except the two
   placeholders, not redefined, no generation-tool calls outside it; ASCII/LF; parses in Windows
   PowerShell 5.1. Sandbox end to end with the real previous app, launcher, adapter, projection,
   Normalizer, shared package and sidecar-reader bytes and real G1 published by the real publisher:
@@ -129,7 +144,7 @@ Coverage (check groups; 2.7.5 adds the real-Qt children):
   frozen exact-G1 finalization with the G2 sidecar removed; ordering gates; an unexpected Scripts
   change refusing qualification removal without spoiling the retry; live-evidence seal;
   INCONCLUSIVE disposition restoring `9a78fc96…` with the inventory equal to the accepted one; PASS
-  disposition in a second attempt keeping `bfba4d3a…` (only the implementation line differs) with the
+  disposition in a second attempt (one document passed for both fixture contexts) keeping `bfba4d3a…` (only the implementation line differs) with the
   untouched-authority proof; sealed attempts verified by the reader; a later preflight refusing while
   the candidate remains installed.
 

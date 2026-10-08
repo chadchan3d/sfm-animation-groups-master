@@ -9,7 +9,7 @@ Mark a step `STOP` (and stop) if its visible expectation fails; ITEM8_RUNBOOK.md
 | S0.2 | | I8-New | | authority_pins.json, fixture_manifest.json |
 | S0.3 | | I8-Preflight | | deployment_before.json |
 | S0.4 | | I8-Deploy | | deployment_after.json |
-| A1 | | Fresh SFM; open the Krystal fixture document | | |
+| A1 | | Fresh SFM; open testscripts.dmx; make shot10 current | | |
 | A2 | | Probe (before CPM) | | probe seq |
 | A3 | | Launcher | | |
 | A4 | | Select krystal20201; wait for counts | | |
@@ -24,7 +24,7 @@ Mark a step `STOP` (and stop) if its visible expectation fails; ITEM8_RUNBOOK.md
 | B6 | | Probe (after Undo) | | probe seq |
 | B7 | | Close CPM with the title-bar X; settle | | |
 | B8 | | Probe (closed) | | probe seq |
-| C1 | | Open the Mia fixture document (same process; do not save) | | |
+| C1 | | CPM closed: make shot3 current in the open testscripts.dmx (no reopen, no save) | | |
 | C2 | | Probe (closed, Mia document) | | probe seq |
 | C3 | | Launcher; select mia1; wait for counts | | |
 | C4 | | Probe (reopened) | | probe seq |
@@ -53,7 +53,7 @@ Mark a step `STOP` (and stop) if its visible expectation fails; ITEM8_RUNBOOK.md
 | C27 | | Probe (after Undo; idle) | | probe seq |
 | D1 | | Probe (before Normalizer) | | probe seq |
 | D2 | | I8-Library library_D01_before_normalizer | | |
-| D3 | | Normalizer: Rebuild Selected Shots (shot3) once; wait for the final report | | |
+| D3 | | Select only shot3 (sole Selected shot); Normalizer Rebuild Selected Shots once; wait for the final report | | |
 | D4 | | I8-CollectLogs D_after_normalizer | | logs/D_after_normalizer.json |
 | D5 | | Probe (after Normalizer) | | probe seq |
 | D6 | | Same CPM window, no reselection: set Fat to 0.30 | | |

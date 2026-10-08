@@ -217,10 +217,24 @@
   }
  },
  "design": "cpm/qualification/ITEM8_POST_CLEANUP_REAL_SFM_QUALIFICATION_DESIGN.md",
+ "fixture_document": {
+  "bytes": 14245089,
+  "encoding": "binary 5, sfm_session 20",
+  "file_name": "testscripts.dmx",
+  "film_clips": 16,
+  "location": "<local SFM sessions folder>/testscripts.dmx (the original qualification document; the operator passes its real path to I8-New, which re-hashes it)",
+  "never_saved": "The document is never saved during item 8 (answer No to every save prompt).",
+  "resolution": "Owner decision (2026-10-08): one physical document serves both named fixture contexts; derivative/variant documents (testscripts_*.dmx, f1_r2_normalized_diagnostic_copy.dmx) are not used. Contents verified read-only (temporary copy converted by SFM's dmxconvert): shot10 and shot12 each hold the Krystal triple; shot3 holds exactly foxmccouldwm1 and mia1. Model checksums are not stored in session files; the probe confirms them live.",
+  "serves": [
+   "krystal (shot10)",
+   "mia (shot3)"
+  ],
+  "sha256": "197e6011faae2da539d0a06ae4924288104b956348cd1c4e0ef80618f9e4e16f"
+ },
  "fixtures": {
   "krystal": {
    "changed_state_requirement": "the Fit must change assaultsuitbody1 (target snapshot differs); an all-already-matched Fit is INCONCLUSIVE",
-   "document": "OPERATOR PREFLIGHT: the Session 1/3/4 Krystal scene file (path + SHA-256 recorded by I8-New)",
+   "document": "fixture_document (testscripts.dmx)",
    "fit_target": {
     "animset_name": "assaultsuitbody1",
     "checksum": -791536511,
@@ -244,6 +258,8 @@
     "source": "S4F ARM scene snapshot"
    },
    "scene": "Session 1 completion-run Krystal scene (SESSION3_RUNBOOK.md section 3; S4F)",
+   "shot": "shot10",
+   "shot_rule": "shot10 is the established Krystal Body/Clothing context; shot12 also holds the triple but is not used",
    "source": {
     "animset_name": "krystal20201",
     "checksum": -1441261258,
@@ -266,7 +282,7 @@
     "literal": "Fat",
     "representation": "MONO"
    },
-   "document": "OPERATOR PREFLIGHT: the R15 addendum / Session 2 Mia scene file (path + SHA-256 recorded by I8-New)",
+   "document": "fixture_document (testscripts.dmx)",
    "expression_control": {
     "class": "face",
     "literal": "SmileClosed",
@@ -390,6 +406,7 @@
     ]
    },
    "library_character_folder": "SFM Character Preset Manager/Characters/mia--2e6533ed1490 (under Documents)",
+   "reached_by": "with CPM closed after B8, switch the already-open document from shot10 to shot3 (no reopen, no save prompt)",
    "recorded_supported_flex_literals": {
     "count": 108,
     "mono": 97,
@@ -408,7 +425,11 @@
      "MouthPull"
     ]
    },
-   "shot": "shot3"
+   "shot": "shot3",
+   "shot3_animation_sets": [
+    "foxmccouldwm1",
+    "mia1"
+   ]
   },
   "normalizer": {
    "command": "Rebuild_Control_Groups_Normalizer (Scripts > ChadChan3D), Rebuild Selected Shots",
@@ -421,7 +442,7 @@
     "mia1"
    ],
    "log": "%PUBLIC%/Documents/sfm_rebuild_control_groups.txt (rewritten per run)",
-   "project_scope": "OPERATOR PREFLIGHT: the Mia document must contain at least one shot besides shot3, so the Selected shot is a proper subset of the project scope",
+   "project_scope": "testscripts.dmx holds 16 film clips; shot3 must be the sole Selected shot, so the Selected shot is a proper subset of the project scope",
    "selected_shot": "shot3"
   }
  },

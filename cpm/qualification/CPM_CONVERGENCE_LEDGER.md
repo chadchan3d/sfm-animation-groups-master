@@ -18,18 +18,26 @@ K/L not started.
 - Design (owner-approved): `cpm/qualification/ITEM8_POST_CLEANUP_REAL_SFM_QUALIFICATION_DESIGN.md`
   (`fe605188…`; workstation paths normalized to repository-relative, content unchanged).
 - Preparation (`real_sfm_qualification/cpm_item8_post_cleanup/`): `ITEM8_RUNBOOK.md`;
-  observation-only `CPM_Item8_Probe.py` `f503c0ab…`; `test_cpm_item8_probe.py` `859b75d1…`;
-  `ITEM8_GENERATION_DRIVER.ps1` `3545ac72…` (frozen Session 2 §2.1 block verbatim + item-8
-  deployment/evidence functions); `test_item8_generation_driver.py` `3f4aa26a…`;
-  `ITEM8_FIXTURE_MANIFEST.json` `2b78f182…`; `item8_evidence_reader.py` `a3d3bd90…`; operator
+  observation-only `CPM_Item8_Probe.py` `f503c0ab…`; `test_cpm_item8_probe.py` `c5e6c627…`;
+  `ITEM8_GENERATION_DRIVER.ps1` `8526c6b1…` (frozen Session 2 §2.1 block verbatim + item-8
+  deployment/evidence functions); `test_item8_generation_driver.py` `73a52296…`;
+  `ITEM8_FIXTURE_MANIFEST.json` `40b51416…`; `item8_evidence_reader.py` `a3d3bd90…`; operator
   template; `ITEM8_EVIDENCE.md` (PREPARED, NOT RUN).
-- **Offline preparation qualification:** probe test 2.7.5 **225/225** (real PySide/Qt 4.8 + model),
-  3.10 **161/161** (model); driver test 3.10 + Windows PowerShell 5.1 **75/75** (sandbox: real
-  G1 → exact G2 → exact G1 with the frozen tooling; both disposition paths).
-- **Operator-preflight items (open):** **OWNER-1** — historical full CPM builds and package copies in
-  the accepted Scripts inventory need an owner disposition before any attempt (the tooling supports
-  acceptance as in Sessions 1–4); the two fixture session files; Mia document shot scope; Mia
-  library; live inventory/installed app/authority (checked by `I8-Preflight`).
+- **Offline preparation qualification:** probe test 2.7.5 **231/231** (real PySide/Qt 4.8 + model),
+  3.10 **172/172** (model, with the live read-only fixture-document check); driver test 3.10 +
+  Windows PowerShell 5.1 **76/76** (sandbox: real G1 → exact G2 → exact G1 with the frozen tooling;
+  both disposition paths; one document for both fixture contexts).
+- **Pre-execution correction (2026-10-08) — fixture ambiguity resolved (owner decision):** the
+  original qualification document `testscripts.dmx` (local SFM sessions folder; SHA-256
+  `197e6011faae2da539d0a06ae4924288104b956348cd1c4e0ef80618f9e4e16f`, 14,245,089 bytes) serves
+  both contexts — Krystal on `shot10`, Mia on `shot3` (sole Selected shot for the Normalizer);
+  derivatives are not used. Phase C switches the already-open document from `shot10` to `shot3` with
+  CPM closed (no reopen, no save). Verified read-only via a temporary `dmxconvert` copy; the document
+  was never modified. Generation/deployment behavior unchanged (driver changed only in its manifest pin).
+- **OWNER-1:** resolved by the owner (historical menu builds and package copies accepted as inert
+  members of the exact Session-4 baseline; recorded per attempt via `-Owner1Recorded`).
+- **Remaining live preflight (checked by `I8-New`/`I8-Preflight`):** Mia library; live
+  inventory/installed app/authority.
 - Fixture identities recovered from Sessions 3–4; qualifying controls derived offline from the
   candidate's own scope over real G1: Body `Fat`, Expression `SmileClosed` (Mia).
 - The Session 4 Fit release-path observation is carried forward unchanged (not repaired).
@@ -282,7 +290,8 @@ Evidence:
   - §22 item 7 (diagnostic/development logging reduction): **COMPLETE — offline qualification
     PASS** (candidate `bfba4d3a…`; not real-SFM qualified);
   - §22 item 8 (focused post-cleanup regression, including post-cleanup real-SFM qualification):
-    **PREPARED, NOT RUN** (owner decision OWNER-1 and operator preflight open).
+    **PREPARED, NOT RUN** (OWNER-1 resolved; fixture ambiguity resolved; awaiting execution
+    authorization from the corrected checkpoint).
 
   **K, L:** not started.
 - **Session 4 notes (not failures; carried to cleanup/K; unchanged by item 7):**
@@ -296,7 +305,7 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-After designer/owner review of this checkpoint and the OWNER-1 disposition: execute item 8 exactly
+On execution authorization from this corrected checkpoint: execute item 8 exactly
 per `real_sfm_qualification/cpm_item8_post_cleanup/ITEM8_RUNBOOK.md` (one fresh SFM process, Phases
 A–F), only under an explicit execution authorization; then adjudicate and apply the deployment
 policy. K and L follow only after item-8 adjudication; neither has begun.

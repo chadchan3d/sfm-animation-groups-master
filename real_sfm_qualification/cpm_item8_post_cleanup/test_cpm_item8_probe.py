@@ -17,7 +17,8 @@ strict recording fake or the REAL shared-package broker.
 Mocks cannot qualify real DME objects, the real installed deployment or the real
 broker under SFM; those are the live item-8 campaign.
 
-Usage: --phase=run   (internal: --child=<scenario> --qt=<real|model> --root=<dir>)
+Usage: --phase=run [--fixture-document=<testscripts.dmx> --dmxconvert=<dmxconvert.exe>]  (Python 3: also
+       verifies the real fixture document read-only)   (internal: --child=<scenario> --qt=<real|model> --root=<dir>)
 """
 from __future__ import print_function
 
@@ -56,6 +57,7 @@ ITEM6_APP = "1e8668717f9a4a1def0900c6b51e20cb9a7676cc365244eab5c31233f133eeeb"
 LAUNCHER_SHA = "996ca483d625d37feb8d8f38a8d13db16f999d4189d98434db9c284a0a458c51"
 G1 = "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93"
 G2 = "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7"
+FIXTURE_DOCUMENT_SHA = "197e6011faae2da539d0a06ae4924288104b956348cd1c4e0ef80618f9e4e16f"
 RESULTS = []
 c = r15.c
 PY2 = r15.PY2
@@ -208,6 +210,110 @@ def static_pins():
         check("pins.generation_tooling_unchanged_since_session2_freeze", diff.strip() == b"", diff)
     except Exception as exc:  # noqa: BLE001
         check("pins.generation_tooling_unchanged_since_session2_freeze", False, repr(exc))
+
+
+def static_fixture_document():
+    """One physical document serves both named fixture contexts, on distinct shots (owner decision)."""
+    m = _manifest()
+    doc, fx = m["fixture_document"], m["fixtures"]
+    check("fixture_document.pinned", doc["file_name"] == "testscripts.dmx" and len(doc["sha256"]) == 64
+          and doc["bytes"] == 14245089 and doc["sha256"] == FIXTURE_DOCUMENT_SHA)
+    check("fixture_document.serves_both_contexts", fx["krystal"]["document"] == fx["mia"]["document"]
+          == "fixture_document (testscripts.dmx)" and doc["serves"] == ["krystal (shot10)", "mia (shot3)"])
+    check("fixture_document.distinct_shots", fx["krystal"]["shot"] == "shot10" and fx["mia"]["shot"] == "shot3"
+          and fx["krystal"]["shot"] != fx["mia"]["shot"])
+    check("fixture_document.normalizer_sole_selected_shot_is_mia_shot", fx["normalizer"]["selected_shot"] == fx["mia"]["shot"]
+          and fx["normalizer"]["expected_log"] == {"scope_mode": "SELECTED_SHOTS", "scope_shots": 1})
+    check("fixture_document.no_workstation_path", not re.search(r"\b[A-Za-z]:[\\/][A-Za-z]", doc["location"]))
+    drv = _read(DRIVER).decode("ascii")
+    new = drv[drv.index("function I8-New"):drv.index("# ---- 2. Preflight")]
+    check("fixture_document.driver_accepts_one_document_for_both",
+          "-ne" not in new.split("$docs = [ordered]@{}")[1].split("if (-not (Test-Path -LiteralPath $I8_ROOT))")[0]
+          and "KrystalDocument" in new and "MiaDocument" in new)
+
+
+def _kv2_film_clips(text):
+    """Minimal keyvalues2 reader: film clips -> [(animation set, model)]."""
+    toks = iter([mt.group(1) if mt.group(1) is not None else mt.group(2)
+                 for mt in re.finditer(r'"((?:[^"\\]|\\.)*)"|([\[\]{},])', text)])
+    els = {}
+
+    def body(etype):
+        el = {"_type": etype}
+        while True:
+            name = next(toks)
+            if name == "}":
+                break
+            typ = next(toks)
+            if typ.endswith("_array"):
+                assert next(toks) == "["
+                vals = []
+                while True:
+                    v = next(toks)
+                    if v == "]":
+                        break
+                    if v == ",":
+                        continue
+                    if typ == "element_array":
+                        if v == "element":
+                            vals.append(("ref", next(toks)))
+                        else:
+                            assert next(toks) == "{"
+                            vals.append(body(v))
+                    else:
+                        vals.append(v)
+                el[name] = vals
+            elif typ == "element":
+                el[name] = ("ref", next(toks))
+            else:
+                nxt = next(toks)
+                el[name] = body(typ) if nxt == "{" else nxt
+        if "id" in el:
+            els[el["id"]] = el
+        return el
+    for t in toks:
+        if t not in ("{", "}", "[", "]", ","):
+            assert next(toks) == "{"
+            body(t)
+    get = lambda r: els.get(r[1]) if isinstance(r, tuple) else r
+    out = {}
+    for e in els.values():
+        if e["_type"] == "DmeFilmClip" and "animationSets" in e:
+            sets = []
+            for a in e.get("animationSets") or []:
+                a = get(a)
+                gm = get(a.get("gameModel")) if a is not None and a.get("gameModel") else None
+                sets.append((a.get("name") if a is not None else None, gm.get("modelName") if gm else None))
+            out[e.get("name")] = sets
+    return out
+
+
+def live_fixture_document(path, dmxconvert):
+    """Opt-in: verify the real fixture document read-only (temporary copy converted by SFM's dmxconvert)."""
+    m = _manifest()
+    before = (_sha(_read(path)), os.stat(path).st_mtime, os.stat(path).st_size)
+    work = os.path.join(FIXTURE_ROOT, "fixture_document")
+    if os.path.isdir(work):
+        shutil.rmtree(work)
+    os.makedirs(work)
+    copy, kv2 = os.path.join(work, "copy.dmx"), os.path.join(work, "copy_kv2.dmx")
+    shutil.copyfile(path, copy)
+    subprocess.check_call([dmxconvert, "-i", copy, "-o", kv2, "-oe", "keyvalues2"],
+                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    clips = _kv2_film_clips(io.open(kv2, encoding="utf-8", errors="replace").read())
+    k, mi = m["fixtures"]["krystal"], m["fixtures"]["mia"]
+    triple = [(k[r]["animset_name"], k[r]["model"]) for r in ("source", "fit_target", "unselected_peer")]
+    check("live_document.sha256_and_size_match_pin", before[0] == m["fixture_document"]["sha256"]
+          and before[2] == m["fixture_document"]["bytes"])
+    check("live_document.shot10_holds_krystal_triple", all(t in clips.get("shot10", []) for t in triple), clips.get("shot10"))
+    check("live_document.shot3_is_exactly_foxmccouldwm1_and_mia1",
+          sorted(a for a, _ in clips.get("shot3", [])) == mi["shot3_animation_sets"]
+          and (mi["animset"]["animset_name"], mi["animset"]["model"]) in clips.get("shot3", []), clips.get("shot3"))
+    check("live_document.shot3_proper_subset_of_project", len(clips) == m["fixture_document"]["film_clips"] and len(clips) >= 2,
+          len(clips))
+    after = (_sha(_read(path)), os.stat(path).st_mtime, os.stat(path).st_size)
+    check("live_document.source_unchanged", before == after)
+    shutil.rmtree(work)
 
 
 def static_fixtures():
@@ -1002,6 +1108,11 @@ def main():
     os.makedirs(FIXTURE_ROOT)
     static_pins()
     static_fixtures()
+    static_fixture_document()
+    if "--fixture-document" in args and not PY2:
+        live_fixture_document(args["--fixture-document"], args["--dmxconvert"])
+    else:
+        print("(live fixture-document check not run: pass --fixture-document=<path> --dmxconvert=<path> under Python 3)")
     static_probe()
     reader_formats()
     reader_files()
