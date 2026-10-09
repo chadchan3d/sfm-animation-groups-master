@@ -1,12 +1,14 @@
 # Pre-K CPM UI polish pass — design and implementation evidence
 
-**Status: refined candidate IMPLEMENTED — offline qualification PASS (2026-10-09).** This is a
-presentation-only pass. The current candidate is **`7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36`**
-(§0). It **supersedes** the first visual candidate `5c6e2789…`; §1–§4 are kept unchanged as that
-candidate's record.
+**Status: LIVE VERIFIED / PASS (2026-10-09; attempt U2).** The refined candidate
+**`7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36`** is installed. It is **the
+exact CPM build eligible to enter K**. **K: NOT STARTED** (needs separate authorization). L: not
+started.
 
-The refined candidate is **not deployed**, **not real-SFM verified** and **not K-qualified**. K and L
-have not started.
+This is a presentation-only pass. `7e4686d7…` **supersedes** the first visual candidate `5c6e2789…`;
+§1–§4 are kept unchanged as that candidate's record. Item 8's functional qualification of
+`bfba4d3a…` is unchanged. The UI pass is byte-bounded against it: only declared presentation edits
+differ.
 
 ## 0. Final visual refinement (current candidate `7e4686d7…`)
 
@@ -71,18 +73,37 @@ Sensitivity:
   paragraphs, and every palette check;
 - a vivid-hover mutation is rejected by the palette and hover checks.
 
-### 0.3 Live state (U1)
+### 0.3 Live checks (U1, U2)
 
-Under the owner's live-check authorization, `5c6e2789…` was deployed with SFM closed:
-- verified backup of `bfba4d3a…`;
-- Scripts difference = the app line only;
-- live authority exact G1 unchanged.
+Each attempt was deployed with SFM closed. Its evidence folder holds the deployment record,
+backups, Scripts inventories, the CPM-log excerpt, the disposition and `SHA256SUMS.txt`. These local
+attempt folders are not committed, because the logs contain workstation paths. Each deployment was
+verified the same way:
+- the Scripts difference was exactly the private-app line, so the launcher, adapter, projection,
+  shared package, Normalizer and sidecar reader were unchanged;
+- the live authority stayed exact G1 (Master `ac45e5c1…`, manifest `d810d648…`, one sidecar
+  `bcd97641…`).
 
-The owner viewed it in SFM, and that review produced this refinement. U1 has no formal PASS/FAIL
-disposition, and its evidence stays outside the repository in the local attempt folder.
+| Attempt | Build | Disposition | Observations |
+|---|---|---|---|
+| U1 | `5c6e2789…` (replacing `bfba4d3a…`; verified backup kept in U1) | **SUPERSEDED / NO QUALIFICATION VERDICT** | PID 31960, run `20261009-091854-pid31960`. Build loaded `ready`. Window shown with 2 models; Refresh once; 2 model selections. Close finalized. No errors or refusals. Owner: the role assignments were correct, but the solid fills were too loud, which led to §0. Not classified PASS or FAIL. |
+| U2 | **`7e4686d7…`** (replacing `5c6e2789…`; the U1 `bfba4d3a…` backup was verified intact) | **PASS** | The owner reviewed it hands-on in real SFM ("Looks good") and asked for a light-touch check instead of the step-by-step checklist. Log for PID 40816, run `20261009-125852-pid40816`: build `7e4686d7…` loaded `ready`, window shown, Help opened twice, close finalized, with 0 authorizations, mutations or refusals. |
 
-**The live install is still `5c6e2789…`.** This refinement did not change any installed bytes.
-Deploying `7e4686d7…` (or restoring `bfba4d3a…`) needs a separate authorization.
+The U2 log also shows two expected guard messages from code that is byte-identical to `bfba4d3a…`:
+- Refresh at launch: "No current shot." The playhead was not in a shot, so the list was empty.
+- Model Info with no model: "Choose a model first."
+
+**Not observed live in U2** (no model was selected):
+- enabled border colors;
+- the Update Preset confirmation;
+- the Review tab.
+
+These are covered by the offline real-Qt pixel and state checks of `7e4686d7…` (§0.2) and by the
+owner's hands-on use of the same layout in U1.
+
+**Disposition:** `7e4686d7…` stays installed. No qualification-only material was deployed in U1 or
+U2. If `bfba4d3a…` is ever needed, its verified backup is in the U1 attempt folder and it can also be
+restored from git (`2fe9a27`).
 
 ---
 
