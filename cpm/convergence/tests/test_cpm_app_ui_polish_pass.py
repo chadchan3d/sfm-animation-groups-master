@@ -38,30 +38,34 @@ _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_THIS_DIR, os.pardir, os.pardir, os.pardir))
 APP_PATH = os.environ.get("CPM_TEST_APP_PATH") or os.path.join(_REPO_ROOT, "cpm", "app", "SFM_Character_Preset_Manager.py")
 REFERENCE_SHA256 = "bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5"  # item 8 COMPLETE / PASS
-CANDIDATE_SHA256 = "5c6e27895920f27100f0692ef3a5565888463d5da453f3c9303ebb67c766b58e"
+CANDIDATE_SHA256 = "7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36"
+# Superseded first visual candidate (solid role fills, "Choose a character" heading); kept for the record.
+SUPERSEDED_CANDIDATE_SHA256 = "5c6e27895920f27100f0692ef3a5565888463d5da453f3c9303ebb67c766b58e"
 ICON_PNG_SHA256 = "65cd4fb31059652537b7e4146c4a5c02e82d00104bb3d0d41d70034e80b21185"  # 64x64 RGBA
-HELPER_TEXT_SHA256 = "bcd6b49a199312795b389d573774adc38c103ebbd7cb788af7e67955eb4996d9"  # palette + helper, as inserted
+HELPER_TEXT_SHA256 = "6df2c300a11f444f4f6b63901ff946ce3f7a18dc1cdb8f04598a8d1cf6e64623"  # palette + helper, as inserted
 ICON_SOURCE_SHA256 ="c466919c137128d081e652d5c6b3e4404a8f463f14cc23b100cc35d380014c0d"  # owner-supplied 1254x1254
 PY2 = sys.version_info[0] == 2
 _TEXT = unicode if PY2 else str  # noqa: F821
 RESULTS = []
 
 # --- Approved presentation ------------------------------------------------------
-HELP_HEADING = u"Choose a character"
+HELP_HEADING = u"Getting started"
 HELP_CHARACTER = (u"Choose the character you want to edit. Body Presets and Expressions change that character. "
-                  u"In Clothing Fit, choose clothing or accessories to fit to that character.")
+                  u"In Clothing Fit, choose clothing or accessories to fit to it.")
 HELP_PLAYHEAD = (u"CPM lists models from the shot under the playhead. To work in another shot, move the playhead "
-                 u"into that shot, click Refresh Model List, then choose the character you want to edit.")
+                 u"there, click Refresh Model List, then choose your character.")
 UPDATE_COPY = u"The preset's current values will be overwritten."
 CLEAR_STATUS_TAIL = u"Click Clear Classification, then choose a new classification under Needs review."
+# Restrained accents: neutral fill and text; the role is carried by the border.
 PALETTES = {
-    u"primary": {"background": "#2f76b5", "border": "#4b8fc7", "color": "#ffffff",
-                 "hover": "#377fbd", "hover_border": "#5a9bd0", "pressed": "#28679d"},
-    u"favorite": {"background": "#54472a", "border": "#8c7442", "color": "#f3e3b5",
-                  "hover": "#5f5030", "hover_border": "#a3874d", "pressed": "#483c24"},
-    u"destructive": {"background": "#583434", "border": "#875050", "color": "#f4dede",
-                     "hover": "#643a3a", "hover_border": "#9c5c5c", "pressed": "#4a2c2c"},
+    u"primary": {"background": "#494949", "border": "#4f7594", "color": "#d8d8d8",
+                 "hover": "#515151", "hover_border": "#5b88ad", "pressed": "#3e4247"},
+    u"favorite": {"background": "#494949", "border": "#806d43", "color": "#d8d8d8",
+                  "hover": "#515151", "hover_border": "#947d4b", "pressed": "#45423c"},
+    u"destructive": {"background": "#494949", "border": "#7a4d4d", "color": "#d8d8d8",
+                     "hover": "#515151", "hover_border": "#8d5959", "pressed": "#463e3e"},
 }
+NEUTRAL_FILL, NEUTRAL_BORDER, NEUTRAL_PRESSED = "#494949", "#5b5b5b", "#414141"
 DISABLED = ("#393939", "#858585", "#484848")  # neutral disabled background / text / border
 ROLES = sorted([("apply_body", u"primary"), ("apply_expr", u"primary"), ("fit_button", u"primary"),
                 ("favorite_body", u"favorite"), ("favorite_expr", u"favorite"),
@@ -355,7 +359,9 @@ def section_wording(cs):
             html = ast.literal_eval(node.args[0])
     plain = re.sub(u"\\s+", u" ", re.sub(u"<[^>]+>", u" ", re.sub(u"<style>.*?</style>", u"", html or u"", flags=re.S)))
     plain = plain.replace(u" ,", u",")
-    check("help.character_heading_first", html is not None and html.index(u"<h3>") == html.index(u"<h3>" + HELP_HEADING))
+    check("help.getting_started_heading_first", html is not None and HELP_HEADING == u"Getting started"
+          and 0 <= html.find(u"<h3>") == html.find(u"<h3>Getting started</h3>")
+          and u"<h3>Choose a character</h3>" not in html)
     check("help.character_paragraph", HELP_CHARACTER in plain, plain[:400])
     check("help.playhead_paragraph", re.sub(u"\\s+", u" ", HELP_PLAYHEAD) in plain, plain[:600])
     check("help.clear_classification", u"click <b>Clear Classification</b>" in (html or u"")
@@ -384,8 +390,28 @@ def section_roles(cs, ref_raw):
             palettes = ast.literal_eval(node.value)
     check("roles.palette_values_pinned", palettes == PALETTES, palettes)
     main_btn = cs.top_text("tool_apply_main_action_button")
-    check("roles.primary_reuses_existing_blue", PALETTES[u"primary"]["background"] in cs.top_text("tool_apply_primary_button"))
-    check("roles.favorite_related_to_existing_gold", u"#d6ad4b" in cs.top_text("tool_favorite_star_icon"))
+
+    def rgb(h):
+        return [int(h[i:i + 2], 16) for i in (1, 3, 5)]
+
+    def spread(h):
+        return max(rgb(h)) - min(rgb(h))
+    check("roles.normal_fill_is_neutral", all(p["background"] == NEUTRAL_FILL and p["color"] == "#d8d8d8"
+                                              for p in palettes.values()) and NEUTRAL_FILL in main_btn)
+    borders = [palettes[r]["border"] for r in (u"primary", u"favorite", u"destructive")]
+    check("roles.border_accents_distinguish_roles", len(set(borders)) == 3 and NEUTRAL_BORDER not in borders
+          and rgb(borders[0])[2] > rgb(borders[0])[0]            # blue cast
+          and rgb(borders[1])[0] > rgb(borders[1])[2]            # warm cast
+          and rgb(borders[2])[0] > max(rgb(borders[2])[1:]),     # red cast
+          borders)
+    check("roles.hover_restrained", all(p["hover"] == "#515151" and spread(p["hover"]) == 0
+                                        and spread(p["hover_border"]) >= spread(p["border"]) for p in palettes.values()))
+    check("roles.pressed_restrained", all(spread(p["pressed"]) <= 12
+                                          and abs(sum(rgb(p["pressed"])) - sum(rgb(NEUTRAL_PRESSED))) <= 30
+                                          for p in palettes.values()),
+          [p["pressed"] for p in palettes.values()])
+    check("roles.no_colored_text_or_solid_fill", all(spread(p["background"]) == 0 and spread(p["color"]) == 0
+                                                     for p in palettes.values()))
     helper = cs.top_text("tool_apply_semantic_action_button")
     disabled_block = u"QPushButton:disabled {\n            background-color: #393939;\n            color: #858585;\n            border: 1px solid #484848;\n        }"
     check("roles.disabled_is_neutral_disabled", disabled_block in helper and disabled_block in main_btn)
@@ -451,7 +477,8 @@ def scenario_window(env, real):
             window.tabs.setCurrentWidget(tab)
         env.settle()
         image = QtGui.QPixmap.grabWidget(button).toImage()
-        return QtGui.QColor(image.pixel(3, image.height() // 2)).name()
+        y = image.height() // 2
+        return [QtGui.QColor(image.pixel(3, y)).name(), QtGui.QColor(image.pixel(0, y)).name()]
     colors = {}
     for name in [r[0] for r in ROLES] + ["save_body", "update_body", "info_body", "refresh", "details"]:
         button = getattr(window, name)
@@ -461,7 +488,9 @@ def scenario_window(env, real):
         button.setEnabled(True)
         enabled = sample(button)
         button.setEnabled(was)
-        colors[name] = {"disabled": _TEXT(disabled), "enabled": _TEXT(enabled), "sheet": _TEXT(button.styleSheet())}
+        colors[name] = {"disabled": _TEXT(disabled[0]), "enabled": _TEXT(enabled[0]),
+                        "disabled_border": _TEXT(disabled[1]), "enabled_border": _TEXT(enabled[1]),
+                        "sheet": _TEXT(button.styleSheet())}
     out["colors"] = colors
     if window.tabs.indexOf(window.review_page) < 0:
         window.tabs.addTab(window.review_page, "Review")
@@ -544,8 +573,10 @@ def section_window_runtime(reference):
         colors = c.get("colors") or {}
         for name, role in ROLES:
             col = colors.get(name, {})
-            check("real.role.%s.%s_enabled" % (name, role), col.get("enabled") == PALETTES[role]["background"], col)
-            check("real.role.%s.disabled_neutral" % name, col.get("disabled") == DISABLED[0], col)
+            check("real.role.%s.%s_enabled_neutral_fill_role_border" % (name, role),
+                  col.get("enabled") == NEUTRAL_FILL and col.get("enabled_border") == PALETTES[role]["border"], col)
+            check("real.role.%s.disabled_neutral" % name, col.get("disabled") == DISABLED[0]
+                  and col.get("disabled_border") == DISABLED[2], col)
         for name in ("save_body", "update_body", "info_body"):
             col, rcol = colors.get(name, {}), (r.get("colors") or {}).get(name, {})
             check("real.neutral.%s_unchanged" % name, col and col == rcol and col.get("enabled") == "#494949", [col, rcol])

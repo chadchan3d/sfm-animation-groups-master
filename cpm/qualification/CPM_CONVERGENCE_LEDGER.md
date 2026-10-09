@@ -8,19 +8,22 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**Pre-K CPM UI polish pass — IMPLEMENTED; offline qualification PASS (2026-10-09).** This is a
-presentation-only pass, so it produces a **new candidate**:
-`5c6e27895920f27100f0692ef3a5565888463d5da453f3c9303ebb67c766b58e`.
-- The new candidate is **not deployed**, **not real-SFM verified** and **not yet K-qualified**.
+**Pre-K CPM UI polish pass — refined candidate IMPLEMENTED; offline qualification PASS
+(2026-10-09).** Current candidate:
+**`7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36`**.
+- It is **not deployed**, **not real-SFM verified** and **not yet K-qualified**.
+- It supersedes the first visual candidate `5c6e2789…`, whose record and outputs are retained
+  unchanged.
 - Item 8 qualified `bfba4d3a…` only. That evidence is unchanged and does not transfer.
-- `bfba4d3a…` remains the installed app.
 - **K: NOT STARTED.** L: not started.
 
 The pass makes eight presentation changes:
 1. the owner-supplied woman icon, embedded at 64×64;
 2. **Character Model:** and "Choose a character model" (Refresh Model List unchanged);
-3. Help explains the character and the playhead workflow;
-4. semantic button colors: blue Apply/Fit, gold Favorite, red Delete, with neutral disabled states;
+3. Help opens with **Getting started**: the character and the playhead workflow;
+4. semantic buttons: blue Apply/Fit, gold Favorite, red Delete. In the refinement these are
+   **neutral fills with restrained role-colored borders**, and every role uses the neutral disabled
+   state;
 5. window 580×800, minimum 540×650 (the four tabs fit);
 6. Update confirmation copy, with no question icon;
 7. Review buttons in a 2×2 grid;
@@ -28,14 +31,24 @@ The pass makes eight presentation changes:
 
 No scope, authority, lifecycle, preset, Fit, generation or Normalizer behavior changed.
 
-Offline results:
+Offline results for `7e4686d7…`:
 - all existing convergence/R14/R15 suites PASS under 2.7.5 (real Qt) and 3.10;
-- the new `test_cpm_app_ui_polish_pass.py` passes **96/96** (2.7.5) and **61/61** (3.10). It
-  reconstructs the candidate byte-for-byte from `bfba4d3a…` plus the declared edits.
+- `test_cpm_app_ui_polish_pass.py` passes **99/99** (2.7.5) and **64/64** (3.10), including byte
+  reconstruction from `bfba4d3a…` and real-Qt pixel checks of fills, borders and disabled states.
 
-The exact-build historical tests (item 6, item 7 reconstruction, item-8 probe/driver) correctly refuse
-the new bytes and were not edited. Record: `cpm/qualification/PRE_K_UI_POLISH_PASS.md`; outputs in
-`pre_k_ui_polish_outputs/`.
+(First candidate `5c6e2789…`: 96/96 and 61/61.)
+
+The exact-build historical tests (item 6, item 7 reconstruction, item-8 probe/driver) refuse the new
+bytes by design and were not edited. Record: `cpm/qualification/PRE_K_UI_POLISH_PASS.md`; outputs
+in `pre_k_ui_polish_outputs_r2/` (first candidate: `pre_k_ui_polish_outputs/`).
+
+**Live state (U1):** under the live-check authorization, `5c6e2789…` was deployed with SFM closed:
+- verified backup of `bfba4d3a…`;
+- Scripts difference = the app line only;
+- authority exact G1.
+
+The owner's viewing led to this refinement. U1 has no formal disposition. **Installed app:
+`5c6e2789…`.** Deploying `7e4686d7…`, or restoring `bfba4d3a…`, needs separate authorization.
 
 Previous milestone: **§22 item 8 — COMPLETE / PASS** (qualifies `bfba4d3a…` only; unchanged). Exact candidate
 `bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5` was qualified in one fresh
@@ -54,7 +67,7 @@ deployment were removed. **The exact qualified candidate remains installed.** No
 blocker was found. **CPM is eligible to enter K; K and L have not started. K, if later authorized,
 must begin in a fresh SFM process.** This checkpoint does not decide L's final installation layout.
 (After the UI pass, K entry also awaits the focused live presentation check and promotion decision for
-`5c6e2789…`.)
+the refined UI candidate `7e4686d7…`.)
 
 - **Attempt `I8A1` (2026-10-08, from `d4ad3cf`):**
   - one SFM process, PID 36912;
@@ -121,8 +134,8 @@ Sessions 1–4 remain complete (evidence for app `9a78fc96…`). R15 and R14 rem
 `cpm/baseline` or the adapter/projection). Items 6 and 7 changed only the mutable app
 (`9a78fc96…` → `1e866871…` → `bfba4d3a…`); the launcher, baseline, adapter/projection, shared
 package, Normalizer, Master and sidecars are unchanged. Item 8 (real SFM) changed no repository
-product file. The pre-K UI polish pass changed only presentation in the app (`bfba4d3a…` →
-`5c6e2789…`).
+product file. The pre-K UI polish pass changed only presentation in the app (`bfba4d3a…` → `5c6e2789…`, refined to
+`7e4686d7…`).
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -144,12 +157,15 @@ The live authority is exact production G1 after Session 4: Master `ac45e5c1…`,
 item-8 `I8-Preflight`/disposition on 2026-10-08; the shared package's qualification-only
 `projections.py` is intentionally not deployed):
 - launcher `996ca483…` as the Scripts-menu entry;
-- private app **`bfba4d3a…`** (item-8 qualified candidate; PASS disposition 2026-10-08) in
+- private app **`bfba4d3a…`** (item-8 qualified candidate; PASS disposition 2026-10-08; replaced
+  live by `5c6e2789…` for U1, see the live note below) in
   `usermod/scripts/ChadChan3D_CPM/` (outside `scripts/sfm`, no `__init__.py`);
 - probe v3 `ce4ace98…`.
 
-The repository candidate `5c6e2789…` (pre-K UI polish pass) is **not deployed**. The previous
-app `9a78fc96…` remains restorable from git (`9d405c8`). The item-8 probe and campaign
+**Live note (U1, 2026-10-09):** the installed private app is currently the superseded first UI
+candidate `5c6e2789…` (verified backup of `bfba4d3a…` kept with the U1 attempt). The repository
+candidate `7e4686d7…` is **not deployed**. The previous app `9a78fc96…` remains restorable from git
+(`9d405c8`). The item-8 probe and campaign
 pointer are not deployed. The Scripts deployment equals the accepted Session 4 inventory
 (`cefc2b88…`) except the private-app line (final `be663eb8…`). The live authority is exact
 production G1. Any later deployment change follows the R15 restart rule.
@@ -350,11 +366,13 @@ Evidence:
     **COMPLETE / PASS** (`I8A1`, 2026-10-08; candidate `bfba4d3a…` real-SFM qualified and
     installed).
 
-  - Pre-K CPM UI polish pass: **IMPLEMENTED — offline qualification PASS** (candidate
-    `5c6e2789…`; not deployed; not real-SFM verified; not K-qualified).
+  - Pre-K CPM UI polish pass: **refined candidate IMPLEMENTED — offline qualification PASS**
+    (`7e4686d7…`; not deployed; not real-SFM verified; not K-qualified). It supersedes `5c6e2789…`,
+    which is live from U1 without a disposition.
 
   **Before K:** the next separate authorization decides two things:
-  - a focused live presentation sanity check of `5c6e2789…`, in a fresh SFM process;
+  - deployment and a focused live presentation sanity check of `7e4686d7…`, in a fresh SFM
+    process (or restoration of `bfba4d3a…`);
   - its promotion into K.
 
   K and L have not started. K requires its own authorization and must begin in a fresh SFM process.
@@ -370,9 +388,14 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. The pre-K UI polish pass is implemented and qualified offline. The next separate authorization
-decides the focused live presentation sanity check of `5c6e2789…` (deployment under the R15 restart
-rule, fresh SFM process) and its promotion into K. K and L have not begun.
+Stop. The refined pre-K UI candidate `7e4686d7…` is implemented and qualified offline. The next
+separate authorization decides three things:
+- disposition of the live U1 state (`5c6e2789…` installed);
+- deployment and a focused live presentation check of `7e4686d7…` (R15 restart rule, fresh SFM
+  process);
+- its promotion into K.
+
+K and L have not begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

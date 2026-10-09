@@ -1,0 +1,215 @@
+Interpreter: 3.10.6
+Phase: publish
+[PASS] publish.g1
+[PASS] publish.g2
+[PASS] publish.corrupt_source
+[PASS] publish.corrupt_fixture_artifact
+[PASS] oracle.g18an_sha256_pinned
+[PASS] oracle.g18an_range_pinned.u
+[PASS] oracle.g18an_range_pinned.provider_constants
+[PASS] oracle.g18an_range_pinned.status_constants
+[PASS] oracle.g18an_range_pinned.g18an_normalize_sidecar_path
+[PASS] oracle.g18an_range_pinned._answer_from_result
+[PASS] oracle.g18an_range_pinned.p01_is_face_path
+[PASS] oracle.g18an_range_pinned.body_morphs_constant
+[PASS] oracle.g18an_range_pinned.semantic_is_body_morph_path
+[PASS] oracle.g18an_range_pinned.semantic_snapshot_from_live_vocabulary
+[PASS] oracle.g18an_range_pinned.semantic_snapshot_signature
+[PASS] oracle.g18an_range_pinned.semantic_snapshot_for_model_row
+[PASS] oracle.g18an_range_pinned.health_thresholds
+[PASS] oracle.g18an_range_pinned.prod_semantic_provider_health_from_descriptor
+[PASS] oracle.g18an_range_pinned.prod_pure_semantic_row
+[PASS] oracle.g18an_range_pinned.prod_provider_capture
+[PASS] oracle.g18an_range_pinned.p03_unmapped_relevant_controls
+[PASS] oracle.normalizer_sha256_pinned
+[PASS] oracle.normalizer_range_pinned
+[PASS] bootstrap.formula_equals_normalizer fixture0
+[PASS] bootstrap.formula_equals_package_bootstrap fixture0
+[PASS] bootstrap.formula_suffix fixture0
+[PASS] bootstrap.formula_equals_normalizer fixture1
+[PASS] bootstrap.formula_equals_package_bootstrap fixture1
+[PASS] bootstrap.formula_suffix fixture1
+[PASS] bootstrap.formula_equals_normalizer fixture2
+[PASS] bootstrap.formula_equals_package_bootstrap fixture2
+[PASS] bootstrap.formula_suffix fixture2
+[PASS] bootstrap.formula_equals_normalizer fixture3
+[PASS] bootstrap.formula_equals_package_bootstrap fixture3
+[PASS] bootstrap.formula_suffix fixture3
+[PASS] bootstrap.default_uses_sys_executable
+[PASS] bootstrap.canonical_broker_obtained
+[PASS] bootstrap.identity
+[PASS] bootstrap.no_second_broker
+[PASS] bootstrap.runtime_module_canonical
+[PASS] bootstrap.origin_mismatch_rejected
+[PASS] bootstrap.api_mismatch_rejected
+[PASS] bootstrap.build_mismatch_rejected
+[PASS] bootstrap.build_restored
+[PASS] bootstrap.non_canonical_module_rejected
+[PASS] bootstrap.get_broker_failure_rejected
+[PASS] bootstrap.state_restored_after_failures
+[PASS] nodev.cpm_authority_adapter.py.no_development_identifiers
+[PASS] nodev.cpm_authority_adapter.py.imports_only_canonical
+[PASS] nodev.cpm_compat_v1_projection.py.no_development_identifiers
+[PASS] nodev.cpm_compat_v1_projection.py.imports_only_canonical
+[PASS] nodev.no_g18an_module_loaded
+[PASS] descriptor.pins_current_generation
+[PASS] descriptor.provider_generation_stable_1
+[PASS] descriptor.no_whole_master_counts
+[PASS] descriptor.fields
+[PASS] descriptor.detached_text_only
+[PASS] descriptor.no_paths
+[PASS] descriptor.g18an_provider_capture_via_provider
+[PASS] descriptor.g18an_provider_capture_via_dict
+[PASS] descriptor.values_match_g18an_constants
+[PASS] facade.answers_for_every_literal
+[PASS] retention.query_many.no_outstanding_lease
+[PASS] retention.query_many.no_open_provider
+[PASS] retention.adapter_state_detached
+[PASS] facade.repeat_query_reuses_view
+[PASS] facade.repeat_query_identical
+[PASS] facade.answers_are_copies
+[PASS] retention.repeat.no_outstanding_lease
+[PASS] retention.repeat.no_open_provider
+[PASS] retention.no_view_or_lease_refers_to_adapter
+[PASS] failure.fixture_sha_is_live_generation
+[PASS] failure.control_fake_view_accepted
+[PASS] failure.revoked_authorization
+[PASS] failure.revoked_authorization.lease_released
+[PASS] failure.revoked_authorization.adapter_state_detached
+[PASS] failure.wrong_consumer
+[PASS] failure.wrong_consumer.lease_released
+[PASS] failure.wrong_consumer.adapter_state_detached
+[PASS] failure.wrong_contract
+[PASS] failure.wrong_contract.lease_released
+[PASS] failure.wrong_contract.adapter_state_detached
+[PASS] failure.omitted_coverage
+[PASS] failure.omitted_coverage.lease_released
+[PASS] failure.omitted_coverage.adapter_state_detached
+[PASS] failure.uncovered_state
+[PASS] failure.uncovered_state.lease_released
+[PASS] failure.uncovered_state.adapter_state_detached
+[PASS] failure.coverage_payload_disagree
+[PASS] failure.coverage_payload_disagree.lease_released
+[PASS] failure.coverage_payload_disagree.adapter_state_detached
+[PASS] failure.malformed_payload
+[PASS] failure.malformed_payload.lease_released
+[PASS] failure.malformed_payload.adapter_state_detached
+[PASS] failure.interpretation_failure
+[PASS] failure.interpretation_failure.lease_released
+[PASS] failure.interpretation_failure.adapter_state_detached
+[PASS] failure.view_generation_differs
+[PASS] failure.view_generation_differs.lease_released
+[PASS] failure.view_generation_differs.adapter_state_detached
+[PASS] failure.view_missing
+[PASS] failure.lease_refused
+[PASS] retention.lease_refused.no_outstanding_lease
+[PASS] retention.lease_refused.no_open_provider
+[PASS] failure.lease_release_failure
+[PASS] failure.lease_release_failure.durably_registered
+[PASS] failure.lease_release_failure.reconciled
+[PASS] retention.after_release_reconcile.no_outstanding_lease
+[PASS] retention.after_release_reconcile.no_open_provider
+[PASS] retention.failure_traceback_holds_no_view_or_lease
+[PASS] retention.failure_has_no_exception_context
+[PASS] failure.invalid_authority_rejected
+[PASS] failure.invalid_authority_reason
+[PASS] retention.invalid_authority.no_outstanding_lease
+[PASS] retention.invalid_authority.no_open_provider
+[PASS] failure.unreadable_master_rejected
+[PASS] health.small_valid_master_healthy
+[PASS] health.reason
+[PASS] health.small_master_below_legacy_thresholds
+[PASS] health.legacy_gate_would_reject_same_master
+[PASS] health.legacy_gate_not_applicable_to_adapter_descriptor
+[PASS] health.advisory_counts
+[PASS] health.many_unrecognized_is_advisory_only
+[PASS] health.healthy_master_unknown_is_genuine_absence
+[PASS] health.healthy_conflict_is_not_absence
+[PASS] health.invalid_authority_unavailable
+[PASS] health.uncovered_request_unavailable
+[PASS] retention.health.no_outstanding_lease
+[PASS] retention.health.no_open_provider
+[PASS] freshness.fixture_generations_differ
+[PASS] freshness.same_generation_succeeds
+[PASS] freshness.provenance_detached
+[PASS] freshness.same_generation_cache_hit
+[PASS] freshness.changed_generation_mismatch
+[PASS] freshness.pinned_query_rejects_new_generation
+[PASS] freshness.pin_not_moved_to_g2
+[PASS] freshness.new_generation_verifiable_explicitly
+[PASS] retention.freshness_g2.no_outstanding_lease
+[PASS] retention.freshness_g2.no_open_provider
+[PASS] freshness.stale_sidecar_unavailable
+[PASS] freshness.stale_sidecar_reason
+[PASS] freshness.g1_restored
+[PASS] freshness.g1_verifiable_again
+[PASS] freshness.invalid_expected_sha_rejected
+[PASS] retention.freshness.no_outstanding_lease
+[PASS] retention.freshness.no_open_provider
+[PASS] parity.g18an_rejects_conflict_results
+[PASS] parity.oracle_covers_all_literals
+[PASS] parity.answer Belly
+[PASS] parity.answer Blink
+[PASS] parity.answer Brow  Up
+[PASS] parity.answer Brow Up
+[PASS] parity.answer Ghost
+[PASS] parity.answer Hips
+[PASS] parity.answer Shirt
+[PASS] parity.answer Skirt
+[PASS] parity.answer Smile
+[PASS] parity.answer Tail
+[PASS] parity.answer WINK
+[PASS] parity.answer Wink
+[PASS] parity.answer bLiNk
+[PASS] parity.answer chest
+[PASS] parity.answer jawopen
+[PASS] parity.answer \xd1OSE
+[PASS] parity.answer \xf1ose
+[PASS] parity.snapshot_identical
+[PASS] parity.signature_identical
+      semantic_snapshot_signature (3.10.6) = 7b63cbda464d38d507141c82d1b58155fcc7a479d907ade77467f2e75db2176e
+[PASS] parity.pure_rows_identical
+[PASS] parity.counts_hand_audit
+[PASS] parity.accepted_expression
+[PASS] parity.accepted_body
+[PASS] parity.row_hand_audit Belly
+[PASS] parity.row_hand_audit Blink
+[PASS] parity.row_hand_audit Brow  Up
+[PASS] parity.row_hand_audit Brow Up
+[PASS] parity.row_hand_audit Ghost
+[PASS] parity.row_hand_audit Hips
+[PASS] parity.row_hand_audit Shirt
+[PASS] parity.row_hand_audit Skirt
+[PASS] parity.row_hand_audit Smile
+[PASS] parity.row_hand_audit Tail
+[PASS] parity.row_hand_audit WINK
+[PASS] parity.row_hand_audit Wink
+[PASS] parity.row_hand_audit bLiNk
+[PASS] parity.row_hand_audit chest
+[PASS] parity.row_hand_audit jawopen
+[PASS] parity.row_hand_audit \xd1OSE
+[PASS] parity.row_hand_audit \xf1ose
+[PASS] parity.row_order_sorted
+[PASS] parity.ambiguity_and_shapes
+[PASS] parity.spellings_destinations
+[PASS] parity.duplicate_occurrences_counted
+[PASS] parity.input_order_independent
+[PASS] parity.occurrence_count_not_in_signature
+[PASS] parity.signature_detects_match_kind_change
+[PASS] parity.signature_detects_spelling_order_change
+[PASS] parity.g18an_snapshot_for_model_row_accepts_adapter
+[PASS] parity.g18an_snapshot_for_model_row_descriptor
+[PASS] parity.oracle_harness_blocks_global_provider
+[PASS] retention.snapshot_for_model_row.no_outstanding_lease
+[PASS] retention.snapshot_for_model_row.no_open_provider
+[PASS] parity.reuse_no_provider_open
+[PASS] parity.reuse_snapshot_signature_matches_oracle
+[PASS] parity.fit_warning_matches_oracle
+[PASS] parity.fit_warning_hand_audit
+[PASS] retention.fit_warning.no_outstanding_lease
+[PASS] retention.fit_warning.no_open_provider
+[PASS] retention.suite_end.no_outstanding_lease
+[PASS] retention.suite_end.no_open_provider
+digest: digest_py3.json sha256=02cf2200a5528f876ded9d3b78087cfeabaf9c15aee7f10fdca846e8a9f4001f checks=205
+
+RESULT: 205/205 ALL PASS

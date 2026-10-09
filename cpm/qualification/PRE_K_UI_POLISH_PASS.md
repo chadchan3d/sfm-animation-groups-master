@@ -1,8 +1,92 @@
 # Pre-K CPM UI polish pass — design and implementation evidence
 
-**Status: IMPLEMENTED — offline qualification PASS (2026-10-09).** This is a presentation-only pass
-and produces a **new candidate** that is **not deployed**, **not real-SFM verified** and **not
-K-qualified**. K and L have not started.
+**Status: refined candidate IMPLEMENTED — offline qualification PASS (2026-10-09).** This is a
+presentation-only pass. The current candidate is **`7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36`**
+(§0). It **supersedes** the first visual candidate `5c6e2789…`; §1–§4 are kept unchanged as that
+candidate's record.
+
+The refined candidate is **not deployed**, **not real-SFM verified** and **not K-qualified**. K and L
+have not started.
+
+## 0. Final visual refinement (current candidate `7e4686d7…`)
+
+The owner viewed `5c6e2789…` in real SFM during live check U1 (§0.3). The semantic assignments were
+correct, but the solid blue/gold/red fills were too loud for SFM's subdued dark interface. This
+bounded refinement changes only two things in `cpm/app/SFM_Character_Preset_Manager.py`:
+- the Help opening (in `ProdWindow.open_help`);
+- the values of `PROD_ACTION_BUTTON_PALETTES`, with its comment.
+
+The helper function, role assignments, layout, wording elsewhere, icon, dimensions and all behavior
+are unchanged. Diff against `5c6e2789…`: 25 lines added, 23 removed.
+
+The principle is that layout establishes hierarchy and color only reinforces meaning.
+
+**Help.** The first heading is now **Getting started**, followed by:
+- "Choose the character you want to edit. Body Presets and Expressions change that character. In
+  Clothing Fit, choose clothing or accessories to fit to it."
+- "CPM lists models from the shot under the playhead. To work in another shot, move the playhead
+  there, click **Refresh Model List**, then choose your character."
+
+### 0.1 Final semantic palette
+
+Normal fill and text are neutral; the border carries the role.
+
+| Role (buttons unchanged) | Normal bg / text | Border | Hover bg / border | Pressed | Disabled |
+|---|---|---|---|---|---|
+| primary — Apply Preset (Body, Expressions), Fit Selected to Model | `#494949` / `#d8d8d8` | `#4f7594` | `#515151` / `#5b88ad` | `#3e4247` (subtle blue cast) | `#393939` bg, `#858585` text, `#484848` border |
+| favorite — Add/Remove Favorite (Body, Expressions) | `#494949` / `#d8d8d8` | `#806d43` | `#515151` / `#947d4b` | `#45423c` (subtle warm cast) | same |
+| destructive — Delete Preset (Body, Expressions) | `#494949` / `#d8d8d8` | `#7a4d4d` | `#515151` / `#8d5959` | `#463e3e` (subtle red cast) | same |
+| neutral — every other button (unchanged) | `#494949` / theme | `#5b5b5b` | `#535353` / `#666666` | `#414141` | same |
+
+No colored text and no saturated fill in any state. Disabled semantic buttons are identical to
+disabled neutral buttons.
+
+### 0.2 Offline qualification of `7e4686d7…`
+
+The commands and interpreters are the same as in §3. Outputs are in `pre_k_ui_polish_outputs_r2/`.
+The first candidate's outputs in `pre_k_ui_polish_outputs/` are unchanged.
+
+| Suite | Result |
+|---|---|
+| projection · adapter · canonical route · operation context · Clothing Fit · convergence gates | 196/196·196/196·3/3 · 205/205·205/205·3/3 · 85/85·85/85·3/3 · 108/108·108/108·3/3 · 95/95·95/95·3/3 · 152/152·152/152·3/3 |
+| R14 · R15 | 2.7.5 18/18 · 3.10 15/15 · 2.7.5 345/345 · 3.10 188/188 |
+| `test_cpm_app_ui_polish_pass.py` | **2.7.5 99/99 (real Qt + model) · 3.10 64/64 (model)** |
+
+Test updates:
+- new pins: candidate `7e4686d7…` and helper text `6df2c300…`; the superseded `5c6e2789…` is
+  recorded in the test;
+- exact **Getting started** heading first, and the approved opening wording;
+- new palette checks: neutral fill and text for every role, border accents distinct with
+  blue/warm/red casts, hover neutral `#515151` with a stronger border, pressed near-neutral (channel
+  spread ≤ 12), no colored text or solid fill;
+- **real-Qt pixels:** every semantic button renders the neutral fill `#494949` with its role border
+  when enabled, and `#393939` with border `#484848` when disabled. Neutral buttons render the same
+  as the reference.
+
+The byte reconstruction from `bfba4d3a…` still proves that nothing else changed. The canonical-route
+bounded sets are unchanged, because the same names are touched.
+
+Sensitivity:
+- the superseded `5c6e2789…` is rejected on 11 checks: pins, reconstruction, the Help heading and
+  paragraphs, and every palette check;
+- a vivid-hover mutation is rejected by the palette and hover checks.
+
+### 0.3 Live state (U1)
+
+Under the owner's live-check authorization, `5c6e2789…` was deployed with SFM closed:
+- verified backup of `bfba4d3a…`;
+- Scripts difference = the app line only;
+- live authority exact G1 unchanged.
+
+The owner viewed it in SFM, and that review produced this refinement. U1 has no formal PASS/FAIL
+disposition, and its evidence stays outside the repository in the local attempt folder.
+
+**The live install is still `5c6e2789…`.** This refinement did not change any installed bytes.
+Deploying `7e4686d7…` (or restoring `bfba4d3a…`) needs a separate authorization.
+
+---
+
+## First visual candidate `5c6e2789…` (superseded; record unchanged below)
 
 | Item | Value |
 |---|---|

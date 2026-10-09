@@ -10265,32 +10265,34 @@ def tool_apply_secondary_action_button(
 
 # Action colors mean the same thing everywhere in CPM: blue is the primary
 # action, gold is Favorite, red is destructive. Every other action stays
-# neutral. Disabled colored buttons use the neutral disabled treatment so they
-# never look available.
+# neutral. Layout establishes hierarchy; color only reinforces meaning, so
+# semantic buttons keep the neutral fill and carry the role in the border.
+# Disabled semantic buttons use the neutral disabled treatment so they never
+# look available.
 PROD_ACTION_BUTTON_PALETTES = {
     u"primary": {
-        "background": "#2f76b5",
-        "border": "#4b8fc7",
-        "color": "#ffffff",
-        "hover": "#377fbd",
-        "hover_border": "#5a9bd0",
-        "pressed": "#28679d",
+        "background": "#494949",
+        "border": "#4f7594",
+        "color": "#d8d8d8",
+        "hover": "#515151",
+        "hover_border": "#5b88ad",
+        "pressed": "#3e4247",
     },
     u"favorite": {
-        "background": "#54472a",
-        "border": "#8c7442",
-        "color": "#f3e3b5",
-        "hover": "#5f5030",
-        "hover_border": "#a3874d",
-        "pressed": "#483c24",
+        "background": "#494949",
+        "border": "#806d43",
+        "color": "#d8d8d8",
+        "hover": "#515151",
+        "hover_border": "#947d4b",
+        "pressed": "#45423c",
     },
     u"destructive": {
-        "background": "#583434",
-        "border": "#875050",
-        "color": "#f4dede",
-        "hover": "#643a3a",
-        "hover_border": "#9c5c5c",
-        "pressed": "#4a2c2c",
+        "background": "#494949",
+        "border": "#7a4d4d",
+        "color": "#d8d8d8",
+        "hover": "#515151",
+        "hover_border": "#8d5959",
+        "pressed": "#463e3e",
     },
 }
 
@@ -32067,9 +32069,9 @@ class ProdWindow(QtGui.QDialog):
                     h3 { color: #7c8f9c; margin-top: 12px; margin-bottom: 3px; }
                     p  { margin-top: 0px; margin-bottom: 9px; }
                 </style>
-                <h3>Choose a character</h3>
-                <p>Choose the character you want to edit. Body Presets and Expressions change that character. In Clothing Fit, choose clothing or accessories to fit to that character.</p>
-                <p>CPM lists models from the shot under the playhead. To work in another shot, move the playhead into that shot, click <b>Refresh Model List</b>, then choose the character you want to edit.</p>
+                <h3>Getting started</h3>
+                <p>Choose the character you want to edit. Body Presets and Expressions change that character. In Clothing Fit, choose clothing or accessories to fit to it.</p>
+                <p>CPM lists models from the shot under the playhead. To work in another shot, move the playhead there, click <b>Refresh Model List</b>, then choose your character.</p>
 
                 <h3>Body Presets</h3>
                 <p>Save body flexes and bone scaling together as one preset. <b>Apply Preset</b> copies those saved values to the selected model.</p>
