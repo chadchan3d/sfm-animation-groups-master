@@ -1,0 +1,38 @@
+{
+    "schema":  "cpm-item8-authority-pins-v1",
+    "attempt":  "I8A1",
+    "wall_time":  "2026-10-08 13:43:34.183",
+    "G1":  {
+               "manifest_sha256":  "d810d6486305a098d4855eea15f6feea3dc7fe7f7aaf97a08415fcac8e7701d6",
+               "master_sha256":  "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93",
+               "sidecar_sha256":  "bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b"
+           },
+    "G2":  {
+               "definition":  "G1 bytes + one trailing LF; semantically identical (publisher-proven parity)",
+               "manifest_sha256":  "recorded by Phase A (manifest_sha256_after_publication)",
+               "master_sha256":  "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7",
+               "sidecar_sha256":  "cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3"
+           },
+    "candidate_app_sha256":  "bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5",
+    "previous_installed_app_sha256":  "9a78fc9692cfa3cae5f3d8443a6c95537248c348d0cd4230c7ba744d99e77900",
+    "probe_sha256":  "f503c0abaf63f891c108fd81c726b1101288a2dcf1091bf6a386388be1571257",
+    "fixture_manifest_sha256":  "40b51416fb8e742b2512dd973ade07ccd0e618a58ebd6c96e9dd62efc1afeb2b",
+    "driver_lf_sha256":  "8526c6b18464e691ca269f4d0cdefb2d8c4e52d527620e9d32ae369fe9074ec1",
+    "accepted_scripts_inventory_sha256":  "cefc2b8874c938533b5ded7c194d6a260b49b9faa1404957161cfbc65ccee922",
+    "generation_tools_lf_sha256":  {
+                                       "real_sfm_qualification/checkpoint_i_generation_replacement/I_Generation_Publisher.py":  "16121575bb003ce3927d5fa039782428b2844d0fb82641ef59dcd64eff0c072e",
+                                       "real_sfm_qualification/checkpoint_i_generation_replacement/I_Generation_Helper.py":  "1d08b0282b0904f2993fc0aa0a98f73b5260291c7f3700ca9f946e3f447fbad7",
+                                       "tools/sfm_master_sidecar/__init__.py":  "8cad865fd9954035aebb3e02d5c454228e80a095595bd9cd3746df0b357f904c",
+                                       "tools/sfm_master_sidecar/cli.py":  "9492955bafb549624216a11ddbacd22fa0fc6d53f85bb89c439f1b895249e9b5",
+                                       "tools/sfm_master_sidecar/compiler.py":  "50dd18045c30aa5258b7821bb02d4f68fc0fa88d4e2fa9a335a2972d4e3f7643",
+                                       "tools/sfm_master_sidecar/format.py":  "b401967db8d07943e9f171058a006c30f0e23eb70a7b43bb5ab950203a3c3259",
+                                       "tools/sfm_master_sidecar/generated_root.py":  "cb379a17f83f915ce2aa1e87c88134caace5019faddcecacc9e610f865890a67",
+                                       "tools/sfm_master_sidecar/manifest.py":  "edc646679e326115a4c8f3b52452476db7cf1885c5d7992ff647e5c0d90c5173",
+                                       "tools/sfm_master_sidecar/mutex_publisher.py":  "1c34aadaaee3809f8b03bf107d20bf441cab6a7a3eeb1acaccca428973246041",
+                                       "tools/sfm_master_sidecar/publisher.py":  "d9ada0c9fd7cd694355189ce0d90ab1ebb38b514bae69965524bb5748c86b0a5",
+                                       "tools/sfm_master_sidecar/reader.py":  "1b95261c52d95c306b28fc6e5e9340afa65de4ea2574ed29c2bab427d252719f",
+                                       "tools/sfm_master_sidecar/win_named_mutex.py":  "61865de9e7b723996aca3043d876b940a19416837d106bf9d89f65448b7b64be",
+                                       "tools/sfm_master_sidecar/writer.py":  "770d5beb1809e425869d12cd697e87fa741f085078589bcb982be8279f07d55d",
+                                       "tools/sfm_master_core.py":  "a76e7e4e66f6ee0b4e15f4f2d5c412dcef120240c93d4cd1dd4dd0deff9ef37b"
+                                   }
+}

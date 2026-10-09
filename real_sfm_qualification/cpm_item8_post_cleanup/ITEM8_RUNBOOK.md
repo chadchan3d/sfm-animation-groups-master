@@ -1,6 +1,9 @@
 # CPM handoff §22 item 8 — focused post-cleanup real-SFM qualification (runbook)
 
-**Status: PREPARED, NOT RUN.** No item-8 phase has been executed. The candidate is not deployed.
+**Status: EXECUTED — PASS (attempt `I8A1`, 2026-10-08; results in `ITEM8_EVIDENCE.md` §6).** The
+runbook text below is unchanged from the executed checkpoint `d4ad3cf`. The candidate `bfba4d3a…`
+remains installed per the PASS disposition. Any later real-SFM campaign needs its own authorization
+and a fresh SFM process.
 
 Authoritative design: `cpm/qualification/ITEM8_POST_CLEANUP_REAL_SFM_QUALIFICATION_DESIGN.md`
 (owner-approved). This runbook translates its six phases into exact operator steps. It changes no

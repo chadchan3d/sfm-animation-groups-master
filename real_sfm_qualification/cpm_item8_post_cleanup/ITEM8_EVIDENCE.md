@@ -1,9 +1,9 @@
 # CPM handoff §22 item 8 — focused post-cleanup real-SFM qualification (evidence)
 
-**Status: PREPARED, NOT RUN.** No item-8 attempt exists. No phase (A–F) has been executed; no SFM
-process was started for item 8; the candidate was not deployed; no G2 was published; the live Master,
-sidecars and installed deployment were not touched. This file holds the preparation record now and
-the actual results after a campaign.
+**Status: EXECUTED — PASS (attempt `I8A1`, 2026-10-08).** Phases A–F all passed in one fresh SFM
+process (PID 36912) from checkpoint `d4ad3cf`. The disposition was PASS: candidate `bfba4d3a…` remains
+installed, the qualification-only probe and pointer were removed, and the live authority is exact G1.
+§1–§5 are the preparation record; §6 holds the live results.
 
 Design: `cpm/qualification/ITEM8_POST_CLEANUP_REAL_SFM_QUALIFICATION_DESIGN.md` (owner-approved).
 Runbook: `ITEM8_RUNBOOK.md`.
@@ -72,12 +72,12 @@ checkout or archive export.
 
 | Item | Status |
 |---|---|
-| **OWNER-1** — historical full CPM builds (`sfm/mainmenu/SFM_CSP_G*`, `SFM_Character_Slider_Preset_Tool_*`) and historical package copies (`sfm/gate_r*_deploy/`) present in the accepted inventory | Open: owner disposition required before an attempt (runbook §2). The prepared tooling supports acceptance as in Sessions 1–4 (`-Owner1Recorded`); any other disposition needs a revised preparation. |
+| **OWNER-1** — historical full CPM builds (`sfm/mainmenu/SFM_CSP_G*`, `SFM_Character_Slider_Preset_Tool_*`) and historical package copies (`sfm/gate_r*_deploy/`) present in the accepted inventory | **Resolved (owner decision):** they are accepted as known inert members of the exact Session-4 baseline. They are left present and unmodified, are never invoked, and are not an authority source. This applies only if the inventory is exact. The disposition was recorded verbatim in `I8A1/operator_steps.md`, and `I8-Preflight -Owner1Recorded` proved the exact inventory (`cefc2b88…`). |
 | Fixture document | **Resolved (owner decision, 2026-10-08):** the original qualification document `testscripts.dmx` (local SFM sessions folder), SHA-256 `197e6011faae2da539d0a06ae4924288104b956348cd1c4e0ef80618f9e4e16f`, 14,245,089 bytes, serves both contexts — Krystal `shot10`, Mia `shot3`. Derivative/variant documents are not used. Recorded again live by `I8-New`. |
 | Fixture shot contents | **Resolved offline (read-only):** `shot10` holds `krystal20201`, `assaultsuitbody1`, `loinclothbra_chadfix_071` with the manifest models; `shot3` holds exactly `foxmccouldwm1` and `mia1`; 16 film clips, so a sole Selected `shot3` is a proper subset. Model checksums (not stored in session files) are confirmed live by the probe. |
-| Mia preset library folder `mia--2e6533ed1490` present; no campaign-named presets | Open: `I8-Preflight` / first inventory. |
-| Live Scripts tree still equals the accepted inventory; installed app `9a78fc96…`; live authority exact G1 | Open: `I8-Preflight` (read-only gates). |
-| Actual Fit result on the fixture (changed state; mappings/warnings) | Open: observed in Phase B (historical 34/26/7 is explanatory only). |
+| Mia preset library folder `mia--2e6533ed1490` present; no campaign-named presets | **Resolved live:** `library_00_preflight` (9 files, no campaign names). |
+| Live Scripts tree still equals the accepted inventory; installed app `9a78fc96…`; live authority exact G1 | **Resolved live:** `I8-Preflight` OK; `S2 BASELINE OK`. |
+| Actual Fit result on the fixture (changed state; mappings/warnings) | **Observed (Phase B):** stage 34 literals, committed-verified 26 mappings / 7 warnings, `changed=1 partial_changed=1 failed=0 unattempted=0`. |
 
 ## 5. Offline preparation qualification
 
@@ -157,9 +157,104 @@ rerun).
 
 ## 6. Live campaign results
 
-No attempt. (After a campaign: attempt id(s), phase verdicts with evidence references, anomalies and
-their disposition, resource interpretation, exact G1 restoration, deployment disposition, and the
-redacted raw copy under `raw/<attempt>/`.)
+### 6.1 Attempt and identities
+
+| Item | Value |
+|---|---|
+| Attempt | `I8A1` (only attempt), 2026-10-08 13:43–20:22, from checkpoint `d4ad3cf8b5c3ffe615b4ad9f4015e57f62acc16d` |
+| Verdict | **PASS** (all six phases; mechanical adjudication 34/34) |
+| SFM process | one fresh `sfm.exe`, PID **36912**, from A1 through exit at F7 |
+| Private module / `ProdWindow` class | `0x30b6b490` / `0x307ed158`, resident throughout, `PROD_R15_MODULE` build `bfba4d3a…` ×3 |
+| Run ID | `20261008-135639-pid36912` (only one) |
+| CPM windows | `0xce494350` (Phase A–B), `0x310bea30` (Phase C–E), `0x30b87418` (Phase F reopen), in that order; census never above 1 window / 1 watcher |
+| Broker | `0x310a7810` (only one); runtime origin is the installed `sfm_master_authority_productionized` menu package |
+| Fixture | `testscripts.dmx` `197e6011…`: Krystal triple on `shot10`, `mia1` on `shot3`; not saved, unchanged at exit |
+| Deployment (`I8-Deploy`, SFM closed) | installed `bfba4d3a…`, probe `f503c0ab…`, verified backup of `9a78fc96…`, pointer `I8A1`; Scripts difference exactly the two expected lines |
+| Generation | G1 Master `ac45e5c1…` → exact G2 `54413b6c…` at 19:46:45 (frozen Phase A/B) → exact G1 restored at F8 (manifest `d810d648…`, single sidecar `bcd97641…`; `exact_match: true` in the finalization record and the independent comparison) |
+
+### 6.2 Phase results
+
+| Phase | Result | Evidence (probe `seq`, log) |
+|---|---|---|
+| **A** — load, identity, reuse | **PASS** | seq 1 (before launch: module and runtime absent); the launcher loaded `bfba4d3a…` through the private loader; Krystal G1 scope healthy (26 Body / 52 Expression / 2 other, 0 unresolved/conflict); seq 2–3 identical module/class/run/window/broker; the second click gave one `PROD_R15_WINDOW_REUSED` with no acquisition, Select Model or new module |
+| **B** — Clothing Fit + Undo, close | **PASS** | authorized on G1; stage opened with 34 literals; committed-verified with 26 mappings / 7 warnings; one release `ok=True`; `CLOTHING_FIT_RESULT generation=2 … changed=1 partial_changed=1 failed=0 unattempted=0`; `G18AN_POST_FIT_ACTION_STATE` present. seq 5: only `assaultsuitbody1` changed (Breastsize, Muscles, slim); source and peer unchanged. One Undo → seq 6 equals B2 exactly. Title-bar close → `PROD_CLOSE_FINALIZED=True`; seq 7 closed-idle with the module resident |
+| **C** — shot switch, Body/Expression persistence + Undo | **PASS** | `shot3` was made current with CPM closed; `mia1` identity confirmed (seq 8). Reopen: same module/run, new window, G1 scope 46 Body / 58 Expression / 4 other (equals the offline derivation). Body Save `preset-b41e5` (`Fat` 0.5), Update (0.8000000119) and Apply all equal their readbacks; only `Fat` changed; one Undo → exactly C13. Expression Save `preset-9b778` (`SmileClosed` 0.6000000238) and Apply equal the readback; one Undo → exactly C23. Each library change stayed within the allowed footprint, and Apply/Undo wrote nothing to the library |
+| **D** — Normalizer coexistence | **PASS** | Rebuild Selected Shots on the sole Selected `shot3` with the CPM Mia scope active: `SELECTED_SHOTS` 1 [`shot3`], 2 eligible targets, REBUILD PASS, CONTEXTUALIZER PASS, `mem_ok=True` 15 / `False` 0, live Master G1, no `PROD_` lines in the Normalizer log; CPM `MODAL_YIELD_ENTER/EXIT restored=True`. The same broker served `cpm_compat_v1` and `normalizer_compat` (opens/closes 4/4, idle). Continuation without reselection: Apply committed (`Fat` back to 0.8000000119); Save `I8 I8A1 D BODY` `preset-a0b83` matched its readback; one Undo → D7; 0 refusals, 0 stale-generation events, 0 scope rebuilds since the Normalizer |
+| **E** — generation transition during a Save prompt | **PASS** | Save opened under G1 at 19:45:32; exact G2 was activated at 19:46:45 while the prompt was open, with the CPM log quiet. On confirm: `Q2_SAVE_POST_CONFIRM` → `AUTHORIZATION_REFUSED` Save Preset `generation-mismatch`; no `PROD_SAVE`; `durable_commit=None`; the "Can't save preset" dialog appeared. Only then `REBUILD_SCHEDULED` → `REBUILD` → one automatic Select Model to healthy G2 in the same window. Libraries E1 = E2 = E3 byte-identical; no `E STALE` file; scene and Undo unchanged. The deliberate G2 Save `preset-c8ac9` (`Fat` 0.3000000119) was authorized on G2, matched its readback and stayed within the footprint |
+| **F** — close/reopen, exit, restoration | **PASS** | Escape close → `PROD_CLOSE_FINALIZED=True` (seq 27 closed-idle). Reopen: same module/class/run, new window `0x30b87418`, healthy G2 scope, idle (seq 28–29). Title-bar close → seq 30 closed-idle, broker 0/0/0 (opens/closes 7/7, views 5). SFM exited with the save declined. F8: exact G1 restored; the qualification deployment (probe, pointer) was removed; the final inventory differs from the accepted one only by the app line |
+
+Across all 30 probe records:
+- same PID and no errors;
+- no acquisition caused by the probe;
+- fixture identities matched;
+- idle at every checkpoint after the broker existed (leases 0, unreleased 0, open providers 0);
+- historical providers inactive whenever the module was loaded;
+- `__main__` held no CPM names, and no other module defined CPM.
+
+CPM-log excerpt checks:
+- no historical or removed event formats (`PROD_PERF`, `ASTRA_PERF`, `PROD_ACTION_TIMING`, `CLOTHING_FIT_RESULT=PASS`);
+- every authorization before 19:46:45 was on G1 and every one after was on G2;
+- exactly one refusal;
+- exactly the four campaign Saves;
+- three committed Applies and none uncommitted;
+- every `PROD_PROVIDER_HEALTH` healthy;
+- three close requests, each finalized.
+
+### 6.3 Resources (probe-measured, same process)
+
+| Point | Private bytes (MB) | Handles | GDI | USER |
+|---|---|---|---|---|
+| seq 1 (A2, before launch) | 3,067.8 | 1,294 | 1,165 | 109 |
+| seq 7 (B8, first closed state) | 3,078.3 | 1,207 | 1,215 | 129 |
+| seq 19 (D1, before Normalizer) | 3,092.3 | 1,214 | 1,247 | 144 |
+| seq 20 (D5, after Normalizer) | 3,101.7 | 1,218 | 1,247 | 145 |
+| seq 27 (F2, closed) | 3,103.3 | 1,222 | 1,243 | 144 |
+| seq 30 (F6, final closed) | 3,103.3 | 1,224 | 1,243 | 145 |
+
+Private usage rose about 35 MB over about 6.5 hours of use. This includes about 9 MB from the
+Normalizer run, three CPM scope builds, two generations and all preset I/O. The two closed states after
+the reopen (F2, F6) are equal in private bytes, and handles, GDI and USER stayed flat between them
+(+2 / 0 / +1). Within one process this is consistent with retained SFM/document state, not a CPM leak
+per close/reopen cycle. Attribution beyond that is not claimed.
+
+### 6.4 Deviation and findings
+
+- **Deviation (procedural, no effect):** at 13:58:51, before A5, the operator ran the installed
+  Session 1 probe (`CPM_Session1_Probe`, v3 `ce4ace98…`) once. This was against runbook rule 5. Its own
+  record showed timing and harness disabled and broker `0x310a7810` counters unchanged (leases 0, open
+  0, opens/closes 1/1). Its side effects were one line in its own JSONL and helper names in `__main__`
+  (60 → 86 names; no CPM names). No acquisition and no CPM state change was observed. It was recorded
+  in `operator_steps.md` and adjudicated as no effect on any phase.
+- **Finding (K/L, user-facing):** CPM resolves its scene from the shot under the playhead
+  (`sfmApp.GetShotAtCurrentTime()`). The Normalizer uses the Clip Editor selection. Users are not told
+  about this difference. No item-8 change.
+- **Finding (K, Normalizer UX):** a successful Normalizer run gives no visible completion
+  confirmation. Recommendation: a non-blocking success notice, with modals only for failures or
+  decisions.
+- The historical menu builds and package copies (OWNER-1) stayed on disk. None was loaded or used as
+  authority: the probe's historical-provider check was inactive in every loaded record, and the log
+  had no historical formats.
+
+### 6.5 Restoration and disposition
+
+- `I8-Finalize`: `S2 RESTORED EXACT G1`. The live Master is `ac45e5c1…`, the manifest `d810d648…`
+  and the single sidecar `bcd97641…`; the G2 sidecar was removed. This was re-verified after
+  disposition.
+- `I8-RemoveQualificationDeployment`: removed the probe and the pointer.
+- `I8-Disposition I8A1 -Verdict PASS` at 20:22:02: **the candidate was retained**. The installed app is
+  `bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5`. The final Scripts inventory
+  (`be663eb8…`) differs from the accepted Session 4 inventory (`cefc2b88…`) only by the private-app
+  line (`9a78fc96…` → `bfba4d3a…`).
+- The live attempt folder was sealed with `SHA256SUMS.txt` (85 files), and the reader's
+  `verify-sums` passes.
+
+### 6.6 Raw evidence
+
+The redacted copy is under `raw/I8A1/` (82 files), with per-file original, excerpt and committed
+SHA-256 and redaction counts in `raw/MANIFEST.md`. The two cumulative CPM-log copies are excerpts
+from byte 642,260, which is `I8-Preflight`'s recorded log size. Four files are byte-identical to
+repository material and are recorded rather than copied: G1, G2, the previous app and the accepted
+inventory.
 
 ## 7. Limitations
 

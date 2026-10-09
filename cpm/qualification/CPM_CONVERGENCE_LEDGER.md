@@ -8,40 +8,61 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**§22 item 8 — PREPARED, NOT RUN.** Exact candidate `bfba4d3a…` remains pending real-SFM
-qualification. New item-8 observation tools qualified offline. Historical Sessions 1–4 unchanged.
-K/L not started.
+**§22 item 8 — COMPLETE / PASS.** Exact candidate
+`bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5` was qualified in one fresh
+real-SFM Python 2.7.5 process. The campaign covered:
+- focused post-cleanup operation;
+- persistence and native Undo;
+- ordinary Fit;
+- generation refusal and rebuild;
+- canonical idle ownership;
+- Normalizer coexistence;
+- close/reopen behavior.
 
-- Exact candidate: `bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5` (unchanged).
-  **Not deployed**; no live item-8 phase (A–F) has been executed, no SFM process was started for
-  item 8, no G2 was published, and the live Master, sidecars and installed deployment are untouched.
-- Design (owner-approved): `cpm/qualification/ITEM8_POST_CLEANUP_REAL_SFM_QUALIFICATION_DESIGN.md`
-  (`fe605188…`; workstation paths normalized to repository-relative, content unchanged).
-- Preparation (`real_sfm_qualification/cpm_item8_post_cleanup/`): `ITEM8_RUNBOOK.md`;
-  observation-only `CPM_Item8_Probe.py` `f503c0ab…`; `test_cpm_item8_probe.py` `c5e6c627…`;
-  `ITEM8_GENERATION_DRIVER.ps1` `8526c6b1…` (frozen Session 2 §2.1 block verbatim + item-8
-  deployment/evidence functions); `test_item8_generation_driver.py` `73a52296…`;
-  `ITEM8_FIXTURE_MANIFEST.json` `40b51416…`; `item8_evidence_reader.py` `a3d3bd90…`; operator
-  template; `ITEM8_EVIDENCE.md` (PREPARED, NOT RUN).
-- **Offline preparation qualification:** probe test 2.7.5 **231/231** (real PySide/Qt 4.8 + model),
-  3.10 **172/172** (model, with the live read-only fixture-document check); driver test 3.10 +
-  Windows PowerShell 5.1 **76/76** (sandbox: real G1 → exact G2 → exact G1 with the frozen tooling;
-  both disposition paths; one document for both fixture contexts).
-- **Pre-execution correction (2026-10-08) — fixture ambiguity resolved (owner decision):** the
-  original qualification document `testscripts.dmx` (local SFM sessions folder; SHA-256
-  `197e6011faae2da539d0a06ae4924288104b956348cd1c4e0ef80618f9e4e16f`, 14,245,089 bytes) serves
-  both contexts — Krystal on `shot10`, Mia on `shot3` (sole Selected shot for the Normalizer);
-  derivatives are not used. Phase C switches the already-open document from `shot10` to `shot3` with
-  CPM closed (no reopen, no save). Verified read-only via a temporary `dmxconvert` copy; the document
-  was never modified. Generation/deployment behavior unchanged (driver changed only in its manifest pin).
-- **OWNER-1:** resolved by the owner (historical menu builds and package copies accepted as inert
-  members of the exact Session-4 baseline; recorded per attempt via `-Owner1Recorded`).
-- **Remaining live preflight (checked by `I8-New`/`I8-Preflight`):** Mia library; live
-  inventory/installed app/authority.
-- Fixture identities recovered from Sessions 3–4; qualifying controls derived offline from the
-  candidate's own scope over real G1: Body `Fat`, Expression `SmileClosed` (Mia).
-- The Session 4 Fit release-path observation is carried forward unchanged (not repaired).
-- Stale-scope UI presentation and `SidecarMissing` messaging remain undecided and out of scope.
+Historical forced-rollback and queued-Fit evidence is retained with its existing qualifications.
+Exact G1 was restored. The temporary item-8 probe, campaign pointer and other qualification-only
+deployment were removed. **The exact qualified candidate remains installed.** No new convergence
+blocker was found. **CPM is eligible to enter K; K and L have not started. K, if later authorized,
+must begin in a fresh SFM process.** This checkpoint does not decide L's final installation layout.
+
+- **Attempt `I8A1` (2026-10-08, from `d4ad3cf`):**
+  - one SFM process, PID 36912;
+  - module `0x30b6b490`, class `0x307ed158`, run `20261008-135639-pid36912`;
+  - broker `0x310a7810`;
+  - windows `0xce494350` → `0x310bea30` → `0x30b87418`;
+  - fixture `testscripts.dmx` (`197e6011…`): Krystal on `shot10`, Mia on `shot3`; not saved.
+- **Phases A–F PASS.** Mechanical adjudication 34/34, from 30 probe records, the CPM-log excerpt,
+  the Normalizer log, and the generation and library records.
+  - **A — load and reuse:** `bfba4d3a…` loaded through the private loader; the second click gave
+    `PROD_R15_WINDOW_REUSED` with no acquisition.
+  - **B — Fit:** authorized on G1; 34 literals; committed-verified with 26 mappings and 7 warnings;
+    one release `ok=True`; `changed=1 partial_changed=1 failed=0 unattempted=0`. Only the target
+    changed, and Undo restored exactly.
+  - **C — persistence and Undo:** Mia scope 46/58/4. Body Save/Update/Apply and Expression
+    Save/Apply all equal their readbacks; each Undo restored exactly; library changes stayed within
+    the footprint.
+  - **D — Normalizer:** Selected `shot3` PASS/PASS, `mem_ok` True 15 / False 0. One broker served
+    both projections. Apply and Save continued without reselection, refusal or rebuild.
+  - **E — generation transition:** a Save opened under G1 and G2 was activated at 19:46:45 with the
+    prompt open. The Save was refused with `generation-mismatch`: no `PROD_SAVE`,
+    `durable_commit=None`, libraries E1 = E2 = E3. Only then did one rebuild to healthy G2 happen.
+    A deliberate G2 Save was authorized on G2.
+  - **F — close/reopen and exit:** Escape and ✕ closes finalized; the reopen kept the same
+    module/run under the G2 scope. Idle 0/0/0 at every checkpoint (broker totals: opens/closes
+    7/7, views 5).
+- **Resources:** private bytes 3,067.8 → 3,103.3 MB (about +35 MB over about 6.5 hours, including
+  about 9 MB for the Normalizer). The two closed states after the reopen were equal, with handles,
+  GDI and USER flat.
+- **Restoration and disposition:** exact G1 restored (Master `ac45e5c1…`, manifest `d810d648…`,
+  sidecar `bcd97641…`). The probe and pointer were removed. PASS disposition: the installed app is
+  `bfba4d3a…`. The final Scripts inventory differs from the accepted Session 4 inventory only by the
+  app line.
+- **OWNER-1 historical files:** present and inert; never loaded, never used as authority.
+- **Deviation (no effect):** the operator ran the installed Session 1 probe once before A5. Its
+  broker counters were unchanged and it caused no acquisition.
+- **Evidence:**
+  - `real_sfm_qualification/cpm_item8_post_cleanup/ITEM8_EVIDENCE.md` §6;
+  - redacted raw files in `raw/I8A1/` (82 files; `raw/MANIFEST.md`).
 
 Previous milestone: **§22 item 7 — COMPLETE: diagnostic/development logging reduction; offline
 qualification PASS** (candidate `bfba4d3a…`; design and evidence
@@ -68,7 +89,8 @@ Sessions 1–4 remain complete (evidence for app `9a78fc96…`). R15 and R14 rem
 `master`. Before item 6 the product was unchanged since `00d0d83` (last commit touching `cpm/app`,
 `cpm/baseline` or the adapter/projection). Items 6 and 7 changed only the mutable app
 (`9a78fc96…` → `1e866871…` → `bfba4d3a…`); the launcher, baseline, adapter/projection, shared
-package, Normalizer, Master and sidecars are unchanged.
+package, Normalizer, Master and sidecars are unchanged. Item 8 (real SFM) changed no repository
+product file.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -86,18 +108,18 @@ was removed after each campaign; the Scripts deployment equals its pre-harness b
 The live authority is exact production G1 after Session 4: Master `ac45e5c1…`, manifest
 `d810d648…`, one sidecar `bcd97641…`.
 
-**Deployed and verified** (runbook §0; re-verified against the workstation at the 2026-10-06
-transfer checkpoint, including the shared package, whose qualification-only `projections.py` is
-intentionally not deployed):
+**Deployed and verified** (runbook §0; re-verified at the 2026-10-06 transfer checkpoint and by
+item-8 `I8-Preflight`/disposition on 2026-10-08; the shared package's qualification-only
+`projections.py` is intentionally not deployed):
 - launcher `996ca483…` as the Scripts-menu entry;
-- private app `9a78fc96…` in `usermod/scripts/ChadChan3D_CPM/` (outside `scripts/sfm`, no
-  `__init__.py`);
+- private app **`bfba4d3a…`** (item-8 qualified candidate; PASS disposition 2026-10-08) in
+  `usermod/scripts/ChadChan3D_CPM/` (outside `scripts/sfm`, no `__init__.py`);
 - probe v3 `ce4ace98…`.
 
-Neither cleanup candidate (`1e866871…`, `bfba4d3a…`) is deployed; the deployed app remains the
-pre-cleanup `9a78fc96…`. Any later deployment follows the R15 restart rule; item 8 deploys only
-through `ITEM8_GENERATION_DRIVER.ps1` (`I8-Deploy`, SFM closed, verified backup, temporary sibling +
-replacement) and applies the design's PASS / FAIL-INCONCLUSIVE policy through `I8-Disposition`.
+The previous app `9a78fc96…` remains restorable from git (`9d405c8`). The item-8 probe and campaign
+pointer are not deployed. The Scripts deployment equals the accepted Session 4 inventory
+(`cefc2b88…`) except the private-app line (final `be663eb8…`). The live authority is exact
+production G1. Any later deployment change follows the R15 restart rule.
 
 The step-9 G18AN menu copy has been removed. The pre-R15 app `664a660c…` and probe v2 are archived
 outside `usermod/scripts`.
@@ -135,6 +157,7 @@ Evidence:
 | Session 3 S3_ADD: fresh Fit committing under G2 (2026-10-06) | **PASS** |
 | Session 4 S4A: forced Body Apply rollback-verification control + gate (2026-10-06) | **PASS** |
 | Session 4 S4F: forced Clothing Fit rollback-verification control + gate (2026-10-06) | **PASS** |
+| §22 item 8 `I8A1`: post-cleanup candidate `bfba4d3a…`, Phases A–F (2026-10-08) | **PASS** |
 
 - **Clothing Fit detail:**
   - `Gfit` was authorized.
@@ -245,6 +268,8 @@ Evidence:
   - stage lease outstanding (1) during rollback verification, 0 adapter calls, exactly one
     successful `release()`; target 2 never staged; nothing committed; P2–P6 0/0/0;
   - ordinary Fit committed-verified and released ok; one Undo restored it visually.
+- **§22 item 8 `I8A1` (2026-10-08, pid 36912, broker `0x310a7810`):** see Current milestone and
+  `ITEM8_EVIDENCE.md` §6. Sessions 1–4 above qualify `9a78fc96…`; `I8A1` qualifies `bfba4d3a…`.
 - **Measurements (Session 1):**
   - process working set +36 MB across the session;
   - CPM scope 107–166 KB;
@@ -280,6 +305,12 @@ Evidence:
   - The stale-scope reason is logged only, and CPM then rebuilds automatically.
 - **Product identity strings** (window slot, log name, `PROD_VERSION`) are unchanged from G18AN
   (K/L).
+- **Item-8 findings (K/L; user-facing, not failures):**
+  1. **Scene source.** CPM resolves its scene from the shot under the playhead
+     (`sfmApp.GetShotAtCurrentTime()`). The Normalizer uses the Clip Editor selection. Users are
+     not told about this difference.
+  2. **Normalizer success.** A successful Normalizer run shows no visible completion confirmation.
+     Recommendation: a non-blocking success notice, with modals only for failures or decisions.
 - **Remaining pre-K qualification:**
   - Session 2: **COMPLETE — PASS** (S2-A_R2 and S2-B_R2).
   - Session 3: **COMPLETE — PASS** (S3 CORE PASS and S3_ADD).
@@ -290,11 +321,13 @@ Evidence:
   - §22 item 7 (diagnostic/development logging reduction): **COMPLETE — offline qualification
     PASS** (candidate `bfba4d3a…`; not real-SFM qualified);
   - §22 item 8 (focused post-cleanup regression, including post-cleanup real-SFM qualification):
-    **PREPARED, NOT RUN** (OWNER-1 resolved; fixture ambiguity resolved; awaiting execution
-    authorization from the corrected checkpoint).
+    **COMPLETE / PASS** (`I8A1`, 2026-10-08; candidate `bfba4d3a…` real-SFM qualified and
+    installed).
 
-  **K, L:** not started.
-- **Session 4 notes (not failures; carried to cleanup/K; unchanged by item 7):**
+  **Pre-K qualification complete. CPM is eligible to enter K.** K and L have not started. K
+  requires its own authorization and must begin in a fresh SFM process. L's final installation
+  layout is undecided.
+- **Session 4 notes (not failures; carried to K; unchanged by items 7–8):**
   - Fit's exception path releases the stage with a bare `release()` (no
     `PROD_CPM_FIT_STAGE_RELEASED` line; result discarded); a raising success-path release could in
     theory be followed by a second `release()`. Live S4F shows exactly one successful release per
@@ -305,10 +338,9 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-On execution authorization from this corrected checkpoint: execute item 8 exactly
-per `real_sfm_qualification/cpm_item8_post_cleanup/ITEM8_RUNBOOK.md` (one fresh SFM process, Phases
-A–F), only under an explicit execution authorization; then adjudicate and apply the deployment
-policy. K and L follow only after item-8 adjudication; neither has begun.
+Stop. §22 item 8 is complete. K may begin only on a separate explicit authorization, in a fresh SFM
+process, from the then-current checkpoint. L (including the final installation layout) follows K.
+Neither has begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
