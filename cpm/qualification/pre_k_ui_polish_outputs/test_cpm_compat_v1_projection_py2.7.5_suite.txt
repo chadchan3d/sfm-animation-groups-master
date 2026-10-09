@@ -1,0 +1,202 @@
+Interpreter: 2.7.5
+Phase: suite
+[PASS] suite.fixture_present
+[PASS] oracle.g18an_sha256_pinned frozen G18AN baseline matches its pinned SHA-256
+[PASS] oracle.policy_line_pinned G18AN line 18494 defines PROD_SEMANTIC_POLICY
+[PASS] oracle.range_pinned.u
+[PASS] oracle.range_pinned.provider_constants
+[PASS] oracle.range_pinned.status_constants
+[PASS] oracle.range_pinned.p01_ascii_fold
+[PASS] oracle.range_pinned.g18an_normalize_sidecar_path
+[PASS] oracle.range_pinned._answer_from_result
+[PASS] fold.g18an_parity Blink
+[PASS] fold.adapter_parity Blink
+[PASS] fold.format_parity Blink
+[PASS] fold.is_text Blink
+[PASS] fold.g18an_parity BLINK
+[PASS] fold.adapter_parity BLINK
+[PASS] fold.format_parity BLINK
+[PASS] fold.is_text BLINK
+[PASS] fold.g18an_parity bLiNk
+[PASS] fold.adapter_parity bLiNk
+[PASS] fold.format_parity bLiNk
+[PASS] fold.is_text bLiNk
+[PASS] fold.g18an_parity ZAza
+[PASS] fold.adapter_parity ZAza
+[PASS] fold.format_parity ZAza
+[PASS] fold.is_text ZAza
+[PASS] fold.g18an_parity A_Z-09
+[PASS] fold.adapter_parity A_Z-09
+[PASS] fold.format_parity A_Z-09
+[PASS] fold.is_text A_Z-09
+[PASS] fold.g18an_parity @[`{
+[PASS] fold.adapter_parity @[`{
+[PASS] fold.format_parity @[`{
+[PASS] fold.is_text @[`{
+[PASS] fold.g18an_parity Brow Up
+[PASS] fold.adapter_parity Brow Up
+[PASS] fold.format_parity Brow Up
+[PASS] fold.is_text Brow Up
+[PASS] fold.g18an_parity Brow  Up
+[PASS] fold.adapter_parity Brow  Up
+[PASS] fold.format_parity Brow  Up
+[PASS] fold.is_text Brow  Up
+[PASS] fold.g18an_parity \tTab\n
+[PASS] fold.adapter_parity \tTab\n
+[PASS] fold.format_parity \tTab\n
+[PASS] fold.is_text \tTab\n
+[PASS] fold.g18an_parity \xd1OSE
+[PASS] fold.adapter_parity \xd1OSE
+[PASS] fold.format_parity \xd1OSE
+[PASS] fold.is_text \xd1OSE
+[PASS] fold.g18an_parity \xd1ose
+[PASS] fold.adapter_parity \xd1ose
+[PASS] fold.format_parity \xd1ose
+[PASS] fold.is_text \xd1ose
+[PASS] fold.g18an_parity \xf1ose
+[PASS] fold.adapter_parity \xf1ose
+[PASS] fold.format_parity \xf1ose
+[PASS] fold.is_text \xf1ose
+[PASS] fold.g18an_parity \xc0\xc9\xce
+[PASS] fold.adapter_parity \xc0\xc9\xce
+[PASS] fold.format_parity \xc0\xc9\xce
+[PASS] fold.is_text \xc0\xc9\xce
+[PASS] fold.g18an_parity \u0130I
+[PASS] fold.adapter_parity \u0130I
+[PASS] fold.format_parity \u0130I
+[PASS] fold.is_text \u0130I
+[PASS] fold.idempotent
+[PASS] fold.whitespace_preserved
+[PASS] fold.non_ascii_untouched
+[PASS] fold.bytes_input_decoded_utf8
+[PASS] wrapper.parity groupFile
+[PASS] wrapper.parity groupFile/Face
+[PASS] wrapper.parity groupFile/Face/Eyes
+[PASS] wrapper.parity groupFile/Body Morphs
+[PASS] wrapper.cpm_rejects_outside Face/Eyes
+[PASS] wrapper.g18an_rejects_outside Face/Eyes
+[PASS] wrapper.cpm_rejects_outside groupFileX/Face
+[PASS] wrapper.g18an_rejects_outside groupFileX/Face
+[PASS] wrapper.cpm_rejects_outside other/groupFile/Face
+[PASS] wrapper.g18an_rejects_outside other/groupFile/Face
+[PASS] explicit.hit_resolved
+[PASS] explicit.fold_conflict_conflict
+[PASS] explicit.master_unknown_absent
+[PASS] explicit.lookup_boundary_is_bytes
+[PASS] explicit.coverage_statuses
+[PASS] explicit.estimate_positive_int
+[PASS] explicit.unknown_result_type_rejected
+[PASS] explicit.hit_without_occurrences_rejected
+[PASS] explicit.conflict_without_occurrences_rejected
+[PASS] explicit.occurrence_fold_mismatch_rejected
+[PASS] explicit.hit_destination_disagrees_rejected
+[PASS] explicit.hit_spanning_two_destinations_rejected
+[PASS] explicit.conflict_single_destination_rejected
+[PASS] explicit.conflict_reported_destinations_disagree_rejected
+[PASS] explicit.path_outside_wrapper_rejected
+[PASS] explicit.empty_wrapper_rejected
+[PASS] explicit.single_family_cap_enforced
+[PASS] contract.declared_request_folds
+[PASS] contract.declared_request_scale
+[PASS] contract.valid_builder_accepted
+[PASS] contract.missing_declared_folds_rejected
+[PASS] contract.missing_declared_scale_rejected
+[PASS] contract.attributes_alone_accepted
+[PASS] contract.folds_disagree_rejected
+[PASS] contract.scale_disagrees_rejected
+[PASS] contract.unfolded_request_rejected
+[PASS] contract.unfolded_non_ascii_safe_request_rejected
+[PASS] contract.bytes_request_normalized_to_text
+[PASS] contract.request_spec_shape
+[PASS] interp.keys_match_g18an_answer_shape
+[PASS] interp.returns_copies_payload_unchanged
+[PASS] interp.uncovered_fold_raises_not_absent
+[PASS] interp.foreign_payload_rejected
+[PASS] identity.components
+[PASS] identity.deterministic
+[PASS] identity.changes_with_master_sha
+[PASS] identity.changes_with_policy
+[PASS] identity.changes_with_projection
+[PASS] identity.short_sha_rejected
+[PASS] identity.non_hex_sha_rejected
+[PASS] identity.empty_policy_rejected
+[PASS] broker.request_fold_count
+[PASS] broker.request_folds_are_text
+[PASS] broker.view_acquired
+[PASS] broker.provider_closed_after_acquire
+[PASS] broker.validate_view_passes
+[PASS] broker.cache_key_uses_text_folds
+[PASS] payload.top_level_keys
+[PASS] payload.family_keys
+[PASS] payload.no_request_spelling_fields
+[PASS] payload.no_master_sha
+[PASS] payload.families_match_hand_audit
+[PASS] coverage.keys_equal_request
+[PASS] coverage.compact_no_occurrences
+[PASS] coverage.absent_is_master_unknown
+[PASS] coverage.uncovered_request_rejected
+[PASS] coverage.wrong_consumer_kind_rejected
+[PASS] estimate.view_charged_with_estimate
+[PASS] estimate.exceeds_payload_walk
+[PASS] estimate.value
+[PASS] answer.hand_audit Blink
+[PASS] answer.hand_audit bLiNk
+[PASS] answer.hand_audit BLINK
+[PASS] answer.hand_audit Wink
+[PASS] answer.hand_audit WINK
+[PASS] answer.hand_audit wink
+[PASS] answer.hand_audit JawOpen
+[PASS] answer.hand_audit jawopen
+[PASS] answer.hand_audit Brow Up
+[PASS] answer.hand_audit brow up
+[PASS] answer.hand_audit BrowUp
+[PASS] answer.hand_audit Brow  Up
+[PASS] answer.hand_audit \xd1OSE
+[PASS] answer.hand_audit \xd1ose
+[PASS] answer.hand_audit \xf1ose
+[PASS] answer.hand_audit Belly
+[PASS] answer.hand_audit Shirt
+[PASS] answer.hand_audit Tail
+[PASS] answer.hand_audit Nonexistent
+[PASS] answer.uncovered_literal_raises
+[PASS] oracle.probe_provider_closed
+[PASS] oracle.g18an_rejects_fold_conflict
+[PASS] oracle.hit_and_unknown_covered
+[PASS] oracle.g18an_answer_parity Blink
+[PASS] oracle.g18an_answer_parity bLiNk
+[PASS] oracle.g18an_answer_parity BLINK
+[PASS] oracle.g18an_answer_parity JawOpen
+[PASS] oracle.g18an_answer_parity jawopen
+[PASS] oracle.g18an_answer_parity Brow Up
+[PASS] oracle.g18an_answer_parity brow up
+[PASS] oracle.g18an_answer_parity BrowUp
+[PASS] oracle.g18an_answer_parity Brow  Up
+[PASS] oracle.g18an_answer_parity \xd1OSE
+[PASS] oracle.g18an_answer_parity \xd1ose
+[PASS] oracle.g18an_answer_parity \xf1ose
+[PASS] oracle.g18an_answer_parity Belly
+[PASS] oracle.g18an_answer_parity Shirt
+[PASS] oracle.g18an_answer_parity Tail
+[PASS] oracle.g18an_answer_parity Nonexistent
+[PASS] identity.equal_across_brokers
+[PASS] identity.payload_equal_across_brokers
+[PASS] descriptor.stable_fields_equal_across_brokers
+[PASS] descriptor.g18an_capture_fields
+[PASS] descriptor.cohort_only_in_diagnostics
+[PASS] reuse.same_view_object
+[PASS] reuse.no_provider_open
+[PASS] reuse.literal_a_exact
+[PASS] reuse.literal_b_folded
+[PASS] reuse.same_family_facts
+[PASS] reuse.payload_unchanged
+[PASS] reuse.leases_released
+[PASS] reuse.provider_closed
+[PASS] separation.v2_not_v1_view
+[PASS] separation.v2_opened_provider
+[PASS] separation.v1_still_reusable
+[PASS] failclosed.builder_error_propagates
+[PASS] failclosed.nothing_published
+[PASS] failclosed.provider_closed
+digest: digest_py27.json sha256=e72e3c84358b2ecc9f8ffb430aa73f44f8a79bd9f173821ff3588c6225db4491 checks=196
+
+RESULT: 196/196 ALL PASS

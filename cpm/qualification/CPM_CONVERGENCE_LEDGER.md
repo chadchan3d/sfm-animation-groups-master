@@ -8,7 +8,36 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**§22 item 8 — COMPLETE / PASS.** Exact candidate
+**Pre-K CPM UI polish pass — IMPLEMENTED; offline qualification PASS (2026-10-09).** This is a
+presentation-only pass, so it produces a **new candidate**:
+`5c6e27895920f27100f0692ef3a5565888463d5da453f3c9303ebb67c766b58e`.
+- The new candidate is **not deployed**, **not real-SFM verified** and **not yet K-qualified**.
+- Item 8 qualified `bfba4d3a…` only. That evidence is unchanged and does not transfer.
+- `bfba4d3a…` remains the installed app.
+- **K: NOT STARTED.** L: not started.
+
+The pass makes eight presentation changes:
+1. the owner-supplied woman icon, embedded at 64×64;
+2. **Character Model:** and "Choose a character model" (Refresh Model List unchanged);
+3. Help explains the character and the playhead workflow;
+4. semantic button colors: blue Apply/Fit, gold Favorite, red Delete, with neutral disabled states;
+5. window 580×800, minimum 540×650 (the four tabs fit);
+6. Update confirmation copy, with no question icon;
+7. Review buttons in a 2×2 grid;
+8. **Clear Classification** wording.
+
+No scope, authority, lifecycle, preset, Fit, generation or Normalizer behavior changed.
+
+Offline results:
+- all existing convergence/R14/R15 suites PASS under 2.7.5 (real Qt) and 3.10;
+- the new `test_cpm_app_ui_polish_pass.py` passes **96/96** (2.7.5) and **61/61** (3.10). It
+  reconstructs the candidate byte-for-byte from `bfba4d3a…` plus the declared edits.
+
+The exact-build historical tests (item 6, item 7 reconstruction, item-8 probe/driver) correctly refuse
+the new bytes and were not edited. Record: `cpm/qualification/PRE_K_UI_POLISH_PASS.md`; outputs in
+`pre_k_ui_polish_outputs/`.
+
+Previous milestone: **§22 item 8 — COMPLETE / PASS** (qualifies `bfba4d3a…` only; unchanged). Exact candidate
 `bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5` was qualified in one fresh
 real-SFM Python 2.7.5 process. The campaign covered:
 - focused post-cleanup operation;
@@ -24,6 +53,8 @@ Exact G1 was restored. The temporary item-8 probe, campaign pointer and other qu
 deployment were removed. **The exact qualified candidate remains installed.** No new convergence
 blocker was found. **CPM is eligible to enter K; K and L have not started. K, if later authorized,
 must begin in a fresh SFM process.** This checkpoint does not decide L's final installation layout.
+(After the UI pass, K entry also awaits the focused live presentation check and promotion decision for
+`5c6e2789…`.)
 
 - **Attempt `I8A1` (2026-10-08, from `d4ad3cf`):**
   - one SFM process, PID 36912;
@@ -90,7 +121,8 @@ Sessions 1–4 remain complete (evidence for app `9a78fc96…`). R15 and R14 rem
 `cpm/baseline` or the adapter/projection). Items 6 and 7 changed only the mutable app
 (`9a78fc96…` → `1e866871…` → `bfba4d3a…`); the launcher, baseline, adapter/projection, shared
 package, Normalizer, Master and sidecars are unchanged. Item 8 (real SFM) changed no repository
-product file.
+product file. The pre-K UI polish pass changed only presentation in the app (`bfba4d3a…` →
+`5c6e2789…`).
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -116,7 +148,8 @@ item-8 `I8-Preflight`/disposition on 2026-10-08; the shared package's qualificat
   `usermod/scripts/ChadChan3D_CPM/` (outside `scripts/sfm`, no `__init__.py`);
 - probe v3 `ce4ace98…`.
 
-The previous app `9a78fc96…` remains restorable from git (`9d405c8`). The item-8 probe and campaign
+The repository candidate `5c6e2789…` (pre-K UI polish pass) is **not deployed**. The previous
+app `9a78fc96…` remains restorable from git (`9d405c8`). The item-8 probe and campaign
 pointer are not deployed. The Scripts deployment equals the accepted Session 4 inventory
 (`cefc2b88…`) except the private-app line (final `be663eb8…`). The live authority is exact
 production G1. Any later deployment change follows the R15 restart rule.
@@ -282,22 +315,15 @@ Evidence:
   - Normalizer namespace isolation (the Normalizer still runs in the shared `__main__`);
   - the shared window slot, log name and identity strings that old CPM builds also claim.
 - **Deferred UI findings (product/UI work; none are Session 1 blockers):**
-  1. **Legacy preset.** Apply of an old `body.scale.head` preset is refused. Future message: "This
-     preset uses an outdated scale format. Delete this preset and save a new Body preset." This
-     is a legacy edge case only; generic bone-scale persistence works.
-  2. **Update Preset confirmation.** Use "The preset's current values will be overwritten." and
-     remove the question-mark icon.
-  3. **Window.** Widen the CPM window, and keep all tabs visible without horizontal tab scrolling.
-  4. **Buttons.** Clearer active/disabled contrast:
-     - primary accent for Apply Preset;
-     - restrained gold for Favorite;
-     - restrained red for Delete.
-  5. **Review.** Try a 2×2 Review action-button grid.
-  6. **Reclassify wording.**
-     - Rename the button to "Clear Classification".
-     - Status: "Classified as Body. Click Clear Classification, then choose a new classification
-       under Needs review."
-     - Keep the clear → rebuild → reclassify behavior unchanged.
+  1. **Legacy preset.** Still open. Apply of an old `body.scale.head` preset is refused. Future
+     message: "This preset uses an outdated scale format. Delete this preset and save a new Body
+     preset." This is a legacy edge case only; generic bone-scale persistence works.
+  2. **Implemented in the pre-K UI polish pass (offline only; live check pending):**
+     - Update Preset confirmation copy, with no question icon;
+     - wider window with all tabs visible;
+     - semantic button colors;
+     - 2×2 Review grid;
+     - Clear Classification wording.
 - **Stale-scope UI presentation** and **`SidecarMissing` messaging:** undecided.
   - Real SFM shows that a stale-generation refusal is presented through the guard's generic copy.
     For Apply this is "Preset could not be applied safely…"; for Save it is "Can't save preset —
@@ -307,8 +333,8 @@ Evidence:
   (K/L).
 - **Item-8 findings (K/L; user-facing, not failures):**
   1. **Scene source.** CPM resolves its scene from the shot under the playhead
-     (`sfmApp.GetShotAtCurrentTime()`). The Normalizer uses the Clip Editor selection. Users are
-     not told about this difference.
+     (`sfmApp.GetShotAtCurrentTime()`). The Normalizer uses the Clip Editor selection. The UI pass
+     explains the playhead workflow in Help only; the behavior is unchanged by design.
   2. **Normalizer success.** A successful Normalizer run shows no visible completion confirmation.
      Recommendation: a non-blocking success notice, with modals only for failures or decisions.
 - **Remaining pre-K qualification:**
@@ -324,9 +350,15 @@ Evidence:
     **COMPLETE / PASS** (`I8A1`, 2026-10-08; candidate `bfba4d3a…` real-SFM qualified and
     installed).
 
-  **Pre-K qualification complete. CPM is eligible to enter K.** K and L have not started. K
-  requires its own authorization and must begin in a fresh SFM process. L's final installation
-  layout is undecided.
+  - Pre-K CPM UI polish pass: **IMPLEMENTED — offline qualification PASS** (candidate
+    `5c6e2789…`; not deployed; not real-SFM verified; not K-qualified).
+
+  **Before K:** the next separate authorization decides two things:
+  - a focused live presentation sanity check of `5c6e2789…`, in a fresh SFM process;
+  - its promotion into K.
+
+  K and L have not started. K requires its own authorization and must begin in a fresh SFM process.
+  L's final installation layout is undecided.
 - **Session 4 notes (not failures; carried to K; unchanged by items 7–8):**
   - Fit's exception path releases the stage with a bare `release()` (no
     `PROD_CPM_FIT_STAGE_RELEASED` line; result discarded); a raising success-path release could in
@@ -338,9 +370,9 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. §22 item 8 is complete. K may begin only on a separate explicit authorization, in a fresh SFM
-process, from the then-current checkpoint. L (including the final installation layout) follows K.
-Neither has begun.
+Stop. The pre-K UI polish pass is implemented and qualified offline. The next separate authorization
+decides the focused live presentation sanity check of `5c6e2789…` (deployment under the R15 restart
+rule, fresh SFM process) and its promotion into K. K and L have not begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

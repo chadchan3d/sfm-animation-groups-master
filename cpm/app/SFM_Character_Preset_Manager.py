@@ -9966,95 +9966,59 @@ def p04_apply_once(
 # -------------------------------------------------------------------------------------------------
 
 
-PROD_WINDOW_ICON_NAME = u"SFMCPMGearIcon.png"
+PROD_WINDOW_ICON_NAME = u"SFMCPMIconWoman.png"
 PROD_WINDOW_ICON_PNG_BASE64 = (
-    "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"
-    "y9rDXv8PeIg+Fz8PQKwAAAAASUVORK5CYII="
+    "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"
+    "8Nt2Ybf/AbvfU5e+h5MGAAAAAElFTkSuQmCC"
 )
 _PROD_WINDOW_ICON_CACHE = None
 _PROD_WINDOW_ICON_LOOKUP_DONE = False
@@ -10296,6 +10260,79 @@ def tool_apply_secondary_action_button(
     # Layout, rather than a second color family, carries hierarchy.
     tool_apply_main_action_button(
         button
+    )
+
+
+# Action colors mean the same thing everywhere in CPM: blue is the primary
+# action, gold is Favorite, red is destructive. Every other action stays
+# neutral. Disabled colored buttons use the neutral disabled treatment so they
+# never look available.
+PROD_ACTION_BUTTON_PALETTES = {
+    u"primary": {
+        "background": "#2f76b5",
+        "border": "#4b8fc7",
+        "color": "#ffffff",
+        "hover": "#377fbd",
+        "hover_border": "#5a9bd0",
+        "pressed": "#28679d",
+    },
+    u"favorite": {
+        "background": "#54472a",
+        "border": "#8c7442",
+        "color": "#f3e3b5",
+        "hover": "#5f5030",
+        "hover_border": "#a3874d",
+        "pressed": "#483c24",
+    },
+    u"destructive": {
+        "background": "#583434",
+        "border": "#875050",
+        "color": "#f4dede",
+        "hover": "#643a3a",
+        "hover_border": "#9c5c5c",
+        "pressed": "#4a2c2c",
+    },
+}
+
+
+def tool_apply_semantic_action_button(
+    button,
+    role,
+):
+    # Shares the neutral main-action sizing; unknown roles stay neutral.
+    tool_apply_main_action_button(
+        button
+    )
+
+    palette = PROD_ACTION_BUTTON_PALETTES.get(
+        role
+    )
+
+    if palette is None:
+        return
+
+    button.setStyleSheet(
+        """
+        QPushButton {
+            background-color: %(background)s;
+            color: %(color)s;
+            border: 1px solid %(border)s;
+            padding: 5px 10px;
+        }
+        QPushButton:hover {
+            background-color: %(hover)s;
+            border: 1px solid %(hover_border)s;
+        }
+        QPushButton:pressed {
+            background-color: %(pressed)s;
+        }
+        QPushButton:disabled {
+            background-color: #393939;
+            color: #858585;
+            border: 1px solid #484848;
+        }
+        """
+        % palette
     )
 
 
@@ -25709,11 +25746,11 @@ class ProdWindow(QtGui.QDialog):
             self
         )
         self.setMinimumSize(
-            500,
+            540,
             650,
         )
         self.resize(
-            520,
+            580,
             800,
         )
 
@@ -25780,7 +25817,7 @@ class ProdWindow(QtGui.QDialog):
         model_row = QtGui.QHBoxLayout()
         model_row.addWidget(
             QtGui.QLabel(
-                "<b>Model:</b>"
+                "<b>Character Model:</b>"
             )
         )
 
@@ -25901,7 +25938,7 @@ class ProdWindow(QtGui.QDialog):
 
         body_primary = QtGui.QHBoxLayout()
         self.apply_body = QtGui.QPushButton("Apply Preset")
-        tool_apply_main_action_button(self.apply_body)
+        tool_apply_semantic_action_button(self.apply_body, u"primary")
         self.apply_body.clicked.connect(lambda: self.apply_kind(P03_KIND_BODY))
         body_primary.addWidget(self.apply_body)
         self.save_body = QtGui.QPushButton("Save New")
@@ -25916,7 +25953,7 @@ class ProdWindow(QtGui.QDialog):
 
         body_secondary = QtGui.QHBoxLayout()
         self.favorite_body = QtGui.QPushButton("Add Favorite")
-        tool_apply_secondary_action_button(self.favorite_body)
+        tool_apply_semantic_action_button(self.favorite_body, u"favorite")
         self.favorite_body.clicked.connect(lambda: self.toggle_favorite(P03_KIND_BODY))
         body_secondary.addWidget(self.favorite_body, 1)
         self.info_body = QtGui.QPushButton("Preset Info")
@@ -25924,7 +25961,7 @@ class ProdWindow(QtGui.QDialog):
         self.info_body.clicked.connect(lambda: self.open_preset_info(P03_KIND_BODY))
         body_secondary.addWidget(self.info_body, 1)
         self.delete_body = QtGui.QPushButton("Delete Preset")
-        tool_apply_secondary_action_button(self.delete_body)
+        tool_apply_semantic_action_button(self.delete_body, u"destructive")
         self.delete_body.clicked.connect(lambda: self.delete_kind(P03_KIND_BODY))
         body_secondary.addWidget(self.delete_body, 1)
         body_layout.addLayout(body_secondary)
@@ -25961,7 +25998,7 @@ class ProdWindow(QtGui.QDialog):
 
         expr_primary = QtGui.QHBoxLayout()
         self.apply_expr = QtGui.QPushButton("Apply Preset")
-        tool_apply_main_action_button(self.apply_expr)
+        tool_apply_semantic_action_button(self.apply_expr, u"primary")
         self.apply_expr.clicked.connect(lambda: self.apply_kind(P03_KIND_EXPRESSION))
         expr_primary.addWidget(self.apply_expr)
         self.save_expr = QtGui.QPushButton("Save New")
@@ -25976,7 +26013,7 @@ class ProdWindow(QtGui.QDialog):
 
         expr_secondary = QtGui.QHBoxLayout()
         self.favorite_expr = QtGui.QPushButton("Add Favorite")
-        tool_apply_secondary_action_button(self.favorite_expr)
+        tool_apply_semantic_action_button(self.favorite_expr, u"favorite")
         self.favorite_expr.clicked.connect(lambda: self.toggle_favorite(P03_KIND_EXPRESSION))
         expr_secondary.addWidget(self.favorite_expr, 1)
         self.info_expr = QtGui.QPushButton("Preset Info")
@@ -25984,7 +26021,7 @@ class ProdWindow(QtGui.QDialog):
         self.info_expr.clicked.connect(lambda: self.open_preset_info(P03_KIND_EXPRESSION))
         expr_secondary.addWidget(self.info_expr, 1)
         self.delete_expr = QtGui.QPushButton("Delete Preset")
-        tool_apply_secondary_action_button(self.delete_expr)
+        tool_apply_semantic_action_button(self.delete_expr, u"destructive")
         self.delete_expr.clicked.connect(lambda: self.delete_kind(P03_KIND_EXPRESSION))
         expr_secondary.addWidget(self.delete_expr, 1)
         expr_layout.addLayout(expr_secondary)
@@ -26007,6 +26044,7 @@ class ProdWindow(QtGui.QDialog):
 
         fit_actions = QtGui.QHBoxLayout()
         self.fit_button = QtGui.QPushButton("Fit Selected to Model")
+        tool_apply_semantic_action_button(self.fit_button, u"primary")
         self.fit_button.setEnabled(False)
         self.fit_button.clicked.connect(self.fit_selected)
         fit_actions.addWidget(self.fit_button)
@@ -26073,7 +26111,8 @@ class ProdWindow(QtGui.QDialog):
             1,
         )
 
-        review_actions = QtGui.QHBoxLayout()
+        # Two rows: the existing order, carried into a 2x2 grid.
+        review_actions = QtGui.QGridLayout()
 
         self.mark_expr = QtGui.QPushButton(
             "Classify as Expression"
@@ -26087,7 +26126,8 @@ class ProdWindow(QtGui.QDialog):
             )
         )
         review_actions.addWidget(
-            self.mark_expr
+            self.mark_expr,
+            0, 0,
         )
 
         self.mark_body = QtGui.QPushButton(
@@ -26102,7 +26142,8 @@ class ProdWindow(QtGui.QDialog):
             )
         )
         review_actions.addWidget(
-            self.mark_body
+            self.mark_body,
+            0, 1,
         )
 
         self.mark_out = QtGui.QPushButton(
@@ -26117,11 +26158,12 @@ class ProdWindow(QtGui.QDialog):
             )
         )
         review_actions.addWidget(
-            self.mark_out
+            self.mark_out,
+            1, 0,
         )
 
         self.reclassify_flex = QtGui.QPushButton(
-            "Reclassify Flex"
+            "Clear Classification"
         )
         self.reclassify_flex.setAutoDefault(
             False
@@ -26133,7 +26175,8 @@ class ProdWindow(QtGui.QDialog):
             self.review_reclassify
         )
         review_actions.addWidget(
-            self.reclassify_flex
+            self.reclassify_flex,
+            1, 1,
         )
 
         review_layout.addLayout(
@@ -27013,7 +27056,7 @@ class ProdWindow(QtGui.QDialog):
 
         if label == "Reclassify Flex":
             return (
-                "Can't reclassify flex",
+                "Can't clear classification",
                 "The saved flex classification could not be cleared. Try again.",
             )
 
@@ -27681,7 +27724,7 @@ class ProdWindow(QtGui.QDialog):
             )
             self.combo.clear()
             self.combo.addItem(
-                "Choose a model"
+                "Choose a character model"
             )
 
             for row in self.candidates:
@@ -27787,16 +27830,16 @@ class ProdWindow(QtGui.QDialog):
             self.sync_review_tab()
 
             self.coverage.setText(
-                "Choose a model."
+                "Choose a character model."
             )
             self.body_summary.setText(
-                "Choose a model."
+                "Choose a character model."
             )
             self.expr_summary.setText(
-                "Choose a model."
+                "Choose a character model."
             )
             self.set_status(
-                "%d model(s) found. Choose a model."
+                "%d model(s) found. Choose a character model."
                 % len(
                     self.candidates
                 )
@@ -27946,17 +27989,17 @@ class ProdWindow(QtGui.QDialog):
                 )
 
             self.coverage.setText(
-                "Choose a model."
+                "Choose a character model."
             )
             self.body_summary.setText(
-                "Choose a model."
+                "Choose a character model."
             )
             self.expr_summary.setText(
-                "Choose a model."
+                "Choose a character model."
             )
 
             self.set_status(
-                "Choose a model to begin."
+                "Choose a character model to begin."
             )
 
         finally:
@@ -29088,11 +29131,11 @@ class ProdWindow(QtGui.QDialog):
             }
             if decision == u"exclude":
                 self.set_status(
-                    "Currently excluded from presets. Reclassify Flex moves it back to Needs review so you can classify it again."
+                    "Excluded from presets. Click Clear Classification, then choose a new classification under Needs review."
                 )
             else:
                 self.set_status(
-                    u"Currently classified as %s. Reclassify Flex moves it back to Needs review so you can classify it again."
+                    u"Classified as %s. Click Clear Classification, then choose a new classification under Needs review."
                     % decision_names.get(
                         decision,
                         decision,
@@ -29599,9 +29642,6 @@ class ProdWindow(QtGui.QDialog):
             )
 
             try:
-                box.setIcon(
-                    QtGui.QMessageBox.Question
-                )
                 box.setWindowTitle(
                     "Update preset?"
                 )
@@ -29620,7 +29660,7 @@ class ProdWindow(QtGui.QDialog):
                     )
                 )
                 box.setInformativeText(
-                    "This overwrites the values currently saved in this preset."
+                    "The preset's current values will be overwritten."
                 )
 
                 update_button = box.addButton(
@@ -32027,8 +32067,9 @@ class ProdWindow(QtGui.QDialog):
                     h3 { color: #7c8f9c; margin-top: 12px; margin-bottom: 3px; }
                     p  { margin-top: 0px; margin-bottom: 9px; }
                 </style>
-                <h3>Choose a model</h3>
-                <p>Select the model you want to work with from the <b>Model</b> menu. The Manager shows the presets saved for that model.</p>
+                <h3>Choose a character</h3>
+                <p>Choose the character you want to edit. Body Presets and Expressions change that character. In Clothing Fit, choose clothing or accessories to fit to that character.</p>
+                <p>CPM lists models from the shot under the playhead. To work in another shot, move the playhead into that shot, click <b>Refresh Model List</b>, then choose the character you want to edit.</p>
 
                 <h3>Body Presets</h3>
                 <p>Save body flexes and bone scaling together as one preset. <b>Apply Preset</b> copies those saved values to the selected model.</p>
@@ -32046,7 +32087,7 @@ class ProdWindow(QtGui.QDialog):
                 <p>Use SFM's normal Undo command <b>(Ctrl+Z)</b> to reverse applied Body Presets, Expressions, and Clothing Fit changes.</p>
 
                 <h3>Why does Review appear?</h3>
-                <p>Review appears when the Manager cannot classify a flex. For each unrecognized flex, decide whether it belongs in <b>Body Presets</b> or <b>Expressions</b>, or should be excluded from presets. Your choices are saved for this model. To change one later, select it under <b>Reviewed choices</b> and click <b>Reclassify Flex</b>.</p>
+                <p>Review appears when the Manager cannot classify a flex. For each unrecognized flex, decide whether it belongs in <b>Body Presets</b> or <b>Expressions</b>, or should be excluded from presets. Your choices are saved for this model. To change one later, select it under <b>Reviewed choices</b> and click <b>Clear Classification</b>.</p>
 
                 <h3>Where presets are saved</h3>
                 <p>Each model has its own preset library. Use <b>Model Info &gt; Open Preset Folder</b> to open it.</p>

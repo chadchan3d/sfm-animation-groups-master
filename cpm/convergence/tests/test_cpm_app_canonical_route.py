@@ -184,8 +184,14 @@ ITEM7_CHANGED_TOP = set([
     "prod_verify_bone_scale_map", "same_time_refresh", "tool_apply_window_icon", "tool_window_icon",
     "undo_state",
 ])
+# Pre-K UI polish pass (cpm/qualification/PRE_K_UI_POLISH_PASS.md): presentation only --
+# the embedded window icon, a semantic action-button helper and its palette, and two
+# copy-only ProdWindow methods (the other touched methods are already listed).
+UIPASS_CHANGED_TOP = set(["PROD_WINDOW_ICON_NAME", "PROD_WINDOW_ICON_PNG_BASE64"])
+UIPASS_NEW_TOP = set(["PROD_ACTION_BUTTON_PALETTES", "tool_apply_semantic_action_button"])
+UIPASS_CHANGED_METHODS = set(["operation_default_error_copy", "review_changed"])
 EXPECTED_CHANGED_TOP = (STEP2B_CHANGED_TOP | STEP3_CHANGED_TOP | STEP4_CHANGED_TOP | R14_CHANGED_TOP
-                        | R15_CHANGED_TOP | ITEM6_CHANGED_TOP | ITEM7_CHANGED_TOP)
+                        | R15_CHANGED_TOP | ITEM6_CHANGED_TOP | ITEM7_CHANGED_TOP | UIPASS_CHANGED_TOP)
 EXPECTED_NEW_TOP = set([
     "PROD_CPM_MAINMENU_RELATIVE_PARTS", "PROD_CPM_ADAPTER_MODULES", "ProdCpmAuthorityBootstrapError",
     "ProdCpmAuthorityNotMigrated", "prod_cpm_mainmenu_dir", "prod_cpm_import_adapter", "prod_cpm_is_main_thread",
@@ -271,7 +277,7 @@ def section_derivation(app):
     added = set(app.top) - set(baseline.top)
     removed = set(baseline.top) - set(app.top)
     check("derivation.changed_top_level_is_bounded", changed == EXPECTED_CHANGED_TOP, sorted(changed))
-    check("derivation.added_top_level_is_bounded", added == EXPECTED_NEW_TOP | R15_NEW_TOP | ITEM6_NEW_TOP,
+    check("derivation.added_top_level_is_bounded", added == EXPECTED_NEW_TOP | R15_NEW_TOP | ITEM6_NEW_TOP | UIPASS_NEW_TOP,
           sorted(added))
     check("derivation.removed_is_exactly_item6_and_item7", removed == ITEM6_REMOVED_TOP | ITEM7_REMOVED_TOP,
           sorted(removed ^ (ITEM6_REMOVED_TOP | ITEM7_REMOVED_TOP)))
@@ -280,7 +286,8 @@ def section_derivation(app):
     # The shortcut binding lives in the constructor-side builder method.
     shortcut_owner = [n for n in bm if "g18an_parity_shortcut = QtGui.QShortcut" in baseline.method_text("ProdWindow", n)]
     check("derivation.shortcut_owner_found", len(shortcut_owner) == 1, shortcut_owner)
-    expected_methods = EXPECTED_CHANGED_METHODS | R15_CHANGED_METHODS | set(shortcut_owner) | ITEM7_CHANGED_METHODS
+    expected_methods = (EXPECTED_CHANGED_METHODS | R15_CHANGED_METHODS | set(shortcut_owner) | ITEM7_CHANGED_METHODS
+                        | UIPASS_CHANGED_METHODS)
     check("derivation.changed_methods_are_bounded", m_changed == expected_methods, sorted(m_changed))
     check("derivation.added_methods_are_bounded", set(am) - set(bm) == EXPECTED_NEW_METHODS | R15_NEW_METHODS,
           sorted(set(am) - set(bm)))
