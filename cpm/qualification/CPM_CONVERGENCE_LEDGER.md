@@ -8,6 +8,15 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
+**K — Integrated CPM/Normalizer product workflow qualification: DESIGN PREPARED FOR REVIEW
+(2026-10-09).** Design and runbook:
+`cpm/qualification/K_INTEGRATED_PRODUCT_WORKFLOW_QUALIFICATION_DESIGN.md`.
+- **K is not started:** no SFM process, no deployment, no K tooling built, no production change.
+- **Plan:** K-0 tooling preparation, then processes K1 (Normalizer-first, alternation, ingress,
+  close orders) and K2 (joint generation transition), plus optional K3 (All Shots, decision D2).
+- **Open decisions before K-0/execution:** D1 (authority-unavailable shared failure), D2 (K3), D3
+  (divergent-ingress SFM gesture), D4 (K-0 approval).
+
 **Pre-K CPM UI polish pass — LIVE VERIFIED / PASS (2026-10-09).** The final build
 **`4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7`** is installed and is **the
 exact CPM candidate eligible to enter K**.
@@ -398,9 +407,10 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. Pre-K is complete: `4e35f292…` is installed, LIVE VERIFIED / PASS, and is the exact CPM
-candidate eligible to enter K. K may begin only on a separate explicit authorization, in a fresh SFM
-process. L follows K. Neither has begun.
+Stop. The K design is prepared for owner review. After decisions D1–D4, K-0 (qualification-only
+tooling and offline qualification) needs its own authorization, and K execution a further
+authorization from the K-0 checkpoint, in fresh SFM processes. `4e35f292…` remains installed and is
+the exact CPM build eligible to enter K. L has not begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
