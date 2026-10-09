@@ -38,7 +38,9 @@ _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 _REPO_ROOT = os.path.abspath(os.path.join(_THIS_DIR, os.pardir, os.pardir, os.pardir))
 APP_PATH = os.environ.get("CPM_TEST_APP_PATH") or os.path.join(_REPO_ROOT, "cpm", "app", "SFM_Character_Preset_Manager.py")
 REFERENCE_SHA256 = "bfba4d3a54cf42d5eb744040e95f110d24e0870fcfcbb35d54e2885f9560e2b5"  # item 8 COMPLETE / PASS
-CANDIDATE_SHA256 = "7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36"
+CANDIDATE_SHA256 = "4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7"
+# Superseded: 7e4686d7 (live-verified U2; previous Getting started wording), kept for the record.
+SUPERSEDED_REFINED_SHA256 = "7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36"
 # Superseded first visual candidate (solid role fills, "Choose a character" heading); kept for the record.
 SUPERSEDED_CANDIDATE_SHA256 = "5c6e27895920f27100f0692ef3a5565888463d5da453f3c9303ebb67c766b58e"
 ICON_PNG_SHA256 = "65cd4fb31059652537b7e4146c4a5c02e82d00104bb3d0d41d70034e80b21185"  # 64x64 RGBA
@@ -50,10 +52,17 @@ RESULTS = []
 
 # --- Approved presentation ------------------------------------------------------
 HELP_HEADING = u"Getting started"
-HELP_CHARACTER = (u"Choose the character you want to edit. Body Presets and Expressions change that character. "
-                  u"In Clothing Fit, choose clothing or accessories to fit to it.")
-HELP_PLAYHEAD = (u"CPM lists models from the shot under the playhead. To work in another shot, move the playhead "
-                 u"there, click Refresh Model List, then choose your character.")
+HELP_CHARACTER = (u"Choose the character you want to edit. Use Body Presets for body shape and Expressions for "
+                  u"facial expressions. In Clothing Fit, choose clothing or accessories to fit to that character.")
+HELP_PLAYHEAD = (u"The model list shows models in the shot under the playhead. To use a character from another shot, "
+                 u"move the playhead into that shot, click Refresh Model List, then choose the character.")
+HELP_BOLD = [u"Body Presets", u"Expressions", u"Clothing Fit", u"Refresh Model List"]  # UI names, Help convention
+
+
+def _help_html(text):
+    for term in HELP_BOLD:
+        text = re.sub(u"(?<= )%s(?=[ ,.])" % re.escape(term), u"<b>%s</b>" % term, text, count=1)
+    return text
 UPDATE_COPY = u"The preset's current values will be overwritten."
 CLEAR_STATUS_TAIL = u"Click Clear Classification, then choose a new classification under Needs review."
 # Restrained accents: neutral fill and text; the role is carried by the border.
@@ -131,8 +140,8 @@ EDITS += [
      u"                <p>Select the model you want to work with from the <b>Model</b> menu. The Manager shows the "
      u"presets saved for that model.</p>\n",
      u"                <h3>" + HELP_HEADING + u"</h3>\n"
-     u"                <p>" + HELP_CHARACTER + u"</p>\n"
-     u"                <p>" + HELP_PLAYHEAD.replace(u"Refresh Model List", u"<b>Refresh Model List</b>") + u"</p>\n", 1),
+     u"                <p>" + _help_html(HELP_CHARACTER) + u"</p>\n"
+     u"                <p>" + _help_html(HELP_PLAYHEAD) + u"</p>\n", 1),
     ("ProdWindow.open_help", u"click <b>Reclassify Flex</b>.</p>", u"click <b>Clear Classification</b>.</p>", 1),
 ]
 HELPER_ANCHOR = u"\ndef tool_favorite_star_icon("
@@ -364,6 +373,8 @@ def section_wording(cs):
           and u"<h3>Choose a character</h3>" not in html)
     check("help.character_paragraph", HELP_CHARACTER in plain, plain[:400])
     check("help.playhead_paragraph", re.sub(u"\\s+", u" ", HELP_PLAYHEAD) in plain, plain[:600])
+    check("help.ui_names_bold", all((u"<b>%s</b>" % t) in (html or u"") for t in HELP_BOLD)
+          and (html or u"").count(u"<b>Refresh Model List</b>") == 1)
     check("help.clear_classification", u"click <b>Clear Classification</b>" in (html or u"")
           and u"Reclassify Flex" not in (html or u""))
     check("help.not_added_to_main_window", HELP_CHARACTER not in init and u"playhead" not in init.lower())

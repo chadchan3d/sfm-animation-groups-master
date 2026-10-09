@@ -32070,8 +32070,8 @@ class ProdWindow(QtGui.QDialog):
                     p  { margin-top: 0px; margin-bottom: 9px; }
                 </style>
                 <h3>Getting started</h3>
-                <p>Choose the character you want to edit. Body Presets and Expressions change that character. In Clothing Fit, choose clothing or accessories to fit to it.</p>
-                <p>CPM lists models from the shot under the playhead. To work in another shot, move the playhead there, click <b>Refresh Model List</b>, then choose your character.</p>
+                <p>Choose the character you want to edit. Use <b>Body Presets</b> for body shape and <b>Expressions</b> for facial expressions. In <b>Clothing Fit</b>, choose clothing or accessories to fit to that character.</p>
+                <p>The model list shows models in the shot under the playhead. To use a character from another shot, move the playhead into that shot, click <b>Refresh Model List</b>, then choose the character.</p>
 
                 <h3>Body Presets</h3>
                 <p>Save body flexes and bone scaling together as one preset. <b>Apply Preset</b> copies those saved values to the selected model.</p>

@@ -8,9 +8,18 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**Pre-K CPM UI polish pass — LIVE VERIFIED / PASS (2026-10-09, attempt U2).** Exact build
-**`7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36`** is installed and is **the
-CPM build eligible to enter K**.
+**Pre-K CPM UI polish pass — wording-only candidate IMPLEMENTED; offline qualification PASS
+(2026-10-09).** The current repository candidate is
+**`4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7`**.
+- It supersedes `7e4686d7…` by changing only the two opening Help paragraphs under **Getting
+  started**.
+- It is **not deployed** and has not been viewed live.
+- UI test: **100/100** (2.7.5) and **65/65** (3.10); all existing suites PASS.
+- Record: `PRE_K_UI_POLISH_PASS.md` §H; outputs in `pre_k_ui_polish_outputs_r3/`.
+
+The **installed** build is still `7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36`.
+It is **LIVE VERIFIED / PASS** (attempt U2) and differs from `4e35f292…` only in that Help text.
+Which build K starts from (`4e35f292…`, after deployment) is for the next authorization.
 - **K: NOT STARTED** (needs separate authorization; must begin in a fresh SFM process). L: not
   started.
 - It supersedes the first visual candidate `5c6e2789…`. That candidate's record and outputs are
@@ -369,9 +378,12 @@ Evidence:
     installed).
 
   - Pre-K CPM UI polish pass: **LIVE VERIFIED / PASS** (`7e4686d7…`, U2; supersedes `5c6e2789…`,
-    whose U1 attempt was closed as SUPERSEDED / NO QUALIFICATION VERDICT).
+    whose U1 attempt was closed as SUPERSEDED / NO QUALIFICATION VERDICT). It is superseded in the
+    repository by the Help-wording-only candidate `4e35f292…` (offline PASS; not deployed).
 
-  **Pre-K complete. `7e4686d7…` is the exact CPM build eligible to enter K.**
+  **Pre-K complete.** `7e4686d7…` is the installed, live-verified build. `4e35f292…` is the current
+  repository candidate, differing only in Help text. The next authorization decides its deployment
+  and K's starting build.
   K and L have not started. K requires its own authorization and must begin in a fresh SFM process.
   L's final installation layout is undecided.
 - **Session 4 notes (not failures; carried to K; unchanged by items 7–8):**
@@ -385,9 +397,13 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. The pre-K UI polish pass is LIVE VERIFIED / PASS, and `7e4686d7…` is installed and eligible to
-enter K. K may begin only on a separate explicit authorization, in a fresh SFM process. L follows K.
-Neither has begun.
+Stop. The Help-wording candidate `4e35f292…` is implemented and qualified offline, and it is not
+deployed. `7e4686d7…` (LIVE VERIFIED / PASS) remains installed. The next separate authorization
+decides two things:
+- deployment of `4e35f292…`;
+- K's starting build.
+
+K may begin only on explicit authorization, in a fresh SFM process. L follows K. Neither has begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

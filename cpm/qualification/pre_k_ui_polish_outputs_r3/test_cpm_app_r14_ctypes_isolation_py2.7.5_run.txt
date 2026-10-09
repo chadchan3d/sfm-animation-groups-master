@@ -1,0 +1,23 @@
+Interpreter: 2.7.5
+Architecture: 32-bit
+[PASS] r14.baseline_byte_identical
+[PASS] r14.normalizer_pinned
+[PASS] r14.second_consumer_ok_initially
+[PASS] r14.fixed_logs_all_fields
+[PASS] r14.fixed_no_native_unavailable
+[PASS] r14.fixed_shared_prototypes_untouched
+[PASS] r14.fixed_second_consumer_ok
+[PASS] r14.private_handles_cached_and_distinct
+[PASS] r14.baseline_logs_same_fields
+[PASS] r14.baseline_mutates_shared_prototypes
+[PASS] r14.baseline_breaks_second_consumer
+[PASS] r14.fixed_independent_of_shared_prototypes
+[PASS] r14.second_consumer_ok_after_restore
+[PASS] r14.fixed_again_untouched
+[PASS] r14.prod_private_windll_touches_no_authority_scene_or_persistence
+[PASS] r14.prod_resource_snapshot_touches_no_authority_scene_or_persistence
+[PASS] r14.no_authority_runtime_loaded
+[PASS] r14.only_prod_resource_snapshot_changed_beyond_convergence
+digest: digest_py27.json sha256=cab31414502a5c1ceca08947bf5859bceefa80fbcb8a9073b11ed1bfb81add93 checks=18
+
+RESULT: 18/18 ALL PASS

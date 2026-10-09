@@ -1,16 +1,59 @@
 # Pre-K CPM UI polish pass — design and implementation evidence
 
-**Status: LIVE VERIFIED / PASS (2026-10-09; attempt U2).** The refined candidate
-**`7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36`** is installed. It is **the
-exact CPM build eligible to enter K**. **K: NOT STARTED** (needs separate authorization). L: not
-started.
+**Status: wording-only candidate IMPLEMENTED — offline qualification PASS (2026-10-09).** The current
+repository candidate is
+**`4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7`** (§H). It **supersedes**
+`7e4686d7…` by changing only the two opening Help paragraphs. It is **not deployed** and has not
+been viewed live.
 
-This is a presentation-only pass. `7e4686d7…` **supersedes** the first visual candidate `5c6e2789…`;
-§1–§4 are kept unchanged as that candidate's record. Item 8's functional qualification of
-`bfba4d3a…` is unchanged. The UI pass is byte-bounded against it: only declared presentation edits
-differ.
+`7e4686d7…` remains the **installed** build and keeps its LIVE VERIFIED / PASS (U2, §0.3). Whether K
+starts from `4e35f292…` is for the next authorization; it needs deployment first. **K: NOT
+STARTED.** L: not started.
 
-## 0. Final visual refinement (current candidate `7e4686d7…`)
+This is a presentation-only pass:
+- `4e35f292…` supersedes `7e4686d7…`, which superseded the first visual candidate `5c6e2789…`;
+- each superseded candidate's section below is kept unchanged as its record (§0 for `7e4686d7…`,
+  §1–§4 for `5c6e2789…`);
+- item 8's functional qualification of `bfba4d3a…` is unchanged, and every candidate is
+  byte-bounded against it: only declared presentation edits differ.
+
+## H. Help wording update (current candidate `4e35f292…`)
+
+This bounded change touches only the two paragraphs under **Getting started** in
+`ProdWindow.open_help`. Diff against `7e4686d7…`: 2 lines added, 2 removed. The heading, the rest of
+Help, button styling and palette, icon, window size, selector wording, Refresh Model List, Review,
+the Update confirmation and all behavior are unchanged.
+
+The Help now opens:
+
+> **Getting started**
+> Choose the character you want to edit. Use **Body Presets** for body shape and **Expressions** for
+> facial expressions. In **Clothing Fit**, choose clothing or accessories to fit to that character.
+> The model list shows models in the shot under the playhead. To use a character from another shot,
+> move the playhead into that shot, click **Refresh Model List**, then choose the character.
+
+UI names are bolded with `<b>…</b>`, following the rest of Help (for example `<b>Body Presets</b>`
+and `<b>Clear Classification</b>`). The rendered plain text is exactly the approved wording.
+
+**Offline qualification** uses the same commands and interpreters as §3. Outputs are in
+`pre_k_ui_polish_outputs_r3/`; the earlier output folders are unchanged.
+
+| Suite | Result |
+|---|---|
+| projection · adapter · canonical route · operation context · Clothing Fit · convergence gates | 196/196·196/196·3/3 · 205/205·205/205·3/3 · 85/85·85/85·3/3 · 108/108·108/108·3/3 · 95/95·95/95·3/3 · 152/152·152/152·3/3 |
+| R14 · R15 | 2.7.5 18/18 · 3.10 15/15 · 2.7.5 345/345 · 3.10 188/188 |
+| `test_cpm_app_ui_polish_pass.py` | **2.7.5 100/100 (real Qt + model) · 3.10 65/65 (model)** |
+
+Test updates:
+- new candidate pin, with `7e4686d7…` recorded as superseded;
+- exact approved paragraphs, checked as rendered plain text;
+- new `help.ui_names_bold` check;
+- the byte reconstruction from `bfba4d3a…` still proves that nothing else changed.
+
+Sensitivity: the superseded `7e4686d7…` is rejected on the pin, the reconstruction and all three
+Help checks.
+
+## 0. Final visual refinement (`7e4686d7…`; superseded by §H, record unchanged)
 
 The owner viewed `5c6e2789…` in real SFM during live check U1 (§0.3). The semantic assignments were
 correct, but the solid blue/gold/red fills were too loud for SFM's subdued dark interface. This
