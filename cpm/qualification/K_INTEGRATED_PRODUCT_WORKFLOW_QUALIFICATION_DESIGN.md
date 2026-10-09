@@ -1,8 +1,9 @@
 # K — Integrated CPM/Normalizer product workflow qualification (design and runbook)
 
-**Status: DESIGN PREPARED FOR REVIEW — not executed.** No SFM process has been started for K. Nothing
-was deployed. The K tooling (K-0, §6) has not been built, and no production code was changed. K and L
-have not started.
+**Status: K PREPARED, NOT RUN.** The design was approved with decisions **D1 = A, D2 = B, D3 = B and
+D4 = YES** (§13). The K-0 qualification-only tooling is built and qualified offline (§6, §15). No SFM
+process has been started for K, the probe has not been deployed, and no production code was changed.
+K execution needs a separate authorization. **K PASS requires K1 + K2 only.** L has not started.
 
 | Item | Value |
 |---|---|
@@ -85,7 +86,7 @@ place.
    frozen Session 2 tooling; the **Normalizer touches G2 first**, then CPM is refused and rebuilds;
    both then alternate under G2.
 8. **Shared failure/recovery:** the stale-generation boundary as experienced by both consumers in
-   one process (§3.5; see decision D1 for authority-unavailable).
+   one process (§3.5). Per **D1 = A**, no authority-unavailable mechanism is created.
 9. **Aggregate resources** across the integrated workflow at settled checkpoints (§5.4).
 10. **Representative ordinary workflows** for each tool:
     - CPM: Body Save New / Apply / Undo, Expression Save New / Apply / Undo, Clothing Fit / Undo,
@@ -145,9 +146,12 @@ than rerun.
   - **CPM:** exactly one generation-mismatch refusal before mutation, then an automatic rebuild,
     then a deliberate action that commits under G2.
   - **Recovery:** both consumers then work normally under G2 in the same process.
-- **Not exercised:** a shared **authority-unavailable** state (for example a Master with no matching
-  sidecar). There is no qualified mechanism to create it: the frozen tooling has only
-  `check-only`, `prepare-publish-g2`, `activate-g2` and `finalize`. See **D1**.
+- **Not exercised (D1 = A):** a shared **authority-unavailable** state (for example a Master with no
+  matching sidecar). No new mechanism is authorized: the frozen tooling has only `check-only`,
+  `prepare-publish-g2`, `activate-g2` and `finalize`. The existing fail-closed evidence is reused
+  instead:
+  - CPM's offline gate C7: refusal before any mutation;
+  - the Normalizer's I-1 I2 fail-closed result and its pre-mutation `ProbeError` path.
 - **Not exercised:** a mid-command Master change (I2 needed a method injector) and Normalizer
   mid-command cancellation (not a product contract; the ledger records N/A).
 
@@ -172,9 +176,9 @@ than rerun.
 |---|---|---|---|
 | **K1** (fresh; G1) | Normalizer-first cold start; CPM joins; divergent and convergent ingress; repeated alternation; close orders X and Y; exit with CPM open; aggregate resources | 4 × Selected (`shot9`, `shot9`, `shot3`, `shot3`) | — |
 | **K2** (fresh; G1 → G2) | CPM-first cold start; joint generation transition with the Normalizer touching G2 first; shared stale-generation recovery; G2 alternation; exit with CPM closed; exact G1 restoration | 3 × Selected (`shot9` G1, `shot9` G2, `shot3` G2) | The only qualified in-process transition is one-way and its restoration is SFM-closed. Combining it with K1 would push the Normalizer count past the bounded budget (§5.4). |
-| **K3** (optional; fresh; G1) | All Shots with CPM resident | 1 × All Shots | See **D2**. The admission guard allows All Shots only as the first Normalizer use in a process, and its memory demand is near the 32-bit ceiling. |
+| K3 (not part of K) | All Shots with CPM resident | — | **Excluded from the K PASS gate (D2 = B).** Optional post-K stress work, not prepared by K-0. |
 
-**Fresh SFM processes: 2 required (K1, K2), plus 1 if D2 includes K3.** One process cannot hold
+**Fresh SFM processes: exactly 2 (K1, K2).** One process cannot hold
 Normalizer-first cold start and CPM-first cold start together. The transition's prerequisites (both
 consumers in G1 state, a bounded Normalizer count, SFM-closed restoration) conflict with K1's
 budget.
@@ -274,19 +278,21 @@ production file is changed.
 - `CPM_K_Probe.py`: the item-8 probe with K pins (`4e35f292…`, K attempt root and pointer). Adds the
   per-cache-key ledger decomposition, the `recent_diagnostics()` tail, the free-VAS sample and the
   `__main__` census of non-CPM names. All reads stay read-only.
-- `K_DRIVER.ps1`:
+- `K_DRIVER.ps1` (every command takes the attempt id first):
   - the frozen Session 2 §2.1 block, byte-identical;
-  - `K-New` (write-once attempt);
-  - `K-Preflight` (read-only identity gates §1, Scripts inventory = U3 inventory, exact G1, library
-    inventories, CPM log offset);
-  - `K-DeployProbe` (probe + pointer only; exact two-line Scripts difference);
-  - `K-CollectLogs <label>` (CPM excerpt; Normalizer log copy; fingerprints);
-  - `K-Library`, `K-Readback`;
-  - `K-GenerationSwitch` (frozen `S2-PhaseA` + `S2-PhaseB`);
-  - `K-Finalize` (frozen `S2-Finalize`, K2 only);
-  - `K-RemoveProbe` (exact restoration of the U3 inventory);
-  - `K-Seal`;
-  - `K-Disposition`.
+  - `K-New` (write-once attempt; the fixture document must equal its pin);
+  - `K-Preflight` (read-only identity gates §1, Scripts inventory = the expected K inventory, exact
+    G1, a whole-root library inventory, CPM log state);
+  - `K-DeployProbe` (probe + pointer only; exact one-line Scripts difference; the CPM app is never
+    written);
+  - `K-CollectLogs` (CPM log; Normalizer log copy, since it is truncated per run);
+  - `K-Library` and `K-LibraryCompare` (the whole Characters root);
+  - `K-Readback`;
+  - `K-GenerationSwitch` (frozen `S2-PhaseA` + `S2-PhaseB`; K2 only; at most once);
+  - `K-Finalize` (frozen `S2-Finalize` after a transition, else `S2-VerifyUntouched`);
+  - `K-RemoveProbe` (removes the probe and pointer; proves the app and fixture unchanged; seals the
+    live evidence list);
+  - `K-Disposition` (records the verdict; never changes the app; seals the attempt).
 - `k_evidence_reader.py` (offline parser/adjudicator), `K_FIXTURE_MANIFEST.json`, an operator-record
   template.
 - Offline qualification under Python 2.7.5 (real PySide/Qt 4.8 + model) and 3.10, following the
@@ -305,8 +311,9 @@ production file is changed.
 2. **One exact human action at a time.** The executor gives the next action only after the operator
    reports the previous one and the executor has verified the evidence on disk.
 3. Before every consumer action, confirm the stated **playhead shot** and **selected shot(s)**. If
-   either is wrong, STOP; do not "fix and continue" silently.
-4. Never move the playhead into `shot12`, never use **Rebuild All Shots** (except K3), never save the
+   either is wrong, STOP; do not "fix and continue" silently. To establish a **divergent** state
+   (D3 = B), set the Clip Editor **selection first, the playhead second, then confirm both**.
+4. Never move the playhead into `shot12`, never use **Rebuild All Shots** (D2 = B), never save the
    document, never run other scripts (including `CPM_Session1_Probe`), and never touch historical
    menu builds.
 5. Expected refusals are listed per step. **Any other refusal, error dialog, stale-generation event,
@@ -327,36 +334,36 @@ record before the next step.
 | K1-S2 | Owner | Start SFM fresh. **File > Open** `testscripts.dmx`. Move the playhead into **`shot9`**. In the Clip Editor, select **only `shot9`**. Do not open CPM. | Document open; `krystalv21` listed; `shot9` sole selection | a load error, or SFM not fresh |
 | K1-S3 | Owner | P | P0: no CPM module, **no broker constructed**, Normalizer marker unused; resource baseline | a broker already exists, or CPM is loaded |
 | **K1-A1** | Owner | Scripts > ChadChan3D > `Rebuild_Control_Groups_Normalizer` → **Rebuild Selected Shot(s)**. Wait until SFM responds. | — | any dialog other than the scope dialog |
-| K1-A2 | Shell | `K-CollectLogs N1` | Normalizer: `SELECTED_SHOTS` 1 [`shot9`]; PASS/PASS; live Master G1; `mem_ok` all True; no CPM lines | any other result |
+| K1-A2 | Shell | `K-CollectLogs K1A1 N1` | Normalizer: `SELECTED_SHOTS` 1 [`shot9`]; PASS/PASS; live Master G1; `mem_ok` all True; no CPM lines | any other result |
 | K1-A3 | Owner | P | **Broker constructed by the Normalizer** (canonical origin); one G1 `normalizer_compat` view; idle 0/0/0 | lease outstanding, or not idle |
-| **K1-B1** | Owner | Move the playhead into **`shot10`**. Do not change the Clip Editor selection. Scripts > ChadChan3D > `SFM_Character_Preset_Manager`. Choose **`krystal20201`** in Character Model. | One CPM window; counts appear | a dialog or error |
+| **K1-B1** | Owner | **DIV (D3 = B):** the selection stays only `shot9` (set first, in K1-S2). Move the playhead into **`shot10`**, then confirm the playhead is in `shot10` and the selection is still only `shot9`. Then Scripts > ChadChan3D > `SFM_Character_Preset_Manager` and choose **`krystal20201`** in Character Model. | One CPM window; counts appear | either shot wrong; a dialog or error |
 | K1-B2 | Owner | P | CPM module `4e35f292…`; **same broker id as K1-A3**; `cpm_compat_v1` G1 view added; Normalizer view still present; idle | different broker; Normalizer view gone; not idle |
 | K1-B3 | Owner | Body Presets → **Save New** `K K1A1 B3 BODY` → OK. | "Body Preset saved" | other text |
-| K1-B4 | Shell | `K-Library`, `K-Readback B3` | Exactly one new preset (Krystal library); within footprint | anything else |
+| K1-B4 | Shell | `K-Library K1A1 library_B4`; `K-Readback K1A1 B3 "*/Body Presets/K K1A1 B3 BODY--preset-*.json"` | Exactly one new preset (Krystal library); within footprint | anything else |
 | K1-B5 | Owner | Clothing Fit tab: check only `assaultsuitbody1`; **Fit Selected to Model**. | "1 item updated" | other text |
 | K1-B6 | Owner | **Edit > Undo** once. Then P. | The suit visibly returns. P: fixture equals the pre-Fit values; idle | a value difference; not idle |
-| **K1-C1** | Owner | **DIV state:** confirm the playhead is in `shot10` and the selection is only `shot9`. Leave CPM open on Krystal. Run the Normalizer → **Rebuild Selected Shot(s)**. Wait. | CPM palette hides during the scope dialog and returns | a dialog or error |
-| K1-C2 | Shell | `K-CollectLogs N2` | Normalizer `shot9` PASS/PASS G1; `mem_ok` True. CPM log: `MODAL_YIELD_ENTER/EXIT restored=True` only, no authorization or refusal. | any CPM refusal or stale event |
+| **K1-C1** | Owner | **DIV state:** confirm the playhead is in `shot10` and the selection is only `shot9` (unchanged since K1-B1). Leave CPM open on Krystal. Run the Normalizer → **Rebuild Selected Shot(s)**. Wait. | CPM palette hides during the scope dialog and returns | a dialog or error |
+| K1-C2 | Shell | `K-CollectLogs K1A1 N2` | Normalizer `shot9` PASS/PASS G1; `mem_ok` True. CPM log: `MODAL_YIELD_ENTER/EXIT restored=True` only, no authorization or refusal. | any CPM refusal or stale event |
 | K1-C3 | Owner | P | Same broker; Normalizer `shot9` view reused or replaced per diagnostics; CPM scope generation and Krystal fixture values unchanged; idle | anything else |
 | K1-C4 | Owner | In CPM (still Krystal), Body Presets → select `K K1A1 B3 BODY` → **Apply Preset**. Then **Edit > Undo** once. | "Body Preset applied"; then visual return | any refusal or "can't" dialog |
 | K1-C5 | Owner | P | Apply committed under G1 with **no stale refusal or rescope**; after Undo the values equal K1-C3; idle | anything else |
 | **K1-D1** | Owner | **CONV state:** move the playhead into **`shot3`**. In CPM click **Refresh Model List**, then choose **`mia1`**. | Mia counts appear | a dialog or error |
 | K1-D2 | Owner | Expressions → **Save New** `K K1A1 D2 EXPR` → OK. | "Expression preset saved" | other text |
-| K1-D3 | Shell | `K-Library`, `K-Readback D2` | One new preset (Mia library); within footprint | anything else |
+| K1-D3 | Shell | `K-Library K1A1 library_D3`; `K-Readback K1A1 D2 "*/Expressions/K K1A1 D2 EXPR--preset-*.json"` | One new preset (Mia library); within footprint | anything else |
 | K1-D4 | Owner | In the Clip Editor, select **only `shot3`**; the playhead stays in `shot3`. Run the Normalizer → **Rebuild Selected Shot(s)**. Wait. | Returns responsive | a dialog or error |
-| K1-D5 | Shell | `K-CollectLogs N3` | Normalizer `shot3` (2 targets) PASS/PASS G1; `mem_ok` True; CPM log quiet apart from the modal yield | anything else |
+| K1-D5 | Shell | `K-CollectLogs K1A1 N3` | Normalizer `shot3` (2 targets) PASS/PASS G1; `mem_ok` True; CPM log quiet apart from the modal yield | anything else |
 | K1-D6 | Owner | P | Same broker; CPM Mia scope intact; idle | anything else |
 | K1-D7 | Owner | Change one Mia face slider (Animation Set Editor) to a clearly different value. In CPM, Expressions → `K K1A1 D2 EXPR` → **Apply Preset**. Then **Edit > Undo** once. | "Expression applied"; then the slider returns | any refusal |
 | K1-D8 | Owner | P | Apply committed G1 with no rescope; Undo restored; idle | anything else |
 | **K1-E1** | Owner | Close CPM with the title-bar **X** (close order X: CPM outlived N2 and N3). P. | Slot empty; module resident; Normalizer views present; idle | anything else |
 | K1-E2 | Owner | With CPM closed (close order Y), selection **only `shot3`**, run the Normalizer → **Rebuild Selected Shot(s)**. Wait. | Responsive | a dialog or error |
-| K1-E3 | Shell | `K-CollectLogs N4` | `shot3` PASS/PASS G1; `mem_ok` True | anything else |
+| K1-E3 | Shell | `K-CollectLogs K1A1 N4` | `shot3` PASS/PASS G1; `mem_ok` True | anything else |
 | K1-E4 | Owner | P (settled resource checkpoint) | Idle; resource rules §5.4 | any §5.4 STOP |
 | K1-E5 | Owner | Reopen CPM (Scripts menu); choose **`mia1`** (playhead still `shot3`). P. | Same module/run, new window; G1 scope; idle | anything else |
 | K1-E6 | Owner | Expressions → `K K1A1 D2 EXPR` → **Delete Preset** → confirm. Move the playhead into **`shot10`**, **Refresh Model List**, choose **`krystal20201`**, Body Presets → `K K1A1 B3 BODY` → **Delete Preset** → confirm. | Both moved to Trash | anything else |
-| K1-E7 | Shell | `K-Library` | Libraries equal their pre-K state apart from the Trash entries | any other difference |
+| K1-E7 | Shell | `K-Library K1A1 library_E7` | Libraries equal their pre-K state apart from the Trash entries | any other difference |
 | **K1-F1** | Owner | P (final settled checkpoint). Then, **with CPM still open**, exit SFM (**File > Exit**) and choose **Don't Save**. | SFM exits normally | a hang, crash or extra dialog |
-| K1-F2 | Shell | `K-CollectLogs final`; `K-RemoveProbe K1A1`; fixture hash check; `K-Seal K1A1` | U3 inventory restored exactly; fixture unchanged; G1 untouched | anything else |
+| K1-F2 | Shell | `K-CollectLogs K1A1 final`; `K-Finalize K1A1` (`S2 UNTOUCHED`); `K-RemoveProbe K1A1` (app + fixture unchanged; live list sealed); after adjudication `K-Disposition K1A1 <verdict>` (seals) | Expected K inventory restored exactly; fixture unchanged; G1 untouched | anything else |
 
 **K1 PASS:** every step as stated in PID-continuous K1; one run ID; one broker for both consumers
 throughout; 4 Normalizer PASS with `mem_ok` True; every CPM action committed with no refusal, stale
@@ -367,30 +374,30 @@ event or rescope; idle at every P; §5.4 rules hold.
 | Step | Actor | Action | PASS / expected | STOP if |
 |---|---|---|---|---|
 | K2-S1 | Shell | `K-New K2A1 <fixture>`; `K-Preflight K2A1 -Owner1Recorded` (includes `S2 BASELINE OK`); `K-DeployProbe K2A1` | `K READY` | any gate |
-| K2-S2 | Owner | Start SFM fresh; open `testscripts.dmx`; playhead in **`shot10`**; Clip Editor selection **only `shot9`**. | — | — |
+| K2-S2 | Owner | Start SFM fresh; open `testscripts.dmx`. **DIV (D3 = B):** in the Clip Editor select **only `shot9`** first; then move the playhead into **`shot10`**; then confirm both. | Playhead `shot10`; selection only `shot9` | either shot wrong |
 | K2-S3 | Owner | P | No broker yet | a broker exists |
 | **K2-A1** | Owner | Open CPM (CPM first, cold); choose **`krystal20201`**. P. | CPM constructs the broker; G1 scope; idle | anything else |
 | K2-A2 | Owner | Body Presets → **Save New** `K K2A1 A2 BODY`. | "Body Preset saved" | — |
-| K2-A3 | Shell | `K-Library`, `K-Readback A2` | One new preset | — |
-| K2-A4 | Owner | (DIV) Run the Normalizer → **Rebuild Selected Shot(s)** (`shot9`). Wait. | — | — |
-| K2-A5 | Shell | `K-CollectLogs N1` | `shot9` PASS/PASS **G1** | — |
+| K2-A3 | Shell | `K-Library K2A1 library_A3`; `K-Readback K2A1 A2 "*/Body Presets/K K2A1 A2 BODY--preset-*.json"` | One new preset | — |
+| K2-A4 | Owner | (DIV; confirm playhead `shot10` and selection only `shot9`) Run the Normalizer → **Rebuild Selected Shot(s)** (`shot9`). Wait. | — | — |
+| K2-A5 | Shell | `K-CollectLogs K2A1 N1` | `shot9` PASS/PASS **G1** | — |
 | K2-A6 | Owner | P | Same broker; G1 views for both kinds; idle | — |
 | **K2-B1** | Shell | With SFM open and both consumers idle (CPM open on Krystal, no prompt): `K-GenerationSwitch K2A1` | `S2 PHASE A OK`, `S2 G2 ACTIVE OK` (exact G2) | any STOP from the frozen tooling: follow its printed instruction |
 | K2-B2 | Owner | P | Live Master G2; **no acquisition, no refusal**; CPM still shows its G1 scope; leases 0 | any acquisition |
 | **K2-C1** | Owner | (Normalizer touches G2 first) Run the Normalizer → **Rebuild Selected Shot(s)** (`shot9`). Wait. | — | — |
-| K2-C2 | Shell | `K-CollectLogs N2` | `shot9` PASS/PASS with logged live Master **G2**; `cohort_acquired` for G2 (no G1 reuse) | G1 used, or FAIL |
+| K2-C2 | Shell | `K-CollectLogs K2A1 N2` | `shot9` PASS/PASS with logged live Master **G2**; `cohort_acquired` for G2 (no G1 reuse) | G1 used, or FAIL |
 | K2-C3 | Owner | P | A G2 `normalizer_compat` view; CPM window still G1 scope (pure, no lease); idle | a lease, or a CPM rebuild already happened |
 | **K2-D1** | Owner | In CPM (still Krystal) Body Presets → `K K2A1 A2 BODY` → **Apply Preset**. | **Expected refusal:** "Preset could not be applied safely…" (generic guard copy). Dismiss it. CPM rebuilds and counts return. | no refusal, a different text, or a mutation |
-| K2-D2 | Shell | `K-CollectLogs D1` | Exactly one `AUTHORIZATION_REFUSED … generation-mismatch`; no Apply outcome; `REBUILD_SCHEDULED` → `REBUILD` → one Select Model to healthy **G2**; no replay | anything else |
+| K2-D2 | Shell | `K-CollectLogs K2A1 D1` | Exactly one `AUTHORIZATION_REFUSED … generation-mismatch`; no Apply outcome; `REBUILD_SCHEDULED` → `REBUILD` → one Select Model to healthy **G2**; no replay | anything else |
 | K2-D3 | Owner | P | CPM G2 scope (same window); both kinds have G2 views; fixture unchanged since K2-B2; idle | anything else |
 | K2-D4 | Owner | Deliberately **Apply Preset** `K K2A1 A2 BODY` again; then **Edit > Undo** once. | "Body Preset applied" (G1-provenance preset, compatible semantic set, §17); then visual return | any refusal |
 | K2-D5 | Owner | P | Authorized **G2**, committed; Undo restored; idle | anything else |
-| **K2-E1** | Owner | Select **only `shot3`** (playhead stays `shot10`, so the state is DIV). Run the Normalizer → **Rebuild Selected Shot(s)**. Wait. | — | — |
-| K2-E2 | Shell | `K-CollectLogs N3` | `shot3` PASS/PASS **G2**; `mem_ok` True | — |
+| **K2-E1** | Owner | **DIV (D3 = B):** in the Clip Editor select **only `shot3`** first; then move the playhead back into **`shot10`** if it moved; then confirm both. Run the Normalizer → **Rebuild Selected Shot(s)**. Wait. | — | — |
+| K2-E2 | Shell | `K-CollectLogs K2A1 N3` | `shot3` PASS/PASS **G2**; `mem_ok` True | — |
 | K2-E3 | Owner | In CPM, **Delete Preset** `K K2A1 A2 BODY` → confirm. Close CPM with **X**. P. | Moved to Trash; closed; idle under G2 | — |
-| K2-E4 | Shell | `K-Library` | Equal to pre-K2 apart from the Trash entry | — |
+| K2-E4 | Shell | `K-Library K2A1 library_E4` | Equal to pre-K2 apart from the Trash entry | — |
 | **K2-F1** | Owner | With CPM closed, exit SFM; **Don't Save**. | Normal exit | — |
-| K2-F2 | Shell | `K-CollectLogs final`; **`K-Finalize K2A1`** (`S2 RESTORED EXACT G1`); `K-RemoveProbe K2A1`; fixture check; `K-Seal K2A1` | Exact G1; U3 inventory; fixture unchanged | restoration not exact: do not start SFM; report |
+| K2-F2 | Shell | `K-CollectLogs K2A1 final`; **`K-Finalize K2A1`** (`S2 RESTORED EXACT G1`); `K-RemoveProbe K2A1` (app + fixture unchanged); after adjudication `K-Disposition K2A1 <verdict>` (seals) | Exact G1; U3 inventory; fixture unchanged | restoration not exact: do not start SFM; report |
 
 **K2 PASS:**
 - G1 → exact G2 is proven.
@@ -402,25 +409,16 @@ event or rescope; idle at every P; §5.4 rules hold.
 - Idle at every P.
 - Exact G1 was restored.
 
-## 10. K3 (optional, D2) — All Shots with CPM resident
+## 10. K3 — not part of K (D2 = B)
 
-Fresh process, G1. Open CPM first (Krystal, `shot10`), then **Rebuild All Shots** once: the first
-Normalizer use, so the admission guard allows it. Then CPM: one Body Apply and Undo. Then exit with
-**Don't Save**.
-
-PASS:
-- the All Shots PASS matches D2-2's target classes for this fixture;
-- `mem_ok` True throughout;
-- CPM continuation is unrefused;
-- idle.
-
-The §5.4 thresholds are **observational** in K3: a crash or `mem_ok=False` is a recorded K finding
-(FAIL) for the owner's disposition, not something K repairs.
+**Rebuild All Shots** with CPM resident is **excluded from the K PASS gate**. It remains optional post-K
+stress work, outside qualification, and K-0 prepares nothing for it. The Normalizer's All Shots
+correctness stays carried by D2-2 and the F3 admission guard.
 
 ## 11. PASS / FAIL / INCONCLUSIVE / STOP and disposition
 
-- **PASS (K):** K1 and K2 PASS (plus K3 if D2 includes it), with every observation present and every
-  §5.4 rule holding.
+- **PASS (K):** K1 and K2 PASS, with every observation present and every §5.4 rule holding. K3 is
+  not part of the gate.
 - **FAIL:** a product behavior contradicts an expectation. Examples:
   - an unexpected refusal, rescope or stale event;
   - a lease left outstanding;
@@ -450,38 +448,26 @@ The §5.4 thresholds are **observational** in K3: a crash or `mem_ok=False` is a
 | Session 4 Fit release notes (bare `release()` on the exception path) | **Carried as a historical note** | K performs only ordinary Fit and never induces a Fit exception. |
 | Body bone-scale rollback-verification branch covered offline only | **Carried as a historical note** | K's ordinary Body Apply may write bone scales but never fails, so the rollback branch is not exercised. |
 | Stale-scope UI presentation (generic guard copy) | **Carried as accepted known behavior; observed in K2-D1** | — |
-| `SidecarMissing` messaging undecided | **Carried; not exercised unless D1 chooses (b)** | — |
+| `SidecarMissing` messaging undecided | **Carried; not exercised (D1 = A)** | — |
 | Legacy `body.scale.head` preset message | **Carried** (legacy edge case) | — |
 | Product identity strings (window slot, log name, `PROD_VERSION`) | **Deferred to L** | — |
 | R15 note: the no-op Apply 0.2 s before a Normalizer report write ("alternation stays with K") | **Tested in K** | Repeated alternation in K1 and K2. |
 | Normalizer repeated-command retained memory (F) | **Carried as accepted known behavior; bounded and recorded** | Command budget and §5.4 STOP thresholds. |
 
-None is a genuine blocker to K execution. D1 and D2 are design decisions, not defects.
+None is a genuine blocker to K execution.
 
-## 13. Decisions required before K-0 / execution
+## 13. Decisions (resolved by the owner, 2026-10-09)
 
-- **D1 — shared authority-unavailable failure.** No qualified mechanism creates it.
-  - **(a) Recommended:** carry offline C7 (CPM fail-closed before mutation), I-1 I2 (Normalizer
-    fail-closed) and the Normalizer's pre-mutation `ProbeError` path as the evidence. K exercises
-    the stale-generation shared failure/recovery only.
-  - **(b)** Authorize K-0 to prepare and offline-qualify a new controlled authority-unavailable state
-    (for example a Master with no published sidecar, restored by the frozen finalize). That is a new
-    mechanism, would extend K by one process, and would also settle the `SidecarMissing` messaging
-    observation.
-- **D2 — All Shots with CPM resident (K3).**
-  - **Include** (recommended if a real heavy workflow must be covered): accept the 32-bit memory risk
-    (D1-3 reached about 3.42 GB working set within one command) as an observational K finding.
-  - **Or exclude:** carry D2-2 and F3 as Normalizer evidence and leave heavy-scene coexistence as
-    accepted known behavior for L/user guidance.
-- **D3 — divergent-ingress operation.** Can the operator select the `shot9` clip in the Clip Editor
-  while the playhead stays in `shot10`, and the reverse, in this SFM build? If selecting a clip moves
-  the playhead, K-0 rewrites K1-C1/K2-A4 to set the selection first and then the playhead, and each
-  step's visual confirmation still applies. **The owner should confirm the exact SFM gesture.**
-- **D4 — K-0 approval.** Approve preparing the qualification-only K tooling (§6) with a commit and
-  push "K PREPARED, NOT RUN" before any execution authorization.
+- **D1 = A:** no new authority-unavailable failure mechanism. The existing CPM/Normalizer fail-closed
+  evidence (C7, I-1 I2) is reused, and K tests the shared stale-generation G1→G2 recovery only.
+- **D2 = B:** K3 / Rebuild All Shots is excluded from the K PASS gate. K consists of K1 and K2 only.
+  K3 remains optional post-K stress work.
+- **D3 = B:** for a divergent-shot state, set the Clip Editor **selection first, then move the
+  playhead second** to the CPM shot, then explicitly confirm both before continuing (K1-B1, K2-S2,
+  K2-E1).
+- **D4 = YES:** the K-0 tooling has been prepared and qualified offline (§15).
 
-**Prerequisite noted, not a decision:** SFM was running (PID 14316, from pre-K U3) when this design was
-written. It must be closed before `K-Preflight`.
+**Prerequisite (not a decision):** SFM must be closed before `K-Preflight`.
 
 ## 14. Human checkpoints (expected)
 
@@ -491,4 +477,101 @@ Multi-part owner rows are split into single exact actions during execution (§7 
 |---|---|---|---|
 | K1 | 19 | about 30 | 9 |
 | K2 | 11 | about 18 | 8 |
-| K3 (if included) | about 5 | about 8 | about 4 |
+
+## 15. K-0 results — tooling prepared and qualified offline (2026-10-09)
+
+The tooling lives in `real_sfm_qualification/cpm_k_integrated/` and is qualification-only. It has not
+been deployed, and no production file changed.
+
+| File | SHA-256 | Role |
+|---|---|---|
+| `CPM_K_Probe.py` | `96d873b795f6fc8e10e762c06045990fbd59663fdf6e03e86dfb79dcdd759365` | observation-only probe (item-8 probe + declared deltas) |
+| `K_DRIVER.ps1` | `270555e9d4639d99cbeb7d935c8e68582d1b33c97da05afd32f4c5b2e3cdfa0b` | Windows PowerShell 5.1 driver: frozen Session 2 §2.1 block + K functions |
+| `K_FIXTURE_MANIFEST.json` | `0c390b8d3e3b51b3a3bc42b0473d05f3b48a7f9f26bff987f2cc02cd26d27b83` | static pins, shots, scope states, budget, decisions |
+| `k_evidence_reader.py` | `4fb42a3cae4bc81759d197f07c86b4e23bd14f5a6c4c39c7523b211e7966a4c3` | offline reader/adjudication helper |
+| `templates/K_OPERATOR_STEPS_TEMPLATE.md` | `1fb082366d461634685ba7b6a72b834e5392b053a012928ca25d35456d5d7d8d` | operator record template |
+| `test_cpm_k_tooling.py` | `0aa7a106d261a920d60be4df0d1782abd492a46ee9b0446303cf3e01ec3b4c4f` | K-0 qualification |
+
+**Offline qualification** (`test_cpm_k_tooling.py --phase=run`; outputs in `offline_outputs/`):
+
+| Interpreter | Qt | Result |
+|---|---|---|
+| embedded Python 2.7.5 | real PySide 1.2 / Qt 4.8 + model | **156/156 ALL PASS** |
+| Python 3.10.6 (+ Windows PowerShell 5.1 for the driver) | model | **187/187 ALL PASS** |
+
+Coverage:
+- **Pins and manifest:**
+  - the repository app is the K candidate;
+  - the driver's probe and manifest pins equal the actual files;
+  - the copied manifest sections (authority, generation tooling, dependencies, shared package, sidecar
+    reader, historical content, fixture identity) equal the item-8 manifest, and the dependencies
+    equal the repository sources;
+  - the expected K inventory is the accepted Session 4 inventory with exactly the app line changed
+    (`59b8f28b…`, equal to the pre-K U3 inventory);
+  - budget ≤ 4 Selected runs per process; no All Shots; DIV/CONV states; `shot12` excluded;
+  - D1–D4 recorded; §5.4 thresholds are identical in the manifest and the reader.
+- **Probe:**
+  - byte reconstruction from the pinned item-8 probe (`f503c0ab…`) plus the declared delta list, and
+    nothing else;
+  - the item-8 purity rules re-run on it: no forbidden names; only the four pure CPM scene readers;
+    only read broker accessors; only read-only `kernel32` calls (`GetCurrentProcess`,
+    `GetProcessHandleCount`, `GlobalMemoryStatusEx`); one write-once and one append site; no
+    Normalizer invocation; its Normalizer `__main__` sentinels are real Normalizer top-level names.
+- **Runtime** (R15 harness; real Qt and model):
+  - **Refusals:** with no pointer, or with an undeployed attempt.
+  - **Normalizer-first with the REAL canonical broker:** the broker exists before any CPM module, and
+    the Normalizer names in `__main__` are recorded. The probe leaves the broker state and the
+    `__main__` dictionary unchanged, with no acquisition. A VAS sample is taken, and the reader
+    reports idle.
+  - **CPM joins:** the same broker, the exact K build, and still no acquisition by the probe.
+  - **A strict broker holding both consumer kinds:** only read accessors are used; the diagnostics
+    tail is summarised; a live view lease is not idle; diagnostics and resources failures are
+    explicit (a resources failure is a STOP).
+  - **Write-once and seal:** existing snapshots are never overwritten, the log is append-only, and a
+    sealed attempt is refused.
+  - **The item-8 build installed instead:** reported, and the reader's identity check fails.
+- **Reader:**
+  - every Normalizer log format string it parses exists in the production Normalizer source;
+  - the real redacted Normalizer log (item 8 D) parses as exactly one Selected-Shot `shot3` PASS/PASS
+    run on G1 with `mem_ok` 15/0;
+  - wrong generation, wrong shot and six log mutations are rejected;
+  - per-consumer views, the idle rule, boundary rules (join, lost view, other broker, wrong
+    generation, Normalizer constructs the broker), STOP thresholds and accumulation rules all behave
+    as designed;
+  - Python 2 `long` resource values are accepted.
+- **Driver** (Python 3; sandbox game root with real G1 published by the real publisher, the real
+  previous and K apps, and the real launcher, adapter, projection, Normalizer, shared package and
+  sidecar reader):
+  - the frozen block is byte-identical, and Section 1 equals the item-8 driver's;
+  - the CPM app is never written;
+  - read-only STOPs write nothing and leak no temporary files: wrong fixture document, OWNER-1,
+    harness and item-8 pointer residue, changed dependency, unexpected script, wrong installed app,
+    changed fixture;
+  - preflight records the expected inventory and exact G1;
+  - probe-only deployment makes an exact one-line Scripts difference;
+  - single active attempt;
+  - whole-root library inventory and readback;
+  - the Normalizer log is collected and parsed;
+  - exactly one G1 → exact G2 transition, then exact G1 restoration;
+  - an unexpected Scripts change refuses removal without spoiling the retry;
+  - removal proves the app and fixture unchanged;
+  - PASS and FAIL dispositions never change the app, the final inventory equals the expected one,
+    and the attempt is sealed and verifiable;
+  - a K1-style attempt proves untouched authority;
+  - a changed fixture document stops removal.
+- **Sensitivity:**
+  - a probe with one added forbidden name is rejected (reconstruction and purity);
+  - a driver that writes the CPM app is rejected.
+
+**Defect found and fixed during K-0 (tooling only):** under Python 2.7 the reader treated resource
+values above 2³¹ (for example about 3.1 GB of private bytes, which are Python 2 `long`) as unobserved.
+`k_evidence_reader.py` now accepts both integer types, and a dedicated check was added.
+
+**Final K structure:**
+- **K PASS = K1 + K2**, two fresh SFM processes.
+- **K1 (G1):** Normalizer-first cold start; CPM joins; DIV (selection first, playhead second);
+  CONV; alternation; close orders X and Y; exit with CPM open. 4 Selected runs.
+- **K2:** CPM-first cold start; the frozen G1 → exact G2 transition with the Normalizer touching G2
+  first; CPM's single generation-mismatch refusal and rebuild; G2 alternation; exit with CPM closed;
+  exact G1 restoration. 3 Selected runs.
+- K3 is not part of K.

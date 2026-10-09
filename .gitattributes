@@ -309,3 +309,12 @@ real_sfm_qualification/cpm_item8_post_cleanup/raw/** -text whitespace=cr-at-eol
 # The probe scene snapshots were written by Python 2.7 json.dumps(indent=...), whose ", "
 # item separator leaves a trailing space on each line. Kept byte-exact.
 real_sfm_qualification/cpm_item8_post_cleanup/raw/I8A1/scene_snapshots/*.json -text -whitespace
+
+# K-0 integrated-product qualification tooling: pinned bytes (probe, driver, manifest) must survive
+# checkout and archive export unchanged.
+real_sfm_qualification/cpm_k_integrated/*.py text eol=lf
+real_sfm_qualification/cpm_k_integrated/*.json text eol=lf
+real_sfm_qualification/cpm_k_integrated/*.ps1 text eol=lf
+real_sfm_qualification/cpm_k_integrated/*.md text eol=lf
+real_sfm_qualification/cpm_k_integrated/templates/*.md text eol=lf
+real_sfm_qualification/cpm_k_integrated/offline_outputs/*.txt text eol=lf

@@ -8,14 +8,20 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**K — Integrated CPM/Normalizer product workflow qualification: DESIGN PREPARED FOR REVIEW
-(2026-10-09).** Design and runbook:
-`cpm/qualification/K_INTEGRATED_PRODUCT_WORKFLOW_QUALIFICATION_DESIGN.md`.
-- **K is not started:** no SFM process, no deployment, no K tooling built, no production change.
-- **Plan:** K-0 tooling preparation, then processes K1 (Normalizer-first, alternation, ingress,
-  close orders) and K2 (joint generation transition), plus optional K3 (All Shots, decision D2).
-- **Open decisions before K-0/execution:** D1 (authority-unavailable shared failure), D2 (K3), D3
-  (divergent-ingress SFM gesture), D4 (K-0 approval).
+**K — Integrated CPM/Normalizer product workflow qualification: K PREPARED, NOT RUN (2026-10-09).**
+- **Design approved:** `cpm/qualification/K_INTEGRATED_PRODUCT_WORKFLOW_QUALIFICATION_DESIGN.md`,
+  with D1 = A, D2 = B, D3 = B and D4 = YES:
+  - no new authority-unavailable mechanism; the shared G1→G2 stale-generation recovery only;
+  - **K PASS = K1 + K2 only**; K3 / All Shots is optional post-K stress work;
+  - divergent shots: selection first, playhead second, confirm both.
+- **K-0 tooling** in `real_sfm_qualification/cpm_k_integrated/`:
+  - probe `96d873b7…` (item-8 probe + declared deltas);
+  - driver `270555e9…` (frozen Session 2 block + K functions; never writes the CPM app);
+  - manifest `0c390b8d…`, reader `4fb42a3c…`, operator template.
+- **Offline qualification:** `test_cpm_k_tooling.py` **2.7.5 156/156** (real Qt + model) and **3.10
+  187/187**, including the driver sandbox G1 → exact G2 → exact G1.
+- **Not done:** no SFM run, no probe deployment, no K1/K2 execution, no production change. K
+  execution needs a separate authorization, in two fresh SFM processes.
 
 **Pre-K CPM UI polish pass — LIVE VERIFIED / PASS (2026-10-09).** The final build
 **`4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7`** is installed and is **the
@@ -355,7 +361,8 @@ Evidence:
   1. **Legacy preset.** Still open. Apply of an old `body.scale.head` preset is refused. Future
      message: "This preset uses an outdated scale format. Delete this preset and save a new Body
      preset." This is a legacy edge case only; generic bone-scale persistence works.
-  2. **Implemented in the pre-K UI polish pass (offline only; live check pending):**
+  2. **Implemented in the pre-K UI polish pass, LIVE VERIFIED / PASS (final build `4e35f292…`,
+     U2 + U3):**
      - Update Preset confirmation copy, with no question icon;
      - wider window with all tabs visible;
      - semantic button colors;
@@ -407,10 +414,9 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. The K design is prepared for owner review. After decisions D1–D4, K-0 (qualification-only
-tooling and offline qualification) needs its own authorization, and K execution a further
-authorization from the K-0 checkpoint, in fresh SFM processes. `4e35f292…` remains installed and is
-the exact CPM build eligible to enter K. L has not begun.
+Stop. K is prepared, not run. K execution (K1 then K2, each in a fresh SFM process, from the K-0
+checkpoint) needs a separate explicit authorization. `4e35f292…` remains installed and is the exact
+CPM build under K. L has not begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
