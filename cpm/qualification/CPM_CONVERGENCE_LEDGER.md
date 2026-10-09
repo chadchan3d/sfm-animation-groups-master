@@ -8,22 +8,19 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**Pre-K CPM UI polish pass — wording-only candidate IMPLEMENTED; offline qualification PASS
-(2026-10-09).** The current repository candidate is
-**`4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7`**.
-- It supersedes `7e4686d7…` by changing only the two opening Help paragraphs under **Getting
-  started**.
-- It is **not deployed** and has not been viewed live.
-- UI test: **100/100** (2.7.5) and **65/65** (3.10); all existing suites PASS.
+**Pre-K CPM UI polish pass — LIVE VERIFIED / PASS (2026-10-09).** The final build
+**`4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7`** is installed and is **the
+exact CPM candidate eligible to enter K**.
+- **U3** verified it live as a Help wording delta from U2: owner review of the Getting started Help
+  ("good looks"), plus a log showing the exact build loaded, Help opened and the close finalized,
+  with no authorizations, mutations or refusals.
+- It supersedes `7e4686d7…` (U2 LIVE VERIFIED / PASS) only in those two Help paragraphs. The offline
+  UI test passes 100/100 and 65/65, and all existing suites PASS.
 - Record: `PRE_K_UI_POLISH_PASS.md` §H; outputs in `pre_k_ui_polish_outputs_r3/`.
-
-The **installed** build is still `7e4686d7c6fe699743a1f611e50d7adce030037f147c5d6c7654c589f30bdb36`.
-It is **LIVE VERIFIED / PASS** (attempt U2) and differs from `4e35f292…` only in that Help text.
-Which build K starts from (`4e35f292…`, after deployment) is for the next authorization.
 - **K: NOT STARTED** (needs separate authorization; must begin in a fresh SFM process). L: not
   started.
-- It supersedes the first visual candidate `5c6e2789…`. That candidate's record and outputs are
-  retained, and its live attempt U1 was closed as SUPERSEDED / NO QUALIFICATION VERDICT.
+- Superseded candidates are retained with their records: `7e4686d7…` (U2 PASS) and `5c6e2789…`
+  (U1 SUPERSEDED / NO QUALIFICATION VERDICT).
 - Item 8 qualified `bfba4d3a…` functionally. That evidence is unchanged, and the UI pass is
   byte-bounded against it.
 
@@ -58,6 +55,9 @@ in `pre_k_ui_polish_outputs_r2/` (first candidate: `pre_k_ui_polish_outputs/`).
   shows the exact build loaded, the window shown, Help opened, and the close finalized, with no
   authorizations, mutations or refusals. Its only messages were the unchanged "No current shot." and
   "Choose a model first." guards.
+- **U3** (`4e35f292…`): **PASS** as a Help wording delta from U2. The owner reviewed the Getting
+  started Help; the log shows the exact build loaded, Help opened and the close finalized. Its only
+  message was the expected "No current shot." at launch.
 
 No model was selected in U2. Enabled border colors, the Update confirmation and Review rest on the
 offline real-Qt checks and on U1 hands-on use. Each deployment was verified with SFM closed: Scripts
@@ -80,7 +80,7 @@ deployment were removed. **The exact qualified candidate remains installed.** No
 blocker was found. **CPM is eligible to enter K; K and L have not started. K, if later authorized,
 must begin in a fresh SFM process.** This checkpoint does not decide L's final installation layout.
 (Superseded for K entry by the pre-K UI pass: the build eligible to enter K is now the live-verified
-`7e4686d7…`.)
+`4e35f292…`.)
 
 - **Attempt `I8A1` (2026-10-08, from `d4ad3cf`):**
   - one SFM process, PID 36912;
@@ -167,18 +167,19 @@ The live authority is exact production G1 after Session 4: Master `ac45e5c1…`,
 `d810d648…`, one sidecar `bcd97641…`.
 
 **Deployed and verified** (runbook §0; re-verified at the 2026-10-06 transfer checkpoint and by
-item-8 `I8-Preflight`/disposition on 2026-10-08 and the U1/U2 deployments on 2026-10-09; the shared package's qualification-only
+item-8 `I8-Preflight`/disposition on 2026-10-08 and the U1–U3 deployments on 2026-10-09; the shared package's qualification-only
 `projections.py` is intentionally not deployed):
 - launcher `996ca483…` as the Scripts-menu entry;
-- private app **`7e4686d7…`** (pre-K UI pass, LIVE VERIFIED / PASS in U2, 2026-10-09; the
-  item-8-qualified `bfba4d3a…` it replaced is preserved, see below) in
+- private app **`4e35f292…`** (final pre-K UI build, LIVE VERIFIED / PASS in U3, 2026-10-09; the
+  builds it replaced, `7e4686d7…`, `5c6e2789…` and the item-8-qualified `bfba4d3a…`, are
+  preserved, see below) in
   `usermod/scripts/ChadChan3D_CPM/` (outside `scripts/sfm`, no `__init__.py`);
 - probe v3 `ce4ace98…`.
 
-`bfba4d3a…` has a verified backup in the U1 attempt folder and can also be restored from git
-(`2fe9a27`). The previous app `9a78fc96…` remains restorable from git (`9d405c8`). The item-8 probe and campaign
+Rollback chain, held in the local U3/U2/U1 attempt folders: `7e4686d7…` → `5c6e2789…` →
+`bfba4d3a…`. `bfba4d3a…` can also be restored from git (`2fe9a27`). The previous app `9a78fc96…` remains restorable from git (`9d405c8`). The item-8 probe and campaign
 pointer are not deployed. The Scripts deployment equals the accepted Session 4 inventory
-(`cefc2b88…`) except the private-app line (U2 inventory `24630e83…`). The live authority is exact
+(`cefc2b88…`) except the private-app line (U3 inventory `59b8f28b…`). The live authority is exact
 production G1. Any later deployment change follows the R15 restart rule.
 
 The step-9 G18AN menu copy has been removed. The pre-R15 app `664a660c…` and probe v2 are archived
@@ -381,9 +382,9 @@ Evidence:
     whose U1 attempt was closed as SUPERSEDED / NO QUALIFICATION VERDICT). It is superseded in the
     repository by the Help-wording-only candidate `4e35f292…` (offline PASS; not deployed).
 
-  **Pre-K complete.** `7e4686d7…` is the installed, live-verified build. `4e35f292…` is the current
-  repository candidate, differing only in Help text. The next authorization decides its deployment
-  and K's starting build.
+  - Final pre-K UI build `4e35f292…`: **LIVE VERIFIED / PASS** (U3, Help wording delta from U2).
+
+  **Pre-K complete. `4e35f292…` is the exact CPM candidate eligible to enter K.**
   K and L have not started. K requires its own authorization and must begin in a fresh SFM process.
   L's final installation layout is undecided.
 - **Session 4 notes (not failures; carried to K; unchanged by items 7–8):**
@@ -397,13 +398,9 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. The Help-wording candidate `4e35f292…` is implemented and qualified offline, and it is not
-deployed. `7e4686d7…` (LIVE VERIFIED / PASS) remains installed. The next separate authorization
-decides two things:
-- deployment of `4e35f292…`;
-- K's starting build.
-
-K may begin only on explicit authorization, in a fresh SFM process. L follows K. Neither has begun.
+Stop. Pre-K is complete: `4e35f292…` is installed, LIVE VERIFIED / PASS, and is the exact CPM
+candidate eligible to enter K. K may begin only on a separate explicit authorization, in a fresh SFM
+process. L follows K. Neither has begun.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

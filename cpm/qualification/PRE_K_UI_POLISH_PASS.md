@@ -1,14 +1,9 @@
 # Pre-K CPM UI polish pass — design and implementation evidence
 
-**Status: wording-only candidate IMPLEMENTED — offline qualification PASS (2026-10-09).** The current
-repository candidate is
-**`4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7`** (§H). It **supersedes**
-`7e4686d7…` by changing only the two opening Help paragraphs. It is **not deployed** and has not
-been viewed live.
-
-`7e4686d7…` remains the **installed** build and keeps its LIVE VERIFIED / PASS (U2, §0.3). Whether K
-starts from `4e35f292…` is for the next authorization; it needs deployment first. **K: NOT
-STARTED.** L: not started.
+**Status: LIVE VERIFIED / PASS — Help wording delta from U2 (2026-10-09; attempt U3).** The
+installed build is **`4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7`** (§H).
+It is **the exact CPM candidate eligible to enter K**. **K: NOT STARTED** (needs separate
+authorization). L: not started.
 
 This is a presentation-only pass:
 - `4e35f292…` supersedes `7e4686d7…`, which superseded the first visual candidate `5c6e2789…`;
@@ -52,6 +47,29 @@ Test updates:
 
 Sensitivity: the superseded `7e4686d7…` is rejected on the pin, the reconstruction and all three
 Help checks.
+
+**Live check U3 (Help wording delta from U2): PASS.** `4e35f292…` replaced `7e4686d7…`, deployed
+with SFM closed:
+- Scripts difference = the app line only (inventory `59b8f28b…`);
+- live authority exact G1 unchanged;
+- the `7e4686d7…` bytes were saved as the U3 restore target.
+
+The owner opened CPM and Help in real SFM and confirmed the **Getting started** section renders
+cleanly ("good looks").
+
+Log for PID 14316, run `20261009-141453-pid14316`:
+- build `4e35f292…` loaded `ready`;
+- window shown, Help opened, close finalized;
+- 0 authorizations, mutations or refusals;
+- one expected guard message: Refresh at launch, "No current shot.", because no session was open.
+
+The U2 presentation campaign was not repeated, as authorized: U2 stays the live evidence for every
+other presentation element, and the offline reconstruction proves the delta is only the Help text.
+
+Rollback chain, held in the local attempt folders:
+- `7e4686d7…` (U3);
+- `5c6e2789…` (U2);
+- `bfba4d3a…` (U1; also in git at `2fe9a27`).
 
 ## 0. Final visual refinement (`7e4686d7…`; superseded by §H, record unchanged)
 
