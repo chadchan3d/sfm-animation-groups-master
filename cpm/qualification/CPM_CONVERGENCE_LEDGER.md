@@ -8,8 +8,26 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**K — Integrated CPM/Normalizer product workflow qualification: IN PROGRESS. K1 COMPLETE / PASS
-(2026-10-10, attempt K1A2). K2 NOT STARTED.**
+**K — Integrated CPM/Normalizer product workflow qualification: COMPLETE / PASS (2026-10-10).**
+K PASS = K1 PASS (K1A2, 53/53) + K2 PASS (K2A1, 39/39), on CPM `4e35f292…` and Normalizer
+`1f4ec5a2…`. Exact production CPM/Normalizer and exact G1 authority remain installed. **L: NOT
+STARTED.**
+- **K2A1:** one fresh SFM process (PID 41240) from `13f57c1e…`:
+  - **CPM first:** CPM created the one broker `0x3101aa50`; Save and the Normalizer's `shot9` run
+    on G1 followed.
+  - **G1→G2 switch:** exact G2 via the frozen tooling with both tools idle. The change alone
+    caused no acquisition or rebuild.
+  - **Normalizer touched G2 first:** a new G2 cohort, no G1 reuse.
+  - **CPM recovery:** exactly one `generation-mismatch` refusal (no mutation, no replay), then one
+    rebuild to healthy G2. The deliberate G2 Apply committed a real change and its Undo restored
+    the operator's value.
+  - **G2 alternation:** the Normalizer's `shot3` run passed on G2; Delete passed; CPM closed; exit.
+  - **Restoration:** `S2 RESTORED EXACT G1`; app and fixture unchanged; idle at every probe;
+    `mem_ok` never False. The adjudication-script correction is recorded (design §18).
+- **Evidence:** design §17 (K1), §18 (K2 and K completion); redacted raw copies in
+  `real_sfm_qualification/cpm_k_integrated/raw/` (K1A1, K1A2, K2A1; `MANIFEST.md`).
+
+Earlier K1 record:
 - **K1A2:** one fresh SFM process (PID 36888) from the K-0-amended checkpoint `93317866…`.
   Mechanical adjudication **53/53 PASS** over the sealed evidence; disposition PASS. Proven:
   - **Normalizer first:** it created the one canonical broker `0x338d0630` before CPM existed, and
@@ -55,8 +73,7 @@ exact CPM candidate eligible to enter K**.
 - It supersedes `7e4686d7…` (U2 LIVE VERIFIED / PASS) only in those two Help paragraphs. The offline
   UI test passes 100/100 and 65/65, and all existing suites PASS.
 - Record: `PRE_K_UI_POLISH_PASS.md` §H; outputs in `pre_k_ui_polish_outputs_r3/`.
-- **K: NOT STARTED** (needs separate authorization; must begin in a fresh SFM process). L: not
-  started.
+- K has since run on this build and is COMPLETE / PASS (see above). L: not started.
 - Superseded candidates are retained with their records: `7e4686d7…` (U2 PASS) and `5c6e2789…`
   (U1 SUPERSEDED / NO QUALIFICATION VERDICT).
 - Item 8 qualified `bfba4d3a…` functionally. That evidence is unchanged, and the UI pass is
@@ -424,8 +441,9 @@ Evidence:
   - Final pre-K UI build `4e35f292…`: **LIVE VERIFIED / PASS** (U3, Help wording delta from U2).
 
   **Pre-K complete. `4e35f292…` is the exact CPM candidate eligible to enter K.**
-  K and L have not started. K requires its own authorization and must begin in a fresh SFM process.
-  L's final installation layout is undecided.
+  - **K — COMPLETE / PASS** (K1A2 + K2A1, 2026-10-10).
+
+  L has not started; it needs separate authorization. L's final installation layout is undecided.
 - **Session 4 notes (not failures; carried to K; unchanged by items 7–8):**
   - Fit's exception path releases the stage with a bare `release()` (no
     `PROD_CPM_FIT_STAGE_RELEASED` line; result discarded); a raising success-path release could in
@@ -437,8 +455,9 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. K1 is COMPLETE / PASS. K2 (joint G1→G2 generation transition, fresh SFM process) needs a
-separate explicit authorization. K is IN PROGRESS. L has not begun. `4e35f292…` remains installed.
+Stop. K is COMPLETE / PASS. L (installation/coexistence/release qualification, handoff §24) needs a
+separate explicit authorization and has not begun. `4e35f292…`, the production Normalizer
+`1f4ec5a2…` and exact G1 authority remain installed.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

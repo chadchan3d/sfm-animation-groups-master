@@ -1,0 +1,50 @@
+[PASS] probes.count_8_contiguous
+[PASS] probes.one_process
+[PASS] probes.no_errors
+[PASS] probes.no_probe_acquisition
+[PASS] probes.identity_ok
+[PASS] probes.one_module_class_run
+[PASS] probes.historical_inactive
+[PASS] probes.no_cpm_names_in_main
+[PASS] cpm_first.baseline_no_broker
+[PASS] cpm_first.cpm_constructs_broker
+[PASS] g1.normalizer_joins_same_broker
+[PASS] broker.one_broker
+[PASS] idle.every_probe_after_broker
+[PASS] generation.exact_g2_activated
+[PASS] transition.no_acquisition_by_change
+[PASS] transition.cpm_quiet_until_touched
+[PASS] normalizer.N1_pass_on_expected_generation
+[PASS] normalizer.N2_pass_on_expected_generation
+[PASS] normalizer.N3_pass_on_expected_generation
+[PASS] normalizer_first_g2.new_g2_cohort_no_g1_reuse
+[PASS] normalizer_first_g2.cpm_still_g1_no_lease
+[PASS] cpm.exactly_one_refusal_generation_mismatch_apply
+[PASS] cpm.refused_apply_no_commit
+[PASS] cpm.refused_apply_no_scene_mutation
+[PASS] cpm.one_rebuild_after_refusal_no_replay
+[PASS] cpm.rebuilt_healthy_g2
+[PASS] cpm.authorizations_g1_before_g2_after
+[PASS] cpm.deliberate_g2_apply_committed
+[PASS] cpm.g2_apply_real_mutation_and_undo
+[PASS] cpm.saves_and_deletes
+[PASS] cpm.close_finalized
+[PASS] cpm.no_historical_formats
+[PASS] cpm.only_action_error_is_expected_refusal
+[PASS] cpm.module_candidate_one_run
+[PASS] g2.both_consumers_g2_views_final
+[PASS] resources.no_stop
+[PASS] library.only_save_delete_footprint
+[PASS] closeout.exact_g1_restored
+[PASS] closeout.app_fixture_unchanged
+RESULT 39/39
+resource trend (seq, private MB, free VAS MB, handles, gdi, user):
+   1 3080 528 1161 1131 105
+   2 3080 506 1165 1149 112
+   3 3096 508 1173 1155 117
+   4 3083 508 1173 1155 117
+   5 3100 507 1175 1155 118
+   6 3091 507 1180 1159 123
+   7 3093 506 1180 1169 129
+   8 3111 506 1180 1153 123
+normalizer VAS telemetry: {'N1': (506707968, 256503808, 13), 'N2': (507162624, 256503808, 13), 'N3': (505823232, 256503808, 15)}

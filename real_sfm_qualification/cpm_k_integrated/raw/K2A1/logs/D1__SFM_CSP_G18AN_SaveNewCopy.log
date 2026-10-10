@@ -1,0 +1,100 @@
+[02:17:26.150000] ========================================================================================================================
+[02:17:26.150000] SFM Character Preset Manager 0.2.0-rc7-g18an-save-new-copy
+[02:17:26.150000] G18AN_RUN run_id=u'20261010-021726-pid41240' pid=41240 parity_oracle=False
+[02:17:26.150000] PROD_R15_MODULE name='chadchan3d_cpm_app' loader='cpm-private-loader-v1' state='ready' build_sha256='4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7' file='<SFM_GAME>\\usermod\\scripts\\ChadChan3D_CPM\\SFM_Character_Preset_Manager.py'
+[02:17:26.182000] PROD_OPERATION_BEGIN id=1 kind=u'Refresh Models' context=None
+[02:17:26.185000] PROD_RESOURCE label=u'ACTION_BEGIN:Refresh Models' working_set_mb=2896.1328125 private_commit_mb=2940.5234375 pagefile_commit_mb=2940.5234375 handles=1162 gdi=1132 user=105 top_widgets=57 dialogs=2
+[02:17:26.199000] PROD_MODELS count=3 initial_index=0
+[02:17:26.200000] PROD_RESOURCE label=u'ACTION_END:Refresh Models' working_set_mb=2896.796875 private_commit_mb=2941.05078125 pagefile_commit_mb=2941.05078125 handles=1162 gdi=1132 user=105 top_widgets=57 dialogs=2
+[02:17:26.200000] PROD_OPERATION_END id=1 kind=u'Refresh Models' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[02:17:26.201000] G18AN_MODAL_WATCHER_STARTED interval_ms=100 scene_pollers=0
+[02:17:26.232000] PROD_WINDOW_SHOWN=True initial_index=0
+[02:17:26.235000] MAINMENU_CALLBACK_RETURNING=True
+[02:17:26.238000] ========================================================================================================================
+[02:17:26.243000] PROD_OPERATION_EVENT_TURN id=1 kind=u'Refresh Models' run_id=u'20261010-021726-pid41240' pid=41240
+[02:17:26.243000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Refresh Models' working_set_mb=2896.66796875 private_commit_mb=2940.5546875 pagefile_commit_mb=2940.5546875 handles=1163 gdi=1139 user=112 top_widgets=57 dialogs=2
+[02:17:28.132000] PROD_OPERATION_BEGIN id=2 kind=u'Select Model' context=None
+[02:17:28.133000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2899.171875 private_commit_mb=2942.84765625 pagefile_commit_mb=2942.84765625 handles=1163 gdi=1149 user=114 top_widgets=57 dialogs=2
+[02:17:28.133000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} previous=None
+[02:17:28.133000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2899.17578125 private_commit_mb=2942.84765625 pagefile_commit_mb=2942.84765625 handles=1163 gdi=1149 user=114 top_widgets=57 dialogs=2
+[02:17:28.163000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:17:29.353000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93' requested_literals=80 master_unknown_literals=0
+[02:17:29.382000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2896.41796875 private_commit_mb=2940.421875 pagefile_commit_mb=2940.421875 handles=1164 gdi=1149 user=114 top_widgets=57 dialogs=2
+[02:17:29.382000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} provider_health=u'healthy' scope_ready=True
+[02:17:29.391000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:17:29.409000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:17:29.429000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:17:29.449000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:17:29.477000] PROD_SELECTION model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' checksum=-1441261258 animset=u'krystal20201' library_key=u'modelpath-sha256-v1:7d2aee52ef3adaa25b252d840b175811ca78893de4fc39b41f8d459f283107a0' expression=52 body=26 other=2 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[02:17:29.478000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2896.58984375 private_commit_mb=2940.421875 pagefile_commit_mb=2940.421875 handles=1164 gdi=1149 user=114 top_widgets=57 dialogs=2
+[02:17:29.478000] PROD_OPERATION_END id=2 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[02:17:29.487000] PROD_OPERATION_EVENT_TURN id=2 kind=u'Select Model' run_id=u'20261010-021726-pid41240' pid=41240
+[02:17:29.487000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2896.58984375 private_commit_mb=2940.421875 pagefile_commit_mb=2940.421875 handles=1164 gdi=1149 user=115 top_widgets=57 dialogs=2
+[02:18:14.154000] PROD_OPERATION_BEGIN id=3 kind=u'Save Current Body' context={'animset_id': (u'DmeAnimationSet', u'krystal20201', 21685, 396236384L), 'model_instance_id': (u'DmeGameModel', u'krystal2020_GameModel', 21686, 4273213272L), 'document_file_id': 0, 'library_identity': {'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}, 'shot_id': (u'DmeFilmClip', u'shot10', 21683, 4279110052L)}
+[02:18:14.155000] PROD_RESOURCE label=u'ACTION_BEGIN:Save Current Body' working_set_mb=2887.13671875 private_commit_mb=2931.43359375 pagefile_commit_mb=2931.43359375 handles=1166 gdi=1149 user=116 top_widgets=57 dialogs=2
+[02:18:14.156000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:18:16.142000] PROD_RESOURCE label=u'Q2_SAVE_POST_CONFIRM' working_set_mb=2887.4765625 private_commit_mb=2931.59765625 pagefile_commit_mb=2931.59765625 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.153000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:18:16.174000] PROD_CPM_OPERATION_AUTHORIZED operation=u'Save Preset' sha256=ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93 kind=u'body' membership=26
+[02:18:16.203000] PROD_RESOURCE label=u'Q2_INDEX_ACQUIRED' working_set_mb=2887.9375 private_commit_mb=2931.59765625 pagefile_commit_mb=2931.59765625 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.204000] PROD_RESOURCE label=u'Q2_INDEX_PROJECTED_LIVE' working_set_mb=2887.95703125 private_commit_mb=2931.59765625 pagefile_commit_mb=2931.59765625 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.205000] PROD_RESOURCE label=u'Q2_INDEX_RELEASED' working_set_mb=2887.95703125 private_commit_mb=2931.59765625 pagefile_commit_mb=2931.59765625 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.205000] PROD_RESOURCE label=u'Q2_BODY_CAPTURE_PURE_ONLY' working_set_mb=2887.95703125 private_commit_mb=2931.59765625 pagefile_commit_mb=2931.59765625 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.206000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_PURE_VALIDATION' working_set_mb=2887.95703125 private_commit_mb=2931.59765625 pagefile_commit_mb=2931.59765625 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.226000] PROD_OPERATION_PHASE id=3 phase=u'durable-commit' detail={'path': u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\krystal2020--7d2aee52ef3a\\Body Presets\\K K2A1 A2 BODY--preset-008f3.json', 'kind': u'body', 'preset_id': u'preset-008f35214496440e8644a0430d681419'}
+[02:18:16.226000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_DURABLE_COMMIT' working_set_mb=2888.1171875 private_commit_mb=2932.0703125 pagefile_commit_mb=2932.0703125 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.233000] PROD_OPERATION_PHASE id=3 phase=u'durable-verified' detail={'path': u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\krystal2020--7d2aee52ef3a\\Body Presets\\K K2A1 A2 BODY--preset-008f3.json', 'kind': u'body', 'preset_id': u'preset-008f35214496440e8644a0430d681419'}
+[02:18:16.234000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_READBACK' working_set_mb=2888.1171875 private_commit_mb=2932.0703125 pagefile_commit_mb=2932.0703125 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.234000] PROD_SAVE=PASS model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' kind=u'body' name=u'K K2A1 A2 BODY' controls=26 bone_records=154 existing_scale_controls=0 path=u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\krystal2020--7d2aee52ef3a\\Body Presets\\K K2A1 A2 BODY--preset-008f3.json' cached_semantic_scope=True indexed_body_capture=True q1_parity=False
+[02:18:16.235000] PROD_RESOURCE label=u'SAVE_AFTER_PASS' working_set_mb=2888.1171875 private_commit_mb=2932.0703125 pagefile_commit_mb=2932.0703125 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.239000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:18:16.257000] PROD_RESOURCE label=u'Q2_SAVE_AFTER_UI_PUBLISH' working_set_mb=2888.12109375 private_commit_mb=2932.0703125 pagefile_commit_mb=2932.0703125 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.257000] PROD_RESOURCE label=u'ACTION_END:Save Current Body' working_set_mb=2888.12109375 private_commit_mb=2932.0703125 pagefile_commit_mb=2932.0703125 handles=1172 gdi=1163 user=123 top_widgets=58 dialogs=3
+[02:18:16.258000] PROD_OPERATION_END id=3 kind=u'Save Current Body' phase=u'UI_PUBLISH' native_commit=None durable_commit={'path': u'<USERPROFILE>\\Documents\\SFM Character Preset Manager\\Characters\\krystal2020--7d2aee52ef3a\\Body Presets\\K K2A1 A2 BODY--preset-008f3.json', 'kind': u'body', 'preset_id': u'preset-008f35214496440e8644a0430d681419'}
+[02:18:16.269000] PROD_OPERATION_EVENT_TURN id=3 kind=u'Save Current Body' run_id=u'20261010-021726-pid41240' pid=41240
+[02:18:16.270000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Save Current Body' working_set_mb=2888.04296875 private_commit_mb=2931.9921875 pagefile_commit_mb=2931.9921875 handles=1172 gdi=1155 user=120 top_widgets=57 dialogs=2
+[02:18:44.949000] G18AN_MODAL_YIELD_ENTER class=u'RebuildScopeDialog' title=u'Rebuild Control Groups' was_visible=True operation=None fit_active=False
+[02:18:48.489000] G18AN_MODAL_YIELD_EXIT restored=True deferred_fit=None
+[02:21:00.156000] G18AN_MODAL_YIELD_ENTER class=u'RebuildScopeDialog' title=u'Rebuild Control Groups' was_visible=True operation=None fit_active=False
+[02:21:05.172000] G18AN_MODAL_YIELD_EXIT restored=True deferred_fit=None
+[02:22:21.587000] PROD_OPERATION_BEGIN id=4 kind=u'Apply Body Preset' context={'animset_id': (u'DmeAnimationSet', u'krystal20201', 21685, 396236384L), 'model_instance_id': (u'DmeGameModel', u'krystal2020_GameModel', 21686, 4273213272L), 'document_file_id': 0, 'library_identity': {'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}, 'shot_id': (u'DmeFilmClip', u'shot10', 21683, 4279110052L)}
+[02:22:21.588000] PROD_RESOURCE label=u'ACTION_BEGIN:Apply Body Preset' working_set_mb=2907.02734375 private_commit_mb=2948.3046875 pagefile_commit_mb=2948.3046875 handles=1172 gdi=1155 user=119 top_widgets=57 dialogs=2
+[02:22:21.592000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:22:25.782000] PROD_CPM_OPERATION_AUTHORIZATION_REFUSED operation=u'Apply Preset' reason=u'generation-mismatch'
+[02:22:25.783000] PROD_ACTION_ERROR label='Apply Body Preset' error=RuntimeError("The selected model's semantic scope is stale. Reselect the model.",)
+[02:22:25.787000] Traceback (most recent call last):
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 27411, in guard
+    result = fn()
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 30092, in work
+    else None
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 24973, in prod_apply
+    u"Apply Preset",
+  File "<SFM_GAME>\usermod\scripts\ChadChan3D_CPM\SFM_Character_Preset_Manager.py", line 16399, in prod_cpm_authorize_operation
+    raise failure[0](failure[1])
+RuntimeError: The selected model's semantic scope is stale. Reselect the model.
+
+[02:22:36.430000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:22:36.448000] PROD_CPM_STALE_GENERATION_REBUILD_SCHEDULED identity={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[02:22:36.448000] PROD_RESOURCE label=u'ACTION_END:Apply Body Preset' working_set_mb=2908.09375 private_commit_mb=2949.8984375 pagefile_commit_mb=2949.8984375 handles=1179 gdi=1167 user=131 top_widgets=58 dialogs=3
+[02:22:36.449000] PROD_OPERATION_END id=4 kind=u'Apply Body Preset' phase=u'BEGIN' native_commit=None durable_commit=None
+[02:22:36.459000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:22:36.476000] PROD_CPM_STALE_GENERATION_REBUILD identity={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[02:22:36.476000] PROD_OPERATION_BEGIN id=5 kind=u'Select Model' context=None
+[02:22:36.477000] PROD_RESOURCE label=u'ACTION_BEGIN:Select Model' working_set_mb=2907.8671875 private_commit_mb=2949.671875 pagefile_commit_mb=2949.671875 handles=1179 gdi=1159 user=126 top_widgets=57 dialogs=2
+[02:22:36.477000] PROD_MODEL_SWITCH_STAGE stage='scope-begin' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} previous={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'}
+[02:22:36.478000] PROD_RESOURCE label=u'MODEL_RENDER_BEFORE_SCOPE' working_set_mb=2907.8671875 private_commit_mb=2949.671875 pagefile_commit_mb=2949.671875 handles=1179 gdi=1159 user=126 top_widgets=57 dialogs=2
+[02:22:36.478000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:22:38.732000] PROD_PROVIDER_HEALTH status=u'healthy' reason=u'canonical-admission-and-view-validated' kind=u'canonical-broker-cpm-compat-v1' sha256=u'54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7' requested_literals=80 master_unknown_literals=0
+[02:22:38.767000] PROD_RESOURCE label=u'MODEL_RENDER_AFTER_SCOPE' working_set_mb=2907.82421875 private_commit_mb=2948.7890625 pagefile_commit_mb=2948.7890625 handles=1179 gdi=1159 user=126 top_widgets=57 dialogs=2
+[02:22:38.767000] PROD_MODEL_SWITCH_STAGE stage='scope-ready' target={'checksum': -1441261258, 'model': u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl', 'animset_name': u'krystal20201'} provider_health=u'healthy' scope_ready=True
+[02:22:38.782000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:22:38.805000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:22:38.827000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:22:38.850000] P01_MASTER_PATH source='filesystem.valve.mod' mod_path=u'usermod' path=u'usermod\\cfg\\sfm_defaultanimationgroups.txt'
+[02:22:38.868000] PROD_SELECTION model=u'models/fursonas/starfox/krystal/bodies/krystal2020.mdl' checksum=-1441261258 animset=u'krystal20201' library_key=u'modelpath-sha256-v1:7d2aee52ef3adaa25b252d840b175811ca78893de4fc39b41f8d459f283107a0' expression=52 body=26 other=2 unresolved=0 conflict=0 overrides=0 bone_scale_production=True bone_scale_policy=complete-native-bone-map-physical-uniform-v1 semantic_scope_builds_this_render=1 pure_scope=True provider_health='healthy'
+[02:22:38.869000] PROD_RESOURCE label=u'ACTION_END:Select Model' working_set_mb=2908.11328125 private_commit_mb=2949.2109375 pagefile_commit_mb=2949.2109375 handles=1179 gdi=1159 user=126 top_widgets=57 dialogs=2
+[02:22:38.869000] PROD_OPERATION_END id=5 kind=u'Select Model' phase=u'UI_PUBLISH' native_commit=None durable_commit=None
+[02:22:38.870000] PROD_OPERATION_EVENT_TURN id=4 kind=u'Apply Body Preset' run_id=u'20261010-021726-pid41240' pid=41240
+[02:22:38.870000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Apply Body Preset' working_set_mb=2908.11328125 private_commit_mb=2949.2109375 pagefile_commit_mb=2949.2109375 handles=1179 gdi=1159 user=126 top_widgets=57 dialogs=2
+[02:22:38.890000] PROD_OPERATION_EVENT_TURN id=5 kind=u'Select Model' run_id=u'20261010-021726-pid41240' pid=41240
+[02:22:38.891000] PROD_RESOURCE label=u'Q2_SETTLED_EVENT_TURN:Select Model' working_set_mb=2908.05078125 private_commit_mb=2949.1484375 pagefile_commit_mb=2949.1484375 handles=1179 gdi=1159 user=127 top_widgets=57 dialogs=2

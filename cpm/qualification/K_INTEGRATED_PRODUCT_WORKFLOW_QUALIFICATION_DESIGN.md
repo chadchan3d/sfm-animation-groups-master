@@ -1,6 +1,6 @@
 # K — Integrated CPM/Normalizer product workflow qualification (design and runbook)
 
-**Status: K PREPARED, NOT RUN (K-0 amended after K1A1; §16).** The design was approved with decisions **D1 = A, D2 = B, D3 = B and
+**Status: K — COMPLETE / PASS (2026-10-10): K1 PASS (K1A2, §17) + K2 PASS (K2A1, §18).** Earlier status, kept for the record: K PREPARED, NOT RUN (K-0 amended after K1A1; §16). The design was approved with decisions **D1 = A, D2 = B, D3 = B and
 D4 = YES** (§13). The K-0 qualification-only tooling is built and qualified offline (§6, §15). No SFM
 process has been started for K, the probe has not been deployed, and no production code was changed.
 K execution needs a separate authorization. **K PASS requires K1 + K2 only.** L has not started.
@@ -687,3 +687,55 @@ product criterion changed):
 
 **K status: IN PROGRESS. K1 COMPLETE / PASS. K2 NOT STARTED** (needs separate authorization). L has
 not started.
+
+## 18. K2 — COMPLETE / PASS (attempt K2A1, 2026-10-10) and K — COMPLETE / PASS
+
+K2 ran under the K2-only authorization from checkpoint `13f57c1e…`. The owner's K2 clarifications
+were recorded before execution:
+1. Re-establish the required selection and playhead state explicitly before every Normalizer
+   command (K2-E1: select only `shot3` first, then put the playhead in `shot10`, confirm both).
+2. K2-D4 must be a real committed G2 Apply, whose Undo restores the operator's Muscles value.
+3. K2-E4 accepts only mutations attributable to the known Save/Delete/Favorites-cleanup behavior.
+
+The attempt ran in one fresh SFM process (PID 41240). Mechanical adjudication over the sealed
+evidence after exit: **39/39 PASS**. Disposition PASS: the live attempt has 55 files and its sums
+verify. The redacted copy is in `real_sfm_qualification/cpm_k_integrated/raw/K2A1/`.
+
+| Proven | Evidence |
+|---|---|
+| **CPM first, cold** | Probe 1: no broker. CPM (run `20261010-021726-pid41240`, module `0x30041910`, window `0x305e2670`) created broker `0x3101aa50` with one G1 `cpm_compat_v1` view; Krystal scope 26/52. |
+| **G1 use by both** | Save `K K2A1 A2 BODY` (G1, 26 controls). Normalizer N1 `shot9` PASS/PASS on G1, joining the same broker; both consumers held G1 views; idle. |
+| **Joint transition** | With both idle and CPM open: frozen `S2-PhaseA` + `S2-PhaseB` gave exact G2 (`54413b6c…`, 02:19:58). The authority change alone caused no acquisition and no rebuild: probe 4 views and provider counters were unchanged, and the CPM log was silent. |
+| **Normalizer touches G2 first** | N2 `shot9` PASS/PASS with the live Master logged as G2. The broker shows `cohort_acquired` G2 `[normalizer_compat]`, and the G1 views of both kinds are stale; nothing from G1 was reused. CPM still held its G1 scope with no lease and no rebuild. |
+| **CPM stale-generation recovery** | The first CPM action, Apply `K K2A1 A2 BODY`, got **exactly one** `AUTHORIZATION_REFUSED Apply Preset generation-mismatch`, then the guard's generic "Preset could not be applied safely…" dialog. There was no Apply outcome (`native_commit=None`, `durable_commit=None`) and no scene change (Undo count 0). After the dialog was dismissed: one `REBUILD_SCHEDULED` → `REBUILD` → one Select Model → healthy **G2** in the same window. No replay. |
+| **Deliberate G2 work** | Muscles set to 1.0, then Apply authorized on **G2** and committed (real change to the preset's 0.3547). Undo restored 1.0. Authorizations were all G1 before the refusal and all G2 after it. |
+| **G2 alternation** | N3 `shot3` (fox + Mia RECONCILED) PASS/PASS on G2, with the selection-first DIV state re-established. Delete of the K2 preset PASS. CPM closed (✕) and finalized. Final probe: both consumers hold G2 views; idle. SFM exited with CPM closed (Don't Save). |
+| **Restoration** | `K-Finalize`: `S2 RESTORED EXACT G1` (Master `ac45e5c1…`, manifest `d810d648…`, single sidecar `bcd97641…`; G2 sidecar removed). The probe was removed, the expected inventory restored, and the installed app `4e35f292…` and fixture unchanged. |
+| **Resources** | No STOP; `mem_ok` 13/13/15, never False; private 3,080 → 3,111 MB. VAS telemetry: probe 506–528 MB free; Normalizer minimum free 505.8–507.2 MB; minimum largest free block 256.5 MB. |
+| **Library** | Differs from preflight only in Krystal's `character.json`: `updated_at` = the K2 Save at 02:18:16, and the `.bak` is the preflight copy. No `library.json` change. This is attributable to the Save/Delete footprint. |
+
+**Adjudication-script correction** (recorded in the attempt before the verdict): the first run of
+the scratch adjudicator banned every `PROD_ACTION_ERROR`/traceback, and so flagged the guard's own
+record of the expected K2-D1 refusal. That record is `PROD_ACTION_ERROR 'Apply Body Preset'` with
+the stale-scope `RuntimeError` at the refusal timestamp, the same pattern item 8 E recorded for its
+refused Save. The check now requires exactly one action error, equal to the expected refusal, and
+no other error or traceback. Result: 39/39.
+
+### K — COMPLETE / PASS
+
+**K PASS = K1 + K2.** K1 PASS (K1A2, 53/53) and K2 PASS (K2A1, 39/39), in two fresh SFM processes,
+on CPM `4e35f292…` and the production Normalizer `1f4ec5a2…`.
+
+The handoff §23 obligations are all covered:
+- Normalizer first → CPM: K1.
+- CPM first → Normalizer: K2, and repeatedly in K1.
+- Repeated alternation: K1 and K2.
+- CPM open while the Normalizer operates: K1 and K2, divergent and same shot.
+- Close-order behavior: K1 X/Y, and exits with CPM open (K1) and closed (K2).
+- Separate consumer view lifetimes: both kinds' views retained and replaced independently.
+- Joint generation transition and shared failure/recovery: K2's stale-generation recovery, with
+  authority-unavailable reused under D1 = A.
+- Aggregate resource behavior: bounded, no STOP.
+- Representative workflows from each tool.
+
+The installed CPM, Normalizer and exact G1 authority remain in place. **L has not started.**
