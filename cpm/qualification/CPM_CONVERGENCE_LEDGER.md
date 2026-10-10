@@ -20,8 +20,23 @@ Otherwise proceed with the assigned milestone.
   - manifest `0c390b8d…`, reader `4fb42a3c…`, operator template.
 - **Offline qualification:** `test_cpm_k_tooling.py` **2.7.5 156/156** (real Qt + model) and **3.10
   187/187**, including the driver sandbox G1 → exact G2 → exact G1.
-- **Not done:** no SFM run, no probe deployment, no K1/K2 execution, no production change. K
-  execution needs a separate authorization, in two fresh SFM processes.
+- **K1 authorized (K2 is not).**
+  - **K1A1 — INCONCLUSIVE:** a qualification-tooling false STOP before either product consumer
+    executed; not a CPM or Normalizer failure. The baseline probe in a fresh fixture-loaded process
+    showed 528 MB free VAS, which tripped the K rule "free VAS < 600 MB". Item 8 D's Normalizer had
+    begun with 421 MB free and finished `mem_ok=True`.
+  - **K1A1 closeout:** SFM closed with Don't Save; exact G1 untouched; probe removed; expected
+    inventory restored; app and fixture unchanged; sealed (local evidence). It is not reused.
+- **K-0 amendment:**
+  - the VAS STOP is removed and free VAS (probe, Normalizer samples) is recorded as telemetry only;
+  - the Normalizer's own `mem_ok=False` is the primary memory/VAS STOP, and the private-bytes
+    safeguards are retained;
+  - a regression check was added;
+  - reader `e137536d…`, manifest `7bf1683a…`, driver `8b302a96…` (manifest pin only); probe
+    unchanged;
+  - tests: **2.7.5 160/160**, **3.10 191/191**.
+  - Design §5.4 and §16.
+- **Next:** K1A2, a new fresh attempt under the unchanged K1 runbook. K2 is NOT STARTED.
 
 **Pre-K CPM UI polish pass — LIVE VERIFIED / PASS (2026-10-09).** The final build
 **`4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7`** is installed and is **the
@@ -414,9 +429,8 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. K is prepared, not run. K execution (K1 then K2, each in a fresh SFM process, from the K-0
-checkpoint) needs a separate explicit authorization. `4e35f292…` remains installed and is the exact
-CPM build under K. L has not begun.
+K1 is in progress: execute K1A2 (fresh SFM process; unchanged K1 runbook) under the existing K1
+authorization. K2 needs separate authorization. L has not begun. `4e35f292…` remains installed.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

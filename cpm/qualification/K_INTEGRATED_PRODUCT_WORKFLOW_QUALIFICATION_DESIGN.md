@@ -1,6 +1,6 @@
 # K — Integrated CPM/Normalizer product workflow qualification (design and runbook)
 
-**Status: K PREPARED, NOT RUN.** The design was approved with decisions **D1 = A, D2 = B, D3 = B and
+**Status: K PREPARED, NOT RUN (K-0 amended after K1A1; §16).** The design was approved with decisions **D1 = A, D2 = B, D3 = B and
 D4 = YES** (§13). The K-0 qualification-only tooling is built and qualified offline (§6, §15). No SFM
 process has been started for K, the probe has not been deployed, and no production code was changed.
 K execution needs a separate authorization. **K PASS requires K1 + K2 only.** L has not started.
@@ -257,9 +257,19 @@ budget.
 - **Accepted known behavior (F, not attributed to CPM):** the Normalizer's per-command retained
   growth from fresh discovery. K records it; it is not a CPM defect.
 - **STOP (before the next Normalizer command) on any of:**
-  - `mem_ok=False` in any Normalizer run;
-  - free VAS reported by `P` below 600 MB;
-  - process private bytes above 3,600 MB.
+  - `mem_ok=False` in any Normalizer run. This is the **primary memory/VAS hard STOP**: the
+    Normalizer's own qualified result.
+  - process private bytes above 3,600 MB, or private bytes unobserved.
+- **Recorded telemetry, never a STOP** (K-0 amendment):
+  - free VAS (`P`: `avail_virtual`/`total_virtual`);
+  - the Normalizer's own address-space samples per run (minimum `mem_free`, minimum `largest_free`,
+    `vas_ok` failures).
+
+  The original fixed "free VAS below 600 MB" STOP was invalid and has been removed, and no
+  replacement VAS floor is defined: K is not a memory-limit calibration campaign. The evidence:
+  - K1A1's fresh, fixture-loaded process had 528 MB free before any consumer ran;
+  - item 8 D's Normalizer run began with 421 MB free (largest free block 191 MB) and finished
+    `mem_ok=True`.
 - **CPM-attributable accumulation is FAIL:** across two equivalent closed-CPM states with no
   Normalizer command between them, private bytes +>10 MB, or handles/GDI/USER growing by more than
   10 per cycle in the same direction twice.
@@ -575,3 +585,58 @@ values above 2³¹ (for example about 3.1 GB of private bytes, which are Python 
   first; CPM's single generation-mismatch refusal and rebuild; G2 alternation; exit with CPM closed;
   exact G1 restoration. 3 Selected runs.
 - K3 is not part of K.
+
+## 16. K1A1 and the K-0 amendment (2026-10-09)
+
+**K1A1 — INCONCLUSIVE: qualification-tooling false STOP before either product consumer
+executed.** This is not a CPM or Normalizer failure.
+
+- **Preparation:** from K-0 checkpoint `033bac3a…`, `K-New` (fixture pin), `K-Preflight
+  -Owner1Recorded` (exact G1, expected inventory `59b8f28b…`, exact dependencies) and
+  `K-DeployProbe` (`K READY`).
+- **What ran:** in a fresh SFM process (PID 19800), the operator opened `testscripts.dmx`, set the
+  selection and playhead to `shot9`, and ran the probe once. Probe seq 1 showed no CPM module, no
+  broker, no acquisition, identity OK and no errors. It also showed 3,077 MB private and **528 MB free
+  VAS** (of 4,095 MB). That met the §5.4 rule "free VAS < 600 MB", and the attempt stopped as required.
+- **Neither product ran:** no CPM log byte and no Normalizer log change after preflight.
+- **Owner decision:** do not waive the rule or continue K1A1. Close SFM with Don't Save, and seal
+  K1A1 INCONCLUSIVE with the classification above.
+- **Closeout:**
+  - `K-Finalize` → `S2 UNTOUCHED` (exact G1);
+  - `K-RemoveProbe` → expected inventory restored, app and fixture unchanged;
+  - `K-Disposition INCONCLUSIVE` → sealed, and `verify-sums` OK (22 files).
+- The evidence stays in the local K1A1 attempt folder. K1A1 is never reused; K1 continues as K1A2 in a
+  new fresh process under the unchanged K1 runbook.
+
+**K-0 amendment** (only what the correction needs):
+- **Reader:** removed the VAS STOP. `mem_ok=False` is the primary memory/VAS STOP, and the
+  private-bytes safeguards are retained. Added `resource_telemetry` and Normalizer VAS telemetry
+  parsing (`vas_samples`, `vas_mem_free_min`, `vas_largest_free_min`, `vas_ok_false`).
+- **Manifest:** STOP list and telemetry list updated, with the amendment rationale recorded. The
+  driver's manifest pin was updated to match.
+- **Tests:**
+  - **Regression:** the K1A1 baseline (528 MB free, 3,077 MB private) does not STOP, and neither
+    does any low or unobserved free VAS; `mem_ok=False` still STOPs.
+  - The Normalizer VAS telemetry from the real item-8 log is recorded (10 samples, minimum free
+    421,031,936 bytes, minimum largest free block 191,037,440 bytes).
+  - The manifest carries no VAS STOP.
+- **Unchanged:** the probe (`96d873b7…`), the frozen block, every other safeguard and the runbook
+  steps.
+
+**Amended tooling (current pins):**
+
+| File | SHA-256 | Change |
+|---|---|---|
+| `CPM_K_Probe.py` | `96d873b795f6fc8e10e762c06045990fbd59663fdf6e03e86dfb79dcdd759365` | unchanged |
+| `K_DRIVER.ps1` | `8b302a96bf8ac00d3893ac1e35829a1356c23d01e47c89781a488526cc98ebf8` | manifest pin only |
+| `K_FIXTURE_MANIFEST.json` | `7bf1683ac5856f9fc0e2f70fd592bbb3e05e72a52aa1cf8edebc148589c8a7f6` | resources section |
+| `k_evidence_reader.py` | `e137536d6799b081cf815f9efdb00a0fb9193fe7488ce558ca603c9eb3279d7c` | VAS STOP removed; telemetry added |
+| `test_cpm_k_tooling.py` | `31bb35ecec838fbeb9bbc3cfe487ff8dfd3a5826dea118539dcc494b8fa4519b` | regression + amendment checks |
+| `templates/K_OPERATOR_STEPS_TEMPLATE.md` | `1fb082366d461634685ba7b6a72b834e5392b053a012928ca25d35456d5d7d8d` | unchanged |
+
+**Amended offline qualification:**
+- embedded Python 2.7.5 (real PySide/Qt 4.8 + model): **160/160 ALL PASS**;
+- Python 3.10.6 (+ Windows PowerShell 5.1 driver sandbox): **191/191 ALL PASS**.
+
+The outputs in `offline_outputs/` have been replaced with these runs. §15's table is the original
+K-0 record.

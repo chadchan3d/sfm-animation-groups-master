@@ -269,8 +269,14 @@ def static_pins():
           and m["shots"]["shot9"]["animation_sets"] == {"krystalv21": "models/domibun/characters/starfox/krystalv2.mdl"})
     check("plan.decisions_recorded", m["decisions"]["D1"].startswith("A:") and m["decisions"]["D2"].startswith("B:")
           and m["decisions"]["D3"].startswith("B:") and m["decisions"]["D4"].startswith("YES"))
-    check("plan.resource_thresholds_match_reader", reader.STOP_MIN_AVAIL_VIRTUAL == 600 * 10 ** 6 and reader.STOP_MAX_PRIVATE == 3600 * 10 ** 6
+    check("plan.resource_thresholds_match_reader", not hasattr(reader, "STOP_MIN_AVAIL_VIRTUAL") and reader.STOP_MAX_PRIVATE == 3600 * 10 ** 6
           and reader.FAIL_PRIVATE_DELTA == 10 * 10 ** 6 and reader.FAIL_COUNTER_STEP == 10 and reader.NORMALIZER_BUDGET == 4)
+    # K-0 amendment: free VAS is telemetry only; the Normalizer's own mem_ok=False is the primary memory/VAS STOP.
+    stops = m["resources"]["stop_before_next_normalizer_command"]
+    check("plan.amendment_no_vas_stop", len(stops) == 3 and stops[0].startswith("any Normalizer mem_ok=False")
+          and not [x for x in stops if "avail_virtual" in x or "VAS" in x.split("(")[0]]
+          and any("avail_virtual" in x for x in m["resources"]["telemetry_recorded_not_gated"])
+          and "K1A1" in m["resources"]["amendment"] and "421 MB" in m["resources"]["amendment"], stops)
     tmpl = _read(TEMPLATE).decode("utf-8")
     check("template.placeholder_and_rules", "<attempt>" in tmpl and "selection first, playhead second" in tmpl
           and "OWNER-1" in tmpl and "D1 = A" in tmpl)
@@ -391,9 +397,24 @@ def reader_checks():
     check("resources.stop_clear", not reader.resource_stop(rec([], res=ok_res))["stop"], reader.resource_stop(rec([], res=ok_res)))
     check("resources.python2_long_values_accepted", reader._is_int(3100 * MB) and reader._is_int(2 ** 40) and not reader._is_int(True)
           and not reader._is_int(3.5))
-    low = dict(ok_res, avail_virtual=599 * MB)
     high = dict(ok_res, private_usage=3601 * MB)
-    check("resources.stop_low_vas", reader.resource_stop(rec([], res=low))["stop"])
+    # Regression (K1A1): a fresh fixture-loaded baseline with 528 MB free VAS (3,077 MB private) must not
+    # STOP merely for being below 600 MB, nor for any low free VAS; mem_ok=False still STOPs.
+    k1a1 = {"observed": True, "avail_virtual": 528838656, "total_virtual": 4294836224, "private_usage": 3076964352,
+            "handles": 1157, "gdi_objects": 1121, "user_objects": 100}
+    check("resources.regression_k1a1_528mb_vas_no_stop", not reader.resource_stop(rec([], res=k1a1))["stop"],
+          reader.resource_stop(rec([], res=k1a1)))
+    check("resources.regression_any_low_vas_no_stop", not reader.resource_stop(rec([], res=dict(k1a1, avail_virtual=50 * MB)))["stop"]
+          and not reader.resource_stop(rec([], res=dict(k1a1, avail_virtual=None)))["stop"])
+    check("resources.regression_mem_ok_false_still_stops", reader.resource_stop(rec([], res=k1a1), {"mem_ok_false": 1})["stop"]
+          and "mem_ok=False" in reader.resource_stop(rec([], res=k1a1), {"mem_ok_false": 1})["reasons"][0])
+    tel = reader.resource_telemetry(rec([], res=k1a1), reader.parse_normalizer_log(sample))
+    vas_free = [int(x) for x in re.findall(r"\bmem_free=(\d+)", sample)]
+    vas_large = [int(x) for x in re.findall(r"\blargest_free=(\d+)", sample)]
+    check("resources.telemetry_recorded", tel["avail_virtual"] == 528838656 and tel["total_virtual"] == 4294836224
+          and tel["normalizer_vas_samples"] == 10 and tel["normalizer_vas_ok_false"] == 0
+          and tel["normalizer_vas_mem_free_min"] == min(vas_free) == 421031936
+          and tel["normalizer_vas_largest_free_min"] == min(vas_large) == 191037440, tel)
     check("resources.stop_high_private", reader.resource_stop(rec([], res=high))["stop"])
     check("resources.stop_mem_ok_false", reader.resource_stop(rec([], res=ok_res), {"mem_ok_false": 1})["stop"])
     check("resources.stop_unobserved_is_stop", reader.resource_stop(rec([], res={"observed": False}))["stop"])

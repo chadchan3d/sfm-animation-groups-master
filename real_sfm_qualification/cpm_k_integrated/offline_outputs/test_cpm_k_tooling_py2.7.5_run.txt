@@ -24,6 +24,7 @@ Interpreter: 2.7.5
 [PASS] plan.shot12_excluded
 [PASS] plan.decisions_recorded
 [PASS] plan.resource_thresholds_match_reader
+[PASS] plan.amendment_no_vas_stop
 [PASS] template.placeholder_and_rules
 [PASS] probe.every_delta_matches_exactly
 [PASS] probe.equals_item8_probe_plus_declared_deltas
@@ -68,7 +69,10 @@ Interpreter: 2.7.5
 [PASS] boundary.normalizer_constructs_broker
 [PASS] resources.stop_clear
 [PASS] resources.python2_long_values_accepted
-[PASS] resources.stop_low_vas
+[PASS] resources.regression_k1a1_528mb_vas_no_stop
+[PASS] resources.regression_any_low_vas_no_stop
+[PASS] resources.regression_mem_ok_false_still_stops
+[PASS] resources.telemetry_recorded
 [PASS] resources.stop_high_private
 [PASS] resources.stop_mem_ok_false
 [PASS] resources.stop_unobserved_is_stop
@@ -158,4 +162,4 @@ Qt modes: real, model
 [PASS] model.pin_mismatch.scenario_completed
 (driver checks run under Python 3: the frozen generation tooling is Python-3-only)
 
-RESULT: 156/156 ALL PASS
+RESULT: 160/160 ALL PASS

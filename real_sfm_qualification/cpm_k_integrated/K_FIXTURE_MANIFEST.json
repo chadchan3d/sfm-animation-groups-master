@@ -1,6 +1,6 @@
 {
  "schema": "cpm-k-fixture-manifest-v1",
- "status": "K-0 prepared offline; K PREPARED, NOT RUN. Copied sections are byte-equivalent in value to ITEM8_FIXTURE_MANIFEST.json (checked by test_cpm_k_tooling.py).",
+ "status": "K-0 prepared offline and amended (VAS STOP removed after K1A1); K PREPARED, NOT RUN. Copied sections are byte-equivalent in value to ITEM8_FIXTURE_MANIFEST.json (checked by test_cpm_k_tooling.py).",
  "design": "cpm/qualification/K_INTEGRATED_PRODUCT_WORKFLOW_QUALIFICATION_DESIGN.md",
  "apps": {
   "installed_relative_path": "ChadChan3D_CPM/SFM_Character_Preset_Manager.py",
@@ -372,15 +372,20 @@
  },
  "resources": {
   "stop_before_next_normalizer_command": [
-   "any Normalizer mem_ok=False",
-   "probe avail_virtual < 600 MB",
-   "probe private_usage > 3600 MB"
+   "any Normalizer mem_ok=False (primary memory/VAS hard STOP: the Normalizer's own qualified result)",
+   "probe private_usage > 3600 MB",
+   "probe private_usage unobserved"
+  ],
+  "telemetry_recorded_not_gated": [
+   "probe avail_virtual / total_virtual (free VAS)",
+   "Normalizer CONTEXTUALIZER_RESOURCE_CHECKPOINT mem_free, largest_free, vas_ok (minimums per run)"
   ],
   "fail_cpm_accumulation": [
    "private +>10 MB between equivalent closed-CPM states with no Normalizer command between",
    "handles, GDI or USER +>10 on two consecutive equivalent steps"
   ],
-  "accepted_known_behavior": "Normalizer per-command retained growth from fresh discovery (F); recorded, not attributed to CPM"
+  "accepted_known_behavior": "Normalizer per-command retained growth from fresh discovery (F); recorded, not attributed to CPM",
+  "amendment": "K-0 amendment 2026-10-09: the fixed 'free VAS < 600 MB' STOP was invalid and was removed (K1A1: 528 MB free VAS in a fresh fixture-loaded process before any consumer ran; item 8 D: a Normalizer run began with 421 MB free VAS and finished mem_ok=True). No replacement VAS floor; K is not a memory-limit calibration campaign."
  },
  "decisions": {
   "D1": "A: no authority-unavailable mechanism; reuse C7 (offline) and I-1 I2 fail-closed evidence; K tests the shared G1->G2 stale-generation recovery only",

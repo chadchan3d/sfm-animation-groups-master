@@ -11,7 +11,7 @@ library footprint, SHA256SUMS) are reused unchanged from the item-8 reader
 (real_sfm_qualification/cpm_item8_post_cleanup/item8_evidence_reader.py). K adds:
 pinned K identities and schemas, the production Normalizer log grammar,
 per-consumer broker-view decomposition, consumer-boundary checks and the
-design's section 5.4 resource rules.
+design's section 5.4 resource rules (free VAS recorded as telemetry only; K-0 amendment).
 
 Python 2.7 and 3.x. Read-only: it writes nothing.
 
@@ -44,8 +44,10 @@ SNAPSHOT_SCHEMA = "cpm-k-scene-snapshot-v1"
 CPM_KIND = "cpm_compat_v1"
 NORMALIZER_KIND = "normalizer_compat"
 MB = 1000 * 1000
-# Design section 5.4.
-STOP_MIN_AVAIL_VIRTUAL = 600 * MB
+# Design section 5.4 (K-0 amendment, 2026-10-09): free VAS is recorded telemetry, never a K STOP.
+# The fixed "free VAS < 600 MB" STOP was invalid (K1A1: 528 MB free in a fresh fixture-loaded
+# process before any consumer ran; item 8 D: a Normalizer run began with 421 MB free and finished
+# with mem_ok=True). The Normalizer's own qualified mem_ok=False is the primary memory/VAS STOP.
 STOP_MAX_PRIVATE = 3600 * MB
 FAIL_PRIVATE_DELTA = 10 * MB
 FAIL_COUNTER_STEP = 10
@@ -206,11 +208,15 @@ _N_RESULT = re.compile(r"^(?P<key>[A-Z][A-Z0-9_]+) = (?P<value>PASS|FAIL)\b")
 _N_MEM = re.compile(r"\bmem_ok=(?P<ok>True|False)\b")
 _N_TERMINAL = re.compile(r"^PRODUCTION_TERMINAL_RESULTS=(?P<rows>.*)$")
 _N_REVISION = re.compile(r"^PRODUCTION_REVISION = (?P<rev>\S+)\s*$")
+_N_VAS_OK = re.compile(r"\bvas_ok=(?P<ok>True|False)\b")
+_N_MEM_FREE = re.compile(r"\bmem_free=(?P<n>\d+)L?\b")
+_N_LARGEST = re.compile(r"\blargest_free=(?P<n>\d+)L?\b")
 
 
 def parse_normalizer_log(text):
     out = {"scope_mode": None, "scope_shots": None, "shot_names": None, "live_master_sha256": [], "results": {},
-           "mem_ok_true": 0, "mem_ok_false": 0, "terminal_results": None, "revision": None, "cpm_lines": 0}
+           "mem_ok_true": 0, "mem_ok_false": 0, "terminal_results": None, "revision": None, "cpm_lines": 0,
+           "vas_samples": 0, "vas_ok_false": 0, "vas_mem_free_min": None, "vas_largest_free_min": None}
     for line in text.splitlines():
         m = _N_SCOPE.match(line)
         if m and out["scope_mode"] is None:
@@ -232,6 +238,15 @@ def parse_normalizer_log(text):
         m = _N_REVISION.match(line)
         if m:
             out["revision"] = m.group("rev")
+        m = _N_VAS_OK.search(line)
+        if m:
+            out["vas_samples"] += 1
+            out["vas_ok_false"] += 1 if m.group("ok") == "False" else 0
+            for key, regex in (("vas_mem_free_min", _N_MEM_FREE), ("vas_largest_free_min", _N_LARGEST)):
+                v = regex.search(line)
+                if v:
+                    n = int(v.group("n"))
+                    out[key] = n if out[key] is None else min(out[key], n)
         if re.search(r"\bPROD_[A-Z_]+[ =]", line) and not line.startswith("PRODUCTION"):
             out["cpm_lines"] += 1
     return out
@@ -257,17 +272,15 @@ def normalizer_run_check(parsed, shots, generation):
 # Resources (design section 5.4)
 # ---------------------------------------------------------------------------
 def resource_stop(record, normalizer_parsed=None):
-    """STOP before the next Normalizer command when any threshold is crossed."""
+    """STOP before the next Normalizer command. Primary memory/VAS STOP: the Normalizer's own
+    qualified mem_ok=False. Retained safeguards: process private bytes > 3600 MB, or private
+    bytes unobserved. Free VAS is never a STOP (see resource_telemetry)."""
     res = record.get("resources") or {}
     reasons, unobserved = [], []
     if not res.get("observed"):
         unobserved.append("resources")
     else:
-        avail, private = res.get("avail_virtual"), res.get("private_usage")
-        if not _is_int(avail):
-            unobserved.append("avail_virtual")
-        elif avail < STOP_MIN_AVAIL_VIRTUAL:
-            reasons.append("free VAS %d MB < 600 MB" % (avail // MB))
+        private = res.get("private_usage")
         if not _is_int(private):
             unobserved.append("private_usage")
         elif private > STOP_MAX_PRIVATE:
@@ -275,6 +288,17 @@ def resource_stop(record, normalizer_parsed=None):
     if normalizer_parsed is not None and normalizer_parsed.get("mem_ok_false"):
         reasons.append("Normalizer mem_ok=False x%d" % normalizer_parsed["mem_ok_false"])
     return {"stop": bool(reasons) or bool(unobserved), "reasons": reasons, "unobserved": unobserved}
+
+
+def resource_telemetry(record, normalizer_parsed=None):
+    """Recorded, never gated: the probe's free/total VAS and the Normalizer's own VAS samples
+    (minimum mem_free and largest free block, vas_ok failures)."""
+    res = record.get("resources") or {}
+    out = dict((k, res.get(k) if _is_int(res.get(k)) else None) for k in ("avail_virtual", "total_virtual", "private_usage"))
+    if normalizer_parsed is not None:
+        for k in ("vas_samples", "vas_mem_free_min", "vas_largest_free_min", "vas_ok_false"):
+            out["normalizer_" + k] = normalizer_parsed.get(k)
+    return out
 
 
 def cpm_accumulation(closed_records):
@@ -351,7 +375,8 @@ def main(argv):
     elif cmd == "resources":
         records = dict((r["seq"], r) for r in load_probe_records(args[0]))
         chosen = [records[int(s)] for s in args[1:]]
-        result = {"stop": [resource_stop(r) for r in chosen], "accumulation": cpm_accumulation(chosen)}
+        result = {"stop": [resource_stop(r) for r in chosen], "telemetry": [resource_telemetry(r) for r in chosen],
+                  "accumulation": cpm_accumulation(chosen)}
     elif cmd == "verify-sums":
         result = verify_sha256sums(args[0])
     else:
