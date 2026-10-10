@@ -8,18 +8,27 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**K — Integrated CPM/Normalizer product workflow qualification: K PREPARED, NOT RUN (2026-10-09).**
-- **Design approved:** `cpm/qualification/K_INTEGRATED_PRODUCT_WORKFLOW_QUALIFICATION_DESIGN.md`,
-  with D1 = A, D2 = B, D3 = B and D4 = YES:
-  - no new authority-unavailable mechanism; the shared G1→G2 stale-generation recovery only;
-  - **K PASS = K1 + K2 only**; K3 / All Shots is optional post-K stress work;
-  - divergent shots: selection first, playhead second, confirm both.
-- **K-0 tooling** in `real_sfm_qualification/cpm_k_integrated/`:
-  - probe `96d873b7…` (item-8 probe + declared deltas);
-  - driver `270555e9…` (frozen Session 2 block + K functions; never writes the CPM app);
-  - manifest `0c390b8d…`, reader `4fb42a3c…`, operator template.
-- **Offline qualification:** `test_cpm_k_tooling.py` **2.7.5 156/156** (real Qt + model) and **3.10
-  187/187**, including the driver sandbox G1 → exact G2 → exact G1.
+**K — Integrated CPM/Normalizer product workflow qualification: IN PROGRESS. K1 COMPLETE / PASS
+(2026-10-10, attempt K1A2). K2 NOT STARTED.**
+- **K1A2:** one fresh SFM process (PID 36888) from the K-0-amended checkpoint `93317866…`.
+  Mechanical adjudication **53/53 PASS** over the sealed evidence; disposition PASS. Proven:
+  - **Normalizer first:** it created the one canonical broker `0x338d0630` before CPM existed, and
+    CPM then joined it.
+  - **Coexistence:** divergent shots (CPM playhead `shot10`, Normalizer selection `shot9`) and the
+    same shot (`shot3`/`shot3`).
+  - **Alternation:** 4 Normalizer Selected runs, all PASS on G1 with `mem_ok` True. CPM Body Save,
+    Fit + Undo, Body Apply + Undo, Expression Save, Apply + Undo and Delete ×2, all on G1 with 0
+    refusals, 0 stale events and no rescope.
+  - **Close orders and lifetimes:** close order X (CPM closed after Normalizer runs) and Y
+    (Normalizer run while CPM closed); reopen with the same module and run in a new window; exit
+    with CPM open. Idle at every probe; both consumers' views were retained.
+  - **Resources:** no STOP; private 3,074 → 3,111 MB.
+  - **Closeout:** exact G1 untouched; app and fixture unchanged; expected inventory restored.
+- **Runbook clarifications** recorded in K1A2: clip-click selection; slider change before a
+  same-value Apply; Delete's Favorites `library.json` cleanup (owner option 1). They are carried
+  into K2-D4/K2-E4.
+- **Evidence:** design §17; redacted raw copies in `real_sfm_qualification/cpm_k_integrated/raw/`
+  (K1A1 and K1A2, `MANIFEST.md`).
 - **K1 authorized (K2 is not).**
   - **K1A1 — INCONCLUSIVE:** a qualification-tooling false STOP before either product consumer
     executed; not a CPM or Normalizer failure. The baseline probe in a fresh fixture-loaded process
@@ -36,7 +45,6 @@ Otherwise proceed with the assigned milestone.
     unchanged;
   - tests: **2.7.5 160/160**, **3.10 191/191**.
   - Design §5.4 and §16.
-- **Next:** K1A2, a new fresh attempt under the unchanged K1 runbook. K2 is NOT STARTED.
 
 **Pre-K CPM UI polish pass — LIVE VERIFIED / PASS (2026-10-09).** The final build
 **`4e35f29242351317f2f961c27e19d66fcd3355cff964b081431fc2fff1f5b9d7`** is installed and is **the
@@ -429,8 +437,8 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-K1 is in progress: execute K1A2 (fresh SFM process; unchanged K1 runbook) under the existing K1
-authorization. K2 needs separate authorization. L has not begun. `4e35f292…` remains installed.
+Stop. K1 is COMPLETE / PASS. K2 (joint G1→G2 generation transition, fresh SFM process) needs a
+separate explicit authorization. K is IN PROGRESS. L has not begun. `4e35f292…` remains installed.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:

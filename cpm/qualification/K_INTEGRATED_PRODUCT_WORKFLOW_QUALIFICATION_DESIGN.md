@@ -371,7 +371,7 @@ record before the next step.
 | K1-E4 | Owner | P (settled resource checkpoint) | Idle; resource rules §5.4 | any §5.4 STOP |
 | K1-E5 | Owner | Reopen CPM (Scripts menu); choose **`mia1`** (playhead still `shot3`). P. | Same module/run, new window; G1 scope; idle | anything else |
 | K1-E6 | Owner | Expressions → `K K1A1 D2 EXPR` → **Delete Preset** → confirm. Move the playhead into **`shot10`**, **Refresh Model List**, choose **`krystal20201`**, Body Presets → `K K1A1 B3 BODY` → **Delete Preset** → confirm. | Both moved to Trash | anything else |
-| K1-E7 | Shell | `K-Library K1A1 library_E7` | Libraries equal their pre-K state apart from the Trash entries | any other difference |
+| K1-E7 | Shell | `K-Library K1A1 library_E7` | Libraries equal their pre-K state apart from: the Trash entries (outside the Characters root); the characters' `character.json`/`.bak`; and Delete's Favorites cleanup in `library.json`/`library.json.bak` (clarified in K1A2, §17) | any other difference |
 | **K1-F1** | Owner | P (final settled checkpoint). Then, **with CPM still open**, exit SFM (**File > Exit**) and choose **Don't Save**. | SFM exits normally | a hang, crash or extra dialog |
 | K1-F2 | Shell | `K-CollectLogs K1A1 final`; `K-Finalize K1A1` (`S2 UNTOUCHED`); `K-RemoveProbe K1A1` (app + fixture unchanged; live list sealed); after adjudication `K-Disposition K1A1 <verdict>` (seals) | Expected K inventory restored exactly; fixture unchanged; G1 untouched | anything else |
 
@@ -400,12 +400,12 @@ event or rescope; idle at every P; §5.4 rules hold.
 | **K2-D1** | Owner | In CPM (still Krystal) Body Presets → `K K2A1 A2 BODY` → **Apply Preset**. | **Expected refusal:** "Preset could not be applied safely…" (generic guard copy). Dismiss it. CPM rebuilds and counts return. | no refusal, a different text, or a mutation |
 | K2-D2 | Shell | `K-CollectLogs K2A1 D1` | Exactly one `AUTHORIZATION_REFUSED … generation-mismatch`; no Apply outcome; `REBUILD_SCHEDULED` → `REBUILD` → one Select Model to healthy **G2**; no replay | anything else |
 | K2-D3 | Owner | P | CPM G2 scope (same window); both kinds have G2 views; fixture unchanged since K2-B2; idle | anything else |
-| K2-D4 | Owner | Deliberately **Apply Preset** `K K2A1 A2 BODY` again; then **Edit > Undo** once. | "Body Preset applied" (G1-provenance preset, compatible semantic set, §17); then visual return | any refusal |
+| K2-D4 | Owner | Click the `shot10` clip if needed (selection may change; §17). Set Krystal's **Muscles** to a clearly different value (§17: the preset equals the current values). Then deliberately **Apply Preset** `K K2A1 A2 BODY` again; then **Edit > Undo** once. | "Body Preset applied" (G1-provenance preset, compatible semantic set, §17); then visual return | any refusal |
 | K2-D5 | Owner | P | Authorized **G2**, committed; Undo restored; idle | anything else |
 | **K2-E1** | Owner | **DIV (D3 = B):** in the Clip Editor select **only `shot3`** first; then move the playhead back into **`shot10`** if it moved; then confirm both. Run the Normalizer → **Rebuild Selected Shot(s)**. Wait. | — | — |
 | K2-E2 | Shell | `K-CollectLogs K2A1 N3` | `shot3` PASS/PASS **G2**; `mem_ok` True | — |
 | K2-E3 | Owner | In CPM, **Delete Preset** `K K2A1 A2 BODY` → confirm. Close CPM with **X**. P. | Moved to Trash; closed; idle under G2 | — |
-| K2-E4 | Shell | `K-Library K2A1 library_E4` | Equal to pre-K2 apart from the Trash entry | — |
+| K2-E4 | Shell | `K-Library K2A1 library_E4` | Equal to pre-K2 apart from the Trash entry, `character.json`/`.bak`, and Delete's Favorites cleanup in `library.json`/`.bak` (§17) | any other difference |
 | **K2-F1** | Owner | With CPM closed, exit SFM; **Don't Save**. | Normal exit | — |
 | K2-F2 | Shell | `K-CollectLogs K2A1 final`; **`K-Finalize K2A1`** (`S2 RESTORED EXACT G1`); `K-RemoveProbe K2A1` (app + fixture unchanged); after adjudication `K-Disposition K2A1 <verdict>` (seals) | Exact G1; U3 inventory; fixture unchanged | restoration not exact: do not start SFM; report |
 
@@ -640,3 +640,50 @@ executed.** This is not a CPM or Normalizer failure.
 
 The outputs in `offline_outputs/` have been replaced with these runs. §15's table is the original
 K-0 record.
+
+## 17. K1 — COMPLETE / PASS (attempt K1A2, 2026-10-10)
+
+The attempt ran under the K1-only authorization from K-0 checkpoint `033bac3a…`, after the K-0
+amendment `93317866…` (§16):
+- **Preparation:** `K-New K1A2`, `K-Preflight -Owner1Recorded` (exact G1; expected inventory
+  `59b8f28b…`; exact dependencies), `K-DeployProbe` → `K READY`.
+- **Process:** one fresh SFM process (PID 36888) from start to exit.
+- **Adjudication:** mechanical, over the sealed evidence after exit: **53/53 PASS**.
+- **Disposition:** PASS. The live attempt has 53 files and its sums verify. The redacted copy is in
+  `real_sfm_qualification/cpm_k_integrated/raw/K1A2/`.
+
+| Proven | Evidence |
+|---|---|
+| **Normalizer first** | Probe 1: no broker and no CPM. The Normalizer's `shot9` run (N1) created broker `0x338d0630` (canonical menu-package origin) with one G1 `normalizer_compat` view. Idle; Normalizer names in shared `__main__`; CPM names absent. |
+| **CPM joins the same broker** | Run `20261010-003140-pid36888`, module `0x33edeb50`, class `0x33882f00`, window `0x2cb2cb48`. Krystal G1 scope 26/52. Same broker, `cpm_compat_v1` G1 view added, Normalizer view kept; boundary check PASS. |
+| **Ordinary CPM workflows** | Body Save `K K1A2 B3 BODY` (G1, 26 controls). Fit `assaultsuitbody1`: G1, 34 literals, `changed=1 failed=0 unattempted=0`, stage released ok; Undo returned all three sets exactly. Body Apply (G1, committed) + Undo. Expression Save `K K1A2 D2 EXPR` (G1, 58) and Apply (G1, committed) + Undo. Both K presets deleted (`PROD_DELETE=PASS` ×2). |
+| **Divergent coexistence** (playhead `shot10`, selection `shot9`) | N2 PASS with CPM open on Krystal. CPM only yielded around the scope dialog (`restored=True`); Krystal values unchanged; the next Apply committed with no refusal, stale event or rescope. |
+| **Same-shot coexistence** (`shot3`/`shot3`) | N3 (`foxmccouldwm1` + `mia1` RECONCILED) PASS with CPM scoped on Mia. Mia scope intact; the next Expression Apply committed with no refusal, stale event or rescope. |
+| **Close orders / lifetimes** | Close order X: CPM closed (✕) after N2/N3 and finalized; module resident; both consumers' views kept. Close order Y: N4 PASS with CPM closed (full reuse). Reopen: same module/class/run, new window `0x2c96ec60`, healthy scope. Exit with CPM open: normal. |
+| **Authority** | Every authorization on G1, every provider health healthy, 0 refusals, 0 stale rebuilds. One broker throughout. Idle at every probe after the broker existed (0 leases, 0 unreleased, 0 open providers, no live view lease). |
+| **Normalizer runs** | 4 Selected runs (budget 4), all PASS/PASS pinned to G1, `mem_ok` 13/13/15/15 True, 0 False, no CPM lines. |
+| **Resources** (§5.4) | No STOP at any probe. Private 3,074 → 3,111 MB over about 45 minutes, including 4 Normalizer runs. Handles 1,165 → 1,078, GDI 1,120 → 1,193, USER 100 → 133 (the first CPM window). The two closed states were identical in handles/GDI/USER. The accumulation rule had no applicable pair (the only closed-state pair is separated by N4). |
+| **Closeout** | `S2 UNTOUCHED` (exact G1); probe removed; expected inventory restored; installed app `4e35f292…` and fixture unchanged. |
+
+**Recorded VAS telemetry (not gated):** probe free VAS 450–525 MB. Normalizer minimum `mem_free`:
+N1 525.9 MB, N2 505.7 MB, N3 510.1 MB, N4 488.9 MB. Normalizer minimum largest free block 212.8 MB
+in every run.
+
+**Runbook clarifications during K1A2** (recorded in the attempt; the owner approved continuing; no
+product criterion changed):
+1. **Editing a character requires clicking its shot clip**, which changes the Clip Editor
+   selection. The selection matters only at Normalizer runs, and every run re-establishes its
+   selection first (D3).
+2. **K1-C4:** the B3 preset equaled Krystal's current values, so before Apply the operator set
+   Muscles to a different value. That made the Apply a real commit, and its Undo restored the
+   operator's value; K1-D7 already worked this way. K2-D4 now carries the same instruction.
+3. **K1-E7:** CPM Delete performs its designed Favorites cleanup (library-metadata write with a
+   `.bak`), so Delete may create or rewrite `library.json`/`library.json.bak` in addition to the
+   Trash entries. K1A2 created `mia--…/library.json` (`{"favorites": []}`) and
+   `krystal2020--…/library.json.bak` (byte-identical to the unchanged `library.json`). The owner
+   ruled this an expectation error (option 1). The K1-E7 and K2-E4 expectations now include it.
+
+**K1A1** (INCONCLUSIVE, tooling false STOP; §16) is preserved; its redacted copy is in `raw/K1A1/`.
+
+**K status: IN PROGRESS. K1 COMPLETE / PASS. K2 NOT STARTED** (needs separate authorization). L has
+not started.

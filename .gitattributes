@@ -318,3 +318,9 @@ real_sfm_qualification/cpm_k_integrated/*.ps1 text eol=lf
 real_sfm_qualification/cpm_k_integrated/*.md text eol=lf
 real_sfm_qualification/cpm_k_integrated/templates/*.md text eol=lf
 real_sfm_qualification/cpm_k_integrated/offline_outputs/*.txt text eol=lf
+
+# K raw outputs (attempts K1A1, K1A2): captured evidence, SHA-256-pinned in
+# cpm_k_integrated/raw/MANIFEST.md, exactly as written. Never normalize.
+real_sfm_qualification/cpm_k_integrated/raw/** -text whitespace=cr-at-eol
+# Probe scene snapshots: Python 2.7 json.dumps(indent=...) leaves trailing spaces. Kept byte-exact.
+real_sfm_qualification/cpm_k_integrated/raw/*/scene_snapshots/*.json -text -whitespace

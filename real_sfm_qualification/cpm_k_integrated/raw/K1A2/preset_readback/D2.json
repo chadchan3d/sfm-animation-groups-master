@@ -1,0 +1,261 @@
+{
+  "capture_provider": {
+    "fold_policy": "ascii-a-z-v1",
+    "provider_contract": "sfm-character-semantic-provider-v1",
+    "provider_generation": 1,
+    "source_sha256": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93"
+  },
+  "capture_semantic_policy": "master-category-operation-scope-v1",
+  "character_key": "modelpath-sha256-v1:2e6533ed1490a151062789e6b14c12de451d06b050c317c64b7421b9aba545b6",
+  "created_at": "20261010-005848-278000",
+  "kind": "expression",
+  "model_ref": {
+    "capture_checksum": 1153028609,
+    "path": "models/annoad/foxbase/mia/mia.mdl"
+  },
+  "name": "K K1A2 D2 EXPR",
+  "preset_id": "preset-46a901d7de2245a299656675a8ee6adf",
+  "record_kind": "preset",
+  "schema_version": 3,
+  "values": {
+    "flex.A": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BigBite": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.Bite": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BlinkJoy": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BlinkLow": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.Blow": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BlowIn": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BlowOut": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BrowDrop": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BrowInnerDrop": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BrowInnerRaise": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BrowOuterDrop": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BrowOuterRaise": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.BrowRaise": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.CheeksFull": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.CheeksUp": {
+      "left": 0.0,
+      "representation": "STEREO",
+      "right": 0.0
+    },
+    "flex.E": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.EyesRelax": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.EyesSuprise": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.I": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.IrisBigger": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.IrisSmaller": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.JawDrop1": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.JawDrop2": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.LipBiteL": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.LipBiteR": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.LipLowerDrop": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.LipLowerRaise": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.LipUpperDrop": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.LipUpperRaise": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.LipsIn": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.LipsOut": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.LowerLidDrop": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.LowerLidRaise": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.MouthBackBite": {
+      "left": 0.0,
+      "representation": "STEREO",
+      "right": 0.0
+    },
+    "flex.MouthCornerCurve": {
+      "left": 0.0,
+      "representation": "STEREO",
+      "right": 0.0
+    },
+    "flex.MouthCornersUp": {
+      "left": 0.0,
+      "representation": "STEREO",
+      "right": 0.0
+    },
+    "flex.MouthFrown": {
+      "left": 0.0,
+      "representation": "STEREO",
+      "right": 0.0
+    },
+    "flex.MouthNarrow": {
+      "left": 0.0,
+      "representation": "STEREO",
+      "right": 0.0
+    },
+    "flex.MouthOpen1": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.MouthOpen3": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.MouthPucker": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.MouthPuckerSmall": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.MouthPull": {
+      "left": 0.0,
+      "representation": "STEREO",
+      "right": 0.0
+    },
+    "flex.MouthWavyL": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.MouthWavyR": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.MouthWiden": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.NosePress": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.O": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.PupilBigger": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.PupilSmaller": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.SmileClosed": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.SmileOpen1": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.SmileOpen3": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.Smirk": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.U": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.UpperLidDrop": {
+      "mono": 0.0,
+      "representation": "MONO"
+    },
+    "flex.UpperLidRaise": {
+      "mono": 0.0,
+      "representation": "MONO"
+    }
+  }
+}

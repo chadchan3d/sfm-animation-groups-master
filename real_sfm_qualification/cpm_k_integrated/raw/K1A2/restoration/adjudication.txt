@@ -1,0 +1,68 @@
+[PASS] probes.count_12_contiguous
+[PASS] probes.one_process
+[PASS] probes.no_errors
+[PASS] probes.no_probe_acquisition
+[PASS] probes.identity_ok
+[PASS] probes.no_cpm_names_in_main
+[PASS] probes.historical_inactive_when_loaded
+[PASS] probes.one_module_class_run
+[PASS] probes.no_other_cpm_modules
+[PASS] normalizer_first.baseline_no_broker_no_cpm
+[PASS] normalizer_first.broker_constructed_by_normalizer
+[PASS] normalizer_first.boundary
+[PASS] cpm_joins.same_broker_boundary
+[PASS] broker.one_broker_throughout
+[PASS] broker.canonical_menu_origin
+[PASS] idle.every_probe_after_broker
+[PASS] views.only_g1_all_probes
+[PASS] views.normalizer_views_never_lost
+[PASS] views.cpm_views_retained_while_closed
+[PASS] lifecycle.two_windows_reopen
+[PASS] lifecycle.closed_states
+[PASS] lifecycle.census_max_one
+[PASS] scope.g1_generation_when_open
+[PASS] scene.fit_undo_restores_pre_fit
+[PASS] scene.divergent_normalizer_left_krystal_unchanged
+[PASS] scene.body_apply_undo_only_operator_slider
+[PASS] scene.expr_apply_undo_only_operator_slider
+[PASS] normalizer.N1_pass_g1
+[PASS] normalizer.N2_pass_g1
+[PASS] normalizer.N3_pass_g1
+[PASS] normalizer.N4_pass_g1
+[PASS] normalizer.budget_4_selected
+[PASS] log.no_historical_or_removed
+[PASS] log.module_candidate_x2_one_run
+[PASS] log.no_refusal
+[PASS] log.no_stale_rebuild
+[PASS] log.all_authorizations_g1
+[PASS] log.saves_exactly_campaign
+[PASS] log.two_committed_applies
+[PASS] log.fit_result
+[PASS] log.fit_stage_released_once_ok
+[PASS] log.provider_health_healthy
+[PASS] log.two_deletes_campaign_presets
+[PASS] log.modal_yield_restored_each_cpm_open_run
+[PASS] log.close_x_finalized_once
+[PASS] log.no_error_traceback
+[PASS] resources.no_stop_any_probe
+[PASS] resources.no_normalizer_mem_ok_false
+[PASS] library.final_footprint_clarified
+[PASS] library.no_k1_preset_left
+[PASS] closeout.g1_untouched
+[PASS] closeout.app_and_fixture_unchanged
+[PASS] closeout.live_seal
+RESULT 53/53
+resource trend (seq, private MB, free VAS MB, handles, gdi, user):
+   1 3074 450 1165 1120 100
+   2 3087 525 1160 1137 107
+   3 3094 504 1170 1155 117
+   4 3087 506 1184 1177 129
+   5 3101 505 1183 1177 129
+   6 3090 507 1183 1182 134
+   7 3111 510 1078 1185 130
+   8 3103 505 1078 1193 133
+   9 3101 506 1078 1177 126
+   10 3117 488 1078 1177 126
+   11 3109 489 1078 1193 133
+   12 3111 489 1078 1193 133
+normalizer VAS telemetry: {'N1': (525869056, 212828160, 13), 'N2': (505724928, 212828160, 13), 'N3': (510144512, 212828160, 15), 'N4': (488919040, 212828160, 15)}
