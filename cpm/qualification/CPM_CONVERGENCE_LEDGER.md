@@ -8,6 +8,32 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
+**U0A — Disposable Windows activation feasibility (pre-L; Astra Updater Blueprint R2, Stage 0
+file half): PASS (bounded), 2026-10-12.** This is experimental evidence, **not** production
+qualification. No updater, GUI, packaging or install exists; no product, authority or SFM file was
+touched (production fingerprint unchanged).
+- **Setup:** baseline `af4c8d6…`; R2 sha `61cf8ed5…` (owner-supplied, not committed); Windows 10
+  22H2 19045.6466, NTFS, non-elevated; disposable synthetic `usermod\cfg` trees only.
+- **Results:** 255 PASS, 1 NOT RUN, 0 FAIL. U0A-1 6/6, U0A-2 83/83, U0A-3 8/9 (cross-user NOT
+  RUN), U0A-4 5/5, U0A-5 134/134, U0A-6 20/20.
+- **Confirmed under process termination:**
+  - protected own-handle no-clobber rename (`GENERIC_READ|DELETE`, share 0; `FileRenameInfo`,
+    `ReplaceIfExists=FALSE` → 183 on an occupied destination; 17 cross-volume, no copy);
+  - every racer refused during protection, and every pre-protection mutation detected through the
+    held handles;
+  - one lock owner across 8 path aliases;
+  - an exact final set verified independently;
+  - every kill point (including during recovery) recovers to a verified old or new state, or to a
+    preserved conflict; recovery is idempotent.
+- **Unproven:** power-loss durability, cross-user and standard-user tokens, real disk-full, AV
+  interference, and all real-SFM behavior (U0B).
+- **R2 remains viable.** Refinements F1–F9 are for L. Notably, F4: the live `publisher.lock` in
+  `sfm_shared_authority` would be refused as unfamiliar content; F7: transaction paths add ~172
+  characters.
+- **Evidence:** `updater_qualification/u0a/U0A_WINDOWS_ACTIVATION_FEASIBILITY_REPORT.md`, plus
+  `harness/` and `evidence/` (redacted).
+- **U0B: NOT STARTED.**
+
 **K — Integrated CPM/Normalizer product workflow qualification: COMPLETE / PASS (2026-10-10).**
 K PASS = K1 PASS (K1A2, 53/53) + K2 PASS (K2A1, 39/39), on CPM `4e35f292…` and Normalizer
 `1f4ec5a2…`. Exact production CPM/Normalizer and exact G1 authority remain installed. **L: NOT
@@ -203,7 +229,9 @@ Sessions 1–4 remain complete (evidence for app `9a78fc96…`). R15 and R14 rem
 (`9a78fc96…` → `1e866871…` → `bfba4d3a…`); the launcher, baseline, adapter/projection, shared
 package, Normalizer, Master and sidecars are unchanged. Item 8 (real SFM) changed no repository
 product file. The pre-K UI polish pass changed only presentation in the app (`bfba4d3a…` → `5c6e2789…`, refined to
-`7e4686d7…`).
+`7e4686d7…`, then the Help-wording build `4e35f292…`, which is installed and was K-qualified). U0A
+added only experiment/documentation files under `updater_qualification/u0a/` (plus a scoped LF
+`.gitattributes` entry for them).
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -394,6 +422,16 @@ Evidence:
     1.2–1.5 s.
 
 ## Unresolved
+- **U0A residuals (updater; experimental, pre-L):**
+  - Unproven:
+    - power/cache-loss durability (R2 C10; a hard-reset campaign is still required);
+    - cross-user and standard-user lock contention;
+    - real disk-full (simulated only);
+    - AV/indexer interference.
+  - L design inputs:
+    - F4: the live `publisher.lock` inside `sfm_shared_authority` needs a defined disposition;
+    - F7: path-length budget at the real installation depth.
+  - U0B questions are in report §8.
 - **K/L residuals from R15 (not in R15 scope, unchanged):**
   - Normalizer namespace isolation (the Normalizer still runs in the shared `__main__`);
   - the shared window slot, log name and identity strings that old CPM builds also claim.
@@ -436,7 +474,7 @@ Evidence:
 
   - Pre-K CPM UI polish pass: **LIVE VERIFIED / PASS** (`7e4686d7…`, U2; supersedes `5c6e2789…`,
     whose U1 attempt was closed as SUPERSEDED / NO QUALIFICATION VERDICT). It is superseded in the
-    repository by the Help-wording-only candidate `4e35f292…` (offline PASS; not deployed).
+    repository by the Help-wording-only candidate `4e35f292…` (U3 LIVE VERIFIED / PASS; installed).
 
   - Final pre-K UI build `4e35f292…`: **LIVE VERIFIED / PASS** (U3, Help wording delta from U2).
 
@@ -455,8 +493,9 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. K is COMPLETE / PASS. L (installation/coexistence/release qualification, handoff §24) needs a
-separate explicit authorization and has not begun. `4e35f292…`, the production Normalizer
+Stop. U0A is complete (PASS, bounded); this is its checkpoint. U0B (real-SFM concurrency) and L
+(installation/coexistence/release qualification, handoff §24) each need separate explicit
+authorization and have not begun. K is COMPLETE / PASS. `4e35f292…`, the production Normalizer
 `1f4ec5a2…` and exact G1 authority remain installed.
 
 ## Checkpoints

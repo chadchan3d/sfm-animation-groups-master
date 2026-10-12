@@ -1,0 +1,305 @@
+isolation {"test_root_realpath_equals_given": true, "filesystem": "NTFS", "drive_type_fixed": true, "outside_repository": true, "outside_sfm": true, "no_reparse_points_on_path": true, "root_empty_or_new": true, "sfm_running": true, "PASS": true}
+U0A-1    1a/1b exclusive GENERIC_READ|DELETE share 0; rename by hel PASS
+U0A-1    1c ReplaceIfExists=FALSE onto existing destination         PASS
+U0A-1    1d own-handle rename without DELETE access                 PASS
+U0A-1    1e retained-file protection GENERIC_READ share 0           PASS
+U0A-1    1f destination occupied by a directory                     PASS
+U0A-1    1g cross-volume own-handle rename                          PASS
+U0A-2    rebuild before_preview inplace on master                   PASS
+U0A-2    rebuild before_preview inplace_py on master                PASS
+U0A-2    rebuild before_preview replacefile on master               PASS
+U0A-2    rebuild before_preview movereplace on master               PASS
+U0A-2    rebuild before_preview delete on master                    PASS
+U0A-2    rebuild before_preview rename on master                    PASS
+U0A-2    rebuild after_preview inplace on master                    PASS
+U0A-2    rebuild after_preview inplace_py on master                 PASS
+U0A-2    rebuild after_preview replacefile on master                PASS
+U0A-2    rebuild after_preview movereplace on master                PASS
+U0A-2    rebuild after_preview delete on master                     PASS
+U0A-2    rebuild after_preview rename on master                     PASS
+U0A-2    rebuild before_protection inplace on master                PASS
+U0A-2    rebuild before_protection inplace_py on master             PASS
+U0A-2    rebuild before_protection replacefile on master            PASS
+U0A-2    rebuild before_protection movereplace on master            PASS
+U0A-2    rebuild before_protection delete on master                 PASS
+U0A-2    rebuild before_protection rename on master                 PASS
+U0A-2    rebuild during_protection inplace on master                PASS
+U0A-2    rebuild during_protection inplace_py on master             PASS
+U0A-2    rebuild during_protection replacefile on master            PASS
+U0A-2    rebuild during_protection movereplace on master            PASS
+U0A-2    rebuild during_protection delete on master                 PASS
+U0A-2    rebuild during_protection rename on master                 PASS
+U0A-2    rebuild after_release inplace on master                    PASS
+U0A-2    rebuild after_release inplace_py on master                 PASS
+U0A-2    rebuild after_release replacefile on master                PASS
+U0A-2    rebuild after_release movereplace on master                PASS
+U0A-2    rebuild after_release delete on master                     PASS
+U0A-2    rebuild after_release rename on master                     PASS
+U0A-2    replace before_preview inplace on master                   PASS
+U0A-2    replace before_preview inplace_py on master                PASS
+U0A-2    replace before_preview replacefile on master               PASS
+U0A-2    replace before_preview movereplace on master               PASS
+U0A-2    replace before_preview delete on master                    PASS
+U0A-2    replace before_preview rename on master                    PASS
+U0A-2    replace after_preview inplace on master                    PASS
+U0A-2    replace after_preview inplace_py on master                 PASS
+U0A-2    replace after_preview replacefile on master                PASS
+U0A-2    replace after_preview movereplace on master                PASS
+U0A-2    replace after_preview delete on master                     PASS
+U0A-2    replace after_preview rename on master                     PASS
+U0A-2    replace before_protection inplace on master                PASS
+U0A-2    replace before_protection inplace_py on master             PASS
+U0A-2    replace before_protection replacefile on master            PASS
+U0A-2    replace before_protection movereplace on master            PASS
+U0A-2    replace before_protection delete on master                 PASS
+U0A-2    replace before_protection rename on master                 PASS
+U0A-2    replace during_protection inplace on master                PASS
+U0A-2    replace during_protection inplace_py on master             PASS
+U0A-2    replace during_protection replacefile on master            PASS
+U0A-2    replace during_protection movereplace on master            PASS
+U0A-2    replace during_protection delete on master                 PASS
+U0A-2    replace during_protection rename on master                 PASS
+U0A-2    replace after_release inplace on master                    PASS
+U0A-2    replace after_release inplace_py on master                 PASS
+U0A-2    replace after_release replacefile on master                PASS
+U0A-2    replace after_release movereplace on master                PASS
+U0A-2    replace after_release delete on master                     PASS
+U0A-2    replace after_release rename on master                     PASS
+U0A-2    rebuild before_protection inplace on sidecar               PASS
+U0A-2    rebuild before_protection replacefile on sidecar           PASS
+U0A-2    rebuild before_protection delete on sidecar                PASS
+U0A-2    rebuild before_protection rename on sidecar                PASS
+U0A-2    rebuild during_protection inplace on sidecar               PASS
+U0A-2    rebuild during_protection replacefile on sidecar           PASS
+U0A-2    rebuild during_protection delete on sidecar                PASS
+U0A-2    rebuild during_protection rename on sidecar                PASS
+U0A-2    rebuild destination occupied before move 0 (S0)            PASS
+U0A-2    rebuild destination occupied before move 1 (P0)            PASS
+U0A-2    rebuild destination occupied before move 2 (S1)            PASS
+U0A-2    rebuild occupied move 2: recovery afterwards               PASS
+U0A-2    rebuild destination occupied before move 3 (P1)            PASS
+U0A-2    rebuild occupied move 3: recovery afterwards               PASS
+U0A-2    replace destination occupied before move 0 (S0)            PASS
+U0A-2    replace destination occupied before move 1 (P0)            PASS
+U0A-2    replace destination occupied before move 2 (M0)            PASS
+U0A-2    replace destination occupied before move 3 (M1)            PASS
+U0A-2    replace occupied move 3: recovery afterwards               PASS
+U0A-2    replace destination occupied before move 4 (S1)            PASS
+U0A-2    replace occupied move 4: recovery afterwards               PASS
+U0A-2    replace destination occupied before move 5 (P1)            PASS
+U0A-2    replace occupied move 5: recovery afterwards               PASS
+U0A-3    3a two competing processes                                 PASS
+U0A-3    3b holder terminated while holding; reacquisition          PASS
+U0A-3    3c activation while another process owns the lock          PASS
+U0A-3    3d rename of the lock's directory while held               PASS
+U0A-3    3e pre-existing lock file without a live owner             PASS
+U0A-3    3f aliases to the same physical lock while held            PASS
+U0A-3    3g lock file denies write access                           PASS
+U0A-3    3h lock directory denies file creation (no lock file yet)  PASS
+U0A-3    3i cross-user contention                                   NOT RUN
+U0A-4    4a rebuild with TXT unchanged (bytes and file identity ret PASS
+U0A-4    4b replacement TXT with matching authority                 PASS
+U0A-4    4c already-installed candidate is a verified no-op         PASS
+U0A-4    4d two historical sidecars, no manifest -> one active arti PASS
+U0A-4    4e activation addressed through a junction alias of the in PASS
+U0A-5    rebuild kill@candidates_written policy=resume              PASS
+U0A-5    rebuild kill@snapshots_written policy=resume               PASS
+U0A-5    rebuild kill@locked policy=resume                          PASS
+U0A-5    rebuild kill@protected policy=resume                       PASS
+U0A-5    rebuild kill@act_begin_forward_0 policy=resume             PASS
+U0A-5    rebuild kill@act_moved_forward_0 policy=resume             PASS
+U0A-5    rebuild kill@act_done_forward_0 policy=resume              PASS
+U0A-5    rebuild kill@act_begin_forward_1 policy=resume             PASS
+U0A-5    rebuild kill@act_moved_forward_1 policy=resume             PASS
+U0A-5    rebuild kill@act_done_forward_1 policy=resume              PASS
+U0A-5    rebuild kill@act_begin_forward_2 policy=resume             PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=resume             PASS
+U0A-5    rebuild kill@act_done_forward_2 policy=resume              PASS
+U0A-5    rebuild kill@act_begin_forward_3 policy=resume             PASS
+U0A-5    rebuild kill@act_moved_forward_3 policy=resume             PASS
+U0A-5    rebuild kill@act_done_forward_3 policy=resume              PASS
+U0A-5    rebuild kill@moves_done policy=resume                      PASS
+U0A-5    rebuild kill@complete policy=resume                        PASS
+U0A-5    rebuild kill@released policy=resume                        PASS
+U0A-5    rebuild kill@candidates_written policy=rollback            PASS
+U0A-5    rebuild kill@snapshots_written policy=rollback             PASS
+U0A-5    rebuild kill@locked policy=rollback                        PASS
+U0A-5    rebuild kill@protected policy=rollback                     PASS
+U0A-5    rebuild kill@act_begin_forward_0 policy=rollback           PASS
+U0A-5    rebuild kill@act_moved_forward_0 policy=rollback           PASS
+U0A-5    rebuild kill@act_done_forward_0 policy=rollback            PASS
+U0A-5    rebuild kill@act_begin_forward_1 policy=rollback           PASS
+U0A-5    rebuild kill@act_moved_forward_1 policy=rollback           PASS
+U0A-5    rebuild kill@act_done_forward_1 policy=rollback            PASS
+U0A-5    rebuild kill@act_begin_forward_2 policy=rollback           PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback           PASS
+U0A-5    rebuild kill@act_done_forward_2 policy=rollback            PASS
+U0A-5    rebuild kill@act_begin_forward_3 policy=rollback           PASS
+U0A-5    rebuild kill@act_moved_forward_3 policy=rollback           PASS
+U0A-5    rebuild kill@act_done_forward_3 policy=rollback            PASS
+U0A-5    rebuild kill@moves_done policy=rollback                    PASS
+U0A-5    rebuild kill@complete policy=rollback                      PASS
+U0A-5    rebuild kill@released policy=rollback                      PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=resume reckill@rec PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=resume reckill@rec PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=resume reckill@rec PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=resume reckill@rec PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback reckill@r PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback reckill@r PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback reckill@r PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback reckill@r PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback reckill@r PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback reckill@r PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback reckill@r PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback reckill@r PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback reckill@r PASS
+U0A-5    rebuild kill@act_moved_forward_2 policy=rollback reckill@r PASS
+U0A-5    rebuild TXT changed after crash, before recovery           PASS
+U0A-5    rebuild retired original missing; rollback requested       PASS
+U0A-5    rebuild candidate corrupted after crash; resume requested  PASS
+U0A-5    rebuild journal records DONE for a move the disk does not  PASS
+U0A-5    rebuild activation rollback interrupted, then recovered tw PASS
+U0A-5    rebuild ...after occupant set aside by operator: recovery  PASS
+U0A-5    replace kill@candidates_written policy=resume              PASS
+U0A-5    replace kill@snapshots_written policy=resume               PASS
+U0A-5    replace kill@locked policy=resume                          PASS
+U0A-5    replace kill@protected policy=resume                       PASS
+U0A-5    replace kill@act_begin_forward_0 policy=resume             PASS
+U0A-5    replace kill@act_moved_forward_0 policy=resume             PASS
+U0A-5    replace kill@act_done_forward_0 policy=resume              PASS
+U0A-5    replace kill@act_begin_forward_1 policy=resume             PASS
+U0A-5    replace kill@act_moved_forward_1 policy=resume             PASS
+U0A-5    replace kill@act_done_forward_1 policy=resume              PASS
+U0A-5    replace kill@act_begin_forward_2 policy=resume             PASS
+U0A-5    replace kill@act_moved_forward_2 policy=resume             PASS
+U0A-5    replace kill@act_done_forward_2 policy=resume              PASS
+U0A-5    replace kill@act_begin_forward_3 policy=resume             PASS
+U0A-5    replace kill@act_moved_forward_3 policy=resume             PASS
+U0A-5    replace kill@act_done_forward_3 policy=resume              PASS
+U0A-5    replace kill@act_begin_forward_4 policy=resume             PASS
+U0A-5    replace kill@act_moved_forward_4 policy=resume             PASS
+U0A-5    replace kill@act_done_forward_4 policy=resume              PASS
+U0A-5    replace kill@act_begin_forward_5 policy=resume             PASS
+U0A-5    replace kill@act_moved_forward_5 policy=resume             PASS
+U0A-5    replace kill@act_done_forward_5 policy=resume              PASS
+U0A-5    replace kill@moves_done policy=resume                      PASS
+U0A-5    replace kill@complete policy=resume                        PASS
+U0A-5    replace kill@released policy=resume                        PASS
+U0A-5    replace kill@candidates_written policy=rollback            PASS
+U0A-5    replace kill@snapshots_written policy=rollback             PASS
+U0A-5    replace kill@locked policy=rollback                        PASS
+U0A-5    replace kill@protected policy=rollback                     PASS
+U0A-5    replace kill@act_begin_forward_0 policy=rollback           PASS
+U0A-5    replace kill@act_moved_forward_0 policy=rollback           PASS
+U0A-5    replace kill@act_done_forward_0 policy=rollback            PASS
+U0A-5    replace kill@act_begin_forward_1 policy=rollback           PASS
+U0A-5    replace kill@act_moved_forward_1 policy=rollback           PASS
+U0A-5    replace kill@act_done_forward_1 policy=rollback            PASS
+U0A-5    replace kill@act_begin_forward_2 policy=rollback           PASS
+U0A-5    replace kill@act_moved_forward_2 policy=rollback           PASS
+U0A-5    replace kill@act_done_forward_2 policy=rollback            PASS
+U0A-5    replace kill@act_begin_forward_3 policy=rollback           PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback           PASS
+U0A-5    replace kill@act_done_forward_3 policy=rollback            PASS
+U0A-5    replace kill@act_begin_forward_4 policy=rollback           PASS
+U0A-5    replace kill@act_moved_forward_4 policy=rollback           PASS
+U0A-5    replace kill@act_done_forward_4 policy=rollback            PASS
+U0A-5    replace kill@act_begin_forward_5 policy=rollback           PASS
+U0A-5    replace kill@act_moved_forward_5 policy=rollback           PASS
+U0A-5    replace kill@act_done_forward_5 policy=rollback            PASS
+U0A-5    replace kill@moves_done policy=rollback                    PASS
+U0A-5    replace kill@complete policy=rollback                      PASS
+U0A-5    replace kill@released policy=rollback                      PASS
+U0A-5    replace kill@act_moved_forward_3 policy=resume reckill@rec PASS
+U0A-5    replace kill@act_moved_forward_3 policy=resume reckill@rec PASS
+U0A-5    replace kill@act_moved_forward_3 policy=resume reckill@rec PASS
+U0A-5    replace kill@act_moved_forward_3 policy=resume reckill@rec PASS
+U0A-5    replace kill@act_moved_forward_3 policy=resume reckill@rec PASS
+U0A-5    replace kill@act_moved_forward_3 policy=resume reckill@rec PASS
+U0A-5    replace kill@act_moved_forward_3 policy=resume reckill@rec PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace kill@act_moved_forward_3 policy=rollback reckill@r PASS
+U0A-5    replace TXT changed after crash, before recovery           PASS
+U0A-5    replace retired original missing; rollback requested       PASS
+U0A-5    replace candidate corrupted after crash; resume requested  PASS
+U0A-5    replace journal records DONE for a move the disk does not  PASS
+U0A-5    replace activation rollback interrupted, then recovered tw PASS
+U0A-5    replace ...after occupant set aside by operator: recovery  PASS
+U0A-6    6a access denied: DELETE denied on old sidecar (file DE +  PASS
+U0A-6    6b access denied on rename into authority dir mid-transact PASS
+U0A-6    6b ...after permission restored: recovery                  PASS
+U0A-6    6c sharing violation: Normalizer-style read handle on Mast PASS
+U0A-6    6d sharing violation: full-sharing reader on old sidecar   PASS
+U0A-6    6e missing source: old sidecar moved away before protectio PASS
+U0A-6    6f missing source: candidate sidecar removed before protec PASS
+U0A-6    6g candidate write fails ERROR_DISK_FULL (SIMULATED inject PASS
+U0A-6    6h unfamiliar pre-existing file in authority dir (publishe PASS
+U0A-6    6i unexpected sidecar created in authority dir during the  PASS
+U0A-6    6j journal/intent flip_byte_middle -> recovery             PASS
+U0A-6    6j journal/intent torn_tail -> recovery                    PASS
+U0A-6    6j journal/intent unknown_intent_schema -> recovery        PASS
+U0A-6    6j journal/intent unknown_journal_schema -> recovery       PASS
+U0A-6    6j journal/intent intent_traversal_name -> recovery        PASS
+U0A-6    6k identity mismatch: Master replaced by identical bytes b PASS
+U0A-6    6l identity mismatch: authority directory swapped for a co PASS
+U0A-6    6m hard-linked Master (alias) refused                      PASS
+U0A-6    6n junction (reparse point) as the authority directory     PASS
+U0A-6    6o advisory check: sfm.exe running -> activation refused   PASS
+{
+ "isolation": {
+  "test_root_realpath_equals_given": true,
+  "filesystem": "NTFS",
+  "drive_type_fixed": true,
+  "outside_repository": true,
+  "outside_sfm": true,
+  "no_reparse_points_on_path": true,
+  "root_empty_or_new": true,
+  "sfm_running": true,
+  "PASS": true
+ },
+ "production_fingerprint_unchanged": true,
+ "production_fingerprint_entries": 5,
+ "production_watch_locations": 3,
+ "elapsed_s": 98.1,
+ "python": "3.10.6 (tags/v3.10.6:9c7b4bd, Aug  1 2022, 21:53:49) [MSC v.1932 64 bit (AMD64)]",
+ "windows": [
+  10,
+  0,
+  19045
+ ],
+ "long_paths_enabled": 1,
+ "max_test_path_length": 395,
+ "test_root_length": 132,
+ "counts": {
+  "U0A-1": {
+   "PASS": 6
+  },
+  "U0A-2": {
+   "PASS": 83
+  },
+  "U0A-3": {
+   "PASS": 8,
+   "NOT RUN": 1
+  },
+  "U0A-4": {
+   "PASS": 5
+  },
+  "U0A-5": {
+   "PASS": 134
+  },
+  "U0A-6": {
+   "PASS": 20
+  }
+ }
+}

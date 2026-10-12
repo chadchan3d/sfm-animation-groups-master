@@ -324,3 +324,11 @@ real_sfm_qualification/cpm_k_integrated/offline_outputs/*.txt text eol=lf
 real_sfm_qualification/cpm_k_integrated/raw/** -text whitespace=cr-at-eol
 # Probe scene snapshots: Python 2.7 json.dumps(indent=...) leaves trailing spaces. Kept byte-exact.
 real_sfm_qualification/cpm_k_integrated/raw/*/scene_snapshots/*.json -text -whitespace
+
+# U0A (2026-10-12): hash-pinned experiment sources, report and evidence; keep exact LF bytes.
+updater_qualification/u0a/**/*.py text eol=lf
+updater_qualification/u0a/**/*.md text eol=lf
+updater_qualification/u0a/**/*.json text eol=lf
+updater_qualification/u0a/**/*.txt text eol=lf
+updater_qualification/u0a/*.md text eol=lf
+updater_qualification/u0a/**/*.zip binary
