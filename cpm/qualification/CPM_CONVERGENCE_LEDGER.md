@@ -8,7 +8,80 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**Updater design checkpoint (documentation only), 2026-10-12: U0B-P0 AUTHORIZED / NOT STARTED.**
+**U0B-P0 — Read-only installation, exposure and evidence preflight (ruling §7): technical
+acceptance PASS (bounded), 2026-10-12; procedural write-footprint deviation awaiting owner
+disposition.**
+- **Scope held:** run from `a274b7c…`. SFM was not running and was never launched. Non-elevated; no
+  tracing, compilation, tests, settings, installed-file or authority change. The live authority was
+  hashed three times during the inventory and was unchanged.
+- **Acceptance:** the designer found all seven ruling §7 acceptance items satisfied. PASS is not
+  native safety, backup recoverability, U0B or release qualification.
+- **Evidence (local only, not committed):** the P0 report (`7f3b26e2672af6101ffc7d7d1b8a33fd31daeb906adcd2b120f61044c6fe8a14`)
+  and inventory (`6516bdb3c66e29843c45911599294b42c840eecf8e10bb2c375951d9987594d1`), plus a private
+  write-footprint note, in the operator's approved local Codex evidence directory. They contain
+  workstation paths and installation details, so they stay out of GitHub.
+- **Procedural finding (owner disposition required):** P0 permitted writes to one evidence folder
+  only. Outside it, during P0:
+  1. two working hash-list files in the agent session's temporary scratchpad (disclosed in the
+     report);
+  2. two tool-output files saved automatically by the agent harness in its session store, one a
+     duplicate of item 1 (not disclosed in the report);
+  3. a `git fetch` at P0 start rewrote repository metadata (`FETCH_HEAD`); no tracked file, ref,
+     index or object changed.
+
+  All still exist, unmodified. They contain hashes, file names and listings, with no credentials. P0
+  is therefore **not** described as fully compliant.
+- **Verified installation identities** (all match pins and repository bytes):
+  - Authority: G1 Master `ac45e5c1…`, `manifest.json` `d810d648…`, the only sidecar `bcd97641…`,
+    and an empty `publisher.lock` (`e3b0c442…`).
+  - Consumers: CPM `4e35f292…`, launcher `996ca483…`, Normalizer `1f4ec5a2…`, adapter
+    `e96e21b5…`, projection `9b077a1b…`, probe v3 `ce4ace98…`, and the shared authority package and
+    reader.
+  - Bytecode: 25 `.pyc` files carry Python 2.7 magic and timestamps matching their sources.
+- **Findings:**
+  - **Effective Master:** statically `usermod/cfg/sfm_defaultanimationgroups.txt` (usermod first in
+    `gameinfo.txt` SearchPaths; launch options set no `-game`/search path). The Normalizer's
+    absolute path is demonstrated in I/J logs. CPM logs a relative path, and the process working
+    directory has never been recorded.
+  - **Stray copies:** 19 other Master-like files are inert by search-path rules (statically): 12
+    outside the live `cfg` (stock `platform`, model packs, a probe backup) and 7 differently named
+    TXT files in `cfg`. The P0 report says "eight" for the latter; the inventory shows seven.
+  - **Selector:** reads only `*.sfmsidecar` (first matching source hash wins). It ignores
+    `publisher.lock` and `manifest.json`, and the winning artifact is not logged.
+  - **`publisher.lock`:** created by `tools/sfm_master_sidecar/publisher.py`. Proposed rule:
+    recognize in place, never move or delete, and refuse if it is held. Implementation remains to
+    qualify.
+  - **Ordinary SFM writes:** `cfg` config files and stats at exit; HKCU Qt settings;
+    `<document>.autosave` beside the open document (from timestamps, not traced); product logs (the
+    Normalizer log is truncated on each run).
+  - **G1 sidecar:** `bcd97641…` exists only in the live installation, not in the repository. A
+    hash-verified second-volume copy is required before any step that could touch the authority.
+  - **Path budget:** the live sidecar path is 175 characters; with about 172 of transaction overhead
+    that is about 347 (over 260). Long paths are enabled on this machine.
+  - **Fixture:** the K/item-8 fixture is still at its pin `197e6011…`.
+- **Unresolved after P0:**
+  - **Native Master access:** path, timing, share mode, and behavior when the Master is locked,
+    absent or mid-replacement are UNKNOWN; no file-access trace exists. Observing them needs
+    elevation (built-in WPR), a tracer install, or a test-only probe, and each needs approval.
+  - **CPM absolute Master target:** inferred only.
+  - **Semantic oracle:** there is no Master pair with a deliberate semantic difference (G2 is G1
+    plus one LF), no oracle combining group tree and channels/keys, and no real sidecar bytes in the
+    repository.
+  - **Bytecode:** content equivalence is shown by timestamps only.
+  - **Antivirus:** Defender real-time protection is on; exclusions are unreadable without elevation;
+    interference is untested.
+  - **Concurrency (C11/G), durability (C10/G hard reset) and cross-user contention:** unqualified,
+    not waived.
+  - **Restoration:** plans are proposed only; backup recoverability is unproven.
+  - **R3-A1 evidence:** the source document behind "native rereads the Master" is absent from the
+    repository.
+- **Next proposal:** P1, real-artifact scratch qualification on a dedicated scratch root on the
+  installation volume (P0 report §7; ruling §6). It is **proposed, not authorized**, and also needs
+  code-development (harness) authorization.
+- **U0B-P1, P2, P3 and L: NOT STARTED.**
+
+Previous milestone: **Updater design checkpoint (documentation only), 2026-10-12** (U0B-P0 was
+authorized there and has since been executed, above).
 The owner approved the updater design adjudication and authorized U0B-P0 as the next milestone. No
 code, test, SFM launch or installed-file change was made; baseline `1a2bbd1…`; committed and
 verified on GitHub as `a7739736366bb057d51bffe4e74d1a5c74614024`.
@@ -29,10 +102,10 @@ verified on GitHub as `a7739736366bb057d51bffe4e74d1a5c74614024`.
 - **Not approved / on HOLD:** A1 and A2 directions only, with no qualification or hard-reset waiver;
   A4 deferred (cross-user unqualified, no test account); N1-first rejected; R2 C10/G hard-reset and
   C11/G concurrency blockers not waived; live fault injection HOLD.
-- **U0B-P0** (ruling §7): read-only preflight, to run only as a separate next-window assignment
-  after reconciling with the then-current Ledger. It writes only its report and inventory, to one
-  new folder in the operator's approved local Codex evidence directory, outside the repository.
-- **U0B-P1, P2, P3: NOT STARTED**; each needs separate authorization.
+- **U0B-P0** (ruling §7): read-only preflight, authorized to write only its report and inventory,
+  to one new folder in the operator's approved local Codex evidence directory, outside the
+  repository. It has since been executed (see Current milestone).
+- **U0B-P1, P2, P3:** each needs separate authorization.
 
 **U0A — Disposable Windows activation feasibility (pre-L; Astra Updater Blueprint R2, Stage 0
 file half): PASS (bounded), 2026-10-12.** This is experimental evidence, **not** production
@@ -62,7 +135,8 @@ touched (production fingerprint unchanged).
   preserve and recognize it in place; see above); F7: transaction paths add ~172 characters.
 - **Evidence:** `updater_qualification/u0a/U0A_WINDOWS_ACTIVATION_FEASIBILITY_REPORT.md`, plus
   `harness/` and `evidence/` (redacted).
-- **U0B:** P0 AUTHORIZED / NOT STARTED; P1–P3 NOT STARTED.
+- **U0B:** P0 technical PASS (bounded; procedural deviation awaiting owner disposition); P1–P3 NOT
+  STARTED.
 
 **K — Integrated CPM/Normalizer product workflow qualification: COMPLETE / PASS (2026-10-10).**
 K PASS = K1 PASS (K1A2, 53/53) + K2 PASS (K2A1, 39/39), on CPM `4e35f292…` and Normalizer
@@ -264,7 +338,8 @@ product file. The pre-K UI polish pass changed only presentation in the app (`bf
 added only experiment/documentation files under `updater_qualification/u0a/` (plus a scoped LF
 `.gitattributes` entry for them). The updater design checkpoint added only documents under
 `updater_qualification/design/` and `reviews/` plus `SHA256SUMS.txt`, scoped `.gitattributes`
-entries, the U0A report's tally correction and this Ledger.
+entries, the U0A report's tally correction and this Ledger. U0B-P0 changed no tracked repository
+file or installed file; its evidence is local only, and the P0 closeout changed only this Ledger.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -282,7 +357,8 @@ was removed after each campaign; the Scripts deployment equals its pre-harness b
 (`cefc2b88…`), and no `ACTIVE_CAMPAIGN.txt` remains.
 
 The live authority is exact production G1 (Master `ac45e5c1…`, manifest `d810d648…`, one sidecar
-`bcd97641…`), last restored and confirmed at K2A1 closeout (`S2 RESTORED EXACT G1`, 2026-10-10).
+`bcd97641…`), last restored and confirmed at K2A1 closeout (`S2 RESTORED EXACT G1`, 2026-10-10),
+and re-verified unchanged, read-only, by U0B-P0 (2026-10-12).
 
 **Deployed and verified** (runbook §0; re-verified at the 2026-10-06 transfer checkpoint and by
 item-8 `I8-Preflight`/disposition on 2026-10-08 and the U1–U3 deployments on 2026-10-09; the shared package's qualification-only
@@ -469,6 +545,9 @@ Evidence:
       and recognize a verified legacy file in place; implementation details are unqualified;
     - F7: path-length budget at the real installation depth (U0A ran on C:, not E:).
   - U0B questions are in report §8; the P0 acceptance evidence is ruling §7.
+- **U0B-P0 open items:** native Master access, CPM working directory, semantic oracle, bytecode
+  content, AV, restoration recoverability, and the write-footprint owner disposition (see Current
+  milestone).
 - **K/L residuals from R15 (not in R15 scope, unchanged):**
   - Normalizer namespace isolation (the Normalizer still runs in the shared `__main__`);
   - the shared window slot, log name and identity strings that old CPM builds also claim.
@@ -530,11 +609,13 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. This is the updater design documentation checkpoint. Next bounded action: **U0B-P0 read-only
-preflight** (ruling §7), as a separate assignment in a new designer window. It is authorized and not
-started; nothing of it was run here. U0B-P1/P2/P3 and L (installation/coexistence/release
-qualification, handoff §24) are NOT STARTED and each need separate authorization; live fault
-injection is on HOLD. K is COMPLETE / PASS; U0A is PASS (bounded). `4e35f292…`, the production
+Stop. This is the U0B-P0 closeout checkpoint. Two owner decisions are pending:
+1. disposition of the P0 procedural write-footprint deviation;
+2. whether to authorize **U0B-P1** (real-artifact scratch qualification; proposed, not authorized;
+   it needs harness code authorization).
+
+U0B-P1/P2/P3 and L (installation/coexistence/release qualification, handoff §24) are NOT STARTED and
+each need separate authorization; live fault injection is on HOLD. K is COMPLETE / PASS; U0A is PASS (bounded). `4e35f292…`, the production
 Normalizer `1f4ec5a2…` and exact G1 authority remain installed.
 
 ## Checkpoints
