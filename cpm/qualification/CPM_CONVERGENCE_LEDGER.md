@@ -10,7 +10,8 @@ Otherwise proceed with the assigned milestone.
 ## Current milestone
 **Updater design checkpoint (documentation only), 2026-10-12: U0B-P0 AUTHORIZED / NOT STARTED.**
 The owner approved the updater design adjudication and authorized U0B-P0 as the next milestone. No
-code, test, SFM launch or installed-file change was made; baseline `1a2bbd1…`.
+code, test, SFM launch or installed-file change was made; baseline `1a2bbd1…`; committed and
+verified on GitHub as `a7739736366bb057d51bffe4e74d1a5c74614024`.
 - **Authority (GitHub, `updater_qualification/`):**
   - `design/OWNER_DECISION_2026-10-12.md`: the owner record; governs only its explicitly
     approved items and lists original and committed SHA-256s;
@@ -57,8 +58,8 @@ touched (production fingerprint unchanged).
 - **Unproven:** power-loss durability, cross-user and standard-user tokens, real disk-full, AV
   interference, and all real-SFM behavior (U0B).
 - **R2 remains viable.** Refinements F1–F9 are for L. Notably, F4: the live `publisher.lock` in
-  `sfm_shared_authority` would be refused as unfamiliar content; F7: transaction paths add ~172
-  characters.
+  `sfm_shared_authority` would be refused as unfamiliar content (owner direction since approved:
+  preserve and recognize it in place; see above); F7: transaction paths add ~172 characters.
 - **Evidence:** `updater_qualification/u0a/U0A_WINDOWS_ACTIVATION_FEASIBILITY_REPORT.md`, plus
   `harness/` and `evidence/` (redacted).
 - **U0B:** P0 AUTHORIZED / NOT STARTED; P1–P3 NOT STARTED.
@@ -187,8 +188,9 @@ real-SFM Python 2.7.5 process. The campaign covered:
 Historical forced-rollback and queued-Fit evidence is retained with its existing qualifications.
 Exact G1 was restored. The temporary item-8 probe, campaign pointer and other qualification-only
 deployment were removed. **The exact qualified candidate remains installed.** No new convergence
-blocker was found. **CPM is eligible to enter K; K and L have not started. K, if later authorized,
-must begin in a fresh SFM process.** This checkpoint does not decide L's final installation layout.
+blocker was found. At that checkpoint CPM was eligible to enter K, and K and L had not started (K
+has since completed, PASS, in fresh SFM processes; L is NOT STARTED). This checkpoint does not
+decide L's final installation layout.
 (Superseded for K entry by the pre-K UI pass: the build eligible to enter K is now the live-verified
 `4e35f292…`.)
 
@@ -266,8 +268,8 @@ entries, the U0A report's tally correction and this Ledger.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
-  checkpoint `bd169401fba1c04bf24a148cd8e65748ae757912` (unchanged since `382c79b`). Its header
-  status banner ("R15 remains OPEN…") predates R15 closure; this Ledger is authoritative for status.
+  checkpoint `bd169401fba1c04bf24a148cd8e65748ae757912` (unchanged since `382c79b`). Its §13 line
+  "R15 remains OPEN…" predates R15 closure; this Ledger is authoritative for status.
 - Updater design authority: `updater_qualification/design/OWNER_DECISION_2026-10-12.md` (with R2 and
   Astra's ruling beside it; see Current milestone). It does not change the frozen R15 Blueprint.
 - `cpm/qualification/R15_NAMESPACE_ISOLATION_PROPOSAL.md`: superseded, historical only.
@@ -279,8 +281,8 @@ redacted, into `real_sfm_qualification/cpm_session4/raw/`. The qualification-onl
 was removed after each campaign; the Scripts deployment equals its pre-harness baseline exactly
 (`cefc2b88…`), and no `ACTIVE_CAMPAIGN.txt` remains.
 
-The live authority is exact production G1 after Session 4: Master `ac45e5c1…`, manifest
-`d810d648…`, one sidecar `bcd97641…`.
+The live authority is exact production G1 (Master `ac45e5c1…`, manifest `d810d648…`, one sidecar
+`bcd97641…`), last restored and confirmed at K2A1 closeout (`S2 RESTORED EXACT G1`, 2026-10-10).
 
 **Deployed and verified** (runbook §0; re-verified at the 2026-10-06 transfer checkpoint and by
 item-8 `I8-Preflight`/disposition on 2026-10-08 and the U1–U3 deployments on 2026-10-09; the shared package's qualification-only
