@@ -8,18 +8,21 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**U0B-P1 — Real-artifact scratch qualification (ruling §6): PASS (bounded), 2026-10-12.** It covers
-the R2 activation/recovery mechanism, exercised by a qualification prototype derived from U0A, on
-real SFM Master and sidecar artifacts in a disposable scratch root on the installation volume (fixed
-NTFS). It is **not** native SFM, consumer-UI, concurrency, durability or release qualification.
-P1 is **not** described as fully procedurally compliant (see Procedural).
-- **Authorized:** the owner approved P1 and bounded harness development. Reconciliation found no
-  material discrepancy.
-- **Result:** final run of 130 cases, 130 PASS, 0 FAIL.
-  - 5 rebuild kill-before-protection cases first reported FAIL from a harness selector-expectation
-    defect. All their state, recovery and preservation checks had passed. They were rerun fresh
-    after the fix (5/5); the first-run records are preserved.
-  - Coverage by ruling §6 category:
+**U0B-P1 — Real-artifact scratch qualification (ruling §6): REOPENED, 2026-10-13. Independent
+closure not accepted; targeted correction required.** The original scratch campaign result stands
+as recorded below, within its exercised boundaries. Overall P1 qualification is **not** technically
+accepted. The correction is **not implemented or tested**. P1 is **not** described as fully
+procedurally compliant (see Procedural).
+- **Original scratch record (2026-10-12, preserved):** a qualification prototype derived from U0A
+  exercised the R2 activation/recovery mechanism on real SFM Master and sidecar artifacts in a
+  disposable scratch root on the installation volume (fixed NTFS). It is not native SFM, consumer-UI,
+  concurrency, durability or release qualification.
+  - **Final record:** 130 cases, 130 PASS = 125 initial PASS + 5 fresh-rerun PASS. The 5 rebuild
+    kill-before-protection cases first failed from a harness selector-expectation defect (all their
+    state, recovery and preservation checks had passed). They were rerun fresh after the fix; the
+    5 original FAIL records are retained.
+  - **No demonstrated data-loss finding.**
+  - Cases by ruling §6 category:
     - canonical import/rebuild/no-op/custom source 7;
     - interrupted forward/reverse and killed recovery 66;
     - newer-data preservation 5;
@@ -28,9 +31,23 @@ P1 is **not** described as fully procedurally compliant (see Procedural).
     - alias/single owner 5;
     - legacy `publisher.lock` 9;
     - selection 2 (+70 embedded selector checks);
-    - broker sharing classification 2;
+    - sharing classification 2 (library/file level only; see gap 2);
     - process status/barriers 10;
     - path length 2.
+- **Reopening (owner, 2026-10-13):** a source-informed independent review (private, not committed;
+  2026-10-13) confirmed two qualification gaps:
+  1. **Verified-no-op branch:** it takes the installation lock and verifies the files, but bypasses
+     the process-status gate and reconciliation of other transaction records, contrary to R2
+     C4/C7/C8 and approved A3. No P1 case ran a RUNNING/UNKNOWN status or a pending transaction
+     against a no-op.
+  2. **Sharing classification:** I1/I2 establish library-level classification (the Python 2.7
+     selector library) and a file-level interlock (a share-read handle blocks updater protection).
+     They are not the broker entry-point qualification required by ruling §6.
+- **Corrective scope (proposed; needs separate authorization):**
+  - a separately identified prototype, with existing evidence preserved;
+  - targeted no-op and pending-transaction regression tests;
+  - actual broker acquisition evidence;
+  - regression coverage determined by the actual diff.
 - **Real artifacts:**
   - Compiling the preserved G1 Master in scratch with the unchanged compiler reproduced the live
     sidecar `bcd97641…` and manifest `d810d648…` byte-for-byte, so G1 is regenerable.
@@ -38,42 +55,47 @@ P1 is **not** described as fully procedurally compliant (see Procedural).
   - A semantic test Master **G3** (`5635ecf3…`, sidecar `3a16e945…`) moves exactly one control
     (`Left PupilDown`, `Face/Eyes` → `Face/Expressions`). This was confirmed by re-parse and by the
     runtime provider's lookup.
-- **Shown in scratch:**
-  - **Interruption:** kills at every activation barrier (import and rebuild) and during recovery
-    recover to the exact old or exact new set, idempotently, with originals preserved.
-  - **Newer data:** user edits after interruption give a truthful CONFLICT with no destructive
-    restore.
-  - **No-clobber:** occupants are never overwritten (183).
-  - **Competitors:** 15 competing writes, replaces, deletes and renames during protection are
-    refused.
-  - **Malformed states:** refused or reconciled truthfully.
-  - **Locking:** single lock owner across junction, case, `\\?\` and `..` aliases; installations
-    resolving outside scratch are refused.
+- **Shown in scratch (limited to the tested cases and interfaces):**
+  - **Interruption:** kills at the tested activation barriers (import and rebuild) and during
+    recovery recovered to the exact old or exact new set, idempotently, with originals preserved.
+  - **Newer data:** in the tested cases, user edits after interruption gave a truthful CONFLICT
+    with no destructive restore.
+  - **No-clobber:** occupants at the tested destinations were never overwritten (183).
+  - **Competitors:** the 15 tested competing writes, replaces, deletes and renames during
+    protection were refused.
+  - **Malformed states:** the tested states were refused or reconciled truthfully.
+  - **Locking:** single lock owner across the tested junction, case, `\\?\` and `..` aliases;
+    installations resolving outside scratch were refused.
   - **`publisher.lock`:** recognized and preserved in place (same file identity). A real legacy
-    lock holder causes refusal, and a legacy publisher cannot lock while activation holds the file.
-  - **Process and barriers:** UNKNOWN or RUNNING process status refuses activation and recovery;
-    EOF, wrong-token and timeout barriers stop without success.
-  - **Selection:** the unchanged selector (Python 2.7, outside SFM) selects by source hash.
+    lock holder caused refusal, and legacy lock acquisition failed while activation held the file.
+    This shows lock acquisition only, **not** exclusion of a full legacy publisher operation (whose
+    earlier publication steps run before the lock; ruling §5).
+  - **Process and barriers:** the RUNNING/UNKNOWN cases were **injected process-query responses**,
+    not real running-SFM detection. They refused full activation and recovery, but were not run
+    against the no-op branch (gap 1). EOF, wrong-token and timeout barriers stopped without success.
+  - **Selection:** the unchanged selector library (Python 2.7, outside SFM) selected by source hash
+    in the tested states.
 - **Findings for P2/L:**
-  - **F1:** the Python 2.7 consumer libraries cannot open Master or sidecar paths of 260 characters
-    or more (259 works, 260 → `SidecarMissing`). The path budget must cover consumer read paths;
-    the live maximum is 175.
-  - **F2:** under Python 2.7 a sharing violation surfaces as permission-denied. A protected sidecar
-    is reported as `SidecarMissing`, misleading wording during an activation.
+  - **F1:** the Python 2.7 consumer libraries failed to open the tested **sidecar** path at 260
+    characters (259 worked; 260 → `SidecarMissing`). No Master threshold was measured
+    independently. The path budget must cover consumer read paths; the live maximum is 175.
+  - **F2:** under Python 2.7 a sharing violation surfaces as permission-denied, so a protected
+    sidecar is reported as `SidecarMissing`, misleading wording during an activation (library
+    level).
   - **F3:** an occupant in an authority slot yields a truthful CONFLICT, not ROLLED_BACK.
-  - **F4:** holding `publisher.lock` makes a concurrent legacy publisher fail at open, with a
+  - **F4:** holding `publisher.lock` makes a concurrent legacy lock acquisition fail at open, with a
     generic message.
 - **Not run:** cross-user; hard reset/durability; native SFM (startup with Master protected or
-  absent, native Rebuild, both consumers' UI refusal paths, channel/key preservation); 8.3 alias
-  (not generated on the volume); real disk-full, AV-induced rename failure, kill inside a kernel
-  call. Subst/UNC aliases, the deny-DELETE ACL and cross-volume behavior reuse U0A evidence.
-  Python 2.7 results qualify library paths only.
+  absent, native Rebuild, both consumers' UI refusal paths, channel/key preservation); broker
+  entry-point sharing classification; 8.3 alias (not generated on the volume); real disk-full,
+  AV-induced rename failure, kill inside a kernel call. Subst/UNC aliases, the deny-DELETE ACL and
+  cross-volume behavior reuse U0A evidence. Python 2.7 results qualify library paths only.
 - **Live installation:** never written or locked. Hash-verified second-volume preservation copies of
   the Master and the three authority files were made before testing. The live fingerprint (4
   authority files, 235 closure files, `gameinfo.txt`, `cfg` listing) was identical at the start,
   before the final run and after it.
 - **Evidence (local only, not committed):** in the operator's approved local Codex evidence
-  directory.
+  directory; unchanged by the reopening.
   - P1 report `bb91b373e89a097187140587583adc115924bfca23006f3b97e25cdf63e62c6f`
   - case matrix `0aaa4da8e296254137d409dec0d74945b7b032e4284bb491df72a5deca312cde`
   - I/O manifest `ac0a27ac6a6b6617f608648bbacc06cfb27fce99b637829f99ff22ac93481156`
@@ -82,15 +104,25 @@ P1 is **not** described as fully procedurally compliant (see Procedural).
   - harness hash list `db043719e29abafd01189ffe57b5b090763c429aa8c3b5bd608b17abc3545d2a`
 
   The prototype is `537739ff…`, the controller `4affc60b…`; the compiler and authority-package
-  copies are unchanged. The harness and scratch run are preserved and not published.
-- **Procedural:** writes outside the two permitted locations occurred:
-  1. a `git fetch` at P1 start rewrote `FETCH_HEAD` before closeout;
-  2. a mistaken empty shell here-document used a transient temporary file in the user temp folder;
-  3. 58 empty temporary directories of a recurring pattern appeared in the user temp folder at
-     that minute, creator unproven;
-  4. agent-harness session files.
+  copies are unchanged. The harness and scratch run are preserved and not published. This entry
+  supersedes the P1 report's "broker-level" wording for I1/I2 and its "Master or sidecar" wording
+  for F1; the hashed report is not edited.
+- **Procedural (owner disposition, 2026-10-13: accepted as non-blocking).** Writes outside the two
+  permitted locations:
+  - **Attributed:**
+    1. a `git fetch` at P1 start rewrote `FETCH_HEAD` before closeout;
+    2. a mistaken empty shell here-document used a transient temporary file in the user temp
+       folder;
+    3. agent-harness session files.
+  - **Unattributed (creator not identified):**
+    1. 58 empty temporary directories of a recurring pattern appeared in the user temp folder in
+       the same minute as attributed item 2;
+    2. a `.ses` file there was modified.
+  - **Unresolved discrepancy:** the footprint log records its read-only audit at about 22:15 local
+    but lists a `.ses` modification at 22:47.
 
-  These are recorded locally and not waived.
+  P1 is **not** fully procedurally compliant. This disposition does not waive any technical defect
+  and does not authorize future out-of-scope writes.
 - **U0B-P2, P3 and L: NOT STARTED.**
 
 Previous milestone: **U0B-P0 — Read-only installation, exposure and evidence preflight (ruling §7):
@@ -221,8 +253,9 @@ touched (production fingerprint unchanged).
   preserve and recognize it in place; see above); F7: transaction paths add ~172 characters.
 - **Evidence:** `updater_qualification/u0a/U0A_WINDOWS_ACTIVATION_FEASIBILITY_REPORT.md`, plus
   `harness/` and `evidence/` (redacted).
-- **U0B:** P0 technical PASS (bounded; deviation owner-accepted as non-blocking); P1 PASS (bounded,
-  scratch); P2–P3 NOT STARTED.
+- **U0B:** P0 technical PASS (bounded; deviation owner-accepted as non-blocking); P1 REOPENED
+  (original scratch campaign 130/130 final PASS; closure not accepted; targeted correction
+  required); P2–P3 NOT STARTED.
 
 **K — Integrated CPM/Normalizer product workflow qualification: COMPLETE / PASS (2026-10-10).**
 K PASS = K1 PASS (K1A2, 53/53) + K2 PASS (K2A1, 39/39), on CPM `4e35f292…` and Normalizer
@@ -427,7 +460,8 @@ added only experiment/documentation files under `updater_qualification/u0a/` (pl
 entries, the U0A report's tally correction and this Ledger. U0B-P0 changed no tracked repository
 file or installed file; its evidence is local only, and the P0 closeout changed only this Ledger.
 U0B-P1 likewise changed no tracked repository file or installed file. Its harness, scratch run and
-evidence are local only, and its closeout changed only this Ledger.
+evidence are local only, and its closeout and the 2026-10-13 reopening reconciliation changed only
+this Ledger.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -633,10 +667,17 @@ Evidence:
       and recognize a verified legacy file in place; implementation details are unqualified;
     - F7: path-length budget at the real installation depth (U0A ran on C:, not E:).
   - U0B questions are in report §8; the P0 acceptance evidence is ruling §7.
-- **U0B open items after P1:** native Master access; the CPM working directory; the native
-  channel/key oracle (a scratch G3 pair now exists); bytecode content; AV interference; restoration
-  recoverability; consumer MAX_PATH (P1-F1) and busy-versus-missing messaging (P1-F2); concurrency,
-  durability and cross-user (not waived). See Current milestone and Previous milestone (P0).
+- **U0B-P1 reopened (technical gaps; correction not implemented or tested):**
+  - the verified-no-op branch bypasses the process-status gate and transaction-record
+    reconciliation (R2 C4/C7/C8, A3);
+  - broker entry-point sharing-violation classification (ruling §6) is unqualified; I1/I2 are
+    library/file level only.
+- **U0B open items:** native Master access; the CPM working directory; the native channel/key
+  oracle (a scratch G3 pair now exists); bytecode content; AV interference; restoration
+  recoverability; consumer MAX_PATH (P1-F1, sidecar path tested; Master threshold not measured) and
+  busy-versus-missing messaging (P1-F2); real running-SFM detection (P1 used injected responses);
+  full legacy-publisher exclusion (only lock acquisition tested); concurrency, durability and
+  cross-user (not waived). See Current milestone and Previous milestone (P0).
 - **K/L residuals from R15 (not in R15 scope, unchanged):**
   - Normalizer namespace isolation (the Normalizer still runs in the shared `__main__`);
   - the shared window slot, log name and identity strings that old CPM builds also claim.
@@ -698,14 +739,15 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. This is the U0B-P1 closeout checkpoint. Pending owner decisions:
-1. disposition of the P1 procedural write-footprint findings (recorded locally);
-2. whether to authorize **U0B-P2**, passive ordinary-SFM characterization. Proposed, not authorized;
-   per the P0 report §7, it uses a disposable fixture copy with live authority unchanged, and needs
-   an observation-method decision (no new tools, elevation, or tracer install). The scratch G3 pair
-   is available if a later, separately approved step needs a semantic Master change.
+Stop. This is the U0B-P1 reopening checkpoint (documentation-only reconciliation, 2026-10-13); the
+owner reconciles it before issuing the next assignment.
+- **Next proposed action:** a separately authorized, targeted **P1 technical correction** (scope in
+  Current milestone). Not authorized and not started.
+- **U0B-P2 paper design** (passive ordinary-SFM characterization) may proceed independently. P2
+  execution is not authorized; it would need an observation-method decision (no new tools,
+  elevation, or tracer install). The scratch G3 pair is available to a later approved step.
 
-U0B-P2/P3 and L (installation/coexistence/release qualification, handoff §24) are NOT STARTED and
+U0B-P2 execution, P3 and L (installation/coexistence/release qualification, handoff §24) are NOT STARTED and
 each need separate authorization; live fault injection is on HOLD. K is COMPLETE / PASS; U0A is PASS (bounded). `4e35f292…`, the production
 Normalizer `1f4ec5a2…` and exact G1 authority remain installed.
 
