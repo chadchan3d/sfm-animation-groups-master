@@ -332,3 +332,13 @@ updater_qualification/u0a/**/*.json text eol=lf
 updater_qualification/u0a/**/*.txt text eol=lf
 updater_qualification/u0a/*.md text eol=lf
 updater_qualification/u0a/**/*.zip binary
+
+# Updater design checkpoint (2026-10-12): R2 is the owner-supplied original, kept byte-exact with its
+# CRLF line endings; never normalize. The sanitized derivatives, owner record, audit and digest list
+# are hash-pinned LF text. Source whitespace (R2's CRLF, the ruling's Markdown hard-break
+# double spaces) is preserved, so diff --check is told to accept it.
+updater_qualification/design/SFM_Character_Tools_Updater_Blueprint_R2.md -text whitespace=cr-at-eol
+updater_qualification/design/SFM_Updater_Final_Architectural_Ruling_2026-10-12.md text eol=lf whitespace=-trailing-space
+updater_qualification/design/OWNER_DECISION_2026-10-12.md text eol=lf
+updater_qualification/reviews/*.md text eol=lf
+updater_qualification/SHA256SUMS.txt text eol=lf

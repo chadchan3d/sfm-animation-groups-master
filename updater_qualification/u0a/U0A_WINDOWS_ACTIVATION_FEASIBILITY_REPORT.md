@@ -6,10 +6,17 @@ qualification.
 The activation primitives and transaction shape in Astra's Updater Blueprint Revision 2 (§C4–C12)
 held under ordinary process termination, on disposable synthetic files, on one Windows 10 / NTFS
 configuration:
-- 255 cases PASS;
+- 256 cases PASS;
 - 1 case NOT RUN: cross-user lock contention (§6);
 - 0 FAIL;
 - 0 INCONCLUSIVE.
+
+> **Correction (2026-10-12, documentation only):** this grand total originally read "255 cases
+> PASS". The raw verdicts in `evidence/u0a_results.json` always summed to 256 PASS, 1 NOT RUN,
+> 0 FAIL (257 recorded cases), as do the per-test counts (6 + 83 + 8 + 5 + 134 + 20 = 256). No case
+> was rerun; the evidence, harness and bounded PASS verdict are unchanged. Owner-approved in
+> `updater_qualification/design/OWNER_DECISION_2026-10-12.md`. R2, read uncommitted during U0A, is
+> now committed byte-identical at `updater_qualification/design/SFM_Character_Tools_Updater_Blueprint_R2.md`.
 
 Power-loss durability, cross-user contention, real disk-full and every real-SFM behavior remain
 unproven. They are listed in §6 and §8.

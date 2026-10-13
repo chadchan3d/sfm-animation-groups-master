@@ -8,14 +8,43 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
+**Updater design checkpoint (documentation only), 2026-10-12: U0B-P0 AUTHORIZED / NOT STARTED.**
+The owner approved the updater design adjudication and authorized U0B-P0 as the next milestone. No
+code, test, SFM launch or installed-file change was made; baseline `1a2bbd1…`.
+- **Authority (GitHub, `updater_qualification/`):**
+  - `design/OWNER_DECISION_2026-10-12.md`: the owner record; governs only its explicitly
+    approved items and lists original and committed SHA-256s;
+  - `design/SFM_Character_Tools_Updater_Blueprint_R2.md`: governs the updater protocol except as
+    approved in the owner record; byte-identical to the original (`61cf8ed5…`, CRLF, `-text`);
+  - `design/SFM_Updater_Final_Architectural_Ruling_2026-10-12.md`: Astra's final ruling; a
+    **sanitized derivative** (original `b985e868…`, copy `d63b886b…`; one workstation path on
+    line 213 replaced);
+  - `reviews/U0B_Independent_Adversarial_Audit_R2_Reconciled.md`: evidence, not approval; sanitized
+    (original `7c552f74…`, copy `c5ab370c…`; one personal name on line 3 → `@OWNER`);
+  - `SHA256SUMS.txt`: committed-copy digests.
+- **Approved:** keep R2 C6–C8 and C12 unchanged; A3 (UNKNOWN process status refuses; barriers fail
+  closed); `publisher.lock` direction: preserve and recognize a verified legacy file in place (no
+  migration or deletion).
+- **Not approved / on HOLD:** A1 and A2 directions only, with no qualification or hard-reset waiver;
+  A4 deferred (cross-user unqualified, no test account); N1-first rejected; R2 C10/G hard-reset and
+  C11/G concurrency blockers not waived; live fault injection HOLD.
+- **U0B-P0** (ruling §7): read-only preflight, to run only as a separate next-window assignment
+  after reconciling with the then-current Ledger. It writes only its report and inventory, to one
+  new folder in the operator's approved local Codex evidence directory, outside the repository.
+- **U0B-P1, P2, P3: NOT STARTED**; each needs separate authorization.
+
 **U0A — Disposable Windows activation feasibility (pre-L; Astra Updater Blueprint R2, Stage 0
 file half): PASS (bounded), 2026-10-12.** This is experimental evidence, **not** production
 qualification. No updater, GUI, packaging or install exists; no product, authority or SFM file was
 touched (production fingerprint unchanged).
-- **Setup:** baseline `af4c8d6…`; R2 sha `61cf8ed5…` (owner-supplied, not committed); Windows 10
-  22H2 19045.6466, NTFS, non-elevated; disposable synthetic `usermod\cfg` trees only.
-- **Results:** 255 PASS, 1 NOT RUN, 0 FAIL. U0A-1 6/6, U0A-2 83/83, U0A-3 8/9 (cross-user NOT
-  RUN), U0A-4 5/5, U0A-5 134/134, U0A-6 20/20.
+- **Setup:** baseline `af4c8d6…`; R2 sha `61cf8ed5…` (owner-supplied; committed byte-identical at
+  the updater design checkpoint); Windows 10 22H2 19045.6466, NTFS, non-elevated; disposable
+  synthetic `usermod\cfg` trees only.
+- **Results:** 256 PASS, 1 NOT RUN, 0 FAIL (257 recorded). U0A-1 6/6, U0A-2 83/83, U0A-3 8/9
+  (cross-user NOT RUN), U0A-4 5/5, U0A-5 134/134, U0A-6 20/20.
+  - *Correction (2026-10-12):* the grand total first recorded as 255 PASS was an arithmetic error.
+    The raw verdicts always summed to 256. Documentation-only correction; no rerun; verdict
+    unchanged.
 - **Confirmed under process termination:**
   - protected own-handle no-clobber rename (`GENERIC_READ|DELETE`, share 0; `FileRenameInfo`,
     `ReplaceIfExists=FALSE` → 183 on an occupied destination; 17 cross-volume, no copy);
@@ -32,7 +61,7 @@ touched (production fingerprint unchanged).
   characters.
 - **Evidence:** `updater_qualification/u0a/U0A_WINDOWS_ACTIVATION_FEASIBILITY_REPORT.md`, plus
   `harness/` and `evidence/` (redacted).
-- **U0B: NOT STARTED.**
+- **U0B:** P0 AUTHORIZED / NOT STARTED; P1–P3 NOT STARTED.
 
 **K — Integrated CPM/Normalizer product workflow qualification: COMPLETE / PASS (2026-10-10).**
 K PASS = K1 PASS (K1A2, 53/53) + K2 PASS (K2A1, 39/39), on CPM `4e35f292…` and Normalizer
@@ -231,12 +260,16 @@ package, Normalizer, Master and sidecars are unchanged. Item 8 (real SFM) change
 product file. The pre-K UI polish pass changed only presentation in the app (`bfba4d3a…` → `5c6e2789…`, refined to
 `7e4686d7…`, then the Help-wording build `4e35f292…`, which is installed and was K-qualified). U0A
 added only experiment/documentation files under `updater_qualification/u0a/` (plus a scoped LF
-`.gitattributes` entry for them).
+`.gitattributes` entry for them). The updater design checkpoint added only documents under
+`updater_qualification/design/` and `reviews/` plus `SHA256SUMS.txt`, scoped `.gitattributes`
+entries, the U0A report's tally correction and this Ledger.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
   checkpoint `bd169401fba1c04bf24a148cd8e65748ae757912` (unchanged since `382c79b`). Its header
   status banner ("R15 remains OPEN…") predates R15 closure; this Ledger is authoritative for status.
+- Updater design authority: `updater_qualification/design/OWNER_DECISION_2026-10-12.md` (with R2 and
+  Astra's ruling beside it; see Current milestone). It does not change the frozen R15 Blueprint.
 - `cpm/qualification/R15_NAMESPACE_ISOLATION_PROPOSAL.md`: superseded, historical only.
 - Convergence requirements and the §22 sequence:
   `docs/qualification/CPM_CONVERGENCE_INTEGRATION_HANDOFF.md`.
@@ -424,14 +457,16 @@ Evidence:
 ## Unresolved
 - **U0A residuals (updater; experimental, pre-L):**
   - Unproven:
-    - power/cache-loss durability (R2 C10; a hard-reset campaign is still required);
-    - cross-user and standard-user lock contention;
+    - power/cache-loss durability (R2 C10; a hard-reset campaign is still required, not waived;
+      no hard reset of this machine is authorized);
+    - cross-user and standard-user lock contention (A4 deferred; not waived);
     - real disk-full (simulated only);
     - AV/indexer interference.
   - L design inputs:
-    - F4: the live `publisher.lock` inside `sfm_shared_authority` needs a defined disposition;
-    - F7: path-length budget at the real installation depth.
-  - U0B questions are in report §8.
+    - F4: the live `publisher.lock` inside `sfm_shared_authority`: approved direction is preserve
+      and recognize a verified legacy file in place; implementation details are unqualified;
+    - F7: path-length budget at the real installation depth (U0A ran on C:, not E:).
+  - U0B questions are in report §8; the P0 acceptance evidence is ruling §7.
 - **K/L residuals from R15 (not in R15 scope, unchanged):**
   - Normalizer namespace isolation (the Normalizer still runs in the shared `__main__`);
   - the shared window slot, log name and identity strings that old CPM builds also claim.
@@ -493,10 +528,12 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. U0A is complete (PASS, bounded); this is its checkpoint. U0B (real-SFM concurrency) and L
-(installation/coexistence/release qualification, handoff §24) each need separate explicit
-authorization and have not begun. K is COMPLETE / PASS. `4e35f292…`, the production Normalizer
-`1f4ec5a2…` and exact G1 authority remain installed.
+Stop. This is the updater design documentation checkpoint. Next bounded action: **U0B-P0 read-only
+preflight** (ruling §7), as a separate assignment in a new designer window. It is authorized and not
+started; nothing of it was run here. U0B-P1/P2/P3 and L (installation/coexistence/release
+qualification, handoff §24) are NOT STARTED and each need separate authorization; live fault
+injection is on HOLD. K is COMPLETE / PASS; U0A is PASS (bounded). `4e35f292…`, the production
+Normalizer `1f4ec5a2…` and exact G1 authority remain installed.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
