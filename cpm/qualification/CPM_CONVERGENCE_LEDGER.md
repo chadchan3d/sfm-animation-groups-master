@@ -8,7 +8,61 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**U0B-P1 — Real-artifact scratch qualification (ruling §6): COMPLETE / PASS (bounded), 2026-10-14.**
+**Offline Updater v1 contract checkpoint (documentation only), 2026-10-16: APPROVED.**
+After Astra's October 16 proportionality review, the owner approved the offline-v1 direction, and the designer
+accepted the reconciled drafts. This checkpoint made no code, test, SFM run, WPR/ETW, installed-file or authority
+change. Base: `27aa672…`.
+- **Authority (GitHub, `updater_qualification/design/`):**
+  - `OFFLINE_UPDATER_V1_CONTRACT_AMENDMENT.md`: the superseding owner decision for v1. It supersedes R2 and the
+    2026-10-12 owner decision only where its §3 explicitly says so. It is a repository copy of the approved
+    draft `e07c3e10…`, differing only in approval wording and resolved placeholders (its §9).
+  - `L_IMPLEMENTATION_AUTHORIZATION_CARD.md`: the L-1 … L-6 plan and the five-group release qualification.
+    It is a copy of the approved draft `d540d0ef…` (its §9). Approving it authorizes no increment.
+  - R2 (`61cf8ed5…`), the 2026-10-12 owner decision and the ruling stay byte-preserved.
+- **Approved:**
+  - **Offline v1:**
+    - The updater installs only with SFM closed.
+    - Candidate preparation may run with SFM open, and writes only to updater-private staging.
+    - Installation refuses a RUNNING or UNKNOWN process state.
+    - There is no live updating, service, launch interceptor or runtime handshake.
+  - **Three equally prominent primary actions:** Get Official Data, Rebuild My Data and Use Another TXT. The
+    labels have no ellipses, and all three go through the one protected backend.
+  - **Single Windows account:** the qualification boundary is one Windows account. The physical installation
+    lock is retained; access-denied or ambiguous ownership refuses; there is no per-user lock.
+  - **Superseded testing requirements:** the R2 C10 hard-reset testing requirement and the broad C11
+    live-overlap testing requirement are superseded within the offline-v1 qualification contract. They are
+    replaced by process-interruption recovery qualification and the offline refusal boundary. They are
+    **not passed** and are not recorded as waivers.
+  - **Installation mechanism unchanged:** R2 C4–C9 and C12 remain substantively unchanged. That covers
+    protected source identity, no-clobber moves, the approved move order, handles held through verification,
+    checked writes and flushing, journaling, evidence-based recovery and refusal on unexpected state. D and E
+    are unchanged too.
+- **Dispositions (earlier verdicts unchanged):**
+  - **U0B-P2:** removed from the v1 critical path. **NOT PASSED.** Its design and preparation work
+    (2026-10-15/16) is private evidence, not committed: WPR calibration C-1R PASS (bounded), BST DMX oracle
+    extraction ELIGIBLE (bounded), observation cards R1/R2, and preparation P-1–P-5 with its C1 correction.
+    That work is retained unchanged and supports no v1 claim.
+  - **Final P2 recorder/comparator correction A–C:** BLOCKED (report `5274d85e…`). Its issues are unresolved
+    and are no longer v1 blockers.
+  - **WPR/ETW development:** discontinued, not completed.
+  - **Broad U0B-P3 native concurrency:** removed from the v1 critical path. **NOT PASSED.** Not started.
+  - **Unqualified, published as v1 limitations (Amendment §5):**
+    - L-A: unexpected native SFM overlap;
+    - L-B: power/cache loss;
+    - L-C: cross-user contention;
+    - L-D: non-participating writers;
+    - L-E: release freshness;
+    - L-F: detection timing.
+  - **U0B is closed for v1 at the P1 evidence boundary.** U0A PASS (bounded), P0 technical PASS (bounded) and
+    P1 COMPLETE / PASS (bounded) are unchanged.
+- **L:**
+  - **L-1** (the activation/recovery backend plus Rebuild My Data, without a GUI): **READY FOR AUTHORIZATION /
+    NOT STARTED.**
+  - **L-2 … L-6:** NOT STARTED; each needs its own authorization.
+  - **Release:** requires the card's five qualification groups to pass on the shipping candidate, each group
+    covering all three actions.
+
+Previous milestone: **U0B-P1 — Real-artifact scratch qualification (ruling §6): COMPLETE / PASS (bounded), 2026-10-14.**
 Owner-approved after the C1 correction and an independent audit (Astra; private, not committed), which
 found both reopening defects resolved: bounded technical PASS for the no-op correction, broker
 qualification and regression sufficiency. Scope: R2 activation/recovery on real SFM Master and sidecar
@@ -102,7 +156,7 @@ qualification. P1/C1 is **not** fully procedurally compliant (see Procedural).
 
   P1/C1 is **not** fully procedurally compliant. The dispositions attribute no unexplained activity,
   waive no technical requirement and authorize no future out-of-scope write.
-- **U0B-P2, P3 and L: NOT STARTED.**
+- **U0B-P2, P3 and L (at P1 closeout): NOT STARTED.** See Current milestone for the offline-v1 dispositions.
 
 Previous milestone: **U0B-P0 — Read-only installation, exposure and evidence preflight (ruling §7):
 technical acceptance PASS (bounded), 2026-10-12.** Owner disposition (2026-10-12): the
@@ -234,7 +288,8 @@ touched (production fingerprint unchanged).
   `harness/` and `evidence/` (redacted).
 - **U0B:** P0 technical PASS (bounded; deviation owner-accepted as non-blocking); P1 COMPLETE /
   PASS (bounded, scratch + broker entry point; reopened 2026-10-13, corrected by C1 2026-10-14);
-  P2–P3 NOT STARTED.
+  P2 and broad P3 removed from the offline-v1 critical path, NOT PASSED (2026-10-16; see Current
+  milestone). U0B is closed for v1 at the P1 evidence boundary.
 
 **K — Integrated CPM/Normalizer product workflow qualification: COMPLETE / PASS (2026-10-10).**
 K PASS = K1 PASS (K1A2, 53/53) + K2 PASS (K2A1, 39/39), on CPM `4e35f292…` and Normalizer
@@ -441,7 +496,10 @@ file or installed file; its evidence is local only, and the P0 closeout changed 
 U0B-P1 likewise changed no tracked repository file or installed file. Its harness, scratch run and
 evidence are local only. Its closeout, the 2026-10-13 reopening reconciliation and the 2026-10-14
 final closeout changed only this Ledger. The C1 correction (2026-10-14) likewise changed no tracked or
-installed file; its corrected prototype, harness, scratch run and evidence are local only.
+installed file; its corrected prototype, harness, scratch run and evidence are local only. The U0B-P2
+design and preparation work changed no tracked or installed file; its evidence is local only. The Offline
+Updater v1 checkpoint (2026-10-16) added only the amendment and L card under `updater_qualification/design/`,
+their `SHA256SUMS.txt` entries, scoped `.gitattributes` entries and this Ledger.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -635,32 +693,32 @@ Evidence:
     1.2–1.5 s.
 
 ## Unresolved
-- **U0A residuals (updater; experimental, pre-L):**
-  - Unproven:
-    - power/cache-loss durability (R2 C10; a hard-reset campaign is still required, not waived;
-      no hard reset of this machine is authorized);
-    - cross-user and standard-user lock contention (A4 deferred; not waived);
-    - real disk-full (simulated only);
-    - AV/indexer interference.
-  - L design inputs:
-    - F4: the live `publisher.lock` inside `sfm_shared_authority`: approved direction is preserve
-      and recognize a verified legacy file in place; implementation details are unqualified;
-    - F7: path-length budget at the real installation depth (U0A ran on C:, not E:).
-  - U0B questions are in report §8; the P0 acceptance evidence is ruling §7.
-- **U0B unqualified boundaries (separately gated; no waiver of C10, C11 or any other approved
-  requirement follows from the P1 PASS):**
-  - native SFM authority-open behavior and actual transition concurrency;
-  - CPM and Normalizer UI refusal handling;
-  - full legacy-publisher exclusion (only lock acquisition tested);
-  - power-loss durability and cross-user contention;
-  - final updater/installer integration, packaging and release qualification.
-- **U0B open items:** native Master access; the CPM working directory; the native channel/key
-  oracle (a scratch G3 pair now exists); bytecode content; AV interference; restoration
-  recoverability; consumer MAX_PATH (P1-F1, sidecar path tested; Master threshold not measured);
-  busy-versus-missing messaging (P1-F2, still potentially misleading at broker level); real
-  running-SFM detection (P1/C1 used injected responses); `intent_schema()` diagnostic hardening for
-  JSON scalar/list input (pre-production, non-blocking; fail-closed). See Current milestone and
-  Previous milestone (P0).
+- **Offline-v1 limitations (published, not qualified; Amendment §5):**
+  - L-A: unexpected native SFM overlap during installation;
+  - L-B: power/cache-loss persistence. No hard reset was performed; the constructed-state tests qualify
+    recovery logic only.
+  - L-C: cross-user contention;
+  - L-D: non-participating writers (detection only);
+  - L-E: release freshness;
+  - L-F: process detection cannot exclude a later launch.
+- **Other unproven (U0A/P1 residuals):**
+  - real disk-full (simulated only);
+  - AV/indexer interference;
+  - full legacy-publisher exclusion (only lock acquisition was tested).
+- **L design inputs carried forward:**
+  - F4: the live `publisher.lock` is preserved and recognized in place;
+  - F7/P1-F1: the consumer path budget is below 260 characters. The Master threshold was not separately
+    measured.
+  - P1-F2: busy-versus-missing messaging. The updater's own messages are in L scope; consumer messaging is
+    unchanged K/L product work.
+  - P1-F3: authority-slot conflict messaging;
+  - P1-F4: legacy-lock fail-closed behavior;
+  - real running-SFM detection. P1/C1 used injected responses only; this is qualified in L-6 group 2.
+  - `intent_schema()` hardening;
+  - CPM and Normalizer behavior after an installation, in L-6 group 5.
+- **Removed from the v1 critical path with P2/P3 (not passed):** native Master access, the CPM working
+  directory, the native channel/key oracle, bytecode content and restoration recoverability. These were the
+  former U0B open items; see Current milestone.
 - **K/L residuals from R15 (not in R15 scope, unchanged):**
   - Normalizer namespace isolation (the Normalizer still runs in the shared `__main__`);
   - the shared window slot, log name and identity strings that old CPM builds also claim.
@@ -710,7 +768,8 @@ Evidence:
   **Pre-K complete. `4e35f292…` is the exact CPM candidate eligible to enter K.**
   - **K — COMPLETE / PASS** (K1A2 + K2A1, 2026-10-10).
 
-  L has not started; it needs separate authorization. L's final installation layout is undecided.
+  L: L-1 READY FOR AUTHORIZATION / NOT STARTED, under the offline-v1 contract (2026-10-16). The final
+  packaging layout is decided in L-5.
 - **Session 4 notes (not failures; carried to K; unchanged by items 7–8):**
   - Fit's exception path releases the stage with a bare `release()` (no
     `PROD_CPM_FIT_STAGE_RELEASED` line; result discarded); a raising success-path release could in
@@ -722,15 +781,14 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. This is the U0B-P1 final closeout checkpoint (documentation only, 2026-10-14).
-- **Next action:** a **U0B-P2 design conference** on passive ordinary-SFM observation under unchanged
-  G1 authority.
-- **P2 execution is NOT AUTHORIZED.** No observation method, elevation, tracer installation, G3
-  deployment or live fault experiment is approved.
+Stop. This is the Offline Updater v1 documentation checkpoint (2026-10-16).
+- **Next action:** owner authorization of **L-1** under
+  `updater_qualification/design/L_IMPLEMENTATION_AUTHORIZATION_CARD.md` §8. L-1 is NOT STARTED.
+- **Not authorized by this checkpoint:** L-1 execution, any native SFM run, WPR/ETW work, a live installation
+  write, or release.
 
-U0B-P2 execution, P3 and L (installation/coexistence/release qualification, handoff §24) are NOT STARTED and
-each need separate authorization; live fault injection is on HOLD. K is COMPLETE / PASS; U0A is PASS (bounded). `4e35f292…`, the production
-Normalizer `1f4ec5a2…` and exact G1 authority remain installed.
+K is COMPLETE / PASS. U0A is PASS (bounded). U0B is closed for v1 at the P1 evidence boundary. `4e35f292…`, the
+production Normalizer `1f4ec5a2…` and exact G1 authority remain installed.
 
 ## Checkpoints
 Update this Ledger and output its complete, concise contents when:
