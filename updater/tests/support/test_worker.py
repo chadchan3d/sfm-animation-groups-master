@@ -9,8 +9,8 @@ Wraps the product worker (sfm_character_tools_updater.worker) and, for this one 
     forms separated by `||`, one per query, the last repeating);
   * injects a candidate-write fault (--inject candidate_write_error=CODE);
   * enables the Win32 call trace and adds it, with the barrier log, to the result;
-  * exposes the backend's replacement route as `prepare-replace --source FILE` so the
-    ported P1 import cases exercise it (the product worker does not expose it in L-1);
+  * trusts a TEST signing key (--trust-key HEX, Ed25519 raw public key) through the test-only
+    seam hooks.extra_trusted_keys; the product's own trust table is never changed;
   * refuses any installation that does not resolve under --scratch-root or that resolves
     under --forbid (the real game directory), before the product code runs.
 
@@ -24,7 +24,7 @@ import threading
 UPDATER = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, UPDATER)
 
-from sfm_character_tools_updater import backend, hooks, w32, worker  # noqa: E402
+from sfm_character_tools_updater import hooks, official, w32, worker  # noqa: E402
 from sfm_character_tools_updater.layout import resolve_installation  # noqa: E402
 from sfm_character_tools_updater.messages import Stop  # noqa: E402
 
@@ -97,7 +97,7 @@ def under(path, root):
 
 def main(argv):
     test_opts = {"--stop-at": [], "--token": [], "--barrier-timeout": [], "--inject": [],
-                 "--scratch-root": [], "--forbid": []}
+                 "--scratch-root": [], "--forbid": [], "--trust-key": []}
     rest = []
     i = 0
     while i < len(argv):
@@ -127,11 +127,11 @@ def main(argv):
             raise SystemExit("unknown injection %r" % k)
     if query is not None:
         hooks.process_query = query
+    if test_opts["--trust-key"]:
+        hooks.extra_trusted_keys = {official.key_id_for(bytes.fromhex(k)): k for k in test_opts["--trust-key"]}
     w32.TRACE_ENABLED[0] = True
 
-    parser = worker.build_parser(worker.COMMANDS + ("prepare-replace",))
-    parser.add_argument("--source")
-    args = parser.parse_args(rest)
+    args = worker.build_parser().parse_args(rest)
     if not under(args.result, scratch):
         raise SystemExit("STOP: result path outside the scratch root")
     try:
@@ -144,8 +144,7 @@ def main(argv):
                "message": "Refused by the test boundary.",
                "details": {"reason": "installation outside the L-1 scratch root", "resolved": real}}
     else:
-        extra = {"prepare-replace": lambda layout, a: backend.prepare(layout, "replace", a.source)}
-        res = worker.run(args, extra)
+        res = worker.run(args)
     res["barriers"] = PASSED
     res["trace"] = w32.TRACE
     if query is not None:

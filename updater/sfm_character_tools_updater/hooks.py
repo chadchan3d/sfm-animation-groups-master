@@ -23,3 +23,7 @@ process_query = None
 
 # None: no fault. Otherwise a Win32 error code reported for candidate writes.
 candidate_write_error = None
+
+# None: only official.TRUSTED_KEYS are trusted. Otherwise {key_id: public_key_hex} of TEST keys
+# added for qualification; never set by the product.
+extra_trusted_keys = None

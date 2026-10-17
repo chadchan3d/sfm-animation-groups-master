@@ -130,6 +130,37 @@ def validate_candidate_files(outcome, name, sc_path, manifest_path):
         return "%s: %s" % (type(e).__name__, str(e)[:300])
 
 
+def validate_official_bytes(outcome, name, body, manifest_bytes):
+    """Before anything is written: the official sidecar bytes against the canonical compile of the
+    official TXT (reader semantic parity), FINAL R3-A2B admission from the bytes, manifest binding."""
+    d = deps()
+    src = outcome.snapshot.sha256_hex
+    try:
+        r = d["reader"].SidecarReader.open_generation_bytes(body, src)
+        try:
+            d["compiler"].verify_semantic_parity(outcome.result, r)
+        finally:
+            r.close()
+        d["provider"].BoundedProvider.open_bytes(body, src).close()
+        return _manifest_binding(manifest_bytes, name, sha(body), src, len(outcome.snapshot.bytes))
+    except Exception as e:
+        return "%s: %s" % (type(e).__name__, str(e)[:300])
+
+
+def validate_official_files(outcome, name, sc_path, manifest_path, sidecar_sha):
+    """An official sidecar against the official TXT, from the bytes on disk: reader semantic
+    parity with the canonical compile of that TXT, FINAL R3-A2B admission, and the official
+    manifest binding the official sidecar and TXT. Byte equality with a local compile is not
+    required (the producer's compiler build may differ); semantic parity is."""
+    try:
+        deps()["compiler"].self_validate_from_path(outcome, sc_path)
+        admit(sc_path, outcome.snapshot.sha256_hex)
+        return _manifest_binding(open(manifest_path, "rb").read(), name, sidecar_sha, outcome.snapshot.sha256_hex,
+                                 len(outcome.snapshot.bytes))
+    except Exception as e:
+        return "%s: %s" % (type(e).__name__, str(e)[:300])
+
+
 def validate_staged_copy(name, sc_path, manifest_path, sidecar_sha, source_sha, source_len):
     """For candidate files copied from validated staging: exact bytes, authority-bound reader
     open (structure + source binding), FINAL R3-A2B admission, manifest fields."""

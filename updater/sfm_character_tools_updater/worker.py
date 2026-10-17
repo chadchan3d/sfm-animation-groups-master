@@ -1,18 +1,28 @@
 # -*- coding: utf-8 -*-
 """The bounded worker entry point: one request in, exactly one JSON result out.
 
-  python -m sfm_character_tools_updater.worker status          --installation CFG --result OUT
-  python -m sfm_character_tools_updater.worker prepare-rebuild --installation CFG --result OUT
-  python -m sfm_character_tools_updater.worker install         --installation CFG --result OUT
-                                                               --prepared ID --confirm-sha SHA
-  python -m sfm_character_tools_updater.worker recover         --installation CFG --result OUT
-                                                               [--policy resume|rollback]
+  python -m sfm_character_tools_updater.worker status           --installation CFG --result OUT
+  python -m sfm_character_tools_updater.worker prepare-rebuild  --installation CFG --result OUT
+  python -m sfm_character_tools_updater.worker prepare-import   --installation CFG --result OUT --source TXT
+  python -m sfm_character_tools_updater.worker prepare-official --installation CFG --result OUT --package DIR
+                                                                [--allow-older]
+  python -m sfm_character_tools_updater.worker install          --installation CFG --result OUT
+                                                                --prepared ID --confirm-sha SHA
+                                                                [--accept-replacement]
+  python -m sfm_character_tools_updater.worker recover          --installation CFG --result OUT
+                                                                [--policy resume|rollback]
+
+prepare-* commands map to the three primary actions (Rebuild My Data, Use Another TXT, Get
+Official Data). They write only updater-private staging and may run while SFM is open. `install`
+installs one prepared candidate through the one protected backend; it refuses while SFM is
+running or its state is unknown. `--confirm-sha` is the destination TXT identity shown by the
+preparation (consent is bound to it); `--accept-replacement` is required when the preparation
+reports `consent_required`.
 
 CFG is the installation's `usermod\\cfg` directory. The result file is created new (an
 existing file is never overwritten); the last stdout line is `RESULT <outcome>`.
 
-This is the backend's own entry point (R2 C5), not an alternate publisher. The replacement
-route (Use Another TXT, Get Official Data) is not exposed in L-1.
+This is the backend's own entry point (R2 C5), not an alternate publisher.
 """
 import argparse
 import json
@@ -23,7 +33,7 @@ from . import VERSION, backend, recovery
 from .layout import Layout, resolve_installation
 from .messages import MESSAGES, Stop
 
-COMMANDS = ("status", "prepare-rebuild", "install", "recover")
+COMMANDS = ("status", "prepare-rebuild", "prepare-import", "prepare-official", "install", "recover")
 
 
 def build_parser(commands=COMMANDS):
@@ -34,6 +44,10 @@ def build_parser(commands=COMMANDS):
     p.add_argument("--prepared")
     p.add_argument("--confirm-sha")
     p.add_argument("--policy", default="resume", choices=("resume", "rollback"))
+    p.add_argument("--source")
+    p.add_argument("--package")
+    p.add_argument("--allow-older", action="store_true")
+    p.add_argument("--accept-replacement", action="store_true")
     return p
 
 
@@ -48,11 +62,19 @@ def dispatch(args, extra=None):
     if args.command == "status":
         return backend.status(layout)
     if args.command == "prepare-rebuild":
-        return backend.prepare(layout, "rebuild")
+        return backend.prepare_rebuild(layout)
+    if args.command == "prepare-import":
+        if not args.source:
+            raise Stop("REFUSED", "NOTHING", reason="prepare-import requires --source")
+        return backend.prepare_import(layout, args.source)
+    if args.command == "prepare-official":
+        if not args.package:
+            raise Stop("REFUSED", "NOTHING", reason="prepare-official requires --package")
+        return backend.prepare_official(layout, args.package, args.allow_older)
     if args.command == "install":
         if not args.prepared or not args.confirm_sha:
             raise Stop("REFUSED", "NOTHING", reason="install requires --prepared and --confirm-sha")
-        return backend.install(layout, args.prepared, args.confirm_sha)
+        return backend.install(layout, args.prepared, args.confirm_sha, args.accept_replacement)
     if args.command == "recover":
         return recovery.recover(layout, args.policy)
     raise Stop("REFUSED", "NOTHING", reason="unknown command")

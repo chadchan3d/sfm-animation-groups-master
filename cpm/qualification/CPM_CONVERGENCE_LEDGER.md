@@ -8,7 +8,74 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**L-1 — Activation backend and Rebuild My Data (headless): COMPLETE / PASS (bounded), 2026-10-17.**
+**L-2 — Use Another TXT and Get Official Data (headless): COMPLETE / PASS (bounded), 2026-10-17.**
+Authorized by the owner under the L card §5. The designer accepted the report (private evidence,
+`L2_IMPLEMENTATION_REPORT.md` `1a50f3e7…`; evidence manifest `f8cdac91…`). Base: `4cc180c…`.
+- **Source (GitHub, `updater/`; digests in `updater/SHA256SUMS.txt`):**
+  - **New:** `sfm_character_tools_updater/official.py` (R2 D1–D5) and the development-side release producer
+    `release_tools/make_official_package.py` (not shipped).
+  - **Changed:** `backend.py`, `candidate.py`, `worker.py`, `messages.py`, `hooks.py`, `__init__.py`
+    (version `0.2.0-l2`) and the tests.
+  - **Byte-identical to L-1:** `recovery.py`, `journal.py`, `w32.py`, `layout.py`, `legacy_lock.py`,
+    `process_gate.py`. Inside the protected activation body only two message keys changed.
+- **Worker commands added:** `prepare-import --source TXT`, `prepare-official --package DIR [--allow-older]`,
+  `install … [--accept-replacement]`.
+- **One protected backend:** both workflows reach the L-1 `install()` → `_activate()` route.
+  - Use Another TXT, and official data whose TXT differs, use the replacement route: retire, then move into the
+    vacant path by handle rename with `ReplaceIfExists=FALSE`.
+  - Official data with the installed TXT installs the data files only.
+  - No second publication path exists.
+- **Use Another TXT:**
+  - an immutable captured copy, bounded at 64 MiB; the chosen file is never written;
+  - explicit consent required when the TXT changes, bound to the observed destination TXT;
+  - a chosen file changed or removed before confirmation requires a fresh check;
+  - the previous Master and authority are retained by the backend.
+- **Get Official Data** (local package of exactly the five D1 files):
+  - **Descriptor:** strict and bounded (16 KiB, no duplicate keys, exact keys and types, safe names).
+  - **Signature:** Ed25519 over the exact `release.json` bytes, with the key chosen by id among trusted keys
+    only.
+  - **Compatibility:** contract 1, provisional profile `sct-authority-profile-1`, sidecar format and semantics
+    0.
+  - **Payload:** exact length and SHA-256. The official sidecar is checked against a canonical compile of the
+    official TXT before anything is written, so it is never paired with another TXT.
+  - **Remembered releases:** an append-only per-installation record. A reused sequence with different bytes is
+    refused; an older release needs `--allow-older` and never lowers the high-water mark.
+  - **Consent:** required when replacing a TXT that is not recognized official data.
+  - **Install:** the staged package is re-authenticated.
+- **Trust boundary:**
+  - `official.TRUSTED_KEYS` is **empty**, so the shipping worker refuses every official package (O12, W3).
+  - Per-run test keys exist only in the scratch area and are trusted only through the test-only seam
+    (`hooks.extra_trusted_keys`, set only by `tests/support/test_worker.py`).
+  - The shipping worker rejects every test option and uses the real `tasklist` process query.
+  - No private key or credential is in the repository.
+- **Dependency:** `cryptography` 50.0.2 (with `cffi` 2.1.1, `pycparser` 3.11, `typing_extensions` 4.16.0).
+  - It was installed from recorded PyPI wheels into an isolated qualification virtual environment in the
+    scratch area, as the owner approved. Global Python is unchanged.
+  - It is imported only for signature verification. Bundling is L-5.
+- **Result:** final run 205/205 PASS (2026-10-17 14:23–15:09Z):
+  - the full L-1 suite as regression, 157/157 with unchanged expectations;
+  - Use Another TXT (M) 11/11;
+  - Get Official Data (O) 36/36;
+  - shipping-worker trust W3 1/1.
+- **Process states:** test operations use an injected CLEAR status unless a case sets its own. X3c and W2 use
+  the real query, which was CLEAR throughout. The live installation fingerprint is identical before and after.
+- **Recorded deviations and corrections (preserved in the evidence):**
+  - **Product defect found and fixed:** `shake1` found that a duplicate descriptor key gave an internal error
+    (failed closed, no success claimed) instead of a clean refusal. The regression case O14a now passes.
+  - **Test defects corrected:** O4's expectation, and O18b hashing a file while it was locked.
+  - **SFM running:** `shake2` stopped before any operation because SFM was running for the owner's other
+    projects. The harness then switched to the injected default described above.
+  - **Release record:** now created only on the first authenticated record.
+- **Outstanding owner-controlled release dependency (not an L-2 defect):** a production Ed25519 signing key.
+  - The owner generates it outside the repository (encrypted private key, offline backup, R2 D3).
+  - Only the public key is embedded, by a separate authorized change.
+  - Until then the shipping updater cannot install official data.
+- **Scope of the PASS:** headless scratch qualification on E:/NTFS with a test key. It does not cover native
+  SFM, either consumer's UI, real-SFM detection, power loss, cross-user behavior, production trust or release
+  eligibility.
+- **L-3:** NOT STARTED / REQUIRES AUTHORIZATION. **L-4 … L-6:** NOT STARTED.
+
+Previous milestone: **L-1 — Activation backend and Rebuild My Data (headless): COMPLETE / PASS (bounded), 2026-10-17.**
 Authorized by the owner under `updater_qualification/design/L_IMPLEMENTATION_AUTHORIZATION_CARD.md` §8. The
 designer accepted the report (private evidence, `L1_IMPLEMENTATION_REPORT.md` `f3091fce…`; evidence manifest
 `39195857…`). Base: `5d7dea8…`.
@@ -580,7 +647,10 @@ Updater v1 checkpoint (2026-10-16) added only the amendment and L card under `up
 their `SHA256SUMS.txt` entries, scoped `.gitattributes` entries and this Ledger. The L-1 checkpoint
 (2026-10-17) added only the new `updater/` tree (product package, test-only suite and `updater/SHA256SUMS.txt`),
 a scoped LF `.gitattributes` entry and this Ledger. No existing tool, CPM, Normalizer, Blueprint, amendment or
-card file changed, and no installed file changed. The L-1 scratch run and evidence are local only.
+card file changed, and no installed file changed. The L-1 scratch run and evidence are local only. The L-2
+checkpoint (2026-10-17) changed only files under `updater/` (adding `official.py` and
+`release_tools/make_official_package.py`, regenerating `updater/SHA256SUMS.txt`) and this Ledger. Its scratch
+run, the isolated qualification environment and its evidence are local only.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -807,6 +877,19 @@ Evidence:
   - process detection matches the image name `sfm.exe` only;
   - dependencies load from repository paths (`tools/` and the authority package under `tests/sidecar/…`).
     Their shipping location is an L-5 decision.
+- **L-2 items (owner dependency or later L stages; not L-2 prerequisites):**
+  - **Owner release dependency:** a production Ed25519 signing key, with only its public key embedded by a
+    separate authorized change. Until then the shipping updater refuses all official packages.
+  - **L-5 compatibility:** the authority profile `sct-authority-profile-1` is provisional, and the signed
+    installed-software inventory (R2 E2–E3) is not implemented.
+  - **L-5 packaging:** bundling of `cryptography` and its dependencies.
+  - **L-4 staging cleanup:** this now includes official-package staging, about 13 MB each.
+  - **Remembered releases:** the record is per installation and not protected against deliberate local
+    deletion. First-contact and offline freshness limits apply (L-E).
+  - **Release provenance:** the producer's `compiler_build` identifier is fixed. Provenance automation belongs
+    with release production.
+  - **Carried from L-1:** the alias path budget, image-name process detection and repository-path dependencies
+    above still apply.
 - **Removed from the v1 critical path with P2/P3 (not passed):** native Master access, the CPM working
   directory, the native channel/key oracle, bytecode content and restoration recoverability. These were the
   former U0B open items; see Current milestone.
@@ -859,7 +942,7 @@ Evidence:
   **Pre-K complete. `4e35f292…` is the exact CPM candidate eligible to enter K.**
   - **K — COMPLETE / PASS** (K1A2 + K2A1, 2026-10-10).
 
-  L: L-1 COMPLETE / PASS (bounded), 2026-10-17. L-2 NOT STARTED / REQUIRES AUTHORIZATION. The final
+  L: L-1 and L-2 COMPLETE / PASS (bounded), 2026-10-17. L-3 NOT STARTED / REQUIRES AUTHORIZATION. The final
   packaging layout is decided in L-5.
 - **Session 4 notes (not failures; carried to K; unchanged by items 7–8):**
   - Fit's exception path releases the stage with a bare `release()` (no
@@ -872,13 +955,14 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. This is the L-1 GitHub checkpoint (2026-10-17).
-- **Next action:** an owner decision on authorizing **L-2** (Use Another TXT and an official package from a
-  local file, card §5). L-2 is NOT STARTED / REQUIRES AUTHORIZATION.
-- **Not authorized by this checkpoint:** L-2 or any later increment, any native SFM run, WPR/ETW work, a live
+Stop. This is the L-2 GitHub checkpoint (2026-10-17).
+- **Next action:** an owner decision on authorizing **L-3** (explicit-action release discovery and download,
+  card §5). L-3 is NOT STARTED / REQUIRES AUTHORIZATION.
+- **Outstanding owner release dependency:** the production signing key (see Current milestone).
+- **Not authorized by this checkpoint:** L-3 or any later increment, any native SFM run, WPR/ETW work, a live
   installation write, or release.
 
-L-1 is COMPLETE / PASS (bounded). K is COMPLETE / PASS. U0A is PASS (bounded). U0B is closed for v1 at the P1
+L-1 and L-2 are COMPLETE / PASS (bounded). K is COMPLETE / PASS. U0A is PASS (bounded). U0B is closed for v1 at the P1
 evidence boundary. `4e35f292…`, the
 production Normalizer `1f4ec5a2…` and exact G1 authority remain installed.
 

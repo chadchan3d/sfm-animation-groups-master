@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """The one protected installed-publication backend (R2 C3-C9, Amendment §2.1).
 
-prepare(): compile and validate into updater-private staging. Writes nothing to the Master
+prepare_rebuild() / prepare_import() / prepare_official(): build and validate the candidate in
+updater-private staging (Rebuild My Data, Use Another TXT, Get Official Data). Writes nothing to the Master
 path or the authority directory, so it may run while SFM runs.
 
 install(): process gate -> (transaction, candidates, snapshots) -> installation lock ->
@@ -18,7 +19,7 @@ import json
 import os
 import uuid
 
-from . import PREP_SCHEMA, hooks, w32
+from . import PREP_SCHEMA, hooks, official, w32
 from . import candidate as cand
 from . import journal as jr
 from .layout import LEGACY_LOCK, SIDECAR_RE, TXID_RE
@@ -257,89 +258,233 @@ def verify_final(layout, txid, intent, moves, states, k, handles, master_handle)
 
 
 # ---------------------------------------------------------------- preparation
-def prepare(layout, kind, source=None):
-    """Compile and validate the candidate into updater-private staging.
+MAX_SOURCE_BYTES = official.MAX_SOURCE_BYTES
+WORKFLOWS = ("rebuild", "import", "official")
 
-    rebuild: the active Master's exact bytes (never rewritten). replace: an immutable
-    captured copy of `source` (the external file is only read). Only staging is written."""
-    if kind not in KINDS:
-        raise Stop("REFUSED", "NOTHING", reason="unknown preparation kind", kind=kind)
-    res = {"operation": "prepare", "kind": kind}
-    st, why = process_status()  # advisory only: preparation may run while SFM runs
-    res["process_status"] = [st, why]
+
+def read_source(path, key_unreadable="SOURCE_UNREADABLE"):
+    """Exact bytes of a TXT, bounded before reading. Never writes to the file."""
     try:
-        txt = open(layout.master if kind == "rebuild" else source, "rb").read()
-    except (OSError, TypeError) as e:
-        raise Stop("REFUSED", "MISSING", reason="source unreadable",
+        st = os.stat(path)
+    except (OSError, TypeError, ValueError) as e:
+        raise Stop("REFUSED", key_unreadable, reason="source unreadable", error=type(e).__name__)
+    a = w32.attrs(path)
+    if a == w32.INVALID_FILE_ATTRIBUTES or a & (w32.FILE_ATTRIBUTE_DIRECTORY | w32.FILE_ATTRIBUTE_REPARSE_POINT):
+        raise Stop("REFUSED", key_unreadable, reason="source is not a regular file")
+    if st.st_size > MAX_SOURCE_BYTES:
+        raise Stop("REFUSED", "SOURCE_TOO_LARGE", reason="source larger than allowed", size=st.st_size,
+                   limit=MAX_SOURCE_BYTES)
+    try:
+        with open(path, "rb") as f:
+            data = f.read(MAX_SOURCE_BYTES + 1)
+    except OSError as e:
+        raise Stop("REFUSED", key_unreadable, reason="source unreadable",
                    error="%s winerror=%s" % (type(e).__name__, getattr(e, "winerror", None)))
-    name, body, manifest, outcome = cand.compile_real(txt, "import" if kind == "replace" else "active")
-    layout.require_path_budget(name)
+    if len(data) > MAX_SOURCE_BYTES:
+        raise Stop("REFUSED", "SOURCE_TOO_LARGE", reason="source larger than allowed", limit=MAX_SOURCE_BYTES)
+    return data
+
+
+def _compile(txt, label, invalid_key):
+    try:
+        return cand.compile_real(txt, label)
+    except Stop as e:
+        if e.message_key == "NOTHING":
+            raise Stop("REFUSED", invalid_key, **e.details)
+        raise
+
+
+def _preview_master(layout):
     m0 = observe_path(layout.master)
     if m0 is None or "sha256" not in m0:
         raise Stop("REFUSED", "MISSING", reason="active master missing or unusable", observed=m0)
-    if kind == "rebuild" and m0["sha256"] != sha(txt):
-        raise Stop("REFUSED", "PREPARE_AGAIN", reason="active master changed while preparing")
+    return m0
+
+
+def _stage(layout, files, check):
+    """Write the staged files (CREATE_NEW, checked, flushed) into a new staging directory, then
+    run `check(sdir)`, which returns None or the failure text."""
     layout.ensure_updater_dirs()
     prepid = uuid.uuid4().hex
     sdir = layout.prepdir(prepid)
     os.mkdir(sdir)
-    files = [(name, body), ("manifest.json", manifest)]
-    if kind == "replace":
-        files.append(("master.txt", txt))
     for n, data in files:
         ok, err = w32.write_new_file(os.path.join(sdir, n), data)
         if not ok:
             raise Stop("REFUSED", "NOTHING", reason="staging write failed", error=w32.ename(err))
-    bad = cand.validate_candidate_files(outcome, name, os.path.join(sdir, name), os.path.join(sdir, "manifest.json"))
+    bad = check(sdir)
     if bad:
         raise Stop("REFUSED", "NOTHING", reason="staged candidate failed validation from disk", error=bad)
-    record = {"schema": PREP_SCHEMA, "prepid": prepid, "kind": kind,
-              "source": {"sha256": sha(txt), "bytes": len(txt),
-                         "label": "active TXT" if kind == "rebuild" else "another TXT"},
-              "candidate": {"sidecar": name, "sidecar_sha256": sha(body), "manifest_sha256": sha(manifest)},
-              "destination": {"master_sha256": m0["sha256"]}}
+    return prepid, sdir
+
+
+def _finish(sdir, record, res, message):
     ok, err = w32.write_new_file(os.path.join(sdir, "prepared.json"),
                                  json.dumps(record, sort_keys=True, indent=1).encode("utf-8"))
     if not ok:
         raise Stop("REFUSED", "NOTHING", reason="staging write failed", error=w32.ename(err))
-    res.update(prepid=prepid, confirm_sha=m0["sha256"], candidate=record["candidate"],
+    st = res["process_status"][0]
+    if st != "CLEAR":
+        message = "%s %s" % (message, MESSAGES["SFM_OPEN_NOTE"])
+    res.update(prepid=record["prepid"], confirm_sha=record["destination"]["master_sha256"],
+               workflow=record["workflow"], kind=record["kind"], candidate=record["candidate"],
                source=record["source"], destination=record["destination"],
-               outcome="PREPARED", message=MESSAGES["PREPARED" if st == "CLEAR" else "PREPARED_SFM_RUNNING"])
+               consent_required=record["consent_required"], outcome="PREPARED", message=message)
+    if "official" in record:
+        res["official"] = record["official"]
     return res
 
 
+def _start(workflow):
+    res = {"operation": "prepare", "workflow": workflow}
+    st, why = process_status()  # advisory only: preparation may run while SFM runs
+    res["process_status"] = [st, why]
+    return res
+
+
+def prepare_rebuild(layout):
+    """Rebuild My Data: the installed Master's exact bytes (never rewritten) compiled into staging."""
+    res = _start("rebuild")
+    txt = read_source(layout.master, "MISSING")
+    name, body, manifest, outcome = _compile(txt, "active", "REBUILD_INVALID")
+    layout.require_path_budget(name)
+    m0 = _preview_master(layout)
+    if m0["sha256"] != sha(txt):
+        raise Stop("REFUSED", "PREPARE_AGAIN", reason="active master changed while preparing")
+    prepid, sdir = _stage(layout, [(name, body), ("manifest.json", manifest)],
+                          lambda d: cand.validate_candidate_files(outcome, name, os.path.join(d, name),
+                                                                  os.path.join(d, "manifest.json")))
+    record = {"schema": PREP_SCHEMA, "prepid": prepid, "workflow": "rebuild", "kind": "rebuild",
+              "source": {"sha256": sha(txt), "bytes": len(txt), "label": "current TXT"},
+              "candidate": {"sidecar": name, "sidecar_sha256": sha(body), "manifest_sha256": sha(manifest)},
+              "destination": {"master_sha256": m0["sha256"]}, "consent_required": False}
+    return _finish(sdir, record, res, MESSAGES["PREPARED"])
+
+
+def prepare_import(layout, source):
+    """Use Another TXT: an immutable captured copy of the chosen file (the file is only read),
+    compiled and validated into staging, previewed against the observed destination."""
+    res = _start("import")
+    src_path = os.path.abspath(source)
+    txt = read_source(src_path)
+    name, body, manifest, outcome = _compile(txt, "import", "SOURCE_INVALID")
+    layout.require_path_budget(name)
+    m0 = _preview_master(layout)
+    prepid, sdir = _stage(layout, [(name, body), ("manifest.json", manifest), ("master.txt", txt)],
+                          lambda d: cand.validate_candidate_files(outcome, name, os.path.join(d, name),
+                                                                  os.path.join(d, "manifest.json")))
+    record = {"schema": PREP_SCHEMA, "prepid": prepid, "workflow": "import", "kind": "replace",
+              "source": {"sha256": sha(txt), "bytes": len(txt), "label": "chosen TXT", "path": src_path},
+              "candidate": {"sidecar": name, "sidecar_sha256": sha(body), "manifest_sha256": sha(manifest)},
+              "destination": {"master_sha256": m0["sha256"]},
+              "consent_required": sha(txt) != m0["sha256"]}
+    return _finish(sdir, record, res, MESSAGES["PREPARED_IMPORT"] if record["consent_required"] else MESSAGES["PREPARED"])
+
+
+def prepare_official(layout, package_dir, allow_older=False):
+    """Get Official Data from a local package: authenticate, check compatibility and payload
+    identities, verify the official sidecar against the official TXT, and remember the
+    authenticated release sequence. The official sidecar is never combined with another TXT."""
+    res = _start("official")
+    d, desc_bytes, sig, payload = official.read_package(os.path.abspath(package_dir))
+    desc_sha = sha(desc_bytes)
+    txt, body, manifest = payload["master"], payload["sidecar"], payload["manifest"]
+    name = d["files"]["sidecar"]["name"]
+    outcome = _compile(txt, "official", "PACKAGE_DAMAGED")[3]
+    bad = cand.validate_official_bytes(outcome, name, body, manifest)
+    if bad:
+        raise Stop("REFUSED", "PACKAGE_DAMAGED", reason="official sidecar does not correspond to the official TXT",
+                   error=bad)
+    layout.require_path_budget(name)
+    m0 = _preview_master(layout)
+    layout.ensure_updater_dirs()
+    log = official.ReleaseLog(layout)
+    try:
+        seq = official.check_sequence(log, d, desc_sha, allow_older)
+        recognized = m0["sha256"] in log.recognized_masters()
+        kind = "rebuild" if m0["sha256"] == sha(txt) else "replace"
+        prepid, sdir = _stage(layout, [(name, body), ("manifest.json", manifest), ("master.txt", txt),
+                                       (official.DESCRIPTOR, desc_bytes), (official.SIGNATURE, sig)],
+                              lambda dd: cand.validate_official_files(outcome, name, os.path.join(dd, name),
+                                                                      os.path.join(dd, "manifest.json"), sha(body)))
+        if not seq["already_seen"]:
+            log.append({"sequence": d["sequence"], "descriptor_sha256": desc_sha, "master_sha256": sha(txt),
+                        "data_version": d["data_version"], "signing_key_id": d["signing_key_id"],
+                        "published_at": d["published_at"]})
+    except Stop as e:
+        if e.message_key == "NOTHING" and "validation" in str(e.details.get("reason", "")):
+            raise Stop("REFUSED", "PACKAGE_DAMAGED", **e.details)
+        raise
+    finally:
+        log.close()
+    record = {"schema": PREP_SCHEMA, "prepid": prepid, "workflow": "official", "kind": kind,
+              "source": {"sha256": sha(txt), "bytes": len(txt), "label": "official data %s" % d["data_version"]},
+              "candidate": {"sidecar": name, "sidecar_sha256": sha(body), "manifest_sha256": sha(manifest)},
+              "destination": {"master_sha256": m0["sha256"], "recognized_official": recognized},
+              "consent_required": kind == "replace" and not recognized,
+              "official": {"sequence": d["sequence"], "data_version": d["data_version"],
+                           "release_tag": d["release_tag"], "descriptor_sha256": desc_sha,
+                           "signing_key_id": d["signing_key_id"], "older_than_seen": seq["older"],
+                           "high_water_before": seq["high_water_before"]}}
+    v = d["data_version"]
+    msg = (MESSAGES["PREPARED_OFFICIAL_OLDER"] % v if seq["older"] else
+           MESSAGES["PREPARED_OFFICIAL_REPLACES"] % v if record["consent_required"] else
+           MESSAGES["PREPARED_OFFICIAL"] % v)
+    return _finish(sdir, record, res, msg)
+
+
 def load_prepared(layout, prepid):
-    """The staged record and the exact bytes it names; any mismatch: prepare again."""
+    """The staged record and the exact bytes it names; any mismatch: prepare again. An official
+    preparation is re-authenticated from its staged descriptor and signature."""
     sdir = layout.prepdir(prepid)
     try:
         rec = json.loads(open(os.path.join(sdir, "prepared.json"), "rb").read().decode("utf-8"))
         assert isinstance(rec, dict) and rec.get("schema") == PREP_SCHEMA and rec.get("prepid") == prepid
-        assert rec.get("kind") in KINDS
+        assert rec.get("workflow") in WORKFLOWS and rec.get("kind") in KINDS
+        assert (rec["workflow"], rec["kind"]) in (("rebuild", "rebuild"), ("import", "replace"),
+                                                  ("official", "rebuild"), ("official", "replace"))
+        assert isinstance(rec.get("consent_required"), bool)
         c = rec["candidate"]
         assert SIDECAR_RE.match(c["sidecar"])
         body = open(os.path.join(sdir, c["sidecar"]), "rb").read()
         manifest = open(os.path.join(sdir, "manifest.json"), "rb").read()
         assert sha(body) == c["sidecar_sha256"] and sha(manifest) == c["manifest_sha256"]
         txt = None
-        if rec["kind"] == "replace":
+        if rec["workflow"] in ("import", "official"):
             txt = open(os.path.join(sdir, "master.txt"), "rb").read()
             assert sha(txt) == rec["source"]["sha256"] and len(txt) == rec["source"]["bytes"]
+        if rec["workflow"] == "official":
+            desc_bytes = open(os.path.join(sdir, official.DESCRIPTOR), "rb").read()
+            sig = open(os.path.join(sdir, official.SIGNATURE), "rb").read()
     except Exception as e:
         raise Stop("REFUSED", "PREPARE_AGAIN", reason="prepared data missing or changed",
                    error="%s: %s" % (type(e).__name__, str(e)[:200]))
+    if rec["workflow"] == "official":
+        d = official.reverify_staged(desc_bytes, sig, {"master": txt, "manifest": manifest, "sidecar": body})
+        if sha(desc_bytes) != rec["official"]["descriptor_sha256"] or d["files"]["sidecar"]["name"] != c["sidecar"]:
+            raise Stop("REFUSED", "PREPARE_AGAIN", reason="prepared official record does not match its descriptor")
     return rec, body, manifest, txt
 
 
 # ---------------------------------------------------------------- installation
-def install(layout, prepid, confirm_sha):
-    """Amendment §2.1 step 6 then step 7. Returns the result dictionary."""
+def install(layout, prepid, confirm_sha, accept_replacement=False):
+    """Amendment §2.1 steps 5-7. Returns the result dictionary."""
     res = {"operation": "install"}
     try:
         res["process_status"] = gate("pre-lock")
         rec, body, manifest, staged_txt = load_prepared(layout, prepid)
         kind = rec["kind"]
-        res["kind"] = kind
-        res["prepid"] = prepid
+        res.update(kind=kind, workflow=rec["workflow"], prepid=prepid)
+        if rec["workflow"] == "import":
+            # C3: before confirmation takes effect, a changed selection requires a new preview.
+            try:
+                now = read_source(rec["source"]["path"], "SOURCE_CHANGED")
+            except Stop as e:
+                raise Stop("REFUSED", "SOURCE_CHANGED", **e.details)
+            if sha(now) != rec["source"]["sha256"]:
+                raise Stop("REFUSED", "SOURCE_CHANGED", reason="chosen TXT changed since preparation")
+        if rec["consent_required"] and not accept_replacement:
+            raise Stop("REFUSED", "NEEDS_CONSENT", reason="replacement not confirmed")
         if kind == "rebuild":
             try:
                 txt = open(layout.master, "rb").read()
@@ -363,6 +508,11 @@ def install(layout, prepid, confirm_sha):
         res["correspondence"] = corr
         if not corr["ok"]:
             res.update(outcome="UNVERIFIED", message=MESSAGES["UNVERIFIED"])
+        elif res["outcome"] == "COMPLETE":
+            v = (rec.get("official") or {}).get("data_version")
+            res["message"] = {"rebuild": MESSAGES["INSTALLED_REBUILD"], "import": MESSAGES["INSTALLED_IMPORT"],
+                              "official": (MESSAGES["INSTALLED_OFFICIAL_REPLACED"] if kind == "replace"
+                                           else MESSAGES["INSTALLED_OFFICIAL"]) % v if v else ""}[rec["workflow"]]
         st, why = process_status()
         res["post_install_process_status"] = [st, why]
         if res["outcome"] != "UNVERIFIED":
@@ -417,9 +567,9 @@ def _activate(layout, kind, txt, name, body, manifest, confirm_sha, inject_write
         res["preview"] = {"master": m0, "sidecars": sidecars, "manifest": manifest_old,
                           "inventory": inv, "dirs": dir_ids}
         if kind == "rebuild" and confirm_sha != sha(txt):
-            raise Stop("REFUSED", "NOTHING", reason="rebuild source changed since confirmation")
+            raise Stop("REFUSED", "PREPARE_AGAIN", reason="rebuild source changed since confirmation")
         if confirm_sha != m0["sha256"]:
-            raise Stop("REFUSED", "NOTHING", reason="destination generation changed; re-present decision",
+            raise Stop("REFUSED", "DESTINATION_CHANGED", reason="destination generation changed; re-present decision",
                        observed=m0["sha256"], confirmed=confirm_sha)
         noop = (sha(txt) == m0["sha256"] and len(sidecars) == 1 and sidecars[0]["name"] == name
                 and manifest_old is not None and manifest_old["sha256"] == sha(manifest))

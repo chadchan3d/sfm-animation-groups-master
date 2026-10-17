@@ -12,7 +12,9 @@ fingerprint tool, and nothing writes to it.
   run_l1.py setup  --run RUN --game GAME --p1-preservation DIR --g3-source FILE --py27 EXE
   run_l1.py groups --run RUN --game GAME --py27 EXE --label LABEL --groups A,B,...
 
-Groups: A B C D E F G H I J K N X W.
+Groups: A B C D E F G H I J K N X W (L-1, rerun as L-2 regression) and M O W3 (L-2: Use Another
+TXT and Get Official Data from a local signed package). Run with a Python that provides the
+`cryptography` package (the isolated qualification environment).
 Results: RUN\\LABEL\\results\\cases\\<case>.json and RUN\\LABEL\\results\\matrix_<group>.json
 """
 import argparse
@@ -55,6 +57,7 @@ GEN = {}
 SHA = {}
 G1_TXT = G2_TXT = G3_TXT = None
 TOKEN = uuid.uuid4().hex[:12]
+PSTAT = None      # the product's real process-status query, bound in main()
 
 
 # ------------------------------------------------------------------ guarded writes
@@ -346,11 +349,12 @@ def noop_ok(step):
 # ------------------------------------------------------------------ process drivers
 KEEP = ("process_status", "noop_verification", "transactions_checked", "correspondence", "restart_required",
         "post_install_process_status", "installed_state", "prepid", "confirm_sha", "candidate", "kind",
-        "recovery_needed", "process_forms_used", "forward_failure", "txid")
+        "recovery_needed", "process_forms_used", "forward_failure", "txid", "workflow", "consent_required",
+        "official", "source", "destination")
 
 
 def run_op(case, step, args, cfg, stop_at=None, action="go", timeout=900, barrier_timeout=None,
-           before_go=None, inject=None):
+           before_go=None, inject=None, trust=False):
     """action: go | kill | eof | badtoken | timeout | callable(name)->'go'|'kill'."""
     out = os.path.join(WORK, "results", "ops", "%s__%s.json" % (case, step))
     guard(out)
@@ -358,7 +362,14 @@ def run_op(case, step, args, cfg, stop_at=None, action="go", timeout=900, barrie
     cmd = [PY3, "-E", "-s", "-B", "-X", "pycache_prefix=" + NOPYC, TEST_WORKER, args[0],
            "--installation", cfg, "--result", out] + list(args[1:])
     cmd += ["--token", TOKEN, "--scratch-root", RUN, "--forbid", A.game]
-    for k, v in (inject or {}).items():
+    if trust:
+        cmd += ["--trust-key", open(os.path.join(RUN, "keys", "test_a.pub"), encoding="ascii").read().strip()]
+    inject = dict(inject or {})
+    if A.process_default and not any(k.startswith("process") for k in inject):
+        # Scratch installations are independent of any SFM the owner has open for other work:
+        # unless a case asks for a specific (or the real) process status, report CLEAR.
+        inject["process"] = A.process_default
+    for k, v in inject.items():
         cmd += ["--inject", "%s=%s" % (k, v)]
     if stop_at:
         cmd += ["--stop-at", stop_at]
@@ -420,24 +431,27 @@ def run_op(case, step, args, cfg, stop_at=None, action="go", timeout=900, barrie
 
 
 def prepare(case, step, cfg, kind, source=None, inject=None):
-    a = ["prepare-rebuild"] if kind == "rebuild" else ["prepare-replace", "--source", source]
+    """kind: rebuild (Rebuild My Data) | replace (Use Another TXT, product `prepare-import`)."""
+    a = ["prepare-rebuild"] if kind == "rebuild" else ["prepare-import", "--source", source]
     return run_op(case, step + "__prep", a, cfg, inject=inject)
 
 
-def install(case, step, cfg, prepid, confirm, **kw):
-    return run_op(case, step, ["install", "--prepared", prepid, "--confirm-sha", confirm], cfg, **kw)
+def install(case, step, cfg, prepid, confirm, accept=False, **kw):
+    a = ["install", "--prepared", prepid, "--confirm-sha", confirm] + (["--accept-replacement"] if accept else [])
+    return run_op(case, step, a, cfg, **kw)
 
 
-def activate(case, step, cfg, kind, confirm, source=None, prep_inject=None, **kw):
+def activate(case, step, cfg, kind, confirm, source=None, prep_inject=None, accept=None, **kw):
     """P1 `activate` = product prepare (staging) + install. Barriers, kills and injections
-    apply to the install process. A failed preparation is returned as the step."""
+    apply to the install process. A failed preparation is returned as the step. An import
+    gives explicit replacement consent unless accept=False (the user confirmed the preview)."""
     pr = prepare(case, step, cfg, kind, source, inject=prep_inject)
     if pr["outcome"] != "PREPARED":
         pr["stage"] = "prepare"
         return pr
-    st = install(case, step, cfg, pr["prepid"], confirm, **kw)
+    st = install(case, step, cfg, pr["prepid"], confirm, accept=(kind == "replace") if accept is None else accept, **kw)
     st["prepare"] = {k: pr.get(k) for k in ("outcome", "message", "prepid", "confirm_sha", "process_status",
-                                            "candidate", "seconds")}
+                                            "candidate", "seconds", "consent_required", "workflow")}
     return st
 
 
@@ -1497,7 +1511,7 @@ def group_X():
     ok, d = final_is(cfg, ("G3", "g3"))
     excl_prep = pr.get("trace_summary", {}).get("n_exclusive_authority_opens")
     v = (pr["outcome"] == "PREPARED" and (pr.get("process_status") or [None])[0] == "RUNNING"
-         and "close SFM" in (pr["message"] or "") and before == mid and excl_prep == 0
+         and "Close SFM before installing" in (pr["message"] or "") and before == mid and excl_prep == 0
          and not pr["trace_summary"]["installation_lock_opens"]
          and sorted(os.path.basename(k) for k in staged) == sorted([GEN["g3"]["sidecar"], "manifest.json",
                                                                     "prepared.json"])
@@ -1540,14 +1554,25 @@ def group_X():
         R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
                                "installation verified and kept; post-install status %s -> restart required, "
                                "message says so" % key if v else "unexpected %s %s" % (outcomes(s), s[0]["message"])))
-    cfg = make_install("X3c_post_install_clear", master="G3", gens=("g1",))
-    s = [activate("X3c_post_install_clear", "act", cfg, "rebuild", SHA["G3"])]
-    v = s[0]["outcome"] == "COMPLETE" and not s[0].get("restart_required") and \
-        "You can now reopen SFM" in (s[0]["message"] or "") and \
-        (s[0].get("post_install_process_status") or [None])[0] == "CLEAR"
-    R.append(finalize_case("X3c_post_install_clear", cfg, s, "PASS" if v else "FAIL",
-                           "post-install status CLEAR (real query) -> 'You can now reopen SFM'" if v else
-                           "unexpected %s %s" % (outcomes(s), s[0]["message"])))
+    cfg = make_install("X3c_real_process_query", master="G3", gens=("g1",))
+    real0 = PSTAT()
+    before = tree(cfg)
+    s = [activate("X3c_real_process_query", "act", cfg, "rebuild", SHA["G3"], inject={"process": "real"})]
+    real1 = PSTAT()
+    if real0[0] == real1[0] == "CLEAR":
+        v = s[0]["outcome"] == "COMPLETE" and not s[0].get("restart_required") and \
+            "You can now reopen SFM" in (s[0]["message"] or "") and \
+            (s[0].get("post_install_process_status") or [None])[0] == "CLEAR"
+        why = "real query CLEAR -> COMPLETE, 'You can now reopen SFM'"
+    elif real0[0] == real1[0] == "RUNNING":
+        v = s[0]["outcome"] == "REFUSED" and "Close SFM" in (s[0]["message"] or "") and before == tree(cfg) and \
+            not txdirs(cfg)
+        why = "real query RUNNING (SFM open for other work) -> install REFUSED 'Close SFM', nothing changed"
+    else:
+        v, why = False, "real process status changed during the case (inconclusive)"
+    R.append(finalize_case("X3c_real_process_query", cfg, s, "PASS" if v else "FAIL",
+                           why if v else "unexpected %s %s (%s)" % (outcomes(s), s[0]["message"], why),
+                           {"real_status_before": real0, "real_status_after": real1}))
     # X4 experimental and future transaction schemas: refused without mutation.
     for nm, schema in (("X4a_schema_p1", "u0b-p1-tx-1"), ("X4b_schema_u0a", "u0a-tx-1")):
         cfg = make_install(nm)
@@ -1678,14 +1703,16 @@ def group_W():
     out = os.path.join(WORK, "results", "ops", nm + "__replace.json")
     guard(out)
     before = tree(cfg, include_staging=True)
-    cp1 = product_worker(["prepare-replace", "--installation", cfg, "--result", out, "--source", G3_TXT], UPDATER)
-    cp2 = product_worker(["prepare-rebuild", "--installation", cfg, "--result", out, "--source", G3_TXT], UPDATER)
-    v = cp1.returncode == 2 and cp2.returncode == 2 and not os.path.exists(out) and \
+    cps = [product_worker(a + ["--installation", cfg, "--result", out], UPDATER) for a in (
+        ["prepare-replace", "--source", G3_TXT], ["prepare-rebuild", "--trust-key", "00" * 32],
+        ["prepare-rebuild", "--inject", "process=raise"], ["install", "--stop-at", "locked"],
+        ["prepare-rebuild", "--scratch-root", RUN])]
+    v = all(cp.returncode == 2 for cp in cps) and not os.path.exists(out) and \
         tree(cfg, include_staging=True) == before
-    R.append(finalize_case(nm, cfg, [{"rc": cp1.returncode, "stderr": cp1.stderr[-300:]},
-                                     {"rc": cp2.returncode, "stderr": cp2.stderr[-300:]}], "PASS" if v else "FAIL",
-                           "product worker rejects 'prepare-replace' and '--source' (usage error, no result, "
-                           "nothing written)" if v else "unexpected"))
+    R.append(finalize_case(nm, cfg, [{"rc": cp.returncode, "stderr": cp.stderr[-300:]} for cp in cps],
+                           "PASS" if v else "FAIL",
+                           "product worker rejects 'prepare-replace', '--trust-key', '--inject', '--stop-at' and "
+                           "'--scratch-root' (usage error, no result, nothing written)" if v else "unexpected"))
     nm = "W2_product_rebuild_flow"
     cfg = make_install(nm, master="G3", gens=("g1",))
     outs = {k: os.path.join(WORK, "results", "ops", "%s__%s.json" % (nm, k)) for k in
@@ -1693,6 +1720,7 @@ def group_W():
     for p in outs.values():
         guard(p)
     steps = []
+    real0 = PSTAT()
     for k, a in (("status0", ["status"]), ("prep", ["prepare-rebuild"])):
         cp = product_worker(a + ["--installation", cfg, "--result", outs[k]], UPDATER)
         steps.append({"step": k, "rc": cp.returncode, "stdout": cp.stdout.strip()[-200:], **jload(outs[k])})
@@ -1703,26 +1731,536 @@ def group_W():
     for k, a in (("status1", ["status"]), ("recover", ["recover"])):
         cp = product_worker(a + ["--installation", cfg, "--result", outs[k]], UPDATER)
         steps.append({"step": k, "rc": cp.returncode, "stdout": cp.stdout.strip()[-200:], **jload(outs[k])})
-    ok, d = final_is(cfg, ("G3", "g3"))
-    sel_ok, sel = select_ok(cfg, "g3")
-    v = (steps[0]["outcome"] == "STATUS" and steps[0]["correspondence"]["ok"] is False
-         and steps[1]["outcome"] == "PREPARED" and steps[2]["outcome"] == "COMPLETE"
-         and steps[2]["correspondence"]["ok"] is True and "trace" not in steps[2]
-         and steps[2]["post_install_process_status"][0] == "CLEAR" and steps[2]["stdout"] == "RESULT COMPLETE"
-         and steps[3]["correspondence"]["ok"] is True and steps[3]["recovery_needed"] is False
-         and steps[4]["outcome"] == "OK" and ok and sel_ok)
+    real1 = PSTAT()
+    if real0[0] == real1[0] == "CLEAR":
+        ok, d = final_is(cfg, ("G3", "g3"))
+        sel_ok, sel = select_ok(cfg, "g3")
+        v = (steps[0]["outcome"] == "STATUS" and steps[0]["correspondence"]["ok"] is False
+             and steps[1]["outcome"] == "PREPARED" and steps[2]["outcome"] == "COMPLETE"
+             and steps[2]["correspondence"]["ok"] is True and "trace" not in steps[2]
+             and steps[2]["post_install_process_status"][0] == "CLEAR" and steps[2]["stdout"] == "RESULT COMPLETE"
+             and steps[3]["correspondence"]["ok"] is True and steps[3]["recovery_needed"] is False
+             and steps[4]["outcome"] == "OK" and ok and sel_ok)
+        why = ("product worker, real query CLEAR: status (needs rebuild) -> prepare-rebuild -> install COMPLETE "
+               "(correspondence verified, no trace) -> status consistent -> recover OK; exact G3; Py2.7 selector G3")
+    elif real0[0] == real1[0] == "RUNNING":
+        ok, d = final_is(cfg, ("G3", "g1"))
+        sel = None
+        v = (steps[0]["outcome"] == "STATUS" and steps[1]["outcome"] == "PREPARED"
+             and "Close SFM before installing" in (steps[1]["message"] or "")
+             and steps[2]["outcome"] == "REFUSED" and "Close SFM" in (steps[2]["message"] or "")
+             and steps[2]["stdout"] == "RESULT REFUSED" and "trace" not in steps[2]
+             and steps[3]["recovery_needed"] is False and steps[4]["outcome"] == "REFUSED" and ok
+             and not txdirs(cfg))
+        why = ("product worker, real query RUNNING (SFM open for other work): prepare-rebuild PREPARED with the "
+               "'close SFM' note; install and recover REFUSED 'Close SFM'; installation unchanged")
+    else:
+        v, why, sel = False, "real process status changed during the case (inconclusive)", None
     for x in steps:
         x.pop("trace", None)
     R.append(finalize_case(nm, cfg, steps, "PASS" if v else "FAIL",
-                           "product worker: status (needs rebuild) -> prepare-rebuild -> install COMPLETE (real CLEAR "
-                           "query, correspondence verified, no trace) -> status consistent -> recover OK; exact G3; "
-                           "Py2.7 selector G3" if v else "unexpected %s" % [x.get("outcome") for x in steps],
-                           {"selector": sel}))
+                           why if v else "unexpected %s (%s)" % ([x.get("outcome") for x in steps], why),
+                           {"selector": sel, "real_status_before": real0, "real_status_after": real1}))
     return R
 
 
+# ------------------------------------------------------------------ L-2: packages and keys (test-only)
+PRODUCER = os.path.join(UPDATER, "release_tools", "make_official_package.py")
+
+
+def producer(*args):
+    cp = subprocess.run([PY3, "-E", "-s", "-B", "-X", "pycache_prefix=" + NOPYC, PRODUCER] + list(args),
+                        capture_output=True, text=True, env=ENV, cwd=os.path.join(RUN, "tmp"), timeout=900)
+    if cp.returncode != 0:
+        raise RuntimeError("producer failed: %s %s" % (args[:1], cp.stderr[-800:]))
+    return cp.stdout
+
+
+def keyfile(name, ext):
+    return os.path.join(RUN, "keys", "%s.%s" % (name, ext))
+
+
+def ensure_keys():
+    """Per-run TEST keys in the scratch run (never in the repository, never shipping trust)."""
+    for k in ("test_a", "test_b"):
+        if not os.path.exists(keyfile(k, "pem")):
+            guard(keyfile(k, "pem"))
+            os.makedirs(os.path.dirname(keyfile(k, "pem")), exist_ok=True)
+            producer("keygen", "--private", keyfile(k, "pem"), "--public", keyfile(k, "pub"))
+
+
+def pkgdir(n):
+    return os.path.join(RUN, "pkgs", n)
+
+
+def build_pkg(n, master, seq, ver, key="test_a", **extra):
+    d = pkgdir(n)
+    if os.path.exists(d):
+        return d
+    guard(d)
+    os.makedirs(os.path.dirname(d), exist_ok=True)
+    args = ["build", "--master", master, "--private", keyfile(key, "pem"), "--out", d, "--sequence", str(seq),
+            "--data-version", ver, "--release-tag", "data-" + ver, "--source-commit", "a1" * 20,
+            "--published-at", "2026-10-17T00:00:00Z"]
+    for p in extra.get("profiles", []):
+        args += ["--profile", p]
+    if "muc" in extra:
+        args += ["--minimum-updater-contract", str(extra["muc"])]
+    producer(*args)
+    return d
+
+
+def desc_bytes(d):
+    return (json.dumps(d, sort_keys=True, separators=(",", ":"), ensure_ascii=True) + "\n").encode("utf-8")
+
+
+def craft(n, base, mutate=None, raw=None, files=None, sign_key="test_a", sig=None, drop=(), add=()):
+    """Copy package `base` to `n` with a modified descriptor (re-signed with `sign_key` unless
+    `sig` is given) and/or replaced, dropped or added files."""
+    d = pkgdir(n)
+    if os.path.exists(d):
+        return d
+    src = pkgdir(base)
+    desc = json.load(open(os.path.join(src, "release.json"), encoding="utf-8"))
+    for nm in os.listdir(src):
+        if nm in ("release.json", "release.sig") or nm in drop or (files and nm == desc["files"]["sidecar"]["name"]
+                                                                  and "sidecar" in files):
+            continue
+        if files and nm == "manifest.json" and "manifest" in files:
+            continue
+        wcopy(os.path.join(src, nm), os.path.join(d, nm))
+    for role, path in (files or {}).items():
+        data = open(path, "rb").read()
+        nm = os.path.basename(path) if role == "sidecar" else ("manifest.json" if role == "manifest" else nm)
+        wbytes(os.path.join(d, nm), data)
+        desc["files"][role] = {"name": nm, "byte_length": len(data), "sha256": sha(data)}
+    if mutate:
+        mutate(desc)
+    db = raw(desc) if raw else desc_bytes(desc)
+    wbytes(os.path.join(d, "release.json"), db)
+    if sig is not None:
+        wbytes(os.path.join(d, "release.sig"), sig)
+    else:
+        producer("sign", "--descriptor", os.path.join(d, "release.json"), "--private", keyfile(sign_key, "pem"),
+                 "--out", os.path.join(d, "release.sig"))
+    for nm, data in add:
+        wbytes(os.path.join(d, nm), data)
+    return d
+
+
+def tampered(n, base, filename, fn):
+    """Copy package `base` with one file's bytes transformed by fn (no re-signing)."""
+    d = pkgdir(n)
+    if os.path.exists(d):
+        return d
+    for nm in os.listdir(pkgdir(base)):
+        data = open(os.path.join(pkgdir(base), nm), "rb").read()
+        wbytes(os.path.join(d, nm), fn(data) if nm == filename else data)
+    return d
+
+
+def pkg_tree(d):
+    return {n: sha_file(os.path.join(d, n)) for n in sorted(os.listdir(d))}
+
+
+def ensure_packages():
+    ensure_keys()
+    build_pkg("G3_s5", G3_TXT, 5, "2026.10.5")
+    build_pkg("G1_s6", G1_TXT, 6, "2026.10.6")
+    build_pkg("G3_s3", G3_TXT, 3, "2026.10.3")
+    build_pkg("G3_s5_alt", G3_TXT, 5, "2026.10.5-alt")
+    build_pkg("G1_s7_keyB", G1_TXT, 7, "2026.10.7", key="test_b")
+    build_pkg("G3_s8_muc2", G3_TXT, 8, "2026.10.8", muc=2)
+    build_pkg("G3_s9_profile", G3_TXT, 9, "2026.10.9", profiles=["other-profile-9"])
+
+
+def official_prep(case, step, cfg, pkg, allow_older=False, trust=True):
+    a = ["prepare-official", "--package", pkg] + (["--allow-older"] if allow_older else [])
+    return run_op(case, step + "__prep", a, cfg, trust=trust)
+
+
+def release_log(cfg):
+    p = os.path.join(cfg, "sfm_character_tools_updater", "official_releases.log")
+    if not os.path.exists(p):
+        return None
+    return [json.loads(l.split(b"\t")[0]) for l in open(p, "rb").read().split(b"\n") if l]
+
+
+def retired_masters(cfg):
+    out = []
+    for td in txdirs(cfg):
+        p = os.path.join(td, "retired", "master.txt")
+        if os.path.exists(p):
+            out.append(p)
+    return out
+
+
+def group_M():
+    """L-2 Use Another TXT (headless import through prepare-import + install)."""
+    R = []
+    nm = "M1_import_consent_and_backup"
+    cfg = make_install(nm)
+    src = os.path.join(WORK, "inputs", "m1_custom.txt")
+    wcopy(G3_TXT, src)
+    pr = prepare(nm, "prep", cfg, "replace", src)
+    before = tree(cfg)
+    s = [pr, install(nm, "install_no_consent", cfg, pr.get("prepid", ""), SHA["G1"], accept=False)]
+    mid = tree(cfg)
+    s.append(install(nm, "install_consent", cfg, pr.get("prepid", ""), SHA["G1"], accept=True))
+    ok3, d3 = final_is(cfg, ("G3", "g3"))
+    ret = retired_masters(cfg)
+    ret_ok = len(ret) == 1 and sha_file(ret[0]) == SHA["G1"]
+    s.append(activate(nm, "restore_previous", cfg, "replace", SHA["G3"], source=ret[0] if ret else src))
+    ok1, d1 = final_is(cfg, ("G1", "g1"))
+    v = (pr["outcome"] == "PREPARED" and pr.get("consent_required") is True and "replaces" in (pr["message"] or "")
+         and s[1]["outcome"] == "REFUSED" and "Confirm the replacement" in (s[1]["message"] or "")
+         and before == mid
+         and s[2]["outcome"] == "COMPLETE" and ok3 and "previous TXT was kept as a backup" in (s[2]["message"] or "")
+         and (s[2].get("correspondence") or {}).get("ok") is True and ret_ok
+         and s[3]["outcome"] == "COMPLETE" and ok1 and sha_file(src) == SHA["G3"]
+         and ret and sha_file(ret[0]) == SHA["G1"])
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "preview says it replaces (consent required); install without consent REFUSED, nothing "
+                           "changed; with consent COMPLETE exact G3; previous G1 TXT kept byte-exact in the backup "
+                           "and restored from it to exact G1; chosen file unchanged" if v else
+                           "unexpected %s" % outcomes(s)))
+    nm = "M2_import_identical_no_consent"
+    cfg = make_install(nm)
+    before = tree(cfg)
+    s = [activate(nm, "act", cfg, "replace", SHA["G1"], source=G1_TXT, accept=False)]
+    v = noop_ok(s[0]) and s[0]["prepare"]["consent_required"] is False and noop_unchanged(before, tree(cfg))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "importing the identical TXT needs no consent and is a verified NOOP" if v else
+                           "unexpected %s" % outcomes(s)))
+    # M3 unusable sources: too large, missing, locked, a directory, malformed
+    big = os.path.join(WORK, "inputs", "too_large.txt")
+    guard(big)
+    with open(big, "xb") as f:
+        f.seek(64 * 1024 * 1024)
+        f.write(b"\n")
+    held = os.path.join(WORK, "inputs", "held.txt")
+    wcopy(G3_TXT, held)
+    bad = os.path.join(WORK, "inputs", "malformed_m3.txt")
+    wbytes(bad, open(G3_TXT, "rb").read()[:150000])
+    for nm, path, key, word in (("M3a_too_large", big, "SOURCE_TOO_LARGE", "too large"),
+                                ("M3b_missing", os.path.join(WORK, "inputs", "does_not_exist.txt"),
+                                 "SOURCE_UNREADABLE", "couldn't be read"),
+                                ("M3c_locked", held, "SOURCE_UNREADABLE", "couldn't be read"),
+                                ("M3d_directory", os.path.join(WORK, "inputs"), "SOURCE_UNREADABLE", "couldn't be read"),
+                                ("M3e_malformed", bad, "SOURCE_INVALID", "isn't a valid animation-group TXT")):
+        cfg = make_install(nm)
+        before = tree(cfg, include_staging=True)
+        hp = None
+        src_before = sha_file(path) if os.path.isfile(path) else None
+        if nm == "M3c_locked":
+            hp, first = start_holder("hold.py", held, "rd", "0")
+        s = [prepare(nm, "prep", cfg, "replace", path)]
+        if hp:
+            release(hp)
+        v = (s[0]["outcome"] == "REFUSED" and word in (s[0]["message"] or "") and "Nothing was changed" in s[0]["message"]
+             and tree(cfg, include_staging=True) == before
+             and (src_before is None or sha_file(path) == src_before))
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "%s -> REFUSED '%s'; nothing written; source unchanged" % (nm[4:], word) if v else
+                               "unexpected %s %s" % (s[0]["outcome"], s[0]["message"])))
+    # M4 selection changed before confirmation -> fresh preview required
+    for nm, change in (("M4a_source_edited_before_install", "edit"), ("M4b_source_removed_before_install", "remove")):
+        cfg = make_install(nm)
+        src = os.path.join(WORK, "inputs", nm + ".txt")
+        wcopy(G3_TXT, src)
+        pr = prepare(nm, "prep", cfg, "replace", src)
+        if change == "edit":
+            wappend(src, b"\n// edited after preview\n")
+        else:
+            wremove(src)
+        before = tree(cfg)
+        s = [pr, install(nm, "install", cfg, pr.get("prepid", ""), SHA["G1"], accept=True)]
+        v = (pr["outcome"] == "PREPARED" and s[1]["outcome"] == "REFUSED" and "changed after it was checked"
+             in (s[1]["message"] or "") and before == tree(cfg) and not txdirs(cfg))
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "chosen file %s after the preview -> REFUSED 'choose the file again'; nothing changed"
+                               % ("edited" if change == "edit" else "removed") if v else "unexpected %s" % outcomes(s)))
+    nm = "M5_destination_changed_before_install"
+    cfg = make_install(nm)
+    pr = prepare(nm, "prep", cfg, "replace", G3_TXT)
+    wappend(os.path.join(cfg, "sfm_defaultanimationgroups.txt"), b"\n// user edit after preview\n")
+    before = tree(cfg)
+    s = [pr, install(nm, "install", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), accept=True)]
+    v = (s[1]["outcome"] == "REFUSED" and "changed after it was checked" in (s[1]["message"] or "")
+         and before == tree(cfg) and not txdirs(cfg))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "installed TXT edited after the preview -> REFUSED 'check again'; edit kept; nothing changed"
+                           if v else "unexpected %s %s" % (outcomes(s), s[1].get("message"))))
+    nm = "M6_import_interrupted_then_recovered"
+    cfg = make_install(nm)
+    src = os.path.join(WORK, "inputs", "m6.txt")
+    wcopy(G3_TXT, src)
+    s = [activate(nm, "act", cfg, "replace", SHA["G1"], source=src, stop_at="act_moved_forward_3", action="kill")]
+    s.append(recover(nm, "rec1", cfg))
+    s.append(recover(nm, "rec2", cfg))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    v = s[0]["killed"] and ok and rec_terminal_ok(s[2]) and sha_file(src) == SHA["G3"] and \
+        len(retired_masters(cfg)) == 1 and sha_file(retired_masters(cfg)[0]) == SHA["G1"]
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "killed after the new TXT moved in -> recovery completes exact G3; previous TXT in the "
+                           "backup; chosen file unchanged" if v else "unexpected %s" % outcomes(s)))
+    return R
+
+
+def group_O():
+    """L-2 Get Official Data from a local signed package."""
+    R = []
+    ensure_packages()
+    P = {n: pkgdir(n) for n in os.listdir(os.path.join(RUN, "pkgs"))}
+    pk0 = {n: pkg_tree(d) for n, d in P.items()}
+    # O1-O5: one installation through a sequence of official packages
+    cfg = make_install("O_sequence")
+    nm = "O1_valid_package_customized_needs_consent"
+    pr = official_prep(nm, "prep", cfg, P["G3_s5"])
+    before = tree(cfg)
+    s = [pr, install(nm, "install_no_consent", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), trust=True)]
+    mid = tree(cfg)
+    s.append(install(nm, "install_consent", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), accept=True,
+                     trust=True))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    log = release_log(cfg) or []
+    v = (pr["outcome"] == "PREPARED" and pr.get("consent_required") is True and "2026.10.5" in pr["message"]
+         and "doesn't match official data" in pr["message"]
+         and s[1]["outcome"] == "REFUSED" and before == mid
+         and s[2]["outcome"] == "COMPLETE" and ok and "Official data 2026.10.5 is installed" in (s[2]["message"] or "")
+         and "kept as a backup" in s[2]["message"] and (s[2].get("correspondence") or {}).get("ok") is True
+         and [r["sequence"] for r in log] == [5] and len(retired_masters(cfg)) == 1
+         and sha_file(retired_masters(cfg)[0]) == SHA["G1"])
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "signed package authenticated; current TXT not official -> consent required; without "
+                           "consent nothing changed; with consent official G3 installed exactly, verified; previous "
+                           "TXT backed up; sequence 5 remembered" if v else "unexpected %s %s" % (outcomes(s), log)))
+    nm = "O2_recognized_official_no_consent"
+    pr = official_prep(nm, "prep", cfg, P["G1_s6"])
+    s = [pr, install(nm, "install", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), trust=True)]
+    ok, d = final_is(cfg, ("G1", "g1"))
+    log = release_log(cfg) or []
+    v = (pr.get("consent_required") is False and (pr.get("destination") or {}).get("recognized_official") is True
+         and s[1]["outcome"] == "COMPLETE" and ok and [r["sequence"] for r in log] == [5, 6])
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "current TXT is recognized official data -> no replacement consent needed; official G1 "
+                           "(sequence 6) installed exactly; high-water 6" if v else "unexpected %s" % outcomes(s)))
+    nm = "O3_older_release_explicit_only"
+    s = [official_prep(nm, "prep_older", cfg, P["G3_s3"])]
+    s.append(official_prep(nm, "prep_older_allowed", cfg, P["G3_s3"], allow_older=True))
+    pr = s[1]
+    s.append(install(nm, "install", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), trust=True))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    log = release_log(cfg) or []
+    v = (s[0]["outcome"] == "REFUSED" and "older than official data already seen" in (s[0]["message"] or "")
+         and pr["outcome"] == "PREPARED" and (pr.get("official") or {}).get("older_than_seen") is True
+         and "older" in pr["message"] and s[2]["outcome"] == "COMPLETE" and ok
+         and max(r["sequence"] for r in log) == 6 and [r["sequence"] for r in log] == [5, 6, 3])
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "older release (3 < 6) refused unless explicitly allowed; allowed -> installed exactly; "
+                           "remembered high-water stays 6" if v else "unexpected %s %s" % (outcomes(s), log)))
+    nm = "O4_replay_same_release"
+    s = [official_prep(nm, "prep_newest_again", cfg, P["G1_s6"]), official_prep(nm, "prep_older_again", cfg, P["G3_s5"])]
+    log = release_log(cfg) or []
+    v = (s[0]["outcome"] == "PREPARED" and s[1]["outcome"] == "REFUSED"
+         and "older than official data already seen" in (s[1]["message"] or "")
+         and [r["sequence"] for r in log] == [5, 6, 3])
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "newest release offered again -> accepted as already seen, nothing new remembered; an "
+                           "already-seen older release offered again -> still refused as older without explicit "
+                           "choice" if v else "unexpected %s %s" % (outcomes(s), log)))
+    nm = "O5_same_sequence_different_bytes"
+    before = tree(cfg, include_staging=True)
+    s = [official_prep(nm, "prep", cfg, P["G3_s5_alt"])]
+    v = (s[0]["outcome"] == "REFUSED" and "can't be trusted" in (s[0]["message"] or "")
+         and tree(cfg, include_staging=True) == before)
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "sequence 5 with different descriptor bytes -> REFUSED (conflict); nothing changed"
+                           if v else "unexpected %s %s" % (outcomes(s), s[0]["message"])))
+    # O6 same official TXT already installed, stale sidecar -> data-only install, TXT not moved
+    nm = "O6_official_same_txt_data_only"
+    cfg = make_install(nm, master="G3", gens=("g1",))
+    pr = official_prep(nm, "prep", cfg, P["G3_s5"])
+    s = [pr, install(nm, "install", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), trust=True)]
+    ok, d = final_is(cfg, ("G3", "g3"))
+    v = (pr.get("kind") == "rebuild" and pr.get("consent_required") is False and s[1]["outcome"] == "COMPLETE" and ok
+         and not retired_masters(cfg) and "Official data 2026.10.5 is installed" in (s[1]["message"] or ""))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "official TXT already active -> only the official data files installed; TXT not moved; "
+                           "exact G3" if v else "unexpected %s" % outcomes(s)))
+    nm = "O7_official_already_installed_noop"
+    cfg = make_install(nm, master="G3", gens=("g3",), manifest="g3")
+    before = tree(cfg)
+    pr = official_prep(nm, "prep", cfg, P["G3_s5"])
+    s = [pr, install(nm, "install", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), trust=True)]
+    v = noop_ok(s[1]) and active_set(before) == active_set(tree(cfg))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "official data already installed -> verified NOOP" if v else "unexpected %s" % outcomes(s)))
+    # O8 tampering with each package file
+    g3sc = GEN["g3"]["sidecar"]
+    flips = (("O8a_tamper_descriptor", "release.json", lambda b: b.replace(b"2026.10.5", b"2026.10.4"), "isn't signed"),
+             ("O8b_tamper_signature", "release.sig", lambda b: bytes([b[0] ^ 1]) + b[1:], "isn't signed"),
+             ("O8c_tamper_txt", "sfm_defaultanimationgroups.txt", lambda b: b + b"\n", "damaged or was altered"),
+             ("O8d_tamper_manifest", "manifest.json", lambda b: b.replace(b'"', b"'", 1), "damaged or was altered"),
+             ("O8e_tamper_sidecar", g3sc, lambda b: b[:-1] + bytes([b[-1] ^ 1]), "damaged or was altered"))
+    cases = [(n, tampered(n, "G3_s5", f, fn), w) for n, f, fn, w in flips]
+    cases += [("O9a_extra_file", craft("O9a_extra_file", "G3_s5", add=[("readme.txt", b"extra")]),
+               "isn't a complete official data package"),
+              ("O9b_missing_file", craft("O9b_missing_file", "G3_s5", drop=("manifest.json",)),
+               "isn't a complete official data package"),
+              ("O10_signed_by_other_key_claiming_trusted", craft("O10_signed_by_other_key", "G3_s5", sign_key="test_b"),
+               "isn't signed"),
+              ("O11_unknown_signing_key", P["G1_s7_keyB"], "isn't signed"),
+              ("O13a_wrong_association", craft("O13a_wrong_association", "G1_s6",
+                                               files={"sidecar": GEN["g3"]["sidecar_path"],
+                                                      "manifest": GEN["g3"]["manifest_path"]}),
+               "damaged or was altered"),
+              ("O14a_duplicate_key", craft("O14a_duplicate_key", "G3_s5",
+                                           raw=lambda d: desc_bytes(d).replace(b'"channel":"stable"',
+                                                                               b'"channel":"stable","channel":"stable"')),
+               "isn't a complete official data package"),
+              ("O14b_unknown_field", craft("O14b_unknown_field", "G3_s5", mutate=lambda d: d.update(extra=1)),
+               "isn't a complete official data package"),
+              ("O14c_wrong_type", craft("O14c_wrong_type", "G3_s5", mutate=lambda d: d.update(sequence="5")),
+               "isn't a complete official data package"),
+              ("O14d_unsafe_name", craft("O14d_unsafe_name", "G3_s5",
+                                         mutate=lambda d: d["files"]["sidecar"].update(name="..\\" + g3sc)),
+               "isn't a complete official data package"),
+              ("O14e_byte_order_mark", craft("O14e_byte_order_mark", "G3_s5", raw=lambda d: b"\xef\xbb\xbf" + desc_bytes(d)),
+               "isn't a complete official data package"),
+              ("O14f_oversized_descriptor", craft("O14f_oversized_descriptor", "G3_s5",
+                                                  raw=lambda d: desc_bytes(d)[:-1] + b" " * 17000 + b"\n"),
+               "isn't a complete official data package"),
+              ("O15a_needs_newer_updater", P["G3_s8_muc2"], "needs a newer version"),
+              ("O15b_unsupported_profile", P["G3_s9_profile"], "isn't compatible"),
+              ("O15c_unsupported_sidecar_contract", craft("O15c_unsupported_sidecar_contract", "G3_s5",
+                                                          mutate=lambda d: d["sidecar_contract"].update(format=1)),
+               "isn't compatible")]
+    for nm, pkg, word in cases:
+        cfg = make_install(nm)
+        before = tree(cfg, include_staging=True)
+        pk_before = pkg_tree(pkg)
+        s = [official_prep(nm, "prep", cfg, pkg)]
+        v = (s[0]["outcome"] == "REFUSED" and word in (s[0]["message"] or "") and "Nothing was changed" in s[0]["message"]
+             and tree(cfg, include_staging=True) == before and pkg_tree(pkg) == pk_before)
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "REFUSED '%s'; installation and package unchanged; nothing staged or remembered" % word
+                               if v else "unexpected %s %s %s" % (s[0]["outcome"], s[0]["message"], s[0].get("details")),
+                               {"package": os.path.basename(pkg)}))
+    nm = "O12_shipping_trust_refuses_test_key"
+    cfg = make_install(nm)
+    before = tree(cfg, include_staging=True)
+    s = [official_prep(nm, "prep", cfg, P["G3_s5"], trust=False)]
+    v = s[0]["outcome"] == "REFUSED" and "isn't signed" in (s[0]["message"] or "") and tree(cfg, include_staging=True) == before
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "without the test-only trust seam the product trusts no key: a test-signed package is "
+                           "REFUSED as unsigned" if v else "unexpected %s" % outcomes(s)))
+    nm = "O13b_official_txt_edited_before_install"
+    cfg = make_install(nm, master="G3", gens=("g1",))
+    pr = official_prep(nm, "prep", cfg, P["G3_s5"])
+    wappend(os.path.join(cfg, "sfm_defaultanimationgroups.txt"), b"\n// local edit after preview\n")
+    before = tree(cfg)
+    s = [pr, install(nm, "install", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), trust=True)]
+    v = pr.get("kind") == "rebuild" and s[1]["outcome"] == "REFUSED" and before == tree(cfg) and not txdirs(cfg)
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "official data never combined with a different local TXT: TXT edited after the preview -> "
+                           "REFUSED, nothing changed" if v else "unexpected %s" % outcomes(s)))
+    # O16 interrupted official installation
+    for nm, at, exp in (("O16a_official_killed_after_cutover", "act_done_forward_3", ("G3", "g3")),
+                        ("O16b_official_killed_before_moves", "protected", ("G1", "g1"))):
+        cfg = make_install(nm)
+        pr = official_prep(nm, "prep", cfg, P["G3_s5"])
+        s = [pr, install(nm, "install", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), accept=True, trust=True,
+                         stop_at=at, action="kill")]
+        s.append(recover(nm, "rec1", cfg))
+        s.append(recover(nm, "rec2", cfg))
+        ok, d = final_is(cfg, exp)
+        v = s[1]["killed"] and ok and rec_terminal_ok(s[3]) and s[2].get("installed_state") == "WORKING"
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "official install killed at %s -> recovery to exact %s; second recovery no-op"
+                               % (at, exp[0]) if v else "unexpected %s" % outcomes(s)))
+    nm = "O17_official_write_fault"
+    cfg = make_install(nm)
+    pr = official_prep(nm, "prep", cfg, P["G3_s5"])
+    s = [pr, install(nm, "install", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), accept=True, trust=True,
+                     inject={"candidate_write_error": 112})]
+    ok, d = final_is(cfg, ("G1", "g1"))
+    v = s[1]["outcome"] == "ABANDONED" and ok
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "write fault during official install -> ABANDONED; exact G1" if v else
+                           "unexpected %s" % outcomes(s)))
+    # O18 the remembered-release record: damaged, busy
+    nm = "O18a_release_record_damaged"
+    cfg = make_install(nm)
+    wbytes(os.path.join(cfg, "sfm_character_tools_updater", "official_releases.log"), b"not a record\n")
+    before = tree(cfg, include_staging=True)
+    s = [official_prep(nm, "prep", cfg, P["G3_s5"])]
+    v = s[0]["outcome"] == "REFUSED" and "record of official releases is damaged" in (s[0]["message"] or "") and \
+        tree(cfg, include_staging=True) == before
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "damaged release record -> REFUSED; record and installation unchanged" if v else
+                           "unexpected %s" % outcomes(s)))
+    nm = "O18b_release_record_busy"
+    cfg = make_install(nm)
+    logp = os.path.join(cfg, "sfm_character_tools_updater", "official_releases.log")
+    wbytes(logp, b"")
+    before = tree(cfg, include_staging=True)
+    hp, first = start_holder("hold.py", logp, "r", "0")
+    s = [official_prep(nm, "prep", cfg, P["G3_s5"])]
+    release(hp)
+    v = s[0]["outcome"] == "REFUSED" and "Another updater window" in (s[0]["message"] or "") and \
+        tree(cfg, include_staging=True) == before
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "release record held by another process -> REFUSED 'another updater window'; unchanged"
+                           if v else "unexpected %s %s" % (outcomes(s), s[0]["message"])))
+    # O19 staged official files altered after preparation
+    for nm, mut in (("O19a_staged_signature_altered", "sig"), ("O19b_staged_descriptor_swapped", "swap")):
+        cfg = make_install(nm)
+        pr = official_prep(nm, "prep", cfg, P["G3_s5"])
+        sd = os.path.join(cfg, "sfm_character_tools_updater", "staging", pr.get("prepid", "x"))
+        if mut == "sig":
+            data = open(os.path.join(sd, "release.sig"), "rb").read()
+            wremove(os.path.join(sd, "release.sig"))
+            wbytes(os.path.join(sd, "release.sig"), bytes([data[0] ^ 1]) + data[1:])
+        else:
+            for f in ("release.json", "release.sig"):
+                wremove(os.path.join(sd, f))
+                wcopy(os.path.join(P["G3_s5_alt"], f), os.path.join(sd, f))
+        before = tree(cfg)
+        s = [pr, install(nm, "install", cfg, pr.get("prepid", ""), pr.get("confirm_sha", ""), accept=True, trust=True)]
+        v = s[1]["outcome"] == "REFUSED" and before == tree(cfg) and not txdirs(cfg)
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "staged official %s altered after preparation -> install REFUSED (%s); nothing changed"
+                               % ("signature" if mut == "sig" else "descriptor", s[1]["message"]) if v else
+                               "unexpected %s %s" % (outcomes(s), s[1].get("details"))))
+    unchanged = all(pkg_tree(d) == pk0[n] for n, d in P.items())
+    R.append(finalize_case("O20_packages_never_modified", None, [], "PASS" if unchanged else "FAIL",
+                           "every source package byte-identical after all official cases" if unchanged else
+                           "a package changed"))
+    return R
+
+
+def group_W3():
+    """The shipping worker (no test seams) refuses a test-signed official package."""
+    ensure_packages()
+    nm = "W3_shipping_worker_official_untrusted"
+    cfg = make_install(nm)
+    out = os.path.join(WORK, "results", "ops", nm + "__prep.json")
+    guard(out)
+    before = tree(cfg, include_staging=True)
+    cp = product_worker(["prepare-official", "--installation", cfg, "--result", out, "--package", pkgdir("G3_s5")],
+                        UPDATER)
+    r = jload(out) if os.path.exists(out) else {}
+    v = (cp.returncode == 0 and r.get("outcome") == "REFUSED" and "isn't signed" in (r.get("message") or "")
+         and tree(cfg, include_staging=True) == before and "trace" not in r)
+    return [finalize_case(nm, cfg, [r], "PASS" if v else "FAIL",
+                          "shipping worker: test-signed package REFUSED as unsigned (no trusted key in the product); "
+                          "nothing written" if v else "unexpected %s" % r.get("outcome"))]
+
+
 GROUPS = {"A": group_A, "B": group_B, "C": group_C, "D": group_D, "E": group_E, "F": group_F, "G": group_G,
-          "H": group_H, "I": group_I, "J": group_J, "K": group_K, "N": group_N, "X": group_X, "W": group_W}
+          "H": group_H, "I": group_I, "J": group_J, "K": group_K, "N": group_N, "X": group_X, "W": group_W,
+          "M": group_M, "O": group_O, "W3": group_W3}
 
 
 def main():
@@ -1737,6 +2275,8 @@ def main():
     ap.add_argument("--label")
     ap.add_argument("--groups")
     ap.add_argument("--outside-target")
+    ap.add_argument("--process-default", default="clear",
+                    help="process form injected into every test operation that does not set one ('' = real query)")
     A = ap.parse_args()
     RUN = os.path.abspath(A.run)
     ART = os.path.join(RUN, "artifacts")
@@ -1754,9 +2294,12 @@ def main():
     WORK = os.path.join(RUN, A.label)
     sys.path.insert(0, UPDATER)
     from sfm_character_tools_updater.process_gate import process_status
+    global PSTAT
+    PSTAT = process_status
     st0 = process_status()
-    if st0[0] != "CLEAR":
+    if st0[0] != "CLEAR" and not A.process_default:
         raise SystemExit("STOP: real process status %s (%s) before the run" % st0)
+    print("PROCESS real status at start: %s (%s); default injected: %r" % (st0[0], st0[1], A.process_default))
     wmkdirs(WORK)
     load_generations()
     statuses = []
