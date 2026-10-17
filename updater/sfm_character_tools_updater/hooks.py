@@ -27,3 +27,10 @@ candidate_write_error = None
 # None: only official.TRUSTED_KEYS are trusted. Otherwise {key_id: public_key_hex} of TEST keys
 # added for qualification; never set by the product.
 extra_trusted_keys = None
+
+# None: connect to the real endpoints over HTTPS. Otherwise a callable mapping each https URL to
+# the URL actually connected (a local test server); only then is plain http accepted.
+network_rewrite = None
+
+# None: the product's network timeout. Otherwise seconds, to qualify the timeout path.
+network_timeout = None

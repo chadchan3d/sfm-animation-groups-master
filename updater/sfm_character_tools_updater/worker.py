@@ -6,6 +6,10 @@
   python -m sfm_character_tools_updater.worker prepare-import   --installation CFG --result OUT --source TXT
   python -m sfm_character_tools_updater.worker prepare-official --installation CFG --result OUT --package DIR
                                                                 [--allow-older]
+  python -m sfm_character_tools_updater.worker check-official   --installation CFG --result OUT
+  python -m sfm_character_tools_updater.worker download-official --installation CFG --result OUT
+                                                                --release-tag TAG --descriptor-sha SHA
+                                                                [--allow-older]
   python -m sfm_character_tools_updater.worker install          --installation CFG --result OUT
                                                                 --prepared ID --confirm-sha SHA
                                                                 [--accept-replacement]
@@ -18,6 +22,11 @@ installs one prepared candidate through the one protected backend; it refuses wh
 running or its state is unknown. `--confirm-sha` is the destination TXT identity shown by the
 preparation (consent is bound to it); `--accept-replacement` is required when the preparation
 reports `consent_required`.
+
+check-official and download-official are the only commands that use the network, each run on an
+explicit user action (Get Official Data). check-official writes nothing; download-official takes
+the release the check reported (`--release-tag`, `--descriptor-sha`), downloads it into
+updater-private staging and prepares it exactly as prepare-official does.
 
 CFG is the installation's `usermod\\cfg` directory. The result file is created new (an
 existing file is never overwritten); the last stdout line is `RESULT <outcome>`.
@@ -33,7 +42,8 @@ from . import VERSION, backend, recovery
 from .layout import Layout, resolve_installation
 from .messages import MESSAGES, Stop
 
-COMMANDS = ("status", "prepare-rebuild", "prepare-import", "prepare-official", "install", "recover")
+COMMANDS = ("status", "prepare-rebuild", "prepare-import", "prepare-official", "check-official",
+            "download-official", "install", "recover")
 
 
 def build_parser(commands=COMMANDS):
@@ -47,6 +57,8 @@ def build_parser(commands=COMMANDS):
     p.add_argument("--source")
     p.add_argument("--package")
     p.add_argument("--allow-older", action="store_true")
+    p.add_argument("--release-tag")
+    p.add_argument("--descriptor-sha")
     p.add_argument("--accept-replacement", action="store_true")
     return p
 
@@ -71,6 +83,13 @@ def dispatch(args, extra=None):
         if not args.package:
             raise Stop("REFUSED", "NOTHING", reason="prepare-official requires --package")
         return backend.prepare_official(layout, args.package, args.allow_older)
+    if args.command in ("check-official", "download-official"):
+        from . import discovery  # the network code is loaded only for these explicit actions
+        if args.command == "check-official":
+            return discovery.check_official(layout)
+        if not args.release_tag or not args.descriptor_sha:
+            raise Stop("REFUSED", "NOTHING", reason="download-official requires --release-tag and --descriptor-sha")
+        return discovery.download_official(layout, args.release_tag, args.descriptor_sha, args.allow_older)
     if args.command == "install":
         if not args.prepared or not args.confirm_sha:
             raise Stop("REFUSED", "NOTHING", reason="install requires --prepared and --confirm-sha")

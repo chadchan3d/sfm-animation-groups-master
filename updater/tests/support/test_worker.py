@@ -12,7 +12,12 @@ Wraps the product worker (sfm_character_tools_updater.worker) and, for this one 
   * trusts a TEST signing key (--trust-key HEX, Ed25519 raw public key) through the test-only
     seam hooks.extra_trusted_keys; the product's own trust table is never changed;
   * refuses any installation that does not resolve under --scratch-root or that resolves
-    under --forbid (the real game directory), before the product code runs.
+    under --forbid (the real game directory), before the product code runs;
+  * (L-3) maps the product's https URLs onto a local test server (--net-base http://127.0.0.1:PORT)
+    through the test-only seam hooks.network_rewrite, and shortens the network timeout
+    (--net-timeout SECONDS) through hooks.network_timeout;
+  * records every name lookup and socket connection attempt of the operation (Python audit
+    hook) in the result as `network`.
 
 Process forms: clear | real | raise | rc:N | output:TEXT (\\n allowed).
 """
@@ -20,6 +25,7 @@ import json
 import os
 import sys
 import threading
+from urllib.parse import urlsplit
 
 UPDATER = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, UPDATER)
@@ -33,6 +39,24 @@ PASSED = []
 TOKEN = [None]
 BARRIER_TIMEOUT = [120.0]
 CLEAR_OUTPUT = "INFO: No tasks are running which match the specified criteria."
+NETWORK = []
+
+
+def audit(event, args):
+    if event == "socket.getaddrinfo":
+        NETWORK.append([event, "%s:%s" % (args[0], args[1])])
+    elif event == "socket.connect":
+        NETWORK.append([event, repr(args[1])])
+
+
+def make_rewrite(base):
+    def rewrite(url):
+        u = urlsplit(url)
+        tail = u.path + ("?" + u.query if u.query else "")
+        if u.hostname == "api.github.com":
+            return base + "/api" + tail
+        return base + "/cdn/" + u.hostname + tail
+    return rewrite
 
 
 def barrier(name):
@@ -97,7 +121,7 @@ def under(path, root):
 
 def main(argv):
     test_opts = {"--stop-at": [], "--token": [], "--barrier-timeout": [], "--inject": [],
-                 "--scratch-root": [], "--forbid": [], "--trust-key": []}
+                 "--scratch-root": [], "--forbid": [], "--trust-key": [], "--net-base": [], "--net-timeout": []}
     rest = []
     i = 0
     while i < len(argv):
@@ -129,7 +153,12 @@ def main(argv):
         hooks.process_query = query
     if test_opts["--trust-key"]:
         hooks.extra_trusted_keys = {official.key_id_for(bytes.fromhex(k)): k for k in test_opts["--trust-key"]}
+    if test_opts["--net-base"]:
+        hooks.network_rewrite = make_rewrite(test_opts["--net-base"][0])
+    if test_opts["--net-timeout"]:
+        hooks.network_timeout = float(test_opts["--net-timeout"][0])
     w32.TRACE_ENABLED[0] = True
+    sys.addaudithook(audit)
 
     args = worker.build_parser().parse_args(rest)
     if not under(args.result, scratch):
@@ -147,6 +176,7 @@ def main(argv):
         res = worker.run(args)
     res["barriers"] = PASSED
     res["trace"] = w32.TRACE
+    res["network"] = NETWORK
     if query is not None:
         res["process_forms_used"] = query.used
     worker.write_result(args.result, res)

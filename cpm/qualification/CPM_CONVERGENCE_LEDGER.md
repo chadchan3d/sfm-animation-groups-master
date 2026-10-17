@@ -8,7 +8,90 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**L-2 — Use Another TXT and Get Official Data (headless): COMPLETE / PASS (bounded), 2026-10-17.**
+**L-3 — Get Official Data online (headless) and official repository identity: COMPLETE / PASS (bounded), 2026-10-17.**
+Authorized by the owner under the L card §5, together with the repository identity resolution. The designer accepted
+the report provisionally (private evidence, `L3_IMPLEMENTATION_REPORT.md` `834619bb…`; evidence manifest
+`1d2a1635…`, 55 entries). Base: `230aa5b…`.
+- **Official repository:** the GitHub repository was renamed. The owner confirmed `chadchan3d/sfm-character-tools`
+  as the permanent official source of data releases.
+  - `official.REPOSITORY` now holds it, for both descriptor validation and release discovery.
+  - The check stays exact: a descriptor naming any other repository, including the previous name
+    `chadchan3d/sfm-animation-groups-master`, is refused.
+  - Redirects from the previous name are not followed.
+  - Historical Blueprints, evidence and checkpoint records keep the previous name as written.
+- **Source (GitHub, `updater/`; digests in `updater/SHA256SUMS.txt`):**
+  - **New:** `sfm_character_tools_updater/discovery.py`.
+  - **Changed:** `official.py` (the constant only), `worker.py`, `messages.py`, `hooks.py` and `__init__.py`
+    (version `0.3.0-l3`).
+  - **Tests:** `run_l1.py` (groups Q and W4) and `support/test_worker.py`; new `support/fake_github.py` and
+    `support/net_audit.py`.
+  - **Byte-identical to L-2:** `backend`, `candidate`, `recovery`, `journal`, `w32`, `layout`, `legacy_lock`,
+    `process_gate` and the release producer.
+- **Worker commands:** `check-official` (writes nothing) and
+  `download-official --release-tag --descriptor-sha [--allow-older]`.
+  - These are the only commands that use the network, each started by an explicit user action.
+  - There is no background polling, and importing the worker loads no network module.
+- **Discovery** of `https://api.github.com/repos/chadchan3d/sfm-character-tools/releases`:
+  - **Listing:** complete (at most 10 pages of 100, each at most 8 MiB). Anything incomplete or malformed gives
+    "Couldn't check for updates."
+  - **Data releases:** tag `data-vX.Y.Z`, not a draft or prerelease.
+  - **Authentication:** each descriptor is checked by the L-2 verifier. Its signed tag must equal the GitHub tag,
+    and the assets must be exactly the five signed files with the signed sizes.
+  - **Offer:** the highest compatible authenticated sequence, as "Official data [version] is available". There
+    is no "latest" claim.
+  - **Other outcomes:** a newer release needing a newer updater, a conflict, older only, unverified, incompatible
+    and already installed are each reported as such.
+  - **Empty list:** "No official data has been published yet."
+- **Download:**
+  - bound to the checked tag and descriptor digest;
+  - compatibility and the sequence rule are checked before any payload request;
+  - each file is bounded by its signed length and hash-checked before writing;
+  - files are written only to `staging\download-<id>`, then go through the unchanged L-2 `prepare_official` and
+    the L-1 install;
+  - HTTPS with certificate verification, one redirect allowed and only to GitHub release-asset hosts, no
+    credentials sent.
+- **Trust boundary (unchanged):**
+  - `official.TRUSTED_KEYS` is empty, so the shipping worker refuses every official package.
+  - The network test seams (`hooks.network_rewrite`, `hooks.network_timeout`) are set only by
+    `tests/support/test_worker.py`.
+  - The shipping worker rejects `--net-base` and `--net-timeout`.
+- **Result:** final run 244/244 PASS (2026-10-17 21:04–21:56Z):
+  - the L-1/L-2 suite as regression, 205/205;
+  - Q 33/33, against a loopback GitHub stand-in with test-signed releases;
+  - W4 6/6, the shipping worker:
+    - no network outside the two commands;
+    - one explicit query of the real official list, empty, giving NONE_PUBLISHED;
+    - a real download of an absent release, refused;
+    - the previous name's real 301, not followed.
+- **Run conditions:** the real process status was CLEAR throughout. The live installation fingerprint was
+  identical before and after, and the sources were identical to the hashes frozen before the run.
+- **Recorded deviations (preserved in the evidence):**
+  - **Product defect found in the shakedown and fixed:** refusing an oversized download raised a duplicate
+    keyword. It failed closed (ERROR, nothing written); Q25 now gives PACKAGE_DAMAGED.
+  - **Test expectations:** three corrected.
+  - **First final attempt:** stopped in group F because the harness invocation omitted the outside-target
+    argument. Groups A–E had passed 100/100 and no F result was written. The full run was repeated from the
+    start.
+- **No official data release has been published.** The real release list is empty.
+  - `data-v1.0.0` exists only as an unsigned, provisional candidate (private evidence, manifest `4f8d3a10…`).
+  - Candidate details: sequence 1; G1 Master `ac45e5c1…`, sidecar `bcd97641…`, manifest `d810d648…`; proposed
+    `source_commit` `230aa5bc…`.
+- **Outstanding release dependencies (unchanged):**
+  - the production signing key (owner-held, outside the repository; its public key embedded by a separate
+    authorized change);
+  - the signed compatibility profile and installed-software inventory (L-5; `sct-authority-profile-1` remains
+    provisional, not certified);
+  - `published_at`;
+  - the final signed package and its publication.
+- **Scope of the PASS:** headless scratch qualification with a loopback stand-in and test keys, plus read-only
+  queries of the real, empty list. It does not cover:
+  - real asset downloads (no real release exists);
+  - proxies or certificate-store packaging;
+  - native SFM or the GUI;
+  - production trust or release eligibility.
+- **L-4:** NOT STARTED / REQUIRES AUTHORIZATION. **L-5, L-6:** NOT STARTED.
+
+Previous milestone: **L-2 — Use Another TXT and Get Official Data (headless): COMPLETE / PASS (bounded), 2026-10-17.**
 Authorized by the owner under the L card §5. The designer accepted the report (private evidence,
 `L2_IMPLEMENTATION_REPORT.md` `1a50f3e7…`; evidence manifest `f8cdac91…`). Base: `4cc180c…`.
 - **Source (GitHub, `updater/`; digests in `updater/SHA256SUMS.txt`):**
@@ -73,7 +156,8 @@ Authorized by the owner under the L card §5. The designer accepted the report (
 - **Scope of the PASS:** headless scratch qualification on E:/NTFS with a test key. It does not cover native
   SFM, either consumer's UI, real-SFM detection, power loss, cross-user behavior, production trust or release
   eligibility.
-- **L-3:** NOT STARTED / REQUIRES AUTHORIZATION. **L-4 … L-6:** NOT STARTED.
+- **L-3:** NOT STARTED / REQUIRES AUTHORIZATION at this checkpoint. It has since been completed (see Current
+  milestone). **L-4 … L-6:** NOT STARTED.
 
 Previous milestone: **L-1 — Activation backend and Rebuild My Data (headless): COMPLETE / PASS (bounded), 2026-10-17.**
 Authorized by the owner under `updater_qualification/design/L_IMPLEMENTATION_AUTHORIZATION_CARD.md` §8. The
@@ -650,7 +734,10 @@ a scoped LF `.gitattributes` entry and this Ledger. No existing tool, CPM, Norma
 card file changed, and no installed file changed. The L-1 scratch run and evidence are local only. The L-2
 checkpoint (2026-10-17) changed only files under `updater/` (adding `official.py` and
 `release_tools/make_official_package.py`, regenerating `updater/SHA256SUMS.txt`) and this Ledger. Its scratch
-run, the isolated qualification environment and its evidence are local only.
+run, the isolated qualification environment and its evidence are local only. The L-3 checkpoint (2026-10-17)
+changed only files under `updater/` (adding `discovery.py` and two test-support files, regenerating
+`updater/SHA256SUMS.txt`) and this Ledger. Its scratch run, the unsigned `data-v1.0.0` candidate and the evidence are
+local only. No release, tag or key exists.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -890,6 +977,13 @@ Evidence:
     with release production.
   - **Carried from L-1:** the alias path budget, image-name process detection and repository-path dependencies
     above still apply.
+- **L-3 items (later L stages or release; not L-3 prerequisites):**
+  - **Freshness:** a check does not record authenticated sequences that are seen but not prepared. The
+    high-water mark advances at preparation. First-contact suppression is not detectable (R2 D4).
+  - **Downloads:** download folders under `staging\download-<id>` are kept (L-4 cleanup). The payload is
+    held in memory before writing, within the existing bounds.
+  - **Untested until later:** real GitHub asset-redirect hosts (untestable until a release exists);
+    proxies (untested); the TLS certificate store (an L-5 packaging decision).
 - **Removed from the v1 critical path with P2/P3 (not passed):** native Master access, the CPM working
   directory, the native channel/key oracle, bytecode content and restoration recoverability. These were the
   former U0B open items; see Current milestone.
@@ -942,8 +1036,8 @@ Evidence:
   **Pre-K complete. `4e35f292…` is the exact CPM candidate eligible to enter K.**
   - **K — COMPLETE / PASS** (K1A2 + K2A1, 2026-10-10).
 
-  L: L-1 and L-2 COMPLETE / PASS (bounded), 2026-10-17. L-3 NOT STARTED / REQUIRES AUTHORIZATION. The final
-  packaging layout is decided in L-5.
+  L: L-1, L-2 and L-3 COMPLETE / PASS (bounded), 2026-10-17. L-4 NOT STARTED / REQUIRES AUTHORIZATION. The
+  final packaging layout is decided in L-5.
 - **Session 4 notes (not failures; carried to K; unchanged by items 7–8):**
   - Fit's exception path releases the stage with a bare `release()` (no
     `PROD_CPM_FIT_STAGE_RELEASED` line; result discarded); a raising success-path release could in
@@ -955,14 +1049,16 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. This is the L-2 GitHub checkpoint (2026-10-17).
-- **Next action:** an owner decision on authorizing **L-3** (explicit-action release discovery and download,
-  card §5). L-3 is NOT STARTED / REQUIRES AUTHORIZATION.
-- **Outstanding owner release dependency:** the production signing key (see Current milestone).
-- **Not authorized by this checkpoint:** L-3 or any later increment, any native SFM run, WPR/ETW work, a live
-  installation write, or release.
+Stop. This is the L-3 GitHub checkpoint (2026-10-17).
+- **Next action:** an owner decision on authorizing **L-4** (Tkinter GUI with the three primary buttons and the
+  bounded worker, card §5). L-4 is NOT STARTED / REQUIRES AUTHORIZATION.
+- **Outstanding release dependencies:** the production signing key, the signed compatibility profile and
+  inventory (L-5), `published_at` and the final signed `data-v1.0.0` package (see Current milestone). No official
+  data release has been published.
+- **Not authorized by this checkpoint:** L-4 or any later increment; signing, tagging or publishing a release;
+  any native SFM run; WPR/ETW work; or a live installation write.
 
-L-1 and L-2 are COMPLETE / PASS (bounded). K is COMPLETE / PASS. U0A is PASS (bounded). U0B is closed for v1 at the P1
+L-1, L-2 and L-3 are COMPLETE / PASS (bounded). K is COMPLETE / PASS. U0A is PASS (bounded). U0B is closed for v1 at the P1
 evidence boundary. `4e35f292…`, the
 production Normalizer `1f4ec5a2…` and exact G1 authority remain installed.
 

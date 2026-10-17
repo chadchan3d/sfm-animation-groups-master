@@ -25,7 +25,9 @@ from .layout import MASTER_NAME, SIDECAR_RE
 from .messages import Stop
 
 UPDATER_CONTRACT = 1
-REPOSITORY = "chadchan3d/sfm-animation-groups-master"
+# The official repository (owner-confirmed permanent identity, 2026-10-17). Checked exactly: a
+# descriptor naming any other repository, including an earlier name of this one, is refused.
+REPOSITORY = "chadchan3d/sfm-character-tools"
 OBJECT_TYPE = "sfm-character-tools-data"
 CHANNEL = "stable"
 # L-2 authority profile identifier: sidecar format 0 / semantics 0, FINAL R3-A2B validator and

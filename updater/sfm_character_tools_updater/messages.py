@@ -71,6 +71,24 @@ MESSAGES = {
     "INSTALLED_IMPORT": "The TXT you chose is installed. Your previous TXT was kept as a backup.",
     "INSTALLED_OFFICIAL": "Official data %s is installed.",
     "INSTALLED_OFFICIAL_REPLACED": "Official data %s is installed. Your previous TXT was kept as a backup.",
+    # L-3 additions (explicit check / download; R2 D4). None of them claims "latest".
+    "CHECK_FAILED": "Couldn't check for updates. Nothing was changed. Check your internet connection and try again.",
+    "NONE_PUBLISHED": "No official data has been published yet. Nothing was changed.",
+    "AVAILABLE": "Official data %s is available.",
+    "INSTALLED_CURRENT": "Official data %s is already installed. Nothing was changed.",
+    "OFFICIAL_OLDER_ONLY": "The official data found (%s) is older than official data already seen here, so it isn't "
+                           "offered as an update. Nothing was changed.",
+    "NEEDS_NEWER_UPDATER": "A newer release needs newer SFM Character Tools. Nothing was changed.",
+    "NEWER_NEEDS_UPDATER_NOTE": "A newer release needs newer SFM Character Tools.",
+    "OFFICIAL_INCOMPATIBLE": "Official data was found, but it isn't compatible with the SFM Character Tools "
+                             "installed here. Nothing was changed.",
+    "OFFICIAL_UNVERIFIED": "Official data was found, but it couldn't be verified as official SFM Character Tools "
+                           "data, so it isn't offered. Nothing was changed.",
+    "RELEASE_CONFLICT": "The official releases found don't match each other or official data seen before, so they "
+                        "can't be trusted. Nothing was changed.",
+    "DOWNLOAD_FAILED": "Couldn't download the official data. Nothing was changed. Try again.",
+    "RELEASE_CHANGED": "The official release changed or was removed since it was checked. Nothing was changed. "
+                       "Check for updates again.",
 }
 
 

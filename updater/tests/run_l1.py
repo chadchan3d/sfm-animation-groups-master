@@ -12,9 +12,12 @@ fingerprint tool, and nothing writes to it.
   run_l1.py setup  --run RUN --game GAME --p1-preservation DIR --g3-source FILE --py27 EXE
   run_l1.py groups --run RUN --game GAME --py27 EXE --label LABEL --groups A,B,...
 
-Groups: A B C D E F G H I J K N X W (L-1, rerun as L-2 regression) and M O W3 (L-2: Use Another
-TXT and Get Official Data from a local signed package). Run with a Python that provides the
-`cryptography` package (the isolated qualification environment).
+Groups: A B C D E F G H I J K N X W (L-1, rerun as L-2/L-3 regression), M O W3 (L-2: Use Another
+TXT and Get Official Data from a local signed package; rerun as L-3 regression) and Q W4 (L-3: Get
+Official Data online -- explicit check and bounded download against a loopback GitHub stand-in, and
+the shipping worker's network boundary including one explicit query of the real, empty official
+release list). Run with a Python that provides the `cryptography` package (the isolated
+qualification environment).
 Results: RUN\\LABEL\\results\\cases\\<case>.json and RUN\\LABEL\\results\\matrix_<group>.json
 """
 import argparse
@@ -350,11 +353,14 @@ def noop_ok(step):
 KEEP = ("process_status", "noop_verification", "transactions_checked", "correspondence", "restart_required",
         "post_install_process_status", "installed_state", "prepid", "confirm_sha", "candidate", "kind",
         "recovery_needed", "process_forms_used", "forward_failure", "txid", "workflow", "consent_required",
-        "official", "source", "destination")
+        "official", "source", "destination",
+        # L-3
+        "network", "offer", "releases", "installed_release", "older_release", "download", "high_water",
+        "newer_needs_newer_updater", "conflicting_sequences", "releases_listed", "data_releases", "repository")
 
 
 def run_op(case, step, args, cfg, stop_at=None, action="go", timeout=900, barrier_timeout=None,
-           before_go=None, inject=None, trust=False):
+           before_go=None, inject=None, trust=False, net=False, net_timeout=None, net_base=None):
     """action: go | kill | eof | badtoken | timeout | callable(name)->'go'|'kill'."""
     out = os.path.join(WORK, "results", "ops", "%s__%s.json" % (case, step))
     guard(out)
@@ -364,6 +370,10 @@ def run_op(case, step, args, cfg, stop_at=None, action="go", timeout=900, barrie
     cmd += ["--token", TOKEN, "--scratch-root", RUN, "--forbid", A.game]
     if trust:
         cmd += ["--trust-key", open(os.path.join(RUN, "keys", "test_a.pub"), encoding="ascii").read().strip()]
+    if net:
+        cmd += ["--net-base", net_base or FAKE.base]
+    if net_timeout:
+        cmd += ["--net-timeout", str(net_timeout)]
     inject = dict(inject or {})
     if A.process_default and not any(k.startswith("process") for k in inject):
         # Scratch installations are independent of any SFM the owner has open for other work:
@@ -1800,7 +1810,7 @@ def build_pkg(n, master, seq, ver, key="test_a", **extra):
     guard(d)
     os.makedirs(os.path.dirname(d), exist_ok=True)
     args = ["build", "--master", master, "--private", keyfile(key, "pem"), "--out", d, "--sequence", str(seq),
-            "--data-version", ver, "--release-tag", "data-" + ver, "--source-commit", "a1" * 20,
+            "--data-version", ver, "--release-tag", extra.get("tag", "data-" + ver), "--source-commit", "a1" * 20,
             "--published-at", "2026-10-17T00:00:00Z"]
     for p in extra.get("profiles", []):
         args += ["--profile", p]
@@ -2258,9 +2268,640 @@ def group_W3():
                           "nothing written" if v else "unexpected %s" % r.get("outcome"))]
 
 
+# ------------------------------------------------------------------ L-3: online Get Official Data (test-only)
+CONFIRMED_REPOSITORY = "chadchan3d/sfm-character-tools"   # owner-confirmed permanent identity (2026-10-17)
+FAKE = None
+
+
+def start_fake():
+    global FAKE
+    if FAKE is None:
+        sys.path.insert(0, SUPPORT)
+        import fake_github
+        FAKE = fake_github.Fake().start()
+    return FAKE
+
+
+def ensure_l3_packages():
+    ensure_packages()
+    build_pkg("L3_s1", G3_TXT, 1, "1.0.0", tag="data-v1.0.0")
+    build_pkg("L3_s2", G1_TXT, 2, "1.0.1", tag="data-v1.0.1")
+    build_pkg("L3_s3_muc2", G3_TXT, 3, "1.0.2", tag="data-v1.0.2", muc=2)
+    build_pkg("L3_s4_profile", G3_TXT, 4, "1.0.3", tag="data-v1.0.3", profiles=["other-profile-4"])
+    build_pkg("L3_s1_alt", G1_TXT, 1, "1.0.9", tag="data-v1.0.9")
+    build_pkg("L3_s1_keyB", G3_TXT, 1, "1.0.0", tag="data-v1.0.0", key="test_b")
+    build_pkg("L3_s5_conflict", G1_TXT, 5, "5.0.0", tag="data-v5.0.0")
+    craft("L3_s1_oldrepo", "L3_s1", mutate=lambda d: d.update(repository="chadchan3d/sfm-animation-groups-master"))
+    craft("L3_s1_republished", "L3_s1", mutate=lambda d: d.update(published_at="2026-10-18T00:00:00Z"))
+
+
+def pkg_files(n):
+    d = pkgdir(n)
+    return {x: open(os.path.join(d, x), "rb").read() for x in sorted(os.listdir(d))}
+
+
+def serve(rels, pages=None):
+    """rels: [(rid, tag, files, kwargs)] on page 1, or explicit pages {n: spec}. Returns {rid: {name: aid}}."""
+    import fake_github
+    FAKE.reset()
+    assets, ids, objs = {}, {}, []
+    for rid, tag, files, kw in rels:
+        obj, data = fake_github.release_json(rid, tag, files, **kw)
+        objs.append(obj)
+        ids[rid] = {a["name"]: a["id"] for a in obj["assets"]}
+        assets.update({aid: {"data": b} for aid, b in data.items()})
+    FAKE.assets = assets
+    FAKE.pages = pages if pages is not None else {1: {"json": objs}}
+    return ids
+
+
+def asset_mode(ids, rid, name, **mode):
+    FAKE.assets[ids[rid][name]].update(mode)
+
+
+def fake_requests(kind=None):
+    """Logged request paths; kind 'assets' = asset API requests, 'cdn' = asset-host requests."""
+    paths = [r["path"] for r in FAKE.log]
+    if kind == "assets":
+        return [p for p in paths if p.startswith("/api/") and "/assets/" in p]
+    if kind == "cdn":
+        return [p for p in paths if p.startswith("/cdn/")]
+    return paths
+
+
+def asset_paths(ids, rid, names):
+    return {"/api/repos/%s/releases/assets/%d" % (CONFIRMED_REPOSITORY, ids[rid][n]) for n in names}
+
+
+def headers_ok():
+    return all("authorization" not in r["headers"]
+               and r["headers"].get("user-agent", "").startswith("SFM-Character-Tools-Updater/0.3.0-l3")
+               for r in FAKE.log)
+
+
+def local_only(step, expect_any=True):
+    ev = step.get("network") or []
+    ok = all(e[1].startswith("127.0.0.1:") if e[0] == "socket.getaddrinfo" else e[1].startswith("('127.0.0.1',")
+             for e in ev)
+    return ok and (bool(ev) if expect_any else True)
+
+
+def no_latest(step):
+    return "latest" not in (step.get("message") or "").lower() and "newest" not in (step.get("message") or "").lower()
+
+
+def check_op(nm, step, cfg, trust=True, **kw):
+    return run_op(nm, step, ["check-official"], cfg, trust=trust, net=True, **kw)
+
+
+def download_op(nm, step, cfg, tag, dsha, allow_older=False, trust=True, **kw):
+    a = ["download-official", "--release-tag", tag, "--descriptor-sha", dsha] + (["--allow-older"] if allow_older else [])
+    return run_op(nm, step, a, cfg, trust=trust, net=True, **kw)
+
+
+def closed_port():
+    import socket
+    s = socket.socket()
+    s.bind(("127.0.0.1", 0))
+    port = s.getsockname()[1]
+    s.close()
+    return "http://127.0.0.1:%d" % port
+
+
+def group_Q():
+    """L-3 Get Official Data online (headless): explicit check-official and download-official
+    against a loopback GitHub stand-in serving test-signed packages, then the L-2 path."""
+    R = []
+    start_fake()
+    ensure_l3_packages()
+    from sfm_character_tools_updater import discovery, official as off
+    S1, S2 = pkg_files("L3_s1"), pkg_files("L3_s2")
+    S1_SHA = sha(S1["release.json"])
+    S1_SC = [n for n in S1 if n.endswith(".sfmsidecar")][0]
+    PAYLOAD = [S1_SC, "manifest.json", "sfm_defaultanimationgroups.txt"]
+
+    def single(nm, rels, want, phrase, trust=True, check=None, pages=None, why="", cfg=None, **kw):
+        cfg = cfg or make_install(nm)
+        ids = serve(rels, pages)
+        before = tree(cfg, include_staging=True)
+        st = check_op(nm, "check", cfg, trust=trust, **kw)
+        v = (st["outcome"] == want and phrase in (st["message"] or "") and tree(cfg, include_staging=True) == before
+             and local_only(st) and headers_ok() and no_latest(st) and (check(st, ids) if check else True))
+        R.append(finalize_case(nm, cfg, [st], "PASS" if v else "FAIL",
+                               why if v else "unexpected %s: %s / %s" % (st["outcome"], st["message"], st.get("details")),
+                               {"server_log": fake_requests()}))
+        return st
+
+    # ---- identity
+    nm = "Q0_repository_identity"
+    v = (off.REPOSITORY == CONFIRMED_REPOSITORY
+         and discovery.RELEASES_URL == "https://api.github.com/repos/%s/releases" % CONFIRMED_REPOSITORY
+         and json.loads(S1["release.json"])["repository"] == CONFIRMED_REPOSITORY)
+    R.append(finalize_case(nm, None, [], "PASS" if v else "FAIL",
+                           "product identity is the confirmed repository for descriptor validation and discovery; "
+                           "the producer signs it" if v else "identity mismatch %s" % off.REPOSITORY))
+    nm = "Q0b_old_repository_descriptor_refused_locally"
+    cfg = make_install(nm)
+    before = tree(cfg, include_staging=True)
+    st = official_prep(nm, "prep", cfg, pkgdir("L3_s1_oldrepo"))
+    v = (st["outcome"] == "REFUSED" and "isn't a complete official data package" in (st["message"] or "")
+         and (st.get("details") or {}).get("fields") == ["repository"] and tree(cfg, include_staging=True) == before
+         and st.get("network") == [])
+    R.append(finalize_case(nm, cfg, [st], "PASS" if v else "FAIL",
+                           "validly signed (trusted test key) descriptor naming the previous repository name: refused "
+                           "(field 'repository'); nothing written; no network" if v else "unexpected %s %s" % (
+                               st["outcome"], st.get("details"))))
+
+    # ---- discovery outcomes (check writes nothing)
+    single("Q1_empty_release_list", [], "NONE_PUBLISHED", "No official data has been published yet",
+           check=lambda st, ids: "offer" not in st and st.get("releases_listed") == 0,
+           why="empty list -> NONE_PUBLISHED, not an error and no offer; nothing written")
+    single("Q2_only_non_data_releases",
+           [(1, "v0.3.0", {"updater.zip": b"zip"}, {}), (2, "data-v1.0.0", S1, {"prerelease": True}),
+            (3, "data-v1.0.1", S2, {"draft": True}), (4, "data-v1.0", S1, {})],
+           "NONE_PUBLISHED", "No official data has been published yet",
+           check=lambda st, ids: st.get("releases_listed") == 4 and st.get("data_releases") == 0
+           and not fake_requests("assets"),
+           why="software release, prerelease, draft and malformed data tag ignored -> NONE_PUBLISHED; no asset fetched")
+    single("Q3_one_valid_release_available", [(10, "data-v1.0.0", S1, {})], "AVAILABLE", "Official data 1.0.0 is available.",
+           check=lambda st, ids: st.get("offer") == {"release_tag": "data-v1.0.0", "sequence": 1, "data_version": "1.0.0",
+                                                     "descriptor_sha256": S1_SHA}
+           and set(fake_requests("assets")) == asset_paths(ids, 10, ["release.json", "release.sig"]),
+           why="one authenticated compatible release -> AVAILABLE 1.0.0 (offer bound to the descriptor digest); only "
+               "release.json/release.sig fetched by the check; nothing written")
+    single("Q4_untrusted_release_not_offered", [(10, "data-v1.0.0", S1, {})], "OFFICIAL_UNVERIFIED",
+           "couldn't be verified", trust=False,
+           check=lambda st, ids: "offer" not in st and st["releases"][0]["message_key"] == "PACKAGE_UNTRUSTED",
+           why="test-signed release without a trusted key -> not offered (OFFICIAL_UNVERIFIED)")
+    single("Q5_highest_compatible_selected", [(10, "data-v1.0.0", S1, {}), (11, "data-v1.0.1", S2, {})], "AVAILABLE",
+           "Official data 1.0.1 is available.", check=lambda st, ids: st["offer"]["sequence"] == 2,
+           cfg=make_install("Q5_highest_compatible_selected", master="G2"),
+           why="two compatible releases -> the highest sequence found (1.0.1) is offered, without a 'latest' claim")
+    single("Q6_newer_incompatible_noted", [(10, "data-v1.0.0", S1, {}),
+                                           (12, "data-v1.0.2", pkg_files("L3_s3_muc2"), {})], "AVAILABLE",
+           "Official data 1.0.0 is available. A newer release needs newer SFM Character Tools.",
+           check=lambda st, ids: st["offer"]["sequence"] == 1 and st.get("newer_needs_newer_updater") is True,
+           why="compatible 1.0.0 offered and the newer release needing a newer updater is reported")
+    single("Q7_only_newer_needs_updater", [(12, "data-v1.0.2", pkg_files("L3_s3_muc2"), {})], "NEEDS_NEWER_UPDATER",
+           "A newer release needs newer SFM Character Tools.", check=lambda st, ids: "offer" not in st,
+           why="only a release needing a newer updater -> NEEDS_NEWER_UPDATER, not 'up to date'")
+    single("Q8_only_incompatible_profile", [(13, "data-v1.0.3", pkg_files("L3_s4_profile"), {})],
+           "OFFICIAL_INCOMPATIBLE", "isn't compatible", check=lambda st, ids: "offer" not in st,
+           why="only an unsupported-profile release -> OFFICIAL_INCOMPATIBLE")
+    single("Q9_installed_release_current", [(10, "data-v1.0.0", S1, {})], "INSTALLED_CURRENT",
+           "Official data 1.0.0 is already installed.", cfg=make_install("Q9_installed_release_current", master="G3",
+                                                                         gens=("g3",), manifest="g3"),
+           check=lambda st, ids: "offer" not in st and st["installed_release"]["sequence"] == 1,
+           why="installed TXT equals the best release -> INSTALLED_CURRENT; no offer")
+    single("Q10_same_sequence_conflict", [(10, "data-v1.0.0", S1, {}),
+                                          (14, "data-v1.0.9", pkg_files("L3_s1_alt"), {})], "RELEASE_CONFLICT",
+           "can't be trusted", check=lambda st, ids: st.get("conflicting_sequences") == [1] and "offer" not in st,
+           why="two releases with sequence 1 and different descriptors -> RELEASE_CONFLICT, nothing offered")
+    # remembered releases: older-only and conflict with the release record
+    nm = "Q11_older_and_record_conflict"
+    cfg = make_install(nm)
+    s = [official_prep(nm, "seed_s5", cfg, pkgdir("G3_s5"))]
+    before = tree(cfg, include_staging=True)
+    serve([(10, "data-v1.0.0", S1, {})])
+    s.append(check_op(nm, "check_older", cfg))
+    log1 = list(FAKE.log)
+    serve([(15, "data-v5.0.0", pkg_files("L3_s5_conflict"), {})])
+    s.append(check_op(nm, "check_conflict", cfg))
+    v = (s[0]["outcome"] == "PREPARED" and s[1]["outcome"] == "OLDER_ONLY"
+         and "(1.0.0) is older than official data already seen" in (s[1]["message"] or "")
+         and s[1]["older_release"]["sequence"] == 1 and s[1].get("high_water") == 5 and "offer" not in s[1]
+         and s[2]["outcome"] == "RELEASE_CONFLICT" and s[2].get("conflicting_sequences") == [5]
+         and tree(cfg, include_staging=True) == before and local_only(s[1]) and local_only(s[2]) and no_latest(s[1]))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "record high-water 5: release 1 -> OLDER_ONLY (not offered); a different sequence-5 "
+                           "descriptor -> RELEASE_CONFLICT; checks wrote nothing" if v else "unexpected %s" % outcomes(s),
+                           {"server_log": [r["path"] for r in log1] + fake_requests()}))
+
+    # ---- per-release refusals: authenticated metadata only, never offered
+    nm = "Q12_release_not_offered_variants"
+    cfg = make_install(nm)
+    before = tree(cfg, include_staging=True)
+    no_sc = {k: b for k, b in S1.items() if k != S1_SC}
+    variants = [("tag_mismatch", [(20, "data-v1.0.5", S1, {})], "PACKAGE_INVALID", "signed release tag differs"),
+                ("missing_asset", [(21, "data-v1.0.0", no_sc, {})], "PACKAGE_INVALID", "differ from the signed file list"),
+                ("extra_asset", [(22, "data-v1.0.0", dict(S1, **{"notes.txt": b"x"}), {})], "PACKAGE_INVALID",
+                 "differ from the signed file list"),
+                ("size_mismatch", [(23, "data-v1.0.0", S1, {"sizes": {S1_SC: len(S1[S1_SC]) + 1}})], "PACKAGE_DAMAGED",
+                 "asset size differs"),
+                ("old_repository", [(24, "data-v1.0.0", pkg_files("L3_s1_oldrepo"), {})], "PACKAGE_INVALID",
+                 "descriptor fields invalid"),
+                ("not_uploaded", [(25, "data-v1.0.0", S1, {"state": "starter"})], "PACKAGE_INVALID", "not fully uploaded"),
+                ("descriptor_too_large", [(26, "data-v1.0.0", S1, {"sizes": {"release.json": 16 * 1024 + 1}})],
+                 "PACKAGE_INVALID", "size invalid"),
+                ("untrusted_key", [(27, "data-v1.0.0", pkg_files("L3_s1_keyB"), {})], "PACKAGE_UNTRUSTED",
+                 "not trusted")]
+    s, ok = [], True
+    for tag, rels, key, reason in variants:
+        serve(rels)
+        st = check_op(nm, tag, cfg)
+        r0 = (st.get("releases") or [{}])[0]
+        good = (st["outcome"] == "OFFICIAL_UNVERIFIED" and r0.get("message_key") == key and reason in r0.get("reason", "")
+                and "offer" not in st and local_only(st) and headers_ok())
+        if tag == "old_repository":
+            good = good and r0.get("fields") == ["repository"]
+        st["variant_ok"] = good
+        ok = ok and good
+        s.append(st)
+    v = ok and tree(cfg, include_staging=True) == before
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "tag mismatch, missing/extra asset, size mismatch, previous repository name, incomplete "
+                           "upload, oversized descriptor, untrusted key: each not offered with its reason; nothing "
+                           "written" if v else "unexpected %s" % [(x["step"], x["outcome"], x.get("variant_ok"))
+                                                                  for x in s]))
+
+    # ---- incomplete queries: "Couldn't check for updates", never a partial answer
+    nm = "Q13_incomplete_query_variants"
+    cfg = make_install(nm)
+    before = tree(cfg, include_staging=True)
+    rel_ok = [(10, "data-v1.0.0", S1, {})]
+    filler = [{"url": "https://api.github.com/repos/%s/releases/%d" % (CONFIRMED_REPOSITORY, 1000 + i), "id": 1000 + i,
+               "tag_name": "v0.%d" % i, "draft": False, "prerelease": False, "assets": []} for i in range(100)]
+    old_rel = {"url": "https://api.github.com/repos/chadchan3d/sfm-animation-groups-master/releases/9", "id": 9,
+               "tag_name": "data-v1.0.0", "draft": False, "prerelease": False, "assets": []}
+    import fake_github
+    other_asset = fake_github.release_json(31, "data-v1.0.0", S1, repo="someone-else/sfm-character-tools")[0]
+    other_asset["url"] = "https://api.github.com/repos/%s/releases/31" % CONFIRMED_REPOSITORY
+
+    def pages_with(spec1, extra=None):
+        return dict({1: spec1}, **(extra or {}))
+    variants = [
+        ("http_500", None, pages_with({"status": 500, "json": {"message": "err"}})),
+        ("rate_limited_403", None, pages_with({"status": 403, "json": {"message": "API rate limit exceeded"},
+                                               "headers": {"X-RateLimit-Remaining": "0"}})),
+        ("redirect_301_not_followed", None, pages_with({"status": 301, "raw": b"", "headers": {
+            "Location": "https://api.github.com/repositories/1/releases?per_page=100&page=1"}})),
+        ("invalid_json", None, pages_with({"raw": b"[{"})),
+        ("duplicate_keys", None, pages_with({"raw": b'[{"id":1,"id":2}]'})),
+        ("truncated_body", None, pages_with({"json": [], "raw": json.dumps(filler[:3]).encode(), "mode": "truncate"})),
+        ("oversized_page", None, pages_with({"raw": b" " * (8 * 1024 * 1024 + 1)})),
+        ("not_a_list", None, pages_with({"json": {"message": "Not Found"}})),
+        ("partial_listing_page2_fails", rel_ok, None),
+        ("too_many_pages", None, {i: {"json": filler} for i in range(1, 11)}),
+        ("release_from_old_identity", None, pages_with({"json": [old_rel]})),
+        ("asset_from_other_repository", None, pages_with({"json": [other_asset]})),
+        ("malformed_release_fields", None, pages_with({"json": [dict(filler[0], tag_name=5)]})),
+        ("descriptor_fetch_500", rel_ok, None),
+        ("descriptor_redirect_offsite", rel_ok, None),
+        ("timeout", None, pages_with({"json": [], "mode": "sleep", "seconds": 3})),
+        ("server_unreachable", None, pages_with({"json": []})),
+        ("too_many_data_releases", None, pages_with({"json": [dict(filler[i], tag_name="data-v9.0.%d" % i)
+                                                               for i in range(51)]})),
+    ]
+    s, ok = [], True
+    for tag, rels, pages in variants:
+        ids = serve(rels or [], pages)
+        kw = {}
+        if tag == "partial_listing_page2_fails":
+            objs = FAKE.pages[1]["json"]
+            FAKE.pages = {1: {"json": objs + filler[:99]}, 2: {"status": 502, "json": {"message": "bad gateway"}}}
+        if tag == "descriptor_fetch_500":
+            asset_mode(ids, 10, "release.json", api="status:500")
+        if tag == "descriptor_redirect_offsite":
+            asset_mode(ids, 10, "release.sig", api="offsite")
+        if tag == "timeout":
+            kw["net_timeout"] = 1
+        if tag == "server_unreachable":
+            kw["net_base"] = closed_port()
+        st = check_op(nm, tag, cfg, **kw)
+        good = (st["outcome"] == "CHECK_FAILED" and (st["message"] or "").startswith("Couldn't check for updates.")
+                and "offer" not in st and local_only(st) and headers_ok())
+        if tag == "redirect_301_not_followed":
+            good = good and fake_requests() == ["/api/repos/%s/releases?per_page=100&page=1" % CONFIRMED_REPOSITORY]
+        if tag == "descriptor_redirect_offsite":
+            good = good and "/cdn/objects.githubusercontent.com/assets/%d" % ids[10]["release.sig"] not in fake_requests()
+        st["variant_ok"] = good
+        st["server_log"] = fake_requests()
+        ok = ok and good
+        s.append(st)
+    v = ok and tree(cfg, include_staging=True) == before
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "%d incomplete or untrustworthy queries (HTTP errors, rate limit, unfollowed 301, bad/"
+                           "duplicate/truncated/oversized JSON, partial pagination, page bound, foreign identity, "
+                           "metadata fetch failure, off-site redirect, timeout, unreachable, release bound) -> "
+                           "'Couldn't check for updates'; nothing written" % len(variants) if v else
+                           "unexpected %s" % [(x["step"], x["outcome"], x.get("variant_ok")) for x in s]))
+    nm = "Q14_pagination_complete"
+    cfg = make_install(nm)
+    ids = serve([(10, "data-v1.0.0", S1, {})])
+    FAKE.pages = {1: {"json": filler}, 2: FAKE.pages[1]}
+    st = check_op(nm, "check", cfg)
+    v = (st["outcome"] == "AVAILABLE" and st.get("releases_listed") == 101 and st["offer"]["sequence"] == 1
+         and [p for p in fake_requests() if "/releases?" in p] == [
+             "/api/repos/%s/releases?per_page=100&page=%d" % (CONFIRMED_REPOSITORY, i) for i in (1, 2)])
+    R.append(finalize_case(nm, cfg, [st], "PASS" if v else "FAIL",
+                           "full first page (100) then a second page: both read; release on page 2 offered"
+                           if v else "unexpected %s %s" % (st["outcome"], st.get("details"))))
+
+    # ---- download-official: bounded, verified, then the L-2 path
+    nm = "Q20_download_prepare_install"
+    cfg = make_install(nm)
+    ids = serve([(10, "data-v1.0.0", S1, {})])
+    s = [check_op(nm, "check", cfg)]
+    log_check = fake_requests()
+    t0 = tree(cfg)
+    FAKE.log.clear()
+    s.append(download_op(nm, "download", cfg, "data-v1.0.0", s[0].get("offer", {}).get("descriptor_sha256", "")))
+    log_dl = fake_requests()
+    t1 = tree(cfg)
+    dl = s[1]
+    s.append(install(nm, "install", cfg, dl.get("prepid", ""), dl.get("confirm_sha", ""), accept=True, trust=True))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    log = release_log(cfg) or []
+    s.append(check_op(nm, "check_after", cfg))
+    staged = sorted(k for k in tree(cfg, True) if k.startswith(STAGING_PREFIX + discovery.DOWNLOAD_PREFIX))
+    conds = {"check_available": s[0]["outcome"] == "AVAILABLE",
+             "prepared_official": dl["outcome"] == "PREPARED" and dl.get("workflow") == "official",
+             "message": "Official data 1.0.0 is checked and ready" in (dl["message"] or ""),
+             "consent_required": dl.get("consent_required") is True,
+             "bound_descriptor": (dl.get("download") or {}).get("descriptor_sha256") == S1_SHA,
+             "active_unchanged": active_set(t0) == active_set(t1),
+             "only_record_added": sorted(set(t1) - set(t0)) == [os.path.join("sfm_character_tools_updater",
+                                                                             "official_releases.log")],
+             "all_assets_requested": set(log_dl) >= asset_paths(ids, 10, list(S1)),
+             "one_redirect_each": len([p for p in log_dl if p.startswith("/cdn/")]) == 5,
+             "five_downloaded_files": len(staged) == 5,
+             "install_complete": s[2]["outcome"] == "COMPLETE" and ok,
+             "install_message": "Official data 1.0.0 is installed" in (s[2]["message"] or ""),
+             "correspondence": (s[2].get("correspondence") or {}).get("ok") is True,
+             "record": [r["sequence"] for r in log] == [1],
+             "check_after_current": s[3]["outcome"] == "INSTALLED_CURRENT",
+             "loopback_only": all(local_only(x) for x in (s[0], s[1], s[3])),
+             "install_no_network": s[2].get("network") == [],
+             "headers": headers_ok()}
+    v = all(conds.values())
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "check AVAILABLE -> download (5 assets via one redirect each, verified, written only to "
+                           "staging; active files unchanged; release record appended) -> PREPARED through the L-2 path (consent required) -> "
+                           "install COMPLETE exact G3, verified; record [1]; next check INSTALLED_CURRENT; install "
+                           "used no network" if v else "unexpected %s %s" % (
+                               outcomes(s), sorted(k for k, c in conds.items() if not c)),
+                           {"server_log_check": log_check, "server_log_download": log_dl, "conditions": conds}))
+
+    def dl_refused(nm, rels, key, phrase, prepare=None, dsha=S1_SHA, trust=True, payload_requests=None, why="", **kw):
+        cfg = make_install(nm)
+        ids = serve(rels)
+        if prepare:
+            prepare(ids)
+        before = tree(cfg, include_staging=True)
+        st = download_op(nm, "download", cfg, "data-v1.0.0", dsha, trust=trust, **kw)
+        v = (st["outcome"] == "REFUSED" and phrase in (st["message"] or "") and tree(cfg, include_staging=True) == before
+             and local_only(st) and headers_ok())
+        if payload_requests is not None and rels:
+            got = set(fake_requests("assets")) & asset_paths(ids, rels[0][0], PAYLOAD)
+            v = v and len(got) == payload_requests
+        R.append(finalize_case(nm, cfg, [st], "PASS" if v else "FAIL",
+                               why if v else "unexpected %s: %s / %s" % (st["outcome"], st["message"], st.get("details")),
+                               {"server_log": fake_requests(), "expected_key": key}))
+
+    dl_refused("Q21_descriptor_changed_since_check", [(10, "data-v1.0.0", pkg_files("L3_s1_republished"), {})],
+               "RELEASE_CHANGED", "changed or was removed since it was checked", payload_requests=0,
+               why="same tag now carries a different signed descriptor -> RELEASE_CHANGED before any payload request; "
+                   "nothing written")
+    dl_refused("Q22_release_removed", [], "RELEASE_CHANGED", "changed or was removed since it was checked",
+               why="release no longer listed -> RELEASE_CHANGED; nothing written")
+    flip = bytearray(S1[S1_SC])
+    flip[len(flip) // 2] ^= 1
+    dl_refused("Q23_payload_altered_on_asset_host", [(10, "data-v1.0.0", S1, {})], "PACKAGE_DAMAGED",
+               "damaged or was altered", prepare=lambda ids: asset_mode(ids, 10, S1_SC, cdn="replace",
+                                                                        cdn_data=bytes(flip)),
+               why="sidecar bytes altered (same length) -> PACKAGE_DAMAGED before anything is written")
+    dl_refused("Q24_payload_truncated", [(10, "data-v1.0.0", S1, {})], "DOWNLOAD_FAILED", "Couldn't download",
+               prepare=lambda ids: asset_mode(ids, 10, S1_SC, cdn="truncate"),
+               why="connection closed early -> DOWNLOAD_FAILED; nothing written")
+    dl_refused("Q25_payload_longer_than_signed", [(10, "data-v1.0.0", S1, {})], "PACKAGE_DAMAGED",
+               "damaged or was altered", prepare=lambda ids: asset_mode(ids, 10, "manifest.json", cdn="extra"),
+               why="more bytes than the signed length -> bounded read stops, PACKAGE_DAMAGED; nothing written")
+    dl_refused("Q26_offsite_redirect_refused", [(10, "data-v1.0.0", S1, {})], "DOWNLOAD_FAILED", "Couldn't download",
+               prepare=lambda ids: asset_mode(ids, 10, S1_SC, api="offsite"),
+               why="asset redirect to a non-GitHub host refused without connecting (loopback only); nothing written")
+    dl_refused("Q27_plain_http_redirect_refused", [(10, "data-v1.0.0", S1, {})], "DOWNLOAD_FAILED", "Couldn't download",
+               prepare=lambda ids: asset_mode(ids, 10, S1_SC, api="http_redirect"),
+               why="asset redirect to plain http refused; nothing written")
+    dl_refused("Q28_second_redirect_refused", [(10, "data-v1.0.0", S1, {})], "DOWNLOAD_FAILED", "Couldn't download",
+               prepare=lambda ids: asset_mode(ids, 10, S1_SC, cdn="redirect_again"),
+               why="a second redirect from the asset host is not followed; nothing written")
+    dl_refused("Q29_asset_redirect_to_old_identity_refused", [(10, "data-v1.0.0", S1, {})], "DOWNLOAD_FAILED",
+               "Couldn't download", prepare=lambda ids: asset_mode(ids, 10, S1_SC, api="api_redirect"),
+               why="asset redirect to the previous repository name on api.github.com is not followed; nothing written")
+    dl_refused("Q30_untrusted_download_refused", [(10, "data-v1.0.0", S1, {})], "PACKAGE_UNTRUSTED",
+               "isn't signed as official", trust=False, payload_requests=0,
+               why="untrusted signature -> PACKAGE_UNTRUSTED before any payload request; nothing written")
+    dl_refused("Q31a_signed_tag_binding_at_download", [(12, "data-v1.0.0", dict(pkg_files("L3_s3_muc2")), {})],
+               "PACKAGE_INVALID", "isn't a complete official data package",
+               why="signed tag data-v1.0.2 served as data-v1.0.0 -> refused (tag binding); nothing written")
+    nm = "Q31b_needs_newer_updater_download"
+    cfg = make_install(nm)
+    M2 = pkg_files("L3_s3_muc2")
+    ids = serve([(12, "data-v1.0.2", M2, {})])
+    before = tree(cfg, include_staging=True)
+    st = download_op(nm, "download", cfg, "data-v1.0.2", sha(M2["release.json"]))
+    payload_req = set(fake_requests("assets")) - asset_paths(ids, 12, ["release.json", "release.sig"])
+    v = (st["outcome"] == "REFUSED" and "needs a newer version of SFM Character Tools" in (st["message"] or "")
+         and not payload_req and tree(cfg, include_staging=True) == before)
+    R.append(finalize_case(nm, cfg, [st], "PASS" if v else "FAIL",
+                           "release needing a newer updater -> PACKAGE_NEEDS_NEWER before payload; nothing written"
+                           if v else "unexpected %s" % st["outcome"]))
+    dl_refused("Q34_listing_fails_at_download", [], "DOWNLOAD_FAILED", "Couldn't download",
+               prepare=lambda ids: FAKE.pages.update({1: {"status": 500, "json": {}}}),
+               why="listing failure during download -> DOWNLOAD_FAILED; nothing written")
+
+    nm = "Q32_download_while_sfm_running"
+    cfg = make_install(nm)
+    serve([(10, "data-v1.0.0", S1, {})])
+    act0 = active_set(tree(cfg))
+    s = [download_op(nm, "download", cfg, "data-v1.0.0", S1_SHA, inject={"process": RUNNING})]
+    s.append(install(nm, "install", cfg, s[0].get("prepid", ""), s[0].get("confirm_sha", ""), accept=True, trust=True,
+                     inject={"process": RUNNING}))
+    v = (s[0]["outcome"] == "PREPARED" and "Close SFM before installing" in (s[0]["message"] or "")
+         and s[1]["outcome"] == "REFUSED" and "Close SFM" in (s[1]["message"] or "")
+         and active_set(tree(cfg)) == act0 and not txdirs(cfg))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "SFM running (injected): download prepares into staging with the 'close SFM' note; install "
+                           "REFUSED; active files unchanged" if v else "unexpected %s" % outcomes(s)))
+
+    nm = "Q33_older_download_explicit_only"
+    cfg = make_install(nm)
+    s = [official_prep(nm, "seed_s5", cfg, pkgdir("G3_s5"))]
+    ids = serve([(10, "data-v1.0.0", S1, {})])
+    before = tree(cfg, include_staging=True)
+    s.append(download_op(nm, "download", cfg, "data-v1.0.0", S1_SHA))
+    pay0 = set(fake_requests("assets")) & asset_paths(ids, 10, PAYLOAD)
+    mid = tree(cfg, include_staging=True)
+    s.append(download_op(nm, "download_allowed", cfg, "data-v1.0.0", S1_SHA, allow_older=True))
+    s.append(install(nm, "install", cfg, s[2].get("prepid", ""), s[2].get("confirm_sha", ""), accept=True, trust=True))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    log = release_log(cfg) or []
+    v = (s[1]["outcome"] == "REFUSED" and "older than official data already seen" in (s[1]["message"] or "")
+         and not pay0 and before == mid and s[2]["outcome"] == "PREPARED"
+         and (s[2].get("official") or {}).get("older_than_seen") is True and s[3]["outcome"] == "COMPLETE" and ok
+         and [r["sequence"] for r in log] == [5, 1])
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "older release refused before any payload request unless explicitly allowed; allowed -> "
+                           "prepared and installed; high-water stays 5" if v else "unexpected %s" % outcomes(s)))
+
+    nm = "Q40_no_network_outside_check_and_download"
+    cfg = make_install(nm)
+    s = [run_op(nm, "status", ["status"], cfg, net=True),
+         run_op(nm, "rebuild__prep", ["prepare-rebuild"], cfg, net=True),
+         run_op(nm, "import__prep", ["prepare-import", "--source", G3_TXT], cfg, net=True),
+         run_op(nm, "official__prep", ["prepare-official", "--package", pkgdir("L3_s1")], cfg, trust=True, net=True)]
+    s.append(install(nm, "install", cfg, s[2].get("prepid", ""), s[2].get("confirm_sha", ""), accept=True, net=True))
+    s.append(recover(nm, "recover", cfg, net=True))
+    v = (all(x.get("network") == [] for x in s) and outcomes(s)[:4] == ["STATUS", "PREPARED", "PREPARED", "PREPARED"]
+         and s[4]["outcome"] == "COMPLETE" and s[5]["outcome"] in ("OK", "NOTHING_TO_RECOVER"))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "status, prepare-rebuild, prepare-import, prepare-official, install and recover (with the "
+                           "test network endpoint configured) made no name lookup or connection" if v else
+                           "unexpected %s %s" % (outcomes(s), [x.get("network") for x in s])))
+    return R
+
+
+def audited_worker(nm, step, args):
+    netlog = os.path.join(WORK, "results", "ops", "%s__%s.net.json" % (nm, step))
+    guard(netlog)
+    cp = subprocess.run([PY3, "-E", "-s", "-B", "-X", "pycache_prefix=" + NOPYC, os.path.join(SUPPORT, "net_audit.py"),
+                         netlog] + args, capture_output=True, text=True, env=ENV, cwd=os.path.join(RUN, "tmp"), timeout=900)
+    return cp, (jload(netlog) if os.path.exists(netlog) else None)
+
+
+def group_W4():
+    """The SHIPPING worker's network boundary (no seams): only check-official/download-official use
+    the network, only to api.github.com; one explicit query of the real official release list."""
+    R = []
+    ensure_l3_packages()
+    from sfm_character_tools_updater import discovery
+    nm = "W4a_shipping_no_network_other_commands"
+    cfg = make_install(nm, master="G3")
+    outs = {}
+    steps = []
+
+    def call(step, args):
+        out = os.path.join(WORK, "results", "ops", "%s__%s.json" % (nm, step))
+        guard(out)
+        cp, net = audited_worker(nm, step, args + ["--installation", cfg, "--result", out])
+        r = jload(out) if os.path.exists(out) else {}
+        r.pop("trace", None)
+        steps.append({"step": step, "rc": cp.returncode, "net": net, "outcome": r.get("outcome"),
+                      "message": r.get("message")})
+        outs[step] = r
+        return r
+    real0 = PSTAT()
+    call("status", ["status"])
+    pr = call("prepare_rebuild", ["prepare-rebuild"])
+    call("prepare_import", ["prepare-import", "--source", G1_TXT])
+    call("prepare_official", ["prepare-official", "--package", pkgdir("L3_s1")])
+    call("install", ["install", "--prepared", pr.get("prepid", ""), "--confirm-sha", pr.get("confirm_sha", "")])
+    call("recover", ["recover"])
+    real1 = PSTAT()
+    v = (all(x["net"] == [] for x in steps) and steps[3]["outcome"] == "REFUSED"
+         and "isn't signed" in (steps[3]["message"] or "")
+         and steps[4]["outcome"] in (("COMPLETE",) if real0[0] == real1[0] == "CLEAR" else ("REFUSED",))
+         and real0[0] == real1[0] and real0[0] in ("CLEAR", "RUNNING"))
+    R.append(finalize_case(nm, cfg, steps, "PASS" if v else "FAIL",
+                           "shipping worker: status, prepare-rebuild, prepare-import, prepare-official (test-signed -> "
+                           "refused as unsigned), install (real process query %s) and recover made no name lookup or "
+                           "connection" % real0[0] if v else "unexpected %s" % [(x["outcome"], x["net"]) for x in steps],
+                           {"real_status_before": real0, "real_status_after": real1}))
+
+    nm = "W4b_shipping_real_check_empty"
+    cfg = make_install(nm)
+    before = tree(cfg, include_staging=True)
+    out = os.path.join(WORK, "results", "ops", nm + "__check.json")
+    guard(out)
+    cp, net = audited_worker(nm, "check", ["check-official", "--installation", cfg, "--result", out])
+    r = jload(out) if os.path.exists(out) else {}
+    hosts = {e[1] for e in (net or []) if e[0] == "socket.getaddrinfo"}
+    if r.get("outcome") == "NONE_PUBLISHED":
+        v = (r.get("releases_listed") == 0 and r.get("repository") == CONFIRMED_REPOSITORY and "offer" not in r
+             and "No official data has been published yet" in (r.get("message") or "")
+             and hosts == {"api.github.com:443"} and tree(cfg, include_staging=True) == before and "trace" not in r)
+        why = ("explicit real query of %s: empty release list -> NONE_PUBLISHED (not an update, not an error); "
+               "lookups only api.github.com:443; nothing written" % discovery.RELEASES_URL)
+    else:
+        v, why = False, "real query did not return the empty list (%s): inconclusive" % r.get("outcome")
+    R.append(finalize_case(nm, cfg, [{"rc": cp.returncode, "net": net, **r}], "PASS" if v else "FAIL",
+                           why if v else "%s / %s" % (why, r.get("details"))))
+
+    nm = "W4c_shipping_real_download_absent_release"
+    cfg = make_install(nm)
+    before = tree(cfg, include_staging=True)
+    out = os.path.join(WORK, "results", "ops", nm + "__download.json")
+    guard(out)
+    cp, net = audited_worker(nm, "download", ["download-official", "--installation", cfg, "--result", out,
+                                              "--release-tag", "data-v1.0.0", "--descriptor-sha", "0" * 64])
+    r = jload(out) if os.path.exists(out) else {}
+    hosts = {e[1] for e in (net or []) if e[0] == "socket.getaddrinfo"}
+    v = (r.get("outcome") == "REFUSED" and "changed or was removed" in (r.get("message") or "")
+         and hosts == {"api.github.com:443"} and tree(cfg, include_staging=True) == before)
+    R.append(finalize_case(nm, cfg, [{"rc": cp.returncode, "net": net, **r}], "PASS" if v else "FAIL",
+                           "real download of data-v1.0.0 before any release exists -> RELEASE_CHANGED (not found); "
+                           "nothing written" if v else "unexpected %s / %s" % (r.get("outcome"), r.get("details"))))
+
+    nm = "W4d_shipping_rejects_network_test_options"
+    cfg = make_install(nm)
+    out = os.path.join(WORK, "results", "ops", nm + "__x.json")
+    guard(out)
+    cps = [product_worker(["check-official", "--installation", cfg, "--result", out] + a, UPDATER)
+           for a in (["--net-base", "http://127.0.0.1:1"], ["--net-timeout", "1"])]
+    v = all(cp.returncode == 2 for cp in cps) and not os.path.exists(out)
+    R.append(finalize_case(nm, cfg, [{"rc": cp.returncode, "stderr": cp.stderr[-200:]} for cp in cps],
+                           "PASS" if v else "FAIL",
+                           "shipping worker rejects --net-base and --net-timeout (usage error, no result)" if v else
+                           "unexpected"))
+
+    nm = "W4e_previous_name_redirect_not_followed"
+    old = "https://api.github.com/repos/chadchan3d/sfm-animation-groups-master/releases?per_page=100&page=1"
+    try:
+        st, h, body = discovery._request(old, "application/vnd.github+json", discovery.MAX_PAGE_BYTES,
+                                         time.monotonic() + 60)
+        got = {"status": st, "location": h.get("location"), "body_bytes": len(body)}
+    except discovery.NetFail as e:
+        got = {"error": e.details}
+    v = got.get("status") in (301, 302, 307, 308) and got.get("body_bytes") == 0
+    R.append(finalize_case(nm, None, [got], "PASS" if v else "FAIL",
+                           "real GitHub answers the previous repository name with a redirect (%s); the product "
+                           "transport returns it unfollowed, and the listing treats any non-200 as \"Couldn't check\""
+                           % got.get("status") if v else "inconclusive/unexpected %s" % got))
+
+    nm = "W4f_network_code_confined"
+    import ast
+    pkg = os.path.join(UPDATER, "sfm_character_tools_updater")
+    netmods = {"socket", "ssl", "http", "urllib", "requests", "urllib3", "asyncio"}
+    users = {}
+    for n in sorted(os.listdir(pkg)):
+        if n.endswith(".py"):
+            tree_ = ast.parse(open(os.path.join(pkg, n), encoding="utf-8").read())
+            mods = set()
+            for node in ast.walk(tree_):
+                if isinstance(node, ast.Import):
+                    mods |= {a.name.split(".")[0] for a in node.names}
+                elif isinstance(node, ast.ImportFrom) and node.module and node.level == 0:
+                    mods.add(node.module.split(".")[0])
+            if mods & netmods:
+                users[n] = sorted(mods & netmods)
+    cp = subprocess.run([PY3, "-E", "-s", "-B", "-X", "pycache_prefix=" + NOPYC, "-c",
+                         "import sys; import sfm_character_tools_updater.worker as w; "
+                         "print(sorted(m for m in sys.modules if m.split('.')[0] in %r))" % sorted(netmods)],
+                        capture_output=True, text=True, env=ENV, cwd=UPDATER, timeout=120)
+    wsrc = open(os.path.join(pkg, "worker.py"), encoding="utf-8").read()
+    v = (users == {"discovery.py": ["http", "ssl", "urllib"]} and cp.stdout.strip() == "[]"
+         and "from . import discovery" in wsrc and "\nfrom . import discovery" not in wsrc)
+    R.append(finalize_case(nm, None, [{"importers": users, "worker_import_net_modules": cp.stdout.strip()}],
+                           "PASS" if v else "FAIL",
+                           "only discovery.py imports network modules; importing the worker loads none; discovery is "
+                           "imported only inside the check/download dispatch" if v else "unexpected %s %s" % (
+                               users, cp.stdout)))
+    return R
+
+
 GROUPS = {"A": group_A, "B": group_B, "C": group_C, "D": group_D, "E": group_E, "F": group_F, "G": group_G,
           "H": group_H, "I": group_I, "J": group_J, "K": group_K, "N": group_N, "X": group_X, "W": group_W,
-          "M": group_M, "O": group_O, "W3": group_W3}
+          "M": group_M, "O": group_O, "W3": group_W3, "Q": group_Q, "W4": group_W4}
 
 
 def main():
