@@ -347,3 +347,8 @@ updater_qualification/SHA256SUMS.txt text eol=lf
 # hash-pinned LF text listed in updater_qualification/SHA256SUMS.txt.
 updater_qualification/design/OFFLINE_UPDATER_V1_CONTRACT_AMENDMENT.md text eol=lf
 updater_qualification/design/L_IMPLEMENTATION_AUTHORIZATION_CARD.md text eol=lf
+
+# L-1 updater backend (2026-10-17): product package and test-only suite; SHA-256 listed in
+# updater/SHA256SUMS.txt, so keep exact LF bytes on every checkout and archive export.
+updater/**/*.py text eol=lf
+updater/SHA256SUMS.txt text eol=lf

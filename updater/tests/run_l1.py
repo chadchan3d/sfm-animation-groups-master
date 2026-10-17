@@ -1,0 +1,1780 @@
+# -*- coding: utf-8 -*-
+"""L-1 qualification controller (TEST-ONLY). Ported from the U0B-P1 controller (p1run.py
+4affc60b...) and the C1 no-op cases (p1c1run.py 6eaa0c8a...), now driving the PRODUCT backend
+through tests/support/test_worker.py (product worker + test seams).
+
+Builds disposable installations under the scratch run directory, drives prepare/install/
+recover processes through barriers, and checks every final state independently. Every write
+of this controller goes through a guard that raises unless the target is under the run
+directory. Nothing here reads the live installation except through the read-only
+fingerprint tool, and nothing writes to it.
+
+  run_l1.py setup  --run RUN --game GAME --p1-preservation DIR --g3-source FILE --py27 EXE
+  run_l1.py groups --run RUN --game GAME --py27 EXE --label LABEL --groups A,B,...
+
+Groups: A B C D E F G H I J K N X W.
+Results: RUN\\LABEL\\results\\cases\\<case>.json and RUN\\LABEL\\results\\matrix_<group>.json
+"""
+import argparse
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+import time
+import uuid
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+UPDATER = os.path.dirname(HERE)
+REPO = os.path.dirname(UPDATER)
+SUPPORT = os.path.join(HERE, "support")
+TEST_WORKER = os.path.join(SUPPORT, "test_worker.py")
+PY3 = sys.executable
+SUBDIR = r"SteamLibrary\steamapps\common\SourceFilmmaker\game\usermod\cfg"
+LOCK_REL = "sfm_character_tools_updater\\installation.lock"
+EMPTY_SHA = hashlib.sha256(b"").hexdigest()
+
+# Fixture identities established by U0B-P1 (report bb91b373...).
+FIXTURE_TXT = {"G1": "ac45e5c1cd45d55b3af95747c97d2f8e93eda4f4fe4fec63e97d62828c904d93",
+               "G2": "54413b6ca618f73733b6624e1d2411a6cfb00a24489330ccbfc153760f3486e7",
+               "G3": "5635ecf352e71a25c345ac838b8410f03af13efdece082e1cc559727e066d993"}
+FIXTURE_SIDECAR = {"g1": "bcd9764105f92ce87fb84053d591ec40c51bc8f482584be1c373c1726305750b",
+                   "g2": "cd370f67bfd4db6a17fdc3d425ffae6934ad223c2f5519eda99e3f5b2264ffe3",
+                   "g3": "3a16e9459db61110a323162c6e90797e8929c5325f906e68905b0299aec7d267"}
+FIXTURE_MANIFEST_PREFIX = {"g1": "d810d648", "g2": "9da5057f", "g3": "d8136a90"}
+G2_REPO = os.path.join(REPO, "real_sfm_qualification", "checkpoint_i_generation_replacement", "i_pass_evidence",
+                       "sfm_checkpoint_i_generated_g2_source.txt")
+AUTH_PKG_REL = os.path.join("tests", "sidecar", "qualification", "candidate_b2c_correction6",
+                            "sfm_master_authority_productionized")
+
+A = None          # parsed arguments
+RUN = ART = WORK = NOPYC = None
+ENV = None
+GEN = {}
+SHA = {}
+G1_TXT = G2_TXT = G3_TXT = None
+TOKEN = uuid.uuid4().hex[:12]
+
+
+# ------------------------------------------------------------------ guarded writes
+def norm(p):
+    p = os.path.abspath(p)
+    if p.startswith("\\\\?\\"):
+        p = p[4:]
+    return os.path.normcase(p).rstrip("\\")
+
+
+def under(path, root):
+    p, r = norm(path), norm(root)
+    return p == r or p.startswith(r + "\\")
+
+
+def guard(path):
+    if not under(path, RUN):
+        raise RuntimeError("STOP: write outside the run directory: %r" % path)
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def sha_file(path):
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for b in iter(lambda: f.read(1 << 20), b""):
+            h.update(b)
+    return h.hexdigest()
+
+
+def jload(p):
+    return json.load(open(p, encoding="utf-8"))
+
+
+def wcopy(src, dst):
+    guard(dst)
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    with open(src, "rb") as f, open(dst, "xb") as g:
+        g.write(f.read())
+
+
+def wbytes(dst, data):
+    guard(dst)
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    with open(dst, "xb") as g:
+        g.write(data)
+
+
+def wappend(dst, data):
+    guard(dst)
+    with open(dst, "ab") as g:
+        g.write(data)
+
+
+def wremove(p):
+    guard(p)
+    os.remove(p)
+
+
+def wmkdirs(p):
+    guard(p)
+    os.makedirs(p)
+
+
+# ------------------------------------------------------------------ setup
+def setup():
+    """Fixtures: G1 (preserved P1 copy), G2 (repository), G3 (P1 scratch artifact), each
+    verified against the P1 identity, then compiled by the unchanged pinned compiler through
+    the product's candidate module. A .py-only, hash-verified copy of the consumer libraries
+    for the Python 2.7 checks (no pre-existing bytecode is ever loaded)."""
+    sys.path.insert(0, UPDATER)
+    from sfm_character_tools_updater import candidate
+    os.makedirs(RUN)
+    rep = {"fixtures": {}, "artifacts": {}, "py27lib": []}
+    for tag, src in (("G1", os.path.join(A.p1_preservation, "sfm_defaultanimationgroups.txt")),
+                     ("G2", G2_REPO), ("G3", A.g3_source)):
+        dst = os.path.join(ART, tag.lower() + "_source.txt")
+        wcopy(src, dst)
+        got = sha_file(dst)
+        rep["fixtures"][tag] = {"sha256": got, "expected": FIXTURE_TXT[tag], "ok": got == FIXTURE_TXT[tag]}
+    for g in ("g1", "g2", "g3"):
+        txt = open(os.path.join(ART, g + "_source.txt"), "rb").read()
+        name, body, manifest, outcome = candidate.compile_real(txt, g)
+        d = os.path.join(ART, g)
+        wbytes(os.path.join(d, name), body)
+        wbytes(os.path.join(d, "manifest.json"), manifest)
+        bad = candidate.validate_candidate_files(outcome, name, os.path.join(d, name), os.path.join(d, "manifest.json"))
+        rep["artifacts"][g] = {"sidecar": name, "sidecar_sha256": sha(body), "manifest_sha256": sha(manifest),
+                               "validation": bad or "PASS",
+                               "ok": (sha(body) == FIXTURE_SIDECAR[g] and name.endswith(FIXTURE_SIDECAR[g] + ".sfmsidecar")
+                                      and sha(manifest).startswith(FIXTURE_MANIFEST_PREFIX[g]) and bad is None)}
+    lib = os.path.join(RUN, "py27lib")
+    srcs = [(os.path.join(REPO, AUTH_PKG_REL), os.path.join(lib, "sfm_master_authority_productionized")),
+            (os.path.join(REPO, "tools", "sfm_master_sidecar"), os.path.join(lib, "sfm_master_sidecar"))]
+    for s, d in srcs:
+        for n in sorted(os.listdir(s)):
+            if n.endswith(".py"):
+                wcopy(os.path.join(s, n), os.path.join(d, n))
+                rep["py27lib"].append({"file": os.path.relpath(os.path.join(d, n), lib),
+                                       "sha256": sha_file(os.path.join(d, n)),
+                                       "ok": sha_file(os.path.join(d, n)) == sha_file(os.path.join(s, n))})
+    wcopy(os.path.join(REPO, "tools", "sfm_master_core.py"), os.path.join(lib, "sfm_master_core.py"))
+    rep["ok"] = all(x["ok"] for x in rep["fixtures"].values()) and all(x["ok"] for x in rep["artifacts"].values()) \
+        and all(x["ok"] for x in rep["py27lib"])
+    out = os.path.join(RUN, "setup.json")
+    guard(out)
+    with open(out, "x", encoding="utf-8") as f:
+        json.dump(rep, f, indent=1, sort_keys=True)
+    print("SETUP ok=%s" % rep["ok"])
+
+
+def load_generations():
+    for g in ("g1", "g2", "g3"):
+        d = os.path.join(ART, g)
+        sc = [n for n in os.listdir(d) if n.endswith(".sfmsidecar")][0]
+        GEN[g] = {"sidecar": sc, "sidecar_path": os.path.join(d, sc), "sidecar_sha": sha_file(os.path.join(d, sc)),
+                  "manifest_path": os.path.join(d, "manifest.json"),
+                  "manifest_sha": sha_file(os.path.join(d, "manifest.json"))}
+    for t in ("G1", "G2", "G3"):
+        SHA[t] = sha_file(os.path.join(ART, t.lower() + "_source.txt"))
+
+
+# ------------------------------------------------------------------ installations and observation
+def inst_id(case):
+    """Short installation directory name: keeps every ordinary scratch installation's consumer
+    paths inside the 260-character budget regardless of the case name's length."""
+    return hashlib.sha256(case.encode("utf-8")).hexdigest()[:10]
+
+
+def make_install(case, master="G1", gens=("g1",), legacy_lock=True, manifest="g1", depth_pad=0, base=None):
+    base = base or os.path.join(WORK, "i", inst_id(case))
+    if depth_pad:
+        base = os.path.join(base, *(["p" * 40] * depth_pad))
+    cfg = os.path.join(base, SUBDIR)
+    wmkdirs(os.path.join(cfg, "sfm_shared_authority"))
+    wcopy({"G1": G1_TXT, "G3": G3_TXT, "G2": G2_TXT}[master], os.path.join(cfg, "sfm_defaultanimationgroups.txt"))
+    for g in gens:
+        wcopy(GEN[g]["sidecar_path"], os.path.join(cfg, "sfm_shared_authority", GEN[g]["sidecar"]))
+    if manifest:
+        wcopy(GEN[manifest]["manifest_path"], os.path.join(cfg, "sfm_shared_authority", "manifest.json"))
+    if legacy_lock:
+        wbytes(os.path.join(cfg, "sfm_shared_authority", "publisher.lock"), b"")
+    wmkdirs(os.path.join(cfg, "sfm_character_tools_updater", "transactions"))
+    return cfg
+
+
+STAGING_PREFIX = "sfm_character_tools_updater\\staging\\"
+
+
+def tree(cfg, include_staging=False):
+    """Independent observer: every file under cfg -> sha256 (plain shared reads). Updater-
+    private staging is reported separately unless include_staging."""
+    out = {}
+    for dp, dn, fn in os.walk(cfg):
+        for n in fn:
+            p = os.path.join(dp, n)
+            rel = os.path.relpath(p, cfg)
+            if rel.startswith(STAGING_PREFIX) and not include_staging:
+                continue
+            try:
+                out[rel] = sha_file(p)
+            except OSError as e:
+                out[rel] = "UNREADABLE:%s" % getattr(e, "winerror", e)
+    return out
+
+
+def active_set(t):
+    """Active slots only: Master and the authority directory."""
+    return {k: v for k, v in t.items() if k == "sfm_defaultanimationgroups.txt"
+            or k.startswith("sfm_shared_authority\\")}
+
+
+def noop_unchanged(before, after):
+    """Active slots byte-identical; the only permitted new file (outside updater-private
+    staging) is the permanent, empty C4 installation lock."""
+    added = sorted(set(after) - set(before))
+    return (active_set(before) == active_set(after)
+            and all(before[k] == after.get(k) for k in before)
+            and added in ([], [LOCK_REL])
+            and (LOCK_REL not in after or after[LOCK_REL] == EMPTY_SHA))
+
+
+def expected_active(master, g, legacy_lock=True):
+    e = {"sfm_defaultanimationgroups.txt": SHA[master],
+         "sfm_shared_authority\\" + GEN[g]["sidecar"]: GEN[g]["sidecar_sha"],
+         "sfm_shared_authority\\manifest.json": GEN[g]["manifest_sha"]}
+    if legacy_lock:
+        e["sfm_shared_authority\\publisher.lock"] = EMPTY_SHA
+    return e
+
+
+def final_is(cfg, which, legacy_lock=True):
+    t = tree(cfg)
+    act = active_set(t)
+    exp = expected_active(which[0], which[1], legacy_lock)
+    return act == exp, {"active": act, "expected": exp}
+
+
+def preserved(t, shas):
+    have = set(t.values())
+    return {s[:12]: (s in have) for s in shas}
+
+
+def originals_present(t, master="G1"):
+    return preserved(t, [SHA[master], GEN["g1"]["sidecar_sha"], GEN["g1"]["manifest_sha"]])
+
+
+def txdirs(cfg):
+    root = os.path.join(cfg, "sfm_character_tools_updater", "transactions")
+    return [os.path.join(root, n) for n in sorted(os.listdir(root))]
+
+
+def tx_files(cfg):
+    return {k: v for k, v in tree(cfg).items() if k.startswith("sfm_character_tools_updater\\transactions\\")}
+
+
+def max_path(cfg):
+    m = 0
+    for dp, dn, fn in os.walk(cfg):
+        for n in dn + fn:
+            m = max(m, len(os.path.join(dp, n)))
+    return m
+
+
+# ------------------------------------------------------------------ trace classification (C1)
+def classify_trace(cfg, trace):
+    """Ordinal classification of every traced CreateFileW and EVENT."""
+    master = norm(os.path.join(cfg, "sfm_defaultanimationgroups.txt"))
+    auth = norm(os.path.join(cfg, "sfm_shared_authority"))
+    lockp = norm(os.path.join(cfg, LOCK_REL))
+    legacy = norm(os.path.join(cfg, "sfm_shared_authority", "publisher.lock"))
+    summary = {"exclusive_authority_opens": [], "preview_authority_opens": 0,
+               "installation_lock_opens": [], "legacy_lock_probe_opens": [], "events": []}
+    for i, r in enumerate(trace or []):
+        if r.get("op") == "EVENT":
+            summary["events"].append(dict(r, ordinal=i))
+            continue
+        if r.get("op") != "CreateFileW":
+            continue
+        a = r["args"]
+        p = norm(a["path"])
+        role = "other"
+        if p == master:
+            role = "authority:master"
+        elif os.path.dirname(p) == auth and (p.endswith(".sfmsidecar") or p.endswith("manifest.json")):
+            role = "authority:" + ("sidecar" if p.endswith(".sfmsidecar") else "manifest")
+        elif p == lockp:
+            role = "installation.lock"
+        elif p == legacy:
+            role = "legacy publisher.lock"
+        rec = {"ordinal": i, "role": role, "access": a["access"], "share": a["share"],
+               "disposition": a["disposition"], "ok": r["ok"], "error": r.get("error"),
+               "file": os.path.basename(a["path"])}
+        if role.startswith("authority:"):
+            if a["share"] == "READ|WRITE|DELETE":
+                summary["preview_authority_opens"] += 1
+            else:
+                summary["exclusive_authority_opens"].append(rec)
+        elif role == "installation.lock":
+            summary["installation_lock_opens"].append(rec)
+        elif role == "legacy publisher.lock":
+            summary["legacy_lock_probe_opens"].append(rec)
+    gates = [e["ordinal"] for e in summary["events"] if e["event"] == "process_gate"]
+    excl = [x["ordinal"] for x in summary["exclusive_authority_opens"]]
+    summary["gate_before_first_exclusive_open"] = (bool(gates) and (not excl or gates[0] < min(excl)))
+    summary["n_exclusive_authority_opens"] = len(excl)
+    return summary
+
+
+def zero_excl(step):
+    return step.get("trace_summary", {}).get("n_exclusive_authority_opens") == 0
+
+
+def noop_ok(step):
+    """C1 success shape: CLEAR gates before exactly three identity-matched share-0 authority opens."""
+    s = step.get("trace_summary", {})
+    ex = s.get("exclusive_authority_opens", [])
+    roles = sorted(x["role"] for x in ex)
+    return (step.get("outcome") == "NOOP" and s.get("gate_before_first_exclusive_open")
+            and roles == ["authority:manifest", "authority:master", "authority:sidecar"]
+            and all(x["access"] == "GENERIC_READ" and x["share"] == "0" and x["ok"] for x in ex)
+            and (step.get("process_status") or [None])[0] == "CLEAR"
+            and len(step.get("noop_verification") or []) == 3
+            and (step.get("correspondence") or {}).get("ok") is True)
+
+
+# ------------------------------------------------------------------ process drivers
+KEEP = ("process_status", "noop_verification", "transactions_checked", "correspondence", "restart_required",
+        "post_install_process_status", "installed_state", "prepid", "confirm_sha", "candidate", "kind",
+        "recovery_needed", "process_forms_used", "forward_failure", "txid")
+
+
+def run_op(case, step, args, cfg, stop_at=None, action="go", timeout=900, barrier_timeout=None,
+           before_go=None, inject=None):
+    """action: go | kill | eof | badtoken | timeout | callable(name)->'go'|'kill'."""
+    out = os.path.join(WORK, "results", "ops", "%s__%s.json" % (case, step))
+    guard(out)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    cmd = [PY3, "-E", "-s", "-B", "-X", "pycache_prefix=" + NOPYC, TEST_WORKER, args[0],
+           "--installation", cfg, "--result", out] + list(args[1:])
+    cmd += ["--token", TOKEN, "--scratch-root", RUN, "--forbid", A.game]
+    for k, v in (inject or {}).items():
+        cmd += ["--inject", "%s=%s" % (k, v)]
+    if stop_at:
+        cmd += ["--stop-at", stop_at]
+    if barrier_timeout:
+        cmd += ["--barrier-timeout", str(barrier_timeout)]
+    t0 = time.time()
+    p = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                         text=True, env=ENV, cwd=os.path.join(RUN, "tmp"))
+    events = []
+    killed = False
+    while True:
+        line = p.stdout.readline()
+        if not line:
+            break
+        line = line.strip()
+        events.append(line)
+        if line.startswith("BARRIER "):
+            name = line.split(" ", 1)[1]
+            act = action(name) if callable(action) else action
+            if before_go:
+                events.append("before_go:%s" % before_go(name))
+            if act == "go":
+                p.stdin.write("GO %s %s\n" % (name, TOKEN))
+                p.stdin.flush()
+            elif act == "kill":
+                p.kill()
+                killed = True
+                break
+            elif act == "eof":
+                p.stdin.close()
+            elif act == "badtoken":
+                p.stdin.write("GO %s %s\n" % (name, "wrong" + TOKEN))
+                p.stdin.flush()
+            elif act == "timeout":
+                pass  # say nothing; the worker's own barrier timeout must fire
+    try:
+        p.wait(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        p.kill()
+        events.append("CONTROLLER_TIMEOUT")
+    err = p.stderr.read()
+    res = None
+    if not killed and os.path.exists(out):
+        res = jload(out)
+    r = {"step": step, "args": [a for a in args], "stop_at": stop_at,
+         "action": action if not callable(action) else "custom", "inject": inject,
+         "killed": killed, "events": events, "rc": p.returncode, "stderr_tail": err[-600:],
+         "outcome": (res or {}).get("outcome"), "message": (res or {}).get("message"),
+         "details": (res or {}).get("details"), "transactions": [
+             {k: t.get(k) for k in ("txid", "outcome", "message", "observed_k", "from_k", "terminal",
+                                     "verified", "details")} for t in (res or {}).get("transactions", [])],
+         "seconds": round(time.time() - t0, 2), "result_file": os.path.relpath(out, WORK)}
+    for k in KEEP:
+        if res and k in res:
+            r[k] = res[k]
+    if res:
+        r["trace_summary"] = classify_trace(cfg, res.get("trace"))
+    return r
+
+
+def prepare(case, step, cfg, kind, source=None, inject=None):
+    a = ["prepare-rebuild"] if kind == "rebuild" else ["prepare-replace", "--source", source]
+    return run_op(case, step + "__prep", a, cfg, inject=inject)
+
+
+def install(case, step, cfg, prepid, confirm, **kw):
+    return run_op(case, step, ["install", "--prepared", prepid, "--confirm-sha", confirm], cfg, **kw)
+
+
+def activate(case, step, cfg, kind, confirm, source=None, prep_inject=None, **kw):
+    """P1 `activate` = product prepare (staging) + install. Barriers, kills and injections
+    apply to the install process. A failed preparation is returned as the step."""
+    pr = prepare(case, step, cfg, kind, source, inject=prep_inject)
+    if pr["outcome"] != "PREPARED":
+        pr["stage"] = "prepare"
+        return pr
+    st = install(case, step, cfg, pr["prepid"], confirm, **kw)
+    st["prepare"] = {k: pr.get(k) for k in ("outcome", "message", "prepid", "confirm_sha", "process_status",
+                                            "candidate", "seconds")}
+    return st
+
+
+def recover(case, step, cfg, policy="resume", **kw):
+    return run_op(case, step, ["recover", "--policy", policy], cfg, **kw)
+
+
+def status(case, step, cfg, **kw):
+    return run_op(case, step, ["status"], cfg, **kw)
+
+
+def py27_select(cfg):
+    """Unchanged selector (hash-verified .py-only copy) under SFM's bundled Python 2.7, outside SFM."""
+    out = os.path.join(WORK, "results", "py27", "%s.json" % uuid.uuid4().hex[:10])
+    guard(out)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    script = os.path.join(RUN, "py27lib", "py27_select.py")
+    cp = subprocess.run([A.py27, "-E", "-s", "-B", script, "select", cfg, out],
+                        capture_output=True, text=True, env=ENV, cwd=os.path.join(RUN, "tmp"), timeout=300)
+    if not os.path.exists(out):
+        return {"error": cp.stderr[-600:], "rc": cp.returncode}
+    return jload(out)
+
+
+def select_ok(cfg, g):
+    s = py27_select(cfg)
+    ok = s.get("selected_basename") == GEN[g]["sidecar"] and s.get("python", "").startswith("2.7")
+    return ok, s
+
+
+def py3(script, *args, **kw):
+    return subprocess.run([PY3, "-E", "-s", "-B", "-X", "pycache_prefix=" + NOPYC, os.path.join(SUPPORT, script)]
+                          + list(args), capture_output=True, text=True, env=ENV, cwd=os.path.join(RUN, "tmp"),
+                          timeout=kw.get("timeout", 120))
+
+
+def start_holder(script, *args):
+    p = subprocess.Popen([PY3, "-E", "-s", "-B", "-X", "pycache_prefix=" + NOPYC, os.path.join(SUPPORT, script)]
+                         + list(args), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                         text=True, env=ENV, cwd=os.path.join(RUN, "tmp"))
+    first = p.stdout.readline().strip()
+    return p, first
+
+
+def release(p):
+    try:
+        p.stdin.write("release\n")
+        p.stdin.flush()
+    except OSError:
+        pass
+    try:
+        out = p.communicate(timeout=60)[0]
+    except subprocess.TimeoutExpired:
+        p.kill()
+        out = "KILLED"
+    return out.strip()
+
+
+def racer(*args):
+    cp = py3("racer.py", *args)
+    try:
+        return json.loads(cp.stdout.strip().splitlines()[-1])
+    except Exception:
+        return {"raw": cp.stdout[-300:], "err": cp.stderr[-300:]}
+
+
+def junction(link, target):
+    guard(link)
+    cp = subprocess.run(["cmd", "/c", "mklink", "/J", os.path.abspath(link), os.path.abspath(target)],
+                        capture_output=True, text=True)
+    return cp.returncode == 0
+
+
+def rec_terminal_ok(step):
+    return step["outcome"] in ("OK", "NOTHING_TO_RECOVER") and all(
+        x["outcome"] == "TERMINAL" for x in step["transactions"])
+
+
+def finalize_case(case, cfg, steps, verdict, why, extra=None):
+    rec = {"case": case, "verdict": verdict, "why": why, "steps": steps, "inst_id": inst_id(case), "cfg": cfg,
+           "final_tree": tree(cfg) if cfg and os.path.isdir(cfg) else None,
+           "final_staging": ({k: v for k, v in tree(cfg, True).items() if k.startswith(STAGING_PREFIX)}
+                             if cfg and os.path.isdir(cfg) else None)}
+    if extra:
+        rec.update(extra)
+    out = os.path.join(WORK, "results", "cases", case + ".json")
+    guard(out)
+    os.makedirs(os.path.dirname(out), exist_ok=True)
+    with open(out, "x", encoding="utf-8") as f:
+        json.dump(rec, f, indent=1, sort_keys=True, default=str)
+    print("%-6s %-58s %s" % (verdict, case, why[:110]))
+    sys.stdout.flush()
+    return {"case": case, "verdict": verdict, "why": why}
+
+
+def outcomes(steps):
+    return [x.get("outcome") for x in steps]
+
+
+RUNNING = 'output:"sfm.exe","4242","Console","1","1,000 K"'
+
+
+# ------------------------------------------------------------------ groups
+def group_A():
+    """Canonical real-artifact operations (P1 categories 1, 2, 8, 11)."""
+    R = []
+    cfg = make_install("A1_import_G3")
+    s = [activate("A1_import_G3", "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    ok, d = final_is(cfg, ("G3", "g3"))
+    sel_ok, sel = select_ok(cfg, "g3")
+    src_untouched = sha_file(G3_TXT) == SHA["G3"]
+    corr = (s[0].get("correspondence") or {}).get("ok") is True
+    v = s[0]["outcome"] == "COMPLETE" and ok and sel_ok and src_untouched and corr
+    R.append(finalize_case("A1_import_G3", cfg, s, "PASS" if v else "FAIL",
+                           "COMPLETE; exact G3 set; correspondence verified; selector picks G3; import source unchanged"
+                           if v else "unexpected: %s" % [s[0]["outcome"], ok, sel_ok, src_untouched, corr],
+                           {"final_check": d, "selector": sel}))
+    cfg = make_install("A2_rebuild_stale", master="G3", gens=("g1",), manifest="g1")
+    s = [activate("A2_rebuild_stale", "act", cfg, "rebuild", SHA["G3"])]
+    ok, d = final_is(cfg, ("G3", "g3"))
+    sel_ok, sel = select_ok(cfg, "g3")
+    master_bytes_same = sha_file(os.path.join(cfg, "sfm_defaultanimationgroups.txt")) == SHA["G3"]
+    corr = (s[0].get("correspondence") or {}).get("ok") is True
+    v = s[0]["outcome"] == "COMPLETE" and ok and sel_ok and master_bytes_same and corr
+    R.append(finalize_case("A2_rebuild_stale", cfg, s, "PASS" if v else "FAIL",
+                           "rebuild COMPLETE; TXT not rewritten; G1 artifact retired; correspondence verified; "
+                           "selector picks G3" if v else "unexpected", {"final_check": d, "selector": sel}))
+    cfg = make_install("A3_noop")
+    before = tree(cfg)
+    s = [activate("A3_noop", "act", cfg, "rebuild", SHA["G1"])]
+    after = tree(cfg)
+    sel_ok, sel = select_ok(cfg, "g1")
+    v = noop_ok(s[0]) and noop_unchanged(before, after) and sel_ok
+    R.append(finalize_case("A3_noop", cfg, s, "PASS" if v else "FAIL",
+                           "NOOP (C1 shape); active slots byte-identical; selector picks G1" if v else "unexpected",
+                           {"selector": sel}))
+    cfg = make_install("A4_import_same")
+    before = tree(cfg)
+    s = [activate("A4_import_same", "act", cfg, "replace", SHA["G1"], source=G1_TXT)]
+    v = noop_ok(s[0]) and noop_unchanged(before, tree(cfg))
+    R.append(finalize_case("A4_import_same", cfg, s, "PASS" if v else "FAIL",
+                           "importing identical bytes is a verified NOOP" if v else "unexpected: %s" % s[0]["outcome"]))
+    cfg = make_install("A5_round_trip")
+    s = [activate("A5_round_trip", "to_g3", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    s.append(activate("A5_round_trip", "to_g1", cfg, "replace", SHA["G3"], source=G1_TXT))
+    ok, d = final_is(cfg, ("G1", "g1"))
+    t = tree(cfg)
+    hist = preserved(t, [GEN["g3"]["sidecar_sha"], SHA["G3"], GEN["g1"]["sidecar_sha"]])
+    v = outcomes(s) == ["COMPLETE", "COMPLETE"] and ok and all(hist.values())
+    R.append(finalize_case("A5_round_trip", cfg, s, "PASS" if v else "FAIL",
+                           "two COMPLETE imports; exact G1 set restored; G3 generation kept in transaction history"
+                           if v else "unexpected", {"history": hist}))
+    cfg = make_install("A6_two_old_sidecars", gens=("g1", "g2"))
+    s = [activate("A6_two_old_sidecars", "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    ok, d = final_is(cfg, ("G3", "g3"))
+    t = tree(cfg)
+    hist = preserved(t, [GEN["g1"]["sidecar_sha"], GEN["g2"]["sidecar_sha"]])
+    v = s[0]["outcome"] == "COMPLETE" and ok and all(hist.values())
+    R.append(finalize_case("A6_two_old_sidecars", cfg, s, "PASS" if v else "FAIL",
+                           "both prior sidecars retired (preserved); exactly one active artifact"
+                           if v else "unexpected", {"history": hist, "final_check": d}))
+    crlf = os.path.join(WORK, "inputs", "g3_crlf.txt")
+    wbytes(crlf, open(G3_TXT, "rb").read().replace(b"\n", b"\r\n"))
+    crlf_sha = sha_file(crlf)
+    cfg = make_install("A7_custom_crlf")
+    s = [activate("A7_custom_crlf", "act", cfg, "replace", SHA["G1"], source=crlf)]
+    m = sha_file(os.path.join(cfg, "sfm_defaultanimationgroups.txt"))
+    sc = (s[0].get("candidate") or {}).get("sidecar")
+    t = active_set(tree(cfg))
+    v = (s[0]["outcome"] == "COMPLETE" and m == crlf_sha and sha_file(crlf) == crlf_sha
+         and sc and ("sfm_shared_authority\\" + sc) in t)
+    sel = py27_select(cfg)
+    v = v and sel.get("selected_basename") == sc
+    R.append(finalize_case("A7_custom_crlf", cfg, s, "PASS" if v else "FAIL",
+                           "custom CRLF source active byte-exact (no normalization); own sidecar selected; "
+                           "external original unchanged" if v else "unexpected",
+                           {"crlf_sha256": crlf_sha, "selector": sel}))
+    return R
+
+
+REPLACE_MOVES = 6   # S0 P0 M0 M1 S1 P1
+REBUILD_MOVES = 4   # S0 P0 S1 P1
+PRE = ["previewed", "candidates_written", "snapshots_written", "locked", "protected"]
+
+
+def barriers_for(n):
+    return PRE + ["act_%s_forward_%d" % (p, i) for i in range(n) for p in ("begin", "moved", "done")] + \
+        ["moves_done", "complete"]
+
+
+def kill_and_recover(case, kind, barrier, policy="resume", rec_kill=None):
+    if kind == "replace":
+        cfg = make_install(case)
+        old, confirm, src = ("G1", "g1"), SHA["G1"], G3_TXT
+    else:
+        cfg = make_install(case, master="G3", gens=("g1",))
+        old, confirm, src = ("G3", "g1"), SHA["G3"], None
+    new = ("G3", "g3")
+    steps = [activate(case, "act", cfg, kind, confirm, source=src, stop_at=barrier, action="kill")]
+    t_crash = tree(cfg)
+    if rec_kill:
+        steps.append(recover(case, "rec_killed", cfg, policy, stop_at=rec_kill, action="kill"))
+    steps.append(recover(case, "rec1", cfg, policy))
+    t1 = tree(cfg)
+    steps.append(recover(case, "rec2", cfg, policy))
+    t2 = tree(cfg)
+    fwd = barrier.startswith("act_") or barrier in ("moves_done", "complete")
+    if policy == "rollback" and barrier != "complete":
+        fwd = False
+    exp = new if fwd else old
+    final_ok = active_set(t1) == expected_active(exp[0], exp[1])
+    idem = t1 == t2 and rec_terminal_ok(steps[-1])
+    loss = originals_present(t1, old[0])
+    stale = kind == "rebuild" and exp == old
+    if stale:
+        # The restored OLD rebuild state is the stale pre-existing installation (G3 TXT, G1
+        # artifact): the truthful selector result is SidecarMissing via SourceGenerationMismatch.
+        sel = py27_select(cfg)
+        sel_ok = sel.get("classification") == "SidecarMissing" and \
+            [d.get("reason") for d in sel.get("diagnostics", [])] == ["SourceGenerationMismatch"]
+    else:
+        sel_ok, sel = select_ok(cfg, exp[1])
+    # C12 truthful state report (L-1 addition): restored stale data is reported as needing rebuild.
+    state_ok = steps[-2].get("installed_state") == ("NEEDS_REBUILD" if stale else "WORKING")
+    killed = steps[0]["killed"]
+    v = killed and final_ok and idem and all(loss.values()) and sel_ok and state_ok
+    return finalize_case(case, cfg, steps, "PASS" if v else "FAIL",
+                         "kill@%s -> recover(%s) -> exact %s set; 2nd recovery no-op; originals preserved; "
+                         "selector ok; state %s" % (barrier, policy, "NEW" if fwd else "OLD",
+                                                    steps[-2].get("installed_state")) if v else
+                         "killed=%s final_ok=%s idem=%s loss=%s sel=%s state=%s" % (
+                             killed, final_ok, idem, loss, sel_ok, steps[-2].get("installed_state")),
+                         {"crash_tree": t_crash, "selector": sel, "expected": "NEW" if fwd else "OLD"})
+
+
+def group_B():
+    """Interrupted forward transactions and reverse/forward recovery (P1 category 4)."""
+    R = []
+    for b in barriers_for(REPLACE_MOVES):
+        R.append(kill_and_recover("B_rep_%s" % b, "replace", b))
+    for b in barriers_for(REBUILD_MOVES):
+        R.append(kill_and_recover("B_reb_%s" % b, "rebuild", b))
+    for i in range(REPLACE_MOVES):
+        R.append(kill_and_recover("B_rollback_moved_%d" % i, "replace", "act_moved_forward_%d" % i,
+                                  policy="rollback"))
+    rec_barriers = ["rec_protected"] + ["rec_%s_forward_%d" % (p, i) for i in range(3, 6)
+                                        for p in ("begin", "moved", "done")]
+    for rb in rec_barriers:
+        R.append(kill_and_recover("B_reckill_%s" % rb, "replace", "act_done_forward_2", rec_kill=rb))
+    for rb in ["rec_%s_rollback_%d" % (p, i) for i in (3, 1) for p in ("begin", "moved", "done")]:
+        R.append(kill_and_recover("B_rbkill_%s" % rb, "replace", "act_done_forward_3", policy="rollback",
+                                  rec_kill=rb))
+    return R
+
+
+def group_C():
+    """Newer-data preservation after interruption (P1 category 4) -- no destructive restore."""
+    R = []
+    user = b"USER NEWER TXT WRITTEN AFTER THE INTERRUPTION\n"
+
+    def case(name, barrier, mutate, policy="resume", expect_key="TXT_CHANGED"):
+        cfg = make_install(name)
+        s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at=barrier, action="kill")]
+        info = mutate(cfg)
+        t0 = tree(cfg)
+        s.append(recover(name, "rec1", cfg, policy))
+        t1 = tree(cfg)
+        s.append(recover(name, "rec2", cfg, policy))
+        t2 = tree(cfg)
+        msg = (s[1]["transactions"] or [{}])[0].get("message") or ""
+        want_msg = {"TXT_CHANGED": "Your TXT changed", "MISSING": "Automatic recovery is unavailable"}[expect_key]
+        conflict = s[1]["outcome"] == "CONFLICT" and want_msg in msg
+        nj = lambda t: {k: v for k, v in t.items() if not k.endswith("\\journal")}  # noqa: E731
+        untouched = nj(t0) == nj(t1) == nj(t2)  # recovery may only append its CONFLICT record
+        kept = originals_present(t1)
+        v = conflict and untouched and all(kept.values())
+        return finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                             "%s; recovery CONFLICT '%s'; no file moved or overwritten (twice); originals kept"
+                             % (info, want_msg) if v else "conflict=%s untouched=%s kept=%s msg=%r"
+                             % (conflict, untouched, kept, msg))
+
+    def new_master_in_vacant_slot(cfg):
+        wbytes(os.path.join(cfg, "sfm_defaultanimationgroups.txt"), user)
+        return "user created a new TXT in the vacated Master slot (k=3)"
+
+    def edit_active_g3(cfg):
+        wappend(os.path.join(cfg, "sfm_defaultanimationgroups.txt"), b"\n// user edit after interruption\n")
+        return "user edited the newly active TXT in place (k=4)"
+
+    def lose_candidate(cfg):
+        td = txdirs(cfg)[0]
+        cand = [n for n in os.listdir(os.path.join(td, "candidate")) if n.endswith(".sfmsidecar")][0]
+        wremove(os.path.join(td, "candidate", cand))
+        return "candidate sidecar lost before recovery (k=2)"
+
+    R.append(case("C1_new_txt_in_vacant_slot", "act_done_forward_2", new_master_in_vacant_slot))
+    R.append(case("C2_edit_after_cutover", "act_done_forward_3", edit_active_g3))
+    R.append(case("C3_edit_after_cutover_rollback", "act_done_forward_3", edit_active_g3, policy="rollback"))
+    R.append(case("C4_candidate_lost", "act_done_forward_1", lose_candidate, expect_key="MISSING"))
+    name = "C5_edit_before_protection"
+    cfg = make_install(name)
+
+    def edit_now(b):
+        if b == "snapshots_written":
+            wappend(os.path.join(cfg, "sfm_defaultanimationgroups.txt"), b"\n// edit before protection\n")
+        return b
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="snapshots_written",
+                  before_go=edit_now)]
+    t = tree(cfg)
+    edited = t["sfm_defaultanimationgroups.txt"] not in (SHA["G1"], SHA["G3"])
+    v = s[0]["outcome"] == "ABANDONED" and edited and \
+        active_set(t)["sfm_shared_authority\\" + GEN["g1"]["sidecar"]] == GEN["g1"]["sidecar_sha"]
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "edit after snapshot detected through held handles -> ABANDONED; edited TXT active and "
+                           "kept; nothing moved" if v else "unexpected %s" % s[0]["outcome"]))
+    return R
+
+
+def group_D():
+    """Occupied destinations, source substitution, competing actors (P1 category 3)."""
+    R = []
+    dests = {0: ("retired", GEN["g1"]["sidecar"]), 1: ("retired", "manifest.json"), 2: ("retired", "master.txt"),
+             3: ("master", None), 4: ("auth", GEN["g3"]["sidecar"])}
+    for i, (kind, nm) in dests.items():
+        name = "D_occupied_dest_%d" % i
+        cfg = make_install(name)
+        occ = ("OCCUPANT FOR MOVE %d\n" % i).encode()
+
+        def place(b, i=i, kind=kind, nm=nm, cfg=cfg, occ=occ):
+            if b == "act_begin_forward_%d" % i:
+                if kind == "retired":
+                    p = os.path.join(txdirs(cfg)[0], "retired", nm)
+                elif kind == "master":
+                    p = os.path.join(cfg, "sfm_defaultanimationgroups.txt")
+                else:
+                    p = os.path.join(cfg, "sfm_shared_authority", nm)
+                if not os.path.exists(p):
+                    wbytes(p, occ)
+            return b
+        s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="act_begin_forward_%d" % i,
+                      before_go=place)]
+        s.append(recover(name, "rec1", cfg))
+        t1 = tree(cfg)
+        occ_kept = sha(occ) in t1.values()
+        kept = originals_present(t1)
+        no_success = s[0]["outcome"] in ("ROLLED_BACK", "CONFLICT")
+        v = occ_kept and all(kept.values()) and no_success and s[1]["outcome"] in ("OK", "CONFLICT",
+                                                                                   "NOTHING_TO_RECOVER")
+        R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                               "occupant at move %d destination: %s; occupant bytes kept; originals kept; "
+                               "recovery %s" % (i, s[0]["outcome"], s[1]["outcome"]) if v else
+                               "occ_kept=%s kept=%s outcome=%s" % (occ_kept, kept, s[0]["outcome"]),
+                               {"forward_failure": s[0].get("forward_failure")}))
+    name = "D_occupied_dest_5_after_vacate"
+    cfg = make_install(name)
+    occ = b"OCCUPANT FOR MOVE 5 (manifest)\n"
+
+    def place5(b):
+        if b == "act_begin_forward_5":
+            wbytes(os.path.join(cfg, "sfm_shared_authority", "manifest.json"), occ)
+        return b
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="act_begin_forward_5",
+                  before_go=place5)]
+    t1 = tree(cfg)
+    v = s[0]["outcome"] in ("ROLLED_BACK", "CONFLICT") and sha(occ) in t1.values() and \
+        all(originals_present(t1).values())
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "manifest-slot occupant after vacate: %s; occupant and originals kept" % s[0]["outcome"]
+                           if v else "unexpected %s" % s[0]["outcome"]))
+    name = "D_substitute_before_protection"
+    cfg = make_install(name)
+    rr = {}
+
+    def sub(b):
+        if b == "locked":
+            rr["r"] = racer("movereplace", os.path.join(cfg, "sfm_defaultanimationgroups.txt"))
+        return b
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="locked", before_go=sub)]
+    t = tree(cfg)
+    sub_kept = rr["r"].get("result_sha256") in t.values()
+    v = s[0]["outcome"] == "ABANDONED" and sub_kept and rr["r"].get("ok") is True
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "substituted TXT detected (identity/bytes) -> ABANDONED; substitute kept active"
+                           if v else "unexpected %s %s" % (s[0]["outcome"], rr), {"racer": rr}))
+    name = "D_import_source_changed"
+    src = os.path.join(WORK, "inputs", "import_copy_D9.txt")
+    wcopy(G3_TXT, src)
+    cfg = make_install(name)
+
+    def change_src(b):
+        if b == "candidates_written":
+            guard(src)
+            with open(src, "wb") as f:
+                f.write(open(G2_TXT, "rb").read())
+        return b
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=src, stop_at="candidates_written",
+                  before_go=change_src)]
+    ok, d = final_is(cfg, ("G3", "g3"))
+    v = s[0]["outcome"] == "COMPLETE" and ok and sha_file(src) == SHA["G2"]
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "captured G3 snapshot installed; later change to the external file ignored and "
+                           "untouched" if v else "unexpected"))
+    name = "D_racers_during_protection"
+    cfg = make_install(name)
+    rr = []
+
+    def races(b):
+        if b == "protected":
+            m = os.path.join(cfg, "sfm_defaultanimationgroups.txt")
+            a = os.path.join(cfg, "sfm_shared_authority")
+            for act in ("inplace", "inplace_py", "replacefile", "movereplace", "delete"):
+                rr.append({"target": "master", **racer(act, m)})
+            rr.append({"target": "master", **racer("rename", m, os.path.join(cfg, "renamed_master.txt"))})
+            for nm in (GEN["g1"]["sidecar"], "manifest.json", "publisher.lock"):
+                rr.append({"target": nm, **racer("delete", os.path.join(a, nm))})
+                rr.append({"target": nm, **racer("rename", os.path.join(a, nm), os.path.join(cfg, nm + ".moved"))})
+                rr.append({"target": nm, **racer("inplace", os.path.join(a, nm))})
+        return b
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="protected", before_go=races)]
+    ok, d = final_is(cfg, ("G3", "g3"))
+    refused = all(r.get("ok") is False for r in rr)
+    v = s[0]["outcome"] == "COMPLETE" and ok and refused and len(rr) == 15
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "15 competing writes/replaces/deletes/renames (Master, sidecar, manifest, "
+                           "publisher.lock) all refused; activation COMPLETE with exact G3 set"
+                           if v else "unexpected %s refused=%s" % (s[0]["outcome"], refused), {"racers": rr}))
+    name = "D_new_child_during_protection"
+    cfg = make_install(name)
+
+    def child(b):
+        if b == "act_done_forward_4":
+            wbytes(os.path.join(cfg, "sfm_shared_authority", "unexpected_new_child.tmp"), b"X")
+        return b
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="act_done_forward_4",
+                  before_go=child)]
+    t = tree(cfg)
+    v = s[0]["outcome"] == "CONFLICT" and "sfm_shared_authority\\unexpected_new_child.tmp" in t and \
+        all(originals_present(t).values())
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "unexpected new authority child detected by final exact-inventory check -> CONFLICT, "
+                           "no success claimed, nothing deleted" if v else "unexpected %s" % s[0]["outcome"]))
+    return R
+
+
+def group_E():
+    """Malformed, incomplete, inconsistent and conflicting states (P1 category 5)."""
+    R = []
+
+    def refused(name, cfg, s, want=("REFUSED",), extra_ok=True, why=""):
+        before = s.pop()
+        t = tree(cfg)
+        v = s[0]["outcome"] in want and noop_unchanged(before, t) and extra_ok
+        return finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                             "%s -> %s; active slots unchanged" % (why, s[0]["outcome"]) if v else
+                             "unexpected %s %s" % (s[0]["outcome"], s[0].get("details")))
+    cfg = make_install("E1_unknown_auth_file")
+    wbytes(os.path.join(cfg, "sfm_shared_authority", "sfm_master_0_tmp.partial"), b"partial")
+    b = tree(cfg)
+    R.append(refused("E1_unknown_auth_file", cfg,
+                     [activate("E1_unknown_auth_file", "act", cfg, "replace", SHA["G1"], source=G3_TXT), b],
+                     why="unrecognized authority file"))
+    cfg = make_install("E2_wrong_format_sidecar_name")
+    wcopy(GEN["g1"]["sidecar_path"], os.path.join(cfg, "sfm_shared_authority",
+                                                  GEN["g1"]["sidecar"].replace("_0_", "_1_")))
+    b = tree(cfg)
+    R.append(refused("E2_wrong_format_sidecar_name", cfg,
+                     [activate("E2_wrong_format_sidecar_name", "act", cfg, "replace", SHA["G1"], source=G3_TXT), b],
+                     why="sidecar-like file of an unknown format version"))
+    bad_src = os.path.join(WORK, "inputs", "malformed.txt")
+    wbytes(bad_src, open(G3_TXT, "rb").read()[:200000])
+    cfg = make_install("E3_malformed_import")
+    b = tree(cfg)
+    R.append(refused("E3_malformed_import", cfg,
+                     [activate("E3_malformed_import", "act", cfg, "replace", SHA["G1"], source=bad_src), b],
+                     extra_ok=not os.listdir(os.path.join(cfg, "sfm_character_tools_updater", "transactions")),
+                     why="truncated (grammatically invalid) import; no transaction created"))
+    cfg = make_install("E4_master_missing")
+    wremove(os.path.join(cfg, "sfm_defaultanimationgroups.txt"))
+    b = tree(cfg)
+    R.append(refused("E4_master_missing", cfg,
+                     [activate("E4_master_missing", "act", cfg, "rebuild", SHA["G1"]), b], why="active TXT absent"))
+    cfg = make_install("E5_master_hardlinked")
+    guard(os.path.join(cfg, "hardlink_to_master.txt"))
+    os.link(os.path.join(cfg, "sfm_defaultanimationgroups.txt"), os.path.join(cfg, "hardlink_to_master.txt"))
+    b = tree(cfg)
+    R.append(refused("E5_master_hardlinked", cfg,
+                     [activate("E5_master_hardlinked", "act", cfg, "replace", SHA["G1"], source=G3_TXT), b],
+                     why="active TXT has a second hard link"))
+    cfg = make_install("E6_stale_confirmation")
+    b = tree(cfg)
+    R.append(refused("E6_stale_confirmation", cfg,
+                     [activate("E6_stale_confirmation", "act", cfg, "replace", SHA["G2"], source=G3_TXT), b],
+                     why="confirmation bound to a different destination generation"))
+    name = "E7_manifest_absent"
+    cfg = make_install(name, manifest=None)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    ok, d = final_is(cfg, ("G3", "g3"))
+    v = s[0]["outcome"] == "COMPLETE" and ok
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "no prior manifest: plan omits P0; exact G3 set" if v else "unexpected"))
+    name = "E8_corrupt_prior_sidecar"
+    cfg = make_install(name, gens=())
+    junk = b"CORRUPT SIDECAR BYTES " * 1000
+    wbytes(os.path.join(cfg, "sfm_shared_authority", GEN["g1"]["sidecar"]), junk)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    t = tree(cfg)
+    ok, d = final_is(cfg, ("G3", "g3"))
+    v = s[0]["outcome"] == "COMPLETE" and ok and sha(junk) in t.values()
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "corrupt prior artifact retired (bytes preserved), never selected" if v else "unexpected"))
+    name = "E9_unknown_journal_schema"
+    cfg = make_install(name)
+    txid = uuid.uuid4().hex
+    td = os.path.join(cfg, "sfm_character_tools_updater", "transactions", txid)
+    wmkdirs(os.path.join(td, "candidate"))
+    wbytes(os.path.join(td, "intent.json"), json.dumps({"schema": "future-tx-9", "txid": txid}).encode())
+    body = json.dumps({"seq": 0, "rec": {"t": "INTENT", "schema": "future-tx-9", "txid": txid}},
+                      sort_keys=True, separators=(",", ":"))
+    wbytes(os.path.join(td, "journal"), ("%s\t%s\n" % (body, sha(body.encode()))).encode())
+    before = tree(cfg)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    s.append(recover(name, "rec1", cfg))
+    t = tree(cfg)
+    future_untouched = all(before[k] == t.get(k) for k in before if txid in k)
+    v = s[0]["outcome"] == "ABANDONED" and s[1]["outcome"] == "CONFLICT" and future_untouched and \
+        active_set(t) == active_set(before) and \
+        any("compatible updater" in (x.get("message") or "") for x in s[1]["transactions"])
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "unknown-schema transaction blocks activation; recovery refuses without mutation "
+                           "('Use a compatible updater')" if v else "unexpected %s" % outcomes(s)))
+    name = "E10_torn_journal_tail"
+    cfg = make_install(name)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="act_moved_forward_2",
+                  action="kill")]
+    wappend(os.path.join(txdirs(cfg)[0], "journal"), b'{"rec":{"t":"DONE","dir":"forw')
+    s.append(recover(name, "rec1", cfg))
+    s.append(recover(name, "rec2", cfg))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    j = open(os.path.join(txdirs(cfg)[0], "journal"), "rb").read()
+    v = ok and b"TORN_TAIL" in j and b'{"rec":{"t":"DONE","dir":"forw' in j and rec_terminal_ok(s[2])
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "torn bytes preserved + acknowledged; forward recovery to exact G3 set" if v else
+                           "unexpected"))
+    name = "E11_journal_missing"
+    cfg = make_install(name)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="candidates_written",
+                  action="kill")]
+    wremove(os.path.join(txdirs(cfg)[0], "journal"))
+    s.append(recover(name, "rec1", cfg))
+    ok, d = final_is(cfg, ("G1", "g1"))
+    v = ok and s[1]["transactions"] and s[1]["transactions"][0]["outcome"] == "ABANDONED"
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "missing journal: original state verified before declaring ABANDONED" if v else
+                           "unexpected"))
+    name = "E12_reparse_auth_dir"
+    cfg = make_install(name)
+    real_auth = os.path.join(WORK, "i", inst_id(name), "auth_real")
+    guard(real_auth)
+    os.rename(os.path.join(cfg, "sfm_shared_authority"), real_auth)
+    jok = junction(os.path.join(cfg, "sfm_shared_authority"), real_auth)
+    before = tree(cfg)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    v = jok and s[0]["outcome"] == "REFUSED" and "reparse" in json.dumps(s[0]["details"]) and tree(cfg) == before
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "junction authority directory refused before any write" if v else "unexpected"))
+    return R
+
+
+def group_F():
+    """Alias ownership and single publication owner (P1 category 6, same-account scope)."""
+    R = []
+    name = "F1_lock_held_by_other"
+    cfg = make_install(name)
+    lockp = os.path.join(cfg, LOCK_REL)
+    p, first = start_holder("racer.py", "lock", lockp)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    release(p)
+    s.append(recover(name, "rec1", cfg))
+    s.append(activate(name, "act2", cfg, "replace", SHA["G1"], source=G3_TXT))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    v = "ACQUIRED" in first and s[0]["outcome"] == "ABANDONED" and ok and s[2]["outcome"] == "COMPLETE"
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "lock held elsewhere -> ABANDONED before protection; after release the retry COMPLETEs"
+                           if v else "unexpected %s %s" % (first, outcomes(s))))
+    name = "F2_lock_aliases"
+    cfg = make_install(name)
+    lockp = os.path.join(cfg, LOCK_REL)
+    jroot = os.path.join(WORK, "i", inst_id(name), "alias_junction")
+    junction(jroot, os.path.join(cfg, "sfm_character_tools_updater"))
+    import ctypes
+    buf = ctypes.create_unicode_buffer(2048)
+    wbytes(lockp, b"")
+    ctypes.windll.kernel32.GetShortPathNameW("\\\\?\\" + lockp, buf, 2048)
+    short = buf.value[4:] if buf.value.startswith("\\\\?\\") else buf.value
+    aliases = {"junction": os.path.join(jroot, "installation.lock"), "upper_case": lockp.upper(),
+               "extended_prefix": "\\\\?\\" + lockp, "dotdot": os.path.join(cfg, "sfm_shared_authority", "..",
+                                                                          "sfm_character_tools_updater",
+                                                                          "installation.lock")}
+    if short and short.lower() != lockp.lower():
+        aliases["short_8dot3"] = short
+    p, first = start_holder("racer.py", "lock", lockp)
+    res = {}
+    for k, v in aliases.items():
+        q, f2 = start_holder("racer.py", "lock", v)
+        res[k] = f2
+        release(q)
+    release(p)
+    q, f3 = start_holder("racer.py", "lock", aliases["junction"])
+    q2, f4 = start_holder("racer.py", "lock", lockp)
+    release(q2)
+    release(q)
+    allref = all('"REFUSED"' in x for x in res.values()) and '"REFUSED"' in f4
+    R.append(finalize_case(name, cfg, [], "PASS" if allref else "FAIL",
+                           "canonical holder refuses %d aliases (%s) with 32; junction holder refuses canonical"
+                           % (len(aliases), ", ".join(sorted(aliases))) if allref else "unexpected",
+                           {"alias_results": res, "reverse": f4, "8dot3_available": "short_8dot3" in aliases}))
+    name = "F3_activate_via_junction"
+    cfg = make_install(name)
+    jl = os.path.join(WORK, "i", inst_id(name), "cfg_alias")
+    junction(jl, cfg)
+    s = [activate(name, "act", jl, "replace", SHA["G1"], source=G3_TXT)]
+    ok, d = final_is(cfg, ("G3", "g3"))
+    v = s[0]["outcome"] == "COMPLETE" and ok
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "alias resolved to the physical installation; exact G3 set" if v else "unexpected"))
+    name = "F4_alias_outside_scratch_refused"
+    target = A.outside_target  # an existing directory outside the scratch root; only listed, never written
+    jl = os.path.join(WORK, "inst", name)
+    os.makedirs(os.path.dirname(jl), exist_ok=True)
+    jok = junction(jl, target)
+    before = sorted(os.listdir(target))
+    s = [run_op(name, "act", ["prepare-rebuild"], cfg=jl)]
+    v = jok and s[0]["outcome"] == "REFUSED" and "outside the L-1 scratch root" in json.dumps(s[0]["details"]) and \
+        sorted(os.listdir(target)) == before
+    R.append(finalize_case(name, None, s, "PASS" if v else "FAIL",
+                           "installation resolving outside the scratch root refused; target unchanged"
+                           if v else "unexpected"))
+    name = "F5_concurrent_activations"
+    cfg = make_install(name)
+    other = {}
+
+    def second(b):
+        if b == "locked":
+            other["s"] = activate(name, "act_second", cfg, "replace", SHA["G1"], source=G3_TXT)
+            other["r"] = recover(name, "rec_while_held", cfg)
+        return b
+    s = [activate(name, "act_first", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="locked", before_go=second)]
+    s += [other["s"], other["r"]]
+    s.append(recover(name, "rec_after", cfg))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    v = s[0]["outcome"] == "COMPLETE" and other["s"]["outcome"] == "ABANDONED" and \
+        other["r"]["outcome"] in ("REFUSED", "ERROR") and ok and rec_terminal_ok(s[-1])
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "second activation ABANDONED (lock 32) and recovery refused while the owner held the "
+                           "lock; owner COMPLETE; exact G3 set" if v else "unexpected %s" % outcomes(s)))
+    return R
+
+
+def group_G():
+    """Legacy publisher.lock recognition and in-place preservation (P1 category 7)."""
+    R = []
+    sys.path.insert(0, UPDATER)
+    from sfm_character_tools_updater import w32
+    name = "G1_lock_identity_preserved"
+    cfg = make_install(name)
+    lp = os.path.join(cfg, "sfm_shared_authority", "publisher.lock")
+
+    def ident(p):
+        h, e = w32.create_file(p, w32.FILE_READ_ATTRIBUTES, 7, w32.OPEN_EXISTING)
+        i = (w32.file_id(h), os.path.getmtime(p), os.path.getsize(p))
+        w32.close(h)
+        return i
+    i0 = ident(lp)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    i1 = ident(lp)
+    ok, d = final_is(cfg, ("G3", "g3"))
+    v = s[0]["outcome"] == "COMPLETE" and ok and i0 == i1
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "publisher.lock recognized; same FileId, mtime and size 0 after activation" if v else
+                           "unexpected %s %s %s" % (s[0]["outcome"], i0, i1)))
+    name = "G2_legacy_publisher_active"
+    cfg = make_install(name)
+    p, first = start_holder("legacy_pub.py", "hold", os.path.join(cfg, "sfm_shared_authority", "publisher.lock"))
+    before = tree(cfg)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    after = tree(cfg)
+    rel = release(p)
+    v = first == "HELD" and s[0]["outcome"] == "REFUSED" and "legacy publisher may be active" in \
+        json.dumps(s[0]["details"]) and noop_unchanged(before, after) and \
+        not os.listdir(os.path.join(cfg, "sfm_character_tools_updater", "transactions"))
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "real legacy _ExclusiveFileLock held -> REFUSED 'a legacy publisher may be active'; "
+                           "nothing written" if v else "unexpected %s %s" % (first, s[0]["outcome"]),
+                           {"legacy_release": rel}))
+    name = "G3_legacy_publisher_blocked_during_activation"
+    cfg = make_install(name)
+    tried = {}
+
+    def attempt(b):
+        if b == "act_done_forward_3":
+            cp = py3("legacy_pub.py", "try", os.path.join(cfg, "sfm_shared_authority", "publisher.lock"))
+            tried["r"] = cp.stdout.strip()
+        return b
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="act_done_forward_3",
+                  before_go=attempt)]
+    after_try = py3("legacy_pub.py", "try", os.path.join(cfg, "sfm_shared_authority", "publisher.lock")).stdout.strip()
+    ok, d = final_is(cfg, ("G3", "g3"))
+    v = s[0]["outcome"] == "COMPLETE" and ok and '"acquired": false' in tried.get("r", "") and \
+        '"acquired": true' in after_try
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "legacy lock acquisition fails while activation holds publisher.lock; succeeds after; "
+                           "exact G3 set" if v else "unexpected %s %s" % (tried, after_try),
+                           {"during": tried.get("r"), "after": after_try}))
+
+    def nonempty(lp):
+        wappend(lp, b"x")
+
+    def hardlink(lp):
+        q = os.path.join(os.path.dirname(os.path.dirname(lp)), "lock_link")
+        guard(q)
+        os.link(lp, q)
+
+    def directory(lp):
+        wremove(lp)
+        wmkdirs(lp)
+    for nm, mut, why in (("G4_lock_not_empty", nonempty, "non-empty publisher.lock"),
+                         ("G5_lock_hardlinked", hardlink, "hard-linked publisher.lock"),
+                         ("G6_lock_is_directory", directory, "publisher.lock is a directory")):
+        cfg = make_install(nm)
+        mut(os.path.join(cfg, "sfm_shared_authority", "publisher.lock"))
+        b = tree(cfg)
+        s = [activate(nm, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+        v = s[0]["outcome"] == "REFUSED" and noop_unchanged(b, tree(cfg))
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "%s -> REFUSED, unchanged" % why if v else "unexpected %s %s" % (
+                                   s[0]["outcome"], s[0]["details"])))
+    name = "G7_lock_absent"
+    cfg = make_install(name, legacy_lock=False)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    ok, d = final_is(cfg, ("G3", "g3"), legacy_lock=False)
+    v = s[0]["outcome"] == "COMPLETE" and ok
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "no publisher.lock: completes; none created" if v else "unexpected"))
+    name = "G8_legacy_starts_before_protection"
+    cfg = make_install(name)
+    hp = {}
+
+    def grab(b):
+        if b == "locked":
+            hp["p"], hp["first"] = start_holder("legacy_pub.py", "hold",
+                                                os.path.join(cfg, "sfm_shared_authority", "publisher.lock"))
+        return b
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="locked", before_go=grab)]
+    release(hp["p"])
+    s.append(recover(name, "rec1", cfg))
+    ok, d = final_is(cfg, ("G1", "g1"))
+    v = hp["first"] == "HELD" and s[0]["outcome"] == "ABANDONED" and ok and rec_terminal_ok(s[1])
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "legacy publisher started after preview -> ABANDONED at protection; exact G1 set"
+                           if v else "unexpected %s" % outcomes(s)))
+    name = "G9_lock_replaced_before_protection"
+    cfg = make_install(name)
+
+    def swap(b):
+        if b == "locked":
+            lp = os.path.join(cfg, "sfm_shared_authority", "publisher.lock")
+            wremove(lp)
+            wbytes(lp, b"")
+        return b
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="locked", before_go=swap)]
+    ok, d = final_is(cfg, ("G1", "g1"))
+    v = s[0]["outcome"] == "ABANDONED" and "identity changed" in json.dumps(s[0]["details"]) and ok
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "publisher.lock replaced by a different empty file -> identity mismatch -> ABANDONED"
+                           if v else "unexpected %s %s" % (s[0]["outcome"], s[0]["details"])))
+    return R
+
+
+def group_H():
+    """Selector behaviour on prepared states (P1 category 8; Py2.7, outside SFM)."""
+    R = []
+    cfg = make_install("H1_two_art", gens=("g1", "g3"))
+    sel = py27_select(cfg)
+    v = sel.get("selected_basename") == GEN["g1"]["sidecar"] and GEN["g1"]["sidecar"] > GEN["g3"]["sidecar"]
+    R.append(finalize_case("H1_two_art", cfg, [], "PASS" if v else "FAIL",
+                           "G1 Master with G3 (sorts first) + G1 artifacts: selector skips the mismatch and selects "
+                           "G1 by source hash" if v else "unexpected", {"selector": sel}))
+    cfg = make_install("H2_no_matching_artifact", master="G3", gens=("g1",))
+    sel = py27_select(cfg)
+    v = sel.get("classification") == "SidecarMissing"
+    R.append(finalize_case("H2_no_matching_artifact", cfg, [], "PASS" if v else "FAIL",
+                           "stale authority (G3 Master, G1 artifact only) -> SidecarMissing, no fallback" if v else
+                           "unexpected", {"selector": sel}))
+    return R
+
+
+def group_I():
+    """Broker-level sharing-violation classification (P1 category 9). Library level only."""
+    R = []
+    cfg = make_install("I_sharing")
+    m = os.path.join(cfg, "sfm_defaultanimationgroups.txt")
+    sc = os.path.join(cfg, "sfm_shared_authority", GEN["g1"]["sidecar"])
+    mf = os.path.join(cfg, "sfm_shared_authority", "manifest.json")
+    rows = []
+    for label, path, acc, share, want in (
+            ("updater protection on Master (READ|DELETE, share 0)", m, "rd", 0, "MasterUnreadable"),
+            ("updater protection on sidecar (READ|DELETE, share 0)", sc, "rd", 0, "SidecarMissing"),
+            ("Normalizer-style read handle on Master (share READ)", m, "r", 1, "SELECTED"),
+            ("updater protection on manifest (share 0)", mf, "rd", 0, "SELECTED")):
+        p, first = start_holder("hold.py", path, acc, str(share))
+        sel = py27_select(cfg)
+        release(p)
+        rows.append({"label": label, "holder": first, "classification": sel.get("classification"),
+                     "diagnostics": sel.get("diagnostics"), "detail": sel.get("detail"), "want": want})
+    v = all(r["classification"] == r["want"] and '"held": true' in r["holder"] for r in rows)
+    R.append(finalize_case("I1_broker_classification", cfg, [], "PASS" if v else "FAIL",
+                           "Py2.7 library: protected Master -> MasterUnreadable; protected sidecar -> skipped, "
+                           "SidecarMissing; share-read Master -> SELECTED; manifest not consulted" if v else
+                           "unexpected %s" % [(r["label"][:20], r["classification"]) for r in rows], {"rows": rows}))
+    name = "I2_normalizer_handle_blocks_updater"
+    cfg = make_install(name)
+    p, first = start_holder("hold.py", os.path.join(cfg, "sfm_defaultanimationgroups.txt"), "r", "1")
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    release(p)
+    s.append(recover(name, "rec1", cfg))
+    ok, d = final_is(cfg, ("G1", "g1"))
+    v = s[0]["outcome"] == "ABANDONED" and "ERROR_SHARING_VIOLATION" in json.dumps(s[0]["details"]) and ok
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "Normalizer-style share-read handle -> updater protection fails 32 -> ABANDONED; "
+                           "exact G1 set" if v else "unexpected %s %s" % (s[0]["outcome"], s[0]["details"])))
+    return R
+
+
+def group_J():
+    """A3 process status and fail-closed barriers (P1 category 10). In the product the pre-lock
+    gate refuses first: REFUSED with nothing created (P1: ABANDONED at the post-lock gate; that
+    path is covered by X5)."""
+    R = []
+    for nm, inj, want in (("J1_process_running", RUNNING, "RUNNING"),
+                          ("J2_query_exception", "raise", "UNKNOWN"),
+                          ("J3_query_nonzero_exit", "rc:5", "UNKNOWN"),
+                          ("J4_query_empty_output", "output:", "UNKNOWN"),
+                          ("J5_query_unparseable", "output:ERROR: something odd", "UNKNOWN"),
+                          ("J6_query_other_image", 'output:"notsfm.exe","1","Console","1","1 K"', "UNKNOWN")):
+        cfg = make_install(nm)
+        before = tree(cfg)
+        s = [activate(nm, "act", cfg, "replace", SHA["G1"], source=G3_TXT, inject={"process": inj})]
+        mid = tree(cfg)
+        s.append(recover(nm, "rec_with_same_status", cfg, inject={"process": inj}))
+        s.append(recover(nm, "rec_clear", cfg))
+        ok, d = final_is(cfg, ("G1", "g1"))
+        v = s[0]["outcome"] == "REFUSED" and want in json.dumps(s[0]["details"]) and zero_excl(s[0]) and \
+            before == mid and not txdirs(cfg) and s[1]["outcome"] == "REFUSED" and ok and rec_terminal_ok(s[2]) \
+            and "Close SFM" in (s[0]["message"] or "")
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "process status %s -> install REFUSED at the pre-lock gate (no transaction, no lock, "
+                               "0 exclusive opens), recovery REFUSED; exact G1 set" % want if v else
+                               "unexpected %s %s" % (outcomes(s), s[0]["details"])))
+    for nm, act, at in (("J7_barrier_eof", "eof", "act_moved_forward_2"),
+                        ("J8_barrier_bad_token", "badtoken", "act_moved_forward_2"),
+                        ("J9_barrier_timeout", "timeout", "act_moved_forward_2"),
+                        ("J10_barrier_eof_before_protection", "eof", "protected")):
+        cfg = make_install(nm)
+        s = [activate(nm, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at=at, action=act,
+                      barrier_timeout=5 if act == "timeout" else None)]
+        s.append(recover(nm, "rec1", cfg))
+        s.append(recover(nm, "rec2", cfg))
+        exp = ("G1", "g1") if at == "protected" else ("G3", "g3")
+        ok, d = final_is(cfg, exp)
+        v = s[0]["outcome"] == "STOPPED" and ok and rec_terminal_ok(s[2])
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "barrier %s at %s -> STOPPED (no success claimed); recovery -> exact %s set"
+                               % (act, at, exp[0]) if v else "unexpected %s" % outcomes(s)))
+    return R
+
+
+def group_K():
+    """Path lengths on E: (P1 category 11) under the Amendment §2.3 consumer path budget."""
+    R = []
+    name = "K1_deep_installation_refused"
+    cfg = make_install(name, depth_pad=5)
+    before = tree(cfg, include_staging=True)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+    s.append(activate(name, "act_rebuild", cfg, "rebuild", SHA["G1"]))
+    after = tree(cfg, include_staging=True)
+    v = all(x["outcome"] == "REFUSED" and "budget" in json.dumps(x["details"]) for x in s) and before == after
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "cfg path %d chars: consumer sidecar path over budget -> prepare REFUSED (import and "
+                           "rebuild); nothing written" % len(cfg) if v else "unexpected %s" % outcomes(s),
+                           {"cfg_len": len(cfg)}))
+    name = "K3_long_transaction_paths_in_budget"
+    cfg = make_install(name)
+    s = [activate(name, "act", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="act_done_forward_3",
+                  action="kill")]
+    s.append(recover(name, "rec1", cfg))
+    s.append(recover(name, "rec2", cfg))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    mp = max_path(cfg)
+    v = ok and rec_terminal_ok(s[2]) and mp > 260
+    R.append(finalize_case(name, cfg, s, "PASS" if v else "FAIL",
+                           "consumer paths in budget; transaction paths up to %d chars; kill + recovery to exact G3 "
+                           "set" % mp if v else "unexpected", {"cfg_len": len(cfg), "max_path": mp}))
+    rows = []
+    for target in (259, 260):
+        fixed = len(os.path.join(WORK, "inst", "")) + len("\\" + SUBDIR + "\\sfm_shared_authority\\") + \
+            len(GEN["g1"]["sidecar"])
+        nm = "K2_%d_" % target
+        nm += "x" * (target - fixed - len(nm))
+        cfg = make_install(nm, base=os.path.join(WORK, "inst", nm))
+        sp = os.path.join(cfg, "sfm_shared_authority", GEN["g1"]["sidecar"])
+        sel = py27_select(cfg)
+        rows.append({"sidecar_path_len": len(sp), "classification": sel.get("classification"),
+                     "reasons": [d.get("reason") for d in sel.get("diagnostics", []) if isinstance(d, dict)]})
+    v = rows[0]["sidecar_path_len"] == 259 and rows[0]["classification"] == "SELECTED" and \
+        rows[1]["sidecar_path_len"] == 260 and rows[1]["classification"] == "SidecarMissing" and \
+        rows[1]["reasons"] == ["io_error"]
+    R.append(finalize_case("K2_py27_consumer_maxpath", None, [], "PASS" if v else "FAIL",
+                           "Py2.7 selector: 259-char sidecar path SELECTED; 260-char path skipped as io_error -> "
+                           "SidecarMissing (the boundary the product budget enforces)" if v else "unexpected %s" % rows,
+                           {"rows": rows}))
+    return R
+
+
+def group_N():
+    """C1 corrected verified-no-op path (p1c1run.py N1-N10), on the product backend."""
+    R = []
+    for nm, kind, src in (("N1_noop_rebuild_clear", "rebuild", None), ("N2_noop_import_same_clear", "replace", G1_TXT)):
+        cfg = make_install(nm)
+        before = tree(cfg)
+        s = [activate(nm, "noop", cfg, kind, SHA["G1"], source=src)]
+        after = tree(cfg)
+        sel = py27_select(cfg)
+        v = noop_ok(s[0]) and noop_unchanged(before, after) and sel.get("selected_basename") == GEN["g1"]["sidecar"]
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "NOOP after gate -> lock -> tx check -> CLEAR gate -> 3 share-0 identity matches; "
+                               "unchanged; correspondence verified; selector G1" if v else
+                               "unexpected %s" % s[0].get("outcome"), {"selector": sel}))
+    for nm, inj, want in (("N3_noop_running", RUNNING, "RUNNING"), ("N4_noop_unknown_exception", "raise", "UNKNOWN")):
+        cfg = make_install(nm)
+        before = tree(cfg)
+        s = [activate(nm, "noop", cfg, "rebuild", SHA["G1"], inject={"process": inj})]
+        ev = [e for e in s[0]["trace_summary"]["events"] if e["event"] == "process_gate"]
+        v = (s[0]["outcome"] == "REFUSED" and want in json.dumps(s[0]["details"]) and zero_excl(s[0])
+             and ev and ev[0]["decision"] == "REFUSE" and noop_unchanged(before, tree(cfg))
+             and not s[0]["trace_summary"]["installation_lock_opens"])
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "%s -> REFUSED; no lock; 0 exclusive authority opens; unchanged" % want if v else
+                               "unexpected %s %s" % (s[0]["outcome"], s[0].get("details"))))
+    nm = "N5_noop_pending_before_protection"
+    cfg = make_install(nm)
+    s = [activate(nm, "act_killed", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="locked", action="kill")]
+    before = tree(cfg)
+    txb = tx_files(cfg)
+    s.append(activate(nm, "noop1", cfg, "rebuild", SHA["G1"]))
+    mid = tree(cfg)
+    s.append(recover(nm, "rec", cfg))
+    s.append(activate(nm, "noop2", cfg, "rebuild", SHA["G1"]))
+    ok, d = final_is(cfg, ("G1", "g1"))
+    txa = tx_files(cfg)
+    v = (s[0]["killed"] and s[1]["outcome"] == "REFUSED" and "run recovery" in json.dumps(s[1]["details"])
+         and s[1]["details"].get("status") == "INTENT" and zero_excl(s[1]) and noop_unchanged(before, mid)
+         and s[2]["outcome"] == "OK" and s[2]["transactions"][0]["outcome"] == "ABANDONED"
+         and noop_ok(s[3]) and [t["status"] for t in s[3]["transactions_checked"]] == ["ABANDONED"]
+         and ok and all(k in txa for k in txb))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "pending INTENT tx -> no-op REFUSED (run recovery), 0 excl opens; recovery ABANDONED; "
+                           "then NOOP; exact G1; tx evidence retained" if v else
+                           "unexpected %s" % outcomes(s), {"final_check": d}))
+    nm = "N6_noop_pending_after_protection"
+    cfg = make_install(nm)
+    s = [activate(nm, "act_killed", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="act_begin_forward_0",
+                  action="kill")]
+    before = tree(cfg)
+    s.append(activate(nm, "noop1", cfg, "rebuild", SHA["G1"]))
+    s.append(recover(nm, "rec_running", cfg, inject={"process": RUNNING}))
+    mid = tree(cfg)
+    s.append(recover(nm, "rec_rollback", cfg, policy="rollback"))
+    s.append(activate(nm, "noop2", cfg, "rebuild", SHA["G1"]))
+    ok, d = final_is(cfg, ("G1", "g1"))
+    rr = s[2].get("trace_summary", {})
+    v = (s[0]["killed"] and s[1]["outcome"] == "REFUSED" and s[1]["details"].get("status") == "BEGIN"
+         and zero_excl(s[1]) and s[2]["outcome"] == "REFUSED" and zero_excl(s[2])
+         and not rr.get("installation_lock_opens") and noop_unchanged(before, mid)
+         and s[3]["outcome"] == "OK" and s[3]["transactions"][0]["outcome"] == "ROLLED_BACK"
+         and noop_ok(s[4]) and ok)
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "protected/BEGIN tx -> no-op REFUSED; RUNNING recovery REFUSED with 0 excl opens and no "
+                           "lock; rollback recovery ROLLED_BACK; NOOP; exact G1" if v else
+                           "unexpected %s" % outcomes(s), {"final_check": d}))
+    nm = "N7_noop_unknown_schema"
+    cfg = make_install(nm)
+    txid = uuid.uuid4().hex
+    td = os.path.join(cfg, "sfm_character_tools_updater", "transactions", txid)
+    wbytes(os.path.join(td, "intent.json"), json.dumps({"schema": "future-tx-9", "txid": txid}).encode())
+    body = json.dumps({"seq": 0, "rec": {"t": "INTENT", "schema": "future-tx-9", "txid": txid}},
+                      sort_keys=True, separators=(",", ":"))
+    wbytes(os.path.join(td, "journal"), ("%s\t%s\n" % (body, sha(body.encode()))).encode())
+    before = tree(cfg)
+    s = [activate(nm, "noop", cfg, "rebuild", SHA["G1"])]
+    v = (s[0]["outcome"] == "REFUSED" and "compatible updater" in (s[0]["message"] or "") and zero_excl(s[0])
+         and noop_unchanged(before, tree(cfg)))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "unknown-schema tx -> REFUSED 'Use a compatible updater'; 0 excl opens; bytes unchanged"
+                           if v else "unexpected %s %s" % (s[0]["outcome"], s[0].get("details"))))
+    nm = "N8_noop_terminal_records"
+    cfg = make_install(nm)
+    s = [activate(nm, "to_g3", cfg, "replace", SHA["G1"], source=G3_TXT),
+         activate(nm, "back_to_g1", cfg, "replace", SHA["G3"], source=G1_TXT)]
+    before = tree(cfg)
+    s.append(activate(nm, "noop", cfg, "rebuild", SHA["G1"]))
+    st = [t["status"] for t in (s[2].get("transactions_checked") or [])]
+    v = (s[0]["outcome"] == "COMPLETE" and s[1]["outcome"] == "COMPLETE" and noop_ok(s[2])
+         and st == ["COMPLETE", "COMPLETE"] and noop_unchanged(before, tree(cfg)))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "two COMPLETE records -> NOOP lists both as terminal" if v else
+                           "unexpected %s %s" % (outcomes(s), st)))
+    nm = "N9_noop_unfamiliar_entry"
+    cfg = make_install(nm)
+    wmkdirs(os.path.join(cfg, "sfm_character_tools_updater", "transactions", "not-a-transaction"))
+    before = tree(cfg)
+    s = [activate(nm, "noop", cfg, "rebuild", SHA["G1"])]
+    v = (s[0]["outcome"] == "REFUSED" and "unfamiliar transaction entry" in json.dumps(s[0]["details"])
+         and zero_excl(s[0]) and noop_unchanged(before, tree(cfg)))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "unfamiliar entry -> REFUSED; 0 excl opens" if v else "unexpected %s" % s[0]["outcome"]))
+    nm = "N10_noop_protection_conflict"
+    cfg = make_install(nm)
+    before = tree(cfg)
+    p, first = start_holder("hold.py", os.path.join(cfg, "sfm_shared_authority", GEN["g1"]["sidecar"]), "r", "1")
+    s = [activate(nm, "noop_held", cfg, "rebuild", SHA["G1"])]
+    rel = release(p)
+    mid = tree(cfg)
+    s.append(activate(nm, "noop_released", cfg, "rebuild", SHA["G1"]))
+    v = ('"held": true' in first and s[0]["outcome"] == "REFUSED"
+         and "ERROR_SHARING_VIOLATION" in json.dumps(s[0]["details"]) and noop_unchanged(before, mid)
+         and noop_ok(s[1]))
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "sidecar held (share READ) -> REFUSED sharing violation, unchanged; released -> NOOP"
+                           if v else "unexpected %s %s" % (outcomes(s), s[0].get("details")),
+                           {"holder": first, "holder_release": rel}))
+    return R
+
+
+def group_X():
+    """L-1 additional cases (card §8)."""
+    R = []
+    # X1 preparation with SFM RUNNING: staging only; install refuses while RUNNING; installs once CLEAR.
+    nm = "X1_prepare_while_running"
+    cfg = make_install(nm, master="G3", gens=("g1",))
+    before = tree(cfg)
+    pr = prepare(nm, "prep", cfg, "rebuild", inject={"process": RUNNING})
+    mid = tree(cfg)
+    staged = {k: v for k, v in tree(cfg, True).items() if k.startswith(STAGING_PREFIX)}
+    s = [pr, install(nm, "install_running", cfg, pr.get("prepid") or "", SHA["G3"], inject={"process": RUNNING})]
+    mid2 = tree(cfg)
+    s.append(install(nm, "install_clear", cfg, pr.get("prepid") or "", SHA["G3"]))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    excl_prep = pr.get("trace_summary", {}).get("n_exclusive_authority_opens")
+    v = (pr["outcome"] == "PREPARED" and (pr.get("process_status") or [None])[0] == "RUNNING"
+         and "close SFM" in (pr["message"] or "") and before == mid and excl_prep == 0
+         and not pr["trace_summary"]["installation_lock_opens"]
+         and sorted(os.path.basename(k) for k in staged) == sorted([GEN["g3"]["sidecar"], "manifest.json",
+                                                                    "prepared.json"])
+         and s[1]["outcome"] == "REFUSED" and before == mid2 and s[2]["outcome"] == "COMPLETE" and ok
+         and (s[2].get("correspondence") or {}).get("ok") is True)
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "prepare with RUNNING -> PREPARED (warning), only staging written, no lock, 0 exclusive "
+                           "authority opens; install RUNNING -> REFUSED unchanged; install CLEAR -> COMPLETE exact G3"
+                           if v else "unexpected %s excl=%s" % (outcomes(s), excl_prep), {"staged": staged}))
+    # X2 consumer path budget boundary: sidecar consumer path 259 installs, 260 refuses.
+    rows = []
+    for target in (259, 260):
+        fixed = len(os.path.join(WORK, "inst", "")) + len("\\" + SUBDIR + "\\sfm_shared_authority\\") + \
+            len(GEN["g3"]["sidecar"])
+        nm = "X2_%d_" % target
+        nm += "y" * (target - fixed - len(nm))
+        cfg = make_install(nm, master="G3", gens=("g1",), base=os.path.join(WORK, "inst", nm))
+        sp = os.path.join(cfg, "sfm_shared_authority", GEN["g3"]["sidecar"])
+        before = tree(cfg, include_staging=True)
+        st = activate(nm, "act", cfg, "rebuild", SHA["G3"])
+        rows.append({"sidecar_path_len": len(sp), "outcome": st["outcome"], "details": st.get("details"),
+                     "unchanged": tree(cfg, include_staging=True) == before,
+                     "exact_g3": final_is(cfg, ("G3", "g3"))[0]})
+    v = (rows[0]["sidecar_path_len"] == 259 and rows[0]["outcome"] == "COMPLETE" and rows[0]["exact_g3"]
+         and rows[1]["sidecar_path_len"] == 260 and rows[1]["outcome"] == "REFUSED"
+         and "budget" in json.dumps(rows[1]["details"]) and rows[1]["unchanged"])
+    R.append(finalize_case("X2_path_budget_boundary", None, [], "PASS" if v else "FAIL",
+                           "sidecar consumer path 259 -> COMPLETE; 260 -> REFUSED 'path too long', nothing written"
+                           if v else "unexpected %s" % rows, {"rows": rows}))
+    # X3 post-install process-status recheck (gate CLEAR, gate CLEAR, then RUNNING / UNKNOWN).
+    for nm, third, key in (("X3a_post_install_running", RUNNING, "RESTART_RUNNING"),
+                           ("X3b_post_install_unknown", "raise", "RESTART_UNKNOWN")):
+        cfg = make_install(nm, master="G3", gens=("g1",))
+        s = [activate(nm, "act", cfg, "rebuild", SHA["G3"], inject={"process_seq": "clear||clear||" + third})]
+        ok, d = final_is(cfg, ("G3", "g3"))
+        want = "SFM was started during installation" if key == "RESTART_RUNNING" else "could not be confirmed"
+        v = (s[0]["outcome"] == "COMPLETE" and ok and s[0].get("restart_required") is True
+             and want in (s[0]["message"] or "") and (s[0].get("correspondence") or {}).get("ok") is True
+             and len(s[0].get("process_forms_used") or []) == 3)
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "installation verified and kept; post-install status %s -> restart required, "
+                               "message says so" % key if v else "unexpected %s %s" % (outcomes(s), s[0]["message"])))
+    cfg = make_install("X3c_post_install_clear", master="G3", gens=("g1",))
+    s = [activate("X3c_post_install_clear", "act", cfg, "rebuild", SHA["G3"])]
+    v = s[0]["outcome"] == "COMPLETE" and not s[0].get("restart_required") and \
+        "You can now reopen SFM" in (s[0]["message"] or "") and \
+        (s[0].get("post_install_process_status") or [None])[0] == "CLEAR"
+    R.append(finalize_case("X3c_post_install_clear", cfg, s, "PASS" if v else "FAIL",
+                           "post-install status CLEAR (real query) -> 'You can now reopen SFM'" if v else
+                           "unexpected %s %s" % (outcomes(s), s[0]["message"])))
+    # X4 experimental and future transaction schemas: refused without mutation.
+    for nm, schema in (("X4a_schema_p1", "u0b-p1-tx-1"), ("X4b_schema_u0a", "u0a-tx-1")):
+        cfg = make_install(nm)
+        txid = uuid.uuid4().hex
+        td = os.path.join(cfg, "sfm_character_tools_updater", "transactions", txid)
+        wmkdirs(os.path.join(td, "candidate"))
+        wbytes(os.path.join(td, "intent.json"), json.dumps({"schema": schema, "txid": txid, "kind": "replace"}).encode())
+        body = json.dumps({"seq": 0, "rec": {"t": "INTENT", "schema": schema, "txid": txid}},
+                          sort_keys=True, separators=(",", ":"))
+        wbytes(os.path.join(td, "journal"), ("%s\t%s\n" % (body, sha(body.encode()))).encode())
+        before = tree(cfg)
+        s = [status(nm, "status", cfg), recover(nm, "rec1", cfg), recover(nm, "rec2", cfg, policy="rollback"),
+             activate(nm, "act", cfg, "replace", SHA["G1"], source=G3_TXT)]
+        after = tree(cfg)
+        txs_untouched = {k: v for k, v in before.items() if txid in k} == {k: v for k, v in after.items() if txid in k}
+        v = (s[0].get("recovery_needed") is True
+             and all(x["outcome"] == "CONFLICT" and any("compatible updater" in (t.get("message") or "")
+                                                        for t in x["transactions"]) for x in s[1:3])
+             and s[3]["outcome"] == "ABANDONED" and txs_untouched and active_set(before) == active_set(after))
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "%s transaction: status reports recovery needed; recovery (resume and rollback) "
+                               "CONFLICT 'Use a compatible updater' without mutation; install ABANDONED" % schema
+                               if v else "unexpected %s" % outcomes(s)))
+    # X5 post-lock gate: CLEAR before the lock, then RUNNING / UNKNOWN -> ABANDONED before protection.
+    for nm, second in (("X5a_post_lock_gate_running", RUNNING), ("X5b_post_lock_gate_unknown", "rc:1")):
+        cfg = make_install(nm)
+        s = [activate(nm, "act", cfg, "replace", SHA["G1"], source=G3_TXT, inject={"process_seq": "clear||" + second})]
+        s.append(recover(nm, "rec_clear", cfg))
+        ok, d = final_is(cfg, ("G1", "g1"))
+        lockp = s[0]["trace_summary"]["installation_lock_opens"]
+        v = (s[0]["outcome"] == "ABANDONED" and zero_excl(s[0]) and lockp and lockp[0]["ok"]
+             and s[0]["details"].get("gate") == "post-lock" and ok and rec_terminal_ok(s[1]))
+        R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                               "pre-lock CLEAR, post-lock %s -> ABANDONED after the lock and before any exclusive "
+                               "authority open; exact G1" % second.split(":")[0] if v else
+                               "unexpected %s %s" % (outcomes(s), s[0].get("details"))))
+    # X6 prepared data no longer matching: TXT edited after preparation / staged bytes altered.
+    nm = "X6a_txt_changed_after_prepare"
+    cfg = make_install(nm, master="G3", gens=("g1",))
+    pr = prepare(nm, "prep", cfg, "rebuild")
+    if pr["outcome"] != "PREPARED":
+        return R + [finalize_case(nm, cfg, [pr], "FAIL", "preparation failed: %s" % pr.get("details"))]
+    wappend(os.path.join(cfg, "sfm_defaultanimationgroups.txt"), b"\n// edit after preparation\n")
+    before = tree(cfg)
+    s = [pr, install(nm, "install", cfg, pr["prepid"], SHA["G3"])]
+    v = s[1]["outcome"] == "REFUSED" and "Prepare it again" in (s[1]["message"] or "") and before == tree(cfg) \
+        and not txdirs(cfg)
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "TXT edited after preparation -> REFUSED 'prepare again'; nothing created; edit kept"
+                           if v else "unexpected %s" % outcomes(s)))
+    nm = "X6b_staged_bytes_altered"
+    cfg = make_install(nm, master="G3", gens=("g1",))
+    pr = prepare(nm, "prep", cfg, "rebuild")
+    if pr["outcome"] != "PREPARED":
+        return R + [finalize_case(nm, cfg, [pr], "FAIL", "preparation failed: %s" % pr.get("details"))]
+    sp = os.path.join(cfg, "sfm_character_tools_updater", "staging", pr["prepid"], GEN["g3"]["sidecar"])
+    wappend(sp, b"X")
+    before = tree(cfg)
+    s = [pr, install(nm, "install", cfg, pr["prepid"], SHA["G3"]),
+         install(nm, "install_unknown_id", cfg, uuid.uuid4().hex, SHA["G3"])]
+    v = all(x["outcome"] == "REFUSED" and "Prepare it again" in (x["message"] or "") for x in s[1:]) and \
+        before == tree(cfg) and not txdirs(cfg)
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "altered staged sidecar / unknown preparation id -> REFUSED 'prepare again'; nothing "
+                           "created" if v else "unexpected %s" % outcomes(s)))
+    # X7 status is read-only (no lock file, no staging, no journal change) and reports a pending transaction.
+    nm = "X7_status_read_only"
+    cfg = make_install(nm)
+    s = [activate(nm, "act_killed", cfg, "replace", SHA["G1"], source=G3_TXT, stop_at="act_done_forward_2",
+                  action="kill")]
+    before = tree(cfg, include_staging=True)
+    lock_existed = os.path.exists(os.path.join(cfg, LOCK_REL))
+    s.append(status(nm, "status", cfg))
+    after = tree(cfg, include_staging=True)
+    s.append(recover(nm, "rec", cfg))
+    s.append(status(nm, "status_after", cfg))
+    ok, d = final_is(cfg, ("G3", "g3"))
+    ts = s[1].get("trace_summary", {})
+    v = (s[1]["outcome"] == "STATUS" and before == after and ts.get("n_exclusive_authority_opens") == 0
+         and not ts.get("installation_lock_opens") and lock_existed
+         and s[3].get("recovery_needed") is False and (s[3].get("correspondence") or {}).get("ok") is True and ok)
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "status changed nothing (no lock/exclusive opens), reported recovery needed; after "
+                           "recovery: consistent, exact G3" if v else "unexpected %s" % outcomes(s)))
+    # X8 truthful report: authority changed after final verification -> UNVERIFIED (not 'complete').
+    nm = "X8_correspondence_failure_unverified"
+    cfg = make_install(nm, master="G3", gens=("g1",))
+
+    def add_child(b):
+        if b == "complete":
+            wbytes(os.path.join(cfg, "sfm_shared_authority", "late_child.tmp"), b"late")
+        return b
+    s = [activate(nm, "act", cfg, "rebuild", SHA["G3"], stop_at="complete", before_go=add_child)]
+    s.append(recover(nm, "rec", cfg))
+    v = (s[0]["outcome"] == "UNVERIFIED" and "could not be verified" in (s[0]["message"] or "")
+         and not (s[0].get("correspondence") or {}).get("ok")
+         and any("unfamiliar" in p for p in (s[0].get("correspondence") or {}).get("problems", []))
+         and rec_terminal_ok(s[1]) and s[1].get("installed_state") == "NEEDS_REBUILD")
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "unexpected authority file after final verification -> UNVERIFIED (not success); "
+                           "recovery reports the installation needs attention" if v else
+                           "unexpected %s %s" % (outcomes(s), s[0].get("correspondence"))))
+    # X9 candidate write fault -> ABANDONED, nothing moved; recovery confirms.
+    nm = "X9_candidate_write_fault"
+    cfg = make_install(nm)
+    s = [activate(nm, "act", cfg, "replace", SHA["G1"], source=G3_TXT, inject={"candidate_write_error": 112})]
+    s.append(recover(nm, "rec", cfg))
+    ok, d = final_is(cfg, ("G1", "g1"))
+    v = s[0]["outcome"] == "ABANDONED" and "ERROR_DISK_FULL" in json.dumps(s[0]["details"]) and ok and \
+        rec_terminal_ok(s[1])
+    R.append(finalize_case(nm, cfg, s, "PASS" if v else "FAIL",
+                           "injected ERROR_DISK_FULL on candidate write -> ABANDONED; exact G1" if v else
+                           "unexpected %s" % outcomes(s)))
+    return R
+
+
+def product_worker(args, cwd):
+    return subprocess.run([PY3, "-E", "-s", "-B", "-X", "pycache_prefix=" + NOPYC, "-m",
+                           "sfm_character_tools_updater.worker"] + args, capture_output=True, text=True, env=ENV,
+                          cwd=cwd, timeout=900)
+
+
+def group_W():
+    """The product worker entry point itself (no test seams, no trace, real process query)."""
+    R = []
+    nm = "W1_product_surface"
+    cfg = make_install(nm)
+    out = os.path.join(WORK, "results", "ops", nm + "__replace.json")
+    guard(out)
+    before = tree(cfg, include_staging=True)
+    cp1 = product_worker(["prepare-replace", "--installation", cfg, "--result", out, "--source", G3_TXT], UPDATER)
+    cp2 = product_worker(["prepare-rebuild", "--installation", cfg, "--result", out, "--source", G3_TXT], UPDATER)
+    v = cp1.returncode == 2 and cp2.returncode == 2 and not os.path.exists(out) and \
+        tree(cfg, include_staging=True) == before
+    R.append(finalize_case(nm, cfg, [{"rc": cp1.returncode, "stderr": cp1.stderr[-300:]},
+                                     {"rc": cp2.returncode, "stderr": cp2.stderr[-300:]}], "PASS" if v else "FAIL",
+                           "product worker rejects 'prepare-replace' and '--source' (usage error, no result, "
+                           "nothing written)" if v else "unexpected"))
+    nm = "W2_product_rebuild_flow"
+    cfg = make_install(nm, master="G3", gens=("g1",))
+    outs = {k: os.path.join(WORK, "results", "ops", "%s__%s.json" % (nm, k)) for k in
+            ("status0", "prep", "install", "status1", "recover")}
+    for p in outs.values():
+        guard(p)
+    steps = []
+    for k, a in (("status0", ["status"]), ("prep", ["prepare-rebuild"])):
+        cp = product_worker(a + ["--installation", cfg, "--result", outs[k]], UPDATER)
+        steps.append({"step": k, "rc": cp.returncode, "stdout": cp.stdout.strip()[-200:], **jload(outs[k])})
+    prep = steps[-1]
+    cp = product_worker(["install", "--installation", cfg, "--result", outs["install"], "--prepared", prep["prepid"],
+                         "--confirm-sha", prep["confirm_sha"]], UPDATER)
+    steps.append({"step": "install", "rc": cp.returncode, "stdout": cp.stdout.strip()[-200:], **jload(outs["install"])})
+    for k, a in (("status1", ["status"]), ("recover", ["recover"])):
+        cp = product_worker(a + ["--installation", cfg, "--result", outs[k]], UPDATER)
+        steps.append({"step": k, "rc": cp.returncode, "stdout": cp.stdout.strip()[-200:], **jload(outs[k])})
+    ok, d = final_is(cfg, ("G3", "g3"))
+    sel_ok, sel = select_ok(cfg, "g3")
+    v = (steps[0]["outcome"] == "STATUS" and steps[0]["correspondence"]["ok"] is False
+         and steps[1]["outcome"] == "PREPARED" and steps[2]["outcome"] == "COMPLETE"
+         and steps[2]["correspondence"]["ok"] is True and "trace" not in steps[2]
+         and steps[2]["post_install_process_status"][0] == "CLEAR" and steps[2]["stdout"] == "RESULT COMPLETE"
+         and steps[3]["correspondence"]["ok"] is True and steps[3]["recovery_needed"] is False
+         and steps[4]["outcome"] == "OK" and ok and sel_ok)
+    for x in steps:
+        x.pop("trace", None)
+    R.append(finalize_case(nm, cfg, steps, "PASS" if v else "FAIL",
+                           "product worker: status (needs rebuild) -> prepare-rebuild -> install COMPLETE (real CLEAR "
+                           "query, correspondence verified, no trace) -> status consistent -> recover OK; exact G3; "
+                           "Py2.7 selector G3" if v else "unexpected %s" % [x.get("outcome") for x in steps],
+                           {"selector": sel}))
+    return R
+
+
+GROUPS = {"A": group_A, "B": group_B, "C": group_C, "D": group_D, "E": group_E, "F": group_F, "G": group_G,
+          "H": group_H, "I": group_I, "J": group_J, "K": group_K, "N": group_N, "X": group_X, "W": group_W}
+
+
+def main():
+    global A, RUN, ART, WORK, NOPYC, ENV, G1_TXT, G2_TXT, G3_TXT
+    ap = argparse.ArgumentParser()
+    ap.add_argument("mode", choices=("setup", "groups"))
+    ap.add_argument("--run", required=True)
+    ap.add_argument("--game", required=True)
+    ap.add_argument("--py27", required=True)
+    ap.add_argument("--p1-preservation")
+    ap.add_argument("--g3-source")
+    ap.add_argument("--label")
+    ap.add_argument("--groups")
+    ap.add_argument("--outside-target")
+    A = ap.parse_args()
+    RUN = os.path.abspath(A.run)
+    ART = os.path.join(RUN, "artifacts")
+    NOPYC = os.path.join(RUN, "nopyc")
+    G1_TXT, G2_TXT, G3_TXT = (os.path.join(ART, t + "_source.txt") for t in ("g1", "g2", "g3"))
+    if under(RUN, A.game) or under(RUN, REPO):
+        raise SystemExit("STOP: run directory inside the game or repository tree")
+    ENV = dict(os.environ, PYTHONDONTWRITEBYTECODE="1", TEMP=os.path.join(RUN, "tmp"), TMP=os.path.join(RUN, "tmp"))
+    if A.mode == "setup":
+        setup()
+        for d in ("tmp", "nopyc"):
+            wmkdirs(os.path.join(RUN, d))
+        wcopy(os.path.join(SUPPORT, "py27_select.py"), os.path.join(RUN, "py27lib", "py27_select.py"))
+        return
+    WORK = os.path.join(RUN, A.label)
+    sys.path.insert(0, UPDATER)
+    from sfm_character_tools_updater.process_gate import process_status
+    st0 = process_status()
+    if st0[0] != "CLEAR":
+        raise SystemExit("STOP: real process status %s (%s) before the run" % st0)
+    wmkdirs(WORK)
+    load_generations()
+    statuses = []
+    for g in A.groups.split(","):
+        before = process_status()
+        R = GROUPS[g]()
+        statuses.append({"group": g, "before": before, "after": process_status()})
+        print("PROCESS %s before=%s after=%s" % (g, before[0], statuses[-1]["after"][0]))
+        sys.stdout.flush()
+        out = os.path.join(WORK, "results", "matrix_%s.json" % g)
+        guard(out)
+        with open(out, "x", encoding="utf-8") as f:
+            json.dump(R, f, indent=1)
+    out = os.path.join(WORK, "results", "process_status_by_group.json")
+    guard(out)
+    with open(out, "x", encoding="utf-8") as f:
+        json.dump(statuses, f, indent=1)
+
+
+if __name__ == "__main__":
+    main()

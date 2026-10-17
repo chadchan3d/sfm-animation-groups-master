@@ -8,7 +8,85 @@ Blueprint, or expands scope, report the conflict before dependent edits.
 Otherwise proceed with the assigned milestone.
 
 ## Current milestone
-**Offline Updater v1 contract checkpoint (documentation only), 2026-10-16: APPROVED.**
+**L-1 — Activation backend and Rebuild My Data (headless): COMPLETE / PASS (bounded), 2026-10-17.**
+Authorized by the owner under `updater_qualification/design/L_IMPLEMENTATION_AUTHORIZATION_CARD.md` §8. The
+designer accepted the report (private evidence, `L1_IMPLEMENTATION_REPORT.md` `f3091fce…`; evidence manifest
+`39195857…`). Base: `5d7dea8…`.
+- **Source (GitHub, `updater/`; digests in `updater/SHA256SUMS.txt`):**
+  - `sfm_character_tools_updater/` (12 modules) — the one protected activation/recovery backend. Its worker
+    commands are `status`, `prepare-rebuild`, `install` and `recover`.
+  - `tests/` — the test-only L-1 suite: `run_l1.py` plus `support/` (test entry point, racer, holder, legacy
+    publisher, Python 2.7 selector check, read-only fingerprint).
+- **Port base:** the C1-corrected P1 prototype `p1proto_c1.py` `8871f137…`. The card names the original
+  `537739ff…`, but P1 closed only after C1. In a function-level AST comparison:
+  - 38 functions are identical, including the plan, the move executor, final verification, the journal, the
+    lock, the no-clobber handle rename and checked writes;
+  - 19 changed and 10 were not ported, every one explained in the report's equivalence table;
+  - the C6–C8 move order, protection and C12 recovery rules are unchanged.
+- **Implemented:**
+  - `prepare()` writes only to `sfm_character_tools_updater\staging\<id>` and may run while SFM runs.
+  - `install()` runs: pre-lock A3 gate → prepared bytes re-verified → transaction → lock → transaction
+    records → post-lock gate → protection → journaled no-clobber moves → final verification through held
+    handles → release → TXT/SIDECAR correspondence (a failure reports UNVERIFIED) → post-install process
+    recheck (restart required if SFM was started).
+  - **Path budget:** consumer paths of 260 characters or more refuse.
+  - **New transaction schema** `sct-updater-tx-1`. The U0A/P1 schemas are refused without mutation.
+  - **Recovery** reports whether the data is WORKING or NEEDS_REBUILD.
+  - **`status`** is read-only.
+  - **Pinned dependencies:** the unchanged compiler, reader, manifest and FINAL R3-A2B admission, each pinned by
+    full SHA-256.
+- **Replacement route** (Use Another TXT / Get Official Data in L-2):
+  - It is implemented in production as `backend.prepare(layout, "replace", source)` (immutable captured copy in
+    staging) plus the `backend._activate` replace kind (M0 retired, then M1 moved into the vacant Master path by
+    handle rename with `ReplaceIfExists=FALSE`).
+  - It is **not exposed** by the worker.
+  - The final run exercised it in 110 cases through the test-only entry point, including 47 interruption
+    cases.
+  - P1's path-based `MoveFileExW(REPLACE_EXISTING)`, `ReplaceFileW` and `DeleteFileW` helpers are not in the
+    product (R2 C6). They remain only in the test racer.
+- **Test seams:** `hooks.py` holds inert defaults (no-op barrier, real process query, no write fault). Only
+  `updater/tests/support/test_worker.py` assigns them. The product package never assigns them and reads no
+  environment variables, and the shipping worker rejects every test option.
+- **Result:** final run 157/157 PASS (2026-10-17 12:32–13:12Z), with the real process status CLEAR before and
+  after every group:
+
+  | Group | Cases |
+  |---|---|
+  | A — canonical operations | 7 |
+  | B — interruption and recovery | 66 |
+  | C — newer-data preservation | 5 |
+  | D — occupants, substitution, racers | 10 |
+  | E — malformed and inconsistent states | 12 |
+  | F — same-account ownership | 5 |
+  | G — legacy `publisher.lock` | 9 |
+  | H — selector, Py2.7 outside SFM | 2 |
+  | I — broker classification, Py2.7 outside SFM | 2 |
+  | J — A3 and barriers | 10 |
+  | K — path lengths | 3 |
+  | N — C1 no-op | 10 |
+  | X — L-1 additions | 14 |
+  | W — product worker entry | 2 |
+
+  - **Fixtures:** the G1/G2/G3 sidecars and manifests recompiled through the product reproduced P1
+    byte-for-byte.
+  - **Live installation:** the before/after fingerprint is identical (authority files, listings, `gameinfo`,
+    the P0 235-file closure), and no updater directory was created.
+- **Expected outcome changes from P1** (by design):
+  - **J1–J6:** RUNNING/UNKNOWN now refuse at the pre-lock gate with nothing created. P1's post-lock ABANDONED
+    path is covered by X5.
+  - **K1 at P1 depth:** now refused by the approved path budget. Long transaction paths are covered by K3.
+- **Recorded deviations (preserved in the evidence):**
+  - **SFM open during `shake1`.** A real `sfm.exe` was running that the session had not started; no test
+    launched SFM. Groups A and N were refused at the pre-lock gate with nothing created, then rerun with SFM
+    closed. This is an unplanned observation, not L-6 group 2 qualification.
+  - **`shake2`** was stopped on the owner's "Pause".
+  - **`/tmp` slip:** two small path notes were written to the user temp folder and deleted immediately.
+  - **C1 §5 broker driver:** not rerun (the consumer library is unchanged). I1/I2 were rerun.
+- **Scope of the PASS:** scratch qualification of the headless backend on E:/NTFS. It does not cover native SFM,
+  either consumer's UI, real-SFM detection, power loss, cross-user behavior or release eligibility.
+- **L-2:** NOT STARTED / REQUIRES AUTHORIZATION. **L-3 … L-6:** NOT STARTED.
+
+Previous milestone: **Offline Updater v1 contract checkpoint (documentation only), 2026-10-16: APPROVED.**
 After Astra's October 16 proportionality review, the owner approved the offline-v1 direction, and the designer
 accepted the reconciled drafts. This checkpoint made no code, test, SFM run, WPR/ETW, installed-file or authority
 change. Base: `27aa672…`.
@@ -57,7 +135,7 @@ change. Base: `27aa672…`.
     P1 COMPLETE / PASS (bounded) are unchanged.
 - **L:**
   - **L-1** (the activation/recovery backend plus Rebuild My Data, without a GUI): **READY FOR AUTHORIZATION /
-    NOT STARTED.**
+    NOT STARTED** at this checkpoint. It has since been completed (see Current milestone).
   - **L-2 … L-6:** NOT STARTED; each needs its own authorization.
   - **Release:** requires the card's five qualification groups to pass on the shipping candidate, each group
     covering all three actions.
@@ -499,7 +577,10 @@ final closeout changed only this Ledger. The C1 correction (2026-10-14) likewise
 installed file; its corrected prototype, harness, scratch run and evidence are local only. The U0B-P2
 design and preparation work changed no tracked or installed file; its evidence is local only. The Offline
 Updater v1 checkpoint (2026-10-16) added only the amendment and L card under `updater_qualification/design/`,
-their `SHA256SUMS.txt` entries, scoped `.gitattributes` entries and this Ledger.
+their `SHA256SUMS.txt` entries, scoped `.gitattributes` entries and this Ledger. The L-1 checkpoint
+(2026-10-17) added only the new `updater/` tree (product package, test-only suite and `updater/SHA256SUMS.txt`),
+a scoped LF `.gitattributes` entry and this Ledger. No existing tool, CPM, Normalizer, Blueprint, amendment or
+card file changed, and no installed file changed. The L-1 scratch run and evidence are local only.
 
 **References for transfer:**
 - Authoritative R15 design: `cpm/qualification/R15_IMPLEMENTATION_BLUEPRINT.md`, frozen from
@@ -713,9 +794,19 @@ Evidence:
     unchanged K/L product work.
   - P1-F3: authority-slot conflict messaging;
   - P1-F4: legacy-lock fail-closed behavior;
-  - real running-SFM detection. P1/C1 used injected responses only; this is qualified in L-6 group 2.
-  - `intent_schema()` hardening;
+  - real running-SFM detection. P1/C1 and L-1 used injected responses (plus the unplanned L-1 `shake1`
+    observation); this is qualified in L-6 group 2.
+  - `intent_schema()` hardening: implemented in L-1 (a non-object intent is an unknown schema).
   - CPM and Normalizer behavior after an installation, in L-6 group 5.
+- **L-1 implementation items (later L stages; not L-1 prerequisites):**
+  - staging under `sfm_character_tools_updater\staging\<id>` is never pruned (about 9.5–13 MB per
+    preparation). The cleanup policy belongs with L-4 and must not touch transaction recovery data.
+  - `prepared.json` is not authenticated. Install re-verifies exact bytes, reader binding, admission and the
+    manifest, but not semantic parity (an L-D case).
+  - the path budget measures the resolved installation path, not any longer alias a consumer might use;
+  - process detection matches the image name `sfm.exe` only;
+  - dependencies load from repository paths (`tools/` and the authority package under `tests/sidecar/…`).
+    Their shipping location is an L-5 decision.
 - **Removed from the v1 critical path with P2/P3 (not passed):** native Master access, the CPM working
   directory, the native channel/key oracle, bytecode content and restoration recoverability. These were the
   former U0B open items; see Current milestone.
@@ -768,7 +859,7 @@ Evidence:
   **Pre-K complete. `4e35f292…` is the exact CPM candidate eligible to enter K.**
   - **K — COMPLETE / PASS** (K1A2 + K2A1, 2026-10-10).
 
-  L: L-1 READY FOR AUTHORIZATION / NOT STARTED, under the offline-v1 contract (2026-10-16). The final
+  L: L-1 COMPLETE / PASS (bounded), 2026-10-17. L-2 NOT STARTED / REQUIRES AUTHORIZATION. The final
   packaging layout is decided in L-5.
 - **Session 4 notes (not failures; carried to K; unchanged by items 7–8):**
   - Fit's exception path releases the stage with a bare `release()` (no
@@ -781,13 +872,14 @@ Evidence:
   R15 suite PASS.
 
 ## Next
-Stop. This is the Offline Updater v1 documentation checkpoint (2026-10-16).
-- **Next action:** owner authorization of **L-1** under
-  `updater_qualification/design/L_IMPLEMENTATION_AUTHORIZATION_CARD.md` §8. L-1 is NOT STARTED.
-- **Not authorized by this checkpoint:** L-1 execution, any native SFM run, WPR/ETW work, a live installation
-  write, or release.
+Stop. This is the L-1 GitHub checkpoint (2026-10-17).
+- **Next action:** an owner decision on authorizing **L-2** (Use Another TXT and an official package from a
+  local file, card §5). L-2 is NOT STARTED / REQUIRES AUTHORIZATION.
+- **Not authorized by this checkpoint:** L-2 or any later increment, any native SFM run, WPR/ETW work, a live
+  installation write, or release.
 
-K is COMPLETE / PASS. U0A is PASS (bounded). U0B is closed for v1 at the P1 evidence boundary. `4e35f292…`, the
+L-1 is COMPLETE / PASS (bounded). K is COMPLETE / PASS. U0A is PASS (bounded). U0B is closed for v1 at the P1
+evidence boundary. `4e35f292…`, the
 production Normalizer `1f4ec5a2…` and exact G1 authority remain installed.
 
 ## Checkpoints
